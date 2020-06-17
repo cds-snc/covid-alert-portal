@@ -14,7 +14,6 @@ class HomePageView(ListView):
 
 class UserProfileView(View):
     def get(self, request, user_id):
-
         try:
             user = HealthcareUser.objects.get(id=user_id)
         except:
@@ -24,7 +23,7 @@ class UserProfileView(View):
             "viewed_user": user
         }
 
-        return render(request, "user_profile.html", context)
+        return render(request, "profiles/user_profile.html", context)
 
 
 class SignUp(generic.CreateView):

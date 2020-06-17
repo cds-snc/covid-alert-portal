@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Welcome to the Homepage</h1>
+<h1>Welcome to the Portal 🧑‍⚕️</h1>
 <p>Users:</p>
 <ul>
 {% for user in healthcareuser_list %}
@@ -16,13 +16,19 @@
 {% endfor %}
 </ul>
 
-{% if user.is_authenticated %}
-    <p>Currently logged in as: {{ user.email }}</p>
-    <p><a href="{% url 'logout' %}">Log out</a>.</p>
+
+{% if healthcareuser_list|length == 0 %}
+    <p><a href="{% url 'signup' %}">Sign up</a> here.</p>
 {% else %}
-    <p>Not currently logged in.</p>
-    <p><a href="{% url 'login' %}">Log in</a> here.</p>
-    <p><a href="{% url 'password_reset' %}">reset password</a></p>
+    {# users exist #}
+    {% if user.is_authenticated %}
+        <p>Currently logged in as: {{ user.email }}</p>
+        <p><a href="{% url 'logout' %}">Log out</a>.</p>
+    {% else %}
+        <p>Not currently logged in.</p>
+        <p><a href="{% url 'signup' %}">Sign up a new user</a> or <a href="{% url 'login' %}">log in</a>.</p>
+    {% endif %}
+
 {% endif %}
 
 {% endblock %}
