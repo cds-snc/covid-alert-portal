@@ -12,6 +12,7 @@ urlpatterns = [
         name='user_profile',
     ),
     path('', views.HomePageView.as_view(), name='home'),
+    path('signup/', views.SignUp.as_view(), name='signup'),
 
     # default auth routes: https://docs.djangoproject.com/en/3.0/topics/auth/default/#module-django.contrib.auth.views
     # accounts/login/ [name='login']
