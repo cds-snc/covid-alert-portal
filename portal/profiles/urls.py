@@ -3,7 +3,6 @@ from django.conf.urls import url
 
 from . import views
 
-app_name = 'profiles'
 
 urlpatterns = [
     url(
@@ -15,13 +14,13 @@ urlpatterns = [
     path('signup/', views.SignUp.as_view(), name='signup'),
 
     # default auth routes: https://docs.djangoproject.com/en/3.0/topics/auth/default/#module-django.contrib.auth.views
-    # accounts/login/ [name='login']
-    # accounts/logout/ [name='logout']
-    # accounts/password_change/ [name='password_change']
-    # accounts/password_change/done/ [name='password_change_done']
-    # accounts/password_reset/ [name='password_reset']
-    # accounts/password_reset/done/ [name='password_reset_done']
-    # accounts/reset/<uidb64>/<token>/ [name='password_reset_confirm']
-    # accounts/reset/done/ [name='password_reset_complete']
+    # /login/ [name='login']
+    # /logout/ [name='logout']
+    # /password_change/ [name='password_change']
+    # /password_change/done/ [name='password_change_done']
+    # /password_reset/ [name='password_reset']
+    # /password_reset/done/ [name='password_reset_done']
+    # /reset/<uidb64>/<token>/ [name='password_reset_confirm']
+    # /reset/done/ [name='password_reset_complete']
     path('', include('django.contrib.auth.urls')),
 ]

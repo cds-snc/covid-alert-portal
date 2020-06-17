@@ -29,5 +29,5 @@ class UserProfileView(View):
 
 class SignUp(generic.CreateView):
     form_class = SignupForm
-    success_url = reverse_lazy('profiles:login')
+    success_url = reverse_lazy('login')
     template_name = 'profiles/signup.html'

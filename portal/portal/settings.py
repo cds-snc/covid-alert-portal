@@ -31,13 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'profiles',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'profiles'
 ]
 
 MIDDLEWARE = [
@@ -129,5 +129,7 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'profiles.HealthcareUser'
 
-LOGIN_REDIRECT_URL = 'profiles:home'
-LOGOUT_REDIRECT_URL = 'profiles:home'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
