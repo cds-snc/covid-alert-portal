@@ -1,0 +1,59 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "188634322f526ea23887fb0ba7cf38ae69eb33855cdb09487accaea528fcf146"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_version": "3.7"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "asgiref": {
+            "hashes": [
+                "sha256:7ea1922cfd63c4ac7687069f8bb0e7768ab9b7fc78ff227577d4240b52d6cb7a",
+                "sha256:f803d8b4962cc338d48a72fa498c52f913b160eb16712e2ecdf2a81904daead9"
+            ],
+            "markers": "python_version >= '3.5'",
+            "version": "==3.2.9"
+        },
+        "django": {
+            "hashes": [
+                "sha256:5052b34b34b3425233c682e0e11d658fd6efd587d11335a0203d827224ada8f2",
+                "sha256:e1630333248c9b3d4e38f02093a26f1e07b271ca896d73097457996e0fae12e8"
+            ],
+            "index": "pypi",
+            "version": "==3.0.7"
+        },
+        "django-user-language-middleware": {
+            "hashes": [
+                "sha256:9c73a0d5916aa07810bf32d8b6be4f0b66d5486126ee5b21d1dee638b80763d2"
+            ],
+            "index": "pypi",
+            "version": "==0.0.3"
+        },
+        "pytz": {
+            "hashes": [
+                "sha256:a494d53b6d39c3c6e44c3bec237336e14305e4f29bbf800b599253057fbb79ed",
+                "sha256:c35965d010ce31b23eeb663ed3cc8c906275d6be1a34393a1d73a41febf4a048"
+            ],
+            "version": "==2020.1"
+        },
+        "sqlparse": {
+            "hashes": [
+                "sha256:022fb9c87b524d1f7862b3037e541f68597a730a8843245c349fc93e1643dc4e",
+                "sha256:e162203737712307dfe78860cc56c8da8a852ab2ee33750e33aeadf38d12c548"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==0.3.1"
+        }
+    },
+    "develop": {}
+}

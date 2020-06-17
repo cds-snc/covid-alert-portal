@@ -1,0 +1,20 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if viewed_user %}
+        <h1 align="center">Viewing User {{ viewed_user.id }}</h1>
+<div align="center">
+         <dl>
+          <dt>Email:</dt>
+          <dd>{{viewed_user.email}}</dd>
+          <dt>Name:</dt>
+          <dd>{{viewed_user.name}}</dd>
+          <dt>Language:</dt>
+          <dd>{{viewed_user.language}}</dd>
+        </dl>
+    {% else %}
+        <p>User not found.</p>
+    {% endif %}
+{% endblock %}
+</div>

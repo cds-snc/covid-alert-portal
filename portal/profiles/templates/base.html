@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{% static 'css/normalize.css' %}" rel="stylesheet">
+
+    <title>{% block title %}Test{% endblock %}</title>
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>
+</html>
