@@ -16,4 +16,12 @@
 {% endfor %}
 </ul>
 
+{% if user.is_authenticated %}
+    <p>Currently logged in as: {{ user.email }}</p>
+    <p><a href="{% url 'profiles:logout' %}">Log out</a>.</p>
+{% else %}
+    <p>Not currently logged in.</p>
+    <p><a href="{% url 'profiles:login' %}">Log in</a> here.</p>
+{% endif %}
+
 {% endblock %}

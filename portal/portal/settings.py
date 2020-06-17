@@ -128,3 +128,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'profiles.HealthcareUser'
+
+LOGIN_REDIRECT_URL = 'profiles:home'
+LOGOUT_REDIRECT_URL = 'profiles:home'
