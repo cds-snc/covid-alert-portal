@@ -70,7 +70,7 @@ class HealthcareUser(AbstractBaseUser):
     language = models.CharField(max_length=10,
                                 choices=settings.LANGUAGES,
                                 default=settings.LANGUAGE_CODE)
-    province = models.CharField(max_lenght=25, choices=PROVINCE_CHOICES, default='nu')
+    province = models.CharField(max_length=25, choices=PROVINCE_CHOICES, default='nu')
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
