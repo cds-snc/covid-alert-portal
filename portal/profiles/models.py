@@ -10,6 +10,22 @@ LANGUAGE_CHOICES = (
     ('fr', 'French'),
 )
 
+PROVINCE_CHOICES = (
+    ('bc', 'British Columbia'),
+    ('ab', 'Alberta'),
+    ('sk', 'Saskachewan'),
+    ('mb', 'Manitoba'),
+    ('on', 'Ontario'),
+    ('qc', 'Quebec'),
+    ('ns', 'Nova Scotia'),
+    ('nb', 'New Brunswick'),
+    ('nl', 'Newfoundland'),
+    ('pe', 'Prince Edward Island'),
+    ('yk', 'Yukon'),
+    ('nt', 'Northwest Territories'),
+    ('nu', 'Nunavut'),
+)
+
 
 class HealthcareUserManager(BaseUserManager):
     def create_user(self, email, name, language='en', password=None):
@@ -54,6 +70,8 @@ class HealthcareUser(AbstractBaseUser):
     language = models.CharField(max_length=10,
                                 choices=settings.LANGUAGES,
                                 default=settings.LANGUAGE_CODE)
+    province = models.CharField(max_length=25, choices=PROVINCE_CHOICES, default='nu')
+
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
