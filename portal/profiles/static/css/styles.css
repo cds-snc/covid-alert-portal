@@ -104,7 +104,7 @@ h6 {
   font-weight: 600;
 }
 
-.page--container, main {
+.phase-banner div, .page--container, main {
   max-width: 960px;
   margin: 0 auto;
   padding-left: 20px;
@@ -112,7 +112,7 @@ h6 {
 }
 
 @media screen and (min-width: 75em) {
-  .page--container, main {
+  .phase-banner div, .page--container, main {
     max-width: 1170px;
   }
 }
@@ -210,5 +210,52 @@ header .canada-flag {
   header .canada-flag {
     width: 360px;
     margin-bottom: 0;
+  }
+}
+
+.phase-banner {
+  background: #f4f4f4;
+  line-height: 1.33;
+}
+
+.phase-banner div {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 35.5em) {
+  .phase-banner div {
+    align-items: center;
+    margin-bottom: 40px;
+  }
+}
+
+.phase-banner span {
+  font-size: 0.7em;
+}
+
+.phase-banner span:first-of-type {
+  border: 2px #000000 solid;
+  padding: 1px 5px;
+  letter-spacing: 1px;
+  margin-right: 1.7em;
+}
+
+@media screen and (min-width: 35.5em) {
+  .phase-banner span:first-of-type {
+    padding: 1px 7px;
+  }
+}
+
+.phase-banner span:last-of-type {
+  margin-top: 3px;
+}
+
+@media screen and (min-width: 35.5em) {
+  .phase-banner span:last-of-type {
+    margin-top: 0px;
   }
 }

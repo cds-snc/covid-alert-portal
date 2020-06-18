@@ -18,11 +18,10 @@
 <body>
     <div class="container">
         <header>
+            {% include  "includes/phase_banner.html" %}
             <div class="page--container">
                 <div class="fip-container">
-                    <div class="canada-flag">
-                        <img src="{% static 'img/sig-blk-en.svg' %}" alt="Government of Canada" />
-                    </div>
+                    {% include  "includes/FIP_header.html" %}
                     <!-- language link -->
                 </div>
             </div>
