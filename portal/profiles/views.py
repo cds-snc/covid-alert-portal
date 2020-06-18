@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, get_object_or_404
 from profiles.models import HealthcareUser
 from django.views.generic import View, ListView
@@ -33,10 +33,17 @@ class SignUp(generic.CreateView):
     template_name = 'profiles/signup.html'
 
 
-class UserEdit(generic.UpdateView):
+class UserEdit(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = HealthcareUser
     form_class = HealthcareUserEditForm
     template_name = 'profiles/user_edit.html'
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
+
+    def test_func(self):
+        # the logged-in user should be the same as the user ID
+        # the id is an int, so we cast it to a string
+        return str(self.request.user.id) == self.kwargs['pk']
 
     def get_initial(self):
         user = get_object_or_404(HealthcareUser, pk=self.kwargs['pk'])

@@ -1,5 +1,6 @@
 <!-- templates/home.html -->
 {% extends 'base.html' %}
+{% block title %}Viewing User {{ user.id }}{% endblock %}
 
 {% block content %}
     {% if viewed_user %}
@@ -13,7 +14,9 @@
           <dt>Language:</dt>
           <dd>{{viewed_user.language}}</dd>
         </dl>
-        <p><a href="{% url 'user_edit' viewed_user.id %}">Edit user info</a></p>
+        {% if user.is_authenticated and user.id == viewed_user.id %}
+            <p><a href="{% url 'user_edit' viewed_user.id %}">Edit user info</a></p>
+        {% endif %}
         <p><a href="{% url 'home' %}">↩ Back</a></p>
 
     {% else %}

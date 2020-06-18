@@ -1,5 +1,6 @@
 <!-- templates/home.html -->
 {% extends 'base.html' %}
+{% block title %}Welcome to the Portal{% endblock %}
 
 {% block content %}
 <h1>Welcome to the Portal 🧑‍⚕️</h1>
@@ -9,7 +10,7 @@
     <li>
         User {{ user.id }}
         - {{ user.email }}
-        - <a href="/users/{{user.id}}">Profile</a>
+        - <a href="{% url 'user_profile' user.id %}">Profile</a>
     </li>
 {% empty %}
     <li>No users yet.</li>
