@@ -86,9 +86,8 @@ h6 {
 }
 
 main {
-  @extend %page-container;
   padding: 0 $space-md;
-  padding-bottom: calc(#{$height-footer} + #{$space-xxl});
+  padding-bottom: $space-xxl;
 
   h1 {
     border-bottom: 1px solid $color-red;
@@ -99,14 +98,6 @@ main {
 
   > div {
     margin-bottom: $space-lg;
-
-    @include md {
-      width: 90%;
-    }
-
-    @include xl {
-      width: 80%;
-    }
   }
 }
 

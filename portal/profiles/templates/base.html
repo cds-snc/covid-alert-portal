@@ -2,51 +2,57 @@
 {% load static %}
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CNoto+Sans:400,700&amp;display=fallback" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CNoto+Sans:400,700&amp;display=fallback" rel="stylesheet">
 
-    <link href="{% static 'css/normalize.css' %}" rel="stylesheet">
-    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+  <link href="{% static 'css/normalize.css' %}" rel="stylesheet">
+  <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 
-    <title>{% block title %}CDS Healthcare Portal{% endblock %}</title>
-    <style>
+  <title>{% block title %}CDS Healthcare Portal{% endblock %}</title>
+  <style>
       nav a { display: inline-block; margin-right: 10px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            {% include  "includes/phase_banner.html" %}
-            <div class="page--container">
-                <div class="fip-container">
-                    {% include  "includes/FIP_header.html" %}
-                    <!-- language link -->
-                </div>
-            </div>
-        </header>
-        <main id="content">
-            <nav>
-                <a href="{% url 'start' %}">Start</a>
-                {% if user.is_authenticated %}
-                    <a href="{% url 'user_profile' user.id %}">Profile</a>
-                    <a href="{% url 'logout' %}">Log out</a>
-                {% else %}
-                    <a href="{% url 'login' %}">Login</a>
-                    <a href="{% url 'signup' %}">Sign up</a>
-                {% endif %}
-            </nav>
-
-            {% if user.is_authenticated %}
-                <p>Currently logged in as: {{ user.email }}</p>
-            {% endif %}
-
-            {% block content %}{% endblock %}
-        </main>
-
-        {% include  "includes/footer.html" %}
-
+<div class="container">
+  <header>
+    {% include  "includes/phase_banner.html" %}
+    <div class="page--container">
+      <div class="fip-container">
+        {% include  "includes/FIP_header.html" %}
+        <!-- language link -->
+      </div>
     </div>
+  </header>
+  <main id="content">
+    <nav class="nav--main">
+      <div class="page--container">
+        <ul>
+          <li><a class="{% if request.resolver_match.url_name == 'start' %}active{% endif %}" href="{% url 'start' %}">Start</a></li>
+          {% if user.is_authenticated %}
+            <li><a class="{% if request.resolver_match.url_name == 'user_profile' %}active{% endif %}" href="{% url 'user_profile' user.id %}">Profile</a></li>
+            <li><a class="{% if request.resolver_match.url_name == 'logout' %}active{% endif %}" href="{% url 'logout' %}">Log out</a></li>
+          {% else %}
+            <li><a class="{% if request.resolver_match.url_name == 'login' %}active{% endif %}" href="{% url 'login' %}">Login</a></li>
+            <li><a class="{% if request.resolver_match.url_name == 'signup' %}active{% endif %}" href="{% url 'signup' %}">Sign up</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+    <div class="page--container">
+      {% if user.is_authenticated %}
+        <p>Currently logged in as: {{ user.email }}</p>
+      {% endif %}
+
+      {% block content %}{% endblock %}
+    </div>
+
+  </main>
+
+  {% include  "includes/footer.html" %}
+
+</div>
 </body>
 </html>
