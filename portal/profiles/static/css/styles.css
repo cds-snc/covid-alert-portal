@@ -178,6 +178,86 @@ li:not(:last-of-type) {
 }
 
 /* Partials */
+footer {
+  width: 100%;
+  background: #f8f8f8;
+  line-height: 30px;
+}
+
+footer .footer-links {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 0.85em;
+}
+
+footer .footer-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 35.5em) {
+  footer .footer-links ul {
+    margin-bottom: 20px;
+  }
+}
+
+footer .footer-links li {
+  margin-right: 15px;
+}
+
+footer .footer-links li::before {
+  content: '\2022';
+  color: #335075;
+  display: inline-block;
+  width: calc(15px + 5px);
+}
+
+@media screen and (min-width: 35.5em) {
+  footer .footer-links li {
+    display: inline-block;
+  }
+  footer .footer-links li:first-of-type::before {
+    content: none;
+    width: 0;
+  }
+}
+
+footer .footer-links a {
+  text-decoration: none;
+}
+
+footer .canada-wordmark {
+  padding-bottom: 20px;
+  width: 147.2px;
+}
+
+@media screen and (min-width: 48em) {
+  footer .page--container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer .page--container .footer-links {
+    flex: 2;
+  }
+  footer .page--container .footer-links ul {
+    margin-bottom: -5px;
+  }
+  footer .page--container .canada-wordmark {
+    flex: 1;
+    text-align: right;
+    margin-bottom: 0;
+    max-height: 100%;
+  }
+  footer .page--container .canada-wordmark img {
+    height: 40px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+}
+
 header {
   padding: 0 0 0 0;
 }
