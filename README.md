@@ -1,4 +1,4 @@
-# healthcare-portal
+# covid-healthcare-portal
 
 Reference implementation of a healthcare portal for Canadian healthcare providers. Allows healthcare providers to generate temporary tracking codes for positively diagnosed patients.
 
@@ -36,5 +36,6 @@ Run `python manage.py createsuperuser` to create a super user.
 
 Then, run `python manage.py runserver` to run the app.
 
-- Navigate to `/admin` to see the custom user model. 
-- Navigate to `/signup` to create a non-admin user account
+- Go to `/admin` to see the custom user model. 
+- Go to `/start` to see the list of users
+- Go to `/signup` to register a new user

@@ -9,7 +9,7 @@ from django.views import generic
 from .forms import SignupForm, HealthcareUserEditForm
 
 
-class HomePageView(ListView):
+class StartPageView(ListView):
     model = HealthcareUser
 
 

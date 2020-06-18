@@ -1,17 +1,19 @@
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf.urls import url
+from django.views.generic import RedirectView
 
 from . import views
 
 
 urlpatterns = [
+    path('', RedirectView.as_view(pattern_name='start')),
+    re_path(r'start/$', views.StartPageView.as_view(), name='start'),
+    re_path(r'signup/$', views.SignUp.as_view(), name='signup'),
     url(
         r'users/(?P<pk>\w+)$',
         views.UserProfileView.as_view(),
         name='user_profile',
     ),
-    path('', views.HomePageView.as_view(), name='home'),
-    path('signup/', views.SignUp.as_view(), name='signup'),
     url(r'users/(?P<pk>\w+)/edit$', views.UserEdit.as_view(), name='user_edit'),
 
     # default auth routes: https://docs.djangoproject.com/en/3.0/topics/auth/default/#module-django.contrib.auth.views

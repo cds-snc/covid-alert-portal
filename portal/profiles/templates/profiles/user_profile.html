@@ -1,4 +1,3 @@
-<!-- templates/home.html -->
 {% extends 'base.html' %}
 {% block title %}Viewing User {{ user.id }}{% endblock %}
 
@@ -17,7 +16,7 @@
         {% if user.is_authenticated and user.id == viewed_user.id %}
             <p><a href="{% url 'user_edit' viewed_user.id %}">Edit user info</a></p>
         {% endif %}
-        <p><a href="{% url 'home' %}">↩ Back</a></p>
+        <p><a href="{% url 'start' %}">↩ Back</a></p>
 
     {% else %}
         <p>User not found.</p>
