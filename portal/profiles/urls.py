@@ -6,12 +6,13 @@ from . import views
 
 urlpatterns = [
     url(
-        r'users/(?P<user_id>\w+)$',
+        r'users/(?P<pk>\w+)$',
         views.UserProfileView.as_view(),
         name='user_profile',
     ),
     path('', views.HomePageView.as_view(), name='home'),
     path('signup/', views.SignUp.as_view(), name='signup'),
+    url(r'users/(?P<pk>\w+)/edit$', views.UserEdit.as_view(), name='user_edit'),
 
     # default auth routes: https://docs.djangoproject.com/en/3.0/topics/auth/default/#module-django.contrib.auth.views
     # /login/ [name='login']
