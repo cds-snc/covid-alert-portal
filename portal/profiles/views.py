@@ -1,3 +1,7 @@
+import requests
+import os
+
+
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, get_object_or_404
 from profiles.models import HealthcareUser
@@ -56,3 +60,14 @@ class UserEdit(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('user_profile', kwargs={'pk': self.kwargs['pk']})
+
+
+def code(request):
+    token = os.getenv("AUTHORIZATION")
+    print(token)
+    auth_header = {'Authorization': 'Bearer ' + token}  # This will go in an Env variable at some point
+    r = requests.post(os.getenv("ENDPOINT"), headers=auth_header)
+    code = r.text
+    code = code[0:4] + ' ' + code[4:8]
+    context = {'code': code}
+    return render(request, 'code/code.html', context)

@@ -9,6 +9,7 @@ verify_ssl = true
 django = "*"
 django-user-language-middleware = "*"
 requests = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3"
