@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
-{% block title %}Welcome to the Portal{% endblock %}
+{% block title %}Accounts 🧑‍⚕{% endblock %}
 
 {% block content %}
-<h1>Welcome to the Portal 🧑‍⚕️</h1>
-<p>Users:</p>
+<h1>Accounts 🧑‍⚕️</h1>
 <ul>
 {% for user in healthcareuser_list %}
     <li>
@@ -15,20 +14,5 @@
     <li>No users yet.</li>
 {% endfor %}
 </ul>
-
-
-{% if healthcareuser_list|length == 0 %}
-    <p><a href="{% url 'signup' %}">Sign up</a> here.</p>
-{% else %}
-    {# users exist #}
-    {% if user.is_authenticated %}
-        <p>Currently logged in as: {{ user.email }}</p>
-        <p><a href="{% url 'logout' %}">Log out</a>.</p>
-    {% else %}
-        <p>Not currently logged in.</p>
-        <p><a href="{% url 'signup' %}">Sign up a new user</a> or <a href="{% url 'login' %}">log in</a>.</p>
-    {% endif %}
-
-{% endif %}
 
 {% endblock %}
