@@ -14,7 +14,7 @@ LANGUAGE_CHOICES = (
 class HealthcareUserManager(BaseUserManager):
     def create_user(self, email, name, language='en', password=None):
         """
-        Creates and saves a User with the given email, favorite color
+        Creates and saves a User with the given email, language
          and password.
         """
         if not email:
@@ -32,8 +32,7 @@ class HealthcareUserManager(BaseUserManager):
 
     def create_superuser(self, email, name, password):
         """
-        Creates and saves a superuser with the given email, date of
-        birth and password.
+        Creates and saves a superuser with the given email, name and password.
         """
         user = self.create_user(
             email,
