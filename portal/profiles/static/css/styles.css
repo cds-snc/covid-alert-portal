@@ -1,0 +1,214 @@
+@charset "UTF-8";
+/* Utilities */
+/*
+    media queries based on Pure CSS's breakpoints: https://purecss.io/grids/
+
+    usage example:
+
+    @include sm {
+      width: 100%;
+    }
+*/
+/* ≥ 336px */
+/* ≥ 568px */
+/* ≥ 768px */
+/* ≥ 1024px */
+/* ≥ 1200px */
+/* App-wide styles */
+* {
+  box-sizing: border-box;
+}
+
+a[href]:not([disabled]):focus,
+area[href]:not([disabled]):focus,
+input:not([disabled]):focus,
+select
+textarea:not([disabled]):focus,
+button:not([disabled]):focus,
+iframe:not([disabled]):focus,
+[tabindex]:not([disabled]):focus,
+[contentEditable=true]:not([disabled]):focus {
+  outline: 3px solid #ffbf47;
+  outline-offset: 0;
+}
+
+body {
+  margin: 0;
+  font-size: 1.05em;
+  font-family: 'Noto Sans', sans-serif;
+  line-height: 1.65;
+}
+
+@media screen and (min-width: 21em) {
+  body {
+    font-size: 1.2em;
+  }
+}
+
+@media screen and (min-width: 35.5em) {
+  body {
+    font-size: 1.3em;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+p,
+.multiple-choice__item p,
+ol,
+ul {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+@media screen and (min-width: 21em) {
+  p,
+.multiple-choice__item p,
+ol,
+ul {
+    margin-bottom: 15px;
+  }
+}
+
+ol,
+ul {
+  padding-left: 20px;
+}
+
+@media screen and (min-width: 35.5em) {
+  ol,
+ul {
+    padding-left: 40px;
+  }
+}
+
+a {
+  color: #284162;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Lato', sans-serif;
+  line-height: 1.33;
+}
+
+.page--container, main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media screen and (min-width: 75em) {
+  .page--container, main {
+    max-width: 1170px;
+  }
+}
+
+main {
+  padding: 0 20px;
+  padding-bottom: calc(80px + 60px);
+}
+
+main h1 {
+  border-bottom: 1px solid #af3c43;
+}
+
+@media screen and (min-width: 48em) {
+  main h1 {
+    padding-right: 15%;
+  }
+}
+
+main > div {
+  margin-bottom: 30px;
+}
+
+@media screen and (min-width: 48em) {
+  main > div {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 75em) {
+  main > div {
+    width: 80%;
+  }
+}
+
+li:not(:last-of-type) {
+  padding-bottom: 5px;
+}
+
+@media screen and (min-width: 35.5em) {
+  li:not(:last-of-type) {
+    padding-bottom: 0;
+  }
+}
+
+.container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* Partials */
+header {
+  padding: 0 0 0 0;
+}
+
+header button {
+  padding: 0;
+}
+
+@media screen and (min-width: 35.5em) {
+  header {
+    padding-bottom: 20px;
+    text-align: right;
+  }
+}
+
+header .fip-container {
+  flex-direction: column;
+  display: flex;
+}
+
+@media screen and (min-width: 35.5em) {
+  header .fip-container {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+}
+
+header .canada-flag {
+  height: auto;
+  max-height: 40px;
+  width: 272px;
+  margin-bottom: 15px;
+}
+
+@media screen and (min-width: 35.5em) {
+  header .canada-flag {
+    width: 360px;
+    margin-bottom: 0;
+  }
+}
