@@ -5,20 +5,20 @@
 a[href],
 area[href],
 input,
-select
-textarea,
+select textarea,
 button,
 iframe,
 [tabindex],
-[contentEditable=true]
-{
-  &:not([disabled]):focus { @include focus(); }
+[contentEditable="true"] {
+  &:not([disabled]):focus:not(.autocomplete__option) {
+    @include focus();
+  }
 }
 
 body {
   margin: 0;
   font-size: 1.05em;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: "Noto Sans", sans-serif;
   line-height: 1.65;
 
   @include xs {
@@ -28,10 +28,6 @@ body {
   @include sm {
     font-size: 1.3em;
   }
-}
-
-.bold {
-  font-weight: bold;
 }
 
 p,
@@ -46,16 +42,24 @@ ul {
   }
 }
 
+p + ul {
+  margin-top: -$space-xs;
+
+  @include xs {
+    margin-top: -$space-sm;
+  }
+}
+
 ol,
 ul {
-  padding-left: $space-md;
+  padding-left: $space-lg;
 
   @include sm {
     padding-left: $space-xl;
   }
 }
 
-a {
+a, a:visited {
   color: $color-blue-dark;
 }
 
@@ -65,8 +69,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   line-height: 1.33;
+  font-weight: 600;
 }
 
 %page-container {

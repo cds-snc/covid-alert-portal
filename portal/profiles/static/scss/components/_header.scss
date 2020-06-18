@@ -6,18 +6,13 @@ header {
   }
 
   @include sm {
-    padding-bottom: $space-md;
     text-align: right;
   }
 
   .fip-container {
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     display: flex;
-
-    @include sm {
-      justify-content: space-between;
-      flex-direction: row;
-    }
   }
 
   .canada-flag {
@@ -25,6 +20,7 @@ header {
     max-height: 40px;
     width: 272px;
     margin-bottom: $space-sm;
+    margin-right: $space-sm;
 
     @include sm {
       width: 360px;
