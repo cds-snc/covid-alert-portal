@@ -82,8 +82,12 @@ WSGI_APPLICATION = 'portal.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'covid_portal',
+        'USER': os.getenv('POSTGRES_USERNAME'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -127,6 +131,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'profiles.HealthcareUser'
