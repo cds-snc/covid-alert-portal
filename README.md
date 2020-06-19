@@ -44,7 +44,7 @@ If you are developing the app and want your styling changes applied as you make 
 python manage.py sass profiles/static/scss/ profiles/static/css/ --watch
 ```
 
-Note that watching the SCSS will require a new terminal window to run the development server. If you are using iTerm, you can open another tab with `Command + t` or a new pane with `Command + d`. Remember to activate your virtual environment in your new pane.
+Note that watching the SCSS will require a new terminal window to run the development server. If you are using iTerm, you can open another tab with `Command + t` or a new pane with `Command + d`. Remember to activate your virtual environment in your new pane using `pipenv shell` and `pipenv install`
 
 #### 3. Create admin super user (optional)
 
