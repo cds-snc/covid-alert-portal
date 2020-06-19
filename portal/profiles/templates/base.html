@@ -34,9 +34,6 @@
     {% include  "includes/nav_main.html" %}
 
     <div class="page--container">
-      {% if user.is_authenticated %}
-        <p>Currently logged in as: {{ user.email }}</p>
-      {% endif %}
 
       {% block content %}{% endblock %}
 

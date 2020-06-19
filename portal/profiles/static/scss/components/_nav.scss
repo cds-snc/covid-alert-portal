@@ -29,6 +29,7 @@ nav {
   a {
     text-decoration: none;
     padding: $space-xs 0;
+    border-bottom: 4px solid transparent;
 
     &.active,
     &:hover {
