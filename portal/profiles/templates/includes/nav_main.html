@@ -1,0 +1,11 @@
+<nav class="nav--main">
+  <div class="page--container">
+    <ul>
+      <li><a class="{% if request.resolver_match.url_name == 'start' %}active{% endif %}" href="{% url 'start' %}">Start</a></li>
+      <li><a class="{% if request.resolver_match.url_name == 'code' %}active{% endif %}" href="{% url 'code' %}">Get a code</a></li>
+      {% if user.is_authenticated %}
+        <li><a class="{% if request.resolver_match.url_name == 'profiles' %}active{% endif %}" href="{% url 'profiles' %}">Manage accounts</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

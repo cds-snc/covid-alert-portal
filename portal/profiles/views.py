@@ -64,22 +64,24 @@ class UserEdit(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
 
 def code(request):
     token = os.getenv("AUTHORIZATION")
-    print(token)
-    auth_header = {'Authorization': 'Bearer ' + token}
-    try:
-        r = requests.post(os.getenv("ENDPOINT"), headers=auth_header)
-        r.raise_for_status()  # If we don't get a valid response, throw an exception
-        diagnosis_code = r.text
-        diagnosis_code = diagnosis_code[0:4] + ' ' + diagnosis_code[4:8]  # Split up the code with a space in the middle so it looks like this: 1234 5678
-    except requests.exceptions.HTTPError as err:
-        sys.stderr.write("Received " + str(r.status_code) + " " + err.response.text)
-        sys.stderr.flush()
-        diagnosis_code = 'Error'
-    except requests.exceptions.RequestException as err:
-        sys.stderr.write('Something went wrong')
-        sys.stderr.flush()
-        diagnosis_code = 'Error'
 
+    if token:
+        try:
+            r = requests.post(os.getenv("ENDPOINT"), headers={'Authorization': 'Bearer ' + token})
+            r.raise_for_status()  # If we don't get a valid response, throw an exception
+        except requests.exceptions.HTTPError as err:
+            sys.stderr.write("Received " + str(r.status_code) + " " + err.response.text)
+            sys.stderr.flush()
+        except requests.exceptions.RequestException as err:
+            sys.stderr.write('Something went wrong')
+            sys.stderr.flush()
+
+        diagnosis_code = r.text
+        # Split up the code with a space in the middle so it looks like this: 1234 5678
+        diagnosis_code = diagnosis_code[0:4] + ' ' + diagnosis_code[4:8]
+
+    else:
+        diagnosis_code = '0000 0000'
 
     context = {'code': diagnosis_code}
     return render(request, 'profiles/code.html', context)

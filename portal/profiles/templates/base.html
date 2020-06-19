@@ -2,32 +2,47 @@
 {% load static %}
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="{% static 'css/normalize.css' %}" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CNoto+Sans:400,700&amp;display=fallback" rel="stylesheet">
 
-    <title>{% block title %}Test{% endblock %}</title>
-    <style>
+  <link href="{% static 'css/normalize.css' %}" rel="stylesheet">
+  <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+
+  <title>{% block title %}CDS Healthcare Portal{% endblock %}</title>
+  <style>
       nav a { display: inline-block; margin-right: 10px; }
     </style>
 </head>
 <body>
-    <div>
-        <nav>
-            <a href="{% url 'start' %}">Start</a>
-            {% if user.is_authenticated %}
-                <a href="{% url 'user_profile' user.id %}">Profile</a>
-                <a href="{% url 'code' user.id %}">Generate Code</a>
-                <a href="{% url 'logout' %}">Log out</a>
-            {% else %}
-                <a href="{% url 'login' %}">Login</a>
-                <a href="{% url 'signup' %}">Sign up</a>
-            {% endif %}
-        </nav>
-         {% if user.is_authenticated %}
-            <p>Currently logged in as: {{ user.email }}</p>
-         {% endif %}
+<div class="container">
+  <header>
+    {% include  "includes/phase_banner.html" %}
+    <div class="page--container">
+      <div class="fip-container">
+        {% include  "includes/FIP_header.html" %}
+        {% include  "includes/nav_header.html" %}
+      </div>
     </div>
-    {% block content %}{% endblock %}
+    <div class="page--container">
+      <div id="site-name">Give your patient a StopCOVID code</div>
+    </div>
+  </header>
+  <main id="content">
+
+    {% include  "includes/nav_main.html" %}
+
+    <div class="page--container">
+
+      {% block content %}{% endblock %}
+
+    </div>
+
+  </main>
+
+  {% include  "includes/footer.html" %}
+
+</div>
 </body>
 </html>

@@ -1,0 +1,37 @@
+header {
+  padding: 0 0 0 0;
+
+  button {
+    padding: 0;
+  }
+
+  @include sm {
+    text-align: right;
+  }
+
+  .fip-container {
+    flex-direction: row;
+    justify-content: space-between;
+    display: flex;
+    margin-bottom: $space-md;
+  }
+
+  .canada-flag {
+    height: auto;
+    max-height: 40px;
+    width: 272px;
+    margin-bottom: $space-sm;
+    margin-right: $space-sm;
+
+    @include sm {
+      width: 360px;
+      margin-bottom: 0;
+    }
+  }
+
+  #site-name {
+    font-size: 1.5em;
+    margin: $space-md 0;
+    text-align: left;
+  }
+}

@@ -10,6 +10,7 @@ django = "*"
 django-user-language-middleware = "*"
 requests = "*"
 python-dotenv = "*"
+django-sass = "*"
 
 [requires]
 python_version = "3"

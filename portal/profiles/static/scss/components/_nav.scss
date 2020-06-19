@@ -1,0 +1,39 @@
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    li {
+      display: inline-block;
+      margin-right: $space-md;
+    }
+  }
+}
+
+.nav--header {
+  li:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.nav--main {
+  background: $color-grey-footer;
+  margin-left: -$space-md;
+  margin-right: -$space-md;
+
+  li {
+    margin-right: $space-md;
+  }
+
+  a {
+    text-decoration: none;
+    padding: $space-xs 0;
+    border-bottom: 4px solid transparent;
+
+    &.active,
+    &:hover {
+      border-bottom: 4px solid $color-blue-dark;
+    }
+  }
+}

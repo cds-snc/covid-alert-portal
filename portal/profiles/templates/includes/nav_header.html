@@ -1,0 +1,12 @@
+<nav class="nav--header">
+  <ul>
+    <li><a href="#">Français</a></li>
+    {% if user.is_authenticated %}
+      <li><a href="{% url 'user_profile' user.id %}">{{ user.email }}</a></li>
+      <li><a href="{% url 'logout' %}">Log out</a></li>
+    {% else %}
+      <li><a href="{% url 'login' %}">Login</a></li>
+      <li><a href="{% url 'signup' %}">Sign up</a></li>
+    {% endif %}
+  </ul>
+</nav>

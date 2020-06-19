@@ -1,0 +1,80 @@
+footer {
+  width: 100%;
+  background: $color-grey-footer;
+  line-height: $space-lg;
+
+  .footer-links {
+    padding-top: $space-lg;
+    padding-bottom: $space-lg;
+    font-size: 0.85em;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 0;
+
+      @include sm {
+        margin-bottom: $space-md;
+      }
+    }
+
+    li {
+      margin-right: $space-sm;
+
+      &::before {
+        content: '\2022';
+        color: $color-blue-light;
+        display: inline-block;
+        // bullets are about 5px, so add space to compensate
+        width: calc(#{$space-sm} + 5px);
+      }
+
+      @include sm {
+        &:first-of-type::before {
+          content: none;
+          width: 0;
+        }
+        display: inline-block;
+      }
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .canada-wordmark {
+    padding-bottom: $space-md;
+    width: 147.2px;
+  }
+
+  @include md {
+    .page--container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .footer-links {
+        flex: 2;
+
+        ul {
+          // put the footer links on the same baseline as the Canada wordmark
+          margin-bottom: -$space-xxs;
+        }
+      }
+      .canada-wordmark {
+        flex: 1;
+        text-align: right;
+        margin-bottom: 0;
+        max-height: 100%;
+
+        img {
+          height: 40px;
+          margin-bottom: $space-xs;
+          margin-top: $space-md;
+        }
+      }
+    }
+  }
+}
