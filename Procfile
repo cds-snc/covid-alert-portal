@@ -1,1 +1,1 @@
-web: sh -c 'cd ./portal && gunicorn portal.wsgi --log-file -'
+web: gunicorn portal.wsgi --log-file -
