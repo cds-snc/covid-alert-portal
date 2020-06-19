@@ -22,11 +22,14 @@ pipenv install  # install dependencies
 ### Running the app for the first time
 
 Make sure you have activated your virtual environment and move into the top-level `portal` folder.
+Copy /portal/.env.example to /portal/.env and provide the appropriate values for your configuration.
+
 
 #### 1. Database migrations
 
-The database will need to be set up. To create the database schema, run
-`python manage.py makemigrations`
+The database will need to be set up. We assume a postgres database named `covid_portal` located on localhost that is accessible with the POSTGRES_USERNAME and POSTGRES_PASSWORD environment variables in the .env file 
+
+To create the database schema, run `python manage.py makemigrations`
 
 Then, create the tables by running `python manage.py migrate`
 
