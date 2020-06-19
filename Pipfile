@@ -8,6 +8,8 @@ verify_ssl = true
 [packages]
 django = "*"
 django-user-language-middleware = "*"
+requests = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3"

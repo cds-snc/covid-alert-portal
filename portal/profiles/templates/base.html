@@ -17,6 +17,7 @@
             <a href="{% url 'start' %}">Start</a>
             {% if user.is_authenticated %}
                 <a href="{% url 'user_profile' user.id %}">Profile</a>
+                <a href="{% url 'code' user.id %}">Generate Code</a>
                 <a href="{% url 'logout' %}">Log out</a>
             {% else %}
                 <a href="{% url 'login' %}">Login</a>

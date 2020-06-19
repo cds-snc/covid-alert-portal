@@ -8,8 +8,8 @@ from . import views
 urlpatterns = [
 
     path('', RedirectView.as_view(pattern_name='start')),
+    path('code/', views.code, name='code'),
     path('start/', TemplateView.as_view(template_name="profiles/start.html"), name='start'),
-    path('code/', TemplateView.as_view(template_name="profiles/code.html"), name='code'),
     path('profiles/', views.StartPageView.as_view(), name='profiles'),
     re_path(r'signup/$', views.SignUp.as_view(), name='signup'),
     url(
