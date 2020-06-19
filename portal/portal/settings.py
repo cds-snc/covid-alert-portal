@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'portal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'covid',
+        'NAME': 'covid_portal',
         'USER': os.getenv('POSTGRES_USERNAME'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
         'HOST': 'localhost',
