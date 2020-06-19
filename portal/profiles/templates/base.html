@@ -22,18 +22,7 @@
     <div class="page--container">
       <div class="fip-container">
         {% include  "includes/FIP_header.html" %}
-        <nav class="nav--header">
-          <ul>
-            <li><a href="#">Français</a></li>
-            {% if user.is_authenticated %}
-              <li><a href="{% url 'user_profile' user.id %}">Profile</a></li>
-              <li><a href="{% url 'logout' %}">Log out</a></li>
-            {% else %}
-              <li><a href="{% url 'login' %}">Login</a></li>
-              <li><a href="{% url 'signup' %}">Sign up</a></li>
-            {% endif %}
-          </ul>
-        </nav>
+        {% include  "includes/nav_header.html" %}
       </div>
     </div>
     <div class="page--container">
@@ -41,23 +30,16 @@
     </div>
   </header>
   <main id="content">
-    <nav class="nav--main">
-      <div class="page--container">
-        <ul>
-          <li><a class="{% if request.resolver_match.url_name == 'start' %}active{% endif %}" href="{% url 'start' %}">Start</a></li>
-          <li><a class="{% if request.resolver_match.url_name == 'code' %}active{% endif %}" href="{% url 'code' %}">Get a code</a></li>
-          {% if user.is_authenticated %}
-            <li><a class="{% if request.resolver_match.url_name == 'profiles' %}active{% endif %}" href="{% url 'profiles' %}">Manage accounts</a></li>
-          {% endif %}
-        </ul>
-      </div>
-    </nav>
+
+    {% include  "includes/nav_main.html" %}
+
     <div class="page--container">
       {% if user.is_authenticated %}
         <p>Currently logged in as: {{ user.email }}</p>
       {% endif %}
 
       {% block content %}{% endblock %}
+
     </div>
 
   </main>
