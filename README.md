@@ -21,7 +21,7 @@ pipenv install  # install dependencies
 
 ### Running the app for the first time
 
-Make sure you have activated your virtual environment.
+Make sure you have activated your virtual environment and move into the top-level `portal` folder.
 
 The database will need to be set up. To create the database schema, run
 `python manage.py makemigrations`
