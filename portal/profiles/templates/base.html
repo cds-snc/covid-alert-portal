@@ -22,7 +22,18 @@
     <div class="page--container">
       <div class="fip-container">
         {% include  "includes/FIP_header.html" %}
-        <!-- language link -->
+        <nav class="nav--header">
+          <ul>
+            <li><a href="#">Français</a></li>
+            {% if user.is_authenticated %}
+              <li><a href="{% url 'user_profile' user.id %}">Profile</a></li>
+              <li><a href="{% url 'logout' %}">Log out</a></li>
+            {% else %}
+              <li><a href="{% url 'login' %}">Login</a></li>
+              <li><a href="{% url 'signup' %}">Sign up</a></li>
+            {% endif %}
+          </ul>
+        </nav>
       </div>
     </div>
     <div class="page--container">
@@ -34,12 +45,9 @@
       <div class="page--container">
         <ul>
           <li><a class="{% if request.resolver_match.url_name == 'start' %}active{% endif %}" href="{% url 'start' %}">Start</a></li>
+          <li><a class="{% if request.resolver_match.url_name == 'code' %}active{% endif %}" href="{% url 'code' %}">Get a code</a></li>
           {% if user.is_authenticated %}
-            <li><a class="{% if request.resolver_match.url_name == 'user_profile' %}active{% endif %}" href="{% url 'user_profile' user.id %}">Profile</a></li>
-            <li><a class="{% if request.resolver_match.url_name == 'logout' %}active{% endif %}" href="{% url 'logout' %}">Log out</a></li>
-          {% else %}
-            <li><a class="{% if request.resolver_match.url_name == 'login' %}active{% endif %}" href="{% url 'login' %}">Login</a></li>
-            <li><a class="{% if request.resolver_match.url_name == 'signup' %}active{% endif %}" href="{% url 'signup' %}">Sign up</a></li>
+            <li><a class="{% if request.resolver_match.url_name == 'profiles' %}active{% endif %}" href="{% url 'profiles' %}">Manage accounts</a></li>
           {% endif %}
         </ul>
       </div>

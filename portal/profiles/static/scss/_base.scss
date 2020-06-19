@@ -92,7 +92,6 @@ main {
   padding-bottom: $space-xxl;
 
   h1 {
-    border-bottom: 1px solid $color-red;
     @include md {
       padding-right: 15%;
     }
