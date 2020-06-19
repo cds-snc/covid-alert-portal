@@ -12,6 +12,7 @@ requests = "*"
 python-dotenv = "*"
 django-sass = "*"
 psycopg2-binary = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3"
