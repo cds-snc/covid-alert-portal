@@ -134,6 +134,19 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Application security: should be set to True in production
+# https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/#https
+is_prod = os.getenv('DJANGO_ENV', 'development') == 'production'
+
+SECURE_SSL_REDIRECT = is_prod
+SESSION_COOKIE_SECURE = is_prod
+CSRF_COOKIE_SECURE = is_prod
+
+# For sites that should only be accessed over HTTPS, instruct modern browsers to refuse to connect to your domain name via an insecure connection (for a given period of time)
+SECURE_HSTS_SECONDS = 3600 if is_prod else 0
+
+# Instructs the browser to send a full URL, but only for same-origin links. No referrer will be sent for cross-origin links.
+SECURE_REFERRER_POLICY = 'same-origin'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
