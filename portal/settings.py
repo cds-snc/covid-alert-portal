@@ -11,10 +11,14 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import sys
 import dj_database_url
 
 from dotenv import load_dotenv
 load_dotenv()
+
+# Tests whether the second command line argument (after ./manage.py) was test
+TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -85,7 +89,12 @@ WSGI_APPLICATION = 'portal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-if os.getenv('DATABASE_URL'):
+if TESTING:
+    db_config = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+elif os.getenv('DATABASE_URL'):
     db_config = dj_database_url.config(conn_max_age=600, ssl_require=True)
 else:
     db_config = {
