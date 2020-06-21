@@ -140,3 +140,5 @@ LOGIN_REDIRECT_URL = 'start'
 LOGOUT_REDIRECT_URL = 'start'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+CSRF_COOKIE_SECURE = True  # Only Authenticate over HTTPS
