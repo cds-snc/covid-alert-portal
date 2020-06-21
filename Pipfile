@@ -14,6 +14,7 @@ python-dotenv = "*"
 django-sass = "*"
 psycopg2-binary = "*"
 gunicorn = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3"
