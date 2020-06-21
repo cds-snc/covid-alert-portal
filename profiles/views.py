@@ -63,13 +63,13 @@ class UserEdit(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
 
 
 def code(request):
-    token = os.getenv("AUTHORIZATION")
+    token = os.getenv("API_AUTHORIZATION")
 
     diagnosis_code = '0000 0000'
 
     if token:
         try:
-            r = requests.post(os.getenv("ENDPOINT"), headers={'Authorization': 'Bearer ' + token})
+            r = requests.post(os.getenv("API_ENDPOINT"), headers={'Authorization': 'Bearer ' + token})
             r.raise_for_status()  # If we don't get a valid response, throw an exception
             diagnosis_code = r.text
         except requests.exceptions.HTTPError as err:
