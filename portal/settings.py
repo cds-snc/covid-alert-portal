@@ -38,6 +38,7 @@ ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'healthcare-portal.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'profiles',
     'django_sass',
     'django.contrib.admin',
