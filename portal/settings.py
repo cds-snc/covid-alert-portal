@@ -31,7 +31,8 @@ debug = os.getenv('DJANGO_DEBUG', 'False')
 # DEBUG will be True if DJANGO_DEBUG exists and is "True". Else, false.
 DEBUG = True if debug == 'True' else False
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'healthcare-portal.herokuapp.com']
 
 
 # Application definition
