@@ -5,4 +5,5 @@
 db.sqlite3
 .env
 *styles.css
-/portal/staticfiles
+/staticfiles/*
+!/staticfiles/.gitkeep
