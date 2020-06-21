@@ -1,4 +1,5 @@
 .idea
+.vscode
 .git
 .DS_Store
 db.sqlite3
