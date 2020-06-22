@@ -15,11 +15,19 @@ class HomePageView(TestCase):
                             "Welcome to the logged out homepage")
 
 
-class CodeView(TestCase):
+class AuthenticatedView(TestCase):
+    def setUp(self):
+        user_model = get_user_model()
+        user = user_model.objects.create_user('test', 'testname')
+        user.set_password('test')
+        user.save()
+
     def test_code(self):
         """
         Just see the code page and one code
         """
+        user_model = get_user_model()
+        self.client.login(username='test', password='test')
         response = self.client.get(reverse('code'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response,
