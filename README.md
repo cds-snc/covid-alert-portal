@@ -73,3 +73,16 @@ Then, run `python manage.py runserver` to run the app.
 - Go to `/admin` to register new users the custom user model
 - Go to `/profiles` to see the list of users
 - Go to `/signup` to register a new user
+
+### Running using Docker Compose
+
+> [Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration.
+
+You can use Docker Compose to build an application container along with a Postgres database. It will map your local files into a Docker container, spin up a PostgreSQL database, and do CSS compliation and a DB migration. The app runs on port `8000`, the database at port `5432` (u: `user`, p: `password`) and will be served at `http://0.0.0.0:8000`.
+
+Read the step-by-step process at [Django, Docker, and PostgreSQL Tutorial](https://learndjango.com/tutorials/django-docker-and-postgresql-tutorial).
+
+### Run
+
+1. Spin up the app: `docker-compose up`
+2. Spin down the app: `Command + c` or `docker-compose down`
