@@ -1,0 +1,19 @@
+{
+  "name": "healthcare-portal",
+  "stack": "container",
+  "addons": ["heroku-postgresql:hobby-dev"],
+  "environments": {
+    "review": {
+      "env": {
+        "DJANGO_DEBUG": "True",
+        "DJANGO_ENV": "development"
+      }
+    },
+    "staging": {
+      "env": {
+        "DJANGO_DEBUG": "False",
+        "DJANGO_ENV": "production"
+      }
+    }
+  }
+}
