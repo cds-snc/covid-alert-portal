@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'profiles',
     'django_sass',
+    'invitations',
+    'django.contrib.sites',  # Required for invitations
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -165,7 +167,10 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'profiles.HealthcareUser'
 
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'start'
 LOGOUT_REDIRECT_URL = 'start'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+SITE_ID = 1  #Required for invitations app
