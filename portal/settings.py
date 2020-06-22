@@ -11,10 +11,14 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
+import sys
+import dj_database_url
 
 from dotenv import load_dotenv
 load_dotenv()
+
+# Tests whether the second command line argument (after ./manage.py) was test
+TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,17 +28,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'j$e+wzxdum=!k$bwxpgt!$(@6!iasecid^tqnijx@r@o-6x%6d'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY',
+                       'j$e+wzxdum=!k$bwxpgt!$(@6!iasecid^tqnijx@r@o-6x%6d')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+debug = os.getenv('DJANGO_DEBUG', 'False')
+# DEBUG will be True if DJANGO_DEBUG exists and is "True". Else, false.
+DEBUG = True if debug == 'True' else False
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'healthcare-portal.herokuapp.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'profiles',
     'django_sass',
     'django.contrib.admin',
@@ -47,6 +55,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,17 +89,24 @@ WSGI_APPLICATION = 'portal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
+if TESTING:
+    db_config = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+elif os.getenv('DATABASE_URL'):
+    db_config = dj_database_url.config(conn_max_age=600, ssl_require=True)
+else:
+    db_config = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'covid_portal',
-        'USER': os.getenv('POSTGRES_USERNAME'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '',
+        'USER': os.getenv('DATABASE_USERNAME'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': os.getenv('DATABASE_HOST', 'localhost'),
+        'PORT': os.getenv('DATABASE_PORT', ''),
     }
-}
 
+DATABASES = {'default': db_config}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -127,6 +143,19 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Application security: should be set to True in production
+# https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/#https
+is_prod = os.getenv('DJANGO_ENV', 'development') == 'production'
+
+SECURE_SSL_REDIRECT = is_prod
+SESSION_COOKIE_SECURE = is_prod
+CSRF_COOKIE_SECURE = is_prod
+
+# For sites that should only be accessed over HTTPS, instruct modern browsers to refuse to connect to your domain name via an insecure connection (for a given period of time)
+SECURE_HSTS_SECONDS = 3600 if is_prod else 0
+
+# Instructs the browser to send a full URL, but only for same-origin links. No referrer will be sent for cross-origin links.
+SECURE_REFERRER_POLICY = 'same-origin'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

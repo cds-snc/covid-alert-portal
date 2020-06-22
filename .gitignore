@@ -1,7 +1,9 @@
 .idea
+.vscode
 .git
 .DS_Store
 db.sqlite3
 .env
 *styles.css
-/portal/staticfiles
+/staticfiles/*
+!/staticfiles/.gitkeep
