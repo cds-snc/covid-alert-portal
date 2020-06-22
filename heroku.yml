@@ -1,0 +1,9 @@
+build:
+  docker:
+    web: Dockerfile
+run:
+  web: |
+    python manage.py sass profiles/assets/scss/ profiles/static/css/
+    python manage.py collectstatic --noinput
+    python manage.py migrate
+    gunicorn portal.wsgi --log-file -
