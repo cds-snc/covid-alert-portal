@@ -8,7 +8,7 @@ from . import views
 
 urlpatterns = [
 
-    path('', RedirectView.as_view(pattern_name='start')),
+    path('', TemplateView.as_view(template_name="profiles/homepage.html"), name='homepage'),
     path('code/', views.code, name='code'),
     path('start/', login_required(TemplateView.as_view(template_name="profiles/start.html")), name='start'),
     path('profiles/', views.UserListView.as_view(), name='profiles'),
