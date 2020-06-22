@@ -1,17 +1,18 @@
 from django.test import TestCase
 
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 
-class StartView(TestCase):
+class HomePageView(TestCase):
     def test_start(self):
         """
         Just see the start page
         """
-        response = self.client.get(reverse('start'))
+        response = self.client.get(reverse('homepage'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response,
-                            "Generate code for Exposure Notification app")
+                            "Welcome to the logged out homepage")
 
 
 class CodeView(TestCase):
