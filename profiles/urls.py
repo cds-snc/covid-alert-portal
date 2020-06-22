@@ -1,6 +1,7 @@
 from django.urls import path, include, re_path
 from django.conf.urls import url
 from django.views.generic import RedirectView, TemplateView
+from django.contrib.auth.decorators import login_required
 
 from . import views
 
@@ -9,9 +10,8 @@ urlpatterns = [
 
     path('', RedirectView.as_view(pattern_name='start')),
     path('code/', views.code, name='code'),
-    path('start/', TemplateView.as_view(template_name="profiles/start.html"), name='start'),
-    path('profiles/', views.StartPageView.as_view(), name='profiles'),
-    re_path(r'signup/$', views.SignUp.as_view(), name='signup'),
+    path('start/', login_required(TemplateView.as_view(template_name="profiles/start.html")), name='start'),
+    path('profiles/', views.UserListView.as_view(), name='profiles'),
     url(
         r'profiles/(?P<pk>\w+)$',
         views.UserProfileView.as_view(),
