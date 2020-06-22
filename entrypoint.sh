@@ -1,16 +1,16 @@
 #!/bin/bash
 
+echo "Compile CSS"
+python manage.py sass profiles/assets/scss/ profiles/static/css/
+
+# If DJANGO_DEBUG isn't 'True' (defaults to 'False'), we need copy the static files over
+
+echo "Collect static files"
+python manage.py collectstatic --noinput
+
 # Apply database migrations
 echo "Apply database migrations"
 python manage.py migrate --noinput
-
-# If running in 'production' mode, we need these
-
-# echo "Compile CSS"
-python manage.py sass profiles/assets/scss/ profiles/static/css/
-
-# echo "Collect static files"
-python manage.py collectstatic --noinput
 
 # Start server
 echo "Starting server"
