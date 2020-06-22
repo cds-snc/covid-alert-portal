@@ -36,7 +36,7 @@ debug = os.getenv('DJANGO_DEBUG', 'False')
 DEBUG = True if debug == 'True' else False
 
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'healthcare-portal.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '*.herokuapp.com']
 
 
 # Application definition
