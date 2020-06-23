@@ -43,7 +43,6 @@ ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '.herokuapp.com']
 
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
-    'profiles',
     'django_sass',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'profiles',
 ]
 
 MIDDLEWARE = [
