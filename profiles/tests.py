@@ -1,6 +1,7 @@
 from django.test import TestCase
 
 from django.urls import reverse
+from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 
 
@@ -17,17 +18,28 @@ class HomePageView(TestCase):
 
 class AuthenticatedView(TestCase):
     def setUp(self):
-        user_model = get_user_model()
-        user = user_model.objects.create_user('test', 'testname')
-        user.set_password('test')
-        user.save()
+        self.credentials = {
+            'username': 'testuser',
+            'password': 'testpassword'}
+        User.objects.create_user(**self.credentials)
+
+    def test_loginpage(self):
+        #  Get the login page
+        response = self.client.get(reverse('login'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Login")
+
+        #  Test logging in
+        response = self.client.post('/login/', self.credentials, follow=True)
+        self.assertTrue(response.context['user'].is_active)
+
 
     def test_code(self):
         """
         Just see the code page and one code
         """
         user_model = get_user_model()
-        self.client.login(username='test', password='test')
+        self.client.login(username='testuser', password='testpassword')
         response = self.client.get(reverse('code'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response,
