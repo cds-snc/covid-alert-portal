@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-23 18:35+0000\n"
+"POT-Creation-Date: 2020-06-23 19:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: profiles/templates/includes/footer.html:8
+msgid "Contact"
+msgstr "Contact"
+
+#: profiles/templates/includes/footer.html:9
+msgid "Terms and conditions"
+msgstr "Avis"
+
+#: profiles/templates/includes/footer.html:10
+msgid "Privacy"
+msgstr "Confidentialité"
+
+#: profiles/templates/includes/footer.html:13
+msgid "Symbol of the Government of Canada"
+msgstr "Symbole du gouvernement du Canada"
 
 #: profiles/templates/profiles/start.html:4
 #: profiles/templates/profiles/start.html:7
