@@ -6,10 +6,30 @@ import sys
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
+from django.urls import reverse_lazy
+from django.views import generic
+from .forms import SignupForm
+
+
+class SignUp(generic.CreateView):
+    form_class = SignupForm
+    success_url = reverse_lazy('login')
+    template_name = 'profiles/signup.html'
+
+
 @login_required
 def code(request):
     token = os.getenv("API_AUTHORIZATION")
 
+    from django.core.mail import send_mail
+
+    send_mail(
+        'Subject here',
+        'Here is the message.',
+        'noreply@wyh8c06.m.notification.alpha.canada.ca',
+        ['stboisvert@gmail.com'],
+        fail_silently=False,
+    )
     diagnosis_code = '0000 0000'
 
     if token:
