@@ -29,4 +29,5 @@ urlpatterns = [
     # /reset/<uidb64>/<token>/ [name='password_reset_confirm']
     # /reset/done/ [name='password_reset_complete']
     path('', include('django.contrib.auth.urls')),
+    path("translate/", views.translate, name="translate")
 ]
