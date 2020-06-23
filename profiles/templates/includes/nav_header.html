@@ -1,6 +1,22 @@
+{% load i18n %}
 <nav class="nav--header">
   <ul>
-    <li><a href="#">Français</a></li>
+    <li>
+      {% get_current_language as LANGUAGE_CODE %}
+      {% get_language_info for "en" as langEn %}
+      {% get_language_info for "fr" as langFr %}
+
+      <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+        <h2 class="visually-hidden">{% trans "Language selection" }</h2>
+        {% if LANGUAGE_CODE == 'en' %}
+          <input type="hidden" name="language" value="{{ langFr.code }}" />
+          <button>{{ langFr.name_local|title }}</button>
+        {% else %}
+          <input type="hidden" name="language" value="{{ langEn.code }}" />
+          <button>{{ langEn.name_local|title }}</button>
+        {% endif %}
+      </form>
+    </li>
     {% if user.is_authenticated %}
       <li><a href="{% url 'user_profile' user.id %}">{{ user.email }}</a></li>
       <li><a href="{% url 'logout' %}">Log out</a></li>

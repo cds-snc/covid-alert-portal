@@ -1,10 +1,6 @@
 header {
   padding: 0 0 0 0;
 
-  button {
-    padding: 0;
-  }
-
   @include sm {
     text-align: right;
   }
@@ -14,6 +10,22 @@ header {
     justify-content: space-between;
     display: flex;
     margin-bottom: $space-md;
+
+    li {
+      a,
+      button {
+        padding: 0 $space-xxs;
+      }
+    }
+
+    button {
+      background: none;
+      color: $color-blue-dark;
+      text-decoration: underline;
+      border: 0;
+      line-height: 1.65;
+      cursor: pointer;
+    }
   }
 
   .canada-flag {

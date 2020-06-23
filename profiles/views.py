@@ -9,7 +9,6 @@ from django.views.generic import View, ListView
 
 from django.urls import reverse_lazy
 from django.views import generic
-from django.utils.translation import gettext as _
 
 from .forms import SignupForm, HealthcareUserEditForm
 
@@ -84,10 +83,3 @@ def code(request):
     diagnosis_code = diagnosis_code[0:4] + ' ' + diagnosis_code[4:8]
 
     return render(request, 'profiles/code.html', {'code': diagnosis_code})
-
-def translate(request):
-    # user_language = "fr"
-    # translation.activate(user_language)
-
-    context = {"hello": _("Hello")}
-    return render(request, "profiles/translate.html", context)
