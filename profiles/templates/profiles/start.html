@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}Generate code for Exposure Notification app{% endblock %}
 
@@ -6,7 +7,7 @@
   <h1>Generate code for Exposure Notification app</h1>
   <p>The StopCOVID app is an exposure notification system that will help stop the spread of COVID-19. This Health Portal is for healthcare practitioners to generate a code to for patients who have tested positive for COVID-19 and have the StopCOVID app.</p>
 
-  <h2>Before you start</h2>
+  <h2>{% trans "Before you start" %}</h2>
   <p>You will need to be speaking to a patient who:</p>
   <ol>
     <li>Has tested positive for COVID-19</li>

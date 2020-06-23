@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}Translate{% endblock %}
+
+{% block content %}
+  <h1>{{ hello }}</h1>
+  <h2>{% trans "My name is Paul" %}</h2>
+{% get_current_language as LANGUAGE_CODE %}
+{{ LANGUAGE_CODE }}
+
+{% endblock %}
