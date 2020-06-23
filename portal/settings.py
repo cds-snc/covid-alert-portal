@@ -171,6 +171,12 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'start'
 LOGOUT_REDIRECT_URL = 'start'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+
+# Invitations app
 SITE_ID = 1  #Required for invitations app
+INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
+INVITATIONS_GONE_ON_ACCEPT_ERROR = False
+INVITATIONS_SIGNUP_REDIRECT = '/error/'
+INVITATIONS_SIGNUP_REDIRECT = '/signup/'
+INVITATIONS_EMAIL_SUBJECT_PREFIX = ''
