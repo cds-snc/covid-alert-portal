@@ -19,9 +19,9 @@
     </li>
     {% if user.is_authenticated %}
       <li><a href="{% url 'user_profile' user.id %}">{{ user.email }}</a></li>
-      <li><a href="{% url 'logout' %}">Log out</a></li>
+      <li><a href="{% url 'logout' %}">{% trans 'Log out' %}</a></li>
     {% else %}
-      <li><a href="{% url 'login' %}">Login</a></li>
+      <li><a href="{% url 'login' %}">{% trans 'Login' %}</a></li>
     {% endif %}
   </ul>
 </nav>
