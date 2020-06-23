@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-23 19:11+0000\n"
+"POT-Creation-Date: 2020-06-23 19:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,6 +46,10 @@ msgstr "Déconnexion"
 #: profiles/templates/includes/nav_header.html:24
 msgid "Login"
 msgstr "Login"
+
+#: profiles/templates/includes/phase_banner.html:4
+msgid "This site will change as we test ideas."
+msgstr "Ce site évoluera au fur et à mesure que nous testons des idées."
 
 #: profiles/templates/profiles/start.html:4
 #: profiles/templates/profiles/start.html:7
