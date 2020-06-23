@@ -18,7 +18,7 @@ class SignUp(generic.CreateView):
     template_name = 'profiles/signup.html'
 
 
-@login_required
+
 def code(request):
     token = os.getenv("API_AUTHORIZATION")
 
