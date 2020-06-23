@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views import generic
 from .forms import SignupForm
+from django.core.mail import send_mail
 
 
 class SignUp(generic.CreateView):
@@ -20,8 +21,6 @@ class SignUp(generic.CreateView):
 @login_required
 def code(request):
     token = os.getenv("API_AUTHORIZATION")
-
-    from django.core.mail import send_mail
 
     send_mail(
         'Subject here',
