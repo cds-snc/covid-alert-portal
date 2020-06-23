@@ -165,6 +165,7 @@ SECURE_REFERRER_POLICY = 'same-origin'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
+AUTH_USER_MODEL = 'profiles.HealthcareUser'
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'start'
