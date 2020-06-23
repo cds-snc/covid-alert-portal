@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-23 19:19+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: profiles/templates/base.html:14
+msgid "COVID Healthcare Portal"
+msgstr "Portail COVID Santé"
+
+#: profiles/templates/base.html:27
+msgid "Give your patient a StopCOVID code"
+msgstr "Donnez à votre patient un code StopCOVID"
+
+#: profiles/templates/includes/FIP_header.html:6
+#: profiles/templates/includes/FIP_header.html:8
+msgid "Government of Canada"
+msgstr "Gouvernement du Canada"
+
+#: profiles/templates/includes/footer.html:8
+msgid "Contact"
+msgstr "Contact"
+
+#: profiles/templates/includes/footer.html:9
+msgid "Terms and conditions"
+msgstr "Avis"
+
+#: profiles/templates/includes/footer.html:10
+msgid "Privacy"
+msgstr "Confidentialité"
+
+#: profiles/templates/includes/footer.html:13
+msgid "Symbol of the Government of Canada"
+msgstr "Symbole du gouvernement du Canada"
+
+#: profiles/templates/includes/nav_header.html:22
+msgid "Log out"
+msgstr "Déconnexion"
+
+#: profiles/templates/includes/nav_header.html:24
+msgid "Login"
+msgstr "Login"
+
+#: profiles/templates/includes/phase_banner.html:4
+msgid "This site will change as we test ideas."
+msgstr "Ce site évoluera au fur et à mesure que nous testons des idées."
+
+#: profiles/templates/profiles/start.html:4
+#: profiles/templates/profiles/start.html:7
+msgid "Generate code for Exposure Notification app"
+msgstr "Générer du code pour l'application de notification d'exposition"
+
+#: profiles/templates/profiles/start.html:9
+msgid ""
+"The StopCOVID app is an exposure notification system that will help stop the "
+"spread of COVID-19. This Health Portal is for healthcare practitioners to "
+"generate a code to for patients who have tested positive for COVID-19 and "
+"have the StopCOVID app."
+msgstr ""
+"L'application StopCOVID est un système de notification d'exposition qui "
+"aidera à stopper la propagation de COVID-19. Ce portail de santé est destiné "
+"aux professionnels de la santé afin de générer un code pour les patients qui "
+"ont été testés positifs pour COVID-19 et qui ont l'application StopCOVID."
+
+#: profiles/templates/profiles/start.html:12
+msgid "Before you start"
+msgstr "Avant de commencer"
+
+#: profiles/templates/profiles/start.html:13
+msgid "You will need to be speaking to a patient who:"
+msgstr "Vous devrez parler à un patient qui :"
+
+#: profiles/templates/profiles/start.html:15
+msgid "Has tested positive for COVID-19"
+msgstr "Test positif pour COVID-19"
+
+#: profiles/templates/profiles/start.html:16
+msgid "Has the StopCOVID app installed on their phone"
+msgstr "L'application StopCOVID est-elle installée sur son téléphone"
+
+#: profiles/templates/profiles/start.html:19
+msgid "Generate code"
+msgstr "Générer du code"

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load i18n %}
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,10 +11,7 @@
   <link href="{% static 'css/normalize.css' %}" rel="stylesheet">
   <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 
-  <title>{% block title %}CDS Healthcare Portal{% endblock %}</title>
-  <style>
-      nav a { display: inline-block; margin-right: 10px; }
-    </style>
+  <title>{% block title %}{% trans "COVID Healthcare Portal" %}{% endblock %}</title>
 </head>
 <body>
 <div class="container">
@@ -26,7 +24,7 @@
       </div>
     </div>
     <div class="page--container">
-      <div id="site-name">Give your patient a StopCOVID code</div>
+      <div id="site-name">{% trans "Give your patient a StopCOVID code" %}</div>
     </div>
   </header>
   <main id="content">

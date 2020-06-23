@@ -1,4 +1,10 @@
 {% load static %}
+{% load i18n %}
 <div class="canada-flag">
-    <img src="{% static 'img/sig-blk-en.svg' %}" alt="Government of Canada" />
+    {% get_current_language as LANGUAGE_CODE %}
+    {% if LANGUAGE_CODE == 'en' %}
+        <img src="{% static 'img/sig-blk-en.svg' %}" alt="{% trans 'Government of Canada' %}" />
+    {% else %}
+        <img src="{% static 'img/sig-blk-fr.svg' %}" alt="{% trans 'Government of Canada' %}" />
+    {% endif %}
 </div>

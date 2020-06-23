@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Generate code for Exposure Notification app{% endblock %}
+{% block title %}{% trans "Generate code for Exposure Notification app" %}{% endblock %}
 
 {% block content %}
-  <h1>Generate code for Exposure Notification app</h1>
-  <p>The StopCOVID app is an exposure notification system that will help stop the spread of COVID-19. This Health Portal is for healthcare practitioners to generate a code to for patients who have tested positive for COVID-19 and have the StopCOVID app.</p>
+  <h1>{% trans "Generate code for Exposure Notification app" %}</h1>
+  <p>
+    {% trans "The StopCOVID app is an exposure notification system that will help stop the spread of COVID-19. This Health Portal is for healthcare practitioners to generate a code to for patients who have tested positive for COVID-19 and have the StopCOVID app." %}
+  </p>
 
-  <h2>Before you start</h2>
-  <p>You will need to be speaking to a patient who:</p>
+  <h2>{% trans "Before you start" %}</h2>
+  <p>{% trans "You will need to be speaking to a patient who:" %}</p>
   <ol>
-    <li>Has tested positive for COVID-19</li>
-    <li>Has the StopCOVID app installed on their phone</li>
+    <li>{% trans "Has tested positive for COVID-19" %}</li>
+    <li>{% trans "Has the StopCOVID app installed on their phone" %}</li>
   </ol>
 
-  <p><a href="{% url 'code' %}">Generate code</a></p>
+  <p><a href="{% url 'code' %}">{% trans "Generate code" %}</a></p>
 {% endblock %}
