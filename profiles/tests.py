@@ -16,6 +16,17 @@ class HomePageView(TestCase):
                             "Welcome to the logged out homepage")
 
 
+class RestristedPageViews(TestCase):
+    #These should redirect us
+    def test_code(self):
+        response = self.client.get(reverse('code'))
+        self.assertRedirects(response, '/login/?next=/code/')
+
+    def test_start(self):
+        response = self.client.get(reverse('start'))
+        self.assertRedirects(response, '/login/?next=/start/')
+
+
 class AuthenticatedView(TestCase):
     def setUp(self):
         self.credentials = {
