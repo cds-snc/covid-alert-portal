@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import sys
 import dj_database_url
+import django_heroku
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -192,3 +193,7 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 email_use_tls = os.getenv('EMAIL_USE_TLS')
 EMAIL_USE_TLS = True if email_use_tls == 'True' else False
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+
+
+
+django_heroku.settings(locals())

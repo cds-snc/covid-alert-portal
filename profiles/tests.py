@@ -28,10 +28,7 @@ class RestristedPageViews(TestCase):
 
 class AuthenticatedView(TestCase):
     def setUp(self):
-        self.credentials = {
-            'email': 'test@test.com',
-            'name': 'testuser',
-            'password': 'testpassword'}
+        self.credentials = {'email': 'test@test.com','name': 'testuser','password': 'testpassword'}
         User = get_user_model()
         User.objects.create_user(**self.credentials)
         self.credentials['username'] = 'test@test.com'  # Because username is what is posted to the login page, even if email is the username field we need to add it here. Adding it before creates an error since it's not expected as part of create_user()

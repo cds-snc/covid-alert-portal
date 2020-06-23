@@ -20,6 +20,7 @@ gunicorn = "*"
 whitenoise = "*"
 dj-database-url = "*"
 django-invitations = "*"
+django-heroku = "*"
 
 [requires]
 python_version = "3"
