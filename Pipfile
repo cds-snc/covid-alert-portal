@@ -9,7 +9,8 @@ format = "black --check ."
 lint = "flake8 ."
 
 [dev-packages]
-pylint = "*"
+black = "*"
+flake8 = "*"
 
 [packages]
 django = "*"
@@ -21,8 +22,6 @@ psycopg2-binary = "*"
 gunicorn = "*"
 whitenoise = "*"
 dj-database-url = "*"
-black = "*"
-flake8 = "*"
 
 [requires]
 python_version = "3"
