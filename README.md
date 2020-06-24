@@ -1,10 +1,8 @@
-# covid-healthcare-portal
+# COVID Healthcare Portal 
 
-Reference implementation of a healthcare portal for Canadian healthcare providers. Allows healthcare providers to generate temporary tracking codes for positively diagnosed patients.
+This repository implements a healthcare portal to complement the [Government of Canada COVID Shield mobile app](https://github.com/cds-snc/covid-shield-mobile). This portal provides authenticated healthcare providers unique temporary codes which can be shared with COVID-diagnosed individuals. This code gives individuals access to upload their random IDs via the mobile app if they choose. No personal information is collected and there is no association between the codes and specific tests.
 
-The main thing it needs to do is user management.
-
-Using this project as a basis: [jlooney/custom-user-example](https://github.com/jlooney/custom-user-example)
+For more information on how this all works, read through the [COVID Shield Rationale](https://github.com/CovidShield/rationale).
 
 ## Setup
 
