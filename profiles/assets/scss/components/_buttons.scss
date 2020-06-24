@@ -1,0 +1,61 @@
+%button-styles {
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.1875;
+  display: inline-block;
+  position: relative;
+  margin-top: 10px;
+  padding: 9px 18px;
+  border-radius: 5px;
+  color: $color-white;
+  background-color: $color-blue-button;
+  border: 2px solid transparent;
+  box-shadow: 0 2px 0 black;
+  text-align: center;
+  vertical-align: top;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-appearance: none;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    bottom: -4px;
+    left: -2px;
+    background: transparent;
+  }
+
+  &:focus {
+    @include focus();
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color-blue-dark;
+  }
+
+  &:active {
+    top: 2px;
+    box-shadow: none;
+
+    &::before {
+      top: -4px;
+    }
+  }
+}
+
+.start-button {
+  margin: $space-lg 0 $space-xxl 0;
+}
+
+main form button {
+  @extend %button-styles;
+  font-family: "Noto Sans", sans-serif;
+}
+
+a[role="button"] {
+  @extend %button-styles;
+}
