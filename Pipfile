@@ -5,6 +5,7 @@ verify_ssl = true
 
 [scripts]
 test = "python manage.py test"
+lint = "black --check ."
 
 [dev-packages]
 pylint = "*"
@@ -19,6 +20,10 @@ psycopg2-binary = "*"
 gunicorn = "*"
 whitenoise = "*"
 dj-database-url = "*"
+black = "*"
 
 [requires]
 python_version = "3"
+
+[pipenv]
+allow_prereleases = true

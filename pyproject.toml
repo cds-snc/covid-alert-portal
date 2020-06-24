@@ -1,0 +1,22 @@
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+exclude = '''
+
+(
+  /(
+    | \.git          # exclude from root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | \.vscode
+    | \.idea
+    | _build
+    | migrations
+  )/
+  | manage.py           # also separately exclude a file named foo.py in
+                        # the root of the project
+)
+'''
