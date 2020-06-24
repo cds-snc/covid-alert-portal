@@ -21,15 +21,6 @@ class SignUp(generic.CreateView):
 def code(request):
     token = os.getenv("API_AUTHORIZATION")
 
-    from django.core.mail import send_mail
-
-    send_mail(
-        'Subject here',
-        'Here is the message.',
-        'noreply@wyh8c06.m.notification.alpha.canada.ca',
-        ['stboisvert@gmail.com'],
-        fail_silently=False,
-    )
     diagnosis_code = '0000 0000'
 
     if token:
