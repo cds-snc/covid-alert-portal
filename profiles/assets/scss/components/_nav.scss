@@ -7,6 +7,10 @@ nav {
     li {
       display: inline-block;
       margin-right: $space-md;
+
+      a {
+        display: inline-block;
+      }
     }
   }
 }
@@ -30,6 +34,7 @@ nav {
     text-decoration: none;
     padding: $space-xs 0;
     border-bottom: 4px solid transparent;
+    margin-right: $space-xs;
 
     &.active,
     &:hover {

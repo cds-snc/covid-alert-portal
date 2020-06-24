@@ -1,10 +1,8 @@
-# covid-healthcare-portal
+# COVID Healthcare Portal 
 
-Reference implementation of a healthcare portal for Canadian healthcare providers. Allows healthcare providers to generate temporary tracking codes for positively diagnosed patients.
+This repository implements a healthcare portal to complement the [Government of Canada COVID Shield mobile app](https://github.com/cds-snc/covid-shield-mobile). This portal provides authenticated healthcare providers unique temporary codes which can be shared with COVID-diagnosed individuals. This code gives individuals access to upload their random IDs via the mobile app if they choose. No personal information is collected and there is no association between the codes and specific tests.
 
-The main thing it needs to do is user management.
-
-Using this project as a basis: [jlooney/custom-user-example](https://github.com/jlooney/custom-user-example)
+For more information on how this all works, read through the [COVID Shield Rationale](https://github.com/CovidShield/rationale).
 
 ## Setup
 
@@ -86,3 +84,31 @@ Read the step-by-step process at [Django, Docker, and PostgreSQL Tutorial](https
 
 1. Spin up the app: `docker-compose up`
 2. Spin down the app: `Command + c` or `docker-compose down`
+
+### Translations
+
+We're using the default Django translations library to add content in French and English.
+
+Here is a short overview of adding a translated string to the application.
+
+Add your string to a template using the `trans` tag.
+
+```
+# profiles/templates/profiles/start.html
+
+<h1>{% trans "Generate code for Exposure Notification app" %}</h1>
+```
+
+Run `python manage.py makemessages -l fr` to update the `django.po` translations file inside of `/locale`.
+
+```
+# locale/fr/LC_MESSAGES/django.po
+
+#: profiles/templates/profiles/start.html:7
+msgid "Generate code for Exposure Notification app"
+msgstr "Générer du code pour l'application de notification d'exposition"
+```
+
+Run `python manage.py compilemessages` to compile the translations so that Django knows how to use them.
+
+For more complete documentation refer to the [Django Translation](https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#translation) docs.
