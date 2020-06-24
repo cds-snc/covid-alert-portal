@@ -46,13 +46,13 @@ Then, create the tables by running `python manage.py migrate`.
 You will need to generate the `profiles/static/css/styles.css` file by compiling the SCSS files. To generate the file once, run:
 
 ```
-python manage.py sass profiles/assets/scss/ profiles/static/css/
+python manage.py sass profiles/static/scss/ profiles/static/css/
 ```
 
 If you are developing the app and want your styling changes applied as you make changes, you can use the `--watch` flag.
 
 ```
-python manage.py sass profiles/assets/scss/ profiles/static/css/ --watch
+python manage.py sass profiles/static/scss/ profiles/static/css/ --watch
 ```
 
 Note that watching the SCSS will require a new terminal window to run the development server. If you are using iTerm, you can open another tab with `Command + t` or a new pane with `Command + d`. Remember to activate your virtual environment in your new pane using `pipenv shell` and `pipenv install`.
@@ -158,13 +158,13 @@ Ensuite, créez les tableaux en exécutant `python manage.py migrate`
 Vous devrez générer le fichier `profiles/static/css/styles.css` en compilant les fichiers SCSS. Pour générer le fichier une seule fois, exécutez :
 
 ```
-python manage.py sass profiles/assets/scss/ profiles/static/css/
+python manage.py sass profiles/static/scss/ profiles/static/css/
 ```
 
 Si vous développez l’application et que vous voulez voir vos changements de styles être appliqués au fur et à mesure que vous les faites, vous pouvez utiliser le flag `--watch`.
 
 ```
-python manage.py sass profiles/assets/scss/ profiles/static/css/ --watch
+python manage.py sass profiles/static/scss/ profiles/static/css/ --watch
 ```
 
 Remarquez que surveiller ainsi le SCSS nécessitera d’avoir une nouvelle fenêtre du terminal pour exécuter le serveur de développement. Si vous utilisez iTerm, vous pouvez ouvrir un nouvel onglet avec `Command + t` ou ajouter une subdivision avec `Command + d`. N’oubliez pas d’activer votre environnement virtuel dans votre nouvelle subdivision à l’aide de `pipenv shell` et `pipenv install`.

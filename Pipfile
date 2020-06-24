@@ -4,6 +4,8 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [scripts]
+css = "python manage.py sass profiles/static/scss/styles.scss profiles/static/css/"
+csswatch = "python manage.py sass profiles/static/scss/styles.scss profiles/static/css/ --watch"
 test = "python manage.py test"
 format = "black --check ."
 lint = "flake8 ."
