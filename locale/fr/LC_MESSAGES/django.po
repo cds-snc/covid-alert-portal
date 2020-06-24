@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-23 19:19+0000\n"
+"POT-Creation-Date: 2020-06-23 22:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,6 +58,61 @@ msgstr "Login"
 #: profiles/templates/includes/phase_banner.html:4
 msgid "This site will change as we test ideas."
 msgstr "Ce site évoluera au fur et à mesure que nous testons des idées."
+
+#: profiles/templates/profiles/code.html:4
+#: profiles/templates/profiles/code.html:7
+msgid "Provide patient with code"
+msgstr "Fournir le code au patient"
+
+#: profiles/templates/profiles/code.html:10
+msgid "Instructions for patient"
+msgstr "Instructions pour le patient"
+
+#: profiles/templates/profiles/code.html:12
+msgid "Open the StopCOVID app by tapping on the icon"
+msgstr "Ouvrez l'application StopCOVID en tapant sur l'icône"
+
+#: profiles/templates/profiles/code.html:13
+msgid "Tap the white section at the bottom of the screen"
+msgstr "Appuyez sur la partie blanche en bas de l'écran"
+
+#: profiles/templates/profiles/code.html:14
+msgid "Tap the <strong>Enter code</strong> button"
+msgstr "Appuyez sur le bouton <strong>« Entrez le code »</strong>"
+
+#: profiles/templates/profiles/code.html:15
+msgid "Enter the following 8-digit code:"
+msgstr "Entrez le code à 8 chiffres suivant :"
+
+#: profiles/templates/profiles/code.html:16
+msgid "Tap the <strong>Submit code</strong> button"
+msgstr "Appuyez sur le bouton <strong>« Envoyer le code »</strong>"
+
+#: profiles/templates/profiles/code.html:17
+msgid ""
+"Tap the <strong>I agree</strong> button. This will anonymously share the "
+"random IDs on your phone."
+msgstr ""
+"Appuyez sur le bouton <strong>« J'accepte »</strong>. Cela permettra de "
+"partager anonymement les identifiants aléatoires de votre téléphone"
+
+#: profiles/templates/profiles/code.html:18
+msgid "Tap <strong>Share</strong>"
+msgstr "Appuyez sur le bouton <strong>« Partagez »</strong>"
+
+#: profiles/templates/profiles/code.html:19
+msgid ""
+"You don’t need to do anything else today. You will receive a notification "
+"each day for the next 13 days requesting your permission to share any new "
+"random IDs."
+msgstr ""
+"Vous n'avez pas besoin de faire autre chose aujourd'hui. Vous recevrez une "
+"notification chaque jour pendant les 13 jours suivants vous demandant la "
+"permission de partager toute nouvelle identité aléatoire."
+
+#: profiles/templates/profiles/code.html:22
+msgid "Next patient"
+msgstr "Patient suivant"
 
 #: profiles/templates/profiles/start.html:4
 #: profiles/templates/profiles/start.html:7
