@@ -5,9 +5,12 @@ verify_ssl = true
 
 [scripts]
 test = "python manage.py test"
+format = "black --check ."
+lint = "flake8 ."
 
 [dev-packages]
-pylint = "*"
+black = "*"
+flake8 = "*"
 
 [packages]
 django = "*"
@@ -22,3 +25,6 @@ dj-database-url = "*"
 
 [requires]
 python_version = "3"
+
+[pipenv]
+allow_prereleases = true
