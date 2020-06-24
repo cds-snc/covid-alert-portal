@@ -43,10 +43,10 @@ ul {
 }
 
 p + ul {
-  margin-top: -$space-xs;
+  margin-top: -$space-xxs;
 
   @include xs {
-    margin-top: -$space-sm;
+    margin-top: -$space-xs;
   }
 }
 

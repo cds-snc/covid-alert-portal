@@ -51,9 +51,16 @@
   margin: $space-lg 0 $space-xxl 0;
 }
 
-main form button {
-  @extend %button-styles;
-  font-family: "Noto Sans", sans-serif;
+main {
+  form button {
+    @extend %button-styles;
+    font-family: "Noto Sans", sans-serif;
+  }
+
+  .content-button {
+    margin-top: $space-lg;
+    margin-bottom: $space-xxl;
+  }
 }
 
 a[role="button"] {
