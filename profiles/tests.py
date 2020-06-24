@@ -9,50 +9,52 @@ class HomePageView(TestCase):
         """
         Just see the start page
         """
-        response = self.client.get(reverse('homepage'))
+        response = self.client.get(reverse("homepage"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response,
-                            "Welcome to the logged out homepage")
+        self.assertContains(response, "Welcome to the logged out homepage")
 
 
 class RestristedPageViews(TestCase):
     #  These should redirect us
     def test_code(self):
-        response = self.client.get(reverse('code'))
-        self.assertRedirects(response, '/en/login/?next=/en/code/')
+        response = self.client.get(reverse("code"))
+        self.assertRedirects(response, "/en/login/?next=/en/code/")
 
     def test_start(self):
-        response = self.client.get(reverse('start'))
-        self.assertRedirects(response, '/en/login/?next=/en/start/')
+        response = self.client.get(reverse("start"))
+        self.assertRedirects(response, "/en/login/?next=/en/start/")
 
 
 class AuthenticatedView(TestCase):
     def setUp(self):
         self.credentials = {
-            'email': 'test@test.com',
-            'name': 'testuser',
-            'password': 'testpassword'}
+            "email": "test@test.com",
+            "name": "testuser",
+            "password": "testpassword",
+        }
         User = get_user_model()
         User.objects.create_user(**self.credentials)
-        self.credentials['username'] = 'test@test.com'  # Because username is what is posted to the login page, even if email is the username field we need to add it here. Adding it before creates an error since it's not expected as part of create_user()
+        self.credentials[
+            "username"
+        ] = "test@test.com"  # Because username is what is posted to the login page, even if email is the username field we need to add it here. Adding it before creates an error since it's not expected as part of create_user()
 
     def test_loginpage(self):
         #  Get the login page
-        response = self.client.get(reverse('login'))
+        response = self.client.get(reverse("login"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Login")
         #  Test logging in
-        response = self.client.post('/en/login/', self.credentials, follow=True)
-        print(response.context['user'])
-        self.assertTrue(response.context['user'].is_active)
+        response = self.client.post("/en/login/", self.credentials, follow=True)
+        print(response.context["user"])
+        self.assertTrue(response.context["user"].is_active)
 
     def test_code(self):
         """
         Login and then see the code page and one code
         """
         user_model = get_user_model()
-        self.client.login(username='test@test.com', password='testpassword')
-        response = self.client.get(reverse('code'))
+        self.client.login(username="test@test.com", password="testpassword")
+        response = self.client.get(reverse("code"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Provide patient with code")
         self.assertContains(

@@ -7,11 +7,18 @@ from . import views
 
 
 urlpatterns = [
-
-    path('', TemplateView.as_view(template_name="profiles/homepage.html"), name='homepage'),
-    path('code/', views.code, name='code'),
-    path('start/', login_required(TemplateView.as_view(template_name="profiles/start.html")), name='start'),
-    re_path(r'signup/$', views.SignUp.as_view(), name='signup'),
+    path(
+        "",
+        TemplateView.as_view(template_name="profiles/homepage.html"),
+        name="homepage",
+    ),
+    path("code/", views.code, name="code"),
+    path(
+        "start/",
+        login_required(TemplateView.as_view(template_name="profiles/start.html")),
+        name="start",
+    ),
+    re_path(r"signup/$", views.SignUp.as_view(), name="signup"),
     # Removed for now
     # path('profiles/', views.UserListView.as_view(), name='profiles'),
     # url(
@@ -20,7 +27,5 @@ urlpatterns = [
     #     name='user_profile',
     # ),
     # url(r'profiles/(?P<pk>\w+)/edit$', views.UserEdit.as_view(), name='user_edit'),
-
-    path('', include('django.contrib.auth.urls')),
+    path("", include("django.contrib.auth.urls")),
 ]
-
