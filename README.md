@@ -67,7 +67,7 @@ Run `python manage.py createsuperuser` to create a super user.
 
 #### 4. Run development server
 
-Then, run `python manage.py runserver` to run the app. By default, it will be served at `http://127.0.0.1:8000/`.
+Then, run `python manage.py runserver` to run the app. Go to `http://127.0.0.1:8000/` to see the landing page.
 
 ### Running using Docker Compose
 
@@ -179,7 +179,7 @@ Exécutez `python manage.py createsuperuser` pour créer un super utilisateur.
 
 #### 4. Exécution du serveur de développement
 
-Exécutez ensuite `python manage.py runserver` pour faire fonctionner l’application. Par défaut, il sera desservie à l’adresse `http://127.0.0.1:8000/`.
+Exécutez ensuite `python manage.py runserver` pour faire fonctionner l’application. Rendez-vous à `http://127.0.0.1:8000/` pour voir la page d’accueil.
 
 ### Exécuter avec Docker Compose
 
