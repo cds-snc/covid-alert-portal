@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Homepage" %}{% endblock %}
+
+{% block content %}
+  <h1>{% trans "Welcome to the logged out homepage" %}</h1>
+  <p>{% trans "The StopCOVID app is an exposure notification system that will help stop the spread of COVID-19. This Health Portal is for healthcare practitioners to generate a code to for patients who have tested positive for COVID-19 and have the StopCOVID app."%}</p>
+
+  <h2>{% trans "Before you start" %}</h2>
+  <p>{% trans "You need to login, contact us to get an account" %}</p>
+
+  <p><a href="{% url 'login' %}">Login</a></p>
+{% endblock %}

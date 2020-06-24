@@ -44,6 +44,8 @@ ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '.herokuapp.com']
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django_sass',
+    'invitations',
+    'django.contrib.sites',  # Required for invitations
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -169,7 +171,16 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'profiles.HealthcareUser'
 
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'start'
 LOGOUT_REDIRECT_URL = 'start'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# Invitations app
+SITE_ID = 1  #Required for invitations app
+# INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
+INVITATIONS_GONE_ON_ACCEPT_ERROR = False
+INVITATIONS_SIGNUP_REDIRECT = '/error/'
+INVITATIONS_SIGNUP_REDIRECT = '/signup/'
+INVITATIONS_EMAIL_SUBJECT_PREFIX = ''

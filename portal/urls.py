@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
@@ -8,5 +8,6 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    path('', include('profiles.urls'))
+    path('', include('profiles.urls')),
+    re_path(r'^invitations/', include('invitations.urls', namespace='invitations')),
 )
