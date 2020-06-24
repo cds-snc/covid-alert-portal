@@ -1,6 +1,6 @@
 [La version française suit.](#---------------------------------------------------------------------)
 
-# COVID Healthcare Portal 
+# COVID Healthcare Portal
 
 This repository implements a healthcare portal to complement the [Government of Canada COVID Shield mobile app](https://github.com/cds-snc/covid-shield-mobile). This portal provides authenticated healthcare providers unique temporary codes which can be shared with COVID-diagnosed individuals. This code gives individuals access to upload their random IDs via the mobile app if they choose. No personal information is collected and there is no association between the codes and specific tests.
 
@@ -28,7 +28,7 @@ Copy `./portal/.env.example` to `./portal/.env` and provide the appropriate valu
 
 A Postgres database will need to be set up.
 
-If a `DATABASE_URL` environment variable exists, it will set all the connection parameters at the same time. Otherwise, the database paremeters will be set individually:
+If a `DATABASE_URL` environment variable exists, it will set all the connection parameters at the same time. Otherwise, the database parameters will be set individually:
 
 - `DATABASE_USERNAME`
 - `DATABASE_PASSWORD`
@@ -67,13 +67,13 @@ Run `python manage.py createsuperuser` to create a super user.
 
 #### 4. Run development server
 
-Then, run `python manage.py runserver` to run the app.
+Then, run `python manage.py runserver` to run the app. By default, it will be served at `http://127.0.0.1:8000/`.
 
 ### Running using Docker Compose
 
 > [Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration.
 
-You can use Docker Compose to build an application container along with a Postgres database. It will map your local files into a Docker container, spin up a PostgreSQL database, and do CSS compliation and a DB migration. The app runs on port `8000`, the database at port `5432` (u: `user`, p: `password`) and will be served at `http://0.0.0.0:8000`.
+You can use Docker Compose to build an application container along with a Postgres database. It will map your local files into a Docker container, spin up a PostgreSQL database, and do CSS compilation and a DB migration. The app runs on port `8000`, the database at port `5432` (u: `user`, p: `password`) and will be served at `http://0.0.0.0:8000`.
 
 Read the step-by-step process at [Django, Docker, and PostgreSQL Tutorial](https://learndjango.com/tutorials/django-docker-and-postgresql-tutorial).
 
@@ -160,6 +160,7 @@ Vous devrez générer le fichier `profiles/static/css/styles.css` en compilant l
 ```
 python manage.py sass profiles/assets/scss/ profiles/static/css/
 ```
+
 Si vous développez l’application et que vous voulez voir vos changements de styles être appliqués au fur et à mesure que vous les faites, vous pouvez utiliser le flag `--watch`.
 
 ```
@@ -170,15 +171,15 @@ Remarquez que surveiller ainsi le SCSS nécessitera d’avoir une nouvelle fenê
 
 #### 3. Création d’un super utilisateur admin (facultatif)
 
-Cette application vous permet d’utiliser l’admin (`/admin`) pour gérer les utilisateurs, même si les utilisateurs peuvent s’inscrire eux-mêmes. 
+Cette application vous permet d’utiliser l’admin (`/admin`) pour gérer les utilisateurs, même si les utilisateurs peuvent s’inscrire eux-mêmes.
 
 Pour accéder au chemin `/admin` vous devrez créer un compte de super utilisateur.
 
 Exécutez `python manage.py createsuperuser` pour créer un super utilisateur.
 
-#### 4.  Exécution du serveur de développement
+#### 4. Exécution du serveur de développement
 
-Exécutez ensuite `python manage.py runserver` pour faire fonctionner l’application.
+Exécutez ensuite `python manage.py runserver` pour faire fonctionner l’application. Par défaut, il sera desservie à l’adresse `http://127.0.0.1:8000/`.
 
 ### Exécuter avec Docker Compose
 
