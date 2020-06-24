@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-24 18:25+0000\n"
+"POT-Creation-Date: 2020-06-24 18:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -164,37 +164,48 @@ msgstr ""
 
 #: profiles/templates/profiles/start.html:4
 #: profiles/templates/profiles/start.html:7
-msgid "Generate code for Exposure Notification app"
-msgstr "Générer du code pour l'application de notification d'exposition"
+msgid "Generate a StopCOVID code"
+msgstr "Générer un code StopCOVID"
 
 #: profiles/templates/profiles/start.html:9
-msgid ""
-"The StopCOVID app is an exposure notification system that will help stop the "
-"spread of COVID-19. This Health Portal is for healthcare practitioners to "
-"generate a code to for patients who have tested positive for COVID-19 and "
-"have the StopCOVID app."
-msgstr ""
-"L'application StopCOVID est un système de notification d'exposition qui "
-"aidera à stopper la propagation de COVID-19. Ce portail de santé est destiné "
-"aux professionnels de la santé afin de générer un code pour les patients qui "
-"ont été testés positifs pour COVID-19 et qui ont l'application StopCOVID."
+msgid "Before generating a code, check the patient has:"
+msgstr "Avant de générer un code, vérifiez que le patient :"
 
 #: profiles/templates/profiles/start.html:12
-msgid "Before you start"
-msgstr "Avant de commencer"
+msgid "tested positive for COVID-19"
+msgstr "a été testé positif au COVID-19"
 
 #: profiles/templates/profiles/start.html:13
-msgid "You will need to be speaking to a patient who:"
-msgstr "Vous devrez parler à un patient qui :"
-
-#: profiles/templates/profiles/start.html:15
-msgid "Has tested positive for COVID-19"
-msgstr "Test positif pour COVID-19"
+msgid "the StopCOVID app installed on their phone"
+msgstr "a installé l'application StopCOVID sur son téléphone"
 
 #: profiles/templates/profiles/start.html:16
-msgid "Has the StopCOVID app installed on their phone"
-msgstr "L'application StopCOVID est-elle installée sur son téléphone"
-
-#: profiles/templates/profiles/start.html:19
 msgid "Generate code"
 msgstr "Générer du code"
+
+#: profiles/templates/profiles/start.html:19
+msgid ""
+"Each code is individual and anonymous. It cannot be used by another patient. "
+"If the code expires before the patient enters it, they’ll need a new code."
+msgstr ""
+
+#~ msgid "Generate code for Exposure Notification app"
+#~ msgstr "Générer du code pour l'application de notification d'exposition"
+
+#~ msgid ""
+#~ "The StopCOVID app is an exposure notification system that will help stop "
+#~ "the spread of COVID-19. This Health Portal is for healthcare "
+#~ "practitioners to generate a code to for patients who have tested positive "
+#~ "for COVID-19 and have the StopCOVID app."
+#~ msgstr ""
+#~ "L'application StopCOVID est un système de notification d'exposition qui "
+#~ "aidera à stopper la propagation de COVID-19. Ce portail de santé est "
+#~ "destiné aux professionnels de la santé afin de générer un code pour les "
+#~ "patients qui ont été testés positifs pour COVID-19 et qui ont "
+#~ "l'application StopCOVID."
+
+#~ msgid "Before you start"
+#~ msgstr "Avant de commencer"
+
+#~ msgid "You will need to be speaking to a patient who:"
+#~ msgstr "Vous devrez parler à un patient qui :"
