@@ -171,7 +171,7 @@ AUTH_USER_MODEL = "profiles.HealthcareUser"
 
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "start"
-LOGOUT_REDIRECT_URL = "start"
+LOGOUT_REDIRECT_URL = "landing"
 
 
 # Invitations app
