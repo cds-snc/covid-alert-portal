@@ -5,7 +5,8 @@ verify_ssl = true
 
 [scripts]
 test = "python manage.py test"
-lint = "black --check ."
+format = "black --check ."
+lint = "flake8 ."
 
 [dev-packages]
 pylint = "*"
@@ -21,6 +22,7 @@ gunicorn = "*"
 whitenoise = "*"
 dj-database-url = "*"
 black = "*"
+flake8 = "*"
 
 [requires]
 python_version = "3"
