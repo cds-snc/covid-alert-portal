@@ -9,9 +9,9 @@ class HomePageView(TestCase):
         """
         Just see the start page
         """
-        response = self.client.get(reverse("homepage"))
+        response = self.client.get(reverse("landing"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Welcome to the logged out homepage")
+        self.assertContains(response, "Welcome to the StopCOVID code generator")
 
 
 class RestristedPageViews(TestCase):
@@ -70,7 +70,7 @@ class i18nTestView(TestCase):
         client = Client(HTTP_ACCEPT_LANGUAGE="fr",)
         response = client.get("/", follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.request["PATH_INFO"], "/fr/")
+        self.assertEqual(response.request["PATH_INFO"], "/fr/landing/")
 
     def test_root_with_accept_language_header_en(self):
         """
@@ -79,7 +79,7 @@ class i18nTestView(TestCase):
         client = Client(HTTP_ACCEPT_LANGUAGE="en",)
         response = client.get("/", follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.request["PATH_INFO"], "/en/")
+        self.assertEqual(response.request["PATH_INFO"], "/en/landing/")
 
     def test_root_without_accept_language_header(self):
         """
@@ -88,22 +88,22 @@ class i18nTestView(TestCase):
         client = Client()
         response = client.get("/", follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.request["PATH_INFO"], "/en/")
+        self.assertEqual(response.request["PATH_INFO"], "/en/landing/")
 
     def test_start_with_language_setting_fr(self):
         """
         Test we end up on French start page from start url "fr" is active language
         """
         translation.activate("fr")
-        response = self.client.get(reverse("homepage"))
+        response = self.client.get(reverse("landing"))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.request["PATH_INFO"], "/fr/")
+        self.assertEqual(response.request["PATH_INFO"], "/fr/landing/")
 
     def test_start_with_language_setting_en(self):
         """
         Test we end up on English start page from start url "en" is active language
         """
         translation.activate("en")
-        response = self.client.get(reverse("homepage"))
+        response = self.client.get(reverse("landing"))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.request["PATH_INFO"], "/en/")
+        self.assertEqual(response.request["PATH_INFO"], "/en/landing/")

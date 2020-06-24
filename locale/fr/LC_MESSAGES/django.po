@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-23 22:12+0000\n"
+"POT-Creation-Date: 2020-06-24 18:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: profiles/templates/base.html:14
-msgid "COVID Healthcare Portal"
-msgstr "Portail COVID Santé"
-
-#: profiles/templates/base.html:27
-msgid "Give your patient a StopCOVID code"
-msgstr "Donnez à votre patient un code StopCOVID"
+#: profiles/templates/base.html:15 profiles/templates/base.html:28
+msgid "StopCOVID code generator"
+msgstr "Générateur des codes StopCOVID"
 
 #: profiles/templates/includes/FIP_header.html:6
 #: profiles/templates/includes/FIP_header.html:8
@@ -47,11 +43,11 @@ msgstr "Confidentialité"
 msgid "Symbol of the Government of Canada"
 msgstr "Symbole du gouvernement du Canada"
 
-#: profiles/templates/includes/nav_header.html:22
+#: profiles/templates/includes/nav_header.html:21
 msgid "Log out"
 msgstr "Déconnexion"
 
-#: profiles/templates/includes/nav_header.html:24
+#: profiles/templates/includes/nav_header.html:23
 msgid "Login"
 msgstr "Login"
 
@@ -113,6 +109,58 @@ msgstr ""
 #: profiles/templates/profiles/code.html:22
 msgid "Next patient"
 msgstr "Patient suivant"
+
+#: profiles/templates/profiles/landing.html:4
+#: profiles/templates/profiles/landing.html:7
+msgid "Welcome to the StopCOVID code generator"
+msgstr "Bienvenue sur le générateur des codes StopCOVID"
+
+#: profiles/templates/profiles/landing.html:8
+msgid "The StopCOVID app notifies people if they’ve been exposed to COVID-19."
+msgstr ""
+"L’application StopCOVID informe les gens s’ils ont été exposés à COVID-19."
+
+#: profiles/templates/profiles/landing.html:9
+#, fuzzy
+#| msgid "Next patient"
+msgid "If a patient:"
+msgstr "Patient suivant"
+
+#: profiles/templates/profiles/landing.html:11
+msgid "is diagnosed with COVID-19, <strong>and</strong>"
+msgstr ""
+
+#: profiles/templates/profiles/landing.html:12
+#, fuzzy
+#| msgid "Has the StopCOVID app installed on their phone"
+msgid "has the app installed on their mobile device"
+msgstr "L'application StopCOVID est-elle installée sur son téléphone"
+
+#: profiles/templates/profiles/landing.html:14
+msgid ""
+"they can enter a StopCOVID code to anonymously notify people they’ve been "
+"near in the past 14 days."
+msgstr ""
+
+#: profiles/templates/profiles/landing.html:15
+msgid "Only an authorized health care worker can give a StopCOVID code."
+msgstr ""
+
+#: profiles/templates/profiles/landing.html:17
+msgid "Log in"
+msgstr "Se connecter"
+
+#: profiles/templates/profiles/landing.html:19
+msgid "StopCOVID works on Android and Apple devices released after 2014."
+msgstr ""
+
+#: profiles/templates/profiles/landing.html:20
+msgid "About StopCOVID [hyperlink to site homepage]"
+msgstr ""
+
+#: profiles/templates/profiles/landing.html:21
+msgid "How StopCOVID protects privacy [hyperlink to privacy policy]"
+msgstr ""
 
 #: profiles/templates/profiles/start.html:4
 #: profiles/templates/profiles/start.html:7

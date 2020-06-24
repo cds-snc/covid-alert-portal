@@ -7,10 +7,11 @@ from . import views
 
 
 urlpatterns = [
+    path("", RedirectView.as_view(pattern_name="landing")),
     path(
-        "",
-        TemplateView.as_view(template_name="profiles/homepage.html"),
-        name="homepage",
+        "landing/",
+        TemplateView.as_view(template_name="profiles/landing.html"),
+        name="landing",
     ),
     path("code/", views.code, name="code"),
     path(
