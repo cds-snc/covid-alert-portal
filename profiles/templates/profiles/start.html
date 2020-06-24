@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Generate code for Exposure Notification app" %}{% endblock %}
+{% block title %}{% trans "Generate a StopCOVID code" %}{% endblock %}
 
 {% block content %}
-  <h1>{% trans "Generate code for Exposure Notification app" %}</h1>
+  <h1>{% trans "Generate a StopCOVID code" %}</h1>
   <p>
-    {% trans "The StopCOVID app is an exposure notification system that will help stop the spread of COVID-19. This Health Portal is for healthcare practitioners to generate a code to for patients who have tested positive for COVID-19 and have the StopCOVID app." %}
+    {% trans "Before generating a code, check the patient has:" %}
   </p>
+  <ul>
+    <li>{% trans "tested positive for COVID-19" %}</li>
+    <li>{% trans "the StopCOVID app installed on their phone" %}</li>
+  </ul>
 
-  <h2>{% trans "Before you start" %}</h2>
-  <p>{% trans "You will need to be speaking to a patient who:" %}</p>
-  <ol>
-    <li>{% trans "Has tested positive for COVID-19" %}</li>
-    <li>{% trans "Has the StopCOVID app installed on their phone" %}</li>
-  </ol>
+  <div class="content-button"><a href="{% url 'code' %}" role='button' draggable='false'>{% trans "Generate code" %}</a></div>
 
-  <div><a href="{% url 'code' %}" role='button' draggable='false'>{% trans "Generate code" %}</a></div>
+  <p>
+    {% trans "Each code is individual and anonymous. It cannot be used by another patient. If the code expires before the patient enters it, they’ll need a new code." %}
+  </p>
 {% endblock %}
