@@ -18,17 +18,10 @@ class SignUp(generic.CreateView):
     template_name = 'profiles/signup.html'
 
 
-
+@login_required
 def code(request):
     token = os.getenv("API_AUTHORIZATION")
 
-    send_mail(
-        'Subject here',
-        'Here is the message.',
-        'noreply@wyh8c06.m.notification.alpha.canada.ca',
-        ['stboisvert@gmail.com'],
-        fail_silently=False,
-    )
     diagnosis_code = '0000 0000'
 
     if token:
