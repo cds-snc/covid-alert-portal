@@ -1,0 +1,26 @@
+{% load i18n %}
+
+<form method="post" id="form--{{ request.resolver_match.url_name }}">
+  {% csrf_token %}
+
+  <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %}">
+    {% for field in form %}
+      <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
+          {{ field.label_tag }}
+          <span class="error--{{ field.html_name }}">{{ field.errors|first }}</span>
+          {% if field.help_text %}
+            <p class="help">{{ field.help_text }}</p>
+          {% endif %}
+          {{ field }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <button type="submit">
+    {% if submit_text %}
+      {% trans submit_text %}
+    {% else %}
+      {% trans "Submit" %}
+    {% endif %}
+  </button>
+</form>
