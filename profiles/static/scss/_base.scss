@@ -100,6 +100,18 @@ main {
   > div {
     margin-bottom: $space-lg;
   }
+
+  .content--container {
+    @include md {
+      width: 90%;
+    }
+    @include lg {
+      width: 80%;
+    }
+    @include xl {
+      width: 70%;
+    }
+  }
 }
 
 li:not(:last-of-type) {

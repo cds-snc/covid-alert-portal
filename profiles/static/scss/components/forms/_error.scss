@@ -1,9 +1,10 @@
 main .errorlist {
   &--container {
-    padding: 15px;
+    padding: $space-sm;
+    padding-right: #{$space-xs + $space-sm};
     background: #f3e9e8;
     border-left: 4px solid $color-red;
-    margin-top: 15px;
+    margin-top: $space-sm;
   }
 
   &--heading {
