@@ -10,7 +10,13 @@ from django.utils.translation import gettext_lazy as _
 from .models import HealthcareUser
 
 
-class HealthcareAuthenticationForm(AuthenticationForm):
+class HealthcareBaseForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("label_suffix", "")
+        super(HealthcareBaseForm, self).__init__(*args, **kwargs)
+
+
+class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
     """
     A login form extending the Django default AuthenticationForm.
     https://github.com/django/django/blob/9a54a9172a724d38caf6a150f41f23d79b9bdbb7/django/contrib/auth/forms.py#L173
@@ -21,7 +27,6 @@ class HealthcareAuthenticationForm(AuthenticationForm):
 
     # override field attributes: https://stackoverflow.com/a/56870308
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault("label_suffix", "")
         super(HealthcareAuthenticationForm, self).__init__(*args, **kwargs)
 
         # remove autofocus from fields
