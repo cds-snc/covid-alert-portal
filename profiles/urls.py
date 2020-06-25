@@ -1,5 +1,4 @@
 from django.urls import path, include, re_path
-from django.conf.urls import url
 from django.views.generic import RedirectView, TemplateView
 from django.contrib.auth import views as auth_views, decorators
 
