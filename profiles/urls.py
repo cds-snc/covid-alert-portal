@@ -1,10 +1,9 @@
 from django.urls import path, include, re_path
 from django.views.generic import RedirectView, TemplateView
-from django.contrib.auth import views as auth_views, decorators
+from django.contrib.auth.views import login_required, PasswordResetView, LoginView
 
 from . import views
 from . import forms
-
 
 urlpatterns = [
     path("", RedirectView.as_view(pattern_name="landing")),
@@ -16,9 +15,7 @@ urlpatterns = [
     path("code/", views.code, name="code"),
     path(
         "start/",
-        decorators.login_required(
-            TemplateView.as_view(template_name="profiles/start.html")
-        ),
+        login_required(TemplateView.as_view(template_name="profiles/start.html")),
         name="start",
     ),
     re_path(r"signup/$", views.SignUp.as_view(), name="signup"),
@@ -33,16 +30,12 @@ urlpatterns = [
     # this login path overrides the default one in 'django.contrib.auth.urls'
     path(
         "login/",
-        auth_views.LoginView.as_view(
-            authentication_form=forms.HealthcareAuthenticationForm
-        ),
+        LoginView.as_view(authentication_form=forms.HealthcareAuthenticationForm),
         name="login",
     ),
     path(
         "password_reset/",
-        auth_views.PasswordResetView.as_view(
-            form_class=forms.HealthcarePasswordResetForm
-        ),
+        PasswordResetView.as_view(form_class=forms.HealthcarePasswordResetForm),
         name="password_reset",
     ),
     path("", include("django.contrib.auth.urls")),
