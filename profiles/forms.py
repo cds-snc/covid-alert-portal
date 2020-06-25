@@ -1,5 +1,4 @@
 from django.contrib.auth.forms import (
-    UserCreationForm,
     UserChangeForm,
     AuthenticationForm,
 )
@@ -9,7 +8,6 @@ from django.core.validators import EmailValidator
 from django.utils.translation import gettext_lazy as _
 
 from invitations.models import Invitation
-from invitations.managers import BaseInvitationManager
 from .models import HealthcareUser
 
 class HealthcareAuthenticationForm(AuthenticationForm):
