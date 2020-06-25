@@ -38,5 +38,12 @@ urlpatterns = [
         ),
         name="login",
     ),
+    path(
+        "password_reset/",
+        auth_views.PasswordResetView.as_view(
+            form_class=forms.HealthcarePasswordResetForm
+        ),
+        name="password_reset",
+    ),
     path("", include("django.contrib.auth.urls")),
 ]

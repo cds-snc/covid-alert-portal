@@ -2,6 +2,7 @@ from django.contrib.auth.forms import (
     UserCreationForm,
     UserChangeForm,
     AuthenticationForm,
+    PasswordResetForm,
 )
 from django import forms
 from django.core.validators import EmailValidator
@@ -37,6 +38,21 @@ class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
         self.fields["username"].validators = [
             EmailValidator(message=_("Enter a valid email address"))
         ]
+
+
+class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
+    """
+    A login form extending the Django default PasswordResetForm.
+    https://github.com/django/django/blob/9a54a9172a724d38caf6a150f41f23d79b9bdbb7/django/contrib/auth/forms.py#L251
+    """
+
+    def __init__(self, *args, **kwargs):
+        super(HealthcarePasswordResetForm, self).__init__(*args, **kwargs)
+
+        # remove autofocus from email
+        self.fields["email"].widget.attrs.pop("autofocus", None)
+        # Otherwise it just says "Email"
+        self.fields["email"].label = _("Email address")
 
 
 class SignupForm(UserCreationForm):
