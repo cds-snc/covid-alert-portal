@@ -25,7 +25,7 @@ jobs:
       - name: Check format with black
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
-          command: run format
+          command: run format --check
 
       - name: Lint for style with flake8
         uses: VaultVulp/action-pipenv@v2.0.1
