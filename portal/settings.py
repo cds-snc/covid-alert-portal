@@ -175,14 +175,11 @@ LOGOUT_REDIRECT_URL = "landing"
 
 # Invitations app
 SITE_ID = 1  # Required for invitations app
-# INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
 INVITATIONS_GONE_ON_ACCEPT_ERROR = False
 INVITATIONS_SIGNUP_REDIRECT = "/error/"
 INVITATIONS_SIGNUP_REDIRECT = "/signup/"
 INVITATIONS_EMAIL_SUBJECT_PREFIX = ""
 INVITATIONS_INVITATION_ONLY = True
-#ACCOUNT_ADAPTER = "profiles.adapters.ProfileInvitationsAdapter"
-#INVITATIONS_ADAPTER = "profiles.adapters.ProfileInvitationsAdapter"
 
 # Email setup
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
