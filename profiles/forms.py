@@ -56,9 +56,6 @@ class SignupForm(forms.Form):
             raise  ValidationError(_("Email already exists"))
         if not Invitation.objects.filter(email__iexact=email):
             raise  ValidationError(_("An invitation hasn't been sent to this address"))
-        elif Invitation.objects.filter(
-                email__iexact=email, accepted=True):
-            raise ValidationError(_("This invitation has already been accepted"))
         return email
  
     def clean_password2(self):
