@@ -2,51 +2,51 @@
 {% load static %}
 {% load i18n %}
 <html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Bootstrap -->
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Lato:400,700%7CNoto+Sans:400,700&amp;display=fallback" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700%7CNoto+Sans:400,700&amp;display=fallback" >
 
-  <!-- Google fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Lato:400,700%7CNoto+Sans:400,700&amp;display=fallback" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700%7CNoto+Sans:400,700&amp;display=fallback" >
+    <link href="{% static 'css/normalize.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 
-  <link href="{% static 'css/normalize.css' %}" rel="stylesheet">
-  <link href="{% static 'css/styles.css' %}" rel="stylesheet">
-  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+    <title>{% block title %}{% trans "StopCOVID code generator" %}{% endblock %}</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        {% include  "includes/phase_banner.html" %}
+        <div class="page--container">
+          <div class="fip-container">
+            {% include  "includes/FIP_header.html" %}
+            {% include  "includes/nav_header.html" %}
+          </div>
+        </div>
+        <div class="page--container">
+          <div id="site-name">{% trans "StopCOVID code generator" %}</div>
+        </div>
+      </header>
+      <main id="content">
 
-  <title>{% block title %}{% trans "StopCOVID code generator" %}{% endblock %}</title>
-</head>
-<body>
-<div class="container">
-  <header>
-    {% include  "includes/phase_banner.html" %}
-    <div class="page--container">
-      <div class="fip-container">
-        {% include  "includes/FIP_header.html" %}
-        {% include  "includes/nav_header.html" %}
-      </div>
+        {% include  "includes/nav_main.html" %}
+
+        <div class="page--container">
+
+          <div class="content--container">
+            {% block content %}{% endblock %}
+          </div>
+        </div>
+
+      </main>
+
+      {% include  "includes/footer.html" %}
+
     </div>
-    <div class="page--container">
-      <div id="site-name">{% trans "StopCOVID code generator" %}</div>
-    </div>
-  </header>
-  <main id="content">
-
-    {% include  "includes/nav_main.html" %}
-
-    <div class="page--container">
-
-      <div class="content--container">
-        {% block content %}{% endblock %}
-      </div>
-    </div>
-
-  </main>
-
-  {% include  "includes/footer.html" %}
-
-</div>
-</body>
+    <script src="{% static 'js/script.js' %}"></script>
+  </body>
 </html>

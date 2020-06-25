@@ -9,6 +9,7 @@ csswatch = "python manage.py sass profiles/static/scss/styles.scss profiles/stat
 test = "python manage.py test"
 format = "black ."
 lint = "flake8 ."
+serve = "python manage.py runserver"
 
 [dev-packages]
 black = "*"
