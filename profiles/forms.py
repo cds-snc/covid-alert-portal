@@ -1,7 +1,22 @@
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import (
+    UserCreationForm,
+    UserChangeForm,
+    AuthenticationForm,
+)
 from django import forms
 
 from .models import HealthcareUser
+
+
+class HealthcareAuthenticationForm(AuthenticationForm):
+    class Meta:
+        model = HealthcareUser
+        fields = ["username", "password"]
+
+    # override field attributes: https://stackoverflow.com/a/56870308
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("label_suffix", "")
+        super(HealthcareAuthenticationForm, self).__init__(*args, **kwargs)
 
 
 class SignupForm(UserCreationForm):
