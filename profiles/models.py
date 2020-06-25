@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
-from portal import settings
-
 
 PROVINCE_CHOICES = (
     ("bc", "British Columbia"),

@@ -52,7 +52,6 @@ class AuthenticatedView(TestCase):
         """
         Login and then see the code page and one code
         """
-        user_model = get_user_model()
         self.client.login(username="test@test.com", password="testpassword")
         response = self.client.get(reverse("code"))
         self.assertEqual(response.status_code, 200)
