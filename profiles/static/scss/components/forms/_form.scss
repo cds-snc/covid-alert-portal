@@ -1,0 +1,17 @@
+main form {
+  width: 100%;
+  max-width: 440px;
+  margin-bottom: $space-xxl;
+
+  label {
+    display: block;
+  }
+
+  .fieldWrapper {
+    margin-bottom: $space-lg;
+
+    > * {
+      margin-bottom: $space-xxs;
+    }
+  }
+}
