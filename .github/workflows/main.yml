@@ -22,10 +22,20 @@ jobs:
         with:
           command: install -d # Install all dependencies, including development ones
 
-      - name: Check format
+      - name: Pipenv check for security vulnerabilities
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
-          command: run format
+          command: check
+
+      - name: Check format with black
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: run format --check
+
+      - name: Lint for style with flake8
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: run lint
 
       - name: Test
         uses: VaultVulp/action-pipenv@v2.0.1

@@ -48,13 +48,13 @@ INSTALLED_APPS = [
     "django_sass",
     "invitations",
     "django.contrib.sites",  # Required for invitations
-    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "profiles",
+    "django.contrib.admin",  # we want our auth templates loaded first
 ]
 
 MIDDLEWARE = [
@@ -177,6 +177,5 @@ LOGOUT_REDIRECT_URL = "landing"
 SITE_ID = 1  # Required for invitations app
 # INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
 INVITATIONS_GONE_ON_ACCEPT_ERROR = False
-INVITATIONS_SIGNUP_REDIRECT = "/error/"
 INVITATIONS_SIGNUP_REDIRECT = "/signup/"
 INVITATIONS_EMAIL_SUBJECT_PREFIX = ""

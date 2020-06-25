@@ -34,7 +34,7 @@ def code(request):
             sys.stderr.write("Received " + str(r.status_code) + " " + err.response.text)
             sys.stderr.flush()
         except requests.exceptions.RequestException as err:
-            sys.stderr.write("Something went wrong")
+            sys.stderr.write("Something went wrong", err)
             sys.stderr.flush()
 
     # Split up the code with a space in the middle so it looks like this: 1234 5678

@@ -7,8 +7,9 @@ verify_ssl = true
 css = "python manage.py sass profiles/static/scss/styles.scss profiles/static/css/"
 csswatch = "python manage.py sass profiles/static/scss/styles.scss profiles/static/css/ --watch"
 test = "python manage.py test"
-format = "black --check ."
+format = "black ."
 lint = "flake8 ."
+serve = "python manage.py runserver"
 
 [dev-packages]
 black = "*"
@@ -24,9 +25,6 @@ gunicorn = "*"
 whitenoise = "*"
 dj-database-url = "*"
 django-invitations = "*"
-
-[requires]
-python_version = "3"
 
 [pipenv]
 allow_prereleases = true
