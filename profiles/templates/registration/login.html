@@ -18,9 +18,9 @@
         {% if key == '__all__' %}
           <a href="#form--{{ request.resolver_match.url_name }}">
         {% else %}
-          <a href="#id_{{ key|escape }}">
+          <a href="#id_{{ key }}">
         {% endif %}
-          {{ value|first|escape }}
+          {{ value|first }}
           </a>
         </li>
       {% endfor %}
@@ -39,7 +39,7 @@
             {{ field.label_tag }}
             <span class="error--{{ field.html_name }}">{{ field.errors|first }}</span>
             {% if field.help_text %}
-            <p class="help">{{ field.help_text|safe }}</p>
+            <p class="help">{{ field.help_text }}</p>
             {% endif %}
             {{ field }}
         </div>
