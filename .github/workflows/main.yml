@@ -22,6 +22,11 @@ jobs:
         with:
           command: install -d # Install all dependencies, including development ones
 
+      - name: Pipenv check for security vulnerabilities
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: check
+
       - name: Check format with black
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
