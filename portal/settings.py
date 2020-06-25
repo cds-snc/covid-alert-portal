@@ -67,7 +67,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "user_language_middleware.UserLanguageMiddleware",
 ]
 
 ROOT_URLCONF = "portal.urls"
@@ -171,7 +170,7 @@ AUTH_USER_MODEL = "profiles.HealthcareUser"
 
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "start"
-LOGOUT_REDIRECT_URL = "start"
+LOGOUT_REDIRECT_URL = "landing"
 
 
 # Invitations app

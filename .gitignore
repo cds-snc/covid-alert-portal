@@ -7,3 +7,4 @@ db.sqlite3
 *styles.css
 /staticfiles/*
 !/staticfiles/.gitkeep
+__pycache__

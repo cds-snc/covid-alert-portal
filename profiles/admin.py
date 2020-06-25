@@ -18,7 +18,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = HealthcareUser
-        fields = ("email", "password", "name", "language", "is_active", "is_admin")
+        fields = ("email", "password", "name", "is_active", "is_admin")
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -35,12 +35,12 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ("email", "name", "language", "is_admin")
+    list_display = ("email", "name", "is_admin")
     list_filter = ("is_admin",)
 
     fieldsets = (
         (None, {"fields": ("email", "password")}),
-        ("Personal info", {"fields": ("name", "language")}),
+        ("Personal info", {"fields": ("name",)}),
         ("Permissions", {"fields": ("is_admin",)}),
     )
 
@@ -51,7 +51,7 @@ class UserAdmin(BaseUserAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("email", "name", "language", "password1", "password2"),
+                "fields": ("email", "name", "password1", "password2"),
             },
         ),
     )

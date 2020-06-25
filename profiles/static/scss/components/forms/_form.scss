@@ -1,0 +1,17 @@
+main form {
+  width: 100%;
+  max-width: 440px;
+  margin-bottom: $space-xxl;
+
+  .fieldWrapper {
+    margin-bottom: $space-lg;
+
+    > * {
+      display: block;
+    }
+
+    > input {
+      margin-top: 8px;
+    }
+  }
+}
