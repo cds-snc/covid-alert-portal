@@ -1,16 +1,61 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
+from django.utils.translation import gettext as _
+from django.core.exceptions import ValidationError
 
+from invitations.models import Invitation
+from invitations.managers import BaseInvitationManager
 from .models import HealthcareUser
 
 
-class SignupForm(UserCreationForm):
+class SignupForm(forms.Form):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
+    email = forms.EmailField(label=_("Your email:"))  #  Disabled = true
+    name = forms.CharField(label=_("Your name:"))
+    password1 = forms.CharField(label=_("Enter password"), widget=forms.PasswordInput)
+    password2 = forms.CharField(label=_("Confirm password"), widget=forms.PasswordInput)
 
-    class Meta:
-        model = HealthcareUser
-        fields = ("email", "name", "language")
+ 
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        if len(name)>200:
+            raise  ValidationError(_("Name is too long"))
+        return name
+  
+    def clean_email(self):
+        email = self.cleaned_data['email'].lower()
+        email_exists = HealthcareUser.objects.filter(email=email)
+        if email_exists.count():
+            raise  ValidationError(_("Email already exists"))
+        if not Invitation.objects.filter(email__iexact=email):
+            raise  ValidationError(_("An invitation hasn't been sent to this address"))
+        elif Invitation.objects.filter(
+                email__iexact=email, accepted=True):
+            raise ValidationError(_("This invitation has already been accepted"))
+        return email
+ 
+    def clean_password2(self):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+
+        if password1 and password2 and password1 != password2:
+            raise ValidationError(_("Password don't match"))
+
+        #We probably don't actually need this here and can rely on AUTH_PASSWORD_VALIDATORS
+        if len(password2) < 12:
+            raise ValidationError(_("Password must be at least 12 characters"))
+
+        return password2
+ 
+    def save(self, commit=True):
+        user = HealthcareUser.objects.create_user(
+            self.cleaned_data['email'],
+            self.cleaned_data['name'],
+            self.cleaned_data['password1']
+        )
+        return user
+
 
 
 class HealthcareUserEditForm(UserChangeForm):
@@ -19,7 +64,7 @@ class HealthcareUserEditForm(UserChangeForm):
 
     class Meta:
         model = HealthcareUser
-        fields = ("email", "name", "language")
+        fields = ("email", "name")
         widgets = {
             "email": forms.EmailInput(attrs={"readonly": "readonly"}),
         }

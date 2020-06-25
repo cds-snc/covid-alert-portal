@@ -3,18 +3,37 @@ import os
 import sys
 
 
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-
 from django.urls import reverse_lazy
 from django.views import generic
 from .forms import SignupForm
+from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
+from django.utils.html import escape,strip_tags
 
 
-class SignUp(generic.CreateView):
-    form_class = SignupForm
-    success_url = reverse_lazy("login")
-    template_name = "profiles/signup.html"
+
+
+def signup(request):
+    if request.method == 'POST':
+        f = SignupForm(request.POST)
+        if f.is_valid():
+            f.save()
+            messages.success(request, 'Account created successfully')
+            return redirect('start')
+ 
+    else:
+        prepopulate = {}
+        get = request.GET.copy()
+        if get["email"]:
+            prepopulate["email"] = escape(strip_tags(get["email"]))
+        if request.session['account_verified_email']:  # TODO: only use GET or SESSION after we're done testing
+            prepopulate["email"] = escape(strip_tags(get["email"]))
+        f = SignupForm(initial=prepopulate)
+ 
+    return render(request, 'profiles/signup.html', {'form': f})
+
 
 
 @login_required
