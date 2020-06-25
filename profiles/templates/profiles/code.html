@@ -12,7 +12,7 @@
         <li>{% trans "Open the StopCOVID app by tapping on the icon" %}</li>
         <li>{% trans "Tap the white section at the bottom of the screen" %}</li>
         <li>{% blocktrans %}Tap the <strong>Enter code</strong> button{% endblocktrans %}</li>
-        <li>{% blocktrans with code|length as code_length %}Enter the following {{ code_length }}-digit code:{% endblocktrans %} <code>{{ code }}</code></li>
+        <li>{% blocktrans with code|cut:" "|length as code_length %}Enter the following {{ code_length }}-digit code:{% endblocktrans %} <code>{{ code }}</code></li>
         <li>{% blocktrans %}Tap the <strong>Submit code</strong> button{% endblocktrans %}</li>
         <li>{% blocktrans %}Tap the <strong>I agree</strong> button. This will anonymously share the random IDs on your phone.{% endblocktrans %}</li>
         <li>{% blocktrans %}Tap <strong>Share</strong>{% endblocktrans %}</li>
