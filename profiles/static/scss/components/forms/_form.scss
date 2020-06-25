@@ -3,15 +3,15 @@ main form {
   max-width: 440px;
   margin-bottom: $space-xxl;
 
-  label {
-    display: block;
-  }
-
   .fieldWrapper {
     margin-bottom: $space-lg;
 
     > * {
-      margin-bottom: $space-xxs;
+      display: block;
+    }
+
+    > input {
+      margin-top: 8px;
     }
   }
 }

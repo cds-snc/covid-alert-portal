@@ -1,0 +1,27 @@
+main .errorlist {
+  &--container {
+    padding: 15px;
+    background: #f3e9e8;
+    border-left: 4px solid $color-red;
+    margin-top: 15px;
+  }
+
+  &--heading {
+    margin-top: $space-xs;
+    margin-bottom: $space-md;
+    font-size: 1.17em;
+  }
+}
+
+main form {
+  .fieldWrapper--container--has-error,
+  .fieldWrapper--has-error {
+    padding-left: $space-md;
+    border-left: 5px solid $color-red;
+  }
+
+  [class^="error--"] {
+    color: $color-red;
+    font-weight: 700;
+  }
+}
