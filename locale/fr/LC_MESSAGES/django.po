@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-24 18:56+0000\n"
+"POT-Creation-Date: 2020-06-25 18:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: profiles/forms.py:33
+msgid "Enter a valid email address"
+msgstr ""
 
 #: profiles/templates/base.html:15 profiles/templates/base.html:28
 msgid "StopCOVID code generator"
@@ -77,8 +81,9 @@ msgid "Tap the <strong>Enter code</strong> button"
 msgstr "Appuyez sur le bouton <strong>« Entrez le code »</strong>"
 
 #: profiles/templates/profiles/code.html:15
-msgid "Enter the following 8-digit code:"
-msgstr "Entrez le code à 8 chiffres suivant :"
+#| msgid "Enter the following 8-digit code:"
+msgid "Enter the following %(code_length)s-digit code:"
+msgstr "Entrez le code à %(code_length)s chiffres suivant :"
 
 #: profiles/templates/profiles/code.html:16
 msgid "Tap the <strong>Submit code</strong> button"
@@ -147,6 +152,8 @@ msgid "Only an authorized health care worker can give a StopCOVID code."
 msgstr ""
 
 #: profiles/templates/profiles/landing.html:17
+#: profiles/templates/registration/login.html:6
+#: profiles/templates/registration/login.html:31
 msgid "Log in"
 msgstr "Se connecter"
 
@@ -187,6 +194,14 @@ msgstr "Générer du code"
 msgid ""
 "Each code is individual and anonymous. It cannot be used by another patient. "
 "If the code expires before the patient enters it, they’ll need a new code."
+msgstr ""
+
+#: profiles/templates/registration/login.html:5
+msgid "Error: "
+msgstr ""
+
+#: profiles/templates/registration/login.html:13
+msgid "Please correct the errors on the page"
 msgstr ""
 
 #~ msgid "Generate code for Exposure Notification app"
