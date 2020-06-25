@@ -186,12 +186,12 @@ INVITATIONS_INVITATION_ONLY = True
 #INVITATIONS_ADAPTER = "profiles.adapters.ProfileInvitationsAdapter"
 
 # Email setup
-EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
-DJANGO_SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
-EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_PORT = int(os.getenv('EMAIL_PORT'))
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-email_use_tls = os.getenv('EMAIL_USE_TLS')
-EMAIL_USE_TLS = True if email_use_tls == 'True' else False
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
+DJANGO_SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT"))
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+email_use_tls = os.getenv("EMAIL_USE_TLS")
+EMAIL_USE_TLS = True if email_use_tls == "True" else False
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
