@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-24 18:56+0000\n"
+"POT-Creation-Date: 2020-06-25 20:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: profiles/templates/base.html:15 profiles/templates/base.html:28
+#: profiles/forms.py:39
+msgid "Enter a valid email address"
+msgstr ""
+
+#: profiles/forms.py:55
+msgid "Email address"
+msgstr ""
+
+#: profiles/templates/base.html:18 profiles/templates/base.html:31
 msgid "StopCOVID code generator"
 msgstr "Générateur des codes StopCOVID"
 
@@ -26,6 +34,14 @@ msgstr "Générateur des codes StopCOVID"
 #: profiles/templates/includes/FIP_header.html:8
 msgid "Government of Canada"
 msgstr "Gouvernement du Canada"
+
+#: profiles/templates/includes/cds_form.html:23
+msgid "Submit"
+msgstr "Soumettre"
+
+#: profiles/templates/includes/error_list.html:6
+msgid "Please correct the errors on the page"
+msgstr "Veuillez corriger les erreurs trouvées dans la page"
 
 #: profiles/templates/includes/footer.html:8
 msgid "Contact"
@@ -121,20 +137,16 @@ msgstr ""
 "L’application StopCOVID informe les gens s’ils ont été exposés à COVID-19."
 
 #: profiles/templates/profiles/landing.html:9
-#, fuzzy
-#| msgid "Next patient"
 msgid "If a patient:"
-msgstr "Patient suivant"
+msgstr ""
 
 #: profiles/templates/profiles/landing.html:11
 msgid "is diagnosed with COVID-19, <strong>and</strong>"
 msgstr ""
 
 #: profiles/templates/profiles/landing.html:12
-#, fuzzy
-#| msgid "Has the StopCOVID app installed on their phone"
 msgid "has the app installed on their mobile device"
-msgstr "L'application StopCOVID est-elle installée sur son téléphone"
+msgstr ""
 
 #: profiles/templates/profiles/landing.html:14
 msgid ""
@@ -147,6 +159,8 @@ msgid "Only an authorized health care worker can give a StopCOVID code."
 msgstr ""
 
 #: profiles/templates/profiles/landing.html:17
+#: profiles/templates/registration/login.html:6
+#: profiles/templates/registration/login.html:12
 msgid "Log in"
 msgstr "Se connecter"
 
@@ -189,23 +203,17 @@ msgid ""
 "If the code expires before the patient enters it, they’ll need a new code."
 msgstr ""
 
-#~ msgid "Generate code for Exposure Notification app"
-#~ msgstr "Générer du code pour l'application de notification d'exposition"
+#: profiles/templates/registration/login.html:5
+#: profiles/templates/registration/password_reset_form.html:5
+msgid "Error: "
+msgstr "Erreur : "
 
-#~ msgid ""
-#~ "The StopCOVID app is an exposure notification system that will help stop "
-#~ "the spread of COVID-19. This Health Portal is for healthcare "
-#~ "practitioners to generate a code to for patients who have tested positive "
-#~ "for COVID-19 and have the StopCOVID app."
-#~ msgstr ""
-#~ "L'application StopCOVID est un système de notification d'exposition qui "
-#~ "aidera à stopper la propagation de COVID-19. Ce portail de santé est "
-#~ "destiné aux professionnels de la santé afin de générer un code pour les "
-#~ "patients qui ont été testés positifs pour COVID-19 et qui ont "
-#~ "l'application StopCOVID."
+#: profiles/templates/registration/login.html:17
+#: profiles/templates/registration/password_reset_form.html:6
+#: profiles/templates/registration/password_reset_form.html:12
+msgid "Forgot your password?"
+msgstr "Oublié votre mot de passe ?"
 
-#~ msgid "Before you start"
-#~ msgstr "Avant de commencer"
-
-#~ msgid "You will need to be speaking to a patient who:"
-#~ msgstr "Vous devrez parler à un patient qui :"
+#: profiles/templates/registration/password_reset_form.html:13
+msgid "We’ll send you an email to create a new password."
+msgstr ""

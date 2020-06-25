@@ -2,6 +2,7 @@ from django.contrib.auth.forms import (
     UserCreationForm,
     UserChangeForm,
     AuthenticationForm,
+    PasswordResetForm,
 )
 from django import forms
 from django.core.validators import EmailValidator
@@ -10,7 +11,13 @@ from django.utils.translation import gettext_lazy as _
 from .models import HealthcareUser
 
 
-class HealthcareAuthenticationForm(AuthenticationForm):
+class HealthcareBaseForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("label_suffix", "")
+        super(HealthcareBaseForm, self).__init__(*args, **kwargs)
+
+
+class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
     """
     A login form extending the Django default AuthenticationForm.
     https://github.com/django/django/blob/9a54a9172a724d38caf6a150f41f23d79b9bdbb7/django/contrib/auth/forms.py#L173
@@ -21,7 +28,6 @@ class HealthcareAuthenticationForm(AuthenticationForm):
 
     # override field attributes: https://stackoverflow.com/a/56870308
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault("label_suffix", "")
         super(HealthcareAuthenticationForm, self).__init__(*args, **kwargs)
 
         # remove autofocus from fields
@@ -32,6 +38,21 @@ class HealthcareAuthenticationForm(AuthenticationForm):
         self.fields["username"].validators = [
             EmailValidator(message=_("Enter a valid email address"))
         ]
+
+
+class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
+    """
+    A login form extending the Django default PasswordResetForm.
+    https://github.com/django/django/blob/9a54a9172a724d38caf6a150f41f23d79b9bdbb7/django/contrib/auth/forms.py#L251
+    """
+
+    def __init__(self, *args, **kwargs):
+        super(HealthcarePasswordResetForm, self).__init__(*args, **kwargs)
+
+        # remove autofocus from email
+        self.fields["email"].widget.attrs.pop("autofocus", None)
+        # Otherwise it just says "Email"
+        self.fields["email"].label = _("Email address")
 
 
 class SignupForm(UserCreationForm):
