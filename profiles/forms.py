@@ -10,7 +10,7 @@ class SignupForm(UserCreationForm):
 
     class Meta:
         model = HealthcareUser
-        fields = ("email", "name", "language")
+        fields = ("email", "name")
 
 
 class HealthcareUserEditForm(UserChangeForm):
@@ -19,7 +19,7 @@ class HealthcareUserEditForm(UserChangeForm):
 
     class Meta:
         model = HealthcareUser
-        fields = ("email", "name", "language")
+        fields = ("email", "name")
         widgets = {
             "email": forms.EmailInput(attrs={"readonly": "readonly"}),
         }

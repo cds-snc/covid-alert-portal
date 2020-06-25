@@ -3,10 +3,6 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 from portal import settings
 
-LANGUAGE_CHOICES = (
-    ("en", "English"),
-    ("fr", "French"),
-)
 
 PROVINCE_CHOICES = (
     ("bc", "British Columbia"),
@@ -26,17 +22,14 @@ PROVINCE_CHOICES = (
 
 
 class HealthcareUserManager(BaseUserManager):
-    def create_user(self, email, name, language="en", password=None):
+    def create_user(self, email, name, password=None):
         """
-        Creates and saves a User with the given email, language
-         and password.
+        Creates and saves a User with the given email and password
         """
         if not email:
             raise ValueError("Users must have an email address")
 
-        user = self.model(
-            email=self.normalize_email(email), name=name, language=language
-        )
+        user = self.model(email=self.normalize_email(email), name=name)
 
         user.set_password(password)
         user.save(using=self._db)
@@ -57,9 +50,6 @@ class HealthcareUser(AbstractBaseUser):
         verbose_name="email address", max_length=255, unique=True,
     )
     name = models.CharField(max_length=200)
-    language = models.CharField(
-        max_length=10, choices=settings.LANGUAGES, default=settings.LANGUAGE_CODE
-    )
     province = models.CharField(max_length=25, choices=PROVINCE_CHOICES, default="nu")
 
     is_active = models.BooleanField(default=True)
