@@ -22,11 +22,7 @@ def signup(request):
  
     else:
         prepopulate = {}
-        get = request.GET.copy()
-        if get["email"]:
-            prepopulate["email"] = escape(strip_tags(get["email"]))
-        if request.session['account_verified_email']:  # TODO: only use GET or SESSION after we're done testing
-            prepopulate["email"] = escape(strip_tags(get["email"]))
+        prepopulate["email"] = request.session.get('account_verified_email', None) if request.session.get('account_verified_email', None) else None  
         f = SignupForm(initial=prepopulate)
  
     return render(request, 'profiles/signup.html', {'form': f})
