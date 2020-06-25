@@ -16,7 +16,6 @@ flake8 = "*"
 
 [packages]
 django = "*"
-django-user-language-middleware = "*"
 requests = "*"
 python-dotenv = "*"
 django-sass = "*"

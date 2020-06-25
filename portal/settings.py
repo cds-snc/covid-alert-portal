@@ -67,7 +67,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "user_language_middleware.UserLanguageMiddleware",
 ]
 
 ROOT_URLCONF = "portal.urls"

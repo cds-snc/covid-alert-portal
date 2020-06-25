@@ -6,8 +6,12 @@
 @import "./_base";
 
 /* Partials */
-@import "./components/_buttons";
+@import "./components/_button";
 @import "./components/_footer";
 @import "./components/_header";
 @import "./components/_nav";
 @import "./components/_phase-banner";
+
+@import "./components/forms/_form";
+@import "./components/forms/_error";
+@import "./components/forms/_input";
