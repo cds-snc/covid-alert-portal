@@ -90,11 +90,7 @@ class SignupForm(HealthcareBaseForm):
 
         if password1 and password2 and password1 != password2:
             raise ValidationError(_("Password don't match"))
-
-        #We probably don't actually need this here and can rely on AUTH_PASSWORD_VALIDATORS
-        if len(password2) < 12:
-            raise ValidationError(_("Password must be at least 12 characters"))
-
+    
         return password2
  
     def save(self, commit=True):
