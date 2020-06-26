@@ -19,7 +19,7 @@ def signup(request):
  
     else:
         prepopulate = {}
-        prepopulate["email"] = request.session.get('account_verified_email', None) if request.session.get('account_verified_email', None) else None  
+        prepopulate["email"] = request.session.get('account_verified_email', None)
         f = SignupForm(initial=prepopulate)
  
     return render(request, 'profiles/signup.html', {'form': f})
