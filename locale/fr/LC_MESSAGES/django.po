@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-25 20:37+0000\n"
+"POT-Creation-Date: 2020-06-25 22:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,8 +93,9 @@ msgid "Tap the <strong>Enter code</strong> button"
 msgstr "Appuyez sur le bouton <strong>« Entrez le code »</strong>"
 
 #: profiles/templates/profiles/code.html:15
-msgid "Enter the following 8-digit code:"
-msgstr "Entrez le code à 8 chiffres suivant :"
+#, python-format
+msgid "Enter the following %(code_length)s-digit code:"
+msgstr "Entrez le code à %(code_length)s chiffres suivant :"
 
 #: profiles/templates/profiles/code.html:16
 msgid "Tap the <strong>Submit code</strong> button"
