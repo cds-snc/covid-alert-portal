@@ -1,4 +1,4 @@
-[La version française suit.](#---------------------------------------------------------------------)
+[La version française suit.](#portail-de-soins-de-santé-covid)
 
 # COVID Healthcare Portal
 
@@ -110,7 +110,7 @@ Run `python manage.py compilemessages` to compile the translations so that Djang
 
 For more complete documentation refer to the [Django Translation](https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#translation) docs.
 
-## ---------------------------------------------------------------------
+____
 
 # Portail de soins de santé COVID
 
