@@ -11,7 +11,12 @@ from django.utils.translation import gettext_lazy as _
 from invitations.models import Invitation
 from .models import HealthcareUser
 
+class HealthcareBaseForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("label_suffix", "")
+        super(HealthcareBaseForm, self).__init__(*args, **kwargs)
 
+        
 class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
     """
     A login form extending the Django default AuthenticationForm.
