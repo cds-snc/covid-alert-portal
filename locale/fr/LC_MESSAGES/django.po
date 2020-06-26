@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-25 22:39+0000\n"
+"POT-Creation-Date: 2020-06-26 18:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,8 +27,8 @@ msgid "Email address"
 msgstr ""
 
 #: profiles/templates/base.html:18 profiles/templates/base.html:31
-msgid "StopCOVID code generator"
-msgstr "Générateur des codes StopCOVID"
+msgid "Generate COVID Alert number"
+msgstr "Générer un numéro pour Alerte COVID"
 
 #: profiles/templates/includes/FIP_header.html:6
 #: profiles/templates/includes/FIP_header.html:8
@@ -73,126 +73,147 @@ msgstr "Ce site évoluera au fur et à mesure que nous testons des idées."
 
 #: profiles/templates/profiles/code.html:4
 #: profiles/templates/profiles/code.html:7
-msgid "Provide patient with code"
-msgstr "Fournir le code au patient"
+msgid "Give patient this number"
+msgstr "Fournir le numéro au patient"
 
 #: profiles/templates/profiles/code.html:10
-msgid "Instructions for patient"
+msgid "Instructions for patient if needed"
 msgstr "Instructions pour le patient"
 
-#: profiles/templates/profiles/code.html:12
-msgid "Open the StopCOVID app by tapping on the icon"
-msgstr "Ouvrez l'application StopCOVID en tapant sur l'icône"
+#: profiles/templates/profiles/code.html:11
+msgid "Open COVID Alert app"
+msgstr ""
 
-#: profiles/templates/profiles/code.html:13
-msgid "Tap the white section at the bottom of the screen"
-msgstr "Appuyez sur la partie blanche en bas de l'écran"
+#: profiles/templates/profiles/code.html:12
+msgid "Tap <strong>Diagnosed with COVID-19? What to do next.</strong>"
+msgstr ""
 
 #: profiles/templates/profiles/code.html:14
-msgid "Tap the <strong>Enter code</strong> button"
-msgstr "Appuyez sur le bouton <strong>« Entrez le code »</strong>"
+msgid ""
+"<strong>Entry screen:</strong> Let people know they may have been exposed"
+msgstr ""
 
 #: profiles/templates/profiles/code.html:15
-#, python-format
-msgid "Enter the following %(code_length)s-digit code:"
-msgstr "Entrez le code à %(code_length)s chiffres suivant :"
-
-#: profiles/templates/profiles/code.html:16
-msgid "Tap the <strong>Submit code</strong> button"
-msgstr "Appuyez sur le bouton <strong>« Envoyer le code »</strong>"
+msgid "Tap <strong>Go to Step 1</strong>"
+msgstr ""
 
 #: profiles/templates/profiles/code.html:17
-msgid ""
-"Tap the <strong>I agree</strong> button. This will anonymously share the "
-"random IDs on your phone."
-msgstr ""
-"Appuyez sur le bouton <strong>« J'accepte »</strong>. Cela permettra de "
-"partager anonymement les identifiants aléatoires de votre téléphone"
-
-#: profiles/templates/profiles/code.html:18
-msgid "Tap <strong>Share</strong>"
-msgstr "Appuyez sur le bouton <strong>« Partagez »</strong>"
+#, python-format
+msgid "<strong>Step 1 screen:</strong> Enter your %(code_length)s-digit number"
+msgstr "<strong>Step 1 screen:</strong> Entrez le code à %(code_length)s chiffres"
 
 #: profiles/templates/profiles/code.html:19
-msgid ""
-"You don’t need to do anything else today. You will receive a notification "
-"each day for the next 13 days requesting your permission to share any new "
-"random IDs."
+msgid "Enter this number: "
 msgstr ""
-"Vous n'avez pas besoin de faire autre chose aujourd'hui. Vous recevrez une "
-"notification chaque jour pendant les 13 jours suivants vous demandant la "
-"permission de partager toute nouvelle identité aléatoire."
 
-#: profiles/templates/profiles/code.html:22
+#: profiles/templates/profiles/code.html:20
+msgid "Tap <strong>Go to Step 2</strong>"
+msgstr ""
+
+#: profiles/templates/profiles/code.html:23
+msgid "<strong>Step 2 screen: </strong> Now you can upload codes"
+msgstr ""
+
+#: profiles/templates/profiles/code.html:24
+msgid "To notify people, give COVID Alert permission to upload random codes."
+msgstr ""
+
+#: profiles/templates/profiles/code.html:25
+msgid "Tap <strong>Agree and go to Step 3</strong>"
+msgstr ""
+
+#: profiles/templates/profiles/code.html:27
+msgid ""
+"<strong>Step 3 message: </strong> Share your random codes from this device "
+"with COVID Alert?"
+msgstr ""
+
+#: profiles/templates/profiles/code.html:28
+#, fuzzy
+msgid "Tap <strong>Allow</strong>"
+msgstr ""
+
+#: profiles/templates/profiles/code.html:30
+msgid "<strong>Last screen: </strong> Thanks for helping fight COVID-19"
+msgstr ""
+
+#: profiles/templates/profiles/code.html:31
+msgid ""
+"COVID Alert will ask permission to upload random codes daily for the next 13 "
+"days."
+msgstr ""
+
+#: profiles/templates/profiles/code.html:33
 msgid "Next patient"
 msgstr "Patient suivant"
 
 #: profiles/templates/profiles/landing.html:4
-#: profiles/templates/profiles/landing.html:7
-msgid "Welcome to the StopCOVID code generator"
-msgstr "Bienvenue sur le générateur des codes StopCOVID"
-
 #: profiles/templates/profiles/landing.html:8
-msgid "The StopCOVID app notifies people if they’ve been exposed to COVID-19."
-msgstr ""
-"L’application StopCOVID informe les gens s’ils ont été exposés à COVID-19."
+msgid "Welcome to Generate COVID Alert number"
+msgstr "Bienvenue sur le générateur des numéros COVID Alert"
 
 #: profiles/templates/profiles/landing.html:9
+#, fuzzy
+msgid "The COVID Alert notifies people if they’ve been exposed to COVID-19."
+msgstr ""
+"L’application COVID Alert informe les gens s’ils ont été exposés à COVID-19."
+
+#: profiles/templates/profiles/landing.html:10
 msgid "If a patient:"
 msgstr ""
 
-#: profiles/templates/profiles/landing.html:11
+#: profiles/templates/profiles/landing.html:12
 msgid "is diagnosed with COVID-19, <strong>and</strong>"
 msgstr ""
 
-#: profiles/templates/profiles/landing.html:12
+#: profiles/templates/profiles/landing.html:13
 msgid "has the app installed on their mobile device"
 msgstr ""
 
-#: profiles/templates/profiles/landing.html:14
-msgid ""
-"they can enter a StopCOVID code to anonymously notify people they’ve been "
-"near in the past 14 days."
-msgstr ""
-
 #: profiles/templates/profiles/landing.html:15
-msgid "Only an authorized health care worker can give a StopCOVID code."
+msgid ""
+"they can enter a COVID Alert number to anonymously notify people they’ve "
+"been near in the past 14 days."
 msgstr ""
 
-#: profiles/templates/profiles/landing.html:17
+#: profiles/templates/profiles/landing.html:16
+msgid "Only an authorized health care worker can give a COVID Alert number."
+msgstr ""
+
+#: profiles/templates/profiles/landing.html:18
 #: profiles/templates/registration/login.html:6
 #: profiles/templates/registration/login.html:12
 msgid "Log in"
 msgstr "Se connecter"
 
-#: profiles/templates/profiles/landing.html:19
-msgid "StopCOVID works on Android and Apple devices released after 2014."
-msgstr ""
-
 #: profiles/templates/profiles/landing.html:20
-msgid "About StopCOVID [hyperlink to site homepage]"
+msgid "COVID Alert works on Android and Apple devices released after 2014."
 msgstr ""
 
 #: profiles/templates/profiles/landing.html:21
-msgid "How StopCOVID protects privacy [hyperlink to privacy policy]"
+msgid "About COVID Alert [hyperlink to site homepage]"
+msgstr ""
+
+#: profiles/templates/profiles/landing.html:22
+msgid "How COVID Alert protects privacy [hyperlink to privacy policy]"
 msgstr ""
 
 #: profiles/templates/profiles/start.html:4
 #: profiles/templates/profiles/start.html:7
-msgid "Generate a StopCOVID code"
-msgstr "Générer un code StopCOVID"
+msgid "Generate a number"
+msgstr "Générer un numéro"
 
 #: profiles/templates/profiles/start.html:9
-msgid "Before generating a code, check the patient has:"
-msgstr "Avant de générer un code, vérifiez que le patient :"
+msgid "Before generating a number, check the patient has:"
+msgstr "Avant de générer un numéro, vérifiez que le patient :"
 
 #: profiles/templates/profiles/start.html:12
 msgid "tested positive for COVID-19"
 msgstr "a été testé positif au COVID-19"
 
 #: profiles/templates/profiles/start.html:13
-msgid "the StopCOVID app installed on their phone"
-msgstr "a installé l'application StopCOVID sur son téléphone"
+msgid "the COVID Alert app installed on Andriod or Apple mobile device"
+msgstr "a installé l'application COVID Alert sur son téléphone"
 
 #: profiles/templates/profiles/start.html:16
 msgid "Generate code"
@@ -201,7 +222,8 @@ msgstr "Générer du code"
 #: profiles/templates/profiles/start.html:19
 msgid ""
 "Each code is individual and anonymous. It cannot be used by another patient. "
-"If the code expires before the patient enters it, they’ll need a new code."
+"If the number expires before the patient enters it, they’ll need a new "
+"number."
 msgstr ""
 
 #: profiles/templates/registration/login.html:5

@@ -11,7 +11,7 @@ class HomePageView(TestCase):
         """
         response = self.client.get(reverse("landing"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Welcome to the StopCOVID code generator")
+        self.assertContains(response, "Welcome to Generate COVID Alert number")
 
 
 class RestristedPageViews(TestCase):
@@ -55,7 +55,7 @@ class AuthenticatedView(TestCase):
         self.client.login(username="test@test.com", password="testpassword")
         response = self.client.get(reverse("code"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Provide patient with code")
+        self.assertContains(response, "Give patient this number")
         self.assertContains(
             response, '<code id="big-code">{}</code>'.format(response.context["code"])
         )
