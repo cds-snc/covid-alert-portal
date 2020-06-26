@@ -48,13 +48,13 @@ INSTALLED_APPS = [
     "django_sass",
     "invitations",
     "django.contrib.sites",  # Required for invitations
-    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "profiles",
+    "django.contrib.admin",  # we want our auth templates loaded first
 ]
 
 MIDDLEWARE = [

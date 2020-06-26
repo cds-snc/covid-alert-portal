@@ -26,8 +26,5 @@ whitenoise = "*"
 dj-database-url = "*"
 django-invitations = "*"
 
-[requires]
-python_version = "3"
-
 [pipenv]
 allow_prereleases = true
