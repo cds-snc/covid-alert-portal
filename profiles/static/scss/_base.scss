@@ -91,12 +91,6 @@ main {
   padding: 0 $space-md;
   padding-bottom: $space-xxl;
 
-  h1 {
-    @include md {
-      padding-right: 15%;
-    }
-  }
-
   > div {
     margin-bottom: $space-lg;
   }
