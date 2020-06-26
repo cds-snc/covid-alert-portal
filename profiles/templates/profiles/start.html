@@ -10,12 +10,12 @@
   </p>
   <ul>
     <li>{% trans "tested positive for COVID-19" %}</li>
-    <li>{% trans "the COVID Alert app installed on Andriod or Apple mobile device" %}</li>
+    <li>{% trans "the app installed on Andriod or Apple mobile device" %}</li>
   </ul>
 
-  <div class="content-button"><a href="{% url 'code' %}" role='button' draggable='false'>{% trans "Generate code" %}</a></div>
+  <div class="content-button"><a href="{% url 'code' %}" role='button' draggable='false'>{% trans "Generate a number" %}</a></div>
 
   <p>
-    {% trans "Each code is individual and anonymous. It cannot be used by another patient. If the number expires before the patient enters it, they’ll need a new number." %}
+    {% trans "Each code is individual and anonymous. It cannot be used by another patient." %}<br />{% trans "If the number expires before the patient enters it, they’ll need a new number." %}
   </p>
 {% endblock %}
