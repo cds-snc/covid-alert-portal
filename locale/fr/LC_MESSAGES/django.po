@@ -142,7 +142,8 @@ msgstr ""
 #: profiles/templates/profiles/code.html:17
 #, python-format
 msgid "<strong>Step 1 screen:</strong> Enter your %(code_length)s-digit number"
-msgstr "<strong>Step 1 screen:</strong> Entrez le code à %(code_length)s chiffres"
+msgstr ""
+"<strong>Step 1 screen:</strong> Entrez le code à %(code_length)s chiffres"
 
 #: profiles/templates/profiles/code.html:19
 msgid "Enter this number: "

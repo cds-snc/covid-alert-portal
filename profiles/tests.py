@@ -5,6 +5,7 @@ from django.utils import translation
 from invitations.models import Invitation
 from .forms import SignupForm
 
+
 class HomePageView(TestCase):
     def test_start(self):
         """
@@ -111,18 +112,14 @@ class i18nTestView(TestCase):
 
 class InvitationFlow(TestCase):
 
-#  TODO: Test that once an email is signed up it can't used again
-#        Only emails with invites can signup
+    #  TODO: Test that once an email is signed up it can't used again
+    #        Only emails with invites can signup
 
     def setUp(self):
         self.email = "test@test.com"
         self.invite = Invitation.create(self.email)
-        self.invite_url = reverse('invitations:accept-invite',args=[self.invite.key])
-
+        self.invite_url = reverse("invitations:accept-invite", args=[self.invite.key])
 
     def test_email_in_form(self):
-        f = SignupForm(initial={"email" : self.invite.email})
+        f = SignupForm(initial={"email": self.invite.email})
         self.assertTrue(self.email in f.as_table())
-
-
-

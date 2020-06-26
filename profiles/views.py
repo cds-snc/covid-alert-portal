@@ -2,28 +2,29 @@ import requests
 import os
 import sys
 
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import SignupForm
 from django.contrib import messages
 
 
-
 def signup(request):
-    if request.method == 'POST':
-        f = SignupForm(request.POST, initial = {"email" : request.session.get('account_verified_email', None)})
+    if request.method == "POST":
+        f = SignupForm(
+            request.POST,
+            initial={"email": request.session.get("account_verified_email", None)},
+        )
         if f.is_valid():
             f.save()
-            messages.success(request, 'Account created successfully')
-            return redirect('start')
- 
+            messages.success(request, "Account created successfully")
+            return redirect("start")
+
     else:
         prepopulate = {}
-        prepopulate["email"] = request.session.get('account_verified_email', None)
+        prepopulate["email"] = request.session.get("account_verified_email", None)
         f = SignupForm(initial=prepopulate)
- 
-    return render(request, 'profiles/signup.html', {'form': f})
 
+    return render(request, "profiles/signup.html", {"form": f})
 
 
 @login_required
