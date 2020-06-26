@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Generate a StopCOVID code" %}{% endblock %}
+{% block title %}{% trans "Generate a number" %}{% endblock %}
 
 {% block content %}
-  <h1>{% trans "Generate a StopCOVID code" %}</h1>
+  <h1>{% trans "Generate a number" %}</h1>
   <p>
-    {% trans "Before generating a code, check the patient has:" %}
+    {% trans "Before generating a number, check the patient has:" %}
   </p>
   <ul>
     <li>{% trans "tested positive for COVID-19" %}</li>
-    <li>{% trans "the StopCOVID app installed on their phone" %}</li>
+    <li>{% trans "the app installed on Andriod or Apple mobile device" %}</li>
   </ul>
 
-  <div class="content-button"><a href="{% url 'code' %}" role='button' draggable='false'>{% trans "Generate code" %}</a></div>
+  <div class="content-button"><a href="{% url 'code' %}" role='button' draggable='false'>{% trans "Generate a number" %}</a></div>
 
   <p>
-    {% trans "Each code is individual and anonymous. It cannot be used by another patient. If the code expires before the patient enters it, they’ll need a new code." %}
+    {% trans "Each code is individual and anonymous. It cannot be used by another patient." %}<br />{% trans "If the number expires before the patient enters it, they’ll need a new number." %}
   </p>
 {% endblock %}

@@ -1,22 +1,24 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Welcome to the StopCOVID code generator" %}{% endblock %}
+{% block title %}{% trans "Welcome to Generate COVID Alert number" %}{% endblock %}
 
 {% block content %}
-  <h1>{% trans "Welcome to the StopCOVID code generator" %}</h1>
-  <p>{% trans "The StopCOVID app notifies people if they’ve been exposed to COVID-19."%}</p>
+
+  <h1>{% trans "Welcome to Generate COVID Alert number" %}</h1>
+  <p>{% trans "The COVID Alert notifies people if they’ve been exposed to COVID-19."%}</p>
   <p>{% trans "If a patient:" %}
   <ul>
     <li>{% blocktrans %}is diagnosed with COVID-19, <strong>and</strong>{% endblocktrans %}</li>
     <li>{% trans "has the app installed on their mobile device" %}</li>
   </ul>
-  <p>{% trans "they can enter a StopCOVID code to anonymously notify people they’ve been near in the past 14 days." %}</p>
-  <p>{% trans "Only an authorized health care worker can give a StopCOVID code." %}</p>
+  <p>{% trans "they can enter a COVID Alert number to anonymously notify people they’ve been near in the past 14 days." %}</p>
+  <p>{% trans "Only an authorized health care worker can give a COVID Alert number." %}</p>
 
   <div class="content-button"><a href="{% url 'login' %}" role='button' draggable='false'>{% trans "Log in" %}</a></div>
 
-  <p>{% trans "StopCOVID works on Android and Apple devices released after 2014." %}</p>
-  <p>{% trans "About StopCOVID [hyperlink to site homepage]" %}</p>
-  <p>{% trans "How StopCOVID protects privacy [hyperlink to privacy policy]" %}</p>
+  <p>{% trans "COVID Alert works on Android and Apple devices released after 2014." %}</p>
+  <p>{% trans "About COVID Alert [hyperlink to site homepage]" %}</p>
+  <p>{% trans "How COVID Alert protects privacy [hyperlink to privacy policy]" %}</p>
+
 {% endblock %}
