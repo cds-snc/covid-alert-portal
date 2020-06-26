@@ -59,10 +59,6 @@ class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
 class SignupForm(HealthcareBaseForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
-
-    def __init__(self, *args, **kwargs):
-        kwargs.setdefault('label_suffix', '')  
-        super(SignupForm, self).__init__(*args, **kwargs)
     
     email = forms.EmailField(label=_("Email Address"), disabled = True)
     name = forms.CharField(label=_("Full name"))
