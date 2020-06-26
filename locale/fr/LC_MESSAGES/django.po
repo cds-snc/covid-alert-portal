@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-26 05:31+0000\n"
+"POT-Creation-Date: 2020-06-26 09:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -209,6 +209,20 @@ msgstr ""
 msgid "How StopCOVID protects privacy [hyperlink to privacy policy]"
 msgstr ""
 
+#: profiles/templates/profiles/signup.html:5
+#: profiles/templates/registration/login.html:5
+#: profiles/templates/registration/password_reset_form.html:5
+msgid "Error: "
+msgstr ""
+
+#: profiles/templates/profiles/signup.html:6
+msgid "Sign Up"
+msgstr ""
+
+#: profiles/templates/profiles/signup.html:13
+msgid "Sign up"
+msgstr ""
+
 #: profiles/templates/profiles/start.html:4
 #: profiles/templates/profiles/start.html:7
 msgid "Generate a StopCOVID code"
@@ -234,11 +248,6 @@ msgstr "Générer du code"
 msgid ""
 "Each code is individual and anonymous. It cannot be used by another patient. "
 "If the code expires before the patient enters it, they’ll need a new code."
-msgstr ""
-
-#: profiles/templates/registration/login.html:5
-#: profiles/templates/registration/password_reset_form.html:5
-msgid "Error: "
 msgstr ""
 
 #: profiles/templates/registration/login.html:17
