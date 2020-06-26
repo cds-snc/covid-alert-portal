@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-26 18:14+0000\n"
+"POT-Creation-Date: 2020-06-26 09:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,6 +99,16 @@ msgstr "Déconnexion"
 msgid "Login"
 msgstr "Login"
 
+#: profiles/templates/includes/nav_main.html:6
+msgid "Start"
+msgstr ""
+
+#: profiles/templates/includes/nav_main.html:7
+#, fuzzy
+#| msgid "Generate a number"
+msgid "Get a number"
+msgstr "Générer un numéro"
+
 #: profiles/templates/includes/phase_banner.html:4
 msgid "This site will change as we test ideas."
 msgstr "Ce site évoluera au fur et à mesure que nous testons des idées."
@@ -161,7 +171,6 @@ msgid ""
 msgstr ""
 
 #: profiles/templates/profiles/code.html:28
-#, fuzzy
 msgid "Tap <strong>Allow</strong>"
 msgstr ""
 
@@ -246,6 +255,7 @@ msgstr ""
 
 #: profiles/templates/profiles/start.html:4
 #: profiles/templates/profiles/start.html:7
+#: profiles/templates/profiles/start.html:16
 msgid "Generate a number"
 msgstr "Générer un numéro"
 
@@ -258,16 +268,18 @@ msgid "tested positive for COVID-19"
 msgstr "a été testé positif au COVID-19"
 
 #: profiles/templates/profiles/start.html:13
-msgid "the COVID Alert app installed on Andriod or Apple mobile device"
+#, fuzzy
+#| msgid "the COVID Alert app installed on Andriod or Apple mobile device"
+msgid "the app installed on Andriod or Apple mobile device"
 msgstr "a installé l'application COVID Alert sur son téléphone"
-
-#: profiles/templates/profiles/start.html:16
-msgid "Generate code"
-msgstr "Générer du code"
 
 #: profiles/templates/profiles/start.html:19
 msgid ""
-"Each code is individual and anonymous. It cannot be used by another patient. "
+"Each code is individual and anonymous. It cannot be used by another patient."
+msgstr ""
+
+#: profiles/templates/profiles/start.html:19
+msgid ""
 "If the number expires before the patient enters it, they’ll need a new "
 "number."
 msgstr ""
@@ -281,3 +293,6 @@ msgstr "Oublié votre mot de passe ?"
 #: profiles/templates/registration/password_reset_form.html:13
 msgid "We’ll send you an email to create a new password."
 msgstr ""
+
+#~ msgid "Generate code"
+#~ msgstr "Générer du code"
