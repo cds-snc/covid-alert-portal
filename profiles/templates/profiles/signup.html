@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Sign Up{% endblock %}
+{% block title %}
+  {% if form.errors %}{% trans "Error: "%}{% endif %}
+  {% trans "Sign Up" %}
+{% endblock %}
+
 
 {% block content %}
-  <h1>Sign up</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-  </form>
+  {% include  "includes/error_list.html" %}
+
+  <h1>{% trans "Sign up" %}</h1>
+  {% include "includes/cds_form.html" with submit_text="Sign up" %}
 {% endblock %}
