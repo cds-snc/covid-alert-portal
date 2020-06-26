@@ -14,7 +14,7 @@ from django.utils.html import escape,strip_tags
 
 def signup(request):
     if request.method == 'POST':
-        f = SignupForm(request.POST)
+        f = SignupForm(request.POST, initial = {"email" : request.session.get('account_verified_email', None)})
         if f.is_valid():
             f.save()
             messages.success(request, 'Account created successfully')

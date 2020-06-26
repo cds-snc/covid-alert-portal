@@ -37,27 +37,35 @@ class HealthcareAuthenticationForm(AuthenticationForm):
 class SignupForm(forms.Form):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
-    email = forms.EmailField(label=_("Your email:"))  #  Disabled = true
-    name = forms.CharField(label=_("Your name:"))
-    password1 = forms.CharField(label=_("Enter password"), widget=forms.PasswordInput)
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')  
+        super(SignupForm, self).__init__(*args, **kwargs)
+    
+    email = forms.EmailField(label=_("Email Address"), disabled = True)
+    name = forms.CharField(label=_("Full name"))
+    password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput, help_text="At least 12 characters")
     password2 = forms.CharField(label=_("Confirm password"), widget=forms.PasswordInput)
 
+
+    def clean(self):
+        self.cleaned_data = super().clean()
+        email = self.cleaned_data.get('email', '').lower()
+        email_exists = HealthcareUser.objects.filter(email=email)
+        if email_exists.count():
+            raise  ValidationError(_("Email already exists"))
+        if not Invitation.objects.filter(email__iexact=email):
+            raise  ValidationError(_("An invitation hasn't been sent to this address"))
+
+        self.cleaned_data['email'] = email
+        return self.cleaned_data
  
     def clean_name(self):
         name = self.cleaned_data['name']
         if len(name)>200:
             raise  ValidationError(_("Name is too long"))
         return name
-  
-    def clean_email(self):
-        email = self.cleaned_data['email'].lower()
-        email_exists = HealthcareUser.objects.filter(email=email)
-        if email_exists.count():
-            raise  ValidationError(_("Email already exists"))
-        if not Invitation.objects.filter(email__iexact=email):
-            raise  ValidationError(_("An invitation hasn't been sent to this address"))
-        return email
- 
+   
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
