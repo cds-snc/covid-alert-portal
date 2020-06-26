@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-25 17:39-0400\n"
+"POT-Creation-Date: 2020-06-25 23:05-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,56 +18,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\profiles\forms.py:33
+#: .\profiles\forms.py:39
 msgid "Enter a valid email address"
 msgstr ""
 
-#: .\profiles\forms.py:40
-msgid "Your email:"
-msgstr ""
-
-#: .\profiles\forms.py:41
-msgid "Your name:"
-msgstr ""
-
-#: .\profiles\forms.py:42
-msgid "Enter password"
-msgstr ""
-
-#: .\profiles\forms.py:43
-msgid "Confirm password"
-msgstr ""
-
-#: .\profiles\forms.py:49
-msgid "Name is too long"
-msgstr ""
-
-#: .\profiles\forms.py:56
-msgid "Email already exists"
-msgstr ""
-
-#: .\profiles\forms.py:58
-msgid "An invitation hasn't been sent to this address"
+#: .\profiles\forms.py:55
+msgid "Email address"
 msgstr ""
 
 #: .\profiles\forms.py:66
+msgid "Email Address"
+msgstr ""
+
+#: .\profiles\forms.py:67
+msgid "Full name"
+msgstr ""
+
+#: .\profiles\forms.py:68
+msgid "Password"
+msgstr ""
+
+#: .\profiles\forms.py:69
+msgid "Confirm password"
+msgstr ""
+
+#: .\profiles\forms.py:77
+msgid "Email already exists"
+msgstr ""
+
+#: .\profiles\forms.py:79
+msgid "An invitation hasn't been sent to this address"
+msgstr ""
+
+#: .\profiles\forms.py:87
+msgid "Name is too long"
+msgstr ""
+
+#: .\profiles\forms.py:95
 msgid "Password don't match"
 msgstr ""
 
-#: .\profiles\forms.py:70
+#: .\profiles\forms.py:99
 msgid "Password must be at least 12 characters"
 msgstr ""
 
 #: .\profiles\templates\base.html:18 .\profiles\templates\base.html:31
-#: profiles/forms.py:39
-msgid "Enter a valid email address"
-msgstr ""
-
-#: profiles/forms.py:55
-msgid "Email address"
-msgstr ""
-
-#: profiles/templates/base.html:18 profiles/templates/base.html:31
 msgid "StopCOVID code generator"
 msgstr "Générateur des codes StopCOVID"
 
@@ -76,16 +71,15 @@ msgstr "Générateur des codes StopCOVID"
 msgid "Government of Canada"
 msgstr "Gouvernement du Canada"
 
-#: .\profiles\templates\includes\footer.html:8
-#: profiles/templates/includes/cds_form.html:23
+#: .\profiles\templates\includes\cds_form.html:23
 msgid "Submit"
 msgstr "Soumettre"
 
-#: profiles/templates/includes/error_list.html:6
+#: .\profiles\templates\includes\error_list.html:6
 msgid "Please correct the errors on the page"
 msgstr "Veuillez corriger les erreurs trouvées dans la page"
 
-#: profiles/templates/includes/footer.html:8
+#: .\profiles\templates\includes\footer.html:8
 msgid "Contact"
 msgstr "Contact"
 
@@ -178,8 +172,7 @@ msgid "The StopCOVID app notifies people if they’ve been exposed to COVID-19."
 msgstr ""
 "L’application StopCOVID informe les gens s’ils ont été exposés à COVID-19."
 
-#| msgid "Next patient"
-#: profiles/templates/profiles/landing.html:9
+#: .\profiles\templates\profiles\landing.html:9
 msgid "If a patient:"
 msgstr ""
 
@@ -187,7 +180,7 @@ msgstr ""
 msgid "is diagnosed with COVID-19, <strong>and</strong>"
 msgstr ""
 
-#: profiles/templates/profiles/landing.html:12
+#: .\profiles\templates\profiles\landing.html:12
 msgid "has the app installed on their mobile device"
 msgstr ""
 
@@ -201,9 +194,9 @@ msgstr ""
 msgid "Only an authorized health care worker can give a StopCOVID code."
 msgstr ""
 
-#: profiles/templates/profiles/landing.html:17
-#: profiles/templates/registration/login.html:6
-#: profiles/templates/registration/login.html:12
+#: .\profiles\templates\profiles\landing.html:17
+#: .\profiles\templates\registration\login.html:6
+#: .\profiles\templates\registration\login.html:12
 msgid "Log in"
 msgstr "Se connecter"
 
@@ -247,19 +240,16 @@ msgid ""
 msgstr ""
 
 #: .\profiles\templates\registration\login.html:5
+#: .\profiles\templates\registration\password_reset_form.html:5
 msgid "Error: "
 msgstr ""
 
-#: .\profiles\templates\registration\login.html:13
-msgid "Please correct the errors on the page"
-msgstr ""
-
-#: profiles/templates/registration/login.html:17
-#: profiles/templates/registration/password_reset_form.html:6
-#: profiles/templates/registration/password_reset_form.html:12
+#: .\profiles\templates\registration\login.html:17
+#: .\profiles\templates\registration\password_reset_form.html:6
+#: .\profiles\templates\registration\password_reset_form.html:12
 msgid "Forgot your password?"
 msgstr "Oublié votre mot de passe ?"
 
-#: profiles/templates/registration/password_reset_form.html:13
+#: .\profiles\templates\registration\password_reset_form.html:13
 msgid "We’ll send you an email to create a new password."
 msgstr ""
