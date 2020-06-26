@@ -5,7 +5,7 @@ from django.contrib.auth.forms import (
 )
 from django import forms
 from django.core.exceptions import ValidationError
-from django.core.validators import EmailValidator
+from django.core.validators import EmailValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
 
 from invitations.models import Invitation
@@ -60,9 +60,9 @@ class SignupForm(HealthcareBaseForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
     
-    email = forms.EmailField(label=_("Email Address"), disabled = True)
-    name = forms.CharField(label=_("Full name"))
-    password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput, help_text="At least 12 characters")
+    email = forms.EmailField(label=_("Email address"), disabled = True)
+    name = forms.CharField(label=_("Full name"), validators=MaxLengthValidator(200))
+    password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput, help_text=_("At least 12 characters"))
     password2 = forms.CharField(label=_("Confirm password"), widget=forms.PasswordInput)
 
 
