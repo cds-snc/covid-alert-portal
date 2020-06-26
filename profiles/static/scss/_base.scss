@@ -131,8 +131,19 @@ li:not(:last-of-type) {
 #big-code {
   display: inline-block;
   background: #eff4f9;
-  padding: 0.75em 1em;
-  margin-bottom: 1em;
-  font-size: 1.5em;
+  padding: $space-md $space-lg;
+  margin-bottom: $space-lg;
   border-radius: 10px;
+  text-align: center;
+
+  code {
+    display: block;
+    font-size: 1.7em;
+    margin-bottom: $space-sm;
+  }
+
+  span {
+    opacity: 0.6;
+    display: inline-block;
+  }
 }
