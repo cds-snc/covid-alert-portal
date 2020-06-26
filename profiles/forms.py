@@ -61,7 +61,7 @@ class SignupForm(HealthcareBaseForm):
     fields, plus a repeated password."""
     
     email = forms.EmailField(label=_("Email address"), disabled = True)
-    name = forms.CharField(label=_("Full name"), validators=MaxLengthValidator(200))
+    name = forms.CharField(label=_("Full name"), validators=[MaxLengthValidator(200)])
     password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput, help_text=_("At least 12 characters"))
     password2 = forms.CharField(label=_("Confirm password"), widget=forms.PasswordInput)
 
