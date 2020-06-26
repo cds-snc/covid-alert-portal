@@ -55,7 +55,8 @@ class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
         self.fields["email"].label = _("Email address")
 
 
-class SignupForm(forms.Form):
+#TODO: Potentially refactor to extend UserCreationForm 
+class SignupForm(HealthcareBaseForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
 
