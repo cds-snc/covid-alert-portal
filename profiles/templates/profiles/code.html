@@ -9,26 +9,26 @@
 
     <h2>{% trans "Instructions for patient if needed" %}</h2>
     <p>{% trans "Open COVID Alert app" %}</p>
-    <ul><li>{% blocktrans %}Tap <strong><em>Diagnosed with COVID-19? What to do next.</em></strong>{% endblocktrans %}</li></ul>
+    <ul><li>{% blocktrans %}Tap <strong>Diagnosed with COVID-19? What to do next.</strong>{% endblocktrans %}</li></ul>
 
     <p>{% blocktrans %}<strong>Entry screen:</strong> Let people know they may have been exposed{% endblocktrans %}
-    <ul><li>{% blocktrans %}Tap <strong><em>Go to Step 1</em></strong>{% endblocktrans %}</li></ul>
+    <ul><li>{% blocktrans %}Tap <strong>Go to Step 1</strong>{% endblocktrans %}</li></ul>
 
     <p>{% blocktrans with code|cut:" "|length as code_length %}<strong>Step 1 screen:</strong> Enter your {{ code_length }}-digit number{% endblocktrans %}
     <ul>
         <li>{% blocktrans %}Enter this number: {% endblocktrans %}<code>{{ code }}</code></li>
-        <li>{% blocktrans %}Tap <strong><em>Go to Step 2</em></strong>{% endblocktrans %}</li>
+        <li>{% blocktrans %}Tap <strong>Go to Step 2</strong>{% endblocktrans %}</li>
     </ul>
 
     <p>{% blocktrans %}<strong>Step 2 screen: </strong> Now you can upload codes{% endblocktrans %}</p>
-    <p class="-mt10"><em>{% trans "To notify people, give COVID Alert permission to upload random codes." %}</em></p>
-    <ul><li>{% blocktrans %}Tap <strong><em>Agree and go to Step 3</em></strong>{% endblocktrans %}</li></ul>
+    <p class="-mt10">{% trans "To notify people, give COVID Alert permission to upload random codes." %}</p>
+    <ul><li>{% blocktrans %}Tap <strong>Agree and go to Step 3</strong>{% endblocktrans %}</li></ul>
 
     <p>{% blocktrans %}<strong>Step 3 message: </strong> Share your random codes from this device with COVID Alert?{% endblocktrans %}</p>
-    <ul><li>{% blocktrans %}Tap <strong><em>Allow</em></strong>{% endblocktrans %}</li></ul>
+    <ul><li>{% blocktrans %}Tap <strong>Allow</strong>{% endblocktrans %}</li></ul>
 
     <p>{% blocktrans %}<strong>Last screen: </strong> Thanks for helping fight COVID-19{% endblocktrans %}</p>
-    <p><em>{% trans "COVID Alert will ask permission to upload random codes daily for the next 13 days." %}</em></p>
+    <p>{% trans "COVID Alert will ask permission to upload random codes daily for the next 13 days." %}</p>
 
     <div class="content-button"><a href="{% url 'start' %}" role='button' draggable='false'>{% trans "Next patient" %}</a></div>
 {% endblock %}
