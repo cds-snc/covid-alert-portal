@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-26 05:07+0000\n"
+"POT-Creation-Date: 2020-06-26 05:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,44 +22,40 @@ msgstr ""
 msgid "Enter a valid email address"
 msgstr ""
 
-#: profiles/forms.py:55
+#: profiles/forms.py:55 profiles/forms.py:63
 msgid "Email address"
 msgstr ""
 
-#: profiles/forms.py:66
-msgid "Email Address"
-msgstr ""
-
-#: profiles/forms.py:67
+#: profiles/forms.py:64
 msgid "Full name"
 msgstr ""
 
-#: profiles/forms.py:68
+#: profiles/forms.py:65
 msgid "Password"
 msgstr ""
 
-#: profiles/forms.py:69
+#: profiles/forms.py:65
+msgid "At least 12 characters"
+msgstr ""
+
+#: profiles/forms.py:66
 msgid "Confirm password"
 msgstr ""
 
-#: profiles/forms.py:77
+#: profiles/forms.py:74
 msgid "Email already exists"
 msgstr ""
 
-#: profiles/forms.py:79
+#: profiles/forms.py:76
 msgid "An invitation hasn't been sent to this address"
 msgstr ""
 
-#: profiles/forms.py:87
+#: profiles/forms.py:84
 msgid "Name is too long"
 msgstr ""
 
-#: profiles/forms.py:95
+#: profiles/forms.py:92
 msgid "Password don't match"
-msgstr ""
-
-#: profiles/forms.py:99
-msgid "Password must be at least 12 characters"
 msgstr ""
 
 #: profiles/templates/base.html:18 profiles/templates/base.html:31
@@ -129,8 +125,9 @@ msgid "Tap the <strong>Enter code</strong> button"
 msgstr "Appuyez sur le bouton <strong>« Entrez le code »</strong>"
 
 #: profiles/templates/profiles/code.html:15
-msgid "Enter the following 8-digit code:"
-msgstr "Entrez le code à 8 chiffres suivant :"
+#, python-format
+msgid "Enter the following %(code_length)s-digit code:"
+msgstr "Entrez le code à %(code_length)s chiffres suivant :"
 
 #: profiles/templates/profiles/code.html:16
 msgid "Tap the <strong>Submit code</strong> button"
