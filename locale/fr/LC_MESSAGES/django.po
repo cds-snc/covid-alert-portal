@@ -55,7 +55,7 @@ msgid "Name is too long"
 msgstr ""
 
 #: profiles/forms.py:92
-msgid "Password don't match"
+msgid "Passwords don't match"
 msgstr ""
 
 #: profiles/templates/base.html:18 profiles/templates/base.html:31

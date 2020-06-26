@@ -93,7 +93,7 @@ class SignupForm(HealthcareBaseForm):
         password2 = self.cleaned_data.get("password2")
 
         if password1 and password2 and password1 != password2:
-            raise ValidationError(_("Password don't match"))
+            raise ValidationError(_("Passwords don't match"))
 
         return password2
 
