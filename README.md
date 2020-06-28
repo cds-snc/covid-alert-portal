@@ -116,7 +116,7 @@ For more complete documentation refer to the [Django Translation](https://docs.d
     a) `python manage.py makemessages -l fr`
     b) `python manage.py compilemessages`
     c) `pipenv run format`
-3. Have some tests (if possible)
+3. Have some tests (if possible) 
 
 ____
 
