@@ -19,5 +19,11 @@
         "DOCKERFILE_HEROKUYML_APPJSON": "staging app.json"
       }
     }
+  },
+  "env": {
+    "DJANGO_DEBUG": "True",
+    "DJANGO_ENV": "development",
+    "DOCKERFILE_APPJSON": "global app.json",
+    "DOCKERFILE_HEROKUYML_APPJSON": "global app.json"
   }
 }
