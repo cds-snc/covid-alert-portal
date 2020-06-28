@@ -46,6 +46,7 @@ ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", ".herokuapp.com"]
 INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "django_sass",
+    "profiles",
     "invitations",
     "django.contrib.sites",  # Required for invitations
     "django.contrib.auth",
@@ -53,7 +54,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "profiles",
     "django.contrib.admin",  # we want our auth templates loaded first
 ]
 
@@ -118,9 +118,8 @@ DATABASES = {"default": db_config}
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-        "OPTIONS": {"min_length": 3},
+        "OPTIONS": {"min_length": 12},
     },
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 
@@ -175,7 +174,17 @@ LOGOUT_REDIRECT_URL = "landing"
 
 # Invitations app
 SITE_ID = 1  # Required for invitations app
-# INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
 INVITATIONS_GONE_ON_ACCEPT_ERROR = False
 INVITATIONS_SIGNUP_REDIRECT = "/signup/"
 INVITATIONS_EMAIL_SUBJECT_PREFIX = ""
+INVITATIONS_INVITATION_ONLY = True
+
+# Email setup
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+email_use_tls = os.getenv("EMAIL_USE_TLS", "True")
+EMAIL_USE_TLS = True if email_use_tls == "True" else False
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")

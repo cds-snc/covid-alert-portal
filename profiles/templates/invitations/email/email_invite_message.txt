@@ -1,0 +1,15 @@
+Hello,
+You’re invited to create an account for ‘Generate COVID Alert number’.
+You’ll be able to use this account to generate numbers for patients using the COVID Alert app. The app notifies people if they’ve been exposed to COVID-19.
+Please use this link to create your account: {{ invite_url }}
+
+Thanks for your essential work to protect our communities!   
+
+-------------------------------------------------------------------------
+
+Bonjour,
+Vous êtes invité à créer un compte pour ‘Générer un numéro Alerte COVID’.
+Vous pourrez utiliser ce compte pour générer des numéros destinés aux patients qui utilisent l’application Alerte COVID. Cette application avise les personnes en cas d’exposition potentielle à la COVID-19.
+Utilisez le lien suivant pour créer votre compte : {{ invite_url }}
+
+Merci pour tout le travail que vous faites pour nos communautés!
