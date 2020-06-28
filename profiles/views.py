@@ -9,6 +9,21 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views import generic
 from .forms import SignupForm
+from portal import settings
+
+
+def envs(request):
+
+    context = {
+        "DEBUG": settings.debug,
+        "DJANGO_DEBUG": os.getenv("DJANGO_DEBUG"),
+        "DJANGO_ENV": os.getenv("DJANGO_ENV"),
+        "DOCKERFILE_ONLY": os.getenv("DOCKERFILE_ONLY"),
+        "DOCKERFILE_HEROKUYML": os.getenv("DOCKERFILE_HEROKUYML"),
+        "DOCKERFILE_APPJSON": os.getenv("DOCKERFILE_APPJSON"),
+        "DOCKERFILE_HEROKUYML_APPJSON": os.getenv("DOCKERFILE_HEROKUYML_APPJSON"),
+    }
+    return render(request, "profiles/envs.html", {"context": context})
 
 
 class SignUp(generic.CreateView):

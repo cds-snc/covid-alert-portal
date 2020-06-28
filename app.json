@@ -6,13 +6,17 @@
     "review": {
       "env": {
         "DJANGO_DEBUG": "True",
-        "DJANGO_ENV": "development"
+        "DJANGO_ENV": "development",
+        "DOCKERFILE_APPJSON": "review app.json",
+        "DOCKERFILE_HEROKUYML_APPJSON": "review app.json"
       }
     },
     "staging": {
       "env": {
         "DJANGO_DEBUG": "False",
-        "DJANGO_ENV": "production"
+        "DJANGO_ENV": "production",
+        "DOCKERFILE_APPJSON": "staging app.json",
+        "DOCKERFILE_HEROKUYML_APPJSON": "staging app.json"
       }
     }
   }

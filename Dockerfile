@@ -5,12 +5,28 @@ FROM python:3.8
 
 # Installs gettext utilities required to makemessages and compilemessages
 RUN apt-get update && apt-get install -y --no-install-recommends \
-		gettext \
+	gettext \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+
+ARG DOCKERFILE_HEROKUYML_APPJSON='Dockerfile'
+ENV DOCKERFILE_HEROKUYML_APPJSON=$DOCKERFILE_HEROKUYML_APPJSON
+
+ARG DOCKERFILE_APPJSON='Dockerfile'
+ENV DOCKERFILE_APPJSON=$DOCKERFILE_APPJSON
+
+ARG DOCKERFILE_HEROKUYML='Dockerfile'
+ENV DOCKERFILE_HEROKUYML=$DOCKERFILE_HEROKUYML
+ENV DOCKERFILE_ONLY='Dockerfile'
+
+ARG DJANGO_DEBUG=False
+ENV DJANGO_DEBUG=$DJANGO_DEBUG
+
+ARG DJANGO_ENV=production
+ENV DJANGO_ENV=$DJANGO_ENV
 
 # Set work directory
 WORKDIR /code

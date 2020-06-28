@@ -1,6 +1,9 @@
 build:
   docker:
     web: Dockerfile
+  config:
+    DOCKERFILE_HEROKUYML_APPJSON: heroku.yml
+    DOCKERFILE_HEROKUYML: heroku.yml
 run:
   web: |
     python manage.py sass profiles/static/scss/styles.scss profiles/static/css/
