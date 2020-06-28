@@ -2,6 +2,8 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.utils import translation
+from invitations.models import Invitation
+from .forms import SignupForm
 
 
 class HomePageView(TestCase):
@@ -106,3 +108,18 @@ class i18nTestView(TestCase):
         response = self.client.get(reverse("landing"))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.request["PATH_INFO"], "/en/landing/")
+
+
+class InvitationFlow(TestCase):
+
+    #  TODO: Test that once an email is signed up it can't used again
+    #        Only emails with invites can signup
+
+    def setUp(self):
+        self.email = "test@test.com"
+        self.invite = Invitation.create(self.email)
+        self.invite_url = reverse("invitations:accept-invite", args=[self.invite.key])
+
+    def test_email_in_form(self):
+        f = SignupForm(initial={"email": self.invite.email})
+        self.assertTrue(self.email in f.as_table())
