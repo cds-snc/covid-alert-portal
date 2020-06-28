@@ -2,8 +2,11 @@ import requests
 import os
 import sys
 
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+
+from django.utils import timezone
 from .forms import SignupForm
 from django.contrib import messages
 
@@ -50,4 +53,6 @@ def code(request):
     # Split up the code with a space in the middle so it looks like this: 1234 5678
     diagnosis_code = diagnosis_code[0:4] + " " + diagnosis_code[4:8]
 
-    return render(request, "profiles/code.html", {"code": diagnosis_code})
+    return render(
+        request, "profiles/code.html", {"code": diagnosis_code, "time": timezone.now()}
+    )

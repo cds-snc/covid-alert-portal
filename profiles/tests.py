@@ -59,7 +59,7 @@ class AuthenticatedView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Give patient this number")
         self.assertContains(
-            response, '<code id="big-code">{}</code>'.format(response.context["code"])
+            response, "<code>{}</code>".format(response.context["code"])
         )
 
 
