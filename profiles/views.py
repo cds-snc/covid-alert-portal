@@ -3,18 +3,31 @@ import os
 import sys
 
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from django.urls import reverse_lazy
-from django.views import generic
+from django.utils import timezone
 from .forms import SignupForm
+from django.contrib import messages
 
 
-class SignUp(generic.CreateView):
-    form_class = SignupForm
-    success_url = reverse_lazy("login")
-    template_name = "profiles/signup.html"
+def signup(request):
+    if request.method == "POST":
+        f = SignupForm(
+            request.POST,
+            initial={"email": request.session.get("account_verified_email", None)},
+        )
+        if f.is_valid():
+            f.save()
+            messages.success(request, "Account created successfully")
+            return redirect("start")
+
+    else:
+        prepopulate = {}
+        prepopulate["email"] = request.session.get("account_verified_email", None)
+        f = SignupForm(initial=prepopulate)
+
+    return render(request, "profiles/signup.html", {"form": f})
 
 
 @login_required
@@ -40,4 +53,6 @@ def code(request):
     # Split up the code with a space in the middle so it looks like this: 1234 5678
     diagnosis_code = diagnosis_code[0:4] + " " + diagnosis_code[4:8]
 
-    return render(request, "profiles/code.html", {"code": diagnosis_code})
+    return render(
+        request, "profiles/code.html", {"code": diagnosis_code, "time": timezone.now()}
+    )

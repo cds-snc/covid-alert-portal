@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-26 18:14+0000\n"
+"POT-Creation-Date: 2020-06-26 09:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,8 +22,40 @@ msgstr ""
 msgid "Enter a valid email address"
 msgstr ""
 
-#: profiles/forms.py:55
+#: profiles/forms.py:55 profiles/forms.py:63
 msgid "Email address"
+msgstr ""
+
+#: profiles/forms.py:64
+msgid "Full name"
+msgstr ""
+
+#: profiles/forms.py:65
+msgid "Password"
+msgstr ""
+
+#: profiles/forms.py:65
+msgid "At least 12 characters"
+msgstr ""
+
+#: profiles/forms.py:66
+msgid "Confirm password"
+msgstr ""
+
+#: profiles/forms.py:74
+msgid "Email already exists"
+msgstr ""
+
+#: profiles/forms.py:76
+msgid "An invitation hasn't been sent to this address"
+msgstr ""
+
+#: profiles/forms.py:84
+msgid "Name is too long"
+msgstr ""
+
+#: profiles/forms.py:92
+msgid "Passwords don't match"
 msgstr ""
 
 #: profiles/templates/base.html:18 profiles/templates/base.html:31
@@ -67,6 +99,16 @@ msgstr "Déconnexion"
 msgid "Login"
 msgstr "Login"
 
+#: profiles/templates/includes/nav_main.html:6
+msgid "Start"
+msgstr ""
+
+#: profiles/templates/includes/nav_main.html:7
+#, fuzzy
+#| msgid "Generate a number"
+msgid "Get a number"
+msgstr "Générer un numéro"
+
 #: profiles/templates/includes/phase_banner.html:4
 msgid "This site will change as we test ideas."
 msgstr "Ce site évoluera au fur et à mesure que nous testons des idées."
@@ -100,7 +142,8 @@ msgstr ""
 #: profiles/templates/profiles/code.html:17
 #, python-format
 msgid "<strong>Step 1 screen:</strong> Enter your %(code_length)s-digit number"
-msgstr "<strong>Step 1 screen:</strong> Entrez le code à %(code_length)s chiffres"
+msgstr ""
+"<strong>Step 1 screen:</strong> Entrez le code à %(code_length)s chiffres"
 
 #: profiles/templates/profiles/code.html:19
 msgid "Enter this number: "
@@ -129,7 +172,6 @@ msgid ""
 msgstr ""
 
 #: profiles/templates/profiles/code.html:28
-#, fuzzy
 msgid "Tap <strong>Allow</strong>"
 msgstr ""
 
@@ -198,8 +240,23 @@ msgstr ""
 msgid "How COVID Alert protects privacy [hyperlink to privacy policy]"
 msgstr ""
 
+#: profiles/templates/profiles/signup.html:5
+#: profiles/templates/registration/login.html:5
+#: profiles/templates/registration/password_reset_form.html:5
+msgid "Error: "
+msgstr ""
+
+#: profiles/templates/profiles/signup.html:6
+msgid "Sign Up"
+msgstr ""
+
+#: profiles/templates/profiles/signup.html:13
+msgid "Sign up"
+msgstr ""
+
 #: profiles/templates/profiles/start.html:4
 #: profiles/templates/profiles/start.html:7
+#: profiles/templates/profiles/start.html:16
 msgid "Generate a number"
 msgstr "Générer un numéro"
 
@@ -212,24 +269,21 @@ msgid "tested positive for COVID-19"
 msgstr "a été testé positif au COVID-19"
 
 #: profiles/templates/profiles/start.html:13
-msgid "the COVID Alert app installed on Andriod or Apple mobile device"
+#, fuzzy
+#| msgid "the COVID Alert app installed on Andriod or Apple mobile device"
+msgid "the app installed on Andriod or Apple mobile device"
 msgstr "a installé l'application COVID Alert sur son téléphone"
-
-#: profiles/templates/profiles/start.html:16
-msgid "Generate code"
-msgstr "Générer du code"
 
 #: profiles/templates/profiles/start.html:19
 msgid ""
-"Each code is individual and anonymous. It cannot be used by another patient. "
+"Each code is individual and anonymous. It cannot be used by another patient."
+msgstr ""
+
+#: profiles/templates/profiles/start.html:19
+msgid ""
 "If the number expires before the patient enters it, they’ll need a new "
 "number."
 msgstr ""
-
-#: profiles/templates/registration/login.html:5
-#: profiles/templates/registration/password_reset_form.html:5
-msgid "Error: "
-msgstr "Erreur : "
 
 #: profiles/templates/registration/login.html:17
 #: profiles/templates/registration/password_reset_form.html:6
@@ -240,3 +294,6 @@ msgstr "Oublié votre mot de passe ?"
 #: profiles/templates/registration/password_reset_form.html:13
 msgid "We’ll send you an email to create a new password."
 msgstr ""
+
+#~ msgid "Generate code"
+#~ msgstr "Générer du code"
