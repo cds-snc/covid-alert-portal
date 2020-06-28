@@ -7,6 +7,7 @@ from . import forms
 
 urlpatterns = [
     path("", RedirectView.as_view(pattern_name="landing")),
+    path("envs/", views.envs, name="envs"),
     path(
         "landing/",
         TemplateView.as_view(template_name="profiles/landing.html"),
