@@ -46,6 +46,7 @@ ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", ".herokuapp.com"]
 INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "django_sass",
+    "profiles",
     "invitations",
     "django.contrib.sites",  # Required for invitations
     "django.contrib.auth",
@@ -53,7 +54,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "profiles",
     "django.contrib.admin",  # we want our auth templates loaded first
 ]
 
