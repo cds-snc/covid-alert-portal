@@ -35,7 +35,8 @@ SECRET_KEY = os.getenv(
 
 debug = os.getenv("DJANGO_DEBUG", "False")
 # DEBUG will be True if DJANGO_DEBUG exists and is "True". Else, false.
-DEBUG = True if debug == "True" else False
+# DEBUG = True if debug == "True" else False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", ".herokuapp.com"]
@@ -150,7 +151,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/#https
 is_prod = os.getenv("DJANGO_ENV", "development") == "production"
 
-SECURE_SSL_REDIRECT = is_prod
+SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = is_prod
 CSRF_COOKIE_SECURE = is_prod
 
