@@ -6,15 +6,25 @@ header {
   }
 
   .fip-container {
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     display: flex;
     margin-bottom: $space-md;
+
+    @include sm {
+      flex-direction: row;
+      align-items: center;
+    }
 
     li {
       a,
       button {
         padding: 0 $space-xxs;
+        margin-left: -5px;
+
+        @include sm {
+          margin: 0;
+        }
       }
     }
 
@@ -31,9 +41,13 @@ header {
   .canada-flag {
     height: auto;
     max-height: 40px;
-    width: 272px;
+    width: 252px;
     margin-bottom: $space-sm;
     margin-right: $space-sm;
+
+    @include xs {
+      width: 272px;
+    }
 
     @include sm {
       width: 360px;
