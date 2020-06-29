@@ -16,7 +16,7 @@ main .errorlist {
 
 main form {
   .fieldWrapper--container--has-error,
-  .fieldWrapper--has-error {
+  :not(.fieldWrapper--container--has-error) .fieldWrapper--has-error {
     padding-left: $space-md;
     border-left: 5px solid $color-red;
   }

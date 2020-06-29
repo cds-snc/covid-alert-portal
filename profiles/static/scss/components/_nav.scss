@@ -6,7 +6,6 @@ nav {
 
     li {
       display: inline-block;
-      margin-right: $space-md;
 
       a {
         display: inline-block;
@@ -16,8 +15,22 @@ nav {
 }
 
 .nav--header {
-  li:last-of-type {
-    margin-right: 0;
+  font-size: 0.8em;
+
+  @include sm {
+    font-size: 0.9em;
+  }
+
+  ul {
+    text-align: right;
+  }
+
+  li {
+    margin-left: $space-md;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
   }
 }
 
