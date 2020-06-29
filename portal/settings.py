@@ -29,8 +29,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv(
-    "DJANGO_SECRET_KEY", "j$e+wzxdum=!k$bwxpgt!$(@6!iasecid^tqnijx@r@o-6x%6d"
+SECRET_KEY = (
+    os.getenv("DJANGO_SECRET_KEY")
+    or "j$e+wzxdum=!k$bwxpgt!$(@6!iasecid^tqnijx@r@o-6x%6d"
 )
 
 debug = os.getenv("DJANGO_DEBUG", "False")
@@ -152,6 +153,11 @@ is_prod = os.getenv("DJANGO_ENV", "development") == "production"
 SECURE_SSL_REDIRECT = is_prod
 SESSION_COOKIE_SECURE = is_prod
 CSRF_COOKIE_SECURE = is_prod
+SECURE_BROWSER_XSS_FILTER = is_prod
+
+# Setting SECURE_SSL_REDIRECT on heroku was causing infinite redirects without this
+if is_prod:
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # For sites that should only be accessed over HTTPS, instruct modern browsers to refuse to connect to your domain name via an insecure connection (for a given period of time)
 SECURE_HSTS_SECONDS = 3600 if is_prod else 0
