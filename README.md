@@ -110,12 +110,14 @@ Run `python manage.py compilemessages` to compile the translations so that Djang
 
 For more complete documentation refer to the [Django Translation](https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#translation) docs.
 
-## Before you commit
+## Before you do a PR
 1. Ensure that you have a commit message that explains all the changes.
 2. Run:
     a) `python manage.py makemessages -l fr`
     b) `python manage.py compilemessages`
-    c) `pipenv run format`
+    c) `pipenv run format --check`
+    d) `pipenv check`
+    e) `pipenv run lint`
 3. Have some tests (if possible)
 
 ____
