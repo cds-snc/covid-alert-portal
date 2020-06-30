@@ -2,21 +2,16 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 
-PROVINCE_CHOICES = (
-    ("bc", "British Columbia"),
-    ("ab", "Alberta"),
-    ("sk", "Saskachewan"),
-    ("mb", "Manitoba"),
-    ("on", "Ontario"),
-    ("qc", "Quebec"),
-    ("ns", "Nova Scotia"),
-    ("nb", "New Brunswick"),
-    ("nl", "Newfoundland"),
-    ("pe", "Prince Edward Island"),
-    ("yk", "Yukon"),
-    ("nt", "Northwest Territories"),
-    ("nu", "Nunavut"),
-)
+class HealthcareProvince(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    abbr = models.SlugField(max_length=2, allow_unicode=True, unique=True)
+
+    def __str__(self):
+        return "{} ({})".format(self.name, self.abbr)
+
+    class Meta:
+        ordering = ["abbr"]
+        verbose_name_plural = "provinces"
 
 
 class HealthcareUserManager(BaseUserManager):
@@ -27,7 +22,7 @@ class HealthcareUserManager(BaseUserManager):
         if not email:
             raise ValueError("Users must have an email address")
 
-        user = self.model(email=self.normalize_email(email), name=name)
+        user = self.model(email=self.normalize_email(email), name=name, province="ON")
 
         user.set_password(password)
         user.save(using=self._db)
@@ -48,7 +43,7 @@ class HealthcareUser(AbstractBaseUser):
         verbose_name="email address", max_length=255, unique=True,
     )
     name = models.CharField(max_length=200)
-    province = models.CharField(max_length=25, choices=PROVINCE_CHOICES, default="nu")
+    province = models.ForeignKey(HealthcareProvince, on_delete=models.PROTECT)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
