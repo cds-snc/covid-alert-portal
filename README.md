@@ -21,8 +21,7 @@ pipenv install  # install dependencies
 
 ### Running the app for the first time
 
-**Quick Start:** After activating a virtual environment run the `entrypoint.sh` script to perform the database migrations, static file collection, and compilation
-of the CSS files.  A server will then be started and can be accessed at `http://127.0.0.1:8000/` or `http://localhost:8000`.
+**Quick Start:** After activating a virtual environment run the `entrypoint.sh` script to perform the database migrations, static file collection, and compilation of the CSS files.  A server will then be started and can be accessed at `http://127.0.0.1:8000/` or `http://localhost:8000`.
 
 For a more thorough setup of the various environment options please follow the instructions below after having activated your virtual environment, and moved into the top-level `portal` folder.
 
