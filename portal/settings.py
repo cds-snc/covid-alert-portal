@@ -30,13 +30,12 @@ SECRET_KEY = (
     or "j$e+wzxdum=!k$bwxpgt!$(@6!iasecid^tqnijx@r@o-6x%6d"
 )
 
-debug = os.getenv("DJANGO_DEBUG", "False")
-# DEBUG will be True if DJANGO_DEBUG exists and is "True". Else, false.
-DEBUG = True if debug == "True" else False
-
 # Application security: should be set to True in production
 # https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/#https
 is_prod = os.getenv("DJANGO_ENV", "development") == "production"
+
+# DEBUG will be True in a developemnt environment and false in production
+DEBUG = not is_prod
 
 ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", ".herokuapp.com", "localhost"]
 
