@@ -18,7 +18,7 @@ urlpatterns = [
         login_required(TemplateView.as_view(template_name="profiles/start.html")),
         name="start",
     ),
-    re_path(r"signup/$", views.signup, name="signup"),
+    re_path(r"signup/$", views.SignUpView.as_view(), name="signup"),
     # Removed for now
     # path('profiles/', views.UserListView.as_view(), name='profiles'),
     # url(
