@@ -92,8 +92,10 @@ WSGI_APPLICATION = "portal.wsgi.application"
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 default_db_path = os.path.join(BASE_DIR, 'db.sqlite3')
+if os.getenv("DATABASE_URL") == "":
+    del os.environ['DATABASE_URL']
 
-if os.getenv("DATABASE_HOST"):
+if  not (os.getenv("DATABASE_HOST") == ""):
     db_config = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "covid_portal",
