@@ -18,13 +18,6 @@ main form {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-
-    &:focus {
-      outline: 3px solid #fd0;
-      outline-offset: 0;
-      -webkit-box-shadow: inset 0 0 0 2px;
-      box-shadow: inset 0 0 0 2px;
-    }
   }
 
   .fieldWrapper--has-error input {
