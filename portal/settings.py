@@ -91,9 +91,9 @@ WSGI_APPLICATION = "portal.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-default_db_path = os.path.join(BASE_DIR, 'db.sqlite3')
+default_db_path = os.path.join(BASE_DIR, "db.sqlite3")
 if os.getenv("DATABASE_URL") == "":
-    del os.environ['DATABASE_URL']
+    del os.environ["DATABASE_URL"]
 
 if os.getenv("DATABASE_HOST") and not (os.getenv("DATABASE_HOST") == ""):
     db_config = {
@@ -106,9 +106,7 @@ if os.getenv("DATABASE_HOST") and not (os.getenv("DATABASE_HOST") == ""):
     }
 else:
     db_config = dj_database_url.config(
-        default=f'sqlite:///{default_db_path}',
-        conn_max_age=600,
-        ssl_require=is_prod
+        default=f"sqlite:///{default_db_path}", conn_max_age=600, ssl_require=is_prod
     )
 
 DATABASES = {"default": db_config}
@@ -145,7 +143,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 
 SECURE_SSL_REDIRECT = is_prod
