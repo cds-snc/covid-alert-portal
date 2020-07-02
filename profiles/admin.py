@@ -2,10 +2,9 @@ from django import forms
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationForm
 
 from profiles.models import HealthcareUser, HealthcareProvince
-from .forms import SignupForm
 
 
 class ProvinceAdmin(admin.ModelAdmin):
@@ -31,7 +30,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = HealthcareUser
-        fields = ("email", "password", "name", "is_active", "is_admin")
+        fields = ("email", "password", "name", "province", "is_active", "is_admin")
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -40,10 +39,23 @@ class UserChangeForm(forms.ModelForm):
         return self.initial["password"]
 
 
+class UserAddForm(UserCreationForm):
+    """A form for creating new users. Extends from UserCreationForm form, which
+    means it includes a repeated password."""
+
+    class Meta:
+        model = HealthcareUser
+        fields = ("email", "name", "province")
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email", "").lower()
+        return email
+
+
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
     form = UserChangeForm
-    add_form = SignupForm
+    add_form = UserAddForm
 
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
@@ -52,9 +64,8 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ("is_admin",)
 
     fieldsets = (
-        (None, {"fields": ("email", "password")}),
-        ("Personal info", {"fields": ("name",)}),
-        ("Permissions", {"fields": ("is_admin",)}),
+        (None, {"fields": ("email", "password", "is_admin")}),
+        ("Personal info", {"fields": ("name", "province")}),
     )
 
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -64,7 +75,7 @@ class UserAdmin(BaseUserAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("email", "name", "password1", "password2"),
+                "fields": ("email", "name", "province", "password1", "password2"),
             },
         ),
     )
