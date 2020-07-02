@@ -4,8 +4,21 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from profiles.models import HealthcareUser
+from profiles.models import HealthcareUser, HealthcareProvince
 from .forms import SignupForm
+
+
+class ProvinceAdmin(admin.ModelAdmin):
+    list_display = ["id", "abbr", "name"]
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 class UserChangeForm(forms.ModelForm):
@@ -35,7 +48,7 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ("email", "name", "is_admin")
+    list_display = ("email", "name", "province", "is_admin")
     list_filter = ("is_admin",)
 
     fieldsets = (
@@ -60,7 +73,7 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ()
 
 
-# Now register the new UserAdmin...
+admin.site.register(HealthcareProvince, ProvinceAdmin)
 admin.site.register(HealthcareUser, UserAdmin)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
