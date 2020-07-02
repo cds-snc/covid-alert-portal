@@ -11,19 +11,14 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import sys
 import dj_database_url
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# Tests whether the second command line argument (after ./manage.py) was test
-TESTING = len(sys.argv) > 1 and sys.argv[1] == "test"
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -34,12 +29,14 @@ SECRET_KEY = (
     or "j$e+wzxdum=!k$bwxpgt!$(@6!iasecid^tqnijx@r@o-6x%6d"
 )
 
-debug = os.getenv("DJANGO_DEBUG", "False")
-# DEBUG will be True if DJANGO_DEBUG exists and is "True". Else, false.
-DEBUG = True if debug == "True" else False
+# Application security: should be set to True in production
+# https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/#https
+is_prod = os.getenv("DJANGO_ENV", "development") == "production"
 
+# DEBUG will be True in a developemnt environment and false in production
+DEBUG = not is_prod
 
-ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", ".herokuapp.com"]
+ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", ".herokuapp.com", "localhost"]
 
 
 # Application definition
@@ -94,14 +91,11 @@ WSGI_APPLICATION = "portal.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-if TESTING:
-    db_config = {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    }
-elif os.getenv("DATABASE_URL"):
-    db_config = dj_database_url.config(conn_max_age=600, ssl_require=True)
-else:
+default_db_path = os.path.join(BASE_DIR, 'db.sqlite3')
+if os.getenv("DATABASE_URL") == "":
+    del os.environ['DATABASE_URL']
+
+if os.getenv("DATABASE_HOST") and not (os.getenv("DATABASE_HOST") == ""):
     db_config = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "covid_portal",
@@ -110,6 +104,12 @@ else:
         "HOST": os.getenv("DATABASE_HOST", "localhost"),
         "PORT": os.getenv("DATABASE_PORT", ""),
     }
+else:
+    db_config = dj_database_url.config(
+        default=f'sqlite:///{default_db_path}',
+        conn_max_age=600,
+        ssl_require=is_prod
+    )
 
 DATABASES = {"default": db_config}
 
@@ -146,9 +146,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Application security: should be set to True in production
-# https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/#https
-is_prod = os.getenv("DJANGO_ENV", "development") == "production"
+
 
 SECURE_SSL_REDIRECT = is_prod
 SESSION_COOKIE_SECURE = is_prod
