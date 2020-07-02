@@ -3,14 +3,17 @@ import os
 import sys
 
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import FormView
-
-from django.utils import timezone
-from .forms import SignupForm
 from django.contrib import messages
 from django.urls import reverse_lazy
+from django.utils import timezone
+
+from invitations.models import Invitation
+
+from .models import HealthcareUser
+from .forms import SignupForm
 
 
 class SignUpView(FormView):
@@ -18,8 +21,35 @@ class SignUpView(FormView):
     template_name = "profiles/signup.html"
     success_url = reverse_lazy("start")
 
+    def get(self, request, *args, **kwargs):
+        invited_email = self.request.session.get("account_verified_email", None)
+
+        # redirect to login page if there's no invited email in the session
+        if not invited_email:
+            messages.warning(self.request, "No invited email in session")
+            return redirect("login")
+
+        # redirect to login page if there's no Invitation for this email
+        if not Invitation.objects.filter(email__iexact=invited_email):
+            messages.error(
+                self.request, "Invitation not found for {}".format(invited_email)
+            )
+            return redirect("login")
+
+        return super().get(request, *args, **kwargs)
+
     def get_initial(self):
-        return {"email": self.request.session.get("account_verified_email", None)}
+        invited_email = self.request.session.get("account_verified_email", None)
+
+        # get invite object and the admin user who sent the invite
+        inviter_id = Invitation.objects.get(email__iexact=invited_email).inviter_id
+        inviter = HealthcareUser.objects.get(id=inviter_id)
+
+        # preload the signup form with the email and the province of the admin
+        return {
+            "email": invited_email,
+            "province": inviter.province.name,
+        }
 
     def form_valid(self, form):
         form.save()
