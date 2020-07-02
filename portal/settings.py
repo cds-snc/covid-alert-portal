@@ -95,7 +95,7 @@ default_db_path = os.path.join(BASE_DIR, 'db.sqlite3')
 if os.getenv("DATABASE_URL") == "":
     del os.environ['DATABASE_URL']
 
-if  not (os.getenv("DATABASE_HOST") == ""):
+if os.getenv("DATABASE_HOST") and not (os.getenv("DATABASE_HOST") == ""):
     db_config = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "covid_portal",
