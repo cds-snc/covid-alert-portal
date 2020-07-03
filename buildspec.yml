@@ -15,6 +15,8 @@ phases:
       - pipenv run python manage.py sass profiles/static/scss/styles.scss profiles/static/css/
       - echo "Collect static files"
       - pipenv run python manage.py collectstatic --noinput -i scss
+      - echo "Compiling French Translations"
+      - pipenv run python manage.py compilemessages
       - echo "Running DB Migrations locally"
       - pipenv run python manage.py migrate --noinput
   build:
