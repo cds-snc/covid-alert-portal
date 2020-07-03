@@ -3,31 +3,28 @@ import os
 import sys
 
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.views.generic import FormView
 
 from django.utils import timezone
 from .forms import SignupForm
 from django.contrib import messages
+from django.urls import reverse_lazy
 
 
-def signup(request):
-    if request.method == "POST":
-        f = SignupForm(
-            request.POST,
-            initial={"email": request.session.get("account_verified_email", None)},
-        )
-        if f.is_valid():
-            f.save()
-            messages.success(request, "Account created successfully")
-            return redirect("start")
+class SignUpView(FormView):
+    form_class = SignupForm
+    template_name = "profiles/signup.html"
+    success_url = reverse_lazy("start")
 
-    else:
-        prepopulate = {}
-        prepopulate["email"] = request.session.get("account_verified_email", None)
-        f = SignupForm(initial=prepopulate)
+    def get_initial(self):
+        return {"email": self.request.session.get("account_verified_email", None)}
 
-    return render(request, "profiles/signup.html", {"form": f})
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, "Account created successfully")
+        return super(SignUpView, self).form_valid(form)
 
 
 @login_required
