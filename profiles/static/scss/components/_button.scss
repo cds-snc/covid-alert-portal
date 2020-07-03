@@ -41,10 +41,17 @@
       top: -4px;
     }
   }
-}
 
-.start-button {
-  margin: $space-lg 0 $space-xxl 0;
+  &.secondary {
+    color: black;
+    background-color: $color-grey-light;
+    box-shadow: 0 2px 0 $color-grey-dark;
+
+    &:hover,
+    &:focus {
+      background-color: #b4b4b4;
+    }
+  }
 }
 
 main {
@@ -53,12 +60,28 @@ main {
     font-family: "Noto Sans", sans-serif;
   }
 
+  a[role="button"] {
+    @extend %button-styles;
+  }
+
   .content-button {
     margin-top: $space-lg;
     margin-bottom: $space-xxl;
-  }
-}
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 
-a[role="button"] {
-  @extend %button-styles;
+    a[role="button"] + a[role="button"] {
+      margin-top: $space-md;
+    }
+
+    @include sm {
+      display: block;
+
+      a[role="button"] + a[role="button"] {
+        margin-top: $space-xs;
+        margin-left: $space-xl;
+      }
+    }
+  }
 }

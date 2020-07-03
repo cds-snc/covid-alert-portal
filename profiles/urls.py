@@ -1,6 +1,7 @@
 from django.urls import path, include, re_path
 from django.views.generic import RedirectView, TemplateView
 from django.contrib.auth.views import login_required, PasswordResetView, LoginView
+from django.contrib.admin.views.decorators import staff_member_required
 
 from . import views
 from . import forms
@@ -17,6 +18,21 @@ urlpatterns = [
         "start/",
         login_required(TemplateView.as_view(template_name="profiles/start.html")),
         name="start",
+    ),
+    path(
+        "invite/",
+        staff_member_required(views.InviteView.as_view(), login_url="login"),
+        name="invite",
+    ),
+    path(
+        "invite_complete/",
+        staff_member_required(
+            TemplateView.as_view(
+                template_name="invitations/templates/invite_complete.html"
+            ),
+            login_url="login",
+        ),
+        name="invite_complete",
     ),
     re_path(r"signup/$", views.SignUpView.as_view(), name="signup"),
     # Removed for now

@@ -10,6 +10,8 @@ from django.core.validators import EmailValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
 
 from invitations.models import Invitation
+from invitations.forms import InvitationAdminAddForm
+
 from .models import HealthcareUser, HealthcareProvince
 
 
@@ -17,7 +19,7 @@ class HealthcareBaseForm(forms.Form):
     def __init__(self, *args, **kwargs):
         # Remove the colon after field labels
         kwargs.setdefault("label_suffix", "")
-        super(HealthcareBaseForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         # override field attributes: https://stackoverflow.com/a/56870308
         for field in self.fields:
@@ -49,7 +51,7 @@ class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
     """
 
     def __init__(self, *args, **kwargs):
-        super(HealthcarePasswordResetForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         # Otherwise it just says "Email"
         self.fields["email"].label = _("Email address")
@@ -100,3 +102,28 @@ class HealthcareUserEditForm(UserChangeForm):
         widgets = {
             "email": forms.EmailInput(attrs={"readonly": "readonly"}),
         }
+
+
+class HealthcareInviteForm(HealthcareBaseForm, InvitationAdminAddForm):
+
+    inviter = forms.CharField(widget=forms.HiddenInput())
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Otherwise it just says "Email"
+        self.fields["email"].label = _("Email address")
+
+    def clean_inviter(self):
+        # get the id and return the instance
+        user_id = self.cleaned_data.get("inviter")
+        return HealthcareUser.objects.get(id=user_id)
+
+    # https://github.com/bee-keeper/django-invitations/blob/9069002f1a0572ae37ffec21ea72f66345a8276f/invitations/forms.py#L60
+    def save(self, *args, **kwargs):
+        cleaned_data = super().clean()
+        params = {
+            "email": cleaned_data.get("email"),
+            "inviter": cleaned_data.get("inviter"),
+        }
+        return Invitation.create(**params)

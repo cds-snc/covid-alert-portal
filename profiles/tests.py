@@ -1,14 +1,14 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from django.contrib.messages import get_messages
+from django.contrib import messages
 from django.utils import translation
 from invitations.models import Invitation
 from .forms import SignupForm
 from .models import HealthcareProvince, HealthcareUser
 
 
-def get_credentials():
+def get_credentials(is_admin=False):
     # Provinces are inserted into the DB during migrations, so they are already in our tests
     province = HealthcareProvince.objects.get(abbr="MB")
 
@@ -16,6 +16,7 @@ def get_credentials():
         "email": "test@test.com",
         "name": "testuser",
         "province": province,
+        "is_admin": is_admin,
         "password": "testpassword",
     }
 
@@ -163,18 +164,18 @@ class SignupFlow(TestCase):
         response = self.client.get(reverse("signup"))
 
         # assert a disabled input with the email value exists
-        self.assertTrue(
+        self.assertContains(
+            response,
             '<input type="text" name="email" value="{}" required disabled id="id_email">'.format(
                 self.invited_email
             ),
-            str(response.content),
         )
         # assert a disabled input with the province value exists
-        self.assertIn(
+        self.assertContains(
+            response,
             '<input type="text" name="province" value="{}" required disabled id="id_province">'.format(
                 self.credentials["province"].name
             ),
-            str(response.content),
         )
 
     def test_redirect_if_invitation_missing_for_email_in_session(self):
@@ -188,5 +189,59 @@ class SignupFlow(TestCase):
         self.assertRedirects(response, "/en/login/")
 
         # get messages without request.context: https://stackoverflow.com/a/14909727
-        messages = list(get_messages(response.wsgi_request))
-        self.assertEqual(str(messages[0]), "Invitation not found for fake@email.com")
+        message_list = list(messages.get_messages(response.wsgi_request))
+        self.assertEqual(
+            str(message_list[0]), "Invitation not found for fake@email.com"
+        )
+
+
+class InviteFlow(TestCase):
+    def setUp(self):
+        self.credentials = get_credentials(is_admin=True)
+        User = get_user_model()
+        user = User.objects.create_user(**self.credentials)
+        self.credentials["username"] = self.credentials["email"]
+        self.credentials["id"] = user.id
+
+        self.invited_email = "invited@test.com"
+
+    def test_redirect_on_invite_page(self):
+        response = self.client.get(reverse("invite"))
+        self.assertRedirects(response, "/en/login/?next=/en/invite/")
+
+    def test_redirect_on_invite_complete_page(self):
+        response = self.client.get(reverse("invite_complete"))
+        self.assertRedirects(response, "/en/login/?next=/en/invite_complete/")
+
+    def test_see_invite_page_and_inviter_id_in_form(self):
+        """
+        Login and see the invite page with the id of the current user in a hidden input
+        """
+        self.client.login(username="test@test.com", password="testpassword")
+        response = self.client.get(reverse("invite"))
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, "Add an account")
+        self.assertContains(
+            response,
+            '<input type="hidden" name="inviter" value="{}" id="id_inviter">'.format(
+                self.credentials["id"]
+            ),
+        )
+
+    def test_see_invite_complete_page_and_message_on_page(self):
+        """
+        Login and see the invite page with the id of the current user in a hidden input
+        """
+        self.client.login(username="test@test.com", password="testpassword")
+        session = self.client.session
+        session["invite_email"] = self.invited_email
+        session.save()
+
+        response = self.client.get(reverse("invite_complete"))
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, "Invitation sent")
+        self.assertContains(
+            response, "Invitation sent to “{}”".format(self.invited_email),
+        )

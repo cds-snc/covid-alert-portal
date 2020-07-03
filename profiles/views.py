@@ -13,7 +13,7 @@ from django.utils import timezone
 from invitations.models import Invitation
 
 from .models import HealthcareUser
-from .forms import SignupForm
+from .forms import SignupForm, HealthcareInviteForm
 
 
 class SignUpView(FormView):
@@ -55,6 +55,26 @@ class SignUpView(FormView):
         form.save()
         messages.success(self.request, "Account created successfully")
         return super(SignUpView, self).form_valid(form)
+
+
+class InviteView(FormView):
+    form_class = HealthcareInviteForm
+    template_name = "invitations/templates/invite.html"
+    success_url = reverse_lazy("invite_complete")
+
+    def get_initial(self):
+        # preload the invite form with the id of the inviter
+        return {"inviter": self.request.user.id}
+
+    def form_valid(self, form):
+        # Save the invite to the DB and return it
+        invite = form.save()
+        invite.send_invitation(self.request)
+        messages.success(
+            self.request, "Invitation sent to “{}”".format(invite.email), "invite"
+        )
+        self.request.session["invite_email"] = invite.email
+        return super().form_valid(form)
 
 
 @login_required
