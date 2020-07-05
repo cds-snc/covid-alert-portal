@@ -394,3 +394,30 @@ class ProfileView(LoggedInTestCase):
             reverse("user_profile", kwargs={"pk": self.credentials["id"]})
         )
         self.assertEqual(response.status_code, 403)
+
+
+class DeleteView(LoggedInTestCase):
+    def setUp(self):
+        super().setUp(is_admin=True)
+
+    def test_delete_page_for_self_forbidden(self):
+        # log in as user in session
+        self.client.login(username=self.user.email, password="testpassword")
+
+        ## get user profile of admin user created in setUp
+        response = self.client.get(reverse("user_delete", kwargs={"pk": self.user.id}))
+        self.assertEqual(response.status_code, 403)
+
+    def test_see_delete_page_for_other_user(self):
+        user2 = User.objects.create_user(**get_other_credentials(is_admin=False))
+
+        # log in as user in session
+        self.client.login(username=self.user.email, password="testpassword")
+
+        ## get user profile of admin user created in setUp
+        response = self.client.get(reverse("user_delete", kwargs={"pk": user2.id}))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            "<p>Are you sure you want to delete testuser2’s account at “test2@test.com”?</p>",
+        )

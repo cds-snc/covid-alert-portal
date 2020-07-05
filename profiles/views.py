@@ -5,7 +5,7 @@ import sys
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.views.generic import FormView, ListView, View
+from django.views.generic import FormView, ListView, View, DeleteView
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -121,6 +121,21 @@ class UserProfileView(LoginRequiredMixin, ProvinceAdminManageMixin, View):
         return render(
             request, "profiles/user_profile.html", {"profile_user": profile_user}
         )
+
+
+class ProvinceAdminDeleteMixin(ProvinceAdminManageMixin):
+    def test_func(self):
+        # id can't be yourself
+        if self.request.user.id == int(self.kwargs["pk"]):
+            return False
+
+        return super().test_func()
+
+
+class UserDeleteView(LoginRequiredMixin, ProvinceAdminDeleteMixin, DeleteView):
+    model = HealthcareUser
+    context_object_name = "profile_user"
+    success_url = reverse_lazy("profiles")
 
 
 @login_required

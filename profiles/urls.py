@@ -39,6 +39,11 @@ urlpatterns = [
     re_path(
         r"profiles/(?P<pk>\w+)$", views.UserProfileView.as_view(), name="user_profile",
     ),
+    re_path(
+        r"profiles/(?P<pk>\w+)/delete$",
+        views.UserDeleteView.as_view(),
+        name="user_delete",
+    ),
     # Removed for now
     # url(r'profiles/(?P<pk>\w+)/edit$', views.UserEdit.as_view(), name='user_edit'),
     # this login path overrides the default one in 'django.contrib.auth.urls'
