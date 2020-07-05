@@ -8,9 +8,12 @@ from .forms import SignupForm
 from .models import HealthcareProvince, HealthcareUser
 
 
+User = get_user_model()
+province = HealthcareProvince.objects.get(abbr="MB")
+
+
 def get_credentials(is_admin=False):
     # Provinces are inserted into the DB during migrations, so they are already in our tests
-    province = HealthcareProvince.objects.get(abbr="MB")
 
     return {
         "email": "test@test.com",
@@ -24,7 +27,6 @@ def get_credentials(is_admin=False):
 class LoggedInTestCase(TestCase):
     def setUp(self, is_admin=False):
         self.credentials = get_credentials(is_admin=is_admin)
-        User = get_user_model()
         self.user = User.objects.create_user(**self.credentials)
         self.credentials["username"] = self.credentials["email"]
         self.credentials["id"] = self.user.id
@@ -241,7 +243,7 @@ class ProfilesView(LoggedInTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
 
-    def test_redirect_on_invite_page_if_logged_out(self):
+    def test_redirect_on_manage_accounts_page_if_logged_out(self):
         response = self.client.get(reverse("profiles"))
         self.assertRedirects(response, "/en/login/?next=/en/profiles/")
 
@@ -264,3 +266,88 @@ class ProfilesView(LoggedInTestCase):
             response, '<td scope="col">{}</td>'.format(self.credentials["email"])
         )
 
+
+class ProfilesView(LoggedInTestCase):
+    def user_two(self, province, is_admin=False):
+        return {
+            "email": "test2@test.com",
+            "name": "testuser2",
+            "province": province,
+            "is_admin": is_admin,
+            "password": "testpassword2",
+        }
+
+    def setUp(self):
+        super().setUp(is_admin=True)
+
+    def test_redirect_on_profile_page_if_logged_out(self):
+        response = self.client.get(
+            reverse("user_profile", kwargs={"pk": self.credentials["id"]})
+        )
+        self.assertRedirects(
+            response, "/en/login/?next=/en/profiles/{}".format(self.credentials["id"])
+        )
+
+    def test_profile_page_visible_when_logged_in(self):
+        self.client.login(username="test@test.com", password="testpassword")
+
+        response = self.client.get(
+            reverse("user_profile", kwargs={"pk": self.credentials["id"]})
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>User profile</h1>")
+
+    def test_profile_page_not_found_if_user_id_does_not_exist(self):
+        self.client.login(username="test@test.com", password="testpassword")
+
+        response = self.client.get(reverse("user_profile", kwargs={"pk": 99}))
+        self.assertEqual(response.status_code, 404)
+
+    def test_fobidden_profile_page_if_non_admin_user_viewing_other_profile(self):
+        user2 = User.objects.create_user(**self.user_two(province))
+        # password is hashed so we can't use it
+        self.client.login(username=user2.email, password="testpassword2")
+
+        ## get user profile of admin user created in setUp
+        response = self.client.get(
+            reverse("user_profile", kwargs={"pk": self.credentials["id"]})
+        )
+        self.assertEqual(response.status_code, 403)
+
+    def test_view_profile_page_if_superuser_viewing_other_profile(self):
+        superuser = self.user_two(province)
+        superuser.pop("province")
+        superuser.pop("is_admin")
+        user2 = User.objects.create_superuser(**superuser)
+        self.client.login(username=user2.email, password="testpassword2")
+
+        response = self.client.get(
+            reverse("user_profile", kwargs={"pk": self.credentials["id"]})
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response, '<td scope="col">{}</td>'.format(self.credentials["email"])
+        )
+
+    def test_view_profile_page_if_admin_user_viewing_same_province_user(self):
+        user2 = User.objects.create_user(**self.user_two(province, is_admin=True))
+        self.client.login(username=user2.email, password="testpassword2")
+
+        response = self.client.get(
+            reverse("user_profile", kwargs={"pk": self.credentials["id"]})
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response, '<td scope="col">{}</td>'.format(self.credentials["email"])
+        )
+
+    def test_forbidden_profile_page_if_admin_user_viewing_other_province_user(self):
+        alberta = HealthcareProvince.objects.get(abbr="AB")
+
+        user2 = User.objects.create_user(**self.user_two(alberta, is_admin=True))
+        self.client.login(username=user2.email, password="testpassword2")
+
+        response = self.client.get(
+            reverse("user_profile", kwargs={"pk": self.credentials["id"]})
+        )
+        self.assertEqual(response.status_code, 403)

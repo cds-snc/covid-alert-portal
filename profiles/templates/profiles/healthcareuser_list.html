@@ -17,10 +17,10 @@
         </tr>
     </thead>
     <tbody>
-      {% for user in healthcareuser_list %}
+      {% for healthcareuser in healthcareuser_list %}
         <tr>
-          <td scope="col">{{ user.email }}</td>
-          <td scope="col">{{ user.is_admin|yesno:_("Admin,Staff") }}</td>
+          <td scope="col"><a href="{% url 'user_profile' healthcareuser.id %}">{{ healthcareuser.email }}</a></td>
+          <td scope="col">{{ healthcareuser.is_admin|yesno:_("Admin,Staff") }}</td>
           <td scope="col">Change</td>
         </tr>
       {% empty %}

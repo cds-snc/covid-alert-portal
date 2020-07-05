@@ -4,7 +4,7 @@
 {% block title %}{% trans "User profile" %}{% endblock %}
 
 {% block content %}
-  {% if viewed_user %}
+  {% if profile_user %}
     <h1>{% trans "User profile" %}</h1>
 
     <table>
@@ -12,15 +12,15 @@
       <tbody>
         <tr>
           <th scope="row">{% trans "Name" %}</td>
-          <td scope="col">{{ viewed_user.name }}</td>
+          <td scope="col">{{ profile_user.name }}</td>
         </tr>
         <tr>
           <th scope="row">{% trans "Email address" %}</td>
-          <td scope="col">{{ viewed_user.email }}</td>
+          <td scope="col">{{ profile_user.email }}</td>
         </tr>
         <tr>
           <th scope="row">{% trans "Province" %}</td>
-          <td scope="col">{{ viewed_user.province.name }}</td>
+          <td scope="col">{{ profile_user.province.name }}</td>
         </tr>
       </tbody>
     </table>

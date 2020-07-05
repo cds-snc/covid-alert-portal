@@ -3,12 +3,13 @@ import os
 import sys
 
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import FormView, ListView, View
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils import timezone
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 from invitations.models import Invitation
 
@@ -81,16 +82,33 @@ class ProfilesView(ListView):
     model = HealthcareUser
 
 
-class UserProfileView(View):
+class UserProfileView(LoginRequiredMixin, UserPassesTestMixin, View):
+    def test_func(self):
+        # 404 if bad user ID
+        profile_user = get_object_or_404(HealthcareUser, pk=self.kwargs["pk"])
+
+        # if superuser, return profile
+        if self.request.user.is_superuser:
+            return True
+
+        # if same user, return profile
+        if self.request.user.id == int(profile_user.id):
+            return True
+
+        # if admin user from same province, return profile
+        if (
+            self.request.user.is_admin
+            and self.request.user.province.id == profile_user.province.id
+        ):
+            return True
+
+        return False
+
     def get(self, request, pk):
-        try:
-            user = HealthcareUser.objects.get(id=pk)
-        except:
-            user = None
-
-        context = {"viewed_user": user}
-
-        return render(request, "profiles/user_profile.html", context)
+        profile_user = get_object_or_404(HealthcareUser, pk=pk)
+        return render(
+            request, "profiles/user_profile.html", {"profile_user": profile_user}
+        )
 
 
 @login_required
