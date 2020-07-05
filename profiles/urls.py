@@ -35,13 +35,15 @@ urlpatterns = [
         name="invite_complete",
     ),
     re_path(r"signup/$", views.SignUpView.as_view(), name="signup"),
+    path(
+        "profiles/",
+        staff_member_required(views.ProfilesView.as_view(), login_url="login",),
+        name="profiles",
+    ),
+    re_path(
+        r"profiles/(?P<pk>\w+)$", views.UserProfileView.as_view(), name="user_profile",
+    ),
     # Removed for now
-    # path('profiles/', views.UserListView.as_view(), name='profiles'),
-    # url(
-    #     r'profiles/(?P<pk>\w+)$',
-    #     views.UserProfileView.as_view(),
-    #     name='user_profile',
-    # ),
     # url(r'profiles/(?P<pk>\w+)/edit$', views.UserEdit.as_view(), name='user_edit'),
     # this login path overrides the default one in 'django.contrib.auth.urls'
     path(

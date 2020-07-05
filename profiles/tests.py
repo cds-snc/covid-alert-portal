@@ -21,6 +21,17 @@ def get_credentials(is_admin=False):
     }
 
 
+class LoggedInTestCase(TestCase):
+    def setUp(self, is_admin=False):
+        self.credentials = get_credentials(is_admin=is_admin)
+        User = get_user_model()
+        self.user = User.objects.create_user(**self.credentials)
+        self.credentials["username"] = self.credentials["email"]
+        self.credentials["id"] = self.user.id
+
+        self.invited_email = "invited@test.com"
+
+
 class HomePageView(TestCase):
     def test_start(self):
         """
@@ -46,15 +57,7 @@ class RestrictedPageViews(TestCase):
         self.assertRedirects(response, "/en/login/")
 
 
-class AuthenticatedView(TestCase):
-    def setUp(self):
-        self.credentials = get_credentials()
-        User = get_user_model()
-        User.objects.create_user(**self.credentials)
-
-        # Because username is what is posted to the login page, even if email is the username field we need to add it here. Adding it before creates an error since it's not expected as part of create_user()
-        self.credentials["username"] = self.credentials["email"]
-
+class AuthenticatedView(LoggedInTestCase):
     def test_loginpage(self):
         #  Get the login page
         response = self.client.get(reverse("login"))
@@ -144,17 +147,10 @@ class InvitationFlow(TestCase):
         self.assertTrue('value="Manitoba"' in f.as_table())
 
 
-class SignupFlow(TestCase):
+class SignupFlow(LoggedInTestCase):
     def setUp(self):
-        self.credentials = get_credentials()
-        User = get_user_model()
-        user = User.objects.create_user(**self.credentials)
-        self.credentials["username"] = self.credentials["email"]
-
-        self.invited_email = "invited@test.com"
-
-        self.invite = Invitation.create(self.invited_email, inviter=user)
-        self.invite_url = reverse("invitations:accept-invite", args=[self.invite.key])
+        super().setUp()
+        self.invite = Invitation.create(self.invited_email, inviter=self.user)
 
     def test_email_and_province_on_signup_page(self):
         session = self.client.session
@@ -195,21 +191,15 @@ class SignupFlow(TestCase):
         )
 
 
-class InviteFlow(TestCase):
+class InviteFlow(LoggedInTestCase):
     def setUp(self):
-        self.credentials = get_credentials(is_admin=True)
-        User = get_user_model()
-        user = User.objects.create_user(**self.credentials)
-        self.credentials["username"] = self.credentials["email"]
-        self.credentials["id"] = user.id
+        super().setUp(is_admin=True)
 
-        self.invited_email = "invited@test.com"
-
-    def test_redirect_on_invite_page(self):
+    def test_redirect_on_invite_page_if_logged_out(self):
         response = self.client.get(reverse("invite"))
         self.assertRedirects(response, "/en/login/?next=/en/invite/")
 
-    def test_redirect_on_invite_complete_page(self):
+    def test_redirect_on_invite_complete_page_if_logged_out(self):
         response = self.client.get(reverse("invite_complete"))
         self.assertRedirects(response, "/en/login/?next=/en/invite_complete/")
 
@@ -245,3 +235,32 @@ class InviteFlow(TestCase):
         self.assertContains(
             response, "Invitation sent to “{}”".format(self.invited_email),
         )
+
+
+class ProfilesView(LoggedInTestCase):
+    def setUp(self):
+        super().setUp(is_admin=True)
+
+    def test_redirect_on_invite_page_if_logged_out(self):
+        response = self.client.get(reverse("profiles"))
+        self.assertRedirects(response, "/en/login/?next=/en/profiles/")
+
+    def test_manage_accounts_link_visible_if_logged_in(self):
+        self.client.login(username="test@test.com", password="testpassword")
+
+        response = self.client.get(reverse("start"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response, '<a  href="{}">Manage accounts</a>'.format(reverse("profiles"))
+        )
+
+    def test_manage_accounts_page(self):
+        self.client.login(username="test@test.com", password="testpassword")
+
+        response = self.client.get(reverse("profiles"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Manage accounts</h1>")
+        self.assertContains(
+            response, '<td scope="col">{}</td>'.format(self.credentials["email"])
+        )
+

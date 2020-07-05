@@ -1,25 +1,32 @@
 {% extends 'base.html' %}
-{% block title %}Viewing User {{ user.id }}{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "User profile" %}{% endblock %}
 
 {% block content %}
-    {% if viewed_user %}
-        <h1 align="center">Viewing User {{ viewed_user.id }}</h1>
-<div align="center">
-         <dl>
-          <dt>Email:</dt>
-          <dd>{{viewed_user.email}}</dd>
-          <dt>Name:</dt>
-          <dd>{{viewed_user.name}}</dd>
-          <dt>Language:</dt>
-          <dd>{{viewed_user.language}}</dd>
-        </dl>
-        {% if user.is_authenticated and user.id == viewed_user.id %}
-            <p><a href="{% url 'user_edit' viewed_user.id %}">Edit user info</a></p>
-        {% endif %}
-        <p><a href="{% url 'start' %}">↩ Back</a></p>
+  {% if viewed_user %}
+    <h1>{% trans "User profile" %}</h1>
 
-    {% else %}
-        <p>User not found.</p>
-    {% endif %}
+    <table>
+      <caption class="visually-hidden">{% trans "User profile" %}</caption>
+      <tbody>
+        <tr>
+          <th scope="row">{% trans "Name" %}</td>
+          <td scope="col">{{ viewed_user.name }}</td>
+        </tr>
+        <tr>
+          <th scope="row">{% trans "Email address" %}</td>
+          <td scope="col">{{ viewed_user.email }}</td>
+        </tr>
+        <tr>
+          <th scope="row">{% trans "Province" %}</td>
+          <td scope="col">{{ viewed_user.province.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="content-button"><a class="secondary" href="{% url 'profiles' %}" role='button' draggable='false'>{% trans "Back to accounts" %}</a></div>
+  {% else %}
+    <p>User not found.</p>
+  {% endif %}
 {% endblock %}
-</div>

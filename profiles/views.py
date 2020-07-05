@@ -5,7 +5,7 @@ import sys
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.views.generic import FormView
+from django.views.generic import FormView, ListView, View
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -75,6 +75,22 @@ class InviteView(FormView):
         )
         self.request.session["invite_email"] = invite.email
         return super().form_valid(form)
+
+
+class ProfilesView(ListView):
+    model = HealthcareUser
+
+
+class UserProfileView(View):
+    def get(self, request, pk):
+        try:
+            user = HealthcareUser.objects.get(id=pk)
+        except:
+            user = None
+
+        context = {"viewed_user": user}
+
+        return render(request, "profiles/user_profile.html", context)
 
 
 @login_required
