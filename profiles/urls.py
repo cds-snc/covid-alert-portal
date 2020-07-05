@@ -35,11 +35,7 @@ urlpatterns = [
         name="invite_complete",
     ),
     re_path(r"signup/$", views.SignUpView.as_view(), name="signup"),
-    path(
-        "profiles/",
-        staff_member_required(views.ProfilesView.as_view(), login_url="login",),
-        name="profiles",
-    ),
+    path("profiles/", views.ProfilesView.as_view(), name="profiles",),
     re_path(
         r"profiles/(?P<pk>\w+)$", views.UserProfileView.as_view(), name="user_profile",
     ),

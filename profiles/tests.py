@@ -9,18 +9,50 @@ from .models import HealthcareProvince, HealthcareUser
 
 
 User = get_user_model()
-province = HealthcareProvince.objects.get(abbr="MB")
 
 
-def get_credentials(is_admin=False):
-    # Provinces are inserted into the DB during migrations, so they are already in our tests
+def get_province(abbr="MB"):
+    # Provinces are inserted into the DB during migrations, we can call them once the test DB is initialized
+    return HealthcareProvince.objects.get(abbr=abbr)
+
+
+def get_credentials(
+    email="test@test.com",
+    name="testuser",
+    province=None,
+    is_admin=False,
+    password="testpassword",
+):
+    return {
+        "email": email,
+        "name": name,
+        "province": province or get_province(),
+        "is_admin": is_admin,
+        "password": password,
+    }
+
+
+def get_other_credentials(
+    email="test2@test.com",
+    name="testuser2",
+    province=None,
+    is_admin=False,
+    is_superuser=False,
+    password="testpassword2",
+):
+    if is_superuser:
+        return {
+            "email": email,
+            "name": name,
+            "password": password,
+        }
 
     return {
-        "email": "test@test.com",
-        "name": "testuser",
-        "province": province,
+        "email": email,
+        "name": name,
+        "province": province or get_province(),
         "is_admin": is_admin,
-        "password": "testpassword",
+        "password": password,
     }
 
 
@@ -138,7 +170,7 @@ class InvitationFlow(TestCase):
         self.email = "test@test.com"
         self.invite = Invitation.create(self.email)
 
-        self.province = HealthcareProvince.objects.get(abbr="MB")
+        self.province = get_province()
 
     def test_email_in_form(self):
         f = SignupForm(initial={"email": self.invite.email})
@@ -247,6 +279,13 @@ class ProfilesView(LoggedInTestCase):
         response = self.client.get(reverse("profiles"))
         self.assertRedirects(response, "/en/login/?next=/en/profiles/")
 
+    def test_forbidden_if_not_admin(self):
+        user2 = User.objects.create_user(**get_other_credentials(is_admin=False))
+        self.client.login(username=user2.email, password="testpassword2")
+
+        response = self.client.get(reverse("profiles"))
+        self.assertEqual(response.status_code, 403)
+
     def test_manage_accounts_link_visible_if_logged_in(self):
         self.client.login(username="test@test.com", password="testpassword")
 
@@ -257,26 +296,30 @@ class ProfilesView(LoggedInTestCase):
         )
 
     def test_manage_accounts_page(self):
-        self.client.login(username="test@test.com", password="testpassword")
+        user2 = User.objects.create_user(**get_other_credentials(is_admin=True))
+        self.client.login(username=user2.email, password="testpassword2")
 
         response = self.client.get(reverse("profiles"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "<h1>Manage accounts</h1>")
-        self.assertContains(
-            response, '<td scope="col">{}</td>'.format(self.credentials["email"])
+        # Make sure the email of the first user is visible
+        self.assertContains(response, self.credentials["email"])
+
+    def test_manage_accounts_page_no_users_from_other_province(self):
+        user2 = User.objects.create_user(
+            **get_other_credentials(province=get_province("AB"), is_admin=True)
         )
 
+        self.client.login(username=user2.email, password="testpassword2")
 
-class ProfilesView(LoggedInTestCase):
-    def user_two(self, province, is_admin=False):
-        return {
-            "email": "test2@test.com",
-            "name": "testuser2",
-            "province": province,
-            "is_admin": is_admin,
-            "password": "testpassword2",
-        }
+        response = self.client.get(reverse("profiles"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Manage accounts</h1>")
+        # make sure email of the first user is not visible
+        self.assertNotContains(response, self.credentials["email"])
 
+
+class ProfileView(LoggedInTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
 
@@ -304,7 +347,7 @@ class ProfilesView(LoggedInTestCase):
         self.assertEqual(response.status_code, 404)
 
     def test_fobidden_profile_page_if_non_admin_user_viewing_other_profile(self):
-        user2 = User.objects.create_user(**self.user_two(province))
+        user2 = User.objects.create_user(**get_other_credentials(is_admin=False))
         # password is hashed so we can't use it
         self.client.login(username=user2.email, password="testpassword2")
 
@@ -315,10 +358,10 @@ class ProfilesView(LoggedInTestCase):
         self.assertEqual(response.status_code, 403)
 
     def test_view_profile_page_if_superuser_viewing_other_profile(self):
-        superuser = self.user_two(province)
-        superuser.pop("province")
-        superuser.pop("is_admin")
-        user2 = User.objects.create_superuser(**superuser)
+        # create superuser
+        user2 = User.objects.create_superuser(
+            **get_other_credentials(is_superuser=True)
+        )
         self.client.login(username=user2.email, password="testpassword2")
 
         response = self.client.get(
@@ -330,7 +373,7 @@ class ProfilesView(LoggedInTestCase):
         )
 
     def test_view_profile_page_if_admin_user_viewing_same_province_user(self):
-        user2 = User.objects.create_user(**self.user_two(province, is_admin=True))
+        user2 = User.objects.create_user(**get_other_credentials(is_admin=True))
         self.client.login(username=user2.email, password="testpassword2")
 
         response = self.client.get(
@@ -342,9 +385,9 @@ class ProfilesView(LoggedInTestCase):
         )
 
     def test_forbidden_profile_page_if_admin_user_viewing_other_province_user(self):
-        alberta = HealthcareProvince.objects.get(abbr="AB")
-
-        user2 = User.objects.create_user(**self.user_two(alberta, is_admin=True))
+        user2 = User.objects.create_user(
+            **get_other_credentials(is_admin=True, province=get_province("AB"))
+        )
         self.client.login(username=user2.email, password="testpassword2")
 
         response = self.client.get(

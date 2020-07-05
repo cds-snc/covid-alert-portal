@@ -78,11 +78,21 @@ class InviteView(FormView):
         return super().form_valid(form)
 
 
-class ProfilesView(ListView):
-    model = HealthcareUser
+class ProfilesView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    def test_func(self):
+        # if superuser, return manage_accounts page
+        if self.request.user.is_superuser or self.request.user.is_admin:
+            return True
+
+        return False
+
+    def get_queryset(self):
+        return HealthcareUser.objects.filter(
+            province=self.request.user.province
+        ).order_by("-is_admin")
 
 
-class UserProfileView(LoginRequiredMixin, UserPassesTestMixin, View):
+class ProvinceAdminManageMixin(UserPassesTestMixin):
     def test_func(self):
         # 404 if bad user ID
         profile_user = get_object_or_404(HealthcareUser, pk=self.kwargs["pk"])
@@ -104,6 +114,8 @@ class UserProfileView(LoginRequiredMixin, UserPassesTestMixin, View):
 
         return False
 
+
+class UserProfileView(LoginRequiredMixin, ProvinceAdminManageMixin, View):
     def get(self, request, pk):
         profile_user = get_object_or_404(HealthcareUser, pk=pk)
         return render(
