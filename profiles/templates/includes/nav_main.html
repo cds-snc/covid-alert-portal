@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<nav class="nav--main">
+<nav class="nav--main"  aria-label="{% trans 'Product navigation' %}">
   <div class="page--container">
     <ul>
       <li><a class="{% if request.resolver_match.url_name == 'start' %}active{% endif %}" href="{% url 'start' %}">{% trans "Start" %}</a></li>
