@@ -22,7 +22,7 @@ class Command(BaseCommand):
 
     def create_su(self):
         ## Check to ensure SU password meets minimum requirements
-        if validate_password(SU_DEFAULT_PASSWORD) == None:
+        if validate_password(SU_DEFAULT_PASSWORD) is None:
             HealthcareUser.objects.create_superuser(
                 "hcw_portal_admin@cds-snc.ca", "hcw_portal_admin", SU_DEFAULT_PASSWORD
             )
