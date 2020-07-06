@@ -36,7 +36,13 @@ is_prod = os.getenv("DJANGO_ENV", "development") == "production"
 # DEBUG will be True in a developemnt environment and false in production
 DEBUG = not is_prod
 
-ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", ".herokuapp.com", "localhost"]
+ALLOWED_HOSTS = [
+    "0.0.0.0",
+    "127.0.0.1",
+    ".herokuapp.com",
+    "localhost",
+    ".elasticbeanstalk.com",
+]
 
 
 # Application definition
