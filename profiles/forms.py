@@ -10,13 +10,18 @@ from django.core.validators import EmailValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
 
 from invitations.models import Invitation
-from .models import HealthcareUser
+from .models import HealthcareUser, HealthcareProvince
 
 
 class HealthcareBaseForm(forms.Form):
     def __init__(self, *args, **kwargs):
+        # Remove the colon after field labels
         kwargs.setdefault("label_suffix", "")
         super(HealthcareBaseForm, self).__init__(*args, **kwargs)
+
+        # override field attributes: https://stackoverflow.com/a/56870308
+        for field in self.fields:
+            self.fields[field].widget.attrs.pop("autofocus", None)
 
 
 class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
@@ -28,13 +33,8 @@ class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
     class Meta:
         model = HealthcareUser
 
-    # override field attributes: https://stackoverflow.com/a/56870308
     def __init__(self, *args, **kwargs):
         super(HealthcareAuthenticationForm, self).__init__(*args, **kwargs)
-
-        # remove autofocus from fields
-        for field in self.fields:
-            self.fields[field].widget.attrs.pop("autofocus", None)
 
         # update / translate validation message for invalid emails
         self.fields["username"].validators = [
@@ -51,8 +51,6 @@ class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
     def __init__(self, *args, **kwargs):
         super(HealthcarePasswordResetForm, self).__init__(*args, **kwargs)
 
-        # remove autofocus from email
-        self.fields["email"].widget.attrs.pop("autofocus", None)
         # Otherwise it just says "Email"
         self.fields["email"].label = _("Email address")
 
@@ -61,14 +59,25 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
     """A form for creating new users. Extends from UserCreation form, which
     means it includes a repeated password."""
 
+    # disabled fields aren't submitted
+    email = forms.CharField(
+        widget=forms.TextInput, label=_("Email address"), disabled=True
+    )
+    province = forms.CharField(
+        widget=forms.TextInput, label=_("Province"), disabled=True
+    )
+
     name = forms.CharField(label=_("Full name"), validators=[MaxLengthValidator(200)])
 
     class Meta:
         model = HealthcareUser
-        fields = ("email", "name")
-        widgets = {
-            "email": forms.EmailInput(attrs={"readonly": "readonly"}),
-        }
+        fields = ("email", "province", "name")
+
+    def clean_province(self):
+        # returns a province name as a string
+        # always returns the province name from "get_initial"
+        province_name = self.cleaned_data.get("province", "")
+        return HealthcareProvince.objects.get(name=province_name)
 
     def clean_email(self):
         email = self.cleaned_data.get("email", "").lower()
