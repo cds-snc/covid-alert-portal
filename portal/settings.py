@@ -39,7 +39,6 @@ DEBUG = not is_prod
 ALLOWED_HOSTS = [
     "0.0.0.0",
     "127.0.0.1",
-    ".herokuapp.com",
     "localhost",
 ]
 
