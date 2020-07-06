@@ -41,9 +41,10 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     ".herokuapp.com",
     "localhost",
-    ".elasticbeanstalk.com",
 ]
 
+if os.getenv("ALLOWED_HOSTS"):
+    ALLOWED_HOSTS.extend(os.getenv("ALLOWED_HOSTS").split(','))
 
 # Application definition
 
