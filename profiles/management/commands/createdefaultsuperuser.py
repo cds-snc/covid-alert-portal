@@ -1,11 +1,9 @@
-import os
 from portal.settings import (
     CREATE_DEFAULT_SU,
-    SU_DEFAULT_PASSWORD,
-    AUTH_PASSWORD_VALIDATORS,
+    SU_DEFAULT_PASSWORD
 )
 from django.contrib.auth.password_validation import validate_password
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from profiles.models import HealthcareUser
 
 SU_EXISTS = HealthcareUser.objects.filter(name="hcw_portal_admin").exists()
