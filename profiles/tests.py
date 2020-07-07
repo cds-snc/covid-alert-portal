@@ -359,10 +359,10 @@ class ProfileView(LoggedInTestCase):
 
     def test_view_profile_page_if_superuser_viewing_other_profile(self):
         # create superuser
-        user2 = User.objects.create_superuser(
+        superuser = User.objects.create_superuser(
             **get_other_credentials(is_superuser=True)
         )
-        self.client.login(username=user2.email, password="testpassword2")
+        self.client.login(username=superuser.email, password="testpassword2")
 
         response = self.client.get(
             reverse("user_profile", kwargs={"pk": self.credentials["id"]})
@@ -371,6 +371,18 @@ class ProfileView(LoggedInTestCase):
         self.assertContains(
             response, '<td scope="col">{}</td>'.format(self.credentials["email"])
         )
+
+    def test_forbidden_see_profile_page_superuser(self):
+        superuser = User.objects.create_superuser(
+            **get_other_credentials(is_superuser=True)
+        )
+
+        # log in as user in session
+        self.client.login(username=self.user.email, password="testpassword")
+
+        ## get user profile of superuser
+        response = self.client.get(reverse("user_profile", kwargs={"pk": superuser.id}))
+        self.assertEqual(response.status_code, 403)
 
     def test_view_profile_page_if_admin_user_viewing_same_province_user(self):
         user2 = User.objects.create_user(**get_other_credentials(is_admin=True))
@@ -400,12 +412,24 @@ class DeleteView(LoggedInTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
 
-    def test_delete_page_for_self_forbidden(self):
+    def test_forbidden_see_delete_page_for_self(self):
         # log in as user in session
         self.client.login(username=self.user.email, password="testpassword")
 
         ## get user profile of admin user created in setUp
         response = self.client.get(reverse("user_delete", kwargs={"pk": self.user.id}))
+        self.assertEqual(response.status_code, 403)
+
+    def test_forbidden_see_delete_page_for_superuser(self):
+        superuser = User.objects.create_superuser(
+            **get_other_credentials(is_superuser=True)
+        )
+
+        # log in as user in session
+        self.client.login(username=self.user.email, password="testpassword")
+
+        ## get user profile of superuser
+        response = self.client.get(reverse("user_delete", kwargs={"pk": superuser.id}))
         self.assertEqual(response.status_code, 403)
 
     def test_see_delete_page_for_other_user(self):

@@ -22,7 +22,7 @@
           <td scope="col"><a href="{% url 'user_profile' healthcareuser.id %}">{{ healthcareuser.email }}</a></td>
           <td scope="col">{{ healthcareuser.is_admin|yesno:_("Admin,Staff") }}</td>
           <td scope="col">
-          {% if not healthcareuser.is_admin %}
+          {% if not healthcareuser.is_superuser and healthcareuser.id != user.id %}
             <a href="{% url 'user_delete' healthcareuser.id %}">
               Remove
             </a>

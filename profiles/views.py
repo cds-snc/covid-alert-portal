@@ -97,13 +97,17 @@ class ProvinceAdminManageMixin(UserPassesTestMixin):
         # 404 if bad user ID
         profile_user = get_object_or_404(HealthcareUser, pk=self.kwargs["pk"])
 
-        # if superuser, return profile
+        # if logged in user is superuser, return profile
         if self.request.user.is_superuser:
             return True
 
         # if same user, return profile
         if self.request.user.id == int(profile_user.id):
             return True
+
+        # Don't return superuser profile pages
+        if profile_user.is_superuser:
+            return False
 
         # if admin user from same province, return profile
         if (
