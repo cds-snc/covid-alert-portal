@@ -10,8 +10,25 @@ main form {
       display: block;
     }
 
-    > input {
+    > input,
+    > select {
       margin-top: 8px;
+
+      &:not([disabled]) {
+        &:focus {
+          border-radius: 0;
+          outline: 3px solid #fd0;
+          outline-offset: 0;
+          -webkit-box-shadow: inset 0 0 0 2px;
+          box-shadow: inset 0 0 0 2px;
+        }
+      }
+
+      &[disabled] {
+        color: $color-grey-dark;
+        background: $color-grey-footer;
+        opacity: 1;
+      }
     }
   }
 }

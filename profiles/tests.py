@@ -1,9 +1,23 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from django.contrib.messages import get_messages
 from django.utils import translation
 from invitations.models import Invitation
 from .forms import SignupForm
+from .models import HealthcareProvince, HealthcareUser
+
+
+def get_credentials():
+    # Provinces are inserted into the DB during migrations, so they are already in our tests
+    province = HealthcareProvince.objects.get(abbr="MB")
+
+    return {
+        "email": "test@test.com",
+        "name": "testuser",
+        "province": province,
+        "password": "testpassword",
+    }
 
 
 class HomePageView(TestCase):
@@ -16,7 +30,7 @@ class HomePageView(TestCase):
         self.assertContains(response, "Welcome to Generate COVID Alert number")
 
 
-class RestristedPageViews(TestCase):
+class RestrictedPageViews(TestCase):
     #  These should redirect us
     def test_code(self):
         response = self.client.get(reverse("code"))
@@ -26,19 +40,19 @@ class RestristedPageViews(TestCase):
         response = self.client.get(reverse("start"))
         self.assertRedirects(response, "/en/login/?next=/en/start/")
 
+    def test_signup(self):
+        response = self.client.get(reverse("signup"))
+        self.assertRedirects(response, "/en/login/")
+
 
 class AuthenticatedView(TestCase):
     def setUp(self):
-        self.credentials = {
-            "email": "test@test.com",
-            "name": "testuser",
-            "password": "testpassword",
-        }
+        self.credentials = get_credentials()
         User = get_user_model()
         User.objects.create_user(**self.credentials)
-        self.credentials[
-            "username"
-        ] = "test@test.com"  # Because username is what is posted to the login page, even if email is the username field we need to add it here. Adding it before creates an error since it's not expected as part of create_user()
+
+        # Because username is what is posted to the login page, even if email is the username field we need to add it here. Adding it before creates an error since it's not expected as part of create_user()
+        self.credentials["username"] = self.credentials["email"]
 
     def test_loginpage(self):
         #  Get the login page
@@ -47,7 +61,6 @@ class AuthenticatedView(TestCase):
         self.assertContains(response, "Login")
         #  Test logging in
         response = self.client.post("/en/login/", self.credentials, follow=True)
-        print(response.context["user"])
         self.assertTrue(response.context["user"].is_active)
 
     def test_code(self):
@@ -118,8 +131,62 @@ class InvitationFlow(TestCase):
     def setUp(self):
         self.email = "test@test.com"
         self.invite = Invitation.create(self.email)
-        self.invite_url = reverse("invitations:accept-invite", args=[self.invite.key])
+
+        self.province = HealthcareProvince.objects.get(abbr="MB")
 
     def test_email_in_form(self):
         f = SignupForm(initial={"email": self.invite.email})
         self.assertTrue(self.email in f.as_table())
+
+    def test_province_in_form(self):
+        f = SignupForm(initial={"province": self.province.name})
+        self.assertTrue('value="Manitoba"' in f.as_table())
+
+
+class SignupFlow(TestCase):
+    def setUp(self):
+        self.credentials = get_credentials()
+        User = get_user_model()
+        user = User.objects.create_user(**self.credentials)
+        self.credentials["username"] = self.credentials["email"]
+
+        self.invited_email = "invited@test.com"
+
+        self.invite = Invitation.create(self.invited_email, inviter=user)
+        self.invite_url = reverse("invitations:accept-invite", args=[self.invite.key])
+
+    def test_email_and_province_on_signup_page(self):
+        session = self.client.session
+        session["account_verified_email"] = self.invite.email
+        session.save()
+
+        response = self.client.get(reverse("signup"))
+
+        # assert a disabled input with the email value exists
+        self.assertTrue(
+            '<input type="text" name="email" value="{}" required disabled id="id_email">'.format(
+                self.invited_email
+            ),
+            str(response.content),
+        )
+        # assert a disabled input with the province value exists
+        self.assertIn(
+            '<input type="text" name="province" value="{}" required disabled id="id_province">'.format(
+                self.credentials["province"].name
+            ),
+            str(response.content),
+        )
+
+    def test_redirect_if_invitation_missing_for_email_in_session(self):
+        session = self.client.session
+        session["account_verified_email"] = "fake@email.com"
+        session.save()
+
+        response = self.client.get(reverse("signup"))
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, "/en/login/")
+
+        # get messages without request.context: https://stackoverflow.com/a/14909727
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(str(messages[0]), "Invitation not found for fake@email.com")

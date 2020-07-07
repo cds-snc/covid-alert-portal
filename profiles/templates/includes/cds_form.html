@@ -7,7 +7,9 @@
     {% for field in form %}
       <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
           {{ field.label_tag }}
-          <span class="error--{{ field.html_name }}">{{ field.errors|first }}</span>
+          {% if field.errors %}
+            <span class="error--{{ field.html_name }}">{{ field.errors|first }}</span>
+          {% endif %}
           {% if field.help_text %}
             <p class="help">{{ field.help_text }}</p>
           {% endif %}
