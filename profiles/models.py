@@ -15,7 +15,7 @@ class HealthcareProvince(models.Model):
 
 
 class HealthcareUserManager(BaseUserManager):
-    def create_user(self, email, name, province, password=None):
+    def create_user(self, email, name, province, is_admin=False, password=None):
         """
         Creates and saves a User with the given email and password
         """
@@ -23,7 +23,10 @@ class HealthcareUserManager(BaseUserManager):
             raise ValueError("Users must have an email address")
 
         user = self.model(
-            email=self.normalize_email(email), name=name, province=province
+            email=self.normalize_email(email),
+            name=name,
+            province=province,
+            is_admin=is_admin,
         )
 
         user.set_password(password)
@@ -37,6 +40,7 @@ class HealthcareUserManager(BaseUserManager):
         ontario = HealthcareProvince.objects.get(abbr="ON")
         user = self.create_user(email, name=name, province=ontario, password=password)
         user.is_admin = True
+        user.is_superuser = True
         user.save(using=self._db)
         return user
 
@@ -50,6 +54,7 @@ class HealthcareUser(AbstractBaseUser):
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     objects = HealthcareUserManager()
 

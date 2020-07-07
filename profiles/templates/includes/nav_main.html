@@ -1,10 +1,13 @@
 {% load i18n %}
 
-<nav class="nav--main">
+<nav class="nav--main"  aria-label="{% trans 'Product navigation' %}">
   <div class="page--container">
     <ul>
-      <li><a class="{% if request.resolver_match.url_name == 'start' %}active{% endif %}" href="{% url 'start' %}">{% trans "Start" %}</a></li>
-      <li><a class="{% if request.resolver_match.url_name == 'code' %}active{% endif %}" href="{% url 'code' %}">{% trans "Get a number" %}</a></li>
+      <li><a {% if request.resolver_match.url_name == 'start' %}class="active"{% endif %} href="{% url 'start' %}">{% trans "Start" %}</a></li>
+      <li><a {% if request.resolver_match.url_name == 'code' %}class="active"{% endif %} href="{% url 'code' %}">{% trans "Get a number" %}</a></li>
+      {% if user.is_admin %}
+        <li><a {% if request.resolver_match.url_name == 'profiles' %}class="active"{% endif %} href="{% url 'profiles' %}">{% trans "Manage accounts" %}</a></li>
+      {% endif %}
     </ul>
   </div>
 </nav>

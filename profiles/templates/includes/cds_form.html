@@ -3,8 +3,14 @@
 <form method="post" id="form--{{ request.resolver_match.url_name }}">
   {% csrf_token %}
 
+  {# Include the hidden fields #}
+  {% for hidden in form.hidden_fields %}
+    {{ hidden }}
+  {% endfor %}
+
   <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %}">
-    {% for field in form %}
+    {# Include the visible fields #}
+    {% for field in form.visible_fields %}
       <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
           {{ field.label_tag }}
           {% if field.errors %}
