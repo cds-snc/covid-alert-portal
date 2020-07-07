@@ -25,6 +25,7 @@ gunicorn = "*"
 whitenoise = "*"
 dj-database-url = "*"
 django-invitations = "*"
+newrelic = "*"
 
 [pipenv]
 allow_prereleases = true
