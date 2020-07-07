@@ -1,0 +1,33 @@
+.jumbotron {
+  background-color: $color-blue-button;
+  color: white;
+  padding: $space-md;
+  text-align: center;
+  display: inline-block;
+  margin-bottom: $space-md;
+  border-radius: 5px;
+
+  > :not(h1) {
+    font-size: 1.05em;
+  }
+
+  h1 {
+    margin-top: 0;
+    margin-bottom: $space-xs;
+  }
+
+  @include xs {
+    > :not(h1) {
+      font-size: 1.2em;
+    }
+  }
+
+  @include sm {
+    padding: $space-lg;
+    margin-bottom: $space-lg;
+
+    h1 {
+      margin-bottom: $space-sm;
+    }
+  }
+}
