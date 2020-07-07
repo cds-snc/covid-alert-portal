@@ -63,13 +63,9 @@ class InviteView(FormView):
     template_name = "invitations/templates/invite.html"
     success_url = reverse_lazy("invite_complete")
 
-    def get_initial(self):
-        # preload the invite form with the id of the inviter
-        return {"inviter": self.request.user.id}
-
     def form_valid(self, form):
-        # Save the invite to the DB and return it
-        invite = form.save()
+        # Pass user to invite, save the invite to the DB, and return it
+        invite = form.save(user=self.request.user)
         invite.send_invitation(self.request)
         messages.success(
             self.request, "Invitation sent to “{}”".format(invite.email), "invite"

@@ -10,7 +10,7 @@ from django.core.validators import EmailValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
 
 from invitations.models import Invitation
-from invitations.forms import InvitationAdminAddForm
+from invitations.forms import InviteForm
 
 from .models import HealthcareUser, HealthcareProvince
 
@@ -104,26 +104,17 @@ class HealthcareUserEditForm(UserChangeForm):
         }
 
 
-class HealthcareInviteForm(HealthcareBaseForm, InvitationAdminAddForm):
-
-    inviter = forms.CharField(widget=forms.HiddenInput())
-
+class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         # Otherwise it just says "Email"
         self.fields["email"].label = _("Email address")
 
-    def clean_inviter(self):
-        # get the id and return the instance
-        user_id = self.cleaned_data.get("inviter")
-        return HealthcareUser.objects.get(id=user_id)
-
     # https://github.com/bee-keeper/django-invitations/blob/9069002f1a0572ae37ffec21ea72f66345a8276f/invitations/forms.py#L60
     def save(self, *args, **kwargs):
+        # user is passed by the view
+        user = kwargs["user"]
         cleaned_data = super().clean()
-        params = {
-            "email": cleaned_data.get("email"),
-            "inviter": cleaned_data.get("inviter"),
-        }
+        params = {"email": cleaned_data.get("email"), "inviter": user}
         return Invitation.create(**params)

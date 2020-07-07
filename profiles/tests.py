@@ -246,12 +246,6 @@ class InviteFlow(LoggedInTestCase):
         self.assertEqual(response.status_code, 200)
 
         self.assertContains(response, "Add an account")
-        self.assertContains(
-            response,
-            '<input type="hidden" name="inviter" value="{}" id="id_inviter">'.format(
-                self.credentials["id"]
-            ),
-        )
 
     def test_see_invite_complete_page_and_message_on_page(self):
         """
