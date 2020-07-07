@@ -5,7 +5,7 @@ import sys
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.views.generic import FormView, ListView, View, DeleteView
+from django.views.generic import FormView, ListView, View, DeleteView, TemplateView
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -58,7 +58,16 @@ class SignUpView(FormView):
         return super(SignUpView, self).form_valid(form)
 
 
-class InviteView(FormView):
+class IsAdminMixin(UserPassesTestMixin):
+    def test_func(self):
+        # allow if superuser or admin
+        if self.request.user.is_superuser or self.request.user.is_admin:
+            return True
+
+        return False
+
+
+class InviteView(LoginRequiredMixin, IsAdminMixin, FormView):
     form_class = HealthcareInviteForm
     template_name = "invitations/templates/invite.html"
     success_url = reverse_lazy("invite_complete")
@@ -74,14 +83,11 @@ class InviteView(FormView):
         return super().form_valid(form)
 
 
-class ProfilesView(LoginRequiredMixin, UserPassesTestMixin, ListView):
-    def test_func(self):
-        # if superuser, return manage_accounts page
-        if self.request.user.is_superuser or self.request.user.is_admin:
-            return True
+class InviteCompleteView(LoginRequiredMixin, IsAdminMixin, TemplateView):
+    template_name = "invitations/templates/invite_complete.html"
 
-        return False
 
+class ProfilesView(LoginRequiredMixin, IsAdminMixin, ListView):
     def get_queryset(self):
         return HealthcareUser.objects.filter(
             province=self.request.user.province
