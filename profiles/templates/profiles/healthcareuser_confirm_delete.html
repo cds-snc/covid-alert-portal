@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% if form.errors %}{% trans "Error: "%}{% endif %}
+  {% trans "Confirm delete user" %}
+{% endblock %}
+
+
+{% block content %}
+  {% include  "includes/error_list.html" %}
+
+  <h1>{% trans "Confirm account removal" %}</h1>
+  <p>{% blocktrans with name=profile_user.name email=profile_user.email %}Are you sure you want to delete {{ name }}’s account at “{{ email }}”?{% endblocktrans %}</p>
+  <p>{% trans "If you remove their account, they will not be able to use the COVID Portal until they are invited back." %}</p>
+  {% include "includes/cds_form.html" with submit_text="Yes, I am sure" %}
+  <div class="content-button" style="margin-top: -40px;"><a class="secondary" href="{% url 'profiles' %}" role='button' draggable='false'>{% trans "No, take me back" %}</a></div>
+
+{% endblock %}

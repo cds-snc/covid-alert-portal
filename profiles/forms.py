@@ -15,6 +15,8 @@ from django.utils.translation import gettext_lazy as _
 from django_otp.plugins.otp_email.conf import settings as otp_settings
 
 from invitations.models import Invitation
+from invitations.forms import InviteForm
+
 from .models import HealthcareUser, HealthcareProvince
 
 
@@ -22,7 +24,7 @@ class HealthcareBaseForm(forms.Form):
     def __init__(self, *args, **kwargs):
         # Remove the colon after field labels
         kwargs.setdefault("label_suffix", "")
-        super(HealthcareBaseForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         # override field attributes: https://stackoverflow.com/a/56870308
         for field in self.fields:
@@ -94,7 +96,7 @@ class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
     """
 
     def __init__(self, *args, **kwargs):
-        super(HealthcarePasswordResetForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         # Otherwise it just says "Email"
         self.fields["email"].label = _("Email address")
@@ -145,3 +147,19 @@ class HealthcareUserEditForm(UserChangeForm):
         widgets = {
             "email": forms.EmailInput(attrs={"readonly": "readonly"}),
         }
+
+
+class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Otherwise it just says "Email"
+        self.fields["email"].label = _("Email address")
+
+    # https://github.com/bee-keeper/django-invitations/blob/9069002f1a0572ae37ffec21ea72f66345a8276f/invitations/forms.py#L60
+    def save(self, *args, **kwargs):
+        # user is passed by the view
+        user = kwargs["user"]
+        cleaned_data = super().clean()
+        params = {"email": cleaned_data.get("email"), "inviter": user}
+        return Invitation.create(**params)

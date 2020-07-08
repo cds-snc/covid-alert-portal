@@ -1,18 +1,38 @@
 {% extends 'base.html' %}
-{% block title %}Accounts 🧑‍⚕{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Manage accounts" %}{% endblock %}
 
 {% block content %}
-<h1>Accounts 🧑‍⚕️</h1>
-<ul>
-{% for user in healthcareuser_list %}
-    <li>
-        User {{ user.id }}
-        - {{ user.email }}
-        - <a href="{% url 'user_profile' user.id %}">Profile</a>
-    </li>
-{% empty %}
-    <li>No users yet.</li>
-{% endfor %}
-</ul>
+  <h1>{% trans "Manage accounts" %}</h1>
+  <div class="content-button"><a href="{% url 'invite' %}" role='button' draggable='false'>{% trans "Add an account" %}</a></div>
+
+  <table class="with-actions">
+    <caption class="visually-hidden">{% trans "User accounts" %}</caption>
+    <thead>
+        <tr>
+          <th scope="col">{% trans "Email address" %}</th>
+          <th scope="col">{% trans "Permissions" %}</th>
+          <th scope="col">{% trans "Actions" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for healthcareuser in healthcareuser_list %}
+        <tr>
+          <td scope="col"><a href="{% url 'user_profile' healthcareuser.id %}">{{ healthcareuser.email }}</a></td>
+          <td scope="col">{{ healthcareuser.is_admin|yesno:_("Admin,Staff") }}</td>
+          <td scope="col">
+          {% if not healthcareuser.is_superuser and healthcareuser.id != user.id %}
+            <a href="{% url 'user_delete' healthcareuser.id %}">
+              Remove
+            </a>
+          {% endif %}
+          </td>
+        </tr>
+      {% empty %}
+        <p>No users yet.</p>
+      {% endfor %}
+    </tbody>
+  </table>
 
 {% endblock %}

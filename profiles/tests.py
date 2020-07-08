@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from django.contrib.messages import get_messages
+from django.contrib import messages
 from django.utils import translation
 from django_otp import DEVICE_ID_SESSION_KEY, oath, util
 from django.test import RequestFactory
@@ -10,16 +10,72 @@ from .forms import SignupForm
 from .models import HealthcareProvince, HealthcareUser
 
 
-def get_credentials():
-    # Provinces are inserted into the DB during migrations, so they are already in our tests
-    province = HealthcareProvince.objects.get(abbr="MB")
+User = get_user_model()
+
+
+def get_province(abbr="MB"):
+    # Provinces are inserted into the DB during migrations, we can call them once the test DB is initialized
+    return HealthcareProvince.objects.get(abbr=abbr)
+
+
+def get_credentials(
+    email="test@test.com",
+    name="testuser",
+    province=None,
+    is_admin=False,
+    password="testpassword",
+):
+    return {
+        "email": email,
+        "name": name,
+        "province": province or get_province(),
+        "is_admin": is_admin,
+        "password": password,
+    }
+
+
+def get_other_credentials(
+    email="test2@test.com",
+    name="testuser2",
+    province=None,
+    is_admin=False,
+    is_superuser=False,
+    password="testpassword2",
+):
+    if is_superuser:
+        return {
+            "email": email,
+            "name": name,
+            "password": password,
+        }
 
     return {
-        "email": "test@test.com",
-        "name": "testuser",
-        "province": province,
-        "password": "testpassword",
+        "email": email,
+        "name": name,
+        "province": province or get_province(),
+        "is_admin": is_admin,
+        "password": password,
     }
+
+
+class AdminUserTestCase(TestCase):
+    def setUp(self, is_admin=False):
+        self.credentials = get_credentials(is_admin=is_admin)
+        self.user = User.objects.create_user(**self.credentials)
+        self.credentials["username"] = self.credentials["email"]
+        self.credentials["id"] = self.user.id
+
+        self.invited_email = "invited@test.com"
+
+    def login_2fa(self):
+        device = self.user.emaildevice_set.create()
+        session = self.client.session
+        session[DEVICE_ID_SESSION_KEY] = device.persistent_id
+        session.save()
+
+        response = self.client.get(reverse("admin:index"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Django administration")
 
 
 class HomePageView(TestCase):
@@ -46,22 +102,32 @@ class RestrictedPageViews(TestCase):
         response = self.client.get(reverse("signup"))
         self.assertRedirects(response, "/en/login/")
 
+    def test_django_admin_panel(self):
+        response = self.client.get(reverse("admin:index"))
+        self.assertRedirects(response, "/admin/login/?next=/admin/")
 
-class AuthenticatedView(TestCase):
+
+class DjangoAdminPanelView(AdminUserTestCase):
     def setUp(self):
-        self.credentials = get_credentials()
-        User = get_user_model()
-        self.user = User.objects.create_user(**self.credentials)
+        super().setUp(is_admin=True)
 
-        # Because username is what is posted to the login page, even if email is the username field we need to add it here. Adding it before creates an error since it's not expected as part of create_user()
-        self.credentials["username"] = self.credentials["email"]
+    def test_redirect_from_django_admin_dashboard_if_admin_user(self):
+        # log in as a healthcare admin user
+        self.client.login(username="test@test.com", password="testpassword")
+        response = self.client.get(reverse("admin:index"))
+        self.assertEqual(response.status_code, 302)
 
-    def login_2fa(self):
-        device = self.user.emaildevice_set.create()
-        session = self.client.session
-        session[DEVICE_ID_SESSION_KEY] = device.persistent_id
-        session.save()
+        self.assertRedirects(response, "/admin/login/?next=/admin/")
 
+    def test_see_django_admin_dashboard_if_superuser(self):
+        superuser = User.objects.create_superuser(
+            **get_other_credentials(is_superuser=True)
+        )
+        # log in as superuser
+        self.client.login(username=superuser.email, password="testpassword2")
+
+
+class AuthenticatedView(AdminUserTestCase):
     def test_loginpage(self):
         #  Get the login page
         response = self.client.get(reverse("login"))
@@ -145,7 +211,7 @@ class InvitationFlow(TestCase):
         self.email = "test@test.com"
         self.invite = Invitation.create(self.email)
 
-        self.province = HealthcareProvince.objects.get(abbr="MB")
+        self.province = get_province()
 
     def test_email_in_form(self):
         f = SignupForm(initial={"email": self.invite.email})
@@ -156,17 +222,10 @@ class InvitationFlow(TestCase):
         self.assertTrue('value="Manitoba"' in f.as_table())
 
 
-class SignupFlow(TestCase):
+class SignupFlow(AdminUserTestCase):
     def setUp(self):
-        self.credentials = get_credentials()
-        User = get_user_model()
-        user = User.objects.create_user(**self.credentials)
-        self.credentials["username"] = self.credentials["email"]
-
-        self.invited_email = "invited@test.com"
-
-        self.invite = Invitation.create(self.invited_email, inviter=user)
-        self.invite_url = reverse("invitations:accept-invite", args=[self.invite.key])
+        super().setUp()
+        self.invite = Invitation.create(self.invited_email, inviter=self.user)
 
     def test_email_and_province_on_signup_page(self):
         session = self.client.session
@@ -176,18 +235,18 @@ class SignupFlow(TestCase):
         response = self.client.get(reverse("signup"))
 
         # assert a disabled input with the email value exists
-        self.assertTrue(
+        self.assertContains(
+            response,
             '<input type="text" name="email" value="{}" required disabled id="id_email">'.format(
                 self.invited_email
             ),
-            str(response.content),
         )
         # assert a disabled input with the province value exists
-        self.assertIn(
+        self.assertContains(
+            response,
             '<input type="text" name="province" value="{}" required disabled id="id_province">'.format(
                 self.credentials["province"].name
             ),
-            str(response.content),
         )
 
     def test_redirect_if_invitation_missing_for_email_in_session(self):
@@ -201,5 +260,223 @@ class SignupFlow(TestCase):
         self.assertRedirects(response, "/en/login/")
 
         # get messages without request.context: https://stackoverflow.com/a/14909727
-        messages = list(get_messages(response.wsgi_request))
-        self.assertEqual(str(messages[0]), "Invitation not found for fake@email.com")
+        message_list = list(messages.get_messages(response.wsgi_request))
+        self.assertEqual(
+            str(message_list[0]), "Invitation not found for fake@email.com"
+        )
+
+
+class InviteFlow(AdminUserTestCase):
+    def setUp(self):
+        super().setUp(is_admin=True)
+
+    def test_redirect_on_invite_page_if_logged_out(self):
+        response = self.client.get(reverse("invite"))
+        self.assertRedirects(response, "/en/login/?next=/en/invite/")
+
+    def test_redirect_on_invite_complete_page_if_logged_out(self):
+        response = self.client.get(reverse("invite_complete"))
+        self.assertRedirects(response, "/en/login/?next=/en/invite_complete/")
+
+    def test_see_invite_page_and_inviter_id_in_form(self):
+        """
+        Login and see the invite page with the id of the current user in a hidden input
+        """
+        self.client.login(username="test@test.com", password="testpassword")
+        response = self.client.get(reverse("invite"))
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, "Add an account")
+
+    def test_see_invite_complete_page_and_message_on_page(self):
+        """
+        Login and see the invite page with the id of the current user in a hidden input
+        """
+        self.client.login(username="test@test.com", password="testpassword")
+        session = self.client.session
+        session["invite_email"] = self.invited_email
+        session.save()
+
+        response = self.client.get(reverse("invite_complete"))
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, "Invitation sent")
+        self.assertContains(
+            response, "Invitation sent to “{}”".format(self.invited_email),
+        )
+
+
+class ProfilesView(AdminUserTestCase):
+    def setUp(self):
+        super().setUp(is_admin=True)
+
+    def test_redirect_on_manage_accounts_page_if_logged_out(self):
+        response = self.client.get(reverse("profiles"))
+        self.assertRedirects(response, "/en/login/?next=/en/profiles/")
+
+    def test_forbidden_if_not_admin(self):
+        user2 = User.objects.create_user(**get_other_credentials(is_admin=False))
+        self.client.login(username=user2.email, password="testpassword2")
+
+        response = self.client.get(reverse("profiles"))
+        self.assertEqual(response.status_code, 403)
+
+    def test_manage_accounts_link_visible_if_logged_in(self):
+        self.client.login(username="test@test.com", password="testpassword")
+
+        response = self.client.get(reverse("start"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response, '<a  href="{}">Manage accounts</a>'.format(reverse("profiles"))
+        )
+
+    def test_manage_accounts_page(self):
+        user2 = User.objects.create_user(**get_other_credentials(is_admin=True))
+        self.client.login(username=user2.email, password="testpassword2")
+
+        response = self.client.get(reverse("profiles"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Manage accounts</h1>")
+        # Make sure the email of the first user is visible
+        self.assertContains(response, self.credentials["email"])
+
+    def test_manage_accounts_page_no_users_from_other_province(self):
+        user2 = User.objects.create_user(
+            **get_other_credentials(province=get_province("AB"), is_admin=True)
+        )
+
+        self.client.login(username=user2.email, password="testpassword2")
+
+        response = self.client.get(reverse("profiles"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Manage accounts</h1>")
+        # make sure email of the first user is not visible
+        self.assertNotContains(response, self.credentials["email"])
+
+
+class ProfileView(AdminUserTestCase):
+    def setUp(self):
+        super().setUp(is_admin=True)
+
+    def test_redirect_on_profile_page_if_logged_out(self):
+        response = self.client.get(
+            reverse("user_profile", kwargs={"pk": self.credentials["id"]})
+        )
+        self.assertRedirects(
+            response, "/en/login/?next=/en/profiles/{}".format(self.credentials["id"])
+        )
+
+    def test_profile_page_visible_when_logged_in(self):
+        self.client.login(username="test@test.com", password="testpassword")
+
+        response = self.client.get(
+            reverse("user_profile", kwargs={"pk": self.credentials["id"]})
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>User profile</h1>")
+
+    def test_profile_page_not_found_if_user_id_does_not_exist(self):
+        self.client.login(username="test@test.com", password="testpassword")
+
+        response = self.client.get(reverse("user_profile", kwargs={"pk": 99}))
+        self.assertEqual(response.status_code, 404)
+
+    def test_fobidden_profile_page_if_non_admin_user_viewing_other_profile(self):
+        user2 = User.objects.create_user(**get_other_credentials(is_admin=False))
+        # password is hashed so we can't use it
+        self.client.login(username=user2.email, password="testpassword2")
+
+        ## get user profile of admin user created in setUp
+        response = self.client.get(
+            reverse("user_profile", kwargs={"pk": self.credentials["id"]})
+        )
+        self.assertEqual(response.status_code, 403)
+
+    def test_view_profile_page_if_superuser_viewing_other_profile(self):
+        # create superuser
+        superuser = User.objects.create_superuser(
+            **get_other_credentials(is_superuser=True)
+        )
+        self.client.login(username=superuser.email, password="testpassword2")
+
+        response = self.client.get(
+            reverse("user_profile", kwargs={"pk": self.credentials["id"]})
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response, '<td scope="col">{}</td>'.format(self.credentials["email"])
+        )
+
+    def test_forbidden_see_profile_page_superuser(self):
+        superuser = User.objects.create_superuser(
+            **get_other_credentials(is_superuser=True)
+        )
+
+        # log in as user in session
+        self.client.login(username=self.user.email, password="testpassword")
+
+        ## get user profile of superuser
+        response = self.client.get(reverse("user_profile", kwargs={"pk": superuser.id}))
+        self.assertEqual(response.status_code, 403)
+
+    def test_view_profile_page_if_admin_user_viewing_same_province_user(self):
+        user2 = User.objects.create_user(**get_other_credentials(is_admin=True))
+        self.client.login(username=user2.email, password="testpassword2")
+
+        response = self.client.get(
+            reverse("user_profile", kwargs={"pk": self.credentials["id"]})
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response, '<td scope="col">{}</td>'.format(self.credentials["email"])
+        )
+
+    def test_forbidden_profile_page_if_admin_user_viewing_other_province_user(self):
+        user2 = User.objects.create_user(
+            **get_other_credentials(is_admin=True, province=get_province("AB"))
+        )
+        self.client.login(username=user2.email, password="testpassword2")
+
+        response = self.client.get(
+            reverse("user_profile", kwargs={"pk": self.credentials["id"]})
+        )
+        self.assertEqual(response.status_code, 403)
+
+
+class DeleteView(AdminUserTestCase):
+    def setUp(self):
+        super().setUp(is_admin=True)
+
+    def test_forbidden_see_delete_page_for_self(self):
+        # log in as user in session
+        self.client.login(username=self.user.email, password="testpassword")
+
+        ## get user profile of admin user created in setUp
+        response = self.client.get(reverse("user_delete", kwargs={"pk": self.user.id}))
+        self.assertEqual(response.status_code, 403)
+
+    def test_forbidden_see_delete_page_for_superuser(self):
+        superuser = User.objects.create_superuser(
+            **get_other_credentials(is_superuser=True)
+        )
+
+        # log in as user in session
+        self.client.login(username=self.user.email, password="testpassword")
+
+        ## get user profile of superuser
+        response = self.client.get(reverse("user_delete", kwargs={"pk": superuser.id}))
+        self.assertEqual(response.status_code, 403)
+
+    def test_see_delete_page_for_other_user(self):
+        user2 = User.objects.create_user(**get_other_credentials(is_admin=False))
+
+        # log in as user in session
+        self.client.login(username=self.user.email, password="testpassword")
+
+        ## get user profile of admin user created in setUp
+        response = self.client.get(reverse("user_delete", kwargs={"pk": user2.id}))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            "<p>Are you sure you want to delete testuser2’s account at “test2@test.com”?</p>",
+        )

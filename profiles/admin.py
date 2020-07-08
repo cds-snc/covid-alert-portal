@@ -30,7 +30,15 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = HealthcareUser
-        fields = ("email", "password", "name", "province", "is_active", "is_admin")
+        fields = (
+            "email",
+            "password",
+            "name",
+            "province",
+            "is_active",
+            "is_admin",
+            "is_superuser",
+        )
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -45,7 +53,7 @@ class UserAddForm(UserCreationForm):
 
     class Meta:
         model = HealthcareUser
-        fields = ("email", "name", "province")
+        fields = ("email", "name", "province", "is_admin", "is_superuser")
 
     def clean_email(self):
         email = self.cleaned_data.get("email", "").lower()
@@ -60,12 +68,13 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ("email", "name", "province", "is_admin")
-    list_filter = ("is_admin",)
+    list_display = ("email", "name", "province", "is_admin", "is_superuser")
+    list_filter = ("is_admin", "is_superuser")
 
     fieldsets = (
-        (None, {"fields": ("email", "password", "is_admin")}),
+        (None, {"fields": ("email", "password")}),
         ("Personal info", {"fields": ("name", "province")}),
+        ("Permissions", {"fields": ("is_admin", "is_superuser")}),
     )
 
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -75,9 +84,10 @@ class UserAdmin(BaseUserAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("email", "name", "province", "password1", "password2"),
+                "fields": ("email", "name", "province", "password1", "password2",),
             },
         ),
+        ("Permissions", {"fields": ("is_admin", "is_superuser")}),
     )
     search_fields = ("email",)
     ordering = ("email",)

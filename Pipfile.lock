@@ -1,15 +1,14 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d2a806bdb875fa1e4a97d6277fbad46b700f6a71260901881b6bb9557cfb2dc6"
+            "sha256": "dc23e08ff937c4c76ebc35aacc3c174b320cb68fe13f3a81c8858cd5cf14d35a"
         },
         "pipfile-spec": 6,
         "requires": {},
         "sources": [
             {
                 "name": "pypi",
-                "url": "https://pypi.org/simple",
-                "verify_ssl": true
+                "url": "https://pypi.org/simple"
             }
         ]
     },
@@ -116,6 +115,13 @@
                 "sha256:fd19c8f73f70ffc6cbcca8139da08ea9a71fc48e7dfc4bb236ad88ab2d6558f1"
             ],
             "version": "==0.20.0"
+        },
+        "newrelic": {
+            "hashes": [
+                "sha256:340ebcdb0dd08bfb597c71598d6d8f746a93f7e4921f10b3616c9142c608a14d"
+            ],
+            "index": "pypi",
+            "version": "==5.14.1.144"
         },
         "psycopg2-binary": {
             "hashes": [
