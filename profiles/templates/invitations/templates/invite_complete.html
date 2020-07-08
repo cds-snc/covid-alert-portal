@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% if form.errors %}{% trans "Error: "%}{% endif %}
+  {% trans "Invitiation sent"  %}
+{% endblock %}
+
+{% block content %}
+  <div class="jumbotron">
+    <h1>{% trans "Invitation sent" %}</h1>
+
+    {% if request.session.invite_email %}
+      <span>Invitation sent to “{{ request.session.invite_email }}”</span>
+    {% endif %}
+  </div>
+  <p>{% trans "They will receive a signup link in their inbox. The link will expire in 3 days." %}</p>
+  <div class="content-button">
+    <a href="{% url 'invite' %}" role='button' draggable='false'>{% trans "Add another account" %}</a>
+    <a href="{% url 'start' %}" class="secondary" role='button' draggable='false'>{% trans "Back to start" %}</a>
+  </div>
+{% endblock %}

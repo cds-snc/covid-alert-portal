@@ -1,0 +1,39 @@
+main table {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #0b0c0c;
+  width: 100%;
+  margin-bottom: $space-md;
+  border-spacing: 0;
+  border-collapse: collapse;
+
+  thead th:last-child {
+    color: transparent;
+  }
+
+  caption {
+    display: table-caption;
+    text-align: left;
+  }
+
+  th,
+  td {
+    padding: $space-md $space-xs $space-sm 0;
+    border-bottom: 1px solid $color-grey-light;
+    text-align: left;
+    vertical-align: top;
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  &.with-actions {
+    th,
+    td {
+      &:last-child {
+        text-align: right;
+      }
+    }
+  }
+}

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 {% load static %}
 {% load i18n %}
-<html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
@@ -36,7 +37,6 @@
         {% include  "includes/nav_main.html" %}
 
         <div class="page--container">
-
           <div class="content--container">
             {% block content %}{% endblock %}
           </div>

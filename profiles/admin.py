@@ -45,7 +45,7 @@ class UserAddForm(UserCreationForm):
 
     class Meta:
         model = HealthcareUser
-        fields = ("email", "name", "province")
+        fields = ("email", "name", "province", "is_admin")
 
     def clean_email(self):
         email = self.cleaned_data.get("email", "").lower()
@@ -75,7 +75,14 @@ class UserAdmin(BaseUserAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("email", "name", "province", "password1", "password2"),
+                "fields": (
+                    "email",
+                    "name",
+                    "province",
+                    "is_admin",
+                    "password1",
+                    "password2",
+                ),
             },
         ),
     )
