@@ -163,7 +163,9 @@ class ProvinceAdminDeleteMixin(ProvinceAdminManageMixin):
         return super().test_func()
 
 
-class UserDeleteView(LoginRequiredMixin, Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView):
+class UserDeleteView(
+    LoginRequiredMixin, Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView
+):
     model = HealthcareUser
     context_object_name = "profile_user"
     success_url = reverse_lazy("profiles")
