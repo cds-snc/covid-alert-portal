@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django_otp import DEVICE_ID_SESSION_KEY
+from django_otp.decorators import otp_required
 
 from invitations.models import Invitation
 
@@ -76,6 +77,7 @@ class Login2FAView(FormView):
 
 
 @login_required
+@otp_required
 def code(request):
     token = os.getenv("API_AUTHORIZATION")
 
