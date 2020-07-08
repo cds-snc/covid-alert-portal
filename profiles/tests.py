@@ -56,7 +56,7 @@ def get_other_credentials(
     }
 
 
-class LoggedInTestCase(TestCase):
+class AdminUserTestCase(TestCase):
     def setUp(self, is_admin=False):
         self.credentials = get_credentials(is_admin=is_admin)
         self.user = User.objects.create_user(**self.credentials)
@@ -90,8 +90,36 @@ class RestrictedPageViews(TestCase):
         response = self.client.get(reverse("signup"))
         self.assertRedirects(response, "/en/login/")
 
+    def test_django_admin_panel(self):
+        response = self.client.get(reverse("admin:index"))
+        self.assertRedirects(response, "/admin/login/?next=/admin/")
 
-class AuthenticatedView(LoggedInTestCase):
+
+class DjangoAdminPanelView(AdminUserTestCase):
+    def setUp(self):
+        super().setUp(is_admin=True)
+
+    def test_redirect_from_django_admin_dashboard_if_admin_user(self):
+        # log in as a healthcare admin user
+        self.client.login(username="test@test.com", password="testpassword")
+        response = self.client.get(reverse("admin:index"))
+        self.assertEqual(response.status_code, 302)
+
+        self.assertRedirects(response, "/admin/login/?next=/admin/")
+
+    def test_see_django_admin_dashboard_if_superuser(self):
+        superuser = User.objects.create_superuser(
+            **get_other_credentials(is_superuser=True)
+        )
+        # log in as superuser
+        self.client.login(username=superuser.email, password="testpassword2")
+
+        response = self.client.get(reverse("admin:index"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Django administration")
+
+
+class AuthenticatedView(AdminUserTestCase):
     def test_loginpage(self):
         #  Get the login page
         response = self.client.get(reverse("login"))
@@ -181,7 +209,7 @@ class InvitationFlow(TestCase):
         self.assertTrue('value="Manitoba"' in f.as_table())
 
 
-class SignupFlow(LoggedInTestCase):
+class SignupFlow(AdminUserTestCase):
     def setUp(self):
         super().setUp()
         self.invite = Invitation.create(self.invited_email, inviter=self.user)
@@ -225,7 +253,7 @@ class SignupFlow(LoggedInTestCase):
         )
 
 
-class InviteFlow(LoggedInTestCase):
+class InviteFlow(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
 
@@ -265,7 +293,7 @@ class InviteFlow(LoggedInTestCase):
         )
 
 
-class ProfilesView(LoggedInTestCase):
+class ProfilesView(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
 
@@ -313,7 +341,7 @@ class ProfilesView(LoggedInTestCase):
         self.assertNotContains(response, self.credentials["email"])
 
 
-class ProfileView(LoggedInTestCase):
+class ProfileView(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
 
@@ -402,7 +430,7 @@ class ProfileView(LoggedInTestCase):
         self.assertEqual(response.status_code, 403)
 
 
-class DeleteView(LoggedInTestCase):
+class DeleteView(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
 
