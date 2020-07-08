@@ -10,9 +10,7 @@ from .models import HealthcareUser
 def generate_2fa_code_for_device(email_device, user: HealthcareUser):
     # I cant use the email_device.generate_challenge() directly here,
     # I need to pass more context into the emails
-    email_device.generate_token(
-        valid_secs=otp_settings.OTP_EMAIL_TOKEN_VALIDITY
-    )
+    email_device.generate_token(valid_secs=otp_settings.OTP_EMAIL_TOKEN_VALIDITY)
 
     context = {
         "token": email_device.token,
@@ -29,7 +27,7 @@ def generate_2fa_code_for_device(email_device, user: HealthcareUser):
     )
 
 
-def generate_2fa_code(user:HealthcareUser):
+def generate_2fa_code(user: HealthcareUser):
     email_devices = user.emaildevice_set.all()
     # If the user has no email device, create one with his email
     if len(email_devices) == 0:

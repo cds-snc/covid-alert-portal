@@ -27,7 +27,7 @@ from .forms import (
     SignupForm,
     Healthcare2FAForm,
     HealthcareInviteForm,
-    Resend2FACodeForm
+    Resend2FACodeForm,
 )
 
 
@@ -96,7 +96,7 @@ class Resend2FAView(FormView, LoginRequiredMixin):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user
+        kwargs["user"] = self.request.user
         return kwargs
 
     def form_valid(self, form):
