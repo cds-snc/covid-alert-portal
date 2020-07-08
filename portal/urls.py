@@ -23,10 +23,3 @@ urlpatterns += i18n_patterns(
         decorator_include([otp_required], "invitations.urls", namespace="invitations"),
     ),
 )
-
-if settings.DEBUG:
-    import debug_toolbar
-
-    urlpatterns += [
-        path("__debug__/", include(debug_toolbar.urls)),
-    ]
