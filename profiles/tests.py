@@ -3,8 +3,7 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.utils import translation
-from django_otp import DEVICE_ID_SESSION_KEY, oath, util
-from django.test import RequestFactory
+from django_otp import DEVICE_ID_SESSION_KEY
 from invitations.models import Invitation
 from .forms import SignupForm
 from .models import HealthcareProvince, HealthcareUser
