@@ -67,7 +67,7 @@ class AdminUserTestCase(TestCase):
 
         self.invited_email = "invited@test.com"
 
-    def login_2fa(self, user:HealthcareUser=None):
+    def login_2fa(self, user: HealthcareUser = None):
         if user is None:
             user = self.user
 
