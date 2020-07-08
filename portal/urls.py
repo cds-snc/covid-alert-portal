@@ -1,6 +1,9 @@
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf.urls.i18n import i18n_patterns
+from django_otp.decorators import otp_required
+from decorator_include import decorator_include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -9,5 +12,11 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     path("", include("profiles.urls")),
-    re_path(r"^invitations/", include("invitations.urls", namespace="invitations")),
+    path("invitations/", decorator_include([otp_required],"invitations.urls", namespace="invitations")),
 )
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ]

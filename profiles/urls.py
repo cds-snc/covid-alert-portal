@@ -1,6 +1,8 @@
 from django.urls import path, include, re_path
 from django.views.generic import RedirectView, TemplateView
-from django.contrib.auth.views import login_required, PasswordResetView, LoginView
+from django.contrib.auth.views import PasswordResetView, login_required
+from django_otp.views import LoginView
+from django_otp.decorators import otp_required
 
 from . import views
 from . import forms
@@ -12,10 +14,10 @@ urlpatterns = [
         TemplateView.as_view(template_name="profiles/landing.html"),
         name="landing",
     ),
-    path("code/", views.code, name="code"),
+    path("code/", otp_required(views.code), name="code"),
     path(
         "start/",
-        login_required(TemplateView.as_view(template_name="profiles/start.html")),
+        login_required(otp_required(TemplateView.as_view(template_name="profiles/start.html"))),
         name="start",
     ),
     re_path(r"signup/$", views.SignUpView.as_view(), name="signup"),
@@ -32,6 +34,11 @@ urlpatterns = [
         "login/",
         LoginView.as_view(authentication_form=forms.HealthcareAuthenticationForm),
         name="login",
+    ),
+    path(
+        "login-2fa/",
+        login_required(views.Login2FAView.as_view()),
+        name="login-2fa",
     ),
     path(
         "password_reset/",

@@ -25,6 +25,8 @@ gunicorn = "*"
 whitenoise = "*"
 dj-database-url = "*"
 django-invitations = "*"
+django-otp = "*"
+django-decorator-include = "*"
 
 [pipenv]
 allow_prereleases = true

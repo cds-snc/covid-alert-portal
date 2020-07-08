@@ -5,9 +5,14 @@ from django.contrib.auth.forms import (
     UserCreationForm,
 )
 from django import forms
+from django.conf import settings
+from django.template.loader import get_template
+from django.template import Context
 from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
 from django.core.validators import EmailValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
+from django_otp.plugins.otp_email.conf import settings as otp_settings
 
 from invitations.models import Invitation
 from .models import HealthcareUser, HealthcareProvince
@@ -40,6 +45,37 @@ class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
         self.fields["username"].validators = [
             EmailValidator(message=_("Enter a valid email address"))
         ]
+
+    def is_valid(self):
+        super().is_valid()
+        user = self.get_user()
+        email_devices = user.emaildevice_set.all()
+        # If the user has no email device, create one with his email
+        if len(email_devices) == 0:
+            email_device = user.emaildevice_set.create()
+        else:
+            email_device = email_devices[0]
+
+        # I cant use the email_device.generate_challenge() directly here, I need to pass more context into the emails
+        email_device.generate_token(valid_secs=otp_settings.OTP_EMAIL_TOKEN_VALIDITY)
+
+        context = {'token': email_device.token, 'full_name': user.name, 'service_name': settings.SERVICE_NAME}
+        body = get_template('otp/email/token.html').render(context)
+
+        send_mail(
+            otp_settings.OTP_EMAIL_SUBJECT,
+            body,
+            otp_settings.OTP_EMAIL_SENDER,
+            [user.email]
+        )
+
+        return super().is_valid()
+
+
+class Healthcare2FAForm(HealthcareBaseForm):
+    code = forms.CharField(
+        widget=forms.TextInput, label=_("Please enter the security code."), required=True
+    )
 
 
 class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):

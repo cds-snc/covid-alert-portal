@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.contrib.messages import get_messages
 from django.utils import translation
+from django_otp import DEVICE_ID_SESSION_KEY, oath, util
+from django.test import RequestFactory
 from invitations.models import Invitation
 from .forms import SignupForm
 from .models import HealthcareProvince, HealthcareUser
@@ -46,13 +48,20 @@ class RestrictedPageViews(TestCase):
 
 
 class AuthenticatedView(TestCase):
+
     def setUp(self):
         self.credentials = get_credentials()
         User = get_user_model()
-        User.objects.create_user(**self.credentials)
+        self.user = User.objects.create_user(**self.credentials)
 
         # Because username is what is posted to the login page, even if email is the username field we need to add it here. Adding it before creates an error since it's not expected as part of create_user()
         self.credentials["username"] = self.credentials["email"]
+
+    def login_2fa(self):
+        device = self.user.emaildevice_set.create()
+        session = self.client.session
+        session[DEVICE_ID_SESSION_KEY] = device.persistent_id
+        session.save()
 
     def test_loginpage(self):
         #  Get the login page
@@ -68,6 +77,11 @@ class AuthenticatedView(TestCase):
         Login and then see the code page and one code
         """
         self.client.login(username="test@test.com", password="testpassword")
+        response = self.client.get(reverse("code"))
+        self.assertEqual(response.status_code, 302)
+
+        self.login_2fa()
+
         response = self.client.get(reverse("code"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Give patient this number")

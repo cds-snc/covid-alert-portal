@@ -9,11 +9,12 @@ from django.views.generic import FormView
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils import timezone
+from django_otp import DEVICE_ID_SESSION_KEY
 
 from invitations.models import Invitation
 
 from .models import HealthcareUser
-from .forms import SignupForm
+from .forms import SignupForm, Healthcare2FAForm
 
 
 class SignUpView(FormView):
@@ -54,7 +55,23 @@ class SignUpView(FormView):
     def form_valid(self, form):
         form.save()
         messages.success(self.request, "Account created successfully")
+
         return super(SignUpView, self).form_valid(form)
+
+class Login2FAView(FormView):
+    form_class = Healthcare2FAForm
+    template_name = "profiles/2fa.html"
+    success_url = reverse_lazy("start")
+
+    def form_valid(self, form):
+        code = form.cleaned_data.get("code")
+        for device in self.request.user.emaildevice_set.all():
+            if device.verify_token(code):
+                self.request.user.otp_device = device
+                self.request.session[DEVICE_ID_SESSION_KEY] = device.persistent_id
+
+        is_valid = super().form_valid(form)
+        return is_valid
 
 
 @login_required
