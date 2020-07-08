@@ -1,4 +1,3 @@
-from django.conf import settings
 from django_otp.plugins.otp_email.conf import settings as otp_settings
 
 from django.conf import settings
