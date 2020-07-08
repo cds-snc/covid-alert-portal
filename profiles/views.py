@@ -61,7 +61,7 @@ class SignUpView(FormView):
         return super(SignUpView, self).form_valid(form)
 
 
-class Login2FAView(FormView):
+class Login2FAView(FormView, LoginRequiredMixin):
     form_class = Healthcare2FAForm
     template_name = "profiles/2fa.html"
     success_url = reverse_lazy("start")
@@ -86,7 +86,13 @@ class IsAdminMixin(UserPassesTestMixin):
         return False
 
 
-class InviteView(LoginRequiredMixin, IsAdminMixin, FormView):
+class Is2FAMixin(UserPassesTestMixin):
+    def test_func(self):
+        # allow user only if the user has a valid 2fa device
+        return self.request.user.is_verified() or False
+
+
+class InviteView(LoginRequiredMixin, Is2FAMixin, IsAdminMixin, FormView):
     form_class = HealthcareInviteForm
     template_name = "invitations/templates/invite.html"
     success_url = reverse_lazy("invite_complete")
@@ -102,11 +108,11 @@ class InviteView(LoginRequiredMixin, IsAdminMixin, FormView):
         return super().form_valid(form)
 
 
-class InviteCompleteView(LoginRequiredMixin, IsAdminMixin, TemplateView):
+class InviteCompleteView(LoginRequiredMixin, Is2FAMixin, IsAdminMixin, TemplateView):
     template_name = "invitations/templates/invite_complete.html"
 
 
-class ProfilesView(LoginRequiredMixin, IsAdminMixin, ListView):
+class ProfilesView(LoginRequiredMixin, Is2FAMixin, IsAdminMixin, ListView):
     def get_queryset(self):
         return HealthcareUser.objects.filter(
             province=self.request.user.province
@@ -140,7 +146,7 @@ class ProvinceAdminManageMixin(UserPassesTestMixin):
         return False
 
 
-class UserProfileView(LoginRequiredMixin, ProvinceAdminManageMixin, View):
+class UserProfileView(LoginRequiredMixin, Is2FAMixin, ProvinceAdminManageMixin, View):
     def get(self, request, pk):
         profile_user = get_object_or_404(HealthcareUser, pk=pk)
         return render(
@@ -157,7 +163,7 @@ class ProvinceAdminDeleteMixin(ProvinceAdminManageMixin):
         return super().test_func()
 
 
-class UserDeleteView(LoginRequiredMixin, ProvinceAdminDeleteMixin, DeleteView):
+class UserDeleteView(LoginRequiredMixin, Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView):
     model = HealthcareUser
     context_object_name = "profile_user"
     success_url = reverse_lazy("profiles")

@@ -45,7 +45,7 @@ urlpatterns = [
         LoginView.as_view(authentication_form=forms.HealthcareAuthenticationForm),
         name="login",
     ),
-    path("login-2fa/", login_required(views.Login2FAView.as_view()), name="login-2fa",),
+    path("login-2fa/", views.Login2FAView.as_view(), name="login-2fa",),
     path(
         "password_reset/",
         PasswordResetView.as_view(form_class=forms.HealthcarePasswordResetForm),
