@@ -5,11 +5,7 @@ from django.contrib.auth.forms import (
     UserCreationForm,
 )
 from django import forms
-from django.conf import settings
-from django.template.loader import get_template
-from django.template import Context
 from django.core.exceptions import ValidationError
-from django.core.mail import send_mail
 from django.core.validators import EmailValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
 from django_otp.plugins.otp_email.conf import settings as otp_settings
@@ -18,6 +14,7 @@ from invitations.models import Invitation
 from invitations.forms import InviteForm
 
 from .models import HealthcareUser, HealthcareProvince
+from .utils import generate_2fa_code
 
 
 class HealthcareBaseForm(forms.Form):
@@ -54,31 +51,22 @@ class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
             return is_valid
 
         user = self.get_user()
-        email_devices = user.emaildevice_set.all()
-        # If the user has no email device, create one with his email
-        if len(email_devices) == 0:
-            email_device = user.emaildevice_set.create()
-        else:
-            email_device = email_devices[0]
-
-        # I cant use the email_device.generate_challenge() directly here, I need to pass more context into the emails
-        email_device.generate_token(valid_secs=otp_settings.OTP_EMAIL_TOKEN_VALIDITY)
-
-        context = {
-            "token": email_device.token,
-            "full_name": user.name,
-            "service_name": settings.SERVICE_NAME,
-        }
-        body = get_template("otp/email/token.html").render(context)
-
-        send_mail(
-            otp_settings.OTP_EMAIL_SUBJECT,
-            body,
-            otp_settings.OTP_EMAIL_SENDER,
-            [user.email],
-        )
+        generate_2fa_code(user)
 
         return is_valid
+
+
+class Resend2FACodeForm(HealthcareBaseForm):
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+
+    def is_valid(self):
+        if self.user is None or self.user.is_authenticated is False:
+            return False
+
+        generate_2fa_code(self.user)
+        return True
 
 
 class Healthcare2FAForm(HealthcareBaseForm):

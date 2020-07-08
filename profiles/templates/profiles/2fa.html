@@ -11,6 +11,7 @@
   {% include  "includes/error_list.html" %}
 
   <h1>{% trans "Check your email" %}</h1>
-  <p>We've sent you an email with a security code to sign in</p>
+  <p>{% trans "We've sent you an email with a security code to sign in" %}</p>
   {% include "includes/cds_form.html" with submit_text=_("Continue") %}
+    <a href="{% url 'resend-2fa' %}">{{ _("Not received an email?") }}</a>
 {% endblock %}

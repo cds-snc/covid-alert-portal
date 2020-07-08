@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-08 18:44+0000\n"
+"POT-Creation-Date: 2020-07-08 20:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,33 +18,33 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: profiles/forms.py:48
+#: profiles/forms.py:45
 msgid "Enter a valid email address"
 msgstr "Veuillez entrer un courriel valide"
 
-#: profiles/forms.py:87
+#: profiles/forms.py:75
 msgid "Please enter the security code."
 msgstr "Veuillez entrer un code de sécurité."
 
-#: profiles/forms.py:102 profiles/forms.py:111 profiles/forms.py:157
+#: profiles/forms.py:90 profiles/forms.py:99 profiles/forms.py:145
 #: profiles/templates/profiles/healthcareuser_list.html:14
 #: profiles/templates/profiles/user_profile.html:18
 msgid "Email address"
 msgstr "Courriel"
 
-#: profiles/forms.py:114 profiles/templates/profiles/user_profile.html:22
+#: profiles/forms.py:102 profiles/templates/profiles/user_profile.html:22
 msgid "Province"
 msgstr ""
 
-#: profiles/forms.py:117
+#: profiles/forms.py:105
 msgid "Full name"
 msgstr "Nom complet"
 
-#: profiles/forms.py:133
+#: profiles/forms.py:121
 msgid "Email already exists"
 msgstr "Ce courriel existe déjà"
 
-#: profiles/forms.py:135
+#: profiles/forms.py:123
 msgid "An invitation hasn't been sent to this address"
 msgstr "Une invitation n'a pas été envoyée à cette adresse."
 
@@ -102,7 +102,6 @@ msgid "Start"
 msgstr "Commencer"
 
 #: profiles/templates/includes/nav_main.html:7
-#| msgid "Generate a number"
 msgid "Get a number"
 msgstr "Générer un numéro"
 
@@ -141,6 +140,7 @@ msgstr ""
 
 #: profiles/templates/invitations/templates/invite.html:5
 #: profiles/templates/invitations/templates/invite_complete.html:5
+#: profiles/templates/profiles/2fa-resend.html:5
 #: profiles/templates/profiles/2fa.html:5
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html:5
 #: profiles/templates/profiles/signup.html:5
@@ -177,17 +177,47 @@ msgstr ""
 msgid "Back to start"
 msgstr ""
 
+#: profiles/templates/profiles/2fa-resend.html:6
 #: profiles/templates/profiles/2fa.html:6
 msgid "Validate your code"
-msgstr ""
+msgstr "Validation du code"
+
+#: profiles/templates/profiles/2fa-resend.html:13
+#: profiles/templates/profiles/2fa-resend.html:15
+#, fuzzy
+#| msgid "Please enter the security code."
+msgid "Resend security code"
+msgstr "Veuillez entrer un code de sécurité."
+
+#: profiles/templates/profiles/2fa-resend.html:14
+msgid ""
+"Sometimes email messages takes a few minutes to arrive. If you don't receive "
+"the email, you can resend it."
+msgstr "Parfois, les courriels prennent quelques minutes à parvenir à destination. Si vous ne recevez pas de courriel, vous pouvez le renvoyer"
+
+#: profiles/templates/profiles/2fa-resend.html:17
+msgid "Has your email address changed since you joined COVID Alert portal?"
+msgstr "Votre adresse courriel a-t-elle changé depuis que vous utilisez Portail Alerte COVID?"
+
+#: profiles/templates/profiles/2fa-resend.html:18
+msgid "Please ask your account manager to reset it."
+msgstr "Veuillez demander à votre gestionnaire de compte de la réinitialiser."
 
 #: profiles/templates/profiles/2fa.html:13
 msgid "Check your email"
-msgstr ""
+msgstr "Vérifiez votre courriel"
+
+#: profiles/templates/profiles/2fa.html:14
+msgid "We've sent you an email with a security code to sign in"
+msgstr "Nous vous avons envoyé un code de sécurité par courriel."
 
 #: profiles/templates/profiles/2fa.html:15
 msgid "Continue"
 msgstr "Continuer"
+
+#: profiles/templates/profiles/2fa.html:16
+msgid "Not received an email?"
+msgstr "Vous n’avez pas reçu de courriel?"
 
 #: profiles/templates/profiles/code.html:5
 #: profiles/templates/profiles/code.html:8
@@ -420,6 +450,18 @@ msgstr "Oublié votre mot de passe ?"
 
 #: profiles/templates/registration/password_reset_form.html:13
 msgid "We’ll send you an email to create a new password."
+msgstr ""
+
+#: profiles/views.py:44
+msgid "No invited email in session"
+msgstr ""
+
+#: profiles/views.py:71
+msgid "Account created successfully"
+msgstr ""
+
+#: profiles/views.py:105
+msgid "Security code has been sent."
 msgstr ""
 
 #~ msgid "Generate code"

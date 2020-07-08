@@ -4,10 +4,11 @@ import sys
 
 
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import FormView, ListView, View, DeleteView, TemplateView
+from django.utils.translation import gettext as _
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import FormView, ListView, View, DeleteView, TemplateView
-from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django_otp import DEVICE_ID_SESSION_KEY
@@ -22,7 +23,12 @@ from .mixins import (
     Is2FAMixin,
     ProvinceAdminManageMixin,
 )
-from .forms import SignupForm, Healthcare2FAForm, HealthcareInviteForm
+from .forms import (
+    SignupForm,
+    Healthcare2FAForm,
+    HealthcareInviteForm,
+    Resend2FACodeForm
+)
 
 
 class SignUpView(FormView):
@@ -35,7 +41,7 @@ class SignUpView(FormView):
 
         # redirect to login page if there's no invited email in the session
         if not invited_email:
-            messages.warning(self.request, "No invited email in session")
+            messages.warning(self.request, _("No invited email in session"))
             return redirect("login")
 
         # redirect to login page if there's no Invitation for this email
@@ -62,7 +68,7 @@ class SignUpView(FormView):
 
     def form_valid(self, form):
         form.save()
-        messages.success(self.request, "Account created successfully")
+        messages.success(self.request, _("Account created successfully"))
 
         return super(SignUpView, self).form_valid(form)
 
@@ -80,6 +86,24 @@ class Login2FAView(FormView, LoginRequiredMixin):
                 self.request.session[DEVICE_ID_SESSION_KEY] = device.persistent_id
 
         is_valid = super().form_valid(form)
+        return is_valid
+
+
+class Resend2FAView(FormView, LoginRequiredMixin):
+    form_class = Resend2FACodeForm
+    template_name = "profiles/2fa-resend.html"
+    success_url = reverse_lazy("login-2fa")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        is_valid = super().form_valid(form)
+        if is_valid:
+            messages.success(self.request, _("Security code has been sent."))
+
         return is_valid
 
 
