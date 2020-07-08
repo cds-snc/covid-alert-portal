@@ -47,7 +47,10 @@ class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
         ]
 
     def is_valid(self):
-        super().is_valid()
+        is_valid = super().is_valid()
+        if is_valid is False:
+            return is_valid
+
         user = self.get_user()
         email_devices = user.emaildevice_set.all()
         # If the user has no email device, create one with his email
@@ -73,7 +76,7 @@ class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
             [user.email],
         )
 
-        return super().is_valid()
+        return is_valid
 
 
 class Healthcare2FAForm(HealthcareBaseForm):
