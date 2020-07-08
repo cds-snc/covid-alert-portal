@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.0/howto/deployment/wsgi/
 import newrelic.agent
 
 newrelic.agent.initialize()
-# The following errors are ignored for in order for New Relic Agent to initialize first.
+# The following errors are ignored in order for New Relic Agent to initialize first.
 import os  # noqa: E402
 from django.core.wsgi import get_wsgi_application  # noqa: E402
 
