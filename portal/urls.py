@@ -12,11 +12,15 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     path("", include("profiles.urls")),
-    path("invitations/", decorator_include([otp_required],"invitations.urls", namespace="invitations")),
+    path(
+        "invitations/",
+        decorator_include([otp_required], "invitations.urls", namespace="invitations"),
+    ),
 )
 
 if settings.DEBUG:
     import debug_toolbar
+
     urlpatterns += [
-        path('__debug__/', include(debug_toolbar.urls)),
+        path("__debug__/", include(debug_toolbar.urls)),
     ]

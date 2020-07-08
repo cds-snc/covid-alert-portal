@@ -58,6 +58,7 @@ class SignUpView(FormView):
 
         return super(SignUpView, self).form_valid(form)
 
+
 class Login2FAView(FormView):
     form_class = Healthcare2FAForm
     template_name = "profiles/2fa.html"

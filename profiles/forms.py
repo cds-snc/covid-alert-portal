@@ -59,14 +59,18 @@ class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
         # I cant use the email_device.generate_challenge() directly here, I need to pass more context into the emails
         email_device.generate_token(valid_secs=otp_settings.OTP_EMAIL_TOKEN_VALIDITY)
 
-        context = {'token': email_device.token, 'full_name': user.name, 'service_name': settings.SERVICE_NAME}
-        body = get_template('otp/email/token.html').render(context)
+        context = {
+            "token": email_device.token,
+            "full_name": user.name,
+            "service_name": settings.SERVICE_NAME,
+        }
+        body = get_template("otp/email/token.html").render(context)
 
         send_mail(
             otp_settings.OTP_EMAIL_SUBJECT,
             body,
             otp_settings.OTP_EMAIL_SENDER,
-            [user.email]
+            [user.email],
         )
 
         return super().is_valid()
@@ -74,7 +78,9 @@ class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
 
 class Healthcare2FAForm(HealthcareBaseForm):
     code = forms.CharField(
-        widget=forms.TextInput, label=_("Please enter the security code."), required=True
+        widget=forms.TextInput,
+        label=_("Please enter the security code."),
+        required=True,
     )
 
 

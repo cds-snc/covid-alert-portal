@@ -48,7 +48,6 @@ class RestrictedPageViews(TestCase):
 
 
 class AuthenticatedView(TestCase):
-
     def setUp(self):
         self.credentials = get_credentials()
         User = get_user_model()
