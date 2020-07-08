@@ -5,7 +5,7 @@ import sys
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import FormView, ListView, View, DeleteView, TemplateView
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -16,6 +16,12 @@ from django_otp.decorators import otp_required
 from invitations.models import Invitation
 
 from .models import HealthcareUser
+from .mixins import (
+    IsAdminMixin,
+    ProvinceAdminDeleteMixin,
+    Is2FAMixin,
+    ProvinceAdminManageMixin,
+)
 from .forms import SignupForm, Healthcare2FAForm, HealthcareInviteForm
 
 
@@ -77,21 +83,6 @@ class Login2FAView(FormView, LoginRequiredMixin):
         return is_valid
 
 
-class IsAdminMixin(UserPassesTestMixin):
-    def test_func(self):
-        # allow if superuser or admin
-        if self.request.user.is_superuser or self.request.user.is_admin:
-            return True
-
-        return False
-
-
-class Is2FAMixin(UserPassesTestMixin):
-    def test_func(self):
-        # allow user only if the user has a valid 2fa device
-        return self.request.user.is_verified() or False
-
-
 class InviteView(LoginRequiredMixin, Is2FAMixin, IsAdminMixin, FormView):
     form_class = HealthcareInviteForm
     template_name = "invitations/templates/invite.html"
@@ -119,48 +110,12 @@ class ProfilesView(LoginRequiredMixin, Is2FAMixin, IsAdminMixin, ListView):
         ).order_by("-is_admin")
 
 
-class ProvinceAdminManageMixin(UserPassesTestMixin):
-    def test_func(self):
-        # 404 if bad user ID
-        profile_user = get_object_or_404(HealthcareUser, pk=self.kwargs["pk"])
-
-        # if logged in user is superuser, return profile
-        if self.request.user.is_superuser:
-            return True
-
-        # if same user, return profile
-        if self.request.user.id == int(profile_user.id):
-            return True
-
-        # Don't return superuser profile pages
-        if profile_user.is_superuser:
-            return False
-
-        # if admin user from same province, return profile
-        if (
-            self.request.user.is_admin
-            and self.request.user.province.id == profile_user.province.id
-        ):
-            return True
-
-        return False
-
-
 class UserProfileView(LoginRequiredMixin, Is2FAMixin, ProvinceAdminManageMixin, View):
     def get(self, request, pk):
         profile_user = get_object_or_404(HealthcareUser, pk=pk)
         return render(
             request, "profiles/user_profile.html", {"profile_user": profile_user}
         )
-
-
-class ProvinceAdminDeleteMixin(ProvinceAdminManageMixin):
-    def test_func(self):
-        # id can't be yourself
-        if self.request.user.id == int(self.kwargs["pk"]):
-            return False
-
-        return super().test_func()
 
 
 class UserDeleteView(
