@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-26 09:52+0000\n"
+"POT-Creation-Date: 2020-07-08 18:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,47 +18,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: profiles/forms.py:39
+#: profiles/forms.py:48
 msgid "Enter a valid email address"
-msgstr ""
+msgstr "Veuillez entrer un courriel valide"
 
-#: profiles/forms.py:55 profiles/forms.py:63
+#: profiles/forms.py:87
+msgid "Please enter the security code."
+msgstr "Veuillez entrer un code de sécurité."
+
+#: profiles/forms.py:102 profiles/forms.py:111 profiles/forms.py:157
+#: profiles/templates/profiles/healthcareuser_list.html:14
+#: profiles/templates/profiles/user_profile.html:18
 msgid "Email address"
+msgstr "Courriel"
+
+#: profiles/forms.py:114 profiles/templates/profiles/user_profile.html:22
+msgid "Province"
 msgstr ""
 
-#: profiles/forms.py:64
+#: profiles/forms.py:117
 msgid "Full name"
-msgstr ""
+msgstr "Nom complet"
 
-#: profiles/forms.py:65
-msgid "Password"
-msgstr ""
-
-#: profiles/forms.py:65
-msgid "At least 12 characters"
-msgstr ""
-
-#: profiles/forms.py:66
-msgid "Confirm password"
-msgstr ""
-
-#: profiles/forms.py:74
+#: profiles/forms.py:133
 msgid "Email already exists"
-msgstr ""
+msgstr "Ce courriel existe déjà"
 
-#: profiles/forms.py:76
+#: profiles/forms.py:135
 msgid "An invitation hasn't been sent to this address"
-msgstr ""
+msgstr "Une invitation n'a pas été envoyée à cette adresse."
 
-#: profiles/forms.py:84
-msgid "Name is too long"
-msgstr ""
-
-#: profiles/forms.py:92
-msgid "Passwords don't match"
-msgstr ""
-
-#: profiles/templates/base.html:18 profiles/templates/base.html:31
+#: profiles/templates/base.html:19 profiles/templates/base.html:32
 msgid "Generate COVID Alert number"
 msgstr "Générer un numéro pour Alerte COVID"
 
@@ -67,7 +57,7 @@ msgstr "Générer un numéro pour Alerte COVID"
 msgid "Government of Canada"
 msgstr "Gouvernement du Canada"
 
-#: profiles/templates/includes/cds_form.html:23
+#: profiles/templates/includes/cds_form.html:31
 msgid "Submit"
 msgstr "Soumettre"
 
@@ -91,103 +81,232 @@ msgstr "Confidentialité"
 msgid "Symbol of the Government of Canada"
 msgstr "Symbole du gouvernement du Canada"
 
-#: profiles/templates/includes/nav_header.html:21
+#: profiles/templates/includes/nav_header.html:2
+msgid "Language and account navigation"
+msgstr "Navigation de la langue et du compte"
+
+#: profiles/templates/includes/nav_header.html:22
 msgid "Log out"
 msgstr "Déconnexion"
 
-#: profiles/templates/includes/nav_header.html:23
+#: profiles/templates/includes/nav_header.html:24
 msgid "Login"
 msgstr "Login"
 
+#: profiles/templates/includes/nav_main.html:3
+msgid "Product navigation"
+msgstr "Navigation du produit"
+
 #: profiles/templates/includes/nav_main.html:6
 msgid "Start"
-msgstr ""
+msgstr "Commencer"
 
 #: profiles/templates/includes/nav_main.html:7
-#, fuzzy
 #| msgid "Generate a number"
 msgid "Get a number"
 msgstr "Générer un numéro"
+
+#: profiles/templates/includes/nav_main.html:9
+#: profiles/templates/profiles/healthcareuser_list.html:4
+#: profiles/templates/profiles/healthcareuser_list.html:7
+msgid "Manage accounts"
+msgstr "Gérer les comptes"
 
 #: profiles/templates/includes/phase_banner.html:4
 msgid "This site will change as we test ideas."
 msgstr "Ce site évoluera au fur et à mesure que nous testons des idées."
 
-#: profiles/templates/profiles/code.html:4
-#: profiles/templates/profiles/code.html:7
+#: profiles/templates/invitations/email/email_invite_subject.html:2
+#: profiles/templates/invitations/email/email_invite_subject.txt:2
+msgid "Invitation to join COVID-ALERT medical portal"
+msgstr ""
+
+#: profiles/templates/invitations/forms/_invite.html:3
+msgid "Invite"
+msgstr ""
+
+#: profiles/templates/invitations/forms/_invite.html:4
+msgid ""
+"Please add an email below. The user will receive an email with instructions."
+msgstr ""
+
+#: profiles/templates/invitations/forms/_invite.html:9
+msgid "Email"
+msgstr ""
+
+#: profiles/templates/invitations/messages/invite_accepted.txt:3
+#, python-format
+msgid "Invitation to - %(email)s - has been accepted"
+msgstr ""
+
+#: profiles/templates/invitations/templates/invite.html:5
+#: profiles/templates/invitations/templates/invite_complete.html:5
+#: profiles/templates/profiles/2fa.html:5
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:5
+#: profiles/templates/profiles/signup.html:5
+#: profiles/templates/registration/login.html:5
+#: profiles/templates/registration/password_reset_form.html:5
+msgid "Error: "
+msgstr ""
+
+#: profiles/templates/invitations/templates/invite.html:6
+#: profiles/templates/invitations/templates/invite.html:11
+#: profiles/templates/profiles/healthcareuser_list.html:8
+msgid "Add an account"
+msgstr ""
+
+#: profiles/templates/invitations/templates/invite_complete.html:6
+msgid "Invitiation sent"
+msgstr ""
+
+#: profiles/templates/invitations/templates/invite_complete.html:11
+msgid "Invitation sent"
+msgstr ""
+
+#: profiles/templates/invitations/templates/invite_complete.html:17
+msgid ""
+"They will receive a signup link in their inbox. The link will expire in 3 "
+"days."
+msgstr ""
+
+#: profiles/templates/invitations/templates/invite_complete.html:19
+msgid "Add another account"
+msgstr ""
+
+#: profiles/templates/invitations/templates/invite_complete.html:20
+msgid "Back to start"
+msgstr ""
+
+#: profiles/templates/profiles/2fa.html:6
+msgid "Validate your code"
+msgstr ""
+
+#: profiles/templates/profiles/2fa.html:13
+msgid "Check your email"
+msgstr ""
+
+#: profiles/templates/profiles/2fa.html:15
+msgid "Continue"
+msgstr "Continuer"
+
+#: profiles/templates/profiles/code.html:5
+#: profiles/templates/profiles/code.html:8
 msgid "Give patient this number"
 msgstr "Fournir le numéro au patient"
 
-#: profiles/templates/profiles/code.html:10
+#: profiles/templates/profiles/code.html:13
+msgid "Expires"
+msgstr ""
+
+#: profiles/templates/profiles/code.html:26
 msgid "Instructions for patient if needed"
 msgstr "Instructions pour le patient"
 
-#: profiles/templates/profiles/code.html:11
+#: profiles/templates/profiles/code.html:27
 msgid "Open COVID Alert app"
 msgstr ""
 
-#: profiles/templates/profiles/code.html:12
+#: profiles/templates/profiles/code.html:28
 msgid "Tap <strong>Diagnosed with COVID-19? What to do next.</strong>"
 msgstr ""
 
-#: profiles/templates/profiles/code.html:14
+#: profiles/templates/profiles/code.html:30
 msgid ""
 "<strong>Entry screen:</strong> Let people know they may have been exposed"
 msgstr ""
 
-#: profiles/templates/profiles/code.html:15
+#: profiles/templates/profiles/code.html:31
 msgid "Tap <strong>Go to Step 1</strong>"
 msgstr ""
 
-#: profiles/templates/profiles/code.html:17
+#: profiles/templates/profiles/code.html:33
 #, python-format
 msgid "<strong>Step 1 screen:</strong> Enter your %(code_length)s-digit number"
 msgstr ""
 "<strong>Step 1 screen:</strong> Entrez le code à %(code_length)s chiffres"
 
-#: profiles/templates/profiles/code.html:19
+#: profiles/templates/profiles/code.html:35
 msgid "Enter this number: "
 msgstr ""
 
-#: profiles/templates/profiles/code.html:20
+#: profiles/templates/profiles/code.html:36
 msgid "Tap <strong>Go to Step 2</strong>"
 msgstr ""
 
-#: profiles/templates/profiles/code.html:23
+#: profiles/templates/profiles/code.html:39
 msgid "<strong>Step 2 screen: </strong> Now you can upload codes"
 msgstr ""
 
-#: profiles/templates/profiles/code.html:24
+#: profiles/templates/profiles/code.html:40
 msgid "To notify people, give COVID Alert permission to upload random codes."
 msgstr ""
 
-#: profiles/templates/profiles/code.html:25
+#: profiles/templates/profiles/code.html:41
 msgid "Tap <strong>Agree and go to Step 3</strong>"
 msgstr ""
 
-#: profiles/templates/profiles/code.html:27
+#: profiles/templates/profiles/code.html:43
 msgid ""
 "<strong>Step 3 message: </strong> Share your random codes from this device "
 "with COVID Alert?"
 msgstr ""
 
-#: profiles/templates/profiles/code.html:28
+#: profiles/templates/profiles/code.html:44
 msgid "Tap <strong>Allow</strong>"
 msgstr ""
 
-#: profiles/templates/profiles/code.html:30
+#: profiles/templates/profiles/code.html:46
 msgid "<strong>Last screen: </strong> Thanks for helping fight COVID-19"
 msgstr ""
 
-#: profiles/templates/profiles/code.html:31
+#: profiles/templates/profiles/code.html:47
 msgid ""
 "COVID Alert will ask permission to upload random codes daily for the next 13 "
 "days."
 msgstr ""
 
-#: profiles/templates/profiles/code.html:33
+#: profiles/templates/profiles/code.html:49
 msgid "Next patient"
 msgstr "Patient suivant"
+
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:6
+msgid "Confirm delete user"
+msgstr ""
+
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:13
+msgid "Confirm account removal"
+msgstr ""
+
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:14
+#, python-format
+msgid "Are you sure you want to delete %(name)s’s account at “%(email)s”?"
+msgstr ""
+
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:15
+msgid ""
+"If you remove their account, they will not be able to use the COVID Portal "
+"until they are invited back."
+msgstr ""
+
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:17
+msgid "No, take me back"
+msgstr ""
+
+#: profiles/templates/profiles/healthcareuser_list.html:11
+msgid "User accounts"
+msgstr ""
+
+#: profiles/templates/profiles/healthcareuser_list.html:15
+msgid "Permissions"
+msgstr ""
+
+#: profiles/templates/profiles/healthcareuser_list.html:16
+msgid "Actions"
+msgstr ""
+
+#: profiles/templates/profiles/healthcareuser_list.html:23
+msgid "Admin,Staff"
+msgstr ""
 
 #: profiles/templates/profiles/landing.html:4
 #: profiles/templates/profiles/landing.html:8
@@ -240,12 +359,6 @@ msgstr ""
 msgid "How COVID Alert protects privacy [hyperlink to privacy policy]"
 msgstr ""
 
-#: profiles/templates/profiles/signup.html:5
-#: profiles/templates/registration/login.html:5
-#: profiles/templates/registration/password_reset_form.html:5
-msgid "Error: "
-msgstr ""
-
 #: profiles/templates/profiles/signup.html:6
 msgid "Sign Up"
 msgstr ""
@@ -283,6 +396,20 @@ msgstr ""
 msgid ""
 "If the number expires before the patient enters it, they’ll need a new "
 "number."
+msgstr ""
+
+#: profiles/templates/profiles/user_profile.html:4
+#: profiles/templates/profiles/user_profile.html:8
+#: profiles/templates/profiles/user_profile.html:11
+msgid "User profile"
+msgstr ""
+
+#: profiles/templates/profiles/user_profile.html:14
+msgid "Name"
+msgstr ""
+
+#: profiles/templates/profiles/user_profile.html:28
+msgid "Back to accounts"
 msgstr ""
 
 #: profiles/templates/registration/login.html:17
