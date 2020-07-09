@@ -53,6 +53,6 @@ class Is2FAMixin(AccessMixin):
     """Verify that the current user is authenticated and using 2FA."""
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_verified() or False:
+        if not request.user.is_verified():
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
