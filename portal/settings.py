@@ -158,9 +158,10 @@ SESSION_COOKIE_SECURE = is_prod
 CSRF_COOKIE_SECURE = is_prod
 SECURE_BROWSER_XSS_FILTER = is_prod
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_SECURITY_WARN_AFTER = 4 * 60  # Showing warning at 4 minutes
 
-# Limit session times to 20h, this should make it that users need to relogin every morning.
-SESSION_COOKIE_AGE = 72000
+# Limit session times to 5 minutes
+SESSION_COOKIE_AGE = 5 * 60
 
 # Setting SECURE_SSL_REDIRECT on heroku was causing infinite redirects without this
 if is_prod:
