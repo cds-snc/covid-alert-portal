@@ -6,7 +6,7 @@ verify_ssl = true
 [scripts]
 css = "python manage.py sass profiles/static/scss/styles.scss profiles/static/css/"
 csswatch = "python manage.py sass profiles/static/scss/styles.scss profiles/static/css/ --watch"
-test = "DJANGO_ENV=tests python manage.py test"
+test = "python manage.py test"
 format = "black ."
 lint = "flake8 ."
 serve = "python manage.py runserver"
