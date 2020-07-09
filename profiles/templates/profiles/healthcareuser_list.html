@@ -24,7 +24,7 @@
           <td scope="col">
           {% if not healthcareuser.is_superuser and healthcareuser.id != user.id %}
             <a href="{% url 'user_delete' healthcareuser.id %}">
-              Remove
+              {% trans "Remove" %}
             </a>
           {% endif %}
           </td>

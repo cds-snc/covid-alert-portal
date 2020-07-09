@@ -3,7 +3,7 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Invitiation sent"  %}
+  {% trans "Invitation sent"  %}
 {% endblock %}
 
 {% block content %}
@@ -17,6 +17,6 @@
   <p>{% trans "They will receive a signup link in their inbox. The link will expire in 3 days." %}</p>
   <div class="content-button">
     <a href="{% url 'invite' %}" role='button' draggable='false'>{% trans "Add another account" %}</a>
-    <a href="{% url 'start' %}" class="secondary" role='button' draggable='false'>{% trans "Back to start" %}</a>
+    <a href="{% url 'profiles' %}" class="secondary" role='button' draggable='false'>{% trans "Manage existing accounts" %}</a>
   </div>
 {% endblock %}
