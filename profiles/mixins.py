@@ -1,5 +1,7 @@
 from django.contrib.auth.mixins import UserPassesTestMixin, AccessMixin
 from django.shortcuts import get_object_or_404
+from django.conf import settings
+from django.contrib.auth.views import redirect_to_login
 
 from .models import HealthcareUser
 
@@ -52,7 +54,18 @@ class IsAdminMixin(UserPassesTestMixin):
 class Is2FAMixin(AccessMixin):
     """Verify that the current user is authenticated and using 2FA."""
 
+    def handle_no_permission(self):
+        return redirect_to_login(
+            self.request.get_full_path(),
+            self.get_login_url(),
+            self.get_redirect_field_name(),
+        )
+
+    def get_login_url(self):
+        return settings.OTP_LOGIN_URL
+
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_verified():
             return self.handle_no_permission()
+
         return super().dispatch(request, *args, **kwargs)

@@ -3,6 +3,7 @@ import os
 import sys
 
 
+from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import FormView, ListView, View, DeleteView, TemplateView
 from django.utils.translation import gettext as _
@@ -82,6 +83,13 @@ class Login2FAView(LoginRequiredMixin, FormView):
         if request.user.is_verified():
             return redirect(reverse_lazy("code"))
         return super().get(request, *args, **kwargs)
+
+    def get_initial(self):
+        initial = super().get_initial()
+        if settings.DEBUG:
+            email_device = self.request.user.emaildevice_set.last()
+            initial["code"] = email_device.token
+        return initial
 
     def form_valid(self, form):
         code = form.cleaned_data.get("code")
