@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.mixins import UserPassesTestMixin, AccessMixin
 from django.shortcuts import get_object_or_404
 
 from .models import HealthcareUser
@@ -49,7 +49,9 @@ class IsAdminMixin(UserPassesTestMixin):
         return False
 
 
-class Is2FAMixin(UserPassesTestMixin):
-    def test_func(self):
-        # allow user only if the user has a valid 2fa device
-        return self.request.user.is_verified() or False
+class Is2FAMixin(AccessMixin):
+    """Verify that the current user is authenticated and using 2FA."""
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_verified() or False:
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)

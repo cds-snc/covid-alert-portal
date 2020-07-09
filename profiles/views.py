@@ -73,10 +73,15 @@ class SignUpView(FormView):
         return super(SignUpView, self).form_valid(form)
 
 
-class Login2FAView(FormView, LoginRequiredMixin):
+class Login2FAView(LoginRequiredMixin, FormView):
     form_class = Healthcare2FAForm
     template_name = "profiles/2fa.html"
     success_url = reverse_lazy("start")
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_verified():
+            return redirect(reverse_lazy("code"))
+        return super().get(request, *args, **kwargs)
 
     def form_valid(self, form):
         code = form.cleaned_data.get("code")
@@ -89,7 +94,7 @@ class Login2FAView(FormView, LoginRequiredMixin):
         return is_valid
 
 
-class Resend2FAView(FormView, LoginRequiredMixin):
+class Resend2FAView(LoginRequiredMixin, FormView):
     form_class = Resend2FACodeForm
     template_name = "profiles/2fa-resend.html"
     success_url = reverse_lazy("login-2fa")
