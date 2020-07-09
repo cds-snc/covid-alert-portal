@@ -213,8 +213,8 @@ if os.getenv("DJANGO_ENV", "production") == "tests":
     AXES_ENABLED = False
 
 AXES_FAILURE_LIMIT = 10  # Lockout after 10 failed login attempts
-AXES_ONLY_USER_FAILURES = False  # Default is to lockout both IP and username. If we set this to True it'll only lockout the username
 AXES_COOLOFF_TIME = timedelta(minutes=5)  # Lock out for 5 Minutes
+AXES_ONLY_USER_FAILURES = True  # Default is to lockout both IP and username. We set this to True so it'll only lockout the username and not lockout a whole department behind a NAT
 AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
     "HTTP_X_FORWARDED_FOR",
     "REAL_IP",
