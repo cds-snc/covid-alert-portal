@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "django_sass",
     "profiles",
     "invitations",
+    "session_security",
     "django.contrib.sites",  # Required for invitations
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -71,6 +72,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "session_security.middleware.SessionSecurityMiddleware",
 ]
 
 ROOT_URLCONF = "portal.urls"
@@ -155,6 +157,7 @@ SECURE_SSL_REDIRECT = is_prod
 SESSION_COOKIE_SECURE = is_prod
 CSRF_COOKIE_SECURE = is_prod
 SECURE_BROWSER_XSS_FILTER = is_prod
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Limit session times to 20h, this should make it that users need to relogin every morning.
 SESSION_COOKIE_AGE = 72000

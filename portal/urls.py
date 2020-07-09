@@ -11,6 +11,7 @@ urlpatterns = [
     ),
     path("admin/", admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
+    re_path(r"session_security/", include("session_security.urls")),
 ]
 
 urlpatterns += i18n_patterns(

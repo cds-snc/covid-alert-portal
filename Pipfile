@@ -26,6 +26,7 @@ whitenoise = "*"
 dj-database-url = "*"
 django-invitations = "*"
 newrelic = "*"
+django-session-security = "*"
 
 [pipenv]
 allow_prereleases = true
