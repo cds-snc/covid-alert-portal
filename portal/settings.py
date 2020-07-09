@@ -94,7 +94,7 @@ TEMPLATES = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    "axes.backends.AxesBackend", #Needs to be first
+    "axes.backends.AxesBackend",  # Needs to be first
     "django.contrib.auth.backends.ModelBackend",
 ]
 
@@ -208,11 +208,14 @@ CREATE_DEFAULT_SU = os.getenv("DJANGO_DEFAULT_SU", "False") == "True"
 SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
 
 # Login Rate Limiting
-AXES_FAILURE_LIMIT = 10 # Lockout after 10 failed login attempts
-AXES_COOLOFF_TIME = 1 # Lock out for 1 hour
-AXES_ONLY_USER_FAILURES = False # Default is to lockout both IP and username. If we set this to True it'll only lockout the username
-AXES_META_PRECEDENCE_ORDER = [ # Use the IP provided by the load balancer
-   'HTTP_X_FORWARDED_FOR',
-   'REAL_IP',
-   'REMOTE_ADDR',
+if os.getenv("DJANGO_ENV", "production") == "tests":
+    AXES_ENABLED = False
+
+AXES_FAILURE_LIMIT = 10  # Lockout after 10 failed login attempts
+AXES_COOLOFF_TIME = 1  # Lock out for 1 hour
+AXES_ONLY_USER_FAILURES = False  # Default is to lockout both IP and username. If we set this to True it'll only lockout the username
+AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
+    "HTTP_X_FORWARDED_FOR",
+    "REAL_IP",
+    "REMOTE_ADDR",
 ]

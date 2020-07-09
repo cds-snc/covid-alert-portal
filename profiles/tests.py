@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.utils import translation
 from invitations.models import Invitation
 from .forms import SignupForm
-from .models import HealthcareProvince, HealthcareUser
+from .models import HealthcareProvince
 
 
 User = get_user_model()
