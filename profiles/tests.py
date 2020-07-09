@@ -131,16 +131,17 @@ class DjangoAdminPanelView(AdminUserTestCase):
             response = self.client.post(
                 reverse("admin:login"),
                 post_data,
-                REMOTE_ADDR='127.0.0.1',
+                REMOTE_ADDR="127.0.0.1",
                 HTTP_USER_AGENT="test-browser",
             )
-            self.assertContains(response, "Please enter the correct email address and password")
-            print(response)
+            self.assertContains(
+                response, "Please enter the correct email address and password"
+            )
 
         response = self.client.post(
             reverse("admin:login"),
             post_data,
-            REMOTE_ADDR='127.0.0.1',
+            REMOTE_ADDR="127.0.0.1",
             HTTP_USER_AGENT="test-browser",
         )
         self.assertEqual(response.status_code, 403)
