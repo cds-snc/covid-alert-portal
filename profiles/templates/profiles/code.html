@@ -8,19 +8,7 @@
   <h1>{% trans "Give patient this number" %}</h1>
   <div id="big-code">
     <code>{{ code }}</code>
-
-    <span>
-    {% trans "Number expires" %}
-    {% timezone "Canada/Eastern" %}
-    {% get_current_language as LANGUAGE_CODE %}
-    {% if LANGUAGE_CODE == 'en' %}
-        {{ time|date:"F jS \a\t f a" }}
-    {% else %}
-        {{ time|date:"j F à G\hi," }}
-    {% endif %}
-      {% trans "local time" %}
-    {% endtimezone %}
-    </span>
+    {% include "includes/expires_string.html" %}
   </div>
 
   <p>{% trans "Tell patient to:" %}</p>
