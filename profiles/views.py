@@ -57,7 +57,7 @@ class SignUpView(FormView):
         # preload the signup form with the email and the province of the admin
         return {
             "email": invited_email,
-            "province": inviter.province.name,
+            "province": inviter.province.abbr,
         }
 
     def form_valid(self, form):
