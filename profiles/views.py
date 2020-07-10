@@ -155,9 +155,7 @@ class UserProfileView(Is2FAMixin, ProvinceAdminManageMixin, View):
         )
 
 
-class UserDeleteView(
-    Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView
-):
+class UserDeleteView(Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView):
     model = HealthcareUser
     context_object_name = "profile_user"
     success_url = reverse_lazy("profiles")
