@@ -5,15 +5,23 @@ from datetime import timedelta
 
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import FormView, ListView, View, DeleteView, TemplateView
 from django.utils.translation import gettext as _
+from django.views.generic import (
+    FormView,
+    ListView,
+    DeleteView,
+    TemplateView,
+    DetailView,
+)
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django_otp import DEVICE_ID_SESSION_KEY
 from django_otp.decorators import otp_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models.expressions import RawSQL
 from django.utils import timezone
+
 
 from invitations.models import Invitation
 
@@ -64,7 +72,7 @@ class SignUpView(FormView):
         # preload the signup form with the email and the province of the admin
         return {
             "email": invited_email,
-            "province": inviter.province.name,
+            "province": inviter.province.abbr,
         }
 
     def form_valid(self, form):
@@ -142,17 +150,15 @@ class InviteCompleteView(Is2FAMixin, IsAdminMixin, TemplateView):
 
 class ProfilesView(Is2FAMixin, IsAdminMixin, ListView):
     def get_queryset(self):
-        return HealthcareUser.objects.filter(
-            province=self.request.user.province
-        ).order_by("-is_admin")
-
-
-class UserProfileView(Is2FAMixin, ProvinceAdminManageMixin, View):
-    def get(self, request, pk):
-        profile_user = get_object_or_404(HealthcareUser, pk=pk)
-        return render(
-            request, "profiles/user_profile.html", {"profile_user": profile_user}
+        return (
+            HealthcareUser.objects.filter(province=self.request.user.province)
+            .annotate(current_user_id=RawSQL("id = %s", (self.request.user.id,)))
+            .order_by("-current_user_id", "-is_admin")
         )
+
+
+class UserProfileView(Is2FAMixin, ProvinceAdminManageMixin, DetailView):
+    model = HealthcareUser
 
 
 class UserDeleteView(Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView):

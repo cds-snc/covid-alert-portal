@@ -93,13 +93,11 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
     """A form for creating new users. Extends from UserCreation form, which
     means it includes a repeated password."""
 
-    # disabled fields aren't submitted
+    # disabled fields aren't submitted / ie, can't be modified
     email = forms.CharField(
         widget=forms.TextInput, label=_("Email address"), disabled=True
     )
-    province = forms.CharField(
-        widget=forms.TextInput, label=_("Province"), disabled=True
-    )
+    province = forms.CharField(widget=forms.HiddenInput, disabled=True)
 
     name = forms.CharField(label=_("Full name"), validators=[MaxLengthValidator(200)])
 
@@ -108,12 +106,13 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
         fields = ("email", "province", "name")
 
     def clean_province(self):
-        # returns a province name as a string
-        # always returns the province name from "get_initial"
-        province_name = self.cleaned_data.get("province", "")
-        return HealthcareProvince.objects.get(name=province_name)
+        # returns a province abbreviation as a string
+        # always returns the province abbr from "get_initial"
+        province_abbr = self.cleaned_data.get("province", "")
+        return HealthcareProvince.objects.get(abbr=province_abbr)
 
     def clean_email(self):
+        print("clean email", self.cleaned_data)
         email = self.cleaned_data.get("email", "").lower()
         email_exists = HealthcareUser.objects.filter(email=email)
         if email_exists.count():

@@ -3,13 +3,13 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Sign up" %}
+  {% trans "Create account" %}
 {% endblock %}
 
 
 {% block content %}
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "Sign up" %}</h1>
-  {% include "includes/cds_form.html" with submit_text=_("Sign up") %}
+  <h1>{% trans "Create account" %}</h1>
+  {% include "includes/cds_form.html" with submit_text=_("Next") %}
 {% endblock %}
