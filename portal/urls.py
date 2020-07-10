@@ -2,8 +2,6 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.http import HttpResponse
 from django.conf.urls.i18n import i18n_patterns
-from django_otp.decorators import otp_required
-from decorator_include import decorator_include
 
 urlpatterns = [
     re_path(
@@ -19,6 +17,6 @@ urlpatterns += i18n_patterns(
     path("", include("profiles.urls")),
     path(
         "invitations/",
-        decorator_include([otp_required], "invitations.urls", namespace="invitations"),
+        include("invitations.urls", namespace="invitations"),
     ),
 )

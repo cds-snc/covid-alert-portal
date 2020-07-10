@@ -26,7 +26,6 @@ whitenoise = "*"
 dj-database-url = "*"
 django-invitations = "*"
 django-otp = "*"
-django-decorator-include = "*"
 newrelic = "*"
 
 [pipenv]

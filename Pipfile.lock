@@ -1,14 +1,15 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "dc23e08ff937c4c76ebc35aacc3c174b320cb68fe13f3a81c8858cd5cf14d35a"
+            "sha256": "46d6621162d893df72323f20a78225bd76a54ebea6db8101480c39d818b3bd85"
         },
         "pipfile-spec": 6,
         "requires": {},
         "sources": [
             {
                 "name": "pypi",
-                "url": "https://pypi.org/simple"
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
             }
         ]
     },
@@ -50,14 +51,6 @@
             ],
             "index": "pypi",
             "version": "==3.0.8"
-        },
-        "django-decorator-include": {
-            "hashes": [
-                "sha256:18db98e0e48dbb3977ab79b5520dbf5ecbb35f0bced8e15ed62dc66762345856",
-                "sha256:fe7a96afb23f66dcbc6227d3c48430e53cc5704eab30841ddb8bd940e5ea8a5a"
-            ],
-            "index": "pypi",
-            "version": "==3.0"
         },
         "django-invitations": {
             "hashes": [
