@@ -10,10 +10,10 @@
         <h2 class="visually-hidden">{% trans "Language selection" }</h2>
         {% if LANGUAGE_CODE == 'en' %}
           <input type="hidden" name="language" value="{{ langFr.code }}" />
-          <button>{{ langFr.name_local|title }}</button>
+          <a role="button" href="https://portail-alerte-covid.alpha.canada.ca{{request.path}}">{{ langFr.name_local|title }}</a>
         {% else %}
           <input type="hidden" name="language" value="{{ langEn.code }}" />
-          <button>{{ langEn.name_local|title }}</button>
+          <a role="button" href="https://covid-alert-portal.alpha.canada.ca{{request.path}}">{{ langEn.name_local|title }}</a>
         {% endif %}
       </form>
     </li>
