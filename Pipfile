@@ -25,6 +25,7 @@ gunicorn = "*"
 whitenoise = "*"
 dj-database-url = "*"
 django-invitations = "*"
+django-otp = "*"
 newrelic = "*"
 
 [pipenv]

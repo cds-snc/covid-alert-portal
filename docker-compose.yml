@@ -15,6 +15,7 @@ services:
       - DATABASE_PASSWORD=password
       - DATABASE_HOST=db
       - DATABASE_PORT=5432
+      - DJANGO_ENV=development
     build: .
     volumes:
       - .:/code

@@ -13,6 +13,7 @@ from invitations.models import Invitation
 from invitations.forms import InviteForm
 
 from .models import HealthcareUser, HealthcareProvince
+from .utils import generate_2fa_code
 
 
 class HealthcareBaseForm(forms.Form):
@@ -42,6 +43,37 @@ class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
         self.fields["username"].validators = [
             EmailValidator(message=_("Enter a valid email address"))
         ]
+
+    def is_valid(self):
+        is_valid = super().is_valid()
+        if is_valid is False:
+            return is_valid
+
+        user = self.get_user()
+        generate_2fa_code(user)
+
+        return is_valid
+
+
+class Resend2FACodeForm(HealthcareBaseForm):
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+
+    def is_valid(self):
+        if self.user is None or self.user.is_authenticated is False:
+            return False
+
+        generate_2fa_code(self.user)
+        return True
+
+
+class Healthcare2FAForm(HealthcareBaseForm):
+    code = forms.CharField(
+        widget=forms.TextInput,
+        label=_("Please enter the security code."),
+        required=True,
+    )
 
 
 class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
