@@ -231,8 +231,8 @@ class SignupFlow(AdminUserTestCase):
         # assert a disabled input with the province value exists
         self.assertContains(
             response,
-            '<input type="text" name="province" value="{}" required disabled id="id_province">'.format(
-                self.credentials["province"].name
+            '<input type="hidden" name="province" value="{}" disabled id="id_province">'.format(
+                self.credentials["province"].abbr
             ),
         )
 

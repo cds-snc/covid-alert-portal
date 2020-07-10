@@ -10,8 +10,8 @@
 {% endblock %}
 
 {% block content %}
-  {% if profile_user %}
-    {% if profile_user.id == user.id %}
+  {% if healthcareuser %}
+    {% if healthcareuser.id == user.id %}
         <h1>{% trans "Your profile" %}</h1>
     {% else %}
         <h1>{% trans "User profile" %}</h1>
@@ -22,20 +22,22 @@
       <tbody>
         <tr>
           <th scope="row">{% trans "Name" %}</td>
-          <td scope="col">{{ profile_user.name }}</td>
+          <td scope="col">{{ healthcareuser.name }}</td>
         </tr>
         <tr>
           <th scope="row">{% trans "Email address" %}</td>
-          <td scope="col">{{ profile_user.email }}</td>
+          <td scope="col">{{ healthcareuser.email }}</td>
         </tr>
         <tr>
           <th scope="row">{% trans "Province" %}</td>
-          <td scope="col">{{ profile_user.province.name }}</td>
+          <td scope="col">{{ healthcareuser.province.name }}</td>
         </tr>
       </tbody>
     </table>
 
-    <div class="content-button"><a class="secondary" href="{% url 'profiles' %}" role='button' draggable='false'>{% trans "Back to accounts" %}</a></div>
+    {% if user.is_admin %}
+      <div class="content-button"><a class="secondary" href="{% url 'profiles' %}" role='button' draggable='false'>{% trans "Back to accounts" %}</a></div>
+    {% endif %}
   {% else %}
     <p>User not found.</p>
   {% endif %}

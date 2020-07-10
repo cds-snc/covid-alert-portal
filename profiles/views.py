@@ -5,7 +5,13 @@ from datetime import timedelta
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.views.generic import FormView, ListView, View, DeleteView, TemplateView
+from django.views.generic import (
+    FormView,
+    ListView,
+    DeleteView,
+    TemplateView,
+    DetailView,
+)
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
@@ -51,7 +57,7 @@ class SignUpView(FormView):
         # preload the signup form with the email and the province of the admin
         return {
             "email": invited_email,
-            "province": inviter.province.name,
+            "province": inviter.province.abbr,
         }
 
     def form_valid(self, form):
@@ -125,12 +131,8 @@ class ProvinceAdminManageMixin(UserPassesTestMixin):
         return False
 
 
-class UserProfileView(LoginRequiredMixin, ProvinceAdminManageMixin, View):
-    def get(self, request, pk):
-        profile_user = get_object_or_404(HealthcareUser, pk=pk)
-        return render(
-            request, "profiles/user_profile.html", {"profile_user": profile_user}
-        )
+class UserProfileView(LoginRequiredMixin, ProvinceAdminManageMixin, DetailView):
+    model = HealthcareUser
 
 
 class ProvinceAdminDeleteMixin(ProvinceAdminManageMixin):
