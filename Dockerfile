@@ -12,11 +12,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-ARG DJANGO_ENV=production
-ENV DJANGO_ENV=$DJANGO_ENV
-
-ARG ALLOWED_HOSTS=.herokuapp.com
-ENV ALLOWED_HOSTS=$ALLOWED_HOSTS
 # Set work directory
 WORKDIR /code
 
