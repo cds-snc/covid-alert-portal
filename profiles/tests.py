@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.utils import translation
+from django_otp import DEVICE_ID_SESSION_KEY
 from invitations.models import Invitation
 from .forms import SignupForm
 from .models import HealthcareProvince
@@ -66,6 +67,15 @@ class AdminUserTestCase(TestCase):
         self.credentials["id"] = self.user.id
 
         self.invited_email = "invited@test.com"
+
+    def login_2fa(self, user: HealthcareUser = None):
+        if user is None:
+            user = self.user
+
+        device = user.emaildevice_set.create()
+        session = self.client.session
+        session[DEVICE_ID_SESSION_KEY] = device.persistent_id
+        session.save()
 
 
 class HomePageView(TestCase):
@@ -163,6 +173,11 @@ class AuthenticatedView(AdminUserTestCase):
         """
         self.client.login(username="test@test.com", password="testpassword")
         response = self.client.get(reverse("code"))
+        self.assertEqual(response.status_code, 302)
+
+        self.login_2fa()
+
+        response = self.client.get(reverse("code"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Give patient this number")
         self.assertContains(
@@ -259,8 +274,8 @@ class SignupFlow(AdminUserTestCase):
         # assert a disabled input with the province value exists
         self.assertContains(
             response,
-            '<input type="text" name="province" value="{}" required disabled id="id_province">'.format(
-                self.credentials["province"].name
+            '<input type="hidden" name="province" value="{}" disabled id="id_province">'.format(
+                self.credentials["province"].abbr
             ),
         )
 
@@ -298,6 +313,7 @@ class InviteFlow(AdminUserTestCase):
         Login and see the invite page with the id of the current user in a hidden input
         """
         self.client.login(username="test@test.com", password="testpassword")
+        self.login_2fa()
         response = self.client.get(reverse("invite"))
         self.assertEqual(response.status_code, 200)
 
@@ -308,6 +324,7 @@ class InviteFlow(AdminUserTestCase):
         Login and see the invite page with the id of the current user in a hidden input
         """
         self.client.login(username="test@test.com", password="testpassword")
+        self.login_2fa()
         session = self.client.session
         session["invite_email"] = self.invited_email
         session.save()
@@ -332,12 +349,14 @@ class ProfilesView(AdminUserTestCase):
     def test_forbidden_if_not_admin(self):
         user2 = User.objects.create_user(**get_other_credentials(is_admin=False))
         self.client.login(username=user2.email, password="testpassword2")
+        self.login_2fa(user2)
 
         response = self.client.get(reverse("profiles"))
         self.assertEqual(response.status_code, 403)
 
     def test_manage_accounts_link_visible_if_logged_in(self):
         self.client.login(username="test@test.com", password="testpassword")
+        self.login_2fa()
 
         response = self.client.get(reverse("start"))
         self.assertEqual(response.status_code, 200)
@@ -348,6 +367,7 @@ class ProfilesView(AdminUserTestCase):
     def test_manage_accounts_page(self):
         user2 = User.objects.create_user(**get_other_credentials(is_admin=True))
         self.client.login(username=user2.email, password="testpassword2")
+        self.login_2fa(user2)
 
         response = self.client.get(reverse("profiles"))
         self.assertEqual(response.status_code, 200)
@@ -361,6 +381,7 @@ class ProfilesView(AdminUserTestCase):
         )
 
         self.client.login(username=user2.email, password="testpassword2")
+        self.login_2fa(user2)
 
         response = self.client.get(reverse("profiles"))
         self.assertEqual(response.status_code, 200)
@@ -383,6 +404,7 @@ class ProfileView(AdminUserTestCase):
 
     def test_profile_page_visible_when_logged_in(self):
         self.client.login(username="test@test.com", password="testpassword")
+        self.login_2fa()
 
         response = self.client.get(
             reverse("user_profile", kwargs={"pk": self.credentials["id"]})
@@ -392,6 +414,7 @@ class ProfileView(AdminUserTestCase):
 
     def test_profile_page_not_found_if_user_id_does_not_exist(self):
         self.client.login(username="test@test.com", password="testpassword")
+        self.login_2fa()
 
         response = self.client.get(reverse("user_profile", kwargs={"pk": 99}))
         self.assertEqual(response.status_code, 404)
@@ -400,6 +423,7 @@ class ProfileView(AdminUserTestCase):
         user2 = User.objects.create_user(**get_other_credentials(is_admin=False))
         # password is hashed so we can't use it
         self.client.login(username=user2.email, password="testpassword2")
+        self.login_2fa(user2)
 
         ## get user profile of admin user created in setUp
         response = self.client.get(
@@ -413,6 +437,7 @@ class ProfileView(AdminUserTestCase):
             **get_other_credentials(is_superuser=True)
         )
         self.client.login(username=superuser.email, password="testpassword2")
+        self.login_2fa(superuser)
 
         response = self.client.get(
             reverse("user_profile", kwargs={"pk": self.credentials["id"]})
@@ -429,6 +454,7 @@ class ProfileView(AdminUserTestCase):
 
         # log in as user in session
         self.client.login(username=self.user.email, password="testpassword")
+        self.login_2fa(self.user)
 
         ## get user profile of superuser
         response = self.client.get(reverse("user_profile", kwargs={"pk": superuser.id}))
@@ -437,6 +463,7 @@ class ProfileView(AdminUserTestCase):
     def test_view_profile_page_if_admin_user_viewing_same_province_user(self):
         user2 = User.objects.create_user(**get_other_credentials(is_admin=True))
         self.client.login(username=user2.email, password="testpassword2")
+        self.login_2fa(user2)
 
         response = self.client.get(
             reverse("user_profile", kwargs={"pk": self.credentials["id"]})
@@ -451,6 +478,7 @@ class ProfileView(AdminUserTestCase):
             **get_other_credentials(is_admin=True, province=get_province("AB"))
         )
         self.client.login(username=user2.email, password="testpassword2")
+        self.login_2fa(user2)
 
         response = self.client.get(
             reverse("user_profile", kwargs={"pk": self.credentials["id"]})
@@ -465,6 +493,7 @@ class DeleteView(AdminUserTestCase):
     def test_forbidden_see_delete_page_for_self(self):
         # log in as user in session
         self.client.login(username=self.user.email, password="testpassword")
+        self.login_2fa(self.user)
 
         ## get user profile of admin user created in setUp
         response = self.client.get(reverse("user_delete", kwargs={"pk": self.user.id}))
@@ -477,6 +506,7 @@ class DeleteView(AdminUserTestCase):
 
         # log in as user in session
         self.client.login(username=self.user.email, password="testpassword")
+        self.login_2fa(self.user)
 
         ## get user profile of superuser
         response = self.client.get(reverse("user_delete", kwargs={"pk": superuser.id}))
@@ -487,6 +517,7 @@ class DeleteView(AdminUserTestCase):
 
         # log in as user in session
         self.client.login(username=self.user.email, password="testpassword")
+        self.login_2fa()
 
         ## get user profile of admin user created in setUp
         response = self.client.get(reverse("user_delete", kwargs={"pk": user2.id}))

@@ -17,7 +17,7 @@
             <span class="error--{{ field.html_name }}">{{ field.errors|first }}</span>
           {% endif %}
           {% if field.help_text %}
-            <p class="help">{{ field.help_text }}</p>
+            <span class="help--{{ field.html_name }}">{{ field.help_text }}</span>
           {% endif %}
           {{ field }}
       </div>

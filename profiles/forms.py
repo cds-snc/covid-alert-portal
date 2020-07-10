@@ -13,6 +13,7 @@ from invitations.models import Invitation
 from invitations.forms import InviteForm
 
 from .models import HealthcareUser, HealthcareProvince
+from .utils import generate_2fa_code
 
 
 class HealthcareBaseForm(forms.Form):
@@ -43,6 +44,37 @@ class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
             EmailValidator(message=_("Enter a valid email address"))
         ]
 
+    def is_valid(self):
+        is_valid = super().is_valid()
+        if is_valid is False:
+            return is_valid
+
+        user = self.get_user()
+        generate_2fa_code(user)
+
+        return is_valid
+
+
+class Resend2FACodeForm(HealthcareBaseForm):
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+
+    def is_valid(self):
+        if self.user is None or self.user.is_authenticated is False:
+            return False
+
+        generate_2fa_code(self.user)
+        return True
+
+
+class Healthcare2FAForm(HealthcareBaseForm):
+    code = forms.CharField(
+        widget=forms.TextInput,
+        label=_("Please enter the security code."),
+        required=True,
+    )
+
 
 class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
     """
@@ -61,13 +93,11 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
     """A form for creating new users. Extends from UserCreation form, which
     means it includes a repeated password."""
 
-    # disabled fields aren't submitted
+    # disabled fields aren't submitted / ie, can't be modified
     email = forms.CharField(
         widget=forms.TextInput, label=_("Email address"), disabled=True
     )
-    province = forms.CharField(
-        widget=forms.TextInput, label=_("Province"), disabled=True
-    )
+    province = forms.CharField(widget=forms.HiddenInput, disabled=True)
 
     name = forms.CharField(label=_("Full name"), validators=[MaxLengthValidator(200)])
 
@@ -76,12 +106,13 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
         fields = ("email", "province", "name")
 
     def clean_province(self):
-        # returns a province name as a string
-        # always returns the province name from "get_initial"
-        province_name = self.cleaned_data.get("province", "")
-        return HealthcareProvince.objects.get(name=province_name)
+        # returns a province abbreviation as a string
+        # always returns the province abbr from "get_initial"
+        province_abbr = self.cleaned_data.get("province", "")
+        return HealthcareProvince.objects.get(abbr=province_abbr)
 
     def clean_email(self):
+        print("clean email", self.cleaned_data)
         email = self.cleaned_data.get("email", "").lower()
         email_exists = HealthcareUser.objects.filter(email=email)
         if email_exists.count():

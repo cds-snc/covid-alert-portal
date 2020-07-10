@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% if form.errors %}{% trans "Error: "%}{% endif %}
+  {% trans "Resend the security code" %}
+{% endblock %}
+
+
+{% block content %}
+  {% include  "includes/error_list.html" %}
+
+  <h1>{% trans "Resend security code" %}</h1>
+  <p>{% trans "Sometimes email messages takes a few minutes to arrive. If you don't receive the email, you can resend it." %}</p>
+  {% include "includes/cds_form.html" with submit_text=_("Resend security code") %}
+  <p>
+      {% trans "Has your email address changed since you joined COVID Alert portal?" %}<br/>
+      {% trans "Please ask your account manager to reset it." %}
+  </p>
+{% endblock %}
