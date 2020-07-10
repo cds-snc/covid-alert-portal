@@ -15,8 +15,5 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     path("", include("profiles.urls")),
-    path(
-        "invitations/",
-        include("invitations.urls", namespace="invitations"),
-    ),
+    path("invitations/", include("invitations.urls", namespace="invitations"),),
 )
