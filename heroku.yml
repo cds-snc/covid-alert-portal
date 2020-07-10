@@ -7,4 +7,4 @@ run:
     python manage.py collectstatic --noinput -i scss
     python manage.py migrate
     python manage.py createdefaultsuperuser
-    uwsgi --http :8000 --module portal.wsgi --static-map /static=/code/staticfiles
+    uwsgi --http :$PORT --module portal.wsgi --static-map /static=/code/staticfiles
