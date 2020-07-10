@@ -6,4 +6,5 @@ run:
     python manage.py sass profiles/static/scss/styles.scss profiles/static/css/
     python manage.py collectstatic --noinput -i scss
     python manage.py migrate
+    python manage.py createdefaultsuperuser
     gunicorn portal.wsgi --log-file -
