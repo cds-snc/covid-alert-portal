@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django_otp import DEVICE_ID_SESSION_KEY
 from django_otp.decorators import otp_required
-from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 
 from invitations.models import Invitation
