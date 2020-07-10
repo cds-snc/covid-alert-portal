@@ -120,7 +120,7 @@ class Resend2FAView(LoginRequiredMixin, FormView):
         return is_valid
 
 
-class InviteView(LoginRequiredMixin, Is2FAMixin, IsAdminMixin, FormView):
+class InviteView(Is2FAMixin, IsAdminMixin, FormView):
     form_class = HealthcareInviteForm
     template_name = "invitations/templates/invite.html"
     success_url = reverse_lazy("invite_complete")
@@ -136,18 +136,18 @@ class InviteView(LoginRequiredMixin, Is2FAMixin, IsAdminMixin, FormView):
         return super().form_valid(form)
 
 
-class InviteCompleteView(LoginRequiredMixin, Is2FAMixin, IsAdminMixin, TemplateView):
+class InviteCompleteView(Is2FAMixin, IsAdminMixin, TemplateView):
     template_name = "invitations/templates/invite_complete.html"
 
 
-class ProfilesView(LoginRequiredMixin, Is2FAMixin, IsAdminMixin, ListView):
+class ProfilesView(Is2FAMixin, IsAdminMixin, ListView):
     def get_queryset(self):
         return HealthcareUser.objects.filter(
             province=self.request.user.province
         ).order_by("-is_admin")
 
 
-class UserProfileView(LoginRequiredMixin, Is2FAMixin, ProvinceAdminManageMixin, View):
+class UserProfileView(Is2FAMixin, ProvinceAdminManageMixin, View):
     def get(self, request, pk):
         profile_user = get_object_or_404(HealthcareUser, pk=pk)
         return render(
@@ -156,7 +156,7 @@ class UserProfileView(LoginRequiredMixin, Is2FAMixin, ProvinceAdminManageMixin, 
 
 
 class UserDeleteView(
-    LoginRequiredMixin, Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView
+    Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView
 ):
     model = HealthcareUser
     context_object_name = "profile_user"

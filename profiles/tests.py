@@ -321,6 +321,7 @@ class ProfilesView(AdminUserTestCase):
     def test_forbidden_if_not_admin(self):
         user2 = User.objects.create_user(**get_other_credentials(is_admin=False))
         self.client.login(username=user2.email, password="testpassword2")
+        self.login_2fa(user2)
 
         response = self.client.get(reverse("profiles"))
         self.assertEqual(response.status_code, 403)
@@ -394,6 +395,7 @@ class ProfileView(AdminUserTestCase):
         user2 = User.objects.create_user(**get_other_credentials(is_admin=False))
         # password is hashed so we can't use it
         self.client.login(username=user2.email, password="testpassword2")
+        self.login_2fa(user2)
 
         ## get user profile of admin user created in setUp
         response = self.client.get(
@@ -424,6 +426,7 @@ class ProfileView(AdminUserTestCase):
 
         # log in as user in session
         self.client.login(username=self.user.email, password="testpassword")
+        self.login_2fa(self.user)
 
         ## get user profile of superuser
         response = self.client.get(reverse("user_profile", kwargs={"pk": superuser.id}))
@@ -447,6 +450,7 @@ class ProfileView(AdminUserTestCase):
             **get_other_credentials(is_admin=True, province=get_province("AB"))
         )
         self.client.login(username=user2.email, password="testpassword2")
+        self.login_2fa(user2)
 
         response = self.client.get(
             reverse("user_profile", kwargs={"pk": self.credentials["id"]})
@@ -461,6 +465,7 @@ class DeleteView(AdminUserTestCase):
     def test_forbidden_see_delete_page_for_self(self):
         # log in as user in session
         self.client.login(username=self.user.email, password="testpassword")
+        self.login_2fa(self.user)
 
         ## get user profile of admin user created in setUp
         response = self.client.get(reverse("user_delete", kwargs={"pk": self.user.id}))
@@ -473,6 +478,7 @@ class DeleteView(AdminUserTestCase):
 
         # log in as user in session
         self.client.login(username=self.user.email, password="testpassword")
+        self.login_2fa(self.user)
 
         ## get user profile of superuser
         response = self.client.get(reverse("user_delete", kwargs={"pk": superuser.id}))
