@@ -9,7 +9,9 @@ from django.views.generic import FormView, ListView, View, DeleteView, TemplateV
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.db.models.expressions import RawSQL
 from django.utils import timezone
+
 
 from invitations.models import Invitation
 
@@ -89,9 +91,11 @@ class InviteCompleteView(LoginRequiredMixin, IsAdminMixin, TemplateView):
 
 class ProfilesView(LoginRequiredMixin, IsAdminMixin, ListView):
     def get_queryset(self):
-        return HealthcareUser.objects.filter(
-            province=self.request.user.province
-        ).order_by("-is_admin")
+        return (
+            HealthcareUser.objects.filter(province=self.request.user.province)
+            .annotate(current_user_id=RawSQL("id = %s", (self.request.user.id,)))
+            .order_by("-current_user_id", "-is_admin")
+        )
 
 
 class ProvinceAdminManageMixin(UserPassesTestMixin):
