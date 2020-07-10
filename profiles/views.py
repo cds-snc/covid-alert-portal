@@ -4,7 +4,7 @@ import sys
 from datetime import timedelta
 
 from django.conf import settings
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.utils.translation import gettext as _
 from django.views.generic import (
     FormView,
