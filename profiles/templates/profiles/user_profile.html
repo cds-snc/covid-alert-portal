@@ -1,11 +1,21 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "User profile" %}{% endblock %}
+{% block title %}
+    {% if profile_user.id == user.id %}
+        {% trans "Your profile" %}
+    {% else %}
+        {% trans "User profile" %}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
   {% if profile_user %}
-    <h1>{% trans "User profile" %}</h1>
+    {% if profile_user.id == user.id %}
+        <h1>{% trans "Your profile" %}</h1>
+    {% else %}
+        <h1>{% trans "User profile" %}</h1>
+    {% endif %}
 
     <table>
       <caption class="visually-hidden">{% trans "User profile" %}</caption>
