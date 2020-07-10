@@ -1,16 +1,17 @@
 import requests
 import os
 import sys
-
+from datetime import timedelta
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import FormView, ListView, View, DeleteView, TemplateView
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.utils import timezone
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.db.models.expressions import RawSQL
+from django.utils import timezone
+
 
 from invitations.models import Invitation
 
@@ -169,7 +170,8 @@ def code(request):
 
     # Split up the code with a space in the middle so it looks like this: 1234 5678
     diagnosis_code = diagnosis_code[0:4] + " " + diagnosis_code[4:8]
+    expiry = timezone.now() + timedelta(days=1)
 
     return render(
-        request, "profiles/code.html", {"code": diagnosis_code, "time": timezone.now()}
+        request, "profiles/code.html", {"code": diagnosis_code, "expiry": expiry}
     )
