@@ -27,6 +27,7 @@ django-invitations = "*"
 django-otp = "*"
 newrelic = "*"
 django-axes = "*"
+uwsgi = "*"
 
 [pipenv]
 allow_prereleases = true
