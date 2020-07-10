@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% load tz %}
 
 {% block title %}{% trans "Give patient this number" %}{% endblock %}
 
@@ -19,5 +18,9 @@
     <li>{% trans "Use the app to anonymously notify people by tapping “Diagnosed with COVID-19? Enter number”. The app will guide the patient through the steps to enter the number." %}</li>
   </ul>
 
-  <div class="content-button"><a href="{% url 'start' %}" role='button' draggable='false'>{% trans "Next patient" %}</a></div>
+  <div class="content-button">
+    <a href="{% url 'start' %}" role='button' draggable='false'>{% trans "Next patient" %}</a>
+    <a class="secondary" href="{% url 'number_instructions' %}" role='button' draggable='false'>{% trans "Detailed instructions" %}</a>
+  </div>
+
 {% endblock %}

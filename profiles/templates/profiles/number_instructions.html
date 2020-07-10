@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Give patient this number" %}{% endblock %}
+
+{% block content %}
+  <h1>{% trans "Give patient this number" %}</h1>
+  <div id="big-code">
+    <code>{{ code }}</code>
+    {% include "includes/expires_string.html" %}
+  </div>
+
+  <p>{% trans "Reminder — tell patient to:" %}</p>
+  <ul>
+    <li>{% trans "Keep the number somewhere safe" %}</li>
+    <li>{% trans "Contact your office if they lose the number or it doesn’t work" %}</li>
+  </ul>
+
+  <h2>{% trans "Detailed instructions" %}</h2>
+  <p>{% trans "Open the COVID Alert app. The app will guide the patient through these steps:" %}
+
+  <ol class="detailed-instructions">
+    <li>
+      <h3 class="detailed-instructions__title">{% trans "Title on home screen" %}</h3>
+      <div class="detailed-instructions__content">
+        <ul>
+          <li>
+            {% blocktrans %}Tap ‘<strong>Diagnosed with COVID-19? What to do next.</strong>’{% endblocktrans %}
+          </li>
+        </ul>
+        <div>
+          <img src="{% static 'img/cat.jpg' %}" />
+        </div>
+      </div>
+    </li>
+    <li>
+      <h3 class="detailed-instructions__title">{% trans "Let people know they may have been exposed" %}</h3>
+      <div class="detailed-instructions__content">
+        <ul>
+          <li>
+            {% blocktrans %}Tap ‘<strong>Enter number</strong>’{% endblocktrans %}
+          </li>
+        </ul>
+        <div>
+          <img src="{% static 'img/cat.jpg' %}" />
+        </div>
+      </div>
+    </li>
+    <li>
+      <h3 class="detailed-instructions__title">{% blocktrans with code|cut:" "|length as code_length %}Enter your {{ code_length }}-digit number{% endblocktrans %}</h3>
+      <div class="detailed-instructions__content">
+        <ul>
+          <li>
+            {% blocktrans %}Enter this number: {% endblocktrans %}<code>{{ code }}</code>
+          </li>
+          <li>
+            {% blocktrans %}Tap ‘<strong>Submit</strong>’{% endblocktrans %}
+          </li>
+        </ul>
+        <div>
+          <img src="{% static 'img/cat.jpg' %}" />
+        </div>
+      </div>
+    </li>
+    <li>
+      <h3 class="detailed-instructions__title">{% trans "Now you can upload codes" %}</h3>
+      <div class="detailed-instructions__content">
+        <ul>
+          <li>{% trans "In order to notify people, patient must give COVID Alert permission to upload random codes" %}</li>
+          <li>{% blocktrans %}Tap ‘<strong>Agree</strong>’{% endblocktrans %}</li>
+        </ul>
+        <div>
+          <img src="{% static 'img/cat.jpg' %}" />
+        </div>
+      </div>
+    </li>
+    <li>
+      <h3 class="detailed-instructions__title">{% trans "Share your random codes from this device with COVID Alert?" %}</h3>
+      <div class="detailed-instructions__content">
+        <ul>
+          <li>{% blocktrans %}Tap ‘<strong>Allow</strong>’{% endblocktrans %}</li>
+        </ul>
+        <div>
+          <img src="{% static 'img/cat.jpg' %}" />
+        </div>
+      </div>
+    </li>
+    <li>
+      <h3 class="detailed-instructions__title">{% trans "Thanks for helping fight COVID-19" %}</h3>
+      <div class="detailed-instructions__content">
+        <ul>
+          <li>{% trans "COVID Alert will ask permission to upload random codes daily for the next 13 days" %}</li>
+        </ul>
+        <div>
+          <img src="{% static 'img/cat.jpg' %}" />
+        </div>
+      </div>
+    </li>
+  </ol>
+
+  <div class="content-button"><a href="{% url 'start' %}" role='button' draggable='false'>{% trans "Next patient" %}</a></div>
+{% endblock %}

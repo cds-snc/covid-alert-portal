@@ -1,0 +1,79 @@
+#big-code {
+  display: inline-block;
+  background: #eff4f9;
+  padding: $space-md $space-lg;
+  margin-bottom: $space-lg;
+  border-radius: 10px;
+  text-align: center;
+
+  code {
+    display: block;
+    font-size: 1.7em;
+    margin-bottom: $space-sm;
+  }
+
+  span {
+    opacity: 0.6;
+    display: inline-block;
+  }
+}
+
+ol.detailed-instructions {
+  width: 100%;
+
+  @include lg {
+    width: 110%;
+  }
+
+  .detailed-instructions__title {
+    font-size: 1em;
+    font-weight: 400;
+  }
+
+  .detailed-instructions__content {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+
+    @include md {
+      align-items: center;
+      flex-direction: row;
+    }
+
+    /* nested instructions container */
+    ul {
+      flex: 2 1 0;
+
+      padding-left: 22px;
+      padding-right: $space-xl;
+
+      @include md {
+        padding-left: $space-md;
+      }
+
+      li:not(:last-of-type) {
+        margin-bottom: $space-sm;
+      }
+    }
+
+    /* images container */
+    ul ~ div {
+      flex: 1 1 0;
+
+      img {
+        max-width: 100%;
+        border: 2px solid $color-grey-dark;
+        border-radius: 5px;
+        margin: $space-xs 0;
+
+        @include xs {
+          max-width: 85%;
+        }
+
+        @include sm {
+          max-width: 350px;
+        }
+      }
+    }
+  }
+}

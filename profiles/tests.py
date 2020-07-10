@@ -167,9 +167,9 @@ class AuthenticatedView(AdminUserTestCase):
         response = self.client.post("/en/login/", self.credentials, follow=True)
         self.assertTrue(response.context["user"].is_active)
 
-    def test_code(self):
+    def test_number(self):
         """
-        Login and then see the code page and one code
+        Login and then see the number page and one generated code
         """
         self.client.login(username="test@test.com", password="testpassword")
         response = self.client.get(reverse("number"))
@@ -179,7 +179,25 @@ class AuthenticatedView(AdminUserTestCase):
 
         response = self.client.get(reverse("number"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Give patient this number")
+        self.assertContains(response, "<h1>Give patient this number</h1>")
+        self.assertContains(
+            response, "<code>{}</code>".format(response.context["code"])
+        )
+
+    def test_number_instructions(self):
+        """
+        Login and then see the number instructions view and one generated code
+        """
+        self.client.login(username="test@test.com", password="testpassword")
+        response = self.client.get(reverse("number_instructions"))
+        self.assertEqual(response.status_code, 302)
+
+        self.login_2fa()
+
+        response = self.client.get(reverse("number_instructions"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Give patient this number</h1>")
+        self.assertContains(response, "<h2>Detailed instructions</h2>")
         self.assertContains(
             response, "<code>{}</code>".format(response.context["code"])
         )

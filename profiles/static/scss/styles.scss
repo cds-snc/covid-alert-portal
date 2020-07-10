@@ -5,6 +5,9 @@
 /* App-wide styles */
 @import "./_base";
 
+/* Page-specific styles */
+@import "./pages/_number";
+
 /* Partials */
 @import "./components/_button";
 @import "./components/_footer";
