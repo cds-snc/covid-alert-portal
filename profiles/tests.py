@@ -8,7 +8,7 @@ from django.utils import translation
 from django_otp import DEVICE_ID_SESSION_KEY
 from invitations.models import Invitation
 from .forms import SignupForm
-from .models import HealthcareProvince
+from .models import HealthcareProvince, HealthcareUser
 
 
 User = get_user_model()
