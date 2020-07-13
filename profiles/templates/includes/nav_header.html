@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load language_switcher %}
 <nav class="nav--header" aria-label="{% trans 'Language and account navigation' %}">
   <ul>
     <li>
@@ -6,14 +7,14 @@
       {% get_language_info for "en" as langEn %}
       {% get_language_info for "fr" as langFr %}
 
-      <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+      <form id="language_toggle" action="{% url 'set_language' %}" method="post">{% csrf_token %}
         <h2 class="visually-hidden">{% trans "Language selection" }</h2>
         {% if LANGUAGE_CODE == 'en' %}
           <input type="hidden" name="language" value="{{ langFr.code }}" />
-          <a role="button" href="https://portail-alerte-covid.alpha.canada.ca{{request.path}}">{{ langFr.name_local|title }}</a>
+          {% lang_switch langFr %}
         {% else %}
           <input type="hidden" name="language" value="{{ langEn.code }}" />
-          <a role="button" href="https://covid-alert-portal.alpha.canada.ca{{request.path}}">{{ langEn.name_local|title }}</a>
+          {% lang_switch langEn %}
         {% endif %}
       </form>
     </li>
