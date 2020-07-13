@@ -82,8 +82,8 @@ class SignUpView(FormView):
         # Let's login the user right now
         user = authenticate(
             request=self.request,
-            username=form.cleaned_data.get('email'),
-            password=form.cleaned_data.get('password1')
+            username=form.cleaned_data.get("email"),
+            password=form.cleaned_data.get("password1"),
         )
         login(self.request, user)
         email_device = user.emaildevice_set.create()
