@@ -112,7 +112,6 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
         return HealthcareProvince.objects.get(abbr=province_abbr)
 
     def clean_email(self):
-        print("clean email", self.cleaned_data)
         email = self.cleaned_data.get("email", "").lower()
         email_exists = HealthcareUser.objects.filter(email=email)
         if email_exists.count():
