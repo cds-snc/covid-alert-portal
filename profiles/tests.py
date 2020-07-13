@@ -1,4 +1,6 @@
-from django.test import TestCase, Client
+from uuid import uuid4
+from django.conf import settings
+from django.test import TestCase, Client, override_settings
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.contrib import messages
@@ -127,6 +129,32 @@ class DjangoAdminPanelView(AdminUserTestCase):
         response = self.client.get(reverse("admin:index"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Django administration")
+
+    @override_settings(AXES_ENABLED=True)
+    def test_user_lockout(self):
+        post_data = {
+            "username": self.user.email,
+            "password": uuid4(),
+        }
+
+        for i in range(0, settings.AXES_FAILURE_LIMIT - 1):
+            response = self.client.post(
+                reverse("admin:login"),
+                post_data,
+                REMOTE_ADDR="127.0.0.1",
+                HTTP_USER_AGENT="test-browser",
+            )
+            self.assertContains(
+                response, "Please enter the correct email address and password"
+            )
+
+        response = self.client.post(
+            reverse("admin:login"),
+            post_data,
+            REMOTE_ADDR="127.0.0.1",
+            HTTP_USER_AGENT="test-browser",
+        )
+        self.assertEqual(response.status_code, 403)
 
 
 class AuthenticatedView(AdminUserTestCase):

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-13 15:09+0000\n"
+"POT-Creation-Date: 2020-07-13 15:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: portal/settings.py:228
+msgid ""
+"This account has been locked due to too many failed log in attempts. Please "
+"try again after 5 minutes."
+msgstr ""
 
 #: profiles/forms.py:44
 msgid "Enter a valid email address"
@@ -381,15 +387,11 @@ msgstr ""
 "Le patient disposera de 24 heures pour utiliser le numéro avant qu’il "
 "n’expire."
 
-#: profiles/templates/profiles/landing.html:22
+#: profiles/templates/profiles/landing.html:23
 #, python-format
-msgid "<a href=\"%(landing_url)s\">About COVID Alert</a>"
-msgstr "<a href=\"%(landing_url)s\">À propos d'Alerte COVID</a>"
-
-#: profiles/templates/profiles/landing.html:24
-#| msgid "How COVID Alert protects privacy [hyperlink to privacy policy]"
 msgid "<a href=\"%(privacy_url)s\">How COVID Alert Portal protects privacy</a>"
-msgstr "<a href=\"%(privacy_url)s\">Comment Alerte COVID protège la vie privée</a>"
+msgstr ""
+"<a href=\"%(privacy_url)s\">Comment Alerte COVID protège la vie privée</a>"
 
 #: profiles/templates/profiles/privacy.html:12
 msgid ""
@@ -841,6 +843,9 @@ msgstr ""
 #: profiles/views.py:126
 msgid "Security code has been sent."
 msgstr ""
+
+#~ msgid "<a href=\"%(landing_url)s\">About COVID Alert</a>"
+#~ msgstr "<a href=\"%(landing_url)s\">À propos d’Alerte COVID</a>"
 
 #~ msgid "About COVID Alert [hyperlink to site homepage]"
 #~ msgstr "À propos d’Alerte COVID [lien]"
