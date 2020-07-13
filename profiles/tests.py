@@ -172,7 +172,7 @@ class AuthenticatedView(AdminUserTestCase):
         Login and then see the code page and one code
         """
         self.client.login(username="test@test.com", password="testpassword")
-        response = self.client.get(reverse("code"))
+        response = self.client.get(reverse("number"))
         self.assertEqual(response.status_code, 302)
 
         self.login_2fa()
