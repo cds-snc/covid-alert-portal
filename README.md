@@ -21,7 +21,10 @@ pipenv install  # install dependencies
 
 ### Running the app for the first time
 
-Make sure you have activated your virtual environment and move into the top-level `portal` folder.
+**Quick Start:** After activating a virtual environment run the `entrypoint.sh` script to perform the database migrations, static file collection, and compilation of the CSS files.  A server will then be started and can be accessed at `http://127.0.0.1:8000/` or `http://localhost:8000`.
+
+For a more thorough setup of the various environment options please follow the instructions below after having activated your virtual environment, and moved into the top-level `portal` folder.
+
 Copy `./portal/.env.example` to `./portal/.env` and provide the appropriate values for your configuration.
 
 #### 1. Database migrations
@@ -110,6 +113,16 @@ Run `python manage.py compilemessages` to compile the translations so that Djang
 
 For more complete documentation refer to the [Django Translation](https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#translation) docs.
 
+## Before you do a PR
+1. Ensure that you have a commit message that explains all the changes.
+2. Run:
+    a) `python manage.py makemessages -l fr`
+    b) `python manage.py compilemessages`
+    c) `pipenv run format --check`
+    d) `pipenv check`
+    e) `pipenv run lint`
+3. Have some tests (if possible)
+
 ____
 
 # Portail de soins de santé COVID
@@ -133,7 +146,10 @@ pipenv install  # install dependencies
 
 ### Exécuter l’appli pour une première fois
 
-Assurez-vous d’avoir activé l’environnement virtuel et déplacez-vous dans le dossier de haut niveau `portal`.
+**Démarrage rapide:** Après avoir activé un environnement virtuel, exécutez le script `entrypoint.sh` pour effectuer les migrations de base de données, la collecte de fichiers statiques et la compilation des fichiers CSS. Une instance de l'application sera alors démarré et sera accessible à `http://127.0.0.1:8000 /` ou `http://localhost:8000`.
+
+Pour une configuration plus approfondie des différentes options d'environnement, veuillez suivre les instructions ci-dessous après avoir activé votre environnement virtuel et déplacé dans le dossier `portal` de niveau supérieur.
+
 Copiez `./portal/.env.example` vers `./portal/.env` et fournissez les valeurs adéquates pour votre configuration.
 
 #### 1. Migrations de bases de données

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% if profile_user.id == user.id %}
+        {% trans "Your profile" %}
+    {% else %}
+        {% trans "User profile" %}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% if healthcareuser %}
+    {% if healthcareuser.id == user.id %}
+        <h1>{% trans "Your profile" %}</h1>
+    {% else %}
+        <h1>{% trans "User profile" %}</h1>
+    {% endif %}
+
+    <table>
+      <caption class="visually-hidden">{% trans "User profile" %}</caption>
+      <tbody>
+        <tr>
+          <th scope="row">{% trans "Name" %}</td>
+          <td scope="col">{{ healthcareuser.name }}</td>
+        </tr>
+        <tr>
+          <th scope="row">{% trans "Email address" %}</td>
+          <td scope="col">{{ healthcareuser.email }}</td>
+        </tr>
+        <tr>
+          <th scope="row">{% trans "Province" %}</td>
+          <td scope="col">{{ healthcareuser.province.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    {% if user.is_admin %}
+      <div class="content-button"><a class="secondary" href="{% url 'profiles' %}" role='button' draggable='false'>{% trans "Back to accounts" %}</a></div>
+    {% endif %}
+  {% else %}
+    <p>User not found.</p>
+  {% endif %}
+{% endblock %}

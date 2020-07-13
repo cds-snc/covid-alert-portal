@@ -11,19 +11,16 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import sys
 import dj_database_url
 
 from dotenv import load_dotenv
+from datetime import timedelta
+from django.utils.translation import gettext_lazy as _
 
 load_dotenv()
 
-# Tests whether the second command line argument (after ./manage.py) was test
-TESTING = len(sys.argv) > 1 and sys.argv[1] == "test"
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -34,21 +31,29 @@ SECRET_KEY = (
     or "j$e+wzxdum=!k$bwxpgt!$(@6!iasecid^tqnijx@r@o-6x%6d"
 )
 
-debug = os.getenv("DJANGO_DEBUG", "False")
-# DEBUG will be True if DJANGO_DEBUG exists and is "True". Else, false.
-DEBUG = True if debug == "True" else False
+# Application security: should be set to True in production
+# https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/#https
+is_prod = os.getenv("DJANGO_ENV", "development") == "production"
 
+# DEBUG will be True in a developemnt environment and false in production
+DEBUG = not is_prod
 
-ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", ".herokuapp.com"]
+ALLOWED_HOSTS = [
+    "0.0.0.0",
+    "127.0.0.1",
+    "localhost",
+]
 
+if os.getenv("ALLOWED_HOSTS"):
+    ALLOWED_HOSTS.extend(os.getenv("ALLOWED_HOSTS").split(","))
 
 # Application definition
 
 INSTALLED_APPS = [
-    "whitenoise.runserver_nostatic",
     "django_sass",
     "profiles",
     "invitations",
+    "axes",
     "django.contrib.sites",  # Required for invitations
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -56,18 +61,21 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.admin",  # we want our auth templates loaded first
+    "django_otp",
+    "django_otp.plugins.otp_email",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django_otp.middleware.OTPMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "axes.middleware.AxesMiddleware",
 ]
 
 ROOT_URLCONF = "portal.urls"
@@ -88,20 +96,22 @@ TEMPLATES = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    "axes.backends.AxesBackend",  # Needs to be first
+    "django.contrib.auth.backends.ModelBackend",
+]
+
 WSGI_APPLICATION = "portal.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-if TESTING:
-    db_config = {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    }
-elif os.getenv("DATABASE_URL"):
-    db_config = dj_database_url.config(conn_max_age=600, ssl_require=True)
-else:
+default_db_path = os.path.join(BASE_DIR, "db.sqlite3")
+if os.getenv("DATABASE_URL") == "":
+    del os.environ["DATABASE_URL"]
+
+if os.getenv("DATABASE_HOST") and not (os.getenv("DATABASE_HOST") == ""):
     db_config = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "covid_portal",
@@ -110,6 +120,10 @@ else:
         "HOST": os.getenv("DATABASE_HOST", "localhost"),
         "PORT": os.getenv("DATABASE_PORT", ""),
     }
+else:
+    db_config = dj_database_url.config(
+        default=f"sqlite:///{default_db_path}", conn_max_age=600, ssl_require=is_prod
+    )
 
 DATABASES = {"default": db_config}
 
@@ -146,14 +160,15 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Application security: should be set to True in production
-# https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/#https
-is_prod = os.getenv("DJANGO_ENV", "development") == "production"
+SERVICE_NAME = "COVID Alert Portal"
 
 SECURE_SSL_REDIRECT = is_prod
 SESSION_COOKIE_SECURE = is_prod
 CSRF_COOKIE_SECURE = is_prod
 SECURE_BROWSER_XSS_FILTER = is_prod
+
+# Limit session times to 20h, this should make it that users need to relogin every morning.
+SESSION_COOKIE_AGE = 72000
 
 # Setting SECURE_SSL_REDIRECT on heroku was causing infinite redirects without this
 if is_prod:
@@ -174,6 +189,7 @@ STATIC_URL = "/static/"
 AUTH_USER_MODEL = "profiles.HealthcareUser"
 
 LOGIN_URL = "login"
+OTP_LOGIN_URL = "login-2fa"
 LOGIN_REDIRECT_URL = "start"
 LOGOUT_REDIRECT_URL = "landing"
 
@@ -186,7 +202,9 @@ INVITATIONS_EMAIL_SUBJECT_PREFIX = ""
 INVITATIONS_INVITATION_ONLY = True
 
 # Email setup
-EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
+EMAIL_BACKEND = (
+    os.getenv("EMAIL_BACKEND") or "django.core.mail.backends.console.EmailBackend"
+)
 EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
@@ -194,3 +212,23 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 email_use_tls = os.getenv("EMAIL_USE_TLS", "True")
 EMAIL_USE_TLS = True if email_use_tls == "True" else False
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+
+# Default Super User Setup
+CREATE_DEFAULT_SU = os.getenv("DJANGO_DEFAULT_SU", "False") == "True"
+SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
+
+# Login Rate Limiting
+if os.getenv("DJANGO_ENV", "production") == "tests":
+    AXES_ENABLED = False
+
+AXES_FAILURE_LIMIT = 5  # Lockout after 5 failed login attempts
+AXES_COOLOFF_MESSAGE = _(
+    "This account has been locked due to too many failed log in attempts. Please try again after 5 minutes."
+)
+AXES_COOLOFF_TIME = timedelta(minutes=5)  # Lock out for 5 Minutes
+AXES_ONLY_USER_FAILURES = True  # Default is to lockout both IP and username. We set this to True so it'll only lockout the username and not lockout a whole department behind a NAT
+AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
+    "HTTP_X_FORWARDED_FOR",
+    "REAL_IP",
+    "REMOTE_ADDR",
+]

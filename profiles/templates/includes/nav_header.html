@@ -1,5 +1,5 @@
 {% load i18n %}
-<nav class="nav--header">
+<nav class="nav--header" aria-label="{% trans 'Language and account navigation' %}">
   <ul>
     <li>
       {% get_current_language as LANGUAGE_CODE %}
@@ -18,9 +18,10 @@
       </form>
     </li>
     {% if user.is_authenticated %}
+      <li><a href="{% url 'user_profile' user.id %}">{{ user.email }}</a></li>
       <li><a href="{% url 'logout' %}">{% trans 'Log out' %}</a></li>
     {% else %}
-      <li><a href="{% url 'login' %}">{% trans 'Login' %}</a></li>
+      <li><a href="{% url 'login' %}">{% trans 'Log in' %}</a></li>
     {% endif %}
   </ul>
 </nav>

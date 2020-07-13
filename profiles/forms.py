@@ -2,6 +2,7 @@ from django.contrib.auth.forms import (
     UserChangeForm,
     AuthenticationForm,
     PasswordResetForm,
+    UserCreationForm,
 )
 from django import forms
 from django.core.exceptions import ValidationError
@@ -9,13 +10,21 @@ from django.core.validators import EmailValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
 
 from invitations.models import Invitation
-from .models import HealthcareUser
+from invitations.forms import InviteForm
+
+from .models import HealthcareUser, HealthcareProvince
+from .utils import generate_2fa_code
 
 
 class HealthcareBaseForm(forms.Form):
     def __init__(self, *args, **kwargs):
+        # Remove the colon after field labels
         kwargs.setdefault("label_suffix", "")
-        super(HealthcareBaseForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
+
+        # override field attributes: https://stackoverflow.com/a/56870308
+        for field in self.fields:
+            self.fields[field].widget.attrs.pop("autofocus", None)
 
 
 class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
@@ -27,18 +36,44 @@ class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
     class Meta:
         model = HealthcareUser
 
-    # override field attributes: https://stackoverflow.com/a/56870308
     def __init__(self, *args, **kwargs):
         super(HealthcareAuthenticationForm, self).__init__(*args, **kwargs)
-
-        # remove autofocus from fields
-        for field in self.fields:
-            self.fields[field].widget.attrs.pop("autofocus", None)
 
         # update / translate validation message for invalid emails
         self.fields["username"].validators = [
             EmailValidator(message=_("Enter a valid email address"))
         ]
+
+    def is_valid(self):
+        is_valid = super().is_valid()
+        if is_valid is False:
+            return is_valid
+
+        user = self.get_user()
+        generate_2fa_code(user)
+
+        return is_valid
+
+
+class Resend2FACodeForm(HealthcareBaseForm):
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+
+    def is_valid(self):
+        if self.user is None or self.user.is_authenticated is False:
+            return False
+
+        generate_2fa_code(self.user)
+        return True
+
+
+class Healthcare2FAForm(HealthcareBaseForm):
+    code = forms.CharField(
+        widget=forms.TextInput,
+        label=_("Please enter the security code."),
+        required=True,
+    )
 
 
 class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
@@ -48,30 +83,36 @@ class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
     """
 
     def __init__(self, *args, **kwargs):
-        super(HealthcarePasswordResetForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
-        # remove autofocus from email
-        self.fields["email"].widget.attrs.pop("autofocus", None)
         # Otherwise it just says "Email"
         self.fields["email"].label = _("Email address")
 
 
-# TODO: Potentially refactor to extend UserCreationForm
-class SignupForm(HealthcareBaseForm):
-    """A form for creating new users. Includes all the required
-    fields, plus a repeated password."""
+class SignupForm(HealthcareBaseForm, UserCreationForm):
+    """A form for creating new users. Extends from UserCreation form, which
+    means it includes a repeated password."""
 
-    email = forms.EmailField(label=_("Email address"), disabled=True)
-    name = forms.CharField(label=_("Full name"), validators=[MaxLengthValidator(200)])
-    password1 = forms.CharField(
-        label=_("Password"),
-        widget=forms.PasswordInput,
-        help_text=_("At least 12 characters"),
+    # disabled fields aren't submitted / ie, can't be modified
+    email = forms.CharField(
+        widget=forms.TextInput, label=_("Email address"), disabled=True
     )
-    password2 = forms.CharField(label=_("Confirm password"), widget=forms.PasswordInput)
+    province = forms.CharField(widget=forms.HiddenInput, disabled=True)
 
-    def clean(self):
-        self.cleaned_data = super().clean()
+    name = forms.CharField(label=_("Full name"), validators=[MaxLengthValidator(200)])
+
+    class Meta:
+        model = HealthcareUser
+        fields = ("email", "province", "name")
+
+    def clean_province(self):
+        # returns a province abbreviation as a string
+        # always returns the province abbr from "get_initial"
+        province_abbr = self.cleaned_data.get("province", "")
+        return HealthcareProvince.objects.get(abbr=province_abbr)
+
+    def clean_email(self):
+        print("clean email", self.cleaned_data)
         email = self.cleaned_data.get("email", "").lower()
         email_exists = HealthcareUser.objects.filter(email=email)
         if email_exists.count():
@@ -79,31 +120,7 @@ class SignupForm(HealthcareBaseForm):
         if not Invitation.objects.filter(email__iexact=email):
             raise ValidationError(_("An invitation hasn't been sent to this address"))
 
-        self.cleaned_data["email"] = email
-        return self.cleaned_data
-
-    def clean_name(self):
-        name = self.cleaned_data["name"]
-        if len(name) > 200:
-            raise ValidationError(_("Name is too long"))
-        return name
-
-    def clean_password2(self):
-        password1 = self.cleaned_data.get("password1")
-        password2 = self.cleaned_data.get("password2")
-
-        if password1 and password2 and password1 != password2:
-            raise ValidationError(_("Passwords don't match"))
-
-        return password2
-
-    def save(self, commit=True):
-        user = HealthcareUser.objects.create_user(
-            self.cleaned_data["email"],
-            self.cleaned_data["name"],
-            self.cleaned_data["password1"],
-        )
-        return user
+        return email
 
 
 class HealthcareUserEditForm(UserChangeForm):
@@ -116,3 +133,26 @@ class HealthcareUserEditForm(UserChangeForm):
         widgets = {
             "email": forms.EmailInput(attrs={"readonly": "readonly"}),
         }
+
+
+class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Otherwise it just says "Email"
+        self.fields["email"].label = _("Email address")
+
+    def validate_invitation(self, email):
+        # Delete all non-accepted, valid invitations for the same email, if they exists
+        Invitation.objects.all_valid().filter(
+            email__iexact=email, accepted=False
+        ).delete()
+        return super().validate_invitation(email)
+
+    # https://github.com/bee-keeper/django-invitations/blob/9069002f1a0572ae37ffec21ea72f66345a8276f/invitations/forms.py#L60
+    def save(self, *args, **kwargs):
+        # user is passed by the view
+        user = kwargs["user"]
+        cleaned_data = super().clean()
+        params = {"email": cleaned_data.get("email"), "inviter": user}
+        return Invitation.create(**params)
