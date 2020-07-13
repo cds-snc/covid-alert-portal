@@ -237,6 +237,15 @@ AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
 ]
 =======
 # Site Setup for Separate Domains
+<<<<<<< HEAD
 URL_EN_PRODUCTION = os.getenv("URL_EN_PRODUCTION", "https://covid-alert-portal.alpha.canada.ca")
 URL_FR_PRODUCTION = os.getenv("URL_FR_PRODUCTION", "https://portail-alerte-covid.alpha.canada.ca")
 >>>>>>> Template tag for language switching
+=======
+URL_EN_PRODUCTION = os.getenv(
+    "URL_EN_PRODUCTION", "https://covid-alert-portal.alpha.canada.ca"
+)
+URL_FR_PRODUCTION = os.getenv(
+    "URL_FR_PRODUCTION", "https://portail-alerte-covid.alpha.canada.ca"
+)
+>>>>>>> Reformatting
