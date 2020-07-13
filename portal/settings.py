@@ -223,7 +223,7 @@ SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
 if os.getenv("DJANGO_ENV", "production") == "tests":
     AXES_ENABLED = False
 
-AXES_FAILURE_LIMIT = 5  # Lockout after 10 failed login attempts
+AXES_FAILURE_LIMIT = 5  # Lockout after 5 failed login attempts
 AXES_COOLOFF_MESSAGE = _(
     "This account has been locked due to too many failed log in attempts. Please try again after 5 minutes."
 )
