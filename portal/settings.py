@@ -166,6 +166,7 @@ SERVICE_NAME = "COVID Alert Portal"
 SECURE_SSL_REDIRECT = is_prod
 SESSION_COOKIE_SECURE = is_prod
 CSRF_COOKIE_SECURE = is_prod
+CSRF_COOKIE_HTTPONLY = is_prod
 SECURE_BROWSER_XSS_FILTER = is_prod
 
 # Limit session times to 20h, this should make it that users need to relogin every morning.
@@ -239,3 +240,6 @@ CSP_DEFAULT_SRC = ["'self'"]
 CSP_STYLE_SRC = ["'self'",'fonts.googleapis.com']
 CSP_FONT_SRC = ["'self'", 'fonts.gstatic.com' ]
 CSP_SCRIPT_SRC = ["'self'", 'cdnjs.cloudflare.com']
+# Force the site to use HTTPS (6 Months below is minimum value accepted)
+if is_prod:
+    SECURE_HSTS_SECONDS = 15768000
