@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-10 17:51-0400\n"
+"POT-Creation-Date: 2020-07-13 15:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,246 +18,248 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\portal\settings.py:228
+#: portal/settings.py:228
 msgid ""
 "This account has been locked due to too many failed log in attempts. Please "
 "try again after 5 minutes."
 msgstr ""
 
-#: .\profiles\forms.py:44
+#: profiles/forms.py:44
 msgid "Enter a valid email address"
 msgstr "Entrez une adresse courriel valide"
 
-#: .\profiles\forms.py:74
+#: profiles/forms.py:74
 msgid "Please enter the security code."
 msgstr ""
 
-#: .\profiles\forms.py:89 .\profiles\forms.py:98 .\profiles\forms.py:143
-#: .\profiles\templates\profiles\healthcareuser_detail.html:28
-#: .\profiles\templates\profiles\healthcareuser_list.html:14
+#: profiles/forms.py:89 profiles/forms.py:98 profiles/forms.py:143
+#: profiles/templates/profiles/healthcareuser_detail.html:28
+#: profiles/templates/profiles/healthcareuser_list.html:14
 msgid "Email address"
 msgstr "Adresse courriel"
 
-#: .\profiles\forms.py:102
+#: profiles/forms.py:102
 msgid "Full name"
 msgstr "Nom complet"
 
-#: .\profiles\forms.py:119
+#: profiles/forms.py:119
 msgid "Email already exists"
 msgstr "L’adresse courriel existe déjà"
 
-#: .\profiles\forms.py:121
+#: profiles/forms.py:121
 msgid "An invitation hasn't been sent to this address"
 msgstr ""
 
-#: .\profiles\templates\base.html:19 .\profiles\templates\base.html:32
+#: profiles/templates/base.html:19 profiles/templates/base.html:32
 msgid "Generate COVID Alert number"
 msgstr "Générer un numéro pour Alerte COVID"
 
-#: .\profiles\templates\includes\FIP_header.html:6
-#: .\profiles\templates\includes\FIP_header.html:8
+#: profiles/templates/includes/FIP_header.html:6
+#: profiles/templates/includes/FIP_header.html:8
 msgid "Government of Canada"
 msgstr "Gouvernement du Canada"
 
-#: .\profiles\templates\includes\cds_form.html:31
+#: profiles/templates/includes/cds_form.html:31
 msgid "Submit"
 msgstr "Soumettre"
 
-#: .\profiles\templates\includes\error_list.html:6
+#: profiles/templates/includes/error_list.html:6
 msgid "Please correct the errors on the page"
 msgstr "Veuillez corriger les erreurs trouvées dans la page"
 
-#: .\profiles\templates\includes\expires_string.html:6
+#: profiles/templates/includes/expires_string.html:6
 msgid "Number expires"
 msgstr "Le numéro expire le"
 
-#: .\profiles\templates\includes\expires_string.html:14
+#: profiles/templates/includes/expires_string.html:14
 msgid "at"
 msgstr "à"
 
-#: .\profiles\templates\includes\footer.html:8
+#: profiles/templates/includes/footer.html:8
 msgid "Contact"
 msgstr "Contact"
 
-#: .\profiles\templates\includes\footer.html:9
+#: profiles/templates/includes/footer.html:9
 msgid "Terms and conditions"
 msgstr "Avis"
 
-#: .\profiles\templates\includes\footer.html:10
+#: profiles/templates/includes/footer.html:10
+#: profiles/templates/profiles/privacy.html:5
+#: profiles/templates/profiles/privacy.html:11
 msgid "Privacy"
 msgstr "Confidentialité"
 
-#: .\profiles\templates\includes\footer.html:13
+#: profiles/templates/includes/footer.html:13
 msgid "Symbol of the Government of Canada"
 msgstr "Symbole du gouvernement du Canada"
 
-#: .\profiles\templates\includes\nav_header.html:2
+#: profiles/templates/includes/nav_header.html:2
 msgid "Language and account navigation"
 msgstr ""
 
-#: .\profiles\templates\includes\nav_header.html:22
+#: profiles/templates/includes/nav_header.html:22
 msgid "Log out"
 msgstr "Déconnexion"
 
-#: .\profiles\templates\includes\nav_header.html:24
-#: .\profiles\templates\profiles\landing.html:19
-#: .\profiles\templates\registration\login.html:6
-#: .\profiles\templates\registration\login.html:12
+#: profiles/templates/includes/nav_header.html:24
+#: profiles/templates/profiles/landing.html:19
+#: profiles/templates/registration/login.html:6
+#: profiles/templates/registration/login.html:12
 msgid "Log in"
 msgstr "Connexion"
 
-#: .\profiles\templates\includes\nav_main.html:3
+#: profiles/templates/includes/nav_main.html:3
 msgid "Product navigation"
 msgstr ""
 
-#: .\profiles\templates\includes\nav_main.html:6
+#: profiles/templates/includes/nav_main.html:6
 msgid "Start"
 msgstr "Accueil"
 
-#: .\profiles\templates\includes\nav_main.html:8
-#: .\profiles\templates\profiles\healthcareuser_list.html:4
-#: .\profiles\templates\profiles\healthcareuser_list.html:7
+#: profiles/templates/includes/nav_main.html:8
+#: profiles/templates/profiles/healthcareuser_list.html:4
+#: profiles/templates/profiles/healthcareuser_list.html:7
 msgid "Manage accounts"
 msgstr "Gérer les comptes"
 
-#: .\profiles\templates\includes\phase_banner.html:4
+#: profiles/templates/includes/phase_banner.html:4
 msgid "This site will change as we test ideas."
 msgstr "Ce site évoluera au fur et à mesure que nous testons des idées."
 
-#: .\profiles\templates\invitations\email\email_invite_subject.html:2
-#: .\profiles\templates\invitations\email\email_invite_subject.txt:2
+#: profiles/templates/invitations/email/email_invite_subject.html:2
+#: profiles/templates/invitations/email/email_invite_subject.txt:2
 msgid "Invitation to join COVID-ALERT medical portal"
 msgstr ""
 
-#: .\profiles\templates\invitations\forms\_invite.html:3
+#: profiles/templates/invitations/forms/_invite.html:3
 msgid "Invite"
 msgstr ""
 
-#: .\profiles\templates\invitations\forms\_invite.html:4
+#: profiles/templates/invitations/forms/_invite.html:4
 msgid ""
 "Please add an email below. The user will receive an email with instructions."
 msgstr ""
 
-#: .\profiles\templates\invitations\forms\_invite.html:9
+#: profiles/templates/invitations/forms/_invite.html:9
 msgid "Email"
 msgstr "Adresse courriel"
 
-#: .\profiles\templates\invitations\messages\invite_accepted.txt:3
+#: profiles/templates/invitations/messages/invite_accepted.txt:3
 #, python-format
 msgid "Invitation to - %(email)s - has been accepted"
 msgstr ""
 
-#: .\profiles\templates\invitations\templates\invite.html:5
-#: .\profiles\templates\invitations\templates\invite_complete.html:5
-#: .\profiles\templates\profiles\2fa-resend.html:5
-#: .\profiles\templates\profiles\2fa.html:5
-#: .\profiles\templates\profiles\healthcareuser_confirm_delete.html:5
-#: .\profiles\templates\profiles\signup.html:5
-#: .\profiles\templates\registration\login.html:5
-#: .\profiles\templates\registration\password_reset_form.html:5
+#: profiles/templates/invitations/templates/invite.html:5
+#: profiles/templates/invitations/templates/invite_complete.html:5
+#: profiles/templates/profiles/2fa-resend.html:5
+#: profiles/templates/profiles/2fa.html:5
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:5
+#: profiles/templates/profiles/signup.html:5
+#: profiles/templates/registration/login.html:5
+#: profiles/templates/registration/password_reset_form.html:5
 msgid "Error: "
 msgstr "Erreur : "
 
-#: .\profiles\templates\invitations\templates\invite.html:6
-#: .\profiles\templates\invitations\templates\invite.html:11
-#: .\profiles\templates\profiles\healthcareuser_list.html:8
+#: profiles/templates/invitations/templates/invite.html:6
+#: profiles/templates/invitations/templates/invite.html:11
+#: profiles/templates/profiles/healthcareuser_list.html:8
 msgid "Add an account"
 msgstr "Ajouter un nouveau compte"
 
-#: .\profiles\templates\invitations\templates\invite.html:13
+#: profiles/templates/invitations/templates/invite.html:13
 msgid "Send invitation email"
 msgstr "Envoyer un courriel d’invitation"
 
-#: .\profiles\templates\invitations\templates\invite_complete.html:6
-#: .\profiles\templates\invitations\templates\invite_complete.html:11
+#: profiles/templates/invitations/templates/invite_complete.html:6
+#: profiles/templates/invitations/templates/invite_complete.html:11
 msgid "Invitation sent"
 msgstr "Invitation envoyée"
 
-#: .\profiles\templates\invitations\templates\invite_complete.html:17
+#: profiles/templates/invitations/templates/invite_complete.html:17
 msgid ""
 "They will receive a signup link in their inbox. The link will expire in 3 "
 "days."
 msgstr ""
 
-#: .\profiles\templates\invitations\templates\invite_complete.html:19
+#: profiles/templates/invitations/templates/invite_complete.html:19
 msgid "Add another account"
 msgstr "Ajouter un autre compte"
 
-#: .\profiles\templates\invitations\templates\invite_complete.html:20
+#: profiles/templates/invitations/templates/invite_complete.html:20
 msgid "Manage existing accounts"
 msgstr "Gérer les comptes existants"
 
-#: .\profiles\templates\profiles\2fa-resend.html:6
+#: profiles/templates/profiles/2fa-resend.html:6
 msgid "Resend the security code"
 msgstr ""
 
-#: .\profiles\templates\profiles\2fa-resend.html:13
-#: .\profiles\templates\profiles\2fa-resend.html:15
+#: profiles/templates/profiles/2fa-resend.html:13
+#: profiles/templates/profiles/2fa-resend.html:15
 msgid "Resend security code"
 msgstr ""
 
-#: .\profiles\templates\profiles\2fa-resend.html:14
+#: profiles/templates/profiles/2fa-resend.html:14
 msgid ""
 "Sometimes email messages takes a few minutes to arrive. If you don't receive "
 "the email, you can resend it."
 msgstr ""
 
-#: .\profiles\templates\profiles\2fa-resend.html:17
+#: profiles/templates/profiles/2fa-resend.html:17
 msgid "Has your email address changed since you joined COVID Alert portal?"
 msgstr ""
 
-#: .\profiles\templates\profiles\2fa-resend.html:18
+#: profiles/templates/profiles/2fa-resend.html:18
 msgid "Please ask your account manager to reset it."
 msgstr ""
 
-#: .\profiles\templates\profiles\2fa.html:6
+#: profiles/templates/profiles/2fa.html:6
 msgid "Validate your code"
 msgstr ""
 
-#: .\profiles\templates\profiles\2fa.html:13
-#: .\profiles\templates\registration\password_reset_done.html:3
-#: .\profiles\templates\registration\password_reset_done.html:6
+#: profiles/templates/profiles/2fa.html:13
+#: profiles/templates/registration/password_reset_done.html:3
+#: profiles/templates/registration/password_reset_done.html:6
 msgid "Check your email"
 msgstr "Vérifiez vos courriels"
 
-#: .\profiles\templates\profiles\2fa.html:14
+#: profiles/templates/profiles/2fa.html:14
 msgid "We've sent you an email with a security code to sign in"
 msgstr ""
 
-#: .\profiles\templates\profiles\2fa.html:15
+#: profiles/templates/profiles/2fa.html:15
 msgid "Continue"
 msgstr ""
 
-#: .\profiles\templates\profiles\2fa.html:16
+#: profiles/templates/profiles/2fa.html:16
 msgid "Not received an email?"
 msgstr ""
 
-#: .\profiles\templates\profiles\code.html:5
-#: .\profiles\templates\profiles\code.html:8
+#: profiles/templates/profiles/code.html:5
+#: profiles/templates/profiles/code.html:8
 msgid "Give patient this number"
 msgstr "Donnez le numéro suivant au patient"
 
-#: .\profiles\templates\profiles\code.html:14
+#: profiles/templates/profiles/code.html:14
 msgid "Tell patient to:"
 msgstr "Dites au patient de :"
 
-#: .\profiles\templates\profiles\code.html:16
+#: profiles/templates/profiles/code.html:16
 msgid "Keep the number somewhere safe"
 msgstr "Garder le numéro dans un endroit sûr"
 
-#: .\profiles\templates\profiles\code.html:17
+#: profiles/templates/profiles/code.html:17
 msgid "Enter the number within <strong>24 hours</strong> or it will expire"
 msgstr ""
 "Utiliser le numéro au cours des <strong>24 prochaines heures</strong>, sinon "
 "il sera expiré"
 
-#: .\profiles\templates\profiles\code.html:18
+#: profiles/templates/profiles/code.html:18
 msgid "Contact your office if they lose the number or it doesn’t work"
 msgstr ""
 "Communiquer avec votre bureau s’il perd le numéro ou si le numéro ne "
 "fonctionne pas"
 
-#: .\profiles\templates\profiles\code.html:19
+#: profiles/templates/profiles/code.html:19
 msgid ""
 "Use the app to anonymously notify people by tapping “Diagnosed with "
 "COVID-19? Enter number”. The app will guide the patient through the steps to "
@@ -267,104 +269,104 @@ msgstr ""
 "personnes en appuyant sur « Vous avez la COVID-19? Entrer le numéro ». "
 "L’application guidera le patient pour qu’il entre son numéro."
 
-#: .\profiles\templates\profiles\code.html:22
+#: profiles/templates/profiles/code.html:22
 msgid "Next patient"
 msgstr "Prochain patient"
 
-#: .\profiles\templates\profiles\healthcareuser_confirm_delete.html:6
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:6
 msgid "Confirm delete user"
 msgstr ""
 
-#: .\profiles\templates\profiles\healthcareuser_confirm_delete.html:13
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:13
 msgid "Confirm account removal"
 msgstr ""
 
-#: .\profiles\templates\profiles\healthcareuser_confirm_delete.html:14
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:14
 #, python-format
 msgid "Are you sure you want to delete %(name)s’s account at “%(email)s”?"
 msgstr ""
 
-#: .\profiles\templates\profiles\healthcareuser_confirm_delete.html:15
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:15
 msgid ""
 "If you remove their account, they will not be able to use the COVID Portal "
 "until they are invited back."
 msgstr ""
 
-#: .\profiles\templates\profiles\healthcareuser_confirm_delete.html:16
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:16
 msgid "Yes, I am sure"
 msgstr ""
 
-#: .\profiles\templates\profiles\healthcareuser_confirm_delete.html:17
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:17
 msgid "No, take me back"
 msgstr ""
 
-#: .\profiles\templates\profiles\healthcareuser_detail.html:6
-#: .\profiles\templates\profiles\healthcareuser_detail.html:15
+#: profiles/templates/profiles/healthcareuser_detail.html:6
+#: profiles/templates/profiles/healthcareuser_detail.html:15
 msgid "Your profile"
 msgstr "Votre profil"
 
-#: .\profiles\templates\profiles\healthcareuser_detail.html:8
-#: .\profiles\templates\profiles\healthcareuser_detail.html:17
-#: .\profiles\templates\profiles\healthcareuser_detail.html:21
+#: profiles/templates/profiles/healthcareuser_detail.html:8
+#: profiles/templates/profiles/healthcareuser_detail.html:17
+#: profiles/templates/profiles/healthcareuser_detail.html:21
 msgid "User profile"
 msgstr "Profil utilisateur"
 
-#: .\profiles\templates\profiles\healthcareuser_detail.html:24
+#: profiles/templates/profiles/healthcareuser_detail.html:24
 msgid "Name"
 msgstr "Nom"
 
-#: .\profiles\templates\profiles\healthcareuser_detail.html:32
+#: profiles/templates/profiles/healthcareuser_detail.html:32
 msgid "Province"
 msgstr "Province"
 
-#: .\profiles\templates\profiles\healthcareuser_detail.html:39
+#: profiles/templates/profiles/healthcareuser_detail.html:39
 msgid "Back to accounts"
 msgstr "Retour aux comptes"
 
-#: .\profiles\templates\profiles\healthcareuser_list.html:11
+#: profiles/templates/profiles/healthcareuser_list.html:11
 msgid "User accounts"
 msgstr "Comptes d'utilisateurs"
 
-#: .\profiles\templates\profiles\healthcareuser_list.html:15
+#: profiles/templates/profiles/healthcareuser_list.html:15
 msgid "Permissions"
 msgstr "Droit d’accès"
 
-#: .\profiles\templates\profiles\healthcareuser_list.html:16
+#: profiles/templates/profiles/healthcareuser_list.html:16
 msgid "Actions"
 msgstr "Actions"
 
-#: .\profiles\templates\profiles\healthcareuser_list.html:23
+#: profiles/templates/profiles/healthcareuser_list.html:23
 msgid "Admin,Staff"
 msgstr "Administrateur,Employé"
 
-#: .\profiles\templates\profiles\healthcareuser_list.html:27
+#: profiles/templates/profiles/healthcareuser_list.html:27
 msgid "Remove"
 msgstr "Retirer"
 
-#: .\profiles\templates\profiles\landing.html:4
-#: .\profiles\templates\profiles\landing.html:8
+#: profiles/templates/profiles/landing.html:4
+#: profiles/templates/profiles/landing.html:8
 msgid "Welcome to Generate COVID Alert number"
 msgstr "Bienvenue dans Générer un numéro Alerte COVID"
 
-#: .\profiles\templates\profiles\landing.html:9
+#: profiles/templates/profiles/landing.html:9
 msgid "The COVID Alert notifies people if they’ve been exposed to COVID-19."
 msgstr ""
 "L’application Alerte COVID avise les personnes en cas d’exposition à la "
 "COVID-19."
 
-#: .\profiles\templates\profiles\landing.html:10
+#: profiles/templates/profiles/landing.html:10
 msgid "If a patient:"
 msgstr "Si un patient :"
 
-#: .\profiles\templates\profiles\landing.html:12
+#: profiles/templates/profiles/landing.html:12
 msgid "is diagnosed with COVID-19, <strong>and</strong>"
 msgstr "a un diagnostic de COVID-19 <strong>et</strong>"
 
-#: .\profiles\templates\profiles\landing.html:13
+#: profiles/templates/profiles/landing.html:13
 msgid "has the app installed on their mobile device"
 msgstr "a l’application Alerte COVID sur son téléphone mobile"
 
-#: .\profiles\templates\profiles\landing.html:15
+#: profiles/templates/profiles/landing.html:15
 msgid ""
 "they can enter a COVID Alert number to anonymously notify people they’ve "
 "been near in the past 14 days."
@@ -373,68 +375,436 @@ msgstr ""
 "façon anonyme les personnes dont il a été près au cours des 14 derniers "
 "jours."
 
-#: .\profiles\templates\profiles\landing.html:16
+#: profiles/templates/profiles/landing.html:16
 msgid "Only an authorized health care worker can give a COVID Alert number."
 msgstr ""
 "Seuls les professionnels de la santé autorisés peuvent donner un numéro "
 "Alerte COVID."
 
-#: .\profiles\templates\profiles\landing.html:17
+#: profiles/templates/profiles/landing.html:17
 msgid "The patient has 24 hours to enter the number before it expires."
 msgstr ""
 "Le patient disposera de 24 heures pour utiliser le numéro avant qu’il "
 "n’expire."
 
-#: .\profiles\templates\profiles\landing.html:21
-msgid "About COVID Alert [hyperlink to site homepage]"
-msgstr "À propos d’Alerte COVID [lien]"
+#: profiles/templates/profiles/landing.html:23
+#, python-format
+msgid "<a href=\"%(privacy_url)s\">How COVID Alert Portal protects privacy</a>"
+msgstr ""
+"<a href=\"%(privacy_url)s\">Comment Alerte COVID protège la vie privée</a>"
 
-#: .\profiles\templates\profiles\landing.html:22
-msgid "How COVID Alert protects privacy [hyperlink to privacy policy]"
-msgstr "Comment Alerte COVID protège la vie privée"
+#: profiles/templates/profiles/privacy.html:12
+msgid ""
+"\n"
+"        <p>The Government of Canada is committed to protect the privacy of "
+"its visitors on its websites. This privacy notice summarizes the privacy "
+"policy and practices of Canadian Digital Service websites, which are under "
+"the responsibility of the <a href=\"https://www.canada.ca/en/treasury-board-"
+"secretariat.html\">Treasury Board of Canada Secretariat</a> (TBS).</p>\n"
+"        <h2>Your privacy and the Internet</h2>\n"
+"        <p>Specific personal information, such as your name, phone number or "
+"email address, is not automatically gathered. TBS would only obtain this "
+"type of information if you supply it by email or by registering in a secure "
+"portion of the site for a program or service (e.g. personal information "
+"provided voluntarily when you complete an online form or request for "
+"service).</p>\n"
+"        <p>The nature of the Internet is such that Web servers automatically "
+"collect certain information about a visit to a website, including the "
+"visitor's Internet Protocol (IP) address. IP addresses are unique numbers "
+"assigned by Internet Service Providers (ISP) to all devices used to access "
+"the Internet. Web servers automatically log the IP addresses of visitors to "
+"their sites. The IP address, on its own, does not identify an individual. "
+"However, in certain circumstances, such as with the co-operation of an ISP "
+"for example, it could be used to identify an individual using the site. For "
+"this reason, the Government of Canada considers the IP address to be "
+"personal information, particularly when combined with other data "
+"automatically collected when a visitor requests a Web page such as the page "
+"or pages visited, date and time of the visit.</p>\n"
+"        <p>In cases where services are provided by organisations outside of "
+"the Government of Canada, such as social media platforms, search or mobile "
+"applications, IP addresses may be recorded by the third-party service "
+"provider.</p>\n"
+"        <p>All personal information created, held or collected by the "
+"Government of Canada is protected under the federal Privacy Act. At any "
+"point of collection, you will be asked for consent to collect your "
+"information or you will be advised of the authority for such collection. You "
+"will also be informed of the purpose for which the personal information is "
+"being collected, and how to exercise your right of access to, and correction "
+"of, that information. In such cases, how your personal information is "
+"handled is described in a Personal Information Collection Statement.</p>\n"
+"        <p>Visitors' personal information is not usually disclosed to anyone "
+"except Government of Canada personnel who need the information to carry out "
+"their responsibilities. Any further disclosure of the personal information "
+"you provide would be in accordance with the federal <a href=\"https://laws-"
+"lois.justice.gc.ca/eng/acts/P-21/index.html\">Privacy Act</a>.</p>\n"
+"        <h2>Communicating with the Canadian Digital Service</h2>\n"
+"        <p>If you choose to send an email to the Canadian Digital Service, "
+"your personal information may be used in order to respond to your inquiry. "
+"TBS does not use the information to create individual profiles. Any "
+"disclosure of your personal information is in accordance with the <a href="
+"\"https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html\">Privacy Act</a>."
+"</p>\n"
+"        <p>Emails and other electronic methods used to communicate with the "
+"Government of Canada are not secure unless it is specifically stated on a "
+"Web page. Therefore, it is recommended that you do not send sensitive "
+"personal information, such as your Social Insurance Number or your date of "
+"birth, through non-secure electronic means.</p>\n"
+"        <p>Personal information from emails is collected pursuant to section "
+"7 of the Financial Administration Act. Such information may be used for "
+"statistical, evaluation and reporting purposes and is included in Personal "
+"Information Bank <a href=\"https://www.canada.ca/en/treasury-board-"
+"secretariat/services/access-information-privacy/access-information/"
+"information-about-programs-information-holdings.html#psu914\">Public "
+"Communications (PSU 914)</a>.</p>\n"
+"        <h2>Third-party social media</h2>\n"
+"        <p>The Government of Canada's use of social media serves as an "
+"extension of its presence on the Web. Social media account(s) are public and "
+"are not hosted on Government of Canada servers. Users who choose to interact "
+"with the Government of Canada, including the Canadian Digital Service, via "
+"social media should read the terms of service and privacy policies of these "
+"third-party service providers and those of any applications used to access "
+"them.</p>\n"
+"        <h2>Improving your experience on the Canadian Digital Service "
+"website</h2>\n"
+"        <h3>Digital markers (including cookies)</h3>\n"
+"        <p>A digital marker is a resource created by the visitors' browser "
+"in order to remember certain pieces of information for the Web server to "
+"reference during the same or subsequent visit to the website. Examples of "
+"digital markers are \"cookies\" or HTML5 web storage. Some examples of what "
+"digital markers do are as follows:</p>\n"
+"        <ul>\n"
+"            <li>they allow a website to recognize a visitor who has "
+"previously accessed the site;</li>\n"
+"            <li>they track what content is viewed on a site which helps "
+"website administrators ensure visitors find what they are looking for.</li>\n"
+"        </ul>\n"
+"        <p>Canadian Digital Service websites use sessional and persistent "
+"digital markers on its websites. During your on-line visit, your browser "
+"exchanges data with the Canadian Digital Service’s Web server. The digital "
+"markers used do not allow the Canadian Digital Service website to identify "
+"individuals and do not contain personal information.</p>\n"
+"        <p>You may adjust your browser settings to reject digital markers, "
+"including cookies, if you so choose. However, it may affect your ability to "
+"interact with the Canadian Digital Service website.</p>\n"
+"        <h3>Web analytics</h3>\n"
+"        <p>Web analytics is the collection, analysis, measurement, and "
+"reporting of data about Web traffic and visits for purposes of understanding "
+"and optimizing Web usage. Information in digital markers may be used in "
+"conjunction with computer request data to identify and track your online "
+"interactions with Canadian Digital Service websites.</p>\n"
+"        <p>The Canadian Digital Service uses <a href=\"https://tools.google."
+"com/dlpage/gaoptout?hl=en\">Google Analytics</a> to improve its websites. "
+"When your computer requests a Web page, the following types of information "
+"are collected and used for Web analytics:</p>\n"
+"        <ul>\n"
+"            <li>the date and time of the request</li>\n"
+"            <li>the type of browser used</li>\n"
+"            <li>the page(s) visited</li>\n"
+"            <li>referral website</li>\n"
+"        </ul>\n"
+"        <p>If you wish, you may opt out of being tracked by Google Analytics "
+"by disabling or refusing the cookies, or by using the Google Analytics Opt-"
+"Out Browser Add-On. If you disable your session cookie option, you will "
+"still be able to access our public website, but you might have difficulties "
+"accessing any secure services.</p>\n"
+"        <p>Canadian Digital Service websites use log file analysis "
+"internally and retain information collected for Web analytics for a maximum "
+"period of 18 months. After this period, the information must be disposed of "
+"in accordance with the Standard on Privacy and Web Analytics or as "
+"authorized by the Librarian and Archivist of Canada. The information is not "
+"disclosed to an external third party service provider.</p>\n"
+"        <p>Data collected for Web analytics purposes goes outside of Canada "
+"to Google servers and may be processed in any country where Google operates "
+"servers. Data may be subject to the governing legislation of that country "
+"(for example, the USA Patriot Act). For further information about Google "
+"Analytics, please refer to the <a href=\"https://policies.google.com/"
+"technologies/partner-sites\">Google Analytics terms of service</a>.</p>\n"
+"        <p>Information used for the purpose of Web analytics is collected "
+"pursuant to section 7 of the Financial Administration Act. Such data may be "
+"used for communications and information technology statistical purposes, "
+"audit, and evaluation, research, planning and reporting. For more "
+"information on how your privacy is safeguarded in relation to web analytics, "
+"see the Standard on Privacy and Web Analytics.</p>\n"
+"        <h2>Protecting the security of Government of Canada websites</h2>\n"
+"        <p>Software programs are used to monitor network traffic and to "
+"identify unauthorized attempts to upload or change information, or otherwise "
+"cause damage. When you visit Canadian Digital Service websites, these "
+"software programs automatically receive and temporarily store information "
+"supplied by your browser (for example, Internet explorer, Mozilla Firefox) "
+"in our Web server logs. Some of the information automatically collected by "
+"our server when you browse our websites includes:</p>\n"
+"        <ul>\n"
+"            <li>he network location and the Internet Protocol (IP) address "
+"of the computer you used to contact our website;</li>\n"
+"            <li>he name of the domain you used to access the Internet (."
+"com, .org, .net, .ca, etc.);</li>\n"
+"            <li>he type of browser you used;</li>\n"
+"            <li>he type of operating system you used (Windows, Mac OS, "
+"etc.)</li>\n"
+"            <li>he date and time you accessed the site;</li>\n"
+"            <li>he pages you have accessed and the documents you have "
+"downloaded; and</li>\n"
+"            <li>the Internet address of the website from which you linked "
+"directly to our site, if applicable.</li>\n"
+"        </ul>\n"
+"        <p>In most circumstances, this is anonymous statistical data and no "
+"attempt is made to link this data, nor the IP addresses of the computers "
+"that have contacted our website, with the identity of individuals visiting "
+"our site unless an attempt to damage the site has been detected. The "
+"programs are never used to gather specific personal information such as your "
+"name, your phone number or your email address.</p>\n"
+"        <p>When a threat to Canadian Digital Service websites or computer "
+"systems of the Government of Canada is detected, information is collected "
+"pursuant to <a href=\"https://laws-lois.justice.gc.ca/eng/acts/f-11/FullText."
+"html#s-161.\">section 161 of the Financial Administration Act</a>. The "
+"information may be shared with appropriate law enforcement authorities if "
+"suspected criminal activities are detected. Such information may be used for "
+"network security related statistical purposes, audit, evaluation, research, "
+"planning and reporting and is included in Personal Information Bank <a href="
+"\"https://www.canada.ca/en/treasury-board-secretariat/services/access-"
+"information-privacy/access-information/information-about-programs-"
+"information-holdings.html#psu939\">Security Incidents (PSU 939)</a>.</p>\n"
+"        <h2>Inquiring about these practices</h2>\n"
+"        <p>Any questions, comments, concerns or complaints you may have "
+"regarding this Statement, your privacy rights and the <a href=\"https://laws-"
+"lois.justice.gc.ca/eng/acts/P-21/index.html\">Privacy Act</a> may be "
+"directed to the TBS Access to Information and Privacy Coordinator by email "
+"at <a href=\"mailto:ATIP.AIPRP@tbs-sct.gc.ca\">ATIP.AIPRP@tbs-sct.gc.ca</a> "
+"or by telephone at 1-866-312-1511. You may also wish to contact the Office "
+"of the Privacy Commissioner of Canada by email at <a href=\"mailto:info@priv."
+"gc.ca\">info@priv.gc.ca</a> or by telephone at 1-800-282-1376. You have the "
+"right to complain to the Office of the Privacy Commissioner of Canada about "
+"the handling of your personal information by TBS.</p>\n"
+"    "
+msgstr ""
+"\n"
+"Le gouvernement du Canada s'engage à protéger les renseignements personnels "
+"des visiteurs de ses sites Web. Le présent énoncé de confidentialité résume "
+"la politique et les pratiques de confidentialité associées aux sites Web du "
+"Service numérique canadien, qui sont sous la responsabilité du <a href="
+"\"https://www.canada.ca/fr/secretariat-conseil-tresor.html\">Secrétariat du "
+"Conseil du Trésor du Canada</a> (SCT).<h2>La protection de vos "
+"renseignements personnels et l'Internet</h2><p>Des renseignements personnels "
+"particuliers, tels que votre nom, votre numéro de téléphone ou votre adresse "
+"courriel, ne sont pas automatiquement saisis. Le SCT n'obtiendrait ce type "
+"de renseignements que si vous les fournissez par courriel ou lorsque vous "
+"vous enregistrez dans une portion protégée du site pour un programme ou un "
+"service (p. ex., renseignements personnels fournis de plein gré lorsque vous "
+"remplissez un formulaire ou une demande de service en ligne).</p><p>La "
+"nature de l'Internet est telle que les serveurs Web recueillent "
+"automatiquement certains renseignements concernant la visite d'un site Web, "
+"notamment l'adresse du protocole Internet (IP) du visiteur. Les adresses IP "
+"consistent en une série de numéros uniques attribués par les fournisseurs de "
+"services Internet (FSI) à tous les appareils utilisés pour accéder à "
+"Internet. Les serveurs Web enregistrent automatiquement les adresses IP des "
+"visiteurs sur leurs sites. L'adresse IP en soi ne permet pas d'identifier "
+"une personne. Dans certains cas toutefois, comme la coopération d'un FSI, "
+"elle peut être utilisée pour identifier une personne qui consulte le site. "
+"Pour cette raison, le gouvernement du Canada perçoit l'adresse IP comme un "
+"renseignement personnel, surtout lorsqu'elle est accompagnée d'autres "
+"données qui sont recueillies systématiquement lorsqu'un visiteur demande une "
+"page Web, comme la page consultée ou les pages consultées, la date et "
+"l'heure de la visite.</p><p>Dans les cas où les services sont dispensés par "
+"des organisations autres que le gouvernement du Canada, notamment les "
+"plateformes de médias sociaux, les applications de recherche et les "
+"applications mobiles, les adresses IP peuvent être enregistrées par un "
+"serveur Web du tiers fournisseur de services.</p><p>Tous les renseignements "
+"personnels créés, détenus ou recueillis par le gouvernement du Canada sont "
+"protégés dans le cadre de la <a href=\"http://laws-lois.justice.gc.ca/fra/"
+"lois/P-21/index.html\">Loi sur la protection des renseignements personnels</"
+"a> du gouvernement fédéral. Ainsi, à chaque point de saisie, on vous "
+"demandera votre consentement avant de recueillir les renseignements vous "
+"concernant ou on vous informera des fins auxquelles les dits renseignements "
+"sont saisis. On vous informera également de la raison pour laquelle les "
+"renseignements personnels sont recueillis et de la façon dont vous pouvez "
+"exercer votre droit d'accéder à ces renseignements et de les corriger. En "
+"pareil cas, la façon dont sont traités vos renseignements personnels est "
+"décrite dans un énoncé de collecte de renseignements personnels.</p><p>Les "
+"renseignements personnels des visiteurs ne sont habituellement divulgués à "
+"personne, sauf au personnel du gouvernement du Canada qui a besoin de ces "
+"renseignements pour s'acquitter de ses responsabilités. Toute divulgation "
+"supplémentaire de ces renseignements personnels particuliers devrait se "
+"faire conformément à la <a href=\"http://laws-lois.justice.gc.ca/fra/lois/"
+"P-21/index.html\">Loi sur la protection des renseignements personnels</a>.</"
+"p><h2>Communication avec le Service numérique canadien</h2><p>Si vous "
+"choisissez de transmettre un courriel au Service numérique canadien, vos "
+"renseignements personnels seront recueillis par le SCT et peuvent être "
+"utilisés pour répondre à votre demande de renseignements. Le SCT n'utilise "
+"pas ces renseignements pour créer des profils individuels. Toute divulgation "
+"de vos renseignements personnels s'effectue conformément à la Loi sur la "
+"protection des renseignements personnels.</p><p>Les courriels et autres "
+"méthodes électroniques utilisées pour communiquer avec le gouvernement du "
+"Canada ne sont pas protégés à moins que cela ne soit expressément indiqué "
+"sur une page Web. En conséquence, il est recommandé que vous ne transmettiez "
+"pas de renseignements personnels de nature délicate, tels que votre numéro "
+"d'assurance sociale ou votre date de naissance, par des moyens électroniques "
+"non sécurisés.</p><p>Les renseignements personnels contenus dans les "
+"courriels sont recueillis conformément à l'article 7 de la Loi sur la "
+"gestion des finances publiques. Ces renseignements peuvent être utilisés à "
+"des fins statistiques ainsi que pour des évaluations et la production de "
+"rapports, et sont inclus dans la banque de renseignements personnels <a href="
+"\"http://www.infosource.gc.ca/emp/emp03-fra.asp#pou914\">Communications "
+"publiques (POU 914)</a>.</p><h2>Médias sociaux de tiers</h2><p>L'utilisation "
+"des médias sociaux par le gouvernement du Canada constitue le prolongement "
+"de sa présence sur le Web. Les comptes des médias sociaux sont publics et ne "
+"sont pas hébergés sur les serveurs du gouvernement du Canada. Les "
+"utilisateurs qui choisissent d'interagir avec le gouvernement du Canada, "
+"notamment le Service numérique canadien, par le truchement des médias "
+"sociaux devraient lire les conditions de service et les politiques de "
+"confidentialité de ces tiers fournisseurs de services et celles liées aux "
+"applications utilisées pour y accéder.</p><h2>Améliorer votre expérience sur "
+"le site Web du Service numérique canadien</h2><h3>Marqueurs numériques (y "
+"compris les témoins)</h3><p>Un marqueur numérique est une ressource créée "
+"par le navigateur des visiteurs afin de retenir certains renseignements "
+"auxquels peut faire référence le serveur dans le cadre de la même visite ou "
+"de visites subséquentes. Les témoins et les spécifications de stockage Web "
+"HTML5 sont des exemples de marqueurs numériques. Voici certains exemples de "
+"ce que font les marqueurs numériques.</p><ul><li>Ils permettent à un site "
+"Web de reconnaître un visiteur qui a préalablement accédé au site.</"
+"li><li>Ils assurent le suivi du contenu consulté sur un site, ce qui aide "
+"les administrateurs du site Web à s'assurer que les visiteurs trouvent ce "
+"qu'ils recherchent.</li></ul><p>Les sites Web du Service numérique canadien "
+"utilisent des marqueurs numériques de session et persistant sur ses sites "
+"Web. Pendant votre visite en ligne, votre navigateur échange des données "
+"avec le serveur Web du Service numérique canadien. Les marqueurs numériques "
+"utilisés ne permettent pas au Service numérique canadien d'identifier des "
+"personnes et ne contiennent pas de renseignements personnels.</p><p>Si vous "
+"le souhaitez, vous pouvez régler les paramètres de votre navigateur de "
+"manière à ce qu'il rejette les marqueurs numériques, y compris les témoins. "
+"Toutefois, cela pourrait influer sur votre capacité à interagir avec le site "
+"Web du Service numérique canadien.</p><h3>Web analytique</h3><p>Par Web "
+"analytique, on entend la collecte, l'analyse, la mesure et la présentation "
+"de données sur le trafic d'un site Internet et sur les visites effectuées "
+"dans le but de comprendre et d'optimiser l'utilisation du Web. Les données "
+"des marqueurs numériques peuvent être utilisées de concert avec les demandes "
+"de données informatiques pour déterminer et repérer vos interactions en "
+"ligne avec les sites Web du Service numérique canadien.</p><p>Le Service "
+"numérique canadien utilise Google Analytics pour améliorer ses sites Web. "
+"Lorsque votre ordinateur demande une page Web, les types de données suivants "
+"sont recueillis et utilisés pour le Web analytique :</p><ul><li>la date et "
+"l'heure de la demande;</li><li>le type de navigateur utilisé;</li><li>la "
+"page visitée ou les pages visitées;</li><li>le site Web de référencement.</"
+"li></ul><p>Si vous le souhaitez, vous pouvez choisir de ne pas être "
+"surveillé par Google Analytics en désactivant ou en refusant les témoins, ou "
+"en utilisant le <a href=\"https://tools.google.com/dlpage/gaoptout?hl=fr"
+"\">Module complémentaire de navigateur pour la désactivation de Google "
+"Analytics (disponible en anglais uniquement)</a>. Si vous désactivez votre "
+"option de témoin volatil, vous aurez peut-être de la difficulté à accéder à "
+"des sites sécurisés, mais pourrez encore consulter notre site Web public.</"
+"p><p>Les sites Web du Service numérique canadien utilisent l'analyse de "
+"fichiers journaux à l'interne et conservent les données recueillies pour le "
+"Web analytique pendant une période maximale de 18 mois. Après cette période, "
+"les données doivent être éliminées conformément à la Norme sur la protection "
+"de la vie privée et le Web analytique ou en obtenant l'autorisation du "
+"bibliothécaire et de l'archiviste du Canada. Les données ne sont pas "
+"divulguées à un tiers fournisseur de services externe.</p><p>Les données "
+"recueillies pour le Web analytique sont transmises à l'extérieur du Canada "
+"vers des serveurs de Google et peuvent être traitées dans n'importe quel "
+"pays où Google exploite des serveurs. Les données peuvent être assujetties à "
+"la législation applicable de ce pays (par exemple la USA Patriot Act). Pour "
+"un complément d'information sur Google Analytics, veuillez-vous référer aux "
+"<a href=\"https://www.google.com/intl/fr/policies/privacy/partners/"
+"\">Conditions de service de Google Analytics</a>.</p><p>Les données "
+"utilisées aux fins de Web analytique sont recueillies conformément à "
+"l'article 7 de la Loi sur la gestion des finances publiques. Ces données "
+"peuvent être utilisées à des fins de statistiques sur les technologies des "
+"communications et de l'information, de vérification, d'évaluation, de "
+"recherche, de planification et de production de rapports. Pour un complément "
+"d'information sur la façon dont vos renseignements personnels sont protégés "
+"dans le cadre du Web analytique, reportez-vous à la Norme sur la protection "
+"de la vie privée et le Web analytique.</p><h2>Assurer la sécurité des sites "
+"Web du gouvernement du Canada</h2><p>Des programmes logiciels sont utilisés "
+"pour surveiller la transmission de données sur le réseau et détecter toute "
+"tentative non autorisée de télécharger ou de modifier des renseignements, ou "
+"encore de causer des torts. Lorsque vous visitez les sites Web du Service "
+"numérique canadien, ces programmes logiciels reçoivent automatiquement et "
+"stockent temporairement les renseignements fournis par votre navigateur (par "
+"exemple, Internet Explorer, Mozilla Firefox) dans nos journaux de serveurs "
+"Web. Voici certains des renseignements recueillis automatiquement par notre "
+"serveur lorsque vous naviguez dans nos sites Web :</p><ul><li>l'emplacement "
+"du réseau et l'adresse du protocole Internet (IP) de l'ordinateur que vous "
+"avez utilisé pour accéder à notre site Web;</li><li>le nom du domaine "
+"utilisé pour accéder à Internet (.com, .org, .net, .ca, etc.).</li><li>le "
+"type de navigateur que vous avez utilisé;</li><li>le type de système "
+"d'exploitation que vous avez utilisé (Windows, Mac OS, etc.).</li><li>la "
+"date et l'heure auxquelles vous avez accédé au site;</li><li>les pages que "
+"vous avez consultées et les documents que vous avez téléchargés;</"
+"li><li>l'adresse Internet du site Web à partir de laquelle vous vous êtes "
+"connecté directement à notre site, le cas échéant.</li><p>Dans la plupart "
+"des cas, il s'agit de données statistiques anonymes et aucune tentative "
+"n'est faite pour lier ces données ou les adresses IP des ordinateurs qui se "
+"sont connectés à notre site Web, à l'identité de personnes qui visitent "
+"notre site, à moins qu'une tentative visant à endommager le site ait été "
+"détectée. Les programmes ne sont jamais utilisés pour recueillir des "
+"renseignements personnels précis, comme votre nom, votre numéro de téléphone "
+"ou votre adresse courriel.</p><p>Lorsqu'une menace visant les sites Web du "
+"Service numérique canadien ou les systèmes informatiques du gouvernement du "
+"Canada est détectée, les renseignements sont recueillis conformément à <a "
+"href=\"https://laws-lois.justice.gc.ca/fra/lois/f-11/TexteComplet."
+"html#s-161\">l'article 161 de la Loi sur la gestion des finances publiques</"
+"a>. Les renseignements peuvent être communiqués aux autorités policières "
+"concernées si l'on soupçonne que des activités criminelles ont été exercées. "
+"De tels renseignements peuvent être utilisés pour établir des statistiques "
+"sur la sécurité du réseau, ainsi qu'à des fins de vérification, "
+"d'évaluation, de recherche, de planification et d'établissement de rapports, "
+"et figurent dans le fichier de renseignements personnels <a href=\"http://"
+"www.infosource.gc.ca/emp/emp03-fra.asp#pou939\">Incidents de sécurité (POU "
+"939)</a>.</p><h2>Pour en apprendre davantage sur ces pratiques</h2><p>Pour "
+"transmettre vos questions, commentaires ou préoccupations concernant le "
+"présent avis, vos droits en matière de protection des renseignements "
+"personnels ou la Loi sur la protection des renseignements personnels, "
+"communiquez avec le coordonnateur de l’accès à l’information et de la "
+"protection des renseignements personnels du SCT, à <a href=\"mailto:atip."
+"aiprp@tbs-sct.gc.ca\">atip.aiprp@tbs-sct.gc.ca</a>, ou en composant le "
+"1-866-312-1511. Vous pouvez aussi communiquer avec le Commissariat à la "
+"protection de la vie privée du Canada par courriel, à <a href=\"mailto:"
+"info@priv.gc.ca\">info@priv.gc.ca</a>, ou par téléphone, au 1-800-282-1376. "
+"Vous avez également la possibilité de déposer une plainte auprès du "
+"Commissariat à la protection de la vie privée du Canada quant à la façon "
+"dont le SCT traite vos renseignements personnels.</p> "
 
-#: .\profiles\templates\profiles\signup.html:6
-#: .\profiles\templates\profiles\signup.html:13
+#: profiles/templates/profiles/signup.html:6
+#: profiles/templates/profiles/signup.html:13
 msgid "Create account"
 msgstr "Créer un compte"
 
-#: .\profiles\templates\profiles\signup.html:14
-#: .\profiles\templates\registration\login.html:14
+#: profiles/templates/profiles/signup.html:14
+#: profiles/templates/registration/login.html:14
 msgid "Next"
 msgstr "Suivant"
 
-#: .\profiles\templates\profiles\start.html:4
-#: .\profiles\templates\profiles\start.html:7
+#: profiles/templates/profiles/start.html:4
+#: profiles/templates/profiles/start.html:7
 msgid "Generate a number"
 msgstr "Générer un numéro"
 
-#: .\profiles\templates\profiles\start.html:9
+#: profiles/templates/profiles/start.html:9
 msgid "Before generating a number, check the patient has:"
 msgstr "Avant de générer un numéro, assurez-vous que le patient :"
 
-#: .\profiles\templates\profiles\start.html:12
+#: profiles/templates/profiles/start.html:12
 msgid "tested positive for COVID-19"
 msgstr "a reçu un test positif à la COVID-19"
 
-#: .\profiles\templates\profiles\start.html:13
+#: profiles/templates/profiles/start.html:13
 msgid "the app installed on Andriod or Apple mobile device"
 msgstr ""
 "a installé l’application Alerte COVID sur son téléphone mobile Android ou "
 "Apple"
 
-#: .\profiles\templates\profiles\start.html:16
+#: profiles/templates/profiles/start.html:16
 msgid "Tell the patient the number will expire within 24 hours."
 msgstr "Informez le patient que le numéro expire après 24 heures."
 
-#: .\profiles\templates\profiles\start.html:18
+#: profiles/templates/profiles/start.html:18
 msgid "Generate number"
 msgstr "Générer un numéro"
 
-#: .\profiles\templates\profiles\start.html:21
+#: profiles/templates/profiles/start.html:21
 msgid "Each code is individual and anonymous."
 msgstr "Le numéro est personnel et anonyme."
 
-#: .\profiles\templates\profiles\start.html:21
+#: profiles/templates/profiles/start.html:21
 msgid ""
 "It cannot be used by another patient. If the number expires before the "
 "patient enters it, they’ll need a new number."
@@ -442,34 +812,40 @@ msgstr ""
 "Il ne peut pas être utilisé pour un autre patient. Si le numéro expire avant "
 "que le patient ait pu l’entrer, il faudra générer un nouveau numéro."
 
-#: .\profiles\templates\registration\login.html:17
-#: .\profiles\templates\registration\password_reset_form.html:6
-#: .\profiles\templates\registration\password_reset_form.html:12
+#: profiles/templates/registration/login.html:17
+#: profiles/templates/registration/password_reset_form.html:6
+#: profiles/templates/registration/password_reset_form.html:12
 msgid "Forgot your password?"
 msgstr "Mot de passe oublié?"
 
-#: .\profiles\templates\registration\password_reset_done.html:8
+#: profiles/templates/registration/password_reset_done.html:8
 msgid "Use the link in your email to reset your password."
 msgstr ""
 "Utilisez le lien fourni dans le courriel pour réinitialiser votre mot de "
 "passe."
 
-#: .\profiles\templates\registration\password_reset_form.html:13
+#: profiles/templates/registration/password_reset_form.html:13
 msgid "We’ll send you an email to create a new password."
 msgstr "Nous vous enverrons un courriel pour créer un nouveau mot de passe."
 
-#: .\profiles\templates\registration\password_reset_form.html:15
+#: profiles/templates/registration/password_reset_form.html:15
 msgid "Send email"
 msgstr "Envoyer"
 
-#: .\profiles\views.py:53
+#: profiles/views.py:53
 msgid "No invited email in session"
 msgstr ""
 
-#: .\profiles\views.py:80
+#: profiles/views.py:80
 msgid "Account created successfully"
 msgstr ""
 
-#: .\profiles\views.py:126
+#: profiles/views.py:126
 msgid "Security code has been sent."
 msgstr ""
+
+#~ msgid "<a href=\"%(landing_url)s\">About COVID Alert</a>"
+#~ msgstr "<a href=\"%(landing_url)s\">À propos d’Alerte COVID</a>"
+
+#~ msgid "About COVID Alert [hyperlink to site homepage]"
+#~ msgstr "À propos d’Alerte COVID [lien]"

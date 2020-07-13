@@ -19,6 +19,6 @@
   <div class="content-button"><a href="{% url 'login' %}" role='button' draggable='false'>{% trans "Log in" %}</a></div>
 
   <p>{% trans "About COVID Alert [hyperlink to site homepage]" %}</p>
-  <p>{% trans "How COVID Alert protects privacy [hyperlink to privacy policy]" %}</p>
-
+  {% url 'privacy' as privacy_url %}
+  <p>{% blocktrans %}<a href="{{ privacy_url }}">How COVID Alert Portal protects privacy</a>{% endblocktrans %}</p>
 {% endblock %}
