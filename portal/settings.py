@@ -219,13 +219,6 @@ DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 CREATE_DEFAULT_SU = os.getenv("DJANGO_DEFAULT_SU", "False") == "True"
 SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
 
-# Site Setup for Separate Domains
-URL_EN_PRODUCTION = os.getenv(
-    "URL_EN_PRODUCTION", "https://covid-alert-portal.alpha.canada.ca"
-)
-URL_FR_PRODUCTION = os.getenv(
-    "URL_FR_PRODUCTION", "https://portail-alerte-covid.alpha.canada.ca"
-)
 # Login Rate Limiting
 if os.getenv("DJANGO_ENV", "production") == "tests":
     AXES_ENABLED = False
