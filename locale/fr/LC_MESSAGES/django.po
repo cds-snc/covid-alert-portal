@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-13 19:38+0000\n"
+"POT-Creation-Date: 2020-07-13 19:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -230,45 +230,6 @@ msgstr ""
 msgid "Not received an email?"
 msgstr ""
 
-#: profiles/templates/profiles/code.html:5
-#: profiles/templates/profiles/code.html:8
-msgid "Give patient this number"
-msgstr "Donnez le numéro suivant au patient"
-
-#: profiles/templates/profiles/code.html:14
-msgid "Tell patient to:"
-msgstr "Dites au patient de :"
-
-#: profiles/templates/profiles/code.html:16
-msgid "Keep the number somewhere safe"
-msgstr "Garder le numéro dans un endroit sûr"
-
-#: profiles/templates/profiles/code.html:17
-msgid "Enter the number within <strong>24 hours</strong> or it will expire"
-msgstr ""
-"Utiliser le numéro au cours des <strong>24 prochaines heures</strong>, sinon "
-"il sera expiré"
-
-#: profiles/templates/profiles/code.html:18
-msgid "Contact your office if they lose the number or it doesn’t work"
-msgstr ""
-"Communiquer avec votre bureau s’il perd le numéro ou si le numéro ne "
-"fonctionne pas"
-
-#: profiles/templates/profiles/code.html:19
-msgid ""
-"Use the app to anonymously notify people by tapping “Diagnosed with "
-"COVID-19? Enter number”. The app will guide the patient through the steps to "
-"enter the number."
-msgstr ""
-"Utiliser l’application mobile pour aviser de façon anonyme les autres "
-"personnes en appuyant sur « Vous avez la COVID-19? Entrer le numéro ». "
-"L’application guidera le patient pour qu’il entre son numéro."
-
-#: profiles/templates/profiles/code.html:22
-msgid "Next patient"
-msgstr "Prochain patient"
-
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html:6
 msgid "Confirm delete user"
 msgstr ""
@@ -392,6 +353,45 @@ msgstr "À propos d’Alerte COVID [lien]"
 msgid "<a href=\"%(privacy_url)s\">How COVID Alert Portal protects privacy</a>"
 msgstr ""
 "<a href=\"%(privacy_url)s\">Comment Alerte COVID protège la vie privée</a>"
+
+#: profiles/templates/profiles/number.html:5
+#: profiles/templates/profiles/number.html:8
+msgid "Give patient this number"
+msgstr "Donnez le numéro suivant au patient"
+
+#: profiles/templates/profiles/number.html:14
+msgid "Tell patient to:"
+msgstr "Dites au patient de :"
+
+#: profiles/templates/profiles/number.html:16
+msgid "Keep the number somewhere safe"
+msgstr "Garder le numéro dans un endroit sûr"
+
+#: profiles/templates/profiles/number.html:17
+msgid "Enter the number within <strong>24 hours</strong> or it will expire"
+msgstr ""
+"Utiliser le numéro au cours des <strong>24 prochaines heures</strong>, sinon "
+"il sera expiré"
+
+#: profiles/templates/profiles/number.html:18
+msgid "Contact your office if they lose the number or it doesn’t work"
+msgstr ""
+"Communiquer avec votre bureau s’il perd le numéro ou si le numéro ne "
+"fonctionne pas"
+
+#: profiles/templates/profiles/number.html:19
+msgid ""
+"Use the app to anonymously notify people by tapping “Diagnosed with "
+"COVID-19? Enter number”. The app will guide the patient through the steps to "
+"enter the number."
+msgstr ""
+"Utiliser l’application mobile pour aviser de façon anonyme les autres "
+"personnes en appuyant sur « Vous avez la COVID-19? Entrer le numéro ». "
+"L’application guidera le patient pour qu’il entre son numéro."
+
+#: profiles/templates/profiles/number.html:22
+msgid "Next patient"
+msgstr "Prochain patient"
 
 #: profiles/templates/profiles/privacy.html:12
 msgid ""
