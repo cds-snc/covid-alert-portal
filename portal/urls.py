@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.http import HttpResponse
 from django.conf.urls.i18n import i18n_patterns
+from django.views.generic.base import TemplateView
 
 urlpatterns = [
     re_path(
