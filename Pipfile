@@ -27,6 +27,7 @@ dj-database-url = "*"
 django-invitations = "*"
 django-otp = "*"
 newrelic = "*"
+django-axes = "*"
 
 [pipenv]
 allow_prereleases = true
