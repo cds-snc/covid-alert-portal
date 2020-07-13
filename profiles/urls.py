@@ -52,6 +52,10 @@ urlpatterns = [
         PasswordResetView.as_view(form_class=forms.HealthcarePasswordResetForm),
         name="password_reset",
     ),
-    path("privacy/", TemplateView.as_view(template_name="profiles/privacy.html"), name="privacy"),
+    path(
+        "privacy/",
+        TemplateView.as_view(template_name="profiles/privacy.html"),
+        name="privacy",
+    ),
     path("", include("django.contrib.auth.urls")),
 ]
