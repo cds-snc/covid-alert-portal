@@ -1,19 +1,23 @@
-<!-- TODO: Gmail doesn't support inline SVGs for emails, we need to either link or attach them to the email -->
-<img src="https://healthcare-portal.herokuapp.com/static/sig-blk-en.jpg" />
-Hello,<br>
-You’re invited to create an account for ‘Generate COVID Alert number’.<br>
-You’ll be able to use this account to generate numbers for patients using the COVID Alert app. The app notifies people if they’ve been exposed to COVID-19.<br>
-Please use this link to create your account: <a href="{{ invite_url }}">{{ invite_url }}</a><br>
-<br>
-Thanks for your essential work to protect our communities!   <br>
-<br>
--------------------------------------------------------------------------
-<br>
-Bonjour,<br>
-Vous êtes invité à créer un compte pour ‘Générer un numéro Alerte COVID’.<br>
-Vous pourrez utiliser ce compte pour générer des numéros destinés aux patients qui utilisent l’application Alerte COVID. Cette application avise les personnes en cas d’exposition potentielle à la COVID-19.<br>
-Utilisez le lien suivant pour créer votre compte : <a href="{{ invite_url }}">{{ invite_url }}</a><br>
-<br>
-Merci pour tout le travail que vous faites pour nos communautés!
+{% load static %}
+<img src="{{scheme}}://{{http_host}}{% static "img/sig-blk-en.jpg" %}" /><br/>
 
-<img src="https://healthcare-portal.herokuapp.com/static/wmms-blk.jpg" />
+<p>Hello,</p>
+<p>Your manager has authorized you to generate numbers for COVID Alert.</p>
+<p>You’ll need an account to give numbers to patients diagnosed with COVID-19. Then patients can use the COVID Alert app to anonymously notify people they’ve been near and possibly exposed.</p>
+<p>Please use this link to create your username and password. The link expires in 3 days:</p>
+<p><a href="{{ invite_url }}">{{ invite_url }}</a></p>
+<p>COVID Alert is an important part of the public health effort to slow the spread of COVID-19.  Thanks for your essential work to protect our communities!</p>
+<br/>
+<br/>
+-------------------------------------------------------------------------
+<br/>
+<br/>
+<p>Bonjour,</p>
+<p>Votre gestionnaire vous a autorisé à générer des numéros pour l’application mobile Alerte COVID.</p>
+<p>Vous aurez besoin d’un compte pour pouvoir fournir des numéros aux patients recevant un diagnostic de COVID-19. Ces derniers pourront ensuite utiliser Alerte COVID pour aviser de façon anonyme les personnes d’une exposition potentielle si jamais elles ont été en proximité.</p>
+<p>Veuillez utiliser le lien suivant pour créer votre nom d’utilisateur et votre mot de passe. Le lien expire dans 3 jours.</p>
+<p><a href="{{ invite_url }}">{{ invite_url }}</a>  </p>
+<p>Alerte COVID fait partie des efforts importants déployés pour ralentir la propagation de COVID-19. Merci pour tout le travail que vous faites pour nos communautés!</p>
+<br/>
+
+<img src="{{scheme}}://{{http_host}}{% static 'img/wmms-blk.jpg' %}" />
