@@ -76,7 +76,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "axes.middleware.AxesMiddleware",
-    "csp.middleware.CSPMiddleware"
+    "csp.middleware.CSPMiddleware",
 ]
 
 ROOT_URLCONF = "portal.urls"
@@ -237,9 +237,9 @@ AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
 
 # HTTP Security headers configuration
 CSP_DEFAULT_SRC = ["'self'"]
-CSP_STYLE_SRC = ["'self'",'fonts.googleapis.com']
-CSP_FONT_SRC = ["'self'", 'fonts.gstatic.com' ]
-CSP_SCRIPT_SRC = ["'self'", 'cdnjs.cloudflare.com']
+CSP_STYLE_SRC = ["'self'", "fonts.googleapis.com"]
+CSP_FONT_SRC = ["'self'", "fonts.gstatic.com"]
+CSP_SCRIPT_SRC = ["'self'", "cdnjs.cloudflare.com"]
 # Force the site to use HTTPS (6 Months below is minimum value accepted)
 if is_prod:
     SECURE_HSTS_SECONDS = 15768000
