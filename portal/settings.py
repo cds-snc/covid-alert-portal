@@ -76,6 +76,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "axes.middleware.AxesMiddleware",
+    "csp.middleware.CSPMiddleware"
 ]
 
 ROOT_URLCONF = "portal.urls"
@@ -232,3 +233,6 @@ AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
     "REAL_IP",
     "REMOTE_ADDR",
 ]
+
+# HTTP Security headers configuration
+CSP_DEFAULT_SRC = ["'self'"]
