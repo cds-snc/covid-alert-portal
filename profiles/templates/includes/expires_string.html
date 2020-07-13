@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load static %}
 {% load tz %}
 {% get_current_language as LANGUAGE_CODE %}
 
@@ -23,17 +24,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/locale/{{ LANGUAGE_CODE }}-ca.min.js"></script>
-<script type="text/javascript">
-  document.addEventListener('DOMContentLoaded', function(){
-    const expiry = moment().add(1, 'days');
-    {% if LANGUAGE_CODE == 'fr' %}
-        // example : 12 juillet a 18 h 12, heure locale
-        document.getElementById('expiry-date').innerHTML = expiry.format('D MMMM');
-        document.getElementById('expiry-time').innerHTML = expiry.format('HH [h] mm')+ ', heure locale';
-    {% else %}
-        // example : July 12 at 6:12 pm local time
-        document.getElementById('expiry-date').innerHTML = expiry.format('MMMM D');
-        document.getElementById('expiry-time').innerHTML = expiry.format('h:mm a') + ' local time';
-    {% endif %}
-  }, false);
-</script>
+{{ LANGUAGE_CODE|json_script:"lang_code" }}
+<script src="{% static 'js/time_formatting.js' %}"></script>
+
