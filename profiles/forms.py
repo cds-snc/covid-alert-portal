@@ -8,6 +8,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
+from invitations.exceptions import AlreadyAccepted, AlreadyInvited, UserRegisteredEmail
 
 from invitations.models import Invitation
 from invitations.forms import InviteForm
@@ -141,6 +142,11 @@ class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
 
         # Otherwise it just says "Email"
         self.fields["email"].label = _("Email address")
+
+    def validate_invitation(self, email):
+        # Delete all non-accepted, valid invitations for the same email, if they exists
+        Invitation.objects.all_valid().filter(email__iexact=email, accepted=False).delete()
+        return super().validate_invitation(email)
 
     # https://github.com/bee-keeper/django-invitations/blob/9069002f1a0572ae37ffec21ea72f66345a8276f/invitations/forms.py#L60
     def save(self, *args, **kwargs):
