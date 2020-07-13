@@ -21,13 +21,12 @@ requests = "*"
 python-dotenv = "*"
 django-sass = "*"
 psycopg2-binary = "*"
-gunicorn = "*"
-whitenoise = "*"
 dj-database-url = "*"
 django-invitations = "*"
 django-otp = "*"
 newrelic = "*"
 django-axes = "*"
+uwsgi = "*"
 
 [pipenv]
 allow_prereleases = true

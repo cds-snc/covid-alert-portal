@@ -7,4 +7,4 @@ run:
     python manage.py collectstatic --noinput -i scss
     python manage.py migrate
     python manage.py createdefaultsuperuser
-    gunicorn portal.wsgi --log-file -
+    uwsgi --http :$PORT --module portal.wsgi --static-map /static=/code/staticfiles
