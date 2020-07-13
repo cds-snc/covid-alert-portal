@@ -14,6 +14,8 @@ import os
 import dj_database_url
 
 from dotenv import load_dotenv
+from datetime import timedelta
+from django.utils.translation import gettext_lazy as _
 
 load_dotenv()
 
@@ -52,6 +54,7 @@ INSTALLED_APPS = [
     "django_sass",
     "profiles",
     "invitations",
+    "axes",
     "django.contrib.sites",  # Required for invitations
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -74,6 +77,7 @@ MIDDLEWARE = [
     "django_otp.middleware.OTPMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "axes.middleware.AxesMiddleware",
 ]
 
 ROOT_URLCONF = "portal.urls"
@@ -92,6 +96,11 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    "axes.backends.AxesBackend",  # Needs to be first
+    "django.contrib.auth.backends.ModelBackend",
 ]
 
 WSGI_APPLICATION = "portal.wsgi.application"
@@ -209,3 +218,19 @@ DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 # Default Super User Setup
 CREATE_DEFAULT_SU = os.getenv("DJANGO_DEFAULT_SU", "False") == "True"
 SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
+
+# Login Rate Limiting
+if os.getenv("DJANGO_ENV", "production") == "tests":
+    AXES_ENABLED = False
+
+AXES_FAILURE_LIMIT = 5  # Lockout after 5 failed login attempts
+AXES_COOLOFF_MESSAGE = _(
+    "This account has been locked due to too many failed log in attempts. Please try again after 5 minutes."
+)
+AXES_COOLOFF_TIME = timedelta(minutes=5)  # Lock out for 5 Minutes
+AXES_ONLY_USER_FAILURES = True  # Default is to lockout both IP and username. We set this to True so it'll only lockout the username and not lockout a whole department behind a NAT
+AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
+    "HTTP_X_FORWARDED_FOR",
+    "REAL_IP",
+    "REMOTE_ADDR",
+]
