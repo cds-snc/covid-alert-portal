@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import sys
 import dj_database_url
 
 from dotenv import load_dotenv
@@ -18,6 +19,9 @@ from datetime import timedelta
 from django.utils.translation import gettext_lazy as _
 
 load_dotenv()
+
+# Tests whether the second command line argument (after ./manage.py) was test
+TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -224,7 +228,7 @@ CREATE_DEFAULT_SU = os.getenv("DJANGO_DEFAULT_SU", "False") == "True"
 SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
 
 # Login Rate Limiting
-if os.getenv("DJANGO_ENV", "production") == "tests":
+if TESTING:
     AXES_ENABLED = False
 
 AXES_FAILURE_LIMIT = 5  # Lockout after 5 failed login attempts
