@@ -6,24 +6,23 @@ from django.urls import translate_url
 register = template.Library()
 
 
-@register.simple_tag(takes_context=True)
-def lang_switch(context, lang):
-    path = context.get("request").get_full_path()
-    if not settings.URL_DUAL_DOMAINS:
-        return format_html(
-            '<a role="button" href="{}" onclick="document.forms["language_toggle"].submit();">{}</a>',
-            translate_url(path, lang.get("code")),
-            lang.get("name_local"),
-        )
-    elif lang.get("code") == "en":
-        return format_html(
-            '<a role="button" href="{}">{}</a>',
-            settings.URL_EN_PRODUCTION + translate_url(path, lang.get("code")),
-            lang.get("name_local"),
-        )
+@register.simple_tag()
+def get_lang_title(lang, langEn, langFr):
+    if lang == "en":
+        return langFr.get("name_local")
     else:
-        return format_html(
-            "<a role='button' href='{}'>{}</a>",
-            settings.URL_FR_PRODUCTION + translate_url(path, lang.get("code")),
-            lang.get("name_local"),
+        return langEn.get("name_local")
+
+
+@register.simple_tag(takes_context=True)
+def get_href(context, lang):
+    path = context.get("request").get_full_path()
+    root_domain = ""
+    translated_lang = "fr" if lang == "en" else "en"
+
+    if settings.URL_DUAL_DOMAINS:
+        root_domain = (
+            settings.URL_FR_PRODUCTION if lang == "fr" else settings.URL_EN_PRODUCTION
         )
+
+    return root_domain + translate_url(path, translated_lang)

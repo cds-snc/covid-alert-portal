@@ -7,16 +7,9 @@
       {% get_language_info for "en" as langEn %}
       {% get_language_info for "fr" as langFr %}
 
-      <form id="language_toggle" action="{% url 'set_language' %}" method="post">{% csrf_token %}
-        <h2 class="visually-hidden">{% trans "Language selection" }</h2>
-        {% if LANGUAGE_CODE == 'en' %}
-          <input type="hidden" name="language" value="{{ langFr.code }}" />
-          {% lang_switch langFr %}
-        {% else %}
-          <input type="hidden" name="language" value="{{ langEn.code }}" />
-          {% lang_switch langEn %}
-        {% endif %}
-      </form>
+      <h2 class="visually-hidden">{% trans "Language selection" }</h2>
+      <a role="button" href="{% get_href LANGUAGE_CODE %}">{% get_lang_title LANGUAGE_CODE langEn langFr %}</a>
+
     </li>
     {% if user.is_authenticated %}
       <li><a href="{% url 'user_profile' user.id %}">{{ user.email }}</a></li>
