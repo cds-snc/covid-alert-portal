@@ -9,7 +9,7 @@ register = template.Library()
 @register.simple_tag(takes_context=True)
 def lang_switch(context, lang):
     path = context.get("request").get_full_path()
-    if settings.DEBUG:
+    if not settings.URL_DUAL_DOMAINS:
         return format_html(
             '<a role="button" href="{}" onclick="document.forms["language_toggle"].submit();">{}</a>',
             translate_url(path, lang.get("code")),
