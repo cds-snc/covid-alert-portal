@@ -232,7 +232,7 @@ SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
 if TESTING:
     AXES_ENABLED = False
     AXES_VERBOSE = False
-    AXES_LOGGER = 'axes.watch_login'
+    AXES_LOGGER = "axes.watch_login"
     logger = getLogger(AXES_LOGGER)
     logger.setLevel(CRITICAL)
 
