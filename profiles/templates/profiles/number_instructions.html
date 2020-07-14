@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 
 {% block title %}{% trans "Give patient this number" %}{% endblock %}
 
@@ -30,7 +31,7 @@
           </li>
         </ul>
         <div>
-          <img src="{% static 'img/cat.jpg' %}" />
+          <img alt="" src="{% static 'img/instructions/screen-1-'|add:request.LANGUAGE_CODE|add:'.png' %}" />
         </div>
       </div>
     </li>
@@ -43,7 +44,7 @@
           </li>
         </ul>
         <div>
-          <img src="{% static 'img/cat.jpg' %}" />
+          <img alt="" src="{% static 'img/instructions/screen-2-'|add:request.LANGUAGE_CODE|add:'.png' %}" />
         </div>
       </div>
     </li>
@@ -59,7 +60,7 @@
           </li>
         </ul>
         <div>
-          <img src="{% static 'img/cat.jpg' %}" />
+          <img alt="" src="{% static 'img/instructions/screen-3-'|add:request.LANGUAGE_CODE|add:'.png' %}" />
         </div>
       </div>
     </li>
@@ -71,7 +72,7 @@
           <li>{% blocktrans %}Tap ‘<strong>Agree</strong>’{% endblocktrans %}</li>
         </ul>
         <div>
-          <img src="{% static 'img/cat.jpg' %}" />
+          <img alt="" src="{% static 'img/instructions/screen-4-'|add:request.LANGUAGE_CODE|add:'.png' %}" />
         </div>
       </div>
     </li>
@@ -82,7 +83,7 @@
           <li>{% blocktrans %}Tap ‘<strong>Allow</strong>’{% endblocktrans %}</li>
         </ul>
         <div>
-          <img src="{% static 'img/cat.jpg' %}" />
+          <img alt="" src="{% static 'img/instructions/screen-5-'|add:request.LANGUAGE_CODE|add:'.png' %}" />
         </div>
       </div>
     </li>
@@ -93,7 +94,7 @@
           <li>{% trans "COVID Alert will ask permission to upload random codes daily for the next 13 days" %}</li>
         </ul>
         <div>
-          <img src="{% static 'img/cat.jpg' %}" />
+          <img alt="" src="{% static 'img/instructions/screen-6-'|add:request.LANGUAGE_CODE|add:'.png' %}" />
         </div>
       </div>
     </li>
