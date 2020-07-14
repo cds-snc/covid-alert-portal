@@ -177,7 +177,7 @@ class AuthenticatedView(AdminUserTestCase):
 
         self.login_2fa()
 
-        response = self.client.get(reverse("code"))
+        response = self.client.get(reverse("number"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Give patient this number")
         self.assertContains(
