@@ -180,7 +180,8 @@ if is_prod:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # For sites that should only be accessed over HTTPS, instruct modern browsers to refuse to connect to your domain name via an insecure connection (for a given period of time)
-SECURE_HSTS_SECONDS = 3600 if is_prod else 0
+if is_prod:
+    SECURE_HSTS_SECONDS = 31536000
 
 # Instructs the browser to send a full URL, but only for same-origin links. No referrer will be sent for cross-origin links.
 SECURE_REFERRER_POLICY = "same-origin"
@@ -244,5 +245,3 @@ CSP_STYLE_SRC = ["'self'", "fonts.googleapis.com"]
 CSP_FONT_SRC = ["'self'", "fonts.gstatic.com"]
 CSP_SCRIPT_SRC = ["'self'", "cdnjs.cloudflare.com"]
 # Force the site to use HTTPS (6 Months below is minimum value accepted)
-if is_prod:
-    SECURE_HSTS_SECONDS = 15768000
