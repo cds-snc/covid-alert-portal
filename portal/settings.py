@@ -244,4 +244,3 @@ CSP_DEFAULT_SRC = ["'self'"]
 CSP_STYLE_SRC = ["'self'", "fonts.googleapis.com"]
 CSP_FONT_SRC = ["'self'", "fonts.gstatic.com"]
 CSP_SCRIPT_SRC = ["'self'", "cdnjs.cloudflare.com"]
-
