@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-13 18:36+0000\n"
+"POT-Creation-Date: 2020-07-14 18:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: portal/settings.py:226
+#: portal/settings.py:233
 msgid ""
 "This account has been locked due to too many failed log in attempts. Please "
 "try again after 5 minutes."
@@ -32,7 +32,7 @@ msgstr "Entrez une adresse courriel valide"
 msgid "Please enter the security code."
 msgstr ""
 
-#: profiles/forms.py:89 profiles/forms.py:98 profiles/forms.py:143
+#: profiles/forms.py:89 profiles/forms.py:98 profiles/forms.py:142
 #: profiles/templates/profiles/healthcareuser_detail.html:28
 #: profiles/templates/profiles/healthcareuser_list.html:14
 msgid "Email address"
@@ -42,17 +42,21 @@ msgstr "Adresse courriel"
 msgid "Full name"
 msgstr "Nom complet"
 
-#: profiles/forms.py:119
+#: profiles/forms.py:118
 msgid "Email already exists"
 msgstr "L’adresse courriel existe déjà"
 
-#: profiles/forms.py:121
+#: profiles/forms.py:120
 msgid "An invitation hasn't been sent to this address"
 msgstr ""
 
 #: profiles/templates/base.html:19 profiles/templates/base.html:32
 msgid "Generate COVID Alert number"
 msgstr "Générer un numéro pour Alerte COVID"
+
+#: profiles/templates/base.html:19
+msgid "– COVID Alert Portal"
+msgstr "– Portail Alerte COVID"
 
 #: profiles/templates/includes/FIP_header.html:6
 #: profiles/templates/includes/FIP_header.html:8
@@ -67,11 +71,11 @@ msgstr "Soumettre"
 msgid "Please correct the errors on the page"
 msgstr "Veuillez corriger les erreurs trouvées dans la page"
 
-#: profiles/templates/includes/expires_string.html:6
+#: profiles/templates/includes/expires_string.html:7
 msgid "Number expires"
 msgstr "Le numéro expire le"
 
-#: profiles/templates/includes/expires_string.html:14
+#: profiles/templates/includes/expires_string.html:15
 msgid "at"
 msgstr "à"
 
@@ -209,8 +213,8 @@ msgid "Validate your code"
 msgstr ""
 
 #: profiles/templates/profiles/2fa.html:13
-#: profiles/templates/registration/password_reset_done.html:3
-#: profiles/templates/registration/password_reset_done.html:6
+#: profiles/templates/registration/password_reset_done.html:4
+#: profiles/templates/registration/password_reset_done.html:7
 msgid "Check your email"
 msgstr "Vérifiez vos courriels"
 
@@ -225,45 +229,6 @@ msgstr ""
 #: profiles/templates/profiles/2fa.html:16
 msgid "Not received an email?"
 msgstr ""
-
-#: profiles/templates/profiles/code.html:5
-#: profiles/templates/profiles/code.html:8
-msgid "Give patient this number"
-msgstr "Donnez le numéro suivant au patient"
-
-#: profiles/templates/profiles/code.html:14
-msgid "Tell patient to:"
-msgstr "Dites au patient de :"
-
-#: profiles/templates/profiles/code.html:16
-msgid "Keep the number somewhere safe"
-msgstr "Garder le numéro dans un endroit sûr"
-
-#: profiles/templates/profiles/code.html:17
-msgid "Enter the number within <strong>24 hours</strong> or it will expire"
-msgstr ""
-"Utiliser le numéro au cours des <strong>24 prochaines heures</strong>, sinon "
-"il sera expiré"
-
-#: profiles/templates/profiles/code.html:18
-msgid "Contact your office if they lose the number or it doesn’t work"
-msgstr ""
-"Communiquer avec votre bureau s’il perd le numéro ou si le numéro ne "
-"fonctionne pas"
-
-#: profiles/templates/profiles/code.html:19
-msgid ""
-"Use the app to anonymously notify people by tapping “Diagnosed with "
-"COVID-19? Enter number”. The app will guide the patient through the steps to "
-"enter the number."
-msgstr ""
-"Utiliser l’application mobile pour aviser de façon anonyme les autres "
-"personnes en appuyant sur « Vous avez la COVID-19? Entrer le numéro ». "
-"L’application guidera le patient pour qu’il entre son numéro."
-
-#: profiles/templates/profiles/code.html:22
-msgid "Next patient"
-msgstr "Prochain patient"
 
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html:6
 msgid "Confirm delete user"
@@ -388,6 +353,45 @@ msgstr "À propos d’Alerte COVID [lien]"
 msgid "<a href=\"%(privacy_url)s\">How COVID Alert Portal protects privacy</a>"
 msgstr ""
 "<a href=\"%(privacy_url)s\">Comment Alerte COVID protège la vie privée</a>"
+
+#: profiles/templates/profiles/number.html:5
+#: profiles/templates/profiles/number.html:8
+msgid "Give patient this number"
+msgstr "Donnez le numéro suivant au patient"
+
+#: profiles/templates/profiles/number.html:14
+msgid "Tell patient to:"
+msgstr "Dites au patient de :"
+
+#: profiles/templates/profiles/number.html:16
+msgid "Keep the number somewhere safe"
+msgstr "Garder le numéro dans un endroit sûr"
+
+#: profiles/templates/profiles/number.html:17
+msgid "Enter the number within <strong>24 hours</strong> or it will expire"
+msgstr ""
+"Utiliser le numéro au cours des <strong>24 prochaines heures</strong>, sinon "
+"il sera expiré"
+
+#: profiles/templates/profiles/number.html:18
+msgid "Contact your office if they lose the number or it doesn’t work"
+msgstr ""
+"Communiquer avec votre bureau s’il perd le numéro ou si le numéro ne "
+"fonctionne pas"
+
+#: profiles/templates/profiles/number.html:19
+msgid ""
+"Use the app to anonymously notify people by tapping “Diagnosed with "
+"COVID-19? Enter number”. The app will guide the patient through the steps to "
+"enter the number."
+msgstr ""
+"Utiliser l’application mobile pour aviser de façon anonyme les autres "
+"personnes en appuyant sur « Vous avez la COVID-19? Entrer le numéro ». "
+"L’application guidera le patient pour qu’il entre son numéro."
+
+#: profiles/templates/profiles/number.html:22
+msgid "Next patient"
+msgstr "Prochain patient"
 
 #: profiles/templates/profiles/privacy.html:12
 msgid ""
@@ -783,7 +787,9 @@ msgid "tested positive for COVID-19"
 msgstr "a reçu un test positif à la COVID-19"
 
 #: profiles/templates/profiles/start.html:13
-msgid "the app installed on Andriod or Apple mobile device"
+#, fuzzy
+#| msgid "the app installed on Andriod or Apple mobile device"
+msgid "the app installed on Android or Apple mobile device"
 msgstr ""
 "a installé l’application Alerte COVID sur son téléphone mobile Android ou "
 "Apple"
@@ -814,7 +820,7 @@ msgstr ""
 msgid "Forgot your password?"
 msgstr "Mot de passe oublié?"
 
-#: profiles/templates/registration/password_reset_done.html:8
+#: profiles/templates/registration/password_reset_done.html:9
 msgid "Use the link in your email to reset your password."
 msgstr ""
 "Utilisez le lien fourni dans le courriel pour réinitialiser votre mot de "
@@ -828,15 +834,15 @@ msgstr "Nous vous enverrons un courriel pour créer un nouveau mot de passe."
 msgid "Send email"
 msgstr "Envoyer"
 
-#: profiles/views.py:53
+#: profiles/views.py:55
 msgid "No invited email in session"
 msgstr ""
 
-#: profiles/views.py:80
+#: profiles/views.py:82
 msgid "Account created successfully"
 msgstr ""
 
-#: profiles/views.py:126
+#: profiles/views.py:138
 msgid "Security code has been sent."
 msgstr ""
 
