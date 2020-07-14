@@ -11,13 +11,18 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import sys
 import dj_database_url
 
 from dotenv import load_dotenv
 from datetime import timedelta
+from logging import getLogger, CRITICAL
 from django.utils.translation import gettext_lazy as _
 
 load_dotenv()
+
+# Tests whether the second command line argument (after ./manage.py) was test
+TESTING = len(sys.argv) > 1 and sys.argv[1] == "test"
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -218,14 +223,19 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 email_use_tls = os.getenv("EMAIL_USE_TLS", "True")
 EMAIL_USE_TLS = True if email_use_tls == "True" else False
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+OTP_EMAIL_SUBJECT = "Your login code"
 
 # Default Super User Setup
 CREATE_DEFAULT_SU = os.getenv("DJANGO_DEFAULT_SU", "False") == "True"
 SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
 
 # Login Rate Limiting
-if os.getenv("DJANGO_ENV", "production") == "tests":
+if TESTING:
     AXES_ENABLED = False
+    AXES_VERBOSE = False
+    AXES_LOGGER = "axes.watch_login"
+    logger = getLogger(AXES_LOGGER)
+    logger.setLevel(CRITICAL)
 
 AXES_FAILURE_LIMIT = 5  # Lockout after 5 failed login attempts
 AXES_COOLOFF_MESSAGE = _(
