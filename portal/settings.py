@@ -21,7 +21,7 @@ from django.utils.translation import gettext_lazy as _
 load_dotenv()
 
 # Tests whether the second command line argument (after ./manage.py) was test
-TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
+TESTING = len(sys.argv) > 1 and sys.argv[1] == "test"
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
