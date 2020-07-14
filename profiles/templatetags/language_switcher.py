@@ -21,7 +21,9 @@ def get_href(context, lang):
 
     if settings.URL_DUAL_DOMAINS:
         root_domain = (
-            settings.URL_FR_PRODUCTION if translated_lang == "fr" else settings.URL_EN_PRODUCTION
+            settings.URL_FR_PRODUCTION
+            if translated_lang == "fr"
+            else settings.URL_EN_PRODUCTION
         )
 
     return root_domain + translate_url(path, translated_lang)
