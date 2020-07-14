@@ -16,7 +16,7 @@
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 
-    <title>{% block title %}{% trans "Generate COVID Alert number" %}{% endblock %}</title>
+    <title>{% block title %}{% trans "Generate COVID Alert number" %}{% endblock %}{% block title_suffix %} {% trans "– COVID Alert Portal" %}{% endblock %}</title>
   </head>
   <body>
     <div class="container">
