@@ -1,6 +1,6 @@
 [La version française suit.](#portail-de-soins-de-santé-covid)
 
-# COVID Healthcare Portal
+# COVID Alert Portal
 
 This repository implements a healthcare portal to complement the [Government of Canada COVID Shield mobile app](https://github.com/cds-snc/covid-shield-mobile). This portal provides authenticated healthcare providers unique temporary codes which can be shared with COVID-diagnosed individuals. This code gives individuals access to upload their random IDs via the mobile app if they choose. No personal information is collected and there is no association between the codes and specific tests.
 
@@ -125,7 +125,7 @@ For more complete documentation refer to the [Django Translation](https://docs.d
 
 ____
 
-# Portail de soins de santé COVID
+# Portail Alerte COVID
 
 Ce dépôt met en oeuvre un portail de soins de santé qui accompagne l’[application mobile COVID Shield du gouvernement du Canada](https://github.com/cds-snc/covid-shield-mobile). Ce portail fournit des codes temporaires à utilisation unique aux professionnels de la santé authentifiés, et ces codes peuvent être transmis aux personnes ayant un diagnostic de COVID-19. Le code permet aux personnes de téléverser les ID aléatoires de l’application mobile si elles acceptent. Aucune information personnelle n’est recueillie, et aucun lien n’est établi entre les codes et les tests.
 

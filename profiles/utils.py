@@ -17,7 +17,7 @@ def generate_2fa_code_for_device(email_device, user: HealthcareUser):
     context = {
         "token": email_device.token,
         "full_name": user.name,
-        "service_name": settings.SERVICE_NAME,
+        "service_name": "COVID Alert Portal",
         "scheme": "https" if settings.SECURE_SSL_REDIRECT else "http",
         "http_host": current_site.domain,
     }
