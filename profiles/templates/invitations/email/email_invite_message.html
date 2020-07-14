@@ -1,6 +1,5 @@
 {% load static %}
-<img src="{{scheme}}://{{http_host}}{% static "img/sig-blk-en.jpg" %}" /><br/>
-
+{% include 'includes/emails/header.html' %}
 <p>Hello,</p>
 <p>Your manager has authorized you to generate numbers for COVID Alert.</p>
 <p>You’ll need an account to give numbers to patients diagnosed with COVID-19. Then patients can use the COVID Alert app to anonymously notify people they’ve been near and possibly exposed.</p>
@@ -18,6 +17,4 @@
 <p>Veuillez utiliser le lien suivant pour créer votre nom d’utilisateur et votre mot de passe. Le lien expire dans 3 jours.</p>
 <p><a href="{{ invite_url }}">{{ invite_url }}</a>  </p>
 <p>Alerte COVID fait partie des efforts importants déployés pour ralentir la propagation de COVID-19. Merci pour tout le travail que vous faites pour nos communautés!</p>
-<br/>
-
-<img src="{{scheme}}://{{http_host}}{% static 'img/wmms-blk.jpg' %}" />
+{% include 'includes/emails/footer.html' %}
