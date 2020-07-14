@@ -91,8 +91,8 @@ class HomePageView(TestCase):
 class RestrictedPageViews(TestCase):
     #  These should redirect us
     def test_code(self):
-        response = self.client.get(reverse("code"))
-        self.assertRedirects(response, "/en/login/?next=/en/code/")
+        response = self.client.get(reverse("number"))
+        self.assertRedirects(response, "/en/login/?next=/en/number/")
 
     def test_start(self):
         response = self.client.get(reverse("start"))
