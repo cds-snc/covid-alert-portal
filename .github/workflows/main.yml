@@ -39,7 +39,5 @@ jobs:
 
       - name: Test
         uses: VaultVulp/action-pipenv@v2.0.1
-        env:
-          DJANGO_ENV: tests
         with:
           command: run test # Run custom `test` command defined in the `[scripts]` block of Pipfile
