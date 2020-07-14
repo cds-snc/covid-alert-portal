@@ -91,8 +91,8 @@ class HomePageView(TestCase):
 class RestrictedPageViews(TestCase):
     #  These should redirect us
     def test_code(self):
-        response = self.client.get(reverse("code"))
-        self.assertRedirects(response, "/en/login/?next=/en/code/")
+        response = self.client.get(reverse("number"))
+        self.assertRedirects(response, "/en/login/?next=/en/number/")
 
     def test_start(self):
         response = self.client.get(reverse("start"))
@@ -172,12 +172,12 @@ class AuthenticatedView(AdminUserTestCase):
         Login and then see the code page and one code
         """
         self.client.login(username="test@test.com", password="testpassword")
-        response = self.client.get(reverse("code"))
+        response = self.client.get(reverse("number"))
         self.assertEqual(response.status_code, 302)
 
         self.login_2fa()
 
-        response = self.client.get(reverse("code"))
+        response = self.client.get(reverse("number"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Give patient this number")
         self.assertContains(
