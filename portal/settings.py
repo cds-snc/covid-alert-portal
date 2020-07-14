@@ -76,6 +76,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "axes.middleware.AxesMiddleware",
+    "csp.middleware.CSPMiddleware",
 ]
 
 ROOT_URLCONF = "portal.urls"
@@ -165,8 +166,12 @@ SERVICE_NAME = "COVID Alert Portal"
 SECURE_SSL_REDIRECT = is_prod
 SESSION_COOKIE_SECURE = is_prod
 CSRF_COOKIE_SECURE = is_prod
+CSRF_COOKIE_HTTPONLY = is_prod
 SECURE_BROWSER_XSS_FILTER = is_prod
 
+# Prefix session and csrf cookie names so they can not be over ridden by insecure hosts.
+SESSION_COOKIE_NAME = "__secure-sessionid"
+CSRF_COOKIE_NAME = "__secure-csrftoken"
 # Limit session times to 20h, this should make it that users need to relogin every morning.
 SESSION_COOKIE_AGE = 72000
 
@@ -175,7 +180,8 @@ if is_prod:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # For sites that should only be accessed over HTTPS, instruct modern browsers to refuse to connect to your domain name via an insecure connection (for a given period of time)
-SECURE_HSTS_SECONDS = 3600 if is_prod else 0
+if is_prod:
+    SECURE_HSTS_SECONDS = 31536000
 
 # Instructs the browser to send a full URL, but only for same-origin links. No referrer will be sent for cross-origin links.
 SECURE_REFERRER_POLICY = "same-origin"
@@ -232,3 +238,9 @@ AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
     "REAL_IP",
     "REMOTE_ADDR",
 ]
+
+# HTTP Security headers configuration
+CSP_DEFAULT_SRC = ["'self'"]
+CSP_STYLE_SRC = ["'self'", "fonts.googleapis.com"]
+CSP_FONT_SRC = ["'self'", "fonts.gstatic.com"]
+CSP_SCRIPT_SRC = ["'self'", "cdnjs.cloudflare.com"]

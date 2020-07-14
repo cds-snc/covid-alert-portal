@@ -27,6 +27,7 @@ django-otp = "*"
 newrelic = "*"
 django-axes = "*"
 uwsgi = "*"
+django-csp = "*"
 
 [pipenv]
 allow_prereleases = true
