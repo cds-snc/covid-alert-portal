@@ -204,5 +204,5 @@ def code(request):
     expiry = timezone.now() + timedelta(days=1)
 
     return render(
-        request, "profiles/code.html", {"code": diagnosis_code, "expiry": expiry}
+        request, "profiles/number.html", {"code": diagnosis_code, "expiry": expiry}
     )
