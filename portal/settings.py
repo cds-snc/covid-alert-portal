@@ -170,8 +170,8 @@ CSRF_COOKIE_HTTPONLY = is_prod
 SECURE_BROWSER_XSS_FILTER = is_prod
 
 # Prefix session and csrf cookie names so they can not be over ridden by insecure hosts.
-SESSION_COOKIE_NAME = "__Secure-sessionid"
-CSRF_COOKIE_NAME = "__Secure-csrftoken"
+SESSION_COOKIE_NAME = "__secure-sessionid"
+CSRF_COOKIE_NAME = "__secure-csrftoken"
 # Limit session times to 20h, this should make it that users need to relogin every morning.
 SESSION_COOKIE_AGE = 72000
 
