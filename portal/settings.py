@@ -218,6 +218,7 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 email_use_tls = os.getenv("EMAIL_USE_TLS", "True")
 EMAIL_USE_TLS = True if email_use_tls == "True" else False
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+OTP_EMAIL_SUBJECT = "Your login code"
 
 # Default Super User Setup
 CREATE_DEFAULT_SU = os.getenv("DJANGO_DEFAULT_SU", "False") == "True"
@@ -254,3 +255,8 @@ CSP_DEFAULT_SRC = ["'self'"]
 CSP_STYLE_SRC = ["'self'", "fonts.googleapis.com"]
 CSP_FONT_SRC = ["'self'", "fonts.gstatic.com"]
 CSP_SCRIPT_SRC = ["'self'", "cdnjs.cloudflare.com"]
+if os.getenv("ALLOWED_HOSTS"):
+    CSP_DEFAULT_SRC.extend(os.getenv("ALLOWED_HOSTS").split(","))
+    CSP_STYLE_SRC.extend(os.getenv("ALLOWED_HOSTS").split(","))
+    CSP_FONT_SRC.extend(os.getenv("ALLOWED_HOSTS").split(","))
+    CSP_SCRIPT_SRC.extend(os.getenv("ALLOWED_HOSTS").split(","))
