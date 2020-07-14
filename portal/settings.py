@@ -16,6 +16,7 @@ import dj_database_url
 
 from dotenv import load_dotenv
 from datetime import timedelta
+from logging import getLogger, CRITICAL
 from django.utils.translation import gettext_lazy as _
 
 load_dotenv()
@@ -230,6 +231,10 @@ SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
 # Login Rate Limiting
 if TESTING:
     AXES_ENABLED = False
+    AXES_VERBOSE = False
+    AXES_LOGGER = 'axes.watch_login'
+    logger = getLogger(AXES_LOGGER)
+    logger.setLevel(CRITICAL)
 
 AXES_FAILURE_LIMIT = 5  # Lockout after 5 failed login attempts
 AXES_COOLOFF_MESSAGE = _(
