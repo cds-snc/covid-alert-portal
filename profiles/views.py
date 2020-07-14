@@ -5,6 +5,7 @@ from datetime import timedelta
 
 from django.conf import settings
 from django.shortcuts import render, redirect
+from django.contrib.sites.shortcuts import get_current_site
 from django.utils.translation import gettext as _
 from django.views.generic import (
     FormView,
@@ -147,7 +148,10 @@ class InviteView(Is2FAMixin, IsAdminMixin, FormView):
     def form_valid(self, form):
         # Pass user to invite, save the invite to the DB, and return it
         invite = form.save(user=self.request.user)
-        invite.send_invitation(self.request)
+        current_site = get_current_site(self.request)
+        invite.send_invitation(
+            self.request, scheme=self.request.scheme, http_host=current_site.domain,
+        )
         messages.success(
             self.request, "Invitation sent to “{}”".format(invite.email), "invite"
         )
