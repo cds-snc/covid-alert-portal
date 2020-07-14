@@ -251,12 +251,22 @@ AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
 ]
 
 # HTTP Security headers configuration
-CSP_DEFAULT_SRC = ["'self'"]
+# "js-agent.newrelic.com", "bam.nr-data.net" and "unsafe-inline" are required by New Relic:
+# https://docs.newrelic.com/docs/browser/new-relic-browser/getting-started/compatibility-requirements-new-relic-browser#csp
+
+CSP_DEFAULT_SRC = [
+    "'self'",
+    "staging.covid-hcportal.cdssandbox.xyz",
+    "covid-alert-portal.alpha.canada.ca",
+    "portail-alerte-covid.alpha.canada.ca",
+]
 CSP_STYLE_SRC = ["'self'", "fonts.googleapis.com"]
 CSP_FONT_SRC = ["'self'", "fonts.gstatic.com"]
-CSP_SCRIPT_SRC = ["'self'", "cdnjs.cloudflare.com"]
-if os.getenv("ALLOWED_HOSTS"):
-    CSP_DEFAULT_SRC.extend(os.getenv("ALLOWED_HOSTS").split(","))
-    CSP_STYLE_SRC.extend(os.getenv("ALLOWED_HOSTS").split(","))
-    CSP_FONT_SRC.extend(os.getenv("ALLOWED_HOSTS").split(","))
-    CSP_SCRIPT_SRC.extend(os.getenv("ALLOWED_HOSTS").split(","))
+CSP_SCRIPT_SRC = [
+    "'self'",
+    "cdnjs.cloudflare.com",
+    "'unsafe-inline'",
+    "js-agent.newrelic.com",
+    "bam.nr-data.net",
+]
+CSP_CONNECT_SRC = ["'self'", "bam.nr-data.net"]
