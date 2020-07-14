@@ -244,3 +244,8 @@ CSP_DEFAULT_SRC = ["'self'"]
 CSP_STYLE_SRC = ["'self'", "fonts.googleapis.com"]
 CSP_FONT_SRC = ["'self'", "fonts.gstatic.com"]
 CSP_SCRIPT_SRC = ["'self'", "cdnjs.cloudflare.com"]
+if os.getenv("ALLOWED_HOSTS"):
+    CSP_DEFAULT_SRC.extend(os.getenv("ALLOWED_HOSTS").split(","))
+    CSP_STYLE_SRC.extend(os.getenv("ALLOWED_HOSTS").split(","))
+    CSP_FONT_SRC.extend(os.getenv("ALLOWED_HOSTS").split(","))
+    CSP_SCRIPT_SRC.extend(os.getenv("ALLOWED_HOSTS").split(","))
