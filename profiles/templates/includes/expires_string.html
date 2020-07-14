@@ -4,21 +4,22 @@
 {% get_current_language as LANGUAGE_CODE %}
 
 {% timezone "Canada/Eastern" %}
-<span>{% trans "Number expires" %}</span>
-  <span id="expiry-date">
-    {% if LANGUAGE_CODE == 'en' %}
-        {{ expiry|date:"F j" }}
-    {% else %}
-        {{ expiry|date:"j F" }}
-    {% endif %}
-  </span>
-  <span>{% trans "at" %}</span>
-  <span id="expiry-time">
-    {% if LANGUAGE_CODE == 'en' %}
-        {{ expiry|date:"f a e" }}
-    {% else %}
-        {{ expiry|date:"G \h i e" }}
-    {% endif %}
+  <span>{% trans "Number expires" %}
+    <time id="expiry-datetime" datetime="{{ expiry|date:'c' }}">
+      {% if LANGUAGE_CODE == 'en' %}
+          {{ expiry|date:"F j" }}
+      {% else %}
+          {{ expiry|date:"j F" }}
+      {% endif %}
+
+      {% trans "at" %}
+
+      {% if LANGUAGE_CODE == 'en' %}
+          {{ expiry|date:"f a e" }}
+      {% else %}
+          {{ expiry|date:"G \h i e" }}
+      {% endif %}
+    </time>
   </span>
 {% endtimezone %}
 
@@ -26,4 +27,3 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/locale/{{ LANGUAGE_CODE }}-ca.min.js"></script>
 {{ LANGUAGE_CODE|json_script:"lang_code" }}
 <script src="{% static 'js/time_formatting.js' %}"></script>
-
