@@ -15,6 +15,7 @@ from django.views.generic import (
 )
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
 from django_otp import DEVICE_ID_SESSION_KEY
 from django_otp.decorators import otp_required
@@ -78,6 +79,16 @@ class SignUpView(FormView):
     def form_valid(self, form):
         form.save()
         messages.success(self.request, _("Account created successfully"))
+        # Let's login the user right now
+        user = authenticate(
+            request=self.request,
+            username=form.cleaned_data.get("email"),
+            password=form.cleaned_data.get("password1"),
+        )
+        login(self.request, user)
+        email_device = user.emaildevice_set.create()
+        self.request.session[DEVICE_ID_SESSION_KEY] = email_device.persistent_id
+        self.request.session.save()
 
         return super(SignUpView, self).form_valid(form)
 
