@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Account locked" %}
+{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Log in" %}</h1>
+    <p>{% trans "Oops! Your account is temporarily locked." %}</p>
+    <p>{% blocktrans %}It looks like you’ve entered the wrong password {{ failure_limit }} times, and you are now locked out of your account. Don’t worry, your account will be unlocked in a few minutes and you can try logging in again.{% endblocktrans %}</p>
+{% endblock %}
