@@ -275,7 +275,6 @@ CSP_FONT_SRC = ["'self'", "fonts.gstatic.com"]
 CSP_SCRIPT_SRC = [
     "'self'",
     "cdnjs.cloudflare.com",
-    "'unsafe-inline'",
     "js-agent.newrelic.com",
     "bam.nr-data.net",
 ]
