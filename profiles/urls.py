@@ -25,7 +25,7 @@ urlpatterns = [
     ),
     path("invite/", views.InviteView.as_view(), name="invite"),
     path(
-        "invite_complete/", views.InviteCompleteView.as_view(), name="invite_complete"
+        "invite-complete/", views.InviteCompleteView.as_view(), name="invite_complete"
     ),
     re_path(r"signup/$", views.SignUpView.as_view(), name="signup"),
     path("profiles/", views.ProfilesView.as_view(), name="profiles",),
@@ -44,7 +44,7 @@ urlpatterns = [
     path("login-2fa/", views.Login2FAView.as_view(), name="login-2fa",),
     path("resend-2fa/", views.Resend2FAView.as_view(), name="resend-2fa",),
     path(
-        "password_reset/",
+        "password-reset/",
         PasswordResetView.as_view(form_class=forms.HealthcarePasswordResetForm),
         name="password_reset",
     ),
