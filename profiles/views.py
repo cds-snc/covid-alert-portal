@@ -167,7 +167,9 @@ class ProfilesView(Is2FAMixin, IsAdminMixin, ListView):
     def get_queryset(self):
         return (
             HealthcareUser.objects.filter(province=self.request.user.province)
-            .annotate(current_user_email=RawSQL("email = %s", (self.request.user.email,)))
+            .annotate(
+                current_user_email=RawSQL("email = %s", (self.request.user.email,))
+            )
             .order_by("-current_user_email", "-is_admin")
         )
 
