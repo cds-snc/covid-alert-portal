@@ -15,6 +15,6 @@ def new_relic():
     elif app_name == "HC_Portal_Staging":
         new_relic_script = "js/new_relic_staging.js"
     else:
-        new_relic_script = "js/new_relic_production"
+        new_relic_script = "js/new_relic_production.js"
 
     return html.format_html("<script src='{}'></script>", static(new_relic_script))
