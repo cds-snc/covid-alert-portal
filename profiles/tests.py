@@ -410,13 +410,14 @@ class ProfileView(AdminUserTestCase):
             reverse("user_profile", kwargs={"pk": self.credentials["id"]})
         )
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Your profile</h1>")
+        self.assertContains(response, "Your profile")
+        self.assertContains(response, self.user.name)
 
     def test_profile_page_not_found_if_user_id_does_not_exist(self):
         self.client.login(username="test@test.com", password="testpassword")
         self.login_2fa()
 
-        response = self.client.get(reverse("user_profile", kwargs={"pk": 99}))
+        response = self.client.get(reverse("user_profile", kwargs={"pk": uuid4()}))
         self.assertEqual(response.status_code, 404)
 
     def test_fobidden_profile_page_if_non_admin_user_viewing_other_profile(self):
