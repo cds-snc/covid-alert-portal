@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load language_switcher %}
 <nav class="nav--header" aria-label="{% trans 'Language and account navigation' %}">
   <ul>
     <li>
@@ -6,16 +7,9 @@
       {% get_language_info for "en" as langEn %}
       {% get_language_info for "fr" as langFr %}
 
-      <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
-        <h2 class="visually-hidden">{% trans "Language selection" }</h2>
-        {% if LANGUAGE_CODE == 'en' %}
-          <input type="hidden" name="language" value="{{ langFr.code }}" />
-          <button>{{ langFr.name_local|title }}</button>
-        {% else %}
-          <input type="hidden" name="language" value="{{ langEn.code }}" />
-          <button>{{ langEn.name_local|title }}</button>
-        {% endif %}
-      </form>
+      <h2 class="visually-hidden">{% trans "Language selection" }</h2>
+      <a href="{% get_href LANGUAGE_CODE %}">{% get_lang_title LANGUAGE_CODE langEn langFr %}</a>
+
     </li>
     {% if user.is_authenticated %}
       <li><a href="{% url 'user_profile' user.id %}">{{ user.email }}</a></li>
