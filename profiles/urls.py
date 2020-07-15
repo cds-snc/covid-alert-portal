@@ -29,13 +29,9 @@ urlpatterns = [
     ),
     re_path(r"signup/$", views.SignUpView.as_view(), name="signup"),
     path("profiles/", views.ProfilesView.as_view(), name="profiles",),
+    path("profiles/<uuid:pk>", views.UserProfileView.as_view(), name="user_profile",),
     path(
-        "profiles/<uuid:pk>", views.UserProfileView.as_view(), name="user_profile",
-    ),
-    path(
-        "profiles/<uuid:pk>/delete",
-        views.UserDeleteView.as_view(),
-        name="user_delete",
+        "profiles/<uuid:pk>/delete", views.UserDeleteView.as_view(), name="user_delete",
     ),
     # Removed for now
     # url(r'profiles/(?P<pk>\w+)/edit$', views.UserEdit.as_view(), name='user_edit'),
