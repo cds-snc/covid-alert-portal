@@ -306,7 +306,7 @@ class InviteFlow(AdminUserTestCase):
 
     def test_redirect_on_invite_complete_page_if_logged_out(self):
         response = self.client.get(reverse("invite_complete"))
-        self.assertRedirects(response, "/en/login/?next=/en/invite_complete/")
+        self.assertRedirects(response, "/en/login/?next=/en/invite-complete/")
 
     def test_see_invite_page_and_inviter_id_in_form(self):
         """
