@@ -17,7 +17,7 @@ class ProvinceAdminManageMixin(UserPassesTestMixin):
             return True
 
         # if same user, return profile
-        if self.request.user.id == int(profile_user.id):
+        if self.request.user.id == profile_user.id:
             return True
 
         # Don't return superuser profile pages
@@ -37,7 +37,7 @@ class ProvinceAdminManageMixin(UserPassesTestMixin):
 class ProvinceAdminDeleteMixin(ProvinceAdminManageMixin):
     def test_func(self):
         # id can't be yourself
-        if self.request.user.id == int(self.kwargs["pk"]):
+        if self.request.user.id == self.kwargs["pk"]:
             return False
 
         return super().test_func()
