@@ -249,6 +249,16 @@ AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
     "REAL_IP",
     "REMOTE_ADDR",
 ]
+# Site Setup for Separate Domains
+
+URL_DUAL_DOMAINS = os.getenv("URL_DUAL_DOMAINS", "False") == "True"
+
+URL_EN_PRODUCTION = os.getenv(
+    "URL_EN_PRODUCTION", "https://covid-alert-portal.alpha.canada.ca"
+)
+URL_FR_PRODUCTION = os.getenv(
+    "URL_FR_PRODUCTION", "https://portail-alerte-covid.alpha.canada.ca"
+)
 
 # HTTP Security headers configuration
 # "js-agent.newrelic.com", "bam.nr-data.net" and "unsafe-inline" are required by New Relic:
