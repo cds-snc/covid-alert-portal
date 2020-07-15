@@ -416,7 +416,7 @@ class ProfileView(AdminUserTestCase):
         self.client.login(username="test@test.com", password="testpassword")
         self.login_2fa()
 
-        response = self.client.get(reverse("user_profile", kwargs={"pk": 99}))
+        response = self.client.get(reverse("user_profile", kwargs={"pk": uuid4()}))
         self.assertEqual(response.status_code, 404)
 
     def test_fobidden_profile_page_if_non_admin_user_viewing_other_profile(self):

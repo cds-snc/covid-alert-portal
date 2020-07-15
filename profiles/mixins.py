@@ -37,7 +37,7 @@ class ProvinceAdminManageMixin(UserPassesTestMixin):
 class ProvinceAdminDeleteMixin(ProvinceAdminManageMixin):
     def test_func(self):
         # id can't be yourself
-        if self.request.user.id == int(self.kwargs["pk"]):
+        if self.request.user.id == self.kwargs["pk"]:
             return False
 
         return super().test_func()
