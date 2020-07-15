@@ -17,7 +17,7 @@ class ProvinceAdminManageMixin(UserPassesTestMixin):
             return True
 
         # if same user, return profile
-        if self.request.user.id == int(profile_user.id):
+        if self.request.user.id == profile_user.id:
             return True
 
         # Don't return superuser profile pages
