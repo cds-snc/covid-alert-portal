@@ -29,7 +29,7 @@ Environment variables are used to control app settings, and configuration for ut
 
 - `DJANGO_SECRET_KEY`: The `SECRET_KEY` in Django is used to provide cryptographic signing, and should be set to a unique, unpredictable value. Django won't start unless this is set. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#secret-key).
 
-- `ALLOWED_HOSTS`: A list of strings representing the host/domain names that this Django site can serve. Only needs to be set in prod. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts).
+- `DJANGO_ALLOWED_HOSTS`: A list of strings representing the host/domain names that this Django site can serve. Only needs to be set in prod. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts).
 
 - `CREATE_DEFAULT_SU`: Whether to create a default superuser (`admin@cds-snc.ca`) the first time the app is provisioned. If we aren't able to directly access the machine where the app is running, this can be enabled for first-time setup.
 

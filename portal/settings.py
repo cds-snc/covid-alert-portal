@@ -49,8 +49,8 @@ ALLOWED_HOSTS = [
     "localhost",
 ]
 
-if os.getenv("ALLOWED_HOSTS"):
-    ALLOWED_HOSTS.extend(os.getenv("ALLOWED_HOSTS").split(","))
+if os.getenv("DJANGO_ALLOWED_HOSTS"):
+    ALLOWED_HOSTS.extend(os.getenv("DJANGO_ALLOWED_HOSTS").split(","))
 
 # Application definition
 
