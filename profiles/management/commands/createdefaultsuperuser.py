@@ -1,4 +1,4 @@
-from portal.settings import CREATE_DEFAULT_SU, SU_DEFAULT_PASSWORD
+from portal.settings import SU_DEFAULT_PASSWORD
 from django.contrib.auth.password_validation import validate_password
 from django.core.management.base import BaseCommand
 from profiles.models import HealthcareUser
@@ -10,7 +10,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         if SU_EXISTS:
             self.stdout.write(self.style.SUCCESS("Default Super User already exists"))
-        elif CREATE_DEFAULT_SU and SU_DEFAULT_PASSWORD:
+        # if SU_DEFAULT_PASSWORD exists, assume we want to create a default superuser
+        elif SU_DEFAULT_PASSWORD:
             self.create_su()
         else:
             self.stdout.write(self.style.SUCCESS("Not creating default Super User"))

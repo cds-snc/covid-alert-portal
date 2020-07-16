@@ -31,9 +31,7 @@ Environment variables are used to control app settings, and configuration for ut
 
 - `DJANGO_ALLOWED_HOSTS`: A list of strings representing the host/domain names that this Django site can serve. Only needs to be set in prod. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts).
 
-- `CREATE_DEFAULT_SU`: Whether to create a default superuser (`admin@cds-snc.ca`) the first time the app is provisioned. If we aren't able to directly access the machine where the app is running, this can be enabled for first-time setup.
-
-- `SU_DEFAULT_PASSWORD`: The password to use for our default admin account.
+- `SU_DEFAULT_PASSWORD`: Setting to trigger the creation of a default superuser the first time the app is provisioned. If this variable exists, a default superuser will be created at `admin@cds-snc.ca` with this password.
 
 ##### database configuration
 
