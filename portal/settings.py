@@ -166,8 +166,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-SERVICE_NAME = "COVID Alert Portal"
-
 SECURE_SSL_REDIRECT = is_prod
 SESSION_COOKIE_SECURE = is_prod
 CSRF_COOKIE_SECURE = is_prod
