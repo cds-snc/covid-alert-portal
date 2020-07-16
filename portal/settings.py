@@ -52,6 +52,13 @@ ALLOWED_HOSTS = [
 if os.getenv("DJANGO_ALLOWED_HOSTS"):
     ALLOWED_HOSTS.extend(os.getenv("DJANGO_ALLOWED_HOSTS").split(","))
 
+# Admins who get emailed about production errors
+ADMINS = []
+
+if os.getenv("DJANGO_ADMINS"):
+    ADMINS.extend([email.strip() for email in os.getenv("DJANGO_ADMINS").split(",")])
+
+
 # Application definition
 
 INSTALLED_APPS = [
