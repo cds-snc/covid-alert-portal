@@ -12,6 +12,10 @@ python manage.py collectstatic --noinput -i scss
 echo "Apply database migrations"
 python manage.py migrate --noinput
 
+# Create default superuser if variables are set
+echo "Check if creating default super user"
+python manage.py createdefaultsuperuser
+
 # Start server
 echo "Starting server"
-python manage.py runserver 0.0.0.0:8000
+uwsgi --http :8000 --module portal.wsgi --static-map /static=/code/staticfiles --enable-threads
