@@ -19,9 +19,104 @@ pipenv shell    # activate virtualenv
 pipenv install  # install dependencies
 ```
 
+### Environment variables
+
+Environment variables are used to control app settings, and configuration for utilities and third-party services. Defaults are `''` or `None` unless otherwise specified.
+
+#### App settings
+
+- `DJANGO_ENV` (default: `development`): Turns on [`DEBUG`](https://docs.djangoproject.com/en/3.0/ref/settings/#debug) mode, as well as doesn't require HTTPS to run. For local development, leave this as `development`.
+
+- `DJANGO_SECRET_KEY`: The `SECRET_KEY` in Django is used to provide cryptographic signing, and should be set to a unique, unpredictable value. Django won't start unless this is set. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#secret-key).
+
+- `DJANGO_ALLOWED_HOSTS`: A list of strings representing the host/domain names that this Django site can serve. Only needs to be set in prod. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts).
+
+- `CREATE_DEFAULT_SU`: Whether to create a default superuser (`admin@cds-snc.ca`) the first time the app is provisioned. If we aren't able to directly access the machine where the app is running, this can be enabled for first-time setup.
+
+- `SU_DEFAULT_PASSWORD`: The password to use for our default admin account.
+
+##### database configuration
+
+- `DATABASE_URL`: A string containing the database scheme, host, username, password, and port. If `DATABASE_HOST` is set, this param will be ignored. The `DATABASE_URL` is parsed by [`dj-django-url`](https://pypi.org/project/dj-database-url/).
+
+- `DATABASE_HOST`: The host of the DB to connect to. If this is set, the `DATABASE_URL` param will be ignored.
+
+- `DATABASE_USERNAME`: The account allowed to perform queries on the DB.
+
+- `DATABASE_PASSWORD`: The password of the DB user.
+
+- `DATABASE_PORT`: The port the DB is running on.
+
+##### email configuration
+
+- `EMAIL_BACKEND` (default: `django.core.mail.backends.console.EmailBackend`): The email backend to use. In production, this should be set to `django.core.mail.backends.smtp.EmailBackend`. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-backend).
+
+- `DEFAULT_FROM_EMAIL`: The email address that emails will say they have been sent from.
+
+The following are only relevant for the `smtp` backend.
+
+- `EMAIL_HOST`: The host to use for sending email. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-host).
+
+- `EMAIL_PORT`: Port to use for the SMTP server defined in EMAIL_HOST.
+  [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-port).
+
+* `EMAIL_HOST_USER`: Username to use for the SMTP server defined in `EMAIL_HOST`. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-host-user).
+
+* `EMAIL_HOST_PASSWORD`: Password to use for the SMTP server defined in `EMAIL_HOST`. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-host-password).
+
+* `EMAIL_USE_TLS` (default: `False`): Whether to use a TLS (secure) connection when talking to the SMTP server. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-use-tls).
+
+#### CovidAlert API settings
+
+- `API_ENDPOINT`: The API endpoint that returns one-time usage codes. If not set, the one-time codes will read as `0000 0000`.
+
+- `API_AUTHORIZATION`: The credentials required to authenticate with the one-time code API. Otherwise the request will return a `401` Forbidden response.
+
+#### New Relic configuration
+
+We use New Relic to monitor for errors in production.
+
+- `NEW_RELIC_APP_NAME`: The app name set up in New Relic.
+
+- `NEW_RELIC_LICENSE_KEY`: Credentials needed to authenticate with New Relic.
+
+<details>
+  <summary>
+    <strong>Example `.env` file</strong></summary>
+
+```
+DJANGO_ENV = development
+DJANGO_SECRET_KEY =
+DJANGO_ALLOWED_HOSTS =
+
+CREATE_DEFAULT_SU =
+SU_DEFAULT_PASSWORD =
+
+API_AUTHORIZATION = ADD_TOKEN_HERE
+API_ENDPOINT = https://example.com/new-key-claim
+DATABASE_URL =
+DATABASE_USERNAME = user
+DATABASE_PASSWORD = password
+DATABASE_HOST =
+DATABASE_PORT =
+
+EMAIL_BACKEND =
+EMAIL_HOST =
+EMAIL_PORT =
+EMAIL_HOST_USER =
+EMAIL_HOST_PASSWORD =
+EMAIL_USE_TLS =
+DEFAULT_FROM_EMAIL =
+
+NEW_RELIC_APP_NAME =
+NEW_RELIC_LICENSE_KEY =
+```
+
+</details>
+
 ### Running the app for the first time
 
-**Quick Start:** After activating a virtual environment run the `entrypoint.sh` script to perform the database migrations, static file collection, and compilation of the CSS files.  A server will then be started and can be accessed at `http://127.0.0.1:8000/` or `http://localhost:8000`.
+**Quick Start:** After activating a virtual environment run the `entrypoint.sh` script to perform the database migrations, static file collection, and compilation of the CSS files. A server will then be started and can be accessed at `http://127.0.0.1:8000/` or `http://localhost:8000`.
 
 For a more thorough setup of the various environment options please follow the instructions below after having activated your virtual environment, and moved into the top-level `portal` folder.
 
@@ -114,16 +209,17 @@ Run `python manage.py compilemessages` to compile the translations so that Djang
 For more complete documentation refer to the [Django Translation](https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#translation) docs.
 
 ## Before you do a PR
+
 1. Ensure that you have a commit message that explains all the changes.
 2. Run:
-    a) `python manage.py makemessages -l fr`
-    b) `python manage.py compilemessages`
-    c) `pipenv run format --check`
-    d) `pipenv check`
-    e) `pipenv run lint`
+   a) `python manage.py makemessages -l fr`
+   b) `python manage.py compilemessages`
+   c) `pipenv run format --check`
+   d) `pipenv check`
+   e) `pipenv run lint`
 3. Have some tests (if possible)
 
-____
+---
 
 # Portail Alerte COVID
 

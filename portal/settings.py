@@ -49,8 +49,8 @@ ALLOWED_HOSTS = [
     "localhost",
 ]
 
-if os.getenv("ALLOWED_HOSTS"):
-    ALLOWED_HOSTS.extend(os.getenv("ALLOWED_HOSTS").split(","))
+if os.getenv("DJANGO_ALLOWED_HOSTS"):
+    ALLOWED_HOSTS.extend(os.getenv("DJANGO_ALLOWED_HOSTS").split(","))
 
 # Application definition
 
@@ -117,15 +117,10 @@ default_db_path = os.path.join(BASE_DIR, "db.sqlite3")
 if os.getenv("DATABASE_URL") == "":
     del os.environ["DATABASE_URL"]
 
-if os.getenv("DATABASE_HOST") and not (os.getenv("DATABASE_HOST") == ""):
-    db_config = {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "covid_portal",
-        "USER": os.getenv("DATABASE_USERNAME"),
-        "PASSWORD": os.getenv("DATABASE_PASSWORD"),
-        "HOST": os.getenv("DATABASE_HOST", "localhost"),
-        "PORT": os.getenv("DATABASE_PORT", ""),
-    }
+if os.getenv("DATABASE_URL"):
+    db_config = dj_database_url.config(
+        default=os.getenv("DATABASE_URL"), conn_max_age=600, ssl_require=is_prod
+    )
 else:
     db_config = dj_database_url.config(
         default=f"sqlite:///{default_db_path}", conn_max_age=600, ssl_require=is_prod
@@ -215,7 +210,7 @@ EMAIL_BACKEND = (
     os.getenv("EMAIL_BACKEND") or "django.core.mail.backends.console.EmailBackend"
 )
 EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
+EMAIL_PORT = int(os.getenv("EMAIL_PORT") or 587)
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 email_use_tls = os.getenv("EMAIL_USE_TLS", "True")
