@@ -3,6 +3,7 @@ from django.views.generic import RedirectView, TemplateView
 from django.contrib.auth.views import PasswordResetView, login_required
 from django_otp.views import LoginView
 from django_otp.decorators import otp_required
+from django.contrib.auth import views as login_views
 
 from . import views
 from . import forms
@@ -44,14 +45,33 @@ urlpatterns = [
     path("login-2fa/", views.Login2FAView.as_view(), name="login-2fa",),
     path("resend-2fa/", views.Resend2FAView.as_view(), name="resend-2fa",),
     path(
-        "password-reset/",
-        PasswordResetView.as_view(form_class=forms.HealthcarePasswordResetForm),
-        name="password_reset",
-    ),
-    path(
         "privacy/",
         TemplateView.as_view(template_name="profiles/privacy.html"),
         name="privacy",
     ),
     path("", include("django.contrib.auth.urls")),
+]
+
+# Django.contrib.auth urls have underscore in them, let's change that for dashes
+urlpatterns += [
+    path(
+        "password-change/",
+        login_views.PasswordChangeView.as_view(),
+        name="password_change",
+    ),
+    path(
+        "password-change/done/",
+        login_views.PasswordChangeDoneView.as_view(),
+        name="password_change_done",
+    ),
+    path(
+        "password-reset/done/",
+        login_views.PasswordResetDoneView.as_view(),
+        name="password_reset_done",
+    ),
+    path(
+        "password-reset/",
+        PasswordResetView.as_view(form_class=forms.HealthcarePasswordResetForm),
+        name="password_reset",
+    ),
 ]
