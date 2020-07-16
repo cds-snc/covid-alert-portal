@@ -11,10 +11,7 @@ services:
       - "5432:5432"
   web:
     environment:
-      - DATABASE_USERNAME=user
-      - DATABASE_PASSWORD=password
-      - DATABASE_HOST=db
-      - DATABASE_PORT=5432
+      - DATABASE_URL=postgres://user:password@db:5432/covid_portal
       - DJANGO_ENV=development
     build: .
     volumes:

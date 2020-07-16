@@ -37,15 +37,7 @@ Environment variables are used to control app settings, and configuration for ut
 
 ##### database configuration
 
-- `DATABASE_URL`: A string containing the database scheme, host, username, password, and port. If `DATABASE_HOST` is set, this param will be ignored. The `DATABASE_URL` is parsed by [`dj-django-url`](https://pypi.org/project/dj-database-url/).
-
-- `DATABASE_HOST`: The host of the DB to connect to. If this is set, the `DATABASE_URL` param will be ignored.
-
-- `DATABASE_USERNAME`: The account allowed to perform queries on the DB.
-
-- `DATABASE_PASSWORD`: The password of the DB user.
-
-- `DATABASE_PORT`: The port the DB is running on.
+- `DATABASE_URL`: A string containing the database scheme, host, username, password, and port. The `DATABASE_URL` is parsed by [`dj-django-url`](https://pypi.org/project/dj-database-url/).
 
 ##### email configuration
 
@@ -95,10 +87,6 @@ SU_DEFAULT_PASSWORD =
 API_AUTHORIZATION = ADD_TOKEN_HERE
 API_ENDPOINT = https://example.com/new-key-claim
 DATABASE_URL =
-DATABASE_USERNAME = user
-DATABASE_PASSWORD = password
-DATABASE_HOST =
-DATABASE_PORT =
 
 EMAIL_BACKEND =
 EMAIL_HOST =
@@ -124,16 +112,15 @@ Copy `./portal/.env.example` to `./portal/.env` and provide the appropriate valu
 
 #### 1. Database migrations
 
-A Postgres database will need to be set up.
+By default the Django will create an SQLite database, but we use Postgres in production.
 
-If a `DATABASE_URL` environment variable exists, it will set all the connection parameters at the same time. Otherwise, the database parameters will be set individually:
+If a `DATABASE_URL` environment variable exists, it will set all the connection parameters at the same time.
 
-- `DATABASE_USERNAME`
-- `DATABASE_PASSWORD`
-- `DATABASE_HOST`
-- `DATABASE_PORT`
+##### Postgres [URL schema](https://github.com/jacobian/dj-database-url#url-schema)
 
-We assume a database named `covid_portal` exists for local development.
+| Django Backend                  | DATABASE_URL                              |
+| ------------------------------- | ----------------------------------------- |
+| `django.db.backends.postgresql` | `postgres://USER:PASSWORD@HOST:PORT/NAME` |
 
 To create the database schema, run `python manage.py makemigrations`.
 
@@ -250,16 +237,15 @@ Copiez `./portal/.env.example` vers `./portal/.env` et fournissez les valeurs ad
 
 #### 1. Migrations de bases de données
 
-Une base de données Postgres devra être configurée.
+Par défaut, Django crée une base de données SQLite, mais nous utilisons Postgres en production.
 
-Si une variable d’environnement `DATABASE_URL` existe, elle configurera tous les paramètres de connexion au même moment. Sinon, les paramètres de la base de données seront configurés individuellement :
+Si une variable d’environnement `DATABASE_URL` existe, elle configurera tous les paramètres de connexion au même moment.
 
-- `DATABASE_USERNAME`
-- `DATABASE_PASSWORD`
-- `DATABASE_HOST`
-- `DATABASE_PORT`
+##### Postgres [URL schema](https://github.com/jacobian/dj-database-url#url-schema)
 
-Nous supposons qu’une base de données nommée `covid_portal` existe pour le développement local.
+| Django Backend                  | DATABASE_URL                              |
+| ------------------------------- | ----------------------------------------- |
+| `django.db.backends.postgresql` | `postgres://USER:PASSWORD@HOST:PORT/NAME` |
 
 Pour créer le schéma de base de données, exécutez `python manage.py makemigrations`
 

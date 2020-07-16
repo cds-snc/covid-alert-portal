@@ -114,6 +114,8 @@ WSGI_APPLICATION = "portal.wsgi.application"
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 default_db_path = os.path.join(BASE_DIR, "db.sqlite3")
+
+# database migrations will fail if env var is set to an empty string
 if os.getenv("DATABASE_URL") == "":
     del os.environ["DATABASE_URL"]
 
