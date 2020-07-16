@@ -8,6 +8,9 @@ python manage.py sass profiles/static/scss/styles.scss profiles/static/css/
 echo "Collect static files"
 python manage.py collectstatic --noinput -i scss
 
+echo "Compiling translations"
+pipenv run python manage.py compilemessages
+
 # Apply database migrations
 echo "Apply database migrations"
 python manage.py migrate --noinput
