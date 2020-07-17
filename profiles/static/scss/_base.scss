@@ -138,23 +138,3 @@ li:not(:last-of-type) {
 .visually-hidden {
   @include visuallyHidden();
 }
-
-#big-code {
-  display: inline-block;
-  background: #eff4f9;
-  padding: $space-md $space-lg;
-  margin-bottom: $space-lg;
-  border-radius: 10px;
-  text-align: center;
-
-  code {
-    display: block;
-    font-size: 1.7em;
-    margin-bottom: $space-sm;
-  }
-
-  span {
-    opacity: 0.6;
-    display: inline-block;
-  }
-}

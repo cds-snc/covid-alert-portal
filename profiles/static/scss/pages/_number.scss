@@ -1,0 +1,43 @@
+#big-code {
+  display: inline-block;
+  background: #eff4f9;
+  padding: $space-md $space-lg;
+  margin-bottom: $space-lg;
+  border-radius: 10px;
+  text-align: center;
+
+  code {
+    display: block;
+    font-size: 1.7em;
+    margin-bottom: $space-sm;
+  }
+
+  span {
+    opacity: 0.6;
+    display: inline-block;
+  }
+}
+
+ol.detailed-instructions {
+  padding-left: 0;
+  list-style-position: inside;
+
+  li {
+    margin-bottom: $space-lg;
+  }
+
+  img {
+    max-width: 100%;
+    border: 2px solid $color-grey-dark;
+    border-radius: 5px;
+    margin: $space-xs 0;
+
+    @include xs {
+      max-width: 80%;
+    }
+
+    @include sm {
+      max-width: 350px;
+    }
+  }
+}
