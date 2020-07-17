@@ -3,10 +3,10 @@
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 
-{% block title %}{% trans "Give patient this number" %}{% endblock %}
+{% block title %}{% trans "Give patient this key" %}{% endblock %}
 
 {% block content %}
-  <h1>{% trans "Give patient this number" %}</h1>
+  <h1>{% trans "Give patient this key" %}</h1>
   <div id="big-code">
     <code>{{ code }}</code>
     {% include "includes/expires_string.html" %}

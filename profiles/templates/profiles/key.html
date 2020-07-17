@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Give patient this number" %}{% endblock %}
+{% block title %}{% trans "Give patient this key" %}{% endblock %}
 
 {% block content %}
-  <h1>{% trans "Give patient this number" %}</h1>
+  <h1>{% trans "Give patient this key" %}</h1>
   <div id="big-code">
     <code>{{ code }}</code>
     {% include "includes/expires_string.html" %}
@@ -20,7 +20,7 @@
 
   <div class="content-button">
     <a href="{% url 'start' %}" role='button' draggable='false'>{% trans "Next patient" %}</a>
-    <a class="secondary" href="{% url 'number_instructions' %}" role='button' draggable='false'>{% trans "Detailed instructions" %}</a>
+    <a class="secondary" href="{% url 'key_instructions' %}" role='button' draggable='false'>{% trans "Detailed instructions" %}</a>
   </div>
 
 {% endblock %}

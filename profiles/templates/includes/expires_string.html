@@ -4,7 +4,7 @@
 {% get_current_language as LANGUAGE_CODE %}
 
 {% timezone "Canada/Eastern" %}
-  <span>{% trans "Number expires" %}
+  <span>{% trans "Key expires" %}
     <time id="expiry-datetime" datetime="{{ expiry|date:'c' }}">
       {% if LANGUAGE_CODE == 'en' %}
           {{ expiry|date:"F j" }}

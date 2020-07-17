@@ -16,8 +16,8 @@ urlpatterns = [
         name="landing",
     ),
     # The otp_required is used directly in the view in this case
-    path("number/", views.code, name="number"),
-    path("number-instructions/", views.code, name="number_instructions"),
+    path("key/", views.code, name="key"),
+    path("key-instructions/", views.code, name="key_instructions"),
     path(
         "start/",
         login_required(

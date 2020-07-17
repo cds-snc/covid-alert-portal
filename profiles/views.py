@@ -209,9 +209,7 @@ def code(request):
     diagnosis_code = diagnosis_code[0:4] + " " + diagnosis_code[4:8]
     expiry = timezone.now() + timedelta(days=1)
 
-    template_name = (
-        "number_instructions" if "/number-instructions" in request.path else "number"
-    )
+    template_name = "key_instructions" if "/key-instructions" in request.path else "key"
 
     return render(
         request,
