@@ -23,6 +23,8 @@ pipenv install  # install dependencies
 
 Environment variables are used to control app settings, and configuration for utilities and third-party services. Defaults are `''` or `None` unless otherwise specified.
 
+<strong>[Example `.env` file](https://github.com/cds-snc/covid-healthcare-portal/blob/main/portal/.env.example)</strong>
+
 #### App settings
 
 - `DJANGO_ENV` (default: `development`): Turns on [`DEBUG`](https://docs.djangoproject.com/en/3.0/ref/settings/#debug) mode, as well as doesn't require HTTPS to run. For local development, leave this as `development`.
@@ -30,6 +32,8 @@ Environment variables are used to control app settings, and configuration for ut
 - `DJANGO_SECRET_KEY`: The `SECRET_KEY` in Django is used to provide cryptographic signing, and should be set to a unique, unpredictable value. Django won't start unless this is set. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#secret-key).
 
 - `DJANGO_ALLOWED_HOSTS`: A list of strings representing the host/domain names that this Django site can serve. Only needs to be set in prod. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts).
+
+- `DJANGO_ADMINS`: A list of all the people who get code error notifications. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#admins).
 
 - `SU_DEFAULT_PASSWORD`: Setting to trigger the creation of a default superuser the first time the app is provisioned. If this variable exists, a default superuser will be created at `admin@cds-snc.ca` with this password.
 
@@ -69,36 +73,6 @@ We use New Relic to monitor for errors in production.
 - `NEW_RELIC_APP_NAME`: The app name set up in New Relic.
 
 - `NEW_RELIC_LICENSE_KEY`: Credentials needed to authenticate with New Relic.
-
-<details>
-  <summary>
-    <strong>Example `.env` file</strong></summary>
-
-```
-DJANGO_ENV = development
-DJANGO_SECRET_KEY =
-DJANGO_ALLOWED_HOSTS =
-
-CREATE_DEFAULT_SU =
-SU_DEFAULT_PASSWORD =
-
-API_AUTHORIZATION = ADD_TOKEN_HERE
-API_ENDPOINT = https://example.com/new-key-claim
-DATABASE_URL =
-
-EMAIL_BACKEND =
-EMAIL_HOST =
-EMAIL_PORT =
-EMAIL_HOST_USER =
-EMAIL_HOST_PASSWORD =
-EMAIL_USE_TLS =
-DEFAULT_FROM_EMAIL =
-
-NEW_RELIC_APP_NAME =
-NEW_RELIC_LICENSE_KEY =
-```
-
-</details>
 
 ### Running the app for the first time
 
