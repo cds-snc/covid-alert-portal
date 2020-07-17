@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-20 19:55+0000\n"
+"POT-Creation-Date: 2020-07-21 15:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,8 +30,9 @@ msgstr "Entrez une adresse courriel valide"
 
 #: profiles/forms.py:46 profiles/forms.py:90 profiles/forms.py:99
 #: profiles/forms.py:143
+#: profiles/templates/invitations/templates/invite_list.html:18
 #: profiles/templates/profiles/healthcareuser_detail.html:28
-#: profiles/templates/profiles/healthcareuser_list.html:14
+#: profiles/templates/profiles/healthcareuser_list.html:17
 msgid "Email address"
 msgstr "Adresse courriel"
 
@@ -143,8 +144,10 @@ msgstr "Adresse courriel"
 msgid "Invitation to - %(email)s - has been accepted"
 msgstr ""
 
+#: profiles/templates/invitations/templates/invitation_confirm_delete.html:5
 #: profiles/templates/invitations/templates/invite.html:5
 #: profiles/templates/invitations/templates/invite_complete.html:5
+#: profiles/templates/invitations/templates/invite_list.html:5
 #: profiles/templates/profiles/2fa-resend.html:5
 #: profiles/templates/profiles/2fa.html:5
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html:5
@@ -154,9 +157,41 @@ msgstr ""
 msgid "Error: "
 msgstr "Erreur : "
 
+#: profiles/templates/invitations/templates/invitation_confirm_delete.html:6
+msgid "Confirm delete invitation"
+msgstr ""
+
+#: profiles/templates/invitations/templates/invitation_confirm_delete.html:13
+msgid "Confirm invitation removal"
+msgstr ""
+
+#: profiles/templates/invitations/templates/invitation_confirm_delete.html:14
+#, python-format
+msgid ""
+"Are you sure you want to delete invitation sent to %(invitation.email)s?"
+msgstr ""
+
+#: profiles/templates/invitations/templates/invitation_confirm_delete.html:15
+msgid ""
+"If you remove their invitation, they will not be able to join the COVID "
+"Alert Portal until they are invited back."
+msgstr ""
+
+#: profiles/templates/invitations/templates/invitation_confirm_delete.html:16
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:16
+msgid "Yes, I am sure"
+msgstr ""
+
+#: profiles/templates/invitations/templates/invitation_confirm_delete.html:17
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:17
+msgid "No, take me back"
+msgstr ""
+
 #: profiles/templates/invitations/templates/invite.html:6
 #: profiles/templates/invitations/templates/invite.html:11
-#: profiles/templates/profiles/healthcareuser_list.html:8
+#: profiles/templates/invitations/templates/invite_list.html:6
+#: profiles/templates/invitations/templates/invite_list.html:12
+#: profiles/templates/profiles/healthcareuser_list.html:9
 msgid "Add an account"
 msgstr "Ajouter un nouveau compte"
 
@@ -182,6 +217,40 @@ msgstr "Ajouter un autre compte"
 #: profiles/templates/invitations/templates/invite_complete.html:20
 msgid "Manage existing accounts"
 msgstr "Gérer les comptes existants"
+
+#: profiles/templates/invitations/templates/invite_list.html:11
+#: profiles/templates/invitations/templates/invite_list.html:15
+msgid "Invitations"
+msgstr "Invitations"
+
+#: profiles/templates/invitations/templates/invite_list.html:19
+msgid "Status"
+msgstr ""
+
+#: profiles/templates/invitations/templates/invite_list.html:20
+#: profiles/templates/profiles/healthcareuser_list.html:19
+msgid "Actions"
+msgstr "Actions"
+
+#: profiles/templates/invitations/templates/invite_list.html:29
+msgid "Expired"
+msgstr ""
+
+#: profiles/templates/invitations/templates/invite_list.html:29
+msgid "Pending"
+msgstr ""
+
+#: profiles/templates/invitations/templates/invite_list.html:35
+msgid "Resend"
+msgstr ""
+
+#: profiles/templates/invitations/templates/invite_list.html:38
+msgid "Delete"
+msgstr ""
+
+#: profiles/templates/invitations/templates/invite_list.html:46
+msgid "No invitation yet"
+msgstr ""
 
 #: profiles/templates/locked_out.html:5
 msgid "Account locked"
@@ -264,14 +333,6 @@ msgid ""
 "Portal until they are invited back."
 msgstr ""
 
-#: profiles/templates/profiles/healthcareuser_confirm_delete.html:16
-msgid "Yes, I am sure"
-msgstr ""
-
-#: profiles/templates/profiles/healthcareuser_confirm_delete.html:17
-msgid "No, take me back"
-msgstr ""
-
 #: profiles/templates/profiles/healthcareuser_detail.html:6
 #: profiles/templates/profiles/healthcareuser_detail.html:15
 msgid "Your profile"
@@ -295,23 +356,23 @@ msgstr "Province"
 msgid "Back to accounts"
 msgstr "Retour aux comptes"
 
-#: profiles/templates/profiles/healthcareuser_list.html:11
+#: profiles/templates/profiles/healthcareuser_list.html:10
+msgid "Check invitations"
+msgstr ""
+
+#: profiles/templates/profiles/healthcareuser_list.html:14
 msgid "User accounts"
 msgstr "Comptes d'utilisateurs"
 
-#: profiles/templates/profiles/healthcareuser_list.html:15
+#: profiles/templates/profiles/healthcareuser_list.html:18
 msgid "Permissions"
 msgstr "Droit d’accès"
 
-#: profiles/templates/profiles/healthcareuser_list.html:16
-msgid "Actions"
-msgstr "Actions"
-
-#: profiles/templates/profiles/healthcareuser_list.html:23
+#: profiles/templates/profiles/healthcareuser_list.html:26
 msgid "Admin,Staff"
 msgstr "Administrateur,Employé"
 
-#: profiles/templates/profiles/healthcareuser_list.html:27
+#: profiles/templates/profiles/healthcareuser_list.html:30
 msgid "Remove"
 msgstr "Retirer"
 
@@ -902,6 +963,6 @@ msgstr ""
 msgid "Security code has been sent."
 msgstr ""
 
-#: profiles/views.py:154
+#: profiles/views.py:161
 msgid ": Your portal account"
 msgstr " : votre compte pour le Portail"

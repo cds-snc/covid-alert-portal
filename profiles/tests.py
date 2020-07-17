@@ -4,7 +4,7 @@ from django.test import TestCase, Client, override_settings
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.contrib import messages
-from django.utils import translation
+from django.utils import translation, timezone
 from django_otp import DEVICE_ID_SESSION_KEY
 from invitations.models import Invitation
 from .forms import SignupForm
@@ -354,6 +354,52 @@ class InviteFlow(AdminUserTestCase):
         self.assertContains(
             response, "Invitation sent to “{}”".format(self.invited_email),
         )
+
+    def test_see_invitations_list(self):
+        invitation = Invitation.create(
+            email=f"{uuid4()}@{uuid4()}.com", inviter=self.user
+        )
+        # If we dont send the invitation, we need to fake a sent date
+        invitation.sent = timezone.now()
+        invitation.save()
+
+        self.client.login(username="test@test.com", password="testpassword")
+        self.login_2fa()
+
+        response = self.client.get(reverse("invitation-list"))
+        self.assertContains(response, invitation.email)
+
+    def test_delete_invitation(self):
+        invitation = Invitation.create(
+            email=f"{uuid4()}@{uuid4()}.com", inviter=self.user
+        )
+        invitation.save()
+
+        self.client.login(username="test@test.com", password="testpassword")
+        self.login_2fa()
+
+        response = self.client.get(
+            reverse("invitation-delete", kwargs={"pk": invitation.id})
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_delete_invitation_normal_user(self):
+        invitation = Invitation.create(
+            email=f"{uuid4()}@{uuid4()}.com", inviter=self.user
+        )
+        invitation.save()
+
+        other_credentials = get_other_credentials(is_admin=False)
+        other_user = User.objects.create_user(**other_credentials)
+        self.client.login(
+            username=other_user.email, password=other_credentials.get("password")
+        )
+        self.login_2fa(other_user)
+
+        response = self.client.get(
+            reverse("invitation-delete", kwargs={"pk": invitation.id})
+        )
+        self.assertEqual(response.status_code, 403)
 
 
 class ProfilesView(AdminUserTestCase):

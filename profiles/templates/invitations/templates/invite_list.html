@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% if form.errors %}{% trans "Error: "%}{% endif %}
+  {% trans "Add an account"  %}
+{% endblock %}
+
+{% block content %}
+  {% include  "includes/error_list.html" %}
+  <h1>{% trans "Invitations" %}</h1>
+  <div class="content-button"><a href="{% url 'invite' %}" role='button' draggable='false'>{% trans "Add an account" %}</a></div>
+  {% if invitation_list.count > 0 %}
+    <table class="with-actions invitations">
+        <caption class="visually-hidden">{% trans "Invitations" %}</caption>
+        <thead>
+        <tr>
+            <th scope="col">{% trans "Email address" %}</th>
+            <th scope="col">{% trans "Status" %}</th>
+            <th scope="col">{% trans "Actions" %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for invitation in invitation_list %}
+            <tr>
+                <td scope="col">{{ invitation.email }}</td>
+                <td scope="col">
+                    <span class="tag {% if invitation.key_expired %}tag--red{% else %}tag--blue{% endif %}">
+                        {% if invitation.key_expired %}{% trans "Expired" %}{% else %}{% trans "Pending" %}{% endif %}
+                    </span>
+                </td>
+                <td scope="col">
+                    {% url 'invitation-list' as invitation_list_url %}
+                    <a href="{% url 'invite' %}?email={{invitation.email|urlencode}}" class="action">
+                        {% trans "Resend" %}
+                    </a>
+                    <a href="{% url 'invitation-delete' invitation.id %}" class="danger">
+                        {% trans "Delete" %}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  {% else %}
+    <p>{{ _("No invitation yet") }}</p>
+  {% endif %}
+{% endblock %}

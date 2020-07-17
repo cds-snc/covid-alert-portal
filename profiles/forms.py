@@ -136,11 +136,13 @@ class HealthcareUserEditForm(UserChangeForm):
 
 
 class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, email=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         # Otherwise it just says "Email"
         self.fields["email"].label = _("Email address")
+        if email:
+            self.initial["email"] = email
 
     def validate_invitation(self, email):
         # Delete all non-accepted, valid invitations for the same email, if they exists

@@ -5,7 +5,10 @@
 
 {% block content %}
   <h1>{% trans "Manage accounts" %}</h1>
-  <div class="content-button"><a href="{% url 'invite' %}" role='button' draggable='false'>{% trans "Add an account" %}</a></div>
+  <div class="content-button">
+      <a href="{% url 'invite' %}" role='button' draggable='false'>{% trans "Add an account" %}</a>
+      <a href="{% url 'invitation-list' %}" role='button' draggable='false' class="secondary">{% trans "Check invitations" %}</a>
+  </div>
 
   <table class="with-actions">
     <caption class="visually-hidden">{% trans "User accounts" %}</caption>
