@@ -141,6 +141,13 @@ class InvitationView(Is2FAMixin, IsAdminMixin, FormView):
             context["email"] = email_initial
         return context
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Add an account")
+        if self.request.GET.get("email", None) is not None:
+            context["title"] = _("Resend invitation")
+        return context
+
     def form_valid(self, form):
         # Pass user to invite, save the invite to the DB, and return it
         invite = form.save(user=self.request.user)

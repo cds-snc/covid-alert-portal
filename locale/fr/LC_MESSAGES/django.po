@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-21 15:18+0000\n"
+"POT-Creation-Date: 2020-07-21 15:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -180,9 +180,8 @@ msgstr ""
 
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html:14
 #, python-format
-msgid ""
-"Are you sure you want to delete invitation sent to %(invitation.email)s?"
-msgstr ""
+msgid "Are you sure you want to delete invitation sent to %(email)s?"
+msgstr "Êtes-vous certain de vouloir retirer l'invitation envoyée à %(email)s?"
 
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html:15
 msgid ""
@@ -193,20 +192,12 @@ msgstr ""
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html:16
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html:16
 msgid "Yes, I am sure"
-msgstr ""
+msgstr "Oui, je suis certain"
 
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html:17
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html:17
 msgid "No, take me back"
-msgstr ""
-
-#: profiles/templates/invitations/templates/invite.html:6
-#: profiles/templates/invitations/templates/invite.html:11
-#: profiles/templates/invitations/templates/invite_list.html:6
-#: profiles/templates/invitations/templates/invite_list.html:12
-#: profiles/templates/profiles/healthcareuser_list.html:9
-msgid "Add an account"
-msgstr "Ajouter un nouveau compte"
+msgstr "Non, retourner en arrière"
 
 #: profiles/templates/invitations/templates/invite.html:13
 msgid "Send invitation email"
@@ -231,6 +222,12 @@ msgstr "Ajouter un autre compte"
 msgid "Manage existing accounts"
 msgstr "Gérer les comptes existants"
 
+#: profiles/templates/invitations/templates/invite_list.html:6
+#: profiles/templates/invitations/templates/invite_list.html:12
+#: profiles/templates/profiles/healthcareuser_list.html:9 profiles/views.py:158
+msgid "Add an account"
+msgstr "Ajouter un nouveau compte"
+
 #: profiles/templates/invitations/templates/invite_list.html:11
 #: profiles/templates/invitations/templates/invite_list.html:15
 msgid "Invitations"
@@ -238,7 +235,7 @@ msgstr "Invitations"
 
 #: profiles/templates/invitations/templates/invite_list.html:19
 msgid "Status"
-msgstr ""
+msgstr "Statut"
 
 #: profiles/templates/invitations/templates/invite_list.html:20
 #: profiles/templates/profiles/healthcareuser_list.html:19
@@ -247,23 +244,23 @@ msgstr "Actions"
 
 #: profiles/templates/invitations/templates/invite_list.html:29
 msgid "Expired"
-msgstr ""
+msgstr "Expirée"
 
 #: profiles/templates/invitations/templates/invite_list.html:29
 msgid "Pending"
-msgstr ""
+msgstr "En attente"
 
 #: profiles/templates/invitations/templates/invite_list.html:35
 msgid "Resend"
-msgstr ""
+msgstr "Ré-envoyer"
 
 #: profiles/templates/invitations/templates/invite_list.html:38
 msgid "Delete"
-msgstr ""
+msgstr "Effacer"
 
 #: profiles/templates/invitations/templates/invite_list.html:46
 msgid "No invitation yet"
-msgstr ""
+msgstr "Aucune invitation pour le moment"
 
 #: profiles/templates/locked_out.html:5
 msgid "Account locked"
@@ -374,7 +371,7 @@ msgstr "Retour aux comptes"
 
 #: profiles/templates/profiles/healthcareuser_list.html:10
 msgid "Check invitations"
-msgstr ""
+msgstr "Voir les invitations"
 
 #: profiles/templates/profiles/healthcareuser_list.html:14
 msgid "User accounts"
@@ -983,10 +980,3 @@ msgstr ""
 #: profiles/views.py:128
 msgid "Security code has been sent."
 msgstr ""
-
-#: profiles/views.py:143
-msgid ": Your portal account"
-msgstr " : votre compte pour le Portail"
-
-#~ msgid "Tell the patient the number will expire within 24 hours."
-#~ msgstr "Informez le patient que le numéro expire après 24 heures."
