@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-20 15:38+0000\n"
+"POT-Creation-Date: 2020-07-20 19:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: portal/settings.py:245
+#: portal/settings.py:247
 msgid ""
 "This account has been locked due to too many failed log in attempts. Please "
 "try again after 5 minutes."
@@ -52,6 +52,7 @@ msgid "An invitation hasn't been sent to this address"
 msgstr ""
 
 #: profiles/templates/base.html:21 profiles/templates/base.html:34
+#: profiles/utils.py:61
 msgid "COVID Alert Portal"
 msgstr "Portail Alerte COVID"
 
@@ -123,11 +124,6 @@ msgstr "Gérer les comptes"
 #: profiles/templates/includes/phase_banner.html:4
 msgid "This site will change as we test ideas."
 msgstr "Ce site évoluera au fur et à mesure que nous testons des idées."
-
-#: profiles/templates/invitations/email/email_invite_subject.html:2
-#: profiles/templates/invitations/email/email_invite_subject.txt:2
-msgid "COVID Alert - give numbers to patients"
-msgstr "Alerte COVID — Fournir des numéros aux patitents"
 
 #: profiles/templates/invitations/forms/_invite.html:3
 msgid "Invite"
@@ -894,14 +890,18 @@ msgstr "Nous vous enverrons un courriel pour créer un nouveau mot de passe."
 msgid "Send email"
 msgstr "Envoyer"
 
-#: profiles/views.py:55
+#: profiles/views.py:56
 msgid "No invited email in session"
 msgstr ""
 
-#: profiles/views.py:82
+#: profiles/views.py:83
 msgid "Account created successfully"
 msgstr ""
 
-#: profiles/views.py:138
+#: profiles/views.py:139
 msgid "Security code has been sent."
 msgstr ""
+
+#: profiles/views.py:154
+msgid ": Your portal account"
+msgstr " : votre compte pour le Portail"
