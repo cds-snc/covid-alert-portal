@@ -5,7 +5,7 @@ Please use this link to create your username and password. The link expires in 2
 
 {{ invite_url }}
 
-  COVID Alert is an important part of the public health effort to slow the spread of COVID-19. Thanks for your essential work to protect our communities!
+COVID Alert is an important part of the public health effort to slow the spread of COVID-19. Thanks for your essential work to protect our communities!
 
 -------------------------------------------------------------------------
 
@@ -16,4 +16,4 @@ Veuillez utiliser le lien suivant pour créer votre nom d’utilisateur et votre
 
 {{ invite_url }}
 
-  Alerte COVID fait partie des efforts importants déployés pour ralentir la propagation de COVID-19. Merci pour tout le travail que vous faites pour nos communautés!
+Alerte COVID fait partie des efforts importants déployés pour ralentir la propagation de COVID-19. Merci pour tout le travail que vous faites pour nos communautés!

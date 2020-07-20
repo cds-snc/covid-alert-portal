@@ -207,6 +207,8 @@ OTP_LOGIN_URL = "login-2fa"
 LOGIN_REDIRECT_URL = "start"
 LOGOUT_REDIRECT_URL = "landing"
 
+# This environment variable is automatically set for Heroku Review apps
+HEROKU_APP_NAME = os.getenv("HEROKU_APP_NAME") or False
 
 # Invitations app
 SITE_ID = 1  # Required for invitations app
