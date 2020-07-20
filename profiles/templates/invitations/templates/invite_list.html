@@ -23,13 +23,13 @@
         <tbody>
         {% for invitation in invitation_list %}
             <tr>
-                <td scope="col">{{ invitation.email }}</td>
-                <td scope="col">
+                <td>{{ invitation.email }}</td>
+                <td>
                     <span class="tag {% if invitation.key_expired %}tag--red{% else %}tag--blue{% endif %}">
                         {% if invitation.key_expired %}{% trans "Expired" %}{% else %}{% trans "Pending" %}{% endif %}
                     </span>
                 </td>
-                <td scope="col">
+                <td>
                     {% url 'invitation-list' as invitation_list_url %}
                     <a href="{% url 'invite' %}?email={{invitation.email|urlencode}}" class="action">
                         {% trans "Resend" %}
@@ -43,6 +43,6 @@
         </tbody>
     </table>
   {% else %}
-    <p>{{ _("No invitation yet") }}</p>
+    <p>{% trans "No invitations yet" %}</p>
   {% endif %}
 {% endblock %}
