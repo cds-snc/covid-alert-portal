@@ -1,23 +1,17 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Generate a number" %}{% endblock %}
+{% block title %}{% trans "Generate a one-time key" %}{% endblock %}
 
 {% block content %}
-  <h1>{% trans "Generate a number" %}</h1>
+  <h1>{% trans "Generate a one-time key" %}</h1>
   <p>
-    {% trans "Before generating a number, check the patient has:" %}
+    {% trans "For each patient who tests positive for COVID-19, check:" %}
   </p>
-  <ul>
-    <li>{% trans "tested positive for COVID-19" %}</li>
-    <li>{% trans "the app installed on Android or Apple mobile device" %}</li>
-  </ul>
-  <p>
-    {% trans "Tell the patient the number will expire within 24 hours." %}
-  </p>
+  <ol>
+    <li>{% blocktrans %}They’ve installed the <strong>app on their phone</strong>.{% endblocktrans %}</li>
+    <li>{% blocktrans %}They understand <strong>the key expires in 24 hours</strong>. If the key expires before the patient enters it, they’ll need to ask your office for a new key.{% endblocktrans %}</li>
+    <li>{% blocktrans %}They’re ready to <strong>record or write the key</strong> somewhere safe.{% endblocktrans %}</li>
+  </ol>
   <div class="content-button"><a href="{% url 'key' %}" role='button' draggable='false'>{% trans "Generate key" %}</a></div>
-
-  <p>
-    {% trans "Each code is individual and anonymous." %}<br />{% trans "It cannot be used by another patient. If the number expires before the patient enters it, they’ll need a new number." %}
-  </p>
 {% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-17 16:27+0000\n"
+"POT-Creation-Date: 2020-07-17 21:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,12 +51,12 @@ msgid "An invitation hasn't been sent to this address"
 msgstr ""
 
 #: profiles/templates/base.html:21 profiles/templates/base.html:34
-msgid "Generate COVID Alert number"
-msgstr "Générer un numéro pour Alerte COVID"
+msgid "COVID Alert Portal"
+msgstr "Portail Alerte COVID"
 
 #: profiles/templates/base.html:21
-msgid "– COVID Alert Portal"
-msgstr "– Portail Alerte COVID"
+msgid "— COVID Alert Portal"
+msgstr "— Portail Alerte COVID"
 
 #: profiles/templates/includes/FIP_header.html:6
 #: profiles/templates/includes/FIP_header.html:8
@@ -373,7 +373,9 @@ msgstr "Appuyez sur « Entrer votre clé »."
 
 #: profiles/templates/profiles/key_instructions.html:25
 msgid "Tap “Next” on “Let people know they may have been exposed”."
-msgstr "Appuyez sur « Suivant » dans l’écran « Aviser les autres personnes d’une exposition potentielle »."
+msgstr ""
+"Appuyez sur « Suivant » dans l’écran « Aviser les autres personnes d’une "
+"exposition potentielle »."
 
 #: profiles/templates/profiles/key_instructions.html:31
 msgid "Enter the key and tap “Submit”"
@@ -384,27 +386,35 @@ msgid ""
 "If you want to notify people, you need to give COVID Alert permission to "
 "upload random codes. Tap “Agree” on “Now you can upload codes”."
 msgstr ""
-"Si vous voulez aviser les autres personnes, vous devez autoriser Alerte COVID à téléverser vos codes aléatoires. Appuyez sur « Accepter » dans l’écran « Vous pouvez maintenant téléverser vos codes »."
+"Si vous voulez aviser les autres personnes, vous devez autoriser Alerte "
+"COVID à téléverser vos codes aléatoires. Appuyez sur « Accepter » dans "
+"l’écran « Vous pouvez maintenant téléverser vos codes »."
 
 #: profiles/templates/profiles/key_instructions.html:43
 msgid ""
 "Tap “Share” on “Share your random codes from this device with COVID Alert?”."
-msgstr "Appuyez sur « Partager » dans la fenêtre « Partager les identifiants aléatoires de votre appareil avec Alerte COVID? »."
+msgstr ""
+"Appuyez sur « Partager » dans la fenêtre « Partager les identifiants "
+"aléatoires de votre appareil avec Alerte COVID? »."
 
 #: profiles/templates/profiles/key_instructions.html:49
 msgid ""
 "COVID Alert will ask permission to upload random codes daily for the next 13 "
 "days."
 msgstr ""
-"Chaque jour, pendant les 13 jours qui suivent, Alerte COVID demandera l’autorisation de téléverser les codes aléatoires."
+"Chaque jour, pendant les 13 jours qui suivent, Alerte COVID demandera "
+"l’autorisation de téléverser les codes aléatoires."
 
 #: profiles/templates/profiles/landing.html:4
 #: profiles/templates/profiles/landing.html:8
-msgid "Welcome to Generate COVID Alert number"
-msgstr "Bienvenue dans Générer un numéro Alerte COVID"
+#, fuzzy
+#| msgid "Welcome to Generate COVID Alert number"
+msgid "Welcome to the COVID Alert Portal"
+msgstr "Bienvenue dans le Portail Alerte COVID"
 
 #: profiles/templates/profiles/landing.html:9
-msgid "The COVID Alert notifies people if they’ve been exposed to COVID-19."
+msgid ""
+"The COVID Alert app notifies people if they’ve been exposed to COVID-19."
 msgstr ""
 "L’application Alerte COVID avise les personnes en cas d’exposition à la "
 "COVID-19."
@@ -834,43 +844,35 @@ msgstr "Suivant"
 
 #: profiles/templates/profiles/start.html:4
 #: profiles/templates/profiles/start.html:7
-msgid "Generate a number"
-msgstr "Générer un numéro"
+msgid "Generate a one-time key"
+msgstr "Générer une clé à usage unique"
 
 #: profiles/templates/profiles/start.html:9
-msgid "Before generating a number, check the patient has:"
-msgstr "Avant de générer un numéro, assurez-vous que le patient :"
+msgid "For each patient who tests positive for COVID-19, check:"
+msgstr "Pour chaque patient qui a un test positif à la COVID-19, vérifiez :"
 
 #: profiles/templates/profiles/start.html:12
-msgid "tested positive for COVID-19"
-msgstr "a reçu un test positif à la COVID-19"
+msgid "They’ve installed the <strong>app on their phone</strong>."
+msgstr "Qu’il a installé <strong>l’application sur son téléphone.</strong>"
 
 #: profiles/templates/profiles/start.html:13
-msgid "the app installed on Android or Apple mobile device"
+msgid ""
+"They understand <strong>the key expires in 24 hours</strong>. If the key "
+"expires before the patient enters it, they’ll need to ask your office for a "
+"new key."
 msgstr ""
-"a installé l’application Alerte COVID sur son téléphone mobile Android ou "
-"Apple"
+"Qu’il comprend que la clé à usage unique <strong>expire après 24 heures</"
+"strong>. Si la clé expire avant que le patient l’utilise, le patient doit en "
+"demander une nouvelle auprès de votre bureau."
+
+#: profiles/templates/profiles/start.html:14
+msgid ""
+"They’re ready to <strong>record or write the key</strong> somewhere safe."
+msgstr "Qu’il est en mesure de <strong>noter la clé</strong> à un endroit sûr."
 
 #: profiles/templates/profiles/start.html:16
-msgid "Tell the patient the number will expire within 24 hours."
-msgstr "Informez le patient que le numéro expire après 24 heures."
-
-#: profiles/templates/profiles/start.html:18
-
 msgid "Generate key"
 msgstr "Générer une clé"
-
-#: profiles/templates/profiles/start.html:21
-msgid "Each code is individual and anonymous."
-msgstr "Le numéro est personnel et anonyme."
-
-#: profiles/templates/profiles/start.html:21
-msgid ""
-"It cannot be used by another patient. If the number expires before the "
-"patient enters it, they’ll need a new number."
-msgstr ""
-"Il ne peut pas être utilisé pour un autre patient. Si le numéro expire avant "
-"que le patient ait pu l’entrer, il faudra générer un nouveau numéro."
 
 #: profiles/templates/registration/login.html:17
 #: profiles/templates/registration/password_reset_form.html:6
