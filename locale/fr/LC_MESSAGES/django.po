@@ -407,7 +407,6 @@ msgstr ""
 
 #: profiles/templates/profiles/landing.html:4
 #: profiles/templates/profiles/landing.html:8
-#, fuzzy
 #| msgid "Welcome to Generate COVID Alert number"
 msgid "Welcome to the COVID Alert Portal"
 msgstr "Bienvenue dans le Portail Alerte COVID"
