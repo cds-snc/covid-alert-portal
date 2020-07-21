@@ -26,11 +26,11 @@ urlpatterns = [
         name="start",
     ),
     path("invite/", views.InvitationView.as_view(), name="invite"),
-    path("invite/list/", views.InvitationListView.as_view(), name="invitation-list"),
+    path("invite/list/", views.InvitationListView.as_view(), name="invitation_list"),
     path(
         "invite/<int:pk>/delete",
         views.InvitationDeleteView.as_view(),
-        name="invitation-delete",
+        name="invitation_delete",
     ),
     path(
         "invite-complete/",

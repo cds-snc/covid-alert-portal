@@ -146,20 +146,6 @@ class InvitationView(Is2FAMixin, IsAdminMixin, FormView):
     template_name = "invitations/templates/invite.html"
     success_url = reverse_lazy("invite_complete")
 
-    def get_form_kwargs(self):
-        context = super().get_form_kwargs()
-        email_initial = self.request.GET.get("email", None)
-        if email_initial:
-            context["email"] = email_initial
-        return context
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = _("Add an account")
-        if self.request.GET.get("email", None) is not None:
-            context["title"] = _("Resend invitation")
-        return context
-
     def form_valid(self, form):
         # Pass user to invite, save the invite to the DB, and return it
         invite = form.save(user=self.request.user)
@@ -192,7 +178,7 @@ class InvitationListView(Is2FAMixin, IsAdminMixin, ListView):
 class InvitationDeleteView(Is2FAMixin, IsAdminMixin, DeleteView):
     model = Invitation
     context_object_name = "invitation"
-    success_url = reverse_lazy("invitation-list")
+    success_url = reverse_lazy("invitation_list")
     template_name = "invitations/templates/invitation_confirm_delete.html"
 
 

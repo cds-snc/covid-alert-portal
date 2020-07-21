@@ -3,7 +3,7 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Add an account"  %}
+  {% trans "Invitations"  %}
 {% endblock %}
 
 {% block content %}
@@ -30,14 +30,13 @@
                     </strong>
                 </td>
                 <td>
-                    {% url 'invitation-list' as invitation_list_url %}
                     <form method="post" action="{% url 'invite' %}">
                         {% csrf_token %}
                         <input type="hidden" name="email" value="{{ invitation.email }}" />
                         <button type="submit" class="link">{% trans "Resend" %}</button>
                     </form>
-                    <a href="{% url 'invitation-delete' invitation.id %}" class="danger">
-                        {% trans "Delete" %}</a>
+                    <a href="{% url 'invitation_delete' invitation.id %}" class="danger">
+                      {% trans "Delete" %}</a>
                 </td>
             </tr>
         {% endfor %}

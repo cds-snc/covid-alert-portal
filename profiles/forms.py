@@ -136,19 +136,15 @@ class HealthcareUserEditForm(UserChangeForm):
 
 
 class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
-    def __init__(self, email=None, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         # Otherwise it just says "Email"
         self.fields["email"].label = _("Email address")
-        if email:
-            self.initial["email"] = email
 
     def validate_invitation(self, email):
-        # Delete all non-accepted, valid invitations for the same email, if they exists
-        Invitation.objects.all_valid().filter(
-            email__iexact=email, accepted=False
-        ).delete()
+        # Delete all non-accepted invitations for the same email, if they exist
+        Invitation.objects.filter(email__iexact=email, accepted=False).delete()
         return super().validate_invitation(email)
 
     # https://github.com/bee-keeper/django-invitations/blob/9069002f1a0572ae37ffec21ea72f66345a8276f/invitations/forms.py#L60

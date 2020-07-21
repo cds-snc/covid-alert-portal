@@ -366,7 +366,7 @@ class InviteFlow(AdminUserTestCase):
         self.client.login(username="test@test.com", password="testpassword")
         self.login_2fa()
 
-        response = self.client.get(reverse("invitation-list"))
+        response = self.client.get(reverse("invitation_list"))
         self.assertContains(response, invitation.email)
 
     def test_delete_invitation(self):
@@ -379,7 +379,7 @@ class InviteFlow(AdminUserTestCase):
         self.login_2fa()
 
         response = self.client.get(
-            reverse("invitation-delete", kwargs={"pk": invitation.id})
+            reverse("invitation_delete", kwargs={"pk": invitation.id})
         )
         self.assertEqual(response.status_code, 200)
 
@@ -397,7 +397,7 @@ class InviteFlow(AdminUserTestCase):
         self.login_2fa(other_user)
 
         response = self.client.get(
-            reverse("invitation-delete", kwargs={"pk": invitation.id})
+            reverse("invitation_delete", kwargs={"pk": invitation.id})
         )
         self.assertEqual(response.status_code, 403)
 
