@@ -213,6 +213,7 @@ OTP_NOTIFY_ENDPOINT = os.getenv(
 OTP_NOTIFY_API_KEY = os.getenv("OTP_NOTIFY_API_KEY")
 OTP_NOTIFY_TEMPLATE_ID = os.getenv("OTP_NOTIFY_TEMPLATE_ID")
 OTP_NOTIFY_TOKEN_VALIDITY = 30
+OTP_NOTIFY_NO_DELIVERY = True
 
 # This environment variable is automatically set for Heroku Review apps
 HEROKU_APP_NAME = os.getenv("HEROKU_APP_NAME") or False
