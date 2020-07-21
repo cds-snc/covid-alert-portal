@@ -4,7 +4,7 @@ from .models import HealthcareUser
 
 
 @receiver(pre_save, sender=HealthcareUser)
-def _save_previous_email(sender, instance, created, **kwargs):
+def _save_previous_email(sender, instance, **kwargs):
     try:
         instance._pre_save_instance = HealthcareUser.objects.get(pk=instance.id)
     except HealthcareUser.DoesNotExist:

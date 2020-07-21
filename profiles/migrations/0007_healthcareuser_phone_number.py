@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='healthcareuser',
             name='phone_number',
-            field=phonenumber_field.modelfields.PhoneNumberField(default='0', max_length=128, region=None),
+            field=phonenumber_field.modelfields.PhoneNumberField(default='+16476675327', max_length=128, region=None),
             preserve_default=False,
         ),
     ]

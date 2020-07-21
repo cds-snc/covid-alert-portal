@@ -75,9 +75,8 @@ class AdminUserTestCase(TestCase):
         if user is None:
             user = self.user
 
-        device = user.notifysmsdevice_set.create()
-        device.number = user.phone_number
-        device.save()
+        # We actually don't care which device, we just need one
+        device = user.notifysmsdevice_set.first()
         session = self.client.session
         session[DEVICE_ID_SESSION_KEY] = device.persistent_id
         session.save()

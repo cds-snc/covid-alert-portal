@@ -74,6 +74,17 @@ We use New Relic to monitor for errors in production.
 
 - `NEW_RELIC_LICENSE_KEY`: Credentials needed to authenticate with New Relic.
 
+#### OTP (2-factor) configuration
+
+We use Notify and django-otp to send login auth code via SMS.
+
+- `OTP_NOTIFY_ENDPOINT`: Changes the default Notify endpoint used.
+- `OTP_NOTIFY_TEMPLATE_ID`: The is the SMS template used and created via the Notify dashboard.
+- `OTP_NOTIFY_API_KEY`: The API key used to call Notify
+- `OTP_NOTIFY_NO_DELIVERY`: Used in tests, prints the token via logging instead of calling Notify.
+
+[Read the docs here](https://django-otp-notify.readthedocs.io/en/latest/)
+
 ### Running the app for the first time
 
 **Quick Start:** After activating a virtual environment run the `entrypoint.sh` script to perform the database migrations, static file collection, and compilation of the CSS files. A server will then be started and can be accessed at `http://127.0.0.1:8000/` or `http://localhost:8000`.
