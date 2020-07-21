@@ -25,9 +25,9 @@
             <tr>
                 <td>{{ invitation.email }}</td>
                 <td>
-                    <span class="tag {% if invitation.key_expired %}tag--red{% else %}tag--blue{% endif %}">
+                    <strong class="tag {% if invitation.key_expired %}tag--red{% else %}tag--blue{% endif %}">
                         {% if invitation.key_expired %}{% trans "Expired" %}{% else %}{% trans "Pending" %}{% endif %}
-                    </span>
+                    </strong>
                 </td>
                 <td>
                     {% url 'invitation-list' as invitation_list_url %}

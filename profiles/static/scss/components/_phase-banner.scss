@@ -17,19 +17,20 @@
     }
   }
 
-  span {
-    font-size: 0.7em;
-  }
-
-  span:first-of-type {
+  /* for the "ALPHA" banner in the top nav */
+  .tag--phase {
     border: 2px $color-black solid;
     padding: 1px 5px;
-    letter-spacing: 1px;
     margin-right: 1.7em;
+    line-height: 1.33;
 
     @include sm {
       padding: 1px 7px;
     }
+  }
+
+  span {
+    font-size: 0.7em;
   }
 
   span:last-of-type {
