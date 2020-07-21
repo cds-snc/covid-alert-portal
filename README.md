@@ -82,6 +82,7 @@ We use Notify and django-otp to send login auth code via SMS.
 - `OTP_NOTIFY_TEMPLATE_ID`: The is the SMS template used and created via the Notify dashboard.
 - `OTP_NOTIFY_API_KEY`: The API key used to call Notify
 - `OTP_NOTIFY_NO_DELIVERY`: Used in tests, prints the token via logging instead of calling Notify.
+- `OTP_NOTIFY_TOKEN_VALIDITY`: time needed in seconds before the token is considered expired 
 
 [Read the docs here](https://django-otp-notify.readthedocs.io/en/latest/)
 

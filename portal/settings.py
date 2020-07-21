@@ -213,6 +213,7 @@ OTP_NOTIFY_API_KEY = (
 )
 OTP_NOTIFY_TEMPLATE_ID = "4e44bb0c-270f-4821-944f-c30b026260fa"
 OTP_NOTIFY_NO_DELIVERY = False
+OTP_NOTIFY_TOKEN_VALIDITY = 30
 
 # This environment variable is automatically set for Heroku Review apps
 HEROKU_APP_NAME = os.getenv("HEROKU_APP_NAME") or False
