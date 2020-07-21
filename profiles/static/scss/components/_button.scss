@@ -73,9 +73,19 @@
 }
 
 main {
-  form button {
+  form button:not(.link) {
     @extend %button-styles;
     font-family: "Noto Sans", sans-serif;
+  }
+
+  form button.link {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: transparent;
+    text-decoration: underline;
+    -webkit-appearance: none;
+    cursor: pointer;
   }
 
   a[role="button"] {
@@ -84,7 +94,7 @@ main {
 
   a.danger {
     color: $color-red;
-    margin-left: 10px;
+    margin-left: $space-md;
   }
 
   .content-button {
