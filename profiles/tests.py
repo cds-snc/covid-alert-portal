@@ -359,7 +359,7 @@ class InviteFlow(AdminUserTestCase):
             response, "Invitation sent to “{}”".format(self.invited_email),
         )
 
-    def test_see_invitations_list(self):
+    def test_see_invitations_list_with_pending_invite(self):
         invitation = Invitation.create(
             email=f"{uuid4()}@{uuid4()}.com", inviter=self.user
         )
@@ -371,7 +371,27 @@ class InviteFlow(AdminUserTestCase):
         self.login_2fa()
 
         response = self.client.get(reverse("invitation_list"))
-        self.assertContains(response, invitation.email)
+        self.assertContains(response, "<td>{}</td>".format(invitation.email))
+        self.assertContains(
+            response, "<strong class='tag tag--blue'>Pending</strong>", html=True
+        )
+
+    def test_see_invitations_list_with_expired_invite(self):
+        invitation = Invitation.create(
+            email=f"{uuid4()}@{uuid4()}.com", inviter=self.user
+        )
+        # Invitations expire after 24 hours
+        invitation.sent = timezone.now() + timezone.timedelta(hours=-25)
+        invitation.save()
+
+        self.client.login(username="test@test.com", password="testpassword")
+        self.login_2fa()
+
+        response = self.client.get(reverse("invitation_list"))
+        self.assertContains(response, "<td>{}</td>".format(invitation.email))
+        self.assertContains(
+            response, "<strong class='tag tag--red'>Expired</strong>", html=True
+        )
 
     def test_delete_invitation(self):
         invitation = Invitation.create(
@@ -404,6 +424,28 @@ class InviteFlow(AdminUserTestCase):
             reverse("invitation_delete", kwargs={"pk": invitation.id})
         )
         self.assertEqual(response.status_code, 403)
+
+    def test_confirm_invitation_deleted(self):
+        invitation = Invitation.create(
+            email=f"{uuid4()}@{uuid4()}.com", inviter=self.user
+        )
+        # If we dont send the invitation, we need to fake a sent date
+        invitation.sent = timezone.now()
+        invitation.save()
+
+        self.client.login(username="test@test.com", password="testpassword")
+        self.login_2fa()
+
+        response = self.client.get(reverse("invitation_list"))
+        self.assertContains(response, "<td>{}</td>".format(invitation.email))
+        self.assertContains(
+            response, "<strong class='tag tag--blue'>Pending</strong>", html=True
+        )
+
+        response = self.client.post(
+            reverse("invitation_delete", kwargs={"pk": invitation.id}), follow=True
+        )
+        self.assertContains(response, "<p>No invitations yet</p>")
 
 
 class ProfilesView(AdminUserTestCase):
