@@ -3,9 +3,12 @@ from django_otp.plugins.otp_email.conf import settings as otp_settings
 from django.conf import settings
 from django.template.loader import get_template
 from django.core.mail import send_mail
-from .models import HealthcareUser
-
+from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.sites.models import Site
+from django.utils.translation import gettext as _
+
+
+from .models import HealthcareUser
 
 
 def generate_2fa_code_for_device(email_device, user: HealthcareUser):
@@ -42,3 +45,19 @@ def generate_2fa_code(user: HealthcareUser):
     else:
         for email_device in email_devices:
             generate_2fa_code_for_device(email_device, user)
+
+
+def get_site_name(request=None):
+    current_site = get_current_site(request) if request else Site.objects.get_current()
+
+    # if example.com is our domain, we're either on localhost or a Heroku PR app
+    if current_site.domain == "example.com":
+        environment = (
+            "[{}]".format(settings.HEROKU_APP_NAME)
+            if settings.HEROKU_APP_NAME
+            else "[Localhost]"
+        )
+
+        return "{} {}".format(environment, _("COVID Alert Portal"))
+
+    return current_site.name
