@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-21 15:24+0000\n"
+"POT-Creation-Date: 2020-07-21 19:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -167,7 +167,7 @@ msgstr ""
 
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html:14
 #, python-format
-msgid "Are you sure you want to delete invitation sent to %(email)s?"
+msgid "Are you sure you want to delete the invitation sent to %(email)s?"
 msgstr "Êtes-vous certain de vouloir retirer l'invitation envoyée à %(email)s?"
 
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html:15
@@ -185,6 +185,13 @@ msgstr "Oui, je suis certain"
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html:17
 msgid "No, take me back"
 msgstr "Non, retourner en arrière"
+
+#: profiles/templates/invitations/templates/invite.html:6
+#: profiles/templates/invitations/templates/invite.html:11
+#: profiles/templates/invitations/templates/invite_list.html:12
+#: profiles/templates/profiles/healthcareuser_list.html:9
+msgid "Add an account"
+msgstr "Ajouter un nouveau compte"
 
 #: profiles/templates/invitations/templates/invite.html:13
 msgid "Send invitation email"
@@ -210,11 +217,6 @@ msgid "Manage existing accounts"
 msgstr "Gérer les comptes existants"
 
 #: profiles/templates/invitations/templates/invite_list.html:6
-#: profiles/templates/invitations/templates/invite_list.html:12
-#: profiles/templates/profiles/healthcareuser_list.html:9 profiles/views.py:158
-msgid "Add an account"
-msgstr "Ajouter un nouveau compte"
-
 #: profiles/templates/invitations/templates/invite_list.html:11
 #: profiles/templates/invitations/templates/invite_list.html:15
 msgid "Invitations"
@@ -230,23 +232,19 @@ msgid "Actions"
 msgstr "Actions"
 
 #: profiles/templates/invitations/templates/invite_list.html:29
-msgid "Expired"
-msgstr "Expirée"
+msgid "Expired,Pending"
+msgstr "Expirée,En attente"
 
-#: profiles/templates/invitations/templates/invite_list.html:29
-msgid "Pending"
-msgstr "En attente"
-
-#: profiles/templates/invitations/templates/invite_list.html:35
+#: profiles/templates/invitations/templates/invite_list.html:36
 msgid "Resend"
 msgstr "Ré-envoyer"
 
-#: profiles/templates/invitations/templates/invite_list.html:38
+#: profiles/templates/invitations/templates/invite_list.html:39
 msgid "Delete"
 msgstr "Effacer"
 
 #: profiles/templates/invitations/templates/invite_list.html:46
-msgid "No invitation yet"
+msgid "No invitations yet"
 msgstr "Aucune invitation pour le moment"
 
 #: profiles/templates/locked_out.html:5
@@ -365,13 +363,17 @@ msgstr "Comptes d'utilisateurs"
 msgid "Permissions"
 msgstr "Droit d’accès"
 
-#: profiles/templates/profiles/healthcareuser_list.html:26
+#: profiles/templates/profiles/healthcareuser_list.html:28
 msgid "Admin,Staff"
 msgstr "Administrateur,Employé"
 
-#: profiles/templates/profiles/healthcareuser_list.html:30
+#: profiles/templates/profiles/healthcareuser_list.html:34
 msgid "Remove"
 msgstr "Retirer"
+
+#: profiles/templates/profiles/healthcareuser_list.html:40
+msgid "No users yet."
+msgstr "Aucune utilisateur pour le moment"
 
 #: profiles/templates/profiles/key.html:4
 #: profiles/templates/profiles/key.html:7
@@ -960,13 +962,15 @@ msgstr ""
 msgid "Security code has been sent."
 msgstr ""
 
-#: profiles/views.py:160
-msgid "Resend invitation"
-msgstr "Ré-envoyer un courriel d’invitation"
-
-#: profiles/views.py:168
+#: profiles/views.py:154
 msgid ": Your portal account"
 msgstr " : votre compte pour le Portail"
+
+#~ msgid "Pending"
+#~ msgstr "En attente"
+
+#~ msgid "Resend invitation"
+#~ msgstr "Ré-envoyer un courriel d’invitation"
 
 #, python-format
 #~ msgid ""
