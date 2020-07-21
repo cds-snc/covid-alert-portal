@@ -40,6 +40,7 @@ from .forms import (
     HealthcareInviteForm,
     Resend2FACodeForm,
 )
+from .utils import get_site_name
 
 
 class SignUpView(FormView):
@@ -138,8 +139,14 @@ class InviteView(Is2FAMixin, IsAdminMixin, FormView):
         # Pass user to invite, save the invite to the DB, and return it
         invite = form.save(user=self.request.user)
         current_site = get_current_site(self.request)
+        subject_line = "{}{}".format(
+            get_site_name(self.request), _(": Your portal account")
+        )
         invite.send_invitation(
-            self.request, scheme=self.request.scheme, http_host=current_site.domain,
+            self.request,
+            scheme=self.request.scheme,
+            http_host=current_site.domain,
+            subject_line=subject_line,
         )
         messages.success(
             self.request, "Invitation sent to “{}”".format(invite.email), "invite"

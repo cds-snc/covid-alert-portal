@@ -214,6 +214,8 @@ OTP_NOTIFY_API_KEY = (
 OTP_NOTIFY_TEMPLATE_ID = "4e44bb0c-270f-4821-944f-c30b026260fa"
 OTP_NOTIFY_NO_DELIVERY = False
 
+# This environment variable is automatically set for Heroku Review apps
+HEROKU_APP_NAME = os.getenv("HEROKU_APP_NAME") or False
 
 # Invitations app
 SITE_ID = 1  # Required for invitations app
@@ -221,6 +223,7 @@ INVITATIONS_GONE_ON_ACCEPT_ERROR = False
 INVITATIONS_SIGNUP_REDIRECT = "/signup/"
 INVITATIONS_EMAIL_SUBJECT_PREFIX = ""
 INVITATIONS_INVITATION_ONLY = True
+INVITATIONS_INVITATION_EXPIRY = 1  # 1 day
 
 # Email setup
 EMAIL_BACKEND = (

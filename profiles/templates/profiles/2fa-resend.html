@@ -3,7 +3,7 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Resend the security code" %}
+  {% trans "Resend security code" %}
 {% endblock %}
 
 
@@ -11,7 +11,7 @@
   {% include  "includes/error_list.html" %}
 
   <h1>{% trans "Resend security code" %}</h1>
-  <p>{% trans "Sometimes email messages takes a few minutes to arrive. If you don't receive the email, you can resend it." %}</p>
+  <p>{% trans "Sometimes email messages take a few minutes to arrive. If you don't receive the email, you can resend it." %}</p>
   {% include "includes/cds_form.html" with submit_text=_("Resend security code") %}
   <p>
       {% trans "Has your phone number changed since you joined COVID Alert portal?" %}<br/>

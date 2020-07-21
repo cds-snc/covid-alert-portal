@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-21 18:57+0000\n"
+"POT-Creation-Date: 2020-07-21 19:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: portal/settings.py:251
+#: portal/settings.py:254
 msgid ""
 "This account has been locked due to too many failed log in attempts. Please "
 "try again after 5 minutes."
@@ -28,49 +28,51 @@ msgstr ""
 msgid "Enter a valid email address"
 msgstr "Entrez une adresse courriel valide"
 
-#: profiles/forms.py:76
-msgid "Please enter the security code."
-msgstr ""
-
-#: profiles/forms.py:91 profiles/forms.py:100 profiles/forms.py:179
+#: profiles/forms.py:48 profiles/forms.py:92 profiles/forms.py:101
+#: profiles/forms.py:180
 #: profiles/templates/profiles/healthcareuser_detail.html:28
 #: profiles/templates/profiles/healthcareuser_list.html:14
 msgid "Email address"
 msgstr "Adresse courriel"
 
-#: profiles/forms.py:104
+#: profiles/forms.py:77
+msgid "Please enter the security code."
+msgstr "Veuillez enter le code de sécurité."
+
+#: profiles/forms.py:105
 msgid "Full name"
 msgstr "Nom complet"
 
-#: profiles/forms.py:108
+#: profiles/forms.py:109
 msgid ""
 "A single use code will be sent to this phone number everytime you try to "
 "login."
 msgstr ""
 
-#: profiles/forms.py:113
+#: profiles/forms.py:114
 msgid "Enter the same phone number as before, for verification"
 msgstr ""
 
-#: profiles/forms.py:141
+#: profiles/forms.py:142
 msgid "Email already exists"
 msgstr "L’adresse courriel existe déjà"
 
-#: profiles/forms.py:143
+#: profiles/forms.py:144
 msgid "An invitation hasn't been sent to this address"
 msgstr ""
 
-#: profiles/forms.py:156
+#: profiles/forms.py:157
 msgid "The phone number fields doesn't match."
 msgstr ""
 
 #: profiles/templates/base.html:21 profiles/templates/base.html:34
-msgid "Generate COVID Alert number"
-msgstr "Générer un numéro pour Alerte COVID"
+#: profiles/utils.py:25
+msgid "COVID Alert Portal"
+msgstr "Portail Alerte COVID"
 
 #: profiles/templates/base.html:21
-msgid "– COVID Alert Portal"
-msgstr "– Portail Alerte COVID"
+msgid "— COVID Alert Portal"
+msgstr "— Portail Alerte COVID"
 
 #: profiles/templates/includes/FIP_header.html:6
 #: profiles/templates/includes/FIP_header.html:8
@@ -136,11 +138,6 @@ msgstr "Gérer les comptes"
 #: profiles/templates/includes/phase_banner.html:4
 msgid "This site will change as we test ideas."
 msgstr "Ce site évoluera au fur et à mesure que nous testons des idées."
-
-#: profiles/templates/invitations/email/email_invite_subject.html:2
-#: profiles/templates/invitations/email/email_invite_subject.txt:2
-msgid "COVID Alert - give numbers to patients"
-msgstr "Alerte COVID — Fournir des numéros aux patitents"
 
 #: profiles/templates/invitations/forms/_invite.html:3
 msgid "Invite"
@@ -217,31 +214,32 @@ msgid ""
 msgstr ""
 
 #: profiles/templates/profiles/2fa-resend.html:6
-msgid "Resend the security code"
-msgstr ""
-
 #: profiles/templates/profiles/2fa-resend.html:13
 #: profiles/templates/profiles/2fa-resend.html:15
 msgid "Resend security code"
-msgstr ""
+msgstr "Renvoyer le code de sécurité"
 
 #: profiles/templates/profiles/2fa-resend.html:14
 msgid ""
-"Sometimes email messages takes a few minutes to arrive. If you don't receive "
+"Sometimes email messages take a few minutes to arrive. If you don't receive "
 "the email, you can resend it."
 msgstr ""
+"Parfois, les courriels prennent quelques minutes à parvenir à destination. "
+"Si vous ne recevez pas de courriel, vous pouvez le renvoyer."
 
 #: profiles/templates/profiles/2fa-resend.html:17
 msgid "Has your phone number changed since you joined COVID Alert portal?"
 msgstr ""
+"Votre adresse courriel a-t-elle changé depuis que vous utilisez Portail "
+"Alerte COVID?"
 
 #: profiles/templates/profiles/2fa-resend.html:18
 msgid "Please ask your account manager to reset it."
-msgstr ""
+msgstr "Veuillez demander à votre gestionnaire de compte de la réinitialiser."
 
 #: profiles/templates/profiles/2fa.html:6
 msgid "Validate your code"
-msgstr ""
+msgstr "Valider votre code"
 
 #: profiles/templates/profiles/2fa.html:13
 msgid "Check your SMS messages"
@@ -249,12 +247,11 @@ msgstr "Vérifiez vos messages texte"
 
 #: profiles/templates/profiles/2fa.html:14
 msgid "We've sent you a SMS with a security code to sign in"
-msgstr ""
-"Nous vous avons envoyé un message texte avec un code d’authentification"
+msgstr "Nous vous avons envoyé un code de sécurité par message texte."
 
 #: profiles/templates/profiles/2fa.html:15
 msgid "Continue"
-msgstr ""
+msgstr "Continuer"
 
 #: profiles/templates/profiles/2fa.html:16
 msgid "Not received a SMS?"
@@ -307,10 +304,9 @@ msgid "Province"
 msgstr "Province"
 
 #: profiles/templates/profiles/healthcareuser_detail.html:36
-#, fuzzy
 #| msgid "Generate a number"
 msgid "Phone number"
-msgstr "Générer un numéro"
+msgstr "Téléphone"
 
 #: profiles/templates/profiles/healthcareuser_detail.html:43
 msgid "Back to accounts"
@@ -426,11 +422,12 @@ msgstr ""
 
 #: profiles/templates/profiles/landing.html:4
 #: profiles/templates/profiles/landing.html:8
-msgid "Welcome to Generate COVID Alert number"
-msgstr "Bienvenue dans Générer un numéro Alerte COVID"
+msgid "Welcome to the COVID Alert Portal"
+msgstr "Bienvenue dans le Portail Alerte COVID"
 
 #: profiles/templates/profiles/landing.html:9
-msgid "The COVID Alert notifies people if they’ve been exposed to COVID-19."
+msgid ""
+"The COVID Alert app notifies people if they’ve been exposed to COVID-19."
 msgstr ""
 "L’application Alerte COVID avise les personnes en cas d’exposition à la "
 "COVID-19."
@@ -860,42 +857,35 @@ msgstr "Suivant"
 
 #: profiles/templates/profiles/start.html:4
 #: profiles/templates/profiles/start.html:7
-msgid "Generate a number"
-msgstr "Générer un numéro"
+msgid "Generate a one-time key"
+msgstr "Générer une clé à usage unique"
 
 #: profiles/templates/profiles/start.html:9
-msgid "Before generating a number, check the patient has:"
-msgstr "Avant de générer un numéro, assurez-vous que le patient :"
+msgid "For each patient who tests positive for COVID-19, check:"
+msgstr "Pour chaque patient qui a un test positif à la COVID-19, vérifiez :"
 
 #: profiles/templates/profiles/start.html:12
-msgid "tested positive for COVID-19"
-msgstr "a reçu un test positif à la COVID-19"
+msgid "They’ve installed the <strong>app on their phone</strong>."
+msgstr "Qu’il a installé <strong>l’application sur son téléphone.</strong>"
 
 #: profiles/templates/profiles/start.html:13
-msgid "the app installed on Android or Apple mobile device"
+msgid ""
+"They understand <strong>the key expires in 24 hours</strong>. If the key "
+"expires before the patient enters it, they’ll need to ask your office for a "
+"new key."
 msgstr ""
-"a installé l’application Alerte COVID sur son téléphone mobile Android ou "
-"Apple"
+"Qu’il comprend que la clé à usage unique <strong>expire après 24 heures</"
+"strong>. Si la clé expire avant que le patient l’utilise, le patient doit en "
+"demander une nouvelle auprès de votre bureau."
+
+#: profiles/templates/profiles/start.html:14
+msgid ""
+"They’re ready to <strong>record or write the key</strong> somewhere safe."
+msgstr "Qu’il est en mesure de <strong>noter la clé</strong> à un endroit sûr."
 
 #: profiles/templates/profiles/start.html:16
-msgid "Tell the patient the number will expire within 24 hours."
-msgstr "Informez le patient que le numéro expire après 24 heures."
-
-#: profiles/templates/profiles/start.html:18
 msgid "Generate key"
 msgstr "Générer une clé"
-
-#: profiles/templates/profiles/start.html:21
-msgid "Each code is individual and anonymous."
-msgstr "Le numéro est personnel et anonyme."
-
-#: profiles/templates/profiles/start.html:21
-msgid ""
-"It cannot be used by another patient. If the number expires before the "
-"patient enters it, they’ll need a new number."
-msgstr ""
-"Il ne peut pas être utilisé pour un autre patient. Si le numéro expire avant "
-"que le patient ait pu l’entrer, il faudra générer un nouveau numéro."
 
 #: profiles/templates/registration/login.html:17
 #: profiles/templates/registration/password_reset_form.html:6
@@ -922,14 +912,21 @@ msgstr "Nous vous enverrons un courriel pour créer un nouveau mot de passe."
 msgid "Send email"
 msgstr "Envoyer"
 
-#: profiles/views.py:55
+#: profiles/views.py:56
 msgid "No invited email in session"
 msgstr ""
 
-#: profiles/views.py:82
+#: profiles/views.py:83
 msgid "Account created successfully"
 msgstr ""
 
-#: profiles/views.py:127
+#: profiles/views.py:128
 msgid "Security code has been sent."
 msgstr ""
+
+#: profiles/views.py:143
+msgid ": Your portal account"
+msgstr " : votre compte pour le Portail"
+
+#~ msgid "Tell the patient the number will expire within 24 hours."
+#~ msgstr "Informez le patient que le numéro expire après 24 heures."

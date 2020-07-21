@@ -45,6 +45,7 @@ class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
         self.fields["username"].validators = [
             EmailValidator(message=_("Enter a valid email address"))
         ]
+        self.fields["username"].label = _("Email address")
 
     def is_valid(self):
         is_valid = super().is_valid()

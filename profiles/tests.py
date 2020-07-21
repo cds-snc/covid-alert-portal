@@ -83,13 +83,13 @@ class AdminUserTestCase(TestCase):
 
 
 class HomePageView(TestCase):
-    def test_start(self):
+    def test_landing(self):
         """
         Just see the start page
         """
         response = self.client.get(reverse("landing"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Welcome to Generate COVID Alert number")
+        self.assertContains(response, "Welcome to the COVID Alert Portal")
 
 
 class RestrictedPageViews(TestCase):
