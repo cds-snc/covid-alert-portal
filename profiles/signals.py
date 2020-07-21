@@ -21,7 +21,11 @@ def update_2fa(sender, instance, created, **kwargs):
         else:
             old_number = instance._pre_save_instance.phone_number.as_e164
 
-        new_number = instance.phone_number.as_e164
+        if isinstance(instance.phone_number, str):
+            new_number = instance.phone_number
+        else:
+            new_number = instance.phone_number.as_e164
+
         if old_number != new_number:
             sms_device = instance.notifysmsdevice_set.get(
                 number=old_number, user=instance
