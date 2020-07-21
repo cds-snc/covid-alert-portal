@@ -144,7 +144,7 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
 
         return email
 
-    def clean_phone_number2(self):
+    def clean_phone_number_confirmation(self):
         phone_number = self.cleaned_data.get("phone_number")
         phone_number_confirmation = self.cleaned_data.get("phone_number_confirmation")
         if (

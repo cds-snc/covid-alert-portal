@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-17 16:27+0000\n"
+"POT-Creation-Date: 2020-07-21 18:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,36 +18,50 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: portal/settings.py:244
+#: portal/settings.py:251
 msgid ""
 "This account has been locked due to too many failed log in attempts. Please "
 "try again after 5 minutes."
 msgstr ""
 
-#: profiles/forms.py:44
+#: profiles/forms.py:46
 msgid "Enter a valid email address"
 msgstr "Entrez une adresse courriel valide"
 
-#: profiles/forms.py:74
+#: profiles/forms.py:76
 msgid "Please enter the security code."
 msgstr ""
 
-#: profiles/forms.py:89 profiles/forms.py:98 profiles/forms.py:142
+#: profiles/forms.py:91 profiles/forms.py:100 profiles/forms.py:179
 #: profiles/templates/profiles/healthcareuser_detail.html:28
 #: profiles/templates/profiles/healthcareuser_list.html:14
 msgid "Email address"
 msgstr "Adresse courriel"
 
-#: profiles/forms.py:102
+#: profiles/forms.py:104
 msgid "Full name"
 msgstr "Nom complet"
 
-#: profiles/forms.py:118
+#: profiles/forms.py:108
+msgid ""
+"A single use code will be sent to this phone number everytime you try to "
+"login."
+msgstr ""
+
+#: profiles/forms.py:113
+msgid "Enter the same phone number as before, for verification"
+msgstr ""
+
+#: profiles/forms.py:141
 msgid "Email already exists"
 msgstr "L’adresse courriel existe déjà"
 
-#: profiles/forms.py:120
+#: profiles/forms.py:143
 msgid "An invitation hasn't been sent to this address"
+msgstr ""
+
+#: profiles/forms.py:156
+msgid "The phone number fields doesn't match."
 msgstr ""
 
 #: profiles/templates/base.html:21 profiles/templates/base.html:34
@@ -218,7 +232,7 @@ msgid ""
 msgstr ""
 
 #: profiles/templates/profiles/2fa-resend.html:17
-msgid "Has your email address changed since you joined COVID Alert portal?"
+msgid "Has your phone number changed since you joined COVID Alert portal?"
 msgstr ""
 
 #: profiles/templates/profiles/2fa-resend.html:18
@@ -230,21 +244,20 @@ msgid "Validate your code"
 msgstr ""
 
 #: profiles/templates/profiles/2fa.html:13
-#: profiles/templates/registration/password_reset_done.html:4
-#: profiles/templates/registration/password_reset_done.html:7
-msgid "Check your email"
-msgstr "Vérifiez vos courriels"
+msgid "Check your SMS messages"
+msgstr "Vérifiez vos messages texte"
 
 #: profiles/templates/profiles/2fa.html:14
-msgid "We've sent you an email with a security code to sign in"
+msgid "We've sent you a SMS with a security code to sign in"
 msgstr ""
+"Nous vous avons envoyé un message texte avec un code d’authentification"
 
 #: profiles/templates/profiles/2fa.html:15
 msgid "Continue"
 msgstr ""
 
 #: profiles/templates/profiles/2fa.html:16
-msgid "Not received an email?"
+msgid "Not received a SMS?"
 msgstr ""
 
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html:6
@@ -293,7 +306,13 @@ msgstr "Nom"
 msgid "Province"
 msgstr "Province"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:39
+#: profiles/templates/profiles/healthcareuser_detail.html:36
+#, fuzzy
+#| msgid "Generate a number"
+msgid "Phone number"
+msgstr "Générer un numéro"
+
+#: profiles/templates/profiles/healthcareuser_detail.html:43
 msgid "Back to accounts"
 msgstr "Retour aux comptes"
 
@@ -373,7 +392,9 @@ msgstr "Appuyez sur « Entrer votre clé »."
 
 #: profiles/templates/profiles/key_instructions.html:25
 msgid "Tap “Next” on “Let people know they may have been exposed”."
-msgstr "Appuyez sur « Suivant » dans l’écran « Aviser les autres personnes d’une exposition potentielle »."
+msgstr ""
+"Appuyez sur « Suivant » dans l’écran « Aviser les autres personnes d’une "
+"exposition potentielle »."
 
 #: profiles/templates/profiles/key_instructions.html:31
 msgid "Enter the key and tap “Submit”"
@@ -384,19 +405,24 @@ msgid ""
 "If you want to notify people, you need to give COVID Alert permission to "
 "upload random codes. Tap “Agree” on “Now you can upload codes”."
 msgstr ""
-"Si vous voulez aviser les autres personnes, vous devez autoriser Alerte COVID à téléverser vos codes aléatoires. Appuyez sur « Accepter » dans l’écran « Vous pouvez maintenant téléverser vos codes »."
+"Si vous voulez aviser les autres personnes, vous devez autoriser Alerte "
+"COVID à téléverser vos codes aléatoires. Appuyez sur « Accepter » dans "
+"l’écran « Vous pouvez maintenant téléverser vos codes »."
 
 #: profiles/templates/profiles/key_instructions.html:43
 msgid ""
 "Tap “Share” on “Share your random codes from this device with COVID Alert?”."
-msgstr "Appuyez sur « Partager » dans la fenêtre « Partager les identifiants aléatoires de votre appareil avec Alerte COVID? »."
+msgstr ""
+"Appuyez sur « Partager » dans la fenêtre « Partager les identifiants "
+"aléatoires de votre appareil avec Alerte COVID? »."
 
 #: profiles/templates/profiles/key_instructions.html:49
 msgid ""
 "COVID Alert will ask permission to upload random codes daily for the next 13 "
 "days."
 msgstr ""
-"Chaque jour, pendant les 13 jours qui suivent, Alerte COVID demandera l’autorisation de téléverser les codes aléatoires."
+"Chaque jour, pendant les 13 jours qui suivent, Alerte COVID demandera "
+"l’autorisation de téléverser les codes aléatoires."
 
 #: profiles/templates/profiles/landing.html:4
 #: profiles/templates/profiles/landing.html:8
@@ -856,7 +882,6 @@ msgid "Tell the patient the number will expire within 24 hours."
 msgstr "Informez le patient que le numéro expire après 24 heures."
 
 #: profiles/templates/profiles/start.html:18
-
 msgid "Generate key"
 msgstr "Générer une clé"
 
@@ -877,6 +902,11 @@ msgstr ""
 #: profiles/templates/registration/password_reset_form.html:12
 msgid "Forgot your password?"
 msgstr "Mot de passe oublié?"
+
+#: profiles/templates/registration/password_reset_done.html:4
+#: profiles/templates/registration/password_reset_done.html:7
+msgid "Check your email"
+msgstr "Vérifiez vos courriels"
 
 #: profiles/templates/registration/password_reset_done.html:9
 msgid "Use the link in your email to reset your password."
@@ -900,6 +930,6 @@ msgstr ""
 msgid "Account created successfully"
 msgstr ""
 
-#: profiles/views.py:138
+#: profiles/views.py:127
 msgid "Security code has been sent."
 msgstr ""
