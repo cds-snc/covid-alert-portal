@@ -10,13 +10,23 @@
   line-height: 1.15;
   padding: 5px 8px;
 
-  &--red {
-    background-color: $color-red-light;
-    color: $color-red;
-  }
-
   &--blue {
     background-color: $color-blue-light;
     color: $color-blue-dark;
+  }
+
+  &--green {
+    background-color: $color-green-light;
+    color: $color-green-dark;
+  }
+
+  &--grey {
+    background-color: $color-grey-footer;
+    color: $color-grey-dark;
+  }
+
+  &--red {
+    background-color: $color-red-light;
+    color: $color-red;
   }
 }
