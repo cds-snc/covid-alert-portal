@@ -74,8 +74,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.admin",  # we want our auth templates loaded first
+    "phonenumber_field",
     "django_otp",
-    "django_otp.plugins.otp_email",
+    "otp_notify",
 ]
 
 MIDDLEWARE = [
@@ -206,6 +207,12 @@ LOGIN_URL = "login"
 OTP_LOGIN_URL = "login-2fa"
 LOGIN_REDIRECT_URL = "start"
 LOGOUT_REDIRECT_URL = "landing"
+OTP_NOTIFY_ENDPOINT = "https://api.notification.alpha.canada.ca"
+OTP_NOTIFY_API_KEY = (
+    "staging-5193be3f-18c5-4fc8-8050-2a58ccdbb223-05139c1c-1224-467d-9dae-77e2171f9cfa"
+)
+OTP_NOTIFY_TEMPLATE_ID = "4e44bb0c-270f-4821-944f-c30b026260fa"
+OTP_NOTIFY_NO_DELIVERY = False
 
 
 # Invitations app
@@ -226,7 +233,6 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 email_use_tls = os.getenv("EMAIL_USE_TLS", "True")
 EMAIL_USE_TLS = True if email_use_tls == "True" else False
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
-OTP_EMAIL_SUBJECT = "Your login code"
 
 # Create default Super User with this password
 SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
@@ -238,6 +244,7 @@ if TESTING:
     AXES_LOGGER = "axes.watch_login"
     logger = getLogger(AXES_LOGGER)
     logger.setLevel(CRITICAL)
+    OTP_NOTIFY_NO_DELIVERY = True
 
 AXES_FAILURE_LIMIT = 5  # Lockout after 5 failed login attempts
 AXES_COOLOFF_MESSAGE = _(

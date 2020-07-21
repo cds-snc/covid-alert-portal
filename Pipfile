@@ -28,6 +28,9 @@ newrelic = "*"
 django-axes = "*"
 uwsgi = "*"
 django-csp = "*"
+phonenumbers = "*"
+django-phonenumber-field = "*"
+django-otp-notify = "*"
 
 [pipenv]
 allow_prereleases = true

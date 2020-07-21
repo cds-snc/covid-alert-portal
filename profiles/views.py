@@ -80,17 +80,6 @@ class SignUpView(FormView):
     def form_valid(self, form):
         form.save()
         messages.success(self.request, _("Account created successfully"))
-        # Let's login the user right now
-        user = authenticate(
-            request=self.request,
-            username=form.cleaned_data.get("email"),
-            password=form.cleaned_data.get("password1"),
-        )
-        login(self.request, user)
-        email_device = user.emaildevice_set.create()
-        self.request.session[DEVICE_ID_SESSION_KEY] = email_device.persistent_id
-        self.request.session.save()
-
         return super(SignUpView, self).form_valid(form)
 
 
@@ -107,13 +96,13 @@ class Login2FAView(LoginRequiredMixin, FormView):
     def get_initial(self):
         initial = super().get_initial()
         if settings.DEBUG:
-            email_device = self.request.user.emaildevice_set.last()
-            initial["code"] = email_device.token
+            sms_device = self.request.user.notifysmsdevice_set.last()
+            initial["code"] = sms_device.token
         return initial
 
     def form_valid(self, form):
         code = form.cleaned_data.get("code")
-        for device in self.request.user.emaildevice_set.all():
+        for device in self.request.user.notifysmsdevice_set.all():
             if device.verify_token(code):
                 self.request.user.otp_device = device
                 self.request.session[DEVICE_ID_SESSION_KEY] = device.persistent_id
