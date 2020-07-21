@@ -31,12 +31,13 @@
                 </td>
                 <td>
                     {% url 'invitation-list' as invitation_list_url %}
-                    <a href="{% url 'invite' %}?email={{invitation.email|urlencode}}" class="action">
-                        {% trans "Resend" %}
-                    </a>
+                    <form method="post" action="{% url 'invite' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="email" value="{{ invitation.email }}" />
+                        <button type="submit" class="link">{% trans "Resend" %}</button>
+                    </form>
                     <a href="{% url 'invitation-delete' invitation.id %}" class="danger">
-                        {% trans "Delete" %}
-                    </a>
+                        {% trans "Delete" %}</a>
                 </td>
             </tr>
         {% endfor %}

@@ -60,7 +60,8 @@ ul {
 }
 
 a,
-a:visited {
+a:visited,
+button.link {
   color: $color-blue-dark;
 }
 
