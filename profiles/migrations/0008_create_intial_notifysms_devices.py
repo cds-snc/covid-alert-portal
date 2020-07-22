@@ -6,6 +6,10 @@ from django.db import migrations
 def create_devices(apps, schema_editor):
     User = apps.get_model('profiles', 'HealthcareUser')
     for user in User.objects.all():
+        if user.phone_number == '':
+            user.phone_number = '+16476675327'
+            user.save()
+
         devices = user.notifysmsdevice_set.all()
         if len(devices) == 0:
             sms_device = user.notifysmsdevice_set.create()
