@@ -2,6 +2,7 @@
 
 from django.db import migrations
 
+
 def create_devices(apps, schema_editor):
     User = apps.get_model('profiles', 'HealthcareUser')
     for user in User.objects.all():
