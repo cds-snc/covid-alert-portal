@@ -12,12 +12,38 @@ jobs:
   build-n-push:
     runs-on: ubuntu-latest
     steps:
+      - name: Wait for container to pass Django CI 3.6 Test
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-CI-tests-3_6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: test (3.6)
+          ref: ${{ github.sha }}
+
+      - name: Wait for container to pass Django CI 3.7 Test
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-CI-tests-3_7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: test (3.7)
+          ref: ${{ github.sha }}
+
       - name: Wait for container to pass Django CI 3.8 Test
         uses: fountainhead/action-wait-for-check@v1.0.0
-        id: wait-for-CI-tests
+        id: wait-for-CI-tests-3_8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           checkName: test (3.8)
+          ref: ${{ github.sha }}
+          
+            
+
+      - name: Wait for Terraform Security Tests
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-terraform-sec-test
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: terraform-security-scan
           ref: ${{ github.sha }}
 
       - name: Checkout

@@ -3,10 +3,6 @@
 # Pull base image
 FROM python:3.8-slim
 
-# Create a group and user to run our app
-ARG APP_USER=appuser
-RUN groupadd -r ${APP_USER} && useradd --no-log-init -m -r -g ${APP_USER} ${APP_USER}
-
 # Installs gettext utilities required to makemessages and compilemessages
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	gettext \
@@ -31,12 +27,10 @@ RUN pipenv install --system --deploy
 # Copy project
 COPY . /code/
 
-# Ensure app user has access to /code directory
-RUN chown -R ${APP_USER}:${APP_USER} /code/
+# Create a group and user to run our app
+ARG APP_USER=django
+RUN groupadd -r ${APP_USER} && useradd --no-log-init -M -d /code -u 1000 -g ${APP_USER} ${APP_USER}
 
-# Change to a non-root user
-USER ${APP_USER}:${APP_USER}
-
-EXPOSE 80
+EXPOSE 8000
 
 CMD ./entrypoint.sh

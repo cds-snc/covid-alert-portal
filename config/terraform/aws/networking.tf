@@ -193,8 +193,8 @@ resource "aws_security_group" "covidportal" {
 resource "aws_security_group_rule" "covidportal_ingress_alb" {
   description              = "Security group rule for Portal Ingress ALB"
   type                     = "ingress"
-  from_port                = 80
-  to_port                  = 80
+  from_port                = 8000
+  to_port                  = 8000
   protocol                 = "tcp"
   security_group_id        = aws_security_group.covidportal.id
   source_security_group_id = aws_security_group.covidportal_load_balancer.id
@@ -222,21 +222,21 @@ resource "aws_security_group_rule" "covidportal_egress_s3_privatelink" {
   ]
 }
 
+resource "aws_security_group_rule" "covidportal_egress_email" {
+  description              = "Security group rule for Portal email egress through privatelink"
+  type                     = "egress"
+  from_port                = 587
+  to_port                  = 587
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.covidportal.id
+  cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:AWS007
+}
+
 resource "aws_security_group_rule" "covidportal_egress_database" {
   description              = "Security group rule for Portal DB egress through privatelink"
   type                     = "egress"
   from_port                = 5432
   to_port                  = 5432
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.covidportal.id
-  cidr_blocks = ["0.0.0.0/0"] 
-}
-
-resource "aws_security_group_rule" "covidportal_egress_email" {
-  description              = "Security group rule for Portal egress through privatelink"
-  type                     = "egress"
-  from_port                = 587
-  to_port                  = 587
   protocol                 = "tcp"
   security_group_id        = aws_security_group.covidportal.id
   source_security_group_id = aws_security_group.covidportal_database.id
@@ -254,11 +254,17 @@ resource "aws_security_group" "covidportal_load_balancer" {
     to_port     = 443
     cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:AWS008
   }
-
-  egress {
+  ingress {
     protocol    = "tcp"
     from_port   = 80
     to_port     = 80
+    cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:AWS008
+  }
+
+  egress {
+    protocol    = "tcp"
+    from_port   = 8000
+    to_port     = 8000
     cidr_blocks = [var.vpc_cidr_block]
   }
 
@@ -327,8 +333,8 @@ resource "aws_default_network_acl" "covidportal" {
     rule_no    = 200
     action     = "deny"
     cidr_block = "0.0.0.0/0"
-    from_port  = 5432
-    to_port    = 5432
+    from_port  = 3389
+    to_port    = 3389
   }
 
   ingress {

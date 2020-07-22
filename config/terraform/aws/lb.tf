@@ -4,7 +4,7 @@
 
 resource "aws_lb_target_group" "covidportal" {
   name                 = "covidportal"
-  port                 = 80
+  port                 = 8000
   protocol             = "HTTP"
   target_type          = "ip"
   deregistration_delay = 30
@@ -14,6 +14,8 @@ resource "aws_lb_target_group" "covidportal" {
     enabled             = true
     interval            = 10
     path                = "/en/landing/"
+    port                = 8000
+    matcher             = "301,200"
     timeout             = 5
     healthy_threshold   = 2
     unhealthy_threshold = 2
@@ -27,7 +29,7 @@ resource "aws_lb_target_group" "covidportal" {
 
 resource "aws_lb_target_group" "covidportal_2" {
   name                 = "covidportal-2"
-  port                 = 80
+  port                 = 8000
   protocol             = "HTTP"
   target_type          = "ip"
   deregistration_delay = 30
@@ -36,7 +38,9 @@ resource "aws_lb_target_group" "covidportal_2" {
   health_check {
     enabled             = true
     interval            = 10
+    port                = 8000
     path                = "/en/landing/"
+    matcher             = "301,200"
     timeout             = 5
     healthy_threshold   = 2
     unhealthy_threshold = 2
@@ -72,7 +76,7 @@ resource "aws_lb_listener" "covidportal_https" {
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-FS-1-2-Res-2019-08"
-  certificate_arn   = aws_acm_certificate.covidportal.arn
+  certificate_arn   = aws_acm_certificate.covidportal_staging.arn
 
   default_action {
     type             = "forward"
