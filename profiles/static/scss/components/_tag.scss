@@ -1,0 +1,14 @@
+.tag {
+  text-transform: uppercase;
+  font-size: 0.70em;
+  padding: 5px 10px;
+  font-weight: bold;
+  &--red {
+    background-color: $color-red-light;
+    color: $color-red;
+  }
+  &--blue {
+    background-color: $color-blue-light;
+    color: $color-blue-dark;
+  }
+}

@@ -25,9 +25,17 @@ urlpatterns = [
         ),
         name="start",
     ),
-    path("invite/", views.InviteView.as_view(), name="invite"),
+    path("invite/", views.InvitationView.as_view(), name="invite"),
+    path("invite/list/", views.InvitationListView.as_view(), name="invitation-list"),
     path(
-        "invite-complete/", views.InviteCompleteView.as_view(), name="invite_complete"
+        "invite/<int:pk>/delete",
+        views.InvitationDeleteView.as_view(),
+        name="invitation-delete",
+    ),
+    path(
+        "invite-complete/",
+        views.InvitationCompleteView.as_view(),
+        name="invite_complete",
     ),
     re_path(r"signup/$", views.SignUpView.as_view(), name="signup"),
     path("profiles/", views.ProfilesView.as_view(), name="profiles",),
