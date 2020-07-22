@@ -28,6 +28,7 @@ newrelic = "*"
 django-axes = "*"
 uwsgi = "*"
 django-csp = "*"
+django-cors-headers = "*"
 
 [pipenv]
 allow_prereleases = true

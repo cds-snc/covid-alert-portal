@@ -227,10 +227,13 @@ def code(request):
         except requests.exceptions.RequestException as err:
             logging.exception(f"Something went wrong {err}")
 
-    # Split up the code with a space in the middle so it looks like this: 123 456 789
-    diagnosis_code = (
-        f"{diagnosis_code[0:3]} {diagnosis_code[3:6]} {diagnosis_code[6:10]}"
-    )
+    # Make sure the code has a length of 10, cheap sanity check
+    if len(diagnosis_code.strip()) == 10:
+        # Split up the code with a space in the middle so it looks like this: 123 456 789
+        diagnosis_code = (
+            f"{diagnosis_code[0:3]} {diagnosis_code[3:6]} {diagnosis_code[6:10]}"
+        )
+
     expiry = timezone.now() + timedelta(days=1)
 
     template_name = "key_instructions" if "/key-instructions" in request.path else "key"
