@@ -1,6 +1,5 @@
 import requests
 import logging
-import sys
 from datetime import timedelta
 
 from django.conf import settings
