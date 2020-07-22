@@ -213,7 +213,9 @@ def code(request):
             sys.stderr.flush()
 
     # Split up the code with a space in the middle so it looks like this: 123 456 789
-    diagnosis_code = f"{diagnosis_code[0:3]} {diagnosis_code[4:7]} {diagnosis_code[8:12]}"
+    diagnosis_code = (
+        f"{diagnosis_code[0:3]} {diagnosis_code[4:7]} {diagnosis_code[8:12]}"
+    )
     expiry = timezone.now() + timedelta(days=1)
 
     template_name = "key_instructions" if "/key-instructions" in request.path else "key"
