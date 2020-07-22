@@ -105,7 +105,7 @@ resource "aws_ecs_service" "covidportal" {
   load_balancer {
     target_group_arn = aws_lb_target_group.covidportal.arn
     container_name   = "covid-portal"
-    container_port   = 80
+    container_port   = 8000
   }
 
   tags = {

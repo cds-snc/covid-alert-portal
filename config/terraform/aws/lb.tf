@@ -4,7 +4,7 @@
 
 resource "aws_lb_target_group" "covidportal" {
   name                 = "covidportal"
-  port                 = 80
+  port                 = 8000
   protocol             = "HTTP"
   target_type          = "ip"
   deregistration_delay = 30
@@ -27,7 +27,7 @@ resource "aws_lb_target_group" "covidportal" {
 
 resource "aws_lb_target_group" "covidportal_2" {
   name                 = "covidportal-2"
-  port                 = 80
+  port                 = 8000
   protocol             = "HTTP"
   target_type          = "ip"
   deregistration_delay = 30
