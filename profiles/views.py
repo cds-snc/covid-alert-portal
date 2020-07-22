@@ -219,7 +219,9 @@ def code(request):
                 settings.API_ENDPOINT, headers={"Authorization": f"Bearer {token}"}
             )
             r.raise_for_status()  # If we don't get a valid response, throw an exception
-            diagnosis_code = r.text
+            # Make sure the code has a length of 10, cheap sanity check
+            if len(r.text.strip()) == 10:
+                diagnosis_code = r.text
         except requests.exceptions.HTTPError as err:
             logging.exception(
                 f"Received {r.status_code} with message {err.response.text}"
@@ -227,12 +229,10 @@ def code(request):
         except requests.exceptions.RequestException as err:
             logging.exception(f"Something went wrong {err}")
 
-    # Make sure the code has a length of 10, cheap sanity check
-    if len(diagnosis_code.strip()) == 10:
-        # Split up the code with a space in the middle so it looks like this: 123 456 789
-        diagnosis_code = (
-            f"{diagnosis_code[0:3]} {diagnosis_code[3:6]} {diagnosis_code[6:10]}"
-        )
+    # Split up the code with a space in the middle so it looks like this: 123 456 789
+    diagnosis_code = (
+        f"{diagnosis_code[0:3]} {diagnosis_code[3:6]} {diagnosis_code[6:10]}"
+    )
 
     expiry = timezone.now() + timedelta(days=1)
 
