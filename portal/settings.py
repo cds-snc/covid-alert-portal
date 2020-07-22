@@ -207,13 +207,12 @@ LOGIN_URL = "login"
 OTP_LOGIN_URL = "login-2fa"
 LOGIN_REDIRECT_URL = "start"
 LOGOUT_REDIRECT_URL = "landing"
-OTP_NOTIFY_ENDPOINT = os.getenv(
-    "OTP_NOTIFY_ENDPOINT", "https://api.notification.alpha.canada.ca"
+OTP_NOTIFY_ENDPOINT = (
+    os.getenv("OTP_NOTIFY_ENDPOINT") or "https://api.notification.alpha.canada.ca"
 )
 OTP_NOTIFY_API_KEY = os.getenv("OTP_NOTIFY_API_KEY")
 OTP_NOTIFY_TEMPLATE_ID = os.getenv("OTP_NOTIFY_TEMPLATE_ID")
-OTP_NOTIFY_TOKEN_VALIDITY = 30
-OTP_NOTIFY_NO_DELIVERY = True
+OTP_NOTIFY_TOKEN_VALIDITY = 90
 
 # This environment variable is automatically set for Heroku Review apps
 HEROKU_APP_NAME = os.getenv("HEROKU_APP_NAME") or False

@@ -38,6 +38,7 @@ class UserChangeForm(forms.ModelForm):
             "is_active",
             "is_admin",
             "is_superuser",
+            "phone_number",
         )
 
     def clean_password(self):
@@ -53,7 +54,14 @@ class UserAddForm(UserCreationForm):
 
     class Meta:
         model = HealthcareUser
-        fields = ("email", "name", "province", "is_admin", "is_superuser")
+        fields = (
+            "email",
+            "name",
+            "province",
+            "is_admin",
+            "is_superuser",
+            "phone_number",
+        )
 
     def clean_email(self):
         email = self.cleaned_data.get("email", "").lower()
@@ -73,7 +81,7 @@ class UserAdmin(BaseUserAdmin):
 
     fieldsets = (
         (None, {"fields": ("email", "password")}),
-        ("Personal info", {"fields": ("name", "province")}),
+        ("Personal info", {"fields": ("name", "province", "phone_number")}),
         ("Permissions", {"fields": ("is_admin", "is_superuser")}),
     )
 
@@ -84,7 +92,14 @@ class UserAdmin(BaseUserAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("email", "name", "province", "password1", "password2",),
+                "fields": (
+                    "email",
+                    "name",
+                    "province",
+                    "password1",
+                    "password2",
+                    "phone_number",
+                ),
             },
         ),
         ("Permissions", {"fields": ("is_admin", "is_superuser")}),

@@ -106,9 +106,8 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
 
     phone_number = PhoneNumberField(
         help_text=_(
-            "A single use code will be sent to this phone number everytime you try to login."
+            "A single use code will be sent to this phone number every time you try to log in."
         ),
-        widget=forms.TextInput(attrs={"placeholder": "+1"}),
     )
     phone_number_confirmation = PhoneNumberField(
         help_text=_("Enter the same phone number as before, for verification"),
@@ -154,7 +153,7 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
             and phone_number != phone_number_confirmation
         ):
             raise forms.ValidationError(
-                _("The phone number fields doesn't match."), code="invalid",
+                _("The phone number fields don't match."), code="invalid",
             )
         return phone_number_confirmation
 
