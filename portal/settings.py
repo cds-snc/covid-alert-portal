@@ -213,9 +213,9 @@ API_ENDPOINT = os.getenv("API_ENDPOINT")
 CORS_ALLOW_CREDENTIALS = False
 CORS_ORIGIN_WHITELIST = []
 CORS_ALLOW_METHODS = [
-    'GET',
-    'OPTIONS',
-    'POST',
+    "GET",
+    "OPTIONS",
+    "POST",
 ]
 
 # This environment variable is automatically set for Heroku Review apps
