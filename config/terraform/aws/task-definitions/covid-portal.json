@@ -1,0 +1,100 @@
+[
+    {
+      "name": "covid-portal",
+      "image": "${image}",
+      "portMappings": [
+        {
+          "containerPort": 80
+        }
+      ],
+      "linuxParameters": {
+        "capabilities": {
+          "drop": ["ALL"]
+        }
+      },
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "${awslogs-group}",
+          "awslogs-region": "${awslogs-region}",
+          "awslogs-stream-prefix": "${awslogs-stream-prefix}"
+        }
+      },
+      "environment": [
+        {
+            "name": "METRIC_PROVIDER",
+            "value": "${metric_provider}"
+        },
+        {
+          "name": "TRACER_PROVIDER",
+          "value": "${tracer_provider}"
+        },
+        {
+          "name": "DJANGO_ENV",
+          "value": "${django_env}"
+        },
+        {
+          "name": "DJANGO_ALLOWED_HOSTS",
+          "value": "${django_allowed_hosts}"
+        },
+        {
+          "name": "EMAIL_BACKEND",
+          "value": "${django_email_backend}"
+        },
+        {
+          "name": "NEW_RELIC_APP_NAME",
+          "value": "${new_relic_app_name}"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "DATABASE_URL",
+          "valueFrom": "${database_url}"
+        },
+        {
+          "name": "API_AUTHORIZATION",
+          "valueFrom": "${api_authorization}"
+        },
+        {
+          "name": "API_ENDPOINT",
+          "valueFrom": "${api_endpoint}"
+        },
+        {
+          "name": "DEFAULT_FROM_EMAIL",
+          "valueFrom": "${default_from_email}"
+        },
+        {
+          "name": "DJANGO_ADMINS",
+          "valueFrom": "${django_admins}"
+        },
+        {
+          "name": "DJANGO_SECRET_KEY",
+          "valueFrom": "${django_secret_key}"
+        },
+        {
+          "name": "EMAIL_HOST",
+          "valueFrom": "${email_host}"
+        },
+        {
+          "name": "EMAIL_HOST_USER",
+          "valueFrom": "${email_host_user}"
+        },
+        {
+          "name": "EMAIL_HOST_PASSWORD",
+          "valueFrom": "${email_host_password}"
+        },
+        {
+          "name": "EMAIL_PORT",
+          "valueFrom": "${email_port}"
+        },
+        {
+          "name": "EMAIL_USE_TLS",
+          "valueFrom": "${email_use_tls}"
+        },
+        {
+          "name": "NEW_RELIC_LICENSE_KEY",
+          "valueFrom": "${new_relic_license_key}"
+        }
+      ]
+    }
+  ]
