@@ -5,7 +5,10 @@
 
 {% block content %}
   <h1>{% trans "Manage accounts" %}</h1>
-  <div class="content-button"><a href="{% url 'invite' %}" role='button' draggable='false'>{% trans "Add an account" %}</a></div>
+  <div class="content-button">
+      <a href="{% url 'invite' %}" role='button' draggable='false'>{% trans "Add an account" %}</a>
+      <a href="{% url 'invitation_list' %}" role='button' draggable='false' class="secondary">{% trans "Check invitations" %}</a>
+  </div>
 
   <table class="with-actions">
     <caption class="visually-hidden">{% trans "User accounts" %}</caption>
@@ -19,18 +22,22 @@
     <tbody>
       {% for healthcareuser in healthcareuser_list %}
         <tr>
-          <td scope="col"><a href="{% url 'user_profile' healthcareuser.id %}">{{ healthcareuser.email }}</a></td>
-          <td scope="col">{{ healthcareuser.is_admin|yesno:_("Admin,Staff") }}</td>
-          <td scope="col">
+          <td><a href="{% url 'user_profile' healthcareuser.id %}">{{ healthcareuser.email }}</a></td>
+          <td>
+            <strong class="tag tag--{{ healthcareuser.is_admin|yesno:'green,grey' }}">
+              {{ healthcareuser.is_admin|yesno:_("Admin,Staff") }}
+            </strong>
+          </td>
+          <td>
           {% if not healthcareuser.is_superuser and healthcareuser.id != user.id %}
-            <a href="{% url 'user_delete' healthcareuser.id %}">
+            <a href="{% url 'user_delete' healthcareuser.id %}" class="danger">
               {% trans "Remove" %}
             </a>
           {% endif %}
           </td>
         </tr>
       {% empty %}
-        <p>No users yet.</p>
+        <p>{% trans "No users yet." %}</p>
       {% endfor %}
     </tbody>
   </table>

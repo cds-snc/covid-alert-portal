@@ -25,10 +25,15 @@ main form {
       }
 
       &[disabled] {
-        color: $color-grey-dark;
+        color: $color-grey;
         background: $color-grey-footer;
         opacity: 1;
       }
     }
   }
+}
+
+main td form {
+  margin: 0;
+  display: inline;
 }

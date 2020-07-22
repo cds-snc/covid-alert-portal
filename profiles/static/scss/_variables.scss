@@ -1,8 +1,9 @@
 // colours (using 'color' because of CSS conventions)
 
-$color-blue-dark: #284162;
+$color-blue-dark: #284162; /* darker: 00243D */
 $color-blue-medium: #335075;
-$color-blue-button: #035b99;
+$color-blue-light: #b3cae5;
+$color-blue-button: #26374a;
 $color-blue-link: #0078fb;
 $color-yellow: #ffbf47;
 $color-white: #ffffff;
@@ -10,9 +11,12 @@ $color-black: #000000;
 $color-red: #af3c43;
 $color-red-light: #f3e9e8;
 $color-purple: #7834bc;
-$color-grey-light: #cbcbcb;
-$color-grey-dark: #6f777b;
-$color-grey-footer: #f4f4f4;
+$color-grey-light: #d0d7de;
+$color-grey: #6f777b;
+$color-grey-dark: #333333;
+$color-grey-footer: #eeeeee;
+$color-green-light: #b3dfc0;
+$color-green-dark: #003620;
 
 // spacing units
 
