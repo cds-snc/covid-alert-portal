@@ -90,7 +90,7 @@ class Login2FAView(LoginRequiredMixin, FormView):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_verified():
-            return redirect(reverse_lazy("code"))
+            return redirect(reverse_lazy("start"))
         return super().get(request, *args, **kwargs)
 
     def get_initial(self):
