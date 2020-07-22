@@ -206,7 +206,7 @@ LOGIN_URL = "login"
 OTP_LOGIN_URL = "login-2fa"
 LOGIN_REDIRECT_URL = "start"
 LOGOUT_REDIRECT_URL = "landing"
-API_AUTHORIZATION = os.getenv('API_AUTHORIZATION')
+API_AUTHORIZATION = os.getenv("API_AUTHORIZATION")
 API_ENDPOINT = os.getenv("API_ENDPOINT")
 
 # This environment variable is automatically set for Heroku Review apps

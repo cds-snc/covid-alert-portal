@@ -201,13 +201,14 @@ def code(request):
     if token:
         try:
             r = requests.post(
-                settings.API_ENDPOINT,
-                headers={"Authorization": f"Bearer {token}"}
+                settings.API_ENDPOINT, headers={"Authorization": f"Bearer {token}"}
             )
             r.raise_for_status()  # If we don't get a valid response, throw an exception
             diagnosis_code = r.text
         except requests.exceptions.HTTPError as err:
-            logging.exception(f"Received {r.status_code} with message {err.response.text}")
+            logging.exception(
+                f"Received {r.status_code} with message {err.response.text}"
+            )
         except requests.exceptions.RequestException as err:
             logging.exception(f"Something went wrong {err}")
 
