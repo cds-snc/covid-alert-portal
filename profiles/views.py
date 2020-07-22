@@ -184,7 +184,7 @@ class UserDeleteView(Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView):
 def code(request):
     token = os.getenv("API_AUTHORIZATION")
 
-    diagnosis_code = "0000 0000"
+    diagnosis_code = "000 000 0000"
 
     if token:
         try:
@@ -200,8 +200,10 @@ def code(request):
             sys.stderr.write("Something went wrong", err)
             sys.stderr.flush()
 
-    # Split up the code with a space in the middle so it looks like this: 1234 5678
-    diagnosis_code = diagnosis_code[0:4] + " " + diagnosis_code[4:8]
+    # Split up the code with a space in the middle so it looks like this: 123 456 789
+    diagnosis_code = (
+        f"{diagnosis_code[0:3]} {diagnosis_code[4:7]} {diagnosis_code[8:12]}"
+    )
     expiry = timezone.now() + timedelta(days=1)
 
     template_name = "key_instructions" if "/key-instructions" in request.path else "key"
