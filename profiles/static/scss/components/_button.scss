@@ -1,3 +1,28 @@
+%button-states {
+  &:focus {
+    outline: 0 !important;
+    border-color: $color-yellow;
+    color: $color-black;
+    background-color: $color-yellow !important;
+    -webkit-box-shadow: 0 2px 0 $color-black;
+    box-shadow: 0 2px 0 $color-black;
+  }
+
+  &:active {
+    top: 2px;
+    box-shadow: none !important;
+
+    &::before {
+      top: -4px;
+    }
+  }
+
+  &[disabled] {
+    opacity: 0.6;
+    cursor: progress;
+  }
+}
+
 %button-styles {
   font-size: 1em;
   font-weight: 400;
@@ -28,45 +53,48 @@
     background: transparent;
   }
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $color-blue-dark;
   }
 
-  &:active {
-    top: 2px;
-    box-shadow: none;
-
-    &::before {
-      top: -4px;
-    }
-  }
-
-  &[disabled] {
-    opacity: 0.6;
-    cursor: progress;
-  }
+  @extend %button-states;
 
   &.secondary {
-    color: black;
+    color: $color-black;
     background-color: $color-grey-light;
-    box-shadow: 0 2px 0 $color-grey-dark;
+    box-shadow: 0 2px 0 $color-grey;
 
-    &:hover,
-    &:focus {
+    &:hover {
       background-color: #b4b4b4;
     }
+
+    @extend %button-states;
   }
 }
 
 main {
-  form button {
+  form button:not(.link) {
     @extend %button-styles;
     font-family: "Noto Sans", sans-serif;
   }
 
+  form button.link {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: transparent;
+    text-decoration: underline;
+    -webkit-appearance: none;
+    cursor: pointer;
+  }
+
   a[role="button"] {
     @extend %button-styles;
+  }
+
+  a.danger {
+    color: $color-red;
+    margin-left: $space-md;
   }
 
   .content-button {

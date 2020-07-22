@@ -141,7 +141,7 @@ class Resend2FAView(LoginRequiredMixin, FormView):
         return is_valid
 
 
-class InviteView(Is2FAMixin, IsAdminMixin, FormView):
+class InvitationView(Is2FAMixin, IsAdminMixin, FormView):
     form_class = HealthcareInviteForm
     template_name = "invitations/templates/invite.html"
     success_url = reverse_lazy("invite_complete")
@@ -166,7 +166,23 @@ class InviteView(Is2FAMixin, IsAdminMixin, FormView):
         return super().form_valid(form)
 
 
-class InviteCompleteView(Is2FAMixin, IsAdminMixin, TemplateView):
+class InvitationListView(Is2FAMixin, IsAdminMixin, ListView):
+    template_name = "invitations/templates/invite_list.html"
+
+    def get_queryset(self):
+        return Invitation.objects.filter(
+            inviter__province=self.request.user.province, accepted=False
+        ).order_by("-sent")
+
+
+class InvitationDeleteView(Is2FAMixin, IsAdminMixin, DeleteView):
+    model = Invitation
+    context_object_name = "invitation"
+    success_url = reverse_lazy("invitation_list")
+    template_name = "invitations/templates/invitation_confirm_delete.html"
+
+
+class InvitationCompleteView(Is2FAMixin, IsAdminMixin, TemplateView):
     template_name = "invitations/templates/invite_complete.html"
 
 
