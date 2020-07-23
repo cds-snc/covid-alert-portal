@@ -131,8 +131,11 @@ class DjangoAdminPanelView(AdminUserTestCase):
         self.client.login(username=superuser.email, password="testpassword2")
 
         response = self.client.get(reverse("admin:index"))
+        self.assertEqual(response.status_code, 302)
+        self.login_2fa(superuser)
+        response = self.client.get(reverse("admin:index"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Django administration")
+        self.assertContains(response, "Django site admin")
 
     @override_settings(AXES_ENABLED=True)
     def test_user_lockout(self):
@@ -143,13 +146,13 @@ class DjangoAdminPanelView(AdminUserTestCase):
 
         for i in range(0, settings.AXES_FAILURE_LIMIT - 1):
             response = self.client.post(
-                reverse("admin:login"),
+                reverse("login"),
                 post_data,
                 REMOTE_ADDR="127.0.0.1",
                 HTTP_USER_AGENT="test-browser",
             )
             self.assertContains(
-                response, "Please enter the correct email address and password"
+                response, "Please enter a correct email address and password"
             )
 
         response = self.client.post(
