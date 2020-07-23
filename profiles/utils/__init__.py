@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.sites.models import Site
 from django.utils.translation import gettext as _
-from .models import HealthcareUser
+from profiles.models import HealthcareUser
 
 
 def generate_2fa_code(user: HealthcareUser):

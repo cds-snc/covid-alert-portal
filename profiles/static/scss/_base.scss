@@ -57,6 +57,20 @@ ul {
   @include sm {
     padding-left: $space-xl;
   }
+
+  li:not(:last-of-type) {
+    padding-bottom: $space-xxs;
+
+    @include sm {
+      padding-bottom: 0;
+    }
+  }
+
+  &.expanded {
+    li + li {
+      padding-top: $space-xs;
+    }
+  }
 }
 
 a,
@@ -105,14 +119,6 @@ main {
     @include xl {
       width: 70%;
     }
-  }
-}
-
-li:not(:last-of-type) {
-  padding-bottom: $space-xxs;
-
-  @include sm {
-    padding-bottom: 0;
   }
 }
 
