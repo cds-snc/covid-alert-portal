@@ -5,6 +5,7 @@ from datetime import timedelta
 
 from django.conf import settings
 from django.shortcuts import render, redirect
+from django.core.exceptions import ValidationError
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.translation import gettext as _
 from django.views.generic import (
@@ -102,13 +103,26 @@ class Login2FAView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         code = form.cleaned_data.get("code")
-        for device in self.request.user.notifysmsdevice_set.all():
+        devices = self.request.user.notifysmsdevice_set.all()
+        for device in devices:
             if device.verify_token(code):
                 self.request.user.otp_device = device
                 self.request.session[DEVICE_ID_SESSION_KEY] = device.persistent_id
 
-        is_valid = super().form_valid(form)
-        return is_valid
+        # Using the first device, since we don't care which it is, let's
+        # check if the user is being throttled
+        if devices[0]:
+            verified_allowed, _ = devices[0].verify_is_allowed()
+            if verified_allowed is False:
+                form.add_error("code", "Please try again later.")
+
+        if self.request.user.otp_device is None and form.has_error("code") is False:
+            form.add_error("code", _("That didn’t match the code that was sent."))
+
+        if form.has_error("code"):
+            return super().form_invalid(form)
+
+        return super().form_valid(form)
 
 
 class Resend2FAView(LoginRequiredMixin, FormView):
