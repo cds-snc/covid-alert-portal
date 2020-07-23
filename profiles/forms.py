@@ -12,7 +12,11 @@ from django.utils.translation import gettext_lazy as _
 from phonenumber_field.formfields import PhoneNumberField
 
 from invitations.models import Invitation
-from invitations.forms import InviteForm
+from invitations.forms import (
+    InviteForm,
+    InvitationAdminAddForm,
+    InvitationAdminChangeForm,
+)
 
 from .models import HealthcareUser, HealthcareProvince
 from .utils import generate_2fa_code
@@ -189,3 +193,26 @@ class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
         cleaned_data = super().clean()
         params = {"email": cleaned_data.get("email"), "inviter": user}
         return Invitation.create(**params)
+
+
+class HealthcareInvitationAdminAddForm(InvitationAdminAddForm):
+    def save(self, *args, **kwargs):
+        cleaned_data = super().clean()
+        email = cleaned_data.get("email")
+        params = {
+            "email": email,
+            "inviter": self.request.user,
+        }
+        instance = Invitation.create(**params)
+        instance.send_invitation(self.request)
+        super().save(*args, **kwargs)
+        return instance
+
+    class Meta:
+        fields = ("email",)
+
+
+class HealthcareInvitationAdminChangeForm(InvitationAdminChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["inviter"].disabled = True

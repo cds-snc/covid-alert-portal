@@ -224,6 +224,7 @@ OTP_NOTIFY_TOKEN_VALIDITY = 90
 # When DEBUG is on, we display the code directly in the form, no need to send it
 if DEBUG:
     OTP_NOTIFY_NO_DELIVERY = True
+
 API_AUTHORIZATION = os.getenv("API_AUTHORIZATION")
 API_ENDPOINT = os.getenv("API_ENDPOINT")
 
@@ -245,6 +246,8 @@ INVITATIONS_SIGNUP_REDIRECT = "/signup/"
 INVITATIONS_EMAIL_SUBJECT_PREFIX = ""
 INVITATIONS_INVITATION_ONLY = True
 INVITATIONS_INVITATION_EXPIRY = 1  # 1 day
+INVITATIONS_ADMIN_ADD_FORM = "profiles.forms.HealthcareInvitationAdminAddForm"
+INVITATIONS_ADMIN_CHANGE_FORM = "profiles.forms.HealthcareInvitationAdminChangeForm"
 
 # Email setup
 EMAIL_BACKEND = (
