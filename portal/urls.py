@@ -2,7 +2,12 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.http import HttpResponse
 from django.conf.urls.i18n import i18n_patterns
+from axes.admin import AccessLogAdmin
 
+def disable_delete_permissions(cls, request, obj=None):
+    return False
+
+AccessLogAdmin.has_delete_permission = disable_delete_permissions
 
 urlpatterns = [
     re_path(
