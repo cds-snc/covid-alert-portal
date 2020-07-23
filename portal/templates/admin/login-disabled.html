@@ -19,6 +19,7 @@
 
 {% block content %}
     <div id="content-main">
-        <p>Please use the <a href="{% url 'login' %}">main website to login</a>.</p>
+    {% url 'login' as login_url %}
+        <p>{% blocktrans %}Please use the <a href="{{ login_url }}">main website to log in</a>.{% endblocktrans %}</p>
     </div>
 {% endblock %}
