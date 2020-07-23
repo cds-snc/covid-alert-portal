@@ -5,10 +5,12 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.utils import translation, timezone
+from django.core.exceptions import ValidationError
 from django_otp import DEVICE_ID_SESSION_KEY
 from invitations.models import Invitation
 from .forms import SignupForm
 from .models import HealthcareProvince, HealthcareUser
+from .validators import BannedPasswordValidator
 
 
 User = get_user_model()
@@ -60,6 +62,21 @@ def get_other_credentials(
         "password": password,
         "phone_number": "+12125552368",
     }
+
+
+class BannedPasswordValidatorTestCase(TestCase):
+    def setUp(self, is_admin=False):
+        self.validator = BannedPasswordValidator()
+
+    def test_bad_12_character_passwords(self):
+        for password in ["qwertyqwerty", "111111111111", "abcdefghijkl"]:
+            with self.assertRaises(ValidationError):
+                self.validator.validate(password)
+
+    def test_bad_covid_passwords(self):
+        for password in ["covidpassword", "PORTALpassword", "passwordViRuS"]:
+            with self.assertRaises(ValidationError):
+                self.validator.validate(password)
 
 
 class AdminUserTestCase(TestCase):
