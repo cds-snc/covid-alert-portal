@@ -15,7 +15,6 @@ from django.views.generic import (
 )
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
 from django_otp import DEVICE_ID_SESSION_KEY
 from django_otp.decorators import otp_required
@@ -82,17 +81,6 @@ class SignUpView(FormView):
     def form_valid(self, form):
         form.save()
         messages.success(self.request, _("Account created successfully"))
-        # Let's login the user right now
-        user = authenticate(
-            request=self.request,
-            username=form.cleaned_data.get("email"),
-            password=form.cleaned_data.get("password1"),
-        )
-        login(self.request, user)
-        email_device = user.emaildevice_set.create()
-        self.request.session[DEVICE_ID_SESSION_KEY] = email_device.persistent_id
-        self.request.session.save()
-
         return super(SignUpView, self).form_valid(form)
 
 
@@ -103,25 +91,45 @@ class Login2FAView(LoginRequiredMixin, FormView):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_verified():
-            return redirect(reverse_lazy("code"))
+            return redirect(reverse_lazy("start"))
         return super().get(request, *args, **kwargs)
 
     def get_initial(self):
         initial = super().get_initial()
         if settings.DEBUG:
-            email_device = self.request.user.emaildevice_set.last()
-            initial["code"] = email_device.token
+            sms_device = self.request.user.notifysmsdevice_set.last()
+            initial["code"] = sms_device.token
         return initial
 
     def form_valid(self, form):
         code = form.cleaned_data.get("code")
-        for device in self.request.user.emaildevice_set.all():
+        devices = self.request.user.notifysmsdevice_set.all()
+        being_throttled = False
+        for device in devices:
+            # let's check if the user is being throttled
+            verified_allowed, errors_details = device.verify_is_allowed()
+            if verified_allowed is False:
+                being_throttled = True
+
+            # Even though we know the device is being throttled, we still need to test it
+            # If not, the throttling will never get increased for this device
             if device.verify_token(code):
                 self.request.user.otp_device = device
                 self.request.session[DEVICE_ID_SESSION_KEY] = device.persistent_id
 
-        is_valid = super().form_valid(form)
-        return is_valid
+        if self.request.user.otp_device is None:
+            # Just in case one of the device is throttled but another one
+            # was verified
+            if being_throttled:
+                form.add_error("code", _("Please try again later."))
+
+            if form.has_error("code") is False:
+                form.add_error("code", _("That didn’t match the code that was sent."))
+
+        if form.has_error("code"):
+            return super().form_invalid(form)
+
+        return super().form_valid(form)
 
 
 class Resend2FAView(LoginRequiredMixin, FormView):

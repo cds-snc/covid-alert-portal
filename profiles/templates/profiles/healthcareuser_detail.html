@@ -32,6 +32,10 @@
           <th scope="row">{% trans "Province" %}</td>
           <td scope="col">{{ healthcareuser.province.name }}</td>
         </tr>
+        <tr>
+            <th scope="row">{% trans "Phone number" %}</td>
+            <td scope="col">{{ healthcareuser.phone_number.as_e164 }}</td>
+        </tr>
       </tbody>
     </table>
 

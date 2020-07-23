@@ -74,8 +74,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.admin",  # we want our auth templates loaded first
+    "phonenumber_field",
     "django_otp",
-    "django_otp.plugins.otp_email",
+    "otp_notify",
 ]
 
 MIDDLEWARE = [
@@ -207,6 +208,15 @@ LOGIN_URL = "login"
 OTP_LOGIN_URL = "login-2fa"
 LOGIN_REDIRECT_URL = "start"
 LOGOUT_REDIRECT_URL = "landing"
+OTP_NOTIFY_ENDPOINT = (
+    os.getenv("OTP_NOTIFY_ENDPOINT") or "https://api.notification.alpha.canada.ca"
+)
+OTP_NOTIFY_API_KEY = os.getenv("OTP_NOTIFY_API_KEY")
+OTP_NOTIFY_TEMPLATE_ID = os.getenv("OTP_NOTIFY_TEMPLATE_ID")
+OTP_NOTIFY_TOKEN_VALIDITY = 90
+# When DEBUG is on, we display the code directly in the form, no need to send it
+if DEBUG:
+    OTP_NOTIFY_NO_DELIVERY = True
 API_AUTHORIZATION = os.getenv("API_AUTHORIZATION")
 API_ENDPOINT = os.getenv("API_ENDPOINT")
 
@@ -240,7 +250,6 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 email_use_tls = os.getenv("EMAIL_USE_TLS", "True")
 EMAIL_USE_TLS = True if email_use_tls == "True" else False
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
-OTP_EMAIL_SUBJECT = "Your login code"
 
 # Create default Super User with this password
 SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
@@ -252,6 +261,7 @@ if TESTING:
     AXES_LOGGER = "axes.watch_login"
     logger = getLogger(AXES_LOGGER)
     logger.setLevel(CRITICAL)
+    OTP_NOTIFY_NO_DELIVERY = True
 
 AXES_FAILURE_LIMIT = 5  # Lockout after 5 failed login attempts
 AXES_COOLOFF_MESSAGE = _(
