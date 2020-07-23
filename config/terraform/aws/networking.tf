@@ -225,8 +225,8 @@ resource "aws_security_group_rule" "covidportal_egress_s3_privatelink" {
 resource "aws_security_group_rule" "covidportal_egress_database" {
   description              = "Security group rule for Portal DB egress through privatelink"
   type                     = "egress"
-  from_port                = 5432
-  to_port                  = 5432
+  from_port                = 587
+  to_port                  = 587
   protocol                 = "tcp"
   security_group_id        = aws_security_group.covidportal.id
   cidr_blocks = ["0.0.0.0/0"] 
@@ -235,8 +235,8 @@ resource "aws_security_group_rule" "covidportal_egress_database" {
 resource "aws_security_group_rule" "covidportal_egress_email" {
   description              = "Security group rule for Portal egress through privatelink"
   type                     = "egress"
-  from_port                = 587
-  to_port                  = 587
+  from_port                = 5432
+  to_port                  = 5432
   protocol                 = "tcp"
   security_group_id        = aws_security_group.covidportal.id
   source_security_group_id = aws_security_group.covidportal_database.id

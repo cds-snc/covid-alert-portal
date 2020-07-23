@@ -19,6 +19,14 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           checkName: test (3.8)
           ref: ${{ github.sha }}
+          
+      - name: Wait for Terraform Security Tests
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-terraform-sec-test
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: terraform-security-scan
+          ref: ${{ github.sha }}
 
       - name: Checkout
         uses: actions/checkout@v2
