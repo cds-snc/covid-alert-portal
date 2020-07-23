@@ -222,6 +222,10 @@ def code(request):
             # Make sure the code has a length of 10, cheap sanity check
             if len(r.text.strip()) == 10:
                 diagnosis_code = r.text
+            else:
+                logger.error(
+                    f"The key API returned a key with the wrong format : {r.text}"
+                )
         except requests.exceptions.HTTPError as err:
             logging.exception(
                 f"Received {r.status_code} with message {err.response.text}"
