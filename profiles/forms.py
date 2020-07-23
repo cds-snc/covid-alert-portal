@@ -10,6 +10,8 @@ from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
 
+from phonenumber_field.formfields import PhoneNumberField
+
 from invitations.models import Invitation
 from invitations.forms import (
     InviteForm,
@@ -107,9 +109,28 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
 
     name = forms.CharField(label=_("Full name"), validators=[MaxLengthValidator(200)])
 
+    phone_number = PhoneNumberField(
+        help_text=_(
+            "A single use code will be sent to this phone number every time you try to log in. Include a +1 before your number."
+        ),
+    )
+    phone_number_confirmation = PhoneNumberField(
+        help_text=_("Enter the same phone number as before, for verification"),
+    )
+
+    field_order = [
+        "email",
+        "province",
+        "name",
+        "phone_number",
+        "phone_number_confirmation",
+        "password1",
+        "password2",
+    ]
+
     class Meta:
         model = HealthcareUser
-        fields = ("email", "province", "name")
+        fields = ("email", "province", "name", "phone_number")
 
     def clean_province(self):
         # returns a province abbreviation as a string
@@ -127,10 +148,24 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
 
         return email
 
+    def clean_phone_number_confirmation(self):
+        phone_number = self.cleaned_data.get("phone_number")
+        phone_number_confirmation = self.cleaned_data.get("phone_number_confirmation")
+        if (
+            phone_number
+            and phone_number_confirmation
+            and phone_number != phone_number_confirmation
+        ):
+            raise forms.ValidationError(
+                _("The phone number fields don‘t match."), code="invalid",
+            )
+        return phone_number_confirmation
+
 
 class HealthcareUserEditForm(UserChangeForm):
     password = None
     email = forms.EmailField(widget=forms.EmailInput, disabled=True)
+    phone_number = PhoneNumberField()
 
     class Meta:
         model = HealthcareUser

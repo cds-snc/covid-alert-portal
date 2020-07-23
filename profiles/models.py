@@ -1,6 +1,7 @@
 from uuid import uuid4
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class HealthcareProvince(models.Model):
@@ -17,7 +18,7 @@ class HealthcareProvince(models.Model):
 
 class HealthcareUserManager(BaseUserManager):
     def create_user(
-        self, email, name, province, is_admin=False, is_superuser=False, password=None
+        self, email, password=None, is_admin=False, is_superuser=False, **kwargs
     ):
         """
         Creates and saves a User with the given email and password
@@ -31,23 +32,27 @@ class HealthcareUserManager(BaseUserManager):
 
         user = self.model(
             email=self.normalize_email(email),
-            name=name,
-            province=province,
             is_admin=is_admin,
             is_superuser=is_superuser,
+            **kwargs,
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, name, password):
+    def create_superuser(self, email, name, password, **kwargs):
         """
         Creates and saves a superuser with the given email, name and password.
         """
         ontario = HealthcareProvince.objects.get(abbr="ON")
         user = self.create_user(
-            email, name=name, province=ontario, password=password, is_superuser=True
+            email,
+            name=name,
+            province=ontario,
+            password=password,
+            is_superuser=True,
+            **kwargs,
         )
         user.save(using=self._db)
         return user
@@ -60,7 +65,7 @@ class HealthcareUser(AbstractBaseUser):
     )
     name = models.CharField(max_length=200)
     province = models.ForeignKey(HealthcareProvince, on_delete=models.PROTECT)
-
+    phone_number = PhoneNumberField()
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
@@ -68,7 +73,7 @@ class HealthcareUser(AbstractBaseUser):
     objects = HealthcareUserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["name"]
+    REQUIRED_FIELDS = ["name", "phone_number"]
 
     def __str__(self):
         return self.email
