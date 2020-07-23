@@ -18,13 +18,7 @@ class HealthcareProvince(models.Model):
 
 class HealthcareUserManager(BaseUserManager):
     def create_user(
-        self,
-        email,
-        password=None,
-        is_admin=False,
-        is_superuser=False,
-        **kwargs
-        # self, email, password = None, name, province, is_admin = False, is_superuser = False, password = None, phone_number = None
+        self, email, password=None, is_admin=False, is_superuser=False, **kwargs
     ):
         """
         Creates and saves a User with the given email and password
