@@ -1,6 +1,5 @@
 import requests
-import os
-import sys
+import logging
 from datetime import timedelta
 
 from django.conf import settings
@@ -41,6 +40,8 @@ from .forms import (
     Resend2FACodeForm,
 )
 from .utils import get_site_name
+
+logger = logging.getLogger(__name__)
 
 
 class SignUpView(FormView):
@@ -210,28 +211,33 @@ class UserDeleteView(Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView):
 @login_required
 @otp_required
 def code(request):
-    token = os.getenv("API_AUTHORIZATION")
-
-    diagnosis_code = "000 000 0000"
-
+    token = settings.API_AUTHORIZATION
+    diagnosis_code = "0000000000"
     if token:
         try:
             r = requests.post(
-                os.getenv("API_ENDPOINT"), headers={"Authorization": "Bearer " + token}
+                settings.API_ENDPOINT, headers={"Authorization": f"Bearer {token}"}
             )
             r.raise_for_status()  # If we don't get a valid response, throw an exception
-            diagnosis_code = r.text
+            # Make sure the code has a length of 10, cheap sanity check
+            if len(r.text.strip()) == 10:
+                diagnosis_code = r.text
+            else:
+                logger.error(
+                    f"The key API returned a key with the wrong format : {r.text}"
+                )
         except requests.exceptions.HTTPError as err:
-            sys.stderr.write("Received " + str(r.status_code) + " " + err.response.text)
-            sys.stderr.flush()
+            logging.exception(
+                f"Received {r.status_code} with message {err.response.text}"
+            )
         except requests.exceptions.RequestException as err:
-            sys.stderr.write("Something went wrong", err)
-            sys.stderr.flush()
+            logging.exception(f"Something went wrong {err}")
 
     # Split up the code with a space in the middle so it looks like this: 123 456 789
     diagnosis_code = (
-        f"{diagnosis_code[0:3]} {diagnosis_code[4:7]} {diagnosis_code[8:12]}"
+        f"{diagnosis_code[0:3]} {diagnosis_code[3:6]} {diagnosis_code[6:10]}"
     )
+
     expiry = timezone.now() + timedelta(days=1)
 
     template_name = "key_instructions" if "/key-instructions" in request.path else "key"
