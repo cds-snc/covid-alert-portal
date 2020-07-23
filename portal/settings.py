@@ -19,6 +19,7 @@ from dotenv import load_dotenv
 from datetime import timedelta
 from logging import getLogger, CRITICAL
 from django.utils.translation import gettext_lazy as _
+from socket import gethostname, gethostbyname
 
 load_dotenv()
 
@@ -48,6 +49,8 @@ ALLOWED_HOSTS = [
     "0.0.0.0",
     "127.0.0.1",
     "localhost",
+    gethostname(),
+    gethostbyname(gethostname()),
 ]
 
 if os.getenv("DJANGO_ALLOWED_HOSTS"):
