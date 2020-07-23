@@ -101,7 +101,7 @@ ROOT_URLCONF = "portal.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "portal", "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -150,6 +150,11 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
         "OPTIONS": {"min_length": 12},
     },
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "OPTIONS": {"user_attributes": ["name", "username"]},
+    },
+    {"NAME": "profiles.validators.BannedPasswordValidator"},
 ]
 
 

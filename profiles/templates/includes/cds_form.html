@@ -14,10 +14,10 @@
       <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
           {{ field.label_tag }}
           {% if field.errors %}
-            <span class="error--{{ field.html_name }}">{{ field.errors|first }}</span>
+            <div class="error--{{ field.html_name }}">{{ field.errors|first }}</div>
           {% endif %}
           {% if field.help_text %}
-            <span class="help--{{ field.html_name }}">{{ field.help_text }}</span>
+            <div class="help--{{ field.html_name }}">{{ field.help_text }}</div>
           {% endif %}
           {{ field }}
       </div>
