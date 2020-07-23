@@ -11,7 +11,11 @@ from django.core.validators import EmailValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
 
 from invitations.models import Invitation
-from invitations.forms import InviteForm, InvitationAdminAddForm, InvitationAdminChangeForm
+from invitations.forms import (
+    InviteForm,
+    InvitationAdminAddForm,
+    InvitationAdminChangeForm,
+)
 
 from .models import HealthcareUser, HealthcareProvince
 from .utils import generate_2fa_code
@@ -162,8 +166,8 @@ class HealthcareInvitationAdminAddForm(InvitationAdminAddForm):
         cleaned_data = super().clean()
         email = cleaned_data.get("email")
         params = {
-            'email': email,
-            'inviter': self.request.user,
+            "email": email,
+            "inviter": self.request.user,
         }
         instance = Invitation.create(**params)
         instance.send_invitation(self.request)
@@ -171,10 +175,10 @@ class HealthcareInvitationAdminAddForm(InvitationAdminAddForm):
         return instance
 
     class Meta:
-        fields = ('email',)
+        fields = ("email",)
 
 
 class HealthcareInvitationAdminChangeForm(InvitationAdminChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['inviter'].disabled = True
+        self.fields["inviter"].disabled = True
