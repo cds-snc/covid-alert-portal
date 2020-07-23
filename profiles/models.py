@@ -73,7 +73,7 @@ class HealthcareUser(AbstractBaseUser):
     objects = HealthcareUserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["name"]
+    REQUIRED_FIELDS = ["name", "phone_number"]
 
     def __str__(self):
         return self.email
