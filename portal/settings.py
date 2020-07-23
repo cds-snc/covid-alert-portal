@@ -83,6 +83,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -216,6 +217,16 @@ OTP_NOTIFY_TOKEN_VALIDITY = 90
 # When DEBUG is on, we display the code directly in the form, no need to send it
 if DEBUG:
     OTP_NOTIFY_NO_DELIVERY = True
+API_AUTHORIZATION = os.getenv("API_AUTHORIZATION")
+API_ENDPOINT = os.getenv("API_ENDPOINT")
+
+CORS_ALLOW_CREDENTIALS = False
+CORS_ORIGIN_WHITELIST = []
+CORS_ALLOW_METHODS = [
+    "GET",
+    "OPTIONS",
+    "POST",
+]
 
 # This environment variable is automatically set for Heroku Review apps
 HEROKU_APP_NAME = os.getenv("HEROKU_APP_NAME") or False
