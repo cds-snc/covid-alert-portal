@@ -135,7 +135,7 @@ class DjangoAdminPanelView(AdminUserTestCase):
         self.login_2fa(superuser)
         response = self.client.get(reverse("admin:index"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Django site admin")
+        self.assertContains(response, "administration")
 
     @override_settings(AXES_ENABLED=True)
     def test_user_lockout(self):
