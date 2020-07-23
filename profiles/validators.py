@@ -1,6 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
-from .passwords._banned_passwords import banned_passwords, banned_partial_passwords
+from .utils._banned_passwords import banned_passwords, banned_partial_passwords
 
 
 class BannedPasswordValidator(object):
