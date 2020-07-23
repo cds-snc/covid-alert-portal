@@ -76,6 +76,7 @@ INSTALLED_APPS = [
     "django.contrib.admin",  # we want our auth templates loaded first
     "django_otp",
     "django_otp.plugins.otp_email",
+    "easyaudit",
 ]
 
 MIDDLEWARE = [
@@ -91,6 +92,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "axes.middleware.AxesMiddleware",
     "csp.middleware.CSPMiddleware",
+    "easyaudit.middleware.easyaudit.EasyAuditMiddleware",
 ]
 
 ROOT_URLCONF = "portal.urls"
