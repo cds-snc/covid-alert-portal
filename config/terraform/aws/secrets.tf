@@ -99,7 +99,7 @@ resource "aws_secretsmanager_secret" "env_email_port"{
 
 resource "aws_secretsmanager_secret_version" "env_email_port"{
   secret_id = aws_secretsmanager_secret.env_email_port.id 
-  secret_string = var.ecs_task_env_email_port
+  secret_string = var.ecs_task_env_email_port #tfsec:ignore:GEN003
 }
 
 resource "aws_secretsmanager_secret" "env_email_use_tls"{
@@ -109,7 +109,7 @@ resource "aws_secretsmanager_secret" "env_email_use_tls"{
 
 resource "aws_secretsmanager_secret_version" "env_email_use_tls"{
   secret_id = aws_secretsmanager_secret.env_email_use_tls.id 
-  secret_string = var.ecs_task_env_email_use_tls
+  secret_string = var.ecs_task_env_email_use_tls #tfsec:ignore:GEN003
 }
 
 resource "aws_secretsmanager_secret" "env_new_relic_license_key"{

@@ -31,9 +31,6 @@ COPY . /code/
 ARG APP_USER=django
 RUN groupadd -r ${APP_USER} && useradd --no-log-init -M -d /code -u 1000 -g ${APP_USER} ${APP_USER}
 
-# Ensure app user has access to /code directory
-RUN chown -R ${APP_USER}:${APP_USER} /code/
-
 EXPOSE 8000
 
 CMD ./entrypoint.sh
