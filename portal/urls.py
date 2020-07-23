@@ -12,6 +12,7 @@ admin.site.site_header = (
 )
 admin.site.site_title = admin.site.site_header
 
+
 def disable_delete_permissions(cls, request, obj=None):
     return False
 
