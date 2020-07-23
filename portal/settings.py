@@ -146,6 +146,7 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
         "OPTIONS": {"min_length": 12},
     },
+    {"NAME": "pwned_passwords_django.validators.PwnedPasswordsValidator"},
 ]
 
 

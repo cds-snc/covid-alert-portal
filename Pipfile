@@ -28,6 +28,7 @@ newrelic = "*"
 django-axes = "*"
 uwsgi = "*"
 django-csp = "*"
+pwned-passwords-django = "*"
 
 [pipenv]
 allow_prereleases = true
