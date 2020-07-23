@@ -104,20 +104,27 @@ class Login2FAView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         code = form.cleaned_data.get("code")
         devices = self.request.user.notifysmsdevice_set.all()
+        being_throttled = False
         for device in devices:
+            # let's check if the user is being throttled
+            verified_allowed, errors_details = device.verify_is_allowed()
+            if verified_allowed is False:
+                being_throttled = True
+
+            # Even though we know the device is being throttled, we still need to test it
+            # If not, the throttling will never get increased for this device
             if device.verify_token(code):
                 self.request.user.otp_device = device
                 self.request.session[DEVICE_ID_SESSION_KEY] = device.persistent_id
 
-        # Using the first device, since we don't care which it is, let's
-        # check if the user is being throttled
-        if devices[0]:
-            verified_allowed, _ = devices[0].verify_is_allowed()
-            if verified_allowed is False:
-                form.add_error("code", "Please try again later.")
+        if self.request.user.otp_device is None:
+            # Just in case one of the device is throttled but another one
+            # was verified
+            if being_throttled:
+                form.add_error("code", _("Please try again later."))
 
-        if self.request.user.otp_device is None and form.has_error("code") is False:
-            form.add_error("code", _("That didn’t match the code that was sent."))
+            if form.has_error("code") is False:
+                form.add_error("code", _("That didn’t match the code that was sent."))
 
         if form.has_error("code"):
             return super().form_invalid(form)
