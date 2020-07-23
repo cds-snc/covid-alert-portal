@@ -228,6 +228,8 @@ INVITATIONS_SIGNUP_REDIRECT = "/signup/"
 INVITATIONS_EMAIL_SUBJECT_PREFIX = ""
 INVITATIONS_INVITATION_ONLY = True
 INVITATIONS_INVITATION_EXPIRY = 1  # 1 day
+INVITATIONS_ADMIN_ADD_FORM = "profiles.forms.HealthcareInvitationAdminAddForm"
+INVITATIONS_ADMIN_CHANGE_FORM = "profiles.forms.HealthcareInvitationAdminChangeForm"
 
 # Email setup
 EMAIL_BACKEND = (
