@@ -32,6 +32,7 @@ def get_credentials(
         "province": province or get_province(),
         "is_admin": is_admin,
         "password": password,
+        "phone_number": "+12125552368",
     }
 
 
@@ -48,6 +49,7 @@ def get_other_credentials(
             "email": email,
             "name": name,
             "password": password,
+            "phone_number": "+12125552368",
         }
 
     return {
@@ -56,6 +58,7 @@ def get_other_credentials(
         "province": province or get_province(),
         "is_admin": is_admin,
         "password": password,
+        "phone_number": "+12125552368",
     }
 
 
@@ -72,7 +75,8 @@ class AdminUserTestCase(TestCase):
         if user is None:
             user = self.user
 
-        device = user.emaildevice_set.create()
+        # We actually don't care which device, we just need one
+        device = user.notifysmsdevice_set.first()
         session = self.client.session
         session[DEVICE_ID_SESSION_KEY] = device.persistent_id
         session.save()

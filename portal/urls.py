@@ -3,6 +3,7 @@ from django.urls import path, include, re_path
 from django.http import HttpResponse
 from django.conf.urls.i18n import i18n_patterns
 
+
 urlpatterns = [
     re_path(
         r"^robots.txt",
