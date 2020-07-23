@@ -98,7 +98,7 @@ ROOT_URLCONF = "portal.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "portal", "templates"),],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -213,6 +213,8 @@ OTP_NOTIFY_ENDPOINT = (
 OTP_NOTIFY_API_KEY = os.getenv("OTP_NOTIFY_API_KEY")
 OTP_NOTIFY_TEMPLATE_ID = os.getenv("OTP_NOTIFY_TEMPLATE_ID")
 OTP_NOTIFY_TOKEN_VALIDITY = 90
+if DEBUG:
+    OTP_NOTIFY_NO_DELIVERY = True
 
 # This environment variable is automatically set for Heroku Review apps
 HEROKU_APP_NAME = os.getenv("HEROKU_APP_NAME") or False
