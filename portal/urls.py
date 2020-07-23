@@ -6,7 +6,9 @@ from django.conf.urls.i18n import i18n_patterns
 from .admin import Admin2FASite
 
 admin.site.__class__ = Admin2FASite
-admin.site.site_header = "COVID Health Portal administration | Administration du Portail Alerte COVID"
+admin.site.site_header = (
+    "COVID Health Portal administration | Administration du Portail Alerte COVID"
+)
 admin.site.site_title = admin.site.site_header
 
 urlpatterns = [
