@@ -32,6 +32,7 @@ phonenumbers = "*"
 django-phonenumber-field = "*"
 django-otp-notify = "*"
 django-cors-headers = "*"
+django-easy-audit = {git = "https://github.com/soynatan/django-easy-audit.git", ref="master"}
 
 [pipenv]
 allow_prereleases = true

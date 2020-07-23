@@ -77,6 +77,7 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "django_otp",
     "otp_notify",
+    "easyaudit",
 ]
 
 MIDDLEWARE = [
@@ -92,6 +93,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "axes.middleware.AxesMiddleware",
     "csp.middleware.CSPMiddleware",
+    "easyaudit.middleware.easyaudit.EasyAuditMiddleware",
 ]
 
 ROOT_URLCONF = "portal.urls"
