@@ -5,7 +5,6 @@ from django.contrib.auth.forms import (
     UserCreationForm,
 )
 from django import forms
-from django.contrib import admin
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
@@ -206,7 +205,7 @@ class HealthcareInvitationAdminAddForm(InvitationAdminAddForm):
         }
         instance = Invitation.create(**params)
         instance.send_invitation(self.request)
-        super(InvitationAdminAddForm, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
         return instance
 
     class Meta:
