@@ -101,7 +101,7 @@ ROOT_URLCONF = "portal.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "portal", "templates"),],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -219,6 +219,7 @@ OTP_NOTIFY_TOKEN_VALIDITY = 90
 # When DEBUG is on, we display the code directly in the form, no need to send it
 if DEBUG:
     OTP_NOTIFY_NO_DELIVERY = True
+
 API_AUTHORIZATION = os.getenv("API_AUTHORIZATION")
 API_ENDPOINT = os.getenv("API_ENDPOINT")
 
