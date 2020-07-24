@@ -26,6 +26,10 @@ output "security_group_load_balancer" {
   value = aws_security_group.covidportal_load_balancer
 }
 
+output "security_group_egress" {
+  value = aws_security_group.covidportal_egress
+}
+
 output "aws_db_subnet_group" {
   value = aws_db_subnet_group.covidportal
 }

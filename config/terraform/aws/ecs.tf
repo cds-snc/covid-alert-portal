@@ -100,6 +100,7 @@ resource "aws_ecs_service" "covidportal" {
     subnets          = aws_subnet.covidportal_private.*.id
     security_groups = [
       aws_security_group.covidportal.id,
+      aws_security_group.covidportal_egress.id
     ]
   }
 

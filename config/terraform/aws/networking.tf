@@ -152,6 +152,37 @@ data "aws_subnet_ids" "ecr_endpoint_available" {
 }
 
 ###
+# AWS NAT GW
+###
+
+resource "aws_eip" "covidportal_natgw" {
+  count      = 3
+  depends_on = [aws_internet_gateway.covidportal]
+
+  vpc = true
+
+  tags = {
+    Name                  = "${var.vpc_name} NAT GW ${count.index}"
+    (var.billing_tag_key) = var.billing_tag_value
+  }
+}
+
+resource "aws_nat_gateway" "covidportal" {
+  count      = 3
+  depends_on = [aws_internet_gateway.covidportal]
+
+  allocation_id = aws_eip.covidportal_natgw.*.id[count.index]
+  subnet_id     = aws_subnet.covidportal_public.*.id[count.index]
+
+  tags = {
+    Name                  = "${var.vpc_name} NAT GW"
+    (var.billing_tag_key) = var.billing_tag_value
+  }
+}
+
+
+
+###
 # AWS Routes
 ###
 
@@ -174,6 +205,29 @@ resource "aws_route_table_association" "covidportal" {
 
   subnet_id      = aws_subnet.covidportal_public.*.id[count.index]
   route_table_id = aws_route_table.covidportal_public_subnet.id
+}
+
+resource "aws_route_table" "covidportal_private_subnet" {
+  count = 3
+
+  vpc_id = aws_vpc.covidportal.id
+
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.covidportal.*.id[count.index]
+  }
+
+  tags = {
+    Name                  = "Private Subnet Route Table ${count.index}"
+    (var.billing_tag_key) = var.billing_tag_value
+  }
+}
+
+resource "aws_route_table_association" "covidportal_private_route" {
+  count = 3
+
+  subnet_id      = aws_subnet.covidportal_private.*.id[count.index]
+  route_table_id = aws_route_table.covidportal_private_subnet.*.id[count.index]
 }
 
 ###
@@ -220,16 +274,6 @@ resource "aws_security_group_rule" "covidportal_egress_s3_privatelink" {
   prefix_list_ids = [
     aws_vpc_endpoint.s3.prefix_list_id
   ]
-}
-
-resource "aws_security_group_rule" "covidportal_egress_email" {
-  description              = "Security group rule for Portal email egress through privatelink"
-  type                     = "egress"
-  from_port                = 587
-  to_port                  = 587
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.covidportal.id
-  cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:AWS007
 }
 
 resource "aws_security_group_rule" "covidportal_egress_database" {
@@ -290,6 +334,36 @@ resource "aws_security_group" "covidportal_database" {
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
   }
+}
+
+resource "aws_security_group" "covidportal_egress" {
+  name        = "egress-anywhere"
+  description = "Egress - CovidShield External Services"
+  vpc_id      = aws_vpc.covidportal.id
+
+  tags = {
+    (var.billing_tag_key) = var.billing_tag_value
+  }
+}
+
+resource "aws_security_group_rule" "covidportal_egress_email" {
+  description              = "Security group rule for Portal email egress through privatelink"
+  type                     = "egress"
+  from_port                = 587
+  to_port                  = 587
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.covidportal_egress.id
+  cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:AWS007
+}
+
+resource "aws_security_group_rule" "covidportal_egress_new_relic" {
+  description              = "Security group rule for Portal New RElic egress through privatelink"
+  type                     = "egress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.covidportal_egress.id
+  cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:AWS007
 }
 
 resource "aws_security_group" "privatelink" {
