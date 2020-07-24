@@ -21,10 +21,11 @@ ecs_name        = "covid-portal"
 metric_provider = "stdout"
 tracer_provider = "stdout"
 django_env = "production"
-django_allowed_hosts = ".covid-portal.cdssandbox.xyz, covid-alert-portal.alpha.canada.ca, portail-alerte-covid.alpha.canada.ca"
+django_allowed_hosts = ".cdssandbox.xyz, covid-alert-portal.alpha.canada.ca, portail-alerte-covid.alpha.canada.ca"
 email_backend = "'django.core.mail.backends.smtp.EmailBackend'"
 ecs_covid_portal_name = "covid-portal"
 new_relic_app_name = "Terraform-Covid-Portal"
+
 
 #Autoscaling ECS
 
@@ -56,4 +57,4 @@ rds_server_instance_class    = "db.t3.medium"
 # AWS Route 53 - route53.tf
 ###
 # Value should come from a TF_VAR environment variable (e.g. set in a Github Secret)
-route53_zone_name = "covid-portal.cdssandbox.xyz"
+route53_zone_name = "terraform.covid-hcportal.cdssandbox.xyz"
