@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-23 17:55+0000\n"
+"POT-Creation-Date: 2020-07-24 17:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,103 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: portal/settings.py:270
+#: covid_key/templates/covid_key/key.html:4
+#: covid_key/templates/covid_key/key.html:7
+#: covid_key/templates/covid_key/key_instructions.html:6
+#: covid_key/templates/covid_key/key_instructions.html:9
+msgid "Give patient this key"
+msgstr "Donnez la clé suivante au patient"
+
+#: covid_key/templates/covid_key/key.html:13
+msgid "Tell patient to:"
+msgstr "Dites au patient de :"
+
+#: covid_key/templates/covid_key/key.html:15
+msgid "Keep the number somewhere safe"
+msgstr "Garder le numéro dans un endroit sûr"
+
+#: covid_key/templates/covid_key/key.html:16
+msgid "Enter the number within <strong>24 hours</strong> or it will expire"
+msgstr ""
+"Utiliser le numéro au cours des <strong>24 prochaines heures</strong>, sinon "
+"il sera expiré"
+
+#: covid_key/templates/covid_key/key.html:17
+msgid "Contact your office if they lose the number or it doesn’t work"
+msgstr ""
+"Communiquer avec votre bureau s’il perd le numéro ou si le numéro ne "
+"fonctionne pas"
+
+#: covid_key/templates/covid_key/key.html:18
+msgid ""
+"Use the app to anonymously notify people by tapping “Diagnosed with "
+"COVID-19? Enter number”. The app will guide the patient through the steps to "
+"enter the number."
+msgstr ""
+"Utiliser l’application mobile pour aviser de façon anonyme les autres "
+"personnes en appuyant sur « Vous avez la COVID-19? Entrer le numéro ». "
+"L’application guidera le patient pour qu’il entre son numéro."
+
+#: covid_key/templates/covid_key/key.html:22
+#: covid_key/templates/covid_key/key_instructions.html:56
+msgid "Next patient"
+msgstr "Prochain patient"
+
+#: covid_key/templates/covid_key/key.html:23
+msgid "Detailed instructions"
+msgstr "Instructions détaillées"
+
+#: covid_key/templates/covid_key/key_instructions.html:15
+msgid "Instructions for patient"
+msgstr "Instructions pour le patient"
+
+#: covid_key/templates/covid_key/key_instructions.html:19
+msgid "Tap ‘Enter your one-time key’."
+msgstr "Appuyez sur « Entrer votre clé »."
+
+#: covid_key/templates/covid_key/key_instructions.html:25
+msgid "Tap “Next” on “Let people know they may have been exposed”."
+msgstr ""
+"Appuyez sur « Suivant » dans l’écran « Aviser les autres personnes d’une "
+"exposition potentielle »."
+
+#: covid_key/templates/covid_key/key_instructions.html:31
+msgid "Enter the key and tap “Submit”"
+msgstr "Entrez la clé et appuyez sur « Envoyer »."
+
+#: covid_key/templates/covid_key/key_instructions.html:37
+msgid ""
+"If you want to notify people, you need to give COVID Alert permission to "
+"upload random codes. Tap “Agree” on “Now you can upload codes”."
+msgstr ""
+"Si vous voulez aviser les autres personnes, vous devez autoriser Alerte "
+"COVID à téléverser vos codes aléatoires. Appuyez sur « Accepter » dans "
+"l’écran « Vous pouvez maintenant téléverser vos codes »."
+
+#: covid_key/templates/covid_key/key_instructions.html:43
+msgid ""
+"Tap “Share” on “Share your random codes from this device with COVID Alert?”."
+msgstr ""
+"Appuyez sur « Partager » dans la fenêtre « Partager les identifiants "
+"aléatoires de votre appareil avec Alerte COVID? »."
+
+#: covid_key/templates/covid_key/key_instructions.html:49
+msgid ""
+"COVID Alert will ask permission to upload random codes daily for the next 13 "
+"days."
+msgstr ""
+"Chaque jour, pendant les 13 jours qui suivent, Alerte COVID demandera "
+"l’autorisation de téléverser les codes aléatoires."
+
+#: covid_key/templates/covid_key/throttled.html:4
+msgid "Daily limit reached"
+msgstr "Limite journalière atteinte"
+
+#: covid_key/templates/covid_key/throttled.html:7
+msgid "You have hit your daily limit of code generation."
+msgstr "Vous avez atteint votre limite journalière pour la génération des codes."
+
+#: portal/settings.py:281
 msgid ""
 "This account has been locked due to too many failed log in attempts. Please "
 "try again after 5 minutes."
@@ -31,125 +127,180 @@ msgstr ""
 "Veuillez utiliser <a href=\"%(login_url)s\">le site principal pour vous "
 "connecter</a>."
 
-#: portal/urls.py:11
-msgid "COVID Health Portal administration"
-msgstr "Administration du Portail Alerte COVID"
+#: portal/templates/base.html:21 portal/templates/base.html:34
+#: profiles/utils/__init__.py:25
+msgid "COVID Alert Portal"
+msgstr "Portail Alerte COVID"
 
-#: profiles/forms.py:46
+#: portal/templates/base.html:21
+msgid "— COVID Alert Portal"
+msgstr "— Portail Alerte COVID"
+
+#: portal/templates/includes/FIP_header.html:6
+#: portal/templates/includes/FIP_header.html:8
+msgid "Government of Canada"
+msgstr "Gouvernement du Canada"
+
+#: portal/templates/includes/cds_form.html:31
+msgid "Submit"
+msgstr "Soumettre"
+
+#: portal/templates/includes/error_list.html:6
+msgid "Please correct the errors on the page"
+msgstr "Veuillez corriger les erreurs trouvées dans la page"
+
+#: portal/templates/includes/expires_string.html:7
+msgid "Key expires"
+msgstr "La clé expire le"
+
+#: portal/templates/includes/expires_string.html:15
+msgid "at"
+msgstr "à"
+
+#: portal/templates/includes/footer.html:8
+#: profiles/templates/profiles/privacy.html:5
+#: profiles/templates/profiles/privacy.html:11
+msgid "Privacy"
+msgstr "Confidentialité"
+
+#: portal/templates/includes/footer.html:11
+msgid "Symbol of the Government of Canada"
+msgstr "Symbole du gouvernement du Canada"
+
+#: portal/templates/includes/nav_header.html:3
+msgid "Language and account navigation"
+msgstr ""
+
+#: portal/templates/includes/nav_header.html:16
+msgid "Log out"
+msgstr "Déconnexion"
+
+#: portal/templates/includes/nav_header.html:18
+#: portal/templates/locked_out.html:9
+#: portal/templates/registration/login.html:6
+#: portal/templates/registration/login.html:12
+#: profiles/templates/profiles/landing.html:19
+msgid "Log in"
+msgstr "Connexion"
+
+#: portal/templates/includes/nav_main.html:3
+msgid "Product navigation"
+msgstr ""
+
+#: portal/templates/includes/nav_main.html:6
+msgid "Start"
+msgstr "Accueil"
+
+#: portal/templates/includes/nav_main.html:8
+#: profiles/templates/profiles/healthcareuser_list.html:4
+#: profiles/templates/profiles/healthcareuser_list.html:7
+msgid "Manage accounts"
+msgstr "Gérer les comptes"
+
+#: portal/templates/includes/phase_banner.html:4
+msgid "This site will change as we test ideas."
+msgstr "Ce site évoluera au fur et à mesure que nous testons des idées."
+
+#: portal/templates/locked_out.html:5
+msgid "Account locked"
+msgstr ""
+
+#: portal/templates/locked_out.html:10
+msgid "Oops! Your account is temporarily locked."
+msgstr ""
+
+#: portal/templates/locked_out.html:11
+#, python-format
+msgid ""
+"It looks like you’ve entered the wrong password %(failure_limit)s times, and "
+"you are now locked out of your account. Don’t worry, your account will be "
+"unlocked in a few minutes and you can try logging in again."
+msgstr ""
+
+#: portal/templates/registration/login.html:5
+#: portal/templates/registration/password_reset_form.html:5
+#: profiles/templates/invitations/templates/invitation_confirm_delete.html:5
+#: profiles/templates/invitations/templates/invite.html:5
+#: profiles/templates/invitations/templates/invite_complete.html:5
+#: profiles/templates/invitations/templates/invite_list.html:5
+#: profiles/templates/profiles/2fa-resend.html:5
+#: profiles/templates/profiles/2fa.html:5
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:5
+#: profiles/templates/profiles/signup.html:5
+msgid "Error: "
+msgstr "Erreur : "
+
+#: portal/templates/registration/login.html:14
+#: profiles/templates/profiles/signup.html:14
+msgid "Next"
+msgstr "Suivant"
+
+#: portal/templates/registration/login.html:17
+#: portal/templates/registration/password_reset_form.html:6
+#: portal/templates/registration/password_reset_form.html:12
+msgid "Forgot your password?"
+msgstr "Mot de passe oublié?"
+
+#: portal/templates/registration/password_reset_done.html:4
+#: portal/templates/registration/password_reset_done.html:7
+msgid "Check your email"
+msgstr "Vérifiez vos courriels"
+
+#: portal/templates/registration/password_reset_done.html:9
+msgid "Use the link in your email to reset your password."
+msgstr ""
+"Utilisez le lien fourni dans le courriel pour réinitialiser votre mot de "
+"passe."
+
+#: portal/templates/registration/password_reset_form.html:13
+msgid "We’ll send you an email to create a new password."
+msgstr "Nous vous enverrons un courriel pour créer un nouveau mot de passe."
+
+#: portal/templates/registration/password_reset_form.html:15
+msgid "Send email"
+msgstr "Envoyer"
+
+#: profiles/forms.py:50
 msgid "Enter a valid email address"
 msgstr "Entrez une adresse courriel valide"
 
-#: profiles/forms.py:48 profiles/forms.py:92 profiles/forms.py:101
-#: profiles/forms.py:178
+#: profiles/forms.py:52 profiles/forms.py:96 profiles/forms.py:105
+#: profiles/forms.py:182
 #: profiles/templates/invitations/templates/invite_list.html:18
 #: profiles/templates/profiles/healthcareuser_detail.html:28
 #: profiles/templates/profiles/healthcareuser_list.html:17
 msgid "Email address"
 msgstr "Adresse courriel"
 
-#: profiles/forms.py:77
+#: profiles/forms.py:81
 msgid "Please enter the security code."
 msgstr "Veuillez enter le code de sécurité."
 
-#: profiles/forms.py:105
+#: profiles/forms.py:109
 msgid "Full name"
 msgstr "Nom complet"
 
-#: profiles/forms.py:109
+#: profiles/forms.py:113
 msgid ""
 "A single use code will be sent to this phone number every time you try to "
 "log in. Include a +1 before your number."
 msgstr ""
 
-#: profiles/forms.py:113
+#: profiles/forms.py:117
 msgid "Enter the same phone number as before, for verification"
 msgstr ""
 
-#: profiles/forms.py:140
+#: profiles/forms.py:144
 msgid "Email already exists"
 msgstr "L’adresse courriel existe déjà"
 
-#: profiles/forms.py:142
+#: profiles/forms.py:146
 msgid "An invitation hasn't been sent to this address"
 msgstr ""
 
-#: profiles/forms.py:155
+#: profiles/forms.py:159
 msgid "The phone number fields don‘t match."
 msgstr ""
-
-#: profiles/templates/base.html:21 profiles/templates/base.html:34
-#: profiles/utils.py:25
-msgid "COVID Alert Portal"
-msgstr "Portail Alerte COVID"
-
-#: profiles/templates/base.html:21
-msgid "— COVID Alert Portal"
-msgstr "— Portail Alerte COVID"
-
-#: profiles/templates/includes/FIP_header.html:6
-#: profiles/templates/includes/FIP_header.html:8
-msgid "Government of Canada"
-msgstr "Gouvernement du Canada"
-
-#: profiles/templates/includes/cds_form.html:31
-msgid "Submit"
-msgstr "Soumettre"
-
-#: profiles/templates/includes/error_list.html:6
-msgid "Please correct the errors on the page"
-msgstr "Veuillez corriger les erreurs trouvées dans la page"
-
-#: profiles/templates/includes/expires_string.html:7
-msgid "Key expires"
-msgstr "La clé expire le"
-
-#: profiles/templates/includes/expires_string.html:15
-msgid "at"
-msgstr "à"
-
-#: profiles/templates/includes/footer.html:8
-#: profiles/templates/profiles/privacy.html:5
-#: profiles/templates/profiles/privacy.html:11
-msgid "Privacy"
-msgstr "Confidentialité"
-
-#: profiles/templates/includes/footer.html:11
-msgid "Symbol of the Government of Canada"
-msgstr "Symbole du gouvernement du Canada"
-
-#: profiles/templates/includes/nav_header.html:3
-msgid "Language and account navigation"
-msgstr ""
-
-#: profiles/templates/includes/nav_header.html:16
-msgid "Log out"
-msgstr "Déconnexion"
-
-#: profiles/templates/includes/nav_header.html:18
-#: profiles/templates/locked_out.html:9
-#: profiles/templates/profiles/landing.html:19
-#: profiles/templates/registration/login.html:6
-#: profiles/templates/registration/login.html:12
-msgid "Log in"
-msgstr "Connexion"
-
-#: profiles/templates/includes/nav_main.html:3
-msgid "Product navigation"
-msgstr ""
-
-#: profiles/templates/includes/nav_main.html:6
-msgid "Start"
-msgstr "Accueil"
-
-#: profiles/templates/includes/nav_main.html:8
-#: profiles/templates/profiles/healthcareuser_list.html:4
-#: profiles/templates/profiles/healthcareuser_list.html:7
-msgid "Manage accounts"
-msgstr "Gérer les comptes"
-
-#: profiles/templates/includes/phase_banner.html:4
-msgid "This site will change as we test ideas."
-msgstr "Ce site évoluera au fur et à mesure que nous testons des idées."
 
 #: profiles/templates/invitations/forms/_invite.html:3
 msgid "Invite"
@@ -168,19 +319,6 @@ msgstr "Adresse courriel"
 #, python-format
 msgid "Invitation to - %(email)s - has been accepted"
 msgstr ""
-
-#: profiles/templates/invitations/templates/invitation_confirm_delete.html:5
-#: profiles/templates/invitations/templates/invite.html:5
-#: profiles/templates/invitations/templates/invite_complete.html:5
-#: profiles/templates/invitations/templates/invite_list.html:5
-#: profiles/templates/profiles/2fa-resend.html:5
-#: profiles/templates/profiles/2fa.html:5
-#: profiles/templates/profiles/healthcareuser_confirm_delete.html:5
-#: profiles/templates/profiles/signup.html:5
-#: profiles/templates/registration/login.html:5
-#: profiles/templates/registration/password_reset_form.html:5
-msgid "Error: "
-msgstr "Erreur : "
 
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html:6
 msgid "Confirm delete invitation"
@@ -271,22 +409,6 @@ msgstr "Effacer"
 #: profiles/templates/invitations/templates/invite_list.html:46
 msgid "No invitations yet"
 msgstr "Aucune invitation pour le moment"
-
-#: profiles/templates/locked_out.html:5
-msgid "Account locked"
-msgstr ""
-
-#: profiles/templates/locked_out.html:10
-msgid "Oops! Your account is temporarily locked."
-msgstr ""
-
-#: profiles/templates/locked_out.html:11
-#, python-format
-msgid ""
-"It looks like you’ve entered the wrong password %(failure_limit)s times, and "
-"you are now locked out of your account. Don’t worry, your account will be "
-"unlocked in a few minutes and you can try logging in again."
-msgstr ""
 
 #: profiles/templates/profiles/2fa-resend.html:6
 #: profiles/templates/profiles/2fa-resend.html:13
@@ -401,94 +523,6 @@ msgstr "Retirer"
 #: profiles/templates/profiles/healthcareuser_list.html:40
 msgid "No users yet."
 msgstr "Aucune utilisateur pour le moment"
-
-#: profiles/templates/profiles/key.html:4
-#: profiles/templates/profiles/key.html:7
-#: profiles/templates/profiles/key_instructions.html:6
-#: profiles/templates/profiles/key_instructions.html:9
-msgid "Give patient this key"
-msgstr "Donnez la clé suivante au patient"
-
-#: profiles/templates/profiles/key.html:13
-msgid "Tell patient to:"
-msgstr "Dites au patient de :"
-
-#: profiles/templates/profiles/key.html:15
-msgid "Keep the number somewhere safe"
-msgstr "Garder le numéro dans un endroit sûr"
-
-#: profiles/templates/profiles/key.html:16
-msgid "Enter the number within <strong>24 hours</strong> or it will expire"
-msgstr ""
-"Utiliser le numéro au cours des <strong>24 prochaines heures</strong>, sinon "
-"il sera expiré"
-
-#: profiles/templates/profiles/key.html:17
-msgid "Contact your office if they lose the number or it doesn’t work"
-msgstr ""
-"Communiquer avec votre bureau s’il perd le numéro ou si le numéro ne "
-"fonctionne pas"
-
-#: profiles/templates/profiles/key.html:18
-msgid ""
-"Use the app to anonymously notify people by tapping “Diagnosed with "
-"COVID-19? Enter number”. The app will guide the patient through the steps to "
-"enter the number."
-msgstr ""
-"Utiliser l’application mobile pour aviser de façon anonyme les autres "
-"personnes en appuyant sur « Vous avez la COVID-19? Entrer le numéro ». "
-"L’application guidera le patient pour qu’il entre son numéro."
-
-#: profiles/templates/profiles/key.html:22
-#: profiles/templates/profiles/key_instructions.html:56
-msgid "Next patient"
-msgstr "Prochain patient"
-
-#: profiles/templates/profiles/key.html:23
-msgid "Detailed instructions"
-msgstr "Instructions détaillées"
-
-#: profiles/templates/profiles/key_instructions.html:15
-msgid "Instructions for patient"
-msgstr "Instructions pour le patient"
-
-#: profiles/templates/profiles/key_instructions.html:19
-msgid "Tap ‘Enter your one-time key’."
-msgstr "Appuyez sur « Entrer votre clé »."
-
-#: profiles/templates/profiles/key_instructions.html:25
-msgid "Tap “Next” on “Let people know they may have been exposed”."
-msgstr ""
-"Appuyez sur « Suivant » dans l’écran « Aviser les autres personnes d’une "
-"exposition potentielle »."
-
-#: profiles/templates/profiles/key_instructions.html:31
-msgid "Enter the key and tap “Submit”"
-msgstr "Entrez la clé et appuyez sur « Envoyer »."
-
-#: profiles/templates/profiles/key_instructions.html:37
-msgid ""
-"If you want to notify people, you need to give COVID Alert permission to "
-"upload random codes. Tap “Agree” on “Now you can upload codes”."
-msgstr ""
-"Si vous voulez aviser les autres personnes, vous devez autoriser Alerte "
-"COVID à téléverser vos codes aléatoires. Appuyez sur « Accepter » dans "
-"l’écran « Vous pouvez maintenant téléverser vos codes »."
-
-#: profiles/templates/profiles/key_instructions.html:43
-msgid ""
-"Tap “Share” on “Share your random codes from this device with COVID Alert?”."
-msgstr ""
-"Appuyez sur « Partager » dans la fenêtre « Partager les identifiants "
-"aléatoires de votre appareil avec Alerte COVID? »."
-
-#: profiles/templates/profiles/key_instructions.html:49
-msgid ""
-"COVID Alert will ask permission to upload random codes daily for the next 13 "
-"days."
-msgstr ""
-"Chaque jour, pendant les 13 jours qui suivent, Alerte COVID demandera "
-"l’autorisation de téléverser les codes aléatoires."
 
 #: profiles/templates/profiles/landing.html:4
 #: profiles/templates/profiles/landing.html:8
@@ -920,11 +954,6 @@ msgstr ""
 msgid "Create account"
 msgstr "Créer un compte"
 
-#: profiles/templates/profiles/signup.html:14
-#: profiles/templates/registration/login.html:14
-msgid "Next"
-msgstr "Suivant"
-
 #: profiles/templates/profiles/start.html:4
 #: profiles/templates/profiles/start.html:7
 msgid "Generate a one-time key"
@@ -957,54 +986,44 @@ msgstr "Qu’il est en mesure de <strong>noter la clé</strong> à un endroit s�
 msgid "Generate key"
 msgstr "Générer une clé"
 
-#: profiles/templates/registration/login.html:17
-#: profiles/templates/registration/password_reset_form.html:6
-#: profiles/templates/registration/password_reset_form.html:12
-msgid "Forgot your password?"
-msgstr "Mot de passe oublié?"
-
-#: profiles/templates/registration/password_reset_done.html:4
-#: profiles/templates/registration/password_reset_done.html:7
-msgid "Check your email"
-msgstr "Vérifiez vos courriels"
-
-#: profiles/templates/registration/password_reset_done.html:9
-msgid "Use the link in your email to reset your password."
+#: profiles/validators.py:10
+msgid "Your password can’t be a commonly-used sequence"
 msgstr ""
-"Utilisez le lien fourni dans le courriel pour réinitialiser votre mot de "
-"passe."
 
-#: profiles/templates/registration/password_reset_form.html:13
-msgid "We’ll send you an email to create a new password."
-msgstr "Nous vous enverrons un courriel pour créer un nouveau mot de passe."
+#: profiles/validators.py:17
+msgid "Your password can’t contain terms related to COVID-19"
+msgstr ""
 
-#: profiles/templates/registration/password_reset_form.html:15
-msgid "Send email"
-msgstr "Envoyer"
+#: profiles/validators.py:22
+msgid "Your password can’t be a commonly-used sequence."
+msgstr ""
 
-#: profiles/views.py:56
+#: profiles/views.py:47
 msgid "No invited email in session"
 msgstr ""
 
-#: profiles/views.py:83
+#: profiles/views.py:74
 msgid "Account created successfully"
 msgstr ""
 
-#: profiles/views.py:124
+#: profiles/views.py:115
 msgid "Please try again later."
 msgstr ""
 
-#: profiles/views.py:127
+#: profiles/views.py:118
 msgid "That didn’t match the code that was sent."
 msgstr ""
 
-#: profiles/views.py:148
+#: profiles/views.py:139
 msgid "Security code has been sent."
 msgstr ""
 
-#: profiles/views.py:163
+#: profiles/views.py:154
 msgid ": Your portal account"
 msgstr " : votre compte pour le Portail"
+
+#~ msgid "COVID Health Portal administration"
+#~ msgstr "Administration du Portail Alerte COVID"
 
 #~ msgid "Pending"
 #~ msgstr "En attente"
