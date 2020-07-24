@@ -1,5 +1,6 @@
-from profiles.tests import AdminUserTestCase
+from django.test import override_settings
 from django.urls import reverse
+from profiles.tests import AdminUserTestCase
 
 
 class KeyView(AdminUserTestCase):
@@ -36,4 +37,14 @@ class KeyView(AdminUserTestCase):
         self.assertContains(response, "<h2>Instructions for patient</h2>")
         self.assertContains(
             response, "<code>{}</code>".format(response.context["code"])
+        )
+
+    @override_settings(COVID_KEY_MAX_PER_USER_PER_DAY=1)
+    def test_key_throttled(self):
+        self.login()
+        response = self.client.get(reverse("key"))
+        self.assertContains(response, "<h1>Give patient this key</h1>")
+        response = self.client.get(reverse("key"))
+        self.assertContains(
+            response, "You have hit your daily limit of code generation"
         )

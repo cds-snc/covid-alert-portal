@@ -88,6 +88,17 @@ class AdminUserTestCase(TestCase):
 
         self.invited_email = "invited@test.com"
 
+    def login(self, credentials: dict = None, login_2fa: bool = True):
+        if credentials is None:
+            credentials = self.credentials
+
+        self.client.login(
+            username=credentials.get("email"), password=credentials.get("password")
+        )
+        if login_2fa:
+            user = HealthcareUser.objects.get(email=credentials.get("email"))
+            self.login_2fa(user)
+
     def login_2fa(self, user: HealthcareUser = None):
         if user is None:
             user = self.user
