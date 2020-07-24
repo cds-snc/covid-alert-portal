@@ -5,7 +5,7 @@ FROM python:3.8-slim
 
 # Installs gettext utilities required to makemessages and compilemessages
 RUN apt-get update && apt-get install -y --no-install-recommends \
-	gettext \
+		gettext \
 		make \
 		build-essential \
 		mime-support \
@@ -22,14 +22,18 @@ ENV PYTHONUNBUFFERED 1
 # Install dependencies
 RUN pip install 'pipenv==2018.11.26'
 COPY Pipfile Pipfile.lock /code/
-RUN pipenv install --system --deploy
+RUN pipenv install --system
 
 # Copy project
 COPY . /code/
 
-# Create a group and user to run our app
-ARG APP_USER=django
-RUN groupadd -r ${APP_USER} && useradd --no-log-init -M -d /code -u 1000 -g ${APP_USER} ${APP_USER}
+# Build static files
+
+RUN python manage.py sass profiles/static/scss/styles.scss profiles/static/css/
+
+RUN python manage.py collectstatic --noinput -i scss
+
+RUN python manage.py compilemessages
 
 EXPOSE 8000
 
