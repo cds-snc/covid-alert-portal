@@ -1,6 +1,9 @@
 from django import forms
 from django.contrib import admin
+from datetime import timedelta
+from django.utils import timezone
 from django.contrib.auth.models import Group
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationForm
 
@@ -76,8 +79,27 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ("email", "name", "province", "is_admin", "is_superuser")
-    list_filter = ("is_admin", "is_superuser")
+    list_display = (
+        "email",
+        "name",
+        "province",
+        "is_admin",
+        "is_superuser",
+        "number_keys_generated",
+    )
+    list_filter = (
+        "is_admin",
+        "is_superuser",
+    )
+
+    def number_keys_generated(self, user: HealthcareUser):
+        return user.covidkey_set.filter(
+            created_at__gte=(timezone.now() - timedelta(hours=24))
+        ).count()
+
+    number_keys_generated.short_description = _(
+        "Number of keys generated in the last 24 hours"
+    )
 
     fieldsets = (
         (None, {"fields": ("email", "password")}),

@@ -8,6 +8,6 @@ class COVIDKey(models.Model):
     key = models.CharField(max_length=12, null=False)
     created_at = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name="+"
+        settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING
     )
     expiry = models.DateTimeField(null=False)
