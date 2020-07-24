@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% if form.errors %}{% trans "Error: "%}{% endif %}
+    {% trans "Not authorized" %}
+{% endblock %}
+
+
+{% block content %}
+    <h1>{% trans "Not authorized" %}</h1>
+    <p></p>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% if form.errors %}{% trans "Error: "%}{% endif %}
+    {% trans "An error ocurred" %}
+{% endblock %}
+
+
+{% block content %}
+    <h1>{% trans "An error ocurred" %}</h1>
+    <p></p>
+{% endblock %}

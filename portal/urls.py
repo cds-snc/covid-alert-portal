@@ -7,6 +7,7 @@ from axes.admin import AccessLogAdmin
 from invitations.views import AcceptInvite
 
 from .admin import Admin2FASite
+from . import views
 
 admin.site.__class__ = Admin2FASite
 admin.site.site_header = (
@@ -20,6 +21,10 @@ def disable_delete_permissions(cls, request, obj=None):
 
 
 AccessLogAdmin.has_delete_permission = disable_delete_permissions
+
+handler403 = views.permission_denied_view
+handler404 = views.page_not_found
+handler500 = views.internal_error
 
 urlpatterns = [
     re_path(
@@ -36,6 +41,9 @@ urlpatterns = [
     ),
     path("admin/", admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
+    path("403/", views.permission_denied_view),
+    path("404/", views.page_not_found),
+    path("500/", views.internal_error),
 ]
 
 invitation_patterns = (
