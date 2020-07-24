@@ -1,4 +1,3 @@
-
 from django.conf import settings
 from django.shortcuts import redirect
 from django.contrib.sites.shortcuts import get_current_site

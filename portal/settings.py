@@ -65,6 +65,7 @@ if os.getenv("DJANGO_ADMINS"):
 INSTALLED_APPS = [
     "django_sass",
     "profiles",
+    "covid_key",
     "invitations",
     "axes",
     "django.contrib.sites",  # Required for invitations
