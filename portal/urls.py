@@ -3,6 +3,7 @@ from django.urls import path, include, re_path
 from django.http import HttpResponse
 from django.conf.urls.i18n import i18n_patterns
 from axes.admin import AccessLogAdmin
+from invitations.views import AcceptInvite
 
 from .admin import Admin2FASite
 
@@ -29,7 +30,19 @@ urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
 ]
 
+invitation_patterns = (
+    [
+        # https://github.com/bee-keeper/django-invitations/blob/master/invitations/urls.py
+        re_path(
+            r"^accept-invite/(?P<key>\w+)/?$",
+            AcceptInvite.as_view(),
+            name="accept-invite",
+        ),
+    ],
+    "invitations",
+)
+
 urlpatterns += i18n_patterns(
     path("", include("profiles.urls")),
-    path("invitations/", include("invitations.urls", namespace="invitations"),),
+    path("invitations/", include(invitation_patterns, namespace="invitations"),),
 )
