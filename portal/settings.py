@@ -102,7 +102,7 @@ ROOT_URLCONF = "portal.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "portal", "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -151,6 +151,11 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
         "OPTIONS": {"min_length": 12},
     },
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "OPTIONS": {"user_attributes": ["name", "username"]},
+    },
+    {"NAME": "profiles.validators.BannedPasswordValidator"},
 ]
 
 
@@ -220,8 +225,10 @@ OTP_NOTIFY_TOKEN_VALIDITY = 90
 # When DEBUG is on, we display the code directly in the form, no need to send it
 if DEBUG:
     OTP_NOTIFY_NO_DELIVERY = True
+
 API_AUTHORIZATION = os.getenv("API_AUTHORIZATION")
 API_ENDPOINT = os.getenv("API_ENDPOINT")
+DJANGO_EASY_AUDIT_READONLY_EVENTS = True
 
 CORS_ALLOW_CREDENTIALS = False
 CORS_ORIGIN_WHITELIST = []
@@ -241,6 +248,8 @@ INVITATIONS_SIGNUP_REDIRECT = "/signup/"
 INVITATIONS_EMAIL_SUBJECT_PREFIX = ""
 INVITATIONS_INVITATION_ONLY = True
 INVITATIONS_INVITATION_EXPIRY = 1  # 1 day
+INVITATIONS_ADMIN_ADD_FORM = "profiles.forms.HealthcareInvitationAdminAddForm"
+INVITATIONS_ADMIN_CHANGE_FORM = "profiles.forms.HealthcareInvitationAdminChangeForm"
 
 # Email setup
 EMAIL_BACKEND = (

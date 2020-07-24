@@ -5,10 +5,12 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.utils import translation, timezone
+from django.core.exceptions import ValidationError
 from django_otp import DEVICE_ID_SESSION_KEY
 from invitations.models import Invitation
 from .forms import SignupForm
 from .models import HealthcareProvince, HealthcareUser
+from .validators import BannedPasswordValidator
 
 
 User = get_user_model()
@@ -60,6 +62,21 @@ def get_other_credentials(
         "password": password,
         "phone_number": "+12125552368",
     }
+
+
+class BannedPasswordValidatorTestCase(TestCase):
+    def setUp(self, is_admin=False):
+        self.validator = BannedPasswordValidator()
+
+    def test_bad_12_character_passwords(self):
+        for password in ["qwertyqwerty", "111111111111", "abcdefghijkl"]:
+            with self.assertRaises(ValidationError):
+                self.validator.validate(password)
+
+    def test_bad_covid_passwords(self):
+        for password in ["covidpassword", "PORTALpassword", "passwordViRuS"]:
+            with self.assertRaises(ValidationError):
+                self.validator.validate(password)
 
 
 class AdminUserTestCase(TestCase):
@@ -142,8 +159,11 @@ class DjangoAdminPanelView(AdminUserTestCase):
         self.client.login(username=superuser.email, password="testpassword2")
 
         response = self.client.get(reverse("admin:index"))
+        self.assertEqual(response.status_code, 302)
+        self.login_2fa(superuser)
+        response = self.client.get(reverse("admin:index"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Django administration")
+        self.assertContains(response, "administration")
 
     @override_settings(AXES_ENABLED=True)
     def test_user_lockout(self):
@@ -154,13 +174,13 @@ class DjangoAdminPanelView(AdminUserTestCase):
 
         for i in range(0, settings.AXES_FAILURE_LIMIT - 1):
             response = self.client.post(
-                reverse("admin:login"),
+                reverse("login"),
                 post_data,
                 REMOTE_ADDR="127.0.0.1",
                 HTTP_USER_AGENT="test-browser",
             )
             self.assertContains(
-                response, "Please enter the correct email address and password"
+                response, "Please enter a correct email address and password"
             )
 
         response = self.client.post(

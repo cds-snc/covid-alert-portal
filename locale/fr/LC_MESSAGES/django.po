@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-21 19:46+0000\n"
+"POT-Creation-Date: 2020-07-23 17:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,18 +18,30 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: portal/settings.py:254
+#: portal/settings.py:270
 msgid ""
 "This account has been locked due to too many failed log in attempts. Please "
 "try again after 5 minutes."
 msgstr ""
+
+#: portal/templates/admin/login-disabled.html:23
+#, python-format
+msgid "Please use the <a href=\"%(login_url)s\">main website to log in</a>."
+msgstr ""
+"Veuillez utiliser <a href=\"%(login_url)s\">le site principal pour vous "
+"connecter</a>."
+
+#: portal/urls.py:11
+msgid "COVID Health Portal administration"
+msgstr "Administration du Portail Alerte COVID"
 
 #: profiles/forms.py:46
 msgid "Enter a valid email address"
 msgstr "Entrez une adresse courriel valide"
 
 #: profiles/forms.py:48 profiles/forms.py:92 profiles/forms.py:101
-#: profiles/forms.py:180
+#: profiles/forms.py:178
+#: profiles/templates/invitations/templates/invite_list.html:18
 #: profiles/templates/profiles/healthcareuser_detail.html:28
 #: profiles/templates/profiles/healthcareuser_list.html:17
 msgid "Email address"
@@ -45,24 +57,24 @@ msgstr "Nom complet"
 
 #: profiles/forms.py:109
 msgid ""
-"A single use code will be sent to this phone number everytime you try to "
-"login."
+"A single use code will be sent to this phone number every time you try to "
+"log in. Include a +1 before your number."
 msgstr ""
 
-#: profiles/forms.py:114
+#: profiles/forms.py:113
 msgid "Enter the same phone number as before, for verification"
 msgstr ""
 
-#: profiles/forms.py:142
+#: profiles/forms.py:140
 msgid "Email already exists"
 msgstr "L’adresse courriel existe déjà"
 
-#: profiles/forms.py:144
+#: profiles/forms.py:142
 msgid "An invitation hasn't been sent to this address"
 msgstr ""
 
-#: profiles/forms.py:157
-msgid "The phone number fields doesn't match."
+#: profiles/forms.py:155
+msgid "The phone number fields don‘t match."
 msgstr ""
 
 #: profiles/templates/base.html:21 profiles/templates/base.html:34
@@ -359,7 +371,6 @@ msgid "Province"
 msgstr "Province"
 
 #: profiles/templates/profiles/healthcareuser_detail.html:36
-#| msgid "Generate a number"
 msgid "Phone number"
 msgstr "Téléphone"
 
@@ -979,11 +990,19 @@ msgstr ""
 msgid "Account created successfully"
 msgstr ""
 
-#: profiles/views.py:128
+#: profiles/views.py:124
+msgid "Please try again later."
+msgstr ""
+
+#: profiles/views.py:127
+msgid "That didn’t match the code that was sent."
+msgstr ""
+
+#: profiles/views.py:148
 msgid "Security code has been sent."
 msgstr ""
 
-#: profiles/views.py:154
+#: profiles/views.py:163
 msgid ": Your portal account"
 msgstr " : votre compte pour le Portail"
 
@@ -993,7 +1012,6 @@ msgstr " : votre compte pour le Portail"
 #~ msgid "Resend invitation"
 #~ msgstr "Ré-envoyer un courriel d’invitation"
 
-#, python-format
 #~ msgid ""
 #~ "Are you sure you want to delete invitation sent to %(invitation.email)s?"
 #~ msgstr "Confirmer le retrait de l’invitation"
