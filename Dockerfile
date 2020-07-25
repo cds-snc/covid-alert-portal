@@ -35,6 +35,13 @@ RUN python manage.py collectstatic --noinput -i scss
 
 RUN python manage.py compilemessages
 
+# Create non-root user
+RUN groupadd -r django && useradd --no-log-init -M -g django django
+RUN chown -R django:django /code/staticfiles
+
+# Switch to non root user
+USER django:django
+
 EXPOSE 8000
 
 CMD ./entrypoint.sh
