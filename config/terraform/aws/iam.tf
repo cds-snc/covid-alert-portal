@@ -23,17 +23,17 @@ data "aws_iam_policy_document" "covidportal_secrets_manager" {
 
     resources = [
       aws_secretsmanager_secret.server_database_url.arn,
-      aws_secretsmanager_secret_version.env_api_authorization.arn,
-      aws_secretsmanager_secret_version.env_api_endpoint.arn,
-      aws_secretsmanager_secret_version.env_default_from_email.arn,
-      aws_secretsmanager_secret_version.env_django_admins.arn,
-      aws_secretsmanager_secret_version.env_django_secret_key.arn,
-      aws_secretsmanager_secret_version.env_email_host.arn,
-      aws_secretsmanager_secret_version.env_email_host_user.arn,
-      aws_secretsmanager_secret_version.env_email_host_password.arn,
-      aws_secretsmanager_secret_version.env_email_port.arn,
-      aws_secretsmanager_secret_version.env_email_use_tls.arn,
-      aws_secretsmanager_secret_version.env_new_relic_license_key.arn,
+      aws_secretsmanager_secret_version.api_authorization.arn,
+      aws_secretsmanager_secret_version.api_endpoint.arn,
+      aws_secretsmanager_secret_version.default_from_email.arn,
+      aws_secretsmanager_secret_version.django_admins.arn,
+      aws_secretsmanager_secret_version.django_secret_key.arn,
+      aws_secretsmanager_secret_version.email_host.arn,
+      aws_secretsmanager_secret_version.email_host_user.arn,
+      aws_secretsmanager_secret_version.email_host_password.arn,
+      aws_secretsmanager_secret_version.new_relic_license_key.arn,
+      aws_secretsmanager_secret_version.notify_api_key.arn,
+      aws_secretsmanager_secret_version.notify_template_id.arn
     ]
   }
 }

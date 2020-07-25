@@ -12,112 +12,112 @@ resource "aws_secretsmanager_secret_version" "server_database_url" {
 # AWS Secret Manager - Covid Alert Portal
 ###
 
-resource "aws_secretsmanager_secret" "env_api_authorization"{
-  name = "env_api_authorization"
+resource "aws_secretsmanager_secret" "api_authorization"{
+  name = "api_authorization"
   recovery_window_in_days = 0
 }
 
-resource "aws_secretsmanager_secret_version" "env_api_authorization"{
-  secret_id = aws_secretsmanager_secret.env_api_authorization.id 
-  secret_string = var.ecs_task_env_api_authorization
+resource "aws_secretsmanager_secret_version" "api_authorization"{
+  secret_id = aws_secretsmanager_secret.api_authorization.id 
+  secret_string = var.ecs_secret_api_authorization
 }
 
-resource "aws_secretsmanager_secret" "env_api_endpoint"{
-  name = "env_api_endpoint"
+resource "aws_secretsmanager_secret" "api_endpoint"{
+  name = "api_endpoint"
   recovery_window_in_days = 0
 }
 
-resource "aws_secretsmanager_secret_version" "env_api_endpoint"{
-  secret_id = aws_secretsmanager_secret.env_api_endpoint.id 
-  secret_string = var.ecs_task_env_api_endpoint
+resource "aws_secretsmanager_secret_version" "api_endpoint"{
+  secret_id = aws_secretsmanager_secret.api_endpoint.id 
+  secret_string = var.ecs_secret_api_endpoint
 }
 
-resource "aws_secretsmanager_secret" "env_default_from_email"{
-  name = "env_default_from_email"
+resource "aws_secretsmanager_secret" "default_from_email"{
+  name = "default_from_email"
   recovery_window_in_days = 0
 }
 
-resource "aws_secretsmanager_secret_version" "env_default_from_email"{
-  secret_id = aws_secretsmanager_secret.env_default_from_email.id 
-  secret_string = var.ecs_task_env_default_from_email
+resource "aws_secretsmanager_secret_version" "default_from_email"{
+  secret_id = aws_secretsmanager_secret.default_from_email.id 
+  secret_string = var.ecs_secret_default_from_email
 }
 
-resource "aws_secretsmanager_secret" "env_django_admins"{
-  name = "env_django_admins"
+resource "aws_secretsmanager_secret" "django_admins"{
+  name = "django_admins"
   recovery_window_in_days = 0
 }
 
-resource "aws_secretsmanager_secret_version" "env_django_admins"{
-  secret_id = aws_secretsmanager_secret.env_django_admins.id 
-  secret_string = var.ecs_task_env_django_admins
+resource "aws_secretsmanager_secret_version" "django_admins"{
+  secret_id = aws_secretsmanager_secret.django_admins.id 
+  secret_string = var.ecs_secret_django_admins
 }
 
-resource "aws_secretsmanager_secret" "env_django_secret_key"{
-  name = "env_django_secret_key"
+resource "aws_secretsmanager_secret" "django_secret_key"{
+  name = "django_secret_key"
   recovery_window_in_days = 0
 }
 
-resource "aws_secretsmanager_secret_version" "env_django_secret_key"{
-  secret_id = aws_secretsmanager_secret.env_django_secret_key.id 
-  secret_string = var.ecs_task_env_django_secret_key
+resource "aws_secretsmanager_secret_version" "django_secret_key"{
+  secret_id = aws_secretsmanager_secret.django_secret_key.id 
+  secret_string = var.ecs_secret_django_secret_key
 }
 
-resource "aws_secretsmanager_secret" "env_email_host"{
-  name = "env_email_host"
+resource "aws_secretsmanager_secret" "email_host"{
+  name = "email_host"
   recovery_window_in_days = 0
 }
 
-resource "aws_secretsmanager_secret_version" "env_email_host"{
-  secret_id = aws_secretsmanager_secret.env_email_host.id 
-  secret_string = var.ecs_task_env_email_host
+resource "aws_secretsmanager_secret_version" "email_host"{
+  secret_id = aws_secretsmanager_secret.email_host.id 
+  secret_string = var.ecs_secret_email_host
 }
 
-resource "aws_secretsmanager_secret" "env_email_host_user"{
-  name = "env_email_host_use"
+resource "aws_secretsmanager_secret" "email_host_user"{
+  name = "email_host_use"
   recovery_window_in_days = 0
 }
 
-resource "aws_secretsmanager_secret_version" "env_email_host_user"{
-  secret_id = aws_secretsmanager_secret.env_email_host_user.id 
-  secret_string = var.ecs_task_env_email_host_user
+resource "aws_secretsmanager_secret_version" "email_host_user"{
+  secret_id = aws_secretsmanager_secret.email_host_user.id 
+  secret_string = var.ecs_secret_email_host_user
 }
 
-resource "aws_secretsmanager_secret" "env_email_host_password"{
-  name = "env_email_host_password"
+resource "aws_secretsmanager_secret" "email_host_password"{
+  name = "email_host_password"
   recovery_window_in_days = 0
 }
 
-resource "aws_secretsmanager_secret_version" "env_email_host_password"{
-  secret_id = aws_secretsmanager_secret.env_email_host_password.id 
-  secret_string = var.ecs_task_env_email_host_password
+resource "aws_secretsmanager_secret_version" "email_host_password"{
+  secret_id = aws_secretsmanager_secret.email_host_password.id 
+  secret_string = var.ecs_secret_email_host_password
 }
 
-resource "aws_secretsmanager_secret" "env_email_port"{
-  name = "env_email_port"
+resource "aws_secretsmanager_secret" "new_relic_license_key"{
+  name = "new_relic_license_key"
   recovery_window_in_days = 0
 }
 
-resource "aws_secretsmanager_secret_version" "env_email_port"{
-  secret_id = aws_secretsmanager_secret.env_email_port.id 
-  secret_string = var.ecs_task_env_email_port #tfsec:ignore:GEN003
+resource "aws_secretsmanager_secret_version" "new_relic_license_key"{
+  secret_id = aws_secretsmanager_secret.new_relic_license_key.id 
+  secret_string = var.ecs_secret_new_relic_license_key
 }
 
-resource "aws_secretsmanager_secret" "env_email_use_tls"{
-  name = "env_email_use_tls"
+resource "aws_secretsmanager_secret" "notify_api_key"{
+  name = "notify_api_key"
   recovery_window_in_days = 0
 }
 
-resource "aws_secretsmanager_secret_version" "env_email_use_tls"{
-  secret_id = aws_secretsmanager_secret.env_email_use_tls.id 
-  secret_string = var.ecs_task_env_email_use_tls #tfsec:ignore:GEN003
+resource "aws_secretsmanager_secret_version" "notify_api_key"{
+  secret_id = aws_secretsmanager_secret.notify_api_key.id
+  secret_string = var.ecs_secret_notify_api_key
 }
 
-resource "aws_secretsmanager_secret" "env_new_relic_license_key"{
-  name = "env_new_relic_license_key"
+resource "aws_secretsmanager_secret" "notify_template_id"{
+  name = "notify_template_id"
   recovery_window_in_days = 0
 }
 
-resource "aws_secretsmanager_secret_version" "env_new_relic_license_key"{
-  secret_id = aws_secretsmanager_secret.env_new_relic_license_key.id 
-  secret_string = var.ecs_task_env_new_relic_license_key
+resource "aws_secretsmanager_secret_version" "notify_template_id"{
+  secret_id = aws_secretsmanager_secret.notify_template_id.id
+  secret_string = var.ecs_secret_notify_template_id
 }

@@ -25,6 +25,7 @@ django_allowed_hosts = ".cdssandbox.xyz, covid-alert-portal.alpha.canada.ca, por
 email_backend = "'django.core.mail.backends.smtp.EmailBackend'"
 ecs_covid_portal_name = "covid-portal"
 new_relic_app_name = "Production-Terraform-Covid-Portal"
+dual_urls = "True"
 
 
 #Autoscaling ECS

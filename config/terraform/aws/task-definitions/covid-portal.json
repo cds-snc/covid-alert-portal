@@ -44,6 +44,18 @@
         {
           "name": "NEW_RELIC_APP_NAME",
           "value": "${new_relic_app_name}"
+        },
+        {
+          "name": "EMAIL_PORT",
+          "value": "${email_port}"
+        },
+        {
+          "name": "EMAIL_USE_TLS",
+          "value": "${email_use_tls}"
+        },
+        {
+          "name": "URL_DUAL_DOMAINS",
+          "value": "${dual_urls}"
         }
       ],
       "secrets": [
@@ -84,16 +96,16 @@
           "valueFrom": "${email_host_password}"
         },
         {
-          "name": "EMAIL_PORT",
-          "valueFrom": "${email_port}"
-        },
-        {
-          "name": "EMAIL_USE_TLS",
-          "valueFrom": "${email_use_tls}"
-        },
-        {
           "name": "NEW_RELIC_LICENSE_KEY",
           "valueFrom": "${new_relic_license_key}"
+        },
+        {
+          "name": "OTP_NOTIFY_API_KEY",
+          "valueFrom": "${notify_api_key}"
+        },
+        {
+          "name": "OTP_NOTIFY_TEMPLATE_ID",
+          "valueFrom": "${notify_template_id}"
         }
       ]
     }

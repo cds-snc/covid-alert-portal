@@ -62,51 +62,53 @@ variable "ecs_covid_portal_name" {
   type = string
 }
 
-variable "ecs_task_env_api_authorization"{
+# Task Covid Portal Secrets
+
+variable "ecs_secret_api_authorization"{
   type = string
 }
 
-variable "ecs_task_env_api_endpoint"{
+variable "ecs_secret_api_endpoint"{
   type = string
 }
 
-variable "ecs_task_env_default_from_email"{
+variable "ecs_secret_default_from_email"{
   type = string
 }
 
-variable "ecs_task_env_django_admins"{
+variable "ecs_secret_django_admins"{
   type = string
 }
 
-variable "ecs_task_env_django_secret_key"{
+variable "ecs_secret_django_secret_key"{
   type = string
 }
 
-variable "ecs_task_env_email_host"{
+variable "ecs_secret_email_host"{
   type = string
 }
 
-variable "ecs_task_env_email_host_user"{
+variable "ecs_secret_email_host_user"{
   type = string
 }
 
-variable "ecs_task_env_email_host_password"{
+variable "ecs_secret_email_host_password"{
   type = string
 }
 
-variable "ecs_task_env_email_port"{
+variable "ecs_secret_new_relic_license_key"{
   type = string
-  default = "587"
 }
 
-variable "ecs_task_env_email_use_tls"{
+variable "ecs_secret_notify_api_key"{
   type = string
-  default = "True"
 }
 
-variable "ecs_task_env_new_relic_license_key"{
+variable "ecs_secret_notify_template_id"{
   type = string
 }
+
+# Task Covid Portal Env Vars
 
 variable "django_env"{
   type = string
@@ -123,6 +125,21 @@ variable "email_backend"{
 }
 
 variable "new_relic_app_name"{
+  type = string
+  default = "Terraform Covid Alert Portal"
+}
+
+variable "email_port"{
+  type = string
+  default = "587"
+}
+
+variable "email_use_tls"{
+  type = string
+  default = "True"
+}
+
+variable "dual_urls"{
   type = string
 }
 
