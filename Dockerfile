@@ -10,22 +10,24 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		build-essential \
 		mime-support \
 		git \
-	&& rm -rf /var/lib/apt/lists/*
+	  && rm -rf /var/lib/apt/lists/*
 
 # Set work directory
-WORKDIR /code
+WORKDIR /opt/app/
+
+# Install pipenv
+RUN pip install 'pipenv==2018.11.26' uwsgi
+
+# Install dependencies
+COPY Pipfile Pipfile.lock /opt/app/
+RUN pipenv lock -r > requirements.txt && pip install -r requirements.txt
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Install dependencies
-RUN pip install 'pipenv==2018.11.26'
-COPY Pipfile Pipfile.lock /code/
-RUN pipenv install --system
 
-# Copy project
-COPY . /code/
+COPY . /opt/app/
 
 # Build static files
 
@@ -35,13 +37,12 @@ RUN python manage.py collectstatic --noinput -i scss
 
 RUN python manage.py compilemessages
 
-# Create non-root user
 RUN groupadd -r django && useradd --no-log-init -M -g django django
-RUN chown -R django:django /code/staticfiles
 
-# Switch to non root user
+RUN chown -R django:django /opt/app
+
 USER django:django
 
 EXPOSE 8000
 
-CMD ./entrypoint.sh
+CMD ["./entrypoint.sh"]
