@@ -51,6 +51,7 @@ data "template_file" "covidportal_task" {
     django_allowed_hosts  = var.django_allowed_hosts
     django_email_backend  = var.email_backend
     new_relic_app_name    = var.new_relic_app_name
+    dual_urls             = var.dual_urls
     notify_api_key        = aws_secretsmanager_secret_version.notify_api_key.arn
     notify_template_id    = aws_secretsmanager_secret_version.notify_template_id.arn
 

@@ -139,6 +139,10 @@ variable "email_use_tls"{
   default = "True"
 }
 
+variable "dual_urls"{
+  type = string
+}
+
 
 
 

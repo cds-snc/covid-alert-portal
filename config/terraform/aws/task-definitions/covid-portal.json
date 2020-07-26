@@ -52,6 +52,10 @@
         {
           "name": "EMAIL_USE_TLS",
           "value": "${email_use_tls}"
+        },
+        {
+          "name": "URL_DUAL_DOMAINS",
+          "value": "${dual_urls}"
         }
       ],
       "secrets": [
