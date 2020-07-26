@@ -2,14 +2,25 @@ name: Build and Push to Container Registries
 
 on:
   push:
-    branches: [aws_docker_build]
+    branches: [main]
 
 env:
   GITHUB_SHA: ${{ github.sha }}
   BRANCH: ${{ github.ref }}
 
 jobs:
+  terraform-security-scan:
+    runs-on: ubuntu-latest
+    continue-on-error: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Terraform security scan
+        uses: triat/terraform-security-scan@v1.2.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build-n-push:
+    needs: terraform-security-scan
     runs-on: ubuntu-latest
     steps:
       - name: Wait for container to pass Django CI 3.6 Test
@@ -35,16 +46,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           checkName: test (3.8)
           ref: ${{ github.sha }}
-          
-            
-
-      - name: Wait for Terraform Security Tests
-        uses: fountainhead/action-wait-for-check@v1.0.0
-        id: wait-for-terraform-sec-test
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          checkName: terraform-security-scan
-          ref: ${{ github.sha }}
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -68,7 +69,8 @@ jobs:
         run: |
           docker build \
           -t $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA \
-          -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+          -t $ECR_REGISTRY/$ECR_REPOSITORY:latest \
+          --build-arg GITHUB_SHA_ARG=$GITHUB_SHA .
       - name: Push containers to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr-covid-portal.outputs.registry }}
