@@ -1,5 +1,6 @@
 import logging
 import requests
+from hashlib import scrypt
 from datetime import timedelta
 from django.conf import settings
 from django.shortcuts import render
@@ -51,6 +52,14 @@ def _generate_key(request):
             )
         except requests.exceptions.RequestException as err:
             logging.exception(f"Something went wrong {err}")
+    else:
+        token = settings.SECRET_KEY
+
+    covid_key = COVIDKey()
+    covid_key.created_by = request.user
+    covid_key.expiry = timezone.now() + timedelta(days=1)
+    covid_key.key = scrypt(password=diagnosis_code.encode(), salt=token.encode(), n=16384, r=8, p=1)
+    covid_key.save()
 
     # Split up the code with a space in the middle so it looks like this:
     # 123 456 789
@@ -58,20 +67,12 @@ def _generate_key(request):
         f"{diagnosis_code[0:3]} {diagnosis_code[3:6]} {diagnosis_code[6:10]}"
     )
 
-    expiry = timezone.now() + timedelta(days=1)
-
-    covid_key = COVIDKey()
-    covid_key.created_by = request.user
-    covid_key.expiry = expiry
-    covid_key.key = diagnosis_code
-    covid_key.save()
-
     template_name = "key_instructions" if "/key-instructions" in request.path else "key"
 
     return render(
         request,
         f"covid_key/{template_name}.html",
-        {"code": diagnosis_code, "expiry": expiry},
+        {"code": diagnosis_code, "expiry": covid_key.expiry},
     )
 
 
