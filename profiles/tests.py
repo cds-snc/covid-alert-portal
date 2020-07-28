@@ -203,6 +203,19 @@ class DjangoAdminPanelView(AdminUserTestCase):
         self.assertEqual(response.status_code, 403)
 
 
+class AuthenticatedView(AdminUserTestCase):
+    def test_loginpage(self):
+        #  Get the login page
+        response = self.client.get(reverse("login"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Log in</h1>")
+        self.assertContains(response, 'autocomplete="off"')
+
+        #  Test logging in
+        response = self.client.post("/en/login/", self.credentials, follow=True)
+        self.assertTrue(response.context["user"].is_active)
+
+
 class i18nTestView(TestCase):
     def test_root_with_accept_language_header_fr(self):
         """
@@ -285,14 +298,14 @@ class SignupFlow(AdminUserTestCase):
         # assert a disabled input with the email value exists
         self.assertContains(
             response,
-            '<input type="text" name="email" value="{}" required disabled id="id_email">'.format(
+            '<input type="text" name="email" value="{}" autocomplete="off" required disabled id="id_email">'.format(
                 self.invited_email
             ),
         )
         # assert a disabled input with the province value exists
         self.assertContains(
             response,
-            '<input type="hidden" name="province" value="{}" disabled id="id_province">'.format(
+            '<input type="hidden" name="province" value="{}" autocomplete="off" disabled id="id_province">'.format(
                 self.credentials["province"].abbr
             ),
         )
