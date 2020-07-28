@@ -31,6 +31,8 @@ class HealthcareBaseForm(forms.Form):
         # override field attributes: https://stackoverflow.com/a/56870308
         for field in self.fields:
             self.fields[field].widget.attrs.pop("autofocus", None)
+            # remove autocomplete attributes
+            self.fields[field].widget.attrs.update({"autocomplete": "off"})
 
 
 class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
