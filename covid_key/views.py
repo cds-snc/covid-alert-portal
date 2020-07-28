@@ -1,6 +1,5 @@
 import logging
 import requests
-from hashlib import scrypt
 from datetime import timedelta
 from django.conf import settings
 from django.shortcuts import render
@@ -58,9 +57,6 @@ def _generate_key(request):
     covid_key = COVIDKey()
     covid_key.created_by = request.user
     covid_key.expiry = timezone.now() + timedelta(days=1)
-    covid_key.key = scrypt(
-        password=diagnosis_code.encode(), salt=token.encode(), n=16384, r=8, p=1
-    )
     covid_key.save()
 
     # Split up the code with a space in the middle so it looks like this:
