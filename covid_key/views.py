@@ -51,8 +51,6 @@ def _generate_key(request):
             )
         except requests.exceptions.RequestException as err:
             logging.exception(f"Something went wrong {err}")
-    else:
-        token = settings.SECRET_KEY
 
     covid_key = COVIDKey()
     covid_key.created_by = request.user
