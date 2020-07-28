@@ -120,17 +120,6 @@ class HomePageView(TestCase):
         self.assertContains(response, "Welcome to the COVID Alert Portal")
 
 
-class AuthenticatedView(AdminUserTestCase):
-    def test_loginpage(self):
-        #  Get the login page
-        response = self.client.get(reverse("login"))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Log in</h1>")
-        #  Test logging in
-        response = self.client.post("/en/login/", self.credentials, follow=True)
-        self.assertTrue(response.context["user"].is_active)
-
-
 class RestrictedPageViews(TestCase):
     #  These should redirect us
     def test_code(self):
