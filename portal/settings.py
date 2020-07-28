@@ -320,5 +320,5 @@ CSP_SCRIPT_SRC = [
 ]
 CSP_CONNECT_SRC = ["'self'", "bam.nr-data.net"]
 
-FRESHDESK_API_ENDPOINT = ''
+FRESHDESK_API_ENDPOINT = "https://cds-snc.freshdesk.com/api/v2/tickets"
 FRESHDESK_API_KEY = os.getenv("FRESHDESK_API_KEY")
