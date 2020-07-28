@@ -27,12 +27,13 @@ class ContactForm(forms.Form):
     def send_freshdesk(self):
         try:
             response = post(
-                settings.FRESHDESK_API_ENDPOINT,
+                settings.FRESHDESK_API_ENDPOINT + "/tickets",
                 json={
                     "email": self.cleaned_data.get("email", None),
                     "subject": self.cleaned_data.get("feedback", "")[0:20],
                     "description": self.cleaned_data.get("feedback", ""),
                     "name": self.cleaned_data.get("name", ""),
+                    "product_id": settings.FRESHDESK_PRODUCT_ID,
                     "status": 2,
                     "priority": 1,
                 },
