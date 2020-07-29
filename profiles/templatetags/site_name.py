@@ -7,5 +7,4 @@ register = template.Library()
 @register.simple_tag(takes_context=True)
 def site_name(context):
     request = context.get("request")
-    st = get_site_name(request) + ": "
-    return st
+    return get_site_name(request) + ": "
