@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Give patient this key" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Give patient this key" %}</h1>
+    <div id="big-code">
+      <code>{{ code }}</code>
+      {% include "includes/expires_string.html" %}
+    </div>
+
+    <p>{% trans "Tell patient to:" %}</p>
+    <ul>
+      <li>{% trans "Keep the number somewhere safe" %}</li>
+      <li>{% blocktrans %}Enter the number within <strong>24 hours</strong> or it will expire{% endblocktrans %}</li>
+      <li>{% trans "Contact your office if they lose the number or it doesn’t work" %}</li>
+      <li>{% trans "Use the app to anonymously notify people by tapping “Diagnosed with COVID-19? Enter number”. The app will guide the patient through the steps to enter the number." %}</li>
+    </ul>
+
+    <div class="content-button">
+      <a href="{% url 'start' %}" role='button' draggable='false'>{% trans "Next patient" %}</a>
+      <a class="secondary" href="{% url 'key_instructions' %}" role='button' draggable='false'>{% trans "Detailed instructions" %}</a>
+    </div>
+{% endblock %}

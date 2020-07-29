@@ -88,6 +88,17 @@ class AdminUserTestCase(TestCase):
 
         self.invited_email = "invited@test.com"
 
+    def login(self, credentials: dict = None, login_2fa: bool = True):
+        if credentials is None:
+            credentials = self.credentials
+
+        self.client.login(
+            username=credentials.get("email"), password=credentials.get("password")
+        )
+        if login_2fa:
+            user = HealthcareUser.objects.get(email=credentials.get("email"))
+            self.login_2fa(user)
+
     def login_2fa(self, user: HealthcareUser = None):
         if user is None:
             user = self.user
@@ -187,44 +198,11 @@ class AuthenticatedView(AdminUserTestCase):
         response = self.client.get(reverse("login"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "<h1>Log in</h1>")
+        self.assertContains(response, 'autocomplete="off"')
+
         #  Test logging in
         response = self.client.post("/en/login/", self.credentials, follow=True)
         self.assertTrue(response.context["user"].is_active)
-
-    def test_key(self):
-        """
-        Login and then see the key page and one generated code
-        """
-        self.client.login(username="test@test.com", password="testpassword")
-        response = self.client.get(reverse("key"))
-        self.assertEqual(response.status_code, 302)
-
-        self.login_2fa()
-
-        response = self.client.get(reverse("key"))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Give patient this key</h1>")
-        self.assertContains(
-            response, "<code>{}</code>".format(response.context["code"])
-        )
-
-    def test_key_instructions(self):
-        """
-        Login and then see the key instructions view and one generated code
-        """
-        self.client.login(username="test@test.com", password="testpassword")
-        response = self.client.get(reverse("key_instructions"))
-        self.assertEqual(response.status_code, 302)
-
-        self.login_2fa()
-
-        response = self.client.get(reverse("key_instructions"))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Give patient this key</h1>")
-        self.assertContains(response, "<h2>Instructions for patient</h2>")
-        self.assertContains(
-            response, "<code>{}</code>".format(response.context["code"])
-        )
 
 
 class i18nTestView(TestCase):
@@ -309,14 +287,14 @@ class SignupFlow(AdminUserTestCase):
         # assert a disabled input with the email value exists
         self.assertContains(
             response,
-            '<input type="text" name="email" value="{}" required disabled id="id_email">'.format(
+            '<input type="text" name="email" value="{}" autocomplete="off" required disabled id="id_email">'.format(
                 self.invited_email
             ),
         )
         # assert a disabled input with the province value exists
         self.assertContains(
             response,
-            '<input type="hidden" name="province" value="{}" disabled id="id_province">'.format(
+            '<input type="hidden" name="province" value="{}" autocomplete="off" disabled id="id_province">'.format(
                 self.credentials["province"].abbr
             ),
         )

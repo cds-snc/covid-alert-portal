@@ -15,9 +15,6 @@ urlpatterns = [
         TemplateView.as_view(template_name="profiles/landing.html"),
         name="landing",
     ),
-    # The otp_required is used directly in the view in this case
-    path("key/", views.code, name="key"),
-    path("key-instructions/", views.code, name="key_instructions"),
     path(
         "start/",
         login_required(
