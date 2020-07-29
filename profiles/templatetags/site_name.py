@@ -8,5 +8,4 @@ register = template.Library()
 def site_name(context):
     request = context.get("request")
     st = get_site_name(request) + ": "
-    print(st)
     return st
