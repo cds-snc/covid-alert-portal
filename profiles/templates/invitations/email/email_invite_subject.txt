@@ -1,1 +1,3 @@
-{{ subject_line }}
+{% load i18n %}
+{% trans "Your portal account" as subject %}
+{{ subject_line|default:subject }}
