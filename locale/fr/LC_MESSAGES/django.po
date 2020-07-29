@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-24 17:29+0000\n"
+"POT-Creation-Date: 2020-07-29 20:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,71 +18,30 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: covid_key/templates/covid_key/key.html:4
-#: covid_key/templates/covid_key/key.html:7
-#: covid_key/templates/covid_key/key_instructions.html:6
-#: covid_key/templates/covid_key/key_instructions.html:9
+#: covid_key/templates/covid_key/key.html:6
+#: covid_key/templates/covid_key/key.html:9
 msgid "Give patient this key"
 msgstr "Donnez la clé suivante au patient"
 
-#: covid_key/templates/covid_key/key.html:13
-msgid "Tell patient to:"
-msgstr "Dites au patient de :"
-
-#: covid_key/templates/covid_key/key.html:15
-msgid "Keep the number somewhere safe"
-msgstr "Garder le numéro dans un endroit sûr"
-
-#: covid_key/templates/covid_key/key.html:16
-msgid "Enter the number within <strong>24 hours</strong> or it will expire"
-msgstr ""
-"Utiliser le numéro au cours des <strong>24 prochaines heures</strong>, sinon "
-"il sera expiré"
-
 #: covid_key/templates/covid_key/key.html:17
-msgid "Contact your office if they lose the number or it doesn’t work"
-msgstr ""
-"Communiquer avec votre bureau s’il perd le numéro ou si le numéro ne "
-"fonctionne pas"
-
-#: covid_key/templates/covid_key/key.html:18
-msgid ""
-"Use the app to anonymously notify people by tapping “Diagnosed with "
-"COVID-19? Enter number”. The app will guide the patient through the steps to "
-"enter the number."
-msgstr ""
-"Utiliser l’application mobile pour aviser de façon anonyme les autres "
-"personnes en appuyant sur « Vous avez la COVID-19? Entrer le numéro ». "
-"L’application guidera le patient pour qu’il entre son numéro."
-
-#: covid_key/templates/covid_key/key.html:22
-#: covid_key/templates/covid_key/key_instructions.html:56
-msgid "Next patient"
-msgstr "Prochain patient"
-
-#: covid_key/templates/covid_key/key.html:23
-msgid "Detailed instructions"
-msgstr "Instructions détaillées"
-
-#: covid_key/templates/covid_key/key_instructions.html:15
 msgid "Instructions for patient"
 msgstr "Instructions pour le patient"
 
-#: covid_key/templates/covid_key/key_instructions.html:19
-msgid "Tap ‘Enter your one-time key’."
+#: covid_key/templates/covid_key/key.html:23
+msgid "Tap “Enter your one-time key”."
 msgstr "Appuyez sur « Entrer votre clé »."
 
-#: covid_key/templates/covid_key/key_instructions.html:25
+#: covid_key/templates/covid_key/key.html:29
 msgid "Tap “Next” on “Let people know they may have been exposed”."
 msgstr ""
 "Appuyez sur « Suivant » dans l’écran « Aviser les autres personnes d’une "
 "exposition potentielle »."
 
-#: covid_key/templates/covid_key/key_instructions.html:31
-msgid "Enter the key and tap “Submit”"
+#: covid_key/templates/covid_key/key.html:35
+msgid "Enter the key and tap “Submit”."
 msgstr "Entrez la clé et appuyez sur « Envoyer »."
 
-#: covid_key/templates/covid_key/key_instructions.html:37
+#: covid_key/templates/covid_key/key.html:41
 msgid ""
 "If you want to notify people, you need to give COVID Alert permission to "
 "upload random codes. Tap “Agree” on “Now you can upload codes”."
@@ -91,14 +50,14 @@ msgstr ""
 "COVID à téléverser vos codes aléatoires. Appuyez sur « Accepter » dans "
 "l’écran « Vous pouvez maintenant téléverser vos codes »."
 
-#: covid_key/templates/covid_key/key_instructions.html:43
+#: covid_key/templates/covid_key/key.html:47
 msgid ""
 "Tap “Share” on “Share your random codes from this device with COVID Alert?”."
 msgstr ""
 "Appuyez sur « Partager » dans la fenêtre « Partager les identifiants "
 "aléatoires de votre appareil avec Alerte COVID? »."
 
-#: covid_key/templates/covid_key/key_instructions.html:49
+#: covid_key/templates/covid_key/key.html:53
 msgid ""
 "COVID Alert will ask permission to upload random codes daily for the next 13 "
 "days."
@@ -106,13 +65,18 @@ msgstr ""
 "Chaque jour, pendant les 13 jours qui suivent, Alerte COVID demandera "
 "l’autorisation de téléverser les codes aléatoires."
 
+#: covid_key/templates/covid_key/key.html:59
+msgid "Next patient"
+msgstr "Prochain patient"
+
 #: covid_key/templates/covid_key/throttled.html:4
 msgid "Daily limit reached"
 msgstr "Limite journalière atteinte"
 
 #: covid_key/templates/covid_key/throttled.html:7
 msgid "You have hit your daily limit of code generation."
-msgstr "Vous avez atteint votre limite journalière pour la génération des codes."
+msgstr ""
+"Vous avez atteint votre limite journalière pour la génération des codes."
 
 #: portal/settings.py:281
 msgid ""
@@ -260,45 +224,49 @@ msgstr "Nous vous enverrons un courriel pour créer un nouveau mot de passe."
 msgid "Send email"
 msgstr "Envoyer"
 
-#: profiles/forms.py:50
+#: profiles/admin.py:101
+msgid "Number of keys generated in the last 24 hours"
+msgstr ""
+
+#: profiles/forms.py:52
 msgid "Enter a valid email address"
 msgstr "Entrez une adresse courriel valide"
 
-#: profiles/forms.py:52 profiles/forms.py:96 profiles/forms.py:105
-#: profiles/forms.py:182
+#: profiles/forms.py:54 profiles/forms.py:98 profiles/forms.py:107
+#: profiles/forms.py:184
 #: profiles/templates/invitations/templates/invite_list.html:18
 #: profiles/templates/profiles/healthcareuser_detail.html:28
 #: profiles/templates/profiles/healthcareuser_list.html:17
 msgid "Email address"
 msgstr "Adresse courriel"
 
-#: profiles/forms.py:81
+#: profiles/forms.py:83
 msgid "Please enter the security code."
 msgstr "Veuillez enter le code de sécurité."
 
-#: profiles/forms.py:109
+#: profiles/forms.py:111
 msgid "Full name"
 msgstr "Nom complet"
 
-#: profiles/forms.py:113
+#: profiles/forms.py:115
 msgid ""
 "A single use code will be sent to this phone number every time you try to "
 "log in. Include a +1 before your number."
 msgstr ""
 
-#: profiles/forms.py:117
+#: profiles/forms.py:119
 msgid "Enter the same phone number as before, for verification"
 msgstr ""
 
-#: profiles/forms.py:144
+#: profiles/forms.py:146
 msgid "Email already exists"
 msgstr "L’adresse courriel existe déjà"
 
-#: profiles/forms.py:146
+#: profiles/forms.py:148
 msgid "An invitation hasn't been sent to this address"
 msgstr ""
 
-#: profiles/forms.py:159
+#: profiles/forms.py:161
 msgid "The phone number fields don‘t match."
 msgstr ""
 
@@ -1021,16 +989,3 @@ msgstr ""
 #: profiles/views.py:154
 msgid ": Your portal account"
 msgstr " : votre compte pour le Portail"
-
-#~ msgid "COVID Health Portal administration"
-#~ msgstr "Administration du Portail Alerte COVID"
-
-#~ msgid "Pending"
-#~ msgstr "En attente"
-
-#~ msgid "Resend invitation"
-#~ msgstr "Ré-envoyer un courriel d’invitation"
-
-#~ msgid ""
-#~ "Are you sure you want to delete invitation sent to %(invitation.email)s?"
-#~ msgstr "Confirmer le retrait de l’invitation"
