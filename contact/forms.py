@@ -16,11 +16,10 @@ class ContactForm(forms.Form):
             "required": _("Enter your email address if you want to contact us")
         },
     )
+    FEEDBACK_MESSAGE = _("You need to tell us about your issue before you contact us")
     feedback = forms.CharField(
         label=_("Ask questions or give feedback"),
-        error_messages={
-            "required": _("You need to tell us about your issue before you contact us")
-        },
+        error_messages={"required": FEEDBACK_MESSAGE},
         widget=forms.Textarea,
     )
 
