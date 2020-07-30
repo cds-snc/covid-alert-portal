@@ -190,8 +190,8 @@ SECURE_BROWSER_XSS_FILTER = is_prod
 # Prefix session and csrf cookie names so they can not be over ridden by insecure hosts.
 SESSION_COOKIE_NAME = "__secure-sessionid"
 CSRF_COOKIE_NAME = "__secure-csrftoken"
-# Limit session times to 20h, this should make it that users need to relogin every morning.
-SESSION_COOKIE_AGE = 72000
+# Limit session time to 1h of inactivity
+SESSION_COOKIE_AGE = 3600
 
 # Setting SECURE_SSL_REDIRECT on heroku was causing infinite redirects without this
 if is_prod:

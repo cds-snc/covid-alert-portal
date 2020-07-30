@@ -18,7 +18,7 @@ WORKDIR /code
 # Install dependencies
 RUN pip install 'pipenv==2018.11.26'
 COPY Pipfile Pipfile.lock /code/
-RUN pipenv install --system
+RUN pipenv install --system --dev
 
 # Copy project
 COPY . /code/

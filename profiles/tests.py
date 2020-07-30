@@ -11,6 +11,8 @@ from invitations.models import Invitation
 from .forms import SignupForm
 from .models import HealthcareProvince, HealthcareUser
 from .validators import BannedPasswordValidator
+from datetime import datetime, timedelta
+from freezegun import freeze_time
 
 
 User = get_user_model()
@@ -203,6 +205,16 @@ class AuthenticatedView(AdminUserTestCase):
         #  Test logging in
         response = self.client.post("/en/login/", self.credentials, follow=True)
         self.assertTrue(response.context["user"].is_active)
+
+    def test_1hour_expiry(self):
+        self.login()
+        response = self.client.get(reverse("key"))
+        self.assertEqual(response.status_code, 200)
+        now = datetime.now()
+        expiry = now + timedelta(seconds=settings.SESSION_COOKIE_AGE + 1)
+        with freeze_time(expiry):
+            response = self.client.get(reverse("key"))
+            self.assertRedirects(response, "/en/login/?next=/en/key/")
 
 
 class i18nTestView(TestCase):

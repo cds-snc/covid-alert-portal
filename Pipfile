@@ -14,6 +14,7 @@ serve = "python manage.py runserver"
 [dev-packages]
 black = "*"
 flake8 = "*"
+freezegun = "*"
 
 [packages]
 django = "*"
