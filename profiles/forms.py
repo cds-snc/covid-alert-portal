@@ -18,21 +18,9 @@ from invitations.forms import (
     InvitationAdminChangeForm,
 )
 
+from portal.forms import HealthcareBaseForm
 from .models import HealthcareUser, HealthcareProvince
 from .utils import generate_2fa_code
-
-
-class HealthcareBaseForm(forms.Form):
-    def __init__(self, *args, **kwargs):
-        # Remove the colon after field labels
-        kwargs.setdefault("label_suffix", "")
-        super().__init__(*args, **kwargs)
-
-        # override field attributes: https://stackoverflow.com/a/56870308
-        for field in self.fields:
-            self.fields[field].widget.attrs.pop("autofocus", None)
-            # remove autocomplete attributes
-            self.fields[field].widget.attrs.update({"autocomplete": "off"})
 
 
 class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
@@ -207,7 +195,8 @@ class HealthcareInvitationAdminAddForm(InvitationAdminAddForm):
         }
         instance = Invitation.create(**params)
         instance.send_invitation(self.request)
-        super().save(*args, **kwargs)
+        # We can't call InvitationAdminForm here, it would try to send 2 invitations
+        super(forms.ModelForm, self).save(*args, **kwargs)
         return instance
 
     class Meta:

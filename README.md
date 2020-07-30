@@ -86,6 +86,15 @@ We use Notify and django-otp to send login auth code via SMS.
 
 [Read the docs here](https://django-otp-notify.readthedocs.io/en/latest/)
 
+
+#### Contact form and Freshdesk
+
+The contact form sends any inquiry to Freshdesk.
+
+- `FRESHDESK_API_KEY`: Your user API key generated in Freshdesk.
+- `FRESHDESK_API_ENDPOINT`: Your Freshdesk domain with `/api/v2/` at the end.
+- `FRESHDESK_PRODUCT_ID`: If you use more than one product, use this variable to specify where the feedback should go to.
+
 ### Running the app for the first time
 
 **Quick Start:** After activating a virtual environment run the `entrypoint.sh` script to perform the database migrations, static file collection, and compilation of the CSS files. A server will then be started and can be accessed at `http://127.0.0.1:8000/` or `http://localhost:8000`.

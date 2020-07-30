@@ -63,11 +63,9 @@ def _generate_key(request):
         f"{diagnosis_code[0:3]} {diagnosis_code[3:6]} {diagnosis_code[6:10]}"
     )
 
-    template_name = "key_instructions" if "/key-instructions" in request.path else "key"
-
     return render(
         request,
-        f"covid_key/{template_name}.html",
+        "covid_key/key.html",
         {"code": diagnosis_code, "expiry": covid_key.expiry},
     )
 

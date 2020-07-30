@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% if form.errors %}{% trans "Error: "%}{% endif %}
+    {% trans "Contact us" %}
+{% endblock %}
+
+
+{% block content %}
+    {% include  "includes/error_list.html" %}
+
+    <h1>{% trans "Contact us" %}</h1>
+    {% include "includes/cds_form.html" with submit_text=_("Send") %}
+{% endblock %}
