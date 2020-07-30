@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     "profiles",
     "covid_key",
     "invitations",
+    "contact",
     "axes",
     "django.contrib.sites",  # Required for invitations
     "django.contrib.auth",
@@ -318,3 +319,7 @@ CSP_SCRIPT_SRC = [
     "bam.nr-data.net",
 ]
 CSP_CONNECT_SRC = ["'self'", "bam.nr-data.net"]
+
+FRESHDESK_API_ENDPOINT = os.getenv("FRESHDESK_API_ENDPOINT")
+FRESHDESK_API_KEY = os.getenv("FRESHDESK_API_KEY")
+FRESHDESK_PRODUCT_ID = int(os.getenv("FRESHDESK_PRODUCT_ID", 0)) or None

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-29 20:52+0000\n"
+"POT-Creation-Date: 2020-07-30 16:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,63 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: contact/forms.py:12
+msgid "Your name"
+msgstr "Votre nom"
+
+#: contact/forms.py:14
+msgid "Your email address"
+msgstr "Votre adresse courriel"
+
+#: contact/forms.py:16
+msgid "Enter your email address if you want to contact us"
+msgstr "Entrez votre courriel si vous voulez nous contacter."
+
+#: contact/forms.py:19
+msgid "You need to tell us about your issue before you contact us"
+msgstr "Le champ commentaire est obligatoire."
+
+#: contact/forms.py:21
+msgid "Ask questions or give feedback"
+msgstr "Questions ou commentaires"
+
+#: contact/forms.py:46
+msgid "We are unable to send your feedback at the moment. Please try again."
+msgstr "Une erreur est survenue. Veuillez ré-essayer."
+
+#: contact/templates/contact/form.html:5
+#: portal/templates/registration/login.html:5
+#: portal/templates/registration/password_reset_confirm.html:5
+#: portal/templates/registration/password_reset_form.html:5
+#: profiles/templates/invitations/templates/invitation_confirm_delete.html:5
+#: profiles/templates/invitations/templates/invite.html:5
+#: profiles/templates/invitations/templates/invite_complete.html:5
+#: profiles/templates/invitations/templates/invite_list.html:5
+#: profiles/templates/profiles/2fa-resend.html:5
+#: profiles/templates/profiles/2fa.html:5
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:5
+#: profiles/templates/profiles/signup.html:5
+msgid "Error: "
+msgstr "Erreur : "
+
+#: contact/templates/contact/form.html:6 contact/templates/contact/form.html:13
+#: portal/templates/includes/footer.html:8
+msgid "Contact us"
+msgstr "Nous joindre"
+
+#: contact/templates/contact/form.html:14
+msgid "Send"
+msgstr "Envoyer"
+
+#: contact/templates/contact/success.html:5
+#: contact/templates/contact/success.html:10
+msgid "Thank you for contacting us"
+msgstr "Merci de nous avoir contactés."
+
+#: contact/templates/contact/success.html:11
+msgid "We’ll reply as soon as possible."
+msgstr "Nous vous répondrons le plus rapidement possible."
 
 #: covid_key/templates/covid_key/key.html:6
 #: covid_key/templates/covid_key/key.html:9
@@ -78,7 +135,7 @@ msgid "You have hit your daily limit of code generation."
 msgstr ""
 "Vous avez atteint votre limite journalière pour la génération des codes."
 
-#: portal/settings.py:281
+#: portal/settings.py:282
 msgid ""
 "This account has been locked due to too many failed log in attempts. Please "
 "try again after 5 minutes."
@@ -121,13 +178,13 @@ msgstr "La clé expire le"
 msgid "at"
 msgstr "à"
 
-#: portal/templates/includes/footer.html:8
+#: portal/templates/includes/footer.html:9
 #: profiles/templates/profiles/privacy.html:5
 #: profiles/templates/profiles/privacy.html:11
 msgid "Privacy"
 msgstr "Confidentialité"
 
-#: portal/templates/includes/footer.html:11
+#: portal/templates/includes/footer.html:12
 msgid "Symbol of the Government of Canada"
 msgstr "Symbole du gouvernement du Canada"
 
@@ -181,19 +238,6 @@ msgid ""
 "unlocked in a few minutes and you can try logging in again."
 msgstr ""
 
-#: portal/templates/registration/login.html:5
-#: portal/templates/registration/password_reset_form.html:5
-#: profiles/templates/invitations/templates/invitation_confirm_delete.html:5
-#: profiles/templates/invitations/templates/invite.html:5
-#: profiles/templates/invitations/templates/invite_complete.html:5
-#: profiles/templates/invitations/templates/invite_list.html:5
-#: profiles/templates/profiles/2fa-resend.html:5
-#: profiles/templates/profiles/2fa.html:5
-#: profiles/templates/profiles/healthcareuser_confirm_delete.html:5
-#: profiles/templates/profiles/signup.html:5
-msgid "Error: "
-msgstr "Erreur : "
-
 #: portal/templates/registration/login.html:14
 #: profiles/templates/profiles/signup.html:14
 msgid "Next"
@@ -204,6 +248,35 @@ msgstr "Suivant"
 #: portal/templates/registration/password_reset_form.html:12
 msgid "Forgot your password?"
 msgstr "Mot de passe oublié?"
+
+#: portal/templates/registration/password_reset_complete.html:4
+#: portal/templates/registration/password_reset_complete.html:7
+msgid "Password reset complete"
+msgstr ""
+
+#: portal/templates/registration/password_reset_complete.html:10
+#, python-format
+msgid ""
+"Your new password has been set. <a href=\"%(login_url)s\">Log in</a> with "
+"your new password."
+msgstr ""
+
+#: portal/templates/registration/password_reset_confirm.html:6
+#: portal/templates/registration/password_reset_confirm.html:14
+#, fuzzy
+#| msgid "Forgot your password?"
+msgid "Change your password"
+msgstr "Mot de passe oublié?"
+
+#: portal/templates/registration/password_reset_confirm.html:16
+msgid "Change password"
+msgstr ""
+
+#: portal/templates/registration/password_reset_confirm.html:19
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
 
 #: portal/templates/registration/password_reset_done.html:4
 #: portal/templates/registration/password_reset_done.html:7
@@ -223,6 +296,10 @@ msgstr "Nous vous enverrons un courriel pour créer un nouveau mot de passe."
 #: portal/templates/registration/password_reset_form.html:15
 msgid "Send email"
 msgstr "Envoyer"
+
+#: portal/templates/registration/password_reset_subject.txt:2
+msgid "Password reset"
+msgstr ""
 
 #: profiles/admin.py:101
 msgid "Number of keys generated in the last 24 hours"
@@ -269,6 +346,12 @@ msgstr ""
 #: profiles/forms.py:161
 msgid "The phone number fields don‘t match."
 msgstr ""
+
+#: profiles/templates/invitations/email/email_invite_subject.txt:2
+#, fuzzy
+#| msgid ": Your portal account"
+msgid "Your portal account"
+msgstr " : votre compte pour le Portail"
 
 #: profiles/templates/invitations/forms/_invite.html:3
 msgid "Invite"

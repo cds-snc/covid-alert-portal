@@ -11,7 +11,8 @@ main form {
     }
 
     > input,
-    > select {
+    > select,
+    > textarea {
       margin-top: 8px;
 
       &:not([disabled]) {
