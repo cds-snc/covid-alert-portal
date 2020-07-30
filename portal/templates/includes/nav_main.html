@@ -7,7 +7,7 @@
       {% if user.is_admin %}
         <li><a {% if request.resolver_match.url_name == 'profiles' %}class="active"{% endif %} href="{% url 'profiles' %}">{% trans "Manage accounts" %}</a></li>
       {% endif %}
-      <li><a {% if request.resolver_match.url_name == 'index' %}class="active"{% endif %} href="{% url 'contact:index' %}">{% trans "Contact us" %}</a></li>
+      <li><a {% if request.resolver_match.url_name == 'index' and 'contact' in request.resolver_match.app_names %}class="active"{% endif %} href="{% url 'contact:index' %}">{% trans "Contact us" %}</a></li>
     </ul>
   </div>
 </nav>
