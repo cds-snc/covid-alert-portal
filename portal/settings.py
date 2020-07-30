@@ -156,6 +156,7 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
         "OPTIONS": {"user_attributes": ["name", "username"]},
     },
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
     {"NAME": "profiles.validators.BannedPasswordValidator"},
 ]
 

@@ -108,9 +108,9 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
     )
 
     field_order = [
+        "name",
         "email",
         "province",
-        "name",
         "phone_number",
         "phone_number_confirmation",
         "password1",
