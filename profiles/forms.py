@@ -207,7 +207,8 @@ class HealthcareInvitationAdminAddForm(InvitationAdminAddForm):
         }
         instance = Invitation.create(**params)
         instance.send_invitation(self.request)
-        super().save(*args, **kwargs)
+        # We can't call InvitationAdminForm here, it would try to send 2 invitations
+        super(forms.ModelForm, self).save(*args, **kwargs)
         return instance
 
     class Meta:

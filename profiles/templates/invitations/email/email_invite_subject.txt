@@ -1,1 +1,6 @@
-{{ subject_line }}
+{% load i18n site_name %}
+{% trans "Your portal account" as suffix %}
+{% site_name as prefix %}
+{% with prefix|add:suffix as subject %}
+{{ subject_line|default:subject }}
+{% endwith %}
