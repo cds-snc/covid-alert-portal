@@ -8,6 +8,7 @@ from django.contrib.auth import views as login_views
 from . import views
 from . import forms
 
+
 urlpatterns = [
     path("", RedirectView.as_view(pattern_name="landing")),
     path(
@@ -58,6 +59,10 @@ urlpatterns = [
     path("", include("django.contrib.auth.urls")),
 ]
 
+# The PasswordResetView doesn't have any html template by default
+PasswordResetView.html_email_template_name = (
+    "registration/password_reset_email_html.html"
+)
 # Django.contrib.auth urls have underscore in them, let's change that for dashes
 urlpatterns += [
     path(
