@@ -192,6 +192,7 @@ SESSION_COOKIE_NAME = "__secure-sessionid"
 CSRF_COOKIE_NAME = "__secure-csrftoken"
 # Limit session time to 1h of inactivity
 SESSION_COOKIE_AGE = 3600
+SESSION_SAVE_EVERY_REQUEST = True
 
 # Setting SECURE_SSL_REDIRECT on heroku was causing infinite redirects without this
 if is_prod:

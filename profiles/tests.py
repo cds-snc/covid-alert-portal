@@ -206,7 +206,7 @@ class AuthenticatedView(AdminUserTestCase):
         response = self.client.post("/en/login/", self.credentials, follow=True)
         self.assertTrue(response.context["user"].is_active)
 
-    def test_1hour_expiry(self):
+    def test_1hour_inactivity(self):
         self.login()
         response = self.client.get(reverse("key"))
         self.assertEqual(response.status_code, 200)
@@ -215,6 +215,26 @@ class AuthenticatedView(AdminUserTestCase):
         with freeze_time(expiry):
             response = self.client.get(reverse("key"))
             self.assertRedirects(response, "/en/login/?next=/en/key/")
+
+    def test_1hour_with_activity(self):
+        self.login()
+        response = self.client.get(reverse("key"))
+        self.assertEqual(response.status_code, 200)
+        now = datetime.now()
+        expiry = now + timedelta(seconds=settings.SESSION_COOKIE_AGE / 2)
+        with freeze_time(expiry):
+            response = self.client.get(reverse("key"))
+            self.assertEqual(response.status_code, 200)
+
+        expiry = now + timedelta(seconds=settings.SESSION_COOKIE_AGE + 1)
+        with freeze_time(expiry):
+            response = self.client.get(reverse("key"))
+            self.assertEqual(response.status_code, 200)
+
+        expiry = now + timedelta(seconds=settings.SESSION_COOKIE_AGE + (settings.SESSION_COOKIE_AGE / 2) + 2)
+        with freeze_time(expiry):
+            response = self.client.get(reverse("key"))
+            self.assertEqual(response.status_code, 302)
 
 
 class i18nTestView(TestCase):
