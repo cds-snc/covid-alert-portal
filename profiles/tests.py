@@ -221,18 +221,21 @@ class AuthenticatedView(AdminUserTestCase):
         response = self.client.get(reverse("key"))
         self.assertEqual(response.status_code, 200)
         now = datetime.now()
+        # 30 minutes
         expiry = now + timedelta(seconds=settings.SESSION_COOKIE_AGE / 2)
         with freeze_time(expiry):
             response = self.client.get(reverse("key"))
             self.assertEqual(response.status_code, 200)
 
-        expiry = now + timedelta(seconds=settings.SESSION_COOKIE_AGE + 1)
-        with freeze_time(expiry):
+        # 1 hour + 1 second from original request
+        expiry2 = now + timedelta(seconds=settings.SESSION_COOKIE_AGE + 1)
+        with freeze_time(expiry2):
             response = self.client.get(reverse("key"))
             self.assertEqual(response.status_code, 200)
 
-        expiry = now + timedelta(seconds=settings.SESSION_COOKIE_AGE + (settings.SESSION_COOKIE_AGE / 2) + 2)
-        with freeze_time(expiry):
+        # 2h + 2 sec
+        expiry3 = now + timedelta(seconds=(settings.SESSION_COOKIE_AGE * 2) + 2)
+        with freeze_time(expiry3):
             response = self.client.get(reverse("key"))
             self.assertEqual(response.status_code, 302)
 
