@@ -1,0 +1,40 @@
+details {
+  margin-bottom: $space-lg;
+  list-style-type: none;
+  border: 1px solid #bcbcbc;
+  border-radius: 5px;
+
+  summary {
+    margin: $space-xs $space-sm;
+    color: $color-blue-dark;
+    cursor: pointer;
+    // the little arrow disappears in firefox unless this is set explicitly
+    display: list-item;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &:focus {
+      outline: 0 !important;
+
+      > span {
+        @include focus($outlineOffset: 2px);
+      }
+    }
+
+    & ~ div {
+      border-top: 1px solid #bcbcbc;
+      padding: $space-lg $space-sm $space-sm $space-sm;
+
+      @include xs {
+        padding-left: $space-lg;
+        padding-right: $space-md;
+      }
+
+      @include sm {
+        padding-left: 42px; /* need a custom size here because of the arrow */
+      }
+    }
+  }
+}
