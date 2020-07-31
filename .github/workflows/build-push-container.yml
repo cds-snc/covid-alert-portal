@@ -10,7 +10,7 @@ env:
 
 jobs:
   terraform-security-scan:
-    if: github.ref != 'refs/heads/master'
+    if: github.ref == 'refs/heads/aws_docker_build_2'
     runs-on: ubuntu-latest
     continue-on-error: false
     steps:
@@ -21,6 +21,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build-n-push:
+    if: github.ref == 'main'
     runs-on: ubuntu-latest
     steps:
       - name: Wait for container to pass Django CI 3.6 Test
