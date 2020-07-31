@@ -1,5 +1,6 @@
 main form {
-  input, textarea {
+  input,
+  textarea {
     display: block;
     margin: 0;
     font-size: inherit;
@@ -22,12 +23,16 @@ main form {
     height: 2.5rem;
   }
 
-  .fieldWrapper--has-error input {
-    border: 2px solid $color-red;
+  .fieldWrapper--has-error {
+    input,
+    textarea {
+      border: 2px solid $color-red;
 
-    &:focus {
-      -webkit-box-shadow: inset 0 0 0 2px $color-red;
-      box-shadow: inset 0 0 0 2px $color-red;
+      &:focus {
+        border: 2px solid $color-black;
+        -webkit-box-shadow: inset 0 0 0 2px $color-red;
+        box-shadow: inset 0 0 0 2px $color-red;
+      }
     }
   }
 }
