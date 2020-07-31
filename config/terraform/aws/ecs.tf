@@ -16,7 +16,7 @@ resource "aws_ecs_cluster" "covidportal" {
 }
 
 locals {
-  portal_repo  = aws_ecr_repository.repository.repository_url
+  portal_repo = aws_ecr_repository.repository.repository_url
 }
 
 ###
@@ -29,31 +29,34 @@ data "template_file" "covidportal_task" {
   template = file("task-definitions/covid-portal.json")
 
   vars = {
-    image                 = "${local.portal_repo}"
-    awslogs-group         = aws_cloudwatch_log_group.covidportal.name
-    awslogs-region        = var.region
-    awslogs-stream-prefix = "ecs-${var.ecs_covid_portal_name}"
-    database_url          = aws_secretsmanager_secret_version.server_database_url.arn
-    metric_provider       = var.metric_provider
-    tracer_provider       = var.tracer_provider
-    api_authorization     = aws_secretsmanager_secret_version.api_authorization.arn
-    api_endpoint          = aws_secretsmanager_secret_version.api_endpoint.arn
-    default_from_email    = aws_secretsmanager_secret_version.default_from_email.arn
-    django_admins         = aws_secretsmanager_secret_version.django_admins.arn
-    django_secret_key     = aws_secretsmanager_secret_version.django_secret_key.arn
-    email_host            = aws_secretsmanager_secret_version.email_host.arn
-    email_host_user       = aws_secretsmanager_secret_version.email_host_user.arn
-    email_host_password   = aws_secretsmanager_secret_version.email_host_password.arn
-    email_port            = var.email_port
-    email_use_tls         = var.email_use_tls
-    new_relic_license_key = aws_secretsmanager_secret_version.new_relic_license_key.arn
-    django_env            = var.django_env
-    django_allowed_hosts  = var.django_allowed_hosts
-    django_email_backend  = var.email_backend
-    new_relic_app_name    = var.new_relic_app_name
-    dual_urls             = var.dual_urls
-    notify_api_key        = aws_secretsmanager_secret_version.notify_api_key.arn
-    notify_template_id    = aws_secretsmanager_secret_version.notify_template_id.arn
+    image                  = "${local.portal_repo}"
+    awslogs-group          = aws_cloudwatch_log_group.covidportal.name
+    awslogs-region         = var.region
+    awslogs-stream-prefix  = "ecs-${var.ecs_covid_portal_name}"
+    database_url           = aws_secretsmanager_secret_version.server_database_url.arn
+    metric_provider        = var.metric_provider
+    tracer_provider        = var.tracer_provider
+    api_authorization      = aws_secretsmanager_secret_version.api_authorization.arn
+    api_endpoint           = aws_secretsmanager_secret_version.api_endpoint.arn
+    default_from_email     = aws_secretsmanager_secret_version.default_from_email.arn
+    django_admins          = aws_secretsmanager_secret_version.django_admins.arn
+    django_secret_key      = aws_secretsmanager_secret_version.django_secret_key.arn
+    email_host             = aws_secretsmanager_secret_version.email_host.arn
+    email_host_user        = aws_secretsmanager_secret_version.email_host_user.arn
+    email_host_password    = aws_secretsmanager_secret_version.email_host_password.arn
+    email_port             = var.email_port
+    email_use_tls          = var.email_use_tls
+    freshdesk_api_endpoint = aws_secretsmanager_secret_version.freshdesk_api_endpoint.arn
+    freshdesk_api_key      = aws_secretsmanager_secret_version.freshdesk_api_key.arn
+    freshdesk_product_id   = aws_secretsmanager_secret_version.freshdesk_product_id.arn
+    new_relic_license_key  = aws_secretsmanager_secret_version.new_relic_license_key.arn
+    django_env             = var.django_env
+    django_allowed_hosts   = var.django_allowed_hosts
+    django_email_backend   = var.email_backend
+    new_relic_app_name     = var.new_relic_app_name
+    dual_urls              = var.dual_urls
+    notify_api_key         = aws_secretsmanager_secret_version.notify_api_key.arn
+    notify_template_id     = aws_secretsmanager_secret_version.notify_template_id.arn
 
   }
 }
