@@ -63,6 +63,8 @@ if os.getenv("DJANGO_ADMINS"):
     # DJANGO_ADMINS expects a tuple formatted as a string, eg '[("Paul", "paul@example.com"),("Bryan", "bryan@example.com")]'
     ADMINS.extend(ast.literal_eval(os.getenv("DJANGO_ADMINS")))
 
+GITHUB_SHA = os.getenv("GITHUB_SHA") or None
+
 # Application definition
 
 INSTALLED_APPS = [

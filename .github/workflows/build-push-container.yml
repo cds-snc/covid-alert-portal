@@ -48,7 +48,7 @@ jobs:
           docker build \
           -t $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA \
           -t $ECR_REGISTRY/$ECR_REPOSITORY:latest \
-          --build-arg GITHUB_SHA_ARG=${{ github.sha }} .
+          --build-arg GITHUB_SHA_ARG=$GITHUB_SHA .
       - name: Push containers to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr-covid-portal.outputs.registry }}

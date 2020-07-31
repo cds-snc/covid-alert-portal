@@ -3,6 +3,9 @@
 # Pull base image
 FROM python:3.8-slim
 
+ARG GITHUB_SHA_ARG
+ENV GITHUB_SHA=$GITHUB_SHA_ARG
+
 # Installs gettext utilities required to makemessages and compilemessages
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	gettext \
