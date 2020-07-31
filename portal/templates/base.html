@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-{% load static %}
-{% load i18n %}
+{% load static i18n new_relic settings %}
 {% get_current_language as LANGUAGE_CODE %}
-{% load new_relic %}
 <html lang="{{ LANGUAGE_CODE }}">
   <head>
     {% new_relic %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Refresh" content="{{ "SESSION_COOKIE_AGE"|get_setting|add:1 }}; url={% url 'session_timed_out' %}">
     <!-- Bootstrap -->
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
     <!-- Google fonts -->

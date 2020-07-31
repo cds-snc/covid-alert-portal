@@ -208,5 +208,9 @@ class UserDeleteView(Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView):
 
 
 def redirect_after_timed_out(request):
-    messages.add_message(request, messages.INFO, _('Your session timed out. Log in again to continue using the portal.'))
-    return redirect(reverse_lazy('login'))
+    messages.add_message(
+        request,
+        messages.INFO,
+        _("Your session timed out. Log in again to continue using the portal."),
+    )
+    return redirect(reverse_lazy("login"))
