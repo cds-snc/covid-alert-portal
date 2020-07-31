@@ -10,4 +10,4 @@ python manage.py createdefaultsuperuser
 
 # Start server
 echo "Starting server"
-uwsgi --http :8000 --master --module portal.wsgi --static-map /static=/opt/app/staticfiles --enable-threads --processes 2
+uwsgi --http :8000 --master --module portal.wsgi --static-map /static=/code/staticfiles --enable-threads --processes 2

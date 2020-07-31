@@ -5,29 +5,30 @@ FROM python:3.8-slim
 
 # Installs gettext utilities required to makemessages and compilemessages
 RUN apt-get update && apt-get install -y --no-install-recommends \
-		gettext \
-		make \
-		build-essential \
-		mime-support \
-		git \
-	  && rm -rf /var/lib/apt/lists/*
+	gettext \
+	make \
+	build-essential \
+	mime-support \
+	git \
+	&& rm -rf /var/lib/apt/lists/*
 
 # Set work directory
-WORKDIR /opt/app/
+WORKDIR /code
 
 # Install pipenv
 RUN pip install 'pipenv==2018.11.26' uwsgi
 
 # Install dependencies
-COPY Pipfile Pipfile.lock /opt/app/
-RUN pipenv lock -r > requirements.txt && pip install -r requirements.txt
+RUN pip install 'pipenv==2018.11.26'
+COPY Pipfile Pipfile.lock /code/
+RUN pipenv install --system --dev
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 
-COPY . /opt/app/
+COPY . /code
 
 # Build static files
 
@@ -39,7 +40,7 @@ RUN python manage.py compilemessages
 
 RUN groupadd -r django && useradd --no-log-init -M -g django django
 
-RUN chown -R django:django /opt/app
+RUN chown -R django:django /code
 
 USER django:django
 
