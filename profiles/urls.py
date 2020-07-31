@@ -51,6 +51,7 @@ urlpatterns = [
     ),
     path("login-2fa/", views.Login2FAView.as_view(), name="login-2fa",),
     path("resend-2fa/", views.Resend2FAView.as_view(), name="resend-2fa",),
+    path("session-timed-out/", views.redirect_after_timed_out, name="session_timed_out"),
     path(
         "privacy/",
         TemplateView.as_view(template_name="profiles/privacy.html"),

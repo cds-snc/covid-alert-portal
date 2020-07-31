@@ -205,3 +205,8 @@ class UserDeleteView(Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView):
     model = HealthcareUser
     context_object_name = "profile_user"
     success_url = reverse_lazy("profiles")
+
+
+def redirect_after_timed_out(request):
+    messages.add_message(request, messages.INFO, _('Your session timed out. Log in again to continue using the portal.'))
+    return redirect(reverse_lazy('login'))
