@@ -64,89 +64,101 @@ variable "ecs_covid_portal_name" {
 
 # Task Covid Portal Secrets
 
-variable "ecs_secret_api_authorization"{
+variable "ecs_secret_api_authorization" {
   type = string
 }
 
-variable "ecs_secret_api_endpoint"{
+variable "ecs_secret_api_endpoint" {
   type = string
 }
 
-variable "ecs_secret_default_from_email"{
+variable "ecs_secret_default_from_email" {
   type = string
 }
 
-variable "ecs_secret_django_admins"{
+variable "ecs_secret_django_admins" {
   type = string
 }
 
-variable "ecs_secret_django_secret_key"{
+variable "ecs_secret_django_secret_key" {
   type = string
 }
 
-variable "ecs_secret_email_host"{
+variable "ecs_secret_email_host" {
   type = string
 }
 
-variable "ecs_secret_email_host_user"{
+variable "ecs_secret_email_host_user" {
   type = string
 }
 
-variable "ecs_secret_email_host_password"{
+variable "ecs_secret_email_host_password" {
   type = string
 }
 
-variable "ecs_secret_new_relic_license_key"{
+variable "ecs_secret_freshdesk_api_endpoint" {
   type = string
 }
 
-variable "ecs_secret_notify_api_key"{
+variable "ecs_secret_freshdesk_api_key" {
   type = string
 }
 
-variable "ecs_secret_notify_template_id"{
+variable "ecs_secret_freshdesk_product_id" {
+  type = string
+}
+
+variable "ecs_secret_new_relic_license_key" {
+  type = string
+}
+
+variable "ecs_secret_notify_api_key" {
+  type = string
+}
+
+variable "ecs_secret_notify_template_id" {
   type = string
 }
 
 # Task Covid Portal Env Vars
 
-variable "django_env"{
-  type = string
+variable "django_env" {
+  type    = string
   default = "production"
 }
 
-variable "django_allowed_hosts"{
+variable "django_allowed_hosts" {
   type = string
 }
 
-variable "email_backend"{
-  type = string
+variable "email_backend" {
+  type    = string
   default = "'django.core.mail.backends.smtp.EmailBackend'"
 }
 
-variable "new_relic_app_name"{
-  type = string
+variable "new_relic_app_name" {
+  type    = string
   default = "Terraform Covid Alert Portal"
 }
 
-variable "email_port"{
-  type = string
+variable "email_port" {
+  type    = string
   default = "587"
 }
 
-variable "email_use_tls"{
-  type = string
+variable "email_use_tls" {
+  type    = string
   default = "True"
 }
 
-variable "dual_urls"{
+variable "dual_urls" {
   type = string
 }
 
 
 
 
-# Covid Portal Scaling 
+# Covid Portal Scaling
 
 variable "portal_autoscale_enabled" {
   type = bool
@@ -197,7 +209,7 @@ variable "rds_server_db_name" {
   type = string
 }
 
-variable "rds_server_name"{
+variable "rds_server_name" {
   type = string
 }
 
