@@ -8,7 +8,7 @@
 
 {% block content %}
   {% include  "includes/error_list.html" %}
-  {% include  "includes/flash_messages.html" %}
+  {% include  "includes/flash_messages.html" with messages=logout_messages %}
 
   <h1>{% trans "Log in" %}</h1>
 

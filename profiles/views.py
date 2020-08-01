@@ -212,5 +212,6 @@ def redirect_after_timed_out(request):
         request,
         messages.INFO,
         _("Your session timed out. Log in again to continue using the portal."),
+        "logout",
     )
     return redirect(reverse_lazy("login"))

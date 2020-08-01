@@ -239,6 +239,13 @@ class AuthenticatedView(AdminUserTestCase):
             response = self.client.get(reverse("key"))
             self.assertEqual(response.status_code, 302)
 
+    def test_session_timed_out_message(self):
+        self.login()
+        response = self.client.get(reverse("session_timed_out"))
+        self.assertEqual(response.status_code, 302)
+        response = self.client.get(reverse("login"))
+        self.assertContains(response, "Your session timed out.")
+
 
 class i18nTestView(TestCase):
     def test_root_with_accept_language_header_fr(self):
