@@ -5,6 +5,9 @@
   <head>
     {% new_relic %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if request.user.is_authenticated %}
+      <meta http-equiv="Refresh" content="{{ "SESSION_COOKIE_AGE"|get_setting|add:1 }}; url={% url 'session_timed_out' %}">
+    {% endif %}
 
     {% with sha="GITHUB_SHA"|get_setting %}
       {% if sha %}
