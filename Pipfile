@@ -14,6 +14,7 @@ serve = "python manage.py runserver"
 [dev-packages]
 black = "*"
 flake8 = "*"
+freezegun = "*"
 
 [packages]
 django = "*"
@@ -26,7 +27,6 @@ django-invitations = "*"
 django-otp = "*"
 newrelic = "*"
 django-axes = "*"
-uwsgi = "*"
 django-csp = "*"
 phonenumbers = "*"
 django-phonenumber-field = "*"

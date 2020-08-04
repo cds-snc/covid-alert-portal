@@ -100,7 +100,7 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
 
     phone_number = PhoneNumberField(
         help_text=_(
-            "A single use code will be sent to this phone number every time you try to log in. Include a +1 before your number."
+            "A single use code will be sent to this phone number every time you try to log in."
         ),
     )
     phone_number_confirmation = PhoneNumberField(

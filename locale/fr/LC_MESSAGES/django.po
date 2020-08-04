@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-30 16:56+0000\n"
+"POT-Creation-Date: 2020-07-31 14:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,29 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: contact/forms.py:12
+#: contact/forms.py:14
 msgid "Your name"
 msgstr "Votre nom"
 
-#: contact/forms.py:14
+#: contact/forms.py:16
 msgid "Your email address"
 msgstr "Votre adresse courriel"
 
-#: contact/forms.py:16
+#: contact/forms.py:18
 msgid "Enter your email address if you want to contact us"
 msgstr "Entrez votre courriel si vous voulez nous contacter."
 
-#: contact/forms.py:19
+#: contact/forms.py:21
 msgid "You need to tell us about your issue before you contact us"
 msgstr "Le champ commentaire est obligatoire."
 
-#: contact/forms.py:21
+#: contact/forms.py:23
 msgid "Ask questions or give feedback"
 msgstr "Questions ou commentaires"
 
-#: contact/forms.py:46
-msgid "We are unable to send your feedback at the moment. Please try again."
-msgstr "Une erreur est survenue. Veuillez ré-essayer."
+#: contact/forms.py:48
+msgid ""
+"There was a problem and your feedback wasn't submitted. Please email your "
+"feedback to assistance+covid@cds-snc.ca."
+msgstr ""
 
 #: contact/templates/contact/form.html:5
 #: portal/templates/registration/login.html:5
@@ -59,6 +61,7 @@ msgstr "Erreur : "
 
 #: contact/templates/contact/form.html:6 contact/templates/contact/form.html:13
 #: portal/templates/includes/footer.html:8
+#: portal/templates/includes/nav_main.html:10
 msgid "Contact us"
 msgstr "Nous joindre"
 
@@ -135,7 +138,7 @@ msgid "You have hit your daily limit of code generation."
 msgstr ""
 "Vous avez atteint votre limite journalière pour la génération des codes."
 
-#: portal/settings.py:282
+#: portal/settings.py:283
 msgid ""
 "This account has been locked due to too many failed log in attempts. Please "
 "try again after 5 minutes."
@@ -199,7 +202,7 @@ msgstr "Déconnexion"
 #: portal/templates/includes/nav_header.html:18
 #: portal/templates/locked_out.html:9
 #: portal/templates/registration/login.html:6
-#: portal/templates/registration/login.html:12
+#: portal/templates/registration/login.html:13
 #: profiles/templates/profiles/landing.html:19
 msgid "Log in"
 msgstr "Connexion"
@@ -238,12 +241,12 @@ msgid ""
 "unlocked in a few minutes and you can try logging in again."
 msgstr ""
 
-#: portal/templates/registration/login.html:14
+#: portal/templates/registration/login.html:15
 #: profiles/templates/profiles/signup.html:14
 msgid "Next"
 msgstr "Suivant"
 
-#: portal/templates/registration/login.html:17
+#: portal/templates/registration/login.html:18
 #: portal/templates/registration/password_reset_form.html:6
 #: portal/templates/registration/password_reset_form.html:12
 msgid "Forgot your password?"
@@ -305,45 +308,45 @@ msgstr ""
 msgid "Number of keys generated in the last 24 hours"
 msgstr ""
 
-#: profiles/forms.py:52
+#: profiles/forms.py:40
 msgid "Enter a valid email address"
 msgstr "Entrez une adresse courriel valide"
 
-#: profiles/forms.py:54 profiles/forms.py:98 profiles/forms.py:107
-#: profiles/forms.py:184
+#: profiles/forms.py:42 profiles/forms.py:86 profiles/forms.py:95
+#: profiles/forms.py:172
 #: profiles/templates/invitations/templates/invite_list.html:18
 #: profiles/templates/profiles/healthcareuser_detail.html:28
 #: profiles/templates/profiles/healthcareuser_list.html:17
 msgid "Email address"
 msgstr "Adresse courriel"
 
-#: profiles/forms.py:83
+#: profiles/forms.py:71
 msgid "Please enter the security code."
 msgstr "Veuillez enter le code de sécurité."
 
-#: profiles/forms.py:111
+#: profiles/forms.py:99
 msgid "Full name"
 msgstr "Nom complet"
 
-#: profiles/forms.py:115
+#: profiles/forms.py:103
 msgid ""
 "A single use code will be sent to this phone number every time you try to "
 "log in. Include a +1 before your number."
 msgstr ""
 
-#: profiles/forms.py:119
+#: profiles/forms.py:107
 msgid "Enter the same phone number as before, for verification"
 msgstr ""
 
-#: profiles/forms.py:146
+#: profiles/forms.py:134
 msgid "Email already exists"
 msgstr "L’adresse courriel existe déjà"
 
-#: profiles/forms.py:148
+#: profiles/forms.py:136
 msgid "An invitation hasn't been sent to this address"
 msgstr ""
 
-#: profiles/forms.py:161
+#: profiles/forms.py:149
 msgid "The phone number fields don‘t match."
 msgstr ""
 
@@ -1072,3 +1075,10 @@ msgstr ""
 #: profiles/views.py:154
 msgid ": Your portal account"
 msgstr " : votre compte pour le Portail"
+
+#: profiles/views.py:211
+msgid "Your session timed out. Log in again to continue using the portal."
+msgstr "Votre session a expiré. Veuillez vous connecter à nouveau en utilisant le portail."
+
+#~ msgid "We are unable to send your feedback at the moment. Please try again."
+#~ msgstr "Une erreur est survenue. Veuillez ré-essayer."

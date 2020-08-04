@@ -60,6 +60,8 @@ if os.getenv("DJANGO_ADMINS"):
     # DJANGO_ADMINS expects a tuple formatted as a string, eg '[("Paul", "paul@example.com"),("Bryan", "bryan@example.com")]'
     ADMINS.extend(ast.literal_eval(os.getenv("DJANGO_ADMINS")))
 
+GITHUB_SHA = os.getenv("GITHUB_SHA") or None
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -111,6 +113,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "portal.context_processors.logout_messages",
             ],
         },
     },
@@ -192,8 +195,9 @@ SECURE_BROWSER_XSS_FILTER = is_prod
 # Prefix session and csrf cookie names so they can not be over ridden by insecure hosts.
 SESSION_COOKIE_NAME = "__secure-sessionid"
 CSRF_COOKIE_NAME = "__secure-csrftoken"
-# Limit session times to 20h, this should make it that users need to relogin every morning.
-SESSION_COOKIE_AGE = 72000
+# Limit session time to 1h of inactivity
+SESSION_COOKIE_AGE = 3600
+SESSION_SAVE_EVERY_REQUEST = True
 
 # Setting SECURE_SSL_REDIRECT on heroku was causing infinite redirects without this
 if is_prod:
@@ -242,6 +246,9 @@ CORS_ALLOW_METHODS = [
 
 # This environment variable is automatically set for Heroku Review apps
 HEROKU_APP_NAME = os.getenv("HEROKU_APP_NAME") or False
+
+# phonenumber_field app, default to Canadian numbers
+PHONENUMBER_DEFAULT_REGION = "CA"
 
 # Invitations app
 SITE_ID = 1  # Required for invitations app

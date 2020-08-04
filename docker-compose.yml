@@ -14,8 +14,6 @@ services:
       - DATABASE_URL=postgres://user:password@db:5432/covid_portal
       - DJANGO_ENV=development
     build: .
-    volumes:
-      - .:/code
     ports:
       - "8000:8000"
     command: ./entrypoint.sh

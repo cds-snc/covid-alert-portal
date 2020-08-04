@@ -2,9 +2,16 @@
 
 # COVID Alert Portal
 
-This repository implements a healthcare portal to complement the [Government of Canada COVID Shield mobile app](https://github.com/cds-snc/covid-shield-mobile). This portal provides authenticated healthcare providers unique temporary codes which can be shared with COVID-diagnosed individuals. This code gives individuals access to upload their random IDs via the mobile app if they choose. No personal information is collected and there is no association between the codes and specific tests.
+This repository implements a healthcare portal to complement the [Government of Canada COVID Alert app](https://github.com/cds-snc/covid-alert-app). This portal provides authenticated healthcare providers unique temporary codes which can be shared with COVID-diagnosed individuals. This code gives individuals access to upload their random IDs via the mobile app if they choose. No personal information is collected by the app and there is no association between the codes and specific tests.
 
-For more information on how this all works, read through the [COVID Shield Rationale](https://github.com/CovidShield/rationale).
+The Portal is part of the [COVID Shield](https://www.covidshield.app/) open-source reference implementation built by Shopify volunteers. For a high-level view on how the components work together, read through the [COVID Shield Rationale](https://github.com/CovidShield/rationale).
+
+## Technical overview
+
+The app can be run as a python process or using `docker-compose`.
+
+- Running the COVID Alert Portal locally as a python process requires [python3](https://www.python.org/downloads/) and a database, although an SQLite database will be created if no connection string exists.
+- Using `docker-compose`, you’ll need [Docker](https://www.docker.com/get-started) installed.
 
 ## Setup
 
@@ -54,11 +61,11 @@ The following are only relevant for the `smtp` backend.
 - `EMAIL_PORT`: Port to use for the SMTP server defined in EMAIL_HOST.
   [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-port).
 
-* `EMAIL_HOST_USER`: Username to use for the SMTP server defined in `EMAIL_HOST`. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-host-user).
+- `EMAIL_HOST_USER`: Username to use for the SMTP server defined in `EMAIL_HOST`. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-host-user).
 
-* `EMAIL_HOST_PASSWORD`: Password to use for the SMTP server defined in `EMAIL_HOST`. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-host-password).
+- `EMAIL_HOST_PASSWORD`: Password to use for the SMTP server defined in `EMAIL_HOST`. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-host-password).
 
-* `EMAIL_USE_TLS` (default: `False`): Whether to use a TLS (secure) connection when talking to the SMTP server. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-use-tls).
+- `EMAIL_USE_TLS` (default: `False`): Whether to use a TLS (secure) connection when talking to the SMTP server. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-use-tls).
 
 #### CovidAlert API settings
 
@@ -79,27 +86,38 @@ We use New Relic to monitor for errors in production.
 We use Notify and django-otp to send login auth code via SMS.
 
 - `OTP_NOTIFY_ENDPOINT`: Changes the default Notify endpoint used.
+
 - `OTP_NOTIFY_TEMPLATE_ID`: The is the SMS template used and created via the Notify dashboard.
+
 - `OTP_NOTIFY_API_KEY`: The API key used to call Notify
-- `OTP_NOTIFY_NO_DELIVERY`: Used in tests, prints the token via logging instead of calling Notify.
-- `OTP_NOTIFY_TOKEN_VALIDITY`: time needed in seconds before the token is considered expired 
+
+- `OTP_NOTIFY_NO_DELIVERY`: Used in tests, prints the token in the console instead of calling Notify.
+
+- `OTP_NOTIFY_TOKEN_VALIDITY`: Time in seconds before the token expires
 
 [Read the docs here](https://django-otp-notify.readthedocs.io/en/latest/)
-
 
 #### Contact form and Freshdesk
 
 The contact form sends any inquiry to Freshdesk.
 
 - `FRESHDESK_API_KEY`: Your user API key generated in Freshdesk.
+
 - `FRESHDESK_API_ENDPOINT`: Your Freshdesk domain with `/api/v2/` at the end.
+
 - `FRESHDESK_PRODUCT_ID`: If you use more than one product, use this variable to specify where the feedback should go to.
 
 ### Running the app for the first time
 
-**Quick Start:** After activating a virtual environment run the `entrypoint.sh` script to perform the database migrations, static file collection, and compilation of the CSS files. A server will then be started and can be accessed at `http://127.0.0.1:8000/` or `http://localhost:8000`.
+**Quick Start:** After activating a virtual environment, run
 
-For a more thorough setup of the various environment options please follow the instructions below after having activated your virtual environment, and moved into the top-level `portal` folder.
+- `pipenv run css`
+- `python manage.py collectstatic --noinput -i scss`
+- the `entrypoint.sh` script to perform the database migrations
+
+sA server will then be started and can be accessed at `http://127.0.0.1:8000/` or `http://localhost:8000`.
+
+For a more thorough setup of the various environment options please follow the instructions below after having activated your virtual environment from inside the root project folder.
 
 Copy `./portal/.env.example` to `./portal/.env` and provide the appropriate values for your configuration.
 
@@ -124,20 +142,20 @@ Then, create the tables by running `python manage.py migrate`.
 You will need to generate the `profiles/static/css/styles.css` file by compiling the SCSS files. To generate the file once, run:
 
 ```
-python manage.py sass profiles/static/scss/ profiles/static/css/
+pipenv run css
 ```
 
 If you are developing the app and want your styling changes applied as you make changes, you can use the `--watch` flag.
 
 ```
-python manage.py sass profiles/static/scss/ profiles/static/css/ --watch
+pipenv run csswatch
 ```
 
 Note that watching the SCSS will require a new terminal window to run the development server. If you are using iTerm, you can open another tab with `Command + t` or a new pane with `Command + d`. Remember to activate your virtual environment in your new pane using `pipenv shell` and `pipenv install`.
 
 #### 3. Create admin super user (optional)
 
-This app allows you to use the admin (`/admin`) to manage users, although users can sign up themselves.
+This app allows you to use the Django admininstration panel (`/admin`) to manage users.
 
 In order to access the `/admin` route, you will need to create a super user account to access the admin.
 
@@ -192,8 +210,8 @@ For more complete documentation refer to the [Django Translation](https://docs.d
 
 1. Ensure that you have a commit message that explains all the changes.
 2. Run:
-   a) `python manage.py makemessages -l fr`
-   b) `python manage.py compilemessages`
+   a) (optional) `python manage.py makemessages -l fr`
+   b) (optional) `python manage.py compilemessages`
    c) `pipenv run format --check`
    d) `pipenv check`
    e) `pipenv run lint`
