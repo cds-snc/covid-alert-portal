@@ -27,6 +27,9 @@ main table {
       padding-right: 0;
     }
   }
+  tbody tr:hover {
+    background-color: $color-grey-light;
+  }
 
   &.with-actions {
     th,

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-31 14:09+0000\n"
+"POT-Creation-Date: 2020-08-04 20:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,7 +138,7 @@ msgid "You have hit your daily limit of code generation."
 msgstr ""
 "Vous avez atteint votre limite journalière pour la génération des codes."
 
-#: portal/settings.py:283
+#: portal/settings.py:290
 msgid ""
 "This account has been locked due to too many failed log in attempts. Please "
 "try again after 5 minutes."
@@ -151,12 +151,12 @@ msgstr ""
 "Veuillez utiliser <a href=\"%(login_url)s\">le site principal pour vous "
 "connecter</a>."
 
-#: portal/templates/base.html:21 portal/templates/base.html:34
+#: portal/templates/base.html:29 portal/templates/base.html:42
 #: profiles/utils/__init__.py:25
 msgid "COVID Alert Portal"
 msgstr "Portail Alerte COVID"
 
-#: portal/templates/base.html:21
+#: portal/templates/base.html:29
 msgid "— COVID Alert Portal"
 msgstr "— Portail Alerte COVID"
 
@@ -331,7 +331,7 @@ msgstr "Nom complet"
 #: profiles/forms.py:103
 msgid ""
 "A single use code will be sent to this phone number every time you try to "
-"log in. Include a +1 before your number."
+"log in."
 msgstr ""
 
 #: profiles/forms.py:107
@@ -457,6 +457,7 @@ msgid "Resend"
 msgstr "Ré-envoyer"
 
 #: profiles/templates/invitations/templates/invite_list.html:39
+#: profiles/templates/profiles/healthcareuser_list.html:34
 msgid "Delete"
 msgstr "Effacer"
 
@@ -570,11 +571,12 @@ msgstr "Droit d’accès"
 msgid "Admin,Staff"
 msgstr "Administrateur,Employé"
 
-#: profiles/templates/profiles/healthcareuser_list.html:34
-msgid "Remove"
-msgstr "Retirer"
+#: profiles/templates/profiles/healthcareuser_list.html:35
+#, python-brace-format
+msgid "Delete account for {email}"
+msgstr "Effacer le compte associé à {email}"
 
-#: profiles/templates/profiles/healthcareuser_list.html:40
+#: profiles/templates/profiles/healthcareuser_list.html:41
 msgid "No users yet."
 msgstr "Aucune utilisateur pour le moment"
 
@@ -1076,9 +1078,14 @@ msgstr ""
 msgid ": Your portal account"
 msgstr " : votre compte pour le Portail"
 
-#: profiles/views.py:211
+#: profiles/views.py:214
 msgid "Your session timed out. Log in again to continue using the portal."
-msgstr "Votre session a expiré. Veuillez vous connecter à nouveau en utilisant le portail."
+msgstr ""
+"Votre session a expiré. Veuillez vous connecter à nouveau en utilisant le "
+"portail."
+
+#~ msgid "Remove"
+#~ msgstr "Retirer"
 
 #~ msgid "We are unable to send your feedback at the moment. Please try again."
 #~ msgstr "Une erreur est survenue. Veuillez ré-essayer."
