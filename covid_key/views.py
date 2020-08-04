@@ -31,6 +31,7 @@ def code(request):
 def _generate_key(request):
     token = settings.API_AUTHORIZATION
     diagnosis_code = "0000000000"
+    covid_key = None
     if token:
         try:
             r = requests.post(
@@ -41,6 +42,11 @@ def _generate_key(request):
             # Make sure the code has a length of 10, cheap sanity check
             if len(r.text.strip()) == 10:
                 diagnosis_code = r.text
+
+                covid_key = COVIDKey()
+                covid_key.created_by = request.user
+                covid_key.expiry = timezone.now() + timedelta(days=1)
+                covid_key.save()
             else:
                 logger.error(
                     f"The key API returned a key with the wrong format : {r.text}"
@@ -52,10 +58,10 @@ def _generate_key(request):
         except requests.exceptions.RequestException as err:
             logging.exception(f"Something went wrong {err}")
 
-    covid_key = COVIDKey()
-    covid_key.created_by = request.user
-    covid_key.expiry = timezone.now() + timedelta(days=1)
-    covid_key.save()
+    if covid_key is None:
+        expiry = timezone.now() + timedelta(days=1)
+    else:
+        expiry = covid_key.expiry
 
     # Split up the code with a space in the middle so it looks like this:
     # 123 456 789
@@ -64,9 +70,7 @@ def _generate_key(request):
     )
 
     return render(
-        request,
-        "covid_key/key.html",
-        {"code": diagnosis_code, "expiry": covid_key.expiry},
+        request, "covid_key/key.html", {"code": diagnosis_code, "expiry": expiry},
     )
 
 

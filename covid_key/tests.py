@@ -1,6 +1,10 @@
+from datetime import timedelta
 from django.test import override_settings
 from django.urls import reverse
+from django.utils import timezone
+
 from profiles.tests import AdminUserTestCase
+from .models import COVIDKey
 
 
 class KeyView(AdminUserTestCase):
@@ -24,8 +28,11 @@ class KeyView(AdminUserTestCase):
     @override_settings(COVID_KEY_MAX_PER_USER_PER_DAY=1)
     def test_key_throttled(self):
         self.login()
-        response = self.client.get(reverse("key"))
-        self.assertContains(response, "<h1>Give patient this key</h1>")
+        covid_key = COVIDKey()
+        covid_key.created_by = self.user
+        covid_key.expiry = timezone.now() + timedelta(days=1)
+        covid_key.save()
+
         response = self.client.get(reverse("key"))
         self.assertContains(
             response, "You have hit your daily limit of code generation"
