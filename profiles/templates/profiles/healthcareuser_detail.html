@@ -3,25 +3,25 @@
 
 {% block title %}
     {% if profile_user.id == user.id %}
-        {% trans "Your profile" %}
+        {% trans "Your account" %}
     {% else %}
-        {% trans "User profile" %}
+        {% trans "User account" %}
     {% endif %}
 {% endblock %}
 
 {% block content %}
   {% if healthcareuser %}
     {% if healthcareuser.id == user.id %}
-        <h1>{% trans "Your profile" %}</h1>
+        <h1>{% trans "Your account" %}</h1>
     {% else %}
-        <h1>{% trans "User profile" %}</h1>
+        <h1>{% trans "User account" %}</h1>
     {% endif %}
 
     <table>
-      <caption class="visually-hidden">{% trans "User profile" %}</caption>
+      <caption class="visually-hidden">{% trans "User account" %}</caption>
       <tbody>
         <tr>
-          <th scope="row">{% trans "Name" %}</td>
+          <th scope="row">{% trans "Your name" %}</td>
           <td scope="col">{{ healthcareuser.name }}</td>
         </tr>
         <tr>

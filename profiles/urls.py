@@ -1,8 +1,7 @@
 from django.urls import path, include, re_path
 from django.views.generic import RedirectView, TemplateView
-from django.contrib.auth.views import PasswordResetView, login_required
+from django.contrib.auth.views import PasswordResetView
 from django_otp.views import LoginView
-from django_otp.decorators import otp_required
 from django.contrib.auth import views as login_views
 
 from . import views
@@ -15,13 +14,6 @@ urlpatterns = [
         "landing/",
         TemplateView.as_view(template_name="profiles/landing.html"),
         name="landing",
-    ),
-    path(
-        "start/",
-        login_required(
-            otp_required(TemplateView.as_view(template_name="profiles/start.html"))
-        ),
-        name="start",
     ),
     path("invite/", views.InvitationView.as_view(), name="invite"),
     path("invite/list/", views.InvitationListView.as_view(), name="invitation_list"),

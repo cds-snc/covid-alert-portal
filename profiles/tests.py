@@ -395,9 +395,6 @@ class InviteFlow(AdminUserTestCase):
         self.assertEqual(response.status_code, 200)
 
         self.assertContains(response, "Invitation sent")
-        self.assertContains(
-            response, "Invitation sent to “{}”".format(self.invited_email),
-        )
 
     def test_see_invitations_list_with_pending_invite(self):
         invitation = Invitation.create(
@@ -511,7 +508,7 @@ class ProfilesView(AdminUserTestCase):
         response = self.client.get(reverse("start"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(
-            response, '<a  href="{}">Manage accounts</a>'.format(reverse("profiles"))
+            response, '<a  href="{}">Manage team</a>'.format(reverse("profiles"))
         )
 
     def test_manage_accounts_page(self):
@@ -521,7 +518,7 @@ class ProfilesView(AdminUserTestCase):
 
         response = self.client.get(reverse("profiles"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Manage accounts</h1>")
+        self.assertContains(response, "<h1>Manage team</h1>")
         # Make sure the email of the first user is visible
         self.assertContains(response, self.credentials["email"])
 
@@ -535,7 +532,7 @@ class ProfilesView(AdminUserTestCase):
 
         response = self.client.get(reverse("profiles"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Manage accounts</h1>")
+        self.assertContains(response, "<h1>Manage team</h1>")
         # make sure email of the first user is not visible
         self.assertNotContains(response, self.credentials["email"])
 
@@ -560,7 +557,7 @@ class ProfileView(AdminUserTestCase):
             reverse("user_profile", kwargs={"pk": self.credentials["id"]})
         )
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Your profile")
+        self.assertContains(response, "Your account")
         self.assertContains(response, self.user.name)
 
     def test_profile_page_not_found_if_user_id_does_not_exist(self):

@@ -193,7 +193,7 @@ msgstr "Symbole du gouvernement du Canada"
 
 #: portal/templates/includes/nav_header.html:3
 msgid "Language and account navigation"
-msgstr ""
+msgstr "Navigation de compte et changement de langue"
 
 #: portal/templates/includes/nav_header.html:16
 msgid "Log out"
@@ -209,7 +209,7 @@ msgstr "Connexion"
 
 #: portal/templates/includes/nav_main.html:3
 msgid "Product navigation"
-msgstr ""
+msgstr "Navigation du produit"
 
 #: portal/templates/includes/nav_main.html:6
 msgid "Start"
@@ -273,7 +273,7 @@ msgstr "Mot de passe oublié?"
 
 #: portal/templates/registration/password_reset_confirm.html:16
 msgid "Change password"
-msgstr ""
+msgstr "Modifier mon mot de passe"
 
 #: portal/templates/registration/password_reset_confirm.html:19
 msgid ""
@@ -302,7 +302,7 @@ msgstr "Envoyer"
 
 #: portal/templates/registration/password_reset_subject.txt:2
 msgid "Password reset"
-msgstr ""
+msgstr "Réinitialisation de votre mode passe"
 
 #: profiles/admin.py:101
 msgid "Number of keys generated in the last 24 hours"
@@ -336,7 +336,7 @@ msgstr ""
 
 #: profiles/forms.py:107
 msgid "Enter the same phone number as before, for verification"
-msgstr ""
+msgstr "Entrer le même numéro, pour des fins de validation"
 
 #: profiles/forms.py:134
 msgid "Email already exists"
@@ -344,7 +344,7 @@ msgstr "L’adresse courriel existe déjà"
 
 #: profiles/forms.py:136
 msgid "An invitation hasn't been sent to this address"
-msgstr ""
+msgstr "L’invitation n'a pu être envoyée."
 
 #: profiles/forms.py:149
 msgid "The phone number fields don‘t match."
@@ -358,7 +358,7 @@ msgstr " : votre compte pour le Portail"
 
 #: profiles/templates/invitations/forms/_invite.html:3
 msgid "Invite"
-msgstr ""
+msgstr "Invitation"
 
 #: profiles/templates/invitations/forms/_invite.html:4
 msgid ""
@@ -506,20 +506,20 @@ msgstr "Continuer"
 
 #: profiles/templates/profiles/2fa.html:16
 msgid "Not received a SMS?"
-msgstr ""
+msgstr "Renvoyer un code de sécurité"
 
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html:6
 msgid "Confirm delete user"
-msgstr ""
+msgstr "Confirmez la suppression de l’utilisateur"
 
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html:13
 msgid "Confirm account removal"
-msgstr ""
+msgstr "Confirmez la suppression du compte"
 
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html:14
 #, python-format
 msgid "Are you sure you want to delete %(name)s’s account at “%(email)s”?"
-msgstr ""
+msgstr "Voulez-vous vraiment supprimer le compte de %(name)s qui est associé à “%(email)s”?"
 
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html:15
 msgid ""
@@ -1062,7 +1062,7 @@ msgstr ""
 
 #: profiles/views.py:115
 msgid "Please try again later."
-msgstr ""
+msgstr "Veuillez réessayer plus tard."
 
 #: profiles/views.py:118
 msgid "That didn’t match the code that was sent."
@@ -1070,7 +1070,7 @@ msgstr ""
 
 #: profiles/views.py:139
 msgid "Security code has been sent."
-msgstr ""
+msgstr "Le code de sécurité a été envoyé"
 
 #: profiles/views.py:154
 msgid ": Your portal account"

@@ -32,7 +32,7 @@
           </div>
         </li>
         <li>
-          <span>{% trans "Enter the key and tap “Submit”." %}</span>
+          <span>{% trans "Enter your one-time key and tap “Submit”." %}</span>
           <div>
             <img alt="" src="{% static 'img/instructions/screen-3-'|add:request.LANGUAGE_CODE|add:'.png' %}" />
           </div>
@@ -56,5 +56,5 @@
     </div>
   </details>
 
-  <div class="content-button"><a href="{% url 'start' %}" role='button' draggable='false'>{% trans "Next patient" %}</a></div>
+  <div class="content-button"><a href="{% url 'start' %}" role='button' draggable='false'>{% trans "New patient" %}</a></div>
 {% endblock %}

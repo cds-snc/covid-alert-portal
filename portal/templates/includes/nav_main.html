@@ -1,13 +1,15 @@
 {% load i18n %}
 
-<nav class="nav--main"  aria-label="{% trans 'Product navigation' %}">
+<nav class="nav--main {% if not request.user.is_verified %}anonymous{% endif %}"  aria-label="{% trans 'Product navigation' %}">
   <div class="page--container">
+   {% if request.user.is_verified %}
     <ul>
       <li><a {% if request.resolver_match.url_name == 'start' %}class="active"{% endif %} href="{% url 'start' %}">{% trans "Start" %}</a></li>
       {% if user.is_admin %}
-        <li><a {% if request.resolver_match.url_name == 'profiles' %}class="active"{% endif %} href="{% url 'profiles' %}">{% trans "Manage accounts" %}</a></li>
+        <li><a {% if request.resolver_match.url_name == 'profiles' %}class="active"{% endif %} href="{% url 'profiles' %}">{% trans "Manage team" %}</a></li>
       {% endif %}
       <li><a {% if request.resolver_match.url_name == 'index' and 'contact' in request.resolver_match.app_names %}class="active"{% endif %} href="{% url 'contact:index' %}">{% trans "Contact us" %}</a></li>
     </ul>
+  {% endif %}
   </div>
 </nav>

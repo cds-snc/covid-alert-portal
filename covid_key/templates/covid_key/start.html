@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Generate a one-time key" %}{% endblock %}
+
+{% block content %}
+  <h1>{% trans "Generate a one-time key" %}</h1>
+  <p>
+    {% trans "For each patient who tests positive for COVID-19, check:" %}
+  </p>
+  <ol class="expanded">
+    <li>{% blocktrans %}They’ve installed the <strong>COVID Alert app</strong> on their phone.{% endblocktrans %}</li>
+    <li>{% blocktrans %}They understand the <strong>key expires in 24 hours</strong>. If the key expires before the patient enters it, they’ll need to ask your office for a new key.{% endblocktrans %}</li>
+    <li>{% blocktrans %}They’re ready to <strong>enter the key in the app</strong> or <strong>record it somewhere safe.</strong>{% endblocktrans %}</li>
+  </ol>
+  <div class="content-button"><a href="{% url 'key' %}" role='button' draggable='false'>{% trans "Generate key" %}</a></div>
+{% endblock %}

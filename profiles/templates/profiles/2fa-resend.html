@@ -10,11 +10,7 @@
 {% block content %}
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "Resend security code" %}</h1>
-  <p>{% trans "Sometimes email messages take a few minutes to arrive. If you don't receive the email, you can resend it." %}</p>
-  {% include "includes/cds_form.html" with submit_text=_("Resend security code") %}
-  <p>
-      {% trans "Has your phone number changed since you joined COVID Alert portal?" %}<br/>
-      {% trans "Please ask your account manager to reset it." %}
-  </p>
+  <h1>{% trans "Re-send security code" %}</h1>
+  <p>{% trans "If you did not get the code, ask us to send it again." %}</p>
+  {% include "includes/cds_form.html" with submit_text=_("Re-send security code") %}
 {% endblock %}
