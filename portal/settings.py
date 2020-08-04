@@ -245,6 +245,9 @@ CORS_ALLOW_METHODS = [
 # This environment variable is automatically set for Heroku Review apps
 HEROKU_APP_NAME = os.getenv("HEROKU_APP_NAME") or False
 
+# phonenumber_field app, default to Canadian numbers
+PHONENUMBER_DEFAULT_REGION = "CA"
+
 # Invitations app
 SITE_ID = 1  # Required for invitations app
 INVITATIONS_GONE_ON_ACCEPT_ERROR = False
