@@ -4,8 +4,10 @@ from datetime import timedelta
 from django.conf import settings
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.utils import timezone
 from django_otp.decorators import otp_required
+from django.utils.translation import gettext as _
 
 from .models import COVIDKey
 
@@ -33,12 +35,14 @@ def _generate_key(request):
     diagnosis_code = "0000000000"
     covid_key = None
     if token:
+        print(token)
         try:
             r = requests.post(
                 settings.API_ENDPOINT, headers={"Authorization": f"Bearer {token}"}
             )
-            r.raise_for_status()  # If we don't get a valid response, throw an
-            # exception
+            # If we don't get a valid response, throw an exception
+            r.raise_for_status()
+
             # Make sure the code has a length of 10, cheap sanity check
             if len(r.text.strip()) == 10:
                 diagnosis_code = r.text
@@ -55,8 +59,26 @@ def _generate_key(request):
             logging.exception(
                 f"Received {r.status_code} with message {err.response.text}"
             )
+            messages.add_message(
+                request,
+                messages.ERROR,
+                _(
+                    "We were unable to generate a key. Our team has been "
+                    "notified. Please try again later."
+                ),
+                "covid_key",
+            )
         except requests.exceptions.RequestException as err:
             logging.exception(f"Something went wrong {err}")
+            messages.add_message(
+                request,
+                messages.ERROR,
+                _(
+                    "We were unable to generate a key. Our team has been notified. "
+                    "Please try again later."
+                ),
+                "covid_key",
+            )
 
     if covid_key is None:
         expiry = timezone.now() + timedelta(days=1)
