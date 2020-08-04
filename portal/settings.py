@@ -60,6 +60,8 @@ if os.getenv("DJANGO_ADMINS"):
     # DJANGO_ADMINS expects a tuple formatted as a string, eg '[("Paul", "paul@example.com"),("Bryan", "bryan@example.com")]'
     ADMINS.extend(ast.literal_eval(os.getenv("DJANGO_ADMINS")))
 
+GITHUB_SHA = os.getenv("GITHUB_SHA") or None
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -242,6 +244,9 @@ CORS_ALLOW_METHODS = [
 
 # This environment variable is automatically set for Heroku Review apps
 HEROKU_APP_NAME = os.getenv("HEROKU_APP_NAME") or False
+
+# phonenumber_field app, default to Canadian numbers
+PHONENUMBER_DEFAULT_REGION = "CA"
 
 # Invitations app
 SITE_ID = 1  # Required for invitations app
