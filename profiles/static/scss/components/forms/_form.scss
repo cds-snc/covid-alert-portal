@@ -3,6 +3,13 @@ main form {
   max-width: 440px;
   margin-bottom: $space-xxl;
 
+  + p {
+    margin-bottom: $space-xxl;
+
+    &.near-form {
+      margin-top: -$space-lg;
+    }
+  }
 
   .fieldWrapper {
     margin-bottom: $space-lg;
@@ -33,10 +40,6 @@ main form {
       }
     }
   }
-}
-
-#form--login {
-  margin-bottom: 10px;
 }
 
 main td form {

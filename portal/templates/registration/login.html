@@ -15,10 +15,8 @@
   <h1>{% trans "Log in" %}</h1>
 
   {% include "includes/cds_form.html" with submit_text=_("Log in") %}
-  <div>
-      <p>
-          <a href="{% url 'password_reset' %}">{% trans "Forgot your password?" %}</a>
-      </p>
-      <p>{% trans "Only an authorized healthcare worker can use a portal account and give a COVID Alert key." %}</p>
-  </div>
+  <p class="near-form">
+      <a href="{% url 'password_reset' %}">{% trans "Forgot your password?" %}</a>
+  </p>
+  <p>{% trans "Only an authorized healthcare worker can use a portal account and give a COVID Alert key." %}</p>
 {% endblock %}
