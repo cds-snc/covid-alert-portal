@@ -1,0 +1,124 @@
+[
+  {
+    "name": "covid-portal",
+    "image": "${image}",
+    "portMappings": [
+      {
+        "containerPort": 8000
+      }
+    ],
+    "linuxParameters": {
+      "capabilities": {
+        "drop": ["ALL"]
+      }
+    },
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${awslogs-group}",
+        "awslogs-region": "${awslogs-region}",
+        "awslogs-stream-prefix": "${awslogs-stream-prefix}"
+      }
+    },
+    "environment": [
+      {
+        "name": "METRIC_PROVIDER",
+        "value": "${metric_provider}"
+      },
+      {
+        "name": "TRACER_PROVIDER",
+        "value": "${tracer_provider}"
+      },
+      {
+        "name": "DJANGO_ENV",
+        "value": "${django_env}"
+      },
+      {
+        "name": "DJANGO_ALLOWED_HOSTS",
+        "value": "${django_allowed_hosts}"
+      },
+      {
+        "name": "EMAIL_BACKEND",
+        "value": "${django_email_backend}"
+      },
+      {
+        "name": "NEW_RELIC_APP_NAME",
+        "value": "${new_relic_app_name}"
+      },
+      {
+        "name": "EMAIL_PORT",
+        "value": "${email_port}"
+      },
+      {
+        "name": "EMAIL_USE_TLS",
+        "value": "${email_use_tls}"
+      },
+      {
+        "name": "URL_DUAL_DOMAINS",
+        "value": "${dual_urls}"
+      }
+    ],
+    "secrets": [
+      {
+        "name": "DATABASE_URL",
+        "valueFrom": "${database_url}"
+      },
+      {
+        "name": "API_AUTHORIZATION",
+        "valueFrom": "${api_authorization}"
+      },
+      {
+        "name": "API_ENDPOINT",
+        "valueFrom": "${api_endpoint}"
+      },
+      {
+        "name": "DEFAULT_FROM_EMAIL",
+        "valueFrom": "${default_from_email}"
+      },
+      {
+        "name": "DJANGO_ADMINS",
+        "valueFrom": "${django_admins}"
+      },
+      {
+        "name": "DJANGO_SECRET_KEY",
+        "valueFrom": "${django_secret_key}"
+      },
+      {
+        "name": "EMAIL_HOST",
+        "valueFrom": "${email_host}"
+      },
+      {
+        "name": "EMAIL_HOST_USER",
+        "valueFrom": "${email_host_user}"
+      },
+      {
+        "name": "EMAIL_HOST_PASSWORD",
+        "valueFrom": "${email_host_password}"
+      },
+      {
+        "name": "FRESHDESK_API_ENDPOINT",
+        "valueFrom": "${freshdesk_api_endpoint}"
+      },
+      {
+        "name": "FRESHDESK_API_KEY",
+        "valueFrom": "${freshdesk_api_key}"
+      },
+      {
+        "name": "FRESHDESK_PRODUCT_ID",
+        "valueFrom": "${freshdesk_product_id}"
+      },
+      {
+        "name": "NEW_RELIC_LICENSE_KEY",
+        "valueFrom": "${new_relic_license_key}"
+      },
+      {
+        "name": "OTP_NOTIFY_API_KEY",
+        "valueFrom": "${notify_api_key}"
+      },
+      {
+        "name": "OTP_NOTIFY_TEMPLATE_ID",
+        "valueFrom": "${notify_template_id}"
+      }
+    ]
+  }
+]

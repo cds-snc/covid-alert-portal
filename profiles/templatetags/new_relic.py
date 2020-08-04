@@ -10,7 +10,11 @@ register = template.Library()
 def new_relic():
     app_name = os.getenv("NEW_RELIC_APP_NAME", "")
     new_relic_script = ""
-    if app_name not in ["HC_Portal_Staging", "HC_Portal_Production"]:
+    if app_name not in [
+        "HC_Portal_Staging",
+        "HC_Portal_Production",
+        "Production-Terraform-Covid-Portal",
+    ]:
         return ""
     elif app_name == "HC_Portal_Staging":
         new_relic_script = "js/new_relic_staging.js"

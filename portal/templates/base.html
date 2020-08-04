@@ -8,6 +8,13 @@
     {% if request.user.is_authenticated %}
       <meta http-equiv="Refresh" content="{{ "SESSION_COOKIE_AGE"|get_setting|add:1 }}; url={% url 'session_timed_out' %}">
     {% endif %}
+
+    {% with sha="GITHUB_SHA"|get_setting %}
+      {% if sha %}
+        <meta name="GITHUB_SHA" content="{{ sha }}">
+      {% endif %}
+    {% endwith %}
+
     <!-- Bootstrap -->
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
     <!-- Google fonts -->

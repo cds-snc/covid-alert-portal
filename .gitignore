@@ -8,3 +8,7 @@ db.sqlite3
 /staticfiles/*
 !/staticfiles/.gitkeep
 __pycache__
+*.tfstate*
+secrets.tfvars
+.terraform/
+*.tfplan
