@@ -22,7 +22,6 @@ WORKDIR /code
 RUN pip install 'pipenv==2018.11.26' uwsgi
 
 # Install dependencies
-RUN pip install 'pipenv==2018.11.26'
 COPY Pipfile Pipfile.lock /code/
 RUN pipenv install --system --dev
 

@@ -19,3 +19,5 @@ services:
     command: ./entrypoint.sh
     depends_on:
       - db
+    volumes:
+      - .:/code

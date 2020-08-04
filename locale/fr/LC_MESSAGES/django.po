@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-31 14:09+0000\n"
+"POT-Creation-Date: 2020-08-04 19:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: contact/forms.py:14
+#: profiles/templates/profiles/healthcareuser_detail.html:24
 msgid "Your name"
 msgstr "Votre nom"
 
@@ -61,7 +62,7 @@ msgstr "Erreur : "
 
 #: contact/templates/contact/form.html:6 contact/templates/contact/form.html:13
 #: portal/templates/includes/footer.html:8
-#: portal/templates/includes/nav_main.html:10
+#: portal/templates/includes/nav_main.html:11
 msgid "Contact us"
 msgstr "Nous joindre"
 
@@ -98,7 +99,7 @@ msgstr ""
 "exposition potentielle »."
 
 #: covid_key/templates/covid_key/key.html:35
-msgid "Enter the key and tap “Submit”."
+msgid "Enter your one-time key and tap “Submit”."
 msgstr "Entrez la clé et appuyez sur « Envoyer »."
 
 #: covid_key/templates/covid_key/key.html:41
@@ -126,8 +127,45 @@ msgstr ""
 "l’autorisation de téléverser les codes aléatoires."
 
 #: covid_key/templates/covid_key/key.html:59
-msgid "Next patient"
-msgstr "Prochain patient"
+msgid "New patient"
+msgstr "Nouveau patient"
+
+#: covid_key/templates/covid_key/start.html:4
+#: covid_key/templates/covid_key/start.html:7
+msgid "Generate a one-time key"
+msgstr "Générer une clé à usage unique"
+
+#: covid_key/templates/covid_key/start.html:9
+msgid "For each patient who tests positive for COVID-19, check:"
+msgstr "Pour chaque patient qui a un test positif à la COVID-19, vérifiez :"
+
+#: covid_key/templates/covid_key/start.html:12
+msgid "They’ve installed the <strong>COVID Alert app</strong> on their phone."
+msgstr ""
+"Qu’il a installé <strong>l’application Alerte COVID</strong> sur son "
+"téléphone."
+
+#: covid_key/templates/covid_key/start.html:13
+msgid ""
+"They understand the <strong>key expires in 24 hours</strong>. If the key "
+"expires before the patient enters it, they’ll need to ask your office for a "
+"new key."
+msgstr ""
+"Qu’il comprend que la clé à usage unique <strong>expire après 24 heures</"
+"strong>. Si la clé expire avant que le patient l’utilise, le patient doit en "
+"demander une nouvelle auprès de votre bureau."
+
+#: covid_key/templates/covid_key/start.html:14
+msgid ""
+"They’re ready to <strong>enter the key in the app</strong> or <strong>record "
+"it somewhere safe.</strong>"
+msgstr ""
+"Qu’il est en mesure d’<strong>entrer la clé dans l’application</strong> ou "
+"de <strong>noter la clé à un endroit sûr.</strong>"
+
+#: covid_key/templates/covid_key/start.html:16
+msgid "Generate key"
+msgstr "Générer une clé"
 
 #: covid_key/templates/covid_key/throttled.html:4
 msgid "Daily limit reached"
@@ -138,7 +176,7 @@ msgid "You have hit your daily limit of code generation."
 msgstr ""
 "Vous avez atteint votre limite journalière pour la génération des codes."
 
-#: portal/settings.py:283
+#: portal/settings.py:290
 msgid ""
 "This account has been locked due to too many failed log in attempts. Please "
 "try again after 5 minutes."
@@ -151,12 +189,12 @@ msgstr ""
 "Veuillez utiliser <a href=\"%(login_url)s\">le site principal pour vous "
 "connecter</a>."
 
-#: portal/templates/base.html:21 portal/templates/base.html:34
+#: portal/templates/base.html:29 portal/templates/base.html:42
 #: profiles/utils/__init__.py:25
 msgid "COVID Alert Portal"
 msgstr "Portail Alerte COVID"
 
-#: portal/templates/base.html:21
+#: portal/templates/base.html:29
 msgid "— COVID Alert Portal"
 msgstr "— Portail Alerte COVID"
 
@@ -195,15 +233,21 @@ msgstr "Symbole du gouvernement du Canada"
 msgid "Language and account navigation"
 msgstr "Navigation de compte et changement de langue"
 
-#: portal/templates/includes/nav_header.html:16
+#: portal/templates/includes/nav_header.html:6
+#: profiles/templates/profiles/healthcareuser_detail.html:6
+#: profiles/templates/profiles/healthcareuser_detail.html:15
+msgid "Your account"
+msgstr "Votre compte"
+
+#: portal/templates/includes/nav_header.html:7
 msgid "Log out"
 msgstr "Déconnexion"
 
-#: portal/templates/includes/nav_header.html:18
+#: portal/templates/includes/nav_header.html:9
 #: portal/templates/locked_out.html:9
 #: portal/templates/registration/login.html:6
-#: portal/templates/registration/login.html:13
-#: profiles/templates/profiles/landing.html:19
+#: portal/templates/registration/login.html:15
+#: portal/templates/registration/login.html:17
 msgid "Log in"
 msgstr "Connexion"
 
@@ -211,15 +255,15 @@ msgstr "Connexion"
 msgid "Product navigation"
 msgstr "Navigation du produit"
 
-#: portal/templates/includes/nav_main.html:6
+#: portal/templates/includes/nav_main.html:7
 msgid "Start"
 msgstr "Accueil"
 
-#: portal/templates/includes/nav_main.html:8
+#: portal/templates/includes/nav_main.html:9
 #: profiles/templates/profiles/healthcareuser_list.html:4
-#: profiles/templates/profiles/healthcareuser_list.html:7
-msgid "Manage accounts"
-msgstr "Gérer les comptes"
+#: profiles/templates/profiles/healthcareuser_list.html:8
+msgid "Manage team"
+msgstr "Gérer l’équipe"
 
 #: portal/templates/includes/phase_banner.html:4
 msgid "This site will change as we test ideas."
@@ -241,16 +285,19 @@ msgid ""
 "unlocked in a few minutes and you can try logging in again."
 msgstr ""
 
-#: portal/templates/registration/login.html:15
-#: profiles/templates/profiles/signup.html:14
-msgid "Next"
-msgstr "Suivant"
-
-#: portal/templates/registration/login.html:18
+#: portal/templates/registration/login.html:20
 #: portal/templates/registration/password_reset_form.html:6
 #: portal/templates/registration/password_reset_form.html:12
 msgid "Forgot your password?"
 msgstr "Mot de passe oublié?"
+
+#: portal/templates/registration/login.html:22
+msgid ""
+"Only an authorized healthcare worker can use a portal account and give a "
+"COVID Alert key."
+msgstr ""
+"Seuls les professionnels de la santé autorisés peuvent donner un numéro "
+"Alerte COVID."
 
 #: portal/templates/registration/password_reset_complete.html:4
 #: portal/templates/registration/password_reset_complete.html:7
@@ -266,8 +313,6 @@ msgstr ""
 
 #: portal/templates/registration/password_reset_confirm.html:6
 #: portal/templates/registration/password_reset_confirm.html:14
-#, fuzzy
-#| msgid "Forgot your password?"
 msgid "Change your password"
 msgstr "Mot de passe oublié?"
 
@@ -316,7 +361,7 @@ msgstr "Entrez une adresse courriel valide"
 #: profiles/forms.py:172
 #: profiles/templates/invitations/templates/invite_list.html:18
 #: profiles/templates/profiles/healthcareuser_detail.html:28
-#: profiles/templates/profiles/healthcareuser_list.html:17
+#: profiles/templates/profiles/healthcareuser_list.html:18
 msgid "Email address"
 msgstr "Adresse courriel"
 
@@ -331,7 +376,7 @@ msgstr "Nom complet"
 #: profiles/forms.py:103
 msgid ""
 "A single use code will be sent to this phone number every time you try to "
-"log in. Include a +1 before your number."
+"log in."
 msgstr ""
 
 #: profiles/forms.py:107
@@ -351,8 +396,6 @@ msgid "The phone number fields don‘t match."
 msgstr ""
 
 #: profiles/templates/invitations/email/email_invite_subject.txt:2
-#, fuzzy
-#| msgid ": Your portal account"
 msgid "Your portal account"
 msgstr " : votre compte pour le Portail"
 
@@ -394,19 +437,16 @@ msgid ""
 msgstr ""
 
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html:16
-#: profiles/templates/profiles/healthcareuser_confirm_delete.html:16
 msgid "Yes, I am sure"
 msgstr "Oui, je suis certain"
 
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html:17
-#: profiles/templates/profiles/healthcareuser_confirm_delete.html:17
 msgid "No, take me back"
 msgstr "Non, retourner en arrière"
 
 #: profiles/templates/invitations/templates/invite.html:6
 #: profiles/templates/invitations/templates/invite.html:11
 #: profiles/templates/invitations/templates/invite_list.html:12
-#: profiles/templates/profiles/healthcareuser_list.html:9
 msgid "Add an account"
 msgstr "Ajouter un nouveau compte"
 
@@ -415,21 +455,15 @@ msgid "Send invitation email"
 msgstr "Envoyer un courriel d’invitation"
 
 #: profiles/templates/invitations/templates/invite_complete.html:6
-#: profiles/templates/invitations/templates/invite_complete.html:11
+#: profiles/templates/invitations/templates/invite_complete.html:10
 msgid "Invitation sent"
 msgstr "Invitation envoyée"
 
-#: profiles/templates/invitations/templates/invite_complete.html:17
-msgid ""
-"They will receive a signup link in their inbox. The link will expire in 3 "
-"days."
-msgstr ""
-
-#: profiles/templates/invitations/templates/invite_complete.html:19
+#: profiles/templates/invitations/templates/invite_complete.html:13
 msgid "Add another account"
 msgstr "Ajouter un autre compte"
 
-#: profiles/templates/invitations/templates/invite_complete.html:20
+#: profiles/templates/invitations/templates/invite_complete.html:14
 msgid "Manage existing accounts"
 msgstr "Gérer les comptes existants"
 
@@ -444,7 +478,7 @@ msgid "Status"
 msgstr "Statut"
 
 #: profiles/templates/invitations/templates/invite_list.html:20
-#: profiles/templates/profiles/healthcareuser_list.html:19
+#: profiles/templates/profiles/healthcareuser_list.html:20
 msgid "Actions"
 msgstr "Actions"
 
@@ -465,39 +499,28 @@ msgid "No invitations yet"
 msgstr "Aucune invitation pour le moment"
 
 #: profiles/templates/profiles/2fa-resend.html:6
-#: profiles/templates/profiles/2fa-resend.html:13
-#: profiles/templates/profiles/2fa-resend.html:15
 msgid "Resend security code"
 msgstr "Renvoyer le code de sécurité"
 
+#: profiles/templates/profiles/2fa-resend.html:13
+#: profiles/templates/profiles/2fa-resend.html:15
+msgid "Re-send security code"
+msgstr "Renvoyer le code de sécurité"
+
 #: profiles/templates/profiles/2fa-resend.html:14
-msgid ""
-"Sometimes email messages take a few minutes to arrive. If you don't receive "
-"the email, you can resend it."
-msgstr ""
-"Parfois, les courriels prennent quelques minutes à parvenir à destination. "
-"Si vous ne recevez pas de courriel, vous pouvez le renvoyer."
-
-#: profiles/templates/profiles/2fa-resend.html:17
-msgid "Has your phone number changed since you joined COVID Alert portal?"
-msgstr ""
-"Votre adresse courriel a-t-elle changé depuis que vous utilisez Portail "
-"Alerte COVID?"
-
-#: profiles/templates/profiles/2fa-resend.html:18
-msgid "Please ask your account manager to reset it."
-msgstr "Veuillez demander à votre gestionnaire de compte de la réinitialiser."
+msgid "If you did not get the code, ask us to send it again."
+msgstr "Si vous n’avez pas reçu de code, nous pouvons vous le renvoyer."
 
 #: profiles/templates/profiles/2fa.html:6
 msgid "Validate your code"
 msgstr "Valider votre code"
 
 #: profiles/templates/profiles/2fa.html:13
-msgid "Check your SMS messages"
-msgstr "Vérifiez vos messages texte"
+msgid "Enter your security code"
+msgstr "Veuillez enter le code de sécurité."
 
 #: profiles/templates/profiles/2fa.html:14
-msgid "We've sent you a SMS with a security code to sign in"
+msgid "We've sent you a text message with a security code."
 msgstr "Nous vous avons envoyé un code de sécurité par message texte."
 
 #: profiles/templates/profiles/2fa.html:15
@@ -505,42 +528,33 @@ msgid "Continue"
 msgstr "Continuer"
 
 #: profiles/templates/profiles/2fa.html:16
-msgid "Not received a SMS?"
-msgstr "Renvoyer un code de sécurité"
+msgid "Resend security code?"
+msgstr "Renvoyer le code de sécurité"
 
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html:6
 msgid "Confirm delete user"
 msgstr "Confirmez la suppression de l’utilisateur"
 
-#: profiles/templates/profiles/healthcareuser_confirm_delete.html:13
-msgid "Confirm account removal"
-msgstr "Confirmez la suppression du compte"
-
-#: profiles/templates/profiles/healthcareuser_confirm_delete.html:14
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:12
 #, python-format
 msgid "Are you sure you want to delete %(name)s’s account at “%(email)s”?"
-msgstr "Voulez-vous vraiment supprimer le compte de %(name)s qui est associé à “%(email)s”?"
+msgstr ""
+"Voulez-vous vraiment supprimer le compte de %(name)s qui est associé à "
+"“%(email)s”?"
 
-#: profiles/templates/profiles/healthcareuser_confirm_delete.html:15
-msgid ""
-"If you remove their account, they will not be able to use the COVID Alert "
-"Portal until they are invited back."
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:13
+msgid "No, keep"
 msgstr ""
 
-#: profiles/templates/profiles/healthcareuser_detail.html:6
-#: profiles/templates/profiles/healthcareuser_detail.html:15
-msgid "Your profile"
-msgstr "Votre profil"
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:14
+msgid "Yes, delete"
+msgstr ""
 
 #: profiles/templates/profiles/healthcareuser_detail.html:8
 #: profiles/templates/profiles/healthcareuser_detail.html:17
 #: profiles/templates/profiles/healthcareuser_detail.html:21
-msgid "User profile"
-msgstr "Profil utilisateur"
-
-#: profiles/templates/profiles/healthcareuser_detail.html:24
-msgid "Name"
-msgstr "Nom"
+msgid "User account"
+msgstr "Comptes d'utilisateurs"
 
 #: profiles/templates/profiles/healthcareuser_detail.html:32
 msgid "Province"
@@ -555,83 +569,32 @@ msgid "Back to accounts"
 msgstr "Retour aux comptes"
 
 #: profiles/templates/profiles/healthcareuser_list.html:10
+msgid "Add new account"
+msgstr "Ajouter un nouveau compte"
+
+#: profiles/templates/profiles/healthcareuser_list.html:11
 msgid "Check invitations"
 msgstr "Voir les invitations"
 
-#: profiles/templates/profiles/healthcareuser_list.html:14
+#: profiles/templates/profiles/healthcareuser_list.html:15
 msgid "User accounts"
 msgstr "Comptes d'utilisateurs"
 
-#: profiles/templates/profiles/healthcareuser_list.html:18
+#: profiles/templates/profiles/healthcareuser_list.html:19
 msgid "Permissions"
 msgstr "Droit d’accès"
 
-#: profiles/templates/profiles/healthcareuser_list.html:28
+#: profiles/templates/profiles/healthcareuser_list.html:29
 msgid "Admin,Staff"
 msgstr "Administrateur,Employé"
 
-#: profiles/templates/profiles/healthcareuser_list.html:34
+#: profiles/templates/profiles/healthcareuser_list.html:35
 msgid "Remove"
 msgstr "Retirer"
 
-#: profiles/templates/profiles/healthcareuser_list.html:40
+#: profiles/templates/profiles/healthcareuser_list.html:41
 msgid "No users yet."
 msgstr "Aucune utilisateur pour le moment"
-
-#: profiles/templates/profiles/landing.html:4
-#: profiles/templates/profiles/landing.html:8
-msgid "Welcome to the COVID Alert Portal"
-msgstr "Bienvenue dans le Portail Alerte COVID"
-
-#: profiles/templates/profiles/landing.html:9
-msgid ""
-"The COVID Alert app notifies people if they’ve been exposed to COVID-19."
-msgstr ""
-"L’application Alerte COVID avise les personnes en cas d’exposition à la "
-"COVID-19."
-
-#: profiles/templates/profiles/landing.html:10
-msgid "If a patient:"
-msgstr "Si un patient :"
-
-#: profiles/templates/profiles/landing.html:12
-msgid "is diagnosed with COVID-19, <strong>and</strong>"
-msgstr "a un diagnostic de COVID-19 <strong>et</strong>"
-
-#: profiles/templates/profiles/landing.html:13
-msgid "has the app installed on their mobile device"
-msgstr "a l’application Alerte COVID sur son téléphone mobile"
-
-#: profiles/templates/profiles/landing.html:15
-msgid ""
-"they can enter a COVID Alert number to anonymously notify people they’ve "
-"been near in the past 14 days."
-msgstr ""
-"il peut entrer un numéro Alerte COVID dans l’application pour aviser de "
-"façon anonyme les personnes dont il a été près au cours des 14 derniers "
-"jours."
-
-#: profiles/templates/profiles/landing.html:16
-msgid "Only an authorized health care worker can give a COVID Alert number."
-msgstr ""
-"Seuls les professionnels de la santé autorisés peuvent donner un numéro "
-"Alerte COVID."
-
-#: profiles/templates/profiles/landing.html:17
-msgid "The patient has 24 hours to enter the number before it expires."
-msgstr ""
-"Le patient disposera de 24 heures pour utiliser le numéro avant qu’il "
-"n’expire."
-
-#: profiles/templates/profiles/landing.html:21
-msgid "About COVID Alert [hyperlink to site homepage]"
-msgstr "À propos d’Alerte COVID [lien]"
-
-#: profiles/templates/profiles/landing.html:23
-#, python-format
-msgid "<a href=\"%(privacy_url)s\">How COVID Alert Portal protects privacy</a>"
-msgstr ""
-"<a href=\"%(privacy_url)s\">Comment Alerte COVID protège la vie privée</a>"
 
 #: profiles/templates/profiles/privacy.html:12
 msgid ""
@@ -1008,37 +971,9 @@ msgstr ""
 msgid "Create account"
 msgstr "Créer un compte"
 
-#: profiles/templates/profiles/start.html:4
-#: profiles/templates/profiles/start.html:7
-msgid "Generate a one-time key"
-msgstr "Générer une clé à usage unique"
-
-#: profiles/templates/profiles/start.html:9
-msgid "For each patient who tests positive for COVID-19, check:"
-msgstr "Pour chaque patient qui a un test positif à la COVID-19, vérifiez :"
-
-#: profiles/templates/profiles/start.html:12
-msgid "They’ve installed the <strong>app on their phone</strong>."
-msgstr "Qu’il a installé <strong>l’application sur son téléphone.</strong>"
-
-#: profiles/templates/profiles/start.html:13
-msgid ""
-"They understand <strong>the key expires in 24 hours</strong>. If the key "
-"expires before the patient enters it, they’ll need to ask your office for a "
-"new key."
-msgstr ""
-"Qu’il comprend que la clé à usage unique <strong>expire après 24 heures</"
-"strong>. Si la clé expire avant que le patient l’utilise, le patient doit en "
-"demander une nouvelle auprès de votre bureau."
-
-#: profiles/templates/profiles/start.html:14
-msgid ""
-"They’re ready to <strong>record or write the key</strong> somewhere safe."
-msgstr "Qu’il est en mesure de <strong>noter la clé</strong> à un endroit sûr."
-
-#: profiles/templates/profiles/start.html:16
-msgid "Generate key"
-msgstr "Générer une clé"
+#: profiles/templates/profiles/signup.html:14
+msgid "Next"
+msgstr "Suivant"
 
 #: profiles/validators.py:10
 msgid "Your password can’t be a commonly-used sequence"
@@ -1052,33 +987,104 @@ msgstr ""
 msgid "Your password can’t be a commonly-used sequence."
 msgstr ""
 
-#: profiles/views.py:47
+#: profiles/views.py:49
 msgid "No invited email in session"
 msgstr ""
 
-#: profiles/views.py:74
-msgid "Account created successfully"
-msgstr ""
-
-#: profiles/views.py:115
+#: profiles/views.py:124
 msgid "Please try again later."
 msgstr "Veuillez réessayer plus tard."
 
-#: profiles/views.py:118
+#: profiles/views.py:127
 msgid "That didn’t match the code that was sent."
 msgstr ""
 
-#: profiles/views.py:139
+#: profiles/views.py:148
 msgid "Security code has been sent."
 msgstr "Le code de sécurité a été envoyé"
 
-#: profiles/views.py:154
+#: profiles/views.py:163
 msgid ": Your portal account"
 msgstr " : votre compte pour le Portail"
 
-#: profiles/views.py:211
+#: profiles/views.py:223
 msgid "Your session timed out. Log in again to continue using the portal."
-msgstr "Votre session a expiré. Veuillez vous connecter à nouveau en utilisant le portail."
+msgstr ""
+"Votre session a expiré. Veuillez vous connecter à nouveau en utilisant le "
+"portail."
+
+#~ msgid ""
+#~ "Sometimes email messages take a few minutes to arrive. If you don't "
+#~ "receive the email, you can resend it."
+#~ msgstr ""
+#~ "Parfois, les courriels prennent quelques minutes à parvenir à "
+#~ "destination. Si vous ne recevez pas de courriel, vous pouvez le renvoyer."
+
+#~ msgid "Has your phone number changed since you joined COVID Alert portal?"
+#~ msgstr ""
+#~ "Votre adresse courriel a-t-elle changé depuis que vous utilisez Portail "
+#~ "Alerte COVID?"
+
+#~ msgid "Please ask your account manager to reset it."
+#~ msgstr ""
+#~ "Veuillez demander à votre gestionnaire de compte de la réinitialiser."
+
+#~ msgid "Check your SMS messages"
+#~ msgstr "Vérifiez vos messages texte"
+
+#~ msgid "Not received a SMS?"
+#~ msgstr "Renvoyer un code de sécurité"
+
+#~ msgid "Confirm account removal"
+#~ msgstr "Confirmez la suppression du compte"
+
+#~ msgid "Your profile"
+#~ msgstr "Votre profil"
+
+#~ msgid "User profile"
+#~ msgstr "Profil utilisateur"
+
+#~ msgid "Name"
+#~ msgstr "Nom"
+
+#~ msgid "Welcome to the COVID Alert Portal"
+#~ msgstr "Bienvenue dans le Portail Alerte COVID"
+
+#~ msgid ""
+#~ "The COVID Alert app notifies people if they’ve been exposed to COVID-19."
+#~ msgstr ""
+#~ "L’application Alerte COVID avise les personnes en cas d’exposition à la "
+#~ "COVID-19."
+
+#~ msgid "If a patient:"
+#~ msgstr "Si un patient :"
+
+#~ msgid "is diagnosed with COVID-19, <strong>and</strong>"
+#~ msgstr "a un diagnostic de COVID-19 <strong>et</strong>"
+
+#~ msgid "has the app installed on their mobile device"
+#~ msgstr "a l’application Alerte COVID sur son téléphone mobile"
+
+#~ msgid ""
+#~ "they can enter a COVID Alert number to anonymously notify people they’ve "
+#~ "been near in the past 14 days."
+#~ msgstr ""
+#~ "il peut entrer un numéro Alerte COVID dans l’application pour aviser de "
+#~ "façon anonyme les personnes dont il a été près au cours des 14 derniers "
+#~ "jours."
+
+#~ msgid "The patient has 24 hours to enter the number before it expires."
+#~ msgstr ""
+#~ "Le patient disposera de 24 heures pour utiliser le numéro avant qu’il "
+#~ "n’expire."
+
+#~ msgid "About COVID Alert [hyperlink to site homepage]"
+#~ msgstr "À propos d’Alerte COVID [lien]"
+
+#~ msgid ""
+#~ "<a href=\"%(privacy_url)s\">How COVID Alert Portal protects privacy</a>"
+#~ msgstr ""
+#~ "<a href=\"%(privacy_url)s\">Comment Alerte COVID protège la vie privée</a>"
 
 #~ msgid "We are unable to send your feedback at the moment. Please try again."
 #~ msgstr "Une erreur est survenue. Veuillez ré-essayer."
