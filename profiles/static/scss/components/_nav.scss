@@ -38,6 +38,10 @@ nav {
   background: $color-grey-footer;
   margin-bottom: $space-xl;
 
+  &.anonymous {
+    border-bottom: 3px solid $color-blue-button;
+  }
+
   li {
     margin-right: $space-md;
   }

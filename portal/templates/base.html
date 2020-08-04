@@ -47,7 +47,7 @@
         {% include  "includes/nav_main.html" %}
 
         <div class="page--container">
-          <div class="content--container">
+          <div class="content--container {% block extra_container_class %}{% endblock %}">
             {% block content %}{% endblock %}
           </div>
         </div>

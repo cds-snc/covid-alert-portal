@@ -2,6 +2,7 @@ footer {
   width: 100%;
   background: $color-grey-footer;
   line-height: $space-lg;
+  border-top: 3px solid $color-blue-button;
 
   .footer-links {
     padding-top: $space-lg;

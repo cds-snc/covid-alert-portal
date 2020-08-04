@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Manage accounts" %}{% endblock %}
+{% block title %}{% trans "Manage team" %}{% endblock %}
 
 {% block content %}
-  <h1>{% trans "Manage accounts" %}</h1>
+  {% include  "includes/flash_messages.html" %}
+  <h1>{% trans "Manage team" %}</h1>
   <div class="content-button">
-      <a href="{% url 'invite' %}" role='button' draggable='false'>{% trans "Add an account" %}</a>
+      <a href="{% url 'invite' %}" role='button' draggable='false'>{% trans "Add new account" %}</a>
       <a href="{% url 'invitation_list' %}" role='button' draggable='false' class="secondary">{% trans "Check invitations" %}</a>
   </div>
 
