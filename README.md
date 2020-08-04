@@ -145,7 +145,7 @@ Run `python manage.py createsuperuser` to create a super user.
 
 #### 4. Run development server
 
-Then, run `python manage.py runserver` to run the app. Go to `http://127.0.0.1:8000/` to see the landing page.
+Then, run `python manage.py runserver` to run the app. Go to `http://127.0.0.1:8000/` to see the login page.
 
 ### Running using Docker Compose
 

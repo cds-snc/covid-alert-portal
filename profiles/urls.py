@@ -10,12 +10,7 @@ from . import forms
 
 
 urlpatterns = [
-    path("", RedirectView.as_view(pattern_name="landing")),
-    path(
-        "landing/",
-        TemplateView.as_view(template_name="profiles/landing.html"),
-        name="landing",
-    ),
+    path("", RedirectView.as_view(pattern_name="login")),
     path(
         "start/",
         login_required(
