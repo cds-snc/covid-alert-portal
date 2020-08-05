@@ -112,6 +112,19 @@ class AdminUserTestCase(TestCase):
         session.save()
 
 
+class UnauthenticatedView(TestCase):
+    def test_login_page(self):
+        response = self.client.get(reverse("login"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Log in</h1>")
+        self.assertNotContains(response, '<a href="/en/login/">Log in</a>')
+
+    def test_privacy_page(self):
+        response = self.client.get(reverse("privacy"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Privacy</h1>")
+
+
 class RestrictedPageViews(TestCase):
     #  These should redirect us
     def test_code(self):

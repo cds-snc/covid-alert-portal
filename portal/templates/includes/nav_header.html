@@ -5,7 +5,8 @@
     {% if user.is_authenticated %}
       <li><a href="{% url 'user_profile' user.id %}">{{ _("Your account") }}</a></li>
       <li><a href="{% url 'logout' %}">{% trans 'Log out' %}</a></li>
-    {% else %}
+    {% endif %}
+    {% if request.resolver_match.url_name != 'login' %}
       <li><a href="{% url 'login' %}">{% trans 'Log in' %}</a></li>
     {% endif %}
     <li>
