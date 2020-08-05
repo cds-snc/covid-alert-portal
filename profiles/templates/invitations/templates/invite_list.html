@@ -36,7 +36,9 @@
                         <button type="submit" class="link">{% trans "Resend" %}</button>
                     </form>
                     <a href="{% url 'invitation_delete' invitation.id %}" class="danger">
-                      {% trans "Delete" %}</a>
+                        <span aria-hidden="true">{% trans "Delete" %}</span>
+                        <span class="visually-hidden">{% blocktrans with email=invitation.email %}Delete invitation for {{email}}{% endblocktrans %}</span>
+                    </a>
                 </td>
             </tr>
         {% endfor %}
