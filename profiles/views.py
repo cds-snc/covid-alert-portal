@@ -162,15 +162,14 @@ class InvitationView(Is2FAMixin, IsAdminMixin, FormView):
         subject_line = "{}{}".format(
             get_site_name(self.request), _(": Your portal account")
         )
-        invite.send_invitation(
-            self.request,
-            scheme=self.request.scheme,
-            http_host=current_site.domain,
-            subject_line=subject_line,
-        )
-        messages.success(
-            self.request, f"You’ve sent the invitation to “{invite.email}”", "invite"
-        )
+        if not settings.TESTING:
+            # Don't actually send the email during tests
+            invite.send_invitation(
+                self.request,
+                scheme=self.request.scheme,
+                http_host=current_site.domain,
+                subject_line=subject_line,
+            )
         self.request.session["invite_email"] = invite.email
         return super().form_valid(form)
 
