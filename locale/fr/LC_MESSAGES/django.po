@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-04 19:05+0000\n"
+"POT-Creation-Date: 2020-08-04 23:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -455,9 +455,20 @@ msgid "Send invitation email"
 msgstr "Envoyer un courriel d’invitation"
 
 #: profiles/templates/invitations/templates/invite_complete.html:6
-#: profiles/templates/invitations/templates/invite_complete.html:10
 msgid "Invitation sent"
 msgstr "Invitation envoyée"
+
+#: profiles/templates/invitations/templates/invite_complete.html:10
+#| msgid "Invitation sent"
+msgid "Invitation sent to %(email)s"
+msgstr "Invitation envoyée à %(email)s"
+
+#: profiles/templates/invitations/templates/invite_complete.html:11
+msgid ""
+"They will need to check their email and follow instructions to create their "
+"account"
+msgstr ""
+"Cette personne devra vérifier ses courriels et suivre les instructions pour créer son compte."
 
 #: profiles/templates/invitations/templates/invite_complete.html:13
 msgid "Add another account"

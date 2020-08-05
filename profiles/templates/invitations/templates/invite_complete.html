@@ -7,8 +7,8 @@
 {% endblock %}
 
 {% block content %}
-  <h1>{% trans "Invitation sent" %}</h1>
-  {% include  "includes/flash_messages.html" %}
+  <h1>{% blocktrans with email=request.session.invite_email %}Invitation sent to {{ email }}{% endblocktrans %}</h1>
+  <p>{% blocktrans %}They will need to check their email and follow instructions to create their account{% endblocktrans %}</p>
   <div class="content-button">
     <a href="{% url 'invite' %}" role='button' draggable='false'>{% trans "Add another account" %}</a>
     <a href="{% url 'profiles' %}" class="secondary" role='button' draggable='false'>{% trans "Manage existing accounts" %}</a>
