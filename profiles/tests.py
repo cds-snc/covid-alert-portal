@@ -298,10 +298,6 @@ class i18nTestView(TestCase):
 
 
 class InvitationFlow(TestCase):
-
-    #  TODO: Test that once an email is signed up it can't used again
-    #        Only emails with invites can signup
-
     def setUp(self):
         self.email = "test@test.com"
         self.invite = Invitation.create(self.email)
@@ -384,20 +380,39 @@ class InviteFlow(AdminUserTestCase):
 
         self.assertContains(response, "Add an account")
 
-    def test_see_invite_complete_page_and_message_on_page(self):
+    def test_send_invitation_and_see_success_message(self):
         """
-        Login and see the invite page with the id of the current user in a hidden input
+        Login, send an invite, and see the success page
         """
         self.client.login(username="test@test.com", password="testpassword")
         self.login_2fa()
-        session = self.client.session
-        session["invite_email"] = self.invited_email
-        session.save()
 
-        response = self.client.get(reverse("invite_complete"))
+        response = self.client.post(
+            reverse("invite"), {"email": self.invited_email}, follow=True
+        )
+
         self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response, "<h1>Invitation sent to {}</h1>".format(self.invited_email)
+        )
 
-        self.assertContains(response, "Invitation sent")
+    def test_send_invitation_twice_and_see_success_message(self):
+        """
+        Login, send an invite, and see the success page twice in a row.
+        This tests we can re-send invites to the same email.
+        """
+        self.client.login(username="test@test.com", password="testpassword")
+        self.login_2fa()
+
+        for i in range(2):
+            response = self.client.post(
+                reverse("invite"), {"email": self.invited_email}, follow=True
+            )
+
+            self.assertEqual(response.status_code, 200)
+            self.assertContains(
+                response, "<h1>Invitation sent to {}</h1>".format(self.invited_email)
+            )
 
     def test_see_invitations_list_with_pending_invite(self):
         invitation = Invitation.create(
