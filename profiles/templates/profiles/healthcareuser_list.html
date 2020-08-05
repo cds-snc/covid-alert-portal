@@ -25,14 +25,15 @@
         <tr>
           <td><a href="{% url 'user_profile' healthcareuser.id %}">{{ healthcareuser.email }}</a></td>
           <td>
-            <strong class="tag tag--{{ healthcareuser.is_admin|yesno:'green,grey' }}">
+            <strong class="tag tag--{{ healthcareuser.is_admin|yesno:'green,blue' }}">
               {{ healthcareuser.is_admin|yesno:_("Admin,Staff") }}
             </strong>
           </td>
           <td>
           {% if not healthcareuser.is_superuser and healthcareuser.id != user.id %}
             <a href="{% url 'user_delete' healthcareuser.id %}" class="danger">
-              {% trans "Remove" %}
+              <span aria-hidden="true">{% trans "Delete" %}</span>
+              <span class="visually-hidden">{% blocktrans with email=healthcareuser.email %}Delete account for {{email}}{% endblocktrans %}</span>
             </a>
           {% endif %}
           </td>
