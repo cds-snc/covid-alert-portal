@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.shortcuts import redirect
 from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth import login, authenticate
 from django.utils.translation import gettext as _
 from django.views.generic import (
     FormView,
@@ -18,6 +19,7 @@ from django.db.models.expressions import RawSQL
 
 from invitations.models import Invitation
 
+from .utils import generate_2fa_code
 from .models import HealthcareUser
 from .mixins import (
     IsAdminMixin,
@@ -37,7 +39,7 @@ from .utils import get_site_name
 class SignUpView(FormView):
     form_class = SignupForm
     template_name = "profiles/signup.html"
-    success_url = reverse_lazy("start")
+    success_url = reverse_lazy("login-2fa")
 
     def get(self, request, *args, **kwargs):
         invited_email = self.request.session.get("account_verified_email", None)
@@ -71,7 +73,14 @@ class SignUpView(FormView):
 
     def form_valid(self, form):
         form.save()
-        messages.success(self.request, _("Account created successfully"))
+        # messages.success(self.request, _("Account created successfully"))
+        user = authenticate(
+            request=self.request,
+            username=form.cleaned_data.get("email"),
+            password=form.cleaned_data.get("password1"),
+        )
+        login(self.request, user)
+        generate_2fa_code(user)
         return super(SignUpView, self).form_valid(form)
 
 
@@ -160,7 +169,7 @@ class InvitationView(Is2FAMixin, IsAdminMixin, FormView):
             subject_line=subject_line,
         )
         messages.success(
-            self.request, "Invitation sent to “{}”".format(invite.email), "invite"
+            self.request, f"You’ve sent the invitation to “{invite.email}”", "invite"
         )
         self.request.session["invite_email"] = invite.email
         return super().form_valid(form)
