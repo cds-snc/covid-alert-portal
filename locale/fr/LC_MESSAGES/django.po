@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-04 23:59+0000\n"
+"POT-Creation-Date: 2020-08-05 01:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -285,13 +285,13 @@ msgid ""
 "unlocked in a few minutes and you can try logging in again."
 msgstr ""
 
-#: portal/templates/registration/login.html:20
+#: portal/templates/registration/login.html:19
 #: portal/templates/registration/password_reset_form.html:6
 #: portal/templates/registration/password_reset_form.html:12
 msgid "Forgot your password?"
 msgstr "Mot de passe oublié?"
 
-#: portal/templates/registration/login.html:22
+#: portal/templates/registration/login.html:21
 msgid ""
 "Only an authorized healthcare worker can use a portal account and give a "
 "COVID Alert key."
@@ -428,13 +428,14 @@ msgstr ""
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html:14
 #, python-format
 msgid "Are you sure you want to delete the invitation sent to %(email)s?"
-msgstr "Êtes-vous certain de vouloir retirer l'invitation envoyée à %(email)s?"
+msgstr "Êtes-vous certain de vouloir retirer l‘invitation envoyée à %(email)s?"
 
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html:15
 msgid ""
-"If you remove their invitation, they will not be able to join the COVID "
+"If you delete their invitation, they will not be able to join the COVID "
 "Alert Portal until they are invited back."
 msgstr ""
+"Si vous retirez cette invitation, la personne invitée ne pourra pas rejoindre le Portail Alerte COVID."
 
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html:16
 msgid "Yes, I am sure"
@@ -459,7 +460,7 @@ msgid "Invitation sent"
 msgstr "Invitation envoyée"
 
 #: profiles/templates/invitations/templates/invite_complete.html:10
-#| msgid "Invitation sent"
+#, python-format
 msgid "Invitation sent to %(email)s"
 msgstr "Invitation envoyée à %(email)s"
 
@@ -468,7 +469,8 @@ msgid ""
 "They will need to check their email and follow instructions to create their "
 "account"
 msgstr ""
-"Cette personne devra vérifier ses courriels et suivre les instructions pour créer son compte."
+"Cette personne devra vérifier ses courriels et suivre les instructions pour "
+"créer son compte."
 
 #: profiles/templates/invitations/templates/invite_complete.html:13
 msgid "Add another account"
