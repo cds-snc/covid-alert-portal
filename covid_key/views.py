@@ -35,7 +35,6 @@ def _generate_key(request):
     diagnosis_code = "0000000000"
     covid_key = None
     if token:
-        print(token)
         try:
             try:
                 r = requests.post(
