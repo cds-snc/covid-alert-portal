@@ -32,7 +32,7 @@
           {% if not healthcareuser.is_superuser and healthcareuser.id != user.id %}
             <a href="{% url 'user_delete' healthcareuser.id %}" class="danger">
               <span aria-hidden="true">{% trans "Delete" %}</span>
-              <span class="visually-hidden">{% blocktrans with email=healthcareuser.email %}Delete account for {email}{% endblocktrans %}</span>
+              <span class="visually-hidden">{% blocktrans with email=healthcareuser.email %}Delete account for {{email}}{% endblocktrans %}</span>
             </a>
           {% endif %}
           </td>
