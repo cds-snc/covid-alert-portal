@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-04 23:59+0000\n"
+"POT-Creation-Date: 2020-08-05 00:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,29 +80,29 @@ msgid "We’ll reply as soon as possible."
 msgstr "Nous vous répondrons le plus rapidement possible."
 
 #: covid_key/templates/covid_key/key.html:6
-#: covid_key/templates/covid_key/key.html:9
+#: covid_key/templates/covid_key/key.html:11
 msgid "Give patient this key"
 msgstr "Donnez la clé suivante au patient"
 
-#: covid_key/templates/covid_key/key.html:17
+#: covid_key/templates/covid_key/key.html:20
 msgid "Instructions for patient"
 msgstr "Instructions pour le patient"
 
-#: covid_key/templates/covid_key/key.html:23
+#: covid_key/templates/covid_key/key.html:26
 msgid "Tap “Enter your one-time key”."
 msgstr "Appuyez sur « Entrer votre clé »."
 
-#: covid_key/templates/covid_key/key.html:29
+#: covid_key/templates/covid_key/key.html:32
 msgid "Tap “Next” on “Let people know they may have been exposed”."
 msgstr ""
 "Appuyez sur « Suivant » dans l’écran « Aviser les autres personnes d’une "
 "exposition potentielle »."
 
-#: covid_key/templates/covid_key/key.html:35
+#: covid_key/templates/covid_key/key.html:38
 msgid "Enter your one-time key and tap “Submit”."
 msgstr "Entrez la clé et appuyez sur « Envoyer »."
 
-#: covid_key/templates/covid_key/key.html:41
+#: covid_key/templates/covid_key/key.html:44
 msgid ""
 "If you want to notify people, you need to give COVID Alert permission to "
 "upload random codes. Tap “Agree” on “Now you can upload codes”."
@@ -111,14 +111,14 @@ msgstr ""
 "COVID à téléverser vos codes aléatoires. Appuyez sur « Accepter » dans "
 "l’écran « Vous pouvez maintenant téléverser vos codes »."
 
-#: covid_key/templates/covid_key/key.html:47
+#: covid_key/templates/covid_key/key.html:50
 msgid ""
 "Tap “Share” on “Share your random codes from this device with COVID Alert?”."
 msgstr ""
 "Appuyez sur « Partager » dans la fenêtre « Partager les identifiants "
 "aléatoires de votre appareil avec Alerte COVID? »."
 
-#: covid_key/templates/covid_key/key.html:53
+#: covid_key/templates/covid_key/key.html:56
 msgid ""
 "COVID Alert will ask permission to upload random codes daily for the next 13 "
 "days."
@@ -126,7 +126,7 @@ msgstr ""
 "Chaque jour, pendant les 13 jours qui suivent, Alerte COVID demandera "
 "l’autorisation de téléverser les codes aléatoires."
 
-#: covid_key/templates/covid_key/key.html:59
+#: covid_key/templates/covid_key/key.html:62
 msgid "New patient"
 msgstr "Nouveau patient"
 
@@ -175,6 +175,10 @@ msgstr "Limite journalière atteinte"
 msgid "You have hit your daily limit of code generation."
 msgstr ""
 "Vous avez atteint votre limite journalière pour la génération des codes."
+
+#: covid_key/views.py:75
+msgid "Something went wrong. Contact your manager."
+msgstr "Une erreur est survenue. Veuillez contacter votre superviseur."
 
 #: portal/settings.py:290
 msgid ""
@@ -285,13 +289,13 @@ msgid ""
 "unlocked in a few minutes and you can try logging in again."
 msgstr ""
 
-#: portal/templates/registration/login.html:20
+#: portal/templates/registration/login.html:19
 #: portal/templates/registration/password_reset_form.html:6
 #: portal/templates/registration/password_reset_form.html:12
 msgid "Forgot your password?"
 msgstr "Mot de passe oublié?"
 
-#: portal/templates/registration/login.html:22
+#: portal/templates/registration/login.html:21
 msgid ""
 "Only an authorized healthcare worker can use a portal account and give a "
 "COVID Alert key."
@@ -459,7 +463,7 @@ msgid "Invitation sent"
 msgstr "Invitation envoyée"
 
 #: profiles/templates/invitations/templates/invite_complete.html:10
-#| msgid "Invitation sent"
+#, python-format
 msgid "Invitation sent to %(email)s"
 msgstr "Invitation envoyée à %(email)s"
 
@@ -468,7 +472,8 @@ msgid ""
 "They will need to check their email and follow instructions to create their "
 "account"
 msgstr ""
-"Cette personne devra vérifier ses courriels et suivre les instructions pour créer son compte."
+"Cette personne devra vérifier ses courriels et suivre les instructions pour "
+"créer son compte."
 
 #: profiles/templates/invitations/templates/invite_complete.html:13
 msgid "Add another account"

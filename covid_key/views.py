@@ -37,46 +37,43 @@ def _generate_key(request):
     if token:
         print(token)
         try:
-            r = requests.post(
-                settings.API_ENDPOINT, headers={"Authorization": f"Bearer {token}"}
-            )
-            # If we don't get a valid response, throw an exception
-            r.raise_for_status()
+            try:
+                r = requests.post(
+                    settings.API_ENDPOINT, headers={"Authorization": f"Bearer {token}"}
+                )
+                # If we don't get a valid response, throw an exception
+                r.raise_for_status()
 
-            # Make sure the code has a length of 10, cheap sanity check
-            if len(r.text.strip()) == 10:
-                diagnosis_code = r.text
-
+                # Make sure the code has a length of 10, cheap sanity check
+                if len(r.text.strip()) == 10:
+                    diagnosis_code = r.text
+                else:
+                    logger.error(
+                        f"The key API returned a key with the wrong format : {r.text}"
+                    )
+                    raise Exception(
+                        f"The key API returned a key with the wrong format : {r.text}"
+                    )
+            except requests.exceptions.HTTPError as err:
+                logging.exception(
+                    f"Received {r.status_code} with message {err.response.text}"
+                )
+                raise err
+            except requests.exceptions.RequestException as err:
+                logging.exception(f"Something went wrong {err}")
+                raise err
+            else:
                 covid_key = COVIDKey()
                 covid_key.created_by = request.user
                 covid_key.expiry = timezone.now() + timedelta(days=1)
                 covid_key.save()
-            else:
-                logger.error(
-                    f"The key API returned a key with the wrong format : {r.text}"
-                )
-        except requests.exceptions.HTTPError as err:
-            logging.exception(
-                f"Received {r.status_code} with message {err.response.text}"
-            )
+
+        except Exception:
+            diagnosis_code = ""
             messages.add_message(
                 request,
                 messages.ERROR,
-                _(
-                    "We were unable to generate a key. Our team has been "
-                    "notified. Please try again later."
-                ),
-                "covid_key",
-            )
-        except requests.exceptions.RequestException as err:
-            logging.exception(f"Something went wrong {err}")
-            messages.add_message(
-                request,
-                messages.ERROR,
-                _(
-                    "We were unable to generate a key. Our team has been notified. "
-                    "Please try again later."
-                ),
+                _("Something went wrong. Contact your manager."),
                 "covid_key",
             )
 

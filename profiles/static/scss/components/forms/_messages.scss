@@ -1,16 +1,27 @@
 main .messages {
   &--container {
     max-width: 450px;
-    color: $color-blue-dark;
-    padding: $space-sm;
-    background: rgba(78, 136, 185, 0.1);
-    border: 1px solid #4E88B9;
-    border-radius: 10px;
     font-weight: bold;
+    margin-bottom: 20px;
     ul {
-      padding-left: 10px;
+      padding-left: 0px;
       list-style-type: none;
       margin-bottom: 0;
+      li {
+        border-radius: 10px;
+        padding: $space-sm;
+
+        &.info {
+          border: 1px solid #4E88B9;
+          color: $color-blue-dark;
+          background: rgba(78, 136, 185, 0.1);
+        }
+        &.error {
+          border: 1px solid $color-red;
+          color: $color-red;
+          background: $color-red-light;
+        }
+      }
     }
   }
 }
