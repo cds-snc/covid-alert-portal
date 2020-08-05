@@ -4,8 +4,10 @@ from datetime import timedelta
 from django.conf import settings
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.utils import timezone
 from django_otp.decorators import otp_required
+from django.utils.translation import gettext as _
 
 from .models import COVIDKey
 
@@ -31,31 +33,53 @@ def code(request):
 def _generate_key(request):
     token = settings.API_AUTHORIZATION
     diagnosis_code = "0000000000"
+    covid_key = None
     if token:
         try:
-            r = requests.post(
-                settings.API_ENDPOINT, headers={"Authorization": f"Bearer {token}"}
-            )
-            r.raise_for_status()  # If we don't get a valid response, throw an
-            # exception
-            # Make sure the code has a length of 10, cheap sanity check
-            if len(r.text.strip()) == 10:
-                diagnosis_code = r.text
-            else:
-                logger.error(
-                    f"The key API returned a key with the wrong format : {r.text}"
+            try:
+                r = requests.post(
+                    settings.API_ENDPOINT, headers={"Authorization": f"Bearer {token}"}
                 )
-        except requests.exceptions.HTTPError as err:
-            logging.exception(
-                f"Received {r.status_code} with message {err.response.text}"
-            )
-        except requests.exceptions.RequestException as err:
-            logging.exception(f"Something went wrong {err}")
+                # If we don't get a valid response, throw an exception
+                r.raise_for_status()
 
-    covid_key = COVIDKey()
-    covid_key.created_by = request.user
-    covid_key.expiry = timezone.now() + timedelta(days=1)
-    covid_key.save()
+                # Make sure the code has a length of 10, cheap sanity check
+                if len(r.text.strip()) == 10:
+                    diagnosis_code = r.text
+                else:
+                    logger.error(
+                        f"The key API returned a key with the wrong format : {r.text}"
+                    )
+                    raise Exception(
+                        f"The key API returned a key with the wrong format : {r.text}"
+                    )
+            except requests.exceptions.HTTPError as err:
+                logging.exception(
+                    f"Received {r.status_code} with message {err.response.text}"
+                )
+                raise err
+            except requests.exceptions.RequestException as err:
+                logging.exception(f"Something went wrong {err}")
+                raise err
+            else:
+                covid_key = COVIDKey()
+                covid_key.created_by = request.user
+                covid_key.expiry = timezone.now() + timedelta(days=1)
+                covid_key.save()
+
+        except Exception:
+            diagnosis_code = ""
+            messages.add_message(
+                request,
+                messages.ERROR,
+                _("Something went wrong. Contact your manager."),
+                "covid_key",
+            )
+
+    if covid_key is None:
+        expiry = timezone.now() + timedelta(days=1)
+    else:
+        expiry = covid_key.expiry
 
     # Split up the code with a space in the middle so it looks like this:
     # 123 456 789
@@ -64,9 +88,7 @@ def _generate_key(request):
     )
 
     return render(
-        request,
-        "covid_key/key.html",
-        {"code": diagnosis_code, "expiry": covid_key.expiry},
+        request, "covid_key/key.html", {"code": diagnosis_code, "expiry": expiry},
     )
 
 
