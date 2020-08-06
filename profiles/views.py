@@ -223,3 +223,8 @@ def redirect_after_timed_out(request):
         "logout",
     )
     return redirect(reverse_lazy("login"))
+
+
+def password_reset_complete(request):
+    generate_2fa_code(request.user)
+    return redirect(reverse_lazy("login-2fa"))
