@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import sys
 import ast
+import requests
 
 import dj_database_url
 from dotenv import load_dotenv
@@ -49,6 +50,17 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
 ]
+
+EC2_PRIVATE_IP = None
+try:
+    EC2_PRIVATE_IP = requests.get(
+        "http://169.254.169.254/latest/meta-data/local-ipv4", timeout=0.01
+    ).text
+except requests.exceptions.RequestException:
+    pass
+
+if EC2_PRIVATE_IP and not DEBUG:
+    ALLOWED_HOSTS.append(EC2_PRIVATE_IP)
 
 if os.getenv("DJANGO_ALLOWED_HOSTS"):
     ALLOWED_HOSTS.extend(os.getenv("DJANGO_ALLOWED_HOSTS").split(","))
