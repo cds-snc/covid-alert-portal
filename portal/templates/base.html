@@ -5,6 +5,7 @@
   <head>
     {% new_relic %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     {% if request.user.is_authenticated %}
       <meta http-equiv="Refresh" content="{{ "SESSION_COOKIE_AGE"|get_setting|add:1 }}; url={% url 'session_timed_out' %}">
     {% endif %}
@@ -35,7 +36,10 @@
         <div class="page--container">
           <div class="fip-container">
             {% include  "includes/FIP_header.html" %}
-            {% include  "includes/nav_header.html" %}
+            {# on the CSRF error page, the request context is missing #}
+            {% if request %}
+              {% include  "includes/nav_header.html" %}
+            {% endif %}
           </div>
         </div>
         <div class="page--container">
