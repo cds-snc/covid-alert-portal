@@ -1,0 +1,33 @@
+version: 0.2
+
+env:
+  variables:
+    DJANGO_ENV: "development"
+phases:
+  install:
+    runtime-versions:
+      python: 3.x
+  pre_build:
+    commands:
+      - pip install --upgrade pip setuptools pipenv
+      - pipenv install --dev
+      - echo "Compile CSS"
+      - pipenv run python manage.py sass profiles/static/scss/styles.scss profiles/static/css/
+      - echo "Collect static files"
+      - pipenv run python manage.py collectstatic --noinput -i scss
+      - echo "Compiling French Translations"
+      - pipenv run python manage.py compilemessages
+      - echo "Running DB Migrations locally"
+      - pipenv run python manage.py migrate --noinput
+  build:
+    commands:
+      - pipenv run python manage.py test
+
+  post_build:
+    commands:
+      - echo "Cleaning up"
+      - rm db.sqlite3
+      - rm ./portal/requirements.txt
+artifacts:
+  files:
+    - "**/*"
