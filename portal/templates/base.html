@@ -35,7 +35,10 @@
         <div class="page--container">
           <div class="fip-container">
             {% include  "includes/FIP_header.html" %}
-            {% include  "includes/nav_header.html" %}
+            {# on the CSRF error page, the request context is missing #}
+            {% if request %}
+              {% include  "includes/nav_header.html" %}
+            {% endif %}
           </div>
         </div>
         <div class="page--container">

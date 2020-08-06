@@ -211,35 +211,35 @@ class AuthenticatedView(AdminUserTestCase):
 
     def test_1hour_inactivity(self):
         self.login()
-        response = self.client.get(reverse("key"))
+        response = self.client.get(reverse("start"))
         self.assertEqual(response.status_code, 200)
         now = datetime.now()
         expiry = now + timedelta(seconds=settings.SESSION_COOKIE_AGE + 1)
         with freeze_time(expiry):
-            response = self.client.get(reverse("key"))
-            self.assertRedirects(response, "/en/login/?next=/en/key/")
+            response = self.client.get(reverse("start"))
+            self.assertRedirects(response, "/en/login/?next=/en/start/")
 
     def test_1hour_with_activity(self):
         self.login()
-        response = self.client.get(reverse("key"))
+        response = self.client.get(reverse("start"))
         self.assertEqual(response.status_code, 200)
         now = datetime.now()
         # 30 minutes
         expiry = now + timedelta(seconds=settings.SESSION_COOKIE_AGE / 2)
         with freeze_time(expiry):
-            response = self.client.get(reverse("key"))
+            response = self.client.get(reverse("start"))
             self.assertEqual(response.status_code, 200)
 
         # 1 hour + 1 second from original request
         expiry2 = now + timedelta(seconds=settings.SESSION_COOKIE_AGE + 1)
         with freeze_time(expiry2):
-            response = self.client.get(reverse("key"))
+            response = self.client.get(reverse("start"))
             self.assertEqual(response.status_code, 200)
 
         # 2h + 2 sec
         expiry3 = now + timedelta(seconds=(settings.SESSION_COOKIE_AGE * 2) + 2)
         with freeze_time(expiry3):
-            response = self.client.get(reverse("key"))
+            response = self.client.get(reverse("start"))
             self.assertEqual(response.status_code, 302)
 
     def test_session_timed_out_message(self):

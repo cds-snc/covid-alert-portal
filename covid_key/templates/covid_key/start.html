@@ -13,5 +13,10 @@
     <li>{% blocktrans %}They understand the <strong>key expires in 24 hours</strong>. If the key expires before the patient enters it, they’ll need to ask your office for a new key.{% endblocktrans %}</li>
     <li>{% blocktrans %}They’re ready to <strong>enter the key in the app</strong> or <strong>record it somewhere safe.</strong>{% endblocktrans %}</li>
   </ol>
-  <div class="content-button"><a href="{% url 'key' %}" role='button' draggable='false'>{% trans "Generate key" %}</a></div>
+  <div class="content-button">
+   <form action="{% url 'key' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">{% trans "Generate key" %}</button>
+  </form>
+  </div>
 {% endblock %}

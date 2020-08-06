@@ -2,7 +2,7 @@ import logging
 import requests
 from datetime import timedelta
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
@@ -18,6 +18,9 @@ logger = logging.getLogger(__name__)
 @login_required
 @otp_required
 def code(request):
+    if request.method != "POST":
+        return redirect("start")
+
     created_keys_count = COVIDKey.objects.filter(
         created_at__gte=timezone.now() - timedelta(hours=24)
     ).count()
