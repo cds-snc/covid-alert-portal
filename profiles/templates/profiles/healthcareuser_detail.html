@@ -23,18 +23,21 @@
         <tr>
           <th scope="row">{% trans "Your name" %}</td>
           <td scope="col">{{ healthcareuser.name }}</td>
+          <td scope="col"><a href="{% url 'user_edit_name' healthcareuser.id %}">{% trans "Change" %}</a></td>
         </tr>
         <tr>
           <th scope="row">{% trans "Email address" %}</td>
           <td scope="col">{{ healthcareuser.email }}</td>
+          <td scope="col"><a href="{% url 'user_edit_email' healthcareuser.id %}">{% trans "Change" %}</a></td>
         </tr>
         <tr>
-          <th scope="row">{% trans "Province" %}</td>
-          <td scope="col">{{ healthcareuser.province.name }}</td>
+          <th scope="row">{% trans "Phone number" %}</td>
+          <td scope="col">{{ healthcareuser.phone_number.as_e164 }}</td>
+          <td scope="col"><a href="{% url 'user_edit_phone' healthcareuser.id %}">{% trans "Change" %}</a></td>
         </tr>
         <tr>
-            <th scope="row">{% trans "Phone number" %}</td>
-            <td scope="col">{{ healthcareuser.phone_number.as_e164 }}</td>
+          <th scope="row" colspan="2">{% trans "Password" %}</td>
+          <td scope="col"><a href="{% url 'user_edit_password' healthcareuser.id %}">{% trans "Change" %}</a></td>
         </tr>
       </tbody>
     </table>
