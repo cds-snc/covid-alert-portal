@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-05 00:48+0000\n"
+"POT-Creation-Date: 2020-08-06 18:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,7 +163,7 @@ msgstr ""
 "Qu’il est en mesure d’<strong>entrer la clé dans l’application</strong> ou "
 "de <strong>noter la clé à un endroit sûr.</strong>"
 
-#: covid_key/templates/covid_key/start.html:16
+#: covid_key/templates/covid_key/start.html:19
 msgid "Generate key"
 msgstr "Générer une clé"
 
@@ -176,7 +176,7 @@ msgid "You have hit your daily limit of code generation."
 msgstr ""
 "Vous avez atteint votre limite journalière pour la génération des codes."
 
-#: covid_key/views.py:75
+#: covid_key/views.py:78
 msgid "Something went wrong. Contact your manager."
 msgstr "Une erreur est survenue. Veuillez contacter votre superviseur."
 
@@ -186,6 +186,18 @@ msgid ""
 "try again after 5 minutes."
 msgstr ""
 
+#: portal/templates/403_csrf.html:4 portal/templates/403_csrf.html:7
+msgid "Forbidden"
+msgstr "Interdit"
+
+#: portal/templates/403_csrf.html:9
+msgid "Something went wrong when visiting this page."
+msgstr "Un problème est survenu lors de la visite de cette page."
+
+#: portal/templates/403_csrf.html:10
+msgid "Start over"
+msgstr "Recommencer"
+
 #: portal/templates/admin/login-disabled.html:23
 #, python-format
 msgid "Please use the <a href=\"%(login_url)s\">main website to log in</a>."
@@ -193,12 +205,12 @@ msgstr ""
 "Veuillez utiliser <a href=\"%(login_url)s\">le site principal pour vous "
 "connecter</a>."
 
-#: portal/templates/base.html:29 portal/templates/base.html:42
+#: portal/templates/base.html:30 portal/templates/base.html:46
 #: profiles/utils/__init__.py:25
 msgid "COVID Alert Portal"
 msgstr "Portail Alerte COVID"
 
-#: portal/templates/base.html:29
+#: portal/templates/base.html:30
 msgid "— COVID Alert Portal"
 msgstr "— Portail Alerte COVID"
 
@@ -439,7 +451,8 @@ msgid ""
 "If you delete their invitation, they will not be able to join the COVID "
 "Alert Portal until they are invited back."
 msgstr ""
-"Si vous retirez cette invitation, la personne invitée ne pourra pas rejoindre le Portail Alerte COVID."
+"Si vous retirez cette invitation, la personne invitée ne pourra pas "
+"rejoindre le Portail Alerte COVID."
 
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html:16
 msgid "Yes, I am sure"
@@ -513,9 +526,9 @@ msgid "Delete"
 msgstr "Effacer"
 
 #: profiles/templates/invitations/templates/invite_list.html:40
-#| msgid "Invitation sent to %(email)s"
+#, python-format
 msgid "Delete invitation for %(email)s"
-msgstr "Retirer l'invitation envoyée à %(email)s"
+msgstr "Retirer l’invitation envoyée à %(email)s"
 
 #: profiles/templates/invitations/templates/invite_list.html:48
 msgid "No invitations yet"
@@ -612,100 +625,15 @@ msgid "Admin,Staff"
 msgstr "Administrateur,Employé"
 
 #: profiles/templates/profiles/healthcareuser_list.html:36
-#| msgid "Delete account for {email}"
+#, python-format
 msgid "Delete account for %(email)s"
-msgstr "Effacer le compte associé à {email}"
+msgstr "Effacer le compte associé à %(email)s"
 
 #: profiles/templates/profiles/healthcareuser_list.html:42
 msgid "No users yet."
 msgstr "Aucune utilisateur pour le moment"
 
 #: profiles/templates/profiles/privacy.html:12
-#| msgid ""
-#| "\n"
-#| "        <p>The Government of Canada is committed to protect the privacy "
-#| "of its visitors on its websites. This privacy notice summarizes the "
-#| "privacy policy and practices of Canadian Digital Service websites, which "
-#| "are under the responsibility of the <a href=\"https://www.canada.ca/en/"
-#| "treasury-board-secretariat.html\">Treasury Board of Canada Secretariat</"
-#| "a> (TBS).</p>\n"
-#| "        <h2>Your privacy and the Internet</h2>\n"
-#| "        <p>Specific personal information, such as your name, phone number "
-#| "or email address, is not automatically gathered. TBS would only obtain "
-#| "this type of information if you supply it by email or by registering in a "
-#| "secure portion of the site for a program or service (e.g. personal "
-#| "information provided voluntarily when you complete an online form or "
-#| "request for service).</p>\n"
-#| "        <p>The nature of the Internet is such that Web servers "
-#| "automatically collect certain information about a visit to a website, "
-#| "including the visitor's Internet Protocol (IP) address. IP addresses are "
-#| "unique numbers assigned by Internet Service Providers (ISP) to all "
-#| "devices used to access the Internet. Web servers automatically log the IP "
-#| "addresses of visitors to their sites. The IP address, on its own, does "
-#| "not identify an individual. However, in certain circumstances, such as "
-#| "with the co-operation of an ISP for example, it could be used to identify "
-#| "an individual using the site. For this reason, the Government of Canada "
-#| "considers the IP address to be personal information, particularly when "
-#| "combined with other data automatically collected when a visitor requests "
-#| "a Web page such as the page or pages visited, date and time of the visit."
-#| "</p>\n"
-#| "        <p>In cases where services are provided by organisations outside "
-#| "of the Government of Canada, such as social media platforms, search or "
-#| "mobile applications, IP addresses may be recorded by the third-party "
-#| "service provider.</p>\n"
-#| "        <p>All personal information created, held or collected by the "
-#| "Government of Canada is protected under the federal Privacy Act. At any "
-#| "point of collection, you will be asked for consent to collect your "
-#| "information or you will be advised of the authority for such collection. "
-#| "You will also be informed of the purpose for which the personal "
-#| "information is being collected, and how to exercise your right of access "
-#| "to, and correction of, that information. In such cases, how your personal "
-#| "information is handled is described in a Personal Information Collection "
-#| "Statement.</p>\n"
-#| "        <p>Visitors' personal information is not usually disclosed to "
-#| "anyone except Government of Canada personnel who need the information to "
-#| "carry out their responsibilities. Any further disclosure of the personal "
-#| "information you provide would be in accordance with the federal <a href="
-#| "\"https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html\">Privacy Act</"
-#| "a>.</p>\n"
-#| "        <h2>Communicating with the Canadian Digital Service</h2>\n"
-#| "        <p>If you choose to send an email to the Canadian Digital "
-#| "Service, your personal information may be used in order to respond to "
-#| "your inquiry. TBS does not use the information to create individual "
-#| "profiles. Any disclosure of your personal information is in accordance "
-#| "with the <a href=\"https://laws-lois.justice.gc.ca/eng/acts/P-21/index."
-#| "html\">Privacy Act</a>.</p>\n"
-#| "        <p>Emails and other electronic methods used to communicate with "
-#| "the Government of Canada are not secure unless it is specifically stated "
-#| "on a Web page. Therefore, it is recommended that you do not send "
-#| "sensitive personal information, such as your Social Insurance Number or "
-#| "your date of birth, through non-secure electronic means.</p>\n"
-#| "        <p>Personal information from emails is collected pursuant to "
-#| "section 7 of the Financial Administration Act. Such information may be "
-#| "used for statistical, evaluation and reporting purposes and is included "
-#| "in Personal Information Bank <a href=\"https://www.canada.ca/en/treasury-"
-#| "board-secretariat/services/access-information-privacy/access-information/"
-#| "information-about-programs-information-holdings.html#psu914\">Public "
-#| "Communications (PSU 914)</a>.</p>\n"
-#| "        <h2>Third-party social media</h2>\n"
-#| "        <p>The Government of Canada's use of social media serves as an "
-#| "extension of its presence on the Web. Social media account(s) are public "
-#| "and are not hosted on Government of Canada servers. Users who choose to "
-#| "interact with the Government of Canada, including the Canadian Digital "
-#| "Service, via social media should read the terms of service and privacy "
-#| "policies of these third-party service providers and those of any "
-#| "applications used to access them.</p>\n"
-#| "        <h2>Improving your experience on the Canadian Digital Service "
-#| "website</h2>\n"
-#| "        <h3>Digital markers (including cookies)</h3>\n"
-#| "        <p>A digital marker is a resource created by the visitors' "
-#| "browser in order to remember certain pieces of information for the Web "
-#| "server to reference during the same or subsequent visit to the website. "
-#| "Examples of digital markers are \"cookies\" or HTML5 web storage. Some "
-#| "examples of what digital markers do are as follows:</p>\n"
-#| "        <ul>\n"
-#| "            <li>they allow a website to recognize a visitor who has "
-#| "previously accessed the site;</li>\n"
 msgid ""
 "\n"
 "        <p>The Government of Canada is committed to protect the privacy of "
@@ -1077,7 +1005,6 @@ msgstr ""
 
 #: profiles/templates/profiles/signup.html:6
 #: profiles/templates/profiles/signup.html:13
-#| msgid "Your account"
 msgid "Create account"
 msgstr "Creation de compte"
 
@@ -1114,10 +1041,11 @@ msgid "Security code has been sent."
 msgstr ""
 
 #: profiles/views.py:163
-#| msgid "Your portal account"
 msgid ": Your portal account"
 msgstr " : votre compte pour le Portail"
 
-#: profiles/views.py:223
+#: profiles/views.py:222
 msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
+"Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
+"portail."
