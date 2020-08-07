@@ -644,7 +644,7 @@ msgstr ""
 #: profiles/templates/profiles/healthcareuser_detail.html:17
 #: profiles/templates/profiles/healthcareuser_detail.html:21
 msgid "User account"
-msgstr "Comptes d'utilisateurs"
+msgstr "Compte d'utilisateur"
 
 #: profiles/templates/profiles/healthcareuser_detail.html:26
 #: profiles/templates/profiles/healthcareuser_detail.html:31
