@@ -19,6 +19,7 @@ from dotenv import load_dotenv
 from datetime import timedelta
 from logging import getLogger, CRITICAL
 from django.utils.translation import gettext_lazy as _
+from socket import gethostname, gethostbyname, gaierror
 
 load_dotenv()
 
@@ -48,7 +49,16 @@ ALLOWED_HOSTS = [
     "0.0.0.0",
     "127.0.0.1",
     "localhost",
+    gethostname(),
 ]
+
+if not DEBUG and not TESTING:
+    try:
+        # this will fail locally because the macbook name can't be resolved to an IP
+        host_by_name = gethostbyname(gethostname())
+        ALLOWED_HOSTS.append(host_by_name)
+    except gaierror:
+        pass
 
 if os.getenv("DJANGO_ALLOWED_HOSTS"):
     ALLOWED_HOSTS.extend(os.getenv("DJANGO_ALLOWED_HOSTS").split(","))
