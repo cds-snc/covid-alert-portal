@@ -13,7 +13,7 @@ resource "aws_lb_target_group" "covidportal" {
   health_check {
     enabled             = true
     interval            = 10
-    path                = "/en/landing/"
+    path                = "/en/login/"
     port                = 8000
     matcher             = "301,200"
     timeout             = 5
@@ -39,7 +39,7 @@ resource "aws_lb_target_group" "covidportal_2" {
     enabled             = true
     interval            = 10
     port                = 8000
-    path                = "/en/landing/"
+    path                = "/en/login/"
     matcher             = "301,200"
     timeout             = 5
     healthy_threshold   = 2
@@ -105,7 +105,7 @@ resource "aws_lb_listener" "covidportal_http" {
     }
   }
 
-    lifecycle {
+  lifecycle {
     ignore_changes = [
       default_action # updated by codedeploy
     ]
