@@ -22,7 +22,8 @@ def code(request):
         return redirect("start")
 
     created_keys_count = COVIDKey.objects.filter(
-        created_at__gte=timezone.now() - timedelta(hours=24)
+        created_at__gte=timezone.now() - timedelta(hours=24),
+        created_by_id=request.user.id,
     ).count()
     if created_keys_count < settings.COVID_KEY_MAX_PER_USER_PER_DAY:
         return _generate_key(request)
