@@ -8,7 +8,7 @@ from django.utils import translation, timezone
 from django.core.exceptions import ValidationError
 from django_otp import DEVICE_ID_SESSION_KEY
 from invitations.models import Invitation
-from .forms import SignupForm
+from .forms import SignupForm, HealthcarePasswordEditForm
 from .models import HealthcareProvince, HealthcareUser
 from .validators import BannedPasswordValidator
 from datetime import datetime, timedelta
@@ -692,3 +692,54 @@ class DeleteView(AdminUserTestCase):
             response,
             "<p>Are you sure you want to delete testuser2’s account at “test2@test.com”?</p>",
         )
+
+
+class ProfileEditView(AdminUserTestCase):
+    def test_edit_someone_else_account(self):
+        self.login()
+        response = self.client.get(
+            reverse("user_edit_name", kwargs={"pk": self.user.id})
+        )
+        self.assertEqual(response.status_code, 200)
+
+        user2 = get_other_credentials(is_admin=False)
+        user2 = User.objects.create_user(**user2)
+
+        response = self.client.get(reverse("user_edit_name", kwargs={"pk": user2.id}))
+        self.assertEqual(response.status_code, 403)
+
+    def test_edit_someone_else_account_with_admin(self):
+        self.login()
+        response = self.client.get(
+            reverse("user_edit_name", kwargs={"pk": self.user.id})
+        )
+        self.assertEqual(response.status_code, 200)
+
+        user2 = get_other_credentials(is_admin=False)
+        user2 = User.objects.create_user(**user2)
+
+        response = self.client.get(reverse("user_edit_name", kwargs={"pk": user2.id}))
+        self.assertEqual(response.status_code, 403)
+
+    def test_change_email(self):
+        self.login()
+        post_data = {
+            "password1": uuid4(),
+            "password2": uuid4(),
+        }
+        response = self.client.post(
+            reverse("user_edit_password", kwargs={"pk": self.user.id}), post_data,
+        )
+        self.assertContains(
+            response, HealthcarePasswordEditForm.error_messages.get("password_mismatch")
+        )
+        password = uuid4()
+        post_data = {
+            "password1": password,
+            "password2": password,
+        }
+        response = self.client.post(
+            reverse("user_edit_password", kwargs={"pk": self.user.id}), post_data,
+        )
+
+        self.assertEqual(response.status_code, 302)
