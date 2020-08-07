@@ -75,7 +75,6 @@ urlpatterns = [
         TemplateView.as_view(template_name="profiles/privacy.html"),
         name="privacy",
     ),
-    path("", include("django.contrib.auth.urls")),
 ]
 
 # The PasswordResetView doesn't have any html template by default
@@ -104,4 +103,14 @@ urlpatterns += [
         PasswordResetView.as_view(form_class=forms.HealthcarePasswordResetForm),
         name="password_reset",
     ),
+    path(
+        "reset/<uidb64>/<token>/",
+        login_views.PasswordResetConfirmView.as_view(
+            post_reset_login=True, post_reset_login_backend="axes.backends.AxesBackend",
+        ),
+        name="password_reset_confirm",
+    ),
+    path("reset/done/", views.password_reset_complete, name="password_reset_complete"),
+    # If this doesnt go last, I can't overwrite the handler for the urls.
+    path("", include("django.contrib.auth.urls")),
 ]

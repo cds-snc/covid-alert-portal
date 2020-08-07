@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Forbidden" %}{% endblock %}
+
+{% block content %}
+<h1>{% trans "Forbidden" %}</h1>
+
+<p>{% trans "Something went wrong when visiting this page." %}</p>
+<div class="content-button"><a href="{% url 'start' %}" role='button' draggable='false'>{% trans "Start over" %}</a></div>
+
+{% endblock content %}

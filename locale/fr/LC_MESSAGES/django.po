@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-07 15:02+0000\n"
+"POT-Creation-Date: 2020-08-06 18:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -164,7 +164,7 @@ msgstr ""
 "Qu’il est en mesure d’<strong>entrer la clé dans l’application</strong> ou "
 "de <strong>noter la clé à un endroit sûr.</strong>"
 
-#: covid_key/templates/covid_key/start.html:16
+#: covid_key/templates/covid_key/start.html:19
 msgid "Generate key"
 msgstr "Générer une clé"
 
@@ -177,7 +177,7 @@ msgid "You have hit your daily limit of code generation."
 msgstr ""
 "Vous avez atteint votre limite journalière pour la génération des codes."
 
-#: covid_key/views.py:75
+#: covid_key/views.py:78
 msgid "Something went wrong. Contact your manager."
 msgstr "Une erreur est survenue. Veuillez contacter votre superviseur."
 
@@ -187,6 +187,18 @@ msgid ""
 "try again after 5 minutes."
 msgstr ""
 
+#: portal/templates/403_csrf.html:4 portal/templates/403_csrf.html:7
+msgid "Forbidden"
+msgstr "Interdit"
+
+#: portal/templates/403_csrf.html:9
+msgid "Something went wrong when visiting this page."
+msgstr "Un problème est survenu lors de la visite de cette page."
+
+#: portal/templates/403_csrf.html:10
+msgid "Start over"
+msgstr "Recommencer"
+
 #: portal/templates/admin/login-disabled.html:23
 #, python-format
 msgid "Please use the <a href=\"%(login_url)s\">main website to log in</a>."
@@ -194,12 +206,12 @@ msgstr ""
 "Veuillez utiliser <a href=\"%(login_url)s\">le site principal pour vous "
 "connecter</a>."
 
-#: portal/templates/base.html:29 portal/templates/base.html:42
+#: portal/templates/base.html:30 portal/templates/base.html:46
 #: profiles/utils/__init__.py:25
 msgid "COVID Alert Portal"
 msgstr "Portail Alerte COVID"
 
-#: portal/templates/base.html:29
+#: portal/templates/base.html:30
 msgid "— COVID Alert Portal"
 msgstr "— Portail Alerte COVID"
 
@@ -578,7 +590,7 @@ msgstr "Effacer"
 #: profiles/templates/invitations/templates/invite_list.html:40
 #, python-format
 msgid "Delete invitation for %(email)s"
-msgstr "Retirer l'invitation envoyée à %(email)s"
+msgstr "Retirer l’invitation envoyée à %(email)s"
 
 #: profiles/templates/invitations/templates/invite_list.html:48
 msgid "No invitations yet"
@@ -678,7 +690,7 @@ msgid "Admin,Staff"
 msgstr "Administrateur,Employé"
 
 #: profiles/templates/profiles/healthcareuser_list.html:36
-#| msgid "Delete account for %(email)s"
+#, python-format
 msgid "Delete account for %(email)s"
 msgstr "Effacer le compte associé à %(email)s"
 
@@ -1093,16 +1105,3 @@ msgstr ""
 msgid "Security code has been sent."
 msgstr ""
 
-#: profiles/views.py:166
-msgid ": Your portal account"
-msgstr " : votre compte pour le Portail"
-
-#: profiles/views.py:253
-msgid "Your session timed out. Log in again to continue using the portal."
-msgstr ""
-
-#~ msgid "Manage existing accounts"
-#~ msgstr "Gérer les comptes existants"
-
-#~ msgid "Province"
-#~ msgstr "Province"
