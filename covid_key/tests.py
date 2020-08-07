@@ -3,8 +3,9 @@ from django.test import override_settings, Client
 from django.urls import reverse
 from django.utils import timezone
 from django_otp import DEVICE_ID_SESSION_KEY
+from django.contrib.auth import get_user_model
 
-from profiles.tests import AdminUserTestCase
+from profiles.tests import AdminUserTestCase, get_other_credentials
 from .models import COVIDKey
 from profiles.models import HealthcareUser
 
@@ -50,6 +51,26 @@ class KeyView(AdminUserTestCase):
         self.assertContains(
             response, "You have hit your daily limit of code generation"
         )
+
+    @override_settings(COVID_KEY_MAX_PER_USER_PER_DAY=1)
+    def test_key_throttled_for_another_user(self):
+        self.login()
+        covid_key = COVIDKey()
+        covid_key.created_by = self.user
+        covid_key.expiry = timezone.now() + timedelta(days=1)
+        covid_key.save()
+
+        response = self.client.post(reverse("key"))
+        self.assertContains(
+            response, "You have hit your daily limit of code generation"
+        )
+
+        user2_credentials = get_other_credentials()
+        get_user_model().objects.create_user(**user2_credentials)
+        self.login(user2_credentials)
+        response = self.client.get(reverse("key"))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, "/en/start/")
 
 
 class KeyViewCSRFEnabled(AdminUserTestCase):
