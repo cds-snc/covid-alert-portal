@@ -1,8 +1,5 @@
 version: 0.2
 
-env:
-  variables:
-    DJANGO_ENV: "development"
 phases:
   install:
     runtime-versions:
