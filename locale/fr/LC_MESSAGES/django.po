@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-10 19:54+0000\n"
+"POT-Creation-Date: 2020-08-10 21:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -238,11 +238,17 @@ msgstr "à"
 
 #: portal/templates/includes/footer.html:9
 #: profiles/templates/profiles/privacy.html:5
-#: profiles/templates/profiles/privacy.html:11
+#: profiles/templates/profiles/privacy.html:9
 msgid "Privacy"
 msgstr "Confidentialité"
 
-#: portal/templates/includes/footer.html:12
+#: portal/templates/includes/footer.html:10
+#: profiles/templates/profiles/terms.html:5
+#: profiles/templates/profiles/terms.html:9
+msgid "Terms of use"
+msgstr "Conditions d’utilisation"
+
+#: portal/templates/includes/footer.html:13
 msgid "Symbol of the Government of Canada"
 msgstr "Symbole du gouvernement du Canada"
 
@@ -659,7 +665,6 @@ msgid "Name"
 msgstr "Nom"
 
 #: profiles/templates/profiles/healthcareuser_detail.html:37
-#| msgid "Change your name"
 msgid "Change the name"
 msgstr "Modifier le nom"
 
@@ -675,7 +680,6 @@ msgid "Phone number"
 msgstr "Téléphone"
 
 #: profiles/templates/profiles/healthcareuser_detail.html:63
-#| msgid "Change your phone number"
 msgid "Change the phone number"
 msgstr "Modifier le numéro de téléphone"
 
@@ -704,7 +708,7 @@ msgid "Edit"
 msgstr "Modifier"
 
 #: profiles/templates/profiles/healthcareuser_list.html:36
-#| msgid "Delete account for %(email)s"
+#, python-format
 msgid "Edit account for %(email)s"
 msgstr "Modifier le compte associé à %(email)s"
 
@@ -717,7 +721,7 @@ msgstr "Effacer le compte associé à %(email)s"
 msgid "No users yet."
 msgstr "Aucune utilisateur pour le moment"
 
-#: profiles/templates/profiles/privacy.html:12
+#: profiles/templates/profiles/privacy.html:10
 msgid ""
 "\n"
 "        <p>The Government of Canada is committed to protect the privacy of "
@@ -1095,6 +1099,64 @@ msgstr "Creation de compte"
 #: profiles/templates/profiles/signup.html:14
 msgid "Next"
 msgstr "Suivant"
+
+#: profiles/templates/profiles/terms.html:10
+msgid ""
+"\n"
+"        <h2>Approving portal users</h2>\n"
+"        <p>Only a provincial, territorial, or federal healthcare authority "
+"can:</p>\n"
+"        <ul>\n"
+"            <li>Approve your use of the portal.</li>\n"
+"            <li>Give you a user account.</li>\n"
+"        </ul>\n"
+"\n"
+"        <h2>Using the portal</h2>\n"
+"        <p>You must:</p>\n"
+"        <ul>\n"
+"            <li>Follow all portal procedures made by your healthcare "
+"authority.</li>\n"
+"            <li>Only give one-time keys to patients diagnosed with COVID-19 "
+"by your healthcare authority.</li>\n"
+"            <li>Take steps to prevent anyone, including other people working "
+"for a healthcare authority, from learning your username and password.</li>\n"
+"        </ul>\n"
+"\n"
+"        <h2>Reporting unauthorized activity</h2>\n"
+"        <p>You must:</p>\n"
+"        <ul>\n"
+"            <li>Report any unauthorized activity, loss of username or "
+"password, or other security issues to <a href=\"mailto:security@cds-snc.ca"
+"\">security@cds-snc.ca</a> and to your healthcare authority.</li>\n"
+"            <li>Follow your healthcare authority’s procedures for reporting "
+"security issues.</li>\n"
+"        </ul>\n"
+"\n"
+"        <h2>Getting help</h2>\n"
+"        <p>For questions about these terms of use, or to report a technical "
+"issue, please contact <a href=\"mailto:assistance@cds-snc.ca"
+"\">assistance@cds-snc.ca</a>.</p>\n"
+"    "
+msgstr ""
+"\n"
+"<h2>Utilisateurs du portail autorisés</h2><p>Seules les autorités sanitaires "
+"provinciale, territoriale ou fédérale peuvent :</p><ul><li>Vous autoriser à "
+"utiliser le portail.</li><li>Vous fournir un compte utilisateur.</li></"
+"ul><h2>Utilisation du portail</h2><p>Vous devez:</p><ul><li>Suivre toutes "
+"les procédures relatives au portail établies par votre autorité sanitaire.</"
+"li><li>Fournir des clés à usage unique seulement aux patients ayant un "
+"diagnostic de COVID-19 établi par votre autorité sanitaire.</li><li>Prendre "
+"les mesures nécessaires pour empêcher toute personne, y compris celles "
+"travaillant pour une autorité sanitaire, de découvrir votre nom "
+"d’utilisateur et votre mot de passe.</li></ul><h2>Signalement des activités "
+"non autorisées</h2><p>Vous devez :</p><ul><li>Signaler les activités non "
+"autorisées, la perte d’un nom d’utilisateur ou d’un mot de passe, ou tout "
+"autre problème de sécurité à <a href=\"mailto:security@cds-snc.ca"
+"\">security@cds-snc.ca</a>et à votre autorité sanitaire.</li><li>Suivre les "
+"procédures établies par votre autorité sanitaire pour signaler les problèmes "
+"de sécurité.</li></ul><h2>Aide</h2><p>Pour toute question au sujet des "
+"modalités d’utilisation, ou pour signaler un problème technique, écrivez à "
+"<a href=\"mailto:assistance@cds-snc.ca\">assistance@cds-snc.ca</a>.</p>"
 
 #: profiles/validators.py:10
 msgid "Your password can’t be a commonly-used sequence"
