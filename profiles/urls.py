@@ -75,6 +75,11 @@ urlpatterns = [
         TemplateView.as_view(template_name="profiles/privacy.html"),
         name="privacy",
     ),
+    path(
+        "terms/",
+        TemplateView.as_view(template_name="profiles/terms.html"),
+        name="terms",
+    ),
 ]
 
 # The PasswordResetView doesn't have any html template by default
