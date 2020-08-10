@@ -197,11 +197,13 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
     name = forms.CharField(label=_("Full name"), validators=[MaxLengthValidator(200)])
 
     phone_number = PhoneNumberField(
+        label=_("Phone number"),
         help_text=_(
-            "A single use code will be sent to this phone number every time you try to log in."
+            "You must enter a new security code each time you log in. We’ll send the code to this phone number."
         ),
     )
     phone_number_confirmation = PhoneNumberField(
+        label=_("Confirm your phone number"),
         help_text=_("Enter the same phone number as before, for verification"),
     )
 
