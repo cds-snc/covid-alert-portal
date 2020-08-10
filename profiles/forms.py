@@ -233,7 +233,7 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
         if email_exists.count():
             raise ValidationError(_("Email already exists"))
         if not Invitation.objects.filter(email__iexact=email):
-            raise ValidationError(_("An invitation hasn't been sent to this address"))
+            raise ValidationError(_("An invitation hasn’t been sent to this address"))
 
         return email
 
@@ -246,7 +246,7 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
             and phone_number != phone_number_confirmation
         ):
             raise forms.ValidationError(
-                _("The phone number fields don‘t match."), code="invalid",
+                _("The phone number fields don’t match."), code="invalid",
             )
         return phone_number_confirmation
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-10 21:59+0000\n"
+"POT-Creation-Date: 2020-08-10 22:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -220,7 +220,7 @@ msgstr "— Portail Alerte COVID"
 msgid "Government of Canada"
 msgstr "Gouvernement du Canada"
 
-#: portal/templates/includes/cds_form.html:31
+#: portal/templates/includes/cds_form.html:37
 msgid "Submit"
 msgstr "Soumettre"
 
@@ -383,7 +383,7 @@ msgid "Enter a valid email address"
 msgstr "Entrez une adresse courriel valide"
 
 #: profiles/forms.py:42 profiles/forms.py:184 profiles/forms.py:193
-#: profiles/forms.py:257
+#: profiles/forms.py:259
 #: profiles/templates/invitations/templates/invite_list.html:18
 #: profiles/templates/profiles/healthcareuser_detail.html:44
 #: profiles/templates/profiles/healthcareuser_list.html:18
@@ -409,7 +409,7 @@ msgstr "Modifier votre nom"
 msgid "Change your phone number"
 msgstr "Modifier votre numéro de téléphone"
 
-#: profiles/forms.py:102
+#: profiles/forms.py:102 profiles/forms.py:206
 msgid "Confirm your phone number"
 msgstr "Confirmez votre numéro de téléphone mobile"
 
@@ -442,26 +442,33 @@ msgstr "Saississez de nouveau votre mot de passe"
 msgid "Full name"
 msgstr "Nom complet"
 
-#: profiles/forms.py:201
-msgid ""
-"A single use code will be sent to this phone number every time you try to "
-"log in."
-msgstr ""
+#: profiles/forms.py:200
+#: profiles/templates/profiles/healthcareuser_detail.html:56
+msgid "Phone number"
+msgstr "Numéro de téléphone mobile"
 
-#: profiles/forms.py:205
+#: profiles/forms.py:202
+msgid ""
+"You must enter a new security code each time you log in. We’ll send the code "
+"to this phone number."
+msgstr ""
+"Il faut entrer un nouveau code de sécurité à chaque connexion. Nous "
+"enverrons le code à ce numéro."
+
+#: profiles/forms.py:207
 msgid "Enter the same phone number as before, for verification"
 msgstr "Entrer le même numéro, pour des fins de validation"
 
-#: profiles/forms.py:232
+#: profiles/forms.py:234
 msgid "Email already exists"
 msgstr "L’adresse courriel existe déjà"
 
-#: profiles/forms.py:234
-msgid "An invitation hasn't been sent to this address"
-msgstr "L’invitation n'a pu être envoyée."
+#: profiles/forms.py:236
+msgid "An invitation hasn’t been sent to this address"
+msgstr "L’invitation n’a pu être envoyée."
 
-#: profiles/forms.py:247
-msgid "The phone number fields don‘t match."
+#: profiles/forms.py:249
+msgid "The phone number fields don’t match."
 msgstr ""
 
 #: profiles/models.py:67
@@ -674,10 +681,6 @@ msgstr "Modifier le nom"
 #: profiles/templates/profiles/healthcareuser_detail.html:75
 msgid "Change"
 msgstr "Mettre à jour"
-
-#: profiles/templates/profiles/healthcareuser_detail.html:56
-msgid "Phone number"
-msgstr "Téléphone"
 
 #: profiles/templates/profiles/healthcareuser_detail.html:63
 msgid "Change the phone number"
@@ -1093,12 +1096,18 @@ msgstr ""
 
 #: profiles/templates/profiles/signup.html:6
 #: profiles/templates/profiles/signup.html:13
+#: profiles/templates/profiles/signup.html:14
 msgid "Create account"
-msgstr "Creation de compte"
+msgstr "Créer un compte"
 
 #: profiles/templates/profiles/signup.html:14
-msgid "Next"
-msgstr "Suivant"
+msgid ""
+"<p>By creating an account, you agree to the COVID Alert Portal <a href=\"/en/"
+"terms\" target=\"_blank\">Terms of use</a>.</p>"
+msgstr ""
+"<p>En créant un compte, vous acceptez de vous soumettre aux <a href=\"/fr/"
+"terms\" target=\"_blank\">conditions d’utilisation</a> du portail Alerte "
+"COVID.</p>"
 
 #: profiles/templates/profiles/terms.html:10
 msgid ""
@@ -1158,17 +1167,13 @@ msgstr ""
 "modalités d’utilisation, ou pour signaler un problème technique, écrivez à "
 "<a href=\"mailto:assistance@cds-snc.ca\">assistance@cds-snc.ca</a>.</p>"
 
-#: profiles/validators.py:10
-msgid "Your password can’t be a commonly-used sequence"
-msgstr ""
+#: profiles/validators.py:10 profiles/validators.py:22
+msgid "Your password can’t be a commonly-used sequence."
+msgstr "Votre mot de passe ne peut pas être utilisé couramment."
 
 #: profiles/validators.py:17
 msgid "Your password can’t contain terms related to COVID-19"
-msgstr ""
-
-#: profiles/validators.py:22
-msgid "Your password can’t be a commonly-used sequence."
-msgstr ""
+msgstr "Votre mot de passe ne peut pas contenir de termes liés à COVID-19"
 
 #: profiles/views.py:52
 msgid "No invited email in session"
@@ -1193,14 +1198,8 @@ msgstr " : votre compte pour le Portail"
 #: profiles/views.py:253
 msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
+"Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
+"portail."
 
-#~| msgid "Change your name"
-#~ msgid "Change your phone"
-#~ msgstr "Modifier votre numéro de téléphone"
-
-#~| msgid "Add new account"
-#~ msgid "Edit %(name)s account"
-#~ msgstr "Modifier le compte de %(name)s"
-
-#~ msgid "Phone numbers provided does not match."
-#~ msgstr "Les numéros de téléphone ne sont pas identiques."
+#~ msgid "Your password can’t be a commonly-used sequence"
+#~ msgstr "Votre mot de passe ne peut pas être utilisé couramment"
