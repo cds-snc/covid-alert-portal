@@ -23,13 +23,19 @@
     <tbody>
       {% for healthcareuser in healthcareuser_list %}
         <tr>
-          <td><a href="{% url 'user_profile' healthcareuser.id %}">{{ healthcareuser.email }}</a></td>
+          <td>{{ healthcareuser.email }}</td>
           <td>
             <strong class="tag tag--{{ healthcareuser.is_admin|yesno:'green,blue' }}">
               {{ healthcareuser.is_admin|yesno:_("Admin,Staff") }}
             </strong>
           </td>
           <td>
+          {% if not healthcareuser.is_superuser and healthcareuser.id != user.id %}
+              <a href="{% url 'user_profile' healthcareuser.id %}">
+                  <span aria-hidden="true">{% trans "Edit" %}</span>
+                  <span class="visually-hidden">{% blocktrans with name=healthcareuser.name %}Edit {{ name }} account{% endblocktrans %}</span>
+              </a>
+          {% endif %}
           {% if not healthcareuser.is_superuser and healthcareuser.id != user.id %}
             <a href="{% url 'user_delete' healthcareuser.id %}" class="danger">
               <span aria-hidden="true">{% trans "Delete" %}</span>

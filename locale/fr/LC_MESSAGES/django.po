@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-06 18:20+0000\n"
+"POT-Creation-Date: 2020-08-10 19:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -181,7 +181,7 @@ msgstr ""
 msgid "Something went wrong. Contact your manager."
 msgstr "Une erreur est survenue. Veuillez contacter votre superviseur."
 
-#: portal/settings.py:290
+#: portal/settings.py:300
 msgid ""
 "This account has been locked due to too many failed log in attempts. Please "
 "try again after 5 minutes."
@@ -260,7 +260,7 @@ msgstr "Votre compte"
 msgid "Log out"
 msgstr "Déconnexion"
 
-#: portal/templates/includes/nav_header.html:10
+#: portal/templates/includes/nav_header.html:9
 #: portal/templates/locked_out.html:9
 #: portal/templates/registration/login.html:6
 #: portal/templates/registration/login.html:15
@@ -330,7 +330,8 @@ msgstr ""
 
 #: portal/templates/registration/password_reset_confirm.html:6
 #: portal/templates/registration/password_reset_confirm.html:14
-#: profiles/forms.py:122
+#: profiles/forms.py:125
+#: profiles/templates/profiles/healthcareuser_detail.html:58
 msgid "Change your password"
 msgstr "Mot de passe oublié?"
 
@@ -375,10 +376,10 @@ msgstr ""
 msgid "Enter a valid email address"
 msgstr "Entrez une adresse courriel valide"
 
-#: profiles/forms.py:42 profiles/forms.py:181 profiles/forms.py:190
-#: profiles/forms.py:254
+#: profiles/forms.py:42 profiles/forms.py:184 profiles/forms.py:193
+#: profiles/forms.py:257
 #: profiles/templates/invitations/templates/invite_list.html:18
-#: profiles/templates/profiles/healthcareuser_detail.html:29
+#: profiles/templates/profiles/healthcareuser_detail.html:34
 #: profiles/templates/profiles/healthcareuser_list.html:18
 msgid "Email address"
 msgstr "Adresse courriel"
@@ -388,17 +389,16 @@ msgid "Please enter the security code."
 msgstr "Veuillez enter le code de sécurité."
 
 #: profiles/forms.py:84
-#| msgid "Check your email"
+#: profiles/templates/profiles/healthcareuser_detail.html:38
 msgid "Change your email"
 msgstr "Modifier votre courriel"
 
 #: profiles/forms.py:92
-#| msgid "Change your password"
+#: profiles/templates/profiles/healthcareuser_detail.html:28
 msgid "Change your name"
 msgstr "Modifier votre nom"
 
 #: profiles/forms.py:100
-#| msgid "Change your password"
 msgid "Change your phone number"
 msgstr "Modifier votre numéro de téléphone"
 
@@ -407,62 +407,59 @@ msgid "Confirm your phone number"
 msgstr "Confirmez votre numéro de téléphone mobile"
 
 #: profiles/forms.py:103
-#| msgid "Enter the same phone number as before, for verification"
 msgid "Enter the same phone number as above."
 msgstr "Saisissez de nouveau votre numéro de téléphone."
 
-#: profiles/forms.py:115
-msgid "Phone numbers provided does not match."
-msgstr "Les numéros de téléphone ne sont pas identiques."
-
-#: profiles/forms.py:124
-msgid "The two password fields didn’t match."
-msgstr "Les mots de passe ne sont pas identiques."
+#: profiles/forms.py:106
+#| msgid "The two password fields didn’t match."
+msgid "The phone numbers didn’t match."
+msgstr "Les numéro de téléphone ne sont pas identiques."
 
 #: profiles/forms.py:127
-#: profiles/templates/profiles/healthcareuser_detail.html:39
-#| msgid "Password reset"
+#| msgid "The two password fields didn’t match."
+msgid "The passwords didn’t match."
+msgstr "Les mots de passe ne sont pas identiques."
+
+#: profiles/forms.py:130
+#: profiles/templates/profiles/healthcareuser_detail.html:54
 msgid "Password"
 msgstr "Mot de passe"
 
-#: profiles/forms.py:133
-#| msgid "Password reset"
+#: profiles/forms.py:136
 msgid "Password confirmation"
 msgstr "Confirmation de votre mot de passe"
 
-#: profiles/forms.py:136
-#| msgid "Enter the same phone number as before, for verification"
+#: profiles/forms.py:139
 msgid "Enter the same password as before, for verification."
 msgstr "Saississez de nouveau votre mot de passe"
 
-#: profiles/forms.py:194
+#: profiles/forms.py:197
 msgid "Full name"
 msgstr "Nom complet"
 
-#: profiles/forms.py:198
+#: profiles/forms.py:201
 msgid ""
 "A single use code will be sent to this phone number every time you try to "
 "log in."
 msgstr ""
 
-#: profiles/forms.py:202
+#: profiles/forms.py:205
 msgid "Enter the same phone number as before, for verification"
 msgstr "Entrer le même numéro, pour des fins de validation"
 
-#: profiles/forms.py:229
+#: profiles/forms.py:232
 msgid "Email already exists"
 msgstr "L’adresse courriel existe déjà"
 
-#: profiles/forms.py:231
+#: profiles/forms.py:234
 msgid "An invitation hasn't been sent to this address"
 msgstr "L’invitation n'a pu être envoyée."
 
-#: profiles/forms.py:244
+#: profiles/forms.py:247
 msgid "The phone number fields don‘t match."
 msgstr ""
 
 #: profiles/models.py:67
-#| msgid "Your name"
 msgid "Your full name"
 msgstr "Votre nom"
 
@@ -583,7 +580,7 @@ msgid "Resend"
 msgstr "Ré-envoyer"
 
 #: profiles/templates/invitations/templates/invite_list.html:39
-#: profiles/templates/profiles/healthcareuser_list.html:35
+#: profiles/templates/profiles/healthcareuser_list.html:41
 msgid "Delete"
 msgstr "Effacer"
 
@@ -658,18 +655,23 @@ msgstr ""
 msgid "User account"
 msgstr "Compte d'utilisateur"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:26
-#: profiles/templates/profiles/healthcareuser_detail.html:31
-#: profiles/templates/profiles/healthcareuser_detail.html:36
-#: profiles/templates/profiles/healthcareuser_detail.html:40
+#: profiles/templates/profiles/healthcareuser_detail.html:29
+#: profiles/templates/profiles/healthcareuser_detail.html:39
+#: profiles/templates/profiles/healthcareuser_detail.html:49
+#: profiles/templates/profiles/healthcareuser_detail.html:59
 msgid "Change"
-msgstr ""
+msgstr "Mettre à jour"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:34
+#: profiles/templates/profiles/healthcareuser_detail.html:44
 msgid "Phone number"
 msgstr "Téléphone"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:46
+#: profiles/templates/profiles/healthcareuser_detail.html:48
+#| msgid "Change your name"
+msgid "Change your phone"
+msgstr "Modifier votre numéro de téléphone"
+
+#: profiles/templates/profiles/healthcareuser_detail.html:68
 msgid "Back to accounts"
 msgstr "Retour aux comptes"
 
@@ -689,12 +691,21 @@ msgstr "Droit d’accès"
 msgid "Admin,Staff"
 msgstr "Administrateur,Employé"
 
+#: profiles/templates/profiles/healthcareuser_list.html:35
+msgid "Edit"
+msgstr ""
+
 #: profiles/templates/profiles/healthcareuser_list.html:36
+#| msgid "Add new account"
+msgid "Edit %(name)s account"
+msgstr "Modifier le compte de %(name)s"
+
+#: profiles/templates/profiles/healthcareuser_list.html:42
 #, python-format
 msgid "Delete account for %(email)s"
 msgstr "Effacer le compte associé à %(email)s"
 
-#: profiles/templates/profiles/healthcareuser_list.html:42
+#: profiles/templates/profiles/healthcareuser_list.html:48
 msgid "No users yet."
 msgstr "Aucune utilisateur pour le moment"
 
@@ -1105,3 +1116,14 @@ msgstr ""
 msgid "Security code has been sent."
 msgstr ""
 
+#: profiles/views.py:166
+#| msgid "Your portal account"
+msgid ": Your portal account"
+msgstr " : votre compte pour le Portail"
+
+#: profiles/views.py:253
+msgid "Your session timed out. Log in again to continue using the portal."
+msgstr ""
+
+#~ msgid "Phone numbers provided does not match."
+#~ msgstr "Les numéros de téléphone ne sont pas identiques."

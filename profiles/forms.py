@@ -102,6 +102,9 @@ class HealthcarePhoneEditForm(HealthcareBaseEditForm):
         label=_("Confirm your phone number"),
         help_text=_("Enter the same phone number as above."),
     )
+    error_messages = {
+        "phone_number_mismatch": _("The phone numbers didn’t match."),
+    }
 
     class Meta:
         model = HealthcareUser
@@ -112,7 +115,7 @@ class HealthcarePhoneEditForm(HealthcareBaseEditForm):
         phone_number2 = self.cleaned_data.get("phone_number2")
         if phone_number and phone_number2 and phone_number != phone_number2:
             raise ValidationError(
-                _("Phone numbers provided does not match."),
+                self.error_messages.get("phone_number_mismatch"),
                 code="phone_number_mismatch",
             )
         return phone_number2
@@ -121,17 +124,17 @@ class HealthcarePhoneEditForm(HealthcareBaseEditForm):
 class HealthcarePasswordEditForm(HealthcareBaseEditForm):
     title = _("Change your password")
     error_messages = {
-        "password_mismatch": _("The two password fields didn’t match."),
+        "password_mismatch": _("The passwords didn’t match."),
     }
     password1 = forms.CharField(
         label=_("Password"),
         strip=False,
-        widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
+        widget=forms.PasswordInput(),
         help_text=password_validation.password_validators_help_text_html(),
     )
     password2 = forms.CharField(
         label=_("Password confirmation"),
-        widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
+        widget=forms.PasswordInput(),
         strip=False,
         help_text=_("Enter the same password as before, for verification."),
     )

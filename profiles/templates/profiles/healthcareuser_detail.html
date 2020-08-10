@@ -21,23 +21,45 @@
       <caption class="visually-hidden">{% trans "User account" %}</caption>
       <tbody>
         <tr>
-          <th scope="row">{% trans "Your name" %}</td>
+          <th scope="row">{% trans "Your name" %}</th>
           <td scope="col">{{ healthcareuser.name }}</td>
-          <td scope="col"><a href="{% url 'user_edit_name' healthcareuser.id %}">{% trans "Change" %}</a></td>
+          <td scope="col">
+              <a href="{% url 'user_edit_name' healthcareuser.id %}">
+                  <span class="visually-hidden">{% trans "Change your name" %}</span>
+                  <span aria-hidden="true">{% trans "Change" %}</span>
+              </a>
+          </td>
         </tr>
         <tr>
-          <th scope="row">{% trans "Email address" %}</td>
+          <th scope="row">{% trans "Email address" %}</th>
           <td scope="col">{{ healthcareuser.email }}</td>
-          <td scope="col"><a href="{% url 'user_edit_email' healthcareuser.id %}">{% trans "Change" %}</a></td>
+          <td scope="col">
+              <a href="{% url 'user_edit_email' healthcareuser.id %}">
+                  <span class="visually-hidden">{% trans "Change your email" %}</span>
+                  <span aria-hidden="true">{% trans "Change" %}</span>
+              </a>
+          </td>
         </tr>
         <tr>
-          <th scope="row">{% trans "Phone number" %}</td>
+          <th scope="row">{% trans "Phone number" %}</th>
           <td scope="col">{{ healthcareuser.phone_number.as_e164 }}</td>
-          <td scope="col"><a href="{% url 'user_edit_phone' healthcareuser.id %}">{% trans "Change" %}</a></td>
+          <td scope="col">
+              <a href="{% url 'user_edit_phone' healthcareuser.id %}">
+                  <span class="visually-hidden">{% trans "Change your phone" %}</span>
+                  <span aria-hidden="true">{% trans "Change" %}</span>
+              </a>
+          </td>
         </tr>
         <tr>
-          <th scope="row" colspan="2">{% trans "Password" %}</td>
-          <td scope="col"><a href="{% url 'user_edit_password' healthcareuser.id %}">{% trans "Change" %}</a></td>
+          <th scope="row" colspan="2">{% trans "Password" %}</th>
+          <td scope="col">
+              {% if request.user.id == healthcareuser.id %}
+              <a href="{% url 'user_edit_password' healthcareuser.id %}">
+                  <span class="visually-hidden">{% trans "Change your password" %}</span>
+                  <span aria-hidden="true">{% trans "Change" %}</span>
+              </a>
+              {% endif %}
+          </td>
         </tr>
       </tbody>
     </table>
