@@ -30,12 +30,12 @@
             </strong>
           </td>
           <td>
-          {% if not healthcareuser.is_superuser and healthcareuser.id != user.id %}
-              <a href="{% url 'user_profile' healthcareuser.id %}">
-                  <span aria-hidden="true">{% trans "Edit" %}</span>
-                  <span class="visually-hidden">{% blocktrans with name=healthcareuser.name %}Edit {{ name }} account{% endblocktrans %}</span>
-              </a>
-          {% endif %}
+          {% spaceless %}
+          <a href="{% url 'user_profile' healthcareuser.id %}">
+              <span aria-hidden="true">{% trans "Edit" %}</span>
+              <span class="visually-hidden">{% blocktrans with email=healthcareuser.email %}Edit account for {{ email }}{% endblocktrans %}</span>
+          </a>
+          {% endspaceless %}
           {% if not healthcareuser.is_superuser and healthcareuser.id != user.id %}
             <a href="{% url 'user_delete' healthcareuser.id %}" class="danger">
               <span aria-hidden="true">{% trans "Delete" %}</span>
