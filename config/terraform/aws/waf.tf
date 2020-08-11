@@ -1,13 +1,6 @@
 ###
-# AWS IPSet - list of IPs/CIDRs to allow
+# AWS WAF - Covid Portal Rules
 ###
-resource "aws_wafv2_ip_set" "new_key_claim" {
-  name               = "new-key-claim"
-  description        = "New Key Claim Allow IPs/CIDRs"
-  scope              = "REGIONAL"
-  ip_address_version = "IPV4"
-  addresses          = toset(var.new_key_claim_allow_list)
-}
 
 resource "aws_wafv2_web_acl" "covidportal" {
   name  = "covid_portal"
@@ -15,6 +8,186 @@ resource "aws_wafv2_web_acl" "covidportal" {
 
   default_action {
     allow {}
+  }
+
+  rule {
+    name     = "AWSManagedRulesAmazonIpReputationList"
+    priority = 1
+
+    override_action {
+      none {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesAmazonIpReputationList"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesAmazonIpReputationList"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "AWSManagedRulesCommonRuleSet"
+    priority = 2
+
+    override_action {
+      none {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesCommonRuleSet"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesCommonRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "AWSManagedRulesKnownBadInputsRuleSet"
+    priority = 3
+    override_action {
+      none {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesKnownBadInputsRuleSet"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesKnownBadInputsRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "AWSManagedRulesLinuxRuleSet"
+    priority = 4
+    override_action {
+      none {}
+    }
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesLinuxRuleSet"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesLinuxRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
+  
+  rule {
+    name     = "LoginPageLimit"
+    priority = 101
+
+    action {
+      block {}
+    }
+
+    statement {
+      rate_based_statement {
+        limit              = 250
+        aggregate_key_type = "IP"
+        scope_down_statement {
+          byte_match_statement {
+            positional_constraint = "CONTAINS"
+            field_to_match {
+              uri_path {}
+            }
+            search_string = "/login"
+            text_transformation {
+              priority = 1
+              type     = "COMPRESS_WHITE_SPACE"
+            }
+            text_transformation {
+              priority = 2
+              type     = "LOWERCASE"
+            }
+          }
+        }
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "LoginPageRateLimit"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "PasswordResetPageLimit"
+    priority = 102
+
+    action {
+      block {}
+    }
+
+   statement {
+      rate_based_statement {
+        limit              = 250
+        aggregate_key_type = "IP"
+        scope_down_statement {
+          and_statement {
+            statement{
+              byte_match_statement {
+                positional_constraint = "EXACTLY"
+                field_to_match {
+                  method {}
+                }
+                search_string = "POST"
+                text_transformation {
+                  priority = 1
+                  type     = "NONE"
+                }
+              }
+            }
+            statement {
+              byte_match_statement {
+                positional_constraint = "CONTAINS"
+                field_to_match {
+                  uri_path {}
+                }
+                search_string = "/password_reset"
+                text_transformation {
+                  priority = 1
+                  type     = "COMPRESS_WHITE_SPACE"
+                }
+                text_transformation {
+                  priority = 2
+                  type     = "LOWERCASE"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "PasswordPageResetRateLimit"
+      sampled_requests_enabled   = true
+    }
   }
 
   tags = {
@@ -26,6 +199,8 @@ resource "aws_wafv2_web_acl" "covidportal" {
     metric_name                = "covid_portal"
     sampled_requests_enabled   = false
   }
+
+
 }
 
 ###
