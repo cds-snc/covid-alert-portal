@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-11 15:27+0000\n"
+"POT-Creation-Date: 2020-08-10 22:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -321,7 +321,7 @@ msgstr "— Portail Alerte COVID"
 msgid "Government of Canada"
 msgstr "Gouvernement du Canada"
 
-#: portal/templates/includes/cds_form.html:31
+#: portal/templates/includes/cds_form.html:37
 msgid "Submit"
 msgstr "Soumettre"
 
@@ -352,11 +352,17 @@ msgstr ""
 
 #: portal/templates/includes/footer.html:9
 #: profiles/templates/profiles/privacy.html:5
-#: profiles/templates/profiles/privacy.html:11
+#: profiles/templates/profiles/privacy.html:9
 msgid "Privacy"
 msgstr "Confidentialité"
 
-#: portal/templates/includes/footer.html:12
+#: portal/templates/includes/footer.html:10
+#: profiles/templates/profiles/terms.html:5
+#: profiles/templates/profiles/terms.html:9
+msgid "Terms of use"
+msgstr "Conditions d’utilisation"
+
+#: portal/templates/includes/footer.html:13
 msgid "Symbol of the Government of Canada"
 msgstr "Symbole du gouvernement du Canada"
 
@@ -491,7 +497,7 @@ msgid "Enter a valid email address"
 msgstr "Entrez une adresse courriel valide"
 
 #: profiles/forms.py:42 profiles/forms.py:184 profiles/forms.py:193
-#: profiles/forms.py:257
+#: profiles/forms.py:259
 #: profiles/templates/invitations/templates/invite_list.html:18
 #: profiles/templates/profiles/healthcareuser_detail.html:44
 #: profiles/templates/profiles/healthcareuser_list.html:18
@@ -517,7 +523,7 @@ msgstr "Modifier votre nom"
 msgid "Change your phone number"
 msgstr "Modifier votre numéro de téléphone"
 
-#: profiles/forms.py:102
+#: profiles/forms.py:102 profiles/forms.py:206
 msgid "Confirm your phone number"
 msgstr "Confirmez votre numéro de téléphone mobile"
 
@@ -550,26 +556,33 @@ msgstr "Saississez de nouveau votre mot de passe"
 msgid "Full name"
 msgstr "Nom complet"
 
-#: profiles/forms.py:201
-msgid ""
-"A single use code will be sent to this phone number every time you try to "
-"log in."
-msgstr ""
+#: profiles/forms.py:200
+#: profiles/templates/profiles/healthcareuser_detail.html:56
+msgid "Phone number"
+msgstr "Numéro de téléphone mobile"
 
-#: profiles/forms.py:205
+#: profiles/forms.py:202
+msgid ""
+"You must enter a new security code each time you log in. We’ll send the code "
+"to this phone number."
+msgstr ""
+"Il faut entrer un nouveau code de sécurité à chaque connexion. Nous "
+"enverrons le code à ce numéro."
+
+#: profiles/forms.py:207
 msgid "Enter the same phone number as before, for verification"
 msgstr "Entrer le même numéro, pour des fins de validation"
 
-#: profiles/forms.py:232
+#: profiles/forms.py:234
 msgid "Email already exists"
 msgstr "L’adresse courriel existe déjà"
 
-#: profiles/forms.py:234
-msgid "An invitation hasn't been sent to this address"
-msgstr "L’invitation n'a pu être envoyée."
+#: profiles/forms.py:236
+msgid "An invitation hasn’t been sent to this address"
+msgstr "L’invitation n’a pu être envoyée."
 
-#: profiles/forms.py:247
-msgid "The phone number fields don‘t match."
+#: profiles/forms.py:249
+msgid "The phone number fields don’t match."
 msgstr ""
 
 #: profiles/models.py:67
@@ -783,10 +796,6 @@ msgstr "Modifier le nom"
 msgid "Change"
 msgstr "Mettre à jour"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:56
-msgid "Phone number"
-msgstr "Téléphone"
-
 #: profiles/templates/profiles/healthcareuser_detail.html:63
 msgid "Change the phone number"
 msgstr "Modifier le numéro de téléphone"
@@ -829,7 +838,7 @@ msgstr "Effacer le compte associé à %(email)s"
 msgid "No users yet."
 msgstr "Aucune utilisateur pour le moment"
 
-#: profiles/templates/profiles/privacy.html:12
+#: profiles/templates/profiles/privacy.html:10
 msgid ""
 "\n"
 "        <p>The Government of Canada is committed to protect the privacy of "
@@ -1201,24 +1210,84 @@ msgstr ""
 
 #: profiles/templates/profiles/signup.html:6
 #: profiles/templates/profiles/signup.html:13
+#: profiles/templates/profiles/signup.html:14
 msgid "Create account"
-msgstr "Creation de compte"
+msgstr "Créer un compte"
 
 #: profiles/templates/profiles/signup.html:14
-msgid "Next"
-msgstr "Suivant"
-
-#: profiles/validators.py:10
-msgid "Your password can’t be a commonly-used sequence"
+msgid ""
+"<p>By creating an account, you agree to the COVID Alert Portal <a href=\"/en/"
+"terms\" target=\"_blank\">Terms of use</a>.</p>"
 msgstr ""
+"<p>En créant un compte, vous acceptez de vous soumettre aux <a href=\"/fr/"
+"terms\" target=\"_blank\">conditions d’utilisation</a> du portail Alerte "
+"COVID.</p>"
+
+#: profiles/templates/profiles/terms.html:10
+msgid ""
+"\n"
+"        <h2>Approving portal users</h2>\n"
+"        <p>Only a provincial, territorial, or federal healthcare authority "
+"can:</p>\n"
+"        <ul>\n"
+"            <li>Approve your use of the portal.</li>\n"
+"            <li>Give you a user account.</li>\n"
+"        </ul>\n"
+"\n"
+"        <h2>Using the portal</h2>\n"
+"        <p>You must:</p>\n"
+"        <ul>\n"
+"            <li>Follow all portal procedures made by your healthcare "
+"authority.</li>\n"
+"            <li>Only give one-time keys to patients diagnosed with COVID-19 "
+"by your healthcare authority.</li>\n"
+"            <li>Take steps to prevent anyone, including other people working "
+"for a healthcare authority, from learning your username and password.</li>\n"
+"        </ul>\n"
+"\n"
+"        <h2>Reporting unauthorized activity</h2>\n"
+"        <p>You must:</p>\n"
+"        <ul>\n"
+"            <li>Report any unauthorized activity, loss of username or "
+"password, or other security issues to <a href=\"mailto:security@cds-snc.ca"
+"\">security@cds-snc.ca</a> and to your healthcare authority.</li>\n"
+"            <li>Follow your healthcare authority’s procedures for reporting "
+"security issues.</li>\n"
+"        </ul>\n"
+"\n"
+"        <h2>Getting help</h2>\n"
+"        <p>For questions about these terms of use, or to report a technical "
+"issue, please contact <a href=\"mailto:assistance@cds-snc.ca"
+"\">assistance@cds-snc.ca</a>.</p>\n"
+"    "
+msgstr ""
+"\n"
+"<h2>Utilisateurs du portail autorisés</h2><p>Seules les autorités sanitaires "
+"provinciale, territoriale ou fédérale peuvent :</p><ul><li>Vous autoriser à "
+"utiliser le portail.</li><li>Vous fournir un compte utilisateur.</li></"
+"ul><h2>Utilisation du portail</h2><p>Vous devez:</p><ul><li>Suivre toutes "
+"les procédures relatives au portail établies par votre autorité sanitaire.</"
+"li><li>Fournir des clés à usage unique seulement aux patients ayant un "
+"diagnostic de COVID-19 établi par votre autorité sanitaire.</li><li>Prendre "
+"les mesures nécessaires pour empêcher toute personne, y compris celles "
+"travaillant pour une autorité sanitaire, de découvrir votre nom "
+"d’utilisateur et votre mot de passe.</li></ul><h2>Signalement des activités "
+"non autorisées</h2><p>Vous devez :</p><ul><li>Signaler les activités non "
+"autorisées, la perte d’un nom d’utilisateur ou d’un mot de passe, ou tout "
+"autre problème de sécurité à <a href=\"mailto:security@cds-snc.ca"
+"\">security@cds-snc.ca</a>et à votre autorité sanitaire.</li><li>Suivre les "
+"procédures établies par votre autorité sanitaire pour signaler les problèmes "
+"de sécurité.</li></ul><h2>Aide</h2><p>Pour toute question au sujet des "
+"modalités d’utilisation, ou pour signaler un problème technique, écrivez à "
+"<a href=\"mailto:assistance@cds-snc.ca\">assistance@cds-snc.ca</a>.</p>"
+
+#: profiles/validators.py:10 profiles/validators.py:22
+msgid "Your password can’t be a commonly-used sequence."
+msgstr "Votre mot de passe ne peut pas être utilisé couramment."
 
 #: profiles/validators.py:17
 msgid "Your password can’t contain terms related to COVID-19"
-msgstr ""
-
-#: profiles/validators.py:22
-msgid "Your password can’t be a commonly-used sequence."
-msgstr ""
+msgstr "Votre mot de passe ne peut pas contenir de termes liés à COVID-19"
 
 #: profiles/views.py:52
 msgid "No invited email in session"
@@ -1243,23 +1312,5 @@ msgstr " : votre compte pour le Portail"
 #: profiles/views.py:253
 msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
-
-#~ msgid ""
-#~ "They understand the <strong>key expires in 24 hours</strong>. If the key "
-#~ "expires before the patient enters it, they’ll need to ask your office for "
-#~ "a new key."
-#~ msgstr ""
-#~ "Qu’il comprend que la clé à usage unique <strong>expire après 24 heures</"
-#~ "strong>. Si la clé expire avant que le patient l’utilise, le patient doit "
-#~ "en demander une nouvelle auprès de votre bureau."
-
-#~| msgid "Change your name"
-#~ msgid "Change your phone"
-#~ msgstr "Modifier votre numéro de téléphone"
-
-#~| msgid "Add new account"
-#~ msgid "Edit %(name)s account"
-#~ msgstr "Modifier le compte de %(name)s"
-
-#~ msgid "Phone numbers provided does not match."
-#~ msgstr "Les numéros de téléphone ne sont pas identiques."
+"Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
+"portail."
