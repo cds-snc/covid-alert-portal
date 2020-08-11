@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-10 22:04+0000\n"
+"POT-Creation-Date: 2020-08-11 19:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,25 +85,25 @@ msgstr "Nous vous répondrons le plus rapidement possible."
 msgid "Give patient this key"
 msgstr "Donnez la clé suivante au patient"
 
-#: covid_key/templates/covid_key/key.html:20
+#: covid_key/templates/covid_key/key.html:23
 msgid "Instructions for patient"
 msgstr "Instructions pour le patient"
 
-#: covid_key/templates/covid_key/key.html:26
+#: covid_key/templates/covid_key/key.html:29
 msgid "Tap “Enter your one-time key”."
 msgstr "Appuyez sur « Entrer votre clé »."
 
-#: covid_key/templates/covid_key/key.html:32
+#: covid_key/templates/covid_key/key.html:35
 msgid "Tap “Next” on “Let people know they may have been exposed”."
 msgstr ""
 "Appuyez sur « Suivant » dans l’écran « Aviser les autres personnes d’une "
 "exposition potentielle »."
 
-#: covid_key/templates/covid_key/key.html:38
+#: covid_key/templates/covid_key/key.html:41
 msgid "Enter your one-time key and tap “Submit”."
 msgstr "Entrez la clé et appuyez sur « Envoyer »."
 
-#: covid_key/templates/covid_key/key.html:44
+#: covid_key/templates/covid_key/key.html:47
 msgid ""
 "If you want to notify people, you need to give COVID Alert permission to "
 "upload random codes. Tap “Agree” on “Now you can upload codes”."
@@ -112,14 +112,14 @@ msgstr ""
 "COVID à téléverser vos codes aléatoires. Appuyez sur « Accepter » dans "
 "l’écran « Vous pouvez maintenant téléverser vos codes »."
 
-#: covid_key/templates/covid_key/key.html:50
+#: covid_key/templates/covid_key/key.html:53
 msgid ""
 "Tap “Share” on “Share your random codes from this device with COVID Alert?”."
 msgstr ""
 "Appuyez sur « Partager » dans la fenêtre « Partager les identifiants "
 "aléatoires de votre appareil avec Alerte COVID? »."
 
-#: covid_key/templates/covid_key/key.html:56
+#: covid_key/templates/covid_key/key.html:59
 msgid ""
 "COVID Alert will ask permission to upload random codes daily for the next 13 "
 "days."
@@ -127,9 +127,13 @@ msgstr ""
 "Chaque jour, pendant les 13 jours qui suivent, Alerte COVID demandera "
 "l’autorisation de téléverser les codes aléatoires."
 
-#: covid_key/templates/covid_key/key.html:62
+#: covid_key/templates/covid_key/key.html:65
 msgid "New patient"
 msgstr "Nouveau patient"
+
+#: covid_key/templates/covid_key/phonetic.html:3
+msgid "To read this phonetically:"
+msgstr "Pour lire la clé de façon phonétique :"
 
 #: covid_key/templates/covid_key/start.html:4
 #: covid_key/templates/covid_key/start.html:7
@@ -148,13 +152,10 @@ msgstr ""
 
 #: covid_key/templates/covid_key/start.html:13
 msgid ""
-"They understand the <strong>key expires in 24 hours</strong>. If the key "
-"expires before the patient enters it, they’ll need to ask your office for a "
-"new key."
+"They’re ready to tell the app about their test results within the next 24 "
+"hours. The one-time key they need to do that expires in 24 hours, and they "
+"will not be able to get another one."
 msgstr ""
-"Qu’il comprend que la clé à usage unique <strong>expire après 24 heures</"
-"strong>. Si la clé expire avant que le patient l’utilise, le patient doit en "
-"demander une nouvelle auprès de votre bureau."
 
 #: covid_key/templates/covid_key/start.html:14
 msgid ""
@@ -176,6 +177,107 @@ msgstr "Limite journalière atteinte"
 msgid "You have hit your daily limit of code generation."
 msgstr ""
 "Vous avez atteint votre limite journalière pour la génération des codes."
+
+#: covid_key/templatetags/alphabet.py:10
+msgid "Zero."
+msgstr "Zéro."
+
+#: covid_key/templatetags/alphabet.py:11
+msgid "One."
+msgstr "Un."
+
+#: covid_key/templatetags/alphabet.py:12
+msgid "Two."
+msgstr "Deux."
+
+#: covid_key/templatetags/alphabet.py:13
+msgid "Three."
+msgstr "Trois."
+
+#: covid_key/templatetags/alphabet.py:14
+msgid "Four."
+msgstr "Quatre."
+
+#: covid_key/templatetags/alphabet.py:15
+msgid "Five."
+msgstr "Cinq."
+
+#: covid_key/templatetags/alphabet.py:16
+msgid "Six."
+msgstr "Six."
+
+#: covid_key/templatetags/alphabet.py:17
+msgid "Seven."
+msgstr "Sept."
+
+#: covid_key/templatetags/alphabet.py:18
+#| msgid "Eighth."
+msgid "Eight."
+msgstr "Huit."
+
+#: covid_key/templatetags/alphabet.py:19
+msgid "Nine."
+msgstr "Neuf."
+
+#: covid_key/templatetags/alphabet.py:20
+msgid "A as in animal."
+msgstr "A comme animal."
+
+#: covid_key/templatetags/alphabet.py:21
+msgid "E as in elephant."
+msgstr "E comme éléphant."
+
+#: covid_key/templatetags/alphabet.py:22
+msgid "F as in family."
+msgstr "F comme famille."
+
+#: covid_key/templatetags/alphabet.py:23
+msgid "H as in hospital."
+msgstr "H comme hôpital."
+
+#: covid_key/templatetags/alphabet.py:24
+msgid "J as in January."
+msgstr "J comme janvier."
+
+#: covid_key/templatetags/alphabet.py:25
+msgid "K as in kangaroo."
+msgstr "K comme kangourou."
+
+#: covid_key/templatetags/alphabet.py:26
+msgid "L as in lion."
+msgstr "L comme lion."
+
+#: covid_key/templatetags/alphabet.py:27
+msgid "Q as in question."
+msgstr "Q comme question."
+
+#: covid_key/templatetags/alphabet.py:28
+msgid "R as in radio."
+msgstr "R comme radio."
+
+#: covid_key/templatetags/alphabet.py:29
+msgid "S as in September."
+msgstr "S comme septembre."
+
+#: covid_key/templatetags/alphabet.py:30
+msgid "U as in uniform."
+msgstr "U comme uniforme."
+
+#: covid_key/templatetags/alphabet.py:31
+msgid "W as in Wi-Fi."
+msgstr "W comme Wi-Fi."
+
+#: covid_key/templatetags/alphabet.py:32
+msgid "X as in X-ray."
+msgstr "X comme xylophone."
+
+#: covid_key/templatetags/alphabet.py:33
+msgid "Y as in yoga."
+msgstr "Y comme yoga."
+
+#: covid_key/templatetags/alphabet.py:34
+msgid "Z as in zebra."
+msgstr "Z comme zèbre."
 
 #: covid_key/views.py:79
 msgid "Something went wrong. Contact your manager."
@@ -229,12 +331,25 @@ msgid "Please correct the errors on the page"
 msgstr "Veuillez corriger les erreurs trouvées dans la page"
 
 #: portal/templates/includes/expires_string.html:7
-msgid "Key expires"
+msgid "Key expires on"
 msgstr "La clé expire le"
 
 #: portal/templates/includes/expires_string.html:15
 msgid "at"
 msgstr "à"
+
+#: portal/templates/includes/expires_string.html:25
+msgid "Only give one key per patient."
+msgstr "Ne donnez qu’une seule clé par patient."
+
+#: portal/templates/includes/expires_string.html:26
+msgid ""
+"On the app, tap for menu.  Then “Enter your one-time key” guides patients "
+"through next steps."
+msgstr ""
+"Le patient doit taper au bas de l’écran de l’application pour voir le menu "
+"apparaître. Le bouton « Entrer votre clé » mène le patient vers les étapes "
+"suivantes."
 
 #: portal/templates/includes/footer.html:9
 #: profiles/templates/profiles/privacy.html:5
@@ -1200,6 +1315,3 @@ msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
 "portail."
-
-#~ msgid "Your password can’t be a commonly-used sequence"
-#~ msgstr "Votre mot de passe ne peut pas être utilisé couramment"
