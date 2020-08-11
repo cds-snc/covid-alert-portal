@@ -1,9 +1,9 @@
 from django.contrib.auth.forms import (
-    UserChangeForm,
     AuthenticationForm,
     PasswordResetForm,
     UserCreationForm,
 )
+from django.contrib.auth import password_validation
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator, MaxLengthValidator
@@ -73,6 +73,104 @@ class Healthcare2FAForm(HealthcareBaseForm):
     )
 
 
+class HealthcareBaseEditForm(HealthcareBaseForm, forms.ModelForm):
+    template_name = "profiles/edit.html"
+
+    class Meta:
+        abstract = True
+
+
+class HealthcareEmailEditForm(HealthcareBaseEditForm):
+    title = _("Change your email")
+
+    class Meta:
+        model = HealthcareUser
+        fields = ("email",)
+
+
+class HealthcareNameEditForm(HealthcareBaseEditForm):
+    title = _("Change your name")
+
+    class Meta:
+        model = HealthcareUser
+        fields = ("name",)
+
+
+class HealthcarePhoneEditForm(HealthcareBaseEditForm):
+    title = _("Change your phone number")
+    phone_number2 = PhoneNumberField(
+        label=_("Confirm your phone number"),
+        help_text=_("Enter the same phone number as above."),
+    )
+    error_messages = {
+        "phone_number_mismatch": _("The phone numbers didn’t match."),
+    }
+
+    class Meta:
+        model = HealthcareUser
+        fields = ("phone_number",)
+
+    def clean_phone_number2(self):
+        phone_number = self.cleaned_data.get("phone_number")
+        phone_number2 = self.cleaned_data.get("phone_number2")
+        if phone_number and phone_number2 and phone_number != phone_number2:
+            raise ValidationError(
+                self.error_messages.get("phone_number_mismatch"),
+                code="phone_number_mismatch",
+            )
+        return phone_number2
+
+
+class HealthcarePasswordEditForm(HealthcareBaseEditForm):
+    title = _("Change your password")
+    error_messages = {
+        "password_mismatch": _("The passwords didn’t match."),
+    }
+    password1 = forms.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput(),
+        help_text=password_validation.password_validators_help_text_html(),
+    )
+    password2 = forms.CharField(
+        label=_("Password confirmation"),
+        widget=forms.PasswordInput(),
+        strip=False,
+        help_text=_("Enter the same password as before, for verification."),
+    )
+
+    class Meta:
+        model = HealthcareUser
+        fields = ()
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise ValidationError(
+                self.error_messages["password_mismatch"], code="password_mismatch",
+            )
+        return password2
+
+    def _post_clean(self):
+        super()._post_clean()
+        # Validate the password after self.instance is updated with form data
+        # by super().
+        password = self.cleaned_data.get("password2")
+        if password:
+            try:
+                password_validation.validate_password(password, self.instance)
+            except ValidationError as error:
+                self.add_error("password2", error)
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data["password1"])
+        if commit:
+            user.save()
+        return user
+
+
 class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
     """
     A login form extending the Django default PasswordResetForm.
@@ -99,11 +197,13 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
     name = forms.CharField(label=_("Full name"), validators=[MaxLengthValidator(200)])
 
     phone_number = PhoneNumberField(
+        label=_("Phone number"),
         help_text=_(
-            "A single use code will be sent to this phone number every time you try to log in."
+            "You must enter a new security code each time you log in. We’ll send the code to this phone number."
         ),
     )
     phone_number_confirmation = PhoneNumberField(
+        label=_("Confirm your phone number"),
         help_text=_("Enter the same phone number as before, for verification"),
     )
 
@@ -133,7 +233,7 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
         if email_exists.count():
             raise ValidationError(_("Email already exists"))
         if not Invitation.objects.filter(email__iexact=email):
-            raise ValidationError(_("An invitation hasn't been sent to this address"))
+            raise ValidationError(_("An invitation hasn’t been sent to this address"))
 
         return email
 
@@ -146,22 +246,9 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
             and phone_number != phone_number_confirmation
         ):
             raise forms.ValidationError(
-                _("The phone number fields don‘t match."), code="invalid",
+                _("The phone number fields don’t match."), code="invalid",
             )
         return phone_number_confirmation
-
-
-class HealthcareUserEditForm(UserChangeForm):
-    password = None
-    email = forms.EmailField(widget=forms.EmailInput, disabled=True)
-    phone_number = PhoneNumberField()
-
-    class Meta:
-        model = HealthcareUser
-        fields = ("email", "name")
-        widgets = {
-            "email": forms.EmailInput(attrs={"readonly": "readonly"}),
-        }
 
 
 class HealthcareInviteForm(HealthcareBaseForm, InviteForm):

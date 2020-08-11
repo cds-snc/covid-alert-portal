@@ -1,5 +1,6 @@
 from uuid import uuid4
 from django.db import models
+from django.utils.translation import gettext as _
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -63,9 +64,13 @@ class HealthcareUser(AbstractBaseUser):
     email = models.EmailField(
         verbose_name="email address", max_length=255, unique=True,
     )
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, verbose_name=_("Your full name"))
     province = models.ForeignKey(HealthcareProvince, on_delete=models.PROTECT)
-    phone_number = PhoneNumberField()
+    phone_number = PhoneNumberField(
+        help_text=_(
+            "You must enter a new security code each time you log in. We’ll send the code to your phone number."
+        )
+    )
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)

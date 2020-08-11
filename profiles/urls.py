@@ -28,9 +28,38 @@ urlpatterns = [
     path(
         "profiles/<uuid:pk>/delete", views.UserDeleteView.as_view(), name="user_delete",
     ),
-    # Removed for now
-    # url(r'profiles/(?P<pk>\w+)/edit$', views.UserEdit.as_view(), name='user_edit'),
-    # this login path overrides the default one in 'django.contrib.auth.urls'
+    path(
+        "profiles/<uuid:pk>/edit/name",
+        views.HealthcareUserEditView.as_view(
+            form_class=forms.HealthcareNameEditForm,
+            template_name=forms.HealthcareNameEditForm.template_name,
+        ),
+        name="user_edit_name",
+    ),
+    path(
+        "profiles/<uuid:pk>/edit/phone",
+        views.HealthcareUserEditView.as_view(
+            form_class=forms.HealthcarePhoneEditForm,
+            template_name=forms.HealthcarePhoneEditForm.template_name,
+        ),
+        name="user_edit_phone",
+    ),
+    path(
+        "profiles/<uuid:pk>/edit/password",
+        views.HealthcareUserEditView.as_view(
+            form_class=forms.HealthcarePasswordEditForm,
+            template_name=forms.HealthcarePasswordEditForm.template_name,
+        ),
+        name="user_edit_password",
+    ),
+    path(
+        "profiles/<uuid:pk>/edit/email",
+        views.HealthcareUserEditView.as_view(
+            form_class=forms.HealthcareEmailEditForm,
+            template_name=forms.HealthcareEmailEditForm.template_name,
+        ),
+        name="user_edit_email",
+    ),
     path(
         "login/",
         LoginView.as_view(authentication_form=forms.HealthcareAuthenticationForm),
@@ -45,6 +74,11 @@ urlpatterns = [
         "privacy/",
         TemplateView.as_view(template_name="profiles/privacy.html"),
         name="privacy",
+    ),
+    path(
+        "terms/",
+        TemplateView.as_view(template_name="profiles/terms.html"),
+        name="terms",
     ),
 ]
 
