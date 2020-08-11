@@ -9,7 +9,7 @@ from . import forms
 
 
 urlpatterns = [
-    path("", RedirectView.as_view(pattern_name="login")),
+    path("", RedirectView.as_view(pattern_name="start")),
     path("invite/", views.InvitationView.as_view(), name="invite"),
     path("invite/list/", views.InvitationListView.as_view(), name="invitation_list"),
     path(
