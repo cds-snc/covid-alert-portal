@@ -1,13 +1,14 @@
 {% load alphabet i18n %}
-<p class="phonetic-wrapper">
-    {% blocktrans %}To read this phonetically:{% endblocktrans %}<br />
-    {% for letter in code %}
-        {% if letter == ' ' %}
-            <br />
-        {% else %}
-        {% with letter|phonetic as word %}
-            {{ word }}
-        {% endwith %}
-        {% endif %}
-    {% endfor %}
-</p>
+<div>
+    <p>{% blocktrans %}To read this phonetically:{% endblocktrans %}</p>
+    <div class="phonetic-wrapper">
+        {% for letter in code %}
+            {% with letter|phonetic as word %}
+                <span>{{ word }}</span>
+            {% endwith %}
+            {% if letter == ' ' %}
+                <br />
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
