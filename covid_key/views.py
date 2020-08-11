@@ -18,7 +18,6 @@ logger = logging.getLogger(__name__)
 @login_required
 @otp_required
 def code(request):
-    print(request.META)
     if request.method != "POST":
         return redirect("start")
 
