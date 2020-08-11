@@ -7,7 +7,7 @@ class BannedPasswordValidator(object):
     def validate(self, password, user=None):
         if password in banned_passwords:
             raise ValidationError(
-                _("Your password can’t be a commonly-used sequence"),
+                _("Your password can’t be a commonly-used sequence."),
                 code="password_banned",
             )
 

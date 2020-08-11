@@ -24,6 +24,12 @@
     {% endfor %}
   </div>
 
+  {% if before_submit %}
+    <div class="before-submit">
+      {{ before_submit }}
+    </div>
+  {% endif %}
+
   <button type="submit">
     {% if submit_text %}
       {{ submit_text }}
