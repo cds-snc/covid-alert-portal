@@ -147,36 +147,15 @@ resource "aws_wafv2_web_acl" "covidportal" {
         limit              = 250
         aggregate_key_type = "IP"
         scope_down_statement {
-          and_statement {
-            statement{
-              byte_match_statement {
-                positional_constraint = "EXACTLY"
-                field_to_match {
-                  method {}
-                }
-                search_string = "POST"
-                text_transformation {
-                  priority = 1
-                  type     = "NONE"
-                }
-              }
+          byte_match_statement {
+            positional_constraint = "EXACTLY"
+            field_to_match {
+              method {}
             }
-            statement {
-              byte_match_statement {
-                positional_constraint = "CONTAINS"
-                field_to_match {
-                  uri_path {}
-                }
-                search_string = "/password_reset"
-                text_transformation {
-                  priority = 1
-                  type     = "COMPRESS_WHITE_SPACE"
-                }
-                text_transformation {
-                  priority = 2
-                  type     = "LOWERCASE"
-                }
-              }
+            search_string = "POST"
+            text_transformation {
+              priority = 1
+              type     = "NONE"
             }
           }
         }
@@ -196,7 +175,7 @@ resource "aws_wafv2_web_acl" "covidportal" {
 
   visibility_config {
     cloudwatch_metrics_enabled = true
-    metric_name                = "covid_portal"
+    metric_name                = "covid_portal_global_rule"
     sampled_requests_enabled   = false
   }
 

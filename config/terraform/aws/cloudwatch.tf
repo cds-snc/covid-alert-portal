@@ -130,3 +130,28 @@ resource "aws_cloudwatch_metric_alarm" "fatal_logged_warn" {
 
   alarm_actions = [aws_sns_topic.alert_warning.arn, aws_sns_topic.alert_critical.arn]
 }
+
+###
+# AWS CloudWatch Metrics - WAF Alarms
+###
+
+resource "aws_cloudwatch_metric_alarm" "LoginPageRateLimit" {
+  alarm_name          = "LoginPageRateLimiter"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "BlockedRequests"
+  namespace           = "WAF"
+  period              = "60"
+  statistic           = "Sum"
+  threshold           = "0"
+  alarm_description   = "This metric monitors for potential DDOS attacks against the Login Page"
+
+  # alarm_actions = [aws_sns_topic.alert_warning.arn]
+
+  dimensions = {
+    Region = var.region
+    Rule = "LoginPageRateLimit"
+    WebACL = "covid_portal_global_rule"
+
+  }
+}
