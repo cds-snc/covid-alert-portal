@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.shortcuts import redirect
+from django.core.exceptions import PermissionDenied
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import login, authenticate
 from django.utils.translation import gettext as _
@@ -10,6 +11,8 @@ from django.views.generic import (
     TemplateView,
     DetailView,
 )
+from django.views.generic.edit import UpdateView
+
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django_otp import DEVICE_ID_SESSION_KEY
@@ -203,6 +206,34 @@ class ProfilesView(Is2FAMixin, IsAdminMixin, ListView):
             )
             .order_by("-current_user_email", "-is_admin")
         )
+
+
+class HealthcareUserEditView(UpdateView):
+    success_url = reverse_lazy("user_profile")
+    model = HealthcareUser
+
+    def get_initial(self):
+        initial = super().get_initial()
+        user = self.get_object()
+        initial["name"] = user.name
+        initial["email"] = user.email
+        return initial
+
+    def get_success_url(self):
+        return reverse_lazy("user_profile", kwargs={"pk": self.kwargs.get("pk")})
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if obj is not None:
+            # Users can edit their own infos, Admin can change someone else infos
+            if obj.id != self.request.user.id and self.request.user.is_admin is False:
+                raise PermissionDenied()
+
+            # Admins can only change account infos from their province
+            if obj.province != self.request.user.province:
+                raise PermissionDenied()
+
+        return obj
 
 
 class UserProfileView(Is2FAMixin, ProvinceAdminManageMixin, DetailView):
