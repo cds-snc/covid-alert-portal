@@ -5,6 +5,37 @@ from django.template.defaultfilters import stringfilter
 register = template.Library()
 
 
+def _phonetic(letter):
+    sentences = {
+        "0": _("Zero."),
+        "1": _("One."),
+        "2": _("Two."),
+        "3": _("Three."),
+        "4": _("Four."),
+        "5": _("Five."),
+        "6": _("Six."),
+        "7": _("Seven."),
+        "8": _("Eighth."),
+        "9": _("Nine."),
+        "A": _("A as in animal."),
+        "E": _("E as in elephant."),
+        "F": _("F as in family."),
+        "H": _("H as in hospital."),
+        "J": _("J as in January."),
+        "K": _("K as in kangaroo."),
+        "L": _("L as in lion."),
+        "Q": _("Q as in question."),
+        "R": _("R as in radio."),
+        "S": _("S as in September."),
+        "U": _("U as in uniform."),
+        "W": _("W as in Wi-Fi."),
+        "X": _("X as in X-ray."),
+        "Y": _("Y as in yoga."),
+        "Z": _("Z as in zebra."),
+    }
+    return sentences.get(letter, "")
+
+
 @register.filter
 @stringfilter
 def phonetic(letter):
@@ -12,80 +43,4 @@ def phonetic(letter):
     if letter == "":
         return ""
     letter = letter.upper()
-
-    if letter == "0":
-        return _("Zero.")
-
-    if letter == "1":
-        return _("One.")
-
-    if letter == "2":
-        return _("Two.")
-
-    if letter == "3":
-        return _("Three.")
-
-    if letter == "4":
-        return _("Four.")
-
-    if letter == "5":
-        return _("Five.")
-
-    if letter == "6":
-        return _("Six.")
-
-    if letter == "7":
-        return _("Seven.")
-
-    if letter == "8":
-        return _("Eighth.")
-
-    if letter == "9":
-        return _("Nine.")
-
-    if letter == "A":
-        return _("A as in animal.")
-
-    if letter == "E":
-        return _("E as in elephant.")
-
-    if letter == "F":
-        return _("F as in family.")
-
-    if letter == "H":
-        return _("H as in hospital.")
-
-    if letter == "J":
-        return _("J as in January.")
-
-    if letter == "K":
-        return _("K as in kangaroo.")
-
-    if letter == "L":
-        return _("L as in lion.")
-
-    if letter == "Q":
-        return _("Q as in question.")
-
-    if letter == "R":
-        return _("R as in radio.")
-
-    if letter == "S":
-        return _("S as in September.")
-
-    if letter == "U":
-        return _("U as in uniform.")
-
-    if letter == "W":
-        return _("W as in Wi-Fi.")
-
-    if letter == "X":
-        return _("X as in X-ray.")
-
-    if letter == "Y":
-        return _("Y as in yoga.")
-
-    if letter == "Z":
-        return _("Z as in zebra.")
-
-    return ""
+    return _phonetic(letter)

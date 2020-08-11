@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-11 15:11+0000\n"
+"POT-Creation-Date: 2020-08-11 15:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -178,103 +178,103 @@ msgid "You have hit your daily limit of code generation."
 msgstr ""
 "Vous avez atteint votre limite journalière pour la génération des codes."
 
-#: covid_key/templatetags/alphabet.py:17
+#: covid_key/templatetags/alphabet.py:10
 msgid "Zero."
 msgstr "Zéro."
 
-#: covid_key/templatetags/alphabet.py:20
+#: covid_key/templatetags/alphabet.py:11
 msgid "One."
 msgstr "Un."
 
-#: covid_key/templatetags/alphabet.py:23
+#: covid_key/templatetags/alphabet.py:12
 msgid "Two."
 msgstr "Deux."
 
-#: covid_key/templatetags/alphabet.py:26
+#: covid_key/templatetags/alphabet.py:13
 msgid "Three."
 msgstr "Trois."
 
-#: covid_key/templatetags/alphabet.py:29
+#: covid_key/templatetags/alphabet.py:14
 msgid "Four."
 msgstr "Quatre."
 
-#: covid_key/templatetags/alphabet.py:32
+#: covid_key/templatetags/alphabet.py:15
 msgid "Five."
 msgstr "Cinq."
 
-#: covid_key/templatetags/alphabet.py:35
+#: covid_key/templatetags/alphabet.py:16
 msgid "Six."
 msgstr "Six."
 
-#: covid_key/templatetags/alphabet.py:38
+#: covid_key/templatetags/alphabet.py:17
 msgid "Seven."
 msgstr "Sept."
 
-#: covid_key/templatetags/alphabet.py:41
+#: covid_key/templatetags/alphabet.py:18
 msgid "Eighth."
 msgstr "Huit."
 
-#: covid_key/templatetags/alphabet.py:44
+#: covid_key/templatetags/alphabet.py:19
 msgid "Nine."
 msgstr "Neuf."
 
-#: covid_key/templatetags/alphabet.py:47
+#: covid_key/templatetags/alphabet.py:20
 msgid "A as in animal."
 msgstr "A comme animal."
 
-#: covid_key/templatetags/alphabet.py:50
+#: covid_key/templatetags/alphabet.py:21
 msgid "E as in elephant."
 msgstr "E comme éléphant."
 
-#: covid_key/templatetags/alphabet.py:53
+#: covid_key/templatetags/alphabet.py:22
 msgid "F as in family."
 msgstr "F comme famille."
 
-#: covid_key/templatetags/alphabet.py:56
+#: covid_key/templatetags/alphabet.py:23
 msgid "H as in hospital."
 msgstr "H comme hôpital."
 
-#: covid_key/templatetags/alphabet.py:59
+#: covid_key/templatetags/alphabet.py:24
 msgid "J as in January."
 msgstr "J comme janvier."
 
-#: covid_key/templatetags/alphabet.py:62
+#: covid_key/templatetags/alphabet.py:25
 msgid "K as in kangaroo."
 msgstr "K comme kangourou."
 
-#: covid_key/templatetags/alphabet.py:65
+#: covid_key/templatetags/alphabet.py:26
 msgid "L as in lion."
 msgstr "L comme lion."
 
-#: covid_key/templatetags/alphabet.py:68
+#: covid_key/templatetags/alphabet.py:27
 msgid "Q as in question."
 msgstr "Q comme question."
 
-#: covid_key/templatetags/alphabet.py:71
+#: covid_key/templatetags/alphabet.py:28
 msgid "R as in radio."
 msgstr "R comme radio."
 
-#: covid_key/templatetags/alphabet.py:74
+#: covid_key/templatetags/alphabet.py:29
 msgid "S as in September."
 msgstr "S comme septembre."
 
-#: covid_key/templatetags/alphabet.py:77
+#: covid_key/templatetags/alphabet.py:30
 msgid "U as in uniform."
 msgstr "U comme uniforme."
 
-#: covid_key/templatetags/alphabet.py:80
+#: covid_key/templatetags/alphabet.py:31
 msgid "W as in Wi-Fi."
 msgstr "W comme Wi-Fi."
 
-#: covid_key/templatetags/alphabet.py:83
+#: covid_key/templatetags/alphabet.py:32
 msgid "X as in X-ray."
 msgstr "X comme xylophone."
 
-#: covid_key/templatetags/alphabet.py:86
+#: covid_key/templatetags/alphabet.py:33
 msgid "Y as in yoga."
 msgstr "Y comme yoga."
 
-#: covid_key/templatetags/alphabet.py:89
+#: covid_key/templatetags/alphabet.py:34
 msgid "Z as in zebra."
 msgstr "Z comme zèbre."
 
