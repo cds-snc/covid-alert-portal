@@ -15,7 +15,7 @@ def _phonetic(letter):
         "5": _("Five."),
         "6": _("Six."),
         "7": _("Seven."),
-        "8": _("Eighth."),
+        "8": _("Eight."),
         "9": _("Nine."),
         "A": _("A as in animal."),
         "E": _("E as in elephant."),
