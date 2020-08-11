@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% if form.errors %}{% trans "Error: "%}{% endif %}
+    {{ form.title }}
+{% endblock %}
+
+
+{% block content %}
+    {% include  "includes/error_list.html" %}
+
+    <h1>{{ form.title }}</h1>
+    {% include "includes/cds_form.html" with submit_text=_("Update") %}
+{% endblock %}
