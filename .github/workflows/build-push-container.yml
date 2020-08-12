@@ -59,8 +59,8 @@ jobs:
 #          aws-region: ca-central-1
 
       - name: Login to Staging Amazon ECR
-         id: login-ecr-covid-portal
-         uses: aws-actions/amazon-ecr-login@v1
+        id: login-ecr-covid-portal
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build Covid Portal
         env:
