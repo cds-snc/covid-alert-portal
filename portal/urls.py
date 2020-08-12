@@ -26,6 +26,11 @@ urlpatterns = [
         lambda x: HttpResponse("User-Agent: *\nDisallow: /", content_type="text/plain"),
         name="robots_file",
     ),
+    path(
+        r"status/",
+        lambda x: HttpResponse("Ok", content_type="text/plain"),
+        name="status",
+    ),
     path("admin/", admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
 ]
