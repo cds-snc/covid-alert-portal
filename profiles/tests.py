@@ -8,12 +8,13 @@ from django.utils import translation, timezone
 from django.core.exceptions import ValidationError
 from django_otp import DEVICE_ID_SESSION_KEY
 from invitations.models import Invitation
-from .forms import SignupForm, HealthcarePhoneEditForm
-from .models import HealthcareProvince, HealthcareUser
-from .validators import BannedPasswordValidator
 from datetime import datetime, timedelta
 from freezegun import freeze_time
 
+from .forms import SignupForm, HealthcarePhoneEditForm
+from .models import HealthcareProvince, HealthcareUser
+from .validators import BannedPasswordValidator
+from .views import InvitationView
 
 User = get_user_model()
 
@@ -521,6 +522,26 @@ class InviteFlow(AdminUserTestCase):
             reverse("invitation_delete", kwargs={"pk": invitation.id}), follow=True
         )
         self.assertContains(response, "<p>No invitations yet</p>")
+
+    def test_throttle_invitations(self):
+        self.login()
+        response = self.client.get(reverse("invite"))
+        self.assertEqual(response.status_code, 200)
+
+        for i in range(settings.MAX_INVITATIONS_PER_PERIOD):
+            invitation = Invitation.create(
+                email=f"{uuid4()}-{i}@{uuid4()}.com", inviter=self.user
+            )
+            invitation.save()
+
+        response = self.client.get(reverse("invite"))
+        self.assertEqual(response.status_code, 403)
+
+        now = datetime.now()
+        expiry = now + timedelta(seconds=settings.MAX_INVITATIONS_PERDIOD_SECONDS + 1)
+        with freeze_time(expiry):
+            response = self.client.get(reverse("invite"))
+            self.assertEqual(response.status_code, 200)
 
 
 class ProfilesView(AdminUserTestCase):

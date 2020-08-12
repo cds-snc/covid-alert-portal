@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-13 20:04+0000\n"
+"POT-Creation-Date: 2020-08-12 19:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -182,6 +182,7 @@ msgid "Generate key"
 msgstr "Générer une clé"
 
 #: covid_key/templates/covid_key/throttled.html:4
+#: portal/templates/throttled/locked.html:4
 msgid "Daily limit reached"
 msgstr "Limite journalière atteinte"
 
@@ -500,6 +501,13 @@ msgstr "Envoyer"
 msgid "Password reset"
 msgstr "Réinitialisation de votre mode passe"
 
+#: portal/templates/throttled/locked.html:7
+#, fuzzy
+#| msgid "You have hit your daily limit of code generation."
+msgid "You have hit your limit."
+msgstr ""
+"Vous avez atteint votre limite journalière pour la génération des codes."
+
 #: profiles/admin.py:101
 msgid "Number of keys generated in the last 24 hours"
 msgstr ""
@@ -727,6 +735,17 @@ msgstr "Retirer l’invitation envoyée à %(email)s"
 #: profiles/templates/invitations/templates/invite_list.html:51
 msgid "No invitations yet"
 msgstr "Aucune invitation pour le moment"
+
+#: profiles/templates/invitations/templates/locked.html:4
+#, fuzzy
+#| msgid "Daily limit reached"
+msgid "Invitation limit reached"
+msgstr "Limite journalière atteinte"
+
+#: profiles/templates/invitations/templates/locked.html:7
+msgid ""
+"You have hit your limit of invitation. Please try again in a few minutes."
+msgstr ""
 
 #: profiles/templates/profiles/2fa-resend.html:6
 msgid "Resend security code"
@@ -1298,27 +1317,27 @@ msgstr "Votre mot de passe ne peut pas être utilisé couramment."
 msgid "Your password can’t contain terms related to COVID-19"
 msgstr "Votre mot de passe ne peut pas contenir de termes liés à COVID-19"
 
-#: profiles/views.py:52
+#: profiles/views.py:53
 msgid "No invited email in session"
 msgstr ""
 
-#: profiles/views.py:126
+#: profiles/views.py:128
 msgid "Please try again later."
 msgstr ""
 
-#: profiles/views.py:129
+#: profiles/views.py:131
 msgid "That didn’t match the code that was sent."
 msgstr ""
 
-#: profiles/views.py:150
+#: profiles/views.py:152
 msgid "Security code has been sent."
 msgstr ""
 
-#: profiles/views.py:165
+#: profiles/views.py:172
 msgid ": Your portal account"
 msgstr " : votre compte pour le Portail"
 
-#: profiles/views.py:251
+#: profiles/views.py:263
 msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
