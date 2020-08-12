@@ -2,7 +2,7 @@
 # AWS WAF - Covid Portal Rules
 ###
 
-resource "aws_wafv2_web_acl" "covidportal" {
+resource "aws_wafv2_web_acl" "covidportal_acl" {
   name  = "covid_portal"
   scope = "REGIONAL"
 
@@ -188,7 +188,7 @@ resource "aws_wafv2_web_acl" "covidportal" {
 
 resource "aws_wafv2_web_acl_association" "covid_portal_assocation" {
   resource_arn = aws_lb.covidportal.arn
-  web_acl_arn  = aws_wafv2_web_acl.covidportal.arn
+  web_acl_arn  = aws_wafv2_web_acl.covidportal_acl.arn
 }
 
 ###
@@ -197,5 +197,5 @@ resource "aws_wafv2_web_acl_association" "covid_portal_assocation" {
 
 resource "aws_wafv2_web_acl_logging_configuration" "firehose_waf_logs_portal" {
   log_destination_configs = ["${aws_kinesis_firehose_delivery_stream.firehose_waf_logs.arn}"]
-  resource_arn            = aws_wafv2_web_acl.covidportal.arn
+  resource_arn            = aws_wafv2_web_acl.covidportal_acl.arn
 }

@@ -131,27 +131,44 @@ resource "aws_cloudwatch_metric_alarm" "fatal_logged_warn" {
   alarm_actions = [aws_sns_topic.alert_warning.arn, aws_sns_topic.alert_critical.arn]
 }
 
+
 ###
-# AWS CloudWatch Metrics - WAF Alarms
+# AWS CloudWatch Metrics - DDoS Alarms
 ###
 
-resource "aws_cloudwatch_metric_alarm" "LoginPageRateLimit" {
-  alarm_name          = "LoginPageRateLimiter"
+resource "aws_cloudwatch_metric_alarm" "ddos_detected_submission" {
+  alarm_name          = "DDoSDetectedCovidPortal"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
-  metric_name         = "BlockedRequests"
-  namespace           = "WAF"
+  metric_name         = "DDoSDetected"
+  namespace           = "AWS/DDoSProtection"
   period              = "60"
   statistic           = "Sum"
   threshold           = "0"
-  alarm_description   = "This metric monitors for potential DDOS attacks against the Login Page"
+  alarm_description   = "This metric monitors for DDoS detected on Covid Portal ALB"
 
-  # alarm_actions = [aws_sns_topic.alert_warning.arn]
+  alarm_actions = [aws_sns_topic.alert_critical.arn]
 
   dimensions = {
-    Region = var.region
-    Rule = "LoginPageRateLimit"
-    WebACL = "covid_portal_global_rule"
+    ResourceArn = aws_lb.covidportal.arn
+  }
+}
 
+resource "aws_cloudwatch_metric_alarm" "ddos_detected_route53" {
+
+  alarm_name          = "DDoSDetectedRoute53"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "DDoSDetected"
+  namespace           = "AWS/DDoSProtection"
+  period              = "60"
+  statistic           = "Sum"
+  threshold           = "0"
+  alarm_description   = "This metric monitors for DDoS detected on route 53"
+
+  alarm_actions = [aws_sns_topic.alert_critical.arn]
+
+  dimensions = {
+    ResourceArn = "arn:aws:route53:::hostedzone/${aws_route53_zone.covidportal.zone_id}"
   }
 }
