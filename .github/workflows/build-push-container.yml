@@ -99,10 +99,9 @@ jobs:
       - name: Push all containers to production Amazon ECR
         env:
           PROD_ECR_REGISTRY: ${{ secrets.PROD_ECR_REGISTRY }}
-          ECR_REPOSITORY: covid-alert-portal-terraform
         run: |
-          docker push $PROD_ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
-          docker push $PROD_ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker push $PROD_ECR_REGISTRY:$GITHUB_SHA
+          docker push $PROD_ECR_REGISTRY:latest
       - name: Logout of Production Amazon ECR
         if: always()
         run: docker logout ${{ steps.login-ecr-prod.outputs.registry }}
