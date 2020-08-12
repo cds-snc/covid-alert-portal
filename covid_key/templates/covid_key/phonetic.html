@@ -1,0 +1,17 @@
+{% load alphabet i18n %}
+<div>
+    <p>{% blocktrans %}To read this phonetically:{% endblocktrans %}</p>
+    <div class="phonetic-wrapper">
+        <div>
+        {% for letter in code %}
+            {% if letter == ' ' %}
+            </div><div>
+            {% else %}
+                {% with letter|phonetic as word %}
+                    <span>{{ word }}</span>
+                {% endwith %}
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+</div>
