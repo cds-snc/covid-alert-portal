@@ -41,9 +41,9 @@ class KeyView(AdminUserTestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, "/en/start/")
 
-    @override_settings(COVID_KEY_MAX_PER_USER_PER_DAY=1)
+    @override_settings(COVID_KEY_MAX_PER_USER=1)
     def test_key_throttled(self):
-        CodeView.throttled_limit = settings.COVID_KEY_MAX_PER_USER_PER_DAY
+        CodeView.throttled_limit = settings.COVID_KEY_MAX_PER_USER
         self.login()
         covid_key = COVIDKey()
         covid_key.created_by = self.user
@@ -53,13 +53,13 @@ class KeyView(AdminUserTestCase):
         response = self.client.post(reverse("key"))
         self.assertContains(
             response,
-            "You have hit your daily limit of code generation",
+            "You are generating too many keys. Try again later.",
             status_code=403,
         )
 
-    @override_settings(COVID_KEY_MAX_PER_USER_PER_DAY=1)
+    @override_settings(COVID_KEY_MAX_PER_USER=1)
     def test_key_throttled_for_another_user(self):
-        CodeView.throttled_limit = settings.COVID_KEY_MAX_PER_USER_PER_DAY
+        CodeView.throttled_limit = settings.COVID_KEY_MAX_PER_USER
         self.login()
         covid_key = COVIDKey()
         covid_key.created_by = self.user
@@ -69,7 +69,7 @@ class KeyView(AdminUserTestCase):
         response = self.client.post(reverse("key"))
         self.assertContains(
             response,
-            "You have hit your daily limit of code generation",
+            "You are generating too many keys. Try again later.",
             status_code=403,
         )
 

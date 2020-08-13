@@ -20,8 +20,8 @@ logger = logging.getLogger(__name__)
 
 class CodeView(Is2FAMixin, ThrottledMixin, TemplateView):
     throttled_model = COVIDKey
-    throttled_limit = settings.COVID_KEY_MAX_PER_USER_PER_DAY
-    throttled_time_range = 86400
+    throttled_limit = settings.COVID_KEY_MAX_PER_USER
+    throttled_time_range = settings.COVID_KEY_MAX_PER_USER_PERIOD_SECONDS
     template_name = "covid_key/key.html"
 
     def get(self, request):
@@ -92,6 +92,6 @@ class CodeView(Is2FAMixin, ThrottledMixin, TemplateView):
 
     def limit_reached(self):
         logger.error(
-            f"User {self.request.user.email} has hit the limit of {settings.COVID_KEY_MAX_PER_USER_PER_DAY} keys per 24h."
+            f"User {self.request.user.email} has hit the limit of {settings.COVID_KEY_MAX_PER_USER} keys per 24h."
         )
-        return render(self.request, "covid_key/throttled.html", status=403)
+        return render(self.request, "covid_key/locked.html", status=403)

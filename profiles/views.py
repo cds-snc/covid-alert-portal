@@ -157,7 +157,7 @@ class InvitationView(Is2FAMixin, IsAdminMixin, ThrottledMixin, FormView):
     success_url = reverse_lazy("invite_complete")
     throttled_model = Invitation
     throttled_limit = settings.MAX_INVITATIONS_PER_PERIOD
-    throttled_time_range = settings.MAX_INVITATIONS_PERDIOD_SECONDS
+    throttled_time_range = settings.MAX_INVITATIONS_PERIOD_SECONDS
     throttled_lookup_user_field = "inviter"
     throttled_lookup_date_field = "created"
 

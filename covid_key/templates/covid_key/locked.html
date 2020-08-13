@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Key generation limit reached" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Key generation limit reached" %}</h2>
+    <p>{% trans "You are generating too many keys. Try again later." %}</p>
+{% endblock %}

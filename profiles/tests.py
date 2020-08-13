@@ -538,7 +538,7 @@ class InviteFlow(AdminUserTestCase):
         self.assertEqual(response.status_code, 403)
 
         now = datetime.now()
-        expiry = now + timedelta(seconds=settings.MAX_INVITATIONS_PERDIOD_SECONDS + 1)
+        expiry = now + timedelta(seconds=settings.MAX_INVITATIONS_PERIOD_SECONDS + 1)
         with freeze_time(expiry):
             response = self.client.get(reverse("invite"))
             self.assertEqual(response.status_code, 200)
