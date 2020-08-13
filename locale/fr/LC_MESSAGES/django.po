@@ -42,7 +42,7 @@ msgstr "Questions ou commentaires"
 #: contact/forms.py:48
 msgid ""
 "There was a problem and your feedback wasn't submitted. Please email your "
-"feedback to assistance+covid@cds-snc.ca."
+"feedback to assistance+healthcare@cds-snc.ca."
 msgstr ""
 
 #: contact/templates/contact/form.html:5
