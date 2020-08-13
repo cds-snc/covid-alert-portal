@@ -80,14 +80,6 @@ class HealthcareBaseEditForm(HealthcareBaseForm, forms.ModelForm):
         abstract = True
 
 
-class HealthcareEmailEditForm(HealthcareBaseEditForm):
-    title = _("Change your email")
-
-    class Meta:
-        model = HealthcareUser
-        fields = ("email",)
-
-
 class HealthcareNameEditForm(HealthcareBaseEditForm):
     title = _("Change your name")
 
