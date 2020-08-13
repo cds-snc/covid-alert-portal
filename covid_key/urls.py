@@ -6,7 +6,7 @@ from django.contrib.auth.views import login_required
 from . import views
 
 urlpatterns = [
-    path("key/", views.code, name="key"),
+    path("key/", views.CodeView.as_view(), name="key"),
     path(
         "start/",
         login_required(

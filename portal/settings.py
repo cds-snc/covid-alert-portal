@@ -270,7 +270,10 @@ INVITATIONS_INVITATION_ONLY = True
 INVITATIONS_INVITATION_EXPIRY = 1  # 1 day
 INVITATIONS_ADMIN_ADD_FORM = "profiles.forms.HealthcareInvitationAdminAddForm"
 INVITATIONS_ADMIN_CHANGE_FORM = "profiles.forms.HealthcareInvitationAdminChangeForm"
-COVID_KEY_MAX_PER_USER_PER_DAY = 100 if is_prod else 10000
+COVID_KEY_MAX_PER_USER = 100 if is_prod else 10000
+COVID_KEY_MAX_PER_USER_PERIOD_SECONDS = 86400  # 1 day
+MAX_INVITATIONS_PER_PERIOD = 25
+MAX_INVITATIONS_PERIOD_SECONDS = 3540  # 59 minutes
 
 # Email setup
 EMAIL_BACKEND = (
@@ -298,7 +301,7 @@ if TESTING:
 
 AXES_FAILURE_LIMIT = 10  # Lockout after 10 failed login attempts
 AXES_COOLOFF_MESSAGE = _(
-    "This account has been locked due to too many failed log in attempts. Please try again after 5 minutes."
+    "This account has been locked due to too many failed log in attempts."
 )
 AXES_LOCKOUT_TEMPLATE = "locked_out.html"
 AXES_COOLOFF_TIME = timedelta(hours=24)  # Lock out for 24 hours
