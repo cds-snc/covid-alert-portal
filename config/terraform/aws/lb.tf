@@ -69,14 +69,14 @@ resource "aws_lb" "covidportal" {
 
 resource "aws_lb_listener" "covidportal_https" {
   depends_on = [
-    aws_acm_certificate.covidportal
+    aws_acm_certificate.covidportal_staging
   ]
 
   load_balancer_arn = aws_lb.covidportal.arn
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-FS-1-2-Res-2019-08"
-  certificate_arn   = aws_acm_certificate.covidportal.arn
+  certificate_arn   = aws_acm_certificate.covidportal_staging.arn
 
   default_action {
     type             = "forward"
