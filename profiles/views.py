@@ -219,6 +219,17 @@ class ProfilesView(Is2FAMixin, IsAdminMixin, ListView):
 class UserProfileView(Is2FAMixin, ProvinceAdminViewMixin, DetailView):
     model = HealthcareUser
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        # True if this is an admin account viewing another admin account
+        context["view_only"] = (
+            kwargs["object"].id != self.request.user.id
+            and (not self.request.user.is_superuser)
+            and kwargs["object"].is_admin
+        )
+        return context
+
 
 class HealthcareUserEditView(Is2FAMixin, ProvinceAdminEditMixin, UpdateView):
     model = HealthcareUser
