@@ -296,12 +296,12 @@ if TESTING:
     getLogger("covid_key.views").setLevel(CRITICAL)
     OTP_NOTIFY_NO_DELIVERY = True
 
-AXES_FAILURE_LIMIT = 5  # Lockout after 5 failed login attempts
+AXES_FAILURE_LIMIT = 10  # Lockout after 10 failed login attempts
 AXES_COOLOFF_MESSAGE = _(
     "This account has been locked due to too many failed log in attempts. Please try again after 5 minutes."
 )
 AXES_LOCKOUT_TEMPLATE = "locked_out.html"
-AXES_COOLOFF_TIME = timedelta(minutes=5)  # Lock out for 5 Minutes
+AXES_COOLOFF_TIME = timedelta(hours=24)  # Lock out for 24 hours
 AXES_ONLY_USER_FAILURES = True  # Default is to lockout both IP and username. We set this to True so it'll only lockout the username and not lockout a whole department behind a NAT
 AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
     "HTTP_X_FORWARDED_FOR",
