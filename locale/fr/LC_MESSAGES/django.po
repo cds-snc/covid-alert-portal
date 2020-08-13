@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-13 16:55+0000\n"
+"POT-Creation-Date: 2020-08-13 20:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,7 +42,7 @@ msgstr "Questions ou commentaires"
 #: contact/forms.py:48
 msgid ""
 "There was a problem and your feedback wasn't submitted. Please email your "
-"feedback to assistance+covid@cds-snc.ca."
+"feedback to assistance+healthcare@cds-snc.ca."
 msgstr ""
 
 #: contact/templates/contact/form.html:5
@@ -141,31 +141,43 @@ msgid "Generate a one-time key"
 msgstr "Générer une clé à usage unique"
 
 #: covid_key/templates/covid_key/start.html:9
-msgid "For each patient who tests positive for COVID-19, check:"
-msgstr "Pour chaque patient qui a un test positif à la COVID-19, vérifiez :"
+msgid "Check that the patient:"
+msgstr "Assurez-vous que le patient :"
 
 #: covid_key/templates/covid_key/start.html:12
-msgid "They’ve installed the <strong>COVID Alert app</strong> on their phone."
-msgstr ""
-"Qu’il a installé <strong>l’application Alerte COVID</strong> sur son "
-"téléphone."
+msgid "Has tested positive for COVID-19."
+msgstr "a reçu un test positif pour la COVID-19."
 
 #: covid_key/templates/covid_key/start.html:13
-msgid ""
-"They’re ready to tell the app about their test results within the next 24 "
-"hours. The one-time key they need to do that expires in 24 hours, and they "
-"will not be able to get another one."
+msgid "Has installed the <strong>COVID Alert app</strong> on their phone."
 msgstr ""
+"a installé <strong>l’application Alerte COVID</strong> sur son téléphone."
 
 #: covid_key/templates/covid_key/start.html:14
 msgid ""
-"They’re ready to <strong>enter the key in the app</strong> or <strong>record "
-"it somewhere safe.</strong>"
+"Is ready to <strong>enter the key in the app</strong> or <strong>record it "
+"somewhere safe</strong>."
 msgstr ""
-"Qu’il est en mesure d’<strong>entrer la clé dans l’application</strong> ou "
-"de <strong>noter la clé à un endroit sûr.</strong>"
+"est en mesure d’<strong>entrer la clé dans l’application</strong> ou de "
+"<strong>noter la clé à un endroit sûr</strong>."
 
-#: covid_key/templates/covid_key/start.html:19
+#: covid_key/templates/covid_key/start.html:15
+msgid ""
+"Understands <strong>the key expires in 24 hours</strong>. If the key expires "
+"before the patient enters it, they will not be able to get a new key.</"
+"strong>"
+msgstr ""
+"comprend que <strong>la clé expire après 24 heures</strong>. Si la clé "
+"expire avant que le patient ne l’utilise, il sera impossible d’en recevoir "
+"une nouvelle"
+
+#: covid_key/templates/covid_key/start.html:18
+msgid "Help us keep accurate stats. Only generate keys for real patients."
+msgstr ""
+"Aidez-nous à maintenir des statistiques fiables. Ne générez des clés que "
+"pour de véritables patients."
+
+#: covid_key/templates/covid_key/start.html:23
 msgid "Generate key"
 msgstr "Générer une clé"
 
@@ -415,12 +427,12 @@ msgid "Oops! Your account is temporarily locked."
 msgstr ""
 
 #: portal/templates/locked_out.html:11
-#, python-format
 msgid ""
-"It looks like you’ve entered the wrong password %(failure_limit)s times, and "
-"you are now locked out of your account. Don’t worry, your account will be "
-"unlocked in a few minutes and you can try logging in again."
+"Contact <a href=\"mailto:assistance+healthcare@cds-snc.ca\">assistance"
+"+healthcare@cds-snc.ca</a> for help."
 msgstr ""
+"Contactez <a href=\"mailto:assistance+healthcare@cds-snc.ca\">assistance"
+"+healthcare@cds-snc.ca</a> pour obtenir de l'aide."
 
 #: portal/templates/registration/login.html:19
 #: portal/templates/registration/password_reset_form.html:6
@@ -451,7 +463,7 @@ msgstr ""
 #: portal/templates/registration/password_reset_confirm.html:6
 #: portal/templates/registration/password_reset_confirm.html:14
 #: profiles/forms.py:117
-#: profiles/templates/profiles/healthcareuser_detail.html:71
+#: profiles/templates/profiles/healthcareuser_detail.html:70
 msgid "Change your password"
 msgstr "Mot de passe oublié?"
 
@@ -514,7 +526,7 @@ msgid "Change your name"
 msgstr "Modifier votre nom"
 
 #: profiles/forms.py:92
-#: profiles/templates/profiles/healthcareuser_detail.html:57
+#: profiles/templates/profiles/healthcareuser_detail.html:56
 msgid "Change your phone number"
 msgstr "Modifier votre numéro de téléphone"
 
@@ -535,7 +547,7 @@ msgid "The passwords didn’t match."
 msgstr "Les mots de passe ne sont pas identiques."
 
 #: profiles/forms.py:122
-#: profiles/templates/profiles/healthcareuser_detail.html:68
+#: profiles/templates/profiles/healthcareuser_detail.html:67
 msgid "Password"
 msgstr "Mot de passe"
 
@@ -552,7 +564,7 @@ msgid "Full name"
 msgstr "Nom complet"
 
 #: profiles/forms.py:192
-#: profiles/templates/profiles/healthcareuser_detail.html:51
+#: profiles/templates/profiles/healthcareuser_detail.html:50
 msgid "Phone number"
 msgstr "Numéro de téléphone mobile"
 
@@ -787,16 +799,16 @@ msgid "Change name"
 msgstr "Modifier le nom"
 
 #: profiles/templates/profiles/healthcareuser_detail.html:41
-#: profiles/templates/profiles/healthcareuser_detail.html:62
-#: profiles/templates/profiles/healthcareuser_detail.html:72
+#: profiles/templates/profiles/healthcareuser_detail.html:61
+#: profiles/templates/profiles/healthcareuser_detail.html:71
 msgid "Change"
 msgstr "Mettre à jour"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:59
+#: profiles/templates/profiles/healthcareuser_detail.html:58
 msgid "Change phone number"
 msgstr "Modifier le numéro de téléphone"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:81
+#: profiles/templates/profiles/healthcareuser_detail.html:80
 msgid "Back to accounts"
 msgstr "Retour aux comptes"
 
@@ -1253,8 +1265,8 @@ msgid ""
 "\n"
 "        <h2>Getting help</h2>\n"
 "        <p>For questions about these terms of use, or to report a technical "
-"issue, please contact <a href=\"mailto:assistance@cds-snc.ca"
-"\">assistance@cds-snc.ca</a>.</p>\n"
+"issue, please contact <a href=\"mailto:assistance+healthcare@cds-snc.ca"
+"\">assistance+healthcare@cds-snc.ca</a>.</p>\n"
 "    "
 msgstr ""
 "\n"
@@ -1275,7 +1287,8 @@ msgstr ""
 "procédures établies par votre autorité sanitaire pour signaler les problèmes "
 "de sécurité.</li></ul><h2>Aide</h2><p>Pour toute question au sujet des "
 "modalités d’utilisation, ou pour signaler un problème technique, écrivez à "
-"<a href=\"mailto:assistance@cds-snc.ca\">assistance@cds-snc.ca</a>.</p>"
+"<a href=\"mailto:assistance+healthcare@cds-snc.ca\">assistance"
+"+healthcare@cds-snc.ca</a>.</p>"
 
 #: profiles/validators.py:10 profiles/validators.py:22
 msgid "Your password can’t be a commonly-used sequence."
