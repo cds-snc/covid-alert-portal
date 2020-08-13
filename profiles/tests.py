@@ -112,6 +112,21 @@ class AdminUserTestCase(TestCase):
         session.save()
 
 
+class RootView(AdminUserTestCase):
+    def setUp(self):
+        super().setUp(is_admin=True)
+
+    def test_not_authenticated_redirects_to_login(self):
+        response = self.client.get("/", follow=True)
+        self.assertRedirects(response, "/en/login/?next=/en/start/")
+
+    def test_authenticated_redirects_to_start(self):
+        self.client.login(username="test@test.com", password="testpassword")
+        self.login_2fa()
+        response = self.client.get("/", follow=True)
+        self.assertRedirects(response, "/en/start/")
+
+
 class UnauthenticatedView(TestCase):
     def test_login_page(self):
         response = self.client.get(reverse("login"))
@@ -123,6 +138,11 @@ class UnauthenticatedView(TestCase):
         response = self.client.get(reverse("privacy"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "<h1>Privacy</h1>")
+
+    def test_terms_page(self):
+        response = self.client.get(reverse("terms"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Terms of use</h1>")
 
 
 class RestrictedPageViews(TestCase):

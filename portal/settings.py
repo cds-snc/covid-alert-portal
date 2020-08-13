@@ -245,6 +245,7 @@ if DEBUG:
 API_AUTHORIZATION = os.getenv("API_AUTHORIZATION")
 API_ENDPOINT = os.getenv("API_ENDPOINT")
 DJANGO_EASY_AUDIT_READONLY_EVENTS = True
+DJANGO_EASY_AUDIT_UNREGISTERED_URLS_EXTRA = [r"^/status/"]
 
 CORS_ALLOW_CREDENTIALS = False
 CORS_ORIGIN_WHITELIST = []
@@ -304,7 +305,7 @@ AXES_COOLOFF_TIME = timedelta(minutes=5)  # Lock out for 5 Minutes
 AXES_ONLY_USER_FAILURES = True  # Default is to lockout both IP and username. We set this to True so it'll only lockout the username and not lockout a whole department behind a NAT
 AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
     "HTTP_X_FORWARDED_FOR",
-    "REAL_IP",
+    "HTTP_X_REAL_IP",
     "REMOTE_ADDR",
 ]
 # Site Setup for Separate Domains

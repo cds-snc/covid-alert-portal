@@ -83,7 +83,6 @@ class SignUpView(FormView):
             password=form.cleaned_data.get("password1"),
         )
         login(self.request, user)
-        generate_2fa_code(user)
         return super(SignUpView, self).form_valid(form)
 
 

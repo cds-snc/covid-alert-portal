@@ -11,6 +11,9 @@
       <h1>{% trans "Give patient this key" %}</h1>
       <div id="big-code">
         <code>{{ code }}</code>
+        <hr aria-hidden="true"/>
+        {% include "covid_key/phonetic.html" %}
+        <hr aria-hidden="true"/>
         {% include "includes/expires_string.html" %}
       </div>
   {% endif %}

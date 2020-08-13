@@ -13,7 +13,7 @@ resource "aws_lb_target_group" "covidportal" {
   health_check {
     enabled             = true
     interval            = 10
-    path                = "/en/login/"
+    path                = "/status/"
     port                = 8000
     matcher             = "301,200"
     timeout             = 5
@@ -39,7 +39,7 @@ resource "aws_lb_target_group" "covidportal_2" {
     enabled             = true
     interval            = 10
     port                = 8000
-    path                = "/en/login/"
+    path                = "/status/"
     matcher             = "301,200"
     timeout             = 5
     healthy_threshold   = 2

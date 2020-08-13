@@ -11,5 +11,5 @@
   {% include  "includes/error_list.html" %}
 
   <h1>{% trans "Create account" %}</h1>
-  {% include "includes/cds_form.html" with submit_text=_("Next") %}
+  {% include "includes/cds_form.html" with submit_text=_("Create account") before_submit=_("<p>By creating an account, you agree to the COVID Alert Portal <a href=\"/en/terms\" target=\"_blank\">Terms of use</a>.</p>") %}
 {% endblock %}

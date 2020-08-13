@@ -4,17 +4,30 @@
   padding: $space-md $space-lg;
   margin-bottom: $space-xl;
   border-radius: 10px;
-  text-align: center;
+  text-align: left;
 
   code {
     display: block;
     font-size: 1.7em;
     margin-bottom: $space-sm;
+    letter-spacing: 0.2em;
+  }
+
+  hr {
+    border: 2px solid;
+    color: black;
+    width: 40px;
+    margin: 20px 0;
   }
 
   span {
-    opacity: 0.6;
     display: inline-block;
+  }
+  .phonetic-wrapper {
+    font-weight: bold;
+    span {
+      margin: 5px 0;
+    }
   }
 }
 
