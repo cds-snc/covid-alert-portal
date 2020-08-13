@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-11 19:08+0000\n"
+"POT-Creation-Date: 2020-08-13 03:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -211,7 +211,6 @@ msgid "Seven."
 msgstr "Sept."
 
 #: covid_key/templatetags/alphabet.py:18
-#| msgid "Eighth."
 msgid "Eight."
 msgstr "Huit."
 
@@ -363,7 +362,16 @@ msgstr "Confidentialité"
 msgid "Terms of use"
 msgstr "Conditions d’utilisation"
 
-#: portal/templates/includes/footer.html:13
+#: portal/templates/includes/footer.html:11
+#: portal/templates/registration/login.html:22
+msgid ""
+"<a href=\"https://www.canada.ca/en/public-health/services/diseases/"
+"coronavirus-disease-covid-19/covid-alert.html\" target=\"_blank\">About "
+"COVID Alert</a>"
+msgstr ""
+"<a href=\"https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid.html\" target=\"_blank\">À propos d’Alerte COVID</a>"
+
+#: portal/templates/includes/footer.html:14
 msgid "Symbol of the Government of Canada"
 msgstr "Symbole du gouvernement du Canada"
 
@@ -1294,23 +1302,23 @@ msgstr "Votre mot de passe ne peut pas contenir de termes liés à COVID-19"
 msgid "No invited email in session"
 msgstr ""
 
-#: profiles/views.py:127
+#: profiles/views.py:126
 msgid "Please try again later."
 msgstr ""
 
-#: profiles/views.py:130
+#: profiles/views.py:129
 msgid "That didn’t match the code that was sent."
 msgstr ""
 
-#: profiles/views.py:151
+#: profiles/views.py:150
 msgid "Security code has been sent."
 msgstr ""
 
-#: profiles/views.py:166
+#: profiles/views.py:165
 msgid ": Your portal account"
 msgstr " : votre compte pour le Portail"
 
-#: profiles/views.py:253
+#: profiles/views.py:252
 msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
