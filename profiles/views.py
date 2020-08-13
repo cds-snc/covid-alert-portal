@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.shortcuts import redirect, render
-from django.core.exceptions import PermissionDenied
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import login, authenticate
 from django.utils.translation import gettext as _
@@ -26,8 +25,9 @@ from invitations.models import Invitation
 from .utils import generate_2fa_code
 from .models import HealthcareUser
 from .mixins import (
+    ProvinceAdminViewMixin,
+    ProvinceAdminEditMixin,
     ProvinceAdminDeleteMixin,
-    ProvinceAdminManageMixin,
 )
 from .forms import (
     SignupForm,
@@ -214,9 +214,13 @@ class ProfilesView(Is2FAMixin, IsAdminMixin, ListView):
         )
 
 
-class HealthcareUserEditView(UpdateView):
-    success_url = reverse_lazy("user_profile")
+class UserProfileView(Is2FAMixin, ProvinceAdminViewMixin, DetailView):
     model = HealthcareUser
+
+
+class HealthcareUserEditView(Is2FAMixin, ProvinceAdminEditMixin, UpdateView):
+    model = HealthcareUser
+    success_url = reverse_lazy("user_profile")
 
     def get_initial(self):
         initial = super().get_initial()
@@ -226,23 +230,6 @@ class HealthcareUserEditView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy("user_profile", kwargs={"pk": self.kwargs.get("pk")})
-
-    def get_object(self, queryset=None):
-        obj = super().get_object(queryset)
-        if obj is not None:
-            # Users can edit their own infos, Admin can change someone else infos
-            if obj.id != self.request.user.id and self.request.user.is_admin is False:
-                raise PermissionDenied()
-
-            # Admins can only change account infos from their province
-            if obj.province != self.request.user.province:
-                raise PermissionDenied()
-
-        return obj
-
-
-class UserProfileView(Is2FAMixin, ProvinceAdminManageMixin, DetailView):
-    model = HealthcareUser
 
 
 class UserDeleteView(Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView):
