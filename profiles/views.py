@@ -205,13 +205,15 @@ class InvitationCompleteView(Is2FAMixin, IsAdminMixin, TemplateView):
 
 class ProfilesView(Is2FAMixin, IsAdminMixin, ListView):
     def get_queryset(self):
-        return (
-            HealthcareUser.objects.filter(province=self.request.user.province)
-            .annotate(
-                current_user_email=RawSQL("email = %s", (self.request.user.email,))
-            )
-            .order_by("-current_user_email", "-is_admin")
-        )
+        queryset = HealthcareUser.objects.filter(province=self.request.user.province)
+
+        # don't return superusers when an admin user makes the request
+        if not self.request.user.is_superuser:
+            queryset = queryset.filter(is_superuser=False)
+
+        return queryset.annotate(
+            current_user_email=RawSQL("email = %s", (self.request.user.email,))
+        ).order_by("-current_user_email", "-is_admin")
 
 
 class UserProfileView(Is2FAMixin, ProvinceAdminViewMixin, DetailView):
