@@ -80,14 +80,6 @@ class HealthcareBaseEditForm(HealthcareBaseForm, forms.ModelForm):
         abstract = True
 
 
-class HealthcareEmailEditForm(HealthcareBaseEditForm):
-    title = _("Change your email")
-
-    class Meta:
-        model = HealthcareUser
-        fields = ("email",)
-
-
 class HealthcareNameEditForm(HealthcareBaseEditForm):
     title = _("Change your name")
 
@@ -246,7 +238,7 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
             and phone_number != phone_number_confirmation
         ):
             raise forms.ValidationError(
-                _("The phone number fields don’t match."), code="invalid",
+                _("The phone numbers didn’t match."), code="invalid",
             )
         return phone_number_confirmation
 

@@ -630,7 +630,7 @@ class ProfileView(AdminUserTestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertContains(
-            response, '<td scope="col">{}</td>'.format(self.credentials["email"])
+            response, '<td colspan="2">{}</td>'.format(self.credentials["email"])
         )
 
     def test_forbidden_see_profile_page_superuser(self):
@@ -656,7 +656,7 @@ class ProfileView(AdminUserTestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertContains(
-            response, '<td scope="col">{}</td>'.format(self.credentials["email"])
+            response, '<td colspan="2">{}</td>'.format(self.credentials["email"])
         )
 
     def test_forbidden_profile_page_if_admin_user_viewing_other_province_user(self):
@@ -715,6 +715,23 @@ class DeleteView(AdminUserTestCase):
 
 
 class ProfileEditView(AdminUserTestCase):
+    def test_edit_name(self):
+        self.login()
+        post_data = {"name": "Don Draper"}
+        response = self.client.post(
+            reverse("user_edit_name", kwargs={"pk": self.user.id}), post_data,
+        )
+        self.assertEqual(response.status_code, 302)
+        user = HealthcareUser.objects.get(pk=self.user.id)
+        self.assertEqual(user.name, "Don Draper")
+
+    def test_edit_email_forbidden(self):
+        self.login()
+        edit_url = "/profiles/{}/edit/email".format(self.user.id)
+        post_data = {"email": "don@example.com"}
+        response = self.client.post(edit_url, post_data)
+        self.assertEqual(response.status_code, 404)
+
     def test_edit_someone_else_account(self):
         self.login()
         response = self.client.get(
@@ -741,7 +758,7 @@ class ProfileEditView(AdminUserTestCase):
         response = self.client.get(reverse("user_edit_name", kwargs={"pk": user2.id}))
         self.assertEqual(response.status_code, 403)
 
-    def test_change_email(self):
+    def test_change_phone_number(self):
         self.login()
         post_data = {
             "phone_number": "+12125552368",

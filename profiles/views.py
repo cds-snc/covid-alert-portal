@@ -215,7 +215,6 @@ class HealthcareUserEditView(UpdateView):
         initial = super().get_initial()
         user = self.get_object()
         initial["name"] = user.name
-        initial["email"] = user.email
         return initial
 
     def get_success_url(self):
