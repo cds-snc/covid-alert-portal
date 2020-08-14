@@ -346,3 +346,10 @@ CSP_CONNECT_SRC = ["'self'", "bam.nr-data.net"]
 FRESHDESK_API_ENDPOINT = os.getenv("FRESHDESK_API_ENDPOINT")
 FRESHDESK_API_KEY = os.getenv("FRESHDESK_API_KEY")
 FRESHDESK_PRODUCT_ID = int(os.getenv("FRESHDESK_PRODUCT_ID", 0)) or None
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"console": {"class": "logging.StreamHandler",},},
+    "root": {"handlers": ["console"], "level": "WARNING",},
+}
