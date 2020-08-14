@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Invitation limit reached" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Invitation limit reached" %}</h1>
+    <p>{% trans "You are sending too many invitations. Try again later." %}</p>
+{% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-13 20:04+0000\n"
+"POT-Creation-Date: 2020-08-13 21:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -131,6 +131,17 @@ msgstr ""
 msgid "New patient"
 msgstr "Nouveau patient"
 
+#: covid_key/templates/covid_key/locked.html:4
+#: covid_key/templates/covid_key/locked.html:7
+#, fuzzy
+#| msgid "Invitation limit reached"
+msgid "Key generation limit reached"
+msgstr "Limite de génération clé atteinte"
+
+#: covid_key/templates/covid_key/locked.html:8
+msgid "You are generating too many keys. Try again later."
+msgstr "Vous générez trop de clés. Réessayez plus tard."
+
 #: covid_key/templates/covid_key/phonetic.html:3
 msgid "To read this phonetically:"
 msgstr "Pour lire la clé de façon phonétique :"
@@ -180,15 +191,6 @@ msgstr ""
 #: covid_key/templates/covid_key/start.html:23
 msgid "Generate key"
 msgstr "Générer une clé"
-
-#: covid_key/templates/covid_key/throttled.html:4
-msgid "Daily limit reached"
-msgstr "Limite journalière atteinte"
-
-#: covid_key/templates/covid_key/throttled.html:7
-msgid "You have hit your daily limit of code generation."
-msgstr ""
-"Vous avez atteint votre limite journalière pour la génération des codes."
 
 #: covid_key/templatetags/alphabet.py:10
 msgid "Zero."
@@ -290,14 +292,12 @@ msgstr "Y comme yoga."
 msgid "Z as in zebra."
 msgstr "Z comme zèbre."
 
-#: covid_key/views.py:79
+#: covid_key/views.py:76
 msgid "Something went wrong. Contact your manager."
 msgstr "Une erreur est survenue. Veuillez contacter votre superviseur."
 
-#: portal/settings.py:301
-msgid ""
-"This account has been locked due to too many failed log in attempts. Please "
-"try again after 5 minutes."
+#: portal/settings.py:304
+msgid "This account has been locked due to too many failed log in attempts."
 msgstr ""
 
 #: portal/templates/403_csrf.html:4 portal/templates/403_csrf.html:7
@@ -499,6 +499,19 @@ msgstr "Envoyer"
 #: portal/templates/registration/password_reset_subject.txt:2
 msgid "Password reset"
 msgstr "Réinitialisation de votre mode passe"
+
+#: portal/templates/throttled/locked.html:4
+msgid "Daily limit reached"
+msgstr "Limite journalière atteinte"
+
+#: portal/templates/throttled/locked.html:7
+msgid "Limit reached"
+msgstr "Limite atteinte"
+
+#: portal/templates/throttled/locked.html:8
+msgid "You have hit your limit."
+msgstr ""
+"Vous avez atteint votre limite journalière pour la génération des codes."
 
 #: profiles/admin.py:101
 msgid "Number of keys generated in the last 24 hours"
@@ -727,6 +740,15 @@ msgstr "Retirer l’invitation envoyée à %(email)s"
 #: profiles/templates/invitations/templates/invite_list.html:51
 msgid "No invitations yet"
 msgstr "Aucune invitation pour le moment"
+
+#: profiles/templates/invitations/templates/locked.html:4
+#: profiles/templates/invitations/templates/locked.html:7
+msgid "Invitation limit reached"
+msgstr "Limite journalière atteinte"
+
+#: profiles/templates/invitations/templates/locked.html:8
+msgid "You are sending too many invitations. Try again later."
+msgstr "Vous envoyez trop d'invitations. Réessayer plus tard."
 
 #: profiles/templates/profiles/2fa-resend.html:6
 msgid "Resend security code"
@@ -1298,27 +1320,27 @@ msgstr "Votre mot de passe ne peut pas être utilisé couramment."
 msgid "Your password can’t contain terms related to COVID-19"
 msgstr "Votre mot de passe ne peut pas contenir de termes liés à COVID-19"
 
-#: profiles/views.py:52
+#: profiles/views.py:51
 msgid "No invited email in session"
 msgstr ""
 
-#: profiles/views.py:126
+#: profiles/views.py:125
 msgid "Please try again later."
-msgstr ""
+msgstr "Réessayer plus tard"
 
-#: profiles/views.py:129
+#: profiles/views.py:128
 msgid "That didn’t match the code that was sent."
 msgstr ""
 
-#: profiles/views.py:150
+#: profiles/views.py:149
 msgid "Security code has been sent."
 msgstr ""
 
-#: profiles/views.py:165
+#: profiles/views.py:169
 msgid ": Your portal account"
 msgstr " : votre compte pour le Portail"
 
-#: profiles/views.py:251
+#: profiles/views.py:258
 msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
