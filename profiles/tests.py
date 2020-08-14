@@ -553,16 +553,15 @@ class ProfilesView(AdminUserTestCase):
         self.assertRedirects(response, "/en/login/?next=/en/profiles/")
 
     def test_forbidden_if_not_admin(self):
-        user2 = User.objects.create_user(**get_other_credentials(is_admin=False))
-        self.client.login(username=user2.email, password="testpassword2")
-        self.login_2fa(user2)
+        staff_credentials = get_other_credentials(is_admin=False)
+        User.objects.create_user(**staff_credentials)
+        self.login(staff_credentials)
 
         response = self.client.get(reverse("profiles"))
         self.assertEqual(response.status_code, 403)
 
     def test_manage_accounts_link_visible_if_logged_in(self):
-        self.client.login(username="test@test.com", password="testpassword")
-        self.login_2fa()
+        self.login()
 
         response = self.client.get(reverse("start"))
         self.assertEqual(response.status_code, 200)
@@ -571,9 +570,9 @@ class ProfilesView(AdminUserTestCase):
         )
 
     def test_manage_accounts_page(self):
-        user2 = User.objects.create_user(**get_other_credentials(is_admin=True))
-        self.client.login(username=user2.email, password="testpassword2")
-        self.login_2fa(user2)
+        admin_credentials = get_other_credentials(is_admin=True)
+        User.objects.create_user(**admin_credentials)
+        self.login(admin_credentials)
 
         response = self.client.get(reverse("profiles"))
         self.assertEqual(response.status_code, 200)
@@ -582,12 +581,11 @@ class ProfilesView(AdminUserTestCase):
         self.assertContains(response, self.credentials["email"])
 
     def test_manage_accounts_page_no_users_from_other_province(self):
-        user2 = User.objects.create_user(
-            **get_other_credentials(province=get_province("AB"), is_admin=True)
+        admin_ab_credentials = get_other_credentials(
+            is_admin=True, province=get_province("AB")
         )
-
-        self.client.login(username=user2.email, password="testpassword2")
-        self.login_2fa(user2)
+        User.objects.create_user(**admin_ab_credentials)
+        self.login(admin_ab_credentials)
 
         response = self.client.get(reverse("profiles"))
         self.assertEqual(response.status_code, 200)
@@ -624,11 +622,10 @@ class ProfileView(AdminUserTestCase):
         response = self.client.get(reverse("user_profile", kwargs={"pk": uuid4()}))
         self.assertEqual(response.status_code, 404)
 
-    def test_fobidden_profile_page_if_non_admin_user_viewing_other_profile(self):
-        user2 = User.objects.create_user(**get_other_credentials(is_admin=False))
-        # password is hashed so we can't use it
-        self.client.login(username=user2.email, password="testpassword2")
-        self.login_2fa(user2)
+    def test_forbidden_profile_page_if_non_admin_user_viewing_other_profile(self):
+        staff_credentials = get_other_credentials(is_admin=False)
+        User.objects.create_user(**staff_credentials)
+        self.login(staff_credentials)
 
         ## get user profile of admin user created in setUp
         response = self.client.get(
@@ -637,12 +634,9 @@ class ProfileView(AdminUserTestCase):
         self.assertEqual(response.status_code, 403)
 
     def test_view_profile_page_if_superuser_viewing_other_profile(self):
-        # create superuser
-        superuser = User.objects.create_superuser(
-            **get_other_credentials(is_superuser=True)
-        )
-        self.client.login(username=superuser.email, password="testpassword2")
-        self.login_2fa(superuser)
+        superuser_credentials = get_other_credentials(is_superuser=True)
+        User.objects.create_superuser(**superuser_credentials)
+        self.login(superuser_credentials)
 
         response = self.client.get(
             reverse("user_profile", kwargs={"pk": self.credentials["id"]})
@@ -689,11 +683,11 @@ class ProfileView(AdminUserTestCase):
         )
 
     def test_forbidden_profile_page_if_admin_user_viewing_other_province_user(self):
-        user2 = User.objects.create_user(
-            **get_other_credentials(is_admin=True, province=get_province("AB"))
+        admin_ab_credentials = get_other_credentials(
+            is_admin=True, province=get_province("AB")
         )
-        self.client.login(username=user2.email, password="testpassword2")
-        self.login_2fa(user2)
+        User.objects.create_user(**admin_ab_credentials)
+        self.login(admin_ab_credentials)
 
         response = self.client.get(
             reverse("user_profile", kwargs={"pk": self.credentials["id"]})
@@ -748,20 +742,18 @@ class DeleteView(AdminUserTestCase):
         )
 
     def test_superadmin_can_see_delete_page_for_admin(self):
-        superuser = User.objects.create_superuser(
-            **get_other_credentials(is_superuser=True)
-        )
-
-        # log in as superuser
-        self.client.login(username=superuser.email, password="testpassword2")
-        self.login_2fa(superuser)
+        superuser_credentials = get_other_credentials(is_superuser=True)
+        User.objects.create_superuser(**superuser_credentials)
+        self.login(superuser_credentials)
 
         ## get user profile of admin user
         response = self.client.get(reverse("user_delete", kwargs={"pk": self.user.id}))
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
-            "<p>Are you sure you want to delete testuser’s account at “test@test.com”?</p>",
+            "<p>Are you sure you want to delete {}’s account at “{}”?</p>".format(
+                self.user.name, self.user.email
+            ),
         )
 
 
@@ -800,12 +792,9 @@ class ProfileEditView(AdminUserTestCase):
         self.assertEqual(response.status_code, 403)
 
     def test_admin_edit_staff_account(self):
-        admin = User.objects.create_user(
-            **get_other_credentials(is_admin=True, is_superuser=False)
-        )
-        # log in as admin user
-        self.client.login(username=admin.email, password="testpassword2")
-        self.login_2fa(admin)
+        admin_credentials = get_other_credentials(is_admin=True, is_superuser=False)
+        User.objects.create_user(**admin_credentials)
+        self.login(admin_credentials)
 
         user2 = User.objects.create_user(
             **get_other_credentials(email="test3@test.com", is_admin=False)
@@ -815,12 +804,9 @@ class ProfileEditView(AdminUserTestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_admin_edit_admin_account_forbidden(self):
-        admin = User.objects.create_user(
-            **get_other_credentials(is_admin=True, is_superuser=False)
-        )
-        # log in as admin user
-        self.client.login(username=admin.email, password="testpassword2")
-        self.login_2fa(admin)
+        admin_credentials = get_other_credentials(is_admin=True, is_superuser=False)
+        User.objects.create_user(**admin_credentials)
+        self.login(admin_credentials)
 
         user2 = User.objects.create_user(
             **get_other_credentials(email="test3@test.com", is_admin=True)
