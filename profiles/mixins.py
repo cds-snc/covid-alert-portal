@@ -4,16 +4,16 @@ from django.shortcuts import get_object_or_404
 from .models import HealthcareUser
 
 
-class ProvinceAdminManageMixin(UserPassesTestMixin):
+class ProvinceAdminViewMixin(UserPassesTestMixin):
     def test_func(self):
-        # 404 if bad user ID
-        profile_user = get_object_or_404(HealthcareUser, pk=self.kwargs["pk"])
-
-        # if logged in user is superuser, return profile
+        # if logged in user is superuser, allow operation
         if self.request.user.is_superuser:
             return True
 
-        # if same user, return profile
+        # 404 if bad user ID
+        profile_user = get_object_or_404(HealthcareUser, pk=self.kwargs["pk"])
+
+        # if same user, allow operation
         if self.request.user.id == profile_user.id:
             return True
 
@@ -21,7 +21,7 @@ class ProvinceAdminManageMixin(UserPassesTestMixin):
         if profile_user.is_superuser:
             return False
 
-        # if admin user from same province, return profile
+        # if admin user, return users from the same province
         if (
             self.request.user.is_admin
             and self.request.user.province.id == profile_user.province.id
@@ -31,9 +31,25 @@ class ProvinceAdminManageMixin(UserPassesTestMixin):
         return False
 
 
-class ProvinceAdminDeleteMixin(ProvinceAdminManageMixin):
+class ProvinceAdminEditMixin(ProvinceAdminViewMixin):
     def test_func(self):
-        # id can't be yourself
+        # 404 if bad user ID
+        profile_user = get_object_or_404(HealthcareUser, pk=self.kwargs["pk"])
+
+        # admins can't edit other admins
+        if (
+            not self.request.user.is_superuser
+            and self.request.user.is_admin
+            and profile_user.is_admin
+        ):
+            return False
+
+        return super().test_func()
+
+
+class ProvinceAdminDeleteMixin(ProvinceAdminEditMixin):
+    def test_func(self):
+        # you can't delete yourself
         if self.request.user.id == self.kwargs["pk"]:
             return False
 

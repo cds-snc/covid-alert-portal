@@ -17,7 +17,7 @@
         <h1>{% trans "User account" %}</h1>
     {% endif %}
 
-    <table>
+    <table {% if not view_only %}class="with-actions" {% endif %}>
       <caption class="visually-hidden">{% trans "User account" %}</caption>
       <tbody>
         <tr>
@@ -28,7 +28,8 @@
                   {% trans "Name" %}
               {% endif %}
           </th>
-          <td>{{ healthcareuser.name }}</td>
+          <td {% if view_only %}colspan="2"{% endif %}>{{ healthcareuser.name }}</td>
+          {% if not view_only %}
           <td>
               <a href="{% url 'user_edit_name' healthcareuser.id %}">
                 <span class="visually-hidden">
@@ -41,6 +42,7 @@
                 <span aria-hidden="true">{% trans "Change" %}</span>
               </a>
           </td>
+          {% endif %}
         </tr>
         <tr>
           <th scope="row">{% trans "Email address" %}</th>
@@ -48,7 +50,8 @@
         </tr>
         <tr>
           <th scope="row">{% trans "Phone number" %}</th>
-          <td>{{ healthcareuser.phone_number.as_e164 }}</td>
+          <td {% if view_only %}colspan="2"{% endif %}>{{ healthcareuser.phone_number.as_e164 }}</td>
+          {% if not view_only %}
           <td>
               <a href="{% url 'user_edit_phone' healthcareuser.id %}">
                 <span class="visually-hidden">
@@ -61,6 +64,7 @@
                 <span aria-hidden="true">{% trans "Change" %}</span>
               </a>
           </td>
+          {% endif %}
         </tr>
         {% if request.user.id == healthcareuser.id %}
             <tr>
