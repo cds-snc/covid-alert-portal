@@ -374,7 +374,16 @@ msgstr "Confidentialité"
 msgid "Terms of use"
 msgstr "Conditions d’utilisation"
 
-#: portal/templates/includes/footer.html:13
+#: portal/templates/includes/footer.html:11
+#: portal/templates/registration/login.html:22
+msgid ""
+"<a href=\"https://www.canada.ca/en/public-health/services/diseases/"
+"coronavirus-disease-covid-19/covid-alert.html\" target=\"_blank\">About "
+"COVID Alert</a>"
+msgstr ""
+"<a href=\"https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid.html\" target=\"_blank\">À propos d’Alerte COVID</a>"
+
+#: portal/templates/includes/footer.html:14
 msgid "Symbol of the Government of Canada"
 msgstr "Symbole du gouvernement du Canada"
 
