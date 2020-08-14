@@ -1,18 +1,16 @@
 import logging
+from logging import getLogger
 from datetime import datetime
+from easyaudit.models import CRUDEvent
 
 
 class LoggerBackend:
-    logging.basicConfig()
-    logger = logging.getLogger("easyaudit_logging")
+    logger = getLogger("easyaudit_logging")
     logger.setLevel(logging.DEBUG)
 
     def request(self, request_info):
-        self.logger.debug(
-            msg=f'{request_info.get("datetime")}::REQUEST::{request_info.get("url")}::{request_info.get("remote_ip")}',
-            extra=request_info,
-        )
-        return request_info  # if you don't need it
+        # Django already logs requests info, no need to send them again
+        return request_info
 
     def login(self, login_info):
         # LOGIN = 0
@@ -23,17 +21,27 @@ class LoggerBackend:
             1: "logout",
             2: "failed",
         }
+
+        # datetime LOGIN login_type obj_name user_id remote_ip
         self.logger.info(
-            msg=f'{datetime.utcnow()}::LOGIN::{login_types.get(login_info.get("login_type"), "other")}-{login_info.get("user_id")}::{login_info.get("remote_ip")}',
+            msg=f'{datetime.utcnow()} LOGIN {login_types.get(login_info.get("login_type"), "other")} {login_info.get("user_id")}::{login_info.get("remote_ip")}',
             extra=login_info,
         )
         return login_info
 
     def crud(self, crud_info):
-        # CREATE = 1
-        # UPDATE = 2
-        # DELETE = 3
-        # M2M_CHANGE = 4
-        # M2M_CHANGE_REV = 5
-        self.logger.info(msg=f'{crud_info.get("datetime")}::CRUD::', extra=crud_info)
+        event_type = None
+        if crud_info.event_type == CRUDEvent.CREATE:
+            event_type = 'CREATE'
+        if crud_info.event_type == CRUDEvent.UPDATE:
+            event_type = 'UPDATE'
+        if crud_info.event_type == CRUDEvent.DELETE:
+            event_type = 'DELETE'
+
+        if event_type is None:
+            # That means the event is either m2m_change or m2m_rev_change, which we don't care about
+            return crud_info
+
+        # datetime CRUD event_type obj_name obj_id user_id remote_ip
+        self.logger.info(msg=f'{crud_info.get("datetime")} CRUD {event_type}  ', extra=crud_info)
         return crud_info

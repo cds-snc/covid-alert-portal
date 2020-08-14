@@ -1,8 +1,5 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import get_object_or_404
-from django.conf import settings
-from django.contrib.auth.views import redirect_to_login
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import HealthcareUser
 
@@ -41,29 +38,3 @@ class ProvinceAdminDeleteMixin(ProvinceAdminManageMixin):
             return False
 
         return super().test_func()
-
-
-class IsAdminMixin(UserPassesTestMixin):
-    def test_func(self):
-        # allow if superuser or admin
-        if self.request.user.is_superuser or self.request.user.is_admin:
-            return True
-
-        return False
-
-
-class Is2FAMixin(LoginRequiredMixin):
-    """Verify that the current user is authenticated and using 2FA."""
-
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return super().dispatch(request, *args, **kwargs)
-
-        if not request.user.is_verified():
-            return redirect_to_login(
-                request.get_full_path(),
-                settings.OTP_LOGIN_URL,
-                self.get_redirect_field_name(),
-            )
-
-        return super().dispatch(request, *args, **kwargs)

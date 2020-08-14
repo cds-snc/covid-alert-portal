@@ -6,13 +6,17 @@
 {% block content %}
   <h1>{% trans "Generate a one-time key" %}</h1>
   <p>
-    {% trans "For each patient who tests positive for COVID-19, check:" %}
+    {% trans "Check that the patient:" %}
   </p>
   <ol class="expanded">
-    <li>{% blocktrans %}They’ve installed the <strong>COVID Alert app</strong> on their phone.{% endblocktrans %}</li>
-    <li>{% blocktrans %}They’re ready to tell the app about their test results within the next 24 hours. The one-time key they need to do that expires in 24 hours, and they will not be able to get another one.{% endblocktrans %}</li>
-    <li>{% blocktrans %}They’re ready to <strong>enter the key in the app</strong> or <strong>record it somewhere safe.</strong>{% endblocktrans %}</li>
+    <li>{% blocktrans %}Has tested positive for COVID-19.{% endblocktrans %}</li>
+    <li>{% blocktrans %}Has installed the <strong>COVID Alert app</strong> on their phone.{% endblocktrans %}</li>
+    <li>{% blocktrans %}Is ready to <strong>enter the key in the app</strong> or <strong>record it somewhere safe</strong>.{% endblocktrans %}</li>
+    <li>{% blocktrans %}Understands <strong>the key expires in 24 hours</strong>. If the key expires before the patient enters it, they will not be able to get a new key.</strong>{% endblocktrans %}</li>
   </ol>
+  <div class="info-message">
+    <span>{% trans "Help us keep accurate stats. Only generate keys for real patients." %}</span>
+  </div>
   <div class="content-button">
    <form action="{% url 'key' %}" method="post">
     {% csrf_token %}

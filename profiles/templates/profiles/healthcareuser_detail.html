@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block title %}
-    {% if profile_user.id == user.id %}
+    {% if healthcareuser.id == user.id %}
         {% trans "Your account" %}
     {% else %}
         {% trans "User account" %}
@@ -28,48 +28,44 @@
                   {% trans "Name" %}
               {% endif %}
           </th>
-          <td scope="col">{{ healthcareuser.name }}</td>
-          <td scope="col">
+          <td>{{ healthcareuser.name }}</td>
+          <td>
               <a href="{% url 'user_edit_name' healthcareuser.id %}">
+                <span class="visually-hidden">
                   {% if request.user.id == healthcareuser.id  %}
-                      <span class="visually-hidden">{% trans "Change your name" %}</span>
+                    {% trans "Change your name" %}
                   {% else %}
-                      <span class="visually-hidden">{% trans "Change the name" %}</span>
+                    {% trans "Change name" %}
                   {% endif %}
-                  <span aria-hidden="true">{% trans "Change" %}</span>
+                </span>
+                <span aria-hidden="true">{% trans "Change" %}</span>
               </a>
           </td>
         </tr>
         <tr>
           <th scope="row">{% trans "Email address" %}</th>
-          <td scope="col">{{ healthcareuser.email }}</td>
-          <td scope="col">
-              <a href="{% url 'user_edit_email' healthcareuser.id %}">
-                  {% if request.user.id == healthcareuser.id  %}
-                      <span class="visually-hidden">{% trans "Change your email" %}</span>
-                  {% endif %}
-                  <span aria-hidden="true">{% trans "Change" %}</span>
-              </a>
-          </td>
+          <td colspan="2">{{ healthcareuser.email }}</td>
         </tr>
         <tr>
           <th scope="row">{% trans "Phone number" %}</th>
-          <td scope="col">{{ healthcareuser.phone_number.as_e164 }}</td>
-          <td scope="col">
+          <td>{{ healthcareuser.phone_number.as_e164 }}</td>
+          <td>
               <a href="{% url 'user_edit_phone' healthcareuser.id %}">
+                <span class="visually-hidden">
                   {% if request.user.id == healthcareuser.id  %}
-                      <span class="visually-hidden">{% trans "Change your phone number" %}</span>
+                    {% trans "Change your phone number" %}
                   {% else %}
-                      <span class="visually-hidden">{% trans "Change the phone number" %}</span>
+                    {% trans "Change phone number" %}
                   {% endif %}
-                  <span aria-hidden="true">{% trans "Change" %}</span>
+                </span>
+                <span aria-hidden="true">{% trans "Change" %}</span>
               </a>
           </td>
         </tr>
         {% if request.user.id == healthcareuser.id %}
             <tr>
               <th scope="row" colspan="2">{% trans "Password" %}</th>
-              <td scope="col">
+              <td>
                   <a href="{% url 'user_edit_password' healthcareuser.id %}">
                       <span class="visually-hidden">{% trans "Change your password" %}</span>
                       <span aria-hidden="true">{% trans "Change" %}</span>
