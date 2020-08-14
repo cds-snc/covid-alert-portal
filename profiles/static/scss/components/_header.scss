@@ -9,6 +9,7 @@ header {
     flex-direction: column;
     justify-content: space-between;
     display: flex;
+    margin-top: $space-md;
     margin-bottom: $space-md;
 
     @include sm {
