@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.core.exceptions import PermissionDenied
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import login, authenticate
@@ -20,14 +20,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.expressions import RawSQL
 
 
+from portal.mixins import ThrottledMixin, Is2FAMixin, IsAdminMixin
 from invitations.models import Invitation
 
 from .utils import generate_2fa_code
 from .models import HealthcareUser
 from .mixins import (
-    IsAdminMixin,
     ProvinceAdminDeleteMixin,
-    Is2FAMixin,
     ProvinceAdminManageMixin,
 )
 from .forms import (
@@ -152,10 +151,15 @@ class Resend2FAView(LoginRequiredMixin, FormView):
         return is_valid
 
 
-class InvitationView(Is2FAMixin, IsAdminMixin, FormView):
+class InvitationView(Is2FAMixin, IsAdminMixin, ThrottledMixin, FormView):
     form_class = HealthcareInviteForm
     template_name = "invitations/templates/invite.html"
     success_url = reverse_lazy("invite_complete")
+    throttled_model = Invitation
+    throttled_limit = settings.MAX_INVITATIONS_PER_PERIOD
+    throttled_time_range = settings.MAX_INVITATIONS_PERIOD_SECONDS
+    throttled_lookup_user_field = "inviter"
+    throttled_lookup_date_field = "created"
 
     def form_valid(self, form):
         # Pass user to invite, save the invite to the DB, and return it
@@ -174,6 +178,9 @@ class InvitationView(Is2FAMixin, IsAdminMixin, FormView):
             )
         self.request.session["invite_email"] = invite.email
         return super().form_valid(form)
+
+    def limit_reached(self):
+        return render(self.request, "invitations/templates/locked.html", status=403)
 
 
 class InvitationListView(Is2FAMixin, IsAdminMixin, ListView):
@@ -215,7 +222,6 @@ class HealthcareUserEditView(UpdateView):
         initial = super().get_initial()
         user = self.get_object()
         initial["name"] = user.name
-        initial["email"] = user.email
         return initial
 
     def get_success_url(self):

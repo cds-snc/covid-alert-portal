@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-13 03:19+0000\n"
+"POT-Creation-Date: 2020-08-13 21:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,7 +42,7 @@ msgstr "Questions ou commentaires"
 #: contact/forms.py:48
 msgid ""
 "There was a problem and your feedback wasn't submitted. Please email your "
-"feedback to assistance+covid@cds-snc.ca."
+"feedback to assistance+healthcare@cds-snc.ca."
 msgstr ""
 
 #: contact/templates/contact/form.html:5
@@ -131,6 +131,17 @@ msgstr ""
 msgid "New patient"
 msgstr "Nouveau patient"
 
+#: covid_key/templates/covid_key/locked.html:4
+#: covid_key/templates/covid_key/locked.html:7
+#, fuzzy
+#| msgid "Invitation limit reached"
+msgid "Key generation limit reached"
+msgstr "Limite de génération clé atteinte"
+
+#: covid_key/templates/covid_key/locked.html:8
+msgid "You are generating too many keys. Try again later."
+msgstr "Vous générez trop de clés. Réessayez plus tard."
+
 #: covid_key/templates/covid_key/phonetic.html:3
 msgid "To read this phonetically:"
 msgstr "Pour lire la clé de façon phonétique :"
@@ -141,42 +152,45 @@ msgid "Generate a one-time key"
 msgstr "Générer une clé à usage unique"
 
 #: covid_key/templates/covid_key/start.html:9
-msgid "For each patient who tests positive for COVID-19, check:"
-msgstr "Pour chaque patient qui a un test positif à la COVID-19, vérifiez :"
+msgid "Check that the patient:"
+msgstr "Assurez-vous que le patient :"
 
 #: covid_key/templates/covid_key/start.html:12
-msgid "They’ve installed the <strong>COVID Alert app</strong> on their phone."
-msgstr ""
-"Qu’il a installé <strong>l’application Alerte COVID</strong> sur son "
-"téléphone."
+msgid "Has tested positive for COVID-19."
+msgstr "a reçu un test positif pour la COVID-19."
 
 #: covid_key/templates/covid_key/start.html:13
-msgid ""
-"They’re ready to tell the app about their test results within the next 24 "
-"hours. The one-time key they need to do that expires in 24 hours, and they "
-"will not be able to get another one."
+msgid "Has installed the <strong>COVID Alert app</strong> on their phone."
 msgstr ""
+"a installé <strong>l’application Alerte COVID</strong> sur son téléphone."
 
 #: covid_key/templates/covid_key/start.html:14
 msgid ""
-"They’re ready to <strong>enter the key in the app</strong> or <strong>record "
-"it somewhere safe.</strong>"
+"Is ready to <strong>enter the key in the app</strong> or <strong>record it "
+"somewhere safe</strong>."
 msgstr ""
-"Qu’il est en mesure d’<strong>entrer la clé dans l’application</strong> ou "
-"de <strong>noter la clé à un endroit sûr.</strong>"
+"est en mesure d’<strong>entrer la clé dans l’application</strong> ou de "
+"<strong>noter la clé à un endroit sûr</strong>."
 
-#: covid_key/templates/covid_key/start.html:19
+#: covid_key/templates/covid_key/start.html:15
+msgid ""
+"Understands <strong>the key expires in 24 hours</strong>. If the key expires "
+"before the patient enters it, they will not be able to get a new key.</"
+"strong>"
+msgstr ""
+"comprend que <strong>la clé expire après 24 heures</strong>. Si la clé "
+"expire avant que le patient ne l’utilise, il sera impossible d’en recevoir "
+"une nouvelle"
+
+#: covid_key/templates/covid_key/start.html:18
+msgid "Help us keep accurate stats. Only generate keys for real patients."
+msgstr ""
+"Aidez-nous à maintenir des statistiques fiables. Ne générez des clés que "
+"pour de véritables patients."
+
+#: covid_key/templates/covid_key/start.html:23
 msgid "Generate key"
 msgstr "Générer une clé"
-
-#: covid_key/templates/covid_key/throttled.html:4
-msgid "Daily limit reached"
-msgstr "Limite journalière atteinte"
-
-#: covid_key/templates/covid_key/throttled.html:7
-msgid "You have hit your daily limit of code generation."
-msgstr ""
-"Vous avez atteint votre limite journalière pour la génération des codes."
 
 #: covid_key/templatetags/alphabet.py:10
 msgid "Zero."
@@ -278,14 +292,12 @@ msgstr "Y comme yoga."
 msgid "Z as in zebra."
 msgstr "Z comme zèbre."
 
-#: covid_key/views.py:79
+#: covid_key/views.py:76
 msgid "Something went wrong. Contact your manager."
 msgstr "Une erreur est survenue. Veuillez contacter votre superviseur."
 
-#: portal/settings.py:300
-msgid ""
-"This account has been locked due to too many failed log in attempts. Please "
-"try again after 5 minutes."
+#: portal/settings.py:304
+msgid "This account has been locked due to too many failed log in attempts."
 msgstr ""
 
 #: portal/templates/403_csrf.html:4 portal/templates/403_csrf.html:7
@@ -424,12 +436,12 @@ msgid "Oops! Your account is temporarily locked."
 msgstr ""
 
 #: portal/templates/locked_out.html:11
-#, python-format
 msgid ""
-"It looks like you’ve entered the wrong password %(failure_limit)s times, and "
-"you are now locked out of your account. Don’t worry, your account will be "
-"unlocked in a few minutes and you can try logging in again."
+"Contact <a href=\"mailto:assistance+healthcare@cds-snc.ca\">assistance"
+"+healthcare@cds-snc.ca</a> for help."
 msgstr ""
+"Contactez <a href=\"mailto:assistance+healthcare@cds-snc.ca\">assistance"
+"+healthcare@cds-snc.ca</a> pour obtenir de l'aide."
 
 #: portal/templates/registration/login.html:19
 #: portal/templates/registration/password_reset_form.html:6
@@ -459,8 +471,8 @@ msgstr ""
 
 #: portal/templates/registration/password_reset_confirm.html:6
 #: portal/templates/registration/password_reset_confirm.html:14
-#: profiles/forms.py:125
-#: profiles/templates/profiles/healthcareuser_detail.html:74
+#: profiles/forms.py:117
+#: profiles/templates/profiles/healthcareuser_detail.html:70
 msgid "Change your password"
 msgstr "Mot de passe oublié?"
 
@@ -497,6 +509,19 @@ msgstr "Envoyer"
 msgid "Password reset"
 msgstr "Réinitialisation de votre mode passe"
 
+#: portal/templates/throttled/locked.html:4
+msgid "Daily limit reached"
+msgstr "Limite journalière atteinte"
+
+#: portal/templates/throttled/locked.html:7
+msgid "Limit reached"
+msgstr "Limite atteinte"
+
+#: portal/templates/throttled/locked.html:8
+msgid "You have hit your limit."
+msgstr ""
+"Vous avez atteint votre limite journalière pour la génération des codes."
+
 #: profiles/admin.py:101
 msgid "Number of keys generated in the last 24 hours"
 msgstr ""
@@ -505,10 +530,10 @@ msgstr ""
 msgid "Enter a valid email address"
 msgstr "Entrez une adresse courriel valide"
 
-#: profiles/forms.py:42 profiles/forms.py:184 profiles/forms.py:193
-#: profiles/forms.py:259
+#: profiles/forms.py:42 profiles/forms.py:176 profiles/forms.py:185
+#: profiles/forms.py:251
 #: profiles/templates/invitations/templates/invite_list.html:18
-#: profiles/templates/profiles/healthcareuser_detail.html:44
+#: profiles/templates/profiles/healthcareuser_detail.html:46
 #: profiles/templates/profiles/healthcareuser_list.html:18
 msgid "Email address"
 msgstr "Adresse courriel"
@@ -518,59 +543,54 @@ msgid "Please enter the security code."
 msgstr "Veuillez enter le code de sécurité."
 
 #: profiles/forms.py:84
-#: profiles/templates/profiles/healthcareuser_detail.html:49
-msgid "Change your email"
-msgstr "Modifier votre courriel"
-
-#: profiles/forms.py:92
-#: profiles/templates/profiles/healthcareuser_detail.html:35
+#: profiles/templates/profiles/healthcareuser_detail.html:36
 msgid "Change your name"
 msgstr "Modifier votre nom"
 
-#: profiles/forms.py:100
-#: profiles/templates/profiles/healthcareuser_detail.html:61
+#: profiles/forms.py:92
+#: profiles/templates/profiles/healthcareuser_detail.html:56
 msgid "Change your phone number"
 msgstr "Modifier votre numéro de téléphone"
 
-#: profiles/forms.py:102 profiles/forms.py:206
+#: profiles/forms.py:94 profiles/forms.py:198
 msgid "Confirm your phone number"
 msgstr "Confirmez votre numéro de téléphone mobile"
 
-#: profiles/forms.py:103
+#: profiles/forms.py:95
 msgid "Enter the same phone number as above."
 msgstr "Saisissez de nouveau votre numéro de téléphone."
 
-#: profiles/forms.py:106
+#: profiles/forms.py:98 profiles/forms.py:241
 msgid "The phone numbers didn’t match."
 msgstr "Les numéro de téléphone ne sont pas identiques."
 
-#: profiles/forms.py:127
+#: profiles/forms.py:119
 msgid "The passwords didn’t match."
 msgstr "Les mots de passe ne sont pas identiques."
 
-#: profiles/forms.py:130
-#: profiles/templates/profiles/healthcareuser_detail.html:71
+#: profiles/forms.py:122
+#: profiles/templates/profiles/healthcareuser_detail.html:67
 msgid "Password"
 msgstr "Mot de passe"
 
-#: profiles/forms.py:136
+#: profiles/forms.py:128
 msgid "Password confirmation"
 msgstr "Confirmation de votre mot de passe"
 
-#: profiles/forms.py:139
+#: profiles/forms.py:131
 msgid "Enter the same password as before, for verification."
 msgstr "Saississez de nouveau votre mot de passe"
 
-#: profiles/forms.py:197
+#: profiles/forms.py:189
 msgid "Full name"
 msgstr "Nom complet"
 
-#: profiles/forms.py:200
-#: profiles/templates/profiles/healthcareuser_detail.html:56
+#: profiles/forms.py:192
+#: profiles/templates/profiles/healthcareuser_detail.html:50
 msgid "Phone number"
 msgstr "Numéro de téléphone mobile"
 
-#: profiles/forms.py:202
+#: profiles/forms.py:194
 msgid ""
 "You must enter a new security code each time you log in. We’ll send the code "
 "to this phone number."
@@ -578,21 +598,17 @@ msgstr ""
 "Il faut entrer un nouveau code de sécurité à chaque connexion. Nous "
 "enverrons le code à ce numéro."
 
-#: profiles/forms.py:207
+#: profiles/forms.py:199
 msgid "Enter the same phone number as before, for verification"
 msgstr "Entrer le même numéro, pour des fins de validation"
 
-#: profiles/forms.py:234
+#: profiles/forms.py:226
 msgid "Email already exists"
 msgstr "L’adresse courriel existe déjà"
 
-#: profiles/forms.py:236
+#: profiles/forms.py:228
 msgid "An invitation hasn’t been sent to this address"
 msgstr "L’invitation n’a pu être envoyée."
-
-#: profiles/forms.py:249
-msgid "The phone number fields don’t match."
-msgstr ""
 
 #: profiles/models.py:67
 msgid "Your full name"
@@ -710,23 +726,38 @@ msgstr "Actions"
 msgid "Expired,Pending"
 msgstr "Expirée,En attente"
 
-#: profiles/templates/invitations/templates/invite_list.html:36
+#: profiles/templates/invitations/templates/invite_list.html:37
 msgid "Resend"
 msgstr "Ré-envoyer"
 
-#: profiles/templates/invitations/templates/invite_list.html:39
+#: profiles/templates/invitations/templates/invite_list.html:38
+#, fuzzy, python-format
+#| msgid "Delete invitation for %(email)s"
+msgid "Resend invitation to %(email)s"
+msgstr "Retirer l’invitation envoyée à %(email)s"
+
+#: profiles/templates/invitations/templates/invite_list.html:42
 #: profiles/templates/profiles/healthcareuser_list.html:41
 msgid "Delete"
 msgstr "Effacer"
 
-#: profiles/templates/invitations/templates/invite_list.html:40
+#: profiles/templates/invitations/templates/invite_list.html:43
 #, python-format
 msgid "Delete invitation for %(email)s"
 msgstr "Retirer l’invitation envoyée à %(email)s"
 
-#: profiles/templates/invitations/templates/invite_list.html:48
+#: profiles/templates/invitations/templates/invite_list.html:51
 msgid "No invitations yet"
 msgstr "Aucune invitation pour le moment"
+
+#: profiles/templates/invitations/templates/locked.html:4
+#: profiles/templates/invitations/templates/locked.html:7
+msgid "Invitation limit reached"
+msgstr "Limite journalière atteinte"
+
+#: profiles/templates/invitations/templates/locked.html:8
+msgid "You are sending too many invitations. Try again later."
+msgstr "Vous envoyez trop d'invitations. Réessayer plus tard."
 
 #: profiles/templates/profiles/2fa-resend.html:6
 msgid "Resend security code"
@@ -794,22 +825,21 @@ msgstr "Compte d'utilisateur"
 msgid "Name"
 msgstr "Nom"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:37
-msgid "Change the name"
+#: profiles/templates/profiles/healthcareuser_detail.html:38
+msgid "Change name"
 msgstr "Modifier le nom"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:39
-#: profiles/templates/profiles/healthcareuser_detail.html:51
-#: profiles/templates/profiles/healthcareuser_detail.html:65
-#: profiles/templates/profiles/healthcareuser_detail.html:75
+#: profiles/templates/profiles/healthcareuser_detail.html:41
+#: profiles/templates/profiles/healthcareuser_detail.html:61
+#: profiles/templates/profiles/healthcareuser_detail.html:71
 msgid "Change"
 msgstr "Mettre à jour"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:63
-msgid "Change the phone number"
+#: profiles/templates/profiles/healthcareuser_detail.html:58
+msgid "Change phone number"
 msgstr "Modifier le numéro de téléphone"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:84
+#: profiles/templates/profiles/healthcareuser_detail.html:80
 msgid "Back to accounts"
 msgstr "Retour aux comptes"
 
@@ -1266,8 +1296,8 @@ msgid ""
 "\n"
 "        <h2>Getting help</h2>\n"
 "        <p>For questions about these terms of use, or to report a technical "
-"issue, please contact <a href=\"mailto:assistance@cds-snc.ca"
-"\">assistance@cds-snc.ca</a>.</p>\n"
+"issue, please contact <a href=\"mailto:assistance+healthcare@cds-snc.ca"
+"\">assistance+healthcare@cds-snc.ca</a>.</p>\n"
 "    "
 msgstr ""
 "\n"
@@ -1288,7 +1318,8 @@ msgstr ""
 "procédures établies par votre autorité sanitaire pour signaler les problèmes "
 "de sécurité.</li></ul><h2>Aide</h2><p>Pour toute question au sujet des "
 "modalités d’utilisation, ou pour signaler un problème technique, écrivez à "
-"<a href=\"mailto:assistance@cds-snc.ca\">assistance@cds-snc.ca</a>.</p>"
+"<a href=\"mailto:assistance+healthcare@cds-snc.ca\">assistance"
+"+healthcare@cds-snc.ca</a>.</p>"
 
 #: profiles/validators.py:10 profiles/validators.py:22
 msgid "Your password can’t be a commonly-used sequence."
@@ -1298,27 +1329,27 @@ msgstr "Votre mot de passe ne peut pas être utilisé couramment."
 msgid "Your password can’t contain terms related to COVID-19"
 msgstr "Votre mot de passe ne peut pas contenir de termes liés à COVID-19"
 
-#: profiles/views.py:52
+#: profiles/views.py:51
 msgid "No invited email in session"
 msgstr ""
 
-#: profiles/views.py:126
+#: profiles/views.py:125
 msgid "Please try again later."
-msgstr ""
+msgstr "Réessayer plus tard"
 
-#: profiles/views.py:129
+#: profiles/views.py:128
 msgid "That didn’t match the code that was sent."
 msgstr ""
 
-#: profiles/views.py:150
+#: profiles/views.py:149
 msgid "Security code has been sent."
 msgstr ""
 
-#: profiles/views.py:165
+#: profiles/views.py:169
 msgid ": Your portal account"
 msgstr " : votre compte pour le Portail"
 
-#: profiles/views.py:252
+#: profiles/views.py:258
 msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "

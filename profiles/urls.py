@@ -53,14 +53,6 @@ urlpatterns = [
         name="user_edit_password",
     ),
     path(
-        "profiles/<uuid:pk>/edit/email",
-        views.HealthcareUserEditView.as_view(
-            form_class=forms.HealthcareEmailEditForm,
-            template_name=forms.HealthcareEmailEditForm.template_name,
-        ),
-        name="user_edit_email",
-    ),
-    path(
         "login/",
         LoginView.as_view(authentication_form=forms.HealthcareAuthenticationForm),
         name="login",
