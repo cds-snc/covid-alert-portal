@@ -67,7 +67,7 @@ ul {
   }
 
   &.expanded {
-    li + li {
+    > li + li {
       padding-top: $space-xs;
     }
   }
