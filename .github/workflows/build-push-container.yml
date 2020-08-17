@@ -2,7 +2,7 @@ name: Build and Push to Container Registries
 
 on:
   push:
-    branches: [main]
+    branches: [main, github_flow_fix]
 
 env:
   GITHUB_SHA: ${{ github.sha }}
