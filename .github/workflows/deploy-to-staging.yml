@@ -43,7 +43,7 @@ jobs:
       - name: Download Covid Portal task definition
         id: download-taskdef-portal
         run: |
-          aws ecs describe-task-definition --task-definition covid-portal --query taskDefinition > task-definition-portal.json
+          aws ecs describe-task-definition --task-definition covid-portal_staging --query taskDefinition > task-definition-portal.json
           echo "##[set-output name=container_name;]$(jq -r '.containerDefinitions[0].name' task-definition-portal.json)"
       - name: Render image for portal service
         id: taskdef-portal

@@ -20,7 +20,7 @@ resource "aws_cloudwatch_metric_alarm" "portal_cpu_utilization_high" {
   period              = "120"
   statistic           = "Average"
   threshold           = "50"
-  alarm_description   = "This metric monitors ecs cpu utilization"
+  alarm_description   = "Covid Alert Portal - This metric monitors ecs cpu utilization"
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
   dimensions = {
@@ -38,7 +38,7 @@ resource "aws_cloudwatch_metric_alarm" "portal_memory_utilization_high" {
   period              = "120"
   statistic           = "Average"
   threshold           = "50"
-  alarm_description   = "This metric monitors ecs memory utilization"
+  alarm_description   = "Covid Alert Portal - This metric monitors ecs memory utilization"
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
 
@@ -55,7 +55,7 @@ resource "aws_cloudwatch_metric_alarm" "portal_memory_utilization_high" {
 
 resource "aws_cloudwatch_log_metric_filter" "five_hundred_response" {
   name           = "500Response"
-  pattern        = "statusClass=5xx msg=\"http response\""
+  pattern        = "\"HTTP/1.1 ?500 ?501 ?502 ?503 ?504 ?505 ?506 ?507 ?508 ?510 ?511\""
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -74,59 +74,48 @@ resource "aws_cloudwatch_metric_alarm" "five_hundred_response_warn" {
   period              = "60"
   statistic           = "Sum"
   threshold           = "1"
-  alarm_description   = "This metric monitors for an 5xx level response"
+  alarm_description   = "Covid Alert Portal - This metric monitors for an 5xx level response"
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
 }
 
-resource "aws_cloudwatch_log_metric_filter" "error_logged" {
-  name           = "ErrorLogged"
-  pattern        = "level=error"
-  log_group_name = aws_cloudwatch_log_group.covidportal.name
+###
+# AWS CloudWatch Metrics - DDoS Alarms
+###
 
-  metric_transformation {
-    name      = "ErrorLogged"
-    namespace = "covidportal"
-    value     = "1"
+resource "aws_cloudwatch_metric_alarm" "ddos_detected_covidportal" {
+  alarm_name          = "DDoSDetectedCovidPortal"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "DDoSDetected"
+  namespace           = "AWS/DDoSProtection"
+  period              = "60"
+  statistic           = "Sum"
+  threshold           = "0"
+  alarm_description   = "Covid Alert Portal - This metric monitors for DDoS detected on Covid Portal ALB"
+
+  alarm_actions = [aws_sns_topic.alert_critical.arn]
+
+  dimensions = {
+    ResourceArn = aws_lb.covidportal.arn
   }
 }
 
-resource "aws_cloudwatch_metric_alarm" "error_logged_warn" {
-  alarm_name          = "ErrorLoggedWarn"
+resource "aws_cloudwatch_metric_alarm" "ddos_detected_route53" {
+
+  alarm_name          = "DDoSDetectedRoute53"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
-  metric_name         = aws_cloudwatch_log_metric_filter.error_logged.name
-  namespace           = "covidportal"
+  metric_name         = "DDoSDetected"
+  namespace           = "AWS/DDoSProtection"
   period              = "60"
   statistic           = "Sum"
-  threshold           = "1"
-  alarm_description   = "This metric monitors for an error level logs"
+  threshold           = "0"
+  alarm_description   = "Covid Alert Portal - This metric monitors for DDoS detected on route 53"
 
-  alarm_actions = [aws_sns_topic.alert_warning.arn]
-}
+  alarm_actions = [aws_sns_topic.alert_critical.arn]
 
-resource "aws_cloudwatch_log_metric_filter" "fatal_logged" {
-  name           = "FatalLogged"
-  pattern        = "level=fatal"
-  log_group_name = aws_cloudwatch_log_group.covidportal.name
-
-  metric_transformation {
-    name      = "FatalLogged"
-    namespace = "covidportal"
-    value     = "1"
+  dimensions = {
+    ResourceArn = "arn:aws:route53:::hostedzone/${aws_route53_zone.covidportal.zone_id}"
   }
-}
-
-resource "aws_cloudwatch_metric_alarm" "fatal_logged_warn" {
-  alarm_name          = "FatalLoggedWarn"
-  comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = "1"
-  metric_name         = aws_cloudwatch_log_metric_filter.fatal_logged.name
-  namespace           = "covidportal"
-  period              = "60"
-  statistic           = "Sum"
-  threshold           = "1"
-  alarm_description   = "This metric monitors for a fatal level logs"
-
-  alarm_actions = [aws_sns_topic.alert_warning.arn, aws_sns_topic.alert_critical.arn]
 }
