@@ -5,7 +5,6 @@ from easyaudit.models import CRUDEvent
 import json
 
 logger = getLogger("easyaudit_logging")
-logger.setLevel(logging.INFO)
 
 
 class LoggerBackend:
