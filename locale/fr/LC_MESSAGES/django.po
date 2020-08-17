@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-13 21:05+0000\n"
+"POT-Creation-Date: 2020-08-15 00:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,7 +62,7 @@ msgid "Error: "
 msgstr "Erreur : "
 
 #: contact/templates/contact/form.html:6 contact/templates/contact/form.html:13
-#: portal/templates/includes/footer.html:8
+#: portal/templates/includes/footer.html:9
 #: portal/templates/includes/nav_main.html:11
 msgid "Contact us"
 msgstr "Nous joindre"
@@ -319,7 +319,7 @@ msgstr ""
 "Veuillez utiliser <a href=\"%(login_url)s\">le site principal pour vous "
 "connecter</a>."
 
-#: portal/templates/base.html:30 portal/templates/base.html:46
+#: portal/templates/base.html:30 portal/templates/base.html:45
 #: profiles/utils/__init__.py:25
 msgid "COVID Alert Portal"
 msgstr "Portail Alerte COVID"
@@ -362,26 +362,27 @@ msgstr ""
 "apparaître. Le bouton « Entrer votre clé » mène le patient vers les étapes "
 "suivantes."
 
-#: portal/templates/includes/footer.html:9
-#: profiles/templates/profiles/privacy.html:5
-#: profiles/templates/profiles/privacy.html:9
-msgid "Privacy"
-msgstr "Confidentialité"
-
-#: portal/templates/includes/footer.html:10
-#: profiles/templates/profiles/terms.html:5
-#: profiles/templates/profiles/terms.html:9
-msgid "Terms of use"
-msgstr "Conditions d’utilisation"
-
-#: portal/templates/includes/footer.html:11
-#: portal/templates/registration/login.html:22
+#: portal/templates/includes/footer.html:8
 msgid ""
 "<a href=\"https://www.canada.ca/en/public-health/services/diseases/"
 "coronavirus-disease-covid-19/covid-alert.html\" target=\"_blank\">About "
 "COVID Alert</a>"
 msgstr ""
-"<a href=\"https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid.html\" target=\"_blank\">À propos d’Alerte COVID</a>"
+"<a href=\"https://www.canada.ca/fr/sante-publique/services/maladies/maladie-"
+"coronavirus-covid-19/alerte-covid.html\" target=\"_blank\">À propos d’Alerte "
+"COVID</a>"
+
+#: portal/templates/includes/footer.html:10
+#: profiles/templates/profiles/privacy.html:5
+#: profiles/templates/profiles/privacy.html:9
+msgid "Privacy"
+msgstr "Confidentialité"
+
+#: portal/templates/includes/footer.html:11
+#: profiles/templates/profiles/terms.html:5
+#: profiles/templates/profiles/terms.html:9
+msgid "Terms of use"
+msgstr "Conditions d’utilisation"
 
 #: portal/templates/includes/footer.html:14
 msgid "Symbol of the Government of Canada"
@@ -422,10 +423,6 @@ msgstr "Accueil"
 #: profiles/templates/profiles/healthcareuser_list.html:8
 msgid "Manage team"
 msgstr "Gérer l’équipe"
-
-#: portal/templates/includes/phase_banner.html:4
-msgid "This site will change as we test ideas."
-msgstr "Ce site évoluera au fur et à mesure que nous testons des idées."
 
 #: portal/templates/locked_out.html:5
 msgid "Account locked"
@@ -472,7 +469,7 @@ msgstr ""
 #: portal/templates/registration/password_reset_confirm.html:6
 #: portal/templates/registration/password_reset_confirm.html:14
 #: profiles/forms.py:117
-#: profiles/templates/profiles/healthcareuser_detail.html:70
+#: profiles/templates/profiles/healthcareuser_detail.html:74
 msgid "Change your password"
 msgstr "Mot de passe oublié?"
 
@@ -533,7 +530,7 @@ msgstr "Entrez une adresse courriel valide"
 #: profiles/forms.py:42 profiles/forms.py:176 profiles/forms.py:185
 #: profiles/forms.py:251
 #: profiles/templates/invitations/templates/invite_list.html:18
-#: profiles/templates/profiles/healthcareuser_detail.html:46
+#: profiles/templates/profiles/healthcareuser_detail.html:48
 #: profiles/templates/profiles/healthcareuser_list.html:18
 msgid "Email address"
 msgstr "Adresse courriel"
@@ -543,12 +540,12 @@ msgid "Please enter the security code."
 msgstr "Veuillez enter le code de sécurité."
 
 #: profiles/forms.py:84
-#: profiles/templates/profiles/healthcareuser_detail.html:36
+#: profiles/templates/profiles/healthcareuser_detail.html:37
 msgid "Change your name"
 msgstr "Modifier votre nom"
 
 #: profiles/forms.py:92
-#: profiles/templates/profiles/healthcareuser_detail.html:56
+#: profiles/templates/profiles/healthcareuser_detail.html:59
 msgid "Change your phone number"
 msgstr "Modifier votre numéro de téléphone"
 
@@ -569,7 +566,7 @@ msgid "The passwords didn’t match."
 msgstr "Les mots de passe ne sont pas identiques."
 
 #: profiles/forms.py:122
-#: profiles/templates/profiles/healthcareuser_detail.html:67
+#: profiles/templates/profiles/healthcareuser_detail.html:71
 msgid "Password"
 msgstr "Mot de passe"
 
@@ -586,7 +583,7 @@ msgid "Full name"
 msgstr "Nom complet"
 
 #: profiles/forms.py:192
-#: profiles/templates/profiles/healthcareuser_detail.html:50
+#: profiles/templates/profiles/healthcareuser_detail.html:52
 msgid "Phone number"
 msgstr "Numéro de téléphone mobile"
 
@@ -737,7 +734,7 @@ msgid "Resend invitation to %(email)s"
 msgstr "Retirer l’invitation envoyée à %(email)s"
 
 #: profiles/templates/invitations/templates/invite_list.html:42
-#: profiles/templates/profiles/healthcareuser_list.html:41
+#: profiles/templates/profiles/healthcareuser_list.html:46
 msgid "Delete"
 msgstr "Effacer"
 
@@ -825,21 +822,21 @@ msgstr "Compte d'utilisateur"
 msgid "Name"
 msgstr "Nom"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:38
+#: profiles/templates/profiles/healthcareuser_detail.html:39
 msgid "Change name"
 msgstr "Modifier le nom"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:41
-#: profiles/templates/profiles/healthcareuser_detail.html:61
-#: profiles/templates/profiles/healthcareuser_detail.html:71
+#: profiles/templates/profiles/healthcareuser_detail.html:42
+#: profiles/templates/profiles/healthcareuser_detail.html:64
+#: profiles/templates/profiles/healthcareuser_detail.html:75
 msgid "Change"
 msgstr "Mettre à jour"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:58
+#: profiles/templates/profiles/healthcareuser_detail.html:61
 msgid "Change phone number"
 msgstr "Modifier le numéro de téléphone"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:80
+#: profiles/templates/profiles/healthcareuser_detail.html:84
 msgid "Back to accounts"
 msgstr "Retour aux comptes"
 
@@ -859,21 +856,31 @@ msgstr "Droit d’accès"
 msgid "Admin,Staff"
 msgstr "Administrateur,Employé"
 
-#: profiles/templates/profiles/healthcareuser_list.html:35
+#: profiles/templates/profiles/healthcareuser_list.html:36
+msgid "View"
+msgstr ""
+
+#: profiles/templates/profiles/healthcareuser_list.html:37
+#, fuzzy, python-format
+#| msgid "Edit account for %(email)s"
+msgid "View account for %(email)s"
+msgstr "Modifier le compte associé à %(email)s"
+
+#: profiles/templates/profiles/healthcareuser_list.html:39
 msgid "Edit"
 msgstr "Modifier"
 
-#: profiles/templates/profiles/healthcareuser_list.html:36
+#: profiles/templates/profiles/healthcareuser_list.html:40
 #, python-format
 msgid "Edit account for %(email)s"
 msgstr "Modifier le compte associé à %(email)s"
 
-#: profiles/templates/profiles/healthcareuser_list.html:42
+#: profiles/templates/profiles/healthcareuser_list.html:47
 #, python-format
 msgid "Delete account for %(email)s"
 msgstr "Effacer le compte associé à %(email)s"
 
-#: profiles/templates/profiles/healthcareuser_list.html:48
+#: profiles/templates/profiles/healthcareuser_list.html:53
 msgid "No users yet."
 msgstr "Aucune utilisateur pour le moment"
 
@@ -1265,61 +1272,56 @@ msgstr ""
 #: profiles/templates/profiles/terms.html:10
 msgid ""
 "\n"
-"        <h2>Approving portal users</h2>\n"
-"        <p>Only a provincial, territorial, or federal healthcare authority "
-"can:</p>\n"
-"        <ul>\n"
-"            <li>Approve your use of the portal.</li>\n"
-"            <li>Give you a user account.</li>\n"
+"        <p>The COVID Alert Portal is only for authorized healthcare workers "
+"in Canada.</p>\n"
+"        <p>By using the portal, you agree to:</p>\n"
+"        <ul class=\"expanded\">\n"
+"            <li>Follow your healthcare authority’s procedures.</li>\n"
+"            <li>Only give one key per each patient diagnosed with COVID-19 "
+"by your healthcare authority. Do not generate a key for any other reason.</"
+"li>\n"
+"            <li>Prevent other people from using your account.  You must "
+"protect your username and password, even from other people working for a "
+"healthcare authority.</li>\n"
+"            <li>\n"
+"            Immediately report any security issues with your account to "
+"both:\n"
+"                <ul>\n"
+"                    <li>your manager</li>\n"
+"                    <li><a href=\"mailto:security@cds-snc.ca\">security@cds-"
+"snc.ca</a></li>\n"
+"                </ul>\n"
+"            </li>\n"
 "        </ul>\n"
 "\n"
-"        <h2>Using the portal</h2>\n"
-"        <p>You must:</p>\n"
-"        <ul>\n"
-"            <li>Follow all portal procedures made by your healthcare "
-"authority.</li>\n"
-"            <li>Only give one-time keys to patients diagnosed with COVID-19 "
-"by your healthcare authority.</li>\n"
-"            <li>Take steps to prevent anyone, including other people working "
-"for a healthcare authority, from learning your username and password.</li>\n"
-"        </ul>\n"
+"        <p>If we detect any misuse of the portal or security issues with "
+"your account, we will immediately disable your account.</p>\n"
 "\n"
-"        <h2>Reporting unauthorized activity</h2>\n"
-"        <p>You must:</p>\n"
-"        <ul>\n"
-"            <li>Report any unauthorized activity, loss of username or "
-"password, or other security issues to <a href=\"mailto:security@cds-snc.ca"
-"\">security@cds-snc.ca</a> and to your healthcare authority.</li>\n"
-"            <li>Follow your healthcare authority’s procedures for reporting "
-"security issues.</li>\n"
-"        </ul>\n"
 "\n"
-"        <h2>Getting help</h2>\n"
+"        <h2>Questions?</h2>\n"
 "        <p>For questions about these terms of use, or to report a technical "
 "issue, please contact <a href=\"mailto:assistance+healthcare@cds-snc.ca"
 "\">assistance+healthcare@cds-snc.ca</a>.</p>\n"
 "    "
 msgstr ""
 "\n"
-"<h2>Utilisateurs du portail autorisés</h2><p>Seules les autorités sanitaires "
-"provinciale, territoriale ou fédérale peuvent :</p><ul><li>Vous autoriser à "
-"utiliser le portail.</li><li>Vous fournir un compte utilisateur.</li></"
-"ul><h2>Utilisation du portail</h2><p>Vous devez:</p><ul><li>Suivre toutes "
-"les procédures relatives au portail établies par votre autorité sanitaire.</"
-"li><li>Fournir des clés à usage unique seulement aux patients ayant un "
-"diagnostic de COVID-19 établi par votre autorité sanitaire.</li><li>Prendre "
-"les mesures nécessaires pour empêcher toute personne, y compris celles "
-"travaillant pour une autorité sanitaire, de découvrir votre nom "
-"d’utilisateur et votre mot de passe.</li></ul><h2>Signalement des activités "
-"non autorisées</h2><p>Vous devez :</p><ul><li>Signaler les activités non "
-"autorisées, la perte d’un nom d’utilisateur ou d’un mot de passe, ou tout "
-"autre problème de sécurité à <a href=\"mailto:security@cds-snc.ca"
-"\">security@cds-snc.ca</a>et à votre autorité sanitaire.</li><li>Suivre les "
-"procédures établies par votre autorité sanitaire pour signaler les problèmes "
-"de sécurité.</li></ul><h2>Aide</h2><p>Pour toute question au sujet des "
-"modalités d’utilisation, ou pour signaler un problème technique, écrivez à "
-"<a href=\"mailto:assistance+healthcare@cds-snc.ca\">assistance"
-"+healthcare@cds-snc.ca</a>.</p>"
+"<p>Le portail Alerte COVID est uniquement conçu pour les professionnels de "
+"la santé du Canada autorisés.</p><p>En utilisant le portail, vous acceptez "
+"de :</p><ul class=\"expanded\"><li>Suivre les procédures établies par votre "
+"autorité sanitaire.</li><li>Ne donner qu’une seule clé aux patients chez qui "
+"la COVID-19 est diagnostiquée et ne pas générer de clé pour aucune autre "
+"raison qui soit.</li><li>Empêcher d’autres personnes d’utiliser votre "
+"compte. Vous devez éviter de divulguer votre nom d’utilisateur et votre mot "
+"de passe, même aux personnes travaillant pour une autorité sanitaire.</"
+"li><li>Signaler immédiatement tout problème de sécurité en lien avec votre "
+"compte aux instances suivantes :<ul><li>votre gestionnaire</li><li><a href="
+"\"mailto:security@cds-snc.ca\">security@cds-snc.ca</a></li></ul><p>Si nous "
+"détectons toute mauvaise utilisation du portail ou tout problème de sécurité "
+"lié à votre compte, nous désactiverons immédiatement votre compte.</"
+"p><h2>Des questions?</h2><p>Pour toute question au sujet des modalités "
+"d’utilisation, ou pour signaler un problème technique, écrivez à <a href="
+"\"mailto:assistance+healthcare@cds-snc.ca\">assistance+healthcare@cds-snc."
+"ca</a>.</p>"
 
 #: profiles/validators.py:10 profiles/validators.py:22
 msgid "Your password can’t be a commonly-used sequence."
@@ -1354,3 +1356,6 @@ msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
 "portail."
+
+#~ msgid "This site will change as we test ideas."
+#~ msgstr "Ce site évoluera au fur et à mesure que nous testons des idées."
