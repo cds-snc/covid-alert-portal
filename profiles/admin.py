@@ -12,11 +12,12 @@ from profiles.models import HealthcareUser, HealthcareProvince
 
 class ProvinceAdmin(admin.ModelAdmin):
     list_display = ["id", "abbr", "name"]
+    readonly_fields = [
+        "abbr",
+        "name",
+    ]
 
     def has_add_permission(self, request, obj=None):
-        return False
-
-    def has_change_permission(self, request, obj=None):
         return False
 
     def has_delete_permission(self, request, obj=None):
