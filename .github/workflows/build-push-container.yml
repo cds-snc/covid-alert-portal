@@ -50,6 +50,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Build Covid Portal
+        run: docker build -t base --build-arg GITHUB_SHA_ARG=$GITHUB_SHA .
+
       - name: Configure AWS credentials
         id: aws-covid-portal
         uses: aws-actions/configure-aws-credentials@v1
@@ -62,28 +65,26 @@ jobs:
         id: login-ecr-covid-portal
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build Covid Portal
+      - name: Tag Images for Staging
         env:
           ECR_REGISTRY: ${{ steps.login-ecr-covid-portal.outputs.registry }}
           PROD_ECR_REGISTRY: ${{ secrets.PROD_ECR_REGISTRY }}
           ECR_REPOSITORY: covid-alert-portal-terraform
+        run: | 
+          docker tag base $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
+          docker tag base $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+      - name: Push containers to Amazon ECR
+        env:
+          PROD_ECR_REGISTRY: ${{ secrets.PROD_ECR_REGISTRY }}
         run: |
-          docker build \
-          -t $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA \
-          -t $PROD_ECR_REGISTRY:$GITHUB_SHA \
-          -t $ECR_REGISTRY/$ECR_REPOSITORY:latest \
-          -t $PROD_ECR_REGISTRY:latest \
-          --build-arg GITHUB_SHA_ARG=$GITHUB_SHA .
-#       - name: Push containers to Amazon ECR
-#        env:
-#          ECR_REGISTRY: ${{ steps.login-ecr-covid-portal.outputs.registry }}
-#          ECR_REPOSITORY: covid-alert-portal-terraform
-#        run: |
-#          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
-#          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
       - name: Logout of Staging Amazon ECR
         if: always()
         run: docker logout ${{ steps.login-ecr-covid-portal.outputs.registry }}
+
       - name: Configure Production AWS credentials
         id: aws-production
         uses: aws-actions/configure-aws-credentials@v1
@@ -96,12 +97,20 @@ jobs:
         id: login-ecr-prod
         uses: aws-actions/amazon-ecr-login@v1
 
+      - name: Tag Images for Production
+        env:
+          PROD_ECR_REGISTRY: ${{ secrets.PROD_ECR_REGISTRY }}
+        run: | 
+          docker tag base $PROD_ECR_REGISTRY:$GITHUB_SHA
+          docker tag base $PROD_ECR_REGISTRY:latest
+
       - name: Push all containers to production Amazon ECR
         env:
           PROD_ECR_REGISTRY: ${{ secrets.PROD_ECR_REGISTRY }}
         run: |
           docker push $PROD_ECR_REGISTRY:$GITHUB_SHA
           docker push $PROD_ECR_REGISTRY:latest
+
       - name: Logout of Production Amazon ECR
         if: always()
         run: docker logout ${{ steps.login-ecr-prod.outputs.registry }}

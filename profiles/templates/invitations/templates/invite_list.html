@@ -33,7 +33,10 @@
                     <form method="post" action="{% url 'invite' %}">
                         {% csrf_token %}
                         <input type="hidden" name="email" value="{{ invitation.email }}" />
-                        <button type="submit" class="link">{% trans "Resend" %}</button>
+                        <button type="submit" class="link">
+                            <span aria-hidden="true">{% trans "Resend" %}</span>
+                            <span class="visually-hidden">{% blocktrans with email=invitation.email %}Resend invitation to {{ email }}{% endblocktrans %}</span>
+                        </button>
                     </form>
                     <a href="{% url 'invitation_delete' invitation.id %}" class="danger">
                         <span aria-hidden="true">{% trans "Delete" %}</span>

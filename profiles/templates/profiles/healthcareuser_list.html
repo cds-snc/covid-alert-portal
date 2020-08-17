@@ -32,16 +32,21 @@
           <td>
           {% spaceless %}
           <a href="{% url 'user_profile' healthcareuser.id %}">
+            {% if not healthcareuser.is_superuser and request.user.id != healthcareuser.id and healthcareuser.is_admin %}
+              <span aria-hidden="true">{% trans "View" %}</span>
+              <span class="visually-hidden">{% blocktrans with email=healthcareuser.email %}View account for {{ email }}{% endblocktrans %}</span>
+            {% else %}
               <span aria-hidden="true">{% trans "Edit" %}</span>
               <span class="visually-hidden">{% blocktrans with email=healthcareuser.email %}Edit account for {{ email }}{% endblocktrans %}</span>
+            {% endif %}
           </a>
           {% endspaceless %}
-          {% if not healthcareuser.is_superuser and healthcareuser.id != user.id %}
-            <a href="{% url 'user_delete' healthcareuser.id %}" class="danger">
-              <span aria-hidden="true">{% trans "Delete" %}</span>
-              <span class="visually-hidden">{% blocktrans with email=healthcareuser.email %}Delete account for {{email}}{% endblocktrans %}</span>
-            </a>
-          {% endif %}
+            {% if not healthcareuser.is_superuser and request.user.id != healthcareuser.id and not healthcareuser.is_admin %}
+              <a href="{% url 'user_delete' healthcareuser.id %}" class="danger">
+                <span aria-hidden="true">{% trans "Delete" %}</span>
+                <span class="visually-hidden">{% blocktrans with email=healthcareuser.email %}Delete account for {{email}}{% endblocktrans %}</span>
+              </a>
+            {% endif %}
           </td>
         </tr>
       {% empty %}

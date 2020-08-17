@@ -45,6 +45,6 @@ class ContactForm(HealthcareBaseForm):
             logger.critical(f"Unable to communicate with Freshdesk : {e}")
             raise ValidationError(
                 _(
-                    "There was a problem and your feedback wasn't submitted. Please email your feedback to assistance+covid@cds-snc.ca."
+                    "There was a problem and your feedback wasn't submitted. Please email your feedback to assistance+healthcare@cds-snc.ca."
                 )
             )
