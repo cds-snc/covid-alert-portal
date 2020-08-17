@@ -1,6 +1,6 @@
 [
   {
-    "name": "covid-portal",
+    "name": "covid-portal_staging",
     "image": "${image}",
     "portMappings": [
       {
