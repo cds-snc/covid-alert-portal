@@ -1,4 +1,3 @@
-import logging
 from logging import getLogger
 from datetime import datetime
 from easyaudit.models import CRUDEvent

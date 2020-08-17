@@ -17,7 +17,6 @@ import ast
 import dj_database_url
 from dotenv import load_dotenv
 from datetime import timedelta
-from logging import getLogger, CRITICAL
 from django.utils.translation import gettext_lazy as _
 from socket import gethostname, gethostbyname, gaierror
 
