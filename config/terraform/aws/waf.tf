@@ -152,10 +152,10 @@ resource "aws_wafv2_web_acl" "covidportal_acl" {
             field_to_match {
               method {}
             }
-            search_string = "POST"
+            search_string = "post"
             text_transformation {
               priority = 1
-              type     = "NONE"
+              type     = "LOWERCASE"
             }
           }
         }
