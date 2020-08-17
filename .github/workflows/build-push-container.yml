@@ -104,12 +104,12 @@ jobs:
           docker tag base $PROD_ECR_REGISTRY:$GITHUB_SHA
           docker tag base $PROD_ECR_REGISTRY:latest
 
-#      - name: Push all containers to production Amazon ECR
-#        env:
-#          PROD_ECR_REGISTRY: ${{ secrets.PROD_ECR_REGISTRY }}
-#        run: |
-#          docker push $PROD_ECR_REGISTRY:$GITHUB_SHA
-#          docker push $PROD_ECR_REGISTRY:latest
+      - name: Push all containers to production Amazon ECR
+        env:
+          PROD_ECR_REGISTRY: ${{ secrets.PROD_ECR_REGISTRY }}
+        run: |
+          docker push $PROD_ECR_REGISTRY:$GITHUB_SHA
+          docker push $PROD_ECR_REGISTRY:latest
 
       - name: Logout of Production Amazon ECR
         if: always()
