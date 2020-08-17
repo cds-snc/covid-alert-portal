@@ -16,7 +16,7 @@ resource "aws_route53_zone" "covidportal" {
 
 resource "aws_route53_record" "covidportal" {
   zone_id = aws_route53_zone.covidportal.zone_id
-  name    = "production.${aws_route53_zone.covidportal.name}"
+  name    = "staging.${aws_route53_zone.covidportal.name}"
   type    = "CNAME"
   ttl     = 300
   records = ["${aws_lb.covidportal.dns_name}"]
