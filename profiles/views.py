@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.shortcuts import redirect, render
-from django.core.exceptions import PermissionDenied
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import login, authenticate
 from django.utils.translation import gettext as _
@@ -26,8 +25,9 @@ from invitations.models import Invitation
 from .utils import generate_2fa_code
 from .models import HealthcareUser
 from .mixins import (
+    ProvinceAdminViewMixin,
+    ProvinceAdminEditMixin,
     ProvinceAdminDeleteMixin,
-    ProvinceAdminManageMixin,
 )
 from .forms import (
     SignupForm,
@@ -205,18 +205,35 @@ class InvitationCompleteView(Is2FAMixin, IsAdminMixin, TemplateView):
 
 class ProfilesView(Is2FAMixin, IsAdminMixin, ListView):
     def get_queryset(self):
-        return (
-            HealthcareUser.objects.filter(province=self.request.user.province)
-            .annotate(
-                current_user_email=RawSQL("email = %s", (self.request.user.email,))
-            )
-            .order_by("-current_user_email", "-is_admin")
-        )
+        queryset = HealthcareUser.objects.filter(province=self.request.user.province)
+
+        # don't return superusers when an admin user makes the request
+        if not self.request.user.is_superuser:
+            queryset = queryset.filter(is_superuser=False)
+
+        return queryset.annotate(
+            current_user_email=RawSQL("email = %s", (self.request.user.email,))
+        ).order_by("-current_user_email", "-is_admin")
 
 
-class HealthcareUserEditView(UpdateView):
-    success_url = reverse_lazy("user_profile")
+class UserProfileView(Is2FAMixin, ProvinceAdminViewMixin, DetailView):
     model = HealthcareUser
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        # True if this is an admin account viewing another admin account
+        context["view_only"] = (
+            kwargs["object"].id != self.request.user.id
+            and (not self.request.user.is_superuser)
+            and kwargs["object"].is_admin
+        )
+        return context
+
+
+class HealthcareUserEditView(Is2FAMixin, ProvinceAdminEditMixin, UpdateView):
+    model = HealthcareUser
+    success_url = reverse_lazy("user_profile")
 
     def get_initial(self):
         initial = super().get_initial()
@@ -226,23 +243,6 @@ class HealthcareUserEditView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy("user_profile", kwargs={"pk": self.kwargs.get("pk")})
-
-    def get_object(self, queryset=None):
-        obj = super().get_object(queryset)
-        if obj is not None:
-            # Users can edit their own infos, Admin can change someone else infos
-            if obj.id != self.request.user.id and self.request.user.is_admin is False:
-                raise PermissionDenied()
-
-            # Admins can only change account infos from their province
-            if obj.province != self.request.user.province:
-                raise PermissionDenied()
-
-        return obj
-
-
-class UserProfileView(Is2FAMixin, ProvinceAdminManageMixin, DetailView):
-    model = HealthcareUser
 
 
 class UserDeleteView(Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView):

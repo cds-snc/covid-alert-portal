@@ -31,7 +31,7 @@ main table {
   &.with-actions {
     th,
     td {
-      &:last-child {
+      &:last-child:not([colspan]) {
         text-align: right;
       }
     }

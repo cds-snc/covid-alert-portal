@@ -65,7 +65,7 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@7218b9c
         with:
           task-definition: ${{ steps.taskdef-portal.outputs.task-definition }}
-          service: KeyRetrieval
+          service: covid-portal_staging
           cluster: ${{ steps.cluster.outputs.name }}
           wait-for-service-stability: true
           codedeploy-appspec: ${{ github.workspace }}/covid-alert-portal-appspec.json

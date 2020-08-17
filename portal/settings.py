@@ -348,8 +348,8 @@ if TESTING:
     LOGGING = {
         "version": 1,
         "disable_existing_loggers": True,
-        "handlers": {"null": {"class": "logging.NullHandler", }, },
-        "root": {"handlers": ["null"], "level": "CRITICAL", },
+        "handlers": {"null": {"class": "logging.NullHandler",},},
+        "root": {"handlers": ["null"], "level": "CRITICAL",},
     }
 else:
     LOGGING = {
