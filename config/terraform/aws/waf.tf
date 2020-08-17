@@ -135,7 +135,7 @@ resource "aws_wafv2_web_acl" "covidportal_acl" {
   }
 
   rule {
-    name     = "PasswordResetPageLimit"
+    name     = "PostRequestRateLimit"
     priority = 102
 
     action {
@@ -164,7 +164,7 @@ resource "aws_wafv2_web_acl" "covidportal_acl" {
 
     visibility_config {
       cloudwatch_metrics_enabled = true
-      metric_name                = "PasswordPageResetRateLimit"
+      metric_name                = "PostRequestRateLimit"
       sampled_requests_enabled   = true
     }
   }
