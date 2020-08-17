@@ -37,4 +37,3 @@ def update_2fa(sender, instance, created, **kwargs):
         sms_device = instance.notifysmsdevice_set.create()
         sms_device.number = instance.phone_number.as_e164
         sms_device.save()
-        sms_device.generate_challenge()
