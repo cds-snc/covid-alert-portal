@@ -69,7 +69,7 @@ resource "aws_lb" "covidportal" {
 
 resource "aws_lb_listener" "covidportal_https" {
   depends_on = [
-    aws_acm_certificate.covidportal
+    aws_acm_certificate.covidportal_staging
   ]
 
   load_balancer_arn = aws_lb.covidportal.arn

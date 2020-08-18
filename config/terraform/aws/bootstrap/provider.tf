@@ -49,12 +49,3 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
     ("CostCentre") = "covidportal"
   }
 }
-
-
-resource "aws_route53_zone" "covidportal" {
-  name = var.route53_zone_name
-
-  tags = {
-    ("CostCentre") = "CovidPortal"
-  }
-}
