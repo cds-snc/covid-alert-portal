@@ -304,13 +304,14 @@ class YubikeyDeviceCreateForm(HealthcareBaseForm, forms.ModelForm):
         self.request = kwargs.pop("request", None)
         super().__init__(*args, **kwargs)
 
-        self.instance.user = self.request.user
+        self.fields["otp_token"].widget.attrs.update({"autofocus": "autofocus"})
 
+        self.instance.user = self.request.user
         # names can have a maximum length of 32 characters
         self.fields["name"].initial = self.request.user.email[:32]
 
         try:
-            # if only one servicne exists, make it a hidden field
+            # if only one service exists, make it a hidden field
             self.fields["service"].initial = self.fields["service"].queryset.get().pk
             self.fields["service"].widget = forms.HiddenInput()
         except ValidationService.MultipleObjectsReturned:

@@ -77,6 +77,25 @@
               </td>
             </tr>
         {% endif %}
+        {% if request.user.is_superuser %}
+            <tr>
+              <th scope="row">{% trans "Yubikey" %}</th>
+              <td>
+                  {{ yubikey|yesno:_("Enabled,Not enabled") }}
+              </td>
+              <td>
+                  {% if yubikey %}
+                  <a href="{% url 'yubikey_delete' yubikey.id  %}">
+                      <span>{% trans "Remove your yubikey" %}</span>
+                  </a>
+                  {% else %}
+                    <a href="{% url 'yubikey_create' %}">
+                        <span>{% trans "Register a yubikey" %}</span>
+                    </a>
+                  {% endif %}
+              </td>
+            </tr>
+        {% endif %}
       </tbody>
     </table>
 

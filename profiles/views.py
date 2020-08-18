@@ -62,7 +62,19 @@ class YubikeyVerifyView(FormView):
 class YubikeyCreateView(CreateView):
     form_class = YubikeyDeviceCreateForm
     template_name = "profiles/yubikey_create.html"
-    success_url = reverse_lazy("start")
+
+    def _check_yubikey_exists_for_user(self, user):
+        return True if RemoteYubikeyDevice.objects.filter(user=user).first() else False
+
+    def get(self, request, *args, **kwargs):
+        # enforce 1 yubikey per user
+        if self._check_yubikey_exists_for_user(self.request.user):
+            return redirect(self.get_success_url())
+
+        return super().get(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse_lazy("user_profile", kwargs={"pk": self.request.user.id})
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -76,6 +88,14 @@ class YubikeyCreateView(CreateView):
         if not self.request.user.is_verified:
             django_otp_login(self.request, self.object)
         return response
+
+
+class YubikeyDeleteView(Is2FAMixin, DeleteView):
+    model = RemoteYubikeyDevice
+    template_name = "profiles/yubikey_delete.html"
+
+    def get_success_url(self):
+        return reverse_lazy("user_profile", kwargs={"pk": self.request.user.id})
 
 
 class SignUpView(FormView):
@@ -261,6 +281,11 @@ class UserProfileView(Is2FAMixin, ProvinceAdminViewMixin, DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
+
+        if self.request.user.is_superuser:
+            context["yubikey"] = RemoteYubikeyDevice.objects.filter(
+                user=self.request.user
+            ).first()
 
         # True if this is an admin account viewing another admin account
         context["view_only"] = (

@@ -74,6 +74,11 @@ urlpatterns = [
     ),
     path("yubikey/create", views.YubikeyCreateView.as_view(), name="yubikey_create",),
     path("yubikey/verify", views.YubikeyVerifyView.as_view(), name="yubikey_verify",),
+    path(
+        "yubikey/<int:pk>/delete",
+        views.YubikeyDeleteView.as_view(),
+        name="yubikey_delete",
+    ),
 ]
 
 # The PasswordResetView doesn't have any html template by default
