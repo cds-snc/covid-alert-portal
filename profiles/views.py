@@ -47,6 +47,11 @@ class YubikeyVerifyView(FormView):
     template_name = "profiles/yubikey_verify.html"
     success_url = reverse_lazy("start")
 
+    def get(self, request, *args, **kwargs):
+        if request.user.is_verified():
+            return redirect(reverse_lazy("start"))
+        return super().get(request, *args, **kwargs)
+
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         device = RemoteYubikeyDevice.objects.filter(user=self.request.user).first()
@@ -56,6 +61,11 @@ class YubikeyVerifyView(FormView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
+
+        device = RemoteYubikeyDevice.objects.filter(user=self.request.user).first()
+        self.request.user.otp_device = device
+        self.request.session[DEVICE_ID_SESSION_KEY] = device.persistent_id
+
         return response
 
 
@@ -84,9 +94,6 @@ class YubikeyCreateView(CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        # This is the users first device, use it to verify the user.
-        if not self.request.user.is_verified:
-            django_otp_login(self.request, self.object)
         return response
 
 
@@ -153,6 +160,12 @@ class Login2FAView(LoginRequiredMixin, FormView):
     def get(self, request, *args, **kwargs):
         if request.user.is_verified():
             return redirect(reverse_lazy("start"))
+
+        if request.user.is_superuser:
+            yubikey = RemoteYubikeyDevice.objects.filter(user=request.user).first()
+            if yubikey:
+                return redirect(reverse_lazy("yubikey_verify"))
+
         return super().get(request, *args, **kwargs)
 
     def get_initial(self):

@@ -350,6 +350,7 @@ class YubikeyVerifyForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.device = kwargs.pop("device", None)
         super().__init__(*args, **kwargs)
+        self.fields["otp_token"].widget.attrs.update({"autofocus": "autofocus"})
 
     def get_device(self):
         if self.is_valid():
