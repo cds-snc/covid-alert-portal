@@ -80,13 +80,13 @@ class SignUpView(FormView):
 
     def form_valid(self, form):
         form.save()
-        # messages.success(self.request, _("Account created successfully"))
         user = authenticate(
             request=self.request,
             username=form.cleaned_data.get("email"),
             password=form.cleaned_data.get("password1"),
         )
         login(self.request, user)
+        generate_2fa_code(user)
         return super(SignUpView, self).form_valid(form)
 
 

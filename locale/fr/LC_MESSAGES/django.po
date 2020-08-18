@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-15 00:52+0000\n"
+"POT-Creation-Date: 2020-08-18 14:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -519,7 +519,11 @@ msgid "You have hit your limit."
 msgstr ""
 "Vous avez atteint votre limite journalière pour la génération des codes."
 
-#: profiles/admin.py:101
+#: profiles/admin.py:25
+msgid "Has a bearer token"
+msgstr "A un jeton d'API"
+
+#: profiles/admin.py:109
 msgid "Number of keys generated in the last 24 hours"
 msgstr ""
 
@@ -607,11 +611,15 @@ msgstr "L’adresse courriel existe déjà"
 msgid "An invitation hasn’t been sent to this address"
 msgstr "L’invitation n’a pu être envoyée."
 
-#: profiles/models.py:67
+#: profiles/models.py:12
+msgid "Bearer token"
+msgstr "Jeton d'API"
+
+#: profiles/models.py:69
 msgid "Your full name"
 msgstr "Votre nom"
 
-#: profiles/models.py:71
+#: profiles/models.py:73
 msgid ""
 "You must enter a new security code each time you log in. We’ll send the code "
 "to your phone number."
