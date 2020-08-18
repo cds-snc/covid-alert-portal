@@ -294,17 +294,18 @@ class UserProfileView(Is2FAMixin, ProvinceAdminViewMixin, DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
+        healthcareuser = context["healthcareuser"]
 
-        if self.request.user.is_superuser:
+        if healthcareuser.is_superuser:
             context["yubikey"] = RemoteYubikeyDevice.objects.filter(
-                user=self.request.user
+                user=healthcareuser
             ).first()
 
         # True if this is an admin account viewing another admin account
         context["view_only"] = (
-            kwargs["object"].id != self.request.user.id
+            healthcareuser.id != self.request.user.id
             and (not self.request.user.is_superuser)
-            and kwargs["object"].is_admin
+            and healthcareuser.is_admin
         )
         return context
 

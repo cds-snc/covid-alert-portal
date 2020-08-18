@@ -80,20 +80,22 @@
         {% if request.user.is_superuser %}
             <tr>
               <th scope="row">{% trans "Yubikey" %}</th>
-              <td>
+              <td {% if request.user.id != healthcareuser.id %}colspan="2"{% endif %}>
                   {{ yubikey|yesno:_("Enabled,Not enabled") }}
               </td>
-              <td>
-                  {% if yubikey %}
-                  <a href="{% url 'yubikey_delete' yubikey.id  %}">
-                      <span>{% trans "Remove your yubikey" %}</span>
-                  </a>
-                  {% else %}
-                    <a href="{% url 'yubikey_create' %}">
-                        <span>{% trans "Register a yubikey" %}</span>
+              {% if request.user.id == healthcareuser.id %}
+                <td>
+                    {% if yubikey %}
+                    <a href="{% url 'yubikey_delete' yubikey.id  %}">
+                        <span>{% trans "Remove your yubikey" %}</span>
                     </a>
-                  {% endif %}
-              </td>
+                    {% else %}
+                      <a href="{% url 'yubikey_create' %}">
+                          <span>{% trans "Register a yubikey" %}</span>
+                      </a>
+                    {% endif %}
+                </td>
+                {% endif %}
             </tr>
         {% endif %}
       </tbody>
