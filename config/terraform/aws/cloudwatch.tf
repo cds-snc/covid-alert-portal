@@ -138,7 +138,7 @@ resource "aws_cloudwatch_metric_alarm" "key_generation_warn" {
 resource "aws_cloudwatch_log_metric_filter" "site_change" {
   name = "SiteTableChange"
   pattern = "\"CRUD model:sites.site\""
-  log_group_name = aws_cloudwatch_log_group.covid_portal.name
+  log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
     name = "SiteTableChange"
@@ -163,7 +163,7 @@ resource "aws_cloudwatch_metric_alarm" "site_change_warn" {
 resource "aws_cloudwatch_log_metric_filter" "account_lockout" {
   name = "AccountLockout"
   pattern = "\"AXES: Locking out\""
-  log_group_name = aws_cloudwatch_log_group.covid_portal.name
+  log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
     name = "AccountLockout"
@@ -188,7 +188,7 @@ resource "aws_cloudwatch_metric_alarm" "AccountLockoutWarn" {
 resource "aws_cloudwatch_log_metric_filter" "invite_lockout" {
   name ="InviteLockout"
   pattern = "\"Forbidden: /en/invite/\""
-  log_group_name = aws_cloudwatch_log_group.covid_portal.name
+  log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
     name ="InviteLockout"
@@ -197,7 +197,7 @@ resource "aws_cloudwatch_log_metric_filter" "invite_lockout" {
   }
 }
 
-resource "aws_cloudwatch_mtric_alarm" "InviteLockoutWarn" {
+resource "aws_cloudwatch_metric_alarm" "InviteLockoutWarn" {
   alarm_name = "InviteLockoutWarn"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods = "1"
