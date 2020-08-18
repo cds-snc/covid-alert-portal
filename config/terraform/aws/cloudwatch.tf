@@ -79,6 +79,33 @@ resource "aws_cloudwatch_metric_alarm" "five_hundred_response_warn" {
   alarm_actions = [aws_sns_topic.alert_warning.arn]
 }
 
+resource "aws_cloudwatch_log_metric_filter" "application_error" {
+  name = "ApplicationError"
+  pattern = "ERROR"
+  log_group_name = aws_cloudwatch_log_group.covidportal.name
+
+  metric_transformation {
+  name = "ApplicationError"
+  namespace = "covidportal"
+  value = "1"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "application_error_warn" {
+  alarm_name          = "ApplicationErrorWarn"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = aws_cloudwatch_log_metric_filter.application_error.name
+  namespace           = "covidportal"
+  period              = "60"
+  statistic           = "Sum"
+  threshold           = "1"
+  alarm_description   = "Covid Alert Portal - This metric monitors for an Application error"
+
+  alarm_actions = [aws_sns_topic.alert_warning.arn]
+}
+
+
 ###
 # AWS CloudWatch Metrics - DDoS Alarms
 ###
