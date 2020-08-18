@@ -11,6 +11,8 @@ from django.utils.translation import gettext_lazy as _
 
 from phonenumber_field.formfields import PhoneNumberField
 
+from otp_yubikey.models import RemoteYubikeyDevice, ValidationService
+
 from invitations.models import Invitation
 from invitations.forms import (
     InviteForm,
@@ -286,3 +288,80 @@ class HealthcareInvitationAdminChangeForm(InvitationAdminChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["inviter"].disabled = True
+
+
+# heavily inspired by https://github.com/ossobv/kleides-mfa/blob/ec93f141761b188dd2a2ecf8bbb525a9da47270e/kleides_mfa/forms.py#L187
+class YubikeyDeviceCreateForm(HealthcareBaseForm, forms.ModelForm):
+    service = forms.ModelChoiceField(
+        label=_("Service"), queryset=ValidationService.objects.all(), empty_label=None,
+    )
+    otp_token = forms.CharField(label=_("Token"))
+
+    # hide "name" and add "disabled attribute" — we will hardcode to the current user's email
+    name = forms.CharField(widget=forms.HiddenInput, disabled=True)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request", None)
+        super().__init__(*args, **kwargs)
+
+        self.instance.user = self.request.user
+
+        # names can have a maximum length of 32 characters
+        self.fields["name"].initial = self.request.user.email[:32]
+
+        try:
+            # if only one servicne exists, make it a hidden field
+            self.fields["service"].initial = self.fields["service"].queryset.get().pk
+            self.fields["service"].widget = forms.HiddenInput()
+        except ValidationService.MultipleObjectsReturned:
+            # Multiple is good, none is bad.
+            pass
+
+    def clean(self):
+        cleaned_data = super().clean()
+        token = self.cleaned_data.get("otp_token")
+        service = self.cleaned_data.get("service")
+        verified = False
+
+        if token and service:
+            self.instance.service = service
+            self.instance.public_id = token[:-32]
+            verified = self.instance.verify_token(token)
+        if not verified:
+            raise forms.ValidationError(
+                _("Unable to validate the token with the device.")
+            )
+        return cleaned_data
+
+    class Meta:
+        model = RemoteYubikeyDevice
+        fields = (
+            "service",
+            "name",
+            "otp_token",
+        )
+
+
+# heavily inspired by: https://github.com/ossobv/kleides-mfa/blob/ec93f141761b188dd2a2ecf8bbb525a9da47270e/kleides_mfa/forms.py#L39
+class YubikeyVerifyForm(forms.Form):
+    otp_token = forms.CharField(label=_("Token"))
+
+    def __init__(self, *args, **kwargs):
+        self.device = kwargs.pop("device", None)
+        super().__init__(*args, **kwargs)
+
+    def get_device(self):
+        if self.is_valid():
+            return self.device
+        return None
+
+    def clean(self):
+        cleaned_data = super().clean()
+        token = cleaned_data.get("otp_token")
+        if not token:  # token is a required field.
+            return cleaned_data
+
+        # Note that tokens can become invalid once verified
+        if not self.device.verify_token(token):
+            raise forms.ValidationError(_("The token is not valid for this device."))
+        return cleaned_data

@@ -72,6 +72,8 @@ urlpatterns = [
         TemplateView.as_view(template_name="profiles/terms.html"),
         name="terms",
     ),
+    path("yubikey/create", views.YubikeyCreateView.as_view(), name="yubikey_create",),
+    path("yubikey/verify", views.YubikeyVerifyView.as_view(), name="yubikey_verify",),
 ]
 
 # The PasswordResetView doesn't have any html template by default

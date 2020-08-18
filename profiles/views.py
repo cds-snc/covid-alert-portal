@@ -4,6 +4,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import login, authenticate
 from django.utils.translation import gettext as _
 from django.views.generic import (
+    CreateView,
     FormView,
     ListView,
     DeleteView,
@@ -14,10 +15,11 @@ from django.views.generic.edit import UpdateView
 
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django_otp import DEVICE_ID_SESSION_KEY
+from django_otp import DEVICE_ID_SESSION_KEY, login as django_otp_login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.expressions import RawSQL
 
+from otp_yubikey.models import RemoteYubikeyDevice
 
 from portal.mixins import ThrottledMixin, Is2FAMixin, IsAdminMixin
 from invitations.models import Invitation
@@ -34,8 +36,46 @@ from .forms import (
     Healthcare2FAForm,
     HealthcareInviteForm,
     Resend2FACodeForm,
+    YubikeyDeviceCreateForm,
+    YubikeyVerifyForm,
 )
 from .utils import get_site_name
+
+
+class YubikeyVerifyView(FormView):
+    form_class = YubikeyVerifyForm
+    template_name = "profiles/yubikey_verify.html"
+    success_url = reverse_lazy("start")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        device = RemoteYubikeyDevice.objects.filter(user=self.request.user).first()
+        # Pass the device to the form
+        kwargs.update({"device": device})
+        return kwargs
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return response
+
+
+class YubikeyCreateView(CreateView):
+    form_class = YubikeyDeviceCreateForm
+    template_name = "profiles/yubikey_create.html"
+    success_url = reverse_lazy("start")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # Update the existing form kwargs dict with the request's user.
+        kwargs.update({"request": self.request})
+        return kwargs
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        # This is the users first device, use it to verify the user.
+        if not self.request.user.is_verified:
+            django_otp_login(self.request, self.object)
+        return response
 
 
 class SignUpView(FormView):
