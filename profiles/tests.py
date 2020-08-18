@@ -272,6 +272,25 @@ class AuthenticatedView(AdminUserTestCase):
 
 
 class i18nTestView(TestCase):
+    def test_switch_language(self):
+        # Test if English is shown by default if the browser doesn't send anything
+        response = self.client.get("/", follow=True)
+        self.assertContains(response, "Français")
+
+        response = self.client.get("/en/switch-language/", follow=True)
+        self.assertContains(response, "English")
+
+        response = self.client.get("/fr/switch-language/", follow=True)
+        self.assertContains(response, "Français")
+
+        response = self.client.get(reverse("privacy"))
+        self.assertContains(response, "<h1>Privacy</h1>")
+
+        response = self.client.get(
+            f'/fr/switch-language/?next={reverse("privacy")}', follow=True
+        )
+        self.assertContains(response, "<h1>Privacy</h1>")
+
     def test_root_with_accept_language_header_fr(self):
         """
         Test we end up on French start page from root url if "Accept-Language" header is "fr"
