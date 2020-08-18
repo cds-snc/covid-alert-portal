@@ -286,11 +286,6 @@ class i18nTestView(TestCase):
         response = self.client.get(reverse("privacy"))
         self.assertContains(response, "<h1>Privacy</h1>")
 
-        response = self.client.get(
-            f'/fr/switch-language/?next={reverse("privacy")}', follow=True
-        )
-        self.assertContains(response, "<h1>Privacy</h1>")
-
     def test_root_with_accept_language_header_fr(self):
         """
         Test we end up on French start page from root url if "Accept-Language" header is "fr"

@@ -282,7 +282,7 @@ def switch_language(request):
         lang = "en"
 
     # Take the referer by default
-    next_url = urlparse(request.GET.get("next", request.META.get("HTTP_REFERER")))
+    next_url = urlparse(request.META.get("HTTP_REFERER"))
     # but if a ?next_url has been provided, let's make sure it's clean
 
     next_url = next_url.path and unquote(next_url.path)
