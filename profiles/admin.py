@@ -6,16 +6,24 @@ from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationForm
+from django.contrib.admin.templatetags.admin_list import _boolean_icon
 
 from profiles.models import HealthcareUser, HealthcareProvince
 
 
 class ProvinceAdmin(admin.ModelAdmin):
-    list_display = ["id", "abbr", "name"]
+    list_display = ["id", "abbr", "name", "is_api_key_set"]
     readonly_fields = [
         "abbr",
         "name",
     ]
+
+    def is_api_key_set(self, obj: "HealthcareProvince"):
+        if obj.api_key is None:
+            return _boolean_icon(False)
+        return _boolean_icon(True)
+
+    is_api_key_set.short_description = _("Has a bearer token")
 
     def has_add_permission(self, request, obj=None):
         return False

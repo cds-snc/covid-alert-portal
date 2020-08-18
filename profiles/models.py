@@ -9,7 +9,9 @@ from phonenumber_field.modelfields import PhoneNumberField
 class HealthcareProvince(models.Model):
     name = models.CharField(max_length=100, unique=True)
     abbr = models.SlugField(max_length=3, allow_unicode=True, unique=True)
-    api_key = models.CharField(null=True, blank=True, max_length=256)
+    api_key = models.CharField(
+        null=True, blank=True, max_length=256, verbose_name=_("Bearer token")
+    )
 
     def __str__(self):
         return "{} ({})".format(self.name, self.abbr)
