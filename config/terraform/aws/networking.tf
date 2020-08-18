@@ -347,7 +347,7 @@ resource "aws_security_group" "covidportal_egress" {
 }
 
 resource "aws_security_group_rule" "covidportal_egress_email" {
-  description              = "Security group rule for Portal email egress through privatelink"
+  description              = "Security group rule for Portal email egress"
   type                     = "egress"
   from_port                = 587
   to_port                  = 587
@@ -357,7 +357,7 @@ resource "aws_security_group_rule" "covidportal_egress_email" {
 }
 
 resource "aws_security_group_rule" "covidportal_egress_new_relic" {
-  description              = "Security group rule for Portal New RElic egress through privatelink"
+  description              = "Security group rule for Portal New Relic egress"
   type                     = "egress"
   from_port                = 443
   to_port                  = 443
