@@ -1,6 +1,6 @@
 from logging import getLogger
 from datetime import datetime
-from easyaudit.models import CRUDEvent
+from easyaudit.models import RequestEvent, CRUDEvent, LoginEvent
 import json
 
 logger = getLogger("easyaudit_logging")
@@ -8,8 +8,8 @@ logger = getLogger("easyaudit_logging")
 
 class LoggerBackend:
     def request(self, request_info):
-        # The Amazon WAF already logs requests info, no need to send them again
-        return request_info
+        # No need to log into the console for request, the WAF takes care of this
+        return RequestEvent.objects.create(**request_info)
 
     def login(self, login_info):
         # LOGIN = 0
@@ -26,7 +26,7 @@ class LoggerBackend:
             msg=f'{datetime.utcnow()} LOGIN login_type:{login_types.get(login_info.get("login_type"), "other")} user_id:{login_info.get("user_id")} remote_ip:{login_info.get("remote_ip")}',
             extra=login_info,
         )
-        return login_info
+        return LoginEvent.objects.create(**login_info)
 
     def crud(self, crud_info):
         event_type = None
@@ -52,4 +52,4 @@ class LoggerBackend:
             msg=f'{crud_info.get("datetime")} CRUD event_type:{event_type} model:{model} object_id:{crud_info.get("object_id")} fields_changed:{",".join(changed_fields)} user_id:{crud_info.get("user_id")}',
             extra=crud_info,
         )
-        return crud_info
+        return CRUDEvent.objects.create(**crud_info)
