@@ -314,7 +314,6 @@ AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
 # Site Setup for Separate Domains
 
 URL_DUAL_DOMAINS = os.getenv("URL_DUAL_DOMAINS", "False") == "True"
-# URL_DUAL_DOMAINS = True
 
 URL_EN_PRODUCTION = os.getenv(
     "URL_EN_PRODUCTION", "https://covid-alert-portal.alpha.canada.ca"

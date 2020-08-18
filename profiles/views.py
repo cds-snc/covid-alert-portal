@@ -306,7 +306,6 @@ def switch_language(request):
     if hasattr(request, "session"):
         request.session[LANGUAGE_SESSION_KEY] = lang
 
-    print(f"setting cookie with {lang}")
     response.set_cookie(
         settings.LANGUAGE_COOKIE_NAME,
         lang,
