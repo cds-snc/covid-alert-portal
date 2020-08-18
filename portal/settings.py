@@ -17,7 +17,6 @@ import ast
 import dj_database_url
 from dotenv import load_dotenv
 from datetime import timedelta
-from logging import getLogger, CRITICAL
 from django.utils.translation import gettext_lazy as _
 from socket import gethostname, gethostbyname, gaierror
 
@@ -245,6 +244,7 @@ if DEBUG:
 API_AUTHORIZATION = os.getenv("API_AUTHORIZATION")
 API_ENDPOINT = os.getenv("API_ENDPOINT")
 DJANGO_EASY_AUDIT_READONLY_EVENTS = True
+DJANGO_EASY_AUDIT_LOGGING_BACKEND = "portal.audit_backends.LoggerBackend"
 DJANGO_EASY_AUDIT_UNREGISTERED_URLS_EXTRA = [r"^/status/"]
 
 CORS_ALLOW_CREDENTIALS = False
@@ -294,9 +294,6 @@ SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
 if TESTING:
     AXES_ENABLED = False
     AXES_VERBOSE = False
-    AXES_LOGGER = "axes.watch_login"
-    getLogger(AXES_LOGGER).setLevel(CRITICAL)
-    getLogger("covid_key.views").setLevel(CRITICAL)
     OTP_NOTIFY_NO_DELIVERY = True
 
 AXES_FAILURE_LIMIT = 10  # Lockout after 10 failed login attempts
@@ -345,3 +342,18 @@ CSP_CONNECT_SRC = ["'self'", "bam.nr-data.net"]
 FRESHDESK_API_ENDPOINT = os.getenv("FRESHDESK_API_ENDPOINT")
 FRESHDESK_API_KEY = os.getenv("FRESHDESK_API_KEY")
 FRESHDESK_PRODUCT_ID = int(os.getenv("FRESHDESK_PRODUCT_ID", 0)) or None
+
+if TESTING:
+    LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": True,
+        "handlers": {"null": {"class": "logging.NullHandler"}},
+        "root": {"handlers": ["null"], "level": "CRITICAL"},
+    }
+else:
+    LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "handlers": {"console": {"class": "logging.StreamHandler"}},
+        "root": {"handlers": ["console"], "level": "INFO"},
+    }
