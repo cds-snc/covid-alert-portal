@@ -105,7 +105,7 @@ resource "aws_wafv2_web_acl" "covidportal_acl" {
 
     statement {
       rate_based_statement {
-        limit              = 250
+        limit              = 100
         aggregate_key_type = "IP"
         scope_down_statement {
           byte_match_statement {
@@ -144,7 +144,7 @@ resource "aws_wafv2_web_acl" "covidportal_acl" {
 
    statement {
       rate_based_statement {
-        limit              = 250
+        limit              = 100
         aggregate_key_type = "IP"
         scope_down_statement {
           byte_match_statement {
