@@ -8,6 +8,16 @@ resource "aws_secretsmanager_secret_version" "server_database_url" {
   secret_string = "postgres://${var.rds_server_db_user}:${var.rds_server_db_password}@${aws_rds_cluster.covidportal_server.endpoint}:5432/${var.rds_server_db_name}"
 }
 
+resource "aws_secretsmanager_secret" "slack_webhook" {
+  name                    = "slack_webhook"
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret_version" "slack_webhook" {
+  secret_id     = aws_secretsmanager_secret.slack_webhook.ecs_secret_freshdesk_product_id
+  secret_string = var.slack_webhook
+}
+
 ###
 # AWS Secret Manager - Covid Alert Portal
 ###

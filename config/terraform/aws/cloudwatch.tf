@@ -80,14 +80,14 @@ resource "aws_cloudwatch_metric_alarm" "five_hundred_response_warn" {
 }
 
 resource "aws_cloudwatch_log_metric_filter" "application_error" {
-  name = "ApplicationError"
-  pattern = "ERROR"
+  name           = "ApplicationError"
+  pattern        = "ERROR"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
-  name = "ApplicationError"
-  namespace = "covidportal"
-  value = "1"
+    name      = "ApplicationError"
+    namespace = "covidportal"
+    value     = "1"
   }
 }
 
@@ -111,103 +111,103 @@ resource "aws_cloudwatch_metric_alarm" "application_error_warn" {
 ###
 
 resource "aws_cloudwatch_log_metric_filter" "key_generation" {
-  name = "KeyGeneration"
-  pattern = "\"CRUD event_type:CREATE model:covid_key.covidkey\""
+  name           = "KeyGeneration"
+  pattern        = "\"CRUD event_type:CREATE model:covid_key.covidkey\""
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
-    name = "KeyGeneration"
+    name      = "KeyGeneration"
     namespace = "covidportal"
-    value = "1"
+    value     = "1"
   }
 }
 
 resource "aws_cloudwatch_metric_alarm" "key_generation_warn" {
-  alarm_name = "KeyGenerationWarn"
+  alarm_name          = "KeyGenerationWarn"
   comparison_operator = "GreaterThanThreshold"
-  evaluation_periods = "1"
-  metric_name = aws_cloudwatch_log_metric_filter.key_generation.name
-  namespace = "covidportal"
-  period = "3600"
-  statistic = "Sum"
-  threshold = "11"
-  alarm_description = "COVID Alert Portal - This metric monitors for more then 11 keys generated in a hour"
-  alarm_actions = [aws_sns_topic.alert_warning.arn]
+  evaluation_periods  = "1"
+  metric_name         = aws_cloudwatch_log_metric_filter.key_generation.name
+  namespace           = "covidportal"
+  period              = "3600"
+  statistic           = "Sum"
+  threshold           = "11"
+  alarm_description   = "COVID Alert Portal - This metric monitors for more then 11 keys generated in a hour"
+  alarm_actions       = [aws_sns_topic.alert_warning.arn]
 }
 
 resource "aws_cloudwatch_log_metric_filter" "site_change" {
-  name = "SiteTableChange"
-  pattern = "\"CRUD model:sites.site\""
+  name           = "SiteTableChange"
+  pattern        = "\"CRUD model:sites.site\""
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
-    name = "SiteTableChange"
+    name      = "SiteTableChange"
     namespace = "covidportal"
-    value = "1"
+    value     = "1"
   }
 }
 
 resource "aws_cloudwatch_metric_alarm" "site_change_warn" {
-  alarm_name = "SiteChangeWarn"
+  alarm_name          = "SiteChangeWarn"
   comparison_operator = "GreaterThanThreshold"
-  evaluation_periods = "1"
-  metric_name = aws_cloudwatch_log_metric_filter.site_change.name
-  namespace = "covidportal"
-  period = "60"
-  statistic = "Sum"
-  threshold = "1"
-  alarm_description = "COVID Alert Portal - This metric monitors for any site table changes"
-  alarm_actions = [aws_sns_topic.alert_warning.arn]
+  evaluation_periods  = "1"
+  metric_name         = aws_cloudwatch_log_metric_filter.site_change.name
+  namespace           = "covidportal"
+  period              = "60"
+  statistic           = "Sum"
+  threshold           = "1"
+  alarm_description   = "COVID Alert Portal - This metric monitors for any site table changes"
+  alarm_actions       = [aws_sns_topic.alert_warning.arn]
 }
 
 resource "aws_cloudwatch_log_metric_filter" "account_lockout" {
-  name = "AccountLockout"
-  pattern = "\"AXES: Locking out\""
+  name           = "AccountLockout"
+  pattern        = "\"AXES: Locking out\""
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
-    name = "AccountLockout"
+    name      = "AccountLockout"
     namespace = "covidportal"
-    value = "1"
+    value     = "1"
   }
 }
 
 resource "aws_cloudwatch_metric_alarm" "AccountLockoutWarn" {
-  alarm_name = "AccountLockoutWarn"
+  alarm_name          = "AccountLockoutWarn"
   comparison_operator = "GreaterThanThreshold"
-  evaluation_periods = "1"
-  metric_name = aws_cloudwatch_log_metric_filter.account_lockout.name
-  namespace = "covidportal"
-  period = "3600"
-  statistic = "Sum"
-  threshold = "5"
-  alarm_description = "COVID Alert Portal - This metric monitors for more than 5 locked out accounts in an hour"
-  alarm_actions = [aws_sns_topic.alert_warning.arn]
+  evaluation_periods  = "1"
+  metric_name         = aws_cloudwatch_log_metric_filter.account_lockout.name
+  namespace           = "covidportal"
+  period              = "3600"
+  statistic           = "Sum"
+  threshold           = "5"
+  alarm_description   = "COVID Alert Portal - This metric monitors for more than 5 locked out accounts in an hour"
+  alarm_actions       = [aws_sns_topic.alert_warning.arn]
 }
 
 resource "aws_cloudwatch_log_metric_filter" "invite_lockout" {
-  name ="InviteLockout"
-  pattern = "\"Forbidden: /en/invite/\""
+  name           = "InviteLockout"
+  pattern        = "\"Forbidden: /en/invite/\""
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
-    name ="InviteLockout"
+    name      = "InviteLockout"
     namespace = "covidportal"
-    value ="1"
+    value     = "1"
   }
 }
 
 resource "aws_cloudwatch_metric_alarm" "InviteLockoutWarn" {
-  alarm_name = "InviteLockoutWarn"
+  alarm_name          = "InviteLockoutWarn"
   comparison_operator = "GreaterThanThreshold"
-  evaluation_periods = "1"
-  metric_name = aws_cloudwatch_log_metric_filter.invite_lockout.name
-  namespace = "covidportal"
-  period = "60"
-  statistic = "Sum"
-  threshold = "1"
-  alarm_description = "COVID Alert Portal - This metric montiors for too many invitations by a user"
-  alarm_actions = [aws_sns_topic.alert_warning.arn]
+  evaluation_periods  = "1"
+  metric_name         = aws_cloudwatch_log_metric_filter.invite_lockout.name
+  namespace           = "covidportal"
+  period              = "60"
+  statistic           = "Sum"
+  threshold           = "1"
+  alarm_description   = "COVID Alert Portal - This metric montiors for too many invitations by a user"
+  alarm_actions       = [aws_sns_topic.alert_warning.arn]
 }
 
 ###

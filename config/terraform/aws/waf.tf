@@ -94,7 +94,7 @@ resource "aws_wafv2_web_acl" "covidportal_acl" {
       sampled_requests_enabled   = true
     }
   }
-  
+
   rule {
     name     = "LoginPageLimit"
     priority = 101
@@ -142,7 +142,7 @@ resource "aws_wafv2_web_acl" "covidportal_acl" {
       block {}
     }
 
-   statement {
+    statement {
       rate_based_statement {
         limit              = 100
         aggregate_key_type = "IP"
