@@ -72,6 +72,7 @@ urlpatterns = [
         TemplateView.as_view(template_name="profiles/terms.html"),
         name="terms",
     ),
+    path("switch-language/", views.switch_language, name="switch_language",),
 ]
 
 # The PasswordResetView doesn't have any html template by default

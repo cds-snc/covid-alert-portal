@@ -2,12 +2,16 @@ from uuid import uuid4
 from django.db import models
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.conf import settings
 from phonenumber_field.modelfields import PhoneNumberField
 
 
 class HealthcareProvince(models.Model):
     name = models.CharField(max_length=100, unique=True)
     abbr = models.SlugField(max_length=3, allow_unicode=True, unique=True)
+    api_key = models.CharField(
+        null=True, blank=True, max_length=256, verbose_name=_("Bearer token")
+    )
 
     def __str__(self):
         return "{} ({})".format(self.name, self.abbr)
@@ -92,6 +96,17 @@ class HealthcareUser(AbstractBaseUser):
         """Does the user have permissions to view the app `app_label`?"""
         # Simplest possible answer: Yes, always
         return True
+
+    @property
+    def api_key(self):
+        """
+        Making a property here just in case we decide to be even ore granular in the future
+        (api key per user or HCW group)
+        """
+        api_key = self.province.api_key
+        if api_key is None or api_key == "":
+            api_key = settings.API_AUTHORIZATION
+        return api_key
 
     @property
     def is_staff(self):

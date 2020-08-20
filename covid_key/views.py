@@ -29,7 +29,7 @@ class CodeView(Is2FAMixin, ThrottledMixin, TemplateView):
 
     @method_decorator(csrf_protect)
     def post(self, request):
-        token = settings.API_AUTHORIZATION
+        token = request.user.api_key
         diagnosis_code = "0000000000"
         covid_key = None
         if token:
