@@ -45,3 +45,21 @@ resource "aws_lambda_function" "notify_slack_sns" {
   }
 
 }
+
+## Allow SNS to call Lambda function
+
+resource "aws_lambda_permission" "notify_slack_warning" {
+  statement_id  = "AllowExecutionFromSNSWarningAlert"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.notify_slack_sns.function_name
+  principal     = "sns.amazonaws.com"
+  source_arn    = aws_sns_topic.alert_warning.arn
+}
+
+resource "aws_lambda_permission" "notify_slack_critical" {
+  statement_id  = "AllowExecutionFromSNSCriticalAlert"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.notify_slack_sns.function_name
+  principal     = "sns.amazonaws.com"
+  source_arn    = aws_sns_topic.alert_critical.arn
+}

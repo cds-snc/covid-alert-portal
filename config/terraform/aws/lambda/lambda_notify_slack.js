@@ -4,7 +4,7 @@ var util = require('util');
 exports.handler = function(event, context) {
 
     var postData = {
-        "channel": "#test-integrations",
+        "channel": "#exposure-healthcare-dev",
         "username": "Staging COVID Alert Portal Notifier",
         "text": "*" + event.Records[0].Sns.Subject + "*",
         "icon_emoji": ":rotating_light:"
