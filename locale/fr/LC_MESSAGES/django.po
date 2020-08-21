@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-20 19:31+0000\n"
+"POT-Creation-Date: 2020-08-21 13:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: contact/forms.py:14
-#: profiles/templates/profiles/healthcareuser_detail.html:26
+#: profiles/templates/profiles/healthcareuser_detail.html:30
 msgid "Your name"
 msgstr "Votre nom"
 
@@ -136,7 +136,6 @@ msgstr "Nouveau patient"
 
 #: covid_key/templates/covid_key/locked.html:4
 #: covid_key/templates/covid_key/locked.html:7
-#| msgid "Invitation limit reached"
 msgid "Key generation limit reached"
 msgstr "Limite de génération clé atteinte"
 
@@ -412,6 +411,10 @@ msgstr "Déconnexion"
 msgid "Log in"
 msgstr "Connexion"
 
+#: portal/templates/includes/nav_header.html:16
+msgid "Language selection"
+msgstr "Choix de langue"
+
 #: portal/templates/includes/nav_main.html:3
 msgid "Product navigation"
 msgstr "Navigation du produit"
@@ -471,7 +474,7 @@ msgstr ""
 #: portal/templates/registration/password_reset_confirm.html:6
 #: portal/templates/registration/password_reset_confirm.html:14
 #: profiles/forms.py:119
-#: profiles/templates/profiles/healthcareuser_detail.html:74
+#: profiles/templates/profiles/healthcareuser_detail.html:95
 msgid "Change your password"
 msgstr "Mot de passe oublié?"
 
@@ -536,7 +539,7 @@ msgstr "Entrez une adresse courriel valide"
 #: profiles/forms.py:44 profiles/forms.py:178 profiles/forms.py:187
 #: profiles/forms.py:253
 #: profiles/templates/invitations/templates/invite_list.html:18
-#: profiles/templates/profiles/healthcareuser_detail.html:48
+#: profiles/templates/profiles/healthcareuser_detail.html:24
 #: profiles/templates/profiles/healthcareuser_list.html:18
 msgid "Email address"
 msgstr "Adresse courriel"
@@ -546,7 +549,7 @@ msgid "Please enter the security code."
 msgstr "Veuillez enter le code de sécurité."
 
 #: profiles/forms.py:86
-#: profiles/templates/profiles/healthcareuser_detail.html:37
+#: profiles/templates/profiles/healthcareuser_detail.html:41
 msgid "Change your name"
 msgstr "Modifier votre nom"
 
@@ -572,7 +575,7 @@ msgid "The passwords didn’t match."
 msgstr "Les mots de passe ne sont pas identiques."
 
 #: profiles/forms.py:124
-#: profiles/templates/profiles/healthcareuser_detail.html:71
+#: profiles/templates/profiles/healthcareuser_detail.html:92
 msgid "Password"
 msgstr "Mot de passe"
 
@@ -613,7 +616,7 @@ msgstr "L’adresse courriel existe déjà"
 msgid "An invitation hasn’t been sent to this address"
 msgstr "L’invitation n’a pu être envoyée."
 
-#: profiles/forms.py:295 profiles/forms.py:330
+#: profiles/forms.py:295 profiles/forms.py:328
 msgid "Token"
 msgstr ""
 
@@ -621,7 +624,7 @@ msgstr ""
 msgid "Unable to validate the token with the device."
 msgstr ""
 
-#: profiles/forms.py:350
+#: profiles/forms.py:348
 msgid "The token is not valid for this device."
 msgstr ""
 
@@ -752,7 +755,7 @@ msgid "Resend"
 msgstr "Ré-envoyer"
 
 #: profiles/templates/invitations/templates/invite_list.html:38
-#| msgid "Delete invitation for %(email)s"
+#, python-format
 msgid "Resend invitation to %(email)s"
 msgstr "Retirer l’invitation envoyée à %(email)s"
 
@@ -843,17 +846,17 @@ msgstr ""
 msgid "User account"
 msgstr "Compte d'utilisateur"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:28
+#: profiles/templates/profiles/healthcareuser_detail.html:32
 msgid "Name"
 msgstr "Nom"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:39
+#: profiles/templates/profiles/healthcareuser_detail.html:43
 msgid "Change name"
 msgstr "Modifier le nom"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:42
+#: profiles/templates/profiles/healthcareuser_detail.html:46
 #: profiles/templates/profiles/healthcareuser_detail.html:64
-#: profiles/templates/profiles/healthcareuser_detail.html:75
+#: profiles/templates/profiles/healthcareuser_detail.html:96
 msgid "Change"
 msgstr "Mettre à jour"
 
@@ -861,20 +864,24 @@ msgstr "Mettre à jour"
 msgid "Change phone number"
 msgstr "Modifier le numéro de téléphone"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:82
+#: profiles/templates/profiles/healthcareuser_detail.html:71
 msgid "Yubikey"
 msgstr ""
 
-#: profiles/templates/profiles/healthcareuser_detail.html:84
+#: profiles/templates/profiles/healthcareuser_detail.html:73
 msgid "Enabled,Not enabled"
 msgstr "Activé,Désactivé"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:90
-msgid "Remove your yubikey"
+#: profiles/templates/profiles/healthcareuser_detail.html:79
+#, fuzzy
+#| msgid "Remove your yubikey"
+msgid "Remove your Yubikey"
 msgstr "Effacer votre clef Yubikey"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:94
-msgid "Register a yubikey"
+#: profiles/templates/profiles/healthcareuser_detail.html:83
+#, fuzzy
+#| msgid "Register a yubikey"
+msgid "Register a Yubikey"
 msgstr "Ajouter une clef Yubikey"
 
 #: profiles/templates/profiles/healthcareuser_detail.html:105
@@ -902,7 +909,7 @@ msgid "View"
 msgstr ""
 
 #: profiles/templates/profiles/healthcareuser_list.html:37
-#| msgid "Edit account for %(email)s"
+#, python-format
 msgid "View account for %(email)s"
 msgstr "Modifier le compte associé à %(email)s"
 
@@ -1370,7 +1377,6 @@ msgstr ""
 
 #: profiles/templates/profiles/yubikey_delete.html:6
 #: profiles/templates/profiles/yubikey_delete.html:13
-#| msgid "Confirm delete user"
 msgid "Confirm delete Yubikey"
 msgstr "Confirmez la suppression de l’utilisateur"
 
@@ -1387,27 +1393,27 @@ msgstr "Votre mot de passe ne peut pas être utilisé couramment."
 msgid "Your password can’t contain terms related to COVID-19"
 msgstr "Votre mot de passe ne peut pas contenir de termes liés à COVID-19"
 
-#: profiles/views.py:118
+#: profiles/views.py:131
 msgid "No invited email in session"
 msgstr ""
 
-#: profiles/views.py:198
+#: profiles/views.py:211
 msgid "Please try again later."
 msgstr "Réessayer plus tard"
 
-#: profiles/views.py:201
+#: profiles/views.py:214
 msgid "That didn’t match the code that was sent."
 msgstr ""
 
-#: profiles/views.py:222
+#: profiles/views.py:235
 msgid "Security code has been sent."
 msgstr ""
 
-#: profiles/views.py:242
+#: profiles/views.py:255
 msgid ": Your portal account"
 msgstr " : votre compte pour le Portail"
 
-#: profiles/views.py:337
+#: profiles/views.py:350
 msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
