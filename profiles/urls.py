@@ -79,6 +79,7 @@ urlpatterns = [
         views.YubikeyDeleteView.as_view(),
         name="yubikey_delete",
     ),
+    path("switch-language/", views.switch_language, name="switch_language",),
 ]
 
 # The PasswordResetView doesn't have any html template by default

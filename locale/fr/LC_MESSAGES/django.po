@@ -136,7 +136,6 @@ msgstr "Nouveau patient"
 
 #: covid_key/templates/covid_key/locked.html:4
 #: covid_key/templates/covid_key/locked.html:7
-#, fuzzy
 #| msgid "Invitation limit reached"
 msgid "Key generation limit reached"
 msgstr "Limite de génération clé atteinte"
@@ -753,7 +752,6 @@ msgid "Resend"
 msgstr "Ré-envoyer"
 
 #: profiles/templates/invitations/templates/invite_list.html:38
-#, fuzzy, python-format
 #| msgid "Delete invitation for %(email)s"
 msgid "Resend invitation to %(email)s"
 msgstr "Retirer l’invitation envoyée à %(email)s"
@@ -904,7 +902,6 @@ msgid "View"
 msgstr ""
 
 #: profiles/templates/profiles/healthcareuser_list.html:37
-#, fuzzy, python-format
 #| msgid "Edit account for %(email)s"
 msgid "View account for %(email)s"
 msgstr "Modifier le compte associé à %(email)s"
@@ -1373,7 +1370,6 @@ msgstr ""
 
 #: profiles/templates/profiles/yubikey_delete.html:6
 #: profiles/templates/profiles/yubikey_delete.html:13
-#, fuzzy
 #| msgid "Confirm delete user"
 msgid "Confirm delete Yubikey"
 msgstr "Confirmez la suppression de l’utilisateur"
