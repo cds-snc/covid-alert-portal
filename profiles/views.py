@@ -342,6 +342,12 @@ class UserDeleteView(Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView):
     context_object_name = "profile_user"
     success_url = reverse_lazy("profiles")
 
+    def delete(self, request, *args, **kwargs):
+        response = super().delete(request, *args, **kwargs)
+        # This wont crash if no object is returned from the filtered query
+        Invitation.objects.filter(email=self.object.email).delete()
+        return response
+
 
 def redirect_after_timed_out(request):
     messages.add_message(
