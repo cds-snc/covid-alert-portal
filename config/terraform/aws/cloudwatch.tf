@@ -74,6 +74,7 @@ resource "aws_cloudwatch_metric_alarm" "five_hundred_response_warn" {
   period              = "60"
   statistic           = "Sum"
   threshold           = "1"
+  treat_missing_data  = "notBreaching"
   alarm_description   = "Covid Alert Portal - This metric monitors for an 5xx level response"
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
@@ -100,6 +101,7 @@ resource "aws_cloudwatch_metric_alarm" "application_error_warn" {
   period              = "60"
   statistic           = "Sum"
   threshold           = "1"
+  treat_missing_data  = "notBreaching"
   alarm_description   = "Covid Alert Portal - This metric monitors for an Application error"
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
@@ -131,6 +133,7 @@ resource "aws_cloudwatch_metric_alarm" "key_generation_warn" {
   period              = "3600"
   statistic           = "Sum"
   threshold           = "11"
+  treat_missing_data  = "notBreaching"
   alarm_description   = "COVID Alert Portal - This metric monitors for more then 11 keys generated in a hour"
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
 }
@@ -156,6 +159,7 @@ resource "aws_cloudwatch_metric_alarm" "site_change_warn" {
   period              = "60"
   statistic           = "Sum"
   threshold           = "1"
+  treat_missing_data  = "notBreaching"
   alarm_description   = "COVID Alert Portal - This metric monitors for any site table changes"
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
 }
@@ -181,6 +185,7 @@ resource "aws_cloudwatch_metric_alarm" "AccountLockoutWarn" {
   period              = "3600"
   statistic           = "Sum"
   threshold           = "5"
+  treat_missing_data  = "notBreaching"
   alarm_description   = "COVID Alert Portal - This metric monitors for more than 5 locked out accounts in an hour"
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
 }
@@ -206,6 +211,7 @@ resource "aws_cloudwatch_metric_alarm" "InviteLockoutWarn" {
   period              = "60"
   statistic           = "Sum"
   threshold           = "1"
+  treat_missing_data  = "notBreaching"
   alarm_description   = "COVID Alert Portal - This metric montiors for too many invitations by a user"
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
 }
