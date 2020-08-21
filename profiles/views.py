@@ -5,6 +5,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import login, authenticate
 from django.utils.translation import gettext as _
 from django.views.generic import (
+    CreateView,
     FormView,
     ListView,
     DeleteView,
@@ -23,6 +24,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.http import HttpResponseRedirect
 from django.urls import translate_url
 
+from otp_yubikey.models import RemoteYubikeyDevice
 
 from portal.mixins import ThrottledMixin, Is2FAMixin, IsAdminMixin
 from invitations.models import Invitation
@@ -39,8 +41,81 @@ from .forms import (
     Healthcare2FAForm,
     HealthcareInviteForm,
     Resend2FACodeForm,
+    YubikeyDeviceCreateForm,
+    YubikeyVerifyForm,
 )
 from .utils import get_site_name
+
+
+class YubikeyVerifyView(FormView):
+    form_class = YubikeyVerifyForm
+    template_name = "profiles/yubikey_verify.html"
+    success_url = reverse_lazy("start")
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_verified():
+            return redirect(reverse_lazy("start"))
+        return super().get(request, *args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        device = RemoteYubikeyDevice.objects.filter(user=self.request.user).first()
+        # Pass the device to the form
+        kwargs.update({"device": device})
+        return kwargs
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+
+        device = RemoteYubikeyDevice.objects.filter(user=self.request.user).first()
+        self.request.user.otp_device = device
+        self.request.session[DEVICE_ID_SESSION_KEY] = device.persistent_id
+
+        return response
+
+
+class YubikeyCreateView(CreateView):
+    form_class = YubikeyDeviceCreateForm
+    template_name = "profiles/yubikey_create.html"
+
+    def _check_yubikey_exists_for_user(self, user):
+        return True if RemoteYubikeyDevice.objects.filter(user=user).first() else False
+
+    def get(self, request, *args, **kwargs):
+        # Enforce 1 yubikey per user
+        if self._check_yubikey_exists_for_user(self.request.user):
+            return redirect(self.get_success_url())
+
+        return super().get(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse_lazy("user_profile", kwargs={"pk": self.request.user.id})
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # Add the currently logged user to the form
+        kwargs["user"] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return response
+
+
+class YubikeyDeleteView(Is2FAMixin, DeleteView):
+    model = RemoteYubikeyDevice
+    template_name = "profiles/yubikey_delete.html"
+
+    def delete(self, request, *args, **kwargs):
+        response = super().delete(request, *args, **kwargs)
+        # If the user logged in with his yubikey in this session, he wont be verified anymore
+        # So we need to send him a new SMS
+        if request.user.is_verified is False:
+            generate_2fa_code(self.request.user)
+        return response
+
+    def get_success_url(self):
+        return reverse_lazy("user_profile", kwargs={"pk": self.request.user.id})
 
 
 class SignUpView(FormView):
@@ -98,6 +173,12 @@ class Login2FAView(LoginRequiredMixin, FormView):
     def get(self, request, *args, **kwargs):
         if request.user.is_verified():
             return redirect(reverse_lazy("start"))
+
+        if request.user.is_superuser:
+            yubikey = RemoteYubikeyDevice.objects.filter(user=request.user).first()
+            if yubikey:
+                return redirect(reverse_lazy("yubikey_verify"))
+
         return super().get(request, *args, **kwargs)
 
     def get_initial(self):
@@ -226,12 +307,18 @@ class UserProfileView(Is2FAMixin, ProvinceAdminViewMixin, DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
+        healthcareuser = context["healthcareuser"]
+
+        if healthcareuser.is_superuser:
+            context["yubikey"] = RemoteYubikeyDevice.objects.filter(
+                user=healthcareuser
+            ).first()
 
         # True if this is an admin account viewing another admin account
         context["view_only"] = (
-            kwargs["object"].id != self.request.user.id
+            healthcareuser.id != self.request.user.id
             and (not self.request.user.is_superuser)
-            and kwargs["object"].is_admin
+            and healthcareuser.is_admin
         )
         return context
 

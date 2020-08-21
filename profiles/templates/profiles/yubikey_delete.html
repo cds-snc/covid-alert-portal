@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% if form.errors %}{% trans "Error: "%}{% endif %}
+  {% trans "Confirm deletion of Yubikey" %}
+{% endblock %}
+
+
+{% block content %}
+  {% include  "includes/error_list.html" %}
+
+  <h1>{% trans "Confirm deletion of Yubikey" %}</h1>
+  {% include "includes/cds_form.html" with submit_text=_("Yes, I am sure") %}
+  <div class="content-button" style="margin-top: -40px;"><a class="secondary" href="{% url 'user_profile' request.user.id %}" role='button' draggable='false'>{% trans "No, take me back" %}</a></div>
+{% endblock %}
