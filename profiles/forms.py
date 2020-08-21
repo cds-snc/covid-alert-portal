@@ -50,7 +50,7 @@ class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
 
         user = self.get_user()
 
-        if user.remoteyubikeydevice_set is not None:
+        if user.remoteyubikeydevice_set.first() is None:
             # Dont send SMS if the user has a Yubikey
             generate_2fa_code(user)
 
