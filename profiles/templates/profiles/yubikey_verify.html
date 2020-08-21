@@ -3,13 +3,13 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Yubikey verify" %}
+  {% trans "Yubikey verification" %}
 {% endblock %}
 
 
 {% block content %}
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "Yubikey verify" %}</h1>
+  <h1>{% trans "Yubikey verification" %}</h1>
   {% include "includes/cds_form.html" with submit_text=_("Continue") %}
 {% endblock %}

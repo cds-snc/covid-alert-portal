@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-21 13:00+0000\n"
+"POT-Creation-Date: 2020-08-21 13:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -873,14 +873,10 @@ msgid "Enabled,Not enabled"
 msgstr "Activé,Désactivé"
 
 #: profiles/templates/profiles/healthcareuser_detail.html:79
-#, fuzzy
-#| msgid "Remove your yubikey"
 msgid "Remove your Yubikey"
 msgstr "Effacer votre clef Yubikey"
 
 #: profiles/templates/profiles/healthcareuser_detail.html:83
-#, fuzzy
-#| msgid "Register a yubikey"
 msgid "Register a Yubikey"
 msgstr "Ajouter une clef Yubikey"
 
@@ -1372,18 +1368,18 @@ msgstr ""
 
 #: profiles/templates/profiles/yubikey_create.html:6
 #: profiles/templates/profiles/yubikey_create.html:13
-msgid "Yubikey create"
-msgstr ""
+msgid "Add Yubikey token"
+msgstr "Ajouter une clef Yubikey"
 
 #: profiles/templates/profiles/yubikey_delete.html:6
 #: profiles/templates/profiles/yubikey_delete.html:13
-msgid "Confirm delete Yubikey"
-msgstr "Confirmez la suppression de l’utilisateur"
+msgid "Confirm deletion of Yubikey"
+msgstr "Confirmez la suppression du Yubikey"
 
 #: profiles/templates/profiles/yubikey_verify.html:6
 #: profiles/templates/profiles/yubikey_verify.html:13
-msgid "Yubikey verify"
-msgstr ""
+msgid "Yubikey verification"
+msgstr "Vérification du Yubikey"
 
 #: profiles/validators.py:10 profiles/validators.py:22
 msgid "Your password can’t be a commonly-used sequence."
