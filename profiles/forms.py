@@ -292,37 +292,21 @@ class HealthcareInvitationAdminChangeForm(InvitationAdminChangeForm):
 
 # heavily inspired by https://github.com/ossobv/kleides-mfa/blob/ec93f141761b188dd2a2ecf8bbb525a9da47270e/kleides_mfa/forms.py#L187
 class YubikeyDeviceCreateForm(HealthcareBaseForm, forms.ModelForm):
-    service = forms.ModelChoiceField(
-        label=_("Service"), queryset=ValidationService.objects.all(), empty_label=None,
-    )
     otp_token = forms.CharField(label=_("Token"))
 
-    # hide "name" and add "disabled attribute" — we will hardcode to the current user's email
-    name = forms.CharField(widget=forms.HiddenInput, disabled=True)
-
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop("request", None)
+        user = kwargs.pop("user", None)
         super().__init__(*args, **kwargs)
-
         self.fields["otp_token"].widget.attrs.update({"autofocus": "autofocus"})
-
-        self.instance.user = self.request.user
-        # names can have a maximum length of 32 characters
-        self.fields["name"].initial = self.request.user.email[:32]
-
-        try:
-            # if only one service exists, make it a hidden field
-            self.fields["service"].initial = self.fields["service"].queryset.get().pk
-            self.fields["service"].widget = forms.HiddenInput()
-        except ValidationService.MultipleObjectsReturned:
-            # Multiple is good, none is bad.
-            pass
+        self.instance.user = user
 
     def clean(self):
         cleaned_data = super().clean()
         token = self.cleaned_data.get("otp_token")
-        service = self.cleaned_data.get("service")
+        service = ValidationService.objects.first()
         verified = False
+        # names can have a maximum length of 32 characters
+        cleaned_data["name"] = self.instance.user.email[:32]
 
         if token and service:
             self.instance.service = service
@@ -336,11 +320,7 @@ class YubikeyDeviceCreateForm(HealthcareBaseForm, forms.ModelForm):
 
     class Meta:
         model = RemoteYubikeyDevice
-        fields = (
-            "service",
-            "name",
-            "otp_token",
-        )
+        fields = ("otp_token",)
 
 
 # heavily inspired by: https://github.com/ossobv/kleides-mfa/blob/ec93f141761b188dd2a2ecf8bbb525a9da47270e/kleides_mfa/forms.py#L39

@@ -15,7 +15,7 @@ from django.views.generic.edit import UpdateView
 
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django_otp import DEVICE_ID_SESSION_KEY, login as django_otp_login
+from django_otp import DEVICE_ID_SESSION_KEY
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.expressions import RawSQL
 
@@ -77,7 +77,7 @@ class YubikeyCreateView(CreateView):
         return True if RemoteYubikeyDevice.objects.filter(user=user).first() else False
 
     def get(self, request, *args, **kwargs):
-        # enforce 1 yubikey per user
+        # Enforce 1 yubikey per user
         if self._check_yubikey_exists_for_user(self.request.user):
             return redirect(self.get_success_url())
 
@@ -88,8 +88,8 @@ class YubikeyCreateView(CreateView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        # Update the existing form kwargs dict with the request's user.
-        kwargs.update({"request": self.request})
+        # Add the currently logged user to the form
+        kwargs["user"] = self.request.user
         return kwargs
 
     def form_valid(self, form):
@@ -100,6 +100,14 @@ class YubikeyCreateView(CreateView):
 class YubikeyDeleteView(Is2FAMixin, DeleteView):
     model = RemoteYubikeyDevice
     template_name = "profiles/yubikey_delete.html"
+
+    def delete(self, request, *args, **kwargs):
+        response = super().delete(request, *args, **kwargs)
+        # If the user logged in with his yubikey in this session, he wont be verified anymore
+        # So we need to send him a new SMS
+        if request.user.is_verified is False:
+            generate_2fa_code(self.request.user)
+        return response
 
     def get_success_url(self):
         return reverse_lazy("user_profile", kwargs={"pk": self.request.user.id})
