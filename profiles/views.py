@@ -59,7 +59,7 @@ class YubikeyVerifyView(FormView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        device = RemoteYubikeyDevice.objects.filter(user=self.request.user).first()
+        device = self.request.user.remoteyubikeydevice_set.first()
         # Pass the device to the form
         kwargs.update({"device": device})
         return kwargs
@@ -174,8 +174,8 @@ class Login2FAView(LoginRequiredMixin, FormView):
         if request.user.is_verified():
             return redirect(reverse_lazy("start"))
 
-        if request.user.is_superuser:
-            yubikey = RemoteYubikeyDevice.objects.filter(user=request.user).first()
+        if request.user.remoteyubikeydevice_set.first() is not None:
+            yubikey = request.user.remoteyubikeydevice_set.first()
             if yubikey:
                 return redirect(reverse_lazy("yubikey_verify"))
 
@@ -354,8 +354,11 @@ def redirect_after_timed_out(request):
 
 
 def password_reset_complete(request):
-    generate_2fa_code(request.user)
-    return redirect(reverse_lazy("login-2fa"))
+    if request.user.remoteyubikeydevice_set.first() is not None:
+        return redirect(reverse_lazy("yubikey_verify"))
+    else:
+        generate_2fa_code(request.user)
+        return redirect(reverse_lazy("login-2fa"))
 
 
 def switch_language(request):
