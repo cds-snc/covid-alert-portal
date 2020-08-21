@@ -618,7 +618,7 @@ msgstr "L’invitation n’a pu être envoyée."
 
 #: profiles/forms.py:295 profiles/forms.py:328
 msgid "Token"
-msgstr ""
+msgstr "Clef"
 
 #: profiles/forms.py:317
 msgid "Unable to validate the token with the device."
