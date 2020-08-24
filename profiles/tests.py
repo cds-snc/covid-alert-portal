@@ -770,6 +770,24 @@ class DeleteView(AdminUserTestCase):
             ),
         )
 
+    def test_invitation_deleted(self):
+        self.login()
+        user_credentials = get_other_credentials()
+        Invitation.create(email=user_credentials.get("email"), inviter=self.user)
+        user = User.objects.create_user(**user_credentials)
+
+        # Delete the user with an existing invitation
+        response = self.client.post(reverse("user_delete", kwargs={"pk": user.id}))
+        self.assertRedirects(response, reverse("profiles"))
+
+        count = Invitation.objects.filter(email=user_credentials.get("email")).count()
+        self.assertEqual(count, 0)
+
+        # Try to delete the user without invitation
+        user = User.objects.create_user(**user_credentials)
+        response = self.client.post(reverse("user_delete", kwargs={"pk": user.id}))
+        self.assertRedirects(response, reverse("profiles"))
+
 
 class ProfileEditView(AdminUserTestCase):
     def test_edit_name(self):
