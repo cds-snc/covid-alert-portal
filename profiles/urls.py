@@ -72,6 +72,13 @@ urlpatterns = [
         TemplateView.as_view(template_name="profiles/terms.html"),
         name="terms",
     ),
+    path("yubikey/create", views.YubikeyCreateView.as_view(), name="yubikey_create",),
+    path("yubikey/verify", views.YubikeyVerifyView.as_view(), name="yubikey_verify",),
+    path(
+        "yubikey/<int:pk>/delete",
+        views.YubikeyDeleteView.as_view(),
+        name="yubikey_delete",
+    ),
     path("switch-language/", views.switch_language, name="switch_language",),
 ]
 

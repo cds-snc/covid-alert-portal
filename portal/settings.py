@@ -90,6 +90,7 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "django_otp",
     "otp_notify",
+    "otp_yubikey",
     "easyaudit",
 ]
 
@@ -229,6 +230,7 @@ AUTH_USER_MODEL = "profiles.HealthcareUser"
 
 LOGIN_URL = "login"
 OTP_LOGIN_URL = "login-2fa"
+
 LOGIN_REDIRECT_URL = "start"
 LOGOUT_REDIRECT_URL = "login"
 OTP_NOTIFY_ENDPOINT = (

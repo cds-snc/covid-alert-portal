@@ -21,6 +21,10 @@
       <caption class="visually-hidden">{% trans "User account" %}</caption>
       <tbody>
         <tr>
+            <th scope="row">{% trans "Email address" %}</th>
+            <td colspan="2">{{ healthcareuser.email }}</td>
+        </tr>
+        <tr>
           <th scope="row">
               {% if request.user.id == healthcareuser.id  %}
                   {% trans "Your name" %}
@@ -45,10 +49,6 @@
           {% endif %}
         </tr>
         <tr>
-          <th scope="row">{% trans "Email address" %}</th>
-          <td colspan="2">{{ healthcareuser.email }}</td>
-        </tr>
-        <tr>
           <th scope="row">{% trans "Phone number" %}</th>
           <td {% if view_only %}colspan="2"{% endif %}>{{ healthcareuser.phone_number.as_e164 }}</td>
           {% if not view_only %}
@@ -66,6 +66,27 @@
           </td>
           {% endif %}
         </tr>
+        {% if request.user.is_superuser %}
+            <tr>
+                <th scope="row">{% trans "Yubikey" %}</th>
+                <td {% if request.user.id != healthcareuser.id %}colspan="2"{% endif %}>
+                    {{ yubikey|yesno:_("Enabled,Not enabled") }}
+                </td>
+                {% if request.user.id == healthcareuser.id %}
+                    <td>
+                        {% if yubikey %}
+                            <a href="{% url 'yubikey_delete' yubikey.id  %}">
+                                <span>{% trans "Remove your Yubikey" %}</span>
+                            </a>
+                        {% else %}
+                            <a href="{% url 'yubikey_create' %}">
+                                <span>{% trans "Register a Yubikey" %}</span>
+                            </a>
+                        {% endif %}
+                    </td>
+                {% endif %}
+            </tr>
+        {% endif %}
         {% if request.user.id == healthcareuser.id %}
             <tr>
               <th scope="row" colspan="2">{% trans "Password" %}</th>

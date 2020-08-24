@@ -11,6 +11,8 @@ from django.utils.translation import gettext_lazy as _
 
 from phonenumber_field.formfields import PhoneNumberField
 
+from otp_yubikey.models import RemoteYubikeyDevice, ValidationService
+
 from invitations.models import Invitation
 from invitations.forms import (
     InviteForm,
@@ -286,3 +288,62 @@ class HealthcareInvitationAdminChangeForm(InvitationAdminChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["inviter"].disabled = True
+
+
+# heavily inspired by https://github.com/ossobv/kleides-mfa/blob/ec93f141761b188dd2a2ecf8bbb525a9da47270e/kleides_mfa/forms.py#L187
+class YubikeyDeviceCreateForm(HealthcareBaseForm, forms.ModelForm):
+    otp_token = forms.CharField(label=_("Token"))
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user", None)
+        super().__init__(*args, **kwargs)
+        self.fields["otp_token"].widget.attrs.update({"autofocus": "autofocus"})
+        self.instance.user = user
+
+    def clean(self):
+        cleaned_data = super().clean()
+        token = self.cleaned_data.get("otp_token")
+        service = ValidationService.objects.first()
+        verified = False
+        # names can have a maximum length of 32 characters
+        cleaned_data["name"] = self.instance.user.email[:32]
+
+        if token and service:
+            self.instance.service = service
+            self.instance.public_id = token[:-32]
+            verified = self.instance.verify_token(token)
+        if not verified:
+            raise forms.ValidationError(
+                _("Unable to validate the token with the device.")
+            )
+        return cleaned_data
+
+    class Meta:
+        model = RemoteYubikeyDevice
+        fields = ("otp_token",)
+
+
+# heavily inspired by: https://github.com/ossobv/kleides-mfa/blob/ec93f141761b188dd2a2ecf8bbb525a9da47270e/kleides_mfa/forms.py#L39
+class YubikeyVerifyForm(forms.Form):
+    otp_token = forms.CharField(label=_("Token"))
+
+    def __init__(self, *args, **kwargs):
+        self.device = kwargs.pop("device", None)
+        super().__init__(*args, **kwargs)
+        self.fields["otp_token"].widget.attrs.update({"autofocus": "autofocus"})
+
+    def get_device(self):
+        if self.is_valid():
+            return self.device
+        return None
+
+    def clean(self):
+        cleaned_data = super().clean()
+        token = cleaned_data.get("otp_token")
+        if not token:  # token is a required field.
+            return cleaned_data
+
+        # Note that tokens can become invalid once verified
+        if not self.device.verify_token(token):
+            raise forms.ValidationError(_("The token is not valid for this device."))
+        return cleaned_data
