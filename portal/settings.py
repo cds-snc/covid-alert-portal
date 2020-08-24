@@ -248,6 +248,9 @@ API_ENDPOINT = os.getenv("API_ENDPOINT")
 DJANGO_EASY_AUDIT_READONLY_EVENTS = True
 DJANGO_EASY_AUDIT_LOGGING_BACKEND = "portal.audit_backends.LoggerBackend"
 DJANGO_EASY_AUDIT_UNREGISTERED_URLS_EXTRA = [r"^/status/"]
+# If the header is set it must be available on the request or an Error will be thrown
+if is_prod and not TESTING:
+    DJANGO_EASY_AUDIT_REMOTE_ADDR_HEADER = "X-Forwarded-For"
 
 CORS_ALLOW_CREDENTIALS = False
 CORS_ORIGIN_WHITELIST = []
