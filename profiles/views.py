@@ -110,7 +110,7 @@ class YubikeyDeleteView(Is2FAMixin, DeleteView):
         response = super().delete(request, *args, **kwargs)
         # If the user logged in with his yubikey in this session, he wont be verified anymore
         # So we need to send him a new SMS
-        if request.user.is_verified is False:
+        if request.user.is_verified() is False:
             generate_2fa_code(self.request.user)
         return response
 
