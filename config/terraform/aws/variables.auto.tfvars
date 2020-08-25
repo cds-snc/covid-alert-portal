@@ -17,15 +17,15 @@ cloudwatch_log_group_name = "covidportal_staging"
 # AWS ECS - ecs.tf
 ###
 
-ecs_name        = "covid-portal_staging"
-metric_provider = "stdout"
-tracer_provider = "stdout"
-django_env = "production"
-django_allowed_hosts = ".cdssandbox.xyz"
-email_backend = "django.core.mail.backends.smtp.EmailBackend"
+ecs_name              = "covid-portal_staging"
+metric_provider       = "stdout"
+tracer_provider       = "stdout"
+django_env            = "production"
+django_allowed_hosts  = ".cdssandbox.xyz"
+email_backend         = "django.core.mail.backends.smtp.EmailBackend"
 ecs_covid_portal_name = "covid-portal_staging"
-new_relic_app_name = "Staging-Terraform-Covid-Portal"
-dual_urls = "False"
+new_relic_app_name    = "Staging-Terraform-Covid-Portal"
+dual_urls             = "False"
 
 
 #Autoscaling ECS
@@ -47,7 +47,7 @@ rds_db_subnet_group_name = "staging-portal-db"
 
 # RDS Cluster
 rds_server_db_name = "staging_covid_portal"
-rds_server_name = "staging-covidportal-db"
+rds_server_name    = "staging-covidportal-db"
 rds_server_db_user = "postgres"
 # Value should come from a TF_VAR environment variable (e.g. set in a Github Secret)
 # rds_server_db_password       = ""

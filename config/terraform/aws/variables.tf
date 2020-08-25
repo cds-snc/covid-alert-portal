@@ -14,6 +14,14 @@ variable "billing_tag_value" {
 }
 
 ###
+# Global Secret
+###
+
+variable "slack_webhook" {
+  type = string
+}
+
+###
 # AWS Cloud Watch - cloudwatch.tf
 ###
 variable "cloudwatch_log_group_name" {
@@ -234,12 +242,4 @@ variable "rds_server_instance_class" {
 ###
 variable "route53_zone_name" {
   type = string
-}
-
-###
-# AWS WAF - IPs/CIDRs to allow to /new-key-claim
-###
-variable "new_key_claim_allow_list" {
-  type    = list
-  default = ["0.0.0.0/1", "128.0.0.0/1"]
 }

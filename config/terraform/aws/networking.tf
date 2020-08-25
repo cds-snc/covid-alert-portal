@@ -347,23 +347,23 @@ resource "aws_security_group" "covidportal_egress" {
 }
 
 resource "aws_security_group_rule" "covidportal_egress_email" {
-  description              = "Security group rule for Portal email egress"
-  type                     = "egress"
-  from_port                = 587
-  to_port                  = 587
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.covidportal_egress.id
-  cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:AWS007
+  description       = "Security group rule for Portal email egress"
+  type              = "egress"
+  from_port         = 587
+  to_port           = 587
+  protocol          = "tcp"
+  security_group_id = aws_security_group.covidportal_egress.id
+  cidr_blocks       = ["0.0.0.0/0"] #tfsec:ignore:AWS007
 }
 
 resource "aws_security_group_rule" "covidportal_egress_new_relic" {
-  description              = "Security group rule for Portal New Relic egress"
-  type                     = "egress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.covidportal_egress.id
-  cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:AWS007
+  description       = "Security group rule for Portal New Relic egress"
+  type              = "egress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  security_group_id = aws_security_group.covidportal_egress.id
+  cidr_blocks       = ["0.0.0.0/0"] #tfsec:ignore:AWS007
 }
 
 resource "aws_security_group" "privatelink" {
