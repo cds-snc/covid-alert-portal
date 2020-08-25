@@ -752,7 +752,9 @@ class DeleteView(AdminUserTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
-            "<p>Are you sure you want to delete testuser2’s account at “test2@test.com”?</p>",
+            "<h1>Are you sure you want to delete the account at {}?</h1>".format(
+                user2.email
+            ),
         )
 
     def test_superadmin_can_see_delete_page_for_admin(self):
@@ -765,8 +767,8 @@ class DeleteView(AdminUserTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
-            "<p>Are you sure you want to delete {}’s account at “{}”?</p>".format(
-                self.user.name, self.user.email
+            "<h1>Are you sure you want to delete the account at {}?</h1>".format(
+                self.user.email
             ),
         )
 

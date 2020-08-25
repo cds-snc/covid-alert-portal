@@ -8,16 +8,15 @@ main .messages {
       list-style-type: none;
       margin-bottom: 0;
       li {
-        border-radius: 10px;
         padding: $space-sm;
 
-        &.info {
-          border: 1px solid #4E88B9;
+        &.info, &.success {
+          border-left: 4px solid #4E88B9;
           color: $color-blue-dark;
           background: rgba(78, 136, 185, 0.1);
         }
         &.error {
-          border: 1px solid $color-red;
+          border-left: 4px solid $color-red;
           color: $color-red;
           background: $color-red-light;
         }

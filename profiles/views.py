@@ -342,6 +342,16 @@ class UserDeleteView(Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView):
     context_object_name = "profile_user"
     success_url = reverse_lazy("profiles")
 
+    def delete(self, request, *args, **kwargs):
+        email = self.get_object().email
+        response = super().delete(request, *args, **kwargs)
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            _("You deleted the account for ‘%(email)s’.") % {"email": email},
+        )
+        return response
+
 
 def redirect_after_timed_out(request):
     messages.add_message(
