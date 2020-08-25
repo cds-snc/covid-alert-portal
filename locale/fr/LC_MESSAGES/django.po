@@ -830,7 +830,6 @@ msgid "Are you sure you want to delete the account at %(email)s?"
 msgstr "Voulez-vous vraiment supprimer le compte associé à %(email)s?"
 
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html:13
-#, fuzzy, python-format
 #| msgid ""
 #| "%(name)s will not be able to log in, and their details will be deleted. "
 #| "You can always create a new account for them later."
