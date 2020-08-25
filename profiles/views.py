@@ -59,7 +59,7 @@ class YubikeyVerifyView(FormView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        device = RemoteYubikeyDevice.objects.filter(user=self.request.user).first()
+        device = self.request.user.remoteyubikeydevice_set.first()
         # Pass the device to the form
         kwargs.update({"device": device})
         return kwargs
@@ -110,7 +110,9 @@ class YubikeyDeleteView(Is2FAMixin, DeleteView):
         response = super().delete(request, *args, **kwargs)
         # If the user logged in with his yubikey in this session, he wont be verified anymore
         # So we need to send him a new SMS
-        if request.user.is_verified is False:
+        if request.user.is_verified() is False or isinstance(
+            request.user.otp_device, RemoteYubikeyDevice
+        ):
             generate_2fa_code(self.request.user)
         return response
 
@@ -174,10 +176,8 @@ class Login2FAView(LoginRequiredMixin, FormView):
         if request.user.is_verified():
             return redirect(reverse_lazy("start"))
 
-        if request.user.is_superuser:
-            yubikey = RemoteYubikeyDevice.objects.filter(user=request.user).first()
-            if yubikey:
-                return redirect(reverse_lazy("yubikey_verify"))
+        if request.user.remoteyubikeydevice_set.first() is not None:
+            return redirect(reverse_lazy("yubikey_verify"))
 
         return super().get(request, *args, **kwargs)
 
@@ -342,6 +342,12 @@ class UserDeleteView(Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView):
     context_object_name = "profile_user"
     success_url = reverse_lazy("profiles")
 
+    def delete(self, request, *args, **kwargs):
+        response = super().delete(request, *args, **kwargs)
+        # This wont crash if no object is returned from the filtered query
+        Invitation.objects.filter(email=self.object.email).delete()
+        return response
+
 
 def redirect_after_timed_out(request):
     messages.add_message(
@@ -354,8 +360,11 @@ def redirect_after_timed_out(request):
 
 
 def password_reset_complete(request):
-    generate_2fa_code(request.user)
-    return redirect(reverse_lazy("login-2fa"))
+    if request.user.remoteyubikeydevice_set.first() is not None:
+        return redirect(reverse_lazy("yubikey_verify"))
+    else:
+        generate_2fa_code(request.user)
+        return redirect(reverse_lazy("login-2fa"))
 
 
 def switch_language(request):
