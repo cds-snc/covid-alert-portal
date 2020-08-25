@@ -49,16 +49,16 @@
           {% endif %}
         </tr>
         <tr>
-          <th scope="row">{% trans "Phone number" %}</th>
+          <th scope="row">{% trans "Mobile phone number" %}</th>
           <td {% if view_only %}colspan="2"{% endif %}>{{ healthcareuser.phone_number.as_e164 }}</td>
           {% if not view_only %}
           <td>
               <a href="{% url 'user_edit_phone' healthcareuser.id %}">
                 <span class="visually-hidden">
                   {% if request.user.id == healthcareuser.id  %}
-                    {% trans "Change your phone number" %}
+                    {% trans "Change your mobile phone number" %}
                   {% else %}
-                    {% trans "Change phone number" %}
+                    {% trans "Change mobile phone number" %}
                   {% endif %}
                 </span>
                 <span aria-hidden="true">{% trans "Change" %}</span>
