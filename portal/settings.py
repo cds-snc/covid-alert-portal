@@ -239,6 +239,7 @@ OTP_NOTIFY_ENDPOINT = (
 OTP_NOTIFY_API_KEY = os.getenv("OTP_NOTIFY_API_KEY")
 OTP_NOTIFY_TEMPLATE_ID = os.getenv("OTP_NOTIFY_TEMPLATE_ID")
 OTP_NOTIFY_TOKEN_VALIDITY = 90
+OTP_EMAIL_THROTTLE_FACTOR = 3
 # When DEBUG is on, we display the code directly in the form, no need to send it
 if DEBUG:
     OTP_NOTIFY_NO_DELIVERY = True
