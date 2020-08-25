@@ -4,6 +4,7 @@ from django.contrib.auth.forms import (
     UserCreationForm,
 )
 from django.contrib.auth import password_validation
+from django.contrib.auth.forms import SetPasswordForm
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator, MaxLengthValidator
@@ -179,6 +180,18 @@ class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
 
         # Otherwise it just says "Email"
         self.fields["email"].label = _("Email address")
+
+
+class HealthcarePasswordResetConfirm(HealthcareBaseForm, SetPasswordForm):
+    new_password1 = forms.CharField(
+        label=_("New password"),
+        widget=forms.PasswordInput(),
+        strip=False,
+        help_text=password_validation.password_validators_help_text_html(),
+    )
+    new_password2 = forms.CharField(
+        label=_("New password confirmation"), strip=False, widget=forms.PasswordInput(),
+    )
 
 
 class SignupForm(HealthcareBaseForm, UserCreationForm):
