@@ -88,6 +88,7 @@ PasswordResetView.html_email_template_name = (
 )
 # Django.contrib.auth urls have underscore in them, let's change that for dashes
 urlpatterns += [
+    path("", include("django.contrib.auth.urls")),
     path(
         "password-change/",
         login_views.PasswordChangeView.as_view(),
@@ -117,5 +118,4 @@ urlpatterns += [
     ),
     path("reset/done/", views.password_reset_complete, name="password_reset_complete"),
     # If this doesnt go last, I can't overwrite the handler for the urls.
-    path("", include("django.contrib.auth.urls")),
 ]
