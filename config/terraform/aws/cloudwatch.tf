@@ -82,7 +82,7 @@ resource "aws_cloudwatch_metric_alarm" "five_hundred_response_warn" {
 
 resource "aws_cloudwatch_log_metric_filter" "application_error" {
   name           = "ApplicationError"
-  pattern        = "ERROR"
+  pattern        = "Error"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
