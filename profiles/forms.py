@@ -94,9 +94,9 @@ class HealthcareNameEditForm(HealthcareBaseEditForm):
 
 
 class HealthcarePhoneEditForm(HealthcareBaseEditForm):
-    title = _("Change your phone number")
+    title = _("Change your mobile phone number")
     phone_number2 = PhoneNumberField(
-        label=_("Confirm your phone number"),
+        label=_("Confirm your mobile phone number"),
         help_text=_("Enter the same phone number as above."),
     )
     error_messages = {
@@ -194,7 +194,7 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
     name = forms.CharField(label=_("Full name"), validators=[MaxLengthValidator(200)])
 
     phone_number = PhoneNumberField(
-        label=_("Phone number"),
+        label=_("Mobile phone number"),
         help_text=_(
             "You must enter a new security code each time you log in. We’ll send the code to this phone number."
         ),

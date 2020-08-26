@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 class ContactForm(HealthcareBaseForm):
-    name = forms.CharField(label=_("Your name"))
+    name = forms.CharField(label=_("Your name (optional)"), required=False)
     email = forms.EmailField(
         label=_("Your email address"),
         error_messages={
