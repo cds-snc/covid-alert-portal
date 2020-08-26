@@ -344,6 +344,12 @@ class UserDeleteView(Is2FAMixin, ProvinceAdminDeleteMixin, DeleteView):
 
     def delete(self, request, *args, **kwargs):
         response = super().delete(request, *args, **kwargs)
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            _("You deleted the account for ‘%(email)s’.")
+            % {"email": self.object.email},
+        )
         # This wont crash if no object is returned from the filtered query
         Invitation.objects.filter(email=self.object.email).delete()
         return response
