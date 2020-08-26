@@ -1,4 +1,4 @@
-from django.urls import path, include, re_path
+from django.urls import path, re_path
 from django.views.generic import RedirectView, TemplateView
 from django.contrib.auth.views import PasswordResetView
 from django_otp.views import LoginView
@@ -86,8 +86,11 @@ urlpatterns = [
 PasswordResetView.html_email_template_name = (
     "registration/password_reset_email_html.html"
 )
+
 # Django.contrib.auth urls have underscore in them, let's change that for dashes
 urlpatterns += [
+    path("login/", login_views.LoginView.as_view(), name="login"),
+    path("logout/", login_views.LogoutView.as_view(), name="logout"),
     path(
         "password-change/",
         login_views.PasswordChangeView.as_view(),
@@ -111,11 +114,12 @@ urlpatterns += [
     path(
         "reset/<uidb64>/<token>/",
         login_views.PasswordResetConfirmView.as_view(
-            post_reset_login=True, post_reset_login_backend="axes.backends.AxesBackend",
+            post_reset_login=True,
+            post_reset_login_backend="axes.backends.AxesBackend",
+            form_class=forms.HealthcarePasswordResetConfirm,
         ),
         name="password_reset_confirm",
     ),
     path("reset/done/", views.password_reset_complete, name="password_reset_complete"),
     # If this doesnt go last, I can't overwrite the handler for the urls.
-    path("", include("django.contrib.auth.urls")),
 ]
