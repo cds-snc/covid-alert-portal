@@ -21,15 +21,7 @@ footer {
     }
 
     li {
-      margin-right: $space-sm;
-
-    //&::before {
-    //  content: "\2022";
-    //  color: $color-blue-medium;
-    //  display: inline-block;
-    //  // bullets are about 5px, so add space to compensate
-    //  width: calc(#{$space-sm} + 5px);
-    //}
+      margin-right: $space-md;
 
       @include sm {
         &:first-of-type::before {
