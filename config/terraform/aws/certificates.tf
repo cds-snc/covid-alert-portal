@@ -1,6 +1,6 @@
 resource "aws_acm_certificate" "covidportal_staging" {
-  domain_name               = var.route53_zone_name
-  subject_alternative_names = ["*.${var.route53_zone_name}"]
+  domain_name               = "covid-hcportal.cdssandbox.xyz"
+  subject_alternative_names = ["*.covid-hcportal.cdssandbox.xyz"]
   validation_method         = "DNS"
 
   tags = {
@@ -10,20 +10,5 @@ resource "aws_acm_certificate" "covidportal_staging" {
   lifecycle {
     create_before_destroy = true
   }
-}
-
-resource "aws_route53_record" "covidportal_staging_certificate_validation" {
-  zone_id = aws_route53_zone.covidportal.zone_id
-  name    = aws_acm_certificate.covidportal_staging.domain_validation_options.0.resource_record_name
-  type    = aws_acm_certificate.covidportal_staging.domain_validation_options.0.resource_record_type
-  records = [aws_acm_certificate.covidportal_staging.domain_validation_options.0.resource_record_value]
-  ttl     = 60
-}
-
-resource "aws_acm_certificate_validation" "covidportal" {
-  certificate_arn = aws_acm_certificate.covidportal_staging.arn
-  validation_record_fqdns = [
-    aws_route53_record.covidportal_staging_certificate_validation.fqdn
-  ]
 }
 

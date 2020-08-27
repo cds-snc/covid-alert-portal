@@ -50,4 +50,10 @@ resource "aws_rds_cluster" "covidportal_server" {
     Name                  = "${var.rds_server_name}-cluster"
     (var.billing_tag_key) = var.billing_tag_value
   }
+
+  lifecycle {
+    ignore_changes = [
+      snapshot_identifier
+    ]
+  }
 }

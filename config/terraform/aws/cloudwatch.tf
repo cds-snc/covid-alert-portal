@@ -55,7 +55,7 @@ resource "aws_cloudwatch_metric_alarm" "portal_memory_utilization_high" {
 
 resource "aws_cloudwatch_log_metric_filter" "five_hundred_response" {
   name           = "500Response"
-  pattern        = "\"HTTP/1.1 ?500 ?501 ?502 ?503 ?504 ?505 ?506 ?507 ?508 ?510 ?511\""
+  pattern        = "\"HTTP/1.1 5\""
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -73,7 +73,7 @@ resource "aws_cloudwatch_metric_alarm" "five_hundred_response_warn" {
   namespace           = "covidportal"
   period              = "60"
   statistic           = "Sum"
-  threshold           = "1"
+  threshold           = "0"
   treat_missing_data  = "notBreaching"
   alarm_description   = "Covid Alert Portal - This metric monitors for an 5xx level response"
 
@@ -82,7 +82,7 @@ resource "aws_cloudwatch_metric_alarm" "five_hundred_response_warn" {
 
 resource "aws_cloudwatch_log_metric_filter" "application_error" {
   name           = "ApplicationError"
-  pattern        = "ERROR"
+  pattern        = "Error"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -100,7 +100,7 @@ resource "aws_cloudwatch_metric_alarm" "application_error_warn" {
   namespace           = "covidportal"
   period              = "60"
   statistic           = "Sum"
-  threshold           = "1"
+  threshold           = "0"
   treat_missing_data  = "notBreaching"
   alarm_description   = "Covid Alert Portal - This metric monitors for an Application error"
 
@@ -140,7 +140,7 @@ resource "aws_cloudwatch_metric_alarm" "key_generation_warn" {
 
 resource "aws_cloudwatch_log_metric_filter" "site_change" {
   name           = "SiteTableChange"
-  pattern        = "\"CRUD model:sites.site\""
+  pattern        = "\"CRUD\" \"model:sites.site\""
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -158,7 +158,7 @@ resource "aws_cloudwatch_metric_alarm" "site_change_warn" {
   namespace           = "covidportal"
   period              = "60"
   statistic           = "Sum"
-  threshold           = "1"
+  threshold           = "0"
   treat_missing_data  = "notBreaching"
   alarm_description   = "COVID Alert Portal - This metric monitors for any site table changes"
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
@@ -210,7 +210,7 @@ resource "aws_cloudwatch_metric_alarm" "InviteLockoutWarn" {
   namespace           = "covidportal"
   period              = "60"
   statistic           = "Sum"
-  threshold           = "1"
+  threshold           = "0"
   treat_missing_data  = "notBreaching"
   alarm_description   = "COVID Alert Portal - This metric montiors for too many invitations by a user"
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
