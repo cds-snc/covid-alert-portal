@@ -290,7 +290,9 @@ class i18nTestView(TestCase):
         """
         Test we end up on French start page from root url if "Accept-Language" header is "fr"
         """
-        client = Client(HTTP_ACCEPT_LANGUAGE="fr",)
+        client = Client(
+            HTTP_ACCEPT_LANGUAGE="fr",
+        )
         response = client.get("/", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.request["PATH_INFO"], "/fr/login/")
@@ -299,7 +301,9 @@ class i18nTestView(TestCase):
         """
         Test we end up on English start page from root url if "Accept-Language" header is "en"
         """
-        client = Client(HTTP_ACCEPT_LANGUAGE="en",)
+        client = Client(
+            HTTP_ACCEPT_LANGUAGE="en",
+        )
         response = client.get("/", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.request["PATH_INFO"], "/en/login/")
@@ -670,7 +674,9 @@ class ProfileView(AdminUserTestCase):
         response = self.client.get(reverse("user_profile", kwargs={"pk": superuser.id}))
         self.assertEqual(response.status_code, 403)
 
-    def test_edit_profile_page_if_admin_user_viewing_staff_same_province_user(self,):
+    def test_edit_profile_page_if_admin_user_viewing_staff_same_province_user(
+        self,
+    ):
         self.login()
 
         user2 = User.objects.create_user(**get_other_credentials(is_admin=False))
@@ -682,7 +688,9 @@ class ProfileView(AdminUserTestCase):
             response, '<a href="/en/profiles/{}/edit/name">'.format(user2.id)
         )
 
-    def test_no_edit_profile_page_if_admin_user_viewing_admin_same_province_user(self,):
+    def test_no_edit_profile_page_if_admin_user_viewing_admin_same_province_user(
+        self,
+    ):
         self.login()
 
         user2 = User.objects.create_user(**get_other_credentials(is_admin=True))
@@ -803,7 +811,8 @@ class ProfileEditView(AdminUserTestCase):
         # post to update name
         post_data = {"name": "Don Draper"}
         response = self.client.post(
-            reverse("user_edit_name", kwargs={"pk": self.user.id}), post_data,
+            reverse("user_edit_name", kwargs={"pk": self.user.id}),
+            post_data,
         )
         self.assertEqual(response.status_code, 302)
         user = HealthcareUser.objects.get(pk=self.user.id)
@@ -864,7 +873,8 @@ class ProfileEditView(AdminUserTestCase):
             "phone_number2": "+12125552323",
         }
         response = self.client.post(
-            reverse("user_edit_phone", kwargs={"pk": self.user.id}), post_data,
+            reverse("user_edit_phone", kwargs={"pk": self.user.id}),
+            post_data,
         )
         self.assertContains(
             response,
@@ -876,7 +886,8 @@ class ProfileEditView(AdminUserTestCase):
             "phone_number2": number,
         }
         response = self.client.post(
-            reverse("user_edit_phone", kwargs={"pk": self.user.id}), post_data,
+            reverse("user_edit_phone", kwargs={"pk": self.user.id}),
+            post_data,
         )
         self.assertEqual(response.status_code, 302)
         user = HealthcareUser.objects.get(pk=self.user.id)

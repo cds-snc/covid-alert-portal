@@ -66,7 +66,9 @@ class HealthcareUserManager(BaseUserManager):
 class HealthcareUser(AbstractBaseUser):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     email = models.EmailField(
-        verbose_name="email address", max_length=255, unique=True,
+        verbose_name="email address",
+        max_length=255,
+        unique=True,
     )
     name = models.CharField(max_length=200, verbose_name=_("Your full name"))
     province = models.ForeignKey(HealthcareProvince, on_delete=models.PROTECT)
