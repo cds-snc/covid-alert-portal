@@ -51,5 +51,8 @@ urlpatterns += i18n_patterns(
     path("", include("profiles.urls")),
     path("", include("covid_key.urls")),
     path("contact/", include("contact.urls")),
-    path("invitations/", include(invitation_patterns, namespace="invitations"),),
+    path(
+        "invitations/",
+        include(invitation_patterns, namespace="invitations"),
+    ),
 )
