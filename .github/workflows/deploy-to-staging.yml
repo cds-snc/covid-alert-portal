@@ -4,10 +4,6 @@ on:
   push:
     branches: [main]
 
-env:
-  GITHUB_SHA: ${{ github.sha }}
-  BRANCH: ${{ github.ref }}
-
 jobs:
   deploy-portal-service:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
