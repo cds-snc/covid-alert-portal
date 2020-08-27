@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.http import HttpResponse
 from django.conf.urls.i18n import i18n_patterns
+from django.conf import settings
 from axes.admin import AccessLogAdmin
 from invitations.views import AcceptInvite
 
@@ -28,7 +29,9 @@ urlpatterns = [
     ),
     path(
         r"status/",
-        lambda x: HttpResponse("Ok", content_type="text/plain"),
+        lambda x: HttpResponse(
+            "{}".format(settings.DJVERSION_VERSION), content_type="text/plain"
+        ),
         name="status",
     ),
     path("admin/", admin.site.urls),
