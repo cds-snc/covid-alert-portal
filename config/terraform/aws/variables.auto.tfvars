@@ -46,7 +46,7 @@ vpc_name       = "covidportal"
 rds_db_subnet_group_name = "staging-portal-db"
 
 # RDS Cluster
-rds_server_db_name = "staging_covid_portal"
+rds_server_db_name = "covid_portal"
 rds_server_name    = "staging-covidportal-db"
 rds_server_db_user = "postgres"
 # Value should come from a TF_VAR environment variable (e.g. set in a Github Secret)
