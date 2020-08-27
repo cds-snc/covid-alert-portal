@@ -28,10 +28,8 @@ TESTING = len(sys.argv) > 1 and sys.argv[1] == "test"
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-DJVERSION_VERSION = "0.0.0"
-
 with open(os.path.join(BASE_DIR, "VERSION")) as version_file:
-    DJVERSION_VERSION = version_file.readline()
+    DJVERSION_VERSION = version_file.readline() or "0.0.0"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
