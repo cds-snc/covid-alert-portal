@@ -147,7 +147,8 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
             raise ValidationError(
-                self.error_messages["password_mismatch"], code="password_mismatch",
+                self.error_messages["password_mismatch"],
+                code="password_mismatch",
             )
         return password2
 
@@ -191,7 +192,9 @@ class HealthcarePasswordResetConfirm(HealthcareBaseForm, SetPasswordForm):
         help_text=password_validation.password_validators_help_text_html(),
     )
     new_password2 = forms.CharField(
-        label=_("New password confirmation"), strip=False, widget=forms.PasswordInput(),
+        label=_("New password confirmation"),
+        strip=False,
+        widget=forms.PasswordInput(),
     )
 
 
@@ -257,7 +260,8 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
             and phone_number != phone_number_confirmation
         ):
             raise forms.ValidationError(
-                _("The phone numbers didn’t match."), code="invalid",
+                _("The phone numbers didn’t match."),
+                code="invalid",
             )
         return phone_number_confirmation
 
@@ -279,12 +283,15 @@ class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
         try:
             # If the email is invalid, an error would have been raised by
             # the CleanEmailMixin
-            domain = email[email.find('@') + 1:]
+            domain = email[email.find("@") + 1 :]
             AuthorizedDomain.objects.get(domain=domain)
         except AuthorizedDomain.DoesNotExist:
             if settings.DEBUG is False or settings.TESTING is True:
                 raise forms.ValidationError(
-                    _('You cannot invite %(email)s to create an account because @%(domain)s is not on the portal’s safelist. To add @%(domain)s to the safelist, email healthcare-en@cds-snc.ca.') % {'domain': domain, 'email': email}
+                    _(
+                        "You cannot invite %(email)s to create an account because @%(domain)s is not on the portal’s safelist. To add @%(domain)s to the safelist, email healthcare-en@cds-snc.ca."
+                    )
+                    % {"domain": domain, "email": email}
                 )
         return email
 

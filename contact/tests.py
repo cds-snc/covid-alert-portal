@@ -15,7 +15,10 @@ class ContactView(TestCase):
             "email": "test@test.com",
         }
 
-        response = self.client.post(reverse("contact:index"), post_data,)
+        response = self.client.post(
+            reverse("contact:index"),
+            post_data,
+        )
         self.assertContains(response, ContactForm.FEEDBACK_MESSAGE)
 
     def test_contact_valid(self):
@@ -29,6 +32,9 @@ class ContactView(TestCase):
             "feedback": "[test please delete] feedback",
         }
 
-        response = self.client.post(reverse("contact:index"), post_data,)
+        response = self.client.post(
+            reverse("contact:index"),
+            post_data,
+        )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, reverse("contact:success"))
