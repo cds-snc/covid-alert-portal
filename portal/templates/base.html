@@ -34,6 +34,9 @@
     <title>{% block title %}{% trans "COVID Alert Portal" %}{% endblock %}{% block title_suffix %} {% trans "— COVID Alert Portal" %}{% endblock %}</title>
   </head>
   <body>
+    {% if request.user.is_authenticated %}
+      <div id="skip-link-container"><a href="#page--content" id="skip-link">{% trans "Skip to main content" %}</a></div>
+    {% endif %}
     <div class="container">
       <header>
         <div class="page--container">
@@ -53,7 +56,7 @@
 
         {% include  "includes/nav_main.html" %}
 
-        <div class="page--container">
+        <div class="page--container" id="page--content" tabindex="-1">
           <div class="content--container {% block extra_container_class %}{% endblock %}">
             {% block content %}{% endblock %}
           </div>
