@@ -10,6 +10,10 @@
       <meta http-equiv="Refresh" content="{{ "SESSION_COOKIE_AGE"|get_setting|add:1 }}; url={% url 'session_timed_out' %}">
     {% endif %}
 
+    {% with version="DJVERSION_VERSION"|get_setting %}
+      <meta name="VERSION" content="{{ version }}">
+    {% endwith %}
+
     {% with sha="GITHUB_SHA"|get_setting %}
       {% if sha %}
         <meta name="GITHUB_SHA" content="{{ sha }}">

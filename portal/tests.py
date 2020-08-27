@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.conf import settings
 from django.urls import reverse
 
 
@@ -15,4 +16,4 @@ class TextView(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get("Content-type"), "text/plain")
-        self.assertContains(response, "Ok")
+        self.assertContains(response, settings.DJVERSION_VERSION)
