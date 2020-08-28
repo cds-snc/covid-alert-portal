@@ -287,7 +287,7 @@ class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
             AuthorizedDomain.objects.get(domain=domain)
         except AuthorizedDomain.DoesNotExist:
             if settings.DEBUG is False or settings.TESTING is True:
-                if AuthorizedDomain.objects.filter(domain='*').count() == 0:
+                if AuthorizedDomain.objects.filter(domain="*").count() == 0:
                     raise forms.ValidationError(
                         _(
                             "You cannot invite %(email)s to create an account because @%(domain)s is not on the portal’s safelist."

@@ -474,10 +474,7 @@ class InviteFlow(AdminUserTestCase):
         response = self.client.post(reverse("invite"), {"email": email}, follow=True)
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(
-            response,
-            "<h1>Invitation sent to {}</h1>".format(email)
-        )
+        self.assertContains(response, "<h1>Invitation sent to {}</h1>".format(email))
 
     def test_see_invitations_list_with_pending_invite(self):
         invitation = Invitation.create(
