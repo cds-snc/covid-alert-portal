@@ -287,12 +287,13 @@ class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
             AuthorizedDomain.objects.get(domain=domain)
         except AuthorizedDomain.DoesNotExist:
             if settings.DEBUG is False or settings.TESTING is True:
-                raise forms.ValidationError(
-                    _(
-                        "You cannot invite %(email)s to create an account because @%(domain)s is not on the portal’s safelist."
+                if AuthorizedDomain.objects.filter(domain='*').count() == 0:
+                    raise forms.ValidationError(
+                        _(
+                            "You cannot invite %(email)s to create an account because @%(domain)s is not on the portal’s safelist."
+                        )
+                        % {"domain": domain, "email": email}
                     )
-                    % {"domain": domain, "email": email}
-                )
         return email
 
     # https://github.com/bee-keeper/django-invitations/blob/9069002f1a0572ae37ffec21ea72f66345a8276f/invitations/forms.py#L60

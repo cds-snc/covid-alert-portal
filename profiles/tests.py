@@ -465,6 +465,20 @@ class InviteFlow(AdminUserTestCase):
             f"You cannot invite {email} to create an account because @{domain} is not on the portal",
         )
 
+    def test_send_invitation_invalid_domain_with_wildcard(self):
+        self.login()
+        domain = "example.com"
+        email = "email@" + domain
+        AuthorizedDomain.objects.create(domain="*")
+
+        response = self.client.post(reverse("invite"), {"email": email}, follow=True)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            "<h1>Invitation sent to {}</h1>".format(email)
+        )
+
     def test_see_invitations_list_with_pending_invite(self):
         invitation = Invitation.create(
             email=f"{uuid4()}@{uuid4()}.com", inviter=self.user
