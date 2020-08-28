@@ -289,7 +289,7 @@ class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
             if settings.DEBUG is False or settings.TESTING is True:
                 raise forms.ValidationError(
                     _(
-                        "You cannot invite %(email)s to create an account because @%(domain)s is not on the portal’s safelist. To add @%(domain)s to the safelist, email healthcare-en@cds-snc.ca."
+                        "You cannot invite %(email)s to create an account because @%(domain)s is not on the portal’s safelist."
                     )
                     % {"domain": domain, "email": email}
                 )
