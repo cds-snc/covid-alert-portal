@@ -50,6 +50,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Read VERSION file
+        id: version
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./VERSION
+
       - name: Build Covid Portal
         run: docker build -t base --build-arg GITHUB_SHA_ARG=$GITHUB_SHA .
 
@@ -69,16 +75,20 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr-covid-portal.outputs.registry }}
           ECR_REPOSITORY: covid-alert-portal-terraform
-        run: | 
+          VERSION: ${{ steps.version.outputs.content }}
+        run: |
           docker tag base $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
+          docker tag base $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION
           docker tag base $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
       - name: Push containers to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr-covid-portal.outputs.registry }}
           ECR_REPOSITORY: covid-alert-portal-terraform
+          VERSION: ${{ steps.version.outputs.content }}
         run: |
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
       - name: Logout of Staging Amazon ECR
@@ -100,15 +110,19 @@ jobs:
       - name: Tag Images for Production
         env:
           PROD_ECR_REGISTRY: ${{ secrets.PROD_ECR_REGISTRY }}
-        run: | 
+          VERSION: ${{ steps.version.outputs.content }}
+        run: |
           docker tag base $PROD_ECR_REGISTRY:$GITHUB_SHA
+          docker tag base $PROD_ECR_REGISTRY:$VERSION
           docker tag base $PROD_ECR_REGISTRY:latest
 
       - name: Push all containers to production Amazon ECR
         env:
           PROD_ECR_REGISTRY: ${{ secrets.PROD_ECR_REGISTRY }}
+          VERSION: ${{ steps.version.outputs.content }}
         run: |
           docker push $PROD_ECR_REGISTRY:$GITHUB_SHA
+          docker push $PROD_ECR_REGISTRY:$VERSION
           docker push $PROD_ECR_REGISTRY:latest
 
       - name: Logout of Production Amazon ECR

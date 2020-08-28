@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-28 14:08+0000\n"
+"POT-Creation-Date: 2020-08-28 15:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -296,9 +296,11 @@ msgstr "Z comme zèbre."
 msgid "Something went wrong. Contact your manager."
 msgstr "Une erreur est survenue. Veuillez contacter votre superviseur."
 
-#: portal/settings.py:307
+#: portal/settings.py:311
 msgid "This account has been locked due to too many failed log in attempts."
 msgstr ""
+"Ce compte a été verrouillé en raison d'un trop grand nombre de tentatives "
+"d'ouverture de session infructueuses."
 
 #: portal/templates/403_csrf.html:4 portal/templates/403_csrf.html:7
 msgid "Forbidden"
@@ -319,14 +321,18 @@ msgstr ""
 "Veuillez utiliser <a href=\"%(login_url)s\">le site principal pour vous "
 "connecter</a>."
 
-#: portal/templates/base.html:30 portal/templates/base.html:45
+#: portal/templates/base.html:34 portal/templates/base.html:52
 #: profiles/utils/__init__.py:25
 msgid "COVID Alert Portal"
 msgstr "Portail Alerte COVID"
 
-#: portal/templates/base.html:30
+#: portal/templates/base.html:34
 msgid "— COVID Alert Portal"
 msgstr "— Portail Alerte COVID"
+
+#: portal/templates/base.html:38
+msgid "Skip to main content"
+msgstr "Passer au contenu principal"
 
 #: portal/templates/includes/FIP_header.html:6
 #: portal/templates/includes/FIP_header.html:8
@@ -554,12 +560,10 @@ msgstr "Modifier votre nom"
 
 #: profiles/forms.py:99
 #: profiles/templates/profiles/healthcareuser_detail.html:59
-#| msgid "Change your phone number"
 msgid "Change your mobile phone number"
 msgstr "Modifier votre numéro de téléphone"
 
 #: profiles/forms.py:101
-#| msgid "Confirm your phone number"
 msgid "Confirm your mobile phone number"
 msgstr "Confirmez votre numéro de téléphone mobile"
 
@@ -589,12 +593,10 @@ msgid "Enter the same password as before, for verification."
 msgstr "Saississez de nouveau votre mot de passe"
 
 #: profiles/forms.py:189
-#| msgid "Change password"
 msgid "New password"
 msgstr "Modifier mon mot de passe"
 
 #: profiles/forms.py:195
-#| msgid "Password confirmation"
 msgid "New password confirmation"
 msgstr "Confirmation de votre mot de passe"
 
@@ -604,7 +606,6 @@ msgstr "Nom complet"
 
 #: profiles/forms.py:214
 #: profiles/templates/profiles/healthcareuser_detail.html:52
-#| msgid "Change phone number"
 msgid "Mobile phone number"
 msgstr "Modifier le numéro de téléphone"
 
@@ -637,7 +638,7 @@ msgstr "L’invitation n’a pu être envoyée."
 msgid ""
 "You cannot invite %(email)s to create an account because @%(domain)s is not "
 "on the portal’s safelist."
-msgstr "Vous ne pouvez pas inviter %(email)s parce que le domaine @%(domain)s n'est pas préapprouvé."
+msgstr ""
 
 #: profiles/forms.py:333 profiles/forms.py:366
 msgid "Token"
@@ -738,15 +739,12 @@ msgid "Invitation sent to %(email)s"
 msgstr "Invitation envoyée à %(email)s"
 
 #: profiles/templates/invitations/templates/invite_complete.html:11
-#| msgid ""
-#| "They will receive an email with a link to create their account. The link "
-#| "will expire in 3 days."
 msgid ""
 "They will receive an email with a link to create their account. The link "
 "will expire in 24 hours."
 msgstr ""
 "Cette personne recevra un courriel contenant un lien pour créer son compte. "
-"Le lien expire après 3 jours."
+"Le lien expire après 24 heures."
 
 #: profiles/templates/invitations/templates/invite_complete.html:13
 msgid "Add another account"
@@ -899,7 +897,6 @@ msgid "Change"
 msgstr "Mettre à jour"
 
 #: profiles/templates/profiles/healthcareuser_detail.html:61
-#| msgid "Change phone number"
 msgid "Change mobile phone number"
 msgstr "Modifier le numéro de téléphone"
 
@@ -1449,7 +1446,7 @@ msgid ": Your portal account"
 msgstr " : votre compte pour le Portail"
 
 #: profiles/views.py:350
-#| msgid "Delete account for %(email)s"
+#, python-format
 msgid "You deleted the account for ‘%(email)s’."
 msgstr "Effacer le compte associé à %(email)s"
 
