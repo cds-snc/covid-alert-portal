@@ -115,3 +115,11 @@ class HealthcareUser(AbstractBaseUser):
         """Is the user a member of staff?"""
         # Only superusers can use the django backend
         return self.is_superuser
+
+
+class AuthorizedDomain(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    domain = models.CharField(max_length=256, unique=True)
+
+    def __str__(self):
+        return self.domain

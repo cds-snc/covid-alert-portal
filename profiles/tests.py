@@ -12,9 +12,8 @@ from datetime import datetime, timedelta
 from freezegun import freeze_time
 
 from .forms import SignupForm, HealthcarePhoneEditForm
-from .models import HealthcareProvince, HealthcareUser
+from .models import HealthcareProvince, HealthcareUser, AuthorizedDomain
 from .validators import BannedPasswordValidator
-from .views import InvitationView
 
 User = get_user_model()
 
@@ -90,6 +89,7 @@ class AdminUserTestCase(TestCase):
         self.credentials["id"] = self.user.id
 
         self.invited_email = "invited@test.com"
+        AuthorizedDomain.objects.create(domain="test.com")
 
     def login(self, credentials: dict = None, login_2fa: bool = True):
         if credentials is None:
@@ -452,6 +452,29 @@ class InviteFlow(AdminUserTestCase):
             self.assertContains(
                 response, "<h1>Invitation sent to {}</h1>".format(self.invited_email)
             )
+
+    def test_send_invitation_invalid_domain(self):
+        self.login()
+        domain = "example.com"
+        email = "email@" + domain
+        response = self.client.post(reverse("invite"), {"email": email}, follow=True)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            f"You cannot invite {email} to create an account because @{domain} is not on the portal",
+        )
+
+    def test_send_invitation_invalid_domain_with_wildcard(self):
+        self.login()
+        domain = "example.com"
+        email = "email@" + domain
+        AuthorizedDomain.objects.create(domain="*")
+
+        response = self.client.post(reverse("invite"), {"email": email}, follow=True)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Invitation sent to {}</h1>".format(email))
 
     def test_see_invitations_list_with_pending_invite(self):
         invitation = Invitation.create(

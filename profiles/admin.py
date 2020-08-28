@@ -8,7 +8,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationForm
 from django.contrib.admin.templatetags.admin_list import _boolean_icon
 
-from profiles.models import HealthcareUser, HealthcareProvince
+from profiles.models import HealthcareUser, HealthcareProvince, AuthorizedDomain
 
 
 class ProvinceAdmin(admin.ModelAdmin):
@@ -142,6 +142,7 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(HealthcareProvince, ProvinceAdmin)
 admin.site.register(HealthcareUser, UserAdmin)
+admin.site.register(AuthorizedDomain)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)
