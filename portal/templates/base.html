@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-{% load static i18n new_relic settings %}
+{% load static i18n settings %}
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
   <head>
-    {% new_relic %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     {% if request.user.is_authenticated %}
