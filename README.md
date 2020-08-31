@@ -75,7 +75,7 @@ The following are only relevant for the `smtp` backend.
 
 #### New Relic configuration
 
-We use New Relic to monitor for errors in production.
+We use New Relic to monitor for server side errors and application performance in production and staging.  We do not leverage New Relic client (browser side) metric reporting.
 
 - `NEW_RELIC_APP_NAME`: The app name set up in New Relic.
 
