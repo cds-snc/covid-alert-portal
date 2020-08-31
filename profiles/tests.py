@@ -12,9 +12,8 @@ from datetime import datetime, timedelta
 from freezegun import freeze_time
 
 from .forms import SignupForm, HealthcarePhoneEditForm
-from .models import HealthcareProvince, HealthcareUser
+from .models import HealthcareProvince, HealthcareUser, AuthorizedDomain
 from .validators import BannedPasswordValidator
-from .views import InvitationView
 
 User = get_user_model()
 
@@ -90,6 +89,7 @@ class AdminUserTestCase(TestCase):
         self.credentials["id"] = self.user.id
 
         self.invited_email = "invited@test.com"
+        AuthorizedDomain.objects.create(domain="test.com")
 
     def login(self, credentials: dict = None, login_2fa: bool = True):
         if credentials is None:
@@ -290,7 +290,9 @@ class i18nTestView(TestCase):
         """
         Test we end up on French start page from root url if "Accept-Language" header is "fr"
         """
-        client = Client(HTTP_ACCEPT_LANGUAGE="fr",)
+        client = Client(
+            HTTP_ACCEPT_LANGUAGE="fr",
+        )
         response = client.get("/", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.request["PATH_INFO"], "/fr/login/")
@@ -299,7 +301,9 @@ class i18nTestView(TestCase):
         """
         Test we end up on English start page from root url if "Accept-Language" header is "en"
         """
-        client = Client(HTTP_ACCEPT_LANGUAGE="en",)
+        client = Client(
+            HTTP_ACCEPT_LANGUAGE="en",
+        )
         response = client.get("/", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.request["PATH_INFO"], "/en/login/")
@@ -448,6 +452,29 @@ class InviteFlow(AdminUserTestCase):
             self.assertContains(
                 response, "<h1>Invitation sent to {}</h1>".format(self.invited_email)
             )
+
+    def test_send_invitation_invalid_domain(self):
+        self.login()
+        domain = "example.com"
+        email = "email@" + domain
+        response = self.client.post(reverse("invite"), {"email": email}, follow=True)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            f"You cannot invite {email} to create an account because @{domain} is not on the portal",
+        )
+
+    def test_send_invitation_invalid_domain_with_wildcard(self):
+        self.login()
+        domain = "example.com"
+        email = "email@" + domain
+        AuthorizedDomain.objects.create(domain="*")
+
+        response = self.client.post(reverse("invite"), {"email": email}, follow=True)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Invitation sent to {}</h1>".format(email))
 
     def test_see_invitations_list_with_pending_invite(self):
         invitation = Invitation.create(
@@ -670,7 +697,9 @@ class ProfileView(AdminUserTestCase):
         response = self.client.get(reverse("user_profile", kwargs={"pk": superuser.id}))
         self.assertEqual(response.status_code, 403)
 
-    def test_edit_profile_page_if_admin_user_viewing_staff_same_province_user(self,):
+    def test_edit_profile_page_if_admin_user_viewing_staff_same_province_user(
+        self,
+    ):
         self.login()
 
         user2 = User.objects.create_user(**get_other_credentials(is_admin=False))
@@ -682,7 +711,9 @@ class ProfileView(AdminUserTestCase):
             response, '<a href="/en/profiles/{}/edit/name">'.format(user2.id)
         )
 
-    def test_no_edit_profile_page_if_admin_user_viewing_admin_same_province_user(self,):
+    def test_no_edit_profile_page_if_admin_user_viewing_admin_same_province_user(
+        self,
+    ):
         self.login()
 
         user2 = User.objects.create_user(**get_other_credentials(is_admin=True))
@@ -803,7 +834,8 @@ class ProfileEditView(AdminUserTestCase):
         # post to update name
         post_data = {"name": "Don Draper"}
         response = self.client.post(
-            reverse("user_edit_name", kwargs={"pk": self.user.id}), post_data,
+            reverse("user_edit_name", kwargs={"pk": self.user.id}),
+            post_data,
         )
         self.assertEqual(response.status_code, 302)
         user = HealthcareUser.objects.get(pk=self.user.id)
@@ -864,7 +896,8 @@ class ProfileEditView(AdminUserTestCase):
             "phone_number2": "+12125552323",
         }
         response = self.client.post(
-            reverse("user_edit_phone", kwargs={"pk": self.user.id}), post_data,
+            reverse("user_edit_phone", kwargs={"pk": self.user.id}),
+            post_data,
         )
         self.assertContains(
             response,
@@ -876,7 +909,8 @@ class ProfileEditView(AdminUserTestCase):
             "phone_number2": number,
         }
         response = self.client.post(
-            reverse("user_edit_phone", kwargs={"pk": self.user.id}), post_data,
+            reverse("user_edit_phone", kwargs={"pk": self.user.id}),
+            post_data,
         )
         self.assertEqual(response.status_code, 302)
         user = HealthcareUser.objects.get(pk=self.user.id)

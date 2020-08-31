@@ -3,9 +3,10 @@ from django.contrib.auth.forms import (
     PasswordResetForm,
     UserCreationForm,
 )
+from django import forms
+from django.conf import settings
 from django.contrib.auth import password_validation
 from django.contrib.auth.forms import SetPasswordForm
-from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
@@ -22,7 +23,7 @@ from invitations.forms import (
 )
 
 from portal.forms import HealthcareBaseForm
-from .models import HealthcareUser, HealthcareProvince
+from .models import HealthcareUser, HealthcareProvince, AuthorizedDomain
 from .utils import generate_2fa_code
 
 
@@ -146,7 +147,8 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
             raise ValidationError(
-                self.error_messages["password_mismatch"], code="password_mismatch",
+                self.error_messages["password_mismatch"],
+                code="password_mismatch",
             )
         return password2
 
@@ -190,7 +192,9 @@ class HealthcarePasswordResetConfirm(HealthcareBaseForm, SetPasswordForm):
         help_text=password_validation.password_validators_help_text_html(),
     )
     new_password2 = forms.CharField(
-        label=_("New password confirmation"), strip=False, widget=forms.PasswordInput(),
+        label=_("New password confirmation"),
+        strip=False,
+        widget=forms.PasswordInput(),
     )
 
 
@@ -256,7 +260,8 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
             and phone_number != phone_number_confirmation
         ):
             raise forms.ValidationError(
-                _("The phone numbers didn’t match."), code="invalid",
+                _("The phone numbers didn’t match."),
+                code="invalid",
             )
         return phone_number_confirmation
 
@@ -272,6 +277,24 @@ class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
         # Delete all non-accepted invitations for the same email, if they exist
         Invitation.objects.filter(email__iexact=email, accepted=False).delete()
         return super().validate_invitation(email)
+
+    def clean_email(self):
+        email = super().clean_email()
+        try:
+            # If the email is invalid, an error would have been raised by
+            # the CleanEmailMixin
+            domain = email[email.find("@") + 1 :]
+            AuthorizedDomain.objects.get(domain=domain)
+        except AuthorizedDomain.DoesNotExist:
+            if settings.DEBUG is False or settings.TESTING is True:
+                if AuthorizedDomain.objects.filter(domain="*").count() == 0:
+                    raise forms.ValidationError(
+                        _(
+                            "You cannot invite %(email)s to create an account because @%(domain)s is not on the portal’s safelist."
+                        )
+                        % {"domain": domain, "email": email}
+                    )
+        return email
 
     # https://github.com/bee-keeper/django-invitations/blob/9069002f1a0572ae37ffec21ea72f66345a8276f/invitations/forms.py#L60
     def save(self, *args, **kwargs):
