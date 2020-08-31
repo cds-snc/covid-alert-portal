@@ -256,3 +256,44 @@ resource "aws_cloudwatch_metric_alarm" "ddos_detected_route53" {
     ResourceArn = "arn:aws:route53:::hostedzone/${aws_route53_zone.covidportal.zone_id}"
   }
 }
+
+###
+# AWS CodeDeploy Events
+###
+
+resource "aws_cloudwatch_event_target" "codedeploy_sns" {
+  target_id = "CodeDeploy_SNS"
+  rule = aws_cloudwatch_event_rule.codedeploy_sns.name
+  arn = aws_sns_topic.alert_warning.arn
+
+  input_transformer {
+    input_paths = {
+      "status" = "$.detail.state"
+      "deploymentID" = "$.detail.deploymentID"
+    }
+    input_template = "\"CloudDeploy for the Staging COVID Alert Portal has registered a <status> for deployment: <deploymentID>\""
+
+  }
+}
+
+resource "aws_cloudwatch_event_rule" "codedeploy_sns" {
+  name = "alert-on-codedeploy-status"
+  description = "Alert if CodeDeploy suceeds or fails during deployment"
+
+  event_pattern = <<PATTERN
+  {
+    "source": [
+      "aws.codedeploy"
+    ],
+    "detail-type": [
+      "CodeDeploy Deployment State-change Notification"
+    ],
+    "detail": {
+      "state": [
+        "SUCCESS",
+        "FAILURE"
+      ]
+    }
+  }
+  PATTERN
+}
