@@ -269,10 +269,9 @@ resource "aws_cloudwatch_event_target" "codedeploy_sns" {
   input_transformer {
     input_paths = {
       "status" = "$.detail.state"
-      "deploymentID" = "$.detail.deploymentID"
+      "deploymentID" = "$.detail.deploymentId"
     }
     input_template = "\"CloudDeploy for the Staging COVID Alert Portal has registered a <status> for deployment: <deploymentID>\""
-
   }
 }
 
