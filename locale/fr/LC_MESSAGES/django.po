@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-28 15:44+0000\n"
+"POT-Creation-Date: 2020-09-01 17:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -321,16 +321,16 @@ msgstr ""
 "Veuillez utiliser <a href=\"%(login_url)s\">le site principal pour vous "
 "connecter</a>."
 
-#: portal/templates/base.html:34 portal/templates/base.html:52
+#: portal/templates/base.html:33 portal/templates/base.html:51
 #: profiles/utils/__init__.py:25
 msgid "COVID Alert Portal"
 msgstr "Portail Alerte COVID"
 
-#: portal/templates/base.html:34
+#: portal/templates/base.html:33
 msgid "— COVID Alert Portal"
 msgstr "— Portail Alerte COVID"
 
-#: portal/templates/base.html:38
+#: portal/templates/base.html:37
 msgid "Skip to main content"
 msgstr "Passer au contenu principal"
 
@@ -379,18 +379,22 @@ msgstr ""
 "COVID</a>"
 
 #: portal/templates/includes/footer.html:10
+msgid "Quick guide"
+msgstr "Guide rapide"
+
+#: portal/templates/includes/footer.html:11
 #: profiles/templates/profiles/privacy.html:5
 #: profiles/templates/profiles/privacy.html:9
 msgid "Privacy"
 msgstr "Confidentialité"
 
-#: portal/templates/includes/footer.html:11
+#: portal/templates/includes/footer.html:12
 #: profiles/templates/profiles/terms.html:5
 #: profiles/templates/profiles/terms.html:9
 msgid "Terms of use"
 msgstr "Conditions d’utilisation"
 
-#: portal/templates/includes/footer.html:14
+#: portal/templates/includes/footer.html:15
 msgid "Symbol of the Government of Canada"
 msgstr "Symbole du gouvernement du Canada"
 
@@ -633,22 +637,22 @@ msgstr "L’adresse courriel existe déjà"
 msgid "An invitation hasn’t been sent to this address"
 msgstr "L’invitation n’a pu être envoyée."
 
-#: profiles/forms.py:292
+#: profiles/forms.py:293
 #, python-format
 msgid ""
 "You cannot invite %(email)s to create an account because @%(domain)s is not "
 "on the portal’s safelist."
 msgstr ""
 
-#: profiles/forms.py:333 profiles/forms.py:366
+#: profiles/forms.py:334 profiles/forms.py:367
 msgid "Token"
 msgstr "Clef"
 
-#: profiles/forms.py:355
+#: profiles/forms.py:356
 msgid "Unable to validate the token with the device."
 msgstr ""
 
-#: profiles/forms.py:386
+#: profiles/forms.py:387
 msgid "The token is not valid for this device."
 msgstr ""
 
@@ -1332,6 +1336,116 @@ msgstr ""
 "Vous avez également la possibilité de déposer une plainte auprès du "
 "Commissariat à la protection de la vie privée du Canada quant à la façon "
 "dont le SCT traite vos renseignements personnels.</p> "
+
+#: profiles/templates/profiles/quick-guide.html:5
+#: profiles/templates/profiles/quick-guide.html:9
+msgid "Quick guide to the portal"
+msgstr "Guide rapide pour le portail"
+
+#: profiles/templates/profiles/quick-guide.html:10
+msgid ""
+"\n"
+"        <h2>Part of the COVID Alert system</h2>\n"
+"        <p>The COVID Alert Portal is part of the system behind Canada’s free "
+"exposure notification app, <a href=\"https://www.canada.ca/en/public-health/"
+"services/diseases/coronavirus-disease-covid-19/covid-alert.html\" target="
+"\"_blank\">COVID Alert</a>.</p>\n"
+"        <p>COVID Alert does not replace manual contact tracing by local "
+"health authorities. It is just one part of the public health effort to limit "
+"the spread of COVID-19.</p>\n"
+"\n"
+"        <h3>One-time keys turn on exposure notifications</h3>\n"
+"        <p>Patients with COVID-19 can choose to notify people they’ve been "
+"near of possible exposure. Notifications do not give information about the "
+"patient or time of exposure.</p>\n"
+"        <p>To notify people, the patient enters a one-time key in the app. "
+"The key confirms the patient has been diagnosed with COVID-19.  Then the app "
+"guides patients through the steps to notify people of possible exposure.</"
+"p>\n"
+"\n"
+"        <h3>Keys expire in 24 hours</h3>\n"
+"        <p>To prevent false reports, only authorized healthcare workers can "
+"generate and give one-time keys. If the key expires before the patient "
+"enters it, they will not be able to get a new key.</p>\n"
+"\n"
+"        <h2>Create an account to generate keys</h2>\n"
+"        <p>You’ll get an email if you’re invited to create a portal account. "
+"Check your spam folder for the invitation.</p>\n"
+"        <p>Both administrators and healthcare workers can generate one-time "
+"keys.</p>\n"
+"        <p>Administrators can also:</p>\n"
+"        <ul>\n"
+"            <li>Invite healthcare workers to create portal accounts.</li>\n"
+"            <li>Delete portal accounts.</li>\n"
+"        </ul>\n"
+"\n"
+"        <h3>Keep a mobile phone with you</h3>\n"
+"        <p>The portal texts a security code to your mobile phone:</p>\n"
+"        <ul>\n"
+"            <li>When you create your account.</li>\n"
+"            <li>Anytime you log in.</li>\n"
+"        </ul>\n"
+"        <h3>Check your browser is compatible</h3>\n"
+"        <p>The portal works on any mobile or desktop device using a browser "
+"with automatic updates, including Chrome, Edge, Firefox, Opera and Safari. "
+"It’s also supported on Internet Explorer 11.</p>\n"
+"        <h2>If the portal is down</h2>\n"
+"        <h3>Follow local procedures for patients who need keys</h3>\n"
+"        <p>Public health authorities must determine what to do for:</p>\n"
+"        <ul>\n"
+"            <li>Situations when an individual healthcare worker cannot use "
+"their portal account.</li>\n"
+"            <li>System-wide portal outages.</li>\n"
+"        </ul>\n"
+"        <h3>Contact us for tech support</h3>\n"
+"        <p>To ask questions or give feedback about the portal, <a href="
+"\"mailto:assistance+healthcare@cds-snc.ca\">contact the Canadian Digital "
+"Service</a>.</p>\n"
+"    "
+msgstr ""
+"\n"
+"<h2>Une composante du système Alerte COVID</h2><p>Le portail Alerte COVID "
+"fait partie du système sous-jacent à l’application mobile gratuite de "
+"notification d’exposition du Canada nommée <a href=\"https://www.canada.ca/"
+"fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-"
+"covid.html\" target=\"_blank\">Alerte COVID</a>.</p><p>Alerte COVID ne "
+"remplace pas la recherche manuelle de contacts effectuée par les autorités "
+"sanitaires locales. Il s’agit seulement de l’un des nombreux efforts de "
+"santé publique visant à limiter la propagation de la COVID-19.</p><h3>Clés à "
+"usage uniques permettant d’activer les notifications d’exposition</h3><p>Les "
+"patients chez qui la COVID-19 a été diagnostiquée peuvent décider de "
+"notifier les personnes qu’ils ont côtoyées d’une exposition potentielle à la "
+"COVID-19. Les notifications ne fournissent aucune information sur le patient "
+"ou sur le moment de l’exposition.</p><p>Pour notifier les personnes, le "
+"patient doit saisir une clé à usage unique dans l’application. Cette clé "
+"confirme que le patient a reçu un diagnostic de COVID-19. L’application "
+"guide ensuite le patient étape par étape pour notifier les autres personnes "
+"d’une exposition potentielle.</p><h3>Expiration des clés après 24 heures</"
+"h3><p>Pour empêcher les faux signalements, seuls les professionnels de la "
+"santé autorisés peuvent générer et fournir des clés à usage unique. Si une "
+"clé expire avant d’être saisie dans l’application, le patient ne pourra pas "
+"en recevoir une nouvelle.</p><h3>Création d’un compte pour générer des clés</"
+"h3><p>Vous recevrez un courriel si vous êtes invité à créer un compte pour "
+"le portail. Vérifiez que l’invitation n’est pas dans vos pourriels.</"
+"p><p>Tant les administrateurs du portail que les professionnels de la santé "
+"peuvent générer des clés à usage unique.</p><p>Les administrateurs peuvent "
+"également :</p><ul><li>Inviter des professionnels de la santé à créer un "
+"compte pour le portail.</li><li>Supprimer des comptes pour le portail.</li></"
+"ul><h3>Ayez un téléphone mobile avec vous</h3><p>Le portail vous envoie un "
+"code de sécurité par message texte :</p><ul><li>Au moment de créer votre "
+"compte.</li><li>Lors de chaque connexion.</li></ul><h3>Vérifiez la "
+"compatibilité de votre navigateur</h3><p>Le portail fonctionne sur tout "
+"appareil mobile ou de bureau dont le navigateur a des mises à jour "
+"automatiques, comme Chrome, Edge, Firefox, Opera et Safari. Le portail est "
+"aussi compatible avec Internet Explorer 11.</p><h2>En cas d’interruption de "
+"service du portail</h2><h3>Suivez le protocole local pour les patients ayant "
+"besoin d’une clé</h3><p>Les autorités sanitaires doivent définir un "
+"protocole pour :</p><ul>    <li>Les situations où seul un professionnel de "
+"la santé ne peut pas utiliser son compte pour le portail.</li>    <li>Les "
+"interruptions de service généralisées du portail.</li></ul><h3>Contactez-"
+"nous pour obtenir du soutien technique</h3><p>Pour des questions ou des "
+"commentaires sur le portail, <a href=\"mailto:assistance+healthcare@cds-snc."
+"ca\">contactez le Service numérique canadien</a>.</p>"
 
 #: profiles/templates/profiles/signup.html:6
 #: profiles/templates/profiles/signup.html:13

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Quick guide to the portal" %}
+{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Quick guide to the portal" %}</h1>
+    {% blocktrans %}
+        <h2>Part of the COVID Alert system</h2>
+        <p>The COVID Alert Portal is part of the system behind Canada’s free exposure notification app, <a href="https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html" target="_blank">COVID Alert</a>.</p>
+        <p>COVID Alert does not replace manual contact tracing by local health authorities. It is just one part of the public health effort to limit the spread of COVID-19.</p>
+
+        <h3>One-time keys turn on exposure notifications</h3>
+        <p>Patients with COVID-19 can choose to notify people they’ve been near of possible exposure. Notifications do not give information about the patient or time of exposure.</p>
+        <p>To notify people, the patient enters a one-time key in the app. The key confirms the patient has been diagnosed with COVID-19.  Then the app guides patients through the steps to notify people of possible exposure.</p>
+
+        <h3>Keys expire in 24 hours</h3>
+        <p>To prevent false reports, only authorized healthcare workers can generate and give one-time keys. If the key expires before the patient enters it, they will not be able to get a new key.</p>
+
+        <h2>Create an account to generate keys</h2>
+        <p>You’ll get an email if you’re invited to create a portal account. Check your spam folder for the invitation.</p>
+        <p>Both administrators and healthcare workers can generate one-time keys.</p>
+        <p>Administrators can also:</p>
+        <ul>
+            <li>Invite healthcare workers to create portal accounts.</li>
+            <li>Delete portal accounts.</li>
+        </ul>
+
+        <h3>Keep a mobile phone with you</h3>
+        <p>The portal texts a security code to your mobile phone:</p>
+        <ul>
+            <li>When you create your account.</li>
+            <li>Anytime you log in.</li>
+        </ul>
+        <h3>Check your browser is compatible</h3>
+        <p>The portal works on any mobile or desktop device using a browser with automatic updates, including Chrome, Edge, Firefox, Opera and Safari. It’s also supported on Internet Explorer 11.</p>
+        <h2>If the portal is down</h2>
+        <h3>Follow local procedures for patients who need keys</h3>
+        <p>Public health authorities must determine what to do for:</p>
+        <ul>
+            <li>Situations when an individual healthcare worker cannot use their portal account.</li>
+            <li>System-wide portal outages.</li>
+        </ul>
+        <h3>Contact us for tech support</h3>
+        <p>To ask questions or give feedback about the portal, <a href="mailto:assistance+healthcare@cds-snc.ca">contact the Canadian Digital Service</a>.</p>
+    {% endblocktrans %}
+{% endblock %}
