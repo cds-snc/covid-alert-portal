@@ -92,35 +92,3 @@ resource "aws_iam_role_policy_attachment" "codedeploy" {
   role       = aws_iam_role.codedeploy.name
   policy_arn = "arn:aws:iam::aws:policy/AWSCodeDeployRoleForECS"
 }
-
-
-###
-# AWS IAM - CloudWatch
-###
-resource "aws_sns_topic_policy" "cloudwatch_events_sns" {
-  arn = aws_sns_topic.alert_warning.arn
-
-  policy = data.aws_iam_policy_document.cloudwatch_events_sns_topic_policy.json
-}
-
-data "aws_iam_policy_document" "cloudwatch_events_sns_topic_policy" {
-
-  statement {
-    actions = [
-      "SNS:Subscribe",
-      "SNS:Publish",
-      "SNS:GetTopicAttributes",
-    ]
-
-    effect = "Allow"
-
-    resources = [
-      aws_sns_topic.alert_warning.arn
-    ]
-
-    principals {
-      type        = "Service"
-      identifiers = ["events.amazonaws.com"]
-    }
-  }
-}
