@@ -88,7 +88,9 @@ class CodeView(Is2FAMixin, ThrottledMixin, TemplateView):
             f"{diagnosis_code[0:3]} {diagnosis_code[3:6]} " f"{diagnosis_code[6:10]}"
         )
 
-        return self.render_to_response({"code": diagnosis_code, "expiry": expiry},)
+        return self.render_to_response(
+            {"code": diagnosis_code, "expiry": expiry},
+        )
 
     def limit_reached(self):
         logger.error(

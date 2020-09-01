@@ -66,7 +66,9 @@ class HealthcareUserManager(BaseUserManager):
 class HealthcareUser(AbstractBaseUser):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     email = models.EmailField(
-        verbose_name="email address", max_length=255, unique=True,
+        verbose_name="email address",
+        max_length=255,
+        unique=True,
     )
     name = models.CharField(max_length=200, verbose_name=_("Your full name"))
     province = models.ForeignKey(HealthcareProvince, on_delete=models.PROTECT)
@@ -113,3 +115,9 @@ class HealthcareUser(AbstractBaseUser):
         """Is the user a member of staff?"""
         # Only superusers can use the django backend
         return self.is_superuser
+
+
+class HealthcareFailedAccessAttempt(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid4)
+    time = models.DateTimeField(_("Attempt Time"), auto_now_add=True, editable=False)
+    username = models.CharField(max_length=256, null=False)
