@@ -33,7 +33,7 @@ resource "aws_sns_topic_subscription" "topic_critical" {
 ###
 
 resource "aws_sns_topic_policy" "cloudwatch_events_sns" {
-  arn = aws_sns_topic.alert_warning.arn
+  arn    = aws_sns_topic.alert_warning.arn
   policy = data.aws_iam_policy_document.cloudwatch_events_sns_topic_policy.json
 }
 
@@ -41,7 +41,7 @@ data "aws_iam_policy_document" "cloudwatch_events_sns_topic_policy" {
 
   # Default Policy
   statement {
-    sid = "SNS_Default_Policy"
+    sid    = "SNS_Default_Policy"
     effect = "Allow"
     actions = [
       "SNS:Subscribe",
@@ -75,7 +75,7 @@ data "aws_iam_policy_document" "cloudwatch_events_sns_topic_policy" {
   }
 
   statement {
-    sid = "SNS_Publish_statement"
+    sid    = "SNS_Publish_statement"
     effect = "Allow"
     actions = [
       "sns:Publish"
@@ -84,7 +84,7 @@ data "aws_iam_policy_document" "cloudwatch_events_sns_topic_policy" {
     resources = [
       aws_sns_topic.alert_warning.arn
     ]
-    
+
     principals {
       type        = "Service"
       identifiers = ["events.amazonaws.com"]
