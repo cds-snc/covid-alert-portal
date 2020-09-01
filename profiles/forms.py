@@ -145,8 +145,7 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
             raise ValidationError(
-                self.error_messages["password_mismatch"],
-                code="password_mismatch",
+                self.error_messages["password_mismatch"], code="password_mismatch",
             )
         return password2
 
@@ -244,8 +243,7 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
             and phone_number != phone_number_confirmation
         ):
             raise forms.ValidationError(
-                _("The phone numbers didn’t match."),
-                code="invalid",
+                _("The phone numbers didn’t match."), code="invalid",
             )
         return phone_number_confirmation
 

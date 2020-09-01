@@ -23,20 +23,10 @@ urlpatterns = [
         name="invite_complete",
     ),
     re_path(r"signup/$", views.SignUpView.as_view(), name="signup"),
+    path("profiles/", views.ProfilesView.as_view(), name="profiles",),
+    path("profiles/<uuid:pk>", views.UserProfileView.as_view(), name="user_profile",),
     path(
-        "profiles/",
-        views.ProfilesView.as_view(),
-        name="profiles",
-    ),
-    path(
-        "profiles/<uuid:pk>",
-        views.UserProfileView.as_view(),
-        name="user_profile",
-    ),
-    path(
-        "profiles/<uuid:pk>/delete",
-        views.UserDeleteView.as_view(),
-        name="user_delete",
+        "profiles/<uuid:pk>/delete", views.UserDeleteView.as_view(), name="user_delete",
     ),
     path(
         "profiles/<uuid:pk>/edit/name",
@@ -67,16 +57,8 @@ urlpatterns = [
         LoginView.as_view(authentication_form=forms.HealthcareAuthenticationForm),
         name="login",
     ),
-    path(
-        "login-2fa/",
-        views.Login2FAView.as_view(),
-        name="login-2fa",
-    ),
-    path(
-        "resend-2fa/",
-        views.Resend2FAView.as_view(),
-        name="resend-2fa",
-    ),
+    path("login-2fa/", views.Login2FAView.as_view(), name="login-2fa",),
+    path("resend-2fa/", views.Resend2FAView.as_view(), name="resend-2fa",),
     path(
         "session-timed-out/", views.redirect_after_timed_out, name="session_timed_out"
     ),
@@ -90,26 +72,14 @@ urlpatterns = [
         TemplateView.as_view(template_name="profiles/terms.html"),
         name="terms",
     ),
-    path(
-        "yubikey/create",
-        views.YubikeyCreateView.as_view(),
-        name="yubikey_create",
-    ),
-    path(
-        "yubikey/verify",
-        views.YubikeyVerifyView.as_view(),
-        name="yubikey_verify",
-    ),
+    path("yubikey/create", views.YubikeyCreateView.as_view(), name="yubikey_create",),
+    path("yubikey/verify", views.YubikeyVerifyView.as_view(), name="yubikey_verify",),
     path(
         "yubikey/<int:pk>/delete",
         views.YubikeyDeleteView.as_view(),
         name="yubikey_delete",
     ),
-    path(
-        "switch-language/",
-        views.switch_language,
-        name="switch_language",
-    ),
+    path("switch-language/", views.switch_language, name="switch_language",),
 ]
 
 # The PasswordResetView doesn't have any html template by default
@@ -141,8 +111,7 @@ urlpatterns += [
     path(
         "reset/<uidb64>/<token>/",
         login_views.PasswordResetConfirmView.as_view(
-            post_reset_login=True,
-            post_reset_login_backend="axes.backends.AxesBackend",
+            post_reset_login=True, post_reset_login_backend="axes.backends.AxesBackend",
         ),
         name="password_reset_confirm",
     ),

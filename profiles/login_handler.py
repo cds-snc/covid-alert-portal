@@ -26,14 +26,17 @@ class HealthcareLoginHandler(AxesDatabaseHandler):
 
         username = credentials.get("username")
         HealthcareFailedAccessAttempt.objects.create(username=username)
-        request.axes_locked_out = True
 
-        user_locked_out.send(
-            "axes",
-            request=request,
-            username=username,
-            ip_address=request.axes_ip_address,
-        )
+        attempts = self.get_healthcare_failures(request, credentials)
+        if attempts >= settings.AXES_SLOW_FAILURE_LIMIT:
+            request.axes_locked_out = True
+
+            user_locked_out.send(
+                "axes",
+                request=request,
+                username=username,
+                ip_address=request.axes_ip_address,
+            )
 
     def get_healthcare_failures(self, request: dict, credentials: dict = None) -> int:
         username = credentials.get("username")
