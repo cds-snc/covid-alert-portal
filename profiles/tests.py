@@ -135,6 +135,11 @@ class UnauthenticatedView(TestCase):
         self.assertContains(response, "<h1>Log in</h1>")
         self.assertNotContains(response, '<a href="/en/login/">Log in</a>')
 
+    def test_quick_guide(self):
+        response = self.client.get(reverse("quick_guide"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Quick guide to the portal</h1>")
+
     def test_privacy_page(self):
         response = self.client.get(reverse("privacy"))
         self.assertEqual(response.status_code, 200)
