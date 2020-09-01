@@ -289,7 +289,6 @@ resource "aws_cloudwatch_event_rule" "codedeploy_sns" {
     ],
     "detail": {
       "state": [
-        "SUCCESS",
         "FAILURE"
       ]
     }
