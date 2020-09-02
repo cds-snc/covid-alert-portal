@@ -329,10 +329,6 @@ URL_FR_PRODUCTION = os.getenv(
     "URL_FR_PRODUCTION", "https://portail-alerte-covid.alpha.canada.ca"
 )
 
-# HTTP Security headers configuration
-# "js-agent.newrelic.com", "bam.nr-data.net" and "unsafe-inline" are required by New Relic:
-# https://docs.newrelic.com/docs/browser/new-relic-browser/getting-started/compatibility-requirements-new-relic-browser#csp
-
 CSP_DEFAULT_SRC = [
     "'self'",
     "staging.covid-hcportal.cdssandbox.xyz",
@@ -344,10 +340,8 @@ CSP_FONT_SRC = ["'self'", "fonts.gstatic.com"]
 CSP_SCRIPT_SRC = [
     "'self'",
     "cdnjs.cloudflare.com",
-    "js-agent.newrelic.com",
-    "bam.nr-data.net",
 ]
-CSP_CONNECT_SRC = ["'self'", "bam.nr-data.net"]
+CSP_CONNECT_SRC = ["'self'"]
 
 FRESHDESK_API_ENDPOINT = os.getenv("FRESHDESK_API_ENDPOINT")
 FRESHDESK_API_KEY = os.getenv("FRESHDESK_API_KEY")
