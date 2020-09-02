@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.3.0] - 2020-09-02
+
+### Added
+
+- Adding a second layer of user throttling. After 100 failed logins in a 30 days window, the user will be blocked for 24 hours.
+- New Quick Guide page now available in the footer.
+- A slack notification is now sent on failed Github Actions
+- Github Actions now running terraform check, plan and security scans on deploys (staging repository)
+
+### Updated
+
+- The privacy page has been simplified
+
 ## [1.2.0] - 2020-08-28
 
 ### Added
