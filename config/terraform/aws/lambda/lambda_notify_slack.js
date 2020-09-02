@@ -25,7 +25,8 @@ exports.handler = function(event, context) {
         "keys generated",
         "site table",
         "locked out accounts",
-        "too many invitations"       
+        "too many invitations",
+        "FAILURE",
         ];
     
     for(var dangerMessagesItem in dangerMessages) {

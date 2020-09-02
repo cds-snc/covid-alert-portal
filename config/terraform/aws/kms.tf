@@ -41,6 +41,21 @@ resource "aws_kms_key" "cw" {
           "kms:Decrypt","kms:GenerateDataKey"
       ],
       "Resource": "*"
+    },
+    {
+      "Sid": "CloudwatchEvents",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "events.amazonaws.com"
+    },
+      "Action": [
+        "kms:Encrypt*",
+        "kms:Decrypt*",
+        "kms:ReEncrypt*",
+        "kms:GenerateDataKey*",
+        "kms:Describe*"
+        ],
+        "Resource": "*"
     }
   ]
 }

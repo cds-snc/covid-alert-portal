@@ -81,6 +81,11 @@ urlpatterns = [
         "session-timed-out/", views.redirect_after_timed_out, name="session_timed_out"
     ),
     path(
+        "quick-guide/",
+        TemplateView.as_view(template_name="profiles/quick-guide.html"),
+        name="quick_guide",
+    ),
+    path(
         "privacy/",
         TemplateView.as_view(template_name="profiles/privacy.html"),
         name="privacy",
