@@ -307,6 +307,11 @@ if TESTING:
     OTP_NOTIFY_NO_DELIVERY = True
 
 AXES_FAILURE_LIMIT = 10  # Lockout after 10 failed login attempts
+AXES_SLOW_FAILURE_LIMIT = (
+    100  # Second level of throttling to prevent slow attacks, 100 tries for 30 days
+)
+AXES_SLOW_FAILURE_COOLOFF_TIME = 30  # in days, second level of throttling
+
 AXES_COOLOFF_MESSAGE = _(
     "This account has been locked due to too many failed log in attempts."
 )
@@ -318,6 +323,7 @@ AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
     "HTTP_X_REAL_IP",
     "REMOTE_ADDR",
 ]
+AXES_HANDLER = "profiles.login_handler.HealthcareLoginHandler"
 # Site Setup for Separate Domains
 
 URL_DUAL_DOMAINS = os.getenv("URL_DUAL_DOMAINS", "False") == "True"
