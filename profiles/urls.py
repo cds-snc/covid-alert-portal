@@ -1,4 +1,4 @@
-from django.urls import path, include, re_path
+from django.urls import path, re_path
 from django.views.generic import RedirectView, TemplateView
 from django.contrib.auth.views import PasswordResetView
 from django_otp.views import LoginView
@@ -23,10 +23,20 @@ urlpatterns = [
         name="invite_complete",
     ),
     re_path(r"signup/$", views.SignUpView.as_view(), name="signup"),
-    path("profiles/", views.ProfilesView.as_view(), name="profiles",),
-    path("profiles/<uuid:pk>", views.UserProfileView.as_view(), name="user_profile",),
     path(
-        "profiles/<uuid:pk>/delete", views.UserDeleteView.as_view(), name="user_delete",
+        "profiles/",
+        views.ProfilesView.as_view(),
+        name="profiles",
+    ),
+    path(
+        "profiles/<uuid:pk>",
+        views.UserProfileView.as_view(),
+        name="user_profile",
+    ),
+    path(
+        "profiles/<uuid:pk>/delete",
+        views.UserDeleteView.as_view(),
+        name="user_delete",
     ),
     path(
         "profiles/<uuid:pk>/edit/name",
@@ -57,10 +67,23 @@ urlpatterns = [
         LoginView.as_view(authentication_form=forms.HealthcareAuthenticationForm),
         name="login",
     ),
-    path("login-2fa/", views.Login2FAView.as_view(), name="login-2fa",),
-    path("resend-2fa/", views.Resend2FAView.as_view(), name="resend-2fa",),
+    path(
+        "login-2fa/",
+        views.Login2FAView.as_view(),
+        name="login-2fa",
+    ),
+    path(
+        "resend-2fa/",
+        views.Resend2FAView.as_view(),
+        name="resend-2fa",
+    ),
     path(
         "session-timed-out/", views.redirect_after_timed_out, name="session_timed_out"
+    ),
+    path(
+        "quick-guide/",
+        TemplateView.as_view(template_name="profiles/quick-guide.html"),
+        name="quick_guide",
     ),
     path(
         "privacy/",
@@ -72,22 +95,37 @@ urlpatterns = [
         TemplateView.as_view(template_name="profiles/terms.html"),
         name="terms",
     ),
-    path("yubikey/create", views.YubikeyCreateView.as_view(), name="yubikey_create",),
-    path("yubikey/verify", views.YubikeyVerifyView.as_view(), name="yubikey_verify",),
+    path(
+        "yubikey/create",
+        views.YubikeyCreateView.as_view(),
+        name="yubikey_create",
+    ),
+    path(
+        "yubikey/verify",
+        views.YubikeyVerifyView.as_view(),
+        name="yubikey_verify",
+    ),
     path(
         "yubikey/<int:pk>/delete",
         views.YubikeyDeleteView.as_view(),
         name="yubikey_delete",
     ),
-    path("switch-language/", views.switch_language, name="switch_language",),
+    path(
+        "switch-language/",
+        views.switch_language,
+        name="switch_language",
+    ),
 ]
 
 # The PasswordResetView doesn't have any html template by default
 PasswordResetView.html_email_template_name = (
     "registration/password_reset_email_html.html"
 )
+
 # Django.contrib.auth urls have underscore in them, let's change that for dashes
 urlpatterns += [
+    path("login/", login_views.LoginView.as_view(), name="login"),
+    path("logout/", login_views.LogoutView.as_view(), name="logout"),
     path(
         "password-change/",
         login_views.PasswordChangeView.as_view(),
@@ -111,11 +149,12 @@ urlpatterns += [
     path(
         "reset/<uidb64>/<token>/",
         login_views.PasswordResetConfirmView.as_view(
-            post_reset_login=True, post_reset_login_backend="axes.backends.AxesBackend",
+            post_reset_login=True,
+            post_reset_login_backend="axes.backends.AxesBackend",
+            form_class=forms.HealthcarePasswordResetConfirm,
         ),
         name="password_reset_confirm",
     ),
     path("reset/done/", views.password_reset_complete, name="password_reset_complete"),
     # If this doesnt go last, I can't overwrite the handler for the urls.
-    path("", include("django.contrib.auth.urls")),
 ]

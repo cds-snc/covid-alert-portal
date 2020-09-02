@@ -28,6 +28,9 @@ TESTING = len(sys.argv) > 1 and sys.argv[1] == "test"
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+with open(os.path.join(BASE_DIR, "VERSION")) as version_file:
+    DJVERSION_VERSION = version_file.readline() or "0.0.0"
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -92,6 +95,7 @@ INSTALLED_APPS = [
     "otp_notify",
     "otp_yubikey",
     "easyaudit",
+    "djversion",
 ]
 
 MIDDLEWARE = [
@@ -331,10 +335,6 @@ URL_FR_PRODUCTION = os.getenv(
     "URL_FR_PRODUCTION", "https://portail-alerte-covid.alpha.canada.ca"
 )
 
-# HTTP Security headers configuration
-# "js-agent.newrelic.com", "bam.nr-data.net" and "unsafe-inline" are required by New Relic:
-# https://docs.newrelic.com/docs/browser/new-relic-browser/getting-started/compatibility-requirements-new-relic-browser#csp
-
 CSP_DEFAULT_SRC = [
     "'self'",
     "staging.covid-hcportal.cdssandbox.xyz",
@@ -346,10 +346,8 @@ CSP_FONT_SRC = ["'self'", "fonts.gstatic.com"]
 CSP_SCRIPT_SRC = [
     "'self'",
     "cdnjs.cloudflare.com",
-    "js-agent.newrelic.com",
-    "bam.nr-data.net",
 ]
-CSP_CONNECT_SRC = ["'self'", "bam.nr-data.net"]
+CSP_CONNECT_SRC = ["'self'"]
 
 FRESHDESK_API_ENDPOINT = os.getenv("FRESHDESK_API_ENDPOINT")
 FRESHDESK_API_KEY = os.getenv("FRESHDESK_API_KEY")
