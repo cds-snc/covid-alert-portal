@@ -277,7 +277,7 @@ resource "aws_cloudwatch_event_target" "codedeploy_sns" {
 
 resource "aws_cloudwatch_event_rule" "codedeploy_sns" {
   name        = "alert-on-codedeploy-status"
-  description = "Alert if CodeDeploy suceeds or fails during deployment"
+  description = "Alert if CodeDeploy Fails during deployment"
 
   event_pattern = <<PATTERN
   {
