@@ -226,7 +226,7 @@ class DjangoAdminPanelView(AdminUserTestCase):
         AXES_ENABLED=True,
         AXES_FAILURE_LIMIT=100,
         AXES_SLOW_FAILURE_LIMIT=10,
-        AXES_SLOW_FAILURE_COOLOFF_TIME=5
+        AXES_SLOW_FAILURE_COOLOFF_TIME=5,
     )
     def test_user_slow_lockout(self):
         post_data = {
@@ -252,7 +252,9 @@ class DjangoAdminPanelView(AdminUserTestCase):
             HTTP_USER_AGENT="test-browser",
         )
         self.assertEqual(response.status_code, 403)
-        expiry = datetime.now() + timedelta(days=settings.AXES_SLOW_FAILURE_COOLOFF_TIME, hours=1)
+        expiry = datetime.now() + timedelta(
+            days=settings.AXES_SLOW_FAILURE_COOLOFF_TIME, hours=1
+        )
         with freeze_time(expiry):
             response = self.client.post(
                 reverse("login"),

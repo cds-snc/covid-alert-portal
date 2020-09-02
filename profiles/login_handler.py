@@ -14,7 +14,7 @@ class HealthcareLoginHandler(AxesDatabaseHandler):
         if locked:
             return True
 
-        user = HealthcareUser.objects.get(email=credentials.get('username'))
+        user = HealthcareUser.objects.get(email=credentials.get("username"))
         if user.blocked_until is not None and user.blocked_until >= now():
             return True
 
@@ -49,7 +49,9 @@ class HealthcareLoginHandler(AxesDatabaseHandler):
             user.blocked_until = None
             user.save()
 
-    def get_healthcareuser_failures(self, request: dict, credentials: dict = None) -> int:
+    def get_healthcareuser_failures(
+        self, request: dict, credentials: dict = None
+    ) -> int:
         username = credentials.get("username")
         threshold = timedelta(days=settings.AXES_SLOW_FAILURE_COOLOFF_TIME)
         return HealthcareFailedAccessAttempt.objects.filter(
