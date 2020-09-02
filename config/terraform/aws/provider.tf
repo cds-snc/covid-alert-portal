@@ -1,18 +1,11 @@
 provider "aws" {
-  version = "~> 2.0"
-  region  = var.region
+  region = var.region
 }
 
 provider "random" {
-  version = "~> 2.3"
 }
 
 provider "template" {
-  version = "~> 2.1"
-
-}
-terraform {
-  required_version = "> 0.12.0"
 }
 
 terraform {
