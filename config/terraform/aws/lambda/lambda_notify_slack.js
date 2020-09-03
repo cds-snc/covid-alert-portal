@@ -14,19 +14,11 @@ exports.handler = function(event, context) {
     var severity = "good";
 
     var dangerMessages = [
-        "Error",
-        "DDoS"
+        "Critical"
       ];
 
     var warningMessages = [
-        "cpu utilization",
-        "memory utilization",
-        "5xx level",
-        "keys generated",
-        "site table",
-        "locked out accounts",
-        "too many invitations",
-        "FAILURE",
+        "Warning"
         ];
     
     for(var dangerMessagesItem in dangerMessages) {
