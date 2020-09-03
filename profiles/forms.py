@@ -109,15 +109,15 @@ class HealthcarePhoneEditForm(HealthcareBaseEditForm):
         model = HealthcareUser
         fields = ("phone_number",)
 
-    def clean_phone_number2(self):
+    def clean_phone_number(self):
         phone_number = self.cleaned_data.get("phone_number")
-        phone_number2 = self.cleaned_data.get("phone_number2")
+        phone_number2 = self.data.get("phone_number2")
         if phone_number and phone_number2 and phone_number != phone_number2:
             raise ValidationError(
                 self.error_messages.get("phone_number_mismatch"),
                 code="phone_number_mismatch",
             )
-        return phone_number2
+        return phone_number
 
 
 class HealthcarePasswordEditForm(HealthcareBaseEditForm):
@@ -138,37 +138,42 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
         help_text=_("Enter the same password as before, for verification."),
     )
 
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+
     class Meta:
         model = HealthcareUser
         fields = ()
 
-    def clean_password2(self):
+    def clean_password1(self):
         password1 = self.cleaned_data.get("password1")
-        password2 = self.cleaned_data.get("password2")
+        # We can't use clean_data for password2, it hasn't been cleaned yet
+        password2 = self.data.get("password2")
         if password1 and password2 and password1 != password2:
             raise ValidationError(
                 self.error_messages["password_mismatch"],
                 code="password_mismatch",
             )
-        return password2
+        return password1
 
     def _post_clean(self):
         super()._post_clean()
         # Validate the password after self.instance is updated with form data
         # by super().
-        password = self.cleaned_data.get("password2")
+        password = self.cleaned_data.get("password1")
         if password:
             try:
                 password_validation.validate_password(password, self.instance)
             except ValidationError as error:
-                self.add_error("password2", error)
+                self.add_error("password1", error)
 
     def save(self, commit=True):
-        user = super().save(commit=False)
-        user.set_password(self.cleaned_data["password1"])
+        self.user.set_password(self.cleaned_data["password1"])
         if commit:
-            user.save()
-        return user
+            self.user.save()
+
+        return self.user
 
 
 class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
@@ -197,8 +202,24 @@ class HealthcarePasswordResetConfirm(HealthcareBaseForm, SetPasswordForm):
         widget=forms.PasswordInput(),
     )
 
+    def clean_new_password1(self):
+        password1 = self.cleaned_data.get("new_password1")
+        # We can't use clean_data for password2, it hasn't been cleaned yet
+        password2 = self.data.get("new_password2")
+        if password1 and password2:
+            if password1 != password2:
+                raise ValidationError(
+                    self.error_messages["password_mismatch"],
+                    code="password_mismatch",
+                )
+        password_validation.validate_password(password1, self.user)
+        return password1
 
-class SignupForm(HealthcareBaseForm, UserCreationForm):
+    def clean_new_password2(self):
+        pass
+
+
+class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):
     """A form for creating new users. Extends from UserCreation form, which
     means it includes a repeated password."""
 
@@ -241,6 +262,22 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
         province_abbr = self.cleaned_data.get("province", "")
         return HealthcareProvince.objects.get(abbr=province_abbr)
 
+    def clean_password1(self):
+        password1 = self.cleaned_data.get("password1")
+        # We can't use clean_data for password2, it hasn't been cleaned yet
+        password2 = self.data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise ValidationError(
+                self.error_messages["password_mismatch"],
+                code="password_mismatch",
+            )
+        return password1
+
+    def clean_password2(self):
+        # We actually dont want this function to run in UserCreationForm
+        # The logic has been moved to clean_password
+        pass
+
     def clean_email(self):
         email = self.cleaned_data.get("email", "").lower()
         email_exists = HealthcareUser.objects.filter(email=email)
@@ -251,9 +288,10 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
 
         return email
 
-    def clean_phone_number_confirmation(self):
+    def clean_phone_number(self):
         phone_number = self.cleaned_data.get("phone_number")
-        phone_number_confirmation = self.cleaned_data.get("phone_number_confirmation")
+        # We can't use clean_data for phone_number_confirmation, it hasn't been cleaned yet
+        phone_number_confirmation = self.data.get("phone_number_confirmation")
         if (
             phone_number
             and phone_number_confirmation
@@ -263,7 +301,21 @@ class SignupForm(HealthcareBaseForm, UserCreationForm):
                 _("The phone numbers didn’t match."),
                 code="invalid",
             )
-        return phone_number_confirmation
+        return phone_number
+
+    def _post_clean(self):
+        # This function is the same as UserCreationForm._post_clean, except we
+        # are pinning the error on field password1 instead of password2 for
+        # accessibility reasons
+        forms.ModelForm._post_clean(self)
+        # Validate the password after self.instance is updated with form data
+        # by super().
+        password = self.cleaned_data.get("password1")
+        if password:
+            try:
+                password_validation.validate_password(password, self.instance)
+            except ValidationError as error:
+                self.add_error("password1", error)
 
 
 class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
