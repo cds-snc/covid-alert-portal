@@ -7,7 +7,7 @@ exports.handler = function(event, context) {
         "channel": "#exposure-healthcare-dev",
         "username": "Staging COVID Alert Portal Notifier",
         "text": "*" + event.Records[0].Sns.Subject + "*",
-        "icon_emoji": ":rotating_light:"
+        "icon_emoji": ":loudspeaker:"
     };
 
     var message = event.Records[0].Sns.Message;
@@ -32,6 +32,7 @@ exports.handler = function(event, context) {
     for(var dangerMessagesItem in dangerMessages) {
         if (message.indexOf(dangerMessages[dangerMessagesItem]) != -1) {
             severity = "danger";
+            postData.icon_emoji = ":rotating_light:";
             break;
         }
     }
@@ -41,6 +42,7 @@ exports.handler = function(event, context) {
         for(var warningMessagesItem in warningMessages) {
             if (message.indexOf(warningMessages[warningMessagesItem]) != -1) {
                 severity = "warning";
+                postData.icon_emoji = ":warning:";
                 break;
             }
         }        
