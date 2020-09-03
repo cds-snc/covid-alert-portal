@@ -10,7 +10,6 @@ from django.contrib.auth.forms import SetPasswordForm
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth import update_session_auth_hash
 
 from phonenumber_field.formfields import PhoneNumberField
 

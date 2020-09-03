@@ -3,7 +3,6 @@ from django.views.generic import RedirectView, TemplateView
 from django.contrib.auth.views import PasswordResetView
 from django_otp.views import LoginView
 from django.contrib.auth import views as login_views
-from django.urls import reverse_lazy
 
 from . import views
 from . import forms
