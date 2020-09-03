@@ -10,6 +10,7 @@ from django.contrib.auth.forms import SetPasswordForm
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth import update_session_auth_hash
 
 from phonenumber_field.formfields import PhoneNumberField
 
@@ -138,11 +139,15 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
         help_text=_("Enter the same password as before, for verification."),
     )
 
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+
     class Meta:
         model = HealthcareUser
         fields = ()
 
-    def clean_password(self):
+    def clean_password1(self):
         password1 = self.cleaned_data.get("password1")
         # We can't use clean_data for password2, it hasn't been cleaned yet
         password2 = self.data.get("password2")
@@ -165,11 +170,11 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
                 self.add_error("password1", error)
 
     def save(self, commit=True):
-        user = super().save(commit=False)
-        user.set_password(self.cleaned_data["password1"])
+        self.user.set_password(self.cleaned_data["password1"])
         if commit:
-            user.save()
-        return user
+            self.user.save()
+
+        return self.user
 
 
 class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
@@ -197,6 +202,22 @@ class HealthcarePasswordResetConfirm(HealthcareBaseForm, SetPasswordForm):
         strip=False,
         widget=forms.PasswordInput(),
     )
+
+    def clean_new_password1(self):
+        password1 = self.cleaned_data.get("new_password1")
+        # We can't use clean_data for password2, it hasn't been cleaned yet
+        password2 = self.data.get("new_password2")
+        if password1 and password2:
+            if password1 != password2:
+                raise ValidationError(
+                    self.error_messages["password_mismatch"],
+                    code="password_mismatch",
+                )
+        password_validation.validate_password(password1, self.user)
+        return password1
+
+    def clean_new_password2(self):
+        pass
 
 
 class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):

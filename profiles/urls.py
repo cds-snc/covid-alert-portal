@@ -3,6 +3,7 @@ from django.views.generic import RedirectView, TemplateView
 from django.contrib.auth.views import PasswordResetView
 from django_otp.views import LoginView
 from django.contrib.auth import views as login_views
+from django.urls import reverse_lazy
 
 from . import views
 from . import forms
@@ -56,7 +57,7 @@ urlpatterns = [
     ),
     path(
         "profiles/<uuid:pk>/edit/password",
-        views.HealthcareUserEditView.as_view(
+        views.HealthcareuserPasswordResetView.as_view(
             form_class=forms.HealthcarePasswordEditForm,
             template_name=forms.HealthcarePasswordEditForm.template_name,
         ),

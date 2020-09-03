@@ -3,6 +3,7 @@ from django.conf import settings
 from django.shortcuts import redirect, render
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.views import PasswordChangeView
 from django.utils.translation import gettext as _
 from django.views.generic import (
     CreateView,
@@ -333,6 +334,11 @@ class HealthcareUserEditView(Is2FAMixin, ProvinceAdminEditMixin, UpdateView):
         initial["name"] = user.name
         return initial
 
+    def get_success_url(self):
+        return reverse_lazy("user_profile", kwargs={"pk": self.kwargs.get("pk")})
+
+
+class HealthcareuserPasswordResetView(PasswordChangeView):
     def get_success_url(self):
         return reverse_lazy("user_profile", kwargs={"pk": self.kwargs.get("pk")})
 
