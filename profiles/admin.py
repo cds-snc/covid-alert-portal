@@ -140,13 +140,16 @@ class UserAdmin(BaseUserAdmin):
         if not obj:
             return self.add_fieldsets
 
-        permissions_tuple = ("Permissions", {"fields": ("is_admin", "is_superuser", "blocked")})
+        permissions_tuple = (
+            "Permissions",
+            {"fields": ("is_admin", "is_superuser", "blocked")},
+        )
         fieldsets = (
             (None, {"fields": ("email", "password")}),
             ("Personal info", {"fields": ("name", "province", "phone_number")}),
         )
         if request.user.is_superuser and obj.id != request.user.id:
-            fieldsets += (permissions_tuple, )
+            fieldsets += (permissions_tuple,)
         return fieldsets
 
 
