@@ -51,7 +51,6 @@ class UserChangeForm(forms.ModelForm):
             "is_admin",
             "is_superuser",
             "phone_number",
-            "blocked",
             "blocked_until",
         )
 
@@ -94,14 +93,15 @@ class UserAdmin(BaseUserAdmin):
         "email",
         "name",
         "province",
+        "is_active",
         "is_admin",
         "is_superuser",
         "number_keys_generated",
-        "blocked",
     )
     list_filter = (
         "is_admin",
         "is_superuser",
+        "is_active",
     )
 
     def number_keys_generated(self, user: HealthcareUser):
@@ -142,7 +142,7 @@ class UserAdmin(BaseUserAdmin):
 
         permissions_tuple = (
             "Permissions",
-            {"fields": ("is_admin", "is_superuser", "blocked")},
+            {"fields": ("is_admin", "is_superuser", "is_active", "blocked_until")},
         )
         fieldsets = (
             (None, {"fields": ("email", "password")}),

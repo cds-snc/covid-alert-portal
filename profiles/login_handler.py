@@ -16,7 +16,7 @@ class HealthcareLoginHandler(AxesDatabaseHandler):
 
         try:
             user = HealthcareUser.objects.get(email=credentials.get("username"))
-            if user.blocked:
+            if not user.is_active:
                 return True
 
             if user.blocked_until is not None and user.blocked_until >= now():
@@ -41,7 +41,7 @@ class HealthcareLoginHandler(AxesDatabaseHandler):
         except HealthcareUser.DoesNotExist:
             user = None
 
-        if user is not None and user.blocked:
+        if user is not None and not user.is_active:
             # Let's not create a HealthcareFailedAccessAttempt if the user has
             # been blocked by an admin
             request.axes_locked_out = True
