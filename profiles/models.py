@@ -80,6 +80,9 @@ class HealthcareUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    blocked_until = models.DateTimeField(
+        null=True, help_text=_("If set, the user will be blocked until that time.")
+    )
 
     objects = HealthcareUserManager()
 
@@ -115,6 +118,12 @@ class HealthcareUser(AbstractBaseUser):
         """Is the user a member of staff?"""
         # Only superusers can use the django backend
         return self.is_superuser
+
+
+class HealthcareFailedAccessAttempt(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid4)
+    time = models.DateTimeField(_("Attempt Time"), auto_now_add=True, editable=False)
+    username = models.CharField(max_length=256, null=False)
 
 
 class AuthorizedDomain(models.Model):

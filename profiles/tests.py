@@ -222,6 +222,50 @@ class DjangoAdminPanelView(AdminUserTestCase):
         )
         self.assertEqual(response.status_code, 403)
 
+    @override_settings(
+        AXES_ENABLED=True,
+        AXES_FAILURE_LIMIT=100,
+        AXES_SLOW_FAILURE_LIMIT=10,
+        AXES_SLOW_FAILURE_COOLOFF_TIME=5,
+    )
+    def test_user_slow_lockout(self):
+        post_data = {
+            "username": self.user.email,
+            "password": uuid4(),
+        }
+
+        for i in range(0, settings.AXES_SLOW_FAILURE_LIMIT - 1):
+            response = self.client.post(
+                reverse("login"),
+                post_data,
+                REMOTE_ADDR="127.0.0.1",
+                HTTP_USER_AGENT="test-browser",
+            )
+            self.assertContains(
+                response, "Please enter a correct email address and password"
+            )
+
+        response = self.client.post(
+            reverse("admin:login"),
+            post_data,
+            REMOTE_ADDR="127.0.0.1",
+            HTTP_USER_AGENT="test-browser",
+        )
+        self.assertEqual(response.status_code, 403)
+        expiry = datetime.now() + timedelta(
+            days=settings.AXES_SLOW_FAILURE_COOLOFF_TIME, hours=1
+        )
+        with freeze_time(expiry):
+            response = self.client.post(
+                reverse("login"),
+                post_data,
+                REMOTE_ADDR="127.0.0.1",
+                HTTP_USER_AGENT="test-browser",
+            )
+            self.assertContains(
+                response, "Please enter a correct email address and password"
+            )
+
 
 class AuthenticatedView(AdminUserTestCase):
     def test_loginpage(self):
