@@ -113,12 +113,6 @@ class UserAdmin(BaseUserAdmin):
         "Number of keys generated in the last 24 hours"
     )
 
-    fieldsets = (
-        (None, {"fields": ("email", "password")}),
-        ("Personal info", {"fields": ("name", "province", "phone_number")}),
-        ("Permissions", {"fields": ("is_admin", "is_superuser", "blocked")}),
-    )
-
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (
@@ -141,6 +135,19 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ("email",)
     ordering = ("email",)
     filter_horizontal = ()
+
+    def get_fieldsets(self, request, obj=None):
+        if not obj:
+            return self.add_fieldsets
+
+        permissions_tuple = ("Permissions", {"fields": ("is_admin", "is_superuser", "blocked")})
+        fieldsets = (
+            (None, {"fields": ("email", "password")}),
+            ("Personal info", {"fields": ("name", "province", "phone_number")}),
+        )
+        if request.user.is_superuser and obj.id != request.user.id:
+            fieldsets += (permissions_tuple, )
+        return fieldsets
 
 
 admin.site.register(HealthcareProvince, ProvinceAdmin)
