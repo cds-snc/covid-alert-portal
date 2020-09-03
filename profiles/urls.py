@@ -56,7 +56,7 @@ urlpatterns = [
     ),
     path(
         "profiles/<uuid:pk>/edit/password",
-        views.HealthcareUserEditView.as_view(
+        views.HealthcareuserPasswordResetView.as_view(
             form_class=forms.HealthcarePasswordEditForm,
             template_name=forms.HealthcarePasswordEditForm.template_name,
         ),
