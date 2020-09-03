@@ -80,6 +80,7 @@ class HealthcareUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    blocked = models.BooleanField(default=False, help_text=_("If blocked, this user won't be able to login in the COVID Portal anymore."))
     blocked_until = models.DateTimeField(
         null=True, help_text=_("If set, the user will be blocked until that time.")
     )

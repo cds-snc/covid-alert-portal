@@ -51,6 +51,8 @@ class UserChangeForm(forms.ModelForm):
             "is_admin",
             "is_superuser",
             "phone_number",
+            "blocked",
+            "blocked_until",
         )
 
     def clean_password(self):
@@ -95,6 +97,7 @@ class UserAdmin(BaseUserAdmin):
         "is_admin",
         "is_superuser",
         "number_keys_generated",
+        "blocked",
     )
     list_filter = (
         "is_admin",
@@ -113,7 +116,7 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {"fields": ("email", "password")}),
         ("Personal info", {"fields": ("name", "province", "phone_number")}),
-        ("Permissions", {"fields": ("is_admin", "is_superuser")}),
+        ("Permissions", {"fields": ("is_admin", "is_superuser", "blocked")}),
     )
 
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
