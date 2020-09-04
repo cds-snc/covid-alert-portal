@@ -96,6 +96,7 @@ INSTALLED_APPS = [
     "otp_yubikey",
     "easyaudit",
     "djversion",
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
