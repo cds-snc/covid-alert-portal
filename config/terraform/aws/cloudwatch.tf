@@ -20,7 +20,7 @@ resource "aws_cloudwatch_metric_alarm" "portal_cpu_utilization_high" {
   period              = "120"
   statistic           = "Average"
   threshold           = "50"
-  alarm_description   = "Covid Alert Portal Warning - CPU usage has been over 50% for 4 minutes."
+  alarm_description   = "COVID Alert Portal Warning - CPU usage has been over 50% for 4 minutes."
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
   dimensions = {
@@ -38,7 +38,7 @@ resource "aws_cloudwatch_metric_alarm" "portal_memory_utilization_high" {
   period              = "120"
   statistic           = "Average"
   threshold           = "50"
-  alarm_description   = "Covid Alert Portal Warning - Memory usage have been over 50% for 4 minutes."
+  alarm_description   = "COVID Alert Portal Warning - Memory usage have been over 50% for 4 minutes."
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
 
@@ -75,7 +75,7 @@ resource "aws_cloudwatch_metric_alarm" "five_hundred_response_warn" {
   statistic           = "Sum"
   threshold           = "0"
   treat_missing_data  = "notBreaching"
-  alarm_description   = "Covid Alert Portal Warning - A 5xx HTML error was detected coming from the portal."
+  alarm_description   = "COVID Alert Portal Warning - A 5xx HTML error was detected coming from the portal."
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
 }
@@ -102,7 +102,7 @@ resource "aws_cloudwatch_metric_alarm" "application_error_warn" {
   statistic           = "Sum"
   threshold           = "0"
   treat_missing_data  = "notBreaching"
-  alarm_description   = "Covid Alert Portal Warning - Django raised an Application Error"
+  alarm_description   = "COVID Alert Portal Warning - Django raised an Application Error"
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
 }
@@ -255,7 +255,7 @@ resource "aws_cloudwatch_metric_alarm" "ddos_detected_covidportal" {
   period              = "60"
   statistic           = "Sum"
   threshold           = "0"
-  alarm_description   = "Covid Alert Portal Warning - AWS has detected a DDOS attack on the COVID Alert Portal's Load Balancer"
+  alarm_description   = "COVID Alert Portal Warning - AWS has detected a DDOS attack on the COVID Alert Portal's Load Balancer"
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
 
@@ -274,7 +274,7 @@ resource "aws_cloudwatch_metric_alarm" "ddos_detected_route53" {
   period              = "60"
   statistic           = "Sum"
   threshold           = "0"
-  alarm_description   = "Covid Alert Portal Warning - AWS has detected a DDOS attack on the COVID Alert Portal's DNS Server"
+  alarm_description   = "COVID Alert Portal Warning - AWS has detected a DDOS attack on the COVID Alert Portal's DNS Server"
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
 
@@ -297,7 +297,7 @@ resource "aws_cloudwatch_event_target" "codedeploy_sns" {
       "status"       = "$.detail.state"
       "deploymentID" = "$.detail.deploymentId"
     }
-    input_template = "\"Covid Alert Portal Warning - CloudDeploy has registered a <status> for deployment: <deploymentID>\""
+    input_template = "\"COVID Alert Portal Warning - CloudDeploy has registered a <status> for deployment: <deploymentID>\""
   }
 }
 
