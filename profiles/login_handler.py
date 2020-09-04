@@ -14,16 +14,9 @@ class HealthcareLoginHandler(AxesDatabaseHandler):
         if locked:
             return True
 
-        try:
-            user = HealthcareUser.objects.get(email=credentials.get("username"))
-            if not user.is_active:
-                return True
-
-            if user.blocked_until is not None and user.blocked_until >= now():
-                return True
-        except HealthcareUser.DoesNotExist:
-            # If the user actually doesn't exist, we don't have to check for status
-            pass
+        user_locked = self._is_user_locked(username=credentials.get("username"))
+        if user_locked:
+            return True
 
         # If not, let's check the double throttling strategy
         attempts = self.get_healthcareuser_failures(request, credentials)
@@ -32,16 +25,24 @@ class HealthcareLoginHandler(AxesDatabaseHandler):
 
         return False
 
+    def _is_user_locked(self, username):
+        try:
+            user = HealthcareUser.objects.get(email=username)
+            if not user.is_active:
+                return True
+
+            if user.blocked_until is not None and user.blocked_until >= now():
+                return True
+        except HealthcareUser.DoesNotExist:
+            return False
+
     def user_login_failed(self, sender, credentials: dict, request=None, **kwargs):
         super().user_login_failed(sender, credentials, request, **kwargs)
         username = credentials.get("username")
 
-        try:
-            user = HealthcareUser.objects.get(email=username)
-        except HealthcareUser.DoesNotExist:
-            user = None
+        user_locked = self._is_user_locked(username=credentials.get("username"))
 
-        if user is not None and not user.is_active:
+        if user_locked:
             # Let's not create a HealthcareFailedAccessAttempt if the user has
             # been blocked by an admin
             request.axes_locked_out = True
