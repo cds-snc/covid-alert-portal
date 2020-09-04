@@ -5,28 +5,20 @@ exports.handler = function(event, context) {
 
     var postData = {
         "channel": "#exposure-healthcare-dev",
-        "username": "Staging COVID Alert Portal Notifier",
-        "text": "*" + event.Records[0].Sns.Subject + "*",
+        "username": "COVID Alert Portal Notifier",
+        "text": "*Staging Environment*",
         "icon_emoji": ":loudspeaker:"
     };
 
-    var message = event.Records[0].Sns.Message;
+    var message = "AlarmDescription" in event.Records[0].Message ? event.Records[0].Message.AlarmDescription : event.Records[0].Sns.Message;
     var severity = "good";
 
     var dangerMessages = [
-        "Error",
-        "DDoS"
+        "COVID Alert Portal Critical"
       ];
 
     var warningMessages = [
-        "cpu utilization",
-        "memory utilization",
-        "5xx level",
-        "keys generated",
-        "site table",
-        "locked out accounts",
-        "too many invitations",
-        "FAILURE",
+        "COVID Alert Portal Warning"
         ];
     
     for(var dangerMessagesItem in dangerMessages) {
