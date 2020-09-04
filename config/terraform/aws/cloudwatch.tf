@@ -257,7 +257,7 @@ resource "aws_cloudwatch_metric_alarm" "ddos_detected_covidportal" {
   threshold           = "0"
   alarm_description   = "Covid Alert Portal Warning - AWS has detected a DDOS attack on the COVID Alert Portal's Load Balancer"
 
-  alarm_actions = [aws_sns_topic.alert_critical.arn]
+  alarm_actions = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
     ResourceArn = aws_lb.covidportal.arn
@@ -276,7 +276,7 @@ resource "aws_cloudwatch_metric_alarm" "ddos_detected_route53" {
   threshold           = "0"
   alarm_description   = "Covid Alert Portal Warning - AWS has detected a DDOS attack on the COVID Alert Portal's DNS Server"
 
-  alarm_actions = [aws_sns_topic.alert_critical.arn]
+  alarm_actions = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
     ResourceArn = "arn:aws:route53:::hostedzone/${aws_route53_zone.covidportal.zone_id}"
