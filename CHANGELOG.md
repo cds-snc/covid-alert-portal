@@ -17,6 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Adding a check in the login_handler to prevent the login form from crashing when trying login with a non-existent e-mail
 
+## [1.4.1] - 2020-09-03
+
+### Updated
+
+- Lower the daily limit of one time key generation to 25 in production
+
 ## [1.4.0] - 2020-09-03
 
 ### Updated
