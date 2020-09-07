@@ -266,6 +266,50 @@ class DjangoAdminPanelView(AdminUserTestCase):
                 response, "Please enter a correct email address and password"
             )
 
+    @override_settings(AXES_ENABLED=True)
+    def test_user_is_blocked(self):
+        other_credentials = get_other_credentials()
+        other_user = User.objects.create_user(**other_credentials)
+        other_user.blocked_until = datetime.now() + timedelta(days=1)
+        other_user.is_active = True
+        other_user.save()
+
+        post_data = {
+            "username": other_credentials.get("email"),
+            "password": other_credentials.get("password"),
+        }
+
+        response = self.client.post(
+            reverse("login"),
+            post_data,
+            REMOTE_ADDR="127.0.0.1",
+            HTTP_USER_AGENT="test-browser",
+        )
+
+        self.assertEqual(response.status_code, 403)
+
+    @override_settings(AXES_ENABLED=True)
+    def test_user_is_inactive(self):
+        other_credentials = get_other_credentials()
+        other_user = User.objects.create_user(**other_credentials)
+        other_user.blocked_until = None
+        other_user.is_active = False
+        other_user.save()
+
+        post_data = {
+            "username": other_credentials.get("email"),
+            "password": other_credentials.get("password"),
+        }
+
+        response = self.client.post(
+            reverse("login"),
+            post_data,
+            REMOTE_ADDR="127.0.0.1",
+            HTTP_USER_AGENT="test-browser",
+        )
+
+        self.assertEqual(response.status_code, 403)
+
 
 class AuthenticatedView(AdminUserTestCase):
     def test_loginpage(self):
