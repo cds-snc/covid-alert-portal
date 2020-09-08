@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Default superusers are associated with CDS, not "Ontario"
+
 ## [1.5.1] - 2020-09-08
 
 ### Fixed
