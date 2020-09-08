@@ -277,7 +277,7 @@ class DjangoAdminPanelView(AdminUserTestCase):
     def test_user_is_blocked(self):
         other_credentials = get_other_credentials()
         other_user = User.objects.create_user(**other_credentials)
-        other_user.blocked_until = datetime.now() + timedelta(days=1)
+        other_user.blocked_until = timezone.now() + timedelta(days=1)
         other_user.is_active = True
         other_user.save()
 
