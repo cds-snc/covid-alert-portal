@@ -81,6 +81,13 @@ class BannedPasswordValidatorTestCase(TestCase):
                 self.validator.validate(password)
 
 
+class DefaultSuperUserTestCase(TestCase):
+    def test_default_superuser_from_cds(self):
+        self.credentials = get_other_credentials(is_superuser=True)
+        self.user = User.objects.create_superuser(**self.credentials)
+        self.assertEqual(self.user.province.name, "Canadian Digital Service")
+
+
 class AdminUserTestCase(TestCase):
     def setUp(self, is_admin=False):
         self.credentials = get_credentials(is_admin=is_admin)
