@@ -51,6 +51,7 @@ class UserChangeForm(forms.ModelForm):
             "is_admin",
             "is_superuser",
             "phone_number",
+            "blocked_until",
         )
 
     def clean_password(self):
@@ -92,6 +93,7 @@ class UserAdmin(BaseUserAdmin):
         "email",
         "name",
         "province",
+        "is_active",
         "is_admin",
         "is_superuser",
         "number_keys_generated",
@@ -99,6 +101,7 @@ class UserAdmin(BaseUserAdmin):
     list_filter = (
         "is_admin",
         "is_superuser",
+        "is_active",
     )
 
     def number_keys_generated(self, user: HealthcareUser):
@@ -108,12 +111,6 @@ class UserAdmin(BaseUserAdmin):
 
     number_keys_generated.short_description = _(
         "Number of keys generated in the last 24 hours"
-    )
-
-    fieldsets = (
-        (None, {"fields": ("email", "password")}),
-        ("Personal info", {"fields": ("name", "province", "phone_number")}),
-        ("Permissions", {"fields": ("is_admin", "is_superuser")}),
     )
 
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -138,6 +135,22 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ("email",)
     ordering = ("email",)
     filter_horizontal = ()
+
+    def get_fieldsets(self, request, obj=None):
+        if not obj:
+            return self.add_fieldsets
+
+        permissions_tuple = (
+            "Permissions",
+            {"fields": ("is_admin", "is_superuser", "is_active", "blocked_until")},
+        )
+        fieldsets = (
+            (None, {"fields": ("email", "password")}),
+            ("Personal info", {"fields": ("name", "province", "phone_number")}),
+        )
+        if request.user.is_superuser and obj.id != request.user.id:
+            fieldsets += (permissions_tuple,)
+        return fieldsets
 
 
 admin.site.register(HealthcareProvince, ProvinceAdmin)

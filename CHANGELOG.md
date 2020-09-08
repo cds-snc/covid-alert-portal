@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.5.0] - 2020-09-03
+
+### Added
+
+- Superusers can now block users permanently via django-admin. Those users won't be able to login until a superuser reactivate them.
+
+### Hotfixes
+
+- Adding a check in the login_handler to prevent the login form from crashing when trying login with a non-existent e-mail
+
 ## [1.4.1] - 2020-09-03
 
 ### Updated
