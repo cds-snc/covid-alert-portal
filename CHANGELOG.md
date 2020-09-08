@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.5.1] - 2020-09-08
+
+### Fixed
+
+- Added aria-describedby attributes to inputs when there are validation error messages.
+- Yubikey verification form now using base form (no colons, removed autocomplete, etc.)
+
 ## [1.5.0] - 2020-09-03
 
 ### Added
@@ -48,7 +55,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Adding a list of authorized domains for outgoing account invites
-
 
 ## [1.1.0] - 2020-08-27
 
