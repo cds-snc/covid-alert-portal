@@ -415,7 +415,7 @@ class YubikeyDeviceCreateForm(HealthcareBaseForm, forms.ModelForm):
 
 
 # heavily inspired by: https://github.com/ossobv/kleides-mfa/blob/ec93f141761b188dd2a2ecf8bbb525a9da47270e/kleides_mfa/forms.py#L39
-class YubikeyVerifyForm(forms.Form):
+class YubikeyVerifyForm(HealthcareBaseForm, forms.Form):
     otp_token = forms.CharField(label=_("Token"))
 
     def __init__(self, *args, **kwargs):
