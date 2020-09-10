@@ -3,7 +3,7 @@ from django.conf import settings
 from django.shortcuts import redirect, render
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.views import PasswordChangeView, PasswordResetView
 from django.utils.translation import gettext as _
 from django.views.generic import (
     CreateView,
@@ -41,6 +41,7 @@ from .forms import (
     SignupForm,
     Healthcare2FAForm,
     HealthcareInviteForm,
+    HealthcarePasswordResetForm,
     Resend2FACodeForm,
     YubikeyDeviceCreateForm,
     YubikeyVerifyForm,
@@ -338,7 +339,20 @@ class HealthcareUserEditView(Is2FAMixin, ProvinceAdminEditMixin, UpdateView):
         return reverse_lazy("user_profile", kwargs={"pk": self.kwargs.get("pk")})
 
 
-class HealthcareuserPasswordResetView(PasswordChangeView):
+class HealthcarePasswordResetView(PasswordResetView):
+    form_class = HealthcarePasswordResetForm
+    html_email_template_name = "registration/password_reset_email_html.html"
+
+    def post(self, *args, **kwargs):
+        base_url = self.request.build_absolute_uri("/")
+        self.extra_email_context = {
+            "base_url": base_url[:-1],  # remove the trailing slash
+        }
+
+        return super().post(*args, **kwargs)
+
+
+class HealthcarePasswordChangeView(PasswordChangeView):
     def get_success_url(self):
         return reverse_lazy("user_profile", kwargs={"pk": self.kwargs.get("pk")})
 
