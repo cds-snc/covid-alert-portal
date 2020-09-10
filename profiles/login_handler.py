@@ -14,8 +14,8 @@ class HealthcareLoginHandler(AxesDatabaseHandler):
         if locked:
             return True
 
-        user = HealthcareUser.objects.get(email=credentials.get("username"))
-        if user.blocked_until is not None and user.blocked_until >= now():
+        user_locked = self._is_user_locked(username=credentials.get("username"))
+        if user_locked:
             return True
 
         # If not, let's check the double throttling strategy
@@ -25,14 +25,26 @@ class HealthcareLoginHandler(AxesDatabaseHandler):
 
         return False
 
+    def _is_user_locked(self, username):
+        try:
+            user = HealthcareUser.objects.get(email=username)
+            if not user.is_active:
+                return True
+
+            if user.blocked_until is not None and user.blocked_until >= now():
+                return True
+        except HealthcareUser.DoesNotExist:
+            return False
+
     def user_login_failed(self, sender, credentials: dict, request=None, **kwargs):
         super().user_login_failed(sender, credentials, request, **kwargs)
-
         username = credentials.get("username")
-        HealthcareFailedAccessAttempt.objects.create(username=username)
 
-        attempts = self.get_healthcareuser_failures(request, credentials)
-        if attempts >= settings.AXES_SLOW_FAILURE_LIMIT:
+        user_locked = self._is_user_locked(username=credentials.get("username"))
+
+        if user_locked:
+            # Let's not create a HealthcareFailedAccessAttempt if the user has
+            # been blocked by an admin
             request.axes_locked_out = True
 
             user_locked_out.send(
@@ -41,6 +53,18 @@ class HealthcareLoginHandler(AxesDatabaseHandler):
                 username=username,
                 ip_address=request.axes_ip_address,
             )
+        else:
+            HealthcareFailedAccessAttempt.objects.create(username=username)
+            attempts = self.get_healthcareuser_failures(request, credentials)
+            if attempts >= settings.AXES_SLOW_FAILURE_LIMIT:
+                request.axes_locked_out = True
+
+                user_locked_out.send(
+                    "axes",
+                    request=request,
+                    username=username,
+                    ip_address=request.axes_ip_address,
+                )
 
     def user_logged_in(self, sender, request, user, **kwargs):
         super().user_logged_in(sender, request, user, **kwargs)

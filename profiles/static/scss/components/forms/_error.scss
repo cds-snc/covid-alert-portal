@@ -21,7 +21,7 @@ main form {
     border-left: 5px solid $color-red;
   }
 
-  [class^="error--"] {
+  .validation-error {
     color: $color-red;
     font-weight: 700;
   }

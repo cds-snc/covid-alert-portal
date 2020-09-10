@@ -12,7 +12,7 @@ resource "aws_cloudwatch_log_group" "covidportal" {
 ###
 
 resource "aws_cloudwatch_metric_alarm" "portal_cpu_utilization_high" {
-  alarm_name          = "portal-cpu-utilization-high"
+  alarm_name          = "portal-cpu-utilization-high-warn"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "2"
   metric_name         = "CPUUtilization"
@@ -20,7 +20,7 @@ resource "aws_cloudwatch_metric_alarm" "portal_cpu_utilization_high" {
   period              = "120"
   statistic           = "Average"
   threshold           = "50"
-  alarm_description   = "Covid Alert Portal - This metric monitors ecs cpu utilization"
+  alarm_description   = "COVID Alert Portal Warning - CPU usage has been over 50% for 4 minutes."
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
   dimensions = {
@@ -30,7 +30,7 @@ resource "aws_cloudwatch_metric_alarm" "portal_cpu_utilization_high" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "portal_memory_utilization_high" {
-  alarm_name          = "portal-memory-utilization-high"
+  alarm_name          = "portal-memory-utilization-high-warn"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 2
   metric_name         = "MemoryUtilization"
@@ -38,7 +38,7 @@ resource "aws_cloudwatch_metric_alarm" "portal_memory_utilization_high" {
   period              = "120"
   statistic           = "Average"
   threshold           = "50"
-  alarm_description   = "Covid Alert Portal - This metric monitors ecs memory utilization"
+  alarm_description   = "COVID Alert Portal Warning - Memory usage have been over 50% for 4 minutes."
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
 
@@ -75,7 +75,7 @@ resource "aws_cloudwatch_metric_alarm" "five_hundred_response_warn" {
   statistic           = "Sum"
   threshold           = "0"
   treat_missing_data  = "notBreaching"
-  alarm_description   = "Covid Alert Portal - This metric monitors for an 5xx level response"
+  alarm_description   = "COVID Alert Portal Warning - A 5xx HTML error was detected coming from the portal."
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
 }
@@ -102,7 +102,7 @@ resource "aws_cloudwatch_metric_alarm" "application_error_warn" {
   statistic           = "Sum"
   threshold           = "0"
   treat_missing_data  = "notBreaching"
-  alarm_description   = "Covid Alert Portal - This metric monitors for an Application error"
+  alarm_description   = "COVID Alert Portal Warning - Django raised an Application Error"
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
 }
@@ -112,8 +112,8 @@ resource "aws_cloudwatch_metric_alarm" "application_error_warn" {
 # AWS CloudWatch Metrics - Activity Alarms
 ###
 
-resource "aws_cloudwatch_log_metric_filter" "key_generation" {
-  name           = "KeyGeneration"
+resource "aws_cloudwatch_log_metric_filter" "key_generation_warn" {
+  name           = "KeyGenerationWarn"
   pattern        = "\"CRUD event_type:CREATE model:covid_key.covidkey\""
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
@@ -128,14 +128,40 @@ resource "aws_cloudwatch_metric_alarm" "key_generation_warn" {
   alarm_name          = "KeyGenerationWarn"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
-  metric_name         = aws_cloudwatch_log_metric_filter.key_generation.name
+  metric_name         = aws_cloudwatch_log_metric_filter.key_generation_warn.name
   namespace           = "covidportal"
   period              = "3600"
   statistic           = "Sum"
-  threshold           = "11"
+  threshold           = "5"
   treat_missing_data  = "notBreaching"
-  alarm_description   = "COVID Alert Portal - This metric monitors for more then 11 keys generated in a hour"
+  alarm_description   = "COVID Alert Portal Warning - 6 COVID One Time Keys have been generated in the last hour"
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
+}
+
+resource "aws_cloudwatch_log_metric_filter" "key_generation_critical" {
+  name           = "KeyGenerationCritical"
+  pattern        = "\"CRUD event_type:CREATE model:covid_key.covidkey\""
+  log_group_name = aws_cloudwatch_log_group.covidportal.name
+
+  metric_transformation {
+    name      = "KeyGeneration"
+    namespace = "covidportal"
+    value     = "1"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "key_generation_critical" {
+  alarm_name          = "KeyGenerationCritical"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = aws_cloudwatch_log_metric_filter.key_generation_critical.name
+  namespace           = "covidportal"
+  period              = "3600"
+  statistic           = "Sum"
+  threshold           = "10"
+  treat_missing_data  = "notBreaching"
+  alarm_description   = "COVID Alert Portal Critical - 11 COVID One Time Keys have been generated in the last hour"
+  alarm_actions       = [aws_sns_topic.alert_critical.arn]
 }
 
 resource "aws_cloudwatch_log_metric_filter" "site_change" {
@@ -160,7 +186,7 @@ resource "aws_cloudwatch_metric_alarm" "site_change_warn" {
   statistic           = "Sum"
   threshold           = "0"
   treat_missing_data  = "notBreaching"
-  alarm_description   = "COVID Alert Portal - This metric monitors for any site table changes"
+  alarm_description   = "COVID Alert Portal Warning - Someone changed something on the Django sites table."
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
 }
 
@@ -184,9 +210,9 @@ resource "aws_cloudwatch_metric_alarm" "AccountLockoutWarn" {
   namespace           = "covidportal"
   period              = "3600"
   statistic           = "Sum"
-  threshold           = "5"
+  threshold           = "4"
   treat_missing_data  = "notBreaching"
-  alarm_description   = "COVID Alert Portal - This metric monitors for more than 5 locked out accounts in an hour"
+  alarm_description   = "COVID Alert Portal Warning - 5 user accounts have been locked out in the last hour."
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
 }
 
@@ -212,7 +238,7 @@ resource "aws_cloudwatch_metric_alarm" "InviteLockoutWarn" {
   statistic           = "Sum"
   threshold           = "0"
   treat_missing_data  = "notBreaching"
-  alarm_description   = "COVID Alert Portal - This metric montiors for too many invitations by a user"
+  alarm_description   = "COVID Alert Portal Warning - Someone has tried to invite more than 25 users in the last hour."
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
 }
 
@@ -221,7 +247,7 @@ resource "aws_cloudwatch_metric_alarm" "InviteLockoutWarn" {
 ###
 
 resource "aws_cloudwatch_metric_alarm" "ddos_detected_covidportal" {
-  alarm_name          = "DDoSDetectedCovidPortal"
+  alarm_name          = "DDoSDetectedCovidPortalWarn"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
   metric_name         = "DDoSDetected"
@@ -229,9 +255,9 @@ resource "aws_cloudwatch_metric_alarm" "ddos_detected_covidportal" {
   period              = "60"
   statistic           = "Sum"
   threshold           = "0"
-  alarm_description   = "Covid Alert Portal - This metric monitors for DDoS detected on Covid Portal ALB"
+  alarm_description   = "COVID Alert Portal Warning - AWS has detected a DDOS attack on the COVID Alert Portal's Load Balancer"
 
-  alarm_actions = [aws_sns_topic.alert_critical.arn]
+  alarm_actions = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
     ResourceArn = aws_lb.covidportal.arn
@@ -240,7 +266,7 @@ resource "aws_cloudwatch_metric_alarm" "ddos_detected_covidportal" {
 
 resource "aws_cloudwatch_metric_alarm" "ddos_detected_route53" {
 
-  alarm_name          = "DDoSDetectedRoute53"
+  alarm_name          = "DDoSDetectedRoute53Warn"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
   metric_name         = "DDoSDetected"
@@ -248,9 +274,9 @@ resource "aws_cloudwatch_metric_alarm" "ddos_detected_route53" {
   period              = "60"
   statistic           = "Sum"
   threshold           = "0"
-  alarm_description   = "Covid Alert Portal - This metric monitors for DDoS detected on route 53"
+  alarm_description   = "COVID Alert Portal Warning - AWS has detected a DDOS attack on the COVID Alert Portal's DNS Server"
 
-  alarm_actions = [aws_sns_topic.alert_critical.arn]
+  alarm_actions = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
     ResourceArn = "arn:aws:route53:::hostedzone/${aws_route53_zone.covidportal.zone_id}"
@@ -271,7 +297,7 @@ resource "aws_cloudwatch_event_target" "codedeploy_sns" {
       "status"       = "$.detail.state"
       "deploymentID" = "$.detail.deploymentId"
     }
-    input_template = "\"CloudDeploy for the Staging COVID Alert Portal has registered a <status> for deployment: <deploymentID>\""
+    input_template = "\"COVID Alert Portal Warning - CloudDeploy has registered a <status> for deployment: <deploymentID>\""
   }
 }
 

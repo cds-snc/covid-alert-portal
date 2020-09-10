@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-01 19:30+0000\n"
+"POT-Creation-Date: 2020-09-03 00:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -296,7 +296,7 @@ msgstr "Z comme zèbre."
 msgid "Something went wrong. Contact your manager."
 msgstr "Une erreur est survenue. Veuillez contacter votre superviseur."
 
-#: portal/settings.py:311
+#: portal/settings.py:316
 msgid "This account has been locked due to too many failed log in attempts."
 msgstr ""
 "Ce compte a été verrouillé en raison d'un trop grand nombre de tentatives "
@@ -526,7 +526,7 @@ msgstr ""
 msgid "Has a bearer token"
 msgstr "A un jeton d'API"
 
-#: profiles/admin.py:110
+#: profiles/admin.py:113
 msgid "Number of keys generated in the last 24 hours"
 msgstr ""
 
@@ -657,6 +657,19 @@ msgstr "Votre nom"
 msgid ""
 "You must enter a new security code each time you log in. We’ll send the code "
 "to your phone number."
+msgstr ""
+
+#: profiles/models.py:83
+msgid ""
+"If blocked, this user won't be able to login in the COVID Portal anymore."
+msgstr "Si bloqué, l'utilisateur ne pourra plus se connecter au portail."
+
+#: profiles/models.py:85
+msgid "If set, the user will be blocked until that time."
+msgstr ""
+
+#: profiles/models.py:126
+msgid "Attempt Time"
 msgstr ""
 
 #: profiles/templates/invitations/email/email_invite_subject.txt:2

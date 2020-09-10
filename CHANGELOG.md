@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Default superusers are associated with CDS, not "Ontario"
+
+## [1.5.1] - 2020-09-08
+
+### Fixed
+
+- Added aria-describedby attributes to inputs when there are validation error messages.
+- Yubikey verification form now using base form (no colons, removed autocomplete, etc.)
+
+## [1.5.0] - 2020-09-03
+
+### Added
+
+- Superusers can now block users permanently via django-admin. Those users won't be able to login until a superuser reactivate them.
+
+### Hotfixes
+
+- Adding a check in the login_handler to prevent the login form from crashing when trying login with a non-existent e-mail
+
+## [1.4.1] - 2020-09-03
+
+### Updated
+
+- Lower the daily limit of one time key generation to 25 in production
+
 ## [1.4.0] - 2020-09-03
 
 ### Updated
@@ -32,7 +57,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Adding a list of authorized domains for outgoing account invites
-
 
 ## [1.1.0] - 2020-08-27
 

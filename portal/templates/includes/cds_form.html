@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n widget_tweaks %}
 
 <form method="post" id="form--{{ request.resolver_match.url_name }}">
   {% csrf_token %}
@@ -14,12 +14,14 @@
       <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
           {{ field.label_tag }}
           {% if field.errors %}
-            <div class="error--{{ field.html_name }}">{{ field.errors|first }}</div>
+            <div id="error--{{ field.html_name }}" class="validation-error">{{ field.errors|first }}</div>
           {% endif %}
           {% if field.help_text %}
             <div class="help--{{ field.html_name }}">{{ field.help_text }}</div>
           {% endif %}
-          {{ field }}
+          {% with "aria-describedby:error--"|add:field.html_name as describedBy %}
+            {{ field|add_error_attr:describedBy  }}
+          {% endwith %}
       </div>
     {% endfor %}
   </div>
