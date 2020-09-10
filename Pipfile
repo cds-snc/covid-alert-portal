@@ -16,7 +16,6 @@ flake8 = "*"
 freezegun = "*"
 
 [packages]
-django = "*"
 requests = "*"
 python-dotenv = "*"
 django-sass = "*"
@@ -36,6 +35,7 @@ django-easy-audit = "==1.3.0a3"
 black = "*"
 django-project-version = "*"
 django-widget-tweaks = "*"
+django = "==3.0.4"
 
 [pipenv]
 allow_prereleases = true
