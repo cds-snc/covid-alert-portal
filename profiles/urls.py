@@ -1,6 +1,5 @@
 from django.urls import path, re_path
 from django.views.generic import RedirectView, TemplateView
-from django.contrib.auth.views import PasswordResetView
 from django_otp.views import LoginView
 from django.contrib.auth import views as login_views
 
@@ -56,7 +55,7 @@ urlpatterns = [
     ),
     path(
         "profiles/<uuid:pk>/edit/password",
-        views.HealthcareuserPasswordResetView.as_view(
+        views.HealthcarePasswordChangeView.as_view(
             form_class=forms.HealthcarePasswordEditForm,
             template_name=forms.HealthcarePasswordEditForm.template_name,
         ),
@@ -117,11 +116,6 @@ urlpatterns = [
     ),
 ]
 
-# The PasswordResetView doesn't have any html template by default
-PasswordResetView.html_email_template_name = (
-    "registration/password_reset_email_html.html"
-)
-
 # Django.contrib.auth urls have underscore in them, let's change that for dashes
 urlpatterns += [
     path("login/", login_views.LoginView.as_view(), name="login"),
@@ -143,7 +137,7 @@ urlpatterns += [
     ),
     path(
         "password-reset/",
-        PasswordResetView.as_view(form_class=forms.HealthcarePasswordResetForm),
+        views.HealthcarePasswordResetView.as_view(),
         name="password_reset",
     ),
     path(

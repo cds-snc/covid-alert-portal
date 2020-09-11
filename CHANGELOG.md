@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Fix password reset links running in non-production environments
 - Default superusers are associated with CDS, not "Ontario"
 
 ## [1.5.1] - 2020-09-08
