@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fix password reset links running in non-production environments
 - Default superusers are associated with CDS, not "Ontario"
-- Let managers remove other team member, even if they have created a CovidKey in the past
+- Let managers remove other team members who have created a CovidKey in the past
+- Add "thank you" message to login page
 
 ## [1.5.1] - 2020-09-08
 
