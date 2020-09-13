@@ -16,11 +16,31 @@ import ast
 
 import dj_database_url
 from dotenv import load_dotenv
+from typing import Any, Callable, Sequence, Union
+
 from datetime import timedelta
 from django.utils.translation import gettext_lazy as _
+from django.utils.functional import lazy
 from socket import gethostname, gethostbyname, gaierror
 
 load_dotenv()
+
+
+def lazy_config(key: str) -> Callable[[str], Any]:
+    """ Lazily get a config value from constance. Useful to bind constance
+    configs to other global settings to make them available to third-party
+    apps that are not aware of constance.
+    """
+    from django.conf import settings
+
+    def _get_config(key: str) -> Any:
+        from constance import config  # noqa
+        return getattr(config, key)
+
+    # The type is guessed from the default value to improve lazy()'s behaviour
+    var_type = type(settings.CONSTANCE_CONFIG[key][0])
+    return lazy(_get_config, var_type)(key)
+
 
 # Tests whether the second command line argument (after ./manage.py) was test
 TESTING = len(sys.argv) > 1 and sys.argv[1] == "test"
@@ -46,6 +66,32 @@ is_prod = os.getenv("DJANGO_ENV", "development") == "production"
 
 # DEBUG will be True in a developemnt environment and false in production
 DEBUG = not is_prod
+
+# When DEBUG is on, we display the code directly in the form, no need to send it
+DEFAULT_OTP_NOTIFY_NO_DELIVERY = False
+if DEBUG:
+    DEFAULT_OTP_NOTIFY_NO_DELIVERY = True
+
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+CONSTANCE_CONFIG = {
+    'OTP_NOTIFY_API_KEY': (os.getenv("OTP_NOTIFY_API_KEY") or '', 'The API key used to call Notify and send the SMS OTP', str),
+    'OTP_NOTIFY_TEMPLATE_ID': (os.getenv("OTP_NOTIFY_TEMPLATE_ID", ''), 'The SMS template ID set by Notify for the SMS OTP.', str),
+    'OTP_NOTIFY_NO_DELIVERY': (DEFAULT_OTP_NOTIFY_NO_DELIVERY, 'Do not send the SMS OTP via SMS. Used in development.', bool),
+
+    'FRESHDESK_API_ENDPOINT': (os.getenv("FRESHDESK_API_ENDPOINT") or '', 'Freshdesk API endpoint. Used in the contact form.', str),
+    'FRESHDESK_API_KEY': (os.getenv("FRESHDESK_API_KEY"), 'Freshdesk API key. Bound to a single user in Freshdesk.', str),
+    'FRESHDESK_PRODUCT_ID': (int(os.getenv("FRESHDESK_PRODUCT_ID", 0)), 'Freshdesk can have multiple product. Use the product ID here.', int),
+
+    'URL_DUAL_DOMAINS': (os.getenv("URL_DUAL_DOMAINS", "False") == "True", "The portal uses a french and english domain name. When switching languages in production, this variable is checked to initiate the domain switching based on user language.", bool),
+    'URL_EN_PRODUCTION': (os.getenv("URL_EN_PRODUCTION", "https://covid-alert-portal.alpha.canada.ca"), "The domain name for the english language.", str),
+    'URL_FR_PRODUCTION': (os.getenv("URL_FR_PRODUCTION", "https://portail-alerte-covid.alpha.canada.ca"), "iThe domain name for the french language.", str),
+
+    'INVITATIONS_INVITATION_EXPIRY': (1, "Number of days before an invitation expires.", int),
+    'COVID_KEY_MAX_PER_USER': (25 if is_prod else 10000, "Number of COVID key generated per user before throttling kicks in.", int),
+    'COVID_KEY_MAX_PER_USER_PERIOD_SECONDS': (86400, "The rolling time window (in seconds) for the throttling of COVID key generation (per user).", int),
+    'MAX_INVITATIONS_PER_PERIOD': (25, "Max number of invitation before throttling kicks in.", int),
+    'MAX_INVITATIONS_PERIOD_SECONDS': (3540, "Rolling window used for throttling of invitation. In seconds.", int),
+}
 
 ALLOWED_HOSTS = [
     "0.0.0.0",
@@ -77,6 +123,8 @@ GITHUB_SHA = os.getenv("GITHUB_SHA") or None
 # Application definition
 
 INSTALLED_APPS = [
+    "constance",
+    'constance.backends.database',
     "django_sass",
     "profiles",
     "covid_key",
@@ -238,16 +286,14 @@ OTP_LOGIN_URL = "login-2fa"
 
 LOGIN_REDIRECT_URL = "start"
 LOGOUT_REDIRECT_URL = "login"
+OTP_NOTIFY_API_KEY = lazy_config('OTP_NOTIFY_API_KEY')
+OTP_NOTIFY_TEMPLATE_ID = lazy_config('OTP_NOTIFY_TEMPLATE_ID')
 OTP_NOTIFY_ENDPOINT = (
     os.getenv("OTP_NOTIFY_ENDPOINT") or "https://api.notification.alpha.canada.ca"
 )
-OTP_NOTIFY_API_KEY = os.getenv("OTP_NOTIFY_API_KEY")
-OTP_NOTIFY_TEMPLATE_ID = os.getenv("OTP_NOTIFY_TEMPLATE_ID")
 OTP_NOTIFY_TOKEN_VALIDITY = 90
 OTP_EMAIL_THROTTLE_FACTOR = 3
-# When DEBUG is on, we display the code directly in the form, no need to send it
-if DEBUG:
-    OTP_NOTIFY_NO_DELIVERY = True
+OTP_NOTIFY_NO_DELIVERY = lazy_config('OTP_NOTIFY_NO_DELIVERY')
 
 API_AUTHORIZATION = os.getenv("API_AUTHORIZATION")
 API_ENDPOINT = os.getenv("API_ENDPOINT")
@@ -278,13 +324,13 @@ INVITATIONS_GONE_ON_ACCEPT_ERROR = False
 INVITATIONS_SIGNUP_REDIRECT = "/signup/"
 INVITATIONS_EMAIL_SUBJECT_PREFIX = ""
 INVITATIONS_INVITATION_ONLY = True
-INVITATIONS_INVITATION_EXPIRY = 1  # 1 day
+INVITATIONS_INVITATION_EXPIRY = lazy_config('INVITATIONS_INVITATION_EXPIRY')  # 1 day by default
 INVITATIONS_ADMIN_ADD_FORM = "profiles.forms.HealthcareInvitationAdminAddForm"
 INVITATIONS_ADMIN_CHANGE_FORM = "profiles.forms.HealthcareInvitationAdminChangeForm"
-COVID_KEY_MAX_PER_USER = 25 if is_prod else 10000
-COVID_KEY_MAX_PER_USER_PERIOD_SECONDS = 86400  # 1 day
-MAX_INVITATIONS_PER_PERIOD = 25
-MAX_INVITATIONS_PERIOD_SECONDS = 3540  # 59 minutes
+COVID_KEY_MAX_PER_USER = lazy_config('COVID_KEY_MAX_PER_USER')
+COVID_KEY_MAX_PER_USER_PERIOD_SECONDS = lazy_config('COVID_KEY_MAX_PER_USER_PERIOD_SECONDS')  # 1 day by default
+MAX_INVITATIONS_PER_PERIOD = lazy_config('MAX_INVITATIONS_PER_PERIOD')
+MAX_INVITATIONS_PERIOD_SECONDS = lazy_config('MAX_INVITATIONS_PERIOD_SECONDS')  # 59 minutes by default
 
 # Email setup
 EMAIL_BACKEND = (
@@ -305,7 +351,7 @@ SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
 if TESTING:
     AXES_ENABLED = False
     AXES_VERBOSE = False
-    OTP_NOTIFY_NO_DELIVERY = True
+    DEFAULT_OTP_NOTIFY_NO_DELIVERY = True
 
 AXES_FAILURE_LIMIT = 10  # Lockout after 10 failed login attempts
 AXES_SLOW_FAILURE_LIMIT = (
@@ -327,14 +373,7 @@ AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
 AXES_HANDLER = "profiles.login_handler.HealthcareLoginHandler"
 # Site Setup for Separate Domains
 
-URL_DUAL_DOMAINS = os.getenv("URL_DUAL_DOMAINS", "False") == "True"
-
-URL_EN_PRODUCTION = os.getenv(
-    "URL_EN_PRODUCTION", "https://covid-alert-portal.alpha.canada.ca"
-)
-URL_FR_PRODUCTION = os.getenv(
-    "URL_FR_PRODUCTION", "https://portail-alerte-covid.alpha.canada.ca"
-)
+URL_DUAL_DOMAINS = lazy_config('URL_DUAL_DOMAINS')
 
 CSP_DEFAULT_SRC = [
     "'self'",
@@ -350,10 +389,6 @@ CSP_SCRIPT_SRC = [
 ]
 CSP_CONNECT_SRC = ["'self'"]
 
-FRESHDESK_API_ENDPOINT = os.getenv("FRESHDESK_API_ENDPOINT")
-FRESHDESK_API_KEY = os.getenv("FRESHDESK_API_KEY")
-FRESHDESK_PRODUCT_ID = int(os.getenv("FRESHDESK_PRODUCT_ID", 0)) or None
-
 if TESTING:
     LOGGING = {
         "version": 1,
@@ -368,3 +403,4 @@ else:
         "handlers": {"console": {"class": "logging.StreamHandler"}},
         "root": {"handlers": ["console"], "level": "INFO"},
     }
+
