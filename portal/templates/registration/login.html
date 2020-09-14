@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n static %}
+{% get_current_language as LANGUAGE_CODE %}
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
@@ -27,7 +28,7 @@
       <div class="ty">
         <img class="ty__hand" src="{% static 'img/thank-you-merci.svg' %}" alt="" />
         <p class="ty__message">{% trans "Thanks for your essential work" %}</p>
-        <img class="ty__logo" src="{% static 'img/logo-en.svg' %}" alt="" />
+        <img class="ty__logo" src="{% static 'img/logo-'|add:request.LANGUAGE_CODE|add:'.svg' %}" alt="" />
       </div>
     </div>
   </div>
