@@ -15,7 +15,15 @@
     .column__content {
       margin-top: $space-xl;
       margin-bottom: $space-xxl;
-      padding-right: $space-md;
+      padding-right: $space-xl;
+      padding-left: $space-md;
+
+      max-width: calc(960px / 2);
+      margin-left: auto;
+
+      @include xl {
+        max-width: calc(1170px / 2);
+      }
     }
 
     .column__decoration {
@@ -52,6 +60,11 @@
 
       .nav--main {
         margin-bottom: 0;
+      }
+
+      .page--container {
+        max-width: unset;
+        padding: 0;
       }
 
       .content--container {
