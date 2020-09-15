@@ -5,6 +5,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView
 from django.utils.translation import gettext as _
+from django.utils.translation import get_language
 from django.views.generic import (
     CreateView,
     FormView,
@@ -253,17 +254,12 @@ class InvitationView(Is2FAMixin, IsAdminMixin, ThrottledMixin, FormView):
     def form_valid(self, form):
         # Pass user to invite, save the invite to the DB, and return it
         invite = form.save(user=self.request.user)
-        current_site = get_current_site(self.request)
-        subject_line = "{}{}".format(
-            get_site_name(self.request), _(": Your portal account")
-        )
         if not settings.TESTING:
             # Don't actually send the email during tests
             invite.send_invitation(
                 self.request,
                 scheme=self.request.scheme,
-                http_host=current_site.domain,
-                subject_line=subject_line,
+                language=get_language(),
             )
         self.request.session["invite_email"] = invite.email
         return super().form_valid(form)
@@ -342,12 +338,12 @@ class HealthcareUserEditView(Is2FAMixin, ProvinceAdminEditMixin, UpdateView):
 
 class HealthcarePasswordResetView(PasswordResetView):
     form_class = HealthcarePasswordResetForm
-    html_email_template_name = "registration/password_reset_email_html.html"
 
     def post(self, *args, **kwargs):
         base_url = self.request.build_absolute_uri("/")
         self.extra_email_context = {
             "base_url": base_url[:-1],  # remove the trailing slash
+            "language": get_language(),
         }
 
         return super().post(*args, **kwargs)
