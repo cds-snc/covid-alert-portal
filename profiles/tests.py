@@ -14,6 +14,7 @@ from freezegun import freeze_time
 from .forms import SignupForm, HealthcarePhoneEditForm
 from .models import HealthcareProvince, HealthcareUser, AuthorizedDomain
 from .validators import BannedPasswordValidator
+from .utils.invitation_adapter import user_signed_up
 
 User = get_user_model()
 
@@ -494,6 +495,7 @@ class SignupFlow(AdminUserTestCase):
         self.assertEqual(
             str(message_list[0]), "Invitation not found for fake@email.com"
         )
+
 
 
 class InviteFlow(AdminUserTestCase):

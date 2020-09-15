@@ -1,7 +1,6 @@
 from urllib.parse import unquote, urlparse
 from django.conf import settings
 from django.shortcuts import redirect, render
-from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView
 from django.utils.translation import gettext as _
@@ -32,6 +31,7 @@ from portal.mixins import ThrottledMixin, Is2FAMixin, IsAdminMixin
 from invitations.models import Invitation
 
 from .utils import generate_2fa_code
+from .utils.invitation_adapter import user_signed_up
 from .models import HealthcareUser
 from .mixins import (
     ProvinceAdminViewMixin,
@@ -47,7 +47,6 @@ from .forms import (
     YubikeyDeviceCreateForm,
     YubikeyVerifyForm,
 )
-from .utils import get_site_name
 
 
 class YubikeyVerifyView(FormView):
@@ -165,6 +164,7 @@ class SignUpView(FormView):
             username=form.cleaned_data.get("email"),
             password=form.cleaned_data.get("password1"),
         )
+        user_signed_up.send(sender=user.__class__, request=self.request, user=user)
         login(self.request, user)
         generate_2fa_code(user)
         return super(SignUpView, self).form_valid(form)
