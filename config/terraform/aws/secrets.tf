@@ -79,7 +79,7 @@ resource "aws_secretsmanager_secret" "password_reset_email_template_id_fr" {
 
 resource "aws_secretsmanager_secret_version" "password_reset_email_template_id_fr" {
   secret_id     = aws_secretsmanager_secret.password_reset_email_template_id_fr.id
-  secret_string = var.
+  secret_string = var.password_reset_email_template_id_fr
 }
 
 resource "aws_secretsmanager_secret" "django_admins" {

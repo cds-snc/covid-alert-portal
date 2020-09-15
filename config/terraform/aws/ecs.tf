@@ -39,10 +39,10 @@ data "template_file" "covidportal_task" {
     api_authorization                   = aws_secretsmanager_secret_version.api_authorization.arn
     api_endpoint                        = aws_secretsmanager_secret_version.api_endpoint.arn
     default_from_email                  = aws_secretsmanager_secret_version.default_from_email.arn
-    invitation_email_template_id_en     = aws_secretsmanager_secret_version.invitation_email_template_id_en
-    invitation_email_template_id_fr     = aws_secretsmanager_secret_version.invitation_email_template_id_fr
-    password_reset_email_template_id_en = aws_secretsmanager_secret_version.password_reset_email_template_id_en
-    password_reset_email_template_id_fr = aws_secretsmanager_secret_version.password_reset_email_template_id_fr
+    invitation_email_template_id_en     = aws_secretsmanager_secret_version.invitation_email_template_id_en.arn
+    invitation_email_template_id_fr     = aws_secretsmanager_secret_version.invitation_email_template_id_fr.arn
+    password_reset_email_template_id_en = aws_secretsmanager_secret_version.password_reset_email_template_id_en.arn
+    password_reset_email_template_id_fr = aws_secretsmanager_secret_version.password_reset_email_template_id_fr.arn
     django_admins                       = aws_secretsmanager_secret_version.django_admins.arn
     django_secret_key                   = aws_secretsmanager_secret_version.django_secret_key.arn
     email_host                          = aws_secretsmanager_secret_version.email_host.arn
