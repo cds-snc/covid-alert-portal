@@ -1,0 +1,75 @@
+.column__decoration {
+  display: none;
+}
+
+/* only include on larger screens */
+@include md {
+  .column__container {
+    display: flex;
+    flex-direction: row;
+
+    .column {
+      flex-basis: 50%;
+    }
+
+    .column__content {
+      margin-top: $space-xl;
+      margin-bottom: $space-xxl;
+      padding-right: $space-xl;
+      padding-left: $space-md;
+
+      max-width: calc(960px / 2);
+      margin-left: auto;
+
+      @include xl {
+        max-width: calc(1170px / 2);
+      }
+    }
+
+    .column__decoration {
+      display: flex;
+      color: white;
+      background: $color-blue-button;
+
+      > .ty {
+        margin: auto;
+        text-align: center;
+
+        .ty__hand {
+          margin-top: -50px;
+          width: 70px;
+        }
+
+        .ty__message {
+          font-size: 1.3em;
+          margin: 0 20%;
+        }
+
+        .ty__logo {
+          margin-top: $space-md;
+          width: 150px;
+        }
+      }
+    }
+  }
+
+  body.login {
+    /* remove all spacing and padding so we can have full-bleed columns */
+    main {
+      padding-bottom: 0;
+
+      .nav--main {
+        margin-bottom: 0;
+      }
+
+      .page--container {
+        max-width: unset;
+        padding: 0;
+      }
+
+      .content--container {
+        width: 100%;
+      }
+    }
+  }
+}

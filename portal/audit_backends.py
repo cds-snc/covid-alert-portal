@@ -41,7 +41,9 @@ class LoggerBackend:
             # That means the event is either m2m_change or m2m_rev_change, which we don't care about
             return crud_info
 
-        model = json.loads(crud_info.get("object_json_repr"))[0].get("model")
+        crud_info_dict = json.loads(crud_info.get("object_json_repr"))
+        model = crud_info_dict[0].get("model")
+
         changed_fields_data = json.loads(crud_info.get("changed_fields", "{}"))
         if changed_fields_data is not None:
             changed_fields = list(changed_fields_data.keys())
