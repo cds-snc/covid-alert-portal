@@ -19,54 +19,51 @@ resource "aws_s3_bucket" "firehose_waf_logs" {
 
 resource "aws_s3_bucket" "portal_maintenance_mode" {
   bucket = "staging-covid-portal-maintenance-mode"
-  acl    = "public-read"
-  website {
-    index_document = "en.htm"
-  }
+  acl    = "private"
 }
 
 resource "aws_s3_bucket_object" "html_files" {
-  for_each = fileset("./maintenance_mode/", "*.htm")
+  for_each     = fileset("./maintenance_mode/", "*.htm")
   content_type = "text/html"
-  bucket = "staging-covid-portal-maintenance-mode"
-  key    = each.value
-  source = "./maintenance_mode/${each.value}"
-  etag   = filemd5("./maintenance_mode/${each.value}")
+  bucket       = "staging-covid-portal-maintenance-mode"
+  key          = each.value
+  source       = "./maintenance_mode/${each.value}"
+  etag         = filemd5("./maintenance_mode/${each.value}")
 }
 
 resource "aws_s3_bucket_object" "html_supporting_css" {
-  for_each = fileset("./maintenance_mode/", "*.css")
+  for_each     = fileset("./maintenance_mode/", "*.css")
   content_type = "text/css"
-  bucket = "staging-covid-portal-maintenance-mode"
-  key    = each.value
-  source = "./maintenance_mode/${each.value}"
-  etag   = filemd5("./maintenance_mode/${each.value}")
+  bucket       = "staging-covid-portal-maintenance-mode"
+  key          = each.value
+  source       = "./maintenance_mode/${each.value}"
+  etag         = filemd5("./maintenance_mode/${each.value}")
 }
 
 resource "aws_s3_bucket_object" "html_supporting_svg" {
-  for_each = fileset("./maintenance_mode/", "*.svg")
+  for_each     = fileset("./maintenance_mode/", "*.svg")
   content_type = "image/svg+xml"
-  bucket = "staging-covid-portal-maintenance-mode"
-  key    = each.value
-  source = "./maintenance_mode/${each.value}"
-  etag   = filemd5("./maintenance_mode/${each.value}")
+  bucket       = "staging-covid-portal-maintenance-mode"
+  key          = each.value
+  source       = "./maintenance_mode/${each.value}"
+  etag         = filemd5("./maintenance_mode/${each.value}")
 }
 
 resource "aws_s3_bucket_object" "html_supporting_ico" {
-  for_each = fileset("./maintenance_mode/", "*.ico")
+  for_each     = fileset("./maintenance_mode/", "*.ico")
   content_type = "image/png"
-  bucket = "staging-covid-portal-maintenance-mode"
-  key    = each.value
-  source = "./maintenance_mode/${each.value}"
-  etag   = filemd5("./maintenance_mode/${each.value}")
+  bucket       = "staging-covid-portal-maintenance-mode"
+  key          = each.value
+  source       = "./maintenance_mode/${each.value}"
+  etag         = filemd5("./maintenance_mode/${each.value}")
 }
 
 data "aws_iam_policy_document" "web_distribution" {
   statement {
     actions = ["s3:GetObject"]
     principals {
-      type        = "*"
-      identifiers = ["*"]
+      type        = "AWS"
+      identifiers = [aws_cloudfront_origin_access_identity.maintenance_access_identity.iam_arn]
     }
     resources = ["${aws_s3_bucket.portal_maintenance_mode.arn}/*"]
   }
