@@ -165,7 +165,6 @@ class SignUpView(FormView):
             username=form.cleaned_data.get("email"),
             password=form.cleaned_data.get("password1"),
         )
-        Invitation.objects.filter(email=user.email).update(accepted=True)
         login(self.request, user)
         generate_2fa_code(user)
         return super(SignUpView, self).form_valid(form)

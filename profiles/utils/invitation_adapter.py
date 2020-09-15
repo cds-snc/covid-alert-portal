@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.dispatch import Signal
 from invitations.adapters import BaseInvitationsAdapter
 
 from notifications_python_client.errors import HTTPError
@@ -6,6 +7,9 @@ from notifications_python_client.notifications import NotificationsAPIClient
 
 
 class HealthcareInvitationAdapter(BaseInvitationsAdapter):
+    def get_user_signed_up_signal(self):
+        return Signal(providing_args=["request", "user"])
+
     def send_mail(self, template_prefix, email, context):
         notifications_client = NotificationsAPIClient(
             settings.NOTIFY_API_KEY, base_url=settings.NOTIFY_ENDPOINT
