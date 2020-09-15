@@ -303,12 +303,20 @@ DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 INVITATIONS_ADAPTER = "profiles.utils.invitation_adapter.HealthcareInvitationAdapter"
 
 PASSWORD_RESET_EMAIL_TEMPLATE_ID = {
-    "en": "0d7607d2-1b8a-493e-ba1f-0014d5a70460",
-    "fr": "f0833811-8638-4502-b412-1788951fcc27",
+    "en": os.getenv(
+        "PASSWORD_RESET_EMAIL_TEMPLATE_ID_EN", "0d7607d2-1b8a-493e-ba1f-0014d5a70460"
+    ),
+    "fr": os.getenv(
+        "PASSWORD_RESET_EMAIL_TEMPLATE_ID_FR", "f0833811-8638-4502-b412-1788951fcc27"
+    ),
 }
 INVITATION_EMAIL_TEMPLATE_ID = {
-    "en": "f5bdd526-ae75-45a9-b338-baeae6f822d6",
-    "fr": "fcaba085-c471-4871-aa62-4a812cbc8332",
+    "en": os.getenv(
+        "INVITATION_EMAIL_TEMPLATE_ID_EN", "f5bdd526-ae75-45a9-b338-baeae6f822d6"
+    ),
+    "fr": os.getenv(
+        "INVITATION_EMAIL_TEMPLATE_ID_FR", "fcaba085-c471-4871-aa62-4a812cbc8332"
+    ),
 }
 
 # Create default Super User with this password
