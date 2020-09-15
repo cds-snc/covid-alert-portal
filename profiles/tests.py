@@ -888,6 +888,18 @@ class DeleteView(AdminUserTestCase):
             ),
         )
 
+    def test_admin_delete_staff_user_generated_keys(self):
+        user2_credentials = get_other_credentials(is_admin=False)
+        user2 = User.objects.create_user(**user2_credentials)
+        self.login(user2_credentials)
+        response = self.client.post(reverse("key"))
+        self.assertEqual(response.status_code, 200)
+
+        self.login(get_credentials())
+        response = self.client.post(reverse("user_delete", kwargs={"pk": user2.id}))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse("profiles"))
+
     def test_superadmin_can_see_delete_page_for_admin(self):
         superuser_credentials = get_other_credentials(is_superuser=True)
         User.objects.create_superuser(**superuser_credentials)

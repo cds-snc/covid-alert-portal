@@ -1,22 +1,35 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n static %}
+{% get_current_language as LANGUAGE_CODE %}
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
   {% trans "Log in" %}
 {% endblock %}
 
-{% block extra_container_class %}login{% endblock %}
+{% block body_class %}login{% endblock %}
 
 {% block content %}
-  {% include  "includes/error_list.html" %}
-  {% include  "includes/flash_messages.html" with messages=logout_messages %}
+  <div class="column__container">
+    <div class="column column__content column--1 column-md--1-2">
+        {% include  "includes/error_list.html" %}
+        {% include  "includes/flash_messages.html" with messages=logout_messages %}
 
-  <h1>{% trans "Log in" %}</h1>
+        <h1>{% trans "Log in" %}</h1>
 
-  {% include "includes/cds_form.html" with submit_text=_("Log in") %}
-  <p class="near-form">
-      <a href="{% url 'password_reset' %}">{% trans "Forgot your password?" %}</a>
-  </p>
-  <p>{% trans "Only an authorized healthcare worker can use a portal account and give a COVID Alert key." %}</p>
+        {% include "includes/cds_form.html" with submit_text=_("Log in") %}
+        <p class="near-form">
+            <a href="{% url 'password_reset' %}">{% trans "Forgot your password?" %}</a>
+        </p>
+        <p>{% trans "Only an authorized healthcare worker can use a portal account and give a COVID Alert key." %}</p>
+    </div>
+
+    <div class="column column__decoration column--0 column-md--1-2" aria-hidden="true">
+      <div class="ty">
+        <img class="ty__hand" src="{% static 'img/thank-you-merci.svg' %}" alt="" />
+        <p class="ty__message">{% trans "Thanks for your essential work" %}</p>
+        <img class="ty__logo" src="{% static 'img/logo-'|add:request.LANGUAGE_CODE|add:'.svg' %}" alt="" />
+      </div>
+    </div>
+  </div>
 {% endblock %}
