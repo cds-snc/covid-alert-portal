@@ -7,6 +7,7 @@ from notifications_python_client.notifications import NotificationsAPIClient
 
 user_signed_up = Signal(providing_args=["request", "user"])
 
+
 class HealthcareInvitationAdapter(BaseInvitationsAdapter):
     def get_user_signed_up_signal(self):
         return user_signed_up

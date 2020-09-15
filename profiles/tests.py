@@ -456,7 +456,9 @@ class InvitationFlow(TestCase):
 class SignupFlow(AdminUserTestCase):
     def setUp(self):
         super().setUp()
-        self.invite = Invitation.create(self.invited_email, inviter=self.user, sent=timezone.now())
+        self.invite = Invitation.create(
+            self.invited_email, inviter=self.user, sent=timezone.now()
+        )
 
     def test_email_and_province_on_signup_page(self):
         session = self.client.session
@@ -497,27 +499,26 @@ class SignupFlow(AdminUserTestCase):
         )
 
     def test_invitation_accepted_after_signup(self):
-        url = reverse('invitations:accept-invite', args=[self.invite.key])
+        url = reverse("invitations:accept-invite", args=[self.invite.key])
         response = self.client.get(url)
         self.assertEqual(self.invite.accepted, False)
         password = uuid4()
         data = {
-            'email': self.invited_email,
-            'province': 'CDS',
-            'name': 'Chuck Norris',
-            'phone_number': "+12125552368",
-            'phone_number_confirmation': "+12125552368",
-            'password1': password,
-            'password2': password,
+            "email": self.invited_email,
+            "province": "CDS",
+            "name": "Chuck Norris",
+            "phone_number": "+12125552368",
+            "phone_number_confirmation": "+12125552368",
+            "password1": password,
+            "password2": password,
         }
-        response = self.client.post(reverse('signup'), data=data)
+        response = self.client.post(reverse("signup"), data=data)
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, reverse('login-2fa'))
+        self.assertEqual(response.url, reverse("login-2fa"))
         # The invitation is modified in another Thread and django/python gil are not aware the object has changed.
         # So let's force a reload from the DB
         self.invite.refresh_from_db()
         self.assertEqual(self.invite.accepted, True)
-
 
 
 class InviteFlow(AdminUserTestCase):
