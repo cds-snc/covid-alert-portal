@@ -84,19 +84,19 @@ variable "ecs_secret_default_from_email" {
   type = string
 }
 
-variable "invitation_email_template_id_en" {
+variable "ecs_secret_invitation_email_template_id_en" {
   type = string
 }
 
-variable "invitation_email_template_id_fr" {
+variable "ecs_secret_invitation_email_template_id_fr" {
   type = string
 }
 
-variable "password_reset_email_template_id_en" {
+variable "ecs_secret_password_reset_email_template_id_en" {
   type = string
 }
 
-variable "password_reset_email_template_id_fr" {
+variable "ecs_secret_password_reset_email_template_id_fr" {
   type = string
 }
 
