@@ -5,6 +5,7 @@
   margin-bottom: $space-xl;
   border-radius: 10px;
   text-align: left;
+  position: relative;
 
   code {
     display: block;
@@ -28,6 +29,17 @@
     span {
       margin: 5px 0;
     }
+  }
+
+  .example-only {
+    color: $color-red;
+    font-weight: bold;
+    max-width: 200px;
+    margin-left: auto;
+    text-align: left;
+    position: absolute;
+    right: 10px;
+    font-size: 120%;
   }
 }
 

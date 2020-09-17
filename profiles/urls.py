@@ -23,6 +23,11 @@ urlpatterns = [
     ),
     re_path(r"signup/$", views.SignUpView.as_view(), name="signup"),
     path(
+        "welcome/",
+        TemplateView.as_view(template_name="profiles/welcome.html"),
+        name="welcome",
+    ),
+    path(
         "profiles/",
         views.ProfilesView.as_view(),
         name="profiles",

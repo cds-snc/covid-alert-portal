@@ -13,37 +13,53 @@
         <p>COVID Alert does not replace manual contact tracing by local health authorities. It is just one part of the public health effort to limit the spread of COVID-19.</p>
 
         <h3>One-time keys turn on exposure notifications</h3>
-        <p>Patients with COVID-19 can choose to notify people they’ve been near of possible exposure. Notifications do not give information about the patient or time of exposure.</p>
-        <p>To notify people, the patient enters a one-time key in the app. The key confirms the patient has been diagnosed with COVID-19.  Then the app guides patients through the steps to notify people of possible exposure.</p>
+        <p>You’ll give one-time keys to patients with COVID-19 who want to notify people they’ve been near. <b>Only give one key per patient.</b></p>
+        <p>Before giving a key, check the patient has the COVID Alert app on their phone.</p>
 
-        <h3>Keys expire in 24 hours</h3>
-        <p>To prevent false reports, only authorized healthcare workers can generate and give one-time keys. If the key expires before the patient enters it, they will not be able to get a new key.</p>
-
+        <h2>How the portal displays a one-time key</h2>
+    {% endblocktrans %}
+        <div id="big-code">
+            <div class="example-only">{% blocktrans %}EXAMPLE ONLY. <br/>NOT A VALID ONE-TIME KEY.{% endblocktrans %}</div>
+            {% with code="AHJ 232 ZWFA" %}
+                <code>{{ code }}</code>
+                <hr aria-hidden="true"/>
+                {% include "covid_key/phonetic.html" %}
+                <hr aria-hidden="true"/>
+                {% blocktrans %}
+                    <span>The <b>key expires in 24 hours</b>.</span><br />
+                    <span> No new keys after expiry.</span>
+                {% endblocktrans %}
+            {% endwith %}
+        </div>
+    {% blocktrans %}
+        <p>The portal also links to detailed instructions. You can use these instructions to help patients enter the key in the app.</p>
+        <h2>Only authorized healthcare workers generate and give one-time keys</h2>
+        <p>By entering the key, the patient confirms they have COVID-19. Then the app guides the patient through the steps to notify people of possible exposure.</p>
+        <p>Notifications do not give information about the patient or time of exposure.</p>
+        <h2>Only generate keys for real patients</h2>
+        <p>By comparing 3 stats, we learn how much the app slows the spread of COVID-19. We need the number of:</p>
+        <ul><li>People with COVID -19.</li>
+        <li>One-time keys generated for patients.</li>
+        <li>Patients who enter keys in the app.</li></ul>
+        <p>To keep stats accurate, only generate a key when you intend to give it to a patient. This condition is part of our terms of use.</p>
         <h2>Create an account to generate keys</h2>
-        <p>You’ll get an email if you’re invited to create a portal account. Check your spam folder for the invitation.</p>
+        <p>You’ll get an email if you’re invited to create a portal account. Check your spam folder for the email.</p>
         <p>Both administrators and healthcare workers can generate one-time keys.</p>
         <p>Administrators can also:</p>
-        <ul>
-            <li>Invite healthcare workers to create portal accounts.</li>
-            <li>Delete portal accounts.</li>
-        </ul>
-
-        <h3>Keep a mobile phone with you</h3>
+        <ul><li>Invite healthcare workers to create portal accounts.</li>
+        <li>Delete portal accounts.</li></ul>
+        <h2>Keep a mobile phone with you</h2>
         <p>The portal texts a security code to your mobile phone:</p>
-        <ul>
-            <li>When you create your account.</li>
-            <li>Anytime you log in.</li>
-        </ul>
-        <h3>Check your browser is compatible</h3>
+        <ul><li>When you create your account.</li>
+        <li>Anytime you log in.</li></ul>
+        <h2>Check your browser is compatible</h2>
         <p>The portal works on any mobile or desktop device using a browser with automatic updates, including Chrome, Edge, Firefox, Opera and Safari. It’s also supported on Internet Explorer 11.</p>
         <h2>If the portal is down</h2>
         <h3>Follow local procedures for patients who need keys</h3>
         <p>Public health authorities must determine what to do for:</p>
-        <ul>
-            <li>Situations when an individual healthcare worker cannot use their portal account.</li>
-            <li>System-wide portal outages.</li>
-        </ul>
-        <h3>Contact us for tech support</h3>
+        <ul><li>Situations when an individual healthcare worker cannot use their portal account.</li>
+        <li>System-wide portal outages.</li></ul>
+        <h2>Contact us for tech support</h2>
         <p>To ask questions or give feedback about the portal, <a href="mailto:assistance+healthcare@cds-snc.ca">contact the Canadian Digital Service</a>.</p>
     {% endblocktrans %}
 {% endblock %}
