@@ -125,7 +125,7 @@ class YubikeyDeleteView(Is2FAMixin, DeleteView):
 class SignUpView(FormView):
     form_class = SignupForm
     template_name = "profiles/signup.html"
-    success_url = reverse_lazy("login-2fa")
+    success_url = reverse_lazy("welcome")
 
     def get(self, request, *args, **kwargs):
         invited_email = self.request.session.get("account_verified_email", None)
