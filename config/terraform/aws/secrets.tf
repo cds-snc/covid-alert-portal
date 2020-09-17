@@ -49,7 +49,7 @@ resource "aws_secretsmanager_secret" "invitation_email_template_id_en" {
 
 resource "aws_secretsmanager_secret_version" "invitation_email_template_id_en" {
   secret_id     = aws_secretsmanager_secret.invitation_email_template_id_en.id
-  secret_string = var.invitation_email_template_id_en
+  secret_string = var.ecs_secret_invitation_email_template_id_en
 }
 
 resource "aws_secretsmanager_secret" "invitation_email_template_id_fr" {
@@ -59,7 +59,7 @@ resource "aws_secretsmanager_secret" "invitation_email_template_id_fr" {
 
 resource "aws_secretsmanager_secret_version" "invitation_email_template_id_fr" {
   secret_id     = aws_secretsmanager_secret.invitation_email_template_id_fr.id
-  secret_string = var.invitation_email_template_id_fr
+  secret_string = var.ecs_secret_invitation_email_template_id_fr
 }
 
 resource "aws_secretsmanager_secret" "password_reset_email_template_id_en" {
@@ -69,7 +69,7 @@ resource "aws_secretsmanager_secret" "password_reset_email_template_id_en" {
 
 resource "aws_secretsmanager_secret_version" "password_reset_email_template_id_en" {
   secret_id     = aws_secretsmanager_secret.password_reset_email_template_id_en.id
-  secret_string = var.password_reset_email_template_id_en
+  secret_string = var.ecs_secret_password_reset_email_template_id_en
 }
 
 resource "aws_secretsmanager_secret" "password_reset_email_template_id_fr" {
@@ -79,7 +79,7 @@ resource "aws_secretsmanager_secret" "password_reset_email_template_id_fr" {
 
 resource "aws_secretsmanager_secret_version" "password_reset_email_template_id_fr" {
   secret_id     = aws_secretsmanager_secret.password_reset_email_template_id_fr.id
-  secret_string = var.password_reset_email_template_id_fr
+  secret_string = var.ecs_secret_password_reset_email_template_id_fr
 }
 
 resource "aws_secretsmanager_secret" "django_admins" {
