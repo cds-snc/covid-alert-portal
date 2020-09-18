@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.6.1] - 2020-09-18
+
+- Up the invitations limit to 200 per hour temporarily
+
 ## [1.6.0] - 2020-09-15
 
 ### Fixed
@@ -15,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Default superusers are associated with CDS, not "Ontario"
 - Let managers remove other team members who have created a CovidKey in the past
 
-### Added 
+### Added
 
 - Add "thank you" message to login page
 
