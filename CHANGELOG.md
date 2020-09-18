@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 - Adds a new Welcome page to users who get through the invite + signup process.
+- Update the quick guide with an example code
 
 ## [1.6.2] - 2020-09-18
 
