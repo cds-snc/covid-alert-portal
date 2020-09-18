@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Send the password reset and the invitation email
+- No longer flag invitation as accepted when the user clicks on the link
+
 ## [1.6.0] - 2020-09-15
 
 ### Fixed
