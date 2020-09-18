@@ -75,7 +75,7 @@ The following are only relevant for the `smtp` backend.
 
 #### New Relic configuration
 
-We use New Relic to monitor for server side errors and application performance in production and staging.  We do not leverage New Relic client (browser side) metric reporting.
+We use New Relic to monitor for server side errors and application performance in production and staging. We do not leverage New Relic client (browser side) metric reporting.
 
 - `NEW_RELIC_APP_NAME`: The app name set up in New Relic.
 
@@ -96,6 +96,14 @@ We use Notify and django-otp to send login auth code via SMS.
 - `OTP_NOTIFY_TOKEN_VALIDITY`: Time in seconds before the token expires
 
 [Read the docs here](https://django-otp-notify.readthedocs.io/en/latest/)
+
+#### Notify configuration
+
+We are using Notify for our OTP SMS codes through an `django-otp-` plugin, but we are also using it directly to send emails.
+
+- `PASSWORD_RESET_EMAIL_TEMPLATE_ID_EN` and `PASSWORD_RESET_EMAIL_TEMPLATE_ID_FR` : Template IDs for the English and French versions of the password reset email
+
+- `INVITATION_EMAIL_TEMPLATE_ID_EN` and `INVITATION_EMAIL_TEMPLATE_ID_FR` : Template IDs for the English and French versions of the user account creation email
 
 #### Contact form and Freshdesk
 

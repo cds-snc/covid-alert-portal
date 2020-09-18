@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-- Send the password reset and the invitation email
-- No longer flag invitation as accepted when the user clicks on the link
+- Use Notify to send user-facing emails: ie, the password reset and the invitation email
+- No longer flag invitations as accepted when the user clicks on the link
 
 ## [1.6.0] - 2020-09-15
 
@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Default superusers are associated with CDS, not "Ontario"
 - Let managers remove other team members who have created a CovidKey in the past
 
-### Added 
+### Added
 
 - Add "thank you" message to login page
 
