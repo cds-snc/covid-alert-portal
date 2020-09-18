@@ -3,6 +3,8 @@ name: Deploy to Staging
 on:
   push:
     branches: [main]
+    paths:
+      - "VERSION"
 
 jobs:
   deploy-portal-service:

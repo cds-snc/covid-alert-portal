@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Only tag and deploy a container to Amazon ECS if the VERSION file has been changed
+
 ## [1.6.0] - 2020-09-15
 
 ### Fixed
