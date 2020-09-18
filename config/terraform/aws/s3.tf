@@ -20,6 +20,14 @@ resource "aws_s3_bucket" "firehose_waf_logs" {
 resource "aws_s3_bucket" "portal_maintenance_mode" {
   bucket = "staging-covid-portal-maintenance-mode"
   acl    = "private"
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
+  #tfsec:ignore:AWS002
 }
 
 resource "aws_s3_bucket_object" "html_files" {
