@@ -44,7 +44,7 @@ SECRET_KEY = (
 # https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/#https
 is_prod = os.getenv("DJANGO_ENV", "development") == "production"
 
-# DEBUG will be True in a developemnt environment and false in production
+# DEBUG will be True in a development environment and false in production
 DEBUG = not is_prod
 
 ALLOWED_HOSTS = [
