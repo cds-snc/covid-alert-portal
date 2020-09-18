@@ -15,22 +15,21 @@
         <h3>One-time keys turn on exposure notifications</h3>
         <p>You’ll give one-time keys to patients with COVID-19 who want to notify people they’ve been near. <b>Only give one key per patient.</b></p>
         <p>Before giving a key, check the patient has the COVID Alert app on their phone.</p>
-
         <h2>How the portal displays a one-time key</h2>
     {% endblocktrans %}
-        <div id="big-code">
-            <div class="example-only">{% blocktrans %}EXAMPLE ONLY. <br/>NOT A VALID ONE-TIME KEY.{% endblocktrans %}</div>
-            {% with code="AHJ 232 ZWFA" %}
-                <code>{{ code }}</code>
-                <hr aria-hidden="true"/>
-                {% include "covid_key/phonetic.html" %}
-                <hr aria-hidden="true"/>
-                {% blocktrans %}
-                    <span>The <b>key expires in 24 hours</b>.</span><br />
-                    <span> No new keys after expiry.</span>
-                {% endblocktrans %}
-            {% endwith %}
-        </div>
+    <div class="big-code big-code__with-example-text">
+        <div class="example-text">{% blocktrans %}EXAMPLE ONLY. <br/>NOT A VALID ONE-TIME KEY.{% endblocktrans %}</div>
+        {% with code="AHJ 232 ZWFA" %}
+            <code>{{ code }}</code>
+            <hr aria-hidden="true"/>
+            {% include "covid_key/phonetic.html" %}
+            <hr aria-hidden="true"/>
+            {% blocktrans %}
+                <span>The <b>key expires in 24 hours</b>.</span><br />
+                <span> No new keys after expiry.</span>
+            {% endblocktrans %}
+        {% endwith %}
+    </div>
     {% blocktrans %}
         <p>The portal also links to detailed instructions. You can use these instructions to help patients enter the key in the app.</p>
         <h2>Only authorized healthcare workers generate and give one-time keys</h2>

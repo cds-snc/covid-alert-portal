@@ -13,8 +13,8 @@
         <p>Before giving a key, check the patient has the COVID Alert app on their phone.</p>
         <h2>How the portal displays a one-time key</h2>
     {% endblocktrans %}
-    <div id="big-code">
-        <div class="example-only">{% blocktrans %}EXAMPLE ONLY. <br/>NOT A VALID ONE-TIME KEY.{% endblocktrans %}</div>
+    <div class="big-code big-code__with-example-text">
+        <div class="example-text">{% blocktrans %}EXAMPLE ONLY. <br/>NOT A VALID ONE-TIME KEY.{% endblocktrans %}</div>
         {% with code="AHJ 232 ZWFA" %}
             <code>{{ code }}</code>
             <hr aria-hidden="true"/>
