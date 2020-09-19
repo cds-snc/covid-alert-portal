@@ -1,10 +1,11 @@
-#big-code {
+.big-code {
   display: inline-block;
   background: #eff4f9;
   padding: $space-md $space-lg;
   margin-bottom: $space-xl;
   border-radius: 10px;
   text-align: left;
+  position: relative;
 
   code {
     display: block;
@@ -27,6 +28,32 @@
     font-weight: bold;
     span {
       margin: 5px 0;
+    }
+  }
+
+  &__with-example-text {
+    .example-text {
+      color: $color-red;
+      font-weight: bold;
+      margin-left: auto;
+      font-size: 120%;
+      border: 3px solid $color-red;
+      border-radius: 3px;
+      padding: $space-xxs;
+      margin-bottom: $space-sm;
+
+      @include md {
+        /* remove border and spacing */
+        margin-bottom: 0;
+        padding: 0;
+        border: none;
+
+        /* absolute positioning in the top-right */
+        max-width: 200px;
+        text-align: left;
+        position: absolute;
+        right: 10px;
+      }
     }
   }
 }
