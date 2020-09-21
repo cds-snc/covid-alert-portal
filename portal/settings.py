@@ -44,7 +44,7 @@ SECRET_KEY = (
 # https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/#https
 is_prod = os.getenv("DJANGO_ENV", "development") == "production"
 
-# DEBUG will be True in a developemnt environment and false in production
+# DEBUG will be True in a development environment and false in production
 DEBUG = not is_prod
 
 ALLOWED_HOSTS = [
@@ -285,7 +285,7 @@ INVITATIONS_ADMIN_ADD_FORM = "profiles.forms.HealthcareInvitationAdminAddForm"
 INVITATIONS_ADMIN_CHANGE_FORM = "profiles.forms.HealthcareInvitationAdminChangeForm"
 COVID_KEY_MAX_PER_USER = 25 if is_prod else 10000
 COVID_KEY_MAX_PER_USER_PERIOD_SECONDS = 86400  # 1 day
-MAX_INVITATIONS_PER_PERIOD = 25
+MAX_INVITATIONS_PER_PERIOD = 200
 MAX_INVITATIONS_PERIOD_SECONDS = 3540  # 59 minutes
 INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
 

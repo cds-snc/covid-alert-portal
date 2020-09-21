@@ -125,7 +125,9 @@ class YubikeyDeleteView(Is2FAMixin, DeleteView):
 class SignUpView(FormView):
     form_class = SignupForm
     template_name = "profiles/signup.html"
-    success_url = reverse_lazy("login-2fa")
+
+    def get_success_url(self):
+        return "{}?next={}".format(reverse_lazy("login-2fa"), reverse_lazy("welcome"))
 
     def get(self, request, *args, **kwargs):
         invited_email = self.request.session.get("account_verified_email", None)
@@ -173,7 +175,15 @@ class SignUpView(FormView):
 class Login2FAView(LoginRequiredMixin, FormView):
     form_class = Healthcare2FAForm
     template_name = "profiles/2fa.html"
-    success_url = reverse_lazy("start")
+
+    def get_success_url(self):
+        next_url = self.request.GET.get("next", None)
+
+        # don't want to allow arbitrary "nexts" here, so hardcode the welcome page
+        if next_url and "welcome" in next_url:
+            return reverse_lazy("welcome")
+
+        return reverse_lazy("start")
 
     def get(self, request, *args, **kwargs):
         if request.user.is_verified():
