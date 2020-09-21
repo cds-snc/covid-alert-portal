@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-- Adds a new Welcome page to users who get through the invite + signup process.
+## [1.7.0] - 2020-09-21
+
+### Added
+
+- Adds a welcome page for new users (after completing signup + 2fa for the first time)
+
+### Updated
+
 - Update the quick guide with an example code
 
 ## [1.6.2] - 2020-09-18
