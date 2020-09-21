@@ -42,6 +42,46 @@ resource "aws_secretsmanager_secret_version" "default_from_email" {
   secret_string = var.ecs_secret_default_from_email
 }
 
+resource "aws_secretsmanager_secret" "invitation_email_template_id_en" {
+  name                    = "invitation_email_template_id_en"
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret_version" "invitation_email_template_id_en" {
+  secret_id     = aws_secretsmanager_secret.invitation_email_template_id_en.id
+  secret_string = var.ecs_secret_invitation_email_template_id_en
+}
+
+resource "aws_secretsmanager_secret" "invitation_email_template_id_fr" {
+  name                    = "invitation_email_template_id_fr"
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret_version" "invitation_email_template_id_fr" {
+  secret_id     = aws_secretsmanager_secret.invitation_email_template_id_fr.id
+  secret_string = var.ecs_secret_invitation_email_template_id_fr
+}
+
+resource "aws_secretsmanager_secret" "password_reset_email_template_id_en" {
+  name                    = "password_reset_email_template_id_en"
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret_version" "password_reset_email_template_id_en" {
+  secret_id     = aws_secretsmanager_secret.password_reset_email_template_id_en.id
+  secret_string = var.ecs_secret_password_reset_email_template_id_en
+}
+
+resource "aws_secretsmanager_secret" "password_reset_email_template_id_fr" {
+  name                    = "password_reset_email_template_id_fr"
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret_version" "password_reset_email_template_id_fr" {
+  secret_id     = aws_secretsmanager_secret.password_reset_email_template_id_fr.id
+  secret_string = var.ecs_secret_password_reset_email_template_id_fr
+}
+
 resource "aws_secretsmanager_secret" "django_admins" {
   name                    = "django_admins"
   recovery_window_in_days = 0
