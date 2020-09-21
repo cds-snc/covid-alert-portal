@@ -13,19 +13,9 @@
         <p>Before giving a key, check the patient has the COVID Alert app on their phone.</p>
         <h3>How the portal displays a one-time key</h3>
     {% endblocktrans %}
-    <div class="big-code big-code__with-example-text">
-        <div class="example-text">{% blocktrans %}EXAMPLE ONLY. <br/>NOT A VALID ONE-TIME KEY.{% endblocktrans %}</div>
-        {% with code="AHJ 232 ZWFA" %}
-            <code>{{ code }}</code>
-            <hr aria-hidden="true"/>
-            {% include "covid_key/phonetic.html" %}
-            <hr aria-hidden="true"/>
-            {% blocktrans %}
-                <span>The <b>key expires in 24 hours</b>.</span><br />
-                <span> No new keys after expiry.</span>
-            {% endblocktrans %}
-        {% endwith %}
-    </div>
+    {% with code="AHJ 232 ZWFA" with_example="true" %}
+        {% include "includes/big-code.html" %}
+    {% endwith %}
     {% url 'terms' as terms_url %}
     {% blocktrans %}
         <p>The portal also links to detailed instructions. You can use the instructions to help patients enter the key.</p>
