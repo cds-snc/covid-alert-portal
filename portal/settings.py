@@ -20,26 +20,10 @@ from typing import Any, Callable, Sequence, Union
 
 from datetime import timedelta
 from django.utils.translation import gettext_lazy as _
-from django.utils.functional import lazy
+from portal.utils import lazy_config
 from socket import gethostname, gethostbyname, gaierror
 
 load_dotenv()
-
-
-def lazy_config(key: str) -> Callable[[str], Any]:
-    """ Lazily get a config value from constance. Useful to bind constance
-    configs to other global settings to make them available to third-party
-    apps that are not aware of constance.
-    """
-    from django.conf import settings
-
-    def _get_config(key: str) -> Any:
-        from constance import config  # noqa
-        return getattr(config, key)
-
-    # The type is guessed from the default value to improve lazy()'s behaviour
-    var_type = type(settings.CONSTANCE_CONFIG[key][0])
-    return lazy(_get_config, var_type)(key)
 
 
 # Tests whether the second command line argument (after ./manage.py) was test
