@@ -11,10 +11,10 @@
   <hr aria-hidden="true"/>
   {% if with_example %}
     {% blocktrans %}
-        <span>The <b>key expires in 24 hours</b>.</span><br />
-        <span> No new keys after expiry.</span>
+        <p>The <strong>key expires in 24 hours</strong>.</p>
     {% endblocktrans %}
   {% else %}
     {% include "includes/expires_string.html" %}
   {% endif %}
+  <p>{% trans "No new keys after expiry." %}</p>
 </div>
