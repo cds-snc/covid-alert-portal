@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.8.0] - 2020-09-21
+
+### Updated
+
 - Use Notify to send user-facing emails: ie, the password reset and the invitation email
+
+### Fixed
+
 - No longer flag invitations as accepted when the user clicks on the link
 
 ## [1.7.0] - 2020-09-21
