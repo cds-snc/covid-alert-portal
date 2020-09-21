@@ -514,7 +514,9 @@ class SignupFlow(AdminUserTestCase):
         }
         response = self.client.post(reverse("signup"), data=data)
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, reverse("login-2fa"))
+        self.assertEqual(
+            response.url, reverse("login-2fa") + "?next=" + reverse("welcome")
+        )
         # The invitation is modified in another Thread and django/python gil are not aware the object has changed.
         # So let's force a reload from the DB
         self.invite.refresh_from_db()

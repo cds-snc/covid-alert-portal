@@ -32,7 +32,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Updated
 
 - Up the COVID Key limit to 200 per hour temporarily
->>>>>>> origin/main
 
 ## [1.6.0] - 2020-09-15
 
