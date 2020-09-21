@@ -8,13 +8,7 @@
   {% include  "includes/flash_messages.html" %}
   {% if code.strip != '' %}
       <h1>{% trans "Give patient this key" %}</h1>
-      <div id="big-code">
-        <code>{{ code }}</code>
-        <hr aria-hidden="true"/>
-        {% include "covid_key/phonetic.html" %}
-        <hr aria-hidden="true"/>
-        {% include "includes/expires_string.html" %}
-      </div>
+      {% include "includes/big-code.html" %}
   {% endif %}
 
   <details>
