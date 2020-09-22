@@ -43,6 +43,7 @@ class KeyView(AdminUserTestCase):
 
     @override_settings(COVID_KEY_MAX_PER_USER=1)
     def test_key_throttled(self):
+        previous_throttled_value = CodeView.throttled_limit
         CodeView.throttled_limit = settings.COVID_KEY_MAX_PER_USER
         self.login()
         covid_key = COVIDKey()
@@ -56,9 +57,11 @@ class KeyView(AdminUserTestCase):
             "You are generating too many keys. Try again later.",
             status_code=403,
         )
+        CodeView.throttled_limit = previous_throttled_value
 
     @override_settings(COVID_KEY_MAX_PER_USER=1)
     def test_key_throttled_for_another_user(self):
+        previous_throttled_value = CodeView.throttled_limit
         CodeView.throttled_limit = settings.COVID_KEY_MAX_PER_USER
         self.login()
         covid_key = COVIDKey()
@@ -79,6 +82,7 @@ class KeyView(AdminUserTestCase):
         response = self.client.get(reverse("key"))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, "/en/start/")
+        CodeView.throttled_limit = previous_throttled_value
 
 
 class KeyViewCSRFEnabled(AdminUserTestCase):

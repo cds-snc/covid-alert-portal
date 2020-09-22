@@ -63,10 +63,11 @@ class CodeView(Is2FAMixin, ThrottledMixin, TemplateView):
                     logging.exception(f"Something went wrong {err}")
                     raise err
                 else:
-                    covid_key = COVIDKey()
-                    covid_key.created_by = request.user
-                    covid_key.expiry = timezone.now() + timedelta(days=1)
-                    covid_key.save()
+                    covid_key = COVIDKey.objects.create(
+                        created_by=request.user,
+                        created_by_email=request.user.email,
+                        expiry=timezone.now() + timedelta(days=1),
+                    )
 
             except Exception:
                 diagnosis_code = ""

@@ -76,6 +76,22 @@
         "valueFrom": "${default_from_email}"
       },
       {
+        "name": "INVITATION_EMAIL_TEMPLATE_ID_EN",
+        "valueFrom": "${invitation_email_template_id_en}"
+      },
+      {
+        "name": "INVITATION_EMAIL_TEMPLATE_ID_FR",
+        "valueFrom": "${invitation_email_template_id_fr}"
+      },
+      {
+        "name": "PASSWORD_RESET_EMAIL_TEMPLATE_ID_EN",
+        "valueFrom": "${password_reset_email_template_id_en}"
+      },
+      {
+        "name": "PASSWORD_RESET_EMAIL_TEMPLATE_ID_FR",
+        "valueFrom": "${password_reset_email_template_id_fr}"
+      },
+      {
         "name": "DJANGO_ADMINS",
         "valueFrom": "${django_admins}"
       },

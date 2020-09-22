@@ -7,6 +7,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.8.1] - 2020-09-21
+
+### Fixed
+
+- Fixed CSS for the big code box on the "/key" page
+
+## [1.8.0] - 2020-09-21
+
+### Updated
+
+- Use Notify to send user-facing emails: ie, the password reset and the invitation email
+
+### Fixed
+
+- No longer flag invitations as accepted when the user clicks on the link
+
+## [1.7.0] - 2020-09-21
+
+### Added
+
+- Adds a welcome page for new users (after completing signup + 2fa for the first time)
+
+### Updated
+
+- Update the quick guide with an example code
+
+## [1.6.2] - 2020-09-18
+
+### Updated
+
+- Up the invitations limit properly to 200 per hour temporarily
+- COVID Keys back down to 25
+
+## [1.6.1] - 2020-09-18
+
+### Updated
+
+- Up the COVID Key limit to 200 per hour temporarily
+
+## [1.6.0] - 2020-09-15
+
+#### ⚠️ This release includes a data migration
+
+### Fixed
+
+- Fix password reset links running in non-production environments
+- Default superusers are associated with CDS, not "Ontario"
+- Let managers remove other team members who have created a CovidKey in the past
+
+### Added
+
+- Add "thank you" message to login page
+
 ## [1.5.1] - 2020-09-08
 
 ### Fixed
@@ -15,6 +68,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Yubikey verification form now using base form (no colons, removed autocomplete, etc.)
 
 ## [1.5.0] - 2020-09-03
+
+#### ⚠️ This release includes a data migration
 
 ### Added
 
