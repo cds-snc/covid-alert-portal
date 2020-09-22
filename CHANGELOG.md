@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Title Case the words in the phonetic alphabet
 - Fixed CSS for "logged-in" nav items for the login page
+- Fixed CSS for login thank you message on IE11
 
 ## [1.8.1] - 2020-09-21
 
