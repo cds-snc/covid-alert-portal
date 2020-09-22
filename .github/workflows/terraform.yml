@@ -20,6 +20,10 @@ env:
   TF_VAR_ecs_secret_api_authorization: ${{ secrets.API_AUTHORIZATION }}
   TF_VAR_ecs_secret_api_endpoint: ${{ secrets.API_ENDPOINT}}
   TF_VAR_ecs_secret_default_from_email: ${{ secrets.DEFAULT_FROM_EMAIL }}
+  TF_VAR_ecs_secret_invitation_email_template_id_en: ${{ secrets.INVITATION_EMAIL_TEMPLATE_ID_EN }}
+  TF_VAR_ecs_secret_invitation_email_template_id_fr: ${{ secrets.INVITATION_EMAIL_TEMPLATE_ID_FR }}
+  TF_VAR_ecs_secret_password_reset_email_template_id_en: ${{ secrets.PASSWORD_RESET_EMAIL_TEMPLATE_ID_EN }}
+  TF_VAR_ecs_secret_password_reset_email_template_id_fr: ${{ secrets.PASSWORD_RESET_EMAIL_TEMPLATE_ID_FR }}
   TF_VAR_ecs_secret_django_admins: ${{ secrets.DJANGO_ADMINS }}
   TF_VAR_ecs_secret_django_secret_key: ${{ secrets.DJANGO_SECRET_KEY }}
   TF_VAR_ecs_secret_email_host: ${{ secrets.EMAIL_HOST}}

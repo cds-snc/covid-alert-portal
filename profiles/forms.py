@@ -7,11 +7,18 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth import password_validation
 from django.contrib.auth.forms import SetPasswordForm
+from django.utils.http import urlsafe_base64_encode
+from django.urls import reverse
+from django.utils.encoding import force_bytes
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import get_language
 
 from phonenumber_field.formfields import PhoneNumberField
+
+from notifications_python_client.errors import HTTPError
+from notifications_python_client.notifications import NotificationsAPIClient
 
 from otp_yubikey.models import RemoteYubikeyDevice, ValidationService
 
@@ -187,6 +194,41 @@ class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
 
         # Otherwise it just says "Email"
         self.fields["email"].label = _("Email address")
+
+    def send_mail(
+        self,
+        subject_template_name,
+        email_template_name,
+        context,
+        from_email,
+        to_email,
+        html_email_template_name=None,
+    ):
+        user = context.get("user")
+        url = context.get("base_url") + reverse(
+            "password_reset_confirm",
+            kwargs={
+                "uidb64": urlsafe_base64_encode(force_bytes(user.pk)),
+                "token": context.get("token"),
+            },
+        )
+        notifications_client = NotificationsAPIClient(
+            settings.NOTIFY_API_KEY, base_url=settings.NOTIFY_ENDPOINT
+        )
+
+        try:
+            notifications_client.send_email_notification(
+                email_address=user.email,
+                template_id=settings.PASSWORD_RESET_EMAIL_TEMPLATE_ID.get(
+                    context.get("language") or "en"
+                ),
+                personalisation={
+                    "name": user.name,
+                    "url": url,
+                },
+            )
+        except HTTPError as e:
+            raise Exception(e)
 
 
 class HealthcarePasswordResetConfirm(HealthcareBaseForm, SetPasswordForm):
@@ -366,7 +408,7 @@ class HealthcareInvitationAdminAddForm(InvitationAdminAddForm):
             "inviter": self.request.user,
         }
         instance = Invitation.create(**params)
-        instance.send_invitation(self.request)
+        instance.send_invitation(self.request, language=get_language())
         # We can't call InvitationAdminForm here, it would try to send 2 invitations
         super(forms.ModelForm, self).save(*args, **kwargs)
         return instance

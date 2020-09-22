@@ -37,6 +37,7 @@ black = "*"
 django-project-version = "*"
 django-widget-tweaks = "*"
 django-constance = {extras = ["database"], version = "*"}
+notifications-python-client = "*"
 
 [pipenv]
 allow_prereleases = true
