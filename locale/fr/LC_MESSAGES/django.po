@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-21 18:42+0000\n"
+"POT-Creation-Date: 2020-09-21 22:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -230,48 +230,48 @@ msgid "Nine."
 msgstr "Neuf."
 
 #: covid_key/templatetags/alphabet.py:20
-msgid "A as in animal."
-msgstr "A comme animal."
+msgid "A as in Animal."
+msgstr "A comme Animal."
 
 #: covid_key/templatetags/alphabet.py:21
-msgid "E as in elephant."
-msgstr "E comme éléphant."
+msgid "E as in Elephant."
+msgstr "E comme Éléphant."
 
 #: covid_key/templatetags/alphabet.py:22
-msgid "F as in family."
-msgstr "F comme famille."
+msgid "F as in Family."
+msgstr "F comme Famille."
 
 #: covid_key/templatetags/alphabet.py:23
-msgid "H as in hospital."
-msgstr "H comme hôpital."
+msgid "H as in Hospital."
+msgstr "H comme Hôpital."
 
 #: covid_key/templatetags/alphabet.py:24
 msgid "J as in January."
-msgstr "J comme janvier."
+msgstr "J comme Janvier."
 
 #: covid_key/templatetags/alphabet.py:25
-msgid "K as in kangaroo."
-msgstr "K comme kangourou."
+msgid "K as in Kangaroo."
+msgstr "K comme Kangourou."
 
 #: covid_key/templatetags/alphabet.py:26
-msgid "L as in lion."
-msgstr "L comme lion."
+msgid "L as in Lion."
+msgstr "L comme Lion."
 
 #: covid_key/templatetags/alphabet.py:27
-msgid "Q as in question."
-msgstr "Q comme question."
+msgid "Q as in Question."
+msgstr "Q comme Question."
 
 #: covid_key/templatetags/alphabet.py:28
-msgid "R as in radio."
-msgstr "R comme radio."
+msgid "R as in Radio."
+msgstr "R comme Radio."
 
 #: covid_key/templatetags/alphabet.py:29
 msgid "S as in September."
-msgstr "S comme septembre."
+msgstr "S comme Septembre."
 
 #: covid_key/templatetags/alphabet.py:30
-msgid "U as in uniform."
-msgstr "U comme uniforme."
+msgid "U as in Uniform."
+msgstr "U comme Uniforme."
 
 #: covid_key/templatetags/alphabet.py:31
 msgid "W as in Wi-Fi."
@@ -279,15 +279,15 @@ msgstr "W comme Wi-Fi."
 
 #: covid_key/templatetags/alphabet.py:32
 msgid "X as in X-ray."
-msgstr "X comme xylophone."
+msgstr "X comme Xylophone."
 
 #: covid_key/templatetags/alphabet.py:33
-msgid "Y as in yoga."
-msgstr "Y comme yoga."
+msgid "Y as in Yoga."
+msgstr "Y comme Yoga."
 
 #: covid_key/templatetags/alphabet.py:34
-msgid "Z as in zebra."
-msgstr "Z comme zèbre."
+msgid "Z as in Zebra."
+msgstr "Z comme Zèbre."
 
 #: covid_key/views.py:77
 msgid "Something went wrong. Contact your manager."
@@ -342,13 +342,15 @@ msgstr "CLÉ À TITRE D’EXEMPLE <br/>(NON VALIDE)"
 #: portal/templates/includes/big-code.html:13
 msgid ""
 "\n"
-"        <span>The <b>key expires in 24 hours</b>.</span><br />\n"
-"        <span> No new keys after expiry.</span>\n"
+"        <p>The <strong>key expires in 24 hours</strong>.</p>\n"
 "    "
 msgstr ""
 "\n"
-"<span>La clé <b>expire après 24 heures</b>.</span><br />\n"
-"<span>Elle ne peut pas être regénérée si elle expire.</span>"
+"<p>La clé <strong>expire après 24 heures</strong>.</p>"
+
+#: portal/templates/includes/big-code.html:19
+msgid "No new keys after expiry."
+msgstr "Elle ne peut pas être regénérée si elle expire."
 
 #: portal/templates/includes/cds_form.html:39
 msgid "Submit"
@@ -365,19 +367,6 @@ msgstr "La clé expire le"
 #: portal/templates/includes/expires_string.html:15
 msgid "at"
 msgstr "à"
-
-#: portal/templates/includes/expires_string.html:25
-msgid "Only give one key per patient."
-msgstr "Ne donnez qu’une seule clé par patient."
-
-#: portal/templates/includes/expires_string.html:26
-msgid ""
-"On the app, tap for menu.  Then “Enter your one-time key” guides patients "
-"through next steps."
-msgstr ""
-"Le patient doit taper au bas de l’écran de l’application pour voir le menu "
-"apparaître. Le bouton « Entrer votre clé » mène le patient vers les étapes "
-"suivantes."
 
 #: portal/templates/includes/footer.html:9
 msgid "Quick guide"
@@ -439,8 +428,8 @@ msgid "Manage team"
 msgstr "Gérer l’équipe"
 
 #: portal/templates/includes/phonetic.html:3
-msgid "To read this phonetically:"
-msgstr "Pour lire la clé de façon phonétique :"
+msgid "Read key phonetically and ask patient to read it back to you:"
+msgstr "Lisez la clé de façon phonétique et demandez au patient de la répéter."
 
 #: portal/templates/locked_out.html:5
 msgid "Account locked"
@@ -1359,12 +1348,3 @@ msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
 "portail."
-
-#~ msgid "Password reset"
-#~ msgstr "Réinitialisation de votre mode passe"
-
-#~ msgid "Your portal account"
-#~ msgstr " : votre compte pour le Portail"
-
-#~ msgid ": Your portal account"
-#~ msgstr " : votre compte pour le Portail"
