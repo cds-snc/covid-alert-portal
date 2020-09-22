@@ -24,6 +24,11 @@
   span {
     display: inline-block;
   }
+
+  > p:last-of-type {
+    margin-top: -$space-xs;
+  }
+
   .phonetic-wrapper {
     font-weight: bold;
     span {
@@ -32,6 +37,10 @@
   }
 
   &__with-example-text {
+    @include md {
+      padding-top: $space-xl;
+    }
+
     .example-text {
       color: $color-red;
       font-weight: bold;
@@ -52,7 +61,8 @@
         max-width: 200px;
         text-align: left;
         position: absolute;
-        right: 10px;
+        right: $space-xs;
+        top: $space-xs;
       }
     }
   }
