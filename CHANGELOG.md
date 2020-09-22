@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Title Case the words in the phonetic alphabet
+
 ## [1.8.1] - 2020-09-21
 
 ### Fixed
