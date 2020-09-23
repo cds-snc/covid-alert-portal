@@ -1,0 +1,67 @@
+name: Prod — Push container to ECR
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "VERSION"
+
+env:
+  GITHUB_SHA: ${{ github.sha }}
+  PROD_ECR_REGISTRY: ${{ secrets.PROD_ECR_REGISTRY }}
+
+jobs:
+  push-prod:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for container to build
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-container-prod
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: build-container
+          ref: ${{ github.sha }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Read VERSION file
+        id: version
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./VERSION
+
+      - name: Build Covid Portal
+        run: docker build -t base --build-arg GITHUB_SHA_ARG=$GITHUB_SHA .
+
+      - name: Configure Production AWS credentials
+        id: aws-production
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ca-central-1
+
+      - name: Login to Production Amazon ECR
+        id: login-ecr-prod
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Tag Images for Production
+        env:
+          VERSION: ${{ steps.version.outputs.content }}
+        run: |
+          docker tag base $PROD_ECR_REGISTRY:$GITHUB_SHA
+          docker tag base $PROD_ECR_REGISTRY:$VERSION
+          docker tag base $PROD_ECR_REGISTRY:latest
+
+      - name: Push all containers to Production Amazon ECR
+        env:
+          VERSION: ${{ steps.version.outputs.content }}
+        run: |
+          docker push $PROD_ECR_REGISTRY:$GITHUB_SHA
+          docker push $PROD_ECR_REGISTRY:$VERSION
+          docker push $PROD_ECR_REGISTRY:latest
+
+      - name: Logout of Production Amazon ECR
+        if: always()
+        run: docker logout ${{ steps.login-ecr-prod.outputs.registry }}

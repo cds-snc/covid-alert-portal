@@ -1,0 +1,57 @@
+name: Build container
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  terraform-security-scan:
+    runs-on: ubuntu-latest
+    continue-on-error: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Terraform security scan
+        uses: triat/terraform-security-scan@v2.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build-container:
+    needs: terraform-security-scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for container to pass Django CI 3.6 Test
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-CI-tests-3_6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: test (3.6)
+          ref: ${{ github.sha }}
+
+      - name: Wait for container to pass Django CI 3.7 Test
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-CI-tests-3_7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: test (3.7)
+          ref: ${{ github.sha }}
+
+      - name: Wait for container to pass Django CI 3.8 Test
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-CI-tests-3_8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: test (3.8)
+          ref: ${{ github.sha }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Read VERSION file
+        id: version
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./VERSION
+
+      - name: Build Covid Portal
+        run: docker build -t base --build-arg GITHUB_SHA_ARG=${{ github.sha }} .
