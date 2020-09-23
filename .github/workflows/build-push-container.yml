@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Terraform security scan
-        uses: triat/terraform-security-scan@v1.2.2
+        uses: triat/terraform-security-scan@v2.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build-n-push:
