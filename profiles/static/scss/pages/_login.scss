@@ -30,10 +30,12 @@
       display: flex;
       color: white;
       background: $color-blue-button;
+      min-height: 85vh;
 
       > .ty {
         margin: auto;
         text-align: center;
+        height: 230px; /* set a literal height for ie11 */
 
         .ty__hand {
           margin-top: -50px;
