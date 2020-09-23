@@ -63,7 +63,7 @@ CONSTANCE_CONFIG = {
     'OTP_NOTIFY_NO_DELIVERY': (DEFAULT_OTP_NOTIFY_NO_DELIVERY, 'Do not send the SMS OTP via SMS. Used in development.', bool),
 
     'FRESHDESK_API_ENDPOINT': (os.getenv("FRESHDESK_API_ENDPOINT") or '', 'Freshdesk API endpoint. Used in the contact form.', str),
-    'FRESHDESK_API_KEY': (os.getenv("FRESHDESK_API_KEY"), 'Freshdesk API key. Bound to a single user in Freshdesk.', str),
+    'FRESHDESK_API_KEY': (os.getenv("FRESHDESK_API_KEY") or '', 'Freshdesk API key. Bound to a single user in Freshdesk.', str),
     'FRESHDESK_PRODUCT_ID': (int(os.getenv("FRESHDESK_PRODUCT_ID", 0)), 'Freshdesk can have multiple product. Use the product ID here.', int),
 
     'URL_DUAL_DOMAINS': (os.getenv("URL_DUAL_DOMAINS", "False") == "True", "The portal uses a french and english domain name. When switching languages in production, this variable is checked to initiate the domain switching based on user language.", bool),
