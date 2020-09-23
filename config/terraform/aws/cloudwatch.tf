@@ -20,7 +20,7 @@ resource "aws_cloudwatch_metric_alarm" "portal_cpu_utilization_high" {
   period              = "120"
   statistic           = "Average"
   threshold           = "50"
-  alarm_description   = "COVID Alert Portal Warning - CPU usage has been over 50% for 4 minutes."
+  alarm_description   = "COVID Alert Portal Warning - High CPU usage has been detected."
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
   dimensions = {
@@ -38,7 +38,7 @@ resource "aws_cloudwatch_metric_alarm" "portal_memory_utilization_high" {
   period              = "120"
   statistic           = "Average"
   threshold           = "50"
-  alarm_description   = "COVID Alert Portal Warning - Memory usage have been over 50% for 4 minutes."
+  alarm_description   = "COVID Alert Portal Warning - High Memory usage has been detected."
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
 
@@ -102,7 +102,7 @@ resource "aws_cloudwatch_metric_alarm" "application_error_warn" {
   statistic           = "Sum"
   threshold           = "0"
   treat_missing_data  = "notBreaching"
-  alarm_description   = "COVID Alert Portal Warning - Django raised an Application Error"
+  alarm_description   = "COVID Alert Portal Warning - An Error message was detected in the ECS logs"
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
 }
@@ -134,7 +134,7 @@ resource "aws_cloudwatch_metric_alarm" "key_generation_warn" {
   statistic           = "Sum"
   threshold           = "5"
   treat_missing_data  = "notBreaching"
-  alarm_description   = "COVID Alert Portal Warning - 6 COVID One Time Keys have been generated in the last hour"
+  alarm_description   = "COVID Alert Portal Warning - COVID One Time Key's generation is 50% of the way to alarm status (x keys / hour)."
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
 }
 
@@ -160,7 +160,7 @@ resource "aws_cloudwatch_metric_alarm" "key_generation_critical" {
   statistic           = "Sum"
   threshold           = "10"
   treat_missing_data  = "notBreaching"
-  alarm_description   = "COVID Alert Portal Critical - 11 COVID One Time Keys have been generated in the last hour"
+  alarm_description   = "COVID Alert Portal Critical - COVID One Time Key's generation alarm threshold surpassed (x keys / hour)."
   alarm_actions       = [aws_sns_topic.alert_critical.arn]
 }
 
@@ -212,7 +212,7 @@ resource "aws_cloudwatch_metric_alarm" "AccountLockoutWarn" {
   statistic           = "Sum"
   threshold           = "4"
   treat_missing_data  = "notBreaching"
-  alarm_description   = "COVID Alert Portal Warning - 5 user accounts have been locked out in the last hour."
+  alarm_description   = "COVID Alert Portal Warning - Multiple User account's have been locked out in the last hour (x locked accounts / hour)."
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
 }
 
@@ -238,7 +238,7 @@ resource "aws_cloudwatch_metric_alarm" "InviteLockoutWarn" {
   statistic           = "Sum"
   threshold           = "0"
   treat_missing_data  = "notBreaching"
-  alarm_description   = "COVID Alert Portal Warning - Someone has tried to invite more than 25 users in the last hour."
+  alarm_description   = "COVID Alert Portal Warning - Someone has tried to invite more users than permitted (x invites / hour)."
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
 }
 
