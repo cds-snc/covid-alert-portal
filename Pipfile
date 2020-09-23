@@ -36,6 +36,7 @@ django-easy-audit = "==1.3.0a3"
 black = "*"
 django-project-version = "*"
 django-widget-tweaks = "*"
+notifications-python-client = "*"
 
 [pipenv]
 allow_prereleases = true

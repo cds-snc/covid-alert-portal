@@ -44,7 +44,7 @@ SECRET_KEY = (
 # https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/#https
 is_prod = os.getenv("DJANGO_ENV", "development") == "production"
 
-# DEBUG will be True in a developemnt environment and false in production
+# DEBUG will be True in a development environment and false in production
 DEBUG = not is_prod
 
 ALLOWED_HOSTS = [
@@ -241,7 +241,9 @@ LOGOUT_REDIRECT_URL = "login"
 OTP_NOTIFY_ENDPOINT = (
     os.getenv("OTP_NOTIFY_ENDPOINT") or "https://api.notification.alpha.canada.ca"
 )
+NOTIFY_ENDPOINT = OTP_NOTIFY_ENDPOINT
 OTP_NOTIFY_API_KEY = os.getenv("OTP_NOTIFY_API_KEY")
+NOTIFY_API_KEY = OTP_NOTIFY_API_KEY
 OTP_NOTIFY_TEMPLATE_ID = os.getenv("OTP_NOTIFY_TEMPLATE_ID")
 OTP_NOTIFY_TOKEN_VALIDITY = 90
 OTP_EMAIL_THROTTLE_FACTOR = 3
@@ -283,8 +285,9 @@ INVITATIONS_ADMIN_ADD_FORM = "profiles.forms.HealthcareInvitationAdminAddForm"
 INVITATIONS_ADMIN_CHANGE_FORM = "profiles.forms.HealthcareInvitationAdminChangeForm"
 COVID_KEY_MAX_PER_USER = 25 if is_prod else 10000
 COVID_KEY_MAX_PER_USER_PERIOD_SECONDS = 86400  # 1 day
-MAX_INVITATIONS_PER_PERIOD = 25
+MAX_INVITATIONS_PER_PERIOD = 200
 MAX_INVITATIONS_PERIOD_SECONDS = 3540  # 59 minutes
+INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
 
 # Email setup
 EMAIL_BACKEND = (
@@ -297,6 +300,16 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 email_use_tls = os.getenv("EMAIL_USE_TLS", "True")
 EMAIL_USE_TLS = True if email_use_tls == "True" else False
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+INVITATIONS_ADAPTER = "profiles.utils.invitation_adapter.HealthcareInvitationAdapter"
+
+PASSWORD_RESET_EMAIL_TEMPLATE_ID = {
+    "en": os.getenv("PASSWORD_RESET_EMAIL_TEMPLATE_ID_EN"),
+    "fr": os.getenv("PASSWORD_RESET_EMAIL_TEMPLATE_ID_FR"),
+}
+INVITATION_EMAIL_TEMPLATE_ID = {
+    "en": os.getenv("INVITATION_EMAIL_TEMPLATE_ID_EN"),
+    "fr": os.getenv("INVITATION_EMAIL_TEMPLATE_ID_FR"),
+}
 
 # Create default Super User with this password
 SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)

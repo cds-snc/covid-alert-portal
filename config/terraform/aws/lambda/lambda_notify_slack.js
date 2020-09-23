@@ -1,6 +1,15 @@
 var https = require('https');
 var util = require('util');
 
+function getMessage(message) {
+    try {
+        const parsedMessage = JSON.parse(message);
+        return parsedMessage.AlarmDescription ? parsedMessage.AlarmDescription : parsedMessage;
+    } catch(err) {
+        return message;
+    }
+
+}
 exports.handler = function(event, context) {
 
     var postData = {
@@ -10,7 +19,7 @@ exports.handler = function(event, context) {
         "icon_emoji": ":loudspeaker:"
     };
 
-    var message = "AlarmDescription" in event.Records[0].Message ? event.Records[0].Message.AlarmDescription : event.Records[0].Sns.Message;
+    var message = getMessage(event.Records[0].Sns.Message);
     var severity = "good";
 
     var dangerMessages = [
