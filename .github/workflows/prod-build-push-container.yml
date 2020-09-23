@@ -1,0 +1,85 @@
+name: Prod — Push container to ECR
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "VERSION"
+
+env:
+  ECR_REPOSITORY: covid-alert-portal-terraform
+  GITHUB_SHA: ${{ github.sha }}
+
+jobs:
+  push-prod:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for container to pass Django CI 3.6 Test
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-CI-tests-3_6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: test (3.6)
+          ref: ${{ github.sha }}
+
+      - name: Wait for container to pass Django CI 3.7 Test
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-CI-tests-3_7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: test (3.7)
+          ref: ${{ github.sha }}
+
+      - name: Wait for container to pass Django CI 3.8 Test
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-CI-tests-3_8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: test (3.8)
+          ref: ${{ github.sha }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Read VERSION file
+        id: version
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./VERSION
+
+      - name: Build Covid Portal
+        run: docker build -t base --build-arg GITHUB_SHA_ARG=$GITHUB_SHA .
+
+      - name: Configure Production AWS credentials
+        id: aws-production
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ca-central-1
+
+      - name: Login to Production Amazon ECR
+        id: login-ecr-prod
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Tag Images for Production
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr-prod.outputs.registry }}
+          VERSION: ${{ steps.version.outputs.content }}
+        run: |
+          docker tag base $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
+          docker tag base $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION
+          docker tag base $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+      - name: Push all containers to Production Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr-prod.outputs.registry }}
+          VERSION: ${{ steps.version.outputs.content }}
+        run: |
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+      - name: Logout of Production Amazon ECR
+        if: always()
+        run: docker logout ${{ steps.login-ecr-prod.outputs.registry }}
