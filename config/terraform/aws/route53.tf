@@ -20,7 +20,6 @@ resource "aws_route53_record" "covidportal" {
   type    = "A"
 
   set_identifier  = "main"
-  health_check_id = aws_route53_health_check.up_or_down.id
 
   failover_routing_policy {
     type = "PRIMARY"
@@ -51,13 +50,3 @@ resource "aws_route53_record" "covidportal_maintenance" {
   }
 }
 
-resource "aws_route53_health_check" "up_or_down" {
-  reference_name    = "Failover_Trigger"
-  fqdn              = aws_lb.covidportal.dns_name
-  port              = 443
-  type              = "HTTPS"
-  resource_path     = "/status/"
-  failure_threshold = "3"
-  request_interval  = "10"
-  regions           = ["us-west-2", "us-east-1", "us-west-1"]
-}
