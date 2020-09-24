@@ -19,8 +19,7 @@ resource "aws_route53_record" "covidportal" {
   name    = "staging.${aws_route53_zone.covidportal.name}"
   type    = "A"
 
-  set_identifier  = "main"
-  health_check_id = aws_route53_health_check.up_or_down.id
+  set_identifier = "main"
 
   failover_routing_policy {
     type = "PRIMARY"
@@ -47,16 +46,7 @@ resource "aws_route53_record" "covidportal_maintenance" {
   alias {
     name                   = aws_cloudfront_distribution.maintenance_mode.domain_name
     zone_id                = aws_cloudfront_distribution.maintenance_mode.hosted_zone_id
-    evaluate_target_health = true
+    evaluate_target_health = false
   }
 }
 
-resource "aws_route53_health_check" "up_or_down" {
-  fqdn              = "staging.covid-hcportal.cdssandbox.xyz"
-  enable_sni        = true
-  port              = 443
-  type              = "HTTPS"
-  resource_path     = "/status/"
-  failure_threshold = "3"
-  request_interval  = "10"
-}
