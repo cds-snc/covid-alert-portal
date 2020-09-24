@@ -19,15 +19,15 @@ resource "aws_route53_record" "covidportal" {
   name    = "staging.${aws_route53_zone.covidportal.name}"
   type    = "A"
 
-  set_identifier  = "main"
+  set_identifier = "main"
 
   failover_routing_policy {
     type = "PRIMARY"
   }
 
   alias {
-    name                   = aws_lb.covidportal.dns_name
-    zone_id                = aws_lb.covidportal.zone_id
+    name    = aws_lb.covidportal.dns_name
+    zone_id = aws_lb.covidportal.zone_id
   }
 }
 
