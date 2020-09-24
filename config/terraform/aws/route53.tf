@@ -44,8 +44,9 @@ resource "aws_route53_record" "covidportal_maintenance" {
   }
 
   alias {
-    name    = aws_cloudfront_distribution.maintenance_mode.domain_name
-    zone_id = aws_cloudfront_distribution.maintenance_mode.hosted_zone_id
+    name                   = aws_cloudfront_distribution.maintenance_mode.domain_name
+    zone_id                = aws_cloudfront_distribution.maintenance_mode.hosted_zone_id
+    evaluate_target_health = false
   }
 }
 
