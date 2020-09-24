@@ -28,7 +28,6 @@ resource "aws_route53_record" "covidportal" {
   alias {
     name                   = aws_lb.covidportal.dns_name
     zone_id                = aws_lb.covidportal.zone_id
-    evaluate_target_health = true
   }
 }
 
