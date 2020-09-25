@@ -58,6 +58,11 @@ ul {
     padding-left: $space-xl;
   }
 
+  ol,
+  ul {
+    margin-bottom: 0; /* no extra bottom spacing for nested lists */
+  }
+
   li:not(:last-of-type) {
     padding-bottom: $space-xxs;
 
@@ -66,9 +71,22 @@ ul {
     }
   }
 
+  &.disc {
+    list-style-type: disc;
+  }
+
   &.expanded {
     > li + li {
       padding-top: $space-xs;
+    }
+  }
+
+  &.paragraphs {
+    padding-left: 0;
+    list-style-type: none;
+
+    > li + li {
+      padding-top: $space-sm;
     }
   }
 }
