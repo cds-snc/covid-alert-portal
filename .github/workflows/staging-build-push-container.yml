@@ -2,7 +2,7 @@ name: Staging — Push container to ECR
 
 on:
   push:
-    branches: [version-pr]
+    branches: [version-pr-2]
 
 env:
   GITHUB_SHA: ${{ github.sha }}
@@ -57,12 +57,12 @@ jobs:
           aws-region: ca-central-1
 
       - name: Login to Staging Amazon ECR
-        id: login-ecr-covid-portal
+        id: login-ecr-staging
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Tag Images for Staging
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr-covid-portal.outputs.registry }}
+          ECR_REGISTRY: ${{ steps.login-ecr-staging.outputs.registry }}
           VERSION: ${{ steps.version.outputs.content }}
         run: |
           docker tag base $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
@@ -71,7 +71,7 @@ jobs:
 
       - name: Push containers to Staging Amazon ECR
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr-covid-portal.outputs.registry }}
+          ECR_REGISTRY: ${{ steps.login-ecr-staging.outputs.registry }}
           VERSION: ${{ steps.version.outputs.content }}
         run: |
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA

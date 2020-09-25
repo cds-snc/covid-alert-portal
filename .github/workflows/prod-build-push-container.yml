@@ -2,13 +2,12 @@ name: Prod — Push container to ECR
 
 on:
   push:
-    branches: [version-pr]
+    branches: [version-pr-2]
     paths:
       - "VERSION"
 
 env:
   GITHUB_SHA: ${{ github.sha }}
-  PROD_ECR_REGISTRY: ${{ secrets.PROD_ECR_REGISTRY }}
 
 jobs:
   push-prod:
@@ -64,6 +63,7 @@ jobs:
 
       - name: Tag Images for Production
         env:
+          ECR_REGISTRY: ${{ steps.login-ecr-prod.outputs.registry }}
           VERSION: ${{ steps.version.outputs.content }}
         run: |
           docker tag base $PROD_ECR_REGISTRY:$GITHUB_SHA
@@ -72,6 +72,7 @@ jobs:
 
       - name: Push all containers to Production Amazon ECR
         env:
+          ECR_REGISTRY: ${{ steps.login-ecr-prod.outputs.registry }}
           VERSION: ${{ steps.version.outputs.content }}
         run: |
           docker push $PROD_ECR_REGISTRY:$GITHUB_SHA
