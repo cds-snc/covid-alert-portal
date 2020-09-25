@@ -15,7 +15,7 @@
     <li>{% blocktrans %}Understands <strong>the key expires in 24 hours</strong>. If the key expires before the patient enters it, they will not be able to get a new key.</strong>{% endblocktrans %}</li>
   </ol>
   <div class="info-message">
-    <span>{% trans "Help us keep accurate stats. Only generate keys for real patients." %}</span>
+    <span>{% trans "Help us keep accurate stats. Only generate keys for real patients and only one key per patient." %}</span>
   </div>
   <div class="content-button">
    <form action="{% url 'key' %}" method="post">
