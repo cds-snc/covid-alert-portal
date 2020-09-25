@@ -1,6 +1,6 @@
 [La version française suit.](#portail-de-soins-de-santé-covid)
 
-# COVID Alert Portal
+# COVID Alert Portal 2
 
 This repository implements a healthcare portal to complement the [Government of Canada COVID Alert app](https://github.com/cds-snc/covid-alert-app). This portal provides authenticated healthcare providers unique temporary codes which can be shared with COVID-diagnosed individuals. This code gives individuals access to upload their random IDs via the mobile app if they choose. No personal information is collected by the app and there is no association between the codes and specific tests.
 
