@@ -588,8 +588,8 @@ class InviteFlow(AdminUserTestCase):
         and there is a user account corresponding to the invited email address
         """
         other_credentials = get_other_credentials(is_admin=False)
-        other_user = User.objects.create_user(**other_credentials)
-        invite = Invitation.create(
+        User.objects.create_user(**other_credentials)
+        Invitation.create(
             other_credentials["email"],
             inviter=self.user,
             sent=timezone.now(),
@@ -615,7 +615,7 @@ class InviteFlow(AdminUserTestCase):
         BUT there is NO user account corresponding to the invited email address
         """
         other_credentials = get_other_credentials(is_admin=False)
-        invite = Invitation.create(
+        Invitation.create(
             other_credentials["email"],
             inviter=self.user,
             sent=timezone.now(),
@@ -630,7 +630,8 @@ class InviteFlow(AdminUserTestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(
-            response, "This e-mail address has already accepted an invite."
+            response,
+            "<h1>Invitation sent to {}</h1>".format(other_credentials["email"]),
         )
 
     def test_send_invitation_invalid_domain(self):
