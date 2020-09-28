@@ -9,7 +9,7 @@
 {% block content %}
   {% include  "includes/error_list.html" %}
   <h1>{% trans "Invitations" %}</h1>
-  <div class="content-button"><a href="{% url 'invite' %}" role='button' draggable='false'>{% trans "Add an account" %}</a></div>
+  <div class="content-button"><a href="{% url 'invite' %}" role='button' draggable='false'>{% trans "Add new account" %}</a></div>
   {% if invitation_list.count > 0 %}
     <table class="with-actions invitations">
         <caption class="visually-hidden">{% trans "Invitations" %}</caption>

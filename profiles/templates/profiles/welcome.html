@@ -8,6 +8,7 @@
 
 {% block content %}
     {% blocktrans %}
+        <h1>Welcome to the portal</h1>
         <h2>One-time keys turn on exposure notifications</h2>
         <p>You’ll give one-time keys to patients with COVID-19 who want to notify people they’ve been near. <b>Only give one key per patient.</b></p>
         <p>Before giving a key, check the patient has the COVID Alert app on their phone.</p>
@@ -18,12 +19,12 @@
     {% endwith %}
     {% url 'terms' as terms_url %}
     {% blocktrans %}
-        <p>The portal also links to detailed instructions. You can use the instructions to help patients enter the key.</p>
+        <p>The portal gives instructions for entering the key, with screenshots from the app. You can use the instructions to help patients enter the key.</p>
         <h2>Only authorized healthcare workers generate and give one-time keys</h2>
         <p>By entering the key, the patient confirms they have COVID-19. Then the app guides the patient through the steps to notify people of possible exposure.</p>
         <p>Notifications do not give information about the patient or time of exposure.</p>
         <h2>Only generate keys for real patients</h2>
-        <p>By comparing 3 stats, we can improve the COVID Alert system by learning how people use the app.  We need the number of: </p>
+        <p>By comparing 3 stats, we can learn how people use the app. We need the number of:</p>
         <ul>
             <li>People with COVID-19.</li>
             <li>One-time keys generated for patients.</li>

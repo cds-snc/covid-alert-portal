@@ -3,12 +3,12 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-    {% trans "Add an account" %}
+    {% trans "Add new account" %}
 {% endblock %}
 
 {% block content %}
   {% include "includes/error_list.html" %}
-  <h1>{% trans "Add an account" %}</h1>
+  <h1>{% trans "Add new account" %}</h1>
 
   {% include "includes/cds_form.html" with submit_text=_("Send invitation email") %}
 {% endblock %}

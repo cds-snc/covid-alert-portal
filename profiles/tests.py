@@ -544,7 +544,7 @@ class InviteFlow(AdminUserTestCase):
         response = self.client.get(reverse("invite"))
         self.assertEqual(response.status_code, 200)
 
-        self.assertContains(response, "Add an account")
+        self.assertContains(response, "Add new account")
 
     def test_send_invitation_and_see_success_message(self):
         """

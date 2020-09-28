@@ -70,7 +70,7 @@ class HealthcareUser(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-    name = models.CharField(max_length=200, verbose_name=_("Your full name"))
+    name = models.CharField(max_length=200, verbose_name=_("Full name"))
     province = models.ForeignKey(HealthcareProvince, on_delete=models.PROTECT)
     phone_number = PhoneNumberField(
         help_text=_(
