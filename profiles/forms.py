@@ -368,8 +368,11 @@ class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
         self.fields["email"].label = _("Email address")
 
     def validate_invitation(self, email):
-        # Delete all non-accepted invitations for the same email, if they exist
-        Invitation.objects.filter(email__iexact=email, accepted=False).delete()
+        account_exists = HealthcareUser.objects.filter(email=email).count()
+        if not account_exists:
+            # If there is no user account, delete any prior invitations to this email
+            Invitation.objects.filter(email__iexact=email).delete()
+
         return super().validate_invitation(email)
 
     def clean_email(self):

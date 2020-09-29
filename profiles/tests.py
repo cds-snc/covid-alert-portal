@@ -580,6 +580,60 @@ class InviteFlow(AdminUserTestCase):
                 response, "<h1>Invitation sent to {}</h1>".format(self.invited_email)
             )
 
+    def test_sent_invite_again_if_accepted_invite_exists_and_user_account_exists(
+        self,
+    ):
+        """
+        Login and send a duplicate invite where another invite already exists
+        and there is a user account corresponding to the invited email address
+        """
+        other_credentials = get_other_credentials(is_admin=False)
+        User.objects.create_user(**other_credentials)
+        Invitation.create(
+            other_credentials["email"],
+            inviter=self.user,
+            sent=timezone.now(),
+            accepted=True,
+        )
+
+        self.client.login(username="test@test.com", password="testpassword")
+        self.login_2fa()
+        response = self.client.post(
+            reverse("invite"), {"email": other_credentials["email"]}, follow=True
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response, "This e-mail address has already accepted an invite."
+        )
+
+    def test_sent_invite_again_if_accepted_invite_exists_but_no_user_account_exists(
+        self,
+    ):
+        """
+        Login and send a duplicate invite where another invite already exists
+        BUT there is NO user account corresponding to the invited email address
+        """
+        other_credentials = get_other_credentials(is_admin=False)
+        Invitation.create(
+            other_credentials["email"],
+            inviter=self.user,
+            sent=timezone.now(),
+            accepted=True,
+        )
+
+        self.client.login(username="test@test.com", password="testpassword")
+        self.login_2fa()
+        response = self.client.post(
+            reverse("invite"), {"email": other_credentials["email"]}, follow=True
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            "<h1>Invitation sent to {}</h1>".format(other_credentials["email"]),
+        )
+
     def test_send_invitation_invalid_domain(self):
         self.login()
         domain = "example.com"
