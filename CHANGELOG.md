@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 - Allow resending invitations whenever no user account exists. Previously, an "accepted" invitation for a deleted user would prevent that user from being invited again.
+- Remove duplicate "preconnect" link in HTML header
 
 ## [1.8.2] - 2020-09-25
 
