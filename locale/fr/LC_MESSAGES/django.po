@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-29 14:30+0000\n"
+"POT-Creation-Date: 2020-09-29 17:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -637,9 +637,11 @@ msgstr "L’invitation n’a pu être envoyée."
 #: profiles/forms.py:403
 #, python-format
 msgid ""
-"You cannot invite %(email)s to create an account because @%(domain)s is not "
-"on the portal’s safelist."
+"You cannot invite ‘%(email)s’ to create an account because ‘@%(domain)s’ is "
+"not on the portal’s safelist."
 msgstr ""
+"Impossible d’inviter ‘%(email)s’ à créer un compte parce que ‘@%(domain)s’ "
+"ne fait pas partie de la liste de confiance du portail."
 
 #: profiles/forms.py:444 profiles/forms.py:477
 msgid "Token"
@@ -1308,13 +1310,49 @@ msgstr "Confirmez la suppression du Yubikey"
 msgid "Yubikey verification"
 msgstr "Vérification du Yubikey"
 
-#: profiles/validators.py:10 profiles/validators.py:22
-msgid "Your password can’t be a commonly-used sequence."
-msgstr "Votre mot de passe ne peut pas être utilisé couramment."
-
 #: profiles/validators.py:17
-msgid "Your password can’t contain terms related to COVID-19"
-msgstr "Votre mot de passe ne peut pas contenir de termes liés à COVID-19"
+msgid "Your password must be more difficult to guess."
+msgstr "Votre mot de passe doit être plus difficile à deviner."
+
+#: profiles/validators.py:24
+msgid "Your password cannot include anything about COVID."
+msgstr "Votre mot de passe ne peut pas faire référence à la COVID."
+
+#: profiles/validators.py:29
+msgid "Your password must be hard to guess."
+msgstr "Votre mot de passe doit être difficile à deviner."
+
+#: profiles/validators.py:36
+#, python-format
+msgid "Your password needs at least %(min_length)d characters."
+msgstr "Votre mot de passe doit comprendre au moins %(min_length)d caractères."
+
+#: profiles/validators.py:42
+#, python-format
+msgid "Your password must be at least %(min_length)d characters."
+msgstr "Votre mot de passe doit être au moins %(min_length)d caractères."
+
+#: profiles/validators.py:54
+msgid "Your password must be different from your other personal information."
+msgstr ""
+
+#: profiles/validators.py:60
+msgid "Your password cannot be similar to your name or email address."
+msgstr ""
+"Votre mot de passe doit être différent de vos autres renseignements "
+"personnels."
+
+#: profiles/validators.py:68
+msgid ""
+"Your password cannot be only numbers. It must have letters or other "
+"characters also."
+msgstr ""
+"Votre mot de passe ne peut pas contenir que des chiffres. Il doit comprendre "
+"des lettres ou d’autres caractères."
+
+#: profiles/validators.py:74
+msgid "Your password cannot be only numbers."
+msgstr "Votre mot de passe ne peut pas contenir que des chiffres."
 
 #: profiles/views.py:137
 msgid "No invited email in session"

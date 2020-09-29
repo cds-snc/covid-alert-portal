@@ -643,7 +643,7 @@ class InviteFlow(AdminUserTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
-            f"You cannot invite {email} to create an account because @{domain} is not on the portal",
+            f"You cannot invite ‘{email}’ to create an account because ‘@{domain}’ is not on the portal",
         )
 
     def test_send_invitation_invalid_domain_with_wildcard(self):

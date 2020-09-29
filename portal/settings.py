@@ -167,14 +167,14 @@ DATABASES = {"default": db_config}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "NAME": "profiles.validators.HealthcareMinimumLengthValidator",
         "OPTIONS": {"min_length": 12},
     },
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "profiles.validators.HealthcareUserAttributeSimilarityValidator",
         "OPTIONS": {"user_attributes": ["name", "username"]},
     },
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+    {"NAME": "profiles.validators.HealthcareNumericPasswordValidator"},
     {"NAME": "profiles.validators.BannedPasswordValidator"},
 ]
 
