@@ -11,8 +11,8 @@ resource "aws_cloudwatch_log_group" "covidportal" {
 # AWS CloudWatch Metrics - Scaling metrics
 ###
 
-resource "aws_cloudwatch_metric_alarm" "portal_cpu_utilization_high" {
-  alarm_name          = "portal-cpu-utilization-high-warn"
+resource "aws_cloudwatch_metric_alarm" "portal_cpu_utilization_high_warn" {
+  alarm_name          = "CpuUtilizationWarn"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "2"
   metric_name         = "CPUUtilization"
@@ -29,8 +29,8 @@ resource "aws_cloudwatch_metric_alarm" "portal_cpu_utilization_high" {
   }
 }
 
-resource "aws_cloudwatch_metric_alarm" "portal_memory_utilization_high" {
-  alarm_name          = "portal-memory-utilization-high-warn"
+resource "aws_cloudwatch_metric_alarm" "portal_memory_utilization_high_warn" {
+  alarm_name          = "MemoryUtilizationWarn"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 2
   metric_name         = "MemoryUtilization"
@@ -112,8 +112,8 @@ resource "aws_cloudwatch_metric_alarm" "application_error_warn" {
 # AWS CloudWatch Metrics - Activity Alarms
 ###
 
-resource "aws_cloudwatch_log_metric_filter" "key_generation_warn" {
-  name           = "KeyGenerationWarn"
+resource "aws_cloudwatch_log_metric_filter" "key_generation" {
+  name           = "KeyGeneration"
   pattern        = "\"CRUD event_type:CREATE model:covid_key.covidkey\""
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
@@ -128,7 +128,7 @@ resource "aws_cloudwatch_metric_alarm" "key_generation_warn" {
   alarm_name          = "KeyGenerationWarn"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
-  metric_name         = aws_cloudwatch_log_metric_filter.key_generation_warn.name
+  metric_name         = aws_cloudwatch_log_metric_filter.key_generation.name
   namespace           = "covidportal"
   period              = "3600"
   statistic           = "Sum"
@@ -138,23 +138,11 @@ resource "aws_cloudwatch_metric_alarm" "key_generation_warn" {
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
 }
 
-resource "aws_cloudwatch_log_metric_filter" "key_generation_critical" {
-  name           = "KeyGenerationCritical"
-  pattern        = "\"CRUD event_type:CREATE model:covid_key.covidkey\""
-  log_group_name = aws_cloudwatch_log_group.covidportal.name
-
-  metric_transformation {
-    name      = "KeyGeneration"
-    namespace = "covidportal"
-    value     = "1"
-  }
-}
-
 resource "aws_cloudwatch_metric_alarm" "key_generation_critical" {
   alarm_name          = "KeyGenerationCritical"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
-  metric_name         = aws_cloudwatch_log_metric_filter.key_generation_critical.name
+  metric_name         = aws_cloudwatch_log_metric_filter.key_generation.name
   namespace           = "covidportal"
   period              = "3600"
   statistic           = "Sum"
@@ -177,7 +165,7 @@ resource "aws_cloudwatch_log_metric_filter" "site_change" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "site_change_warn" {
-  alarm_name          = "SiteChangeWarn"
+  alarm_name          = "SiteTableChangeWarn"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
   metric_name         = aws_cloudwatch_log_metric_filter.site_change.name
@@ -202,7 +190,7 @@ resource "aws_cloudwatch_log_metric_filter" "account_lockout" {
   }
 }
 
-resource "aws_cloudwatch_metric_alarm" "AccountLockoutWarn" {
+resource "aws_cloudwatch_metric_alarm" "account_lockout_warn" {
   alarm_name          = "AccountLockoutWarn"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
@@ -228,7 +216,7 @@ resource "aws_cloudwatch_log_metric_filter" "invite_lockout" {
   }
 }
 
-resource "aws_cloudwatch_metric_alarm" "InviteLockoutWarn" {
+resource "aws_cloudwatch_metric_alarm" "invite_lockout_warn" {
   alarm_name          = "InviteLockoutWarn"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
@@ -246,7 +234,7 @@ resource "aws_cloudwatch_metric_alarm" "InviteLockoutWarn" {
 # AWS CloudWatch Metrics - DDoS Alarms
 ###
 
-resource "aws_cloudwatch_metric_alarm" "ddos_detected_covidportal" {
+resource "aws_cloudwatch_metric_alarm" "ddos_detected_covidportal_warn" {
   alarm_name          = "DDoSDetectedCovidPortalWarn"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
@@ -264,7 +252,7 @@ resource "aws_cloudwatch_metric_alarm" "ddos_detected_covidportal" {
   }
 }
 
-resource "aws_cloudwatch_metric_alarm" "ddos_detected_route53" {
+resource "aws_cloudwatch_metric_alarm" "ddos_detected_route53_warn" {
 
   alarm_name          = "DDoSDetectedRoute53Warn"
   comparison_operator = "GreaterThanThreshold"
