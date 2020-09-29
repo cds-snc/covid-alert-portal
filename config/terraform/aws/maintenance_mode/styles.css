@@ -1,0 +1,287 @@
+@charset "UTF-8";
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-size: 1.05em;
+  font-family: "Noto Sans", sans-serif;
+  line-height: 1.65;
+}
+
+@media screen and (min-width: 21em) {
+  body {
+    font-size: 1.2em;
+  }
+}
+
+@media screen and (min-width: 35.5em) {
+  body {
+    font-size: 1.3em;
+  }
+}
+
+p,
+.multiple-choice__item p,
+ol,
+ul {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+@media screen and (min-width: 21em) {
+  p,
+.multiple-choice__item p,
+ol,
+ul {
+    margin-bottom: 15px;
+  }
+}
+
+
+
+ol,
+ul {
+  padding-left: 30px;
+}
+
+@media screen and (min-width: 35.5em) {
+  ol,
+ul {
+    padding-left: 40px;
+  }
+}
+
+
+a,
+a:visited,
+button.link {
+  color: #284162;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+#site-name {
+  font-family: "Lato", sans-serif;
+  line-height: 1.33;
+  font-weight: 600;
+}
+
+.page--container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+main {
+  padding-bottom: 60px;
+}
+
+main > div {
+  margin-bottom: 30px;
+}
+
+@media screen and (min-width: 48em) {
+  main .content--container {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 64em) {
+  main .content--container {
+    width: 80%;
+  }
+}
+
+.container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container main {
+  flex: 1 0 auto;
+}
+
+.container footer {
+  flex-shrink: 0;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+
+footer {
+  width: 100%;
+  background: #eeeeee;
+  line-height: 30px;
+  border-top: 3px solid #26374a;
+}
+
+footer .footer-links {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 0.85em;
+}
+
+footer .canada-wordmark {
+  padding-bottom: 20px;
+  width: 147.2px;
+}
+
+@media screen and (min-width: 48em) {
+  footer .page--container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer .page--container .footer-links {
+    flex: 2;
+  }
+  footer .page--container .footer-links ul {
+    margin-bottom: -5px;
+  }
+  footer .page--container .canada-wordmark {
+    flex: 1;
+    text-align: right;
+    margin-bottom: 0;
+    max-height: 100%;
+  }
+  footer .page--container .canada-wordmark img {
+    height: 40px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+}
+
+header {
+  padding: 0 0 0 0;
+}
+
+@media screen and (min-width: 35.5em) {
+  header {
+    text-align: right;
+  }
+}
+
+header .fip-container {
+  flex-direction: column;
+  justify-content: space-between;
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 35.5em) {
+  header .fip-container {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+header .fip-container li a,
+header .fip-container li button {
+  padding: 0 5px;
+  margin-left: -5px;
+}
+
+@media screen and (min-width: 35.5em) {
+  header .fip-container li a,
+header .fip-container li button {
+    margin: 0;
+  }
+}
+
+
+header .canada-flag {
+  height: auto;
+  max-height: 40px;
+  width: 252px;
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+
+@media screen and (min-width: 21em) {
+  header .canada-flag {
+    width: 272px;
+  }
+}
+
+@media screen and (min-width: 35.5em) {
+  header .canada-flag {
+    width: 360px;
+    margin-bottom: 0;
+  }
+}
+
+header #site-name {
+  font-size: 1.5em;
+  margin: 20px 0;
+  text-align: left;
+}
+
+
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+nav ul li {
+  display: inline-block;
+}
+
+nav ul li a {
+  display: inline-block;
+}
+
+.nav--header {
+  font-size: 0.8em;
+}
+
+@media screen and (min-width: 35.5em) {
+  .nav--header {
+    font-size: 0.9em;
+  }
+}
+
+.nav--header ul {
+  text-align: right;
+}
+
+.nav--header li {
+  margin-left: 20px;
+}
+
+.nav--header li:first-of-type {
+  margin-left: 0;
+}
+
+.nav--main {
+  background: #eeeeee;
+  margin-bottom: 40px;
+}
+
+.nav--main.anonymous {
+  border-bottom: 3px solid #26374a;
+}

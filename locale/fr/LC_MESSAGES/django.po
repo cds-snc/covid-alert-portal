@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-21 18:42+0000\n"
+"POT-Creation-Date: 2020-09-25 20:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -180,7 +180,9 @@ msgstr ""
 "une nouvelle"
 
 #: covid_key/templates/covid_key/start.html:18
-msgid "Help us keep accurate stats. Only generate keys for real patients."
+msgid ""
+"Help us keep accurate stats. Only generate keys for real patients and only "
+"one key per patient."
 msgstr ""
 "Aidez-nous à maintenir des statistiques fiables. Ne générez des clés que "
 "pour de véritables patients."
@@ -230,48 +232,48 @@ msgid "Nine."
 msgstr "Neuf."
 
 #: covid_key/templatetags/alphabet.py:20
-msgid "A as in animal."
-msgstr "A comme animal."
+msgid "A as in Animal."
+msgstr "A comme Animal."
 
 #: covid_key/templatetags/alphabet.py:21
-msgid "E as in elephant."
-msgstr "E comme éléphant."
+msgid "E as in Elephant."
+msgstr "E comme Éléphant."
 
 #: covid_key/templatetags/alphabet.py:22
-msgid "F as in family."
-msgstr "F comme famille."
+msgid "F as in Family."
+msgstr "F comme Famille."
 
 #: covid_key/templatetags/alphabet.py:23
-msgid "H as in hospital."
-msgstr "H comme hôpital."
+msgid "H as in Hospital."
+msgstr "H comme Hôpital."
 
 #: covid_key/templatetags/alphabet.py:24
 msgid "J as in January."
-msgstr "J comme janvier."
+msgstr "J comme Janvier."
 
 #: covid_key/templatetags/alphabet.py:25
-msgid "K as in kangaroo."
-msgstr "K comme kangourou."
+msgid "K as in Kangaroo."
+msgstr "K comme Kangourou."
 
 #: covid_key/templatetags/alphabet.py:26
-msgid "L as in lion."
-msgstr "L comme lion."
+msgid "L as in Lion."
+msgstr "L comme Lion."
 
 #: covid_key/templatetags/alphabet.py:27
-msgid "Q as in question."
-msgstr "Q comme question."
+msgid "Q as in Question."
+msgstr "Q comme Question."
 
 #: covid_key/templatetags/alphabet.py:28
-msgid "R as in radio."
-msgstr "R comme radio."
+msgid "R as in Radio."
+msgstr "R comme Radio."
 
 #: covid_key/templatetags/alphabet.py:29
 msgid "S as in September."
-msgstr "S comme septembre."
+msgstr "S comme Septembre."
 
 #: covid_key/templatetags/alphabet.py:30
-msgid "U as in uniform."
-msgstr "U comme uniforme."
+msgid "U as in Uniform."
+msgstr "U comme Uniforme."
 
 #: covid_key/templatetags/alphabet.py:31
 msgid "W as in Wi-Fi."
@@ -279,15 +281,15 @@ msgstr "W comme Wi-Fi."
 
 #: covid_key/templatetags/alphabet.py:32
 msgid "X as in X-ray."
-msgstr "X comme xylophone."
+msgstr "X comme Xylophone."
 
 #: covid_key/templatetags/alphabet.py:33
-msgid "Y as in yoga."
-msgstr "Y comme yoga."
+msgid "Y as in Yoga."
+msgstr "Y comme Yoga."
 
 #: covid_key/templatetags/alphabet.py:34
-msgid "Z as in zebra."
-msgstr "Z comme zèbre."
+msgid "Z as in Zebra."
+msgstr "Z comme Zèbre."
 
 #: covid_key/views.py:77
 msgid "Something went wrong. Contact your manager."
@@ -342,13 +344,15 @@ msgstr "CLÉ À TITRE D’EXEMPLE <br/>(NON VALIDE)"
 #: portal/templates/includes/big-code.html:13
 msgid ""
 "\n"
-"        <span>The <b>key expires in 24 hours</b>.</span><br />\n"
-"        <span> No new keys after expiry.</span>\n"
+"        <p>The <strong>key expires in 24 hours</strong>.</p>\n"
 "    "
 msgstr ""
 "\n"
-"<span>La clé <b>expire après 24 heures</b>.</span><br />\n"
-"<span>Elle ne peut pas être regénérée si elle expire.</span>"
+"<p>La clé <strong>expire après 24 heures</strong>.</p>"
+
+#: portal/templates/includes/big-code.html:19
+msgid "No new keys after expiry."
+msgstr "Elle ne peut pas être regénérée si elle expire."
 
 #: portal/templates/includes/cds_form.html:39
 msgid "Submit"
@@ -365,19 +369,6 @@ msgstr "La clé expire le"
 #: portal/templates/includes/expires_string.html:15
 msgid "at"
 msgstr "à"
-
-#: portal/templates/includes/expires_string.html:25
-msgid "Only give one key per patient."
-msgstr "Ne donnez qu’une seule clé par patient."
-
-#: portal/templates/includes/expires_string.html:26
-msgid ""
-"On the app, tap for menu.  Then “Enter your one-time key” guides patients "
-"through next steps."
-msgstr ""
-"Le patient doit taper au bas de l’écran de l’application pour voir le menu "
-"apparaître. Le bouton « Entrer votre clé » mène le patient vers les étapes "
-"suivantes."
 
 #: portal/templates/includes/footer.html:9
 msgid "Quick guide"
@@ -439,8 +430,8 @@ msgid "Manage team"
 msgstr "Gérer l’équipe"
 
 #: portal/templates/includes/phonetic.html:3
-msgid "To read this phonetically:"
-msgstr "Pour lire la clé de façon phonétique :"
+msgid "Read key phonetically and ask patient to read it back to you:"
+msgstr "Lisez la clé de façon phonétique et demandez au patient de la répéter."
 
 #: portal/templates/locked_out.html:5
 msgid "Account locked"
@@ -752,8 +743,8 @@ msgstr "Invitation envoyée à %(email)s"
 
 #: profiles/templates/invitations/templates/invite_complete.html:11
 msgid ""
-"They will receive an email with a link to create their account. The link "
-"will expire in 24 hours."
+"They’ll receive an email with a link to create their account. The link "
+"expires in 24 hours."
 msgstr ""
 "Cette personne recevra un courriel contenant un lien pour créer son compte. "
 "Le lien expire après 24 heures."
@@ -982,7 +973,7 @@ msgstr "Avis de confidentialité pour le portail Alerte COVID"
 #: profiles/templates/profiles/privacy.html:10
 msgid ""
 "\n"
-"        <ul>\n"
+"        <ul class=\"paragraphs\">\n"
 "        <li>\n"
 "            <b>We need your personal information</b> so you can use the "
 "portal to generate one-time keys.\n"
@@ -990,7 +981,7 @@ msgid ""
 "        <li>\n"
 "            <b>We log all activity and information in the portal</b>, "
 "including:\n"
-"            <ul>\n"
+"            <ul class=\"disc\">\n"
 "                <li>each time you generate a key.</li>\n"
 "                <li>personal information you share with the portal, such as "
 "your phone number.</li>\n"
@@ -1016,30 +1007,30 @@ msgid ""
 "target=\"_blank\">Privacy Commissioner of Canada</a>.\n"
 "        </li>\n"
 "        </ul>\n"
-"        <p><b>Questions?</b></p>\n"
+"        <h2>Questions?</h2>\n"
 "        <p>Contact <a href=\"mailto:hc.AlerteCOVIDAlert.sc@canada.ca"
 "\">Health Canada</a>.</p>\n"
 "    "
 msgstr ""
 "\n"
-"<ul><li><b>Nous avons besoin de vos renseignements personnels</b> pour vous "
-"permettre d’utiliser le portail et de générer des clés à usage unique."
-"<li><b>Nous consignons les activités et les renseignements liés au portail</"
-"b>, notamment : <ul><li>chacune des fois où vous générez une clé,</"
-"li><li>les renseignements personnels que vous partagez avec le portail, "
-"comme votre numéro de téléphone.</li></ul><li><b>Nous avons l’autorisation "
-"d’utiliser ces renseignements</b> selon la Loi sur le ministère de la Santé "
-"et la Loi sur la gestion des finances publiques.</li><li><b>Nous ne "
-"partagerons vos renseignements personnels que si nous détectons des "
-"activités illégales.</b> Nous pourrions alors fournir vos renseignements aux "
-"forces policières.</li><li><b>Vous avez le droit d’accéder à vos "
-"renseignements personnels, de les réviser et de les corriger.</b> Vous "
-"pouvez corriger par vous-même la plupart des renseignements dans le portail."
-"</li><li><b>Vous avez le droit de faire une plainte</b> au sujet de la façon "
-"dont nous utilisons vos renseignements au commissaire à la protection de la "
-"vie privée du Canada.</li></ul><p><b>Des questions?</b></p><p>Communiquez "
-"avec <a href=\"mailto:hc.AlerteCOVIDAlert.sc@canada.ca\">Santé Canada</a>.</"
-"p>"
+"<ul class=\"paragraphs\"><li><b>Nous avons besoin de vos renseignements "
+"personnels</b> pour vous permettre d’utiliser le portail et de générer des "
+"clés à usage unique.<li><b>Nous consignons les activités et les "
+"renseignements liés au portail</b>, notamment : <ul class=\"disc"
+"\"><li>chacune des fois où vous générez une clé,</li><li>les renseignements "
+"personnels que vous partagez avec le portail, comme votre numéro de "
+"téléphone.</li></ul><li><b>Nous avons l’autorisation d’utiliser ces "
+"renseignements</b> selon la Loi sur le ministère de la Santé et la Loi sur "
+"la gestion des finances publiques.</li><li><b>Nous ne partagerons vos "
+"renseignements personnels que si nous détectons des activités illégales.</b> "
+"Nous pourrions alors fournir vos renseignements aux forces policières.</"
+"li><li><b>Vous avez le droit d’accéder à vos renseignements personnels, de "
+"les réviser et de les corriger.</b> Vous pouvez corriger par vous-même la "
+"plupart des renseignements dans le portail.</li><li><b>Vous avez le droit de "
+"faire une plainte</b> au sujet de la façon dont nous utilisons vos "
+"renseignements au commissaire à la protection de la vie privée du Canada.</"
+"li></ul><h2>Des questions?</h2><p>Communiquez avec <a href=\"mailto:hc."
+"AlerteCOVIDAlert.sc@canada.ca\">Santé Canada</a>.</p>"
 
 #: profiles/templates/profiles/quick-guide.html:5
 #: profiles/templates/profiles/quick-guide.html:9
@@ -1185,7 +1176,8 @@ msgstr ""
 "terms\" target=\"_blank\">conditions d’utilisation</a> du portail Alerte "
 "COVID.</p>"
 
-#: profiles/templates/profiles/terms.html:10
+#: profiles/templates/profiles/terms.html:11
+#, python-format
 msgid ""
 "\n"
 "        <p>The COVID Alert Portal is only for authorized healthcare workers "
@@ -1203,21 +1195,17 @@ msgid ""
 "            Immediately report any security issues with your account to "
 "both:\n"
 "                <ul>\n"
-"                    <li>your manager</li>\n"
+"                    <li>your administrator</li>\n"
 "                    <li><a href=\"mailto:security@cds-snc.ca\">security@cds-"
 "snc.ca</a></li>\n"
 "                </ul>\n"
 "            </li>\n"
 "        </ul>\n"
-"\n"
 "        <p>If we detect any misuse of the portal or security issues with "
-"your account, we will immediately disable your account.</p>\n"
-"\n"
-"\n"
+"your account, we’ll immediately disable your account.</p>\n"
 "        <h2>Questions?</h2>\n"
 "        <p>For questions about these terms of use, or to report a technical "
-"issue, please contact <a href=\"mailto:assistance+healthcare@cds-snc.ca"
-"\">assistance+healthcare@cds-snc.ca</a>.</p>\n"
+"issue, please <a href=\"%(contact_url)s\">contact us</a>.</p>\n"
 "    "
 msgstr ""
 "\n"
@@ -1230,14 +1218,13 @@ msgstr ""
 "compte. Vous devez éviter de divulguer votre nom d’utilisateur et votre mot "
 "de passe, même aux personnes travaillant pour une autorité sanitaire.</"
 "li><li>Signaler immédiatement tout problème de sécurité en lien avec votre "
-"compte aux instances suivantes :<ul><li>votre gestionnaire</li><li><a href="
-"\"mailto:security@cds-snc.ca\">security@cds-snc.ca</a></li></ul><p>Si nous "
-"détectons toute mauvaise utilisation du portail ou tout problème de sécurité "
-"lié à votre compte, nous désactiverons immédiatement votre compte.</"
-"p><h2>Des questions?</h2><p>Pour toute question au sujet des modalités "
-"d’utilisation, ou pour signaler un problème technique, écrivez à <a href="
-"\"mailto:assistance+healthcare@cds-snc.ca\">assistance+healthcare@cds-snc."
-"ca</a>.</p>"
+"compte aux instances suivantes :<ul><li>l’administrateur du portail</"
+"li><li><a href=\"mailto:security@cds-snc.ca\">security@cds-snc.ca</a></li></"
+"ul></li></ul><p>Si nous détectons toute mauvaise utilisation du portail ou "
+"tout problème de sécurité lié à votre compte, nous désactiverons "
+"immédiatement votre compte.</p><h2>Des questions?</h2><p>Pour toute question "
+"au sujet des modalités d’utilisation, ou pour signaler un problème "
+"technique, écrivez à <a href=\"%(contact_url)s\">contactez-nous</a>.</p>"
 
 #: profiles/templates/profiles/welcome.html:6
 msgid "Welcome to the portal"
@@ -1359,12 +1346,3 @@ msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
 "portail."
-
-#~ msgid "Password reset"
-#~ msgstr "Réinitialisation de votre mode passe"
-
-#~ msgid "Your portal account"
-#~ msgstr " : votre compte pour le Portail"
-
-#~ msgid ": Your portal account"
-#~ msgstr " : votre compte pour le Portail"

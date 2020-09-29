@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.8.2] - 2020-09-25
+
+### Updated
+
+- Title Case the words in the phonetic alphabet
+- Updated content for the Privacy and Terms of use pages
+
+### Fixed
+
+- Fixed CSS for "logged-in" nav items for the login page
+- Fixed CSS for login thank you message on IE11
+
 ## [1.8.1] - 2020-09-21
 
 ### Fixed
