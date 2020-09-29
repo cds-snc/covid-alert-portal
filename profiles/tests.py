@@ -544,7 +544,7 @@ class InviteFlow(AdminUserTestCase):
         response = self.client.get(reverse("invite"))
         self.assertEqual(response.status_code, 200)
 
-        self.assertContains(response, "Add an account")
+        self.assertContains(response, "Add new account")
 
     def test_send_invitation_and_see_success_message(self):
         """
@@ -643,7 +643,7 @@ class InviteFlow(AdminUserTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
-            f"You cannot invite {email} to create an account because @{domain} is not on the portal",
+            f"You cannot invite ‘{email}’ to create an account because ‘@{domain}’ is not on the portal",
         )
 
     def test_send_invitation_invalid_domain_with_wildcard(self):

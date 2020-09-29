@@ -15,5 +15,4 @@
   <p>{% trans "If you delete their invitation, they will not be able to join the COVID Alert Portal until they are invited back." %}</p>
   {% include "includes/cds_form.html" with submit_text=_("Yes, I am sure") %}
   <div class="content-button" style="margin-top: -40px;"><a class="secondary" href="{% url 'invitation_list' %}" role='button' draggable='false'>{% trans "No, take me back" %}</a></div>
-
 {% endblock %}
