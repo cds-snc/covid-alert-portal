@@ -37,6 +37,7 @@ resource "aws_s3_bucket_object" "html_files" {
   key          = each.value
   source       = "./maintenance_mode/${each.value}"
   etag         = filemd5("./maintenance_mode/${each.value}")
+  cache_control = "max-age=60"
 }
 
 resource "aws_s3_bucket_object" "html_supporting_css" {
