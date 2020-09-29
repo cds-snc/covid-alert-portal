@@ -76,6 +76,10 @@ h6,
   padding-right: 20px;
 }
 
+#page--content:focus {
+  outline: none;
+}
+
 main {
   padding-bottom: 60px;
 }
