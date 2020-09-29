@@ -5,7 +5,7 @@
     {% if healthcareuser.id == user.id %}
         {% trans "Your account" %}
     {% else %}
-        {% trans "User account" %}
+        {% trans "User profile" %}
     {% endif %}
 {% endblock %}
 
@@ -14,11 +14,11 @@
     {% if healthcareuser.id == user.id %}
         <h1>{% trans "Your account" %}</h1>
     {% else %}
-        <h1>{% trans "User account" %}</h1>
+        <h1>{% trans "User profile" %}</h1>
     {% endif %}
 
     <table {% if not view_only %}class="with-actions" {% endif %}>
-      <caption class="visually-hidden">{% trans "User account" %}</caption>
+      <caption class="visually-hidden">{% trans "User profile" %}</caption>
       <tbody>
         <tr>
             <th scope="row">{% trans "Email address" %}</th>
@@ -26,11 +26,7 @@
         </tr>
         <tr>
           <th scope="row">
-              {% if request.user.id == healthcareuser.id  %}
-                  {% trans "Your name" %}
-              {% else %}
-                  {% trans "Name" %}
-              {% endif %}
+              {% trans "Name" %}
           </th>
           <td {% if view_only %}colspan="2"{% endif %}>{{ healthcareuser.name }}</td>
           {% if not view_only %}

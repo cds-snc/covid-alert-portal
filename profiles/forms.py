@@ -96,6 +96,9 @@ class HealthcareBaseEditForm(HealthcareBaseForm, forms.ModelForm):
 
 class HealthcareNameEditForm(HealthcareBaseEditForm):
     title = _("Change your name")
+    name = forms.CharField(
+        label=_("Full name"),
+    )
 
     class Meta:
         model = HealthcareUser
@@ -104,9 +107,15 @@ class HealthcareNameEditForm(HealthcareBaseEditForm):
 
 class HealthcarePhoneEditForm(HealthcareBaseEditForm):
     title = _("Change your mobile phone number")
+    phone_number = PhoneNumberField(
+        label=_("Mobile phone number"),
+        help_text=_(
+            "You must enter a new security code each time you log in. We’ll text the code to your mobile phone number."
+        ),
+    )
     phone_number2 = PhoneNumberField(
         label=_("Confirm your mobile phone number"),
-        help_text=_("Enter the same phone number as above."),
+        help_text=_("Enter the same mobile number as above."),
     )
     error_messages = {
         "phone_number_mismatch": _("The phone numbers didn’t match."),
@@ -142,7 +151,7 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
         label=_("Password confirmation"),
         widget=forms.PasswordInput(),
         strip=False,
-        help_text=_("Enter the same password as before, for verification."),
+        help_text=_("Enter the same password as above."),
     )
 
     def __init__(self, user, *args, **kwargs):
@@ -276,12 +285,19 @@ class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):
     phone_number = PhoneNumberField(
         label=_("Mobile phone number"),
         help_text=_(
-            "You must enter a new security code each time you log in. We’ll send the code to this phone number."
+            "You must enter a new security code each time you log in. We’ll text the code to your mobile phone number."
         ),
     )
     phone_number_confirmation = PhoneNumberField(
         label=_("Confirm your phone number"),
-        help_text=_("Enter the same phone number as before, for verification"),
+        help_text=_("Enter the same mobile number as above."),
+    )
+
+    password2 = forms.CharField(
+        label=_("Confirm your password"),
+        help_text=_("Enter the same password as above."),
+        strip=False,
+        widget=forms.PasswordInput(),
     )
 
     field_order = [
@@ -368,8 +384,11 @@ class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
         self.fields["email"].label = _("Email address")
 
     def validate_invitation(self, email):
-        # Delete all non-accepted invitations for the same email, if they exist
-        Invitation.objects.filter(email__iexact=email, accepted=False).delete()
+        account_exists = HealthcareUser.objects.filter(email=email).count()
+        if not account_exists:
+            # If there is no user account, delete any prior invitations to this email
+            Invitation.objects.filter(email__iexact=email).delete()
+
         return super().validate_invitation(email)
 
     def clean_email(self):
@@ -384,7 +403,7 @@ class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
                 if AuthorizedDomain.objects.filter(domain="*").count() == 0:
                     raise forms.ValidationError(
                         _(
-                            "You cannot invite %(email)s to create an account because @%(domain)s is not on the portal’s safelist."
+                            "You cannot invite ‘%(email)s’ to create an account because ‘@%(domain)s’ is not on the portal’s safelist."
                         )
                         % {"domain": domain, "email": email}
                     )

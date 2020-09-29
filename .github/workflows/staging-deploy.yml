@@ -6,7 +6,6 @@ on:
 
 jobs:
   deploy-portal-service:
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: Wait for container to be built and pushed
@@ -14,7 +13,7 @@ jobs:
         id: wait-for-build
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          checkName: build-n-push
+          checkName: push-staging
           ref: ${{ github.sha }}
 
       - name: Checkout
