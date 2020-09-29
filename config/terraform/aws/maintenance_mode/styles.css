@@ -32,14 +32,12 @@ ul {
 
 @media screen and (min-width: 21em) {
   p,
-.multiple-choice__item p,
-ol,
-ul {
+  .multiple-choice__item p,
+  ol,
+  ul {
     margin-bottom: 15px;
   }
 }
-
-
 
 ol,
 ul {
@@ -48,11 +46,10 @@ ul {
 
 @media screen and (min-width: 35.5em) {
   ol,
-ul {
+  ul {
     padding-left: 40px;
   }
 }
-
 
 a,
 a:visited,
@@ -78,7 +75,6 @@ h6,
   padding-left: 20px;
   padding-right: 20px;
 }
-
 
 main {
   padding-bottom: 60px;
@@ -128,7 +124,6 @@ main > div {
   border: 0 !important;
   white-space: nowrap !important;
 }
-
 
 footer {
   width: 100%;
@@ -206,11 +201,10 @@ header .fip-container li button {
 
 @media screen and (min-width: 35.5em) {
   header .fip-container li a,
-header .fip-container li button {
+  header .fip-container li button {
     margin: 0;
   }
 }
-
 
 header .canada-flag {
   height: auto;
@@ -238,8 +232,6 @@ header #site-name {
   margin: 20px 0;
   text-align: left;
 }
-
-
 
 nav ul {
   margin: 0;
