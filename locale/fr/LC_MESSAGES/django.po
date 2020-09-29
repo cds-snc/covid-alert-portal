@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-29 17:59+0000\n"
+"POT-Creation-Date: 2020-09-29 20:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,7 +84,7 @@ msgid "We’ll reply as soon as possible."
 msgstr "Nous vous répondrons le plus rapidement possible."
 
 #: contact/templates/contact/success.html:14
-#: covid_key/templates/covid_key/key.html:58
+#: covid_key/templates/covid_key/key.html:69
 msgid "New patient"
 msgstr "Nouveau patient"
 
@@ -103,40 +103,78 @@ msgid "Give patient this key"
 msgstr "Donnez la clé suivante au patient"
 
 #: covid_key/templates/covid_key/key.html:16
-msgid "Instructions for patient"
-msgstr "Instructions pour le patient"
+msgid "Instructions for entering key"
+msgstr "Instructions pour entrer une clé dans l’application"
 
 #: covid_key/templates/covid_key/key.html:22
+msgid ""
+"Open the app. At the bottom of the screen, swipe “Tap for menu” for the "
+"screen to enter the one time key."
+msgstr ""
+"Ouvrir l’application. Appuyer sur « Appuyez pour voir le menu » dans le bas "
+"de l’écran pour faire apparaître l’écran permettant d’entrer la clé."
+
+#: covid_key/templates/covid_key/key.html:28
 msgid "Tap “Enter your one-time key”."
 msgstr "Appuyez sur « Entrer votre clé »."
 
-#: covid_key/templates/covid_key/key.html:28
-msgid "Tap “Next” on “Let people know they may have been exposed”."
-msgstr ""
-"Appuyez sur « Suivant » dans l’écran « Aviser les autres personnes d’une "
-"exposition potentielle »."
-
 #: covid_key/templates/covid_key/key.html:34
-msgid "Enter your one-time key and tap “Submit”."
-msgstr "Entrez la clé et appuyez sur « Envoyer »."
+msgid ""
+"On “Notify people they’ve been exposed”, read the instructions. Then tap "
+"“Next”."
+msgstr ""
+"Lire les instructions de l’écran « Aviser les personnes d’une exposition ». "
+"Appuyer ensuite sur « Suivant »."
 
 #: covid_key/templates/covid_key/key.html:40
 msgid ""
-"If you want to notify people, you need to give COVID Alert permission to "
-"upload random codes. Tap “Agree” on “Now you can upload codes”."
+"Patients can use capital or small letters to enter the one-time key. Tap "
+"“Submit key”."
 msgstr ""
-"Si vous voulez aviser les autres personnes, vous devez autoriser Alerte "
-"COVID à téléverser vos codes aléatoires. Appuyez sur « Accepter » dans "
-"l’écran « Vous pouvez maintenant téléverser vos codes »."
+"La clé peut être saisie en majuscules ou en minuscules. Appuyer sur "
+"« Soumettre la clé »."
 
 #: covid_key/templates/covid_key/key.html:46
 msgid ""
-"Tap “Share” on “Share your random codes from this device with COVID Alert?”."
+"Then several screens ask questions. The app uses the answers to calculate "
+"when patients were most likely contagious, so it only notifies people they "
+"were near at that time."
 msgstr ""
-"Appuyez sur « Partager » dans la fenêtre « Partager les identifiants "
-"aléatoires de votre appareil avec Alerte COVID? »."
+"Les écrans qui suivent posent quelques questions. L’application s’en sert "
+"pour calculer la période où le patient était susceptible d’être contagieux, "
+"pour ensuite n’aviser que les personnes côtoyées pendant cette période."
 
-#: covid_key/templates/covid_key/key.html:52
+#: covid_key/templates/covid_key/key.html:48
+msgid ""
+"If a patient decides not to answer, then the app notifies everyone they were "
+"near over the past 14 days."
+msgstr ""
+"Si le patient préfère ne pas répondre aux questions, l’application enverra "
+"des notifications à toutes les personnes qu’il a côtoyées au cours des 14 "
+"derniers jours."
+
+#: covid_key/templates/covid_key/key.html:51
+msgid ""
+"After patients have either answered questions or decided not to answer,  "
+"they need to give COVID Alert permission to upload random codes. Tap “Share "
+"exposures” to give permission."
+msgstr ""
+"Après avoir répondu ou non aux questions, le patient doit  autoriser Alerte "
+"COVID à téléverser les codes aléatoires. Appuyer sur « Partager les "
+"expositions » pour le faire."
+
+#: covid_key/templates/covid_key/key.html:57
+msgid ""
+"The next screen asks permission to share information to notify others. "
+"Depending on the phone’s operating system, the screen may describe this in "
+"different ways, such as sharing random IDs with COVID Alert. Tap “Share”."
+msgstr ""
+"L’écran qui suit demande l’autorisation de partager des renseignements afin "
+"d’aviser les personnes. La formulation de cette demande, par exemple "
+"« partager des identifiants aléatoires avec Alerte COVID », peut varier "
+"selon le système d’exploitation du téléphone. Appuyer sur « Partager »."
+
+#: covid_key/templates/covid_key/key.html:63
 msgid ""
 "COVID Alert will ask permission to upload random codes daily for the next 13 "
 "days."
@@ -187,7 +225,7 @@ msgid ""
 msgstr ""
 "comprend que <strong>la clé expire après 24 heures</strong>. Si la clé "
 "expire avant que le patient ne l’utilise, il sera impossible d’en recevoir "
-"une nouvelle"
+"une nouvelle."
 
 #: covid_key/templates/covid_key/start.html:18
 msgid ""
@@ -195,7 +233,7 @@ msgid ""
 "one key per patient."
 msgstr ""
 "Aidez-nous à maintenir des statistiques fiables. Ne générez des clés que "
-"pour de véritables patients."
+"pour les patients, et une seule clé par patient."
 
 #: covid_key/templates/covid_key/start.html:23
 msgid "Generate key"
@@ -634,7 +672,7 @@ msgstr "L’adresse courriel existe déjà"
 msgid "An invitation hasn’t been sent to this address"
 msgstr "L’invitation n’a pu être envoyée."
 
-#: profiles/forms.py:403
+#: profiles/forms.py:406
 #, python-format
 msgid ""
 "You cannot invite ‘%(email)s’ to create an account because ‘@%(domain)s’ is "
@@ -643,15 +681,15 @@ msgstr ""
 "Impossible d’inviter ‘%(email)s’ à créer un compte parce que ‘@%(domain)s’ "
 "ne fait pas partie de la liste de confiance du portail."
 
-#: profiles/forms.py:444 profiles/forms.py:477
+#: profiles/forms.py:447 profiles/forms.py:480
 msgid "Token"
 msgstr "Clef"
 
-#: profiles/forms.py:466
+#: profiles/forms.py:469
 msgid "Unable to validate the token with the device."
 msgstr ""
 
-#: profiles/forms.py:497
+#: profiles/forms.py:500
 msgid "The token is not valid for this device."
 msgstr ""
 
@@ -1310,39 +1348,39 @@ msgstr "Confirmez la suppression du Yubikey"
 msgid "Yubikey verification"
 msgstr "Vérification du Yubikey"
 
-#: profiles/validators.py:17
+#: profiles/validators.py:16
 msgid "Your password must be more difficult to guess."
 msgstr "Votre mot de passe doit être plus difficile à deviner."
 
-#: profiles/validators.py:24
+#: profiles/validators.py:23
 msgid "Your password cannot include anything about COVID."
 msgstr "Votre mot de passe ne peut pas faire référence à la COVID."
 
-#: profiles/validators.py:29
+#: profiles/validators.py:28
 msgid "Your password must be hard to guess."
 msgstr "Votre mot de passe doit être difficile à deviner."
 
-#: profiles/validators.py:36
+#: profiles/validators.py:35
 #, python-format
 msgid "Your password needs at least %(min_length)d characters."
 msgstr "Votre mot de passe doit comprendre au moins %(min_length)d caractères."
 
-#: profiles/validators.py:42
+#: profiles/validators.py:41
 #, python-format
 msgid "Your password must be at least %(min_length)d characters."
 msgstr "Votre mot de passe doit être au moins %(min_length)d caractères."
 
-#: profiles/validators.py:54
+#: profiles/validators.py:53
 msgid "Your password must be different from your other personal information."
 msgstr ""
 
-#: profiles/validators.py:60
+#: profiles/validators.py:59
 msgid "Your password cannot be similar to your name or email address."
 msgstr ""
 "Votre mot de passe doit être différent de vos autres renseignements "
 "personnels."
 
-#: profiles/validators.py:68
+#: profiles/validators.py:67
 msgid ""
 "Your password cannot be only numbers. It must have letters or other "
 "characters also."
@@ -1350,7 +1388,7 @@ msgstr ""
 "Votre mot de passe ne peut pas contenir que des chiffres. Il doit comprendre "
 "des lettres ou d’autres caractères."
 
-#: profiles/validators.py:74
+#: profiles/validators.py:73
 msgid "Your password cannot be only numbers."
 msgstr "Votre mot de passe ne peut pas contenir que des chiffres."
 
@@ -1380,3 +1418,18 @@ msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
 "portail."
+
+#~ msgid "Tap “Next” on “Let people know they may have been exposed”."
+#~ msgstr ""
+#~ "Appuyez sur « Suivant » dans l’écran « Aviser les autres personnes d’une "
+#~ "exposition potentielle »."
+
+#~ msgid "Enter your one-time key and tap “Submit”."
+#~ msgstr "Entrez la clé et appuyez sur « Envoyer »."
+
+#~ msgid ""
+#~ "Tap “Share” on “Share your random codes from this device with COVID "
+#~ "Alert?”."
+#~ msgstr ""
+#~ "Appuyez sur « Partager » dans la fenêtre « Partager les identifiants "
+#~ "aléatoires de votre appareil avec Alerte COVID? »."

@@ -7,7 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-- Allow resending invitations whenever no user account exists. Previously, an "accepted" invitation for a deleted user would prevent that user from being invited again.
+- Update in-app content
+
+  - Update instructions and screenshots for instructions that healthcare providers give to patients
+
+- Data migration to add "sent" dates to any invitations missing that fields
+- Allow resending invitations whenever no user account exists — previously, an "accepted" invitation for a deleted user would prevent that user from being invited again
 - Remove duplicate "preconnect" link in HTML header
 
 ## [1.8.2] - 2020-09-25
