@@ -1,6 +1,6 @@
 {% load i18n widget_tweaks %}
 
-<form method="post" id="form--{{ request.resolver_match.url_name }}">
+<form method="post" id="form--{{ request.resolver_match.url_name }}" {% if form_class %}class="{{ form_class }}"{% endif %} >
   {% csrf_token %}
 
   {# Include the hidden fields #}
