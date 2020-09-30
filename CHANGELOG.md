@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.8.4] - 2020-09-30
+
+### Updated
+
+- Remove traceback instructions for the instructions for patients. We want to wait for the app to be updated before those go out.
+
 ## [1.8.3] - 2020-09-30
 
 ### Updated
