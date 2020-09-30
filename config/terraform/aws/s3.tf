@@ -31,12 +31,13 @@ resource "aws_s3_bucket" "portal_maintenance_mode" {
 }
 
 resource "aws_s3_bucket_object" "html_files" {
-  for_each     = fileset("./maintenance_mode/", "*.htm")
-  content_type = "text/html"
-  bucket       = "staging-covid-portal-maintenance-mode"
-  key          = each.value
-  source       = "./maintenance_mode/${each.value}"
-  etag         = filemd5("./maintenance_mode/${each.value}")
+  for_each      = fileset("./maintenance_mode/", "*.htm")
+  content_type  = "text/html"
+  bucket        = "staging-covid-portal-maintenance-mode"
+  key           = each.value
+  source        = "./maintenance_mode/${each.value}"
+  etag          = filemd5("./maintenance_mode/${each.value}")
+  cache_control = "max-age=60"
 }
 
 resource "aws_s3_bucket_object" "html_supporting_css" {

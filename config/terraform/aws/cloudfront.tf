@@ -40,6 +40,12 @@ resource "aws_cloudfront_distribution" "maintenance_mode" {
     default_ttl            = 3600
     max_ttl                = 86400
   }
+
+  custom_error_response {
+    error_code         = "403"
+    response_code      = "200"
+    response_page_path = "/en.htm"
+  }
   restrictions {
     geo_restriction {
       restriction_type = "none"
