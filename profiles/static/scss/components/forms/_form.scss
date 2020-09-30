@@ -3,6 +3,14 @@ main form {
   max-width: 460px;
   margin-bottom: $space-xxl;
 
+  &.small {
+    width: 50%;
+
+    @include sm {
+      width: 33%;
+    }
+  }
+
   + p {
     margin-bottom: $space-xxl;
 

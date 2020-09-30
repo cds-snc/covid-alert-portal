@@ -82,7 +82,7 @@ class Resend2FACodeForm(HealthcareBaseForm):
 class Healthcare2FAForm(HealthcareBaseForm):
     code = forms.CharField(
         widget=forms.TextInput,
-        label=_("Please enter the security code."),
+        label=_("Security code"),
         required=True,
     )
 
@@ -148,7 +148,7 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
         help_text=password_validation.password_validators_help_text_html(),
     )
     password2 = forms.CharField(
-        label=_("Password confirmation"),
+        label=_("Confirm your password"),
         widget=forms.PasswordInput(),
         strip=False,
         help_text=_("Enter the same password as above."),
@@ -248,9 +248,10 @@ class HealthcarePasswordResetConfirm(HealthcareBaseForm, SetPasswordForm):
         help_text=password_validation.password_validators_help_text_html(),
     )
     new_password2 = forms.CharField(
-        label=_("New password confirmation"),
+        label=_("Confirm your new password"),
         strip=False,
         widget=forms.PasswordInput(),
+        help_text=_("Enter the same password as above."),
     )
 
     def clean_new_password1(self):
