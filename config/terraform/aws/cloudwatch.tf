@@ -135,13 +135,13 @@ resource "aws_cloudwatch_metric_alarm" "key_generation_warn" {
 
   metric_query {
     id          = "keys"
-    expression  = "FILL(m1, 0)"
+    expression  = "FILL(k1, 0)"
     label       = "KeysGenerated"
     return_data = "true"
   }
 
   metric_query {
-    id = "m1"
+    id = "k1"
 
     metric {
       metric_name = aws_cloudwatch_log_metric_filter.key_generation.name
@@ -164,13 +164,13 @@ resource "aws_cloudwatch_metric_alarm" "key_generation_critical" {
 
   metric_query {
     id          = "keys"
-    expression  = "FILL(m1, 0)"
+    expression  = "FILL(k2, 0)"
     label       = "KeysGenerated"
     return_data = "true"
   }
 
   metric_query {
-    id = "m1"
+    id = "k2"
 
     metric {
       metric_name = aws_cloudwatch_log_metric_filter.key_generation.name
@@ -231,13 +231,13 @@ resource "aws_cloudwatch_metric_alarm" "account_lockout_warn" {
 
   metric_query {
     id          = "lockouts"
-    expression  = "FILL(m1, 0)"
+    expression  = "FILL(l1, 0)"
     label       = "AccountLockouts"
     return_data = "true"
   }
 
   metric_query {
-    id = "m1"
+    id = "l1"
 
     metric {
       metric_name = aws_cloudwatch_log_metric_filter.account_lockout.name
@@ -272,13 +272,13 @@ resource "aws_cloudwatch_metric_alarm" "invite_lockout_warn" {
 
   metric_query {
     id          = "invites"
-    expression  = "FILL(m1, 0)"
+    expression  = "FILL(i1, 0)"
     label       = "InviteLockouts"
     return_data = "true"
   }
 
   metric_query {
-    id = "m1"
+    id = "i1"
 
     metric {
       metric_name = aws_cloudwatch_log_metric_filter.invite_lockout.name
