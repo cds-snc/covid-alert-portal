@@ -262,17 +262,16 @@ class InvitationView(Is2FAMixin, IsAdminMixin, ThrottledMixin, FormView):
 
     def form_valid(self, form):
         # Pass user to invite, save the invite to the DB, and return it
-        self.throttle_limit_check()
-        if not self.throttled_active:
-            invite = form.save(user=self.request.user)
-            if not settings.TESTING:
-                # Don't actually send the email during tests
-                invite.send_invitation(
-                    self.request,
-                    scheme=self.request.scheme,
-                    language=get_language(),
-                )
-            self.request.session["invite_email"] = invite.email
+
+        invite = form.save(user=self.request.user)
+        if not settings.TESTING:
+            # Don't actually send the email during tests
+            invite.send_invitation(
+                self.request,
+                scheme=self.request.scheme,
+                language=get_language(),
+            )
+        self.request.session["invite_email"] = invite.email
         return super().form_valid(form)
 
     def limit_reached(self):
