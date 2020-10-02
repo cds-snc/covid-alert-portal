@@ -2,12 +2,18 @@
 {% load i18n %}
 
 {% block title %}
-    {% if form.errors %}{% trans "Error: "%}{% endif %}
-    {% trans "Not authorized" %}
+    {% trans "No entry" %}
 {% endblock %}
 
 
 {% block content %}
-    <h1>{% trans "Not authorized" %}</h1>
-    <p></p>
+    <h1>{% trans "No entry" %}</h1>
+    <p>{% trans "You do not have permission to visit this page." %}</p>
+    <div class="content-button push-down">
+        {% if user.is_authenticated %}
+            <a href="{% url 'start' %}" role='button' draggable='false'>{% trans "New patient" %}</a>
+        {% else %}
+            <a href="{% url 'login' %}" role='button' draggable='false'>{% trans "Log in" %}</a>
+        {% endif %}
+    </div>
 {% endblock %}

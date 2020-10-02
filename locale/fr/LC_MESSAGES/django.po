@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 21:13+0000\n"
+"POT-Creation-Date: 2020-10-02 16:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,7 +65,7 @@ msgid "Error: "
 msgstr "Erreur : "
 
 #: contact/templates/contact/form.html:6 contact/templates/contact/form.html:13
-#: portal/templates/includes/footer.html:8
+#: portal/templates/500.html:17 portal/templates/includes/footer.html:8
 #: portal/templates/includes/nav_main.html:11
 msgid "Contact us"
 msgstr "Nous joindre"
@@ -84,12 +84,13 @@ msgid "We’ll reply as soon as possible."
 msgstr "Nous vous répondrons le plus rapidement possible."
 
 #: contact/templates/contact/success.html:14
-#: covid_key/templates/covid_key/key.html:58
+#: covid_key/templates/covid_key/key.html:58 portal/templates/403.html:14
+#: portal/templates/404.html:15
 msgid "New patient"
 msgstr "Nouveau patient"
 
-#: contact/templates/contact/success.html:16
-#: portal/templates/includes/nav_header.html:9
+#: contact/templates/contact/success.html:16 portal/templates/403.html:16
+#: portal/templates/404.html:17 portal/templates/includes/nav_header.html:9
 #: portal/templates/locked_out.html:9
 #: portal/templates/registration/login.html:7
 #: portal/templates/registration/login.html:18
@@ -311,6 +312,14 @@ msgstr ""
 "Ce compte a été verrouillé en raison d'un trop grand nombre de tentatives "
 "d'ouverture de session infructueuses."
 
+#: portal/templates/403.html:5 portal/templates/403.html:10
+msgid "No entry"
+msgstr "Non autorisé"
+
+#: portal/templates/403.html:11
+msgid "You do not have permission to visit this page."
+msgstr "Vous n’avez pas l’autorisation de visiter la page."
+
 #: portal/templates/403_csrf.html:4 portal/templates/403_csrf.html:7
 msgid "Forbidden"
 msgstr "Interdit"
@@ -322,6 +331,41 @@ msgstr "Un problème est survenu lors de la visite de cette page."
 #: portal/templates/403_csrf.html:10
 msgid "Start over"
 msgstr "Recommencer"
+
+#: portal/templates/404.html:5 portal/templates/404.html:10
+msgid "Page not found"
+msgstr "Page introuvable"
+
+#: portal/templates/404.html:11
+msgid "If you typed the web address, make sure it’s correct."
+msgstr "Si vous avez tapé l’adresse URL, vérifiez qu’elle est exacte."
+
+#: portal/templates/404.html:12
+msgid "If you pasted the web address, make sure you copied the entire address."
+msgstr ""
+"Si vous avez collé l’adresse URL, vérifiez que vous avez copié l’adresse "
+"complète."
+
+#: portal/templates/500.html:5 portal/templates/500.html:10
+msgid "Try again later"
+msgstr "Réessayer plus tard"
+
+#: portal/templates/500.html:11
+msgid ""
+"Something went wrong with the system. Tell your portal adminstrator as soon "
+"as possible."
+msgstr ""
+"Un problème a eu lieu avec le serveur. Parlez-en à votre administrateur du "
+"portail dès que possible."
+
+#: portal/templates/500.html:13
+msgid "We need to fix the problem so you can generate keys."
+msgstr "Nous devons régler le problème pour que vous puissez générer des clés."
+
+#: portal/templates/500.html:14
+msgid "Please contact us with the details of what you were trying to do."
+msgstr ""
+"Veuillez nous communiquer les détails de ce que vous avez essayé de faire."
 
 #: portal/templates/admin/login-disabled.html:23
 #, python-format
