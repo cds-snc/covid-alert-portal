@@ -59,9 +59,10 @@ resource "aws_cloudwatch_log_metric_filter" "five_hundred_response" {
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
-    name      = "500Response"
-    namespace = "covidportal"
-    value     = "1"
+    name          = "500Response"
+    namespace     = "covidportal"
+    value         = "1"
+    default_value = "0"
   }
 }
 
@@ -86,9 +87,10 @@ resource "aws_cloudwatch_log_metric_filter" "application_error" {
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
-    name      = "ApplicationError"
-    namespace = "covidportal"
-    value     = "1"
+    name          = "ApplicationError"
+    namespace     = "covidportal"
+    value         = "1"
+    default_value = "0"
   }
 }
 
@@ -118,68 +120,39 @@ resource "aws_cloudwatch_log_metric_filter" "key_generation" {
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
-    name      = "KeyGeneration"
-    namespace = "covidportal"
-    value     = "1"
+    name          = "KeyGeneration"
+    namespace     = "covidportal"
+    value         = "1"
+    default_value = "0"
   }
 }
 
 resource "aws_cloudwatch_metric_alarm" "key_generation_warn" {
   alarm_name          = "KeyGenerationWarn"
   comparison_operator = "GreaterThanThreshold"
+  metric_name         = aws_cloudwatch_log_metric_filter.key_generation.name
+  namespace           = "covidportal"
+  period              = "3600"
+  statistic           = "Sum"
   evaluation_periods  = "1"
   threshold           = "5"
   treat_missing_data  = "notBreaching"
   alarm_description   = "COVID Alert Portal Warning - COVID One Time Key's generation is 50% of the way to alarm status (x keys / hour)."
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
-
-  metric_query {
-    id          = "keys"
-    expression  = "FILL(k1, 0)"
-    label       = "KeysGenerated"
-    return_data = "true"
-  }
-
-  metric_query {
-    id = "k1"
-
-    metric {
-      metric_name = aws_cloudwatch_log_metric_filter.key_generation.name
-      namespace   = "covidportal"
-      period      = "3600"
-      stat        = "Sum"
-      unit        = "Count"
-    }
-  }
 }
 
 resource "aws_cloudwatch_metric_alarm" "key_generation_critical" {
   alarm_name          = "KeyGenerationCritical"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
+  metric_name         = aws_cloudwatch_log_metric_filter.key_generation.name
+  namespace           = "covidportal"
+  period              = "3600"
+  statistic           = "Sum"
   threshold           = "10"
   treat_missing_data  = "notBreaching"
   alarm_description   = "COVID Alert Portal Critical - COVID One Time Key's generation alarm threshold surpassed (x keys / hour)."
   alarm_actions       = [aws_sns_topic.alert_critical.arn]
-
-  metric_query {
-    id          = "keys"
-    expression  = "FILL(k2, 0)"
-    label       = "KeysGenerated"
-    return_data = "true"
-  }
-
-  metric_query {
-    id = "k2"
-
-    metric {
-      metric_name = aws_cloudwatch_log_metric_filter.key_generation.name
-      namespace   = "covidportal"
-      period      = "3600"
-      stat        = "Sum"
-      unit        = "Count"
-    }
-  }
 }
 
 resource "aws_cloudwatch_log_metric_filter" "site_change" {
@@ -188,9 +161,10 @@ resource "aws_cloudwatch_log_metric_filter" "site_change" {
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
-    name      = "SiteTableChange"
-    namespace = "covidportal"
-    value     = "1"
+    name          = "SiteTableChange"
+    namespace     = "covidportal"
+    value         = "1"
+    default_value = "0"
   }
 }
 
@@ -214,9 +188,10 @@ resource "aws_cloudwatch_log_metric_filter" "account_lockout" {
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
-    name      = "AccountLockout"
-    namespace = "covidportal"
-    value     = "1"
+    name          = "AccountLockout"
+    namespace     = "covidportal"
+    value         = "1"
+    default_value = "0"
   }
 }
 
@@ -224,29 +199,14 @@ resource "aws_cloudwatch_metric_alarm" "account_lockout_warn" {
   alarm_name          = "AccountLockoutWarn"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
+  metric_name         = aws_cloudwatch_log_metric_filter.account_lockout.name
+  namespace           = "covidportal"
+  period              = "3600"
+  statistic           = "Sum"
   threshold           = "4"
   treat_missing_data  = "notBreaching"
   alarm_description   = "COVID Alert Portal Warning - Multiple User account's have been locked out in the last hour (x locked accounts / hour)."
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
-
-  metric_query {
-    id          = "lockouts"
-    expression  = "FILL(l1, 0)"
-    label       = "AccountLockouts"
-    return_data = "true"
-  }
-
-  metric_query {
-    id = "l1"
-
-    metric {
-      metric_name = aws_cloudwatch_log_metric_filter.account_lockout.name
-      namespace   = "covidportal"
-      period      = "3600"
-      stat        = "Sum"
-      unit        = "Count"
-    }
-  }
 }
 
 resource "aws_cloudwatch_log_metric_filter" "invite_lockout" {
@@ -255,9 +215,10 @@ resource "aws_cloudwatch_log_metric_filter" "invite_lockout" {
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
-    name      = "InviteLockout"
-    namespace = "covidportal"
-    value     = "1"
+    name          = "InviteLockout"
+    namespace     = "covidportal"
+    value         = "1"
+    default_value = "0"
   }
 }
 
@@ -265,29 +226,14 @@ resource "aws_cloudwatch_metric_alarm" "invite_lockout_warn" {
   alarm_name          = "InviteLockoutWarn"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
+  metric_name         = aws_cloudwatch_log_metric_filter.invite_lockout.name
+  namespace           = "covidportal"
+  period              = "60"
+  statistic           = "Sum"
   threshold           = "0"
   treat_missing_data  = "notBreaching"
   alarm_description   = "COVID Alert Portal Warning - Someone has tried to invite more users than permitted (x invites / hour)."
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
-
-  metric_query {
-    id          = "invites"
-    expression  = "FILL(i1, 0)"
-    label       = "InviteLockouts"
-    return_data = "true"
-  }
-
-  metric_query {
-    id = "i1"
-
-    metric {
-      metric_name = aws_cloudwatch_log_metric_filter.invite_lockout.name
-      namespace   = "covidportal"
-      period      = "60"
-      stat        = "Sum"
-      unit        = "Count"
-    }
-  }
 }
 
 ###
