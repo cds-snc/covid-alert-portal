@@ -30,7 +30,9 @@ pipenv install  # install dependencies
 
 Environment variables are used to control app settings, and configuration for utilities and third-party services. Defaults are `''` or `None` unless otherwise specified.
 
-<strong>[Example `.env` file](https://github.com/cds-snc/covid-healthcare-portal/blob/main/portal/.env.example)</strong>
+<details>
+<summary>Detailed explanation of each environment variable</summary>
+<div>
 
 #### App settings
 
@@ -114,6 +116,10 @@ The contact form sends any inquiry to Freshdesk.
 - `FRESHDESK_API_ENDPOINT`: Your Freshdesk domain with `/api/v2/` at the end.
 
 - `FRESHDESK_PRODUCT_ID`: If you use more than one product, use this variable to specify where the feedback should go to.
+</div>
+</details>
+
+<strong>[Example `.env` file](https://github.com/cds-snc/covid-healthcare-portal/blob/main/portal/.env.example)</strong>
 
 ### Running the app for the first time
 
@@ -214,16 +220,33 @@ Run `python manage.py compilemessages` to compile the translations so that Djang
 
 For more complete documentation refer to the [Django Translation](https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#translation) docs.
 
-## Before you do a PR
+## Development workflow
 
-1. Ensure that you have a commit message that explains all the changes.
-2. Run:
-   a) (optional) `python manage.py makemessages -l fr`
-   b) (optional) `python manage.py compilemessages`
-   c) `pipenv run format --check`
-   d) `pipenv check`
-   e) `pipenv run lint`
-3. Have some tests (if possible)
+### Feature development
+
+Feature development on the Portal follows a [trunk-based development](https://trunkbaseddevelopment.com/) workflow. The `main` branch has the most up-to-date code and is always production-ready. When starting a new feature (or a bugfix, etc.), a new branch is created from the tip of the `main` branch. Once the work is complete, the feature is merged back into `main` via a Pull Request (PR). PRs must pass a series of [automated tests](https://github.com/cds-snc/covid-alert-portal#automated-tests) (unit tests, linting, etc), as well as a manual review by another developer. After the automated tests pass and the PR is approved, the code is merged into `main` and the feature branch is deleted. The `main` branch is protected from direct pushes or force pushes — pull requests are mandatory.
+
+### Application versioning
+
+We keep the version number in a root-level [`VERSION` file](https://github.com/cds-snc/covid-alert-portal/blob/main/VERSION) and the list of changes between versions in the root [`CHANGELOG.md` file](https://github.com/cds-snc/covid-alert-portal/blob/main/CHANGELOG.md). We follow [semantic versioning conventions](https://semver.org/) and for the Changelog file we follow the format suggested by [keepachangelog.com](https://keepachangelog.com/en/1.0.0/).
+
+Not all PRs will update the app version — in fact, most of them don’t. PRs with new features or bug fixes require an update to the Changelog file, under “Unreleased”. When the version is next incremented, all of the unreleased changes are included as part of the version bump. It’s okay if something doesn’t make it into the Changelog when it is merged — `CHANGELOG.md` is a file like any other and can be corrected retroactively.
+
+Note that releasing a change to production **requires** incrementing the `VERSION` file. The Changelog is kept up-to-date by convention, but it is not formally required to be in sync with the version in the VERSION file.
+
+### Automated tests
+
+We are using [GitHub Actions](https://github.com/features/actions) as our CI platform: it runs our automated tests for us and automates our deployments.
+
+Our automated tests include:
+
+- `pipenv run test`: Runs our suite of unit tests (on CI we run them in Python versions 3.6, 3.7, 3.8)
+- `pipenv run format --check`: uses the `black` Python formatter to ensure consistency of our code
+- `pipenv run lint`: uses `flake8` to ensure Python style guide compliance
+- Snyk (SaaS): checks for vulnerable dependencies
+- LGTM (SaaS): checks for code smells and insecure coding practices
+- `terraform plan`: if the terraform config has been modified, `terraform plan` will return a diff of changes between the current infrastructure and the files in the PR.
+- `terraform security-scan`: will flag any unsafe configuration changes
 
 ---
 
