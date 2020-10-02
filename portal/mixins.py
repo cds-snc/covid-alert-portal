@@ -37,7 +37,7 @@ class ThrottledMixin:
         }
         count = self.throttled_model.objects.filter(**filter_kwargs).count()
         if count > self.throttled_limit:
-            self.throttled_active = True 
+            self.throttled_active = True
 
     def _check(self):
         if self.throttled_model is None:
