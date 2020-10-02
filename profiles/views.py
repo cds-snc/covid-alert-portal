@@ -262,7 +262,6 @@ class InvitationView(Is2FAMixin, IsAdminMixin, ThrottledMixin, FormView):
 
     def form_valid(self, form):
         # Pass user to invite, save the invite to the DB, and return it
-
         invite = form.save(user=self.request.user)
         if not settings.TESTING:
             # Don't actually send the email during tests
