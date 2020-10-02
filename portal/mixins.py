@@ -36,7 +36,7 @@ class ThrottledMixin:
             - timedelta(seconds=self.throttled_time_range),
         }
         count = self.throttled_model.objects.filter(**filter_kwargs).count()
-        if count > self.throttled_limit:
+        if count >= self.throttled_limit:
             self.throttled_active = True
 
     def _check(self):
