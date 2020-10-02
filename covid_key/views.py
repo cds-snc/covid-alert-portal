@@ -32,7 +32,8 @@ class CodeView(Is2FAMixin, ThrottledMixin, TemplateView):
         token = request.user.api_key
         diagnosis_code = "0000000000"
         covid_key = None
-        if token:
+        self.throttle_limit_check()
+        if token and not self.throttled_active:
             try:
                 try:
                     r = requests.post(

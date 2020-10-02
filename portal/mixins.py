@@ -13,23 +13,31 @@ class ThrottledMixin:
     throttled_model = None
     throttled_limit = None
     throttled_time_range = None
+    throttled_active = None
 
     def render_to_response(self, context, **response_kwargs):
         self._check()
 
-        filter_kwargs = {
-            f"{self.throttled_lookup_user_field}": self.request.user.id,
-            f"{self.throttled_lookup_date_field}__gte": now()
-            - timedelta(seconds=self.throttled_time_range),
-        }
-        count = self.throttled_model.objects.filter(**filter_kwargs).count()
-        if count >= self.throttled_limit:
+        if self.throttled_active is None:
+            self.throttle_limit_check()
+
+        if self.throttled_active:
             return self.limit_reached()
 
         return super().render_to_response(context, **response_kwargs)
 
     def limit_reached(self):
         return render(self.request, "throttled/locked.html", status=403)
+
+    def throttle_limit_check(self):
+        filter_kwargs = {
+            f"{self.throttled_lookup_user_field}": self.request.user.id,
+            f"{self.throttled_lookup_date_field}__gte": now()
+            - timedelta(seconds=self.throttled_time_range),
+        }
+        count = self.throttled_model.objects.filter(**filter_kwargs).count()
+        if count > self.throttled_limit:
+            self.throttled_active = True 
 
     def _check(self):
         if self.throttled_model is None:
