@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Page not found" %}
+{% endblock %}
+
+
+{% block content %}
+    <h1>{% trans "Page not found" %}</h1>
+    <p>{% trans "If you typed the web address, make sure it’s correct." %}</p>
+    <p>{% trans "If you pasted the web address, make sure you copied the entire address." %}</p>
+    <div class="content-button push-down">
+        {% if user.is_authenticated %}
+            <a href="{% url 'start' %}" role='button' draggable='false'>{% trans "New patient" %}</a>
+        {% else %}
+            <a href="{% url 'login' %}" role='button' draggable='false'>{% trans "Log in" %}</a>
+        {% endif %}
+    </div>
+{% endblock %}

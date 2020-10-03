@@ -18,7 +18,7 @@ def _phonetic(letter):
         "8": _("Eight."),
         "9": _("Nine."),
         "A": _("A as in Animal."),
-        "E": _("E as in Elephant."),
+        "E": _("E as in Espresso."),
         "F": _("F as in Family."),
         "H": _("H as in Hospital."),
         "J": _("J as in January."),

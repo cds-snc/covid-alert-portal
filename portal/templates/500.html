@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Try again later" %}
+{% endblock %}
+
+
+{% block content %}
+    <h1>{% trans "Try again later" %}</h1>
+    <p>{% trans "Something went wrong with the system. Tell your portal adminstrator as soon as possible." %}</p>
+    <br />
+    <p>{% trans "We need to fix the problem so you can generate keys." %}</p>
+    <p>{% trans "Please contact us with the details of what you were trying to do." %}</p>
+
+    <div class="content-button">
+        <a href="{% url 'contact:index' %}" role='button' draggable='false'>{% trans "Contact us" %}</a>
+    </div>
+{% endblock %}

@@ -55,3 +55,28 @@ class ValidationErrorsView(TestCase):
             response,
             '<input type="text" name="username" value="roger sterling" autocapitalize="none" autocomplete="off" maxlength="255" aria-describedby="error--username" required id="id_username">',
         )
+
+
+class CustomErrorHandlersView(TestCase):
+    def test_custom_403_response(self):
+        response = self.client.get("/403/")
+        self.assertContains(
+            response, "You do not have permission to visit this page.", status_code=403
+        )
+
+    def test_custom_404_response(self):
+        response = self.client.get("/404/")
+        self.assertContains(
+            response,
+            "If you typed the web address, make sure it’s correct.",
+            status_code=404,
+        )
+
+    def test_custom_500_response(self):
+        response = self.client.get("/500/")
+        # Make assertions on the response here. For example:
+        self.assertContains(
+            response,
+            "Something went wrong with the system. Tell your portal adminstrator as soon as possible.",
+            status_code=500,
+        )
