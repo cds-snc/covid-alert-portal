@@ -13,7 +13,12 @@ from datetime import datetime, timedelta
 from freezegun import freeze_time
 
 from .forms import SignupForm, HealthcarePhoneEditForm
-from .models import HealthcareProvince, HealthcareUser, AuthorizedDomain
+from .models import (
+    HealthcareProvince,
+    HealthcareUser,
+    AuthorizedDomain,
+    HealthcareFailedAccessAttempt,
+)
 from .validators import BannedPasswordValidator
 from .utils.invitation_adapter import user_signed_up
 
@@ -543,9 +548,14 @@ class SignupFlow(AdminUserTestCase):
             HTTP_USER_AGENT="test-browser",
         )
 
-        # Assert that a login attempt record exists
+        # Assert that a login attempt records exist
         self.assertTrue(
             AccessAttempt.objects.filter(username=self.new_user_data["email"]).first(),
+        )
+        self.assertTrue(
+            HealthcareFailedAccessAttempt.objects.filter(
+                username=self.new_user_data["email"]
+            ).first(),
         )
 
         url = reverse("invitations:accept-invite", args=[self.invite.key])
@@ -561,6 +571,11 @@ class SignupFlow(AdminUserTestCase):
         # Assert that no login attempt records exist
         self.assertIsNone(
             AccessAttempt.objects.filter(username=self.new_user_data["email"]).first(),
+        )
+        self.assertIsNone(
+            HealthcareFailedAccessAttempt.objects.filter(
+                username=self.new_user_data["email"]
+            ).first(),
         )
 
 

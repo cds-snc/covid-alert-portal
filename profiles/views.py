@@ -33,7 +33,7 @@ from axes.models import AccessAttempt
 
 from .utils import generate_2fa_code
 from .utils.invitation_adapter import user_signed_up
-from .models import HealthcareUser
+from .models import HealthcareUser, HealthcareFailedAccessAttempt
 from .mixins import (
     ProvinceAdminViewMixin,
     ProvinceAdminEditMixin,
@@ -173,6 +173,7 @@ class SignUpView(FormView):
 
         # delete matching access attempts for this user
         AccessAttempt.objects.filter(username=user.email).delete(),
+        HealthcareFailedAccessAttempt.objects.filter(username=user.email).delete()
 
         return super(SignUpView, self).form_valid(form)
 
