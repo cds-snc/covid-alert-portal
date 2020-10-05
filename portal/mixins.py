@@ -14,7 +14,7 @@ class ThrottledMixin:
     throttled_limit = None
     throttled_time_range = None
 
-    def render_to_response(self, context, **response_kwargs):
+    def dispatch(self, *args, **kwargs):
         self._check()
 
         filter_kwargs = {
@@ -26,7 +26,7 @@ class ThrottledMixin:
         if count >= self.throttled_limit:
             return self.limit_reached()
 
-        return super().render_to_response(context, **response_kwargs)
+        return super().dispatch(*args, **kwargs)
 
     def limit_reached(self):
         return render(self.request, "throttled/locked.html", status=403)
