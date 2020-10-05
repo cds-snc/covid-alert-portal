@@ -29,6 +29,7 @@ from otp_yubikey.models import RemoteYubikeyDevice
 
 from portal.mixins import ThrottledMixin, Is2FAMixin, IsAdminMixin
 from invitations.models import Invitation
+from axes.models import AccessAttempt
 
 from .utils import generate_2fa_code
 from .utils.invitation_adapter import user_signed_up
@@ -169,6 +170,10 @@ class SignUpView(FormView):
         user_signed_up.send(sender=user.__class__, request=self.request, user=user)
         login(self.request, user)
         generate_2fa_code(user)
+
+        # delete matching access attempts for this user
+        AccessAttempt.objects.filter(username=user.email).delete(),
+
         return super(SignUpView, self).form_valid(form)
 
 

@@ -8,6 +8,7 @@ from django.utils import translation, timezone
 from django.core.exceptions import ValidationError
 from django_otp import DEVICE_ID_SESSION_KEY
 from invitations.models import Invitation
+from axes.models import AccessAttempt
 from datetime import datetime, timedelta
 from freezegun import freeze_time
 
@@ -460,6 +461,17 @@ class SignupFlow(AdminUserTestCase):
             self.invited_email, inviter=self.user, sent=timezone.now()
         )
 
+        password = uuid4()
+        self.new_user_data = {
+            "email": self.invited_email,
+            "province": "CDS",
+            "name": "Chuck Norris",
+            "phone_number": "+12125552368",
+            "phone_number_confirmation": "+12125552368",
+            "password1": password,
+            "password2": password,
+        }
+
     def test_email_and_province_on_signup_page(self):
         session = self.client.session
         session["account_verified_email"] = self.invite.email
@@ -502,17 +514,7 @@ class SignupFlow(AdminUserTestCase):
         url = reverse("invitations:accept-invite", args=[self.invite.key])
         response = self.client.get(url)
         self.assertEqual(self.invite.accepted, False)
-        password = uuid4()
-        data = {
-            "email": self.invited_email,
-            "province": "CDS",
-            "name": "Chuck Norris",
-            "phone_number": "+12125552368",
-            "phone_number_confirmation": "+12125552368",
-            "password1": password,
-            "password2": password,
-        }
-        response = self.client.post(reverse("signup"), data=data)
+        response = self.client.post(reverse("signup"), data=self.new_user_data)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
             response.url, reverse("login-2fa") + "?next=" + reverse("welcome")
@@ -521,6 +523,45 @@ class SignupFlow(AdminUserTestCase):
         # So let's force a reload from the DB
         self.invite.refresh_from_db()
         self.assertEqual(self.invite.accepted, True)
+
+    @override_settings(AXES_ENABLED=True)
+    def test_login_attempts_deleted_after_signup(self):
+        """
+        Try to log in with a username that doesn't have an account yet.
+        Once we complete the signup, those access attempts should be removed.
+        """
+        # Assert user account doesn't exist
+        self.assertIsNone(
+            HealthcareUser.objects.filter(email=self.new_user_data["email"]).first()
+        )
+
+        # Try to log in with a username that doesn't exist yet
+        response = self.client.post(
+            reverse("login"),
+            {"username": self.new_user_data["email"], "password": "fake_password"},
+            REMOTE_ADDR="127.0.0.1",
+            HTTP_USER_AGENT="test-browser",
+        )
+
+        # Assert that a login attempt record exists
+        self.assertTrue(
+            AccessAttempt.objects.filter(username=self.new_user_data["email"]).first(),
+        )
+
+        url = reverse("invitations:accept-invite", args=[self.invite.key])
+        response = self.client.get(url)
+        response = self.client.post(reverse("signup"), data=self.new_user_data)
+        self.assertEqual(response.status_code, 302)
+
+        # Assert user account exists
+        self.assertTrue(
+            HealthcareUser.objects.filter(email=self.new_user_data["email"]).first(),
+        )
+
+        # Assert that no login attempt records exist
+        self.assertIsNone(
+            AccessAttempt.objects.filter(username=self.new_user_data["email"]).first(),
+        )
 
 
 class InviteFlow(AdminUserTestCase):
