@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add custom error templates for common error states
 - Very small change to the phonetic alphabet
 - Application throttling works as expected, fixed the sequencing of operations
+- Remove prior login attempts for newly created accounts
 
 ## [1.8.4] - 2020-09-30
 
