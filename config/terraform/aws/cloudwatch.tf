@@ -38,7 +38,7 @@ resource "aws_cloudwatch_metric_alarm" "portal_memory_utilization_high_warn" {
   period              = "120"
   statistic           = "Average"
   threshold           = "50"
-  alarm_description   = "COVID Alert Portal Warning - High Memory usage has been detected."
+  alarm_description   = "COVID Alert Portal Warning - High memory usage has been detected."
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
 
@@ -104,7 +104,7 @@ resource "aws_cloudwatch_metric_alarm" "application_error_warn" {
   statistic           = "Sum"
   threshold           = "0"
   treat_missing_data  = "notBreaching"
-  alarm_description   = "COVID Alert Portal Warning - An Error message was detected in the ECS logs"
+  alarm_description   = "COVID Alert Portal Warning - An error message was detected in the ECS logs"
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
 }
@@ -135,9 +135,9 @@ resource "aws_cloudwatch_metric_alarm" "key_generation_warn" {
   period              = "3600"
   statistic           = "Sum"
   evaluation_periods  = "1"
-  threshold           = "5"
+  threshold           = "20"
   treat_missing_data  = "notBreaching"
-  alarm_description   = "COVID Alert Portal Warning - COVID One Time Key's generation is 50% of the way to alarm status (x keys / hour)."
+  alarm_description   = "COVID Alert Portal Warning - COVID one-time keys generation is 50% of the way to alarm status (x keys / hour)."
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
 }
 
@@ -149,9 +149,9 @@ resource "aws_cloudwatch_metric_alarm" "key_generation_critical" {
   namespace           = "covidportal"
   period              = "3600"
   statistic           = "Sum"
-  threshold           = "10"
+  threshold           = "40"
   treat_missing_data  = "notBreaching"
-  alarm_description   = "COVID Alert Portal Critical - COVID One Time Key's generation alarm threshold surpassed (x keys / hour)."
+  alarm_description   = "COVID Alert Portal Critical - COVID one-time keys generation alarm threshold surpassed (x keys / hour)."
   alarm_actions       = [aws_sns_topic.alert_critical.arn]
 }
 
@@ -205,7 +205,7 @@ resource "aws_cloudwatch_metric_alarm" "account_lockout_warn" {
   statistic           = "Sum"
   threshold           = "4"
   treat_missing_data  = "notBreaching"
-  alarm_description   = "COVID Alert Portal Warning - Multiple User account's have been locked out in the last hour (x locked accounts / hour)."
+  alarm_description   = "COVID Alert Portal Warning - Multiple user accounts have been locked out in the last hour (x locked accounts / hour)."
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
 }
 

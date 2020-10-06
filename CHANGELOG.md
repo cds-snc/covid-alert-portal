@@ -7,8 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.8.5] - 2020-10-06
+
+### Updated
+
+- Now that more provinces are onboarded, bump the limits for how many keys can be generated before alarms go off
 - Add custom error templates for common error states
 - Very small change to the phonetic alphabet
+
+### Fixed
+
 - Application throttling works as expected, fixed the sequencing of operations
 - Remove prior login attempts for newly created accounts
 - Fix the login page layout on IE11
