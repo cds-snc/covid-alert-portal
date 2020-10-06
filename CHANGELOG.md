@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Very small change to the phonetic alphabet
 - Application throttling works as expected, fixed the sequencing of operations
 - Remove prior login attempts for newly created accounts
+- Fix the login page layout on IE11
 
 ## [1.8.4] - 2020-09-30
 
