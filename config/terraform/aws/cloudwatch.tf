@@ -315,3 +315,48 @@ resource "aws_cloudwatch_event_rule" "codedeploy_sns" {
   }
   PATTERN
 }
+
+###
+# AWS Metrics for Security Dashboard Reporting
+#
+
+CRUD event_type:UPDATE model:profiles.healthcareuser
+
+resource "aws_cloudwatch_log_metric_filter" "users_created" {
+  name           = "UsersCreated"
+  pattern        = "\"CRUD event_type:CREATE model:profiles.healthcareuser\""
+  log_group_name = aws_cloudwatch_log_group.covidportal.name
+
+  metric_transformation {
+    name          = "UsersCreated"
+    namespace     = "covidportal"
+    value         = "1"
+    default_value = "0"
+  }
+}
+
+resource "aws_cloudwatch_log_metric_filter" "users_deleted" {
+  name           = "UsersDeleted"
+  pattern        = "\"CRUD event_type:CREATE model:profiles.healthcareuser\""
+  log_group_name = aws_cloudwatch_log_group.covidportal.name
+
+  metric_transformation {
+    name          = "UsersDeleted"
+    namespace     = "covidportal"
+    value         = "1"
+    default_value = "0"
+  }
+}
+
+resource "aws_cloudwatch_log_metric_filter" "users_login" {
+  name           = "UsersLogin"
+  pattern        = "\"LOGIN login_type:login\""
+  log_group_name = aws_cloudwatch_log_group.covidportal.name
+
+  metric_transformation {
+    name          = "UsersLogin"
+    namespace     = "covidportal"
+    value         = "1"
+    default_value = "0"
+  }
+}
