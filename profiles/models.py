@@ -74,7 +74,7 @@ class HealthcareUser(AbstractBaseUser):
     province = models.ForeignKey(HealthcareProvince, on_delete=models.PROTECT)
     phone_number = PhoneNumberField(
         help_text=_(
-            "You must enter a new security code each time you log in. We’ll send the code to your phone number."
+            "You must enter a new security code each time you log in. We’ll text the code to your mobile phone number."
         )
     )
     is_active = models.BooleanField(default=True)

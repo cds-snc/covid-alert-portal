@@ -393,7 +393,15 @@ class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
         return super().validate_invitation(email)
 
     def clean_email(self):
-        email = super().clean_email()
+        try:
+            email = super().clean_email()
+        except ValidationError:
+            # it is no longer possible to get the "already invited" or the "already accepted" error messages
+            # without having an existing Portal account
+            raise forms.ValidationError(
+                _("This email address already has a portal account.")
+            )
+
         try:
             # If the email is invalid, an error would have been raised by
             # the CleanEmailMixin
