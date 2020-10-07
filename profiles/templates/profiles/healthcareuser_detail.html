@@ -21,10 +21,6 @@
       <caption class="visually-hidden">{% trans "User profile" %}</caption>
       <tbody>
         <tr>
-            <th scope="row">{% trans "Email address" %}</th>
-            <td colspan="2">{{ healthcareuser.email }}</td>
-        </tr>
-        <tr>
           <th scope="row">
               {% trans "Name" %}
           </th>
@@ -43,6 +39,10 @@
               </a>
           </td>
           {% endif %}
+        </tr>
+        <tr>
+            <th scope="row">{% trans "Email address" %}</th>
+            <td colspan="2">{{ healthcareuser.email }}</td>
         </tr>
         <tr>
           <th scope="row">{% trans "Mobile phone number" %}</th>

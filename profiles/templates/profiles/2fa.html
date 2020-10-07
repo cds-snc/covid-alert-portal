@@ -11,7 +11,7 @@
   {% include  "includes/error_list.html" %}
 
   <h1>{% trans "Enter your security code" %}</h1>
-  <p>{% trans "We've sent you a text message with a security code." %}</p>
+  <p>{% trans "We’ve sent you a text message with a security code." %}</p>
 
   {% include "includes/cds_form.html" with submit_text=_("Next") form_class="small" %}
   <a href="{% url 'resend-2fa' %}">{{ _("Resend security code?") }}</a>
