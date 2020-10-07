@@ -660,7 +660,7 @@ class InviteFlow(AdminUserTestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(
-            response, "This e-mail address has already accepted an invite."
+            response, "This email address already has a portal account."
         )
 
     def test_sent_invite_again_if_accepted_invite_exists_but_no_user_account_exists(
