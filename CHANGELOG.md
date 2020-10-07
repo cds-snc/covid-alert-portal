@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.8.6] - 2020-10-07
+
+### Updated
+
+- Update French content in various places across the application
+
+### Fixed
+
+- Replace straight apostrophes (`'`) with curly apostrophes (`’`)
+
 ## [1.8.5] - 2020-10-06
 
 ### Updated
