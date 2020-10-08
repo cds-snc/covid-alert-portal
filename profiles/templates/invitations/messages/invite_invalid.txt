@@ -1,0 +1,4 @@
+{% load i18n %}
+{% autoescape off %}
+{% blocktrans %}Your invitation has expired. Contact your administrator for a new invitation link.{% endblocktrans %}
+{% endautoescape %}

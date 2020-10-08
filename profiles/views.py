@@ -133,17 +133,11 @@ class SignUpView(FormView):
     def get(self, request, *args, **kwargs):
         invited_email = self.request.session.get("account_verified_email", None)
 
-        # redirect to login page if there's no invited email in the session
-        if not invited_email:
-            messages.warning(self.request, _("No invited email in session"))
-            return redirect("login")
-
-        # redirect to login page if there's no Invitation for this email
-        if not Invitation.objects.filter(email__iexact=invited_email):
-            messages.error(
-                self.request, "Invitation not found for {}".format(invited_email)
-            )
-            return redirect("login")
+        # if session variable or invitation is missing, redirect to "expired" page
+        if not invited_email or not Invitation.objects.filter(
+            email__iexact=invited_email
+        ):
+            return redirect("invite_expired")
 
         return super().get(request, *args, **kwargs)
 

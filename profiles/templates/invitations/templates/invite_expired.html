@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "You need a new link to create an account" %}{% endblock %}
+
+{% block content %}
+    {% include  "includes/flash_messages.html" %}
+    <h1>{% trans "You need a new link to create an account" %}</h1>
+    <p>{% trans "Contact your administrator." %}</p>
+{% endblock %}
