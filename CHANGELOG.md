@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 - Add messaging for account invitations when they are expired, deleted or accepted
+- Pass the admin user's email to the account invitation template in Notify
 
 ## [1.8.6] - 2020-10-07
 

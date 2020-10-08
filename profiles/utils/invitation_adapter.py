@@ -25,6 +25,7 @@ class HealthcareInvitationAdapter(BaseInvitationsAdapter):
                 ),
                 personalisation={
                     "url": context.get("invite_url"),
+                    "admin_email": context.get("inviter").email,
                 },
             )
         except HTTPError as e:
