@@ -61,7 +61,7 @@ class LoggerBackend:
 
             for users in portal_users:
                 logger.info(
-                msg=f'{crud_info.get("datetime")} LOGGING user_count province: {users[0]} super_admins: {users[2]} admins: {users[1]}  staff: {users[3]}',
+                msg=f'{crud_info.get("datetime")} LOGGING user_count province: "{users[0]}" super_admins: {users[2]} admins: {users[1]}  staff: {users[3]}',
                 extra=crud_info,
                 ) 
 
