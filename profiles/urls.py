@@ -17,6 +17,11 @@ urlpatterns = [
         name="invitation_delete",
     ),
     path(
+        "invite/expired",
+        TemplateView.as_view(template_name="invitations/templates/invite_expired.html"),
+        name="invite_expired",
+    ),
+    path(
         "invite-complete/",
         views.InvitationCompleteView.as_view(),
         name="invite_complete",

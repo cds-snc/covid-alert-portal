@@ -177,7 +177,7 @@ class RestrictedPageViews(TestCase):
 
     def test_signup(self):
         response = self.client.get(reverse("signup"))
-        self.assertRedirects(response, "/en/login/")
+        self.assertRedirects(response, "/en/invite/expired")
 
     def test_django_admin_panel(self):
         response = self.client.get(reverse("admin:index"))
@@ -459,7 +459,7 @@ class InvitationFlow(TestCase):
         self.assertTrue('value="Manitoba"' in f.as_table())
 
 
-class SignupFlow(AdminUserTestCase):
+class SignupView(AdminUserTestCase):
     def setUp(self):
         super().setUp()
         self.invite = Invitation.create(
@@ -507,13 +507,7 @@ class SignupFlow(AdminUserTestCase):
         response = self.client.get(reverse("signup"))
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, "/en/login/")
-
-        # get messages without request.context: https://stackoverflow.com/a/14909727
-        message_list = list(messages.get_messages(response.wsgi_request))
-        self.assertEqual(
-            str(message_list[0]), "Invitation not found for fake@email.com"
-        )
+        self.assertRedirects(response, "/en/invite/expired")
 
     def test_invitation_accepted_after_signup(self):
         url = reverse("invitations:accept-invite", args=[self.invite.key])
@@ -579,7 +573,7 @@ class SignupFlow(AdminUserTestCase):
         )
 
 
-class InviteFlow(AdminUserTestCase):
+class InviteView(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
 
@@ -820,6 +814,60 @@ class InviteFlow(AdminUserTestCase):
         with freeze_time(expiry):
             response = self.client.get(reverse("invite"))
             self.assertEqual(response.status_code, 200)
+
+
+class InviteErrorView(AdminUserTestCase):
+    def setUp(self):
+        super().setUp(is_admin=True)
+
+    def test_redirect_to_login_with_expired_message_on_expired_invite(self):
+        invitation = Invitation.create(email="fake@example.com", inviter=self.user)
+        # Invitations expire after 24 hours
+        invitation.sent = timezone.now() + timezone.timedelta(hours=-25)
+        invitation.save()
+
+        url = reverse("invitations:accept-invite", kwargs={"key": invitation.key})
+
+        response = self.client.post(url, follow=True)
+        self.assertEqual(response.request["PATH_INFO"], "/en/invite/expired")
+        self.assertContains(
+            response,
+            "<h1>You need a new link to create an account</h1>",
+            html=True,
+        )
+
+    def test_redirect_to_login_with_account_exists_message_if_invite_doesnt_exist(self):
+        invitation = Invitation.create(email="fake@example.com", inviter=self.user)
+        invitation_key = invitation.key
+        invitation.delete()
+
+        # invitation has been deleted
+        url = reverse("invitations:accept-invite", kwargs={"key": invitation_key})
+
+        response = self.client.post(url, follow=True)
+        self.assertEqual(response.request["PATH_INFO"], "/en/login/")
+        self.assertContains(
+            response,
+            '<li class="error">Your invitation has expired. Contact your administrator for a new invitation link.</li>',
+            html=True,
+        )
+
+    def test_redirect_to_login_with_account_exists_message_if_invite_accepted(self):
+        invitation = Invitation.create(
+            email="fake@example.com", inviter=self.user, accepted=True
+        )
+        invitation.sent = timezone.now()
+        invitation.save()
+
+        url = reverse("invitations:accept-invite", kwargs={"key": invitation.key})
+
+        response = self.client.post(url, follow=True)
+        self.assertEqual(response.request["PATH_INFO"], "/en/login/")
+        self.assertContains(
+            response,
+            '<li class="error">Account already exists for ‘fake@example.com’</li>',
+            html=True,
+        )
 
 
 class ProfilesView(AdminUserTestCase):

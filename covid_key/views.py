@@ -74,7 +74,7 @@ class CodeView(Is2FAMixin, ThrottledMixin, TemplateView):
                 messages.add_message(
                     request,
                     messages.ERROR,
-                    _("Something went wrong. Contact your manager."),
+                    _("Something went wrong. Contact your administrator."),
                     "covid_key",
                 )
 
