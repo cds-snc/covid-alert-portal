@@ -320,34 +320,6 @@ resource "aws_cloudwatch_event_rule" "codedeploy_sns" {
 # AWS Metrics for Security Dashboard Reporting
 #
 
-CRUD event_type:UPDATE model:profiles.healthcareuser
-
-resource "aws_cloudwatch_log_metric_filter" "users_created" {
-  name           = "UsersCreated"
-  pattern        = "\"CRUD event_type:CREATE model:profiles.healthcareuser\""
-  log_group_name = aws_cloudwatch_log_group.covidportal.name
-
-  metric_transformation {
-    name          = "UsersCreated"
-    namespace     = "covidportal"
-    value         = "1"
-    default_value = "0"
-  }
-}
-
-resource "aws_cloudwatch_log_metric_filter" "users_deleted" {
-  name           = "UsersDeleted"
-  pattern        = "\"CRUD event_type:CREATE model:profiles.healthcareuser\""
-  log_group_name = aws_cloudwatch_log_group.covidportal.name
-
-  metric_transformation {
-    name          = "UsersDeleted"
-    namespace     = "covidportal"
-    value         = "1"
-    default_value = "0"
-  }
-}
-
 resource "aws_cloudwatch_log_metric_filter" "users_login" {
   name           = "UsersLogin"
   pattern        = "\"LOGIN login_type:login\""
@@ -358,5 +330,41 @@ resource "aws_cloudwatch_log_metric_filter" "users_login" {
     namespace     = "covidportal"
     value         = "1"
     default_value = "0"
+  }
+}
+
+resource "aws_cloudwatch_log_metric_filter" "alberta_super_admins" {
+  name = "AlbertaSuperAdmins"
+  pattern = "\"[date, time, type=LOGGING, ..., province=Alberta, saText, super_admins, aText, admins, sText, staff]\""
+  log_group_name = aws_cloudwatch_log_group.covidportal.name
+
+  metric_transformation {
+    name          = "AlbertaSuperAdmins"
+    namespace     = "covidportal"
+    value         = "$super_admins"
+  }
+}
+
+resource "aws_cloudwatch_log_metric_filter" "alberta_admins" {
+  name = "AlbertaAdmins"
+  pattern = "\"[date, time, type=LOGGING, ..., province=Alberta, saText, super_admins, aText, admins, sText, staff]\""
+  log_group_name = aws_cloudwatch_log_group.covidportal.name
+
+  metric_transformation {
+    name          = "AlbertaAdmins"
+    namespace     = "covidportal"
+    value         = "$admins"
+  }
+}
+
+resource "aws_cloudwatch_log_metric_filter" "alberta_staff" {
+  name = "AlbertaStaff"
+  pattern = "\"[date, time, type=LOGGING, ..., province=Alberta, saText, super_admins, aText, admins, sText, staff]\""
+  log_group_name = aws_cloudwatch_log_group.covidportal.name
+
+  metric_transformation {
+    name          = "AlbertaStaff"
+    namespace     = "covidportal"
+    value         = "$staff"
   }
 }
