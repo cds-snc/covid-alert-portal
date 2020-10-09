@@ -191,6 +191,10 @@ resource "aws_wafv2_web_acl_association" "covid_portal_assocation" {
   web_acl_arn  = aws_wafv2_web_acl.covidportal_acl.arn
 }
 
+resource "aws_wafv2_web_acl_association" "maintenance_page_assocation" {
+  resource_arn = aws_cloudfront_distribution.maintenance_mode.arn
+  web_acl_arn  = aws_wafv2_web_acl.covidportal_acl.arn
+}
 ###
 # AWS WAF - Logging
 ###
