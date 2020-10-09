@@ -147,6 +147,20 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
                 "title": "User Activity",
                 "view": "table"
             }
+        },
+        {
+            "type": "log",
+            "x": 0,
+            "y": 14,
+            "width": 15,
+            "height": 6,
+            "properties": {
+                "query": "SOURCE 'covidportal_staging' | fields @message\n| filter @message like /HTTP\\/1.1 400/\n| parse @message \"() {*} [*] * * => generated\" toss1, toss2, method, url\n| filter url != \"/\"\n| stats concat(method,\" \", url) as path, count(path) as attempts by path\n| sort by attempts desc",
+                "region": "ca-central-1",
+                "stacked": false,
+                "view": "table",
+                "title": "Attempts that succeeded WAF but were blocked by COVID Alert Portal"
+            }
         }
     ]
 }
