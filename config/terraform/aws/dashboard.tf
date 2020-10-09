@@ -1,6 +1,6 @@
 
 resource "aws_cloudwatch_dashboard" "ocio_report" {
-  dashboard_name = "Security Report"
+  dashboard_name = "SecurityReport"
 
   dashboard_body = <<EOF
 {
