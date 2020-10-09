@@ -318,8 +318,9 @@ resource "aws_cloudwatch_event_rule" "codedeploy_sns" {
 
 ###
 # AWS Metrics for Security Dashboard Reporting
-#
+###
 
+# Metric to help track suspicious login times
 resource "aws_cloudwatch_log_metric_filter" "users_login" {
   name           = "UsersLogin"
   pattern        = "\"LOGIN login_type:login\""
@@ -333,6 +334,7 @@ resource "aws_cloudwatch_log_metric_filter" "users_login" {
   }
 }
 
+# Alberta User Metric
 resource "aws_cloudwatch_log_metric_filter" "alberta_super_admins" {
   name           = "AlbertaSuperAdmins"
   pattern        = "\"[date, time, type=LOGGING, ..., province=Alberta, saText, super_admins, aText, admins, sText, staff]\""
@@ -369,41 +371,7 @@ resource "aws_cloudwatch_log_metric_filter" "alberta_staff" {
   }
 }
 
-resource "aws_cloudwatch_log_metric_filter" "alberta_super_admins" {
-  name           = "AlbertaSuperAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Alberta\", saText, super_admins, aText, admins, sText, staff]\""
-  log_group_name = aws_cloudwatch_log_group.covidportal.name
-
-  metric_transformation {
-    name      = "AlbertaSuperAdmins"
-    namespace = "covidportal"
-    value     = "$super_admins"
-  }
-}
-
-resource "aws_cloudwatch_log_metric_filter" "alberta_admins" {
-  name           = "AlbertaAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Alberta\", saText, super_admins, aText, admins, sText, staff]\""
-  log_group_name = aws_cloudwatch_log_group.covidportal.name
-
-  metric_transformation {
-    name      = "AlbertaAdmins"
-    namespace = "covidportal"
-    value     = "$admins"
-  }
-}
-
-resource "aws_cloudwatch_log_metric_filter" "alberta_staff" {
-  name           = "AlbertaStaff"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Alberta\", saText, super_admins, aText, admins, sText, staff]\""
-  log_group_name = aws_cloudwatch_log_group.covidportal.name
-
-  metric_transformation {
-    name      = "AlbertaStaff"
-    namespace = "covidportal"
-    value     = "$staff"
-  }
-}
+# BC User Metric
 
 resource "aws_cloudwatch_log_metric_filter" "bc_super_admins" {
   name           = "BCSuperAdmins"
@@ -440,7 +408,7 @@ resource "aws_cloudwatch_log_metric_filter" "bc_staff" {
     value     = "$staff"
   }
 }
-
+# Canadian Armed Forces User Metric
 resource "aws_cloudwatch_log_metric_filter" "caf_super_admins" {
   name           = "CAFSuperAdmins"
   pattern        = "\"[date, time, type=LOGGING, ..., province=\"Canadian Armed Forces\", saText, super_admins, aText, admins, sText, staff]\""
@@ -477,6 +445,7 @@ resource "aws_cloudwatch_log_metric_filter" "caf_staff" {
   }
 }
 
+# Canadian Digital Service User Metric
 resource "aws_cloudwatch_log_metric_filter" "cds_super_admins" {
   name           = "CDSSuperAdmins"
   pattern        = "\"[date, time, type=LOGGING, ..., province=\"Canadian Digital Service\", saText, super_admins, aText, admins, sText, staff]\""
@@ -512,6 +481,8 @@ resource "aws_cloudwatch_log_metric_filter" "cds_staff" {
     value     = "$staff"
   }
 }
+
+# Manitoba User Metric
 
 resource "aws_cloudwatch_log_metric_filter" "manitoba_super_admins" {
   name           = "ManitobaSuperAdmins"
@@ -549,6 +520,8 @@ resource "aws_cloudwatch_log_metric_filter" "manitoba_staff" {
   }
 }
 
+# New Brunswick User Metric
+
 resource "aws_cloudwatch_log_metric_filter" "nb_super_admins" {
   name           = "NBSuperAdmins"
   pattern        = "\"[date, time, type=LOGGING, ..., province=\"New Brunswick\", saText, super_admins, aText, admins, sText, staff]\""
@@ -585,6 +558,7 @@ resource "aws_cloudwatch_log_metric_filter" "nb_staff" {
   }
 }
 
+# Newfoundland and Labrador User Metric
 resource "aws_cloudwatch_log_metric_filter" "nfld_super_admins" {
   name           = "NFLDSuperAdmins"
   pattern        = "\"[date, time, type=LOGGING, ..., province=\"Newfoundland and Labrador\", saText, super_admins, aText, admins, sText, staff]\""
@@ -620,7 +594,7 @@ resource "aws_cloudwatch_log_metric_filter" "nfld_staff" {
     value     = "$staff"
   }
 }
-
+# Nova Scotia User Metric
 resource "aws_cloudwatch_log_metric_filter" "ns_super_admins" {
   name           = "NSSuperAdmins"
   pattern        = "\"[date, time, type=LOGGING, ..., province=\"Nova Scotia\", saText, super_admins, aText, admins, sText, staff]\""
@@ -656,7 +630,7 @@ resource "aws_cloudwatch_log_metric_filter" "ns_staff" {
     value     = "$staff"
   }
 }
-
+# Northwest Territories User Metric
 resource "aws_cloudwatch_log_metric_filter" "nwt_super_admins" {
   name           = "NWTSuperAdmins"
   pattern        = "\"[date, time, type=LOGGING, ..., province=\"Northwest Territories\", saText, super_admins, aText, admins, sText, staff]\""
@@ -692,7 +666,7 @@ resource "aws_cloudwatch_log_metric_filter" "nwt_staff" {
     value     = "$staff"
   }
 }
-
+# Nunavut User Metric
 resource "aws_cloudwatch_log_metric_filter" "nunavut_super_admins" {
   name           = "NunavutSuperAdmins"
   pattern        = "\"[date, time, type=LOGGING, ..., province=\"Nunavut\", saText, super_admins, aText, admins, sText, staff]\""
@@ -728,7 +702,7 @@ resource "aws_cloudwatch_log_metric_filter" "nunavut_staff" {
     value     = "$staff"
   }
 }
-
+# Ontario User Metric
 resource "aws_cloudwatch_log_metric_filter" "ontario_super_admins" {
   name           = "OntarioSuperAdmins"
   pattern        = "\"[date, time, type=LOGGING, ..., province=\"Ontario\", saText, super_admins, aText, admins, sText, staff]\""
@@ -764,7 +738,7 @@ resource "aws_cloudwatch_log_metric_filter" "ontario_staff" {
     value     = "$staff"
   }
 }
-
+# Prince Edward Island User Metric
 resource "aws_cloudwatch_log_metric_filter" "pei_super_admins" {
   name           = "PEISuperAdmins"
   pattern        = "\"[date, time, type=LOGGING, ..., province=\"Prince Edward Island\", saText, super_admins, aText, admins, sText, staff]\""
@@ -800,7 +774,7 @@ resource "aws_cloudwatch_log_metric_filter" "pei_staff" {
     value     = "$staff"
   }
 }
-
+# Quebec User Metric
 resource "aws_cloudwatch_log_metric_filter" "quebec_super_admins" {
   name           = "QuebecSuperAdmins"
   pattern        = "\"[date, time, type=LOGGING, ..., province=\"Quebec\", saText, super_admins, aText, admins, sText, staff]\""
@@ -836,7 +810,7 @@ resource "aws_cloudwatch_log_metric_filter" "quebec_staff" {
     value     = "$staff"
   }
 }
-
+# Saskatchewan User Metric
 resource "aws_cloudwatch_log_metric_filter" "sask_super_admins" {
   name           = "SaskatchewanSuperAdmins"
   pattern        = "\"[date, time, type=LOGGING, ..., province=\"Saskatchewan\", saText, super_admins, aText, admins, sText, staff]\""
@@ -872,7 +846,7 @@ resource "aws_cloudwatch_log_metric_filter" "sask_staff" {
     value     = "$staff"
   }
 }
-
+# Yukon User Metric
 resource "aws_cloudwatch_log_metric_filter" "yukon_super_admins" {
   name           = "YukonSuperAdmins"
   pattern        = "\"[date, time, type=LOGGING, ..., province=\"Yukon\", saText, super_admins, aText, admins, sText, staff]\""
