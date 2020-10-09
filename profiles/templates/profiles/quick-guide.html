@@ -20,6 +20,7 @@
     {% with code="AHJ 232 ZWFA" with_example="true" %}
         {% include "includes/big-code.html" %}
     {% endwith %}
+    {% url 'terms' as terms_url %}
     {% blocktrans %}
         <p>The portal gives instructions for entering the key, with screenshots from the app. You can use the instructions to help patients enter the key.</p>
         <h2>Only authorized healthcare workers generate and give one-time keys</h2>
@@ -30,7 +31,7 @@
         <ul><li>People with COVID -19.</li>
         <li>One-time keys generated for patients.</li>
         <li>Patients who enter keys in the app.</li></ul>
-        <p>To keep stats accurate, only generate a key when you intend to give it to a patient. This condition is part of our terms of use.</p>
+        <p>To keep stats accurate, only generate a key when you intend to give it to a patient. This condition is part of our <a href="{{ terms_url }}">terms of use</a>.</p>
         <h2>Create an account to generate keys</h2>
         <p>You’ll get an email if you’re invited to create a portal account. Check your spam folder for the email.</p>
         <p>Both administrators and healthcare workers can generate one-time keys.</p>
@@ -51,4 +52,5 @@
         <h3>Contact us for tech support</h3>
         <p>To ask questions or give feedback about the portal, <a href="mailto:assistance+healthcare@cds-snc.ca">contact the Canadian Digital Service</a>.</p>
     {% endblocktrans %}
+    <div class="content-button"><a href="{% url 'start' %}" role='button' draggable='false'>{% trans "Visit portal" %}</a></div>
 {% endblock %}
