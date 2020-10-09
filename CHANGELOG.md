@@ -7,7 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-- Add messaging for account invitations when they are expired, deleted or accepted
+## [1.9.1] - 2020-10-09
+
+### Fixed
+
+- Lowercase emails during logins attempts. We convert emails to lowercase during signup, so we should do it during login as well.
+
+## [1.9.0] - 2020-10-08
+
+### Added
+
+- Add new page and flash messages to handle scenarios where account invitations are expired, deleted or accepted
+- Pass the admin user's email to the account invitation template in Notify
 
 ## [1.8.6] - 2020-10-07
 
