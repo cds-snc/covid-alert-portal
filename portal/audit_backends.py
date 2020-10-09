@@ -1,7 +1,7 @@
 from logging import getLogger
 from datetime import datetime
 from easyaudit.models import RequestEvent, CRUDEvent, LoginEvent
-from profiles.models import HealthcareUser, HealthcareProvince
+from profiles.models import HealthcareProvince
 from django.db.models import Count,Q
 import json
 
