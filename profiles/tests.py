@@ -1176,6 +1176,20 @@ class ProfileEditView(AdminUserTestCase):
         response = self.client.get(reverse("user_edit_name", kwargs={"pk": user2.id}))
         self.assertEqual(response.status_code, 200)
 
+    def test_admin_edit_staff_password_forbidden(self):
+        admin_credentials = get_other_credentials(is_admin=True, is_superuser=False)
+        User.objects.create_user(**admin_credentials)
+        self.login(admin_credentials)
+
+        user2 = User.objects.create_user(
+            **get_other_credentials(email="test3@test.com", is_admin=False)
+        )
+
+        response = self.client.get(
+            reverse("user_edit_password", kwargs={"pk": user2.id})
+        )
+        self.assertEqual(response.status_code, 403)
+
     def test_admin_edit_admin_account_forbidden(self):
         admin_credentials = get_other_credentials(is_admin=True, is_superuser=False)
         User.objects.create_user(**admin_credentials)

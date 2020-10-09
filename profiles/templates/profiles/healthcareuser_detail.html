@@ -62,7 +62,7 @@
           </td>
           {% endif %}
         </tr>
-        {% if request.user.is_superuser %}
+        {% if request.user.is_superuser and request.user.id == healthcareuser.id %}
             <tr>
                 <th scope="row">{% trans "Yubikey" %}</th>
                 <td {% if request.user.id != healthcareuser.id %}colspan="2"{% endif %}>
