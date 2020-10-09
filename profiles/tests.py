@@ -337,6 +337,16 @@ class AuthenticatedView(AdminUserTestCase):
         response = self.client.post("/en/login/", self.credentials, follow=True)
         self.assertTrue(response.context["user"].is_active)
 
+    def test_login_with_uppercased_email_and_whitespace(self):
+        _credentials = {
+            "username": "TeST@test.com  ",
+            "password": self.credentials["password"],
+        }
+
+        #  Log in with uppercase letters and trailing whitespace in email address
+        response = self.client.post("/en/login/", _credentials, follow=True)
+        self.assertTrue(response.context["user"].is_active)
+
     def test_1hour_inactivity(self):
         self.login()
         response = self.client.get(reverse("start"))
