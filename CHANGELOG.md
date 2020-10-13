@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Content updates to the Quick Guide page
 - (Super)admins are no longer permitted to change other users' passwords
+- Redirect to the login page if yubikey verification page is visited before user is authenticated
 
 ## [1.9.1] - 2020-10-09
 
