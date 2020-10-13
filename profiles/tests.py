@@ -3,7 +3,6 @@ from django.conf import settings
 from django.test import TestCase, Client, override_settings
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from django.contrib import messages
 from django.utils import translation, timezone
 from django.core.exceptions import ValidationError
 from django_otp import DEVICE_ID_SESSION_KEY
@@ -184,6 +183,69 @@ class RestrictedPageViews(TestCase):
         self.assertRedirects(response, "/admin/login/?next=/admin/")
 
 
+class UserLockoutView(AdminUserTestCase):
+    def setUp(self):
+        super().setUp(is_admin=True)
+
+    def attempt_logins_return_response(self, number_of_attempts):
+        post_data = {
+            "username": self.user.email,
+            "password": uuid4(),
+        }
+
+        for i in range(0, number_of_attempts):
+            response = self.client.post(
+                reverse("login"),
+                post_data,
+                REMOTE_ADDR="127.0.0.1",
+                HTTP_USER_AGENT="test-browser",
+            )
+            self.assertContains(
+                response, "Please enter a correct email address and password"
+            )
+
+        return self.client.post(
+            reverse("admin:login"),
+            post_data,
+            REMOTE_ADDR="127.0.0.1",
+            HTTP_USER_AGENT="test-browser",
+        )
+
+    @override_settings(AXES_ENABLED=True)
+    def test_user_lockout(self):
+        response = self.attempt_logins_return_response(settings.AXES_FAILURE_LIMIT - 1)
+        self.assertEqual(response.status_code, 403)
+
+    @override_settings(
+        AXES_ENABLED=True,
+        AXES_FAILURE_LIMIT=100,
+        AXES_SLOW_FAILURE_LIMIT=10,
+        AXES_SLOW_FAILURE_COOLOFF_TIME=5,
+    )
+    def test_user_slow_lockout(self):
+        response = self.attempt_logins_return_response(
+            settings.AXES_SLOW_FAILURE_LIMIT - 1
+        )
+        self.assertEqual(response.status_code, 403)
+
+        expiry = datetime.now() + timedelta(
+            days=settings.AXES_SLOW_FAILURE_COOLOFF_TIME, hours=1
+        )
+        with freeze_time(expiry):
+            response = self.client.post(
+                reverse("login"),
+                {
+                    "username": self.user.email,
+                    "password": uuid4(),
+                },
+                REMOTE_ADDR="127.0.0.1",
+                HTTP_USER_AGENT="test-browser",
+            )
+            self.assertContains(
+                response, "Please enter a correct email address and password"
+            )
+
+
 class DjangoAdminPanelView(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
@@ -209,76 +271,6 @@ class DjangoAdminPanelView(AdminUserTestCase):
         response = self.client.get(reverse("admin:index"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "administration")
-
-    @override_settings(AXES_ENABLED=True)
-    def test_user_lockout(self):
-        post_data = {
-            "username": self.user.email,
-            "password": uuid4(),
-        }
-
-        for i in range(0, settings.AXES_FAILURE_LIMIT - 1):
-            response = self.client.post(
-                reverse("login"),
-                post_data,
-                REMOTE_ADDR="127.0.0.1",
-                HTTP_USER_AGENT="test-browser",
-            )
-            self.assertContains(
-                response, "Please enter a correct email address and password"
-            )
-
-        response = self.client.post(
-            reverse("admin:login"),
-            post_data,
-            REMOTE_ADDR="127.0.0.1",
-            HTTP_USER_AGENT="test-browser",
-        )
-        self.assertEqual(response.status_code, 403)
-
-    @override_settings(
-        AXES_ENABLED=True,
-        AXES_FAILURE_LIMIT=100,
-        AXES_SLOW_FAILURE_LIMIT=10,
-        AXES_SLOW_FAILURE_COOLOFF_TIME=5,
-    )
-    def test_user_slow_lockout(self):
-        post_data = {
-            "username": self.user.email,
-            "password": uuid4(),
-        }
-
-        for i in range(0, settings.AXES_SLOW_FAILURE_LIMIT - 1):
-            response = self.client.post(
-                reverse("login"),
-                post_data,
-                REMOTE_ADDR="127.0.0.1",
-                HTTP_USER_AGENT="test-browser",
-            )
-            self.assertContains(
-                response, "Please enter a correct email address and password"
-            )
-
-        response = self.client.post(
-            reverse("admin:login"),
-            post_data,
-            REMOTE_ADDR="127.0.0.1",
-            HTTP_USER_AGENT="test-browser",
-        )
-        self.assertEqual(response.status_code, 403)
-        expiry = datetime.now() + timedelta(
-            days=settings.AXES_SLOW_FAILURE_COOLOFF_TIME, hours=1
-        )
-        with freeze_time(expiry):
-            response = self.client.post(
-                reverse("login"),
-                post_data,
-                REMOTE_ADDR="127.0.0.1",
-                HTTP_USER_AGENT="test-browser",
-            )
-            self.assertContains(
-                response, "Please enter a correct email address and password"
-            )
 
     @override_settings(AXES_ENABLED=True)
     def test_user_is_blocked(self):
@@ -462,11 +454,11 @@ class InvitationFlow(TestCase):
 
     def test_email_in_form(self):
         f = SignupForm(initial={"email": self.invite.email})
-        self.assertTrue(self.email in f.as_table())
+        self.assertIn(self.email, f.as_table())
 
     def test_province_in_form(self):
         f = SignupForm(initial={"province": self.province.name})
-        self.assertTrue('value="Manitoba"' in f.as_table())
+        self.assertIn('value="Manitoba"', f.as_table())
 
 
 class SignupView(AdminUserTestCase):
@@ -521,7 +513,8 @@ class SignupView(AdminUserTestCase):
 
     def test_invitation_accepted_after_signup(self):
         url = reverse("invitations:accept-invite", args=[self.invite.key])
-        response = self.client.get(url)
+        self.client.get(url)
+        # make sure invite is not accepted just by visiting the URL
         self.assertEqual(self.invite.accepted, False)
         response = self.client.post(reverse("signup"), data=self.new_user_data)
         self.assertEqual(response.status_code, 302)
@@ -545,7 +538,7 @@ class SignupView(AdminUserTestCase):
         )
 
         # Try to log in with a username that doesn't exist yet
-        response = self.client.post(
+        self.client.post(
             reverse("login"),
             {"username": self.new_user_data["email"], "password": "fake_password"},
             REMOTE_ADDR="127.0.0.1",
@@ -563,7 +556,7 @@ class SignupView(AdminUserTestCase):
         )
 
         url = reverse("invitations:accept-invite", args=[self.invite.key])
-        response = self.client.get(url)
+        self.client.get(url)
         response = self.client.post(reverse("signup"), data=self.new_user_data)
         self.assertEqual(response.status_code, 302)
 
@@ -1175,6 +1168,20 @@ class ProfileEditView(AdminUserTestCase):
 
         response = self.client.get(reverse("user_edit_name", kwargs={"pk": user2.id}))
         self.assertEqual(response.status_code, 200)
+
+    def test_admin_edit_staff_password_forbidden(self):
+        admin_credentials = get_other_credentials(is_admin=True, is_superuser=False)
+        User.objects.create_user(**admin_credentials)
+        self.login(admin_credentials)
+
+        user2 = User.objects.create_user(
+            **get_other_credentials(email="test3@test.com", is_admin=False)
+        )
+
+        response = self.client.get(
+            reverse("user_edit_password", kwargs={"pk": user2.id})
+        )
+        self.assertEqual(response.status_code, 403)
 
     def test_admin_edit_admin_account_forbidden(self):
         admin_credentials = get_other_credentials(is_admin=True, is_superuser=False)

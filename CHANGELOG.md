@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Content updates to the Quick Guide page
+- (Super)admins are no longer permitted to change other users' passwords
+
 ## [1.9.1] - 2020-10-09
 
 ### Fixed
