@@ -52,6 +52,10 @@ class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
         ]
         self.fields["username"].label = _("Email address")
 
+    # lowercase all email addresses entered into the login form
+    def clean_username(self):
+        return self.cleaned_data["username"].lower()
+
     def is_valid(self):
         is_valid = super().is_valid()
         if is_valid is False:
