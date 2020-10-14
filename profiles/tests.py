@@ -205,7 +205,7 @@ class UserLockoutView(AdminUserTestCase):
                 HTTP_USER_AGENT="test-browser",
             )
             self.assertContains(
-                response, "Please enter a correct email address and password"
+                response, "Your username or password do not match our records"
             )
 
         return self.client.post(
@@ -246,7 +246,7 @@ class UserLockoutView(AdminUserTestCase):
                 HTTP_USER_AGENT="test-browser",
             )
             self.assertContains(
-                response, "Please enter a correct email address and password"
+                response, "Your username or password do not match our records"
             )
 
 
@@ -493,7 +493,7 @@ class SignupView(AdminUserTestCase):
         # assert a disabled input with the email value exists
         self.assertContains(
             response,
-            '<input type="text" name="email" value="{}" autocomplete="off" required disabled id="id_email">'.format(
+            '<input type="text" name="email" value="{}" autocomplete="off" disabled id="id_email">'.format(
                 self.invited_email
             ),
         )
