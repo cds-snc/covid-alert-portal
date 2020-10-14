@@ -174,9 +174,13 @@ class RestrictedPageViews(TestCase):
         response = self.client.get(reverse("start"))
         self.assertRedirects(response, "/en/login/?next=/en/start/")
 
-    def test_signup(self):
-        response = self.client.get(reverse("signup"))
-        self.assertRedirects(response, "/en/invite/expired")
+    def test_2fa(self):
+        response = self.client.get(reverse("login-2fa"))
+        self.assertRedirects(response, "/en/login/?next=/en/login-2fa/")
+
+    def test_yubikey_verify(self):
+        response = self.client.get(reverse("yubikey_verify"))
+        self.assertRedirects(response, "/en/login/")
 
     def test_django_admin_panel(self):
         response = self.client.get(reverse("admin:index"))

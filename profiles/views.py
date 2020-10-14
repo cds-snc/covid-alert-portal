@@ -57,8 +57,12 @@ class YubikeyVerifyView(FormView):
     success_url = reverse_lazy("start")
 
     def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect(reverse_lazy("login"))
+
         if request.user.is_verified():
             return redirect(reverse_lazy("start"))
+
         return super().get(request, *args, **kwargs)
 
     def get_form_kwargs(self):
