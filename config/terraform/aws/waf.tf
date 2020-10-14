@@ -182,6 +182,112 @@ resource "aws_wafv2_web_acl" "covidportal_acl" {
 
 }
 
+resource "aws_wafv2_web_acl" "maintenancepage_acl" {
+  name  = "maintenance_page"
+  scope = "REGIONAL"
+
+  default_action {
+    allow {}
+  }
+
+  rule {
+    name     = "AWSManagedRulesAmazonIpReputationList"
+    priority = 1
+
+    override_action {
+      none {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesAmazonIpReputationList"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesAmazonIpReputationList"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "AWSManagedRulesCommonRuleSet"
+    priority = 2
+
+    override_action {
+      none {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesCommonRuleSet"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesCommonRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "AWSManagedRulesKnownBadInputsRuleSet"
+    priority = 3
+    override_action {
+      none {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesKnownBadInputsRuleSet"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesKnownBadInputsRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "AWSManagedRulesLinuxRuleSet"
+    priority = 4
+    override_action {
+      none {}
+    }
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesLinuxRuleSet"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesLinuxRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
+
+
+  tags = {
+    (var.billing_tag_key) = var.billing_tag_value
+  }
+
+  visibility_config {
+    cloudwatch_metrics_enabled = true
+    metric_name                = "covid_portal_global_rule"
+    sampled_requests_enabled   = false
+  }
+
+
+}
 ###
 # AWS WAF - Resource Assocation
 ###
@@ -191,6 +297,10 @@ resource "aws_wafv2_web_acl_association" "covid_portal_assocation" {
   web_acl_arn  = aws_wafv2_web_acl.covidportal_acl.arn
 }
 
+resource "aws_wafv2_web_acl_association" "maintenance_page_association" {
+  resource_arn = aws_cloudfront_distribution.maintenance_mode.arn
+  web_acl_arn  = aws_wafv2_web_acl.maintenancepage_acl.arn
+}
 ###
 # AWS WAF - Logging
 ###

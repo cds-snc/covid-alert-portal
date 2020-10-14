@@ -1,6 +1,8 @@
 from logging import getLogger
 from datetime import datetime
 from easyaudit.models import RequestEvent, CRUDEvent, LoginEvent
+from profiles.models import HealthcareProvince
+from django.db.models import Count, Q
 import json
 
 logger = getLogger("easyaudit_logging")
@@ -50,6 +52,29 @@ class LoggerBackend:
         else:
             changed_fields = []
         # datetime CRUD event_type obj_name obj_id user_id remote_ip
+
+        if model == "profiles.healthcareuser" and (
+            event_type == "CREATE" or event_type == "DELETE"
+        ):
+
+            portal_users = HealthcareProvince.objects.annotate(
+                num_admins=Count(
+                    "healthcareuser", filter=Q(healthcareuser__is_admin="True")
+                ),
+                num_super_admins=Count(
+                    "healthcareuser", filter=Q(healthcareuser__is_superuser="True")
+                ),
+                num_staff=Count(
+                    "healthcareuser", filter=Q(healthcareuser__is_admin="False")
+                ),
+            ).values_list("name", "num_admins", "num_super_admins", "num_staff")
+
+            for users in portal_users:
+                logger.info(
+                    msg=f'{crud_info.get("datetime")} LOGGING user_count province: "{users[0]}" super_admins: {users[2]} admins: {users[1]}  staff: {users[3]}',
+                    extra=crud_info,
+                )
+
         logger.info(
             msg=f'{crud_info.get("datetime")} CRUD event_type:{event_type} model:{model} object_id:{crud_info.get("object_id")} fields_changed:{",".join(changed_fields)} user_id:{crud_info.get("user_id")}',
             extra=crud_info,

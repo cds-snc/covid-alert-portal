@@ -9,6 +9,8 @@ resource "aws_cloudfront_origin_access_identity" "maintenance_access_identity" {
 resource "aws_cloudfront_distribution" "maintenance_mode" {
   http_version = "http2"
 
+  web_acl_id = aws_wafv2_web_acl.maintenancepage_acl.arn
+
   origin {
     origin_id   = local.s3_origin_id
     domain_name = aws_s3_bucket.portal_maintenance_mode.bucket_regional_domain_name
