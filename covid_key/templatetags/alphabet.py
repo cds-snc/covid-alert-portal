@@ -22,7 +22,7 @@ def _phonetic(letter):
         "F": _("F as in Family."),
         "H": _("H as in Hospital."),
         "J": _("J as in January."),
-        "K": _("K as in Kangaroo."),
+        "K": _("K as in Kilo."),
         "L": _("L as in Lion."),
         "Q": _("Q as in Question."),
         "R": _("R as in Radio."),

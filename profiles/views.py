@@ -229,7 +229,7 @@ class Login2FAView(LoginRequiredMixin, FormView):
                 form.add_error("code", _("Please try again later."))
 
             if form.has_error("code") is False:
-                form.add_error("code", _("That didn’t match the code that was sent."))
+                form.add_error("code", _("You entered the wrong code."))
 
         if form.has_error("code"):
             return super().form_invalid(form)

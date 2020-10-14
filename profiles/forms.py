@@ -34,11 +34,38 @@ from .models import HealthcareUser, HealthcareProvince, AuthorizedDomain
 from .utils import generate_2fa_code
 
 
+validation_messages = {
+    "code": {
+        "required": _("Enter information to continue"),
+    },
+    "email": {
+        "required": _("Enter your email address"),
+    },
+    "name": {
+        "required": _("Enter your name"),
+    },
+    "password": {"required": _("Enter your password")},
+    "password2": {"required": _("Enter the same password again")},
+    "phone_number": {"required": _("Enter your phone number")},
+    "phone_number2": {"required": _("Enter the same phone number again")},
+    "username": {
+        "required": _("Enter your email address for the COVID Alert Portal"),
+    },
+}
+
+
 class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
     """
     A login form extending the Django default AuthenticationForm.
     https://github.com/django/django/blob/9a54a9172a724d38caf6a150f41f23d79b9bdbb7/django/contrib/auth/forms.py#L173
     """
+
+    error_messages = {
+        "invalid_login": _(
+            "Your username or password do not match our records.  Check if “caps lock” is on or off."
+        ),
+        "inactive": _("This account is inactive."),
+    }
 
     class Meta:
         model = HealthcareUser
@@ -51,6 +78,12 @@ class HealthcareAuthenticationForm(HealthcareBaseForm, AuthenticationForm):
             EmailValidator(message=_("Enter a valid email address"))
         ]
         self.fields["username"].label = _("Email address")
+        self.fields["username"].error_messages["required"] = validation_messages[
+            "username"
+        ]["required"]
+        self.fields["password"].error_messages["required"] = validation_messages[
+            "password"
+        ]["required"]
 
     # lowercase all email addresses entered into the login form
     def clean_username(self):
@@ -89,6 +122,7 @@ class Healthcare2FAForm(HealthcareBaseForm):
         label=_("Security code"),
         required=True,
     )
+    code.error_messages["required"] = validation_messages["code"]["required"]
 
 
 class HealthcareBaseEditForm(HealthcareBaseForm, forms.ModelForm):
@@ -103,6 +137,7 @@ class HealthcareNameEditForm(HealthcareBaseEditForm):
     name = forms.CharField(
         label=_("Full name"),
     )
+    name.error_messages["required"] = validation_messages["name"]["required"]
 
     class Meta:
         model = HealthcareUser
@@ -117,12 +152,20 @@ class HealthcarePhoneEditForm(HealthcareBaseEditForm):
             "You must enter a new security code each time you log in. We’ll text the code to your mobile phone number."
         ),
     )
+    phone_number.error_messages["required"] = validation_messages["phone_number"][
+        "required"
+    ]
+
     phone_number2 = PhoneNumberField(
         label=_("Confirm your mobile phone number"),
         help_text=_("Enter the same mobile number as above."),
     )
+    phone_number2.error_messages["required"] = validation_messages["phone_number2"][
+        "required"
+    ]
+
     error_messages = {
-        "phone_number_mismatch": _("The phone numbers didn’t match."),
+        "phone_number_mismatch": _("You entered 2 different phone numbers."),
     }
 
     class Meta:
@@ -143,7 +186,7 @@ class HealthcarePhoneEditForm(HealthcareBaseEditForm):
 class HealthcarePasswordEditForm(HealthcareBaseEditForm):
     title = _("Change your password")
     error_messages = {
-        "password_mismatch": _("The passwords didn’t match."),
+        "password_mismatch": _("You entered 2 different passwords."),
     }
     password1 = forms.CharField(
         label=_("Password"),
@@ -151,12 +194,15 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
         widget=forms.PasswordInput(),
         help_text=password_validation.password_validators_help_text_html(),
     )
+    password1.error_messages["required"] = validation_messages["password"]["required"]
+
     password2 = forms.CharField(
         label=_("Confirm your password"),
         widget=forms.PasswordInput(),
         strip=False,
         help_text=_("Enter the same password as above."),
     )
+    password2.error_messages["required"] = validation_messages["password2"]["required"]
 
     def __init__(self, user, *args, **kwargs):
         self.user = user
@@ -207,6 +253,9 @@ class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
 
         # Otherwise it just says "Email"
         self.fields["email"].label = _("Email address")
+        self.fields["email"].error_messages["required"] = validation_messages["email"][
+            "required"
+        ]
 
     def send_mail(
         self,
@@ -251,6 +300,10 @@ class HealthcarePasswordResetConfirm(HealthcareBaseForm, SetPasswordForm):
         strip=False,
         help_text=password_validation.password_validators_help_text_html(),
     )
+    new_password1.error_messages["required"] = validation_messages["password"][
+        "required"
+    ]
+
     new_password2 = forms.CharField(
         label=_("Confirm your new password"),
         strip=False,
@@ -286,6 +339,7 @@ class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):
     province = forms.CharField(widget=forms.HiddenInput, disabled=True)
 
     name = forms.CharField(label=_("Full name"), validators=[MaxLengthValidator(200)])
+    name.error_messages["required"] = validation_messages["name"]["required"]
 
     phone_number = PhoneNumberField(
         label=_("Mobile phone number"),
@@ -293,10 +347,17 @@ class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):
             "You must enter a new security code each time you log in. We’ll text the code to your mobile phone number."
         ),
     )
+    phone_number.error_messages["required"] = validation_messages["phone_number"][
+        "required"
+    ]
+
     phone_number_confirmation = PhoneNumberField(
         label=_("Confirm your phone number"),
         help_text=_("Enter the same mobile number as above."),
     )
+
+    password1 = forms.CharField(widget=forms.PasswordInput())
+    password1.error_messages["required"] = validation_messages["password"]["required"]
 
     password2 = forms.CharField(
         label=_("Confirm your password"),
@@ -304,6 +365,7 @@ class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):
         strip=False,
         widget=forms.PasswordInput(),
     )
+    password2.error_messages["required"] = validation_messages["password2"]["required"]
 
     field_order = [
         "name",

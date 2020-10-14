@@ -53,7 +53,7 @@ class ValidationErrorsView(TestCase):
         # look for the input including the id, the input value, and the "aria-describedby" attribute
         self.assertContains(
             response,
-            '<input type="text" name="username" value="roger sterling" autocapitalize="none" autocomplete="off" maxlength="255" aria-describedby="error--username" required id="id_username">',
+            '<input type="text" name="username" value="roger sterling" autocapitalize="none" autocomplete="off" maxlength="255" aria-describedby="error--username" id="id_username">',
         )
 
 
