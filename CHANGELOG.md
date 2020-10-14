@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-- Content updates to the Quick Guide page
+- Rewrite default validation messages
+- Content updates to various pages in the app, including the Quick Guide page
+- Remove the "required" attribute from form inputs
 - (Super)admins are no longer permitted to change other users' passwords
 - Redirect to the login page if yubikey verification page is visited before user is authenticated
 
