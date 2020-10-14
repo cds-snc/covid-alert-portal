@@ -205,7 +205,7 @@ class UserLockoutView(AdminUserTestCase):
                 HTTP_USER_AGENT="test-browser",
             )
             self.assertContains(
-                response, "Please enter a correct email address and password"
+                response, "Your username or password do not match our records"
             )
 
         return self.client.post(
@@ -246,7 +246,7 @@ class UserLockoutView(AdminUserTestCase):
                 HTTP_USER_AGENT="test-browser",
             )
             self.assertContains(
-                response, "Please enter a correct email address and password"
+                response, "Your username or password do not match our records"
             )
 
 
