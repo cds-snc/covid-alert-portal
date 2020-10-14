@@ -2,6 +2,8 @@ from django import forms
 
 
 class HealthcareBaseForm(forms.Form):
+    use_required_attribute = False
+
     def __init__(self, *args, **kwargs):
         # Remove the colon after field labels
         kwargs.setdefault("label_suffix", "")

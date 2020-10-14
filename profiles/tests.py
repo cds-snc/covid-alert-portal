@@ -493,7 +493,7 @@ class SignupView(AdminUserTestCase):
         # assert a disabled input with the email value exists
         self.assertContains(
             response,
-            '<input type="text" name="email" value="{}" autocomplete="off" required disabled id="id_email">'.format(
+            '<input type="text" name="email" value="{}" autocomplete="off" disabled id="id_email">'.format(
                 self.invited_email
             ),
         )
