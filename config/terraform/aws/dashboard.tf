@@ -4,11 +4,12 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
 
   dashboard_body = <<EOF
 {
+    "start": "-P28D",
     "widgets": [
         {
             "type": "metric",
             "x": 0,
-            "y": 1,
+            "y": 7,
             "width": 6,
             "height": 3,
             "properties": {
@@ -26,7 +27,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
         {
             "type": "metric",
             "x": 6,
-            "y": 1,
+            "y": 7,
             "width": 9,
             "height": 6,
             "properties": {
@@ -45,7 +46,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
         {
             "type": "metric",
             "x": 15,
-            "y": 1,
+            "y": 7,
             "width": 9,
             "height": 6,
             "properties": {
@@ -62,7 +63,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
         {
             "type": "text",
             "x": 0,
-            "y": 0,
+            "y": 6,
             "width": 24,
             "height": 1,
             "properties": {
@@ -72,7 +73,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
         {
             "type": "metric",
             "x": 0,
-            "y": 8,
+            "y": 14,
             "width": 9,
             "height": 6,
             "properties": {
@@ -95,7 +96,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
         {
             "type": "text",
             "x": 0,
-            "y": 7,
+            "y": 13,
             "width": 24,
             "height": 1,
             "properties": {
@@ -105,7 +106,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
         {
             "type": "log",
             "x": 15,
-            "y": 8,
+            "y": 14,
             "width": 9,
             "height": 6,
             "properties": {
@@ -119,7 +120,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
         {
             "type": "metric",
             "x": 9,
-            "y": 8,
+            "y": 14,
             "width": 6,
             "height": 6,
             "properties": {
@@ -137,7 +138,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
         {
             "type": "log",
             "x": 0,
-            "y": 4,
+            "y": 10,
             "width": 6,
             "height": 3,
             "properties": {
@@ -151,15 +152,39 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
         {
             "type": "log",
             "x": 0,
-            "y": 14,
+            "y": 20,
             "width": 15,
             "height": 6,
             "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @message\n| filter @message like /HTTP\\/1.1 400/\n| parse @message \"() {*} [*] * * => generated\" toss1, toss2, method, url\n| filter url != \"/\"\n| stats concat(method,\" \", url) as path, count(path) as attempts by path\n| sort by attempts desc",
+                "query": "SOURCE 'covidportal_staging' | fields @message\n| filter @message like /HTTP\\/1.1 400/ and @message not like /\\/status/\n| parse @message \"() {*} [*] * * => generated\" toss1, toss2, method, url\n| filter url != \"/\"\n| stats concat(method,\" \", url) as path, count(path) as attempts by path\n| sort by attempts desc",
                 "region": "ca-central-1",
                 "stacked": false,
-                "view": "table",
-                "title": "Attempts that succeeded WAF but were blocked by COVID Alert Portal"
+                "title": "Attempts that succeeded WAF but were blocked by COVID Alert Portal",
+                "view": "table"
+            }
+        },
+        {
+            "type": "log",
+            "x": 0,
+            "y": 3,
+            "width": 24,
+            "height": 3,
+            "properties": {
+                "query": "SOURCE 'covidportal_staging' | fields @message\n| filter @message like /\\/status\\//\n| stats (count()/51500)*100 as Analysis_Progress by bin (1d)",
+                "region": "ca-central-1",
+                "stacked": false,
+                "title": "Report Generation Progress Indicator",
+                "view": "bar"
+            }
+        },
+        {
+            "type": "text",
+            "x": 0,
+            "y": 0,
+            "width": 24,
+            "height": 3,
+            "properties": {
+                "markdown": "\n# Dashboard Generation Indicator\nWhen the majority of the bars in the graph below are at or near the '100' value the dashboard is completely loaded.\n\nThis amount of time is required to ensure that the 'User Activity', 'Multiple Users / IP', and 'Attempts that succeeded WAF but were blocked by COVID Alert Portal' have enough time to completely load.\n"
             }
         }
     ]
