@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-09 18:15+0000\n"
+"POT-Creation-Date: 2020-10-14 19:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -265,8 +265,8 @@ msgid "J as in January."
 msgstr "J comme dans Janvier."
 
 #: covid_key/templatetags/alphabet.py:25
-msgid "K as in Kangaroo."
-msgstr "K comme dans Kangourou."
+msgid "K as in Kilo."
+msgstr "K comme dans Kilo."
 
 #: covid_key/templatetags/alphabet.py:26
 msgid "L as in Lion."
@@ -420,8 +420,8 @@ msgid "Please correct the errors on the page"
 msgstr "Veuillez corriger les erreurs trouvées dans la page"
 
 #: portal/templates/includes/expires_string.html:7
-msgid "Key expires on"
-msgstr "La clé expire le"
+msgid "Key <strong>expires on</strong>"
+msgstr "La clé <strong>expire le</strong>"
 
 #: portal/templates/includes/expires_string.html:15
 msgid "at"
@@ -518,7 +518,7 @@ msgstr "Merci pour tout votre travail"
 
 #: portal/templates/registration/password_reset_confirm.html:7
 #: portal/templates/registration/password_reset_confirm.html:17
-#: profiles/forms.py:144
+#: profiles/forms.py:187
 #: profiles/templates/profiles/healthcareuser_detail.html:91
 msgid "Change your password"
 msgstr "Modifier votre mot de passe"
@@ -589,42 +589,87 @@ msgstr "A un jeton d’API"
 msgid "Number of keys generated in the last 24 hours"
 msgstr "Nombre de clés générées dans les dernières 24 heures"
 
-#: profiles/forms.py:51
+#: profiles/forms.py:39
+msgid "Enter information to continue"
+msgstr "Entrez les renseignements demandés pour continuer"
+
+#: profiles/forms.py:42
+msgid "Enter your email address"
+msgstr "Saisissez votre adresse courriel"
+
+#: profiles/forms.py:45
+msgid "Enter your name"
+msgstr "Saisissez votre nom"
+
+#: profiles/forms.py:47
+msgid "Enter your password"
+msgstr "Saisissez votre mot de passe"
+
+#: profiles/forms.py:48
+msgid "Enter the same password again"
+msgstr "Saisissez le même mot de passe"
+
+#: profiles/forms.py:49
+msgid "Enter your phone number"
+msgstr "Saisissez votre numéro de téléphone mobile"
+
+#: profiles/forms.py:50
+msgid "Enter the same phone number again"
+msgstr "Saisissez le même numéro de téléphone."
+
+#: profiles/forms.py:52
+msgid "Enter your email address for the COVID Alert Portal"
+msgstr "Saisissez l’adresse courriel associée au portail Alerte COVID"
+
+#: profiles/forms.py:65
+msgid ""
+"Your username or password do not match our records.  Check if “caps lock” is "
+"on or off."
+msgstr ""
+"Votre nom d’utilisateur ou votre mot de passe ne correspond pas à celui dans "
+"nos dossiers. Vérifiez que la touche Verrouillage majuscules n’est pas "
+"activée."
+
+#: profiles/forms.py:67
+msgid "This account is inactive."
+msgstr "Ce compte est inactif."
+
+#: profiles/forms.py:78
 msgid "Enter a valid email address"
 msgstr "Entrez une adresse courriel valide"
 
-#: profiles/forms.py:53 profiles/forms.py:209 profiles/forms.py:284
-#: profiles/forms.py:389
+#: profiles/forms.py:80 profiles/forms.py:255 profiles/forms.py:337
+#: profiles/forms.py:451
 #: profiles/templates/invitations/templates/invite_list.html:18
 #: profiles/templates/profiles/healthcareuser_detail.html:44
 #: profiles/templates/profiles/healthcareuser_list.html:18
 msgid "Email address"
 msgstr "Adresse courriel"
 
-#: profiles/forms.py:89
+#: profiles/forms.py:122
 msgid "Security code"
 msgstr "Code de sécurité"
 
-#: profiles/forms.py:102
+#: profiles/forms.py:136
 #: profiles/templates/profiles/healthcareuser_detail.html:33
 msgid "Change your name"
 msgstr "Modifier votre nom"
 
-#: profiles/forms.py:104 profiles/forms.py:288 profiles/models.py:73
+#: profiles/forms.py:138 profiles/forms.py:341 profiles/models.py:73
 msgid "Full name"
 msgstr "Nom complet"
 
-#: profiles/forms.py:113
+#: profiles/forms.py:148
 #: profiles/templates/profiles/healthcareuser_detail.html:55
 msgid "Change your mobile phone number"
 msgstr "Modifier votre numéro de téléphone"
 
-#: profiles/forms.py:115 profiles/forms.py:291
+#: profiles/forms.py:150 profiles/forms.py:345
 #: profiles/templates/profiles/healthcareuser_detail.html:48
 msgid "Mobile phone number"
 msgstr "Numéro de téléphone mobile"
 
-#: profiles/forms.py:117 profiles/forms.py:293 profiles/models.py:77
+#: profiles/forms.py:152 profiles/forms.py:347 profiles/models.py:77
 msgid ""
 "You must enter a new security code each time you log in. We’ll text the code "
 "to your mobile phone number."
@@ -632,60 +677,64 @@ msgstr ""
 "Il faut entrer un nouveau code de sécurité à chaque connexion. Nous vous "
 "enverrons le code par message texte."
 
-#: profiles/forms.py:121
+#: profiles/forms.py:160
 msgid "Confirm your mobile phone number"
 msgstr "Confirmez votre numéro de téléphone mobile"
 
-#: profiles/forms.py:122 profiles/forms.py:298
+#: profiles/forms.py:161 profiles/forms.py:356
 msgid "Enter the same mobile number as above."
 msgstr "Saisissez de nouveau votre numéro de téléphone."
 
-#: profiles/forms.py:125 profiles/forms.py:364
-msgid "The phone numbers didn’t match."
-msgstr "Les numéro de téléphone ne sont pas identiques."
+#: profiles/forms.py:168
+msgid "You entered 2 different phone numbers."
+msgstr "Vous avez saisi 2 numéros de téléphone différents"
 
-#: profiles/forms.py:146
-msgid "The passwords didn’t match."
-msgstr "Les mots de passe ne sont pas identiques."
+#: profiles/forms.py:189
+msgid "You entered 2 different passwords."
+msgstr "Vous avez saisi 2 mots de passe différents"
 
-#: profiles/forms.py:149
+#: profiles/forms.py:192
 #: profiles/templates/profiles/healthcareuser_detail.html:88
 msgid "Password"
 msgstr "Mot de passe"
 
-#: profiles/forms.py:155 profiles/forms.py:302
+#: profiles/forms.py:200 profiles/forms.py:363
 msgid "Confirm your password"
 msgstr "Confirmez votre mot de passe"
 
-#: profiles/forms.py:158 profiles/forms.py:258 profiles/forms.py:303
+#: profiles/forms.py:203 profiles/forms.py:311 profiles/forms.py:364
 msgid "Enter the same password as above."
 msgstr "Saisissez de nouveau votre mot de passe."
 
-#: profiles/forms.py:249
+#: profiles/forms.py:298
 msgid "New password"
 msgstr "Modifier mon mot de passe"
 
-#: profiles/forms.py:255
+#: profiles/forms.py:308
 msgid "Confirm your new password"
 msgstr "Confirmez votre nouveau mot de passe"
 
-#: profiles/forms.py:297
+#: profiles/forms.py:355
 msgid "Confirm your phone number"
 msgstr "Confirmez votre numéro de téléphone mobile"
 
-#: profiles/forms.py:348
+#: profiles/forms.py:410
 msgid "Email already exists"
 msgstr "L’adresse courriel existe déjà"
 
-#: profiles/forms.py:350
+#: profiles/forms.py:412
 msgid "An invitation hasn’t been sent to this address"
 msgstr "L’invitation n’a pu être envoyée."
 
-#: profiles/forms.py:406
+#: profiles/forms.py:426
+msgid "The phone numbers didn’t match."
+msgstr "Les numéro de téléphone ne sont pas identiques."
+
+#: profiles/forms.py:468
 msgid "This email address already has a portal account."
 msgstr "Cette adresse courriel est déjà associée à un compte pour le portail."
 
-#: profiles/forms.py:419
+#: profiles/forms.py:481
 #, python-format
 msgid ""
 "You cannot invite ‘%(email)s’ to create an account because ‘@%(domain)s’ is "
@@ -694,15 +743,15 @@ msgstr ""
 "Impossible d’inviter ‘%(email)s’ à créer un compte parce que ‘@%(domain)s’ "
 "ne fait pas partie de la liste de confiance du portail."
 
-#: profiles/forms.py:460 profiles/forms.py:493
+#: profiles/forms.py:522 profiles/forms.py:555
 msgid "Token"
 msgstr "Clé"
 
-#: profiles/forms.py:482
+#: profiles/forms.py:544
 msgid "Unable to validate the token with the device."
 msgstr ""
 
-#: profiles/forms.py:513
+#: profiles/forms.py:575
 msgid "The token is not valid for this device."
 msgstr ""
 
@@ -782,8 +831,8 @@ msgstr "Invitation envoyée à %(email)s"
 
 #: profiles/templates/invitations/templates/invite_complete.html:11
 msgid ""
-"They’ll receive an email with a link to create their account. The link "
-"expires in 1 day."
+"They’ll get an email with a link to create their account. The link expires "
+"in 1 day."
 msgstr ""
 "Cette personne recevra un courriel contenant un lien pour créer son compte. "
 "Le lien expire après 1 jour."
@@ -858,13 +907,10 @@ msgid "You are sending too many invitations. Try again later."
 msgstr "Vous envoyez trop d’invitations. Réessayer plus tard."
 
 #: profiles/templates/profiles/2fa-resend.html:6
-msgid "Resend security code"
-msgstr "Renvoyer le code de sécurité"
-
 #: profiles/templates/profiles/2fa-resend.html:13
 #: profiles/templates/profiles/2fa-resend.html:15
 msgid "Re-send security code"
-msgstr "Renvoyer le code de sécurité"
+msgstr "Renvoyer un code de sécurité"
 
 #: profiles/templates/profiles/2fa-resend.html:14
 msgid "If you did not get the code, ask us to send it again."
@@ -1407,24 +1453,24 @@ msgstr ""
 msgid "Your password cannot be only numbers."
 msgstr "Votre mot de passe ne peut pas contenir que des chiffres."
 
-#: profiles/views.py:225
+#: profiles/views.py:229
 msgid "Please try again later."
 msgstr "Réessayer plus tard"
 
-#: profiles/views.py:228
-msgid "That didn’t match the code that was sent."
-msgstr "Cela ne correspond pas au code qui a été envoyé."
+#: profiles/views.py:232
+msgid "You entered the wrong code."
+msgstr "Vous n’avez pas saisi le bon code."
 
-#: profiles/views.py:249
+#: profiles/views.py:253
 msgid "Security code has been sent."
 msgstr "Le code de sécurité a été envoyé."
 
-#: profiles/views.py:377
+#: profiles/views.py:381
 #, python-format
 msgid "You deleted the account for ‘%(email)s’."
 msgstr "Vous avez supprimé le compte associé à ‘%(email)s’"
 
-#: profiles/views.py:389
+#: profiles/views.py:393
 msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
