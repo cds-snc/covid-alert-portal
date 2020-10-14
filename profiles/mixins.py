@@ -54,3 +54,12 @@ class ProvinceAdminDeleteMixin(ProvinceAdminEditMixin):
             return False
 
         return super().test_func()
+
+
+class EditPasswordMixin(UserPassesTestMixin):
+    def test_func(self):
+        # you can't change someone else's password
+        if self.request.user.id != self.kwargs["pk"]:
+            return False
+
+        return True

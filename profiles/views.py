@@ -35,6 +35,7 @@ from .utils import generate_2fa_code
 from .utils.invitation_adapter import user_signed_up
 from .models import HealthcareUser, HealthcareFailedAccessAttempt
 from .mixins import (
+    EditPasswordMixin,
     ProvinceAdminViewMixin,
     ProvinceAdminEditMixin,
     ProvinceAdminDeleteMixin,
@@ -56,8 +57,12 @@ class YubikeyVerifyView(FormView):
     success_url = reverse_lazy("start")
 
     def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect(reverse_lazy("login"))
+
         if request.user.is_verified():
             return redirect(reverse_lazy("start"))
+
         return super().get(request, *args, **kwargs)
 
     def get_form_kwargs(self):
@@ -358,7 +363,7 @@ class HealthcarePasswordResetView(PasswordResetView):
         return super().post(*args, **kwargs)
 
 
-class HealthcarePasswordChangeView(PasswordChangeView):
+class HealthcarePasswordChangeView(Is2FAMixin, EditPasswordMixin, PasswordChangeView):
     def get_success_url(self):
         return reverse_lazy("user_profile", kwargs={"pk": self.kwargs.get("pk")})
 
