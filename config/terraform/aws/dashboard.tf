@@ -4,7 +4,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
 
   dashboard_body = <<EOF
 {
-    "start": "-P28D",
+    "start": "-P7D",
     "widgets": [
         {
             "type": "metric",
@@ -73,7 +73,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
         {
             "type": "metric",
             "x": 0,
-            "y": 32,
+            "y": 23,
             "width": 9,
             "height": 6,
             "properties": {
@@ -96,7 +96,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
         {
             "type": "text",
             "x": 0,
-            "y": 31,
+            "y": 22,
             "width": 24,
             "height": 1,
             "properties": {
@@ -106,7 +106,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
         {
             "type": "log",
             "x": 15,
-            "y": 32,
+            "y": 23,
             "width": 9,
             "height": 6,
             "properties": {
@@ -120,7 +120,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
         {
             "type": "metric",
             "x": 9,
-            "y": 32,
+            "y": 23,
             "width": 6,
             "height": 6,
             "properties": {
@@ -152,7 +152,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
         {
             "type": "log",
             "x": 0,
-            "y": 38,
+            "y": 29,
             "width": 15,
             "height": 6,
             "properties": {
@@ -189,10 +189,10 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
         },
         {
             "type": "metric",
-            "x": 0,
-            "y": 25,
-            "width": 24,
-            "height": 6,
+            "x": 12,
+            "y": 13,
+            "width": 12,
+            "height": 9,
             "properties": {
                 "metrics": [
                     [ "covidportal", "UsersLogin", { "id": "m1", "stat": "Sum", "label": "UserLogins", "period": 3600 } ],
@@ -208,211 +208,15 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
         },
         {
             "type": "log",
-            "x": 18,
-            "y": 19,
-            "width": 6,
-            "height": 3,
-            "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/ and @message like /province: \"Prince Edward Island\"/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| stats latest(super_admins) as SuperAdmins, latest(admins) as Admins, latest(staff) as Staff\n\n\n",
-                "region": "ca-central-1",
-                "stacked": false,
-                "title": "Prince Edward Island",
-                "view": "table"
-            }
-        },
-        {
-            "type": "log",
-            "x": 6,
-            "y": 13,
-            "width": 6,
-            "height": 3,
-            "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/ and @message like /province: \"Alberta\"/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| stats latest(super_admins) as SuperAdmins, latest(admins) as Admins, latest(staff) as Staff\n\n\n",
-                "region": "ca-central-1",
-                "stacked": false,
-                "title": "Alberta",
-                "view": "table"
-            }
-        },
-        {
-            "type": "log",
-            "x": 0,
-            "y": 16,
-            "width": 6,
-            "height": 3,
-            "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/ and @message like /province: \"Manitoba\"/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| stats latest(super_admins) as SuperAdmins, latest(admins) as Admins, latest(staff) as Staff\n\n\n",
-                "region": "ca-central-1",
-                "stacked": false,
-                "title": "Manitoba",
-                "view": "table"
-            }
-        },
-        {
-            "type": "log",
-            "x": 0,
-            "y": 22,
-            "width": 6,
-            "height": 3,
-            "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/ and @message like /province: \"Quebec\"/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| stats latest(super_admins) as SuperAdmins, latest(admins) as Admins, latest(staff) as Staff\n\n\n",
-                "region": "ca-central-1",
-                "stacked": false,
-                "title": "Quebec",
-                "view": "table"
-            }
-        },
-        {
-            "type": "log",
-            "x": 18,
-            "y": 13,
-            "width": 6,
-            "height": 3,
-            "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/ and @message like /province: \"British Columbia\"/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| stats latest(super_admins) as SuperAdmins, latest(admins) as Admins, latest(staff) as Staff\n\n\n",
-                "region": "ca-central-1",
-                "stacked": false,
-                "title": "British Columbia",
-                "view": "table"
-            }
-        },
-        {
-            "type": "log",
-            "x": 6,
-            "y": 22,
-            "width": 6,
-            "height": 3,
-            "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/ and @message like /province: \"Saskatchewan\"/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| stats latest(super_admins) as SuperAdmins, latest(admins) as Admins, latest(staff) as Staff\n\n\n",
-                "region": "ca-central-1",
-                "stacked": false,
-                "title": "Saskatchewan",
-                "view": "table"
-            }
-        },
-        {
-            "type": "log",
-            "x": 12,
-            "y": 13,
-            "width": 6,
-            "height": 3,
-            "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/ and @message like /province: \"Canadian Armed Forces\"/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| stats latest(super_admins) as SuperAdmins, latest(admins) as Admins, latest(staff) as Staff\n\n\n",
-                "region": "ca-central-1",
-                "stacked": false,
-                "title": "Canadian Armed Forces",
-                "view": "table"
-            }
-        },
-        {
-            "type": "log",
-            "x": 12,
-            "y": 22,
-            "width": 6,
-            "height": 3,
-            "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/ and @message like /province: \"Yukon\"/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| stats latest(super_admins) as SuperAdmins, latest(admins) as Admins, latest(staff) as Staff\n\n\n",
-                "region": "ca-central-1",
-                "stacked": false,
-                "title": "Yukon",
-                "view": "table"
-            }
-        },
-        {
-            "type": "log",
-            "x": 6,
-            "y": 16,
-            "width": 6,
-            "height": 3,
-            "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/ and @message like /province: \"New Brunswick\"/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| stats latest(super_admins) as SuperAdmins, latest(admins) as Admins, latest(staff) as Staff\n\n\n",
-                "region": "ca-central-1",
-                "stacked": false,
-                "title": "New Brunswick",
-                "view": "table"
-            }
-        },
-        {
-            "type": "log",
-            "x": 12,
-            "y": 16,
-            "width": 6,
-            "height": 3,
-            "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/ and @message like /province: \"Newfoundland and Labrador\"/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| stats latest(super_admins) as SuperAdmins, latest(admins) as Admins, latest(staff) as Staff\n\n\n",
-                "region": "ca-central-1",
-                "stacked": false,
-                "title": "Newfoundland and Labrador",
-                "view": "table"
-            }
-        },
-        {
-            "type": "log",
             "x": 0,
             "y": 13,
-            "width": 6,
-            "height": 3,
+            "width": 12,
+            "height": 9,
             "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/ and @message like /province: \"Canadian Digital Service\"/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| stats latest(super_admins) as SuperAdmins, latest(admins) as Admins, latest(staff) as Staff\n\n\n",
+                "query": "SOURCE 'covidportal_staging' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| sort @timestamp desc\n| limit 15\n| display province, super_admins, admins, staff\n\n\n",
                 "region": "ca-central-1",
                 "stacked": false,
-                "title": "Canadian Digital Service",
-                "view": "table"
-            }
-        },
-        {
-            "type": "log",
-            "x": 18,
-            "y": 16,
-            "width": 6,
-            "height": 3,
-            "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/ and @message like /province: \"Nova Scotia\"/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| stats latest(super_admins) as SuperAdmins, latest(admins) as Admins, latest(staff) as Staff\n\n\n",
-                "region": "ca-central-1",
-                "stacked": false,
-                "title": "Nova Scotia",
-                "view": "table"
-            }
-        },
-        {
-            "type": "log",
-            "x": 0,
-            "y": 19,
-            "width": 6,
-            "height": 3,
-            "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/ and @message like /province: \"Northwest Territories\"/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| stats latest(super_admins) as SuperAdmins, latest(admins) as Admins, latest(staff) as Staff\n\n\n",
-                "region": "ca-central-1",
-                "stacked": false,
-                "title": "Northwest Territories",
-                "view": "table"
-            }
-        },
-        {
-            "type": "log",
-            "x": 6,
-            "y": 19,
-            "width": 6,
-            "height": 3,
-            "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/ and @message like /province: \"Nunavut\"/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| stats latest(super_admins) as SuperAdmins, latest(admins) as Admins, latest(staff) as Staff\n\n\n",
-                "region": "ca-central-1",
-                "stacked": false,
-                "title": "Nunavut",
-                "view": "table"
-            }
-        },
-        {
-            "type": "log",
-            "x": 12,
-            "y": 19,
-            "width": 6,
-            "height": 3,
-            "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/ and @message like /province: \"Ontario\"/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| stats latest(super_admins) as SuperAdmins, latest(admins) as Admins, latest(staff) as Staff\n\n\n",
-                "region": "ca-central-1",
-                "stacked": false,
-                "title": "Ontario",
+                "title": "User type by Province",
                 "view": "table"
             }
         }
