@@ -337,7 +337,7 @@ resource "aws_cloudwatch_log_metric_filter" "users_login" {
 # Alberta User Metric
 resource "aws_cloudwatch_log_metric_filter" "alberta_super_admins" {
   name           = "AlbertaSuperAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=Alberta, saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=Alberta, saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -349,7 +349,7 @@ resource "aws_cloudwatch_log_metric_filter" "alberta_super_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "alberta_admins" {
   name           = "AlbertaAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=Alberta, saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=Alberta, saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -361,7 +361,7 @@ resource "aws_cloudwatch_log_metric_filter" "alberta_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "alberta_staff" {
   name           = "AlbertaStaff"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=Alberta, saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=Alberta, saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -375,7 +375,7 @@ resource "aws_cloudwatch_log_metric_filter" "alberta_staff" {
 
 resource "aws_cloudwatch_log_metric_filter" "bc_super_admins" {
   name           = "BCSuperAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"British Columbia\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"British Columbia\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -387,7 +387,7 @@ resource "aws_cloudwatch_log_metric_filter" "bc_super_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "bc_admins" {
   name           = "BCAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"British Columbia\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"British Columbia\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -399,7 +399,7 @@ resource "aws_cloudwatch_log_metric_filter" "bc_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "bc_staff" {
   name           = "BCStaff"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"British Comumbia\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"British Comumbia\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -411,7 +411,7 @@ resource "aws_cloudwatch_log_metric_filter" "bc_staff" {
 # Canadian Armed Forces User Metric
 resource "aws_cloudwatch_log_metric_filter" "caf_super_admins" {
   name           = "CAFSuperAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Canadian Armed Forces\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Canadian Armed Forces\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -423,7 +423,7 @@ resource "aws_cloudwatch_log_metric_filter" "caf_super_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "caf_admins" {
   name           = "CAFAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Canadian Armed Forces\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Canadian Armed Forces\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -435,7 +435,7 @@ resource "aws_cloudwatch_log_metric_filter" "caf_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "caf_staff" {
   name           = "CAFStaff"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Canadian Armed Forces\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Canadian Armed Forces\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -448,7 +448,7 @@ resource "aws_cloudwatch_log_metric_filter" "caf_staff" {
 # Canadian Digital Service User Metric
 resource "aws_cloudwatch_log_metric_filter" "cds_super_admins" {
   name           = "CDSSuperAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Canadian Digital Service\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Canadian Digital Service\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -460,7 +460,7 @@ resource "aws_cloudwatch_log_metric_filter" "cds_super_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "cds_admins" {
   name           = "CDSAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Canadian Digital Service\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Canadian Digital Service\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -472,7 +472,7 @@ resource "aws_cloudwatch_log_metric_filter" "cds_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "cds_staff" {
   name           = "CDSStaff"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Canadian Digital Service\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Canadian Digital Service\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -486,7 +486,7 @@ resource "aws_cloudwatch_log_metric_filter" "cds_staff" {
 
 resource "aws_cloudwatch_log_metric_filter" "manitoba_super_admins" {
   name           = "ManitobaSuperAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Manitoba\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Manitoba\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -498,7 +498,7 @@ resource "aws_cloudwatch_log_metric_filter" "manitoba_super_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "manitoba_admins" {
   name           = "ManitobaAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Manitoba\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Manitoba\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -510,7 +510,7 @@ resource "aws_cloudwatch_log_metric_filter" "manitoba_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "manitoba_staff" {
   name           = "ManitobaStaff"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Canadian Digital Service\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Canadian Digital Service\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -524,7 +524,7 @@ resource "aws_cloudwatch_log_metric_filter" "manitoba_staff" {
 
 resource "aws_cloudwatch_log_metric_filter" "nb_super_admins" {
   name           = "NBSuperAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"New Brunswick\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"New Brunswick\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -536,7 +536,7 @@ resource "aws_cloudwatch_log_metric_filter" "nb_super_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "nb_admins" {
   name           = "NBSAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"New Brunswick\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"New Brunswick\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -548,7 +548,7 @@ resource "aws_cloudwatch_log_metric_filter" "nb_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "nb_staff" {
   name           = "NBStaff"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"New Brunswick\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"New Brunswick\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -561,7 +561,7 @@ resource "aws_cloudwatch_log_metric_filter" "nb_staff" {
 # Newfoundland and Labrador User Metric
 resource "aws_cloudwatch_log_metric_filter" "nfld_super_admins" {
   name           = "NFLDSuperAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Newfoundland and Labrador\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Newfoundland and Labrador\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -573,7 +573,7 @@ resource "aws_cloudwatch_log_metric_filter" "nfld_super_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "nfld_admins" {
   name           = "NFLDAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Newfoundland and Labrador\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Newfoundland and Labrador\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -585,7 +585,7 @@ resource "aws_cloudwatch_log_metric_filter" "nfld_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "nfld_staff" {
   name           = "NFLDStaff"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Newfoundland and Labrador\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Newfoundland and Labrador\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -597,7 +597,7 @@ resource "aws_cloudwatch_log_metric_filter" "nfld_staff" {
 # Nova Scotia User Metric
 resource "aws_cloudwatch_log_metric_filter" "ns_super_admins" {
   name           = "NSSuperAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Nova Scotia\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Nova Scotia\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -609,7 +609,7 @@ resource "aws_cloudwatch_log_metric_filter" "ns_super_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "ns_admins" {
   name           = "NSAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Nova Scotia\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Nova Scotia\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -621,7 +621,7 @@ resource "aws_cloudwatch_log_metric_filter" "ns_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "ns_staff" {
   name           = "NSStaff"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Nova Scotia\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Nova Scotia\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -633,7 +633,7 @@ resource "aws_cloudwatch_log_metric_filter" "ns_staff" {
 # Northwest Territories User Metric
 resource "aws_cloudwatch_log_metric_filter" "nwt_super_admins" {
   name           = "NWTSuperAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Northwest Territories\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Northwest Territories\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -645,7 +645,7 @@ resource "aws_cloudwatch_log_metric_filter" "nwt_super_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "nwt_admins" {
   name           = "NWTAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Northwest Territories\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Northwest Territories\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -657,7 +657,7 @@ resource "aws_cloudwatch_log_metric_filter" "nwt_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "nwt_staff" {
   name           = "NWTStaff"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Northwest Territories\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Northwest Territories\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -669,7 +669,7 @@ resource "aws_cloudwatch_log_metric_filter" "nwt_staff" {
 # Nunavut User Metric
 resource "aws_cloudwatch_log_metric_filter" "nunavut_super_admins" {
   name           = "NunavutSuperAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Nunavut\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Nunavut\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -681,7 +681,7 @@ resource "aws_cloudwatch_log_metric_filter" "nunavut_super_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "nunavut_admins" {
   name           = "NunavutAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Nunavut\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Nunavut\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -693,7 +693,7 @@ resource "aws_cloudwatch_log_metric_filter" "nunavut_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "nunavut_staff" {
   name           = "NunavutStaff"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Nunavut\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Nunavut\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -705,7 +705,7 @@ resource "aws_cloudwatch_log_metric_filter" "nunavut_staff" {
 # Ontario User Metric
 resource "aws_cloudwatch_log_metric_filter" "ontario_super_admins" {
   name           = "OntarioSuperAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Ontario\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Ontario\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -717,7 +717,7 @@ resource "aws_cloudwatch_log_metric_filter" "ontario_super_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "ontario_admins" {
   name           = "OntarioAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Ontario\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Ontario\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -729,7 +729,7 @@ resource "aws_cloudwatch_log_metric_filter" "ontario_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "ontario_staff" {
   name           = "OntarioStaff"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Ontario\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Ontario\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -741,7 +741,7 @@ resource "aws_cloudwatch_log_metric_filter" "ontario_staff" {
 # Prince Edward Island User Metric
 resource "aws_cloudwatch_log_metric_filter" "pei_super_admins" {
   name           = "PEISuperAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Prince Edward Island\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Prince Edward Island\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -753,7 +753,7 @@ resource "aws_cloudwatch_log_metric_filter" "pei_super_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "pei_admins" {
   name           = "PEIAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Prince Edward Island\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Prince Edward Island\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -765,7 +765,7 @@ resource "aws_cloudwatch_log_metric_filter" "pei_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "pei_staff" {
   name           = "PEIStaff"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Prince Edward Island\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Prince Edward Island\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -777,7 +777,7 @@ resource "aws_cloudwatch_log_metric_filter" "pei_staff" {
 # Quebec User Metric
 resource "aws_cloudwatch_log_metric_filter" "quebec_super_admins" {
   name           = "QuebecSuperAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Quebec\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Quebec\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -789,7 +789,7 @@ resource "aws_cloudwatch_log_metric_filter" "quebec_super_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "quebec_admins" {
   name           = "QuebecAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Quebec\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Quebec\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -801,7 +801,7 @@ resource "aws_cloudwatch_log_metric_filter" "quebec_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "quebec_staff" {
   name           = "QuebecStaff"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Quebec\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Quebec\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -813,7 +813,7 @@ resource "aws_cloudwatch_log_metric_filter" "quebec_staff" {
 # Saskatchewan User Metric
 resource "aws_cloudwatch_log_metric_filter" "sask_super_admins" {
   name           = "SaskatchewanSuperAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Saskatchewan\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Saskatchewan\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -825,7 +825,7 @@ resource "aws_cloudwatch_log_metric_filter" "sask_super_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "sask_admins" {
   name           = "SaskatchewanAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Saskatchewan\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Saskatchewan\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -837,7 +837,7 @@ resource "aws_cloudwatch_log_metric_filter" "sask_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "sask_staff" {
   name           = "SaskatchewanStaff"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Saskatchewan\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Saskatchewan\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -849,7 +849,7 @@ resource "aws_cloudwatch_log_metric_filter" "sask_staff" {
 # Yukon User Metric
 resource "aws_cloudwatch_log_metric_filter" "yukon_super_admins" {
   name           = "YukonSuperAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Yukon\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Yukon\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -861,7 +861,7 @@ resource "aws_cloudwatch_log_metric_filter" "yukon_super_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "yukon_admins" {
   name           = "YukonAdmins"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Yukon\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Yukon\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {
@@ -873,7 +873,7 @@ resource "aws_cloudwatch_log_metric_filter" "yukon_admins" {
 
 resource "aws_cloudwatch_log_metric_filter" "yukon_staff" {
   name           = "YukonStaff"
-  pattern        = "\"[date, time, type=LOGGING, ..., province=\"Yukon\", saText, super_admins, aText, admins, sText, staff]\""
+  pattern        = "[date, time, type=LOGGING, ..., province=\"Yukon\", saText, super_admins, aText, admins, sText, staff]"
   log_group_name = aws_cloudwatch_log_group.covidportal.name
 
   metric_transformation {

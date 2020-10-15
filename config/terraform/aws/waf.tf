@@ -183,8 +183,9 @@ resource "aws_wafv2_web_acl" "covidportal_acl" {
 }
 
 resource "aws_wafv2_web_acl" "maintenancepage_acl" {
-  name  = "maintenance_page"
-  scope = "REGIONAL"
+  name     = "maintenance_page"
+  provider = aws.us-east-1
+  scope    = "CLOUDFRONT"
 
   default_action {
     allow {}
