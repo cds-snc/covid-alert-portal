@@ -1,0 +1,34 @@
+name: Test code coverage
+
+on: push
+
+jobs:
+  coverage_test:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.8]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - uses: dschep/install-pipenv-action@v1
+      - name: Install dependecies
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: install -d # Install all dependencies, including development ones
+
+      - name: Generate coverage report
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: run coverage_test
+
+      - name: Generate coverage report
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: run coverage_report
