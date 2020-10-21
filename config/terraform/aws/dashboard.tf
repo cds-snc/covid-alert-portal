@@ -307,7 +307,7 @@ resource "aws_cloudwatch_dashboard" "sli_report" {
                 "period": 60,
                 "title": "Service Availability Detection Band"
             }
-        },
+        }
     ]
 }
 EOF
