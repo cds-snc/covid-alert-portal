@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Hide the "Your account" link on the 2FA page because people can't see/edit their account info yet
+
 ## [1.9.2] - 2020-10-14
 
 ### Updated
