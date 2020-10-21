@@ -3,7 +3,11 @@
 <nav class="nav--header" aria-label="{% trans 'Language and account navigation' %}">
   <ul>
     {% if user.is_authenticated %}
-      <li><a href="{% url 'user_profile' user.id %}">{{ _("Your account") }}</a></li>
+      {# "user.is_authenticated" means they have passed the initial login screen (email, password) #}
+      {# "user.is_verifed" means they have also entered a 2FA code #}
+      {% if user.is_verified %}
+        <li><a href="{% url 'user_profile' user.id %}">{{ _("Your account") }}</a></li>
+      {% endif %}
       <li><a href="{% url 'logout' %}">{% trans 'Log out' %}</a></li>
     {% elif request.resolver_match.url_name != 'login' %}
       <li><a href="{% url 'login' %}">{% trans 'Log in' %}</a></li>
