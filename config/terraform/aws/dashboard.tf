@@ -305,7 +305,7 @@ resource "aws_cloudwatch_dashboard" "sla_report" {
                 "region": "ca-central-1",
                 "stat": "Average",
                 "period": 60,
-                "title": "User Login Anomalay Detection Band"
+                "title": "Service Availability Detection Band"
             }
         },
     ]
