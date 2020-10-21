@@ -330,7 +330,7 @@ class DjangoAdminPanelView(AdminUserTestCase):
 
 
 class AuthenticatedView(AdminUserTestCase):
-    def test_loginpage(self):
+    def test_login_page(self):
         #  Get the login page
         response = self.client.get(reverse("login"))
         self.assertEqual(response.status_code, 200)
@@ -340,6 +340,16 @@ class AuthenticatedView(AdminUserTestCase):
         #  Test logging in
         response = self.client.post("/en/login/", self.credentials, follow=True)
         self.assertTrue(response.context["user"].is_active)
+
+    def test_2fa_page(self):
+        self.login(login_2fa=False)
+
+        #  Get the 2fa page
+        response = self.client.get(reverse("login-2fa"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Enter your security code</h1>")
+        self.assertNotContains(response, "Your account")
+        self.assertContains(response, "Log out")
 
     def test_login_with_uppercased_email_and_whitespace(self):
         _credentials = {
