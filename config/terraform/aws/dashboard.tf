@@ -224,8 +224,8 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
 }
 EOF
 }
-resource "aws_cloudwatch_dashboard" "sla_report" {
-  dashboard_name = "SLAReport"
+resource "aws_cloudwatch_dashboard" "sli_report" {
+  dashboard_name = "SLIReport"
 
   dashboard_body = <<EOF
 {
@@ -257,7 +257,7 @@ resource "aws_cloudwatch_dashboard" "sla_report" {
                 "annotations": {
                     "horizontal": [
                         {
-                            "label": "SLA Threshold",
+                            "label": "SLI Threshold",
                             "value": 1
                         }
                     ]
