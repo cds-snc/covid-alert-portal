@@ -10,10 +10,13 @@ test = "python manage.py test"
 format = "black ."
 lint = "flake8 ."
 serve = "python manage.py runserver"
+coverage_test = "coverage run --source='.' manage.py test"
+coverage_report = "coverage report"
 
 [dev-packages]
 flake8 = "*"
 freezegun = "*"
+coverage = "*"
 
 [packages]
 django = "*"

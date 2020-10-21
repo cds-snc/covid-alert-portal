@@ -1,4 +1,5 @@
 from uuid import uuid4
+from django.apps import apps
 from django.conf import settings
 from django.test import TestCase, Client, override_settings
 from django.urls import reverse
@@ -11,6 +12,7 @@ from axes.models import AccessAttempt
 from datetime import datetime, timedelta
 from freezegun import freeze_time
 
+from .apps import ProfilesConfig
 from .forms import SignupForm, HealthcarePhoneEditForm
 from .models import (
     HealthcareProvince,
@@ -70,6 +72,12 @@ def get_other_credentials(
         "password": password,
         "phone_number": "+12125552368",
     }
+
+
+class ProfilesConfigTest(TestCase):
+    def test_apps(self):
+        self.assertEqual(ProfilesConfig.name, "profiles")
+        self.assertEqual(apps.get_app_config("profiles").name, "profiles")
 
 
 class BannedPasswordValidatorTestCase(TestCase):
