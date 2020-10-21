@@ -19,3 +19,9 @@ exclude = '''
                         # the root of the project
 )
 '''
+
+[tool.coverage.run]
+omit = ['*/migrations/*']
+
+[tool.coverage.report]
+fail_under=80.0

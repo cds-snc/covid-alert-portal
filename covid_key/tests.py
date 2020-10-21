@@ -1,15 +1,24 @@
 from datetime import timedelta
-from django.test import override_settings, Client
+from django.apps import apps
+from django.test import override_settings, Client, TestCase
 from django.urls import reverse
 from django.utils import timezone
 from django_otp import DEVICE_ID_SESSION_KEY
 from django.contrib.auth import get_user_model
 from django.conf import settings
 
+from profiles.models import HealthcareUser
 from profiles.tests import AdminUserTestCase, get_other_credentials
+
+from .apps import CovidKeyConfig
 from .models import COVIDKey
 from .views import CodeView
-from profiles.models import HealthcareUser
+
+
+class CovidKeyConfigTest(TestCase):
+    def test_apps(self):
+        self.assertEqual(CovidKeyConfig.name, "covid_key")
+        self.assertEqual(apps.get_app_config("covid_key").name, "covid_key")
 
 
 class KeyView(AdminUserTestCase):

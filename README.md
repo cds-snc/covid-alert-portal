@@ -248,6 +248,11 @@ Our automated tests include:
 - `terraform plan`: if the terraform config has been modified, `terraform plan` will return a diff of changes between the current infrastructure and the files in the PR.
 - `terraform security-scan`: will flag any unsafe configuration changes
 
+We also have an automated test for code coverage, which will fail if code coverage falls below 80%. We are using the [`coverage`](https://coverage.readthedocs.io/en/coverage-5.3/) library, as recommended by the Django docs. Configuration for `coverage` is found in [`pyproject.toml`](https://github.com/cds-snc/covid-alert-portal/blob/main/pyproject.toml).
+
+- `pipenv run coverage_test`: run the unit tests to generate the report
+- `pipenv run coverage_report`: display the report
+
 ---
 
 # Portail Alerte COVID
