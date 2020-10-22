@@ -247,7 +247,7 @@ resource "aws_cloudwatch_dashboard" "sli_report" {
                 "region": "ca-central-1",
                 "period": 60,
                 "stat": "Average",
-                "title": "Response Time SLA",
+                "title": "Response Time SLI",
                 "yAxis": {
                     "left": {
                         "showUnits": false,
@@ -286,7 +286,7 @@ resource "aws_cloudwatch_dashboard" "sli_report" {
                 "period": 3600,
                 "stacked": false,
                 "setPeriodToTimeRange": true,
-                "title": "5xx HTTP Errors SLA"
+                "title": "5xx HTTP Errors SLI"
             }
         },
         {
