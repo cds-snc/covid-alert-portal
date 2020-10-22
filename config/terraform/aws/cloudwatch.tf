@@ -288,7 +288,7 @@ resource "aws_cloudwatch_log_metric_filter" "service_availability" {
 
 resource "aws_cloudwatch_metric_alarm" "service_availability_warn" {
   alarm_name          = "ServiceAvailabilityWarn"
-  comparison_operator = "LessThanUpperThreshold"
+  comparison_operator = "LessThanLowerThreshold"
   evaluation_periods  = "1"
   threshold_metric_id = "e1"
   alarm_description   = "COVID Alert Portal Warning - No status checks detected.  Check COVID Alert Portal to ensure site is operational."
