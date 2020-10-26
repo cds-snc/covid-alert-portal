@@ -109,7 +109,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
                 "title": "Key Generation Critical Alarm",
                 "annotations": {
                     "alarms": [
-                        "arn:aws:cloudwatch:ca-central-1:595701125956:alarm:KeyGenerationCritical"
+                        "${aws_cloudwatch_metric_alarm.key_generation_critical.arn}"
                     ]
                 },
                 "view": "timeSeries",
@@ -240,7 +240,7 @@ resource "aws_cloudwatch_dashboard" "sli_report" {
             "properties": {
                 "metrics": [
                     [ { "expression": "FILL(m1, 0)", "label": "Reponse Time", "id": "e2" } ],
-                    [ "AWS/ApplicationELB", "TargetResponseTime", "LoadBalancer", "app/covidportal/da875a433e92c979", { "id": "m1", "visible": false } ]
+                    [ "AWS/ApplicationELB", "TargetResponseTime", "LoadBalancer", "${aws_lb.covidportal.arn_suffix}", { "id": "m1", "visible": false } ]
                 ],
                 "view": "timeSeries",
                 "stacked": false,
@@ -274,9 +274,9 @@ resource "aws_cloudwatch_dashboard" "sli_report" {
                 "metrics": [
                     [ { "expression": "SUM([m1,m2])", "id": "e1", "region": "ca-central-1", "yAxis": "left", "label": "5xx HTTP Errors" } ],
                     [ { "expression": "m4-m3", "id": "e2", "region": "ca-central-1", "yAxis": "left", "label": "Non 4xx HTTP Requests" } ],
-                    [ "AWS/ApplicationELB", "HTTPCode_Target_5XX_Count", "LoadBalancer", "app/covidportal/da875a433e92c979", { "id": "m1", "visible": false } ],
+                    [ "AWS/ApplicationELB", "HTTPCode_Target_5XX_Count", "LoadBalancer", "${aws_lb.covidportal.arn_suffix}", { "id": "m1", "visible": false } ],
                     [ { "expression": "(e1/e2)*100", "id": "e3", "region": "ca-central-1", "label": "% 5xx HTTP Error Rate" } ],
-                    [ "AWS/ApplicationELB", "HTTPCode_ELB_503_Count", "LoadBalancer", "app/covidportal/da875a433e92c979", { "id": "m2", "visible": false } ],
+                    [ "AWS/ApplicationELB", "HTTPCode_ELB_503_Count", "LoadBalancer", "${aws_lb.covidportal.arn_suffix}", { "id": "m2", "visible": false } ],
                     [ ".", "HTTPCode_Target_4XX_Count", ".", ".", { "id": "m3", "visible": false } ],
                     [ ".", "RequestCount", ".", ".", { "id": "m4", "visible": false } ]
                 ],
