@@ -256,15 +256,11 @@ class Resend2FAView(LoginRequiredMixin, FormView):
         return is_valid
 
 class Login2FAEmergencyView(Login2FAView):
-    # For tomorrow:
-    #  Need to look at the logic that a user might not have a static token device. 
-    #  
     
     form_class = Healthcare2FAForm
     template_name = "profiles/2fa-emergency.html"
 
-    def get_initial(self):
-        return super().get_initial()
+    # Add a specific get_initial(self) method
 
     def form_valid(self, form):
         code = form.cleaned_data.get("code")
