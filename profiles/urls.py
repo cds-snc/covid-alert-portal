@@ -86,11 +86,7 @@ urlpatterns = [
         views.Resend2FAView.as_view(),
         name="resend-2fa",
     ),
-    path(
-        "emergency-2fa/",
-        views.Login2FAEmergencyView.as_view(),
-        name="emergency-2fa"
-    ),
+    path("emergency-2fa/", views.Login2FAEmergencyView.as_view(), name="emergency-2fa"),
     path(
         "session-timed-out/", views.redirect_after_timed_out, name="session_timed_out"
     ),

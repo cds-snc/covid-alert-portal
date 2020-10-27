@@ -255,8 +255,9 @@ class Resend2FAView(LoginRequiredMixin, FormView):
 
         return is_valid
 
+
 class Login2FAEmergencyView(Login2FAView):
-    
+
     form_class = Healthcare2FAForm
     template_name = "profiles/2fa-emergency.html"
 
@@ -268,7 +269,7 @@ class Login2FAEmergencyView(Login2FAView):
         static_device = get_user_static_device(self, self.request.user)
         being_throttled = False
 
-        if static_device is not None:  
+        if static_device is not None:
             # let's check if the user is being throttled
             verified_allowed, errors_details = static_device.verify_is_allowed()
             if verified_allowed is False:
@@ -278,7 +279,9 @@ class Login2FAEmergencyView(Login2FAView):
             # If not, the throttling will never get increased for this device
             if static_device.verify_token(code):
                 self.request.user.otp_device = static_device
-                self.request.session[DEVICE_ID_SESSION_KEY] = static_device.persistent_id
+                self.request.session[
+                    DEVICE_ID_SESSION_KEY
+                ] = static_device.persistent_id
 
         if self.request.user.otp_device is None:
             # Just in case one of the device is throttled but another one
@@ -293,6 +296,7 @@ class Login2FAEmergencyView(Login2FAView):
             return super().form_invalid(form)
 
         return super().form_valid(form)
+
 
 class InvitationView(Is2FAMixin, IsAdminMixin, ThrottledMixin, FormView):
     form_class = HealthcareInviteForm
@@ -489,6 +493,7 @@ def switch_language(request):
         samesite=settings.LANGUAGE_COOKIE_SAMESITE,
     )
     return response
+
 
 def get_user_static_device(self, user, confirmed=None):
     devices = devices_for_user(user, confirmed=confirmed)
