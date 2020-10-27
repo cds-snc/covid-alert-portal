@@ -10,13 +10,8 @@
 {% block content %}
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "Enter your security code" %}</h1>
-  <p>{% trans "We’ve sent you a text message with a security code." %}</p>
+  <h1>{% trans "Enter your emergency security code" %}</h1>
+  <p>{% trans "Please use one of your 2fa emergency codes." %}</p>
 
   {% include "includes/cds_form.html" with submit_text=_("Next") form_class="small" %}
-  <a href="{% url 'resend-2fa' %}">{{ _("Resend security code?") }}</a>
-  <p>
-    <a href="{% url 'emergency-2fa' %}">{{ _("Use an emergency code?") }}</a>
-  </p>
-  
 {% endblock %}

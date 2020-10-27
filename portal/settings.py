@@ -92,6 +92,7 @@ INSTALLED_APPS = [
     "django.contrib.admin",  # we want our auth templates loaded first
     "phonenumber_field",
     "django_otp",
+    "django_otp.plugins.otp_static",
     "otp_notify",
     "otp_yubikey",
     "easyaudit",

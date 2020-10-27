@@ -17,7 +17,8 @@ from django.views.generic.edit import UpdateView
 
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django_otp import DEVICE_ID_SESSION_KEY
+from django_otp import DEVICE_ID_SESSION_KEY, devices_for_user
+from django_otp.plugins.otp_static.models import StaticDevice
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.expressions import RawSQL
 from django.utils.translation import LANGUAGE_SESSION_KEY, check_for_language
@@ -254,6 +255,48 @@ class Resend2FAView(LoginRequiredMixin, FormView):
 
         return is_valid
 
+class Login2FAEmergencyView(Login2FAView):
+    # For tomorrow:
+    #  Need to look at the logic that a user might not have a static token device. 
+    #  
+    
+    form_class = Healthcare2FAForm
+    template_name = "profiles/2fa-emergency.html"
+
+    def get_initial(self):
+        return super().get_initial()
+
+    def form_valid(self, form):
+        code = form.cleaned_data.get("code")
+        # Need to add the new verification code here for Static Devices
+        static_device = get_user_static_device(self, self.request.user)
+        being_throttled = False
+
+        if static_device is not None:  
+            # let's check if the user is being throttled
+            verified_allowed, errors_details = static_device.verify_is_allowed()
+            if verified_allowed is False:
+                being_throttled = True
+
+            # Even though we know the device is being throttled, we still need to test it
+            # If not, the throttling will never get increased for this device
+            if static_device.verify_token(code):
+                self.request.user.otp_device = static_device
+                self.request.session[DEVICE_ID_SESSION_KEY] = static_device.persistent_id
+
+        if self.request.user.otp_device is None:
+            # Just in case one of the device is throttled but another one
+            # was verified
+            if being_throttled:
+                form.add_error("code", _("Please try again later."))
+
+            if form.has_error("code") is False:
+                form.add_error("code", _("You entered the wrong code."))
+
+        if form.has_error("code"):
+            return super().form_invalid(form)
+
+        return super().form_valid(form)
 
 class InvitationView(Is2FAMixin, IsAdminMixin, ThrottledMixin, FormView):
     form_class = HealthcareInviteForm
@@ -450,3 +493,9 @@ def switch_language(request):
         samesite=settings.LANGUAGE_COOKIE_SAMESITE,
     )
     return response
+
+def get_user_static_device(self, user, confirmed=None):
+    devices = devices_for_user(user, confirmed=confirmed)
+    for device in devices:
+        if isinstance(device, StaticDevice):
+            return device
