@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% if form.errors %}{% trans "Error: "%}{% endif %}
+  {% trans "Enter mobile phone number" %}
+{% endblock %}
+
+
+{% block content %}
+  {% include  "includes/error_list.html" %}
+
+  <h1>{% trans "Enter mobile phone number" %}</h1>
+  {% include "includes/cds_form.html" with submit_text=_("Add mobile phone") %}
+{% endblock %}
