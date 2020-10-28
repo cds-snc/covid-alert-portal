@@ -410,6 +410,7 @@ class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):
             except ValidationError as error:
                 self.add_error("password1", error)
 
+
 class SignupForm2fa(HealthcareBaseForm, forms.ModelForm):
     """A form for adding a phonenumber to an account on signup."""
 
@@ -451,6 +452,7 @@ class SignupForm2fa(HealthcareBaseForm, forms.ModelForm):
                 code="invalid",
             )
         return phone_number
+
 
 class HealthcareInviteForm(HealthcareBaseForm, InviteForm):
     def __init__(self, *args, **kwargs):

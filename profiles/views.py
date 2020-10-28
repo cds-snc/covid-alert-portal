@@ -169,13 +169,13 @@ class SignUpView(FormView):
         )
         user_signed_up.send(sender=user.__class__, request=self.request, user=user)
         login(self.request, user)
-        
 
         # delete matching access attempts for this user
         AccessAttempt.objects.filter(username=user.email).delete(),
         HealthcareFailedAccessAttempt.objects.filter(username=user.email).delete()
 
         return super(SignUpView, self).form_valid(form)
+
 
 class SignUp2FAView(LoginRequiredMixin, FormView):
     form_class = SignupForm2fa
@@ -195,6 +195,7 @@ class SignUp2FAView(LoginRequiredMixin, FormView):
         generate_2fa_code(self.request.user)
 
         return super(SignUp2FAView, self).form_valid(form)
+
 
 class Login2FAView(LoginRequiredMixin, FormView):
     form_class = Healthcare2FAForm
