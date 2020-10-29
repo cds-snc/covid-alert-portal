@@ -341,8 +341,8 @@ class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):
     name = forms.CharField(label=_("Full name"), validators=[MaxLengthValidator(200)])
     name.error_messages["required"] = validation_messages["name"]["required"]
 
-    password1 = forms.CharField(widget=forms.PasswordInput())
-    password1.error_messages["required"] = validation_messages["password"]["required"]
+    # overwrite the password1 validation message in the __init__ method
+    # password1 is inherited from the UserCreationFrom base class: https://github.com/django/django/blob/302caa40e4caab7d95ef7d0a88a90f935039ab09/django/contrib/auth/forms.py#L90
 
     password2 = forms.CharField(
         label=_("Confirm your password"),
@@ -363,6 +363,12 @@ class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):
     class Meta:
         model = HealthcareUser
         fields = ("email", "province", "name")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["password1"].error_messages["required"] = validation_messages[
+            "password"
+        ]["required"]
 
     def clean_province(self):
         # returns a province abbreviation as a string
