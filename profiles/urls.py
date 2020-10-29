@@ -27,6 +27,7 @@ urlpatterns = [
         name="invite_complete",
     ),
     re_path(r"signup/$", views.SignUpView.as_view(), name="signup"),
+    path("signup-2fa/", views.SignUp2FAView.as_view(), name="signup-2fa"),
     path(
         "welcome/",
         TemplateView.as_view(template_name="profiles/welcome.html"),

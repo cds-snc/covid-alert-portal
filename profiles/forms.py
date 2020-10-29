@@ -341,21 +341,6 @@ class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):
     name = forms.CharField(label=_("Full name"), validators=[MaxLengthValidator(200)])
     name.error_messages["required"] = validation_messages["name"]["required"]
 
-    phone_number = PhoneNumberField(
-        label=_("Mobile phone number"),
-        help_text=_(
-            "You must enter a new security code each time you log in. We’ll text the code to your mobile phone number."
-        ),
-    )
-    phone_number.error_messages["required"] = validation_messages["phone_number"][
-        "required"
-    ]
-
-    phone_number_confirmation = PhoneNumberField(
-        label=_("Confirm your phone number"),
-        help_text=_("Enter the same mobile number as above."),
-    )
-
     password1 = forms.CharField(widget=forms.PasswordInput())
     password1.error_messages["required"] = validation_messages["password"]["required"]
 
@@ -371,15 +356,13 @@ class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):
         "name",
         "email",
         "province",
-        "phone_number",
-        "phone_number_confirmation",
         "password1",
         "password2",
     ]
 
     class Meta:
         model = HealthcareUser
-        fields = ("email", "province", "name", "phone_number")
+        fields = ("email", "province", "name")
 
     def clean_province(self):
         # returns a province abbreviation as a string
@@ -413,6 +396,48 @@ class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):
 
         return email
 
+    def _post_clean(self):
+        # This function is the same as UserCreationForm._post_clean, except we
+        # are pinning the error on field password1 instead of password2 for
+        # accessibility reasons
+        forms.ModelForm._post_clean(self)
+        # Validate the password after self.instance is updated with form data
+        # by super().
+        password = self.cleaned_data.get("password1")
+        if password:
+            try:
+                password_validation.validate_password(password, self.instance)
+            except ValidationError as error:
+                self.add_error("password1", error)
+
+
+class SignupForm2fa(HealthcareBaseForm, forms.ModelForm):
+    """A form for adding a phonenumber to an account on signup."""
+
+    phone_number = PhoneNumberField(
+        label=_("Mobile phone number"),
+        help_text=_(
+            "You must enter a new security code each time you log in. We’ll text the code to your mobile phone number."
+        ),
+    )
+    phone_number.error_messages["required"] = validation_messages["phone_number"][
+        "required"
+    ]
+
+    phone_number_confirmation = PhoneNumberField(
+        label=_("Confirm your phone number"),
+        help_text=_("Enter the same mobile number as above."),
+    )
+
+    field_order = [
+        "phone_number",
+        "phone_number_confirmation",
+    ]
+
+    class Meta:
+        model = HealthcareUser
+        fields = ("phone_number",)
+
     def clean_phone_number(self):
         phone_number = self.cleaned_data.get("phone_number")
         # We can't use clean_data for phone_number_confirmation, it hasn't been cleaned yet
@@ -427,20 +452,6 @@ class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):
                 code="invalid",
             )
         return phone_number
-
-    def _post_clean(self):
-        # This function is the same as UserCreationForm._post_clean, except we
-        # are pinning the error on field password1 instead of password2 for
-        # accessibility reasons
-        forms.ModelForm._post_clean(self)
-        # Validate the password after self.instance is updated with form data
-        # by super().
-        password = self.cleaned_data.get("password1")
-        if password:
-            try:
-                password_validation.validate_password(password, self.instance)
-            except ValidationError as error:
-                self.add_error("password1", error)
 
 
 class HealthcareInviteForm(HealthcareBaseForm, InviteForm):

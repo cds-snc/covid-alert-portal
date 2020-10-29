@@ -42,6 +42,7 @@ from .mixins import (
 )
 from .forms import (
     SignupForm,
+    SignupForm2fa,
     Healthcare2FAForm,
     HealthcareInviteForm,
     HealthcarePasswordResetForm,
@@ -133,7 +134,7 @@ class SignUpView(FormView):
     template_name = "profiles/signup.html"
 
     def get_success_url(self):
-        return "{}?next={}".format(reverse_lazy("login-2fa"), reverse_lazy("welcome"))
+        return reverse_lazy("signup-2fa")
 
     def get(self, request, *args, **kwargs):
         invited_email = self.request.session.get("account_verified_email", None)
@@ -168,13 +169,32 @@ class SignUpView(FormView):
         )
         user_signed_up.send(sender=user.__class__, request=self.request, user=user)
         login(self.request, user)
-        generate_2fa_code(user)
 
         # delete matching access attempts for this user
         AccessAttempt.objects.filter(username=user.email).delete(),
         HealthcareFailedAccessAttempt.objects.filter(username=user.email).delete()
 
         return super(SignUpView, self).form_valid(form)
+
+
+class SignUp2FAView(LoginRequiredMixin, FormView):
+    form_class = SignupForm2fa
+    template_name = "profiles/signup2fa.html"
+
+    def get_success_url(self):
+        return "{}?next={}".format(reverse_lazy("login-2fa"), reverse_lazy("welcome"))
+
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        existing_user = HealthcareUser.objects.get(pk=self.request.user.id)
+        existing_user.phone_number = form.instance.phone_number
+        existing_user.save()
+
+        generate_2fa_code(self.request.user)
+
+        return super(SignUp2FAView, self).form_valid(form)
 
 
 class Login2FAView(LoginRequiredMixin, FormView):
@@ -196,6 +216,9 @@ class Login2FAView(LoginRequiredMixin, FormView):
 
         if request.user.remoteyubikeydevice_set.first() is not None:
             return redirect(reverse_lazy("yubikey_verify"))
+
+        if request.user.notifysmsdevice_set.first() is None:
+            return redirect(reverse_lazy("signup-2fa"))
 
         return super().get(request, *args, **kwargs)
 

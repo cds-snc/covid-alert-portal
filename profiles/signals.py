@@ -14,7 +14,7 @@ def _save_previous_email(sender, instance, **kwargs):
 
 @receiver(post_save, sender=HealthcareUser)
 def update_2fa(sender, instance, created, **kwargs):
-    if not created:
+    if not created and instance._pre_save_instance.phone_number:
         # Tries to update the sms device that belongs to the previous number
         # with the new number
         if isinstance(instance._pre_save_instance.phone_number, str):
@@ -35,6 +35,7 @@ def update_2fa(sender, instance, created, **kwargs):
                 sms_device.number = new_number
                 sms_device.save()
     else:
-        sms_device = instance.notifysmsdevice_set.create()
-        sms_device.number = instance.phone_number.as_e164
-        sms_device.save()
+        if instance.phone_number:
+            sms_device = instance.notifysmsdevice_set.create()
+            sms_device.number = instance.phone_number.as_e164
+            sms_device.save()
