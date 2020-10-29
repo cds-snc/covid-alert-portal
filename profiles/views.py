@@ -216,6 +216,9 @@ class Login2FAView(LoginRequiredMixin, FormView):
 
         if request.user.remoteyubikeydevice_set.first() is not None:
             return redirect(reverse_lazy("yubikey_verify"))
+        
+        if request.user.notifysmsdevice_set.first() is None:
+            return redirect(reverse_lazy("signup-2fa"))
 
         return super().get(request, *args, **kwargs)
 
