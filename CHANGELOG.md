@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.10.0] - 2020-10-29
+
+### Added
+
+- Split the signup flow into multiple pages: add a second page for entering mobile phone as 2FA device
+
+### Fixed
+
+- Add the password label and help text back to the sign up page
 - Hide the "Your account" link on the 2FA page because people can't see/edit their account info yet
 
 ## [1.9.2] - 2020-10-14
