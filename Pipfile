@@ -17,6 +17,7 @@ coverage_report = "coverage report"
 flake8 = "*"
 freezegun = "*"
 coverage = "*"
+django-debug-toolbar = "*"
 
 [packages]
 django = "*"
@@ -40,6 +41,7 @@ black = "*"
 django-project-version = "*"
 django-widget-tweaks = "*"
 notifications-python-client = "*"
+django-flags = "*"
 
 [pipenv]
 allow_prereleases = true
