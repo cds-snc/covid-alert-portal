@@ -1056,6 +1056,15 @@ class ProfileView(AdminUserTestCase):
         )
         self.assertEqual(response.status_code, 403)
 
+    def test_only_user_can_view_own_security_codes(self):
+
+        self.login()
+        user2 = User.objects.create_user(**get_other_credentials(is_admin=True))
+        response = self.client.get(reverse("user_profile", kwargs={"pk": user2.id}))
+        self.assertEqual(response.status_code, 200)
+        ## no security codes link present
+        self.assertNotContains(response, '<a href="/en/profiles/security-codes">')
+
 
 class DeleteView(AdminUserTestCase):
     def setUp(self):
