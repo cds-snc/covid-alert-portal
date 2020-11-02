@@ -113,7 +113,7 @@ resource "aws_secretsmanager_secret_version" "email_host" {
 }
 
 resource "aws_secretsmanager_secret" "email_host_user" {
-  name                    = "email_host_use"
+  name                    = "email_host_user"
   recovery_window_in_days = 0
 }
 
