@@ -40,6 +40,7 @@ black = "*"
 django-project-version = "*"
 django-widget-tweaks = "*"
 notifications-python-client = "*"
+django-waffle = "*"
 
 [pipenv]
 allow_prereleases = true
