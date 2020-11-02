@@ -2,7 +2,6 @@ from django import forms
 from django.contrib import admin
 from datetime import timedelta
 from django.utils import timezone
-from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationForm
@@ -156,6 +155,3 @@ class UserAdmin(BaseUserAdmin):
 admin.site.register(HealthcareProvince, ProvinceAdmin)
 admin.site.register(HealthcareUser, UserAdmin)
 admin.site.register(AuthorizedDomain)
-# ... and, since we're not using Django's built-in permissions,
-# unregister the Group model from admin.
-admin.site.unregister(Group)

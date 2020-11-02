@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Security Codes" %}{% endblock %}
+
+{% block content %}
+  {% include  "includes/flash_messages.html" %}
+  <h1>{% trans "Security Codes" %}</h1>
+  <p>{% trans "Without a mobile phone, you will need to use these single-use security codes to access the portal." %}</p>
+  {% for security_code in security_code_list %}
+  <h2>{{ security_code.token }}</h2>
+
+  {% endfor %}
+
+  <p>{% trans "Write down these single-use security codes on a piece of paper." %}</p>
+  <p>{% trans "Make sure to get more security codes before you use up all of the ones listed here." %}</p>
+  
+
+{% endblock %}

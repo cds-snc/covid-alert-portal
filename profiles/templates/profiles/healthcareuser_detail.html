@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load waffle_tags %}
 
 {% block title %}
     {% if healthcareuser.id == user.id %}
@@ -93,7 +94,25 @@
                   </a>
               </td>
             </tr>
-        {% endif %}
+            {% switch "SECURITY_CODE" %}
+            <tr>
+              <th scope="row">{% trans "Security Codes" %}</th>
+              <td>{{ security_code_count }} {%trans " unused codes remaining" %}</td>
+              {% if not view_only %}
+              <td>
+                  <a href="{% url 'security_code_list' %}">
+                    <span class="visually-hidden">
+
+                        {% trans "Get Security Codes" %}
+
+                    </span>
+                    <span aria-hidden="true">{% trans "Get Security Codes" %}</span>
+                  </a>
+              </td>
+              {% endif %}
+            </tr>
+            {% endswitch %}
+          {% endif %}
       </tbody>
     </table>
 
