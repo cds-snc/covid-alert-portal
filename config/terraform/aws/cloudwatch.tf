@@ -290,7 +290,7 @@ resource "aws_cloudwatch_metric_alarm" "service_availability_warn" {
   evaluation_periods  = "1"
   threshold_metric_id = "e1"
   alarm_description   = "COVID Alert Portal Warning - No status checks detected.  Check COVID Alert Portal to ensure site is operational."
-  treat_missing_data  = "notBreaching"
+  treat_missing_data  = "breaching"
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
 
   metric_query {
