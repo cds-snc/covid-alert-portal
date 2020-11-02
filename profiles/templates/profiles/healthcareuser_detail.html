@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load waffle_tags %}
 
 {% block title %}
     {% if healthcareuser.id == user.id %}
@@ -93,6 +94,7 @@
                   </a>
               </td>
             </tr>
+            {% switch "security_code" %}
             <tr>
               <th scope="row">{% trans "Security Codes" %}</th>
               <td>{{ security_code_count }} {%trans " unused codes remaining" %}</td>
@@ -109,7 +111,8 @@
               </td>
               {% endif %}
             </tr>
-        {% endif %}
+            {% endswitch %}         
+          {% endif %}
       </tbody>
     </table>
 

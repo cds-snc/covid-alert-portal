@@ -32,6 +32,8 @@ from portal.mixins import ThrottledMixin, Is2FAMixin, IsAdminMixin
 from invitations.models import Invitation
 from axes.models import AccessAttempt
 
+from waffle.mixins import WaffleSwitchMixin
+
 from .utils import generate_2fa_code
 from .utils.invitation_adapter import user_signed_up
 from .models import HealthcareUser, HealthcareFailedAccessAttempt
@@ -279,7 +281,8 @@ class Resend2FAView(LoginRequiredMixin, FormView):
         return is_valid
 
 
-class SecurityCodeListView(Is2FAMixin, ListView):
+class SecurityCodeListView(WaffleSwitchMixin, Is2FAMixin, ListView):
+    waffle_switch = "security_code"
     template_name = "profiles/2fa-codes.html"
     context_object_name = "security_code_list"
 

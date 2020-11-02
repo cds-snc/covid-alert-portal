@@ -77,6 +77,7 @@ GITHUB_SHA = os.getenv("GITHUB_SHA") or None
 # Application definition
 
 INSTALLED_APPS = [
+    "waffle",
     "django_sass",
     "profiles",
     "covid_key",
@@ -114,6 +115,7 @@ MIDDLEWARE = [
     "axes.middleware.AxesMiddleware",
     "csp.middleware.CSPMiddleware",
     "easyaudit.middleware.easyaudit.EasyAuditMiddleware",
+    "waffle.middleware.WaffleMiddleware",
 ]
 
 ROOT_URLCONF = "portal.urls"
@@ -382,3 +384,5 @@ else:
         "handlers": {"console": {"class": "logging.StreamHandler"}},
         "root": {"handlers": ["console"], "level": "INFO"},
     }
+
+WAFFLE_CREATE_MISSING_SWITCHES = True
