@@ -282,7 +282,7 @@ class Resend2FAView(LoginRequiredMixin, FormView):
 
 
 class SecurityCodeListView(WaffleSwitchMixin, Is2FAMixin, ListView):
-    waffle_switch = "security_code"
+    waffle_switch = "SECURITY_CODE"
     template_name = "profiles/2fa-codes.html"
     context_object_name = "security_code_list"
 

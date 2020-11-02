@@ -94,7 +94,7 @@
                   </a>
               </td>
             </tr>
-            {% switch "security_code" %}
+            {% switch "SECURITY_CODE" %}
             <tr>
               <th scope="row">{% trans "Security Codes" %}</th>
               <td>{{ security_code_count }} {%trans " unused codes remaining" %}</td>
@@ -102,7 +102,7 @@
               <td>
                   <a href="{% url 'security_code_list' %}">
                     <span class="visually-hidden">
-                      
+
                         {% trans "Get Security Codes" %}
 
                     </span>
@@ -111,7 +111,7 @@
               </td>
               {% endif %}
             </tr>
-            {% endswitch %}         
+            {% endswitch %}
           {% endif %}
       </tbody>
     </table>
