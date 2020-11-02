@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% load i18n feature_flags %}
-{% flag_disabled 'STATIC_SECURITY_CODES' as security_code_flag %}
+{% load i18n %}
+
 {% block title %}
     {% if healthcareuser.id == user.id %}
         {% trans "Your account" %}
@@ -93,8 +93,6 @@
                   </a>
               </td>
             </tr>
-
-            {% if security_code_flag %}
             <tr>
               <th scope="row">{% trans "Security Codes" %}</th>
               <td>{{ security_code_count }} {%trans " unused codes remaining" %}</td>
@@ -111,7 +109,6 @@
               </td>
               {% endif %}
             </tr>
-            {% endif %}
         {% endif %}
       </tbody>
     </table>

@@ -8,7 +8,6 @@ from invitations.views import AcceptInvite
 
 from .admin import Admin2FASite
 from . import views
-import debug_toolbar
 
 admin.site.__class__ = Admin2FASite
 admin.site.site_header = (
@@ -45,7 +44,6 @@ urlpatterns = [
     path("403/", views.permission_denied_view),
     path("404/", views.page_not_found),
     path("500/", views.internal_error),
-    path('__debug__/', include(debug_toolbar.urls)),
 ]
 
 invitation_patterns = (
