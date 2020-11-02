@@ -251,7 +251,7 @@ resource "aws_cloudwatch_metric_alarm" "response_time_warn" {
 
   metric_query {
     id          = "e1"
-    expression  = "ANOMALY_DETECTION_BAND(m1)"
+    expression  = "ANOMALY_DETECTION_BAND(m1, 3)"
     label       = "Response Times (Expected)"
     return_data = "true"
   }
@@ -264,10 +264,8 @@ resource "aws_cloudwatch_metric_alarm" "response_time_warn" {
       namespace   = "AWS/ApplicationELB"
       period      = "60"
       stat        = "Average"
-      unit        = "Count"
-
       dimensions = {
-        InstanceId = aws_lb.covidportal.arn_suffix
+        LoadBalancer = aws_lb.covidportal.arn_suffix
       }
     }
   }
@@ -292,12 +290,12 @@ resource "aws_cloudwatch_metric_alarm" "service_availability_warn" {
   evaluation_periods  = "1"
   threshold_metric_id = "e1"
   alarm_description   = "COVID Alert Portal Warning - No status checks detected.  Check COVID Alert Portal to ensure site is operational."
-  treat_missing_data  = "notBreaching"
+  treat_missing_data  = "breaching"
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
 
   metric_query {
     id          = "e1"
-    expression  = "ANOMALY_DETECTION_BAND(m1)"
+    expression  = "ANOMALY_DETECTION_BAND(m1, 3)"
     label       = "Status Checks (Expected)"
     return_data = "true"
   }
@@ -310,7 +308,6 @@ resource "aws_cloudwatch_metric_alarm" "service_availability_warn" {
       namespace   = "covidportal"
       period      = "60"
       stat        = "Sum"
-      unit        = "Count"
     }
   }
 }
