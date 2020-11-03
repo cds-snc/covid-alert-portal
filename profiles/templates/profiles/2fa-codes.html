@@ -7,13 +7,20 @@
   {% include  "includes/flash_messages.html" %}
   <h1>{% trans "Security Codes" %}</h1>
   <p>{% trans "Without a mobile phone, you will need to use these single-use security codes to access the portal." %}</p>
-  {% for security_code in security_code_list %}
-  <h2>{{ security_code.token }}</h2>
 
-  {% endfor %}
+  <div class="static-codes">
+    <ul>
+    {% for security_code in security_code_list %}
+      <li>
+        <span class="visually-hidden">{{ security_code.token|upper|join:" " }}</span>
+        <span aria-hidden="true"><span>{{ security_code.token|slice:":4" }}</span><span>{{ security_code.token|slice:"4:" }}</span></span>
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
 
   <p>{% trans "Write down these single-use security codes on a piece of paper." %}</p>
   <p>{% trans "Make sure to get more security codes before you use up all of the ones listed here." %}</p>
-  
+  <div class="content-button"><a href="{% url 'start' %}" role='button' draggable='false'>{% trans "Visit portal" %}</a></div>
 
 {% endblock %}
