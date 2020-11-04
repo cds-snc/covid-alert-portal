@@ -40,6 +40,8 @@ resource "aws_rds_cluster" "covidportal_server" {
   preferred_backup_window   = "07:00-09:00"
   db_subnet_group_name      = aws_db_subnet_group.covidportal.name
   storage_encrypted         = true
+  #tfsec:ignore:AWS051
+  # KMS key is not explicitly defined but a default key is created
 
 
   vpc_security_group_ids = [
