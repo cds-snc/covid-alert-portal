@@ -17,8 +17,7 @@ from django.views.generic.edit import UpdateView
 
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django_otp import DEVICE_ID_SESSION_KEY, devices_for_user
-from django_otp.plugins.otp_static.models import StaticDevice, StaticToken
+from django_otp import DEVICE_ID_SESSION_KEY
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.expressions import RawSQL
 from django.utils.translation import LANGUAGE_SESSION_KEY, check_for_language
@@ -29,10 +28,9 @@ from django.urls import translate_url
 from otp_yubikey.models import RemoteYubikeyDevice
 
 from portal.mixins import ThrottledMixin, Is2FAMixin, IsAdminMixin
+from backup_codes.views import get_user_static_device
 from invitations.models import Invitation
 from axes.models import AccessAttempt
-
-from waffle.mixins import WaffleSwitchMixin
 
 from .utils import generate_2fa_code
 from .utils.invitation_adapter import user_signed_up
@@ -281,32 +279,6 @@ class Resend2FAView(LoginRequiredMixin, FormView):
         return is_valid
 
 
-class SecurityCodeListView(WaffleSwitchMixin, Is2FAMixin, ListView):
-    waffle_switch = "SECURITY_CODE"
-    template_name = "profiles/2fa-codes.html"
-    context_object_name = "security_code_list"
-
-    def setup(self, request, *args, **kwargs):
-        self.recreate_security_codes(request)
-
-        return super().setup(request, *args, **kwargs)
-
-    def get_queryset(self):
-        return get_user_static_device(self, self.request.user).token_set.all()
-
-    def recreate_security_codes(self, request):
-        devices = get_user_static_device(self, request.user)
-        if devices:
-            devices.token_set.all().delete()
-        else:
-            devices = StaticDevice.objects.create(
-                user=request.user, name="Static_Security_Codes"
-            )
-        for n in range(5):
-            security_code = StaticToken.random_token()
-            devices.token_set.create(token=security_code)
-
-
 class InvitationView(Is2FAMixin, IsAdminMixin, ThrottledMixin, FormView):
     form_class = HealthcareInviteForm
     template_name = "invitations/templates/invite.html"
@@ -512,10 +484,3 @@ def switch_language(request):
         samesite=settings.LANGUAGE_COOKIE_SAMESITE,
     )
     return response
-
-
-def get_user_static_device(self, user, confirmed=None):
-    devices = devices_for_user(user, confirmed=confirmed)
-    for device in devices:
-        if isinstance(device, StaticDevice):
-            return device
