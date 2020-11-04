@@ -1,0 +1,28 @@
+.static-codes {
+  display: inline-block;
+  border: 2px dashed $color-grey;
+  padding: $space-md calc(#{$space-xl} + #{$space-md});
+  margin: $space-md 0 $space-lg 0;
+  border-radius: 10px;
+  text-align: left;
+  position: relative;
+
+  ul {
+    font-family: monospace;
+    font-size: 1.2em;
+    padding-left: 0;
+    margin-bottom: 0;
+    letter-spacing: 0.05em;
+    list-style-type: none;
+
+    li {
+      &:not(:last-of-type) {
+        margin-bottom: $space-sm;
+      }
+
+      [aria-hidden="true"] span:last-of-type {
+        padding-left: $space-xs;
+      }
+    }
+  }
+}
