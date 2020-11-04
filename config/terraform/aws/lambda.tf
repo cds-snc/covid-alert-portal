@@ -64,6 +64,13 @@ resource "aws_lambda_permission" "notify_slack_critical" {
   source_arn    = aws_sns_topic.alert_critical.arn
 }
 
+resource "aws_lambda_permission" "notify_slack_ok" {
+  statement_id  = "AllowExecutionFromSNSOkAlert"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.notify_slack_sns.function_name
+  principal     = "sns.amazonaws.com"
+  source_arn    = aws_sns_topic.alert_ok.arn
+}
 ## Allow Lambda to create Logs in Cloudwatch
 
 resource "aws_iam_policy" "lambda_logging" {
