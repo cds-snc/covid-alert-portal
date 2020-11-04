@@ -7,10 +7,12 @@ from django.contrib.auth import get_user_model
 from django.utils import translation, timezone
 from django.core.exceptions import ValidationError
 from django_otp import DEVICE_ID_SESSION_KEY
+from django_otp.plugins.otp_static.models import StaticDevice
 from invitations.models import Invitation
 from axes.models import AccessAttempt
 from datetime import datetime, timedelta
 from freezegun import freeze_time
+from waffle.models import Switch
 
 from .apps import ProfilesConfig
 from .forms import SignupForm, HealthcarePhoneEditForm
@@ -111,6 +113,8 @@ class AdminUserTestCase(TestCase):
 
         self.invited_email = "invited@test.com"
         AuthorizedDomain.objects.create(domain="test.com")
+
+        Switch.objects.create(name="SECURITY_CODE", active=True)
 
     def login(self, credentials: dict = None, login_2fa: bool = True):
         if credentials is None:
@@ -1269,20 +1273,15 @@ class ProfileEditView(AdminUserTestCase):
         self.assertEqual(user.phone_number, number)
 
 
-from waffle.models import Switch
-from django_otp.plugins.otp_static.models import StaticDevice
-
-
 class SecurityCodeView(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
-        Switch.objects.create(name="SECURITY_CODE", active=True)
 
     def test_user_can_view_security_codes_row_on_account_page(self):
         self.login()
         response = self.client.get(reverse("user_profile", kwargs={"pk": self.user.id}))
         self.assertEqual(response.status_code, 200)
-        ## no security codes link present
+        ## security codes link is present
         self.assertContains(response, '<a href="/en/profiles/security-codes">')
 
     def test_user_can_generate_5_security_codes(self):
