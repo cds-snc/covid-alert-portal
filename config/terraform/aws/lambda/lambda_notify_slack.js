@@ -60,7 +60,7 @@ exports.handler = function(event, context) {
 
     
     // Only check for warning messages if necessary
-    if (severity == "good" && needs_processing) {
+    if (needs_processing) {
         for(var warningMessagesItem in warningMessages) {
             if (message.indexOf(warningMessages[warningMessagesItem]) != -1) {
                 severity = "warning";
