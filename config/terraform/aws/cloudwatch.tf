@@ -252,7 +252,7 @@ resource "aws_cloudwatch_metric_alarm" "response_time_warn" {
 
   metric_query {
     id          = "e1"
-    expression  = "ANOMALY_DETECTION_BAND(m1, 3)"
+    expression  = "ANOMALY_DETECTION_BAND(m1, 5)"
     label       = "Response Times (Expected)"
     return_data = "true"
   }
