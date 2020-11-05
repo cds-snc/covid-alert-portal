@@ -19,8 +19,10 @@ exports.handler = function(event, context) {
         "icon_emoji": ":loudspeaker:"
     };
 
-    var message = getMessage(event.Records[0].Sns.Message);
+    var message = event.Records[0].Sns.Message;
+
     var severity = "good";
+    var needs_processing = true;
 
     var dangerMessages = [
         "COVID Alert Portal Critical"
@@ -29,21 +31,42 @@ exports.handler = function(event, context) {
     var warningMessages = [
         "COVID Alert Portal Warning"
         ];
+
+    var okMessages = [
+        "\"NewStateValue\":\"OK\""
+    ];
+
     
-    for(var dangerMessagesItem in dangerMessages) {
-        if (message.indexOf(dangerMessages[dangerMessagesItem]) != -1) {
-            severity = "danger";
-            postData.icon_emoji = ":rotating_light:";
+    for(var okMessagesItem in okMessages) {
+        if (message.indexOf(okMessages[okMessagesItem]) != -1) {
+            message = "Alarm Status now OK - " + getMessage(message); 
+            needs_processing = false;
             break;
         }
     }
     
+    // Only check for critial messages if necessary
+    if (needs_processing){
+        for(var dangerMessagesItem in dangerMessages) {
+            if (message.indexOf(dangerMessages[dangerMessagesItem]) != -1) {
+                severity = "danger";
+                postData.icon_emoji = ":rotating_light:";
+                message = getMessage(message);
+                needs_processing = false;
+                break;
+            }
+        }
+    }
+
+    
     // Only check for warning messages if necessary
-    if (severity == "good") {
+    if (needs_processing) {
         for(var warningMessagesItem in warningMessages) {
             if (message.indexOf(warningMessages[warningMessagesItem]) != -1) {
                 severity = "warning";
                 postData.icon_emoji = ":warning:";
+                message = getMessage(message);
+                needs_processing = false;
                 break;
             }
         }        
