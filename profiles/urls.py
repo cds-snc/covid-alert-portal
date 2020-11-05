@@ -73,11 +73,6 @@ urlpatterns = [
         name="user_edit_password",
     ),
     path(
-        "profiles/security-codes",
-        views.SecurityCodeListView.as_view(),
-        name="security_code_list",
-    ),
-    path(
         "login/",
         LoginView.as_view(authentication_form=forms.HealthcareAuthenticationForm),
         name="login",
