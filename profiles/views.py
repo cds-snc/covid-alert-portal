@@ -362,9 +362,10 @@ class ProfilesView(Is2FAMixin, IsAdminMixin, ListView):
         if not self.request.user.is_superuser:
             queryset = queryset.filter(is_superuser=False)
 
+        # sorting rules: (a) current user on top, (b) then admins, (c) then staff by email address alphabetically
         return queryset.annotate(
             current_user_email=RawSQL("email = %s", (self.request.user.email,))
-        ).order_by("-current_user_email", "-is_admin")
+        ).order_by("-current_user_email", "-is_admin", "email")
 
 
 class UserProfileView(Is2FAMixin, ProvinceAdminViewMixin, DetailView):
