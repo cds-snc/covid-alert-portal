@@ -100,6 +100,14 @@ variable "ecs_secret_password_reset_email_template_id_fr" {
   type = string
 }
 
+variable "ecs_secret_backup_code_admin_email_template_id_en" {
+  type = string
+}
+
+variable "ecs_secret_backup_code_admin_email_template_id_fr" {
+  type = string
+}
+
 variable "ecs_secret_django_admins" {
   type = string
 }

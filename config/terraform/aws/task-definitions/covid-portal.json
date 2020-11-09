@@ -92,6 +92,14 @@
         "valueFrom": "${password_reset_email_template_id_fr}"
       },
       {
+        "name": "BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_EN",
+        "valueFrom": "${backup_code_admin_email_template_id_en}"
+      },
+      {
+        "name": "BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_FR",
+        "valueFrom": "${backup_code_admin_email_template_id_fr}"
+      },
+      {
         "name": "DJANGO_ADMINS",
         "valueFrom": "${django_admins}"
       },

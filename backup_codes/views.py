@@ -57,17 +57,25 @@ class RequestBackupCodes(WaffleSwitchMixin, LoginRequiredMixin, FormView):
         if self.user_was_invited:
             invitation = Invitation.objects.filter(email__iexact=self.request.user.email).first()
             if HealthcareUser.objects.filter(email__iexact=invitation.inviter.email).exists():
-                return invitation.inviter.email
-            else:
-                return "assistance+healthcare@cds-snc.ca"
+                return invitation.inviter
+        
+        return dict({"email": "assistance+healthcare@cds-snc.ca", "name":"Portal Super Admin"}) 
 
     @cached_property
     def user_was_invited(self):
         return Invitation.objects.filter(email__iexact=self.request.user.email).exists()
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # Add the currently logged user to the form
+        kwargs["user"] = self.request.user
+        kwargs["admin"] = self.user_admin
+        return kwargs
+
     def form_valid(self, form):
         is_valid = super().form_valid(form)
         if is_valid:
+            form.send_mail(self.request.LANGUAGE_CODE)
             messages.success(self.request, _("Your administrator has been notified."))
 
         return is_valid
