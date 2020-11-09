@@ -65,11 +65,6 @@ class RequestBackupCodes(WaffleSwitchMixin, LoginRequiredMixin, FormView):
     def user_was_invited(self):
         return Invitation.objects.filter(email__iexact=self.request.user.email).exists()
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs["user"] = self.request.user
-        return kwargs
-
     def form_valid(self, form):
         is_valid = super().form_valid(form)
         if is_valid:
@@ -77,8 +72,10 @@ class RequestBackupCodes(WaffleSwitchMixin, LoginRequiredMixin, FormView):
 
         return is_valid
 
-
+######################
 # Functions used from the Profiles module for 2fa login.
+######################
+
 def get_user_static_device(self, user, confirmed=None):
     devices = devices_for_user(user, confirmed=confirmed)
     for device in devices:
