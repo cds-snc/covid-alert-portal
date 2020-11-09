@@ -35,7 +35,7 @@
 
   {% include "includes/cds_form.html" with submit_text=_("Next") form_class="small" %}
 
-  {% switch "BACKUP_CODE"}
+  {% switch "BACKUP_CODE" %}
 
     {% if view.has_mobile %}
       <a href="{% url 'resend-2fa' %}">{{ _("Resend security code?") }}</a>
