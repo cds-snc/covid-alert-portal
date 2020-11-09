@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load waffle_tags %}
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
@@ -13,4 +14,8 @@
   <h1>{% trans "Re-send security code" %}</h1>
   <p>{% trans "If you did not get the code, ask us to send it again." %}</p>
   {% include "includes/cds_form.html" with submit_text=_("Re-send security code") %}
+  {% switch "BACKUP_CODE" %}
+    <a href="{% url 'backup_codes_help' %}">{{ _("Unable to receive SMS?") }}</a>
+  {% endswitch %}
+
 {% endblock %}

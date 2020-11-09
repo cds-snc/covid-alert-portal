@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% if form.errors %}{% trans "Error: "%}{% endif %}
+  {% trans "No security code?" %}
+{% endblock %}
+
+
+{% block content %}
+  {% include  "includes/error_list.html" %}
+
+  <h1>{% trans "No security code?" %}</h1>
+  <p>{% trans "You can get more security codes once you’ve logged-in to the portal in ‘Your Account’ page." %}
+    {% trans "If your security codes are no longer valid or you have lost your security codes, your administrator" %}
+    ({{ view.user_admin }}) {%trans "can help." %}</p>
+  {% include "includes/cds_form.html" with submit_text=_("Request security codes from admin") %}
+
+{% endblock %}
