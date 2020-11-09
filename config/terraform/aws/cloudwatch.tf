@@ -23,6 +23,7 @@ resource "aws_cloudwatch_metric_alarm" "portal_cpu_utilization_high_warn" {
   alarm_description   = "COVID Alert Portal Warning - High CPU usage has been detected."
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
+  ok_actions    = [aws_sns_topic.alert_ok.arn]
   dimensions = {
     ClusterName = aws_ecs_cluster.covidportal.name
     ServiceName = aws_ecs_service.covidportal.name
@@ -41,6 +42,7 @@ resource "aws_cloudwatch_metric_alarm" "portal_memory_utilization_high_warn" {
   alarm_description   = "COVID Alert Portal Warning - High memory usage has been detected."
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
+  ok_actions    = [aws_sns_topic.alert_ok.arn]
 
   dimensions = {
     ClusterName = aws_ecs_cluster.covidportal.name
@@ -249,6 +251,7 @@ resource "aws_cloudwatch_metric_alarm" "response_time_warn" {
   alarm_description   = "COVID Alert Portal Warning - The latency of response times from the Portal are abnormally high."
   treat_missing_data  = "notBreaching"
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
+  ok_actions          = [aws_sns_topic.alert_ok.arn]
 
   metric_query {
     id          = "e1"
@@ -294,6 +297,7 @@ resource "aws_cloudwatch_metric_alarm" "service_availability_warn" {
   alarm_description   = "COVID Alert Portal Warning - No status checks detected.  Check COVID Alert Portal to ensure site is operational."
   treat_missing_data  = "breaching"
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
+  ok_actions          = [aws_sns_topic.alert_ok.arn]
 
   metric_query {
     id          = "e1"
