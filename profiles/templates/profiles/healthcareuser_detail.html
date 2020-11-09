@@ -97,17 +97,23 @@
             {% switch "BACKUP_CODE" %}
             <tr>
               <th scope="row">{% trans "Security Codes" %}</th>
-              <td>{{ security_code_count }} {%trans " unused codes remaining" %}</td>
+              <td>
+                <span>
+                {{ security_code_count }}
+                {% if security_code_count == 1 %}{% trans "code" %}{% else %}{% trans "codes" %}{% endif %}
+                {% trans "remaining" %}
+                </span>
+              </td>
               {% if not view_only %}
               <td>
-                  <a href="{% url 'backup_codes' %}">
-                    <span class="visually-hidden">
-
-                        {% trans "Get Security Codes" %}
-
-                    </span>
-                    <span aria-hidden="true">{% trans "Get Security Codes" %}</span>
-                  </a>
+                {% if security_code_count < 1 %}
+                  <form action="{% url 'backup_codes' %}" method="post">
+                  {% csrf_token %}
+                    <button type="submit" class="link">{% trans "Get security codes" %}</button>
+                  </form>
+                {% else %}
+                  <a href="{% url 'backup_codes' %}">{% trans "View security codes" %}</a>
+                {% endif %}
               </td>
               {% endif %}
             </tr>
