@@ -22,6 +22,8 @@ resource "aws_rds_cluster_instance" "covidportal_server_instances" {
   instance_class               = var.rds_server_instance_class
   db_subnet_group_name         = aws_db_subnet_group.covidportal.name
   performance_insights_enabled = true
+  #tfsec:ignore:AWS053
+  # KMS key is not explicitly defined but a default key is created
 
   tags = {
     Name                  = "${var.rds_server_name}-instance"
