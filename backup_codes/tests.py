@@ -3,22 +3,23 @@ from django.test import TestCase
 from django.urls import reverse
 
 from django_otp.plugins.otp_static.models import StaticDevice
+from waffle.models import Switch
 
 from profiles.tests import AdminUserTestCase
 
 from .apps import BackupCodesConfig
-
 
 class BackupCodesConfigTest(TestCase):
     def test_apps(self):
         self.assertEqual(BackupCodesConfig.name, "backup_codes")
         self.assertEqual(apps.get_app_config("backup_codes").name, "backup_codes")
 
-
 class SecurityCodeView(AdminUserTestCase):
-    def setUp(self):
-        super().setUp(is_admin=True)
 
+    def setUp(self):
+        Switch.objects.create(name="BACKUP_CODE", active=True)
+        super().setUp(is_admin=True)
+        
     def test_user_can_view_security_codes_row_on_account_page(self):
         self.login()
         response = self.client.get(reverse("user_profile", kwargs={"pk": self.user.id}))
@@ -77,3 +78,10 @@ class SecurityCodeView(AdminUserTestCase):
                     token[:4], token[-4:]
                 ),
             )
+
+class SecurityCodeLogin(AdminUserTestCase):
+    def setUp(self):
+        Switch.objects.create(name="BACKUP_CODE", active=True)
+        super().setUp(is_admin=True)
+    
+    
