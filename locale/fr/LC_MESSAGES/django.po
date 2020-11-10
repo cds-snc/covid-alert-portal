@@ -24,8 +24,6 @@ msgid "Security Codes"
 msgstr "Codes de sécurité"
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html:8
-#, fuzzy
-#| msgid "Security code"
 msgid "Security codes"
 msgstr "Code de sécurité"
 
@@ -50,14 +48,10 @@ msgstr ""
 "répertoriés ici."
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html:27
-#, fuzzy
-#| msgid "Security code"
 msgid "Get new security codes"
 msgstr "Obtenez des codes de sécurité"
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html:29
-#, fuzzy
-#| msgid "Back to accounts"
 msgid "Back to your account"
 msgstr "Retour aux comptes"
 
