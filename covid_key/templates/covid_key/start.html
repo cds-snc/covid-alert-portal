@@ -20,7 +20,7 @@
   <div class="content-button">
    <form action="{% url 'key' %}" method="post">
     {% csrf_token %}
-    <button type="submit">{% trans "Generate key" %}</button>
-  </form>
+      <button type="submit">{% trans "Generate key" %}</button>
+    </form>
   </div>
 {% endblock %}
