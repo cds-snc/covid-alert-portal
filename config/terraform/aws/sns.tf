@@ -85,7 +85,8 @@ data "aws_iam_policy_document" "cloudwatch_events_sns_topic_policy" {
     }
 
     resources = [
-      aws_sns_topic.alert_warning.arn
+      aws_sns_topic.alert_warning.arn,
+      aws_sns_topic.alert_ok.arn
     ]
 
     principals {
@@ -102,7 +103,8 @@ data "aws_iam_policy_document" "cloudwatch_events_sns_topic_policy" {
     ]
 
     resources = [
-      aws_sns_topic.alert_warning.arn
+      aws_sns_topic.alert_warning.arn,
+      aws_sns_topic.alert_ok.arn
     ]
 
     principals {
