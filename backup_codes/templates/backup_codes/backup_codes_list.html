@@ -5,7 +5,7 @@
 
 {% block content %}
   {% include  "includes/flash_messages.html" %}
-  <h1>{% trans "Security Codes" %}</h1>
+  <h1>{% trans "Security codes" %}</h1>
   <p>{% trans "Without a mobile phone, you will need to use these single-use security codes to access the portal." %}</p>
 
   <div class="static-codes">
@@ -21,6 +21,12 @@
 
   <p>{% trans "Write down these single-use security codes on a piece of paper." %}</p>
   <p>{% trans "Make sure to get more security codes before you use up all of the ones listed here." %}</p>
-  <div class="content-button"><a href="{% url 'start' %}" role='button' draggable='false'>{% trans "Visit portal" %}</a></div>
+  <div class="content-button">
+    <form action="{% url 'backup_codes' %}" method="post">
+      {% csrf_token %}
+      <button type="submit">{% trans "Get new security codes" %}</button>
+    </form>
+    <a href="{% url 'user_profile' pk=user.id %}" class="secondary" role='button' draggable='false'>{% trans "Back to your account" %}</a>
+  </div>
 
 {% endblock %}

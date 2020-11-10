@@ -104,20 +104,33 @@ main {
     flex-direction: column;
     align-items: flex-start;
 
+    form {
+      width: auto;
+      max-width: unset;
+      margin-bottom: none;
+      display: inline;
+    }
+
     &.push-down {
       margin-top: $space-xxl;
     }
 
-    a[role="button"] + a[role="button"] {
-      margin-top: $space-md;
+    form,
+    a[role="button"] {
+      + a[role="button"] {
+        margin-top: $space-md;
+      }
     }
 
     @include sm {
       display: block;
 
-      a[role="button"] + a[role="button"] {
-        margin-top: $space-xs;
-        margin-left: $space-xl;
+      form,
+      a[role="button"] {
+        + a[role="button"] {
+          margin-top: $space-xs;
+          margin-left: $space-xl;
+        }
       }
     }
   }
