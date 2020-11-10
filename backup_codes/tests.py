@@ -1,14 +1,18 @@
+from datetime import time
 from django.apps import apps
 from django.test import TestCase
 from django.urls import reverse
+from django.utils import timezone
+from django.contrib.auth import get_user_model
 
 from django_otp.plugins.otp_static.models import StaticDevice
-
+from invitations.models import Invitation
+from profiles.models import (
+    HealthcareProvince
+)
 from waffle.models import Switch
 
 from profiles.tests import AdminUserTestCase
-from profiles.models import HealthcareUser
-
 
 from .apps import BackupCodesConfig
 
@@ -20,9 +24,9 @@ class BackupCodesConfigTest(TestCase):
 class SecurityCodeView(AdminUserTestCase):
 
     def setUp(self):
-        Switch.objects.create(name="BACKUP_CODE", active=True)
         super().setUp(is_admin=True)
-
+        Switch.objects.create(name="BACKUP_CODE", active=True)
+        
     def test_user_can_get_security_codes_on_account_page(self):
         self.login()
         response = self.client.get(reverse("user_profile", kwargs={"pk": self.user.id}))
@@ -110,9 +114,10 @@ class SecurityCodeLogin(AdminUserTestCase):
         self.ensure_codes_created()
         self.logout()
 
+
     def ensure_codes_created(self):
         self.login(login_2fa=True)
-        self.client.get(reverse("backup_codes"))
+        self.client.post(reverse("backup_codes"), follow=True)
     
     def logout(self):
         response = self.client.get("/", follow=True)
@@ -128,7 +133,7 @@ class SecurityCodeLogin(AdminUserTestCase):
         self.assertEqual(response.status_code, 200)
         
         # Get backup code
-        static_device = StaticDevice.objects.get(user__id=self.user.id)
+        static_device = self.user.staticdevice_set.first()
         token = static_device.token_set.first()
         
         # Submit backup code
@@ -146,8 +151,30 @@ class SecurityCodeLogin(AdminUserTestCase):
         # Check if we are now verified
         self.assertTrue(response.context["user"].is_verified)
 
+class SecurityCodeHelp(AdminUserTestCase):
+    def setUp(self):
+        super().setUp(is_admin=False)
+        Switch.objects.create(name="BACKUP_CODE", active=True)
+        self.inviter_credentials = {
+            "email": "inviter@test.com",
+            "name": "InviterUser",
+            "province": HealthcareProvince.objects.get(abbr="ON"),
+            "is_admin": True,
+            "password": "superdupercomplex_To_Infinity_and_Beyond",
+            "phone_number": "+12125552368",
+        }
+        User = get_user_model()
+        self.inviter = User.objects.create_user(**self.inviter_credentials)
+        self.invite = Invitation.create(self.user.email, inviter=self.inviter, sent=timezone.now())
+        self.invite.accepted = True
 
-    # def users_admin_displayed_on_backup_code_help_page
+    def test_users_admin_displayed_on_backup_code_help_page(self):
+        self.login(login_2fa=False)
+        response = self.client.get(reverse("backup_codes_help"))
+        self.assertContains(response, self.inviter.email)
+
+
+
 
 
     
