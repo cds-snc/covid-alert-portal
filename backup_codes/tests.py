@@ -3,9 +3,12 @@ from django.test import TestCase
 from django.urls import reverse
 
 from django_otp.plugins.otp_static.models import StaticDevice
+
 from waffle.models import Switch
 
 from profiles.tests import AdminUserTestCase
+from profiles.models import HealthcareUser
+
 
 from .apps import BackupCodesConfig
 
@@ -81,7 +84,50 @@ class SecurityCodeView(AdminUserTestCase):
 
 class SecurityCodeLogin(AdminUserTestCase):
     def setUp(self):
-        Switch.objects.create(name="BACKUP_CODE", active=True)
         super().setUp(is_admin=True)
+        Switch.objects.create(name="BACKUP_CODE", active=True)
+        self.ensure_codes_created()
+        self.logout()
+
+    def ensure_codes_created(self):
+        self.login(login_2fa=True)
+        self.client.get(reverse("backup_codes"))
+    
+    def logout(self):
+        response = self.client.get("/", follow=True)
+        if response.context["user"].is_active:
+            self.client.get(reverse("logout"))
+
+    def test_user_can_login_with_backup_code(self):
+
+        self.login(login_2fa=False)
+
+        #  Get the 2fa page
+        response = self.client.get(reverse("login-2fa"))
+        self.assertEqual(response.status_code, 200)
+        
+        # Get backup code
+        static_device = StaticDevice.objects.get(user__id=self.user.id)
+        token = static_device.token_set.first()
+        
+        # Submit backup code
+        post_data = {
+            "code": token.token
+        }
+        response = self.client.post(
+            reverse("login-2fa"),
+            post_data,
+            REMOTE_ADDR="127.0.0.1",
+            HTTP_USER_AGENT="test-browser",
+            follow = True
+        )
+
+        # Check if we are now verified
+        self.assertTrue(response.context["user"].is_verified)
+
+
+    # def users_admin_displayed_on_backup_code_help_page
+
+
     
     
