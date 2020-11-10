@@ -11,7 +11,6 @@ from invitations.models import Invitation
 from axes.models import AccessAttempt
 from datetime import datetime, timedelta
 from freezegun import freeze_time
-from waffle.models import Switch
 
 from .apps import ProfilesConfig
 from .forms import SignupForm, HealthcarePhoneEditForm
@@ -112,8 +111,6 @@ class AdminUserTestCase(TestCase):
 
         self.invited_email = "invited@test.com"
         AuthorizedDomain.objects.create(domain="test.com")
-
-        Switch.objects.create(name="BACKUP_CODE", active=True)
 
     def login(self, credentials: dict = None, login_2fa: bool = True):
         if credentials is None:
