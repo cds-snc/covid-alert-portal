@@ -1,4 +1,6 @@
 from django.views.generic import ListView
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from django_otp import devices_for_user
 from django_otp.plugins.otp_static.models import StaticDevice, StaticToken
 
@@ -12,10 +14,17 @@ class BackupCodeListView(WaffleSwitchMixin, Is2FAMixin, ListView):
     template_name = "backup_codes/backup_codes_list.html"
     context_object_name = "backup_code_list"
 
-    def setup(self, request, *args, **kwargs):
-        self.recreate_backup_codes(request)
+    def get(self, request, *args, **kwargs):
+        if not get_user_static_device(self, self.request.user):
+            return redirect(
+                reverse_lazy("user_profile", kwargs={"pk": request.user.id})
+            )
 
-        return super().setup(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.recreate_backup_codes(request)
+        return redirect(reverse_lazy("backup_codes"))
 
     def get_queryset(self):
         return get_user_static_device(self, self.request.user).token_set.all()
