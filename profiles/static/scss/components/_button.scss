@@ -116,6 +116,7 @@ main {
     }
 
     form,
+    button,
     a[role="button"] {
       + a[role="button"] {
         margin-top: $space-md;
@@ -126,6 +127,7 @@ main {
       display: block;
 
       form,
+      button,
       a[role="button"] {
         + a[role="button"] {
           margin-top: $space-xs;

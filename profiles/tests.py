@@ -183,7 +183,7 @@ class RestrictedPageViews(TestCase):
         self.assertRedirects(response, "/en/login/?next=/en/start/")
 
     def test_2fa(self):
-        response = self.client.get(reverse("login-2fa"))
+        response = self.client.get(reverse("login_2fa"))
         self.assertRedirects(response, "/en/login/?next=/en/login-2fa/")
 
     def test_yubikey_verify(self):
@@ -345,7 +345,7 @@ class AuthenticatedView(AdminUserTestCase):
         self.login(login_2fa=False)
 
         #  Get the 2fa page
-        response = self.client.get(reverse("login-2fa"))
+        response = self.client.get(reverse("login_2fa"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "<h1>Enter your security code</h1>")
         self.assertNotContains(response, "Your account")
@@ -540,14 +540,14 @@ class SignupView(AdminUserTestCase):
         self.assertEqual(self.invite.accepted, False)
         response = self.client.post(reverse("signup"), data=self.new_user_data)
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, reverse("signup-2fa"))
+        self.assertEqual(response.url, reverse("signup_2fa"))
         second_step_response = self.client.post(
-            reverse("signup-2fa"), data=self.new_user_data
+            reverse("signup_2fa"), data=self.new_user_data
         )
         self.assertEqual(second_step_response.status_code, 302)
         self.assertEqual(
             second_step_response.url,
-            reverse("login-2fa") + "?next=" + reverse("welcome"),
+            reverse("login_2fa") + "?next=" + reverse("welcome"),
         )
 
         # The invitation is modified in another Thread and django/python gil are not aware the object has changed.

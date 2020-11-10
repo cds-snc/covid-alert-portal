@@ -38,17 +38,17 @@
   {% switch "BACKUP_CODE" %}
 
     {% if view.has_mobile %}
-      <a href="{% url 'resend-2fa' %}">{{ _("Resend security code?") }}</a>
+      <a href="{% url 'resend_2fa' %}">{{ _("Resend security code?") }}</a>
     {% else %}
     <a href="{% url 'backup_codes_help' %}">{{ _("No security code?") }}</a>
     {% endif %}
 
   {% else %}
 
-    <a href="{% url 'resend-2fa' %}">{{ _("Resend security code?") }}</a>
-    
+    <a href="{% url 'resend_2fa' %}">{{ _("Resend security code?") }}</a>
+
   {% endswitch %}
 
 
-  
+
 {% endblock %}

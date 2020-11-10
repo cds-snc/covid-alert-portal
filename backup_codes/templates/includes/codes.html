@@ -1,0 +1,10 @@
+<div class="static-codes">
+  <ul>
+  {% for code in codes %}
+    <li>
+      <span class="visually-hidden">{{ code.token|upper|join:" " }}</span>
+      <span aria-hidden="true"><span>{{ code.token|slice:":4" }}</span><span>{{ code.token|slice:"4:" }}</span></span>
+    </li>
+  {% endfor %}
+  </ul>
+</div>
