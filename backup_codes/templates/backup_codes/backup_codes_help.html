@@ -11,9 +11,7 @@
   {% include  "includes/error_list.html" %}
 
   <h1>{% trans "No security code?" %}</h1>
-  <p>{% blocktrans }
-    Ask your administrator ({{view.user_admin.email}}) for a code.
-    {% endblocktrans %}</p>
+  <p>{% blocktrans with view.user_admin.email as admin_email %}Ask your administrator ({{admin_email}}) for a code.{% endblocktrans %}</p>
   {% include "includes/cds_form.html" with submit_text=_("Get codes from admin") %}
 
 {% endblock %}
