@@ -17,8 +17,6 @@ from portal.mixins import Is2FAMixin
 
 from backup_codes.forms import RequestBackupCodesForm
 
-from django.urls import reverse_lazy
-
 from django.utils.translation import gettext as _
 from django.utils.functional import cached_property
 
