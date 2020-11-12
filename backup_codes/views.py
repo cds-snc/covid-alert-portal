@@ -11,7 +11,6 @@ from django_otp import DEVICE_ID_SESSION_KEY
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
-from django.contrib import messages
 
 from waffle.mixins import WaffleSwitchMixin
 from portal.mixins import Is2FAMixin
