@@ -7,26 +7,25 @@ from django.contrib.auth import get_user_model
 
 from django_otp.plugins.otp_static.models import StaticDevice
 from invitations.models import Invitation
-from profiles.models import (
-    HealthcareProvince
-)
+from profiles.models import HealthcareProvince
 from waffle.models import Switch
 
 from profiles.tests import AdminUserTestCase
 
 from .apps import BackupCodesConfig
 
+
 class BackupCodesConfigTest(TestCase):
     def test_apps(self):
         self.assertEqual(BackupCodesConfig.name, "backup_codes")
         self.assertEqual(apps.get_app_config("backup_codes").name, "backup_codes")
 
-class SecurityCodeView(AdminUserTestCase):
 
+class SecurityCodeView(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
         Switch.objects.create(name="BACKUP_CODE", active=True)
-        
+
     def test_user_can_get_security_codes_on_account_page(self):
         self.login()
         response = self.client.get(reverse("user_profile", kwargs={"pk": self.user.id}))
@@ -107,6 +106,7 @@ class SecurityCodeView(AdminUserTestCase):
                 ),
             )
 
+
 class SecurityCodeLogin(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
@@ -114,11 +114,10 @@ class SecurityCodeLogin(AdminUserTestCase):
         self.ensure_codes_created()
         self.logout()
 
-
     def ensure_codes_created(self):
         self.login(login_2fa=True)
         self.client.post(reverse("backup_codes"), follow=True)
-    
+
     def logout(self):
         response = self.client.get("/", follow=True)
         if response.context["user"].is_active:
@@ -131,25 +130,24 @@ class SecurityCodeLogin(AdminUserTestCase):
         #  Get the 2fa page
         response = self.client.get(reverse("login-2fa"))
         self.assertEqual(response.status_code, 200)
-        
+
         # Get backup code
         static_device = self.user.staticdevice_set.first()
         token = static_device.token_set.first()
-        
+
         # Submit backup code
-        post_data = {
-            "code": token.token
-        }
+        post_data = {"code": token.token}
         response = self.client.post(
             reverse("login-2fa"),
             post_data,
             REMOTE_ADDR="127.0.0.1",
             HTTP_USER_AGENT="test-browser",
-            follow = True
+            follow=True,
         )
 
         # Check if we are now verified
         self.assertTrue(response.context["user"].is_verified)
+
 
 class SecurityCodeHelp(AdminUserTestCase):
     def setUp(self):
@@ -165,17 +163,12 @@ class SecurityCodeHelp(AdminUserTestCase):
         }
         User = get_user_model()
         self.inviter = User.objects.create_user(**self.inviter_credentials)
-        self.invite = Invitation.create(self.user.email, inviter=self.inviter, sent=timezone.now())
+        self.invite = Invitation.create(
+            self.user.email, inviter=self.inviter, sent=timezone.now()
+        )
         self.invite.accepted = True
 
     def test_users_admin_displayed_on_backup_code_help_page(self):
         self.login(login_2fa=False)
         response = self.client.get(reverse("backup_codes_help"))
         self.assertContains(response, self.inviter.email)
-
-
-
-
-
-    
-    

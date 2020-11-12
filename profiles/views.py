@@ -211,10 +211,13 @@ class Login2FAView(LoginRequiredMixin, FormView):
             return True
         else:
             return False
- 
+
     @cached_property
     def has_static_code(self):
-        if waffle.switch_is_active("BACKUP_CODE") and self.request.user.staticdevice_set is not None:
+        if (
+            waffle.switch_is_active("BACKUP_CODE")
+            and self.request.user.staticdevice_set is not None
+        ):
             return True
         else:
             return False
@@ -256,11 +259,15 @@ class Login2FAView(LoginRequiredMixin, FormView):
         backup_being_throttled = False
 
         if self.has_mobile:
-            code_verfied, sms_being_throttled = verify_user_code(self, code, devices_sms)
-          
+            code_verfied, sms_being_throttled = verify_user_code(
+                self, code, devices_sms
+            )
+
         if not code_verfied and self.has_static_code:
             devices_backup = self.request.user.staticdevice_set.all()
-            code_verfied, backup_being_throttled = verify_user_code(self, code, devices_backup)
+            code_verfied, backup_being_throttled = verify_user_code(
+                self, code, devices_backup
+            )
 
         if not code_verfied:
             # Just in case one of the device is throttled but another one
@@ -275,7 +282,7 @@ class Login2FAView(LoginRequiredMixin, FormView):
             return super().form_invalid(form)
 
         return super().form_valid(form)
-    
+
 
 class Resend2FAView(LoginRequiredMixin, FormView):
     form_class = Resend2FACodeForm
@@ -377,7 +384,9 @@ class UserProfileView(Is2FAMixin, ProvinceAdminViewMixin, DetailView):
 
         # Get the number of Security Codes that currently exist
 
-        context["security_code_count"] = get_user_backup_codes_count(self, healthcareuser)
+        context["security_code_count"] = get_user_backup_codes_count(
+            self, healthcareuser
+        )
         return context
 
 

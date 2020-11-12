@@ -56,6 +56,7 @@ class BackupCodeListView(WaffleSwitchMixin, Is2FAMixin, ListView):
             security_code = StaticToken.random_token()
             devices.token_set.create(token=security_code)
 
+
 class RequestBackupCodes(WaffleSwitchMixin, LoginRequiredMixin, FormView):
     waffle_switch = "BACKUP_CODE"
     form_class = RequestBackupCodesForm
@@ -65,11 +66,17 @@ class RequestBackupCodes(WaffleSwitchMixin, LoginRequiredMixin, FormView):
     @cached_property
     def user_admin(self):
         if self.user_was_invited:
-            invitation = Invitation.objects.filter(email__iexact=self.request.user.email).first()
-            if HealthcareUser.objects.filter(email__iexact=invitation.inviter.email).exists():
+            invitation = Invitation.objects.filter(
+                email__iexact=self.request.user.email
+            ).first()
+            if HealthcareUser.objects.filter(
+                email__iexact=invitation.inviter.email
+            ).exists():
                 return invitation.inviter
-        
-        return dict({"email": "assistance+healthcare@cds-snc.ca", "name":"Portal Super Admin"}) 
+
+        return dict(
+            {"email": "assistance+healthcare@cds-snc.ca", "name": "Portal Super Admin"}
+        )
 
     @cached_property
     def user_was_invited(self):
@@ -90,15 +97,18 @@ class RequestBackupCodes(WaffleSwitchMixin, LoginRequiredMixin, FormView):
             return redirect(reverse_lazy("backup_codes_contacted"))
         return is_valid
 
+
 ######################
 # Functions used from the Profiles module for 2fa login.
 ######################
+
 
 def get_user_static_device(self, user, confirmed=None):
     devices = devices_for_user(user, confirmed=confirmed)
     for device in devices:
         if isinstance(device, StaticDevice):
             return device
+
 
 def get_user_backup_codes_count(self, user):
     devices = get_user_static_device(self, user)
@@ -107,6 +117,7 @@ def get_user_backup_codes_count(self, user):
         tokens = devices.token_set.all()
         token_count = tokens.count()
     return token_count
+
 
 def verify_user_code(self, code, devices):
     being_throttled = False
@@ -123,5 +134,5 @@ def verify_user_code(self, code, devices):
             code_sucessful = True
             self.request.user.otp_device = device
             self.request.session[DEVICE_ID_SESSION_KEY] = device.persistent_id
-    
+
     return [code_sucessful, being_throttled]
