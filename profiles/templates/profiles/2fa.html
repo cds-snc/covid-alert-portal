@@ -15,7 +15,7 @@
   {% switch "BACKUP_CODE" %}
 
     {% if view.has_static_code and not view.has_mobile %}
-    <p>{% trans "We’ve provided you with single-use security codes." %}</p>
+    <p>{% trans "You kept these codes on paper." %}</p>
     {% endif %}
 
     {% if not view.has_static_code and view.has_mobile  %}
@@ -23,7 +23,7 @@
     {% endif %}
 
     {% if view.has_static_code and view.has_mobile  %}
-      <p>{% trans "We’ve texted you a security code. You can also use a back-up code. " %}</p>
+      <p>{% trans "We’ve texted you a security code and you've also got codes on paper." %}</p>
     {% endif %}
 
   {% else %}
