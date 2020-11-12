@@ -47,7 +47,7 @@ class SignupBackupCodeListView(LoginRequiredMixin, WaffleSwitchMixin, ListView):
 
     def get(self, request, *args, **kwargs):
         # make sure you are coming from the /signup-2fa page
-        if request.headers["Referer"] and request.headers["Referer"].endswith(
+        if request.headers.get("Referer") and request.headers["Referer"].endswith(
             str(reverse_lazy("signup_2fa"))
         ):
             recreate_backup_codes(request)

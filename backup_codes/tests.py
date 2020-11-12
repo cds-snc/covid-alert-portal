@@ -21,7 +21,7 @@ class BackupCodesConfigTest(TestCase):
         self.assertEqual(apps.get_app_config("backup_codes").name, "backup_codes")
 
 
-class SecurityCodeView(AdminUserTestCase):
+class BackupCodesView(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
         Switch.objects.create(name="BACKUP_CODE", active=True)
@@ -128,7 +128,7 @@ class SecurityCodeLogin(AdminUserTestCase):
         self.login(login_2fa=False)
 
         #  Get the 2fa page
-        response = self.client.get(reverse("login-2fa"))
+        response = self.client.get(reverse("login_2fa"))
         self.assertEqual(response.status_code, 200)
 
         # Get backup code
@@ -138,7 +138,7 @@ class SecurityCodeLogin(AdminUserTestCase):
         # Submit backup code
         post_data = {"code": token.token}
         response = self.client.post(
-            reverse("login-2fa"),
+            reverse("login_2fa"),
             post_data,
             follow=True,
         )
@@ -202,5 +202,32 @@ class SecurityCodeRedirect(TestCase):
             username=self.user_credentials.get("email"),
             password=self.user_credentials.get("password"),
         )
-        response = self.client.get(reverse("login-2fa"), follow=True)
+        response = self.client.get(reverse("login_2fa"), follow=True)
         self.assertRedirects(response, "/en/signup-2fa/")
+
+
+class BackupCodesSignupView(AdminUserTestCase):
+    def setUp(self):
+        super().setUp(is_admin=True)
+        Switch.objects.create(name="BACKUP_CODE", active=True)
+
+    def test_redirect_to_login_backup_codes_signup_view(self):
+        response = self.client.get(reverse("signup_backup_codes"))
+        self.assertRedirects(response, "/en/login/?next=/en/signup/backup-codes")
+
+    def test_redirect_to_start_backup_codes_signup_view_after_login(self):
+        self.login()
+        response = self.client.get(reverse("signup_backup_codes"))
+        self.assertRedirects(response, "/en/start/")
+
+    def test_backup_codes_signup_view_after_setting_referrer(self):
+        self.login()
+        # this header assumes they have come from the "/2fa-signup" page
+        # syntax here: https://stackoverflow.com/a/31903154
+        headers = {"HTTP_REFERER": reverse("signup_2fa")}
+        response = self.client.get(reverse("signup_backup_codes"), **headers)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>No mobile phone?</h1>")
+
+        device = StaticDevice.objects.get(user__id=self.user.id)
+        self.assertEqual(len(device.token_set.all()), 5)
