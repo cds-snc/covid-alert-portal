@@ -1,6 +1,7 @@
 .big-code {
   display: inline-block;
-  background: #eff4f9;
+  background: $color-blue-ultralight;
+  border: 2px solid $color-blue;
   padding: $space-md $space-lg;
   margin-bottom: $space-xl;
   border-radius: 10px;

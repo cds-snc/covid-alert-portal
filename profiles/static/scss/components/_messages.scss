@@ -10,8 +10,9 @@ main .messages {
       li {
         padding: $space-sm;
 
-        &.info, &.success {
-          border-left: 4px solid #4E88B9;
+        &.info,
+        &.success {
+          border-left: 4px solid $color-blue;
           color: $color-blue-dark;
           background: rgba(78, 136, 185, 0.1);
         }
@@ -23,4 +24,12 @@ main .messages {
       }
     }
   }
+}
+
+main .info-message {
+  margin: $space-xl 0;
+  font-size: 0.85em;
+  border-left: 3px solid $color-yellow;
+  background-color: $color-yellow-light;
+  padding: $space-xxs $space-md;
 }
