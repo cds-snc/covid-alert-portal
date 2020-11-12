@@ -10,6 +10,7 @@ from django_otp.plugins.otp_static.models import StaticDevice, StaticToken
 from django_otp import DEVICE_ID_SESSION_KEY
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import logout
 from django.contrib import messages
 
 from waffle.mixins import WaffleSwitchMixin
@@ -85,8 +86,8 @@ class RequestBackupCodes(WaffleSwitchMixin, LoginRequiredMixin, FormView):
         is_valid = super().form_valid(form)
         if is_valid:
             form.send_mail(self.request.LANGUAGE_CODE)
-            messages.success(self.request, _("Your administrator has been notified."))
-
+            logout(self.request)
+            return redirect(reverse_lazy("backup_codes_contacted"))
         return is_valid
 
 ######################

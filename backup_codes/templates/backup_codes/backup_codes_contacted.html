@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% trans "We've contacted your administrator" %}
+{% endblock %}
+
+
+{% block content %}
+
+  <h1>{% trans "We've contacted your administrator" %}</h1>
+  <p>{% trans "They'll give you a code" %}</p>
+  <div class="content-button"><a href="{% url 'login' %}" role='button' draggable='false'>{% trans "Login" %}</a></div>
+{% endblock %}
