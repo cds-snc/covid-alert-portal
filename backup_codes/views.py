@@ -11,6 +11,7 @@ from django_otp import DEVICE_ID_SESSION_KEY
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
+from django.conf import settings
 
 from waffle.mixins import WaffleSwitchMixin
 from portal.mixins import Is2FAMixin
@@ -89,7 +90,13 @@ class RequestBackupCodes(WaffleSwitchMixin, LoginRequiredMixin, FormView):
     def form_valid(self, form):
         is_valid = super().form_valid(form)
         if is_valid:
-            form.send_mail(self.request.LANGUAGE_CODE)
+            if settings.DEBUG:
+                print(
+                    f"DEBUG ONLY: Email message would have been sent to {form.admin.email} for {form.user.name} with {form.user.email} email address"
+                )
+            else:
+                form.send_mail(self.request.LANGUAGE_CODE)
+
             logout(self.request)
             return redirect(reverse_lazy("backup_codes_contacted"))
         return is_valid
