@@ -72,9 +72,7 @@ class RequestBackupCodes(WaffleSwitchMixin, LoginRequiredMixin, FormView):
             ).exists():
                 return invitation.inviter
 
-        return dict(
-            {"email": "assistance+healthcare@cds-snc.ca", "name": "Portal Super Admin"}
-        )
+        return {"email": "assistance+healthcare@cds-snc.ca", "name": "Portal Super Admin"}
 
     @cached_property
     def user_was_invited(self):
