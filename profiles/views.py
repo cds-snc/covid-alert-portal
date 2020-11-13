@@ -207,7 +207,7 @@ class Login2FAView(LoginRequiredMixin, FormView):
 
     @cached_property
     def has_mobile(self):
-        if self.request.user.notifysmsdevice_set is not None:
+        if self.request.user.notifysmsdevice_set.exists():
             return True
         else:
             return False
@@ -216,7 +216,7 @@ class Login2FAView(LoginRequiredMixin, FormView):
     def has_static_code(self):
         if (
             waffle.switch_is_active("BACKUP_CODE")
-            and self.request.user.staticdevice_set is not None
+            and self.request.user.staticdevice_set.exists()
         ):
             return True
         else:
@@ -246,8 +246,12 @@ class Login2FAView(LoginRequiredMixin, FormView):
     def get_initial(self):
         initial = super().get_initial()
         if settings.DEBUG:
-            sms_device = self.request.user.notifysmsdevice_set.last()
-            initial["code"] = sms_device.token
+            if self.has_mobile:
+                sms_device = self.request.user.notifysmsdevice_set.last()
+                initial["code"] = sms_device.token
+            elif self.has_static_code:
+                static_device = self.request.user.staticdevice_set.first()
+                initial["code"] = static_device.token_set.first().token
         return initial
 
     def form_valid(self, form):
