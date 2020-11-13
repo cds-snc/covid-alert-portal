@@ -255,7 +255,7 @@ class Login2FAView(LoginRequiredMixin, FormView):
         return initial
 
     def form_valid(self, form):
-        code = form.cleaned_data.get("code")     
+        code = form.cleaned_data.get("code")
         code_verfied = False
         sms_being_throttled = False
         backup_being_throttled = False
@@ -266,18 +266,15 @@ class Login2FAView(LoginRequiredMixin, FormView):
             throttled = False
             if devices_sms.count() > 1:
                 for device in devices_sms:
-                    verified, throttled = verify_user_code(
-                        self, code, device
-                    )
+                    verified, throttled = verify_user_code(self, code, device)
                     if verified:
                         code_verfied = verified
                     if throttled:
                         sms_being_throttled = throttled
             else:
                 code_verfied, sms_being_throttled = verify_user_code(
-                self, code, devices_sms
+                    self, code, devices_sms
                 )
-                    
 
         if not code_verfied and self.has_static_code:
             devices_backup = self.request.user.staticdevice_set.all()
@@ -285,18 +282,15 @@ class Login2FAView(LoginRequiredMixin, FormView):
             throttled = False
             if devices_backup.count() > 1:
                 for device in devices_backup:
-                    verified, throttled = verify_user_code(
-                        self, code, device
-                    )
+                    verified, throttled = verify_user_code(self, code, device)
                     if verified:
                         code_verfied = verified
                     if throttled:
                         backup_being_throttled = throttled
             else:
                 code_verfied, sms_being_throttled = verify_user_code(
-                self, code, devices_backup
+                    self, code, devices_backup
                 )
-            
 
         if not code_verfied:
             # Just in case one of the device is throttled but another one
