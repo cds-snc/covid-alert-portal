@@ -114,11 +114,9 @@ def get_user_static_device(self, user, confirmed=None):
 
 def get_user_backup_codes_count(self, user):
     devices = get_user_static_device(self, user)
-    token_count = 0
     if devices:
-        tokens = devices.token_set.all()
-        token_count = tokens.count()
-    return token_count
+        return devices.token_set.all().count()
+    return 0
 
 
 def verify_user_code(self, code, devices):
