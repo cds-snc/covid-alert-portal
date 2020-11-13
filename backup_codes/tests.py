@@ -140,8 +140,6 @@ class SecurityCodeLogin(AdminUserTestCase):
         response = self.client.post(
             reverse("login-2fa"),
             post_data,
-            REMOTE_ADDR="127.0.0.1",
-            HTTP_USER_AGENT="test-browser",
             follow=True,
         )
 
