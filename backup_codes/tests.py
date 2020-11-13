@@ -154,7 +154,7 @@ class SecurityCodeHelp(AdminUserTestCase):
         self.inviter_credentials = {
             "email": "inviter@test.com",
             "name": "InviterUser",
-            "province": HealthcareProvince.objects.get(abbr="ON"),
+            "province": HealthcareProvince.objects.get(abbr="MB"),
             "is_admin": True,
             "password": "superdupercomplex_To_Infinity_and_Beyond",
             "phone_number": "+12125552368",
