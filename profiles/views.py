@@ -207,20 +207,16 @@ class Login2FAView(LoginRequiredMixin, FormView):
 
     @cached_property
     def has_mobile(self):
-        if self.request.user.notifysmsdevice_set.exists():
-            return True
-        else:
-            return False
+        return True if self.request.user.notifysmsdevice_set.exists() else False
 
     @cached_property
     def has_static_code(self):
-        if (
-            waffle.switch_is_active("BACKUP_CODE")
+        return (
+            True
+            if waffle.switch_is_active("BACKUP_CODE")
             and self.request.user.staticdevice_set.exists()
-        ):
-            return True
-        else:
-            return False
+            else False
+        )
 
     def get_success_url(self):
         next_url = self.request.GET.get("next", None)
@@ -261,36 +257,14 @@ class Login2FAView(LoginRequiredMixin, FormView):
         backup_being_throttled = False
 
         if self.has_mobile:
-            devices_sms = self.request.user.notifysmsdevice_set.all()
-            verified = False
-            throttled = False
-            if devices_sms.count() > 1:
-                for device in devices_sms:
-                    verified, throttled = verify_user_code(self, code, device)
-                    if verified:
-                        code_verfied = verified
-                    if throttled:
-                        sms_being_throttled = throttled
-            else:
-                code_verfied, sms_being_throttled = verify_user_code(
-                    self, code, devices_sms
-                )
+            code_verfied, sms_being_throttled = verify_user_code(
+                self, code, self.request.user.notifysmsdevice_set.all()
+            )
 
         if not code_verfied and self.has_static_code:
-            devices_backup = self.request.user.staticdevice_set.all()
-            verified = False
-            throttled = False
-            if devices_backup.count() > 1:
-                for device in devices_backup:
-                    verified, throttled = verify_user_code(self, code, device)
-                    if verified:
-                        code_verfied = verified
-                    if throttled:
-                        backup_being_throttled = throttled
-            else:
-                code_verfied, sms_being_throttled = verify_user_code(
-                    self, code, devices_backup
-                )
+            code_verfied, backup_being_throttled = verify_user_code(
+                self, code, self.request.user.staticdevice_set.all()
+            )
 
         if not code_verfied:
             # Just in case one of the device is throttled but another one
