@@ -306,6 +306,11 @@ EMAIL_USE_TLS = True if email_use_tls == "True" else False
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 INVITATIONS_ADAPTER = "profiles.utils.invitation_adapter.HealthcareInvitationAdapter"
 
+BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID = {
+    "en": os.getenv("BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_EN"),
+    "fr": os.getenv("BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_FR"),
+}
+
 PASSWORD_RESET_EMAIL_TEMPLATE_ID = {
     "en": os.getenv("PASSWORD_RESET_EMAIL_TEMPLATE_ID_EN"),
     "fr": os.getenv("PASSWORD_RESET_EMAIL_TEMPLATE_ID_FR"),

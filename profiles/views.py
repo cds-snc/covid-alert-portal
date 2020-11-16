@@ -5,6 +5,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView
 from django.utils.translation import gettext as _
 from django.utils.translation import get_language
+from django.utils.functional import cached_property
 from django.views.generic import (
     CreateView,
     FormView,
@@ -28,9 +29,11 @@ from django.urls import translate_url
 from otp_yubikey.models import RemoteYubikeyDevice
 
 from portal.mixins import ThrottledMixin, Is2FAMixin, IsAdminMixin
-from backup_codes.views import get_user_static_device
+from backup_codes.views import get_user_backup_codes_count, verify_user_code
 from invitations.models import Invitation
 from axes.models import AccessAttempt
+
+import waffle
 
 from .utils import generate_2fa_code
 from .utils.invitation_adapter import user_signed_up
@@ -202,6 +205,19 @@ class Login2FAView(LoginRequiredMixin, FormView):
     form_class = Healthcare2FAForm
     template_name = "profiles/2fa.html"
 
+    @cached_property
+    def has_mobile(self):
+        return True if self.request.user.notifysmsdevice_set.exists() else False
+
+    @cached_property
+    def has_static_code(self):
+        return (
+            True
+            if waffle.switch_is_active("BACKUP_CODE")
+            and self.request.user.staticdevice_set.exists()
+            else False
+        )
+
     def get_success_url(self):
         next_url = self.request.GET.get("next", None)
 
@@ -218,7 +234,7 @@ class Login2FAView(LoginRequiredMixin, FormView):
         if request.user.remoteyubikeydevice_set.first() is not None:
             return redirect(reverse_lazy("yubikey_verify"))
 
-        if request.user.notifysmsdevice_set.first() is None:
+        if not self.has_mobile and not self.has_static_code:
             return redirect(reverse_lazy("signup-2fa"))
 
         return super().get(request, *args, **kwargs)
@@ -226,33 +242,38 @@ class Login2FAView(LoginRequiredMixin, FormView):
     def get_initial(self):
         initial = super().get_initial()
         if settings.DEBUG:
-            sms_device = self.request.user.notifysmsdevice_set.last()
-            initial["code"] = sms_device.token
+            if self.has_mobile:
+                sms_device = self.request.user.notifysmsdevice_set.last()
+                initial["code"] = sms_device.token
+            elif self.has_static_code:
+                static_device = self.request.user.staticdevice_set.first()
+                if static_device.token_set.count() > 1:
+                    initial["code"] = static_device.token_set.first().token
         return initial
 
     def form_valid(self, form):
         code = form.cleaned_data.get("code")
-        devices = self.request.user.notifysmsdevice_set.all()
-        being_throttled = False
-        for device in devices:
-            # let's check if the user is being throttled
-            verified_allowed, errors_details = device.verify_is_allowed()
-            if verified_allowed is False:
-                being_throttled = True
+        code_verfied = False
+        sms_being_throttled = False
+        backup_being_throttled = False
 
-            # Even though we know the device is being throttled, we still need to test it
-            # If not, the throttling will never get increased for this device
-            if device.verify_token(code):
-                self.request.user.otp_device = device
-                self.request.session[DEVICE_ID_SESSION_KEY] = device.persistent_id
+        if self.has_mobile:
+            code_verfied, sms_being_throttled = verify_user_code(
+                self, code, self.request.user.notifysmsdevice_set.all()
+            )
 
-        if self.request.user.otp_device is None:
+        if not code_verfied and self.has_static_code:
+            code_verfied, backup_being_throttled = verify_user_code(
+                self, code, self.request.user.staticdevice_set.all()
+            )
+
+        if not code_verfied:
             # Just in case one of the device is throttled but another one
             # was verified
-            if being_throttled:
+            if sms_being_throttled or backup_being_throttled:
                 form.add_error("code", _("Please try again later."))
 
-            if form.has_error("code") is False:
+            else:
                 form.add_error("code", _("You entered the wrong code."))
 
         if form.has_error("code"):
@@ -360,13 +381,10 @@ class UserProfileView(Is2FAMixin, ProvinceAdminViewMixin, DetailView):
         )
 
         # Get the number of Security Codes that currently exist
-        devices = get_user_static_device(self, healthcareuser)
-        token_count = 0
-        if devices:
-            tokens = devices.token_set.all()
-            token_count = tokens.count()
-        context["security_code_count"] = token_count
 
+        context["security_code_count"] = get_user_backup_codes_count(
+            self, healthcareuser
+        )
         return context
 
 

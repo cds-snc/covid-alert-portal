@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-09 20:35+0000\n"
+"POT-Creation-Date: 2020-11-12 21:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,62 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: backup_codes/templates/backup_codes/backup_codes_contacted.html:5
+#: backup_codes/templates/backup_codes/backup_codes_contacted.html:11
+msgid "We've contacted your administrator"
+msgstr "Nous avons contacté votre administrateur"
+
+#: backup_codes/templates/backup_codes/backup_codes_contacted.html:12
+msgid "They'll give you a code"
+msgstr "Votre administrateur vous donnera un code."
+
+#: backup_codes/templates/backup_codes/backup_codes_contacted.html:13
+#: contact/templates/contact/success.html:16 portal/templates/403.html:16
+#: portal/templates/404.html:17 portal/templates/includes/nav_header.html:13
+#: portal/templates/locked_out.html:9
+#: portal/templates/registration/login.html:7
+#: portal/templates/registration/login.html:18
+#: portal/templates/registration/login.html:20
+msgid "Log in"
+msgstr "Connexion"
+
+#: backup_codes/templates/backup_codes/backup_codes_help.html:5
+#: contact/templates/contact/form.html:5
+#: portal/templates/registration/login.html:6
+#: portal/templates/registration/password_reset_confirm.html:6
+#: portal/templates/registration/password_reset_form.html:5
+#: profiles/templates/invitations/templates/invitation_confirm_delete.html:5
+#: profiles/templates/invitations/templates/invite.html:5
+#: profiles/templates/invitations/templates/invite_complete.html:5
+#: profiles/templates/invitations/templates/invite_list.html:5
+#: profiles/templates/profiles/2fa-resend.html:6
+#: profiles/templates/profiles/2fa.html:6
+#: profiles/templates/profiles/edit.html:5
+#: profiles/templates/profiles/healthcareuser_confirm_delete.html:5
+#: profiles/templates/profiles/signup.html:5
+#: profiles/templates/profiles/signup2fa.html:5
+#: profiles/templates/profiles/welcome.html:5
+#: profiles/templates/profiles/yubikey_create.html:5
+#: profiles/templates/profiles/yubikey_delete.html:5
+#: profiles/templates/profiles/yubikey_verify.html:5
+msgid "Error: "
+msgstr "Erreur : "
+
+#: backup_codes/templates/backup_codes/backup_codes_help.html:6
+#: backup_codes/templates/backup_codes/backup_codes_help.html:13
+#: profiles/templates/profiles/2fa.html:43
+msgid "No security code?"
+msgstr "Pas de code de sécurité?"
+
+#: backup_codes/templates/backup_codes/backup_codes_help.html:14
+#, python-format
+msgid "Ask your administrator (%(admin_email)s) for a code."
+msgstr "Demandez à votre administrateur (%(admin_email)s) de vous donner un code."
+
+#: backup_codes/templates/backup_codes/backup_codes_help.html:15
+msgid "Get codes from admin"
+msgstr "Demander un code"
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html:4
 #: profiles/templates/profiles/healthcareuser_detail.html:99
@@ -83,27 +139,6 @@ msgstr ""
 "Il y a eu un problème et vos commentaires n’ont pas été envoyés. Envoyer vos "
 "commentaires par courriel à assistance+healthcare@cds-snc.ca."
 
-#: contact/templates/contact/form.html:5
-#: portal/templates/registration/login.html:6
-#: portal/templates/registration/password_reset_confirm.html:6
-#: portal/templates/registration/password_reset_form.html:5
-#: profiles/templates/invitations/templates/invitation_confirm_delete.html:5
-#: profiles/templates/invitations/templates/invite.html:5
-#: profiles/templates/invitations/templates/invite_complete.html:5
-#: profiles/templates/invitations/templates/invite_list.html:5
-#: profiles/templates/profiles/2fa-resend.html:5
-#: profiles/templates/profiles/2fa.html:5
-#: profiles/templates/profiles/edit.html:5
-#: profiles/templates/profiles/healthcareuser_confirm_delete.html:5
-#: profiles/templates/profiles/signup.html:5
-#: profiles/templates/profiles/signup2fa.html:5
-#: profiles/templates/profiles/welcome.html:5
-#: profiles/templates/profiles/yubikey_create.html:5
-#: profiles/templates/profiles/yubikey_delete.html:5
-#: profiles/templates/profiles/yubikey_verify.html:5
-msgid "Error: "
-msgstr "Erreur : "
-
 #: contact/templates/contact/form.html:6 contact/templates/contact/form.html:13
 #: portal/templates/500.html:17 portal/templates/includes/footer.html:8
 #: portal/templates/includes/nav_main.html:11
@@ -128,15 +163,6 @@ msgstr "Nous vous répondrons le plus rapidement possible."
 #: portal/templates/404.html:15
 msgid "New patient"
 msgstr "Nouveau patient"
-
-#: contact/templates/contact/success.html:16 portal/templates/403.html:16
-#: portal/templates/404.html:17 portal/templates/includes/nav_header.html:13
-#: portal/templates/locked_out.html:9
-#: portal/templates/registration/login.html:7
-#: portal/templates/registration/login.html:18
-#: portal/templates/registration/login.html:20
-msgid "Log in"
-msgstr "Connexion"
 
 #: covid_key/templates/covid_key/key.html:5
 #: covid_key/templates/covid_key/key.html:10
@@ -385,7 +411,7 @@ msgid "Something went wrong. Contact your administrator."
 msgstr ""
 "Une erreur est survenue. Veuillez contacter votre admistrateur du portail."
 
-#: portal/settings.py:334
+#: portal/settings.py:339
 msgid "This account has been locked due to too many failed log in attempts."
 msgstr ""
 "Ce compte a été verrouillé en raison d’un trop grand nombre de tentatives "
@@ -982,33 +1008,47 @@ msgstr "Limite journalière atteinte"
 msgid "You are sending too many invitations. Try again later."
 msgstr "Vous envoyez trop d’invitations. Réessayer plus tard."
 
-#: profiles/templates/profiles/2fa-resend.html:6
-#: profiles/templates/profiles/2fa-resend.html:13
-#: profiles/templates/profiles/2fa-resend.html:15
+#: profiles/templates/profiles/2fa-resend.html:7
+#: profiles/templates/profiles/2fa-resend.html:14
+#: profiles/templates/profiles/2fa-resend.html:16
 msgid "Re-send security code"
 msgstr "Renvoyer un code de sécurité"
 
-#: profiles/templates/profiles/2fa-resend.html:14
-msgid "If you did not get the code, ask us to send it again."
+#: profiles/templates/profiles/2fa-resend.html:15
+msgid "If you did not get the code, we can send it again."
 msgstr "Si vous n’avez pas reçu de code, nous pouvons vous en renvoyer un."
 
-#: profiles/templates/profiles/2fa.html:6
+#: profiles/templates/profiles/2fa-resend.html:18
+msgid "Cannot get text messages?"
+msgstr "Incapable de recevoir des messages texte?"
+
+#: profiles/templates/profiles/2fa.html:7
 msgid "Validate your code"
 msgstr "Valider votre code"
 
-#: profiles/templates/profiles/2fa.html:13
+#: profiles/templates/profiles/2fa.html:14
 msgid "Enter your security code"
 msgstr "Entrez votre code de sécurité"
 
-#: profiles/templates/profiles/2fa.html:14
+#: profiles/templates/profiles/2fa.html:18
+msgid "You kept these codes on paper."
+msgstr "Vous devriez avoir noté vos codes sur une feuille."
+
+#: profiles/templates/profiles/2fa.html:22
+#: profiles/templates/profiles/2fa.html:31
 msgid "We’ve sent you a text message with a security code."
 msgstr "Nous vous avons envoyé un code de sécurité par message texte."
 
-#: profiles/templates/profiles/2fa.html:16
+#: profiles/templates/profiles/2fa.html:26
+msgid "We’ve texted you a security code and you've also got codes on paper."
+msgstr "Utilisez le code reçu par message texte ou l’un de ceux que vous avez notés sur une feuille."
+
+#: profiles/templates/profiles/2fa.html:36
 msgid "Next"
 msgstr "Suivant"
 
-#: profiles/templates/profiles/2fa.html:17
+#: profiles/templates/profiles/2fa.html:41
+#: profiles/templates/profiles/2fa.html:48
 msgid "Resend security code?"
 msgstr "Renvoyer le code de sécurité"
 
@@ -1558,24 +1598,24 @@ msgstr ""
 msgid "Your password cannot be only numbers."
 msgstr "Votre mot de passe ne peut pas contenir que des chiffres."
 
-#: profiles/views.py:253
+#: profiles/views.py:276
 msgid "Please try again later."
 msgstr "Réessayer plus tard"
 
-#: profiles/views.py:256
+#: profiles/views.py:279
 msgid "You entered the wrong code."
 msgstr "Vous n’avez pas saisi le bon code."
 
-#: profiles/views.py:277
+#: profiles/views.py:300
 msgid "Security code has been sent."
 msgstr "Le code de sécurité a été envoyé."
 
-#: profiles/views.py:415
+#: profiles/views.py:435
 #, python-format
 msgid "You deleted the account for ‘%(email)s’."
 msgstr "Vous avez supprimé le compte associé à ‘%(email)s’"
 
-#: profiles/views.py:427
+#: profiles/views.py:447
 msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "

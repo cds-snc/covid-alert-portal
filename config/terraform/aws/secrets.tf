@@ -82,6 +82,26 @@ resource "aws_secretsmanager_secret_version" "password_reset_email_template_id_f
   secret_string = var.ecs_secret_password_reset_email_template_id_fr
 }
 
+resource "aws_secretsmanager_secret" "backup_code_admin_email_template_id_en" {
+  name                    = "backup_code_admin_email_template_id_en"
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret_version" "backup_code_admin_email_template_id_en" {
+  secret_id     = aws_secretsmanager_secret.backup_code_admin_email_template_id_en.id
+  secret_string = var.ecs_secret_backup_code_admin_email_template_id_en
+}
+
+resource "aws_secretsmanager_secret" "backup_code_admin_email_template_id_fr" {
+  name                    = "backup_code_admin_email_template_id_fr"
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret_version" "backup_code_admin_email_template_id_fr" {
+  secret_id     = aws_secretsmanager_secret.backup_code_admin_email_template_id_fr.id
+  secret_string = var.ecs_secret_backup_code_admin_email_template_id_fr
+}
+
 resource "aws_secretsmanager_secret" "django_admins" {
   name                    = "django_admins"
   recovery_window_in_days = 0

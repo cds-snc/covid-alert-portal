@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load waffle_tags %}
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
@@ -11,8 +12,43 @@
   {% include  "includes/error_list.html" %}
 
   <h1>{% trans "Enter your security code" %}</h1>
-  <p>{% trans "We’ve sent you a text message with a security code." %}</p>
+  {% switch "BACKUP_CODE" %}
+
+    {% if view.has_static_code and not view.has_mobile %}
+    <p>{% trans "You kept these codes on paper." %}</p>
+    {% endif %}
+
+    {% if not view.has_static_code and view.has_mobile  %}
+      <p>{% trans "We’ve sent you a text message with a security code." %}</p>
+    {% endif %}
+
+    {% if view.has_static_code and view.has_mobile  %}
+      <p>{% trans "We’ve texted you a security code and you’ve also got codes on paper." %}</p>
+    {% endif %}
+
+  {% else %}
+
+    <p>{% trans "We’ve sent you a text message with a security code." %}</p>
+
+  {% endswitch %}
+
 
   {% include "includes/cds_form.html" with submit_text=_("Next") form_class="small" %}
-  <a href="{% url 'resend-2fa' %}">{{ _("Resend security code?") }}</a>
+
+  {% switch "BACKUP_CODE" %}
+
+    {% if view.has_mobile %}
+      <a href="{% url 'resend-2fa' %}">{{ _("Resend security code?") }}</a>
+    {% else %}
+    <a href="{% url 'backup_codes_help' %}">{{ _("No security code?") }}</a>
+    {% endif %}
+
+  {% else %}
+
+    <a href="{% url 'resend-2fa' %}">{{ _("Resend security code?") }}</a>
+    
+  {% endswitch %}
+
+
+  
 {% endblock %}
