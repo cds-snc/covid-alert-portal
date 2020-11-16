@@ -535,8 +535,6 @@ class SignupView(AdminUserTestCase):
         self.assertRedirects(response, "/en/invite/expired")
 
     def test_invitation_accepted_after_signup(self):
-        Switch.objects.create(name="BACKUP_CODE", active=True)
-
         url = reverse("invitations:accept-invite", args=[self.invite.key])
         self.client.get(url)
         # make sure invite is not accepted just by visiting the URL
@@ -545,10 +543,11 @@ class SignupView(AdminUserTestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, reverse("signup_2fa"))
 
-        self.assertContains(
-            self.client.get(reverse("signup_2fa")),
-            '<a href="/en/signup/backup-codes" class="secondary" role="button" draggable="false">No mobile phone?</a>',
-        )
+        # add this check once "BACKUP_CODE" switch is no longer needed
+        # self.assertContains(
+        #     self.client.get(reverse("signup_2fa")),
+        #     '<a href="/en/signup/backup-codes" class="secondary" role="button" draggable="false">No mobile phone?</a>',
+        # )
 
         second_step_response = self.client.post(
             reverse("signup_2fa"), data=self.new_user_data
