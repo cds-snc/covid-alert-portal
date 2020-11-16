@@ -12,7 +12,6 @@
   <h1>{% blocktrans with email=profile_user.email %}Are you sure you want to delete the account at {{ email }}?{% endblocktrans %}</h1>
   <p>{% blocktrans with name=profile_user.name %}{{ name }} will not be able to log in and their details will be deleted.{% endblocktrans %}</p>
   <p>{% trans "You can create a new account for them later." %}</p>
-  <div class="content-button" style="margin-top: -40px;"><a class="secondary" href="{% url 'profiles' %}" role='button' draggable='false'>{% trans "No, keep" %}</a></div>
-  {% include "includes/cds_form.html" with submit_text=_("Yes, delete") %}
+  {% include "includes/cds_form.html" with submit_text=_("Yes, delete") submit_class='danger' secondary_action_before=True secondary_action_text=_('No, keep') secondary_action_url='profiles' %}
 
 {% endblock %}
