@@ -9,9 +9,7 @@
 
 {% block content %}
   {% include  "includes/error_list.html" %}
-
   <h1>{% blocktrans with email=invitation.email%}Are you sure you want to delete the invitation sent to {{ email }}?{% endblocktrans %}</h1>
   <p>{% trans "If you delete their invitation, they will not be able to join the COVID Alert Portal until they are invited back." %}</p>
-  {% include "includes/cds_form.html" with submit_text=_("Yes, I am sure") %}
-  <div class="content-button" style="margin-top: -40px;"><a class="secondary" href="{% url 'invitation_list' %}" role='button' draggable='false'>{% trans "No, take me back" %}</a></div>
+  {% include "includes/cds_form.html" with submit_text=_("Yes, I am sure") submit_class='danger' secondary_action_before=True secondary_action_text=_('No, take me back') secondary_action_url='invitation_list' %}
 {% endblock %}
