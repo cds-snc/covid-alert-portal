@@ -33,7 +33,11 @@
   {% endif %}
 
   <div class="content-button">
-    <button type="submit">
+    {% if secondary_action_text and secondary_action_before %}
+      <a href="{% url secondary_action_url %}" class="secondary" role="button" draggable="false">{{ secondary_action_text }}</a>
+    {% endif %}
+
+    <button type="submit" {% if submit_class %}class="{{ submit_class }}"{% endif %}>
       {% if submit_text %}
         {{ submit_text }}
       {% else %}
@@ -42,7 +46,7 @@
     </button>
 
   {% switch "BACKUP_CODE" %}
-    {% if secondary_action_text %}
+    {% if secondary_action_text and not secondary_action_before %}
       <a href="{% url secondary_action_url %}" class="secondary" role="button" draggable="false">{{ secondary_action_text }}</a>
     {% endif %}
   {% endswitch %}

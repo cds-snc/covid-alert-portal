@@ -70,6 +70,22 @@
 
     @extend %button-states;
   }
+
+  &.danger {
+    color: $color-white;
+    background-color: $color-red;
+    box-shadow: 0 2px 0 $color-red-dark;
+
+    &:hover {
+      background-color: #8e0619;
+    }
+
+    &:focus {
+      color: $color-black;
+    }
+
+    @extend %button-states;
+  }
 }
 
 main {
@@ -118,7 +134,8 @@ main {
     form,
     button,
     a[role="button"] {
-      + a[role="button"] {
+      + a[role="button"],
+      + button {
         margin-top: $space-md;
       }
     }
@@ -129,7 +146,8 @@ main {
       form,
       button,
       a[role="button"] {
-        + a[role="button"] {
+        + a[role="button"],
+        + button {
           margin-top: $space-xs;
           margin-left: $space-xl;
         }
