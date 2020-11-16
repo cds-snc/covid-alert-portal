@@ -1,4 +1,3 @@
-from django import forms
 from django.conf import settings
 from notifications_python_client.errors import HTTPError
 from notifications_python_client.notifications import NotificationsAPIClient
