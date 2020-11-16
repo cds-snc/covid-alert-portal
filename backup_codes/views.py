@@ -140,10 +140,9 @@ def get_user_backup_codes_count(user):
     return 0
 
 
-def verify_user_code(request, code):
+def verify_user_code(request, code, devices):
     being_throttled = False
     code_sucessful = False
-    devices = request.user.staticdevice_set.all()
 
     for device in devices:
         # let's check if the user is being throttled on the sms codes
