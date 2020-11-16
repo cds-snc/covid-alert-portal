@@ -2,24 +2,9 @@ from django import forms
 from django.conf import settings
 from notifications_python_client.errors import HTTPError
 from notifications_python_client.notifications import NotificationsAPIClient
+from portal.forms import HealthcareBaseForm
 
-
-class BackupCodesBaseForm(forms.Form):
-    use_required_attribute = False
-
-    def __init__(self, *args, **kwargs):
-        # Remove the colon after field labels
-        kwargs.setdefault("label_suffix", "")
-        super().__init__(*args, **kwargs)
-
-        # override field attributes: https://stackoverflow.com/a/56870308
-        for field in self.fields:
-            self.fields[field].widget.attrs.pop("autofocus", None)
-            # remove autocomplete attributes
-            self.fields[field].widget.attrs.update({"autocomplete": "off"})
-
-
-class RequestBackupCodesForm(BackupCodesBaseForm):
+class RequestBackupCodesForm(HealthcareBaseForm):
     def __init__(self, user, admin, *args, **kwargs):
         self.user = user
         self.admin = admin
