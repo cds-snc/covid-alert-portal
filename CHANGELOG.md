@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Add static backup codes (behind feature flag)
+  - On user account page: see codes and generate more codes
+  - On signup: new accounts can create codes instead of adding a phone
+  - On login: login accepts a backup code, and allows users to message an administrator
+
+## [1.10.2] - 2020-11-16
+
+### Updated
+
+- List users under "Manage team" alphabetically by email address
+- "Delete" buttons are red (ie, they are destructive actions) and horizontal
+
 ## [1.10.1] - 2020-10-29
 
 ### Updated
