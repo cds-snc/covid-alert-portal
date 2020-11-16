@@ -1,4 +1,4 @@
-{% load i18n widget_tweaks %}
+{% load i18n widget_tweaks waffle_tags %}
 
 <form method="post" id="form--{{ request.resolver_match.url_name }}" {% if form_class %}class="{{ form_class }}"{% endif %} >
   {% csrf_token %}
@@ -32,11 +32,20 @@
     </div>
   {% endif %}
 
-  <button type="submit">
-    {% if submit_text %}
-      {{ submit_text }}
-    {% else %}
-      {% trans "Submit" %}
+  <div class="content-button">
+    <button type="submit">
+      {% if submit_text %}
+        {{ submit_text }}
+      {% else %}
+        {% trans "Submit" %}
+      {% endif %}
+    </button>
+
+  {% switch "BACKUP_CODE" %}
+    {% if secondary_action_text %}
+      <a href="{% url secondary_action_url %}" class="secondary" role="button" draggable="false">{{ secondary_action_text }}</a>
     {% endif %}
-  </button>
+  {% endswitch %}
+  </div>
+
 </form>

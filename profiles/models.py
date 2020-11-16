@@ -75,7 +75,8 @@ class HealthcareUser(AbstractBaseUser):
     phone_number = PhoneNumberField(
         help_text=_(
             "You must enter a new security code each time you log in. We’ll text the code to your mobile phone number."
-        )
+        ),
+        blank=True,
     )
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)

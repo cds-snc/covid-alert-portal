@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "No mobile phone?" %}{% endblock %}
+
+{% block content %}
+  {% include  "includes/flash_messages.html" %}
+  <h1>{% trans "No mobile phone?" %}</h1>
+  <p>{% trans "Log into the portal using one of the security codes below. You can use each code only once.  When you have 1 code left, we’ll tell you how to get more." %}</p>
+  <p>{% trans "Write the codes on paper. Do not save or store this screen, copy the codes to an electronic device, or share the codes with anyone else." %}</p>
+
+  {% include "includes/codes.html" with codes=backup_code_list %}
+
+  <div class="content-button">
+    <a href="{% url 'login_2fa'%}" role='button' draggable='false'>{% trans "Next" %}</a>
+  </div>
+
+{% endblock %}

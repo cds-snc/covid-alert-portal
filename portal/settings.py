@@ -238,7 +238,7 @@ STATIC_URL = "/static/"
 AUTH_USER_MODEL = "profiles.HealthcareUser"
 
 LOGIN_URL = "login"
-OTP_LOGIN_URL = "login-2fa"
+OTP_LOGIN_URL = "login_2fa"
 
 LOGIN_REDIRECT_URL = "start"
 LOGOUT_REDIRECT_URL = "login"

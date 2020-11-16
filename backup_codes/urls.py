@@ -19,4 +19,9 @@ urlpatterns = [
         TemplateView.as_view(template_name="backup_codes/backup_codes_contacted.html"),
         name="backup_codes_contacted",
     ),
+    path(
+        "signup/backup-codes",
+        views.SignupBackupCodeListView.as_view(),
+        name="signup_backup_codes",
+    ),
 ]

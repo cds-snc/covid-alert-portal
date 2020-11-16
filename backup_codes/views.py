@@ -1,25 +1,22 @@
 from django.views.generic import ListView, FormView
-
-from invitations.models import Invitation
-from profiles.models import HealthcareUser
-
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django_otp import devices_for_user
-from django_otp.plugins.otp_static.models import StaticDevice, StaticToken
-from django_otp import DEVICE_ID_SESSION_KEY
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
 from django.conf import settings
+from django.utils.translation import gettext as _
+from django.utils.functional import cached_property
+
+from django_otp import devices_for_user
+from django_otp.plugins.otp_static.models import StaticDevice, StaticToken
+from django_otp import DEVICE_ID_SESSION_KEY
 
 from waffle.mixins import WaffleSwitchMixin
 from portal.mixins import Is2FAMixin
 
 from backup_codes.forms import RequestBackupCodesForm
-
-from django.utils.translation import gettext as _
-from django.utils.functional import cached_property
+from invitations.models import Invitation
+from profiles.models import HealthcareUser
 
 
 class BackupCodeListView(WaffleSwitchMixin, Is2FAMixin, ListView):
@@ -28,7 +25,7 @@ class BackupCodeListView(WaffleSwitchMixin, Is2FAMixin, ListView):
     context_object_name = "backup_code_list"
 
     def get(self, request, *args, **kwargs):
-        if not get_user_static_device(self, self.request.user):
+        if not get_user_static_device(self.request.user):
             return redirect(
                 reverse_lazy("user_profile", kwargs={"pk": request.user.id})
             )
@@ -36,30 +33,51 @@ class BackupCodeListView(WaffleSwitchMixin, Is2FAMixin, ListView):
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        self.recreate_backup_codes(request)
+        recreate_backup_codes(request)
         return redirect(reverse_lazy("backup_codes"))
 
     def get_queryset(self):
-        return get_user_static_device(self, self.request.user).token_set.all()
+        return get_user_static_device(self.request.user).token_set.all()
 
-    def recreate_backup_codes(self, request):
-        devices = get_user_static_device(self, request.user)
-        if devices:
-            devices.token_set.all().delete()
-        else:
-            devices = StaticDevice.objects.create(
-                user=request.user, name="Static_Security_Codes"
-            )
-        for n in range(5):
-            security_code = StaticToken.random_token()
-            devices.token_set.create(token=security_code)
+
+class SignupBackupCodeListView(LoginRequiredMixin, WaffleSwitchMixin, ListView):
+    waffle_switch = "BACKUP_CODE"
+    template_name = "backup_codes/signup_backup_codes_list.html"
+    context_object_name = "backup_code_list"
+
+    def get(self, request, *args, **kwargs):
+        # make sure you are coming from the /signup-2fa page
+        if request.headers.get("Referer") and request.headers["Referer"].endswith(
+            str(reverse_lazy("signup_2fa"))
+        ):
+            recreate_backup_codes(request)
+            return super().get(request, *args, **kwargs)
+
+        return redirect(reverse_lazy("start"))
+
+    def get_queryset(self):
+        # this is called _after_ self.get()
+        return get_user_static_device(self.request.user).token_set.all()
+
+
+def recreate_backup_codes(request):
+    devices = get_user_static_device(request.user)
+    if devices:
+        devices.token_set.all().delete()
+    else:
+        devices = StaticDevice.objects.create(
+            user=request.user, name="Static_Security_Codes"
+        )
+    for n in range(5):
+        security_code = StaticToken.random_token()
+        devices.token_set.create(token=security_code)
 
 
 class RequestBackupCodes(WaffleSwitchMixin, LoginRequiredMixin, FormView):
     waffle_switch = "BACKUP_CODE"
     form_class = RequestBackupCodesForm
     template_name = "backup_codes/backup_codes_help.html"
-    success_url = reverse_lazy("login-2fa")
+    success_url = reverse_lazy("login_2fa")
 
     @cached_property
     def user_admin(self):
@@ -108,23 +126,25 @@ class RequestBackupCodes(WaffleSwitchMixin, LoginRequiredMixin, FormView):
 ######################
 
 
-def get_user_static_device(self, user, confirmed=None):
+def get_user_static_device(user, confirmed=None):
     devices = devices_for_user(user, confirmed=confirmed)
     for device in devices:
         if isinstance(device, StaticDevice):
             return device
 
 
-def get_user_backup_codes_count(self, user):
-    devices = get_user_static_device(self, user)
+def get_user_backup_codes_count(user):
+    devices = get_user_static_device(user)
     if devices:
         return devices.token_set.all().count()
     return 0
 
 
-def verify_user_code(self, code, devices):
+def verify_user_code(request, code):
     being_throttled = False
     code_sucessful = False
+    devices = request.user.staticdevice_set.all()
+
     for device in devices:
         # let's check if the user is being throttled on the sms codes
         verified_allowed, errors_details = device.verify_is_allowed()
@@ -135,7 +155,7 @@ def verify_user_code(self, code, devices):
         # If not, the throttling will never get increased for this device
         if device.verify_token(code):
             code_sucessful = True
-            self.request.user.otp_device = device
-            self.request.session[DEVICE_ID_SESSION_KEY] = device.persistent_id
+            request.user.otp_device = device
+            request.session[DEVICE_ID_SESSION_KEY] = device.persistent_id
 
     return [code_sucessful, being_throttled]

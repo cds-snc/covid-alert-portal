@@ -1,23 +1,14 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Security Codes" %}{% endblock %}
+{% block title %}{% trans "Security codes" %}{% endblock %}
 
 {% block content %}
   {% include  "includes/flash_messages.html" %}
   <h1>{% trans "Security codes" %}</h1>
   <p>{% trans "Without a mobile phone, you will need to use these single-use security codes to access the portal." %}</p>
 
-  <div class="static-codes">
-    <ul>
-    {% for backup_code in backup_code_list %}
-      <li>
-        <span class="visually-hidden">{{ backup_code.token|upper|join:" " }}</span>
-        <span aria-hidden="true"><span>{{ backup_code.token|slice:":4" }}</span><span>{{ backup_code.token|slice:"4:" }}</span></span>
-      </li>
-    {% endfor %}
-    </ul>
-  </div>
+  {% include "includes/codes.html" with codes=backup_code_list %}
 
   <p>{% trans "Write down these single-use security codes on a piece of paper." %}</p>
   <p>{% trans "Make sure to get more security codes before you use up all of the ones listed here." %}</p>

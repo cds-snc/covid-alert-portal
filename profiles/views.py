@@ -138,7 +138,7 @@ class SignUpView(FormView):
     template_name = "profiles/signup.html"
 
     def get_success_url(self):
-        return reverse_lazy("signup-2fa")
+        return reverse_lazy("signup_2fa")
 
     def get(self, request, *args, **kwargs):
         invited_email = self.request.session.get("account_verified_email", None)
@@ -183,10 +183,10 @@ class SignUpView(FormView):
 
 class SignUp2FAView(LoginRequiredMixin, FormView):
     form_class = SignupForm2fa
-    template_name = "profiles/signup2fa.html"
+    template_name = "profiles/signup_2fa.html"
 
     def get_success_url(self):
-        return "{}?next={}".format(reverse_lazy("login-2fa"), reverse_lazy("welcome"))
+        return "{}?next={}".format(reverse_lazy("login_2fa"), reverse_lazy("welcome"))
 
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
@@ -235,7 +235,7 @@ class Login2FAView(LoginRequiredMixin, FormView):
             return redirect(reverse_lazy("yubikey_verify"))
 
         if not self.has_mobile and not self.has_static_code:
-            return redirect(reverse_lazy("signup-2fa"))
+            return redirect(reverse_lazy("signup_2fa"))
 
         return super().get(request, *args, **kwargs)
 
@@ -258,14 +258,10 @@ class Login2FAView(LoginRequiredMixin, FormView):
         backup_being_throttled = False
 
         if self.has_mobile:
-            code_verfied, sms_being_throttled = verify_user_code(
-                self, code, self.request.user.notifysmsdevice_set.all()
-            )
+            code_verfied, sms_being_throttled = verify_user_code(self.request, code)
 
         if not code_verfied and self.has_static_code:
-            code_verfied, backup_being_throttled = verify_user_code(
-                self, code, self.request.user.staticdevice_set.all()
-            )
+            code_verfied, backup_being_throttled = verify_user_code(self.request, code)
 
         if not code_verfied:
             # Just in case one of the device is throttled but another one
@@ -285,7 +281,7 @@ class Login2FAView(LoginRequiredMixin, FormView):
 class Resend2FAView(LoginRequiredMixin, FormView):
     form_class = Resend2FACodeForm
     template_name = "profiles/2fa-resend.html"
-    success_url = reverse_lazy("login-2fa")
+    success_url = reverse_lazy("login_2fa")
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -381,10 +377,7 @@ class UserProfileView(Is2FAMixin, ProvinceAdminViewMixin, DetailView):
         )
 
         # Get the number of Security Codes that currently exist
-
-        context["security_code_count"] = get_user_backup_codes_count(
-            self, healthcareuser
-        )
+        context["security_code_count"] = get_user_backup_codes_count(healthcareuser)
         return context
 
 
@@ -453,7 +446,7 @@ def password_reset_complete(request):
         return redirect(reverse_lazy("yubikey_verify"))
     else:
         generate_2fa_code(request.user)
-        return redirect(reverse_lazy("login-2fa"))
+        return redirect(reverse_lazy("login_2fa"))
 
 
 def switch_language(request):
