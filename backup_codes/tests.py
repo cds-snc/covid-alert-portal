@@ -171,7 +171,9 @@ class SecurityCodeHelp(AdminUserTestCase):
         response = self.client.get(reverse("backup_codes_help"))
         self.assertContains(response, self.inviter.email)
 
-    def test_generic_admin_displayed_on_backup_code_page_when_inviter_doesnt_exist(self):
+    def test_generic_admin_displayed_on_backup_code_page_when_inviter_doesnt_exist(
+        self,
+    ):
         # Delete inviter
         User = get_user_model()
         User.objects.filter(email__exact=self.inviter.email).delete()
@@ -179,6 +181,7 @@ class SecurityCodeHelp(AdminUserTestCase):
         self.login(login_2fa=False)
         response = self.client.get(reverse("backup_codes_help"))
         self.assertContains(response, "assistance+healthcare@cds-snc.ca")
+
 
 class SecurityCodeRedirect(TestCase):
     def setUp(self):
@@ -193,11 +196,11 @@ class SecurityCodeRedirect(TestCase):
         }
         User = get_user_model()
         self.user = User.objects.create_user(**self.user_credentials)
-    
+
     def test_user_redirected_to_signup_if_no_mobile_or_static_codes(self):
         self.client.login(
-            username=self.user_credentials.get("email"), password=self.user_credentials.get("password")
+            username=self.user_credentials.get("email"),
+            password=self.user_credentials.get("password"),
         )
         response = self.client.get(reverse("login-2fa"), follow=True)
         self.assertRedirects(response, "/en/signup-2fa/")
-        
