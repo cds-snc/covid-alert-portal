@@ -4,6 +4,7 @@ from notifications_python_client.errors import HTTPError
 from notifications_python_client.notifications import NotificationsAPIClient
 from portal.forms import HealthcareBaseForm
 
+
 class RequestBackupCodesForm(HealthcareBaseForm):
     def __init__(self, user, admin, *args, **kwargs):
         self.user = user
