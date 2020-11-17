@@ -256,16 +256,20 @@ class Login2FAView(LoginRequiredMixin, FormView):
         code_verfied = False
         sms_being_throttled = False
         backup_being_throttled = False
+        locked_out = False
 
         if self.has_mobile:
-            code_verfied, sms_being_throttled = verify_user_code(
+            code_verfied, sms_being_throttled, locked_out = verify_user_code(
                 self.request, code, self.request.user.notifysmsdevice_set.all()
             )
 
         if not code_verfied and self.has_static_code:
-            code_verfied, backup_being_throttled = verify_user_code(
+            code_verfied, backup_being_throttled , locked_out= verify_user_code(
                 self.request, code, self.request.user.staticdevice_set.all()
             )
+
+        if locked_out:
+            return redirect(reverse_lazy("login"))
 
         if not code_verfied:
             # Just in case one of the device is throttled but another one
