@@ -247,7 +247,7 @@ class Login2FAView(LoginRequiredMixin, FormView):
                 initial["code"] = sms_device.token
             elif self.has_static_code:
                 static_device = self.request.user.staticdevice_set.first()
-                if static_device.token_set.count() > 1:
+                if static_device.token_set.count() > 0:
                     initial["code"] = static_device.token_set.first().token
         return initial
 
