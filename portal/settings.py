@@ -329,6 +329,9 @@ if TESTING:
     AXES_VERBOSE = False
     OTP_NOTIFY_NO_DELIVERY = True
 
+BACKUP_CODES_LOCKOUT_LIMIT = 100
+BACKUP_CODES_COUNT = 10
+
 AXES_FAILURE_LIMIT = 10  # Lockout after 10 failed login attempts
 AXES_SLOW_FAILURE_LIMIT = (
     100  # Second level of throttling to prevent slow attacks, 100 tries for 30 days

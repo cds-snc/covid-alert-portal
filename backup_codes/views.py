@@ -3,13 +3,11 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
-from django.conf import settings
 from django.utils.translation import gettext as _
 from django.utils.functional import cached_property
 
 from django_otp import devices_for_user
 from django_otp.plugins.otp_static.models import StaticDevice, StaticToken
-from django_otp import DEVICE_ID_SESSION_KEY
 
 from waffle.mixins import WaffleSwitchMixin
 from portal.mixins import Is2FAMixin
@@ -18,8 +16,7 @@ from backup_codes.forms import RequestBackupCodesForm
 from invitations.models import Invitation
 from profiles.models import HealthcareUser
 
-
-BACKUP_CODES_COUNT = 10
+from django.conf import settings
 
 
 class BackupCodeListView(WaffleSwitchMixin, Is2FAMixin, ListView):
@@ -121,7 +118,7 @@ def _get_backup_codes_list(user):
     tokens = get_user_static_device(user).token_set.all()
 
     # create an array of a fixed size and fill it with as many tokens as actually exist
-    token_list = [None] * BACKUP_CODES_COUNT
+    token_list = [None] * settings.BACKUP_CODES_COUNT
     for idx, token in enumerate(tokens):
         token_list[idx] = token
 
@@ -135,7 +132,7 @@ def _recreate_backup_codes(user):
         devices.token_set.all().delete()
     else:
         devices = StaticDevice.objects.create(user=user, name="Static_Security_Codes")
-    for n in range(BACKUP_CODES_COUNT):
+    for n in range(settings.BACKUP_CODES_COUNT):
         security_code = StaticToken.random_token()
         devices.token_set.create(token=security_code)
 
@@ -157,23 +154,3 @@ def get_user_backup_codes_count(user):
     if devices:
         return devices.token_set.all().count()
     return 0
-
-
-def verify_user_code(request, code, devices):
-    being_throttled = False
-    code_sucessful = False
-
-    for device in devices:
-        # let's check if the user is being throttled on the sms codes
-        verified_allowed, errors_details = device.verify_is_allowed()
-        if verified_allowed is False:
-            being_throttled = True
-
-        # Even though we know the device is being throttled, we still need to test it
-        # If not, the throttling will never get increased for this device
-        if device.verify_token(code):
-            code_sucessful = True
-            request.user.otp_device = device
-            request.session[DEVICE_ID_SESSION_KEY] = device.persistent_id
-
-    return [code_sucessful, being_throttled]

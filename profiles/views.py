@@ -18,7 +18,7 @@ from django.views.generic.edit import UpdateView
 
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django_otp import DEVICE_ID_SESSION_KEY
+from django_otp import DEVICE_ID_SESSION_KEY, devices_for_user
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.expressions import RawSQL
 from django.utils.translation import LANGUAGE_SESSION_KEY, check_for_language
@@ -29,7 +29,7 @@ from django.urls import translate_url
 from otp_yubikey.models import RemoteYubikeyDevice
 
 from portal.mixins import ThrottledMixin, Is2FAMixin, IsAdminMixin
-from backup_codes.views import get_user_backup_codes_count, verify_user_code
+from backup_codes.views import get_user_backup_codes_count
 from invitations.models import Invitation
 from axes.models import AccessAttempt
 
@@ -247,7 +247,7 @@ class Login2FAView(LoginRequiredMixin, FormView):
                 initial["code"] = sms_device.token
             elif self.has_static_code:
                 static_device = self.request.user.staticdevice_set.first()
-                if static_device.token_set.count() > 1:
+                if static_device.token_set.count() > 0:
                     initial["code"] = static_device.token_set.first().token
         return initial
 
@@ -256,16 +256,20 @@ class Login2FAView(LoginRequiredMixin, FormView):
         code_verfied = False
         sms_being_throttled = False
         backup_being_throttled = False
+        locked_out = False
 
         if self.has_mobile:
-            code_verfied, sms_being_throttled = verify_user_code(
+            code_verfied, sms_being_throttled, locked_out = _verify_user_code(
                 self.request, code, self.request.user.notifysmsdevice_set.all()
             )
 
-        if not code_verfied and self.has_static_code:
-            code_verfied, backup_being_throttled = verify_user_code(
+        if not locked_out and not code_verfied and self.has_static_code:
+            code_verfied, backup_being_throttled, locked_out = _verify_user_code(
                 self.request, code, self.request.user.staticdevice_set.all()
             )
+
+        if locked_out:
+            return redirect(reverse_lazy("login"))
 
         if not code_verfied:
             # Just in case one of the device is throttled but another one
@@ -499,3 +503,41 @@ def switch_language(request):
         samesite=settings.LANGUAGE_COOKIE_SAMESITE,
     )
     return response
+
+
+def _reset_all_devices_failure_count(user):
+    devices = devices_for_user(user, None)
+    for device in devices:
+        device.throttling_failure_count = 0
+        device.save()
+
+
+def _verify_user_code(request, code, devices):
+    being_throttled = False
+    code_sucessful = False
+    locked_out = False
+
+    for device in devices:
+        if device.throttling_failure_count >= settings.BACKUP_CODES_LOCKOUT_LIMIT - 1:
+            # Lock the user out by setting them inactive
+            request.user.is_active = False
+            request.user.save()
+            locked_out = True
+            being_throttled = True
+            _reset_all_devices_failure_count(request.user)
+            break
+
+        # let's check if the user is being throttled on the sms codes
+        verified_allowed, errors_details = device.verify_is_allowed()
+        if verified_allowed is False:
+            being_throttled = True
+
+        # Even though we know the device is being throttled, we still need to test it
+        # If not, the throttling will never get increased for this device
+        if device.verify_token(code):
+            code_sucessful = True
+            request.user.otp_device = device
+            request.session[DEVICE_ID_SESSION_KEY] = device.persistent_id
+            _reset_all_devices_failure_count(request.user)
+
+    return [code_sucessful, being_throttled, locked_out]

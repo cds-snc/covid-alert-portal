@@ -1,9 +1,11 @@
-from datetime import time
+from time import sleep
 from django.apps import apps
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth import get_user_model
+
+from profiles.utils import generate_2fa_code
 
 from django_otp.plugins.otp_static.models import StaticDevice
 from invitations.models import Invitation
@@ -131,7 +133,7 @@ class BackupCodesView(AdminUserTestCase):
         )
 
 
-class SecurityCodeLogin(AdminUserTestCase):
+class BackupCodesLogin(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
         Switch.objects.create(name="BACKUP_CODE", active=True)
@@ -170,8 +172,31 @@ class SecurityCodeLogin(AdminUserTestCase):
         # Check if we are now verified
         self.assertTrue(response.context["user"].is_verified)
 
+    def test_user_can_login_with_sms_code(self):
+        self.login(login_2fa=False)
+        generate_2fa_code(self.user)
 
-class SecurityCodeHelp(AdminUserTestCase):
+        #  Get the 2fa page
+        response = self.client.get(reverse("login_2fa"))
+        self.assertEqual(response.status_code, 200)
+
+        # Get backup code
+        sms_device = self.user.notifysmsdevice_set.last()
+        token = sms_device.token
+
+        # Submit backup code
+        post_data = {"code": token}
+        response = self.client.post(
+            reverse("login_2fa"),
+            post_data,
+            follow=True,
+        )
+
+        # Check if we are now verified
+        self.assertTrue(response.context["user"].is_verified)
+
+
+class BackupCodesHelp(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=False)
         Switch.objects.create(name="BACKUP_CODE", active=True)
@@ -207,7 +232,7 @@ class SecurityCodeHelp(AdminUserTestCase):
         self.assertContains(response, "assistance+healthcare@cds-snc.ca")
 
 
-class SecurityCodeRedirect(TestCase):
+class BackupCodesRedirect(TestCase):
     def setUp(self):
         super().setUp()
         Switch.objects.create(name="BACKUP_CODE", active=True)
@@ -255,3 +280,137 @@ class BackupCodesSignupView(AdminUserTestCase):
 
         device = StaticDevice.objects.get(user__id=self.user.id)
         self.assertEqual(len(device.token_set.all()), 10)
+
+
+class BackupCodesLockout(BackupCodesLogin):
+    def check_throttle_failure_count(self, devices):
+        count = 0
+        for device in devices:
+            count = count + device.throttling_failure_count
+
+        return count
+
+    @override_settings(BACKUP_CODES_LOCKOUT_LIMIT=2)
+    def test_lockout_of_backup_codes_with_sms_device(self):
+        # Only test the SMS codes
+        user = self.user
+        user.staticdevice_set.all().delete()
+        self.login(login_2fa=False)
+        generate_2fa_code(self.user)
+        # Get the 2fa page
+        response = self.client.get(reverse("login_2fa"))
+        self.assertEqual(response.status_code, 200)
+        # Set bad token code
+        token = "ImBadToken"
+        # Submit backup code
+        post_data = {"code": token}
+        response = self.client.post(
+            reverse("login_2fa"),
+            post_data,
+            follow=True,
+        )
+        # Check if we are now verified
+        self.assertFormError(response, "form", "code", "You entered the wrong code.")
+        # Pause to ensure second request isn't throttled.
+        sleep(2)
+        response = self.client.post(
+            reverse("login_2fa"),
+            post_data,
+            follow=True,
+        )
+        self.assertRedirects(response, "/en/login/")
+        # Test to ensure the tocken failures have been reset.
+        self.assertEqual(
+            self.check_throttle_failure_count(user.notifysmsdevice_set.all()), 0
+        )
+        self.assertEqual(
+            self.check_throttle_failure_count(user.staticdevice_set.all()), 0
+        )
+
+    @override_settings(BACKUP_CODES_LOCKOUT_LIMIT=2)
+    def test_lockout_of_backup_codes_with_static_device(self):
+        # Only test the Static Codes
+        user = self.user
+        user.notifysmsdevice_set.all().delete()
+        self.login(login_2fa=False)
+        # Get the 2fa page
+        response = self.client.get(reverse("login_2fa"))
+        self.assertEqual(response.status_code, 200)
+        # Set bad token code
+        token = "ImBadToken"
+        # Submit backup code
+        post_data = {"code": token}
+        response = self.client.post(
+            reverse("login_2fa"),
+            post_data,
+            follow=True,
+        )
+        # Check if we are now verified
+        self.assertFormError(response, "form", "code", "You entered the wrong code.")
+        # Pause to ensure second request isn't throttled.
+        sleep(2)
+        response = self.client.post(
+            reverse("login_2fa"),
+            post_data,
+            follow=True,
+        )
+        self.assertRedirects(response, "/en/login/")
+        # Test to ensure the tocken failures have been reset.
+        self.assertEqual(
+            self.check_throttle_failure_count(user.notifysmsdevice_set.all()), 0
+        )
+        self.assertEqual(
+            self.check_throttle_failure_count(user.staticdevice_set.all()), 0
+        )
+
+    def test_backup_code_attempts_are_being_throttled_with_sms(self):
+        # Remove any Static codes if they exist
+        self.user.staticdevice_set.all().delete()
+        self.login(login_2fa=False)
+        # Get the 2fa page
+        response = self.client.get(reverse("login_2fa"))
+        self.assertEqual(response.status_code, 200)
+        # Set bad token code
+        token = "ImBadToken"
+        # Submit backup code
+        post_data = {"code": token}
+        response = self.client.post(
+            reverse("login_2fa"),
+            post_data,
+            follow=True,
+        )
+        # Check if we are now verified
+        self.assertFormError(response, "form", "code", "You entered the wrong code.")
+        # Pause to ensure second request isn't throttled.
+        response = self.client.post(
+            reverse("login_2fa"),
+            post_data,
+            follow=True,
+        )
+        self.assertFormError(response, "form", "code", "Please try again later.")
+
+    def test_backup_code_attempts_are_being_throttled_with_static(self):
+        # Remove any Static codes if they exist
+        self.user.notifysmsdevice_set.all().delete()
+        self.login(login_2fa=False)
+        # Get the 2fa page
+        response = self.client.get(reverse("login_2fa"))
+        self.assertEqual(response.status_code, 200)
+        # Set bad token code
+        token = "ImBadToken"
+        # Submit backup code
+        post_data = {"code": token}
+        response = self.client.post(
+            reverse("login_2fa"),
+            post_data,
+            follow=True,
+        )
+        # Check if we are now verified
+        self.assertFormError(response, "form", "code", "You entered the wrong code.")
+        # Pause to ensure second request isn't throttled.
+        response = self.client.post(
+            reverse("login_2fa"),
+            post_data,
+            follow=True,
+        )
+        self.assertFormError(response, "form", "code", "Please try again later.")
