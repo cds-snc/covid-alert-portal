@@ -6,12 +6,13 @@
 {% block content %}
   {% include  "includes/flash_messages.html" %}
   <h1>{% trans "Security codes" %}</h1>
-  <p>{% trans "Without a mobile phone, you will need to use these single-use security codes to access the portal." %}</p>
+  <p>{% trans "Use these security codes to login to the portal. The code proves it’s you." %}</p>
+  <p>{% trans "You can use each code only once." %}</p>
+  <p>{% trans "Keep the codes on paper in a safe place. Do not save or store this screen, copy the codes to an electronic device, or share the codes with anyone else." %}</p>
 
   {% include "includes/codes.html" with codes=backup_code_list %}
 
-  <p>{% trans "Write down these single-use security codes on a piece of paper." %}</p>
-  <p>{% trans "Make sure to get more security codes before you use up all of the ones listed here." %}</p>
+  <p>{% trans "When you get new codes, the last codes will no longer work, even if you have not used them yet." %}</p>
   <div class="content-button">
     <form action="{% url 'backup_codes' %}" method="post">
       {% csrf_token %}
