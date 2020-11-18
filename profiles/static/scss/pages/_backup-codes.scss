@@ -1,13 +1,9 @@
 .static-codes {
   display: inline-block;
-  border: 2px dashed $color-grey;
-  padding: $space-md calc(#{$space-xl} + #{$space-md});
-  margin: $space-md 0 $space-lg 0;
-  border-radius: 10px;
-  text-align: left;
   position: relative;
+  margin: $space-md 0 $space-lg 0;
 
-  ul {
+  ol {
     font-family: monospace;
     font-size: 1.2em;
     padding-left: 0;
@@ -15,9 +11,24 @@
     letter-spacing: 0.05em;
     list-style-type: none;
 
+    column-count: 2;
+    column-gap: $space-xl;
+
     li {
+      border: 1px dashed $color-grey;
+      padding: 2px $space-xs;
+      border-radius: 5px;
+
       &:not(:last-of-type) {
         margin-bottom: $space-sm;
+      }
+
+      &.empty {
+        background: $color-grey-light;
+
+        span {
+          padding-left: $space-xs;
+        }
       }
 
       [aria-hidden="true"] span:last-of-type {

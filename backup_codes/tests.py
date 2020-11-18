@@ -43,7 +43,7 @@ class BackupCodesView(AdminUserTestCase):
 
         response = self.client.get(reverse("user_profile", kwargs={"pk": self.user.id}))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "5 codes remaining", html=True)
+        self.assertContains(response, "10 codes remaining", html=True)
         ## view security codes link
         self.assertContains(
             response, '<a href="/en/backup-codes">View security codes</a>'
@@ -54,14 +54,14 @@ class BackupCodesView(AdminUserTestCase):
         response = self.client.get(reverse("backup_codes"))
         self.assertRedirects(response, "/en/profiles/{}".format(self.credentials["id"]))
 
-    def test_user_can_generate_5_security_codes(self):
+    def test_user_can_generate_10_security_codes(self):
         self.login()
         response = self.client.post(reverse("backup_codes"), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "<h1>Security codes</h1>")
 
         device = StaticDevice.objects.get(user__id=self.user.id)
-        self.assertEqual(len(device.token_set.all()), 5)
+        self.assertEqual(len(device.token_set.all()), 10)
 
     def test_old_security_codes_invalid_if_new_security_codes_generated(self):
         self.login()
@@ -105,6 +105,30 @@ class BackupCodesView(AdminUserTestCase):
                     token[:4], token[-4:]
                 ),
             )
+
+    def test_user_codes_empty_HTML(self):
+        self.login()
+        response = self.client.post(reverse("backup_codes"), follow=True)
+        device = StaticDevice.objects.get(user__id=self.user.id)
+        # delete all but 1 code
+        for _ in range(len(device.token_set.all()) - 1):
+            device.token_set.last().delete()
+        self.assertEqual(len(device.token_set.all()), 1)
+
+        # make sure it says "1 code remaining"
+        response = self.client.get(reverse("user_profile", kwargs={"pk": self.user.id}))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "1 code remaining", html=True)
+
+        # make sure there are 9 empty list items
+        response = self.client.get(reverse("backup_codes"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            '<li aria-hidden="true" class="empty"><span></span></li>',
+            count=9,
+            html=True,
+        )
 
 
 class SecurityCodeLogin(AdminUserTestCase):
@@ -230,4 +254,4 @@ class BackupCodesSignupView(AdminUserTestCase):
         self.assertContains(response, "<h1>No mobile phone?</h1>")
 
         device = StaticDevice.objects.get(user__id=self.user.id)
-        self.assertEqual(len(device.token_set.all()), 5)
+        self.assertEqual(len(device.token_set.all()), 10)

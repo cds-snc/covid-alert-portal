@@ -19,6 +19,9 @@ from invitations.models import Invitation
 from profiles.models import HealthcareUser
 
 
+BACKUP_CODES_COUNT = 10
+
+
 class BackupCodeListView(WaffleSwitchMixin, Is2FAMixin, ListView):
     waffle_switch = "BACKUP_CODE"
     template_name = "backup_codes/backup_codes_list.html"
@@ -33,11 +36,11 @@ class BackupCodeListView(WaffleSwitchMixin, Is2FAMixin, ListView):
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        recreate_backup_codes(request)
+        _recreate_backup_codes(request.user)
         return redirect(reverse_lazy("backup_codes"))
 
     def get_queryset(self):
-        return get_user_static_device(self.request.user).token_set.all()
+        return _get_backup_codes_list(self.request.user)
 
 
 class SignupBackupCodeListView(LoginRequiredMixin, WaffleSwitchMixin, ListView):
@@ -50,27 +53,14 @@ class SignupBackupCodeListView(LoginRequiredMixin, WaffleSwitchMixin, ListView):
         if request.headers.get("Referer") and request.headers["Referer"].endswith(
             str(reverse_lazy("signup_2fa"))
         ):
-            recreate_backup_codes(request)
+            _recreate_backup_codes(request.user)
             return super().get(request, *args, **kwargs)
 
         return redirect(reverse_lazy("start"))
 
+    # this is called _after_ self.get()
     def get_queryset(self):
-        # this is called _after_ self.get()
-        return get_user_static_device(self.request.user).token_set.all()
-
-
-def recreate_backup_codes(request):
-    devices = get_user_static_device(request.user)
-    if devices:
-        devices.token_set.all().delete()
-    else:
-        devices = StaticDevice.objects.create(
-            user=request.user, name="Static_Security_Codes"
-        )
-    for n in range(5):
-        security_code = StaticToken.random_token()
-        devices.token_set.create(token=security_code)
+        return _get_backup_codes_list(self.request.user)
 
 
 class RequestBackupCodes(WaffleSwitchMixin, LoginRequiredMixin, FormView):
@@ -122,7 +112,36 @@ class RequestBackupCodes(WaffleSwitchMixin, LoginRequiredMixin, FormView):
 
 
 ######################
-# Functions used from the Profiles module for 2fa login.
+# Utility functions used only by this module
+######################
+
+
+def _get_backup_codes_list(user):
+    """Returns a fixed-length list filled with as many active backup codes as the user still has."""
+    tokens = get_user_static_device(user).token_set.all()
+
+    # create an array of a fixed size and fill it with as many tokens as actually exist
+    token_list = [None] * BACKUP_CODES_COUNT
+    for idx, token in enumerate(tokens):
+        token_list[idx] = token
+
+    return token_list
+
+
+def _recreate_backup_codes(user):
+    """Creates 10 new backup codes for a user, deletes all previous backup codes."""
+    devices = get_user_static_device(user)
+    if devices:
+        devices.token_set.all().delete()
+    else:
+        devices = StaticDevice.objects.create(user=user, name="Static_Security_Codes")
+    for n in range(BACKUP_CODES_COUNT):
+        security_code = StaticToken.random_token()
+        devices.token_set.create(token=security_code)
+
+
+######################
+# Functions used by the Profiles module for 2fa login.
 ######################
 
 
