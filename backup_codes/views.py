@@ -17,7 +17,7 @@ from backup_codes.forms import RequestBackupCodesForm
 from invitations.models import Invitation
 from profiles.models import HealthcareUser
 
-from backup_codes.conf import settings
+from django.conf import settings
 
 
 class BackupCodeListView(WaffleSwitchMixin, Is2FAMixin, ListView):

@@ -518,7 +518,7 @@ def _verify_user_code(request, code, devices):
     locked_out = False
 
     for device in devices:
-        if device.throttling_failure_count >= settings.BACKUP_CODES_LOCKOUT_LIMIT:
+        if device.throttling_failure_count >= settings.BACKUP_CODES_LOCKOUT_LIMIT - 1:
             # Lock the user out by setting them inactive
             request.user.is_active = False
             request.user.save()

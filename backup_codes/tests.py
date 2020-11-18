@@ -290,7 +290,7 @@ class BackupCodesLockout(BackupCodesLogin):
 
         return count
 
-    @override_settings(BACKUP_CODES_LOCKOUT_LIMIT=1)
+    @override_settings(BACKUP_CODES_LOCKOUT_LIMIT=2)
     def test_lockout_of_backup_codes_with_sms_device(self):
         # Only test the SMS codes
         user = self.user
@@ -327,7 +327,7 @@ class BackupCodesLockout(BackupCodesLogin):
             self.check_throttle_failure_count(user.staticdevice_set.all()), 0
         )
 
-    @override_settings(BACKUP_CODES_LOCKOUT_LIMIT=1)
+    @override_settings(BACKUP_CODES_LOCKOUT_LIMIT=2)
     def test_lockout_of_backup_codes_with_static_device(self):
         # Only test the Static Codes
         user = self.user
