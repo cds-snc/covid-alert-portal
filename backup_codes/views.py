@@ -21,9 +21,6 @@ from profiles.models import HealthcareUser
 from backup_codes.conf import settings
 
 
-BACKUP_CODES_COUNT = 10
-
-
 class BackupCodeListView(WaffleSwitchMixin, Is2FAMixin, ListView):
     waffle_switch = "BACKUP_CODE"
     template_name = "backup_codes/backup_codes_list.html"
@@ -123,7 +120,7 @@ def _get_backup_codes_list(user):
     tokens = get_user_static_device(user).token_set.all()
 
     # create an array of a fixed size and fill it with as many tokens as actually exist
-    token_list = [None] * BACKUP_CODES_COUNT
+    token_list = [None] * settings.BACKUP_CODES_COUNT
     for idx, token in enumerate(tokens):
         token_list[idx] = token
 
@@ -137,7 +134,7 @@ def _recreate_backup_codes(user):
         devices.token_set.all().delete()
     else:
         devices = StaticDevice.objects.create(user=user, name="Static_Security_Codes")
-    for n in range(BACKUP_CODES_COUNT):
+    for n in range(settings.BACKUP_CODES_COUNT):
         security_code = StaticToken.random_token()
         devices.token_set.create(token=security_code)
 

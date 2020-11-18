@@ -8,9 +8,7 @@ class Settings:
     if they are not specified by the configuration.
     """
 
-    defaults = {
-        "BACKUP_CODES_LOCKOUT_LIMIT": 100,
-    }
+    defaults = {"BACKUP_CODES_LOCKOUT_LIMIT": 100, "BACKUP_CODES_COUNT": 10}
 
     def __getattr__(self, name):
         if name in self.defaults:

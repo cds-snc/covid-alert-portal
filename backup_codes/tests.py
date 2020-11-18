@@ -417,4 +417,3 @@ class BackupCodesLockout(BackupCodesLogin):
             follow=True,
         )
         self.assertFormError(response, "form", "code", "Please try again later.")
-
