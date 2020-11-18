@@ -12,8 +12,6 @@ from invitations.models import Invitation
 from profiles.models import HealthcareProvince
 from waffle.models import Switch
 
-from django_otp.plugins.otp_static.models import StaticDevice
-
 from profiles.tests import AdminUserTestCase
 
 from .apps import BackupCodesConfig
@@ -284,7 +282,6 @@ class BackupCodesSignupView(AdminUserTestCase):
         self.assertEqual(len(device.token_set.all()), 10)
 
 
-@override_settings(BACKUP_CODES_LOCKOUT_LIMIT=1)
 class BackupCodesLockout(BackupCodesLogin):
     def check_throttle_failure_count(self, devices):
         count = 0
@@ -293,6 +290,7 @@ class BackupCodesLockout(BackupCodesLogin):
 
         return count
 
+    @override_settings(BACKUP_CODES_LOCKOUT_LIMIT=1)
     def test_lockout_of_backup_codes_with_sms_device(self):
         # Only test the SMS codes
         user = self.user
@@ -329,6 +327,7 @@ class BackupCodesLockout(BackupCodesLogin):
             self.check_throttle_failure_count(user.staticdevice_set.all()), 0
         )
 
+    @override_settings(BACKUP_CODES_LOCKOUT_LIMIT=1)
     def test_lockout_of_backup_codes_with_static_device(self):
         # Only test the Static Codes
         user = self.user
@@ -364,7 +363,6 @@ class BackupCodesLockout(BackupCodesLogin):
             self.check_throttle_failure_count(user.staticdevice_set.all()), 0
         )
 
-    @override_settings(BACKUP_CODES_LOCKOUT_LIMIT=2)
     def test_backup_code_attempts_are_being_throttled_with_sms(self):
         # Remove any Static codes if they exist
         self.user.staticdevice_set.all().delete()
@@ -391,7 +389,6 @@ class BackupCodesLockout(BackupCodesLogin):
         )
         self.assertFormError(response, "form", "code", "Please try again later.")
 
-    @override_settings(BACKUP_CODES_LOCKOUT_LIMIT=2)
     def test_backup_code_attempts_are_being_throttled_with_static(self):
         # Remove any Static codes if they exist
         self.user.notifysmsdevice_set.all().delete()

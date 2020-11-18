@@ -3,7 +3,6 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
-from django.conf import settings
 from django.utils.translation import gettext as _
 from django.utils.functional import cached_property
 
