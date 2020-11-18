@@ -18,7 +18,7 @@ from django.views.generic.edit import UpdateView
 
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django_otp import DEVICE_ID_SESSION_KEY
+from django_otp import DEVICE_ID_SESSION_KEY, devices_for_user
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.expressions import RawSQL
 from django.utils.translation import LANGUAGE_SESSION_KEY, check_for_language
@@ -505,6 +505,13 @@ def switch_language(request):
     return response
 
 
+def _reset_all_devices_failure_count(user):
+    devices = devices_for_user(user, None)
+    for device in devices:
+        device.throttling_failure_count = 0
+        device.save()
+
+
 def _verify_user_code(request, code, devices):
     being_throttled = False
     code_sucessful = False
@@ -517,7 +524,7 @@ def _verify_user_code(request, code, devices):
             request.user.save()
             locked_out = True
             being_throttled = True
-            reset_all_devices_failure_count(request.user)
+            _reset_all_devices_failure_count(request.user)
             break
 
         # let's check if the user is being throttled on the sms codes
@@ -531,6 +538,6 @@ def _verify_user_code(request, code, devices):
             code_sucessful = True
             request.user.otp_device = device
             request.session[DEVICE_ID_SESSION_KEY] = device.persistent_id
-            reset_all_devices_failure_count(request.user)
+            _reset_all_devices_failure_count(request.user)
 
     return [code_sucessful, being_throttled, locked_out]

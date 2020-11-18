@@ -155,10 +155,3 @@ def get_user_backup_codes_count(user):
     if devices:
         return devices.token_set.all().count()
     return 0
-
-
-def reset_all_devices_failure_count(user):
-    devices = devices_for_user(user, None)
-    for device in devices:
-        device.throttling_failure_count = 0
-        device.save()
