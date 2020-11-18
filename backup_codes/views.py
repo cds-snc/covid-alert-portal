@@ -157,37 +157,6 @@ def get_user_backup_codes_count(user):
     return 0
 
 
-def verify_user_code(request, code, devices):
-    being_throttled = False
-    code_sucessful = False
-    locked_out = False
-
-    for device in devices:
-        if device.throttling_failure_count >= settings.BACKUP_CODES_LOCKOUT_LIMIT:
-            # Lock the user out by setting them inactive
-            request.user.is_active = False
-            request.user.save()
-            locked_out = True
-            being_throttled = True
-            reset_all_devices_failure_count(request.user)
-            break
-
-        # let's check if the user is being throttled on the sms codes
-        verified_allowed, errors_details = device.verify_is_allowed()
-        if verified_allowed is False:
-            being_throttled = True
-
-        # Even though we know the device is being throttled, we still need to test it
-        # If not, the throttling will never get increased for this device
-        if device.verify_token(code):
-            code_sucessful = True
-            request.user.otp_device = device
-            request.session[DEVICE_ID_SESSION_KEY] = device.persistent_id
-            reset_all_devices_failure_count(request.user)
-
-    return [code_sucessful, being_throttled, locked_out]
-
-
 def reset_all_devices_failure_count(user):
     devices = devices_for_user(user, None)
     for device in devices:
