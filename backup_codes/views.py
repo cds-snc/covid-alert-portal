@@ -172,6 +172,7 @@ def verify_user_code(request, code, devices):
 
     return [code_sucessful, being_throttled, locked_out]
 
+
 def reset_all_devices_failure_count(user):
     devices = devices_for_user(user, None)
     for device in devices:

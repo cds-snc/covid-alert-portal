@@ -7,9 +7,9 @@ class Settings:
     instance will contain all of our settings as attributes, with default values
     if they are not specified by the configuration.
     """
-    defaults = {
-        'BACKUP_CODES_LOCKOUT_LIMIT': 100,
 
+    defaults = {
+        "BACKUP_CODES_LOCKOUT_LIMIT": 100,
     }
 
     def __getattr__(self, name):

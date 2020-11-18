@@ -173,6 +173,7 @@ class BackupCodesLogin(AdminUserTestCase):
         # Check if we are now verified
         self.assertTrue(response.context["user"].is_verified)
 
+
 class BackupCodesHelp(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=False)
@@ -258,6 +259,7 @@ class BackupCodesSignupView(AdminUserTestCase):
         device = StaticDevice.objects.get(user__id=self.user.id)
         self.assertEqual(len(device.token_set.all()), 5)
 
+
 @override_settings(BACKUP_CODES_LOCKOUT_LIMIT=1)
 class BackupCodesLockout(BackupCodesLogin):
     def check_throttle_failure_count(self, devices):
@@ -296,8 +298,12 @@ class BackupCodesLockout(BackupCodesLogin):
         )
         self.assertRedirects(response, "/en/login/")
         # Test to ensure the tocken failures have been reset.
-        self.assertEqual(self.check_throttle_failure_count(user.notifysmsdevice_set.all()), 0)
-        self.assertEqual(self.check_throttle_failure_count(user.staticdevice_set.all()), 0)
+        self.assertEqual(
+            self.check_throttle_failure_count(user.notifysmsdevice_set.all()), 0
+        )
+        self.assertEqual(
+            self.check_throttle_failure_count(user.staticdevice_set.all()), 0
+        )
 
     def test_lockout_of_backup_codes_with_static_device(self):
         # Only test the Static Codes
@@ -327,8 +333,12 @@ class BackupCodesLockout(BackupCodesLogin):
         )
         self.assertRedirects(response, "/en/login/")
         # Test to ensure the tocken failures have been reset.
-        self.assertEqual(self.check_throttle_failure_count(user.notifysmsdevice_set.all()), 0)
-        self.assertEqual(self.check_throttle_failure_count(user.staticdevice_set.all()), 0)
+        self.assertEqual(
+            self.check_throttle_failure_count(user.notifysmsdevice_set.all()), 0
+        )
+        self.assertEqual(
+            self.check_throttle_failure_count(user.staticdevice_set.all()), 0
+        )
 
     @override_settings(BACKUP_CODES_LOCKOUT_LIMIT=2)
     def test_backup_code_attempts_are_being_throttled_with_sms(self):
@@ -356,6 +366,7 @@ class BackupCodesLockout(BackupCodesLogin):
             follow=True,
         )
         self.assertFormError(response, "form", "code", "Please try again later.")
+
     @override_settings(BACKUP_CODES_LOCKOUT_LIMIT=2)
     def test_backup_code_attempts_are_being_throttled_with_static(self):
         # Remove any Static codes if they exist

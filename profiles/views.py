@@ -264,7 +264,7 @@ class Login2FAView(LoginRequiredMixin, FormView):
             )
 
         if not locked_out and not code_verfied and self.has_static_code:
-            code_verfied, backup_being_throttled , locked_out= verify_user_code(
+            code_verfied, backup_being_throttled, locked_out = verify_user_code(
                 self.request, code, self.request.user.staticdevice_set.all()
             )
 
