@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Security code" %}{% endblock %}
+
+{% block content %}
+  {% include  "includes/flash_messages.html" %}
+  <h1>{% trans "Security code" %}</h1>
+
+  <p>{% blocktrans with view.staff_user.email as staff_email %}Give {{ staff_email }} this code to log in.{% endblocktrans %}</p>
+
+  {% include "includes/codes.html" with codes=backup_code_list class="admin" %}
+
+  <p>{% trans "Read the code phonetically and ask the staff member to read it back to you." %}</p>
+  <p>{% trans "One. Three. A as in Animal. Three." %}</p>
+
+  <p>{% trans "After they log in, they can follow the instructions to get more security codes." %}</p>
+
+  <div class="content-button">
+    <a class="secondary" href="{% url 'profiles' %}" role='button' draggable='false'>{% trans "Back to accounts" %}</a>
+  </div>
+
+{% endblock %}

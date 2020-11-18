@@ -1,40 +1,14 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model
 
-from .models import HealthcareUser
-
-
-class ProvinceAdminViewMixin(UserPassesTestMixin):
-    def test_func(self):
-        # if logged in user is superuser, allow operation
-        if self.request.user.is_superuser:
-            return True
-
-        # 404 if bad user ID
-        profile_user = get_object_or_404(HealthcareUser, pk=self.kwargs["pk"])
-
-        # if same user, allow operation
-        if self.request.user.id == profile_user.id:
-            return True
-
-        # Don't return superuser profile pages
-        if profile_user.is_superuser:
-            return False
-
-        # if admin user, return users from the same province
-        if (
-            self.request.user.is_admin
-            and self.request.user.province.id == profile_user.province.id
-        ):
-            return True
-
-        return False
+from portal.mixins import ProvinceAdminMixin
 
 
-class ProvinceAdminEditMixin(ProvinceAdminViewMixin):
+class ProvinceAdminEditMixin(ProvinceAdminMixin):
     def test_func(self):
         # 404 if bad user ID
-        profile_user = get_object_or_404(HealthcareUser, pk=self.kwargs["pk"])
+        profile_user = get_object_or_404(get_user_model(), pk=self.kwargs["pk"])
 
         # admins can't edit other admins
         if (
