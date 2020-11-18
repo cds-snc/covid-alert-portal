@@ -8,7 +8,6 @@ from django.utils.functional import cached_property
 
 from django_otp import devices_for_user
 from django_otp.plugins.otp_static.models import StaticDevice, StaticToken
-from django_otp import DEVICE_ID_SESSION_KEY
 
 from waffle.mixins import WaffleSwitchMixin
 from portal.mixins import Is2FAMixin
