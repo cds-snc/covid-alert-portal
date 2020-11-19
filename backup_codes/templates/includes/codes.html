@@ -4,7 +4,7 @@
     {% if code %}
       <li>
         <span class="visually-hidden">{{ code.token|upper|join:" " }}</span>
-        <span aria-hidden="true"><span>{{ code.token|slice:":4" }}</span><span>{{ code.token|slice:"4:" }}</span></span>
+        <span aria-hidden="true"><span>{{ code.token|upper|slice:":4" }}</span><span>{{ code.token|upper|slice:"4:" }}</span></span>
       </li>
     {% else %}
       <li aria-hidden="true" class="empty">

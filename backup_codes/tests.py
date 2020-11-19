@@ -104,7 +104,7 @@ class BackupCodesView(AdminUserTestCase):
             self.assertContains(
                 response,
                 '<span aria-hidden="true"><span>{}</span><span>{}</span>'.format(
-                    token[:4], token[-4:]
+                    token[:4].upper(), token[-4:].upper()
                 ),
             )
 
@@ -145,12 +145,9 @@ class BackupCodesLogin(AdminUserTestCase):
         self.client.post(reverse("backup_codes"), follow=True)
 
     def logout(self):
-        response = self.client.get("/", follow=True)
-        if response.context["user"].is_active:
-            self.client.get(reverse("logout"))
+        self.client.logout()
 
     def test_user_can_login_with_backup_code(self):
-
         self.login(login_2fa=False)
 
         #  Get the 2fa page
@@ -159,18 +156,53 @@ class BackupCodesLogin(AdminUserTestCase):
 
         # Get backup code
         static_device = self.user.staticdevice_set.first()
-        token = static_device.token_set.first()
+        token = static_device.token_set.first().token
 
         # Submit backup code
-        post_data = {"code": token.token}
-        response = self.client.post(
-            reverse("login_2fa"),
-            post_data,
-            follow=True,
-        )
+        response = self.client.post(reverse("login_2fa"), {"code": token}, follow=True)
 
         # Check if we are now verified
-        self.assertTrue(response.context["user"].is_verified)
+        self.assertTrue(response.context["user"].is_verified())
+
+    def test_user_can_login_with_backup_code_case_insensitive(self):
+        self.login(login_2fa=False)
+
+        #  Get the 2fa page
+        response = self.client.get(reverse("login_2fa"))
+        self.assertEqual(response.status_code, 200)
+
+        # Get backup code
+        static_device = self.user.staticdevice_set.first()
+        token = static_device.token_set.first().token
+
+        # uppercase backup code
+        token = token.upper()
+
+        # Submit backup code
+        response = self.client.post(reverse("login_2fa"), {"code": token}, follow=True)
+
+        # Check if we are now verified
+        self.assertTrue(response.context["user"].is_verified())
+
+    def test_user_can_login_with_backup_code_whitespace(self):
+        self.login(login_2fa=False)
+
+        #  Get the 2fa page
+        response = self.client.get(reverse("login_2fa"))
+        self.assertEqual(response.status_code, 200)
+
+        # Get backup code
+        static_device = self.user.staticdevice_set.first()
+        token = static_device.token_set.first().token
+
+        # add leading and trailing whitespace, and a space in the middle
+        token = " {} {} ".format(token[:4], token[4:])
+
+        # Submit backup code
+        response = self.client.post(reverse("login_2fa"), {"code": token}, follow=True)
+
+        # Check if we are now verified
+        self.assertTrue(response.context["user"].is_verified())
 
     def test_user_can_login_with_sms_code(self):
         self.login(login_2fa=False)
