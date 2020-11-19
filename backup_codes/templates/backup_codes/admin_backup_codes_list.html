@@ -11,8 +11,14 @@
 
   {% include "includes/codes.html" with codes=backup_code_list class="admin" %}
 
-  <p>{% trans "Read the code phonetically and ask the staff member to read it back to you." %}</p>
-  <p>{% trans "One. Three. A as in Animal. Three." %}</p>
+    {% with backup_code_list.0.token as token %}
+      {% with token|slice:":4" as tokenFirstHalf %}
+      {% with token|slice:"4:" as tokenSecondHalf %}
+        {% include "includes/phonetic.html" with code=tokenFirstHalf|add:" "|add:tokenSecondHalf intro=_("Read the code phonetically and ask the staff member to read it back to you:") %}
+      {% endwith %}
+      {% endwith %}
+    {% endwith %}
+  <br />
 
   <p>{% trans "After they log in, they can follow the instructions to get more security codes." %}</p>
 

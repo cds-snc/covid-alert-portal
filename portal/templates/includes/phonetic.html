@@ -1,7 +1,13 @@
 {% load alphabet i18n %}
-<div>
-    <p>{% blocktrans %}Read key phonetically and ask patient to read it back to you:{% endblocktrans %}</p>
-    <div class="phonetic-wrapper">
+<div class="phonetic__wrapper">
+    <p>
+        {% if intro %}
+            {{ intro }}
+        {% else %}
+            {% trans "Read key phonetically and ask patient to read it back to you:" %}
+        {% endif %}
+    </p>
+    <div class="phonetic__alphabet">
         <div>
         {% for letter in code %}
             {% if letter == ' ' %}
