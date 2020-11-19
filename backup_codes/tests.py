@@ -104,7 +104,7 @@ class BackupCodesView(AdminUserTestCase):
             self.assertContains(
                 response,
                 '<span aria-hidden="true"><span>{}</span><span>{}</span>'.format(
-                    token[:4], token[-4:]
+                    token[:4].upper(), token[-4:].upper()
                 ),
             )
 
