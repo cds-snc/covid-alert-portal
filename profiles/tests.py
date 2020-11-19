@@ -17,7 +17,6 @@ from .apps import ProfilesConfig
 from .forms import SignupForm, HealthcarePhoneEditForm
 from .models import (
     HealthcareProvince,
-    HealthcareUser,
     AuthorizedDomain,
     HealthcareFailedAccessAttempt,
 )
@@ -27,7 +26,7 @@ from .utils.invitation_adapter import user_signed_up
 User = get_user_model()
 
 
-def get_province(abbr="MB"):
+def _get_province(abbr="MB"):
     # Provinces are inserted into the DB during migrations, we can call them once the test DB is initialized
     return HealthcareProvince.objects.get(abbr=abbr)
 
@@ -35,14 +34,14 @@ def get_province(abbr="MB"):
 def get_credentials(
     email="test@test.com",
     name="testuser",
-    province=None,
+    province="MB",
     is_admin=False,
     password="testpassword",
 ):
     return {
         "email": email,
         "name": name,
-        "province": province or get_province(),
+        "province": _get_province(province),
         "is_admin": is_admin,
         "password": password,
         "phone_number": "+12125552368",
@@ -52,7 +51,7 @@ def get_credentials(
 def get_other_credentials(
     email="test2@test.com",
     name="testuser2",
-    province=None,
+    province="MB",
     is_admin=False,
     is_superuser=False,
     password="testpassword2",
@@ -68,7 +67,7 @@ def get_other_credentials(
     return {
         "email": email,
         "name": name,
-        "province": province or get_province(),
+        "province": _get_province(province),
         "is_admin": is_admin,
         "password": password,
         "phone_number": "+12125552368",
@@ -121,10 +120,10 @@ class AdminUserTestCase(TestCase):
             username=credentials.get("email"), password=credentials.get("password")
         )
         if login_2fa:
-            user = HealthcareUser.objects.get(email=credentials.get("email"))
+            user = User.objects.get(email=credentials.get("email"))
             self.login_2fa(user)
 
-    def login_2fa(self, user: HealthcareUser = None):
+    def login_2fa(self, user: User = None):
         if user is None:
             user = self.user
 
@@ -207,22 +206,12 @@ class UserLockoutView(AdminUserTestCase):
         }
 
         for i in range(0, number_of_attempts):
-            response = self.client.post(
-                reverse("login"),
-                post_data,
-                REMOTE_ADDR="127.0.0.1",
-                HTTP_USER_AGENT="test-browser",
-            )
+            response = self.client.post(reverse("login"), post_data)
             self.assertContains(
                 response, "Your username or password do not match our records"
             )
 
-        return self.client.post(
-            reverse("admin:login"),
-            post_data,
-            REMOTE_ADDR="127.0.0.1",
-            HTTP_USER_AGENT="test-browser",
-        )
+        return self.client.post(reverse("admin:login"), post_data)
 
     @override_settings(AXES_ENABLED=True)
     def test_user_lockout(self):
@@ -251,8 +240,6 @@ class UserLockoutView(AdminUserTestCase):
                     "username": self.user.email,
                     "password": uuid4(),
                 },
-                REMOTE_ADDR="127.0.0.1",
-                HTTP_USER_AGENT="test-browser",
             )
             self.assertContains(
                 response, "Your username or password do not match our records"
@@ -298,12 +285,7 @@ class DjangoAdminPanelView(AdminUserTestCase):
             "password": other_credentials.get("password"),
         }
 
-        response = self.client.post(
-            reverse("login"),
-            post_data,
-            REMOTE_ADDR="127.0.0.1",
-            HTTP_USER_AGENT="test-browser",
-        )
+        response = self.client.post(reverse("login"), post_data)
 
         self.assertEqual(response.status_code, 403)
 
@@ -320,12 +302,7 @@ class DjangoAdminPanelView(AdminUserTestCase):
             "password": other_credentials.get("password"),
         }
 
-        response = self.client.post(
-            reverse("login"),
-            post_data,
-            REMOTE_ADDR="127.0.0.1",
-            HTTP_USER_AGENT="test-browser",
-        )
+        response = self.client.post(reverse("login"), post_data)
 
         self.assertEqual(response.status_code, 403)
 
@@ -473,7 +450,7 @@ class InvitationFlow(TestCase):
         self.email = "test@test.com"
         self.invite = Invitation.create(self.email)
 
-        self.province = get_province()
+        self.province = _get_province()
 
     def test_email_in_form(self):
         f = SignupForm(initial={"email": self.invite.email})
@@ -571,15 +548,13 @@ class SignupView(AdminUserTestCase):
         """
         # Assert user account doesn't exist
         self.assertIsNone(
-            HealthcareUser.objects.filter(email=self.new_user_data["email"]).first()
+            User.objects.filter(email=self.new_user_data["email"]).first()
         )
 
         # Try to log in with a username that doesn't exist yet
         self.client.post(
             reverse("login"),
             {"username": self.new_user_data["email"], "password": "fake_password"},
-            REMOTE_ADDR="127.0.0.1",
-            HTTP_USER_AGENT="test-browser",
         )
 
         # Assert that a login attempt records exist
@@ -599,7 +574,7 @@ class SignupView(AdminUserTestCase):
 
         # Assert user account exists
         self.assertTrue(
-            HealthcareUser.objects.filter(email=self.new_user_data["email"]).first(),
+            User.objects.filter(email=self.new_user_data["email"]).first(),
         )
 
         # Assert that no login attempt records exist
@@ -947,9 +922,7 @@ class ProfilesView(AdminUserTestCase):
         self.assertContains(response, self.credentials["email"])
 
     def test_manage_accounts_page_no_users_from_other_province(self):
-        admin_ab_credentials = get_other_credentials(
-            is_admin=True, province=get_province("AB")
-        )
+        admin_ab_credentials = get_other_credentials(is_admin=True, province="AB")
         User.objects.create_user(**admin_ab_credentials)
         self.login(admin_ab_credentials)
 
@@ -1053,9 +1026,7 @@ class ProfileView(AdminUserTestCase):
         )
 
     def test_forbidden_profile_page_if_admin_user_viewing_other_province_user(self):
-        admin_ab_credentials = get_other_credentials(
-            is_admin=True, province=get_province("AB")
-        )
+        admin_ab_credentials = get_other_credentials(is_admin=True, province="AB")
         User.objects.create_user(**admin_ab_credentials)
         self.login(admin_ab_credentials)
 
@@ -1183,7 +1154,7 @@ class ProfileEditView(AdminUserTestCase):
             post_data,
         )
         self.assertEqual(response.status_code, 302)
-        user = HealthcareUser.objects.get(pk=self.user.id)
+        user = User.objects.get(pk=self.user.id)
         self.assertEqual(user.name, "Don Draper")
 
     def test_edit_email_forbidden(self):
@@ -1272,5 +1243,5 @@ class ProfileEditView(AdminUserTestCase):
             post_data,
         )
         self.assertEqual(response.status_code, 302)
-        user = HealthcareUser.objects.get(pk=self.user.id)
+        user = User.objects.get(pk=self.user.id)
         self.assertEqual(user.phone_number, number)
