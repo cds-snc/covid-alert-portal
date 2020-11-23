@@ -1,0 +1,47 @@
+/* Variables */
+/* darker: 00243D */
+/* Partials */
+main .announcements--container {
+  max-width: 450px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+main .announcements--container ul {
+  padding-left: 0px;
+  list-style-type: none;
+  margin-bottom: 0;
+}
+
+main .announcements--container ul li {
+  padding: 15px;
+}
+
+main .announcements--container ul li.info, main .announcements--container ul li.success {
+  border-left: 4px solid #4e88b9;
+  color: #284162;
+  background: rgba(78, 136, 185, 0.1);
+}
+
+main .announcements--container ul li.error {
+  border-left: 4px solid #b1081f;
+  color: #b1081f;
+  background: #f3e9e8;
+}
+
+main .announcements--container ul li .title {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+main .announcements--container ul li .content {
+  font-weight: normal !important;
+}
+
+main .info-message {
+  margin: 40px 0;
+  font-size: 0.85em;
+  border-left: 3px solid #ffbf47;
+  background-color: #fff7e6;
+  padding: 5px 20px;
+}

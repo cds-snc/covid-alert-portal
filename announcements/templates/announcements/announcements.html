@@ -1,0 +1,18 @@
+{% load static i18n %}
+<link href="{% static 'css/announcements.css' %}" rel="stylesheet">
+
+<div class="announcements--container" role="alert">
+    <ul class="announcements">
+    {% for announcement in announcements %}
+        <li class="{{ announcement.level }}">
+            <div class="title">{{announcement.title}}</div>
+            {% if announcement.content %}
+            <div class="content">
+                {{announcement.content|safe}}
+            </div>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
