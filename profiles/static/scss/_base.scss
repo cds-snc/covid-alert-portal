@@ -163,3 +163,7 @@ main {
 .visually-hidden {
   @include visuallyHidden();
 }
+
+.print-only {
+  display: none;
+}

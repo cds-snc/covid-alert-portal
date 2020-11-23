@@ -3,9 +3,13 @@
 
 {% block title %}{% trans "Security codes" %}{% endblock %}
 
+{% block body_class %}backup_codes{% endblock %}
+
 {% block content %}
   {% include  "includes/flash_messages.html" %}
   <h1>{% trans "Security codes" %}</h1>
+  <h2 class="header--print print-only">Security codes for {{ user.email }}</h2>
+
   <p>{% trans "Use these security codes to login to the portal. The code proves it’s you." %}</p>
   <p>{% trans "You can use each code only once." %}</p>
   <p>{% trans "Keep the codes on paper in a safe place. Do not save or store this screen, copy the codes to an electronic device, or share the codes with anyone else." %}</p>
