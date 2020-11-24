@@ -134,6 +134,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "portal.context_processors.logout_messages",
             ],
+            "libraries": {"alphabet": "portal.templatetags.alphabet"},
         },
     },
 ]

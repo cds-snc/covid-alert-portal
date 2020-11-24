@@ -12,9 +12,11 @@ from invitations.models import Invitation
 from profiles.models import HealthcareProvince
 from waffle.models import Switch
 
-from profiles.tests import AdminUserTestCase
+from profiles.tests import AdminUserTestCase, get_other_credentials
 
 from .apps import BackupCodesConfig
+
+User = get_user_model()
 
 
 class BackupCodesConfigTest(TestCase):
@@ -133,6 +135,128 @@ class BackupCodesView(AdminUserTestCase):
         )
 
 
+class AdminBackupCodesView(AdminUserTestCase):
+    def setUp(self):
+        super().setUp(is_admin=True)
+        Switch.objects.create(name="BACKUP_CODE", active=True)
+
+    def test_admin_can_see_security_code_button_for_staff_user(self):
+        staff_credentials = get_other_credentials(is_admin=False)
+        staff_user = User.objects.create_user(**staff_credentials)
+
+        self.login()
+        response = self.client.get(
+            reverse("user_profile", kwargs={"pk": staff_user.id})
+        )
+        self.assertEqual(response.status_code, 200)
+        # see the "get a code" link in the profile of the user
+        self.assertContains(
+            response,
+            '<button type="submit" class="link">Get a security code</button>',
+            html=True,
+        )
+
+    def test_admin_can_get_security_code_for_staff_user(self):
+        staff_credentials = get_other_credentials(is_admin=False)
+        staff_user = User.objects.create_user(**staff_credentials)
+
+        self.login()
+        response = self.client.post(
+            reverse("backup_codes_admin", kwargs={"pk": staff_user.id}), follow=True
+        )
+
+        device = StaticDevice.objects.get(user__id=staff_user.id)
+        self.assertEqual(len(device.token_set.all()), 1)
+        token = device.token_set.first().token
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Security code</h1>", html=True)
+        # see the code on the screen
+        self.assertContains(
+            response,
+            '<span aria-hidden="true"><span>{}</span><span>{}</span>'.format(
+                token[:4].upper(), token[-4:].upper()
+            ),
+        )
+
+    def test_admin_getting_security_code_for_staff_user_replaces_existing_codes(self):
+        staff_credentials = get_other_credentials(is_admin=False)
+        staff_user = User.objects.create_user(**staff_credentials)
+
+        # create 10 codes for staff user
+        self.login(staff_credentials)
+        self.client.post(reverse("backup_codes"), follow=True)
+        device = StaticDevice.objects.get(user__id=staff_user.id)
+        self.assertEqual(len(device.token_set.all()), 10)
+
+        # login again as the admin user
+        self.login()
+        # create a code for the staff user
+        self.client.post(
+            reverse("backup_codes_admin", kwargs={"pk": staff_user.id}), follow=True
+        )
+
+        device = StaticDevice.objects.get(user__id=staff_user.id)
+        # test there is only 1 code remaining
+        self.assertEqual(len(device.token_set.all()), 1)
+
+    def test_admin_redirect_on_get_request_if_no_static_device(self):
+        staff_credentials = get_other_credentials(is_admin=False)
+        staff_user = User.objects.create_user(**staff_credentials)
+
+        # user doesn't have a static device set → redirect back to profile
+        self.login()
+        response = self.client.get(
+            reverse("backup_codes_admin", kwargs={"pk": staff_user.id})
+        )
+        self.assertRedirects(response, "/en/profiles/{}".format(staff_user.id))
+
+    def test_admin_can_get_security_code_for_other_admin_user(self):
+        admin_credentials = get_other_credentials(is_admin=True)
+        admin_user = User.objects.create_user(**admin_credentials)
+
+        self.login()
+        response = self.client.post(
+            reverse("backup_codes_admin", kwargs={"pk": admin_user.id})
+        )
+        self.assertRedirects(
+            response, "/en/profiles/{}/backup-codes/admin".format(admin_user.id)
+        )
+
+        # see 1 code exists for other admin
+        device = StaticDevice.objects.get(user__id=admin_user.id)
+        self.assertEqual(len(device.token_set.all()), 1)
+
+    def test_admin_can_NOT_get_security_code_for_other_province_user(self):
+        ab_staff_credentials = get_other_credentials(province="AB")
+        ab_staff_user = User.objects.create_user(**ab_staff_credentials)
+
+        self.login()
+        response = self.client.post(
+            reverse("backup_codes_admin", kwargs={"pk": ab_staff_user.id})
+        )
+        # forbidden to generate code
+        self.assertEqual(response.status_code, 403)
+
+        # see no codes exist for other province user
+        self.assertIsNone(
+            StaticDevice.objects.filter(user__id=ab_staff_user.id).first()
+        )
+
+    def test_admin_can_NOT_get_security_code_for_superuser(self):
+        superuser_credentials = get_other_credentials(is_superuser=True)
+        superuser = User.objects.create_superuser(**superuser_credentials)
+
+        self.login()
+        response = self.client.post(
+            reverse("backup_codes_admin", kwargs={"pk": superuser.id})
+        )
+        # forbidden to generate code
+        self.assertEqual(response.status_code, 403)
+
+        # see no codes exist for superuser
+        self.assertIsNone(StaticDevice.objects.filter(user__id=superuser.id).first())
+
+
 class BackupCodesLogin(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
@@ -240,7 +364,6 @@ class BackupCodesHelp(AdminUserTestCase):
             "password": "superdupercomplex_To_Infinity_and_Beyond",
             "phone_number": "+12125552368",
         }
-        User = get_user_model()
         self.inviter = User.objects.create_user(**self.inviter_credentials)
         self.invite = Invitation.create(
             self.user.email, inviter=self.inviter, sent=timezone.now()
@@ -256,7 +379,6 @@ class BackupCodesHelp(AdminUserTestCase):
         self,
     ):
         # Delete inviter
-        User = get_user_model()
         User.objects.filter(email__exact=self.inviter.email).delete()
 
         self.login(login_2fa=False)
@@ -275,7 +397,6 @@ class BackupCodesRedirect(TestCase):
             "is_admin": True,
             "password": "superdupercomplex_To_Infinity_and_Beyond",
         }
-        User = get_user_model()
         self.user = User.objects.create_user(**self.user_credentials)
 
     def test_user_redirected_to_signup_if_no_mobile_or_static_codes(self):

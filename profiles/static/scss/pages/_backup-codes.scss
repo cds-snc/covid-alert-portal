@@ -3,16 +3,24 @@
   position: relative;
   margin: $space-md 0 $space-lg 0;
 
+  &:not(.admin) {
+    ol {
+      column-count: 2;
+      column-gap: $space-xl;
+      font-size: 1.2em;
+    }
+  }
+
+  &.admin ol {
+    font-size: 1.5em;
+  }
+
   ol {
     font-family: monospace;
-    font-size: 1.2em;
     padding-left: 0;
     margin-bottom: 0;
     letter-spacing: 0.05em;
     list-style-type: none;
-
-    column-count: 2;
-    column-gap: $space-xl;
 
     li {
       border: 1px dashed $color-grey;
