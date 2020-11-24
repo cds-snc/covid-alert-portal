@@ -19,8 +19,8 @@ class Migration(migrations.Migration):
             name='Announcement',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title_en', models.CharField(max_length=100,verbose_name='Title in English')),
-                ('title_fr', models.CharField(max_length=100,verbose_name='Title in French')),
+                ('title_en', models.CharField(max_length=100, verbose_name='Title in English')),
+                ('title_fr', models.CharField(max_length=100, verbose_name='Title in French')),
                 ('content_en', models.TextField(blank=True, verbose_name='English Content')),
                 ('content_fr', models.TextField(blank=True, verbose_name='French Content')),
                 ('display', models.BooleanField(default=False, verbose_name='show_to_users')),
