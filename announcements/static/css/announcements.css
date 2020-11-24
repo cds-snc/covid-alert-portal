@@ -19,30 +19,44 @@ main .announcements--container ul li {
 
 main .announcements--container ul li.info, main .announcements--container ul li.success {
   border-left: 4px solid #4e88b9;
-  color: #284162;
   background: rgba(78, 136, 185, 0.1);
+}
+
+main .announcements--container ul li.info a, main .announcements--container ul li.info .dismiss, main .announcements--container ul li.success a, main .announcements--container ul li.success .dismiss {
+  color: #284162;
 }
 
 main .announcements--container ul li.error {
   border-left: 4px solid #b1081f;
-  color: #b1081f;
   background: #f3e9e8;
+}
+
+main .announcements--container ul li.error a, main .announcements--container ul li.error .dismiss {
+  color: #b1081f;
 }
 
 main .announcements--container ul li.warning {
   border-left: 4px solid #ffbf47;
-  color: #ffbf47;
   background: #fff7e6;
+}
+
+main .announcements--container ul li.warning a, main .announcements--container ul li.warning .dismiss {
+  color: #ffbf47;
 }
 
 main .announcements--container ul li .dismiss {
   position: absolute;
   right: 0;
   top: 0;
-  width: 30px;
-  height: 30px;
+  width: 1.5em;
+  height: 1.5em;
   text-align: center;
   cursor: pointer;
+  font-size: 2em;
+}
+
+main .announcements--container ul li .announcement-content-container {
+  width: 90%;
 }
 
 main .announcements--container ul li .title {
@@ -52,4 +66,13 @@ main .announcements--container ul li .title {
 
 main .announcements--container ul li .content {
   font-weight: normal !important;
+}
+
+main .announcements--container ul li form {
+  float: right;
+  width: 0;
+}
+
+main .announcements--container ul li a {
+  font-weight: bold;
 }

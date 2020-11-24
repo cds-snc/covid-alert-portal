@@ -6,21 +6,24 @@
     {% for announcement in announcements %}
         <li class="{{ announcement.level }}">
             {% if announcement.dismissable %}
-            <form class ="dismiss" action="{{ announcement.dismiss_url }}" method="post">
+            <form action="{{ announcement.dismiss_url }}" method="post">
                 {% csrf_token %}
                 <label>
-                   <span class="dismiss" aria-label="Dismiss">&times</span> 
+                   <span class="dismiss" aria-label="{% trans 'Dismiss' %}">&times</span> 
                    <input type="submit" hidden/>
                 </label>
                 
             </form>
             {% endif %}
-            <div class="title">{{announcement.title}}</div>
-            {% if announcement.content %}
-            <div class="content">
-                {{announcement.content|safe}}
+            <div class="announcement-content-container" style="width: 90%;">
+                <div class="title">{{announcement.title}}</div>
+                {% if announcement.content %}
+                <div class="content">
+                    {{announcement.content|safe}}
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
+
         </li>
     {% endfor %}
     </ul>

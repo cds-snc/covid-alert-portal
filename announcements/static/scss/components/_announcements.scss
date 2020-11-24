@@ -13,38 +13,57 @@ main .announcements {
         &.info,
         &.success {
           border-left: 4px solid $color-blue;
-          color: $color-blue-dark;
+          
           background: rgba(78, 136, 185, 0.1);
+          a, .dismiss {
+            color: $color-blue-dark;
+          }
+
         }
         &.error {
           border-left: 4px solid $color-red;
-          color: $color-red;
           background: $color-red-light;
+          a, .dismiss {
+            color: $color-red;
+          }
         }
         &.warning {
           border-left: 4px solid $color-yellow;
-          color: $color-yellow;
           background: $color-yellow-light;
+          a, .dismiss {
+            color: $color-yellow;
+          }
         }
 
         .dismiss {
           position: absolute;
-          right:0;
-          top:0;
-          width: 30px;
-          height: 30px;
+          right: 0;
+          top: 0;
+          width: 1.5em;
+          height: 1.5em;
           text-align: center;
           cursor: pointer;
+          font-size: 2em;
         }
-        
+        .announcement-content-container {
+          width: 90%;
+        }
         .title {
-          font-weight:bold;
-          font-size:1.1em;
+          font-weight: bold;
+          font-size: 1.1em;
         }
         .content {
-          font-weight:normal !important;
+          font-weight: normal !important;
+        }
+
+        form {
+          float: right;
+          width: 0;
         }
         
+        a {
+          font-weight: bold;
+        }
       }
     }
   }
