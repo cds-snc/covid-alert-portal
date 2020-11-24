@@ -5,6 +5,12 @@
     <ul class="announcements">
     {% for announcement in announcements %}
         <li class="{{ announcement.level }}">
+            {% if announcement.dismissable %}
+            <form action="{{ announcement.dismiss_url }}" method="post">
+                {% csrf_token %}
+                <button class="dismiss">&times</button>
+            </form>
+            {% endif %}
             <div class="title">{{announcement.title}}</div>
             {% if announcement.content %}
             <div class="content">

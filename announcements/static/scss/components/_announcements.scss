@@ -1,6 +1,5 @@
 main .announcements {
   &--container {
-    max-width: 450px;
     font-weight: bold;
     margin-bottom: 20px;
     ul {
@@ -9,6 +8,7 @@ main .announcements {
       margin-bottom: 0;
       li {
         padding: $space-sm;
+        position: relative;
 
         &.info,
         &.success {
@@ -20,6 +20,20 @@ main .announcements {
           border-left: 4px solid $color-red;
           color: $color-red;
           background: $color-red-light;
+        }
+        &.warning {
+          border-left: 4px solid $color-yellow;
+          color: $color-yellow;
+          background: $color-yellow-light;
+        }
+
+        .dismiss {
+          position: absolute;
+          right:0;
+          top:0;
+          width: 30px;
+          height: 30px;
+          text-align: center;
         }
         
         .title {
@@ -33,12 +47,4 @@ main .announcements {
       }
     }
   }
-}
-
-main .info-message {
-  margin: $space-xl 0;
-  font-size: 0.85em;
-  border-left: 3px solid $color-yellow;
-  background-color: $color-yellow-light;
-  padding: $space-xxs $space-md;
 }

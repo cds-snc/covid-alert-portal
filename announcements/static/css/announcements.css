@@ -2,7 +2,6 @@
 /* darker: 00243D */
 /* Partials */
 main .announcements--container {
-  max-width: 450px;
   font-weight: bold;
   margin-bottom: 20px;
 }
@@ -15,6 +14,7 @@ main .announcements--container ul {
 
 main .announcements--container ul li {
   padding: 15px;
+  position: relative;
 }
 
 main .announcements--container ul li.info, main .announcements--container ul li.success {
@@ -29,6 +29,21 @@ main .announcements--container ul li.error {
   background: #f3e9e8;
 }
 
+main .announcements--container ul li.warning {
+  border-left: 4px solid #ffbf47;
+  color: #ffbf47;
+  background: #fff7e6;
+}
+
+main .announcements--container ul li .dismiss {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+
 main .announcements--container ul li .title {
   font-weight: bold;
   font-size: 1.1em;
@@ -36,12 +51,4 @@ main .announcements--container ul li .title {
 
 main .announcements--container ul li .content {
   font-weight: normal !important;
-}
-
-main .info-message {
-  margin: 40px 0;
-  font-size: 0.85em;
-  border-left: 3px solid #ffbf47;
-  background-color: #fff7e6;
-  padding: 5px 20px;
 }

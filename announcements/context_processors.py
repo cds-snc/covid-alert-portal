@@ -17,23 +17,34 @@ def announcement(request):
             .filter(Q(publish_end__gte=todays_date) | Q(publish_end=None))
         )
 
+        exclusions = request.session.get("excluded_announcements", [])
+        exclusions = set(exclusions)
+
+        available_announcements = available_announcements.exclude(pk__in=exclusions)
+
         if available_announcements.count() > 0:
             display_announcements = []
             for announcement in available_announcements:
                 if request.LANGUAGE_CODE == "en":
                     display_announcements += [
                         {
+                            "pk": announcement.pk,
                             "title": announcement.title_en,
                             "content": announcement.content_en,
                             "level": announcement.level,
+                            "dismissable": announcement.dismissable,
+                            "dismiss_url": announcement.dismiss_url()
                         }
                     ]
                 elif request.LANGUAGE_CODE == "fr":
                     display_announcements += [
                         {
+                            "pk": announcement.pk,
                             "title": announcement.title_fr,
                             "content": announcement.content_fr,
                             "level": announcement.level,
+                            "dismissable": announcement.dismissable,
+                            "dismiss_url": announcement.dismiss_url()
                         }
                     ]
 

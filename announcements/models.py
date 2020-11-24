@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.conf import settings
 import datetime
@@ -35,3 +36,7 @@ class Announcement(models.Model):
     dismissable = models.BooleanField(_("dismissable"), default=False)
     publish_start = models.DateField(_("publish_start"), default=datetime.date.today)
     publish_end = models.DateField(_("publish_end"), blank=True, null=True)
+
+    def dismiss_url(self):
+        if self.dismissable:
+            return reverse("announcements:dismiss", args=[self.pk])
