@@ -33,7 +33,7 @@ def announcement(request):
                             "content": announcement.content_en,
                             "level": announcement.level,
                             "dismissable": announcement.dismissable,
-                            "dismiss_url": announcement.dismiss_url()
+                            "dismiss_url": announcement.dismiss_url(),
                         }
                     ]
                 elif request.LANGUAGE_CODE == "fr":
@@ -44,7 +44,7 @@ def announcement(request):
                             "content": announcement.content_fr,
                             "level": announcement.level,
                             "dismissable": announcement.dismissable,
-                            "dismiss_url": announcement.dismiss_url()
+                            "dismiss_url": announcement.dismiss_url(),
                         }
                     ]
 

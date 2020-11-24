@@ -67,5 +67,5 @@ urlpatterns += i18n_patterns(
         "invitations/",
         include(invitation_patterns, namespace="invitations"),
     ),
-    path("announcements/", include("announcements.urls"))
+    path("announcements/", include("announcements.urls")),
 )
