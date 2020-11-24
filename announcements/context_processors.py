@@ -9,7 +9,7 @@ def announcement(request):
     Adds the active announcements to the context for users with an active session
     """
     todays_date = datetime.date.today()
-    logged_in = request.user.is_authenticated
+    logged_in = request.user.is_verified()
     if logged_in:
         available_announcements = (
             Announcement.objects.filter(Q(for_user=request.user) | Q(site_wide=True))

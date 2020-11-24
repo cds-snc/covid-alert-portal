@@ -6,9 +6,13 @@
     {% for announcement in announcements %}
         <li class="{{ announcement.level }}">
             {% if announcement.dismissable %}
-            <form action="{{ announcement.dismiss_url }}" method="post">
+            <form class ="dismiss" action="{{ announcement.dismiss_url }}" method="post">
                 {% csrf_token %}
-                <button class="dismiss">&times</button>
+                <label>
+                   <span class="dismiss" aria-label="Dismiss">&times</span> 
+                   <input type="submit" hidden/>
+                </label>
+                
             </form>
             {% endif %}
             <div class="title">{{announcement.title}}</div>
