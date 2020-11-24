@@ -1,6 +1,5 @@
 from .models import Announcement
 from django.db.models import Q
-from django.contrib.auth.models import AnonymousUser
 import datetime
 
 
