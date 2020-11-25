@@ -14,7 +14,7 @@ main .announcements {
         &.success {
           border-left: 4px solid $color-blue;
           
-          background: rgba(78, 136, 185, 0.1);
+          background: $color-blue-ultralight;
           a, .dismiss {
             color: $color-blue-dark;
           }
@@ -29,9 +29,9 @@ main .announcements {
         }
         &.warning {
           border-left: 4px solid $color-yellow;
-          background: $color-yellow-light;
+          background: $color-yellow-ultralight;
           a, .dismiss {
-            color: $color-yellow;
+            color: $color-yellow-dark;
           }
         }
 
