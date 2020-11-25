@@ -44,7 +44,6 @@ data "template_file" "covidportal_task" {
     password_reset_email_template_id_fr    = aws_secretsmanager_secret_version.password_reset_email_template_id_fr.arn
     backup_code_admin_email_template_id_en = aws_secretsmanager_secret_version.backup_code_admin_email_template_id_en.arn,
     backup_code_admin_email_template_id_fr = aws_secretsmanager_secret_version.backup_code_admin_email_template_id_fr.arn,
-    django_admins                          = aws_secretsmanager_secret_version.django_admins.arn
     django_secret_key                      = aws_secretsmanager_secret_version.django_secret_key.arn
     freshdesk_api_endpoint                 = aws_secretsmanager_secret_version.freshdesk_api_endpoint.arn
     freshdesk_api_key                      = aws_secretsmanager_secret_version.freshdesk_api_key.arn

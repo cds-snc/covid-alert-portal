@@ -104,10 +104,6 @@ variable "ecs_secret_backup_code_admin_email_template_id_fr" {
   type = string
 }
 
-variable "ecs_secret_django_admins" {
-  type = string
-}
-
 variable "ecs_secret_django_secret_key" {
   type = string
 }

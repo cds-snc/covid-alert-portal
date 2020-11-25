@@ -92,16 +92,6 @@ resource "aws_secretsmanager_secret_version" "backup_code_admin_email_template_i
   secret_string = var.ecs_secret_backup_code_admin_email_template_id_fr
 }
 
-resource "aws_secretsmanager_secret" "django_admins" {
-  name                    = "django_admins"
-  recovery_window_in_days = 0
-}
-
-resource "aws_secretsmanager_secret_version" "django_admins" {
-  secret_id     = aws_secretsmanager_secret.django_admins.id
-  secret_string = var.ecs_secret_django_admins
-}
-
 resource "aws_secretsmanager_secret" "django_secret_key" {
   name                    = "django_secret_key"
   recovery_window_in_days = 0

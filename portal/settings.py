@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import sys
-import ast
 
 import dj_database_url
 from dotenv import load_dotenv
@@ -64,13 +63,6 @@ if not DEBUG and not TESTING:
 
 if os.getenv("DJANGO_ALLOWED_HOSTS"):
     ALLOWED_HOSTS.extend(os.getenv("DJANGO_ALLOWED_HOSTS").split(","))
-
-# Admins who get emailed about production errors
-ADMINS = []
-
-if os.getenv("DJANGO_ADMINS"):
-    # DJANGO_ADMINS expects a tuple formatted as a string, eg '[("Paul", "paul@example.com"),("Bryan", "bryan@example.com")]'
-    ADMINS.extend(ast.literal_eval(os.getenv("DJANGO_ADMINS")))
 
 GITHUB_SHA = os.getenv("GITHUB_SHA") or None
 
