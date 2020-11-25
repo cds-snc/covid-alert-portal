@@ -1,0 +1,43 @@
+@media print {
+  .screen-only {
+    display: initial;
+  }
+
+  body {
+    font-size: 1.15em;
+  }
+
+  body.backup_codes {
+    header .fip-container,
+    nav,
+    div.content-button,
+    footer {
+      display: none;
+    }
+
+    header #site-name {
+      font-size: 2.8em;
+
+      img {
+        display: inline-block;
+        margin-left: $space-lg;
+        width: 55px;
+        margin-bottom: -8px;
+      }
+    }
+
+    h1 {
+      display: none;
+    }
+
+    .header--print {
+      display: block;
+      margin: 0.67em 0;
+      font-size: 1.8em;
+    }
+
+    .static-codes ol {
+      font-size: 1.4em;
+    }
+  }
+}

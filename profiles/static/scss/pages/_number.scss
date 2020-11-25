@@ -22,19 +22,8 @@
     margin: 20px 0;
   }
 
-  span {
-    display: inline-block;
-  }
-
   > p:last-of-type {
     margin-top: -$space-xs;
-  }
-
-  .phonetic-wrapper {
-    font-weight: bold;
-    span {
-      margin: 5px 0;
-    }
   }
 
   &__with-example-text {

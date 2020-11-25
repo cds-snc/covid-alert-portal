@@ -136,6 +136,7 @@ TEMPLATES = [
                 "announcements.context_processors.announcement",
                 "portal.context_processors.logout_messages",
             ],
+            "libraries": {"alphabet": "portal.templatetags.alphabet"},
         },
     },
 ]

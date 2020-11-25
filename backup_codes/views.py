@@ -1,5 +1,5 @@
 from django.views.generic import ListView, FormView
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
@@ -11,7 +11,7 @@ from django_otp import devices_for_user
 from django_otp.plugins.otp_static.models import StaticDevice, StaticToken
 
 from waffle.mixins import WaffleSwitchMixin
-from portal.mixins import Is2FAMixin
+from portal.mixins import Is2FAMixin, ProvinceAdminMixin
 
 from backup_codes.forms import RequestBackupCodesForm
 from invitations.models import Invitation
@@ -40,6 +40,36 @@ class BackupCodeListView(WaffleSwitchMixin, Is2FAMixin, ListView):
 
     def get_queryset(self):
         return _get_backup_codes_list(self.request.user)
+
+
+class AdminBackupCodeListView(
+    WaffleSwitchMixin, Is2FAMixin, ProvinceAdminMixin, ListView
+):
+    waffle_switch = "BACKUP_CODE"
+    template_name = "backup_codes/admin_backup_codes_list.html"
+    context_object_name = "backup_code_list"
+
+    def dispatch(self, request, *args, **kwargs):
+        # setting self.staff_user so that other methods will have access to it
+        self.staff_user = get_object_or_404(HealthcareUser, pk=self.kwargs["pk"])
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        if not get_user_static_device(self.staff_user):
+            return redirect(
+                reverse_lazy("user_profile", kwargs={"pk": self.staff_user.pk})
+            )
+
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        _recreate_backup_codes(self.staff_user, num_codes=1)
+        return redirect(
+            reverse_lazy("backup_codes_admin", kwargs={"pk": self.staff_user.pk})
+        )
+
+    def get_queryset(self, *args, **kwargs):
+        return get_user_static_device(self.staff_user).token_set.all()
 
 
 class SignupBackupCodeListView(LoginRequiredMixin, WaffleSwitchMixin, ListView):
@@ -127,14 +157,14 @@ def _get_backup_codes_list(user):
     return token_list
 
 
-def _recreate_backup_codes(user):
+def _recreate_backup_codes(user, num_codes=settings.BACKUP_CODES_COUNT):
     """Creates 10 new backup codes for a user, deletes all previous backup codes."""
     devices = get_user_static_device(user)
     if devices:
         devices.token_set.all().delete()
     else:
         devices = StaticDevice.objects.create(user=user, name="Static_Security_Codes")
-    for n in range(settings.BACKUP_CODES_COUNT):
+    for n in range(num_codes):
         security_code = StaticToken.random_token()
         devices.token_set.create(token=security_code)
 

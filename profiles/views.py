@@ -28,7 +28,7 @@ from django.urls import translate_url
 
 from otp_yubikey.models import RemoteYubikeyDevice
 
-from portal.mixins import ThrottledMixin, Is2FAMixin, IsAdminMixin
+from portal.mixins import ThrottledMixin, Is2FAMixin, IsAdminMixin, ProvinceAdminMixin
 from backup_codes.views import get_user_backup_codes_count
 from invitations.models import Invitation
 from axes.models import AccessAttempt
@@ -40,7 +40,6 @@ from .utils.invitation_adapter import user_signed_up
 from .models import HealthcareUser, HealthcareFailedAccessAttempt
 from .mixins import (
     EditPasswordMixin,
-    ProvinceAdminViewMixin,
     ProvinceAdminEditMixin,
     ProvinceAdminDeleteMixin,
 )
@@ -365,7 +364,7 @@ class ProfilesView(Is2FAMixin, IsAdminMixin, ListView):
         ).order_by("-current_user_email", "-is_admin", "email")
 
 
-class UserProfileView(Is2FAMixin, ProvinceAdminViewMixin, DetailView):
+class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):
     model = HealthcareUser
 
     def get_context_data(self, *args, **kwargs):

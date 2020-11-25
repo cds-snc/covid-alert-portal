@@ -124,6 +124,13 @@ class Healthcare2FAForm(HealthcareBaseForm):
     )
     code.error_messages["required"] = validation_messages["code"]["required"]
 
+    # lowercase and remove whitespace from codes entered into the 2fa form
+    def clean_code(self):
+        # lowercase
+        code = self.cleaned_data["code"].lower()
+        # remove whitespace
+        return "".join(code.split(" "))
+
 
 class HealthcareBaseEditForm(HealthcareBaseForm, forms.ModelForm):
     template_name = "profiles/edit.html"

@@ -10,6 +10,11 @@ urlpatterns = [
         name="backup_codes",
     ),
     path(
+        "profiles/<uuid:pk>/backup-codes/admin",
+        views.AdminBackupCodeListView.as_view(),
+        name="backup_codes_admin",
+    ),
+    path(
         "backup-codes-help",
         views.RequestBackupCodes.as_view(),
         name="backup_codes_help",
