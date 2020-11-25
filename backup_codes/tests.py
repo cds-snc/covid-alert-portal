@@ -133,7 +133,25 @@ class BackupCodesView(AdminUserTestCase):
             count=9,
             html=True,
         )
+    def test_low_on_security_codes_banner(self):
+        self.login()
+        # Generate static device and codes
+        self.client.post(reverse("backup_codes"), follow=True)
+        # delete all but 1 code
+        device = StaticDevice.objects.get(user__id=self.user.id)
+        for _ in range(len(device.token_set.all()) - 1):
+            device.token_set.last().delete()
+        self.assertEqual(len(device.token_set.all()), 1)
 
+        response = self.client.get(reverse("welcome"), follow=True)
+        self.assertEqual(response.status_code, 200)
+
+        # make sure there is an annoucement at the top of the page
+        self.assertContains(
+            response,
+            '<div class="title">You have 1 security code remaining.</div>',
+            html=True,
+        )
 
 class AdminBackupCodesView(AdminUserTestCase):
     def setUp(self):
