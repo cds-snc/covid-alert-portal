@@ -295,16 +295,7 @@ MAX_INVITATIONS_PERIOD_SECONDS = 3540  # 59 minutes
 INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
 
 # Email setup
-EMAIL_BACKEND = (
-    os.getenv("EMAIL_BACKEND") or "django.core.mail.backends.console.EmailBackend"
-)
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = int(os.getenv("EMAIL_PORT") or 587)
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-email_use_tls = os.getenv("EMAIL_USE_TLS", "True")
-EMAIL_USE_TLS = True if email_use_tls == "True" else False
-DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 INVITATIONS_ADAPTER = "profiles.utils.invitation_adapter.HealthcareInvitationAdapter"
 
 BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID = {

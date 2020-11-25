@@ -2,13 +2,13 @@
 
 # COVID Alert Portal
 
-This repository implements a healthcare portal to complement the [Government of Canada COVID Alert app](https://github.com/cds-snc/covid-alert-app). This portal provides authenticated healthcare providers unique temporary codes which can be shared with COVID-diagnosed individuals. This code gives individuals access to upload their random IDs via the mobile app if they choose. No personal information is collected by the app and there is no association between the codes and specific tests.
+The COVID Alert Portal provides authenticated healthcare providers unique temporary codes which can be shared with COVID-diagnosed individuals. The code enables individuals to upload their random IDs via the mobile app if they choose. No personal information is collected by the app and there is no association between the codes and specific tests. The Portal complements the [Government of Canada COVID Alert app](https://github.com/cds-snc/covid-alert-app).
 
-The Portal is part of the [COVID Shield](https://www.covidshield.app/) open-source reference implementation built by Shopify volunteers. For a high-level view on how the components work together, read through the [COVID Shield Rationale](https://github.com/CovidShield/rationale).
+A healthcare portal is one of the three pieces of the [COVID Shield](https://www.covidshield.app/) open-source reference implementation built by Shopify volunteers. For a high-level view on how the components work together, read through the [COVID Shield Rationale](https://github.com/CovidShield/rationale).
 
 ## Technical overview
 
-The app can be run as a python process or using `docker-compose`.
+The COVID Alert Portal is a Django application: it can be run as a python process or using `docker-compose`.
 
 - Running the COVID Alert Portal locally as a python process requires [python3](https://www.python.org/downloads/) and a database, although an SQLite database will be created if no connection string exists.
 - Using `docker-compose`, you’ll need [Docker](https://www.docker.com/get-started) installed.
@@ -50,42 +50,25 @@ Environment variables are used to control app settings, and configuration for ut
 
 - `DATABASE_URL`: A string containing the database scheme, host, username, password, and port. The `DATABASE_URL` is parsed by [`dj-django-url`](https://pypi.org/project/dj-database-url/).
 
-##### email configuration
-
-- `EMAIL_BACKEND` (default: `django.core.mail.backends.console.EmailBackend`): The email backend to use. In production, this should be set to `django.core.mail.backends.smtp.EmailBackend`. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-backend).
-
-- `DEFAULT_FROM_EMAIL`: The email address that emails will say they have been sent from.
-
-The following are only relevant for the `smtp` backend.
-
-- `EMAIL_HOST`: The host to use for sending email. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-host).
-
-- `EMAIL_PORT`: Port to use for the SMTP server defined in EMAIL_HOST.
-  [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-port).
-
-- `EMAIL_HOST_USER`: Username to use for the SMTP server defined in `EMAIL_HOST`. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-host-user).
-
-- `EMAIL_HOST_PASSWORD`: Password to use for the SMTP server defined in `EMAIL_HOST`. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-host-password).
-
-- `EMAIL_USE_TLS` (default: `False`): Whether to use a TLS (secure) connection when talking to the SMTP server. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#email-use-tls).
-
 #### CovidAlert API settings
 
 - `API_ENDPOINT`: The API endpoint that returns one-time usage codes. If not set, the one-time codes will read as `0000 0000`.
 
 - `API_AUTHORIZATION`: The credentials required to authenticate with the one-time code API. Otherwise the request will return a `401` Forbidden response.
 
-#### New Relic configuration
+#### Notify configuration
 
-We use New Relic to monitor for server side errors and application performance in production and staging. We do not leverage New Relic client (browser side) metric reporting.
+We are using Notify to send user-facing emails (eg, invitation emails and password reset emails), as well as for our OTP SMS codes through an `django-otp-` plugin.
 
-- `NEW_RELIC_APP_NAME`: The app name set up in New Relic.
+- `PASSWORD_RESET_EMAIL_TEMPLATE_ID_EN` and `PASSWORD_RESET_EMAIL_TEMPLATE_ID_FR` : Template IDs for the English and French versions of the password reset email
 
-- `NEW_RELIC_LICENSE_KEY`: Credentials needed to authenticate with New Relic.
+- `INVITATION_EMAIL_TEMPLATE_ID_EN` and `INVITATION_EMAIL_TEMPLATE_ID_FR` : Template IDs for the English and French versions of the user account creation email
+
+- `BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_EN` and `BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_FR` : Template IDs for the English and French versions of the email that staff users send to admins requesting a new backup code.
 
 #### OTP (2-factor) configuration
 
-We use Notify and django-otp to send login auth code via SMS.
+We use Notify and django-otp to send 2FA auth codes via SMS.
 
 - `OTP_NOTIFY_ENDPOINT`: Changes the default Notify endpoint used.
 
@@ -99,14 +82,6 @@ We use Notify and django-otp to send login auth code via SMS.
 
 [Read the docs here](https://django-otp-notify.readthedocs.io/en/latest/)
 
-#### Notify configuration
-
-We are using Notify for our OTP SMS codes through an `django-otp-` plugin, but we are also using it directly to send emails.
-
-- `PASSWORD_RESET_EMAIL_TEMPLATE_ID_EN` and `PASSWORD_RESET_EMAIL_TEMPLATE_ID_FR` : Template IDs for the English and French versions of the password reset email
-
-- `INVITATION_EMAIL_TEMPLATE_ID_EN` and `INVITATION_EMAIL_TEMPLATE_ID_FR` : Template IDs for the English and French versions of the user account creation email
-
 #### Contact form and Freshdesk
 
 The contact form sends any inquiry to Freshdesk.
@@ -116,6 +91,19 @@ The contact form sends any inquiry to Freshdesk.
 - `FRESHDESK_API_ENDPOINT`: Your Freshdesk domain with `/api/v2/` at the end.
 
 - `FRESHDESK_PRODUCT_ID`: If you use more than one product, use this variable to specify where the feedback should go to.
+
+##### email configuration
+
+- We use [GC Notify](https://notification.canada.ca/) for sending all user-facing emails and text messages, so we shouldn't need [the SMTP interface that Django provides](https://docs.djangoproject.com/en/3.1/topics/email/). In case there are any errant `send_mail` calls, they will be printed to the console.
+
+#### New Relic configuration
+
+We use New Relic to monitor for server side errors and application performance in production and staging. We do not leverage New Relic client (browser side) metric reporting.
+
+- `NEW_RELIC_APP_NAME`: The app name set up in New Relic.
+
+- `NEW_RELIC_LICENSE_KEY`: Credentials needed to authenticate with New Relic.
+
 </div>
 </details>
 
@@ -129,7 +117,7 @@ The contact form sends any inquiry to Freshdesk.
 - `python manage.py collectstatic --noinput -i scss`
 - the `entrypoint.sh` script to perform the database migrations
 
-sA server will then be started and can be accessed at `http://127.0.0.1:8000/` or `http://localhost:8000`.
+The local server can be accessed at `http://127.0.0.1:8000/` or `http://localhost:8000`.
 
 For a more thorough setup of the various environment options please follow the instructions below after having activated your virtual environment from inside the root project folder.
 
@@ -137,7 +125,7 @@ Copy `./portal/.env.example` to `./portal/.env` and provide the appropriate valu
 
 #### 1. Database migrations
 
-By default the Django will create an SQLite database, but we use Postgres in production.
+By default the Django creates an SQLite database, but we use Postgres in production.
 
 If a `DATABASE_URL` environment variable exists, it will set all the connection parameters at the same time.
 

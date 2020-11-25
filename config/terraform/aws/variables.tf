@@ -80,10 +80,6 @@ variable "ecs_secret_api_endpoint" {
   type = string
 }
 
-variable "ecs_secret_default_from_email" {
-  type = string
-}
-
 variable "ecs_secret_invitation_email_template_id_en" {
   type = string
 }
@@ -113,18 +109,6 @@ variable "ecs_secret_django_admins" {
 }
 
 variable "ecs_secret_django_secret_key" {
-  type = string
-}
-
-variable "ecs_secret_email_host" {
-  type = string
-}
-
-variable "ecs_secret_email_host_user" {
-  type = string
-}
-
-variable "ecs_secret_email_host_password" {
   type = string
 }
 
@@ -163,24 +147,9 @@ variable "django_allowed_hosts" {
   type = string
 }
 
-variable "email_backend" {
-  type    = string
-  default = "'django.core.mail.backends.smtp.EmailBackend'"
-}
-
 variable "new_relic_app_name" {
   type    = string
   default = "Terraform Covid Alert Portal"
-}
-
-variable "email_port" {
-  type    = string
-  default = "587"
-}
-
-variable "email_use_tls" {
-  type    = string
-  default = "True"
 }
 
 variable "dual_urls" {
