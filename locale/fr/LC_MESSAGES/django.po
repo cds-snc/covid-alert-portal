@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-24 21:42+0000\n"
+"POT-Creation-Date: 2020-11-25 15:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,6 +65,7 @@ msgstr "publier_fin"
 #: announcements/templates/announcements/announcements.html:12
 msgid "Dismiss"
 msgstr "Révocable"
+
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html:4
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html:8
 #: profiles/forms.py:122
@@ -99,15 +100,15 @@ msgid "Back to accounts"
 msgstr "Retour aux comptes"
 
 #: backup_codes/templates/backup_codes/backup_codes_contacted.html:5
-#: backup_codes/templates/backup_codes/backup_codes_contacted.html:11
+#: backup_codes/templates/backup_codes/backup_codes_contacted.html:10
 msgid "We’ve contacted your administrator"
 msgstr "Nous avons contacté votre administrateur"
 
-#: backup_codes/templates/backup_codes/backup_codes_contacted.html:12
+#: backup_codes/templates/backup_codes/backup_codes_contacted.html:11
 msgid "They’ll give you a code."
 msgstr "Votre administrateur vous donnera un code."
 
-#: backup_codes/templates/backup_codes/backup_codes_contacted.html:13
+#: backup_codes/templates/backup_codes/backup_codes_contacted.html:12
 #: contact/templates/contact/success.html:16 portal/templates/403.html:16
 #: portal/templates/404.html:17 portal/templates/includes/nav_header.html:13
 #: portal/templates/locked_out.html:9
@@ -140,38 +141,38 @@ msgid "Error: "
 msgstr "Erreur : "
 
 #: backup_codes/templates/backup_codes/backup_codes_help.html:6
-#: backup_codes/templates/backup_codes/backup_codes_help.html:13
+#: backup_codes/templates/backup_codes/backup_codes_help.html:12
 #: profiles/templates/profiles/2fa.html:43
 msgid "No security code?"
 msgstr "Pas de code de sécurité?"
 
-#: backup_codes/templates/backup_codes/backup_codes_help.html:14
+#: backup_codes/templates/backup_codes/backup_codes_help.html:13
 #, python-format
 msgid "Ask your administrator (%(admin_email)s) for a code."
 msgstr ""
 "Demandez à votre administrateur (%(admin_email)s) de vous donner un code."
 
-#: backup_codes/templates/backup_codes/backup_codes_help.html:15
+#: backup_codes/templates/backup_codes/backup_codes_help.html:14
 msgid "Get codes from admin"
 msgstr "Demander un code"
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html:4
-#: backup_codes/templates/backup_codes/backup_codes_list.html:8
+#: backup_codes/templates/backup_codes/backup_codes_list.html:10
 msgid "Security codes"
 msgstr "Code de sécurité"
 
-#: backup_codes/templates/backup_codes/backup_codes_list.html:9
+#: backup_codes/templates/backup_codes/backup_codes_list.html:13
 msgid ""
 "Use these security codes to login to the portal. The code proves it’s you."
 msgstr ""
 "Utilisez les codes suivants pour vous connecter au portail. Ils servent à "
 "vous authentifier."
 
-#: backup_codes/templates/backup_codes/backup_codes_list.html:10
+#: backup_codes/templates/backup_codes/backup_codes_list.html:14
 msgid "You can use each code only once."
 msgstr "Chaque code ne peut être utilisé qu’une fois."
 
-#: backup_codes/templates/backup_codes/backup_codes_list.html:11
+#: backup_codes/templates/backup_codes/backup_codes_list.html:15
 msgid ""
 "Keep the codes on paper in a safe place. Do not save or store this screen, "
 "copy the codes to an electronic device, or share the codes with anyone else."
@@ -180,7 +181,7 @@ msgstr ""
 "de faire une sauvegarde de l’écran, de copier les codes sur un appareil "
 "électronique ou de donner les codes à d’autres personnes."
 
-#: backup_codes/templates/backup_codes/backup_codes_list.html:15
+#: backup_codes/templates/backup_codes/backup_codes_list.html:19
 msgid ""
 "When you get new codes, the last codes will no longer work, even if you have "
 "not used them yet."
@@ -188,21 +189,21 @@ msgstr ""
 "Quand vous générez de nouveaux codes, tous les codes précédents qui n’ont "
 "pas été utilisés deviennent invalides."
 
-#: backup_codes/templates/backup_codes/backup_codes_list.html:19
+#: backup_codes/templates/backup_codes/backup_codes_list.html:23
 msgid "Get new security codes"
 msgstr "Obtenez des codes de sécurité"
 
-#: backup_codes/templates/backup_codes/backup_codes_list.html:21
+#: backup_codes/templates/backup_codes/backup_codes_list.html:25
 msgid "Back to your account"
 msgstr "Retour aux comptes"
 
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html:4
-#: backup_codes/templates/backup_codes/signup_backup_codes_list.html:8
+#: backup_codes/templates/backup_codes/signup_backup_codes_list.html:10
 #: profiles/templates/profiles/signup_2fa.html:14
 msgid "No mobile phone?"
 msgstr "Pas de téléphone mobile?"
 
-#: backup_codes/templates/backup_codes/signup_backup_codes_list.html:9
+#: backup_codes/templates/backup_codes/signup_backup_codes_list.html:13
 msgid ""
 "Log into the portal using one of the security codes below. You can use each "
 "code only once.  When you have 1 code left, we’ll tell you how to get more."
@@ -211,7 +212,7 @@ msgstr ""
 "Chaque code ne peut être utilisé qu’une fois. Quand il n’en restera qu’un "
 "seul, nous vous dirons comment en obtenir d’autres."
 
-#: backup_codes/templates/backup_codes/signup_backup_codes_list.html:10
+#: backup_codes/templates/backup_codes/signup_backup_codes_list.html:14
 msgid ""
 "Write the codes on paper. Do not save or store this screen, copy the codes "
 "to an electronic device, or share the codes with anyone else."
@@ -220,7 +221,7 @@ msgstr ""
 "de copier les codes sur un appareil électronique ou de donner les codes à "
 "d’autres personnes."
 
-#: backup_codes/templates/backup_codes/signup_backup_codes_list.html:15
+#: backup_codes/templates/backup_codes/signup_backup_codes_list.html:19
 #: profiles/templates/profiles/2fa.html:36
 #: profiles/templates/profiles/signup_2fa.html:14
 msgid "Next"
@@ -426,7 +427,7 @@ msgid "Something went wrong. Contact your administrator."
 msgstr ""
 "Une erreur est survenue. Veuillez contacter votre admistrateur du portail."
 
-#: portal/settings.py:343
+#: portal/settings.py:345
 msgid "This account has been locked due to too many failed log in attempts."
 msgstr ""
 "Ce compte a été verrouillé en raison d’un trop grand nombre de tentatives "
@@ -494,7 +495,7 @@ msgstr ""
 "Veuillez utiliser <a href=\"%(login_url)s\">le site principal pour vous "
 "connecter</a>."
 
-#: portal/templates/base.html:31 portal/templates/base.html:49
+#: portal/templates/base.html:31 portal/templates/base.html:50
 msgid "COVID Alert Portal"
 msgstr "Portail Alerte COVID"
 
