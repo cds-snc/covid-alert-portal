@@ -8,9 +8,10 @@ from announcements.models import Announcement
 from .views import _remove_low_on_codes_notification
 import waffle
 
+
 @receiver(post_delete, sender=StaticToken)
 def add_low_on_tokens_notification(sender, instance, **kwargs):
-    if waffle.switch_is_active('BACKUP_CODE'):
+    if waffle.switch_is_active("BACKUP_CODE"):
         users_static_codes_remaining = instance.device.token_set.all().count()
         if users_static_codes_remaining <= 1:
             # Remove existing notification for only 1 code remaining if it exists

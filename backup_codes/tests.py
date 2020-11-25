@@ -133,6 +133,7 @@ class BackupCodesView(AdminUserTestCase):
             count=9,
             html=True,
         )
+
     def test_low_on_security_codes_banner(self):
         self.login()
         # Generate static device and codes
@@ -152,6 +153,7 @@ class BackupCodesView(AdminUserTestCase):
             '<div class="title">You have 1 security code remaining.</div>',
             html=True,
         )
+
 
 class AdminBackupCodesView(AdminUserTestCase):
     def setUp(self):
