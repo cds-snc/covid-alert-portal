@@ -8,6 +8,7 @@ main .announcements {
       list-style-type: none;
       margin-bottom: 0;
       li {
+
         padding: $space-sm;
         position: relative;
 
@@ -65,6 +66,9 @@ main .announcements {
         a {
           font-weight: bold;
         }
+        ~ li {
+          margin-bottom: 10px; /*doesn't apply to the first one */
+          }
       }
     }
   }

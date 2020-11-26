@@ -4,10 +4,11 @@
 main .announcements--container {
   font-weight: bold;
   margin-bottom: 20px;
+  width: 90%;
 }
 
 main .announcements--container ul {
-  padding-left: 0px;
+  padding-left: 0;
   list-style-type: none;
   margin-bottom: 0;
 }
@@ -75,4 +76,9 @@ main .announcements--container ul li form {
 
 main .announcements--container ul li a {
   font-weight: bold;
+}
+
+main .announcements--container ul li ~ li {
+  margin-bottom: 10px;
+  /*doesn't apply to the first one */
 }
