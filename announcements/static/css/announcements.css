@@ -79,6 +79,6 @@ main .announcements--container ul li a {
 }
 
 main .announcements--container ul li ~ li {
-  margin-bottom: 10px;
+  margin-top: 10px;
   /*doesn't apply to the first one */
 }
