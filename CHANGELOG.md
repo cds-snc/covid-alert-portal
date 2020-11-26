@@ -15,6 +15,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - If not able to log in: users can request a backup code from their administrator
   - On generating codes: print styles for the backup codes
 
+## [1.10.4] - 2020-11-26
+
+#### ⚠️ This release includes a data migration
+
+### Updated
+
+- Add the ability to create a site wide or user specific site banner.
+
 ## [1.10.3] - 2020-11-26
 
 ### Updated
