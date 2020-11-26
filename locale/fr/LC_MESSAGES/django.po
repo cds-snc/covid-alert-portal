@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-25 15:51+0000\n"
+"POT-Creation-Date: 2020-11-26 17:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,35 +34,53 @@ msgstr "Contenu Anglais"
 msgid "French Content"
 msgstr "Contenu français"
 
-#: announcements/models.py:24
-msgid "show_to_users"
-msgstr "montrer_aus_utilisateurs"
-
-#: announcements/models.py:26
-msgid "creation_date"
-msgstr "date_de_création"
+#: announcements/models.py:25
+msgid "Announcement active"
+msgstr "Annonce active"
 
 #: announcements/models.py:27
-msgid "site wide"
-msgstr "tous utilisateurs"
+msgid "This must be selected in order for the announcement to be displayed to users"
+msgstr "Ceci doit être sélectionné pour que l'annonce soit affichée aux utilisateurs"
 
-#: announcements/models.py:33
-msgid "for_user"
-msgstr "pour_utilisateur"
+#: announcements/models.py:32
 
-#: announcements/models.py:36
-msgid "dismissable"
-msgstr "révocable"
 
-#: announcements/models.py:37
-msgid "publish_start"
-msgstr "publier_début"
+msgid "Creation date"
+msgstr "Date de création"
 
 #: announcements/models.py:38
-msgid "publish_end"
-msgstr "publier_fin"
+msgid "For User"
+msgstr "Pour utilisateur"
 
-#: announcements/templates/announcements/announcements.html:12
+#: announcements/models.py:40
+msgid "If no user is selected the announcement will be shown to all users."
+msgstr "Si aucun utilisateur n'est sélectionné, l'annonce sera affichée à tous les utilisateurs."
+
+#: announcements/models.py:45
+msgid "Dismissable"
+msgstr "Révocable"
+
+#: announcements/models.py:47
+msgid "Can a user dismiss this message for the duration of their logged in session?"
+msgstr "Un utilisateur peut-il ignorer ce message pendant la durée de sa session connectée?"
+
+#: announcements/models.py:52
+msgid "Publish start date"
+msgstr "Date de début de publication"
+
+#: announcements/models.py:53
+msgid "The announcement will be shown from this date"
+msgstr "L'annonce sera diffusée à partir de cette date"
+
+#: announcements/models.py:57
+msgid "Publish end date"
+msgstr "Date de fin de publication"
+
+#: announcements/models.py:58
+msgid "The announcement will not be shown after this date"
+msgstr "L'annonce ne sera pas diffusée après cette date"
+
+#: announcements/templates/announcements/announcements.html:13
 msgid "Dismiss"
 msgstr "Révocable"
 
@@ -1774,3 +1792,12 @@ msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
 "portail."
+
+#~ msgid "show_to_users"
+#~ msgstr "montrer_aus_utilisateurs"
+
+#~ msgid "site wide"
+#~ msgstr "tous utilisateurs"
+
+#~ msgid "for_user"
+#~ msgstr "pour_utilisateur"
