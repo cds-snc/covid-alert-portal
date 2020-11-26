@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('title_fr', models.CharField(max_length=100, verbose_name='Title in French')),
                 ('content_en', models.TextField(blank=True, verbose_name='English Content')),
                 ('content_fr', models.TextField(blank=True, verbose_name='French Content')),
-                ('is_active', models.BooleanField(default=False,help_text='This must be selected in order for the announcement to be displayed to users', verbose_name='Show to users')),
+                ('is_active', models.BooleanField(default=False, help_text='This must be selected in order for the announcement to be displayed to users', verbose_name='Show to users')),
                 ('level', models.CharField(choices=[('warning', 'Warning'), ('error', 'Error'), ('success', 'Success'), ('info', 'Info')], default='info', max_length=7)),
                 ('creation_date', models.DateTimeField(auto_now=True, verbose_name='Creation date')),
                 ('dismissable', models.BooleanField(default=False, help_text='Can a user dismiss this message for the duration of their logged in session?', verbose_name='Dismissable')),

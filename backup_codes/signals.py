@@ -17,9 +17,6 @@ def add_low_on_tokens_notification(sender, instance, **kwargs):
             # Remove existing notification for only 1 code remaining if it exists
             _remove_low_on_codes_notification(instance.device.user)
 
-            users_profile = reverse_lazy(
-                "user_profile", kwargs={"pk": instance.device.user.id}
-            )
             Announcement.objects.create(
                 title_en=f"You have {users_static_codes_remaining} security code remaining.",
                 title_fr=f"Il vous reste {users_static_codes_remaining} code de sécurité.",
