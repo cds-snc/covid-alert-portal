@@ -32,16 +32,6 @@ resource "aws_secretsmanager_secret_version" "api_endpoint" {
   secret_string = var.ecs_secret_api_endpoint
 }
 
-resource "aws_secretsmanager_secret" "default_from_email" {
-  name                    = "default_from_email"
-  recovery_window_in_days = 0
-}
-
-resource "aws_secretsmanager_secret_version" "default_from_email" {
-  secret_id     = aws_secretsmanager_secret.default_from_email.id
-  secret_string = var.ecs_secret_default_from_email
-}
-
 resource "aws_secretsmanager_secret" "invitation_email_template_id_en" {
   name                    = "invitation_email_template_id_en"
   recovery_window_in_days = 0
@@ -102,16 +92,6 @@ resource "aws_secretsmanager_secret_version" "backup_code_admin_email_template_i
   secret_string = var.ecs_secret_backup_code_admin_email_template_id_fr
 }
 
-resource "aws_secretsmanager_secret" "django_admins" {
-  name                    = "django_admins"
-  recovery_window_in_days = 0
-}
-
-resource "aws_secretsmanager_secret_version" "django_admins" {
-  secret_id     = aws_secretsmanager_secret.django_admins.id
-  secret_string = var.ecs_secret_django_admins
-}
-
 resource "aws_secretsmanager_secret" "django_secret_key" {
   name                    = "django_secret_key"
   recovery_window_in_days = 0
@@ -120,36 +100,6 @@ resource "aws_secretsmanager_secret" "django_secret_key" {
 resource "aws_secretsmanager_secret_version" "django_secret_key" {
   secret_id     = aws_secretsmanager_secret.django_secret_key.id
   secret_string = var.ecs_secret_django_secret_key
-}
-
-resource "aws_secretsmanager_secret" "email_host" {
-  name                    = "email_host"
-  recovery_window_in_days = 0
-}
-
-resource "aws_secretsmanager_secret_version" "email_host" {
-  secret_id     = aws_secretsmanager_secret.email_host.id
-  secret_string = var.ecs_secret_email_host
-}
-
-resource "aws_secretsmanager_secret" "email_host_user" {
-  name                    = "email_host_user"
-  recovery_window_in_days = 0
-}
-
-resource "aws_secretsmanager_secret_version" "email_host_user" {
-  secret_id     = aws_secretsmanager_secret.email_host_user.id
-  secret_string = var.ecs_secret_email_host_user
-}
-
-resource "aws_secretsmanager_secret" "email_host_password" {
-  name                    = "email_host_password"
-  recovery_window_in_days = 0
-}
-
-resource "aws_secretsmanager_secret_version" "email_host_password" {
-  secret_id     = aws_secretsmanager_secret.email_host_password.id
-  secret_string = var.ecs_secret_email_host_password
 }
 
 resource "aws_secretsmanager_secret" "freshdesk_api_endpoint" {

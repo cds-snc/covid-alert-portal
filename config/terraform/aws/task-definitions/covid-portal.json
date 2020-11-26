@@ -38,20 +38,8 @@
         "value": "${django_allowed_hosts}"
       },
       {
-        "name": "EMAIL_BACKEND",
-        "value": "${django_email_backend}"
-      },
-      {
         "name": "NEW_RELIC_APP_NAME",
         "value": "${new_relic_app_name}"
-      },
-      {
-        "name": "EMAIL_PORT",
-        "value": "${email_port}"
-      },
-      {
-        "name": "EMAIL_USE_TLS",
-        "value": "${email_use_tls}"
       },
       {
         "name": "URL_DUAL_DOMAINS",
@@ -70,10 +58,6 @@
       {
         "name": "API_ENDPOINT",
         "valueFrom": "${api_endpoint}"
-      },
-      {
-        "name": "DEFAULT_FROM_EMAIL",
-        "valueFrom": "${default_from_email}"
       },
       {
         "name": "INVITATION_EMAIL_TEMPLATE_ID_EN",
@@ -100,24 +84,8 @@
         "valueFrom": "${backup_code_admin_email_template_id_fr}"
       },
       {
-        "name": "DJANGO_ADMINS",
-        "valueFrom": "${django_admins}"
-      },
-      {
         "name": "DJANGO_SECRET_KEY",
         "valueFrom": "${django_secret_key}"
-      },
-      {
-        "name": "EMAIL_HOST",
-        "valueFrom": "${email_host}"
-      },
-      {
-        "name": "EMAIL_HOST_USER",
-        "valueFrom": "${email_host_user}"
-      },
-      {
-        "name": "EMAIL_HOST_PASSWORD",
-        "valueFrom": "${email_host_password}"
       },
       {
         "name": "FRESHDESK_API_ENDPOINT",

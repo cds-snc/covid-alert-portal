@@ -19,18 +19,13 @@ env:
   AWS_REGION: ca-central-1
   TF_VAR_ecs_secret_api_authorization: ${{ secrets.API_AUTHORIZATION }}
   TF_VAR_ecs_secret_api_endpoint: ${{ secrets.API_ENDPOINT}}
-  TF_VAR_ecs_secret_default_from_email: ${{ secrets.DEFAULT_FROM_EMAIL }}
   TF_VAR_ecs_secret_invitation_email_template_id_en: ${{ secrets.INVITATION_EMAIL_TEMPLATE_ID_EN }}
   TF_VAR_ecs_secret_invitation_email_template_id_fr: ${{ secrets.INVITATION_EMAIL_TEMPLATE_ID_FR }}
   TF_VAR_ecs_secret_password_reset_email_template_id_en: ${{ secrets.PASSWORD_RESET_EMAIL_TEMPLATE_ID_EN }}
   TF_VAR_ecs_secret_password_reset_email_template_id_fr: ${{ secrets.PASSWORD_RESET_EMAIL_TEMPLATE_ID_FR }}
   TF_VAR_ecs_secret_backup_code_admin_email_template_id_en: ${{ secrets.BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_EN }}
   TF_VAR_ecs_secret_backup_code_admin_email_template_id_fr: ${{ secrets.BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_FR }}
-  TF_VAR_ecs_secret_django_admins: ${{ secrets.DJANGO_ADMINS }}
   TF_VAR_ecs_secret_django_secret_key: ${{ secrets.DJANGO_SECRET_KEY }}
-  TF_VAR_ecs_secret_email_host: ${{ secrets.EMAIL_HOST}}
-  TF_VAR_ecs_secret_email_host_user: ${{ secrets.EMAIL_HOST_USER }}
-  TF_VAR_ecs_secret_email_host_password: ${{ secrets.EMAIL_HOST_PASSWORD }}
   TF_VAR_ecs_secret_freshdesk_api_endpoint: ${{ secrets.FRESHDESK_API_ENDPOINT }}
   TF_VAR_ecs_secret_freshdesk_api_key: ${{ secrets.FRESHDESK_API_KEY }}
   TF_VAR_ecs_secret_freshdesk_product_id: ${{ secrets.FRESHDESK_PRODUCT_ID }}
@@ -81,27 +76,26 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
           terraform_version: 0.13.1
 
-    - name: Terraform Format
-      run: terraform fmt -check
+      - name: Terraform Format
+        run: terraform fmt -check
 
-    - name: Terraform Init
-      run: |
-        terraform init
-    - name: Terraform Plan
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: terraform plan -out terraform.tfplan
+      - name: Terraform Init
+        run: |
+          terraform init
+      - name: Terraform Plan
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: terraform plan -out terraform.tfplan
 
-    - name: Terraform Apply
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: terraform apply -auto-approve terraform.tfplan
+      - name: Terraform Apply
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: terraform apply -auto-approve terraform.tfplan
