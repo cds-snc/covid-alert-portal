@@ -172,7 +172,7 @@ def _recreate_backup_codes(user, num_codes=settings.BACKUP_CODES_COUNT):
 
 
 def _remove_low_on_codes_notification(user):
-    """Remove the existing low on code notificaiton if it exists """
+    """Remove the existing low on code notification if it exists """
     existing_announcements = Announcement.objects.filter(
         Q(for_user=user) & Q(content_en__contains="To get more codes, visit")
     )

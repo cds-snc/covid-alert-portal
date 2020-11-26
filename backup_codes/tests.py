@@ -147,7 +147,7 @@ class BackupCodesView(AdminUserTestCase):
         response = self.client.get(reverse("welcome"), follow=True)
         self.assertEqual(response.status_code, 200)
 
-        # make sure there is an annoucement at the top of the page
+        # make sure there is an announcement at the top of the page
         self.assertContains(
             response,
             '<div class="title">You have 1 security code remaining.</div>',
