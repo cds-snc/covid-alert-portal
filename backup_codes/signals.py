@@ -27,5 +27,5 @@ def add_low_on_tokens_notification(sender, instance, **kwargs):
                 content_fr=f"Pour obtenir plus de codes, visitez <a href='/profiles/{instance.device.user.id}'>Votre Compte</a>",
                 level="info",
                 for_user=instance.device.user,
-                display=True,
+                is_active=True,
             )

@@ -26,8 +26,7 @@ class AnnoncementsSiteWide(AdminUserTestCase):
             title_en="Test for Site Wide",
             title_fr="Voici un test Site Wide",
             level="info",
-            display=True,
-            site_wide=True,
+            is_active=True,
         )
 
     def test_site_wide_is_visible_by_all(self):
@@ -60,7 +59,7 @@ class AnnoncementsSiteWide(AdminUserTestCase):
             title_en="Test for User 1 Only",
             title_fr="Test pour utilisateur 1 seulement",
             level="info",
-            display=True,
+            is_active=True,
             for_user=self.user,
         )
         self.login()
@@ -80,8 +79,7 @@ class AnnoncementsSiteWide(AdminUserTestCase):
             title_en="Test for Site Wide - Not Enabled",
             title_fr="Voici un test Site Wide - Non active",
             level="info",
-            display=False,
-            site_wide=True,
+            is_active=False,
         )
 
         self.login()
@@ -96,8 +94,7 @@ class AnnoncementsSiteWide(AdminUserTestCase):
             title_en="Test for Site Wide - Not Enabled",
             title_fr="Voici un test Site Wide - Non active",
             level="info",
-            display=True,
-            site_wide=True,
+            is_active=True,
             dismissable=True,
         )
         self.login()

@@ -11,8 +11,8 @@ def announcement(request):
     logged_in = request.user.is_verified()
     if logged_in:
         available_announcements = (
-            Announcement.objects.filter(Q(for_user=request.user) | Q(site_wide=True))
-            .filter(Q(display=True) & Q(publish_start__lte=todays_date))
+            Announcement.objects.filter(Q(for_user=request.user) | Q(for_user=None))
+            .filter(Q(is_active=True) & Q(publish_start__lte=todays_date))
             .filter(Q(publish_end__gte=todays_date) | Q(publish_end=None))
         )
 

@@ -9,13 +9,12 @@ class AnnouncementAdmin(admin.ModelAdmin):
         "content_en",
         "title_fr",
         "content_fr",
-        "display",
+        "is_active",
         "level",
-        "site_wide",
         "for_user",
         "creation_date",
     )
-    list_filter = ("site_wide", "level", "creation_date")
+    list_filter = ("level", "creation_date")
     readonly_fields = ["creation_date"]
     fieldsets = (
         (
@@ -26,8 +25,7 @@ class AnnouncementAdmin(admin.ModelAdmin):
             "Display Options",
             {
                 "fields": [
-                    "display",
-                    "site_wide",
+                    "is_active",
                     "for_user",
                     "dismissable",
                     "publish_start",
