@@ -24,23 +24,23 @@ def announcement(request):
         if available_announcements.count() > 0:
             display_announcements = []
             for announcement in available_announcements:
-                if request.LANGUAGE_CODE == "en":
-                    display_announcements += [
-                        {
-                            "pk": announcement.pk,
-                            "title": announcement.title_en,
-                            "content": announcement.content_en,
-                            "level": announcement.level,
-                            "dismissable": announcement.dismissable,
-                            "dismiss_url": announcement.dismiss_url(),
-                        }
-                    ]
-                elif request.LANGUAGE_CODE == "fr":
+                if request.LANGUAGE_CODE == "fr":
                     display_announcements += [
                         {
                             "pk": announcement.pk,
                             "title": announcement.title_fr,
                             "content": announcement.content_fr,
+                            "level": announcement.level,
+                            "dismissable": announcement.dismissable,
+                            "dismiss_url": announcement.dismiss_url(),
+                        }
+                    ]
+                else:
+                    display_announcements += [
+                        {
+                            "pk": announcement.pk,
+                            "title": announcement.title_en,
+                            "content": announcement.content_en,
                             "level": announcement.level,
                             "dismissable": announcement.dismissable,
                             "dismiss_url": announcement.dismiss_url(),
