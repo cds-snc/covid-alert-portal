@@ -11,6 +11,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - On user account page: see codes and generate more codes
   - On signup: new accounts can create codes instead of adding a phone
   - On login: login accepts a backup code, and allows users to message an administrator
+  - On attempted login: lock out users after a set number of failed 2FA attempts
+  - If not able to log in: users can request a backup code from their administrator
+  - On generating codes: print styles for the backup codes
+
+## [1.10.3] - 2020-11-26
+
+### Updated
+
+- Remove STMP email configuration and ADMINS variable
+  - Note: this is not a user-facing change but updating the version so that we can release independently
 
 ## [1.10.2] - 2020-11-16
 
