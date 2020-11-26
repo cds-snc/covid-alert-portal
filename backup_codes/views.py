@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
 from django.utils.translation import gettext as _
 from django.utils.functional import cached_property
+from django.db.models import Q
 
 from django_otp import devices_for_user
 from django_otp.plugins.otp_static.models import StaticDevice, StaticToken
@@ -15,6 +16,7 @@ from portal.mixins import Is2FAMixin, ProvinceAdminMixin
 from backup_codes.forms import RequestBackupCodesForm
 from invitations.models import Invitation
 from profiles.models import HealthcareUser
+from announcements.models import Announcement
 
 from django.conf import settings
 
@@ -165,6 +167,18 @@ def _recreate_backup_codes(user, num_codes=settings.BACKUP_CODES_COUNT):
     for n in range(num_codes):
         security_code = StaticToken.random_token()
         devices.token_set.create(token=security_code)
+
+    _remove_low_on_codes_notification(user)
+
+
+def _remove_low_on_codes_notification(user):
+    """Remove the existing low on code notification if it exists """
+    existing_announcements = Announcement.objects.filter(
+        Q(for_user=user) & Q(content_en__contains="To get more codes, visit")
+    )
+    if existing_announcements.count() > 0:
+        for announcement in existing_announcements:
+            announcement.delete()
 
 
 ######################

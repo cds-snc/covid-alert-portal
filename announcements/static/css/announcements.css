@@ -1,0 +1,84 @@
+/* Variables */
+/* darker: 00243D */
+/* Partials */
+main .announcements--container {
+  font-weight: bold;
+  margin-bottom: 20px;
+  width: 90%;
+}
+
+main .announcements--container ul {
+  padding-left: 0;
+  list-style-type: none;
+  margin-bottom: 0;
+}
+
+main .announcements--container ul li {
+  padding: 15px;
+  position: relative;
+}
+
+main .announcements--container ul li.info, main .announcements--container ul li.success {
+  border-left: 4px solid #4e88b9;
+  background: #eff4f9;
+}
+
+main .announcements--container ul li.info a, main .announcements--container ul li.info .dismiss, main .announcements--container ul li.success a, main .announcements--container ul li.success .dismiss {
+  color: #284162;
+}
+
+main .announcements--container ul li.error {
+  border-left: 4px solid #b1081f;
+  background: #f3e9e8;
+}
+
+main .announcements--container ul li.error a, main .announcements--container ul li.error .dismiss {
+  color: #b1081f;
+}
+
+main .announcements--container ul li.warning {
+  border-left: 4px solid #FFBF47;
+  background: #FFF7E3;
+}
+
+main .announcements--container ul li.warning a, main .announcements--container ul li.warning .dismiss {
+  color: #6F4F05;
+}
+
+main .announcements--container ul li .dismiss {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1.5em;
+  height: 1.5em;
+  text-align: center;
+  cursor: pointer;
+  font-size: 2em;
+}
+
+main .announcements--container ul li .announcement-content-container {
+  width: 90%;
+}
+
+main .announcements--container ul li .title {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+main .announcements--container ul li .content {
+  font-weight: normal !important;
+}
+
+main .announcements--container ul li form {
+  float: right;
+  width: 0;
+}
+
+main .announcements--container ul li a {
+  font-weight: bold;
+}
+
+main .announcements--container ul li ~ li {
+  margin-top: 10px;
+  /*doesn't apply to the first one */
+}

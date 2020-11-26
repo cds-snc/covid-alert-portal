@@ -1,0 +1,33 @@
+{% load static i18n %}
+{% if announcements %}
+<link href="{% static 'css/announcements.css' %}" rel="stylesheet">
+
+<div class="announcements--container" role="alert">
+    <ul class="announcements">
+    {% for announcement in announcements %}
+        <li class="{{ announcement.level }}">
+            {% if announcement.dismissable %}
+            <form action="{{ announcement.dismiss_url }}" method="post">
+                {% csrf_token %}
+                <label>
+                   <span class="dismiss" aria-label="{% trans 'Dismiss' %}">&times</span> 
+                   <input type="submit" hidden/>
+                </label>
+                
+            </form>
+            {% endif %}
+            <div class="announcement-content-container">
+                <div class="title">{{announcement.title}}</div>
+                {% if announcement.content %}
+                <div class="content">
+                    {{announcement.content|safe}}
+                </div>
+                {% endif %}
+            </div>
+
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endif %}
+

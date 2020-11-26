@@ -1,0 +1,75 @@
+main .announcements {
+  &--container {
+    font-weight: bold;
+    margin-bottom: $space-md;
+    width:90%;
+    ul {
+      padding-left: 0;
+      list-style-type: none;
+      margin-bottom: 0;
+      li {
+
+        padding: $space-sm;
+        position: relative;
+
+        &.info,
+        &.success {
+          border-left: 4px solid $color-blue;
+          
+          background: $color-blue-ultralight;
+          a, .dismiss {
+            color: $color-blue-dark;
+          }
+
+        }
+        &.error {
+          border-left: 4px solid $color-red;
+          background: $color-red-light;
+          a, .dismiss {
+            color: $color-red;
+          }
+        }
+        &.warning {
+          border-left: 4px solid $color-yellow;
+          background: $color-yellow-ultralight;
+          a, .dismiss {
+            color: $color-yellow-dark;
+          }
+        }
+
+        .dismiss {
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 1.5em;
+          height: 1.5em;
+          text-align: center;
+          cursor: pointer;
+          font-size: 2em;
+        }
+        .announcement-content-container {
+          width: 90%;
+        }
+        .title {
+          font-weight: bold;
+          font-size: 1.1em;
+        }
+        .content {
+          font-weight: normal !important;
+        }
+
+        form {
+          float: right;
+          width: 0;
+        }
+        
+        a {
+          font-weight: bold;
+        }
+        ~ li {
+          margin-top: 10px; /*doesn't apply to the first one */
+          }
+      }
+    }
+  }
+}
