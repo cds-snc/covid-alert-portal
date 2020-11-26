@@ -2,7 +2,6 @@ from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
 from django_otp.plugins.otp_static.models import StaticToken
-from django.urls import reverse_lazy
 
 from announcements.models import Announcement
 from .views import _remove_low_on_codes_notification
