@@ -1,4 +1,5 @@
 {% load static i18n %}
+{% if announcements %}
 <link href="{% static 'css/announcements.css' %}" rel="stylesheet">
 
 <div class="announcements--container" role="alert">
@@ -28,4 +29,5 @@
     {% endfor %}
     </ul>
 </div>
+{% endif %}
 
