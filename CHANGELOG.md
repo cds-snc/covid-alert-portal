@@ -14,8 +14,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - On attempted login: lock out users after a set number of failed 2FA attempts
   - If not able to log in: users can request a backup code from their administrator
   - On generating codes: print styles for the backup codes
+-
 
-## [1.10.5] - 2020-11-26
+## [1.10.6] - 2020-11-27
+
+### Fixed
+
+- Red delete button on the "Delete yubikey" page (missed this earlier)
+
+## [1.10.5] - 2020-11-27
 
 ### Updated
 

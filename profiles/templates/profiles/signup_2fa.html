@@ -11,5 +11,6 @@
   {% include  "includes/error_list.html" %}
 
   <h1>{% trans "Enter mobile phone number" %}</h1>
-  {% include "includes/cds_form.html" with submit_text=_("Next") secondary_action_url="signup_backup_codes" secondary_action_text=_("No mobile phone?")  %}
+  {% url 'signup_backup_codes' as signup_backup_codes_url %}
+  {% include "includes/cds_form.html" with submit_text=_("Next") secondary_action_url=signup_backup_codes_url secondary_action_text=_("No mobile phone?")  %}
 {% endblock %}
