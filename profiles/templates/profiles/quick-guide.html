@@ -21,6 +21,7 @@
         {% include "includes/big-code.html" %}
     {% endwith %}
     {% url 'terms' as terms_url %}
+    {% url 'contact:index' as contact_url %}
     {% blocktrans %}
         <p>The portal gives instructions for entering the key, with screenshots from the app. You can use the instructions to help patients enter the key.</p>
         <h2>Only authorized healthcare workers generate and give one-time keys</h2>
@@ -42,6 +43,13 @@
         <p>The portal texts a security code to your mobile phone:</p>
         <ul><li>When you create your account.</li>
         <li>Anytime you log in.</li></ul>
+        <h3>No mobile phone?</h3>
+        <p>You’ll get 10 security codes when you create an account. You can only use each code once.</p>
+        <p>You can get more codes by visiting your account.</p>
+        <p>When you get new codes, your old codes will no longer work, even if you have not used them yet.</p>
+        <h2>If you cannot log in</h2>
+        <h3>Contact your administrator</h3>
+        <p>Administrators can give codes to their staff.</p>
         <h3>Check your browser is compatible</h3>
         <p>The portal works on any mobile or desktop device using a browser with automatic updates, including Chrome, Edge, Firefox, Opera and Safari. It’s also supported on Internet Explorer 11.</p>
         <h2>If the portal is down</h2>
@@ -50,7 +58,7 @@
         <ul><li>Situations when an individual healthcare worker cannot use their portal account.</li>
         <li>System-wide portal outages.</li></ul>
         <h3>Contact us for tech support</h3>
-        <p>To ask questions or give feedback about the portal, <a href="mailto:assistance+healthcare@cds-snc.ca">contact the Canadian Digital Service</a>.</p>
+        <p>To ask questions or give feedback about the portal, <a href="{{ contact_url }}">contact us</a>.</p>
     {% endblocktrans %}
     <div class="content-button"><a href="{% url 'start' %}" role='button' draggable='false'>{% trans "Visit portal" %}</a></div>
 {% endblock %}
