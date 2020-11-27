@@ -244,21 +244,15 @@ resource "aws_cloudwatch_metric_alarm" "invite_lockout_warn" {
 
 resource "aws_cloudwatch_metric_alarm" "response_time_warn" {
   alarm_name          = "ResponseTimeWarn"
-  comparison_operator = "GreaterThanUpperThreshold"
+  comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "5"
   datapoints_to_alarm = "2"
-  threshold_metric_id = "e1"
+  threshold           = "1"
   alarm_description   = "COVID Alert Portal Warning - The latency of response times from the Portal are abnormally high."
   treat_missing_data  = "notBreaching"
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
   ok_actions          = [aws_sns_topic.alert_ok.arn]
 
-  metric_query {
-    id          = "e1"
-    expression  = "ANOMALY_DETECTION_BAND(m1, 5)"
-    label       = "Response Times (Expected)"
-    return_data = "true"
-  }
 
   metric_query {
     id          = "m1"
@@ -290,21 +284,37 @@ resource "aws_cloudwatch_log_metric_filter" "service_availability" {
 
 resource "aws_cloudwatch_metric_alarm" "service_availability_warn" {
   alarm_name          = "ServiceAvailabilityWarn"
-  comparison_operator = "LessThanLowerThreshold"
+  comparison_operator = "LessThanThreshold"
   evaluation_periods  = "5"
   datapoints_to_alarm = "2"
-  threshold_metric_id = "e1"
-  alarm_description   = "COVID Alert Portal Warning - No status checks detected.  Check COVID Alert Portal to ensure site is operational."
+  threshold_metric_id = "18"
+  alarm_description   = "COVID Alert Portal Warning - Low status checks detected.  Check COVID Alert Portal to ensure site is operational."
   treat_missing_data  = "breaching"
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
   ok_actions          = [aws_sns_topic.alert_ok.arn]
 
   metric_query {
-    id          = "e1"
-    expression  = "ANOMALY_DETECTION_BAND(m1, 3)"
-    label       = "Status Checks (Expected)"
+    id          = "m1"
     return_data = "true"
+    metric {
+      metric_name = "ServiceAvailability"
+      namespace   = "covidportal"
+      period      = "60"
+      stat        = "Sum"
+    }
   }
+}
+
+resource "aws_cloudwatch_metric_alarm" "service_availability_critical" {
+  alarm_name          = "ServiceAvailabilityCritical"
+  comparison_operator = "LessThanThreshold"
+  evaluation_periods  = "5"
+  datapoints_to_alarm = "2"
+  threshold_metric_id = "1"
+  alarm_description   = "COVID Alert Portal Critical - No status checks detected.  Check COVID Alert Portal to ensure site is operational."
+  treat_missing_data  = "breaching"
+  alarm_actions       = [aws_sns_topic.alert_warning.arn]
+  ok_actions          = [aws_sns_topic.alert_ok.arn]
 
   metric_query {
     id          = "m1"
