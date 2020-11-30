@@ -336,14 +336,14 @@ resource "aws_cloudwatch_metric_alarm" "service_dns_critical" {
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
   threshold           = "1"
-  period = "60"
-  statistic = "Minimum"
-  metric_name = "HealthCheckStatus"
-  namespace   = "AWS/Route53"
+  period              = "60"
+  statistic           = "Minimum"
+  metric_name         = "HealthCheckStatus"
+  namespace           = "AWS/Route53"
   alarm_description   = "COVID Alert Portal Critical - Portal not reachable by DNS.  Check COVID Alert Portal to ensure site is operational."
   treat_missing_data  = "missing"
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
-  ok_actions          = [aws_sns_topic.alert_ok.arn]  
+  ok_actions          = [aws_sns_topic.alert_ok.arn]
   dimensions = {
     HealthCheckId = aws_route53_health_check.dns-is-routeable.id
   }
