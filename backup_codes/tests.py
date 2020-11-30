@@ -276,6 +276,26 @@ class AdminBackupCodesView(AdminUserTestCase):
         # see no codes exist for superuser
         self.assertIsNone(StaticDevice.objects.filter(user__id=superuser.id).first())
 
+    def test_admin_can_delete_staff_user_with_security_codes(self):
+        staff_credentials = get_other_credentials(is_admin=False)
+        staff_user = User.objects.create_user(**staff_credentials)
+
+        self.login()
+        # generate a code for a staff user
+        self.client.post(
+            reverse("backup_codes_admin", kwargs={"pk": staff_user.id}), follow=True
+        )
+
+        device = StaticDevice.objects.get(user__id=staff_user.id)
+        self.assertEqual(len(device.token_set.all()), 1)
+
+        response = self.client.post(
+            reverse("user_delete", kwargs={"pk": staff_user.id})
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse("profiles"))
+        self.assertEqual(len(User.objects.filter(pk=staff_user.id)), 0)
+
 
 class BackupCodesLogin(AdminUserTestCase):
     def setUp(self):
