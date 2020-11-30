@@ -50,3 +50,13 @@ resource "aws_route53_record" "covidportal_maintenance" {
   }
 }
 
+# Route 53 Healthcheck
+resource "aws_route53_health_check" "dns-is-routeable" {
+  fqdn              = "staging.covid-hcportal.cdssandbox.xyz"
+  port              = 443
+  type              = "HTTPS"
+  resource_path     = "/status/"
+  failure_threshold = "5"
+  request_interval  = "30"
+
+}
