@@ -9,15 +9,17 @@ import waffle
 
 from profiles.models import HealthcareUser
 
+
 @receiver(post_delete, sender=HealthcareUser)
 def remove_any_outstanding_announcements_to_be_created(sender, instance, **kwargs):
     #  Remove any announcements for the user that were just created becuase of low code signal
-    if (waffle.switch_is_active("BACKUP_CODE")):
+    if waffle.switch_is_active("BACKUP_CODE"):
         Announcement.objects.filter(for_user=instance).delete()
+
 
 @receiver(post_delete, sender=StaticToken)
 def add_low_on_tokens_notification(sender, instance, **kwargs):
-    if (waffle.switch_is_active("BACKUP_CODE")):
+    if waffle.switch_is_active("BACKUP_CODE"):
         for_user = HealthcareUser.objects.get(id=instance.device.user.id)
         users_static_codes_remaining = instance.device.token_set.all().count()
 
