@@ -7,10 +7,10 @@ from announcements.models import Announcement
 from .views import _remove_low_on_codes_notification
 import waffle
 
-from profiles.models import HealthcareUser
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
-
-@receiver(post_delete, sender=HealthcareUser)
+@receiver(post_delete, sender=User)
 def remove_any_outstanding_announcements_to_be_created(sender, instance, **kwargs):
     #  Remove any announcements for the user that were just created becuase of low code signal
     if waffle.switch_is_active("BACKUP_CODE"):
@@ -20,7 +20,7 @@ def remove_any_outstanding_announcements_to_be_created(sender, instance, **kwarg
 @receiver(post_delete, sender=StaticToken)
 def add_low_on_tokens_notification(sender, instance, **kwargs):
     if waffle.switch_is_active("BACKUP_CODE"):
-        for_user = HealthcareUser.objects.get(id=instance.device.user.id)
+        for_user = User.objects.get(id=instance.device.user.id)
         users_static_codes_remaining = instance.device.token_set.all().count()
 
         if users_static_codes_remaining <= 1:
