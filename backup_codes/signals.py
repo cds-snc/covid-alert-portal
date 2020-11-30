@@ -8,7 +8,9 @@ from .views import _remove_low_on_codes_notification
 import waffle
 
 from django.contrib.auth import get_user_model
+
 User = get_user_model()
+
 
 @receiver(post_delete, sender=User)
 def remove_any_outstanding_announcements_to_be_created(sender, instance, **kwargs):
