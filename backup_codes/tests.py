@@ -34,7 +34,7 @@ class BackupCodesView(AdminUserTestCase):
         self.login()
         response = self.client.get(reverse("user_profile", kwargs={"pk": self.user.id}))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "0 codes remaining", html=True)
+        self.assertContains(response, "None generated", html=True)
         ## get security codes button
         self.assertContains(
             response, '<button type="submit" class="link">Get security codes</button>'
