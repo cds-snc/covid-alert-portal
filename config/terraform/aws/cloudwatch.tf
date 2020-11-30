@@ -287,7 +287,7 @@ resource "aws_cloudwatch_metric_alarm" "service_availability_warn" {
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "5"
   datapoints_to_alarm = "2"
-  threshold_metric_id = "18"
+  threshold           = "18"
   alarm_description   = "COVID Alert Portal Warning - Low status checks detected.  Check COVID Alert Portal to ensure site is operational."
   treat_missing_data  = "breaching"
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
@@ -310,7 +310,7 @@ resource "aws_cloudwatch_metric_alarm" "service_availability_critical" {
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "5"
   datapoints_to_alarm = "2"
-  threshold_metric_id = "1"
+  threshold           = "1"
   alarm_description   = "COVID Alert Portal Critical - No status checks detected.  Check COVID Alert Portal to ensure site is operational."
   treat_missing_data  = "breaching"
   alarm_actions       = [aws_sns_topic.alert_warning.arn]
