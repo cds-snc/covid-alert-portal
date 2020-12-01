@@ -73,7 +73,7 @@ resource "aws_lambda_permission" "notify_slack_ok" {
 }
 
 resource "aws_lambda_permission" "notify_slack_dns_critical" {
-  statement_id  = "AllowExecutionFromSNSCriticalAlert"
+  statement_id  = "AllowExecutionFromSNSDnsCriticalAlert"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.notify_slack_sns.function_name
   principal     = "sns.amazonaws.com"
