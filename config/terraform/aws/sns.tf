@@ -42,6 +42,23 @@ resource "aws_sns_topic_subscription" "topic_ok" {
   endpoint  = aws_lambda_function.notify_slack_sns.arn
 }
 
+## Created in US-East-1 due to Route53
+resource "aws_sns_topic" "alert_dns_critical" {
+  provider          = aws.us-east-1
+  name              = "alert-dns-critical"
+  kms_master_key_id = aws_kms_key.cw.arn
+
+  tags = {
+    (var.billing_tag_key) = var.billing_tag_value
+  }
+}
+resource "aws_sns_topic_subscription" "topic_dns_critical" {
+  provider  = aws.us-east-1
+  topic_arn = aws_sns_topic.alert_dns_critical.arn
+  protocol  = "lambda"
+  endpoint  = aws_lambda_function.notify_slack_sns.arn
+}
+
 
 ###
 # AWS SNS - CloudWatch Policy
