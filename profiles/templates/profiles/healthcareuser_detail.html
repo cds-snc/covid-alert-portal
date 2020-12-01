@@ -47,20 +47,34 @@
         </tr>
         <tr>
           <th scope="row">{% trans "Mobile phone number" %}</th>
-          <td {% if view_only %}colspan="2"{% endif %}>{{ healthcareuser.phone_number.as_e164 }}</td>
-          {% if not view_only %}
-          <td>
-              <a href="{% url 'user_edit_phone' healthcareuser.id %}">
-                <span class="visually-hidden">
-                  {% if user.id == healthcareuser.id  %}
-                    {% trans "Change your mobile phone number" %}
-                  {% else %}
-                    {% trans "Change mobile phone number" %}
-                  {% endif %}
-                </span>
-                <span aria-hidden="true">{% trans "Change" %}</span>
-              </a>
-          </td>
+          {% if healthcareuser.phone_number %}
+            <td {% if view_only %}colspan="2"{% endif %}>{{ healthcareuser.phone_number.as_e164 }}</td>
+            {% if not view_only %}
+            <td>
+                <a href="{% url 'user_edit_phone' healthcareuser.id %}">
+                  <span class="visually-hidden">
+                    {% if user.id == healthcareuser.id  %}
+                      {% trans "Change your mobile phone number" %}
+                    {% else %}
+                      {% trans "Change mobile phone number" %}
+                    {% endif %}
+                  </span>
+                  <span aria-hidden="true">{% trans "Change" %}</span>
+                </a>
+            </td>
+            {% endif %}
+          {% else %}
+            <td {% if view_only %}colspan="2"{% endif %}>{% trans "Not using" %}</td>
+            {% if not view_only %}
+            <td>
+                <a href="{% url 'user_edit_phone' healthcareuser.id %}">
+                  <span class="visually-hidden">
+                    {% trans "Add mobile phone number" %}
+                  </span>
+                  <span aria-hidden="true">{% trans "Add" %}</span>
+                </a>
+            </td>
+            {% endif %}
           {% endif %}
         </tr>
         {% if user.is_superuser and user.id == healthcareuser.id %}
@@ -73,11 +87,11 @@
                     <td>
                         {% if yubikey %}
                             <a href="{% url 'yubikey_delete' yubikey.id  %}">
-                                <span>{% trans "Remove your Yubikey" %}</span>
+                                <span>{% trans "Remove Yubikey" %}</span>
                             </a>
                         {% else %}
                             <a href="{% url 'yubikey_create' %}">
-                                <span>{% trans "Register a Yubikey" %}</span>
+                                <span>{% trans "Register Yubikey" %}</span>
                             </a>
                         {% endif %}
                     </td>
@@ -100,16 +114,20 @@
             <th scope="row">{% trans "Security Codes" %}</th>
             <td>
               <span>
-              {{ security_code_count }}
-              {% if security_code_count == 1 %}{% trans "code" %}{% else %}{% trans "codes" %}{% endif %}
-              {% trans "remaining" %}
+              {% if backup_codes_set %}
+                {{ backup_codes_count }}
+                {% if backup_codes_count == 1 %}{% trans "code" %}{% else %}{% trans "codes" %}{% endif %}
+                {% trans "remaining" %}
+              {% else %}
+                {% trans "None generated" %}
+              {% endif %}
               </span>
             </td>
             {% if not view_only %}
             <td>
               {% if user.id == healthcareuser.id %}
 
-                {% if security_code_count < 1 %}
+                {% if backup_codes_count < 1 %}
                   <form action="{% url 'backup_codes' %}" method="post">
                     {% csrf_token %}
                     <button type="submit" class="link">{% trans "Get security codes" %}</button>

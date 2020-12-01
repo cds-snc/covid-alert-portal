@@ -191,10 +191,3 @@ def get_user_static_device(user, confirmed=None):
     for device in devices:
         if isinstance(device, StaticDevice):
             return device
-
-
-def get_user_backup_codes_count(user):
-    devices = get_user_static_device(user)
-    if devices:
-        return devices.token_set.all().count()
-    return 0
