@@ -12,11 +12,11 @@
 
   <p>{% trans "Use these security codes to login to the portal. The code proves it’s you." %}</p>
   <p>{% trans "You can use each code only once." %}</p>
-  <p>{% trans "Keep the codes on paper in a safe place. Do not save or store this screen, copy the codes to an electronic device, or share the codes with anyone else." %}</p>
+  <p>{% trans "Keep the codes somewhere that only you can access. Do not email them to yourself or anyone else, do not keep them on a shared computer or on any device that is not protected by a password." %}</p>
 
   {% include "includes/codes.html" with codes=backup_code_list %}
 
-  <p>{% trans "When you get new codes, the last codes will no longer work, even if you have not used them yet." %}</p>
+  <p>{% trans "When you get new codes, your old codes will no longer work, even if you have not used them yet." %}</p>
   <div class="content-button">
     <form action="{% url 'backup_codes' %}" method="post">
       {% csrf_token %}

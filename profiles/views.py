@@ -29,7 +29,7 @@ from django.urls import translate_url
 from otp_yubikey.models import RemoteYubikeyDevice
 
 from portal.mixins import ThrottledMixin, Is2FAMixin, IsAdminMixin, ProvinceAdminMixin
-from backup_codes.views import get_user_backup_codes_count
+from backup_codes.views import get_user_static_device
 from invitations.models import Invitation
 from axes.models import AccessAttempt
 
@@ -384,7 +384,11 @@ class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):
         )
 
         # Get the number of Security Codes that currently exist
-        context["security_code_count"] = get_user_backup_codes_count(healthcareuser)
+        _devices = get_user_static_device(healthcareuser)
+        context["backup_codes_set"] = True if _devices else False
+        context["backup_codes_count"] = (
+            _devices.token_set.all().count() if _devices else 0
+        )
         return context
 
 
