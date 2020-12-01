@@ -333,6 +333,7 @@ resource "aws_cloudwatch_metric_alarm" "service_availability_critical" {
 ###
 resource "aws_cloudwatch_metric_alarm" "service_dns_critical" {
   alarm_name          = "ServiceDNSCritical"
+  provider            = aws.us-east-1
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
   threshold           = "1"
