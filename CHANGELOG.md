@@ -7,14 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-- Add static backup codes (behind feature flag)
+- TODO: Remove feature flag once backup codes rollout has gone smoothly
+
+## [1.11.0] - 2020-12-01
+
+- Add static backup codes
   - On user account page: see codes and generate more codes
   - On signup: new accounts can create codes instead of adding a phone
   - On login: login accepts a backup code, and allows users to message an administrator
   - On attempted login: lock out users after a set number of failed 2FA attempts
   - If not able to log in: users can request a backup code from their administrator
   - On generating codes: print styles for the backup codes
--
 
 ## [1.10.6] - 2020-11-27
 
