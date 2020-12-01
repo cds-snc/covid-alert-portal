@@ -52,6 +52,16 @@ resource "aws_sns_topic" "alert_dns_critical" {
     (var.billing_tag_key) = var.billing_tag_value
   }
 }
+
+resource "aws_sns_topic" "alert_dns_ok" {
+  provider          = aws.us-east-1
+  name              = "alert-dns-ok"
+  kms_master_key_id = aws_kms_key.cw.arn
+  tags = {
+    (var.billing_tag_key) = var.billing_tag_value
+  }
+}
+
 resource "aws_sns_topic_subscription" "topic_dns_critical" {
   provider  = aws.us-east-1
   topic_arn = aws_sns_topic.alert_dns_critical.arn
@@ -59,6 +69,12 @@ resource "aws_sns_topic_subscription" "topic_dns_critical" {
   endpoint  = aws_lambda_function.notify_slack_sns.arn
 }
 
+resource "aws_sns_topic_subscription" "topic_dns_ok" {
+  topic_arn = aws_sns_topic.alert_dns_ok.arn
+  provider  = aws.us-east-1
+  protocol  = "lambda"
+  endpoint  = aws_lambda_function.notify_slack_sns.arn
+}
 
 ###
 # AWS SNS - CloudWatch Policy
