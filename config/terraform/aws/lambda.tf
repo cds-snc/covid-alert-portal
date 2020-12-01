@@ -71,6 +71,22 @@ resource "aws_lambda_permission" "notify_slack_ok" {
   principal     = "sns.amazonaws.com"
   source_arn    = aws_sns_topic.alert_ok.arn
 }
+
+resource "aws_lambda_permission" "notify_slack_dns_critical" {
+  statement_id  = "AllowExecutionFromSNSDnsCriticalAlert"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.notify_slack_sns.function_name
+  principal     = "sns.amazonaws.com"
+  source_arn    = aws_sns_topic.alert_dns_critical.arn
+}
+resource "aws_lambda_permission" "notify_slack_dns_ok" {
+  statement_id  = "AllowExecutionFromSNSDnsOKAlert"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.notify_slack_sns.function_name
+  principal     = "sns.amazonaws.com"
+  source_arn    = aws_sns_topic.alert_dns_ok.arn
+}
+
 ## Allow Lambda to create Logs in Cloudwatch
 
 resource "aws_iam_policy" "lambda_logging" {
