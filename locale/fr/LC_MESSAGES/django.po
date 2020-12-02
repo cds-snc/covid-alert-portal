@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-30 21:15+0000\n"
+"POT-Creation-Date: 2020-12-02 20:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -444,7 +444,21 @@ msgid "Something went wrong. Contact your administrator."
 msgstr ""
 "Une erreur est survenue. Veuillez contacter votre admistrateur du portail."
 
-#: portal/settings.py:328
+#: google_analytics/models.py:12
+msgid "Google Analytics Code"
+msgstr "Code pour Google Analytics"
+
+#: google_analytics/models.py:18
+msgid ""
+"If no tracking code provided Google Analytics will not record any data for "
+"site."
+msgstr "Si aucun code est soumis Google Analytics ne serait pas en mesure de captures les données pour ce site."
+
+#: google_analytics/models.py:23 google_analytics/models.py:26
+msgid "Google Analytics V4 Tracking Code"
+msgstr "Code pour Google Analytics version 4"
+
+#: portal/settings.py:330
 msgid "This account has been locked due to too many failed log in attempts."
 msgstr ""
 "Ce compte a été verrouillé en raison d’un trop grand nombre de tentatives "
@@ -512,15 +526,15 @@ msgstr ""
 "Veuillez utiliser <a href=\"%(login_url)s\">le site principal pour vous "
 "connecter</a>."
 
-#: portal/templates/base.html:31 portal/templates/base.html:50
+#: portal/templates/base.html:36 portal/templates/base.html:55
 msgid "COVID Alert Portal"
 msgstr "Portail Alerte COVID"
 
-#: portal/templates/base.html:31
+#: portal/templates/base.html:36
 msgid "— COVID Alert Portal"
 msgstr "— Portail Alerte COVID"
 
-#: portal/templates/base.html:35
+#: portal/templates/base.html:40
 msgid "Skip to main content"
 msgstr "Passer au contenu principal"
 
