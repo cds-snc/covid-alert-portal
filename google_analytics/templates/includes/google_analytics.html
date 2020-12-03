@@ -3,7 +3,6 @@
 {% block content %}
   {% get_solo 'google_analytics.GoogleAnalytics' as ga_config %}
   {% if ga_config.ga_code %}
-    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script nonce={{request.csp_nonce}} async src="https://www.googletagmanager.com/gtag/js?id={{ga_config.ga_code}}"></script>
     <script nonce={{request.csp_nonce}}>
       window.dataLayer = window.dataLayer || [];
