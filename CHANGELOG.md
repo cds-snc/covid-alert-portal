@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - TODO: Remove feature flag once backup codes rollout has gone smoothly
 
+## [1.11.1] - 2020-12-03
+
+### Updated
+
+- Updated the privacy pages to include new text about Google Analytics.
+- Added Goolge Analytics tag placeholder and configurator through admin portal.
+
 ## [1.11.0] - 2020-12-01
 
 - Add static backup codes
