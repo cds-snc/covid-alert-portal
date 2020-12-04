@@ -32,6 +32,7 @@ from portal.mixins import ThrottledMixin, Is2FAMixin, IsAdminMixin, ProvinceAdmi
 from backup_codes.views import get_user_static_device
 from invitations.models import Invitation
 from axes.models import AccessAttempt
+from easyaudit.models import CRUDEvent
 
 import waffle
 
@@ -389,6 +390,16 @@ class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):
         context["backup_codes_count"] = (
             _devices.token_set.all().count() if _devices else 0
         )
+
+        # Get most recent password change
+        CONTENT_TYPE_ID_PROFILES_HEALTHCARE_USER = 1
+        event = CRUDEvent.objects.filter(
+            content_type=CONTENT_TYPE_ID_PROFILES_HEALTHCARE_USER,
+            changed_fields__contains='"password"',
+            user=healthcareuser.id,
+        ).latest("datetime")
+        context["password_last_changed"] = event.datetime
+
         return context
 
 
