@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-- TODO: Remove feature flag once backup codes rollout has gone smoothly
+## [1.11.2] - 2020-12-03
 
-## [1.11.1] - 2020-12-03
+### Removed
+
+- Remove BACKUP_CODE feature flag now that backup codes rollout has gone swimmingly
+
+## [1.11.1] - 2020-12-4
+
+#### ⚠️ This release includes a data migration
 
 ### Updated
 
@@ -17,6 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added Goolge Analytics tag placeholder and configurator through admin portal.
 
 ## [1.11.0] - 2020-12-01
+
+#### ⚠️ This release includes a data migration
 
 - Add static backup codes
   - On user account page: see codes and generate more codes

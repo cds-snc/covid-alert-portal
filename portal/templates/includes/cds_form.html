@@ -1,4 +1,4 @@
-{% load i18n widget_tweaks waffle_tags %}
+{% load i18n widget_tweaks %}
 
 <form method="post" id="form--{{ request.resolver_match.url_name }}" {% if form_class %}class="{{ form_class }}"{% endif %} >
   {% csrf_token %}
@@ -45,11 +45,9 @@
       {% endif %}
     </button>
 
-  {% switch "BACKUP_CODE" %}
     {% if secondary_action_text and not secondary_action_before %}
       <a href="{{ secondary_action_url }}" class="secondary" role="button" draggable="false">{{ secondary_action_text }}</a>
     {% endif %}
-  {% endswitch %}
   </div>
 
 </form>
