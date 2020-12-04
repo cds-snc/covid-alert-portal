@@ -10,7 +10,6 @@ from django.db.models import Q
 from django_otp import devices_for_user
 from django_otp.plugins.otp_static.models import StaticDevice, StaticToken
 
-from waffle.mixins import WaffleSwitchMixin
 from portal.mixins import Is2FAMixin, ProvinceAdminMixin
 
 from backup_codes.forms import RequestBackupCodesForm
@@ -21,8 +20,7 @@ from announcements.models import Announcement
 from django.conf import settings
 
 
-class BackupCodeListView(WaffleSwitchMixin, Is2FAMixin, ListView):
-    waffle_switch = "BACKUP_CODE"
+class BackupCodeListView(Is2FAMixin, ListView):
     template_name = "backup_codes/backup_codes_list.html"
     context_object_name = "backup_code_list"
 
@@ -42,10 +40,7 @@ class BackupCodeListView(WaffleSwitchMixin, Is2FAMixin, ListView):
         return _get_backup_codes_list(self.request.user)
 
 
-class AdminBackupCodeListView(
-    WaffleSwitchMixin, Is2FAMixin, ProvinceAdminMixin, ListView
-):
-    waffle_switch = "BACKUP_CODE"
+class AdminBackupCodeListView(Is2FAMixin, ProvinceAdminMixin, ListView):
     template_name = "backup_codes/admin_backup_codes_list.html"
     context_object_name = "backup_code_list"
 
@@ -72,8 +67,7 @@ class AdminBackupCodeListView(
         return get_user_static_device(self.staff_user).token_set.all()
 
 
-class SignupBackupCodeListView(LoginRequiredMixin, WaffleSwitchMixin, ListView):
-    waffle_switch = "BACKUP_CODE"
+class SignupBackupCodeListView(LoginRequiredMixin, ListView):
     template_name = "backup_codes/signup_backup_codes_list.html"
     context_object_name = "backup_code_list"
 
@@ -92,8 +86,7 @@ class SignupBackupCodeListView(LoginRequiredMixin, WaffleSwitchMixin, ListView):
         return _get_backup_codes_list(self.request.user)
 
 
-class RequestBackupCodes(WaffleSwitchMixin, LoginRequiredMixin, FormView):
-    waffle_switch = "BACKUP_CODE"
+class RequestBackupCodes(LoginRequiredMixin, FormView):
     form_class = RequestBackupCodesForm
     template_name = "backup_codes/backup_codes_help.html"
     success_url = reverse_lazy("login_2fa")

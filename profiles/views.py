@@ -33,8 +33,6 @@ from backup_codes.views import get_user_static_device
 from invitations.models import Invitation
 from axes.models import AccessAttempt
 
-import waffle
-
 from .utils import generate_2fa_code
 from .utils.invitation_adapter import user_signed_up
 from .models import HealthcareUser, HealthcareFailedAccessAttempt
@@ -210,12 +208,7 @@ class Login2FAView(LoginRequiredMixin, FormView):
 
     @cached_property
     def has_static_code(self):
-        return (
-            True
-            if waffle.switch_is_active("BACKUP_CODE")
-            and self.request.user.staticdevice_set.exists()
-            else False
-        )
+        return True if self.request.user.staticdevice_set.exists() else False
 
     def get_success_url(self):
         next_url = self.request.GET.get("next", None)

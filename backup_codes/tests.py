@@ -10,7 +10,6 @@ from profiles.utils import generate_2fa_code
 from django_otp.plugins.otp_static.models import StaticDevice
 from invitations.models import Invitation
 from profiles.models import HealthcareProvince
-from waffle.models import Switch
 
 from profiles.tests import AdminUserTestCase, get_other_credentials
 
@@ -28,7 +27,6 @@ class BackupCodesConfigTest(TestCase):
 class BackupCodesView(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
-        Switch.objects.create(name="BACKUP_CODE", active=True)
 
     def test_user_can_get_security_codes_on_account_page(self):
         self.login()
@@ -158,7 +156,6 @@ class BackupCodesView(AdminUserTestCase):
 class AdminBackupCodesView(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
-        Switch.objects.create(name="BACKUP_CODE", active=True)
 
     def test_admin_can_see_security_code_button_for_staff_user(self):
         staff_credentials = get_other_credentials(is_admin=False)
@@ -300,7 +297,6 @@ class AdminBackupCodesView(AdminUserTestCase):
 class BackupCodesLogin(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
-        Switch.objects.create(name="BACKUP_CODE", active=True)
         self.ensure_codes_created()
         self.logout()
 
@@ -395,7 +391,6 @@ class BackupCodesLogin(AdminUserTestCase):
 class BackupCodesHelp(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=False)
-        Switch.objects.create(name="BACKUP_CODE", active=True)
         self.inviter_credentials = {
             "email": "inviter@test.com",
             "name": "InviterUser",
@@ -429,7 +424,6 @@ class BackupCodesHelp(AdminUserTestCase):
 class BackupCodesRedirect(TestCase):
     def setUp(self):
         super().setUp()
-        Switch.objects.create(name="BACKUP_CODE", active=True)
         self.user_credentials = {
             "email": "user1@test.com",
             "name": "No Phone User",
@@ -451,7 +445,6 @@ class BackupCodesRedirect(TestCase):
 class BackupCodesSignupView(AdminUserTestCase):
     def setUp(self):
         super().setUp(is_admin=True)
-        Switch.objects.create(name="BACKUP_CODE", active=True)
 
     def test_redirect_to_login_backup_codes_signup_view(self):
         response = self.client.get(reverse("signup_backup_codes"))

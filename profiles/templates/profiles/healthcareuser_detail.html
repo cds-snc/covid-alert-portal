@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% load waffle_tags %}
 
 {% block title %}
     {% if healthcareuser.id == user.id %}
@@ -109,45 +108,43 @@
               </td>
             </tr>
         {% endif %}
-        {% switch "BACKUP_CODE" %}
-          <tr>
-            <th scope="row">{% trans "Security Codes" %}</th>
-            <td>
-              <span>
-              {% if backup_codes_set %}
-                {{ backup_codes_count }}
-                {% if backup_codes_count == 1 %}{% trans "code" %}{% else %}{% trans "codes" %}{% endif %}
-                {% trans "remaining" %}
-              {% else %}
-                {% trans "None generated" %}
-              {% endif %}
-              </span>
-            </td>
-            {% if not view_only %}
-            <td>
-              {% if user.id == healthcareuser.id %}
-
-                {% if backup_codes_count < 1 %}
-                  <form action="{% url 'backup_codes' %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="link">{% trans "Get security codes" %}</button>
-                  </form>
-                {% else %}
-                  <a href="{% url 'backup_codes' %}">{% trans "View security codes" %}</a>
-                {% endif %}
-
-              {% else %}
-
-                  <form action="{% url 'backup_codes_admin' healthcareuser.id %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="link">{% trans "Get a security code" %}</button>
-                  </form>
-
-              {% endif %}
-            </td>
+        <tr>
+          <th scope="row">{% trans "Security Codes" %}</th>
+          <td>
+            <span>
+            {% if backup_codes_set %}
+              {{ backup_codes_count }}
+              {% if backup_codes_count == 1 %}{% trans "code" %}{% else %}{% trans "codes" %}{% endif %}
+              {% trans "remaining" %}
+            {% else %}
+              {% trans "None generated" %}
             {% endif %}
-          </tr>
-        {% endswitch %}
+            </span>
+          </td>
+          {% if not view_only %}
+          <td>
+            {% if user.id == healthcareuser.id %}
+
+              {% if backup_codes_count < 1 %}
+                <form action="{% url 'backup_codes' %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="link">{% trans "Get security codes" %}</button>
+                </form>
+              {% else %}
+                <a href="{% url 'backup_codes' %}">{% trans "View security codes" %}</a>
+              {% endif %}
+
+            {% else %}
+
+                <form action="{% url 'backup_codes_admin' healthcareuser.id %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="link">{% trans "Get a security code" %}</button>
+                </form>
+
+            {% endif %}
+          </td>
+          {% endif %}
+        </tr>
       </tbody>
     </table>
 
