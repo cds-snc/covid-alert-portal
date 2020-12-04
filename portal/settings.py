@@ -93,6 +93,8 @@ INSTALLED_APPS = [
     "djversion",
     "widget_tweaks",
     "announcements",
+    "solo",
+    "google_analytics",
 ]
 
 MIDDLEWARE = [
@@ -355,11 +357,20 @@ CSP_DEFAULT_SRC = [
 ]
 CSP_STYLE_SRC = ["'self'", "fonts.googleapis.com"]
 CSP_FONT_SRC = ["'self'", "fonts.gstatic.com"]
+CSP_IMG_SRC = [
+    "'self'",
+    "https://www.googletagmanager.com",
+    "https://www.google-analytics.com",
+]
 CSP_SCRIPT_SRC = [
     "'self'",
     "cdnjs.cloudflare.com",
 ]
-CSP_CONNECT_SRC = ["'self'"]
+CSP_CONNECT_SRC = [
+    "'self'",
+    "https://www.google-analytics.com",
+]
+CSP_INCLUDE_NONCE_IN = ["script-src"]
 
 FRESHDESK_API_ENDPOINT = os.getenv("FRESHDESK_API_ENDPOINT")
 FRESHDESK_API_KEY = os.getenv("FRESHDESK_API_KEY")

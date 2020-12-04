@@ -41,6 +41,7 @@ django-project-version = "*"
 django-widget-tweaks = "*"
 notifications-python-client = "*"
 django-waffle = "*"
+django-solo = "*"
 
 [pipenv]
 allow_prereleases = true
