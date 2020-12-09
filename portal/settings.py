@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     "covid_key",
     "invitations",
     "contact",
+    "about",
     "backup_codes",
     "axes",
     "django.contrib.sites",  # Required for invitations

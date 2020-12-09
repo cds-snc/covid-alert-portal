@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+{% trans "COVID Alert" %}
+{% endblock %}
+
+{% block content_class %}row{% endblock %}
+{% block content %}
+  <div class="column">
+    <nav class="nav--about" aria-label="{% trans 'About the Portal navigation' %}">
+      <ul>
+        <li><a href="#">COVID Alert</a></li>
+        <li><a href="#">Create an account</a></li>
+        <li><a href="#">One-time keys</a></li>
+        <li><a href="#">Give a key</a></li>
+        <li><a href="#">Help patient enter key</a></li>
+        <li><a href="#">Admin accounts</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="column column--2-3">
+    <h1>{% trans "COVID Alert" %}</h1>
+    <p>{% trans "The COVID Alert Portal is part of the system behind Canada’s free exposure notification app, COVID Alert. You can get an overview of the app from this short video." %}</p>
+    <h2>{% trans "You’re crucial to the app’s success" %}</h2>
+    <p>{% trans "You’ll give one-time keys to patients with COVID-19 who’ve installed the app. To notify people, patients enter the key in the app. This confirms they’ve been diagnosed with COVID-19." %}</p>
+    <p>{% trans "Only authorized healthcare workers can generate and give one-time keys." %}</p>
+    <p>{% trans "COVID Alert does not replace manual contact tracing by local health authorities." %}</p>
+    <a href="#">Next: Create an account →</a>
+  </div>
+{% endblock %}
