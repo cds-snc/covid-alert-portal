@@ -27,33 +27,17 @@
   }
 
   &__with-example-text {
-    @include md {
-      padding-top: $space-xl;
-    }
+    padding-top: $space-lg;
 
     .example-text {
       color: $color-red;
       font-weight: bold;
       margin-left: auto;
-      font-size: 120%;
-      border: 3px solid $color-red;
-      border-radius: 3px;
-      padding: $space-xxs;
-      margin-bottom: $space-sm;
-
-      @include md {
-        /* remove border and spacing */
-        margin-bottom: 0;
-        padding: 0;
-        border: none;
-
-        /* absolute positioning in the top-right */
-        max-width: 200px;
-        text-align: left;
-        position: absolute;
-        right: $space-xs;
-        top: $space-xs;
-      }
+      font-size: 110%;
+      border: 2px solid $color-red;
+      border-radius: 4px;
+      padding: $space-xxs $space-xs;
+      margin-bottom: $space-md;
     }
   }
 }

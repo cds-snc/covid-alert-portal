@@ -170,6 +170,11 @@ class UnauthenticatedView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "<h1>Terms of use</h1>")
 
+    def test_support_page(self):
+        response = self.client.get(reverse("support"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Support</h1>")
+
 
 class RestrictedPageViews(TestCase):
     #  These should redirect us
