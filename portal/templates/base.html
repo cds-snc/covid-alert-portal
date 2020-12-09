@@ -24,7 +24,6 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Lato:400,700%7CNoto+Sans:400,700&amp;display=fallback" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700%7CNoto+Sans:400,700&amp;display=fallback" >
 
- 
     <!-- Google Analytics-->
     {% include "includes/google_analytics.html" %}
 
@@ -62,8 +61,10 @@
         {% include  "includes/nav_main.html" %}
 
         <div class="page--container" id="page--content" tabindex="-1">
-          <div class="content--container">
+          {% if request.resolver_match.url_name != 'login' %}
             {% include "announcements/announcements.html" %}
+          {% endif %}
+          <div class="content--container {% block content_class %}{% endblock %}">
             {% block content %}{% endblock %}
           </div>
         </div>
