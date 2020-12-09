@@ -27,6 +27,9 @@
     <p>{% trans "You’ll give one-time keys to patients with COVID-19 who’ve installed the app. To notify people, patients enter the key in the app. This confirms they’ve been diagnosed with COVID-19." %}</p>
     <p>{% trans "Only authorized healthcare workers can generate and give one-time keys." %}</p>
     <p>{% trans "COVID Alert does not replace manual contact tracing by local health authorities." %}</p>
-    <a href="#">Next: Create an account →</a>
+
+    <div class="content-next-link">
+      <a href="{% url 'about:create_account' %}" class="chevron-right">{% trans "Next:" %} {% trans "Create an account" %}</a>
+    </div>
   </div>
 {% endblock %}

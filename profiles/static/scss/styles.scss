@@ -32,5 +32,8 @@
 /* Print styles */
 @import "./_print";
 
+/* About styles */
+@import "about/scss/_next-link";
+
 /* Announcement styles */
-@import "announcements/_announcements";
+@import "announcements/scss/_announcements";
