@@ -97,8 +97,7 @@ urlpatterns = [
     ),
     path(
         "quick-guide/",
-        TemplateView.as_view(template_name="profiles/quick-guide.html"),
-        name="quick_guide",
+        RedirectView.as_view(pattern_name="support", permanent=True),
     ),
     path(
         "privacy/",
