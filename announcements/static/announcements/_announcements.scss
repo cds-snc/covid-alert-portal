@@ -1,38 +1,49 @@
+$color-yellow-ultralight: #fff7e3;
+$color-yellow-dark: #6f4f05;
+
 main .announcements {
   &--container {
     font-weight: bold;
     margin-bottom: $space-md;
-    width:90%;
+    width: 90%;
+
     ul {
       padding-left: 0;
       list-style-type: none;
       margin-bottom: 0;
-      li {
 
+      li {
         padding: $space-sm;
         position: relative;
 
         &.info,
         &.success {
           border-left: 4px solid $color-blue;
-          
+
           background: $color-blue-ultralight;
-          a, .dismiss {
+
+          a,
+          .dismiss {
             color: $color-blue-dark;
           }
-
         }
+
         &.error {
           border-left: 4px solid $color-red;
           background: $color-red-light;
-          a, .dismiss {
+
+          a,
+          .dismiss {
             color: $color-red;
           }
         }
+
         &.warning {
           border-left: 4px solid $color-yellow;
           background: $color-yellow-ultralight;
-          a, .dismiss {
+
+          a,
+          .dismiss {
             color: $color-yellow-dark;
           }
         }
@@ -47,13 +58,16 @@ main .announcements {
           cursor: pointer;
           font-size: 2em;
         }
+
         .announcement-content-container {
           width: 90%;
         }
+
         .title {
           font-weight: bold;
           font-size: 1.1em;
         }
+
         .content {
           font-weight: normal !important;
         }
@@ -62,13 +76,14 @@ main .announcements {
           float: right;
           width: 0;
         }
-        
+
         a {
           font-weight: bold;
         }
+
         ~ li {
           margin-top: 10px; /*doesn't apply to the first one */
-          }
+        }
       }
     }
   }

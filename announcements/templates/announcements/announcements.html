@@ -1,6 +1,5 @@
 {% load static i18n %}
 {% if announcements %}
-<link href="{% static 'css/announcements.css' %}" rel="stylesheet">
 
 <div class="announcements--container" role="alert">
     <ul class="announcements">
@@ -10,10 +9,10 @@
             <form action="{{ announcement.dismiss_url }}" method="post">
                 {% csrf_token %}
                 <label>
-                   <span class="dismiss" aria-label="{% trans 'Dismiss' %}">&times</span> 
+                   <span class="dismiss" aria-label="{% trans 'Dismiss' %}">&times</span>
                    <input type="submit" hidden/>
                 </label>
-                
+
             </form>
             {% endif %}
             <div class="announcement-content-container">
