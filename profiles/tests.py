@@ -155,11 +155,6 @@ class UnauthenticatedView(TestCase):
         self.assertContains(response, "<h1>Log in</h1>")
         self.assertNotContains(response, '<a href="/en/login/">Log in</a>')
 
-    def test_quick_guide(self):
-        response = self.client.get(reverse("quick_guide"))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Quick guide to the portal</h1>")
-
     def test_privacy_page(self):
         response = self.client.get(reverse("privacy"))
         self.assertEqual(response.status_code, 200)
@@ -169,6 +164,15 @@ class UnauthenticatedView(TestCase):
         response = self.client.get(reverse("terms"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "<h1>Terms of use</h1>")
+
+    def test_support_page(self):
+        response = self.client.get(reverse("support"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Support</h1>")
+
+    def test_quick_guide_redirects_to_support(self):
+        response = self.client.get("/en/quick-guide/", follow=False)
+        self.assertRedirects(response, reverse("support"), status_code=301)
 
 
 class RestrictedPageViews(TestCase):

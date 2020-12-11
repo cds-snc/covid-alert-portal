@@ -58,3 +58,25 @@ nav {
     }
   }
 }
+
+.nav--about {
+  li {
+    width: 100%;
+    margin-bottom: $space-sm;
+
+    a {
+      text-decoration: none;
+
+      &.active {
+        font-weight: 600;
+        border-left: 4px solid currentColor;
+        padding-left: $space-xs;
+      }
+
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
+  }
+}

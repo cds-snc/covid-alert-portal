@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+{% trans "One-time keys" %}
+{% endblock %}
+
+{% block content_class %}row{% endblock %}
+{% block content %}
+  <div class="column">
+    {% include  "includes/nav_about.html" %}
+  </div>
+
+  <div class="column column--2-3">
+    <h1>{% trans "One-time keys" %}</h1>
+    <p>{% trans "Patients only get 1 key per positive test, and the key expires in 24 hours." %}</p>
+
+    <h2>{% trans "Before generating a key" %}</h2>
+    <p>{% trans "You’ll confirm that the patient should get a key, and that they’re ready to enter or record it. The portal will guide you each time you need to do this." %}</p>
+
+    <h3>{% trans "Only generate a key if you intend to give it to a patient" %}</h3>
+    <p>{% trans "This condition is part of our terms of use, so that we can keep stats accurate. We use the stats to improve COVID Alert." %}</p>
+
+    <div class="content-next-link">
+      <a href="{% url 'about:give_a_key' %}" class="chevron-right">{% trans "Next:" %} {% trans "Give a key" %}</a>
+    </div>
+  </div>
+{% endblock %}

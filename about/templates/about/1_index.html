@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+{% trans "COVID Alert" %}
+{% endblock %}
+
+{% block content_class %}row{% endblock %}
+{% block content %}
+  <div class="column">
+    {% include  "includes/nav_about.html" %}
+  </div>
+
+  <div class="column column--2-3">
+    <h1>{% trans "COVID Alert" %}</h1>
+    {% blocktrans %}
+      <p>
+        The COVID Alert Portal is part of the system behind Canada’s <a href="https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html" target="_blank">exposure notification app, COVID Alert</a>. You can get more information from a <a href="https://www.canada.ca/en/public-health/services/video/covid-alert.html" target="_blank">short video about how the COVID Alert app works</a>.
+      </p>
+    {% endblocktrans %}
+    <h2>{% trans "You’re crucial to the app’s success" %}</h2>
+    <p>{% trans "You’ll give one-time keys to patients with COVID-19 who’ve installed the app. To notify people, patients enter the key in the app. This confirms they’ve been diagnosed with COVID-19." %}</p>
+    <p>{% trans "Only authorized healthcare workers can generate and give one-time keys." %}</p>
+    <p>{% trans "COVID Alert does not replace manual contact tracing by local health authorities." %}</p>
+
+    <div class="content-next-link">
+      <a href="{% url 'about:create_account' %}" class="chevron-right">{% trans "Next:" %} {% trans "Create an account" %}</a>
+    </div>
+  </div>
+{% endblock %}

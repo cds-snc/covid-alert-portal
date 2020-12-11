@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.12.0] - 2020-12-11
+
+### Added
+
+- Added new "About the Portal" section
+  - Included in the main navigation and has a new page layout
+  - Mostly it is the content in the Quick guide, but broken up into more manageable sections
+- Added new "Support" page
+  - Replaces "Contact us" in the main nav
+
+### Updated
+
+- Announcement banners are now full-screen (except on the login page)
+
+## Removed
+
+- Remove "Quick guide" page
+  - 301 redirect the old URL to the new about page
+
 ## [1.11.2] - 2020-12-03
 
 ### Removed

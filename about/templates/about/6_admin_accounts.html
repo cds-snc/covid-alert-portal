@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+{% trans "Admin accounts" %}
+{% endblock %}
+
+{% block content_class %}row{% endblock %}
+{% block content %}
+  <div class="column">
+    {% include  "includes/nav_about.html" %}
+  </div>
+
+  <div class="column column--2-3">
+    <h1>{% trans "Admin accounts" %}</h1>
+    <p>{% trans "Both administrators and team members can generate one-time keys." %}</p>
+    <p>{% trans "Administrators can also:" %}</p>
+    <ul>
+      <li>{% trans "Invite team members to create portal accounts." %}</li>
+      <li>{% trans "Make changes or update information in team member accounts." %}</li>
+      <li>{% trans "Delete portal accounts." %}</li>
+      <li>{% trans "Give security codes to healthcare workers who are locked out of the portal." %}</li>
+    </ul>
+
+    <div class="content-next-link">
+      <a href="{% url 'support' %}" class="chevron-right">{% trans "Next:" %} {% trans "Support" %}</a>
+    </div>
+  </div>
+{% endblock %}

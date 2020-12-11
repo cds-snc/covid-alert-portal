@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+{% trans "Create an account" %}
+{% endblock %}
+
+{% block content_class %}row{% endblock %}
+{% block content %}
+  <div class="column">
+    {% include  "includes/nav_about.html" %}
+  </div>
+
+  <div class="column column--2-3">
+    <h1>{% trans "Create an account" %}</h1>
+    <p>{% trans "If your administrator decides you need a portal account, you’ll get an email invitation. Check your spam folder if you’re expecting an invitation." %}</p>
+    <p>{% trans "Follow the directions in the invitation to create your account." %}</p>
+
+    <h2>{% trans "Keep a mobile phone with you" %}</h2>
+    <p>{% trans "The portal texts a security code to your mobile phone:" %}</p>
+    <ul>
+      <li>{% trans "When you create your account." %}</li>
+      <li>{% trans "Anytime you log in." %}</li>
+    </ul>
+
+    <p>{% trans "If you do not have a mobile phone, you can get security codes by visiting" %}
+    {% if user.id %}
+      <a href="{% url 'user_profile' user.id %}">
+    {% else %}
+      <a href="{% url 'login' %}">
+    {% endif %}
+    {% trans "Manage your account" %}</a>. {% trans "Keep the codes somewhere only you can access." %}</p>
+
+    <div class="content-next-link">
+      <a href="{% url 'about:one_time_keys' %}" class="chevron-right">{% trans "Next:" %} {% trans "One-time keys" %}</a>
+    </div>
+  </div>
+{% endblock %}
