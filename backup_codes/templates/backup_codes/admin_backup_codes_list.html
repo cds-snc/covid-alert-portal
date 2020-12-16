@@ -14,7 +14,7 @@
     {% with backup_code_list.0.token as token %}
       {% with token|slice:":4" as tokenFirstHalf %}
       {% with token|slice:"4:" as tokenSecondHalf %}
-        {% include "includes/phonetic.html" with code=tokenFirstHalf|add:" "|add:tokenSecondHalf intro=_("Read the code phonetically and ask the staff member to read it back to you:") %}
+        {% include "includes/phonetic.html" with code=tokenFirstHalf|add:" "|add:tokenSecondHalf intro=_("Read the code phonetically and ask the team member to read it back to you:") %}
       {% endwith %}
       {% endwith %}
     {% endwith %}
@@ -23,7 +23,7 @@
   <p>{% trans "After they log in, they can follow the instructions to get more security codes." %}</p>
 
   <div class="content-button">
-    <a class="secondary" href="{% url 'profiles' %}" role='button' draggable='false'>{% trans "Back to accounts" %}</a>
+    <a class="secondary" href="{% url 'profiles' %}" role='button' draggable='false'>{% trans "Back to Manage team" %}</a>
   </div>
 
 {% endblock %}

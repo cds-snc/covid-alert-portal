@@ -36,8 +36,8 @@
               <span aria-hidden="true">{% trans "View" %}</span>
               <span class="visually-hidden">{% blocktrans with email=healthcareuser.email %}View account for {{ email }}{% endblocktrans %}</span>
             {% else %}
-              <span aria-hidden="true">{% trans "Edit" %}</span>
-              <span class="visually-hidden">{% blocktrans with email=healthcareuser.email %}Edit account for {{ email }}{% endblocktrans %}</span>
+              <span aria-hidden="true">{% trans "Manage" %}</span>
+              <span class="visually-hidden">{% blocktrans with email=healthcareuser.email %}Manage account for {{ email }}{% endblocktrans %}</span>
             {% endif %}
           </a>
           {% endspaceless %}

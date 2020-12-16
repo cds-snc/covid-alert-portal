@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-16 16:51+0000\n"
+"POT-Creation-Date: 2020-12-16 17:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,6 +126,8 @@ msgstr ""
 "sécurité dans"
 
 #: about/templates/about/2_create_account.html:32
+#: profiles/templates/profiles/healthcareuser_detail.html:6
+#: profiles/templates/profiles/healthcareuser_detail.html:15
 msgid "Manage your account"
 msgstr "Gérer votre compte"
 
@@ -357,9 +359,9 @@ msgstr ""
 
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html:17
 msgid ""
-"Read the code phonetically and ask the staff member to read it back to you:"
+"Read the code phonetically and ask the team member to read it back to you:"
 msgstr ""
-"Lisez le code de façon phonétique puis demandez à l’employé de vous le "
+"Lisez le code de façon phonétique puis demandez au membre de vous le "
 "répéter :"
 
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html:23
@@ -371,9 +373,8 @@ msgstr ""
 "plus de codes de sécurité."
 
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html:26
-#: profiles/templates/profiles/healthcareuser_detail.html:152
-msgid "Back to accounts"
-msgstr "Retour aux comptes"
+msgid "Back to Manage team"
+msgstr "Retourner à « Gérer l’équipe »"
 
 #: backup_codes/templates/backup_codes/backup_codes_contacted.html:5
 #: backup_codes/templates/backup_codes/backup_codes_contacted.html:10
@@ -853,8 +854,6 @@ msgid "Language and account navigation"
 msgstr "Navigation de compte et changement de langue"
 
 #: portal/templates/includes/nav_header.html:9
-#: profiles/templates/profiles/healthcareuser_detail.html:6
-#: profiles/templates/profiles/healthcareuser_detail.html:15
 msgid "Your account"
 msgstr "Votre compte"
 
@@ -1614,6 +1613,10 @@ msgstr "Voyez vos codes de sécurité"
 msgid "Get a security code"
 msgstr "Obtenir un code de sécurité"
 
+#: profiles/templates/profiles/healthcareuser_detail.html:152
+msgid "Back to accounts"
+msgstr "Retour aux comptes"
+
 #: profiles/templates/profiles/healthcareuser_list.html:15
 msgid "User accounts"
 msgstr "Comptes d’utilisateurs"
@@ -1636,13 +1639,13 @@ msgid "View account for %(email)s"
 msgstr "Modifier le compte associé à %(email)s"
 
 #: profiles/templates/profiles/healthcareuser_list.html:39
-msgid "Edit"
-msgstr "Modifier"
+msgid "Manage"
+msgstr "Gérer"
 
 #: profiles/templates/profiles/healthcareuser_list.html:40
 #, python-format
-msgid "Edit account for %(email)s"
-msgstr "Modifier le compte associé à %(email)s"
+msgid "Manage account for %(email)s"
+msgstr "Gérer le compte associé à %(email)s"
 
 #: profiles/templates/profiles/healthcareuser_list.html:47
 #, python-format
