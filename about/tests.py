@@ -4,8 +4,6 @@ from django.urls import reverse
 
 from .apps import AboutConfig
 
-from profiles.tests import AdminUserTestCase
-
 
 class AboutConfigTest(TestCase):
     def test_apps(self):

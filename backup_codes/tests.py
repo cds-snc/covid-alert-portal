@@ -110,7 +110,7 @@ class BackupCodesView(AdminUserTestCase):
 
     def test_user_codes_empty_HTML(self):
         self.login()
-        response = self.client.post(reverse("backup_codes"), follow=True)
+        self.client.post(reverse("backup_codes"), follow=True)
         device = StaticDevice.objects.get(user__id=self.user.id)
         # delete all but 1 code
         for _ in range(len(device.token_set.all()) - 1):
