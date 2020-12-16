@@ -142,7 +142,7 @@ class BackupCodesView(AdminUserTestCase):
             device.token_set.last().delete()
         self.assertEqual(len(device.token_set.all()), 1)
 
-        response = self.client.get(reverse("welcome"), follow=True)
+        response = self.client.get(reverse("start"), follow=True)
         self.assertEqual(response.status_code, 200)
 
         # make sure there is an announcement at the top of the page

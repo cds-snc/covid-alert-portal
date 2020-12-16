@@ -532,10 +532,7 @@ class SignupView(AdminUserTestCase):
             reverse("signup_2fa"), data=self.new_user_data
         )
         self.assertEqual(second_step_response.status_code, 302)
-        self.assertEqual(
-            second_step_response.url,
-            reverse("login_2fa") + "?next=" + reverse("welcome"),
-        )
+        self.assertEqual(second_step_response.url, reverse("login_2fa"))
 
         # The invitation is modified in another Thread and django/python gil are not aware the object has changed.
         # So let's force a reload from the DB
