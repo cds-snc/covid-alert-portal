@@ -45,7 +45,7 @@ class BackupCodesView(AdminUserTestCase):
 
         response = self.client.get(reverse("user_profile", kwargs={"pk": self.user.id}))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "10 codes remaining", html=True)
+        self.assertContains(response, "10 codes left", html=True)
         ## view security codes link
         self.assertContains(
             response, '<a href="/en/backup-codes">View security codes</a>'
@@ -117,10 +117,10 @@ class BackupCodesView(AdminUserTestCase):
             device.token_set.last().delete()
         self.assertEqual(len(device.token_set.all()), 1)
 
-        # make sure it says "1 code remaining"
+        # make sure it says "1 code left"
         response = self.client.get(reverse("user_profile", kwargs={"pk": self.user.id}))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "1 code remaining", html=True)
+        self.assertContains(response, "1 code left", html=True)
 
         # make sure there are 9 empty list items
         response = self.client.get(reverse("backup_codes"))
@@ -148,7 +148,7 @@ class BackupCodesView(AdminUserTestCase):
         # make sure there is an announcement at the top of the page
         self.assertContains(
             response,
-            '<div class="title">You have 1 security code remaining.</div>',
+            '<div class="title">You have 1 security code left.</div>',
             html=True,
         )
 
@@ -213,7 +213,7 @@ class AdminBackupCodesView(AdminUserTestCase):
         )
 
         device = StaticDevice.objects.get(user__id=staff_user.id)
-        # test there is only 1 code remaining
+        # test there is only 1 code left
         self.assertEqual(len(device.token_set.all()), 1)
 
     def test_admin_redirect_on_get_request_if_no_static_device(self):

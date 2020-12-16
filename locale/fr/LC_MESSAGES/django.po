@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-11 17:21+0000\n"
+"POT-Creation-Date: 2020-12-16 17:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -79,7 +79,6 @@ msgstr ""
 #: about/templates/about/3_one_time_keys.html:25
 #: about/templates/about/4_give_a_key.html:32
 #: about/templates/about/5_help_patient_enter_key.html:20
-#: about/templates/about/6_admin_accounts.html:26
 msgid "Next:"
 msgstr "Suivant :"
 
@@ -127,6 +126,8 @@ msgstr ""
 "sécurité dans"
 
 #: about/templates/about/2_create_account.html:32
+#: profiles/templates/profiles/healthcareuser_detail.html:6
+#: profiles/templates/profiles/healthcareuser_detail.html:15
 msgid "Manage your account"
 msgstr "Gérer votre compte"
 
@@ -268,13 +269,6 @@ msgstr ""
 "Fournir des codes de sécurité aux membres incapables de se connecter au "
 "portail."
 
-#: about/templates/about/6_admin_accounts.html:26
-#: portal/templates/includes/nav_main.html:12
-#: profiles/templates/profiles/support.html:5
-#: profiles/templates/profiles/support.html:9
-msgid "Support"
-msgstr "Assistance"
-
 #: about/templates/includes/nav_about.html:5
 msgid "Table of contents: About the Portal"
 msgstr "Table des matières: Le portail"
@@ -365,9 +359,9 @@ msgstr ""
 
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html:17
 msgid ""
-"Read the code phonetically and ask the staff member to read it back to you:"
+"Read the code phonetically and ask the team member to read it back to you:"
 msgstr ""
-"Lisez le code de façon phonétique puis demandez à l’employé de vous le "
+"Lisez le code de façon phonétique puis demandez au membre de vous le "
 "répéter :"
 
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html:23
@@ -379,9 +373,8 @@ msgstr ""
 "plus de codes de sécurité."
 
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html:26
-#: profiles/templates/profiles/healthcareuser_detail.html:152
-msgid "Back to accounts"
-msgstr "Retour aux comptes"
+msgid "Back to Manage team"
+msgstr "Retourner à « Gérer l’équipe »"
 
 #: backup_codes/templates/backup_codes/backup_codes_contacted.html:5
 #: backup_codes/templates/backup_codes/backup_codes_contacted.html:10
@@ -861,8 +854,6 @@ msgid "Language and account navigation"
 msgstr "Navigation de compte et changement de langue"
 
 #: portal/templates/includes/nav_header.html:9
-#: profiles/templates/profiles/healthcareuser_detail.html:6
-#: profiles/templates/profiles/healthcareuser_detail.html:15
 msgid "Your account"
 msgstr "Votre compte"
 
@@ -882,15 +873,21 @@ msgstr "Navigation du produit"
 msgid "Start"
 msgstr "Accueil"
 
-#: portal/templates/includes/nav_main.html:8
+#: portal/templates/includes/nav_main.html:9
 msgid "About the portal"
 msgstr "Le portail"
 
-#: portal/templates/includes/nav_main.html:10
+#: portal/templates/includes/nav_main.html:11
 #: profiles/templates/profiles/healthcareuser_list.html:4
 #: profiles/templates/profiles/healthcareuser_list.html:8
 msgid "Manage team"
 msgstr "Gérer l’équipe"
+
+#: portal/templates/includes/nav_main.html:13
+#: profiles/templates/profiles/support.html:5
+#: profiles/templates/profiles/support.html:9
+msgid "Support"
+msgstr "Assistance"
 
 #: portal/templates/includes/phonetic.html:7
 msgid "Read key phonetically and ask patient to read it back to you:"
@@ -1597,7 +1594,7 @@ msgid "codes"
 msgstr "codes"
 
 #: profiles/templates/profiles/healthcareuser_detail.html:118
-msgid "remaining"
+msgid "left"
 msgstr "disponible"
 
 #: profiles/templates/profiles/healthcareuser_detail.html:120
@@ -1615,6 +1612,10 @@ msgstr "Voyez vos codes de sécurité"
 #: profiles/templates/profiles/healthcareuser_detail.html:141
 msgid "Get a security code"
 msgstr "Obtenir un code de sécurité"
+
+#: profiles/templates/profiles/healthcareuser_detail.html:152
+msgid "Back to accounts"
+msgstr "Retour aux comptes"
 
 #: profiles/templates/profiles/healthcareuser_list.html:15
 msgid "User accounts"
@@ -1638,13 +1639,13 @@ msgid "View account for %(email)s"
 msgstr "Modifier le compte associé à %(email)s"
 
 #: profiles/templates/profiles/healthcareuser_list.html:39
-msgid "Edit"
-msgstr "Modifier"
+msgid "Manage"
+msgstr "Gérer"
 
 #: profiles/templates/profiles/healthcareuser_list.html:40
 #, python-format
-msgid "Edit account for %(email)s"
-msgstr "Modifier le compte associé à %(email)s"
+msgid "Manage account for %(email)s"
+msgstr "Gérer le compte associé à %(email)s"
 
 #: profiles/templates/profiles/healthcareuser_list.html:47
 #, python-format

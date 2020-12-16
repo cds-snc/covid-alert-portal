@@ -3,7 +3,7 @@
 
 {% block title %}
     {% if healthcareuser.id == user.id %}
-        {% trans "Your account" %}
+        {% trans "Manage your account" %}
     {% else %}
         {% trans "User profile" %}
     {% endif %}
@@ -12,7 +12,7 @@
 {% block content %}
   {% if healthcareuser %}
     {% if healthcareuser.id == user.id %}
-        <h1>{% trans "Your account" %}</h1>
+        <h1>{% trans "Manage your account" %}</h1>
     {% else %}
         <h1>{% trans "User profile" %}</h1>
     {% endif %}
@@ -115,7 +115,7 @@
             {% if backup_codes_set %}
               {{ backup_codes_count }}
               {% if backup_codes_count == 1 %}{% trans "code" %}{% else %}{% trans "codes" %}{% endif %}
-              {% trans "remaining" %}
+              {% trans "left" %}
             {% else %}
               {% trans "None generated" %}
             {% endif %}
