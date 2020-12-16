@@ -42,55 +42,6 @@ ul {
   }
 }
 
-p + ul {
-  margin-top: -$space-xxs;
-
-  @include xs {
-    margin-top: -$space-xs;
-  }
-}
-
-ol,
-ul {
-  padding-left: $space-lg;
-
-  @include sm {
-    padding-left: $space-xl;
-  }
-
-  ol,
-  ul {
-    margin-bottom: 0; /* no extra bottom spacing for nested lists */
-  }
-
-  li:not(:last-of-type) {
-    padding-bottom: $space-xxs;
-
-    @include sm {
-      padding-bottom: 0;
-    }
-  }
-
-  &.disc {
-    list-style-type: disc;
-  }
-
-  &.expanded {
-    > li + li {
-      padding-top: $space-xs;
-    }
-  }
-
-  &.paragraphs {
-    padding-left: 0;
-    list-style-type: none;
-
-    > li + li {
-      padding-top: $space-sm;
-    }
-  }
-}
-
 a,
 a:visited,
 button.link {
@@ -134,6 +85,11 @@ h5 {
   }
 }
 
+strong.break-line {
+  display: block;
+  margin: $space-xs 0;
+}
+
 main {
   padding-bottom: $space-xxl;
 
@@ -141,15 +97,21 @@ main {
     margin-bottom: $space-lg;
   }
 
-  .content--container:not(.row) {
-    @include md {
-      width: 90%;
-    }
-    @include lg {
-      width: 80%;
-    }
-    @include xl {
-      width: 70%;
+  .content--container {
+    &:not(.row) {
+      @include md {
+        width: 90%;
+      }
+      @include lg {
+        width: 80%;
+      }
+      @include xl {
+        width: 70%;
+      }
+
+      .content-section {
+        margin-top: $space-xxl !important;
+      }
     }
   }
 }

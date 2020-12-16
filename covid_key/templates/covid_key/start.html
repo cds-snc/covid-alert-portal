@@ -13,11 +13,13 @@
     <li>{% trans "Installed the COVID Alert app on their phone." %}</li>
   </ul>
 
-  <div class="content-button">
+  <div class="content-button content-section">
     <p><strong>{% trans "Does this patient meet both conditions?" %}</strong></p>
     <a href="{% url 'generate_key' %}" role='button' draggable='false'>{% trans "Yes, continue" %}</a>
   </div>
 
-  <p><strong>{% trans "New or need a refresher?" %}</strong></p>
-  <p>{% trans "Visit" %} <a href="{% url 'about:index' %}">{% trans "About the portal" %}</a>.</p>
+  <div class="content-section">
+    <p><strong>{% trans "New or need a refresher?" %}</strong></p>
+    <p>{% trans "Visit" %} <a href="{% url 'about:index' %}">{% trans "About the portal" %}</a>.</p>
+  </div>
 {% endblock %}
