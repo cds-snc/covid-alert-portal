@@ -4,7 +4,7 @@
   <div class="page--container">
     <ul>
       {% if user.is_verified %}
-        <li><a {% if request.resolver_match.url_name == 'start' %}class="active"{% endif %} href="{% url 'start' %}">{% trans "Start" %}</a></li>
+        <li><a {% if request.resolver_match.url_name == 'start' or request.resolver_match.url_name == 'generate_key' %}class="active"{% endif %} href="{% url 'start' %}">{% trans "Generate keys" %}</a></li>
       {% endif %}
       <li><a {% if 'about' in request.path %}class="active"{% endif %} href="{% url 'about:index' %}">{% trans "About the portal" %}</a></li>
       {% if user.is_admin and user.is_verified %}
