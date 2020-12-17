@@ -15,6 +15,24 @@
   border: 0 !important;
 }
 
+@mixin chevron($direction: "right") {
+  border-style: solid;
+  content: "";
+  display: inline-block;
+  height: 0.45em;
+  position: relative;
+  width: 0.45em;
+  transform: rotate(45deg);
+
+  @if $direction == "right" {
+    border-width: 0.15em 0.15em 0 0;
+    left: 0.3em;
+  } @else if $direction == "left" {
+    border-width: 0 0 0.15em 0.15em;
+    right: 0.3em;
+  }
+}
+
 /*
     media queries based on Pure CSS's breakpoints: https://purecss.io/grids/
 

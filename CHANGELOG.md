@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.13.0] - 2020-12-16
+
+### Added
+
+- Split the "start" page into 2 new pages
+  - Page 1 to ask if this patient is positive and has the app on their phone?
+  - Page 2 to ask if this patient is ready to enter the code or write it down somewhere
+  - Change "start" link in main nav to "Generate keys"
+  - Added a green "start" GOV.UK type-button
+
+### Updated
+
+- Remove h3s in About section: use h2s instead
+- Resize h2s, make them smaller
+- Minor content updates to account page and 2FA flow
+
+## Removed
+
+- Remove "Next" link to Support page from the "Admin accounts" page
+- Remove "Welcome" page
+  - No 301 redirect for the "welcome" URL because there was no in-app link to it
+  - New users are now directed to the "start" page
+
 ## [1.12.1] - 2020-12-11
 
 ### Updated

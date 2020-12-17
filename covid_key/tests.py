@@ -21,6 +21,23 @@ class CovidKeyConfigTest(TestCase):
         self.assertEqual(apps.get_app_config("covid_key").name, "covid_key")
 
 
+class StartView(AdminUserTestCase):
+    def setUp(self):
+        super().setUp()
+
+    def test_start_view(self):
+        self.login()
+        response = self.client.get(reverse("start"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>You’re logged in to give one-time keys</h1>")
+
+    def test_generate_key_view(self):
+        self.login()
+        response = self.client.get(reverse("generate_key"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>When patient is ready, generate a key</h1>")
+
+
 class KeyView(AdminUserTestCase):
     def test_key(self):
         """

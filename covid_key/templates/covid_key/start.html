@@ -1,26 +1,25 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Generate a one-time key" %}{% endblock %}
+{% block title %}{% trans "You’re logged in to give one-time keys" %}{% endblock %}
 
 {% block content %}
-  <h1>{% trans "Generate a one-time key" %}</h1>
+  <h1>{% trans "You’re logged in to give one-time keys" %}</h1>
   <p>
-    {% trans "Check that the patient:" %}
+    {% trans "Patients need a key if they’ve:" %}
   </p>
-  <ol class="expanded">
-    <li>{% blocktrans %}Has tested positive for COVID-19.{% endblocktrans %}</li>
-    <li>{% blocktrans %}Has installed the <strong>COVID Alert app</strong> on their phone.{% endblocktrans %}</li>
-    <li>{% blocktrans %}Is ready to <strong>enter the key in the app</strong> or <strong>record it somewhere safe</strong>.{% endblocktrans %}</li>
-    <li>{% blocktrans %}Understands <strong>the key expires in 24 hours</strong>. If the key expires before the patient enters it, they will not be able to get a new key.</strong>{% endblocktrans %}</li>
-  </ol>
-  <div class="info-message">
-    <span>{% trans "Help us keep accurate stats. Only generate keys for real patients and only one key per patient." %}</span>
+  <ul class="expanded">
+    <li>{% blocktrans %}Tested positive for COVID-19, <strong>and</strong>,{% endblocktrans %}</li>
+    <li>{% trans "Installed the COVID Alert app on their phone." %}</li>
+  </ul>
+
+  <div class="content-button content-section">
+    <p><strong>{% trans "Does this patient meet both conditions?" %}</strong></p>
+    <a href="{% url 'generate_key' %}" role='button' draggable='false'>{% trans "Yes, continue" %}</a>
   </div>
-  <div class="content-button">
-   <form action="{% url 'key' %}" method="post">
-    {% csrf_token %}
-      <button type="submit">{% trans "Generate key" %}</button>
-    </form>
+
+  <div class="content-section">
+    <p><strong>{% trans "New or need a refresher?" %}</strong></p>
+    <p>{% trans "Visit" %} <a href="{% url 'about:index' %}">{% trans "About the portal" %}</a>.</p>
   </div>
 {% endblock %}

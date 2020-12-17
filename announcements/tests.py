@@ -45,7 +45,7 @@ class AnnoncementsSiteWide(AdminUserTestCase):
     def test_site_wide_is_visible_on_multiple_pages(self):
         self.login()
         # Page 1
-        response = self.client.get(reverse("welcome"))
+        response = self.client.get(reverse("about:index"))
         self.assertContains(response, '<div class="title">Test for Site Wide</div>')
         # Page 2
         response = self.client.get(reverse("start"))
