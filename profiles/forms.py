@@ -199,15 +199,17 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
         label=_("Password"),
         strip=False,
         widget=forms.PasswordInput(),
-        help_text=password_validation.password_validators_help_text_html(),
+        help_text=_(
+            f"Your password must be at least {settings.PASSWORD_MINIMUM_LENGTH} characters."
+        ),
     )
     password1.error_messages["required"] = validation_messages["password"]["required"]
 
     password2 = forms.CharField(
-        label=_("Confirm your password"),
+        label=_("Enter your password again."),
         widget=forms.PasswordInput(),
         strip=False,
-        help_text=_("Enter the same password as above."),
+        help_text=None,
     )
     password2.error_messages["required"] = validation_messages["password2"]["required"]
 
@@ -237,8 +239,14 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
         password = self.cleaned_data.get("password1")
         if password:
             try:
-                password_validation.validate_password(password, self.instance)
+                password_validation.validate_password(password, self.user)
             except ValidationError as error:
+                for error in error.error_list:
+                    if error.code == "password_too_short":
+                        # Let's remove the help text to prevent displaying
+                        # the same message twice, we might argue we should
+                        # always remove the help_text when there is an error
+                        self.fields["password1"].help_text = None
                 self.add_error("password1", error)
 
     def save(self, commit=True):

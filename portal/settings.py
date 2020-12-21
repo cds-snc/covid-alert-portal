@@ -166,15 +166,15 @@ DATABASES = {"default": db_config}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
-
+PASSWORD_MINIMUM_LENGTH = 12
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "profiles.validators.HealthcareMinimumLengthValidator",
-        "OPTIONS": {"min_length": 12},
+        "OPTIONS": {"min_length": PASSWORD_MINIMUM_LENGTH},
     },
     {
         "NAME": "profiles.validators.HealthcareUserAttributeSimilarityValidator",
-        "OPTIONS": {"user_attributes": ["name", "username"]},
+        "OPTIONS": {"user_attributes": ["name", "username", "email"]},
     },
     {"NAME": "profiles.validators.HealthcareNumericPasswordValidator"},
     {"NAME": "profiles.validators.BannedPasswordValidator"},
