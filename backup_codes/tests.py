@@ -110,7 +110,7 @@ class BackupCodesView(AdminUserTestCase):
 
     def test_user_codes_empty_HTML(self):
         self.login()
-        response = self.client.post(reverse("backup_codes"), follow=True)
+        self.client.post(reverse("backup_codes"), follow=True)
         device = StaticDevice.objects.get(user__id=self.user.id)
         # delete all but 1 code
         for _ in range(len(device.token_set.all()) - 1):
@@ -142,7 +142,7 @@ class BackupCodesView(AdminUserTestCase):
             device.token_set.last().delete()
         self.assertEqual(len(device.token_set.all()), 1)
 
-        response = self.client.get(reverse("welcome"), follow=True)
+        response = self.client.get(reverse("start"), follow=True)
         self.assertEqual(response.status_code, 200)
 
         # make sure there is an announcement at the top of the page

@@ -14,4 +14,13 @@ urlpatterns = [
         ),
         name="start",
     ),
+    path(
+        "generate-key/",
+        login_required(
+            otp_required(
+                TemplateView.as_view(template_name="covid_key/generate_key.html")
+            )
+        ),
+        name="generate_key",
+    ),
 ]

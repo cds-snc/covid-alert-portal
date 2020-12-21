@@ -16,6 +16,8 @@
 @import "./components/_footer";
 @import "./components/_header";
 @import "./components/_jumbotron";
+@import "./components/_links";
+@import "./components/_lists";
 @import "./components/_messages";
 @import "./components/_nav";
 @import "./components/_phonetic";
@@ -31,9 +33,6 @@
 
 /* Print styles */
 @import "./_print";
-
-/* About styles */
-@import "about/scss/_next-link";
 
 /* Announcement styles */
 @import "announcements/scss/_announcements";

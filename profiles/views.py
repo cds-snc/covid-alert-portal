@@ -181,9 +181,7 @@ class SignUpView(FormView):
 class SignUp2FAView(LoginRequiredMixin, FormView):
     form_class = SignupForm2fa
     template_name = "profiles/signup_2fa.html"
-
-    def get_success_url(self):
-        return "{}?next={}".format(reverse_lazy("login_2fa"), reverse_lazy("welcome"))
+    success_url = reverse_lazy("login_2fa")
 
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
@@ -201,6 +199,7 @@ class SignUp2FAView(LoginRequiredMixin, FormView):
 class Login2FAView(LoginRequiredMixin, FormView):
     form_class = Healthcare2FAForm
     template_name = "profiles/2fa.html"
+    success_url = reverse_lazy("start")
 
     @cached_property
     def has_mobile(self):
@@ -209,15 +208,6 @@ class Login2FAView(LoginRequiredMixin, FormView):
     @cached_property
     def has_static_code(self):
         return True if self.request.user.staticdevice_set.exists() else False
-
-    def get_success_url(self):
-        next_url = self.request.GET.get("next", None)
-
-        # don't want to allow arbitrary "nexts" here, so hardcode the welcome page
-        if next_url and "welcome" in next_url:
-            return reverse_lazy("welcome")
-
-        return reverse_lazy("start")
 
     def get(self, request, *args, **kwargs):
         if request.user.is_verified():

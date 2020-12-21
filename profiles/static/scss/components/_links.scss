@@ -1,0 +1,21 @@
+.content-next-link {
+  margin-top: $space-xxl;
+  margin-bottom: $space-md;
+
+  a::after {
+    @include chevron();
+  }
+}
+
+.content-back-link {
+  margin-top: $space-md;
+  margin-bottom: $space-xl;
+
+  a {
+    padding-left: 0.3em;
+
+    &::before {
+      @include chevron("left");
+    }
+  }
+}

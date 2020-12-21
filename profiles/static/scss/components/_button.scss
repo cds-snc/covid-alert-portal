@@ -71,6 +71,20 @@
     @extend %button-states;
   }
 
+  &.start {
+    background-color: $color-green;
+    box-shadow: 0 2px 0 $color-green-dark;
+    padding-right: 23px;
+
+    &::after {
+      @include chevron();
+    }
+
+    &:hover {
+      background-color: $color-green-medium;
+    }
+  }
+
   &.danger {
     color: $color-white;
     background-color: $color-red;

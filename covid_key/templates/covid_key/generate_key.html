@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "When patient is ready, generate a key" %}{% endblock %}
+
+{% block content %}
+  <div class="content-back-link">
+    <a href="{% url 'start' %}" class="chevron-left">{% trans "Go back" %}</a>
+  </div>
+
+  <h1>{% trans "When patient is ready, generate a key" %}</h1>
+  <p>
+    {% trans "Tell the patient:" %}
+  </p>
+  <ol class="expanded">
+    <li>{% trans "The key expires in 24 hours and they cannot get another one." %}</li>
+    <li>{% blocktrans %}<span>To open the app and check they’re connected to the internet.</span><strong class="break-line">OR</strong><span>To find a safe place to record the key right now.</span>{% endblocktrans %}</li>
+  </ol>
+
+  <div class="content-button content-section">
+    <p><strong>{% trans "Is this patient ready?" %}</strong></p>
+   <form action="{% url 'key' %}" method="post">
+    {% csrf_token %}
+      <button type="submit" class="start">{% trans "Yes, generate a key" %}</button>
+    </form>
+  </div>
+{% endblock %}
