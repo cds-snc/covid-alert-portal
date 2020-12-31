@@ -117,7 +117,7 @@
               {% if backup_codes_count == 1 %}{% trans "code" %}{% else %}{% trans "codes" %}{% endif %}
               {% trans "left" %}
             {% else %}
-              {% trans "None generated" %}
+              {% trans "Never generated" %}
             {% endif %}
             </span>
           </td>
@@ -128,7 +128,7 @@
               {% if backup_codes_count < 1 %}
                 <form action="{% url 'backup_codes' %}" method="post">
                   {% csrf_token %}
-                  <button type="submit" class="link">{% trans "Get security codes" %}</button>
+                  <button type="submit" class="link">{% trans "Generate codes" %}</button>
                 </form>
               {% else %}
                 <a href="{% url 'backup_codes' %}">{% trans "View security codes" %}</a>

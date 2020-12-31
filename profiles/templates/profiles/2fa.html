@@ -13,7 +13,7 @@
   <h1>{% trans "Enter your security code" %}</h1>
 
   {% if view.has_static_code and not view.has_mobile %}
-  <p>{% trans "You kept these codes on paper." %}</p>
+  <p>{% trans "You kept these codes somewhere safe." %}</p>
   {% endif %}
 
   {% if not view.has_static_code and view.has_mobile  %}
@@ -21,7 +21,7 @@
   {% endif %}
 
   {% if view.has_static_code and view.has_mobile  %}
-    <p>{% trans "We’ve texted you a security code and you’ve also got codes on paper." %}</p>
+    <p>{% trans "We’ve texted you a code and you also kept codes somewhere safe." %}</p>
   {% endif %}
 
   {% include "includes/cds_form.html" with submit_text=_("Next") form_class="small" %}
