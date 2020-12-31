@@ -76,3 +76,66 @@ nav {
     }
   }
 }
+
+.nav--about__mobile {
+  display: inline-block;
+
+  @include md {
+    display: none;
+  }
+}
+.nav--about__desktop {
+  display: none;
+
+  @include md {
+    display: block;
+  }
+}
+
+.nav--about__mobile {
+  border: none;
+  border-radius: 0;
+  background: $color-grey-footer;
+
+  > summary {
+    margin: 0;
+    padding: $space-xs 25px $space-xs $space-sm;
+    list-style: none;
+    border-bottom: $color-blue-dark 2px solid;
+
+    &:focus {
+      outline: 3px solid $color-yellow !important;
+    }
+
+    &:hover {
+      opacity: 1;
+      background: #d4d4d4;
+    }
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    > div {
+      &::after {
+        @include chevron("down");
+      }
+    }
+  }
+
+  &[open] {
+    width: auto;
+
+    > summary {
+      margin-bottom: $space-md;
+
+      > div::after {
+        @include chevron("up");
+      }
+    }
+
+    ul a:not(.active) {
+      padding-left: $space-sm;
+    }
+  }
+}

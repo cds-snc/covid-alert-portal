@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-01 18:17+0000\n"
+"POT-Creation-Date: 2021-01-04 21:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: about/templates/about/1_index.html:5 about/templates/about/1_index.html:15
-#: about/templates/includes/nav_about.html:7
+#: about/templates/includes/_nav_about.html:5
 msgid "COVID Alert"
 msgstr "Alerte COVID"
 
@@ -85,7 +85,7 @@ msgstr "Suivant :"
 #: about/templates/about/1_index.html:27
 #: about/templates/about/2_create_account.html:5
 #: about/templates/about/2_create_account.html:15
-#: about/templates/includes/nav_about.html:8
+#: about/templates/includes/_nav_about.html:6
 msgid "Create an account"
 msgstr "Créer un compte"
 
@@ -139,7 +139,7 @@ msgstr "Conservez vos codes dans un endroit sûr."
 #: about/templates/about/2_create_account.html:35
 #: about/templates/about/3_one_time_keys.html:5
 #: about/templates/about/3_one_time_keys.html:15
-#: about/templates/includes/nav_about.html:9
+#: about/templates/includes/_nav_about.html:7
 msgid "One-time keys"
 msgstr "Clés à usage unique"
 
@@ -178,7 +178,7 @@ msgstr ""
 #: about/templates/about/3_one_time_keys.html:25
 #: about/templates/about/4_give_a_key.html:5
 #: about/templates/about/4_give_a_key.html:15
-#: about/templates/includes/nav_about.html:10
+#: about/templates/includes/_nav_about.html:8
 msgid "Give a key"
 msgstr "Fournir une clé"
 
@@ -225,7 +225,7 @@ msgstr ""
 #: about/templates/about/4_give_a_key.html:32
 #: about/templates/about/5_help_patient_enter_key.html:5
 #: about/templates/about/5_help_patient_enter_key.html:15
-#: about/templates/includes/nav_about.html:11
+#: about/templates/includes/_nav_about.html:9
 msgid "Help patient enter key"
 msgstr "Aider le patient avec sa clé"
 
@@ -236,7 +236,7 @@ msgstr "Vérifiez que son téléphone est connecté à Internet."
 #: about/templates/about/5_help_patient_enter_key.html:20
 #: about/templates/about/6_admin_accounts.html:5
 #: about/templates/about/6_admin_accounts.html:15
-#: about/templates/includes/nav_about.html:12
+#: about/templates/includes/_nav_about.html:10
 msgid "Admin accounts"
 msgstr "Comptes administrateurs"
 
@@ -270,9 +270,15 @@ msgstr ""
 "Fournir des codes de sécurité aux membres incapables de se connecter au "
 "portail."
 
-#: about/templates/includes/nav_about.html:5
+#: about/templates/includes/_nav_about.html:3
 msgid "Table of contents: About the Portal"
 msgstr "Table des matières: Le portail"
+
+#: about/templates/includes/nav_about.html:10
+#: covid_key/templates/covid_key/start.html:23
+#: portal/templates/includes/nav_main.html:9
+msgid "About the portal"
+msgstr "Le portail"
 
 #: announcements/models.py:20
 msgid "Title in English"
@@ -646,11 +652,6 @@ msgstr "Besoin d’en savoir plus sur le portail?"
 #: covid_key/templates/covid_key/start.html:23
 msgid "Visit"
 msgstr "Consultez"
-
-#: covid_key/templates/covid_key/start.html:23
-#: portal/templates/includes/nav_main.html:9
-msgid "About the portal"
-msgstr "Le portail"
 
 #: covid_key/views.py:77
 msgid "Something went wrong. Contact your administrator."
@@ -1216,8 +1217,8 @@ msgstr "Ce compte est inactif."
 msgid "Enter a valid email address"
 msgstr "Entrez une adresse courriel valide"
 
-#: profiles/forms.py:80 profiles/forms.py:267 profiles/forms.py:349
-#: profiles/forms.py:480
+#: profiles/forms.py:80 profiles/forms.py:262 profiles/forms.py:344
+#: profiles/forms.py:475
 #: profiles/templates/invitations/templates/invite_list.html:18
 #: profiles/templates/profiles/healthcareuser_detail.html:44
 #: profiles/templates/profiles/healthcareuser_list.html:18
@@ -1229,7 +1230,7 @@ msgstr "Adresse courriel"
 msgid "Change your name"
 msgstr "Modifier votre nom"
 
-#: profiles/forms.py:145 profiles/forms.py:353 profiles/models.py:73
+#: profiles/forms.py:145 profiles/forms.py:348 profiles/models.py:73
 msgid "Full name"
 msgstr "Nom complet"
 
@@ -1238,12 +1239,12 @@ msgstr "Nom complet"
 msgid "Change your mobile phone number"
 msgstr "Modifier votre numéro de téléphone"
 
-#: profiles/forms.py:157 profiles/forms.py:436
+#: profiles/forms.py:157 profiles/forms.py:431
 #: profiles/templates/profiles/healthcareuser_detail.html:48
 msgid "Mobile phone number"
 msgstr "Numéro de téléphone mobile"
 
-#: profiles/forms.py:159 profiles/forms.py:438 profiles/models.py:77
+#: profiles/forms.py:159 profiles/forms.py:433 profiles/models.py:77
 msgid ""
 "You must enter a new security code each time you log in. We’ll text the code "
 "to your mobile phone number."
@@ -1255,7 +1256,7 @@ msgstr ""
 msgid "Confirm your mobile phone number"
 msgstr "Confirmez votre numéro de téléphone mobile"
 
-#: profiles/forms.py:168 profiles/forms.py:447
+#: profiles/forms.py:168 profiles/forms.py:442
 msgid "Enter the same mobile number as above."
 msgstr "Saisissez de nouveau votre numéro de téléphone."
 
@@ -1272,48 +1273,47 @@ msgstr "Vous avez saisi 2 mots de passe différents"
 msgid "Password"
 msgstr "Mot de passe"
 
-#: profiles/forms.py:206
-#| msgid "Enter your password"
+#: profiles/forms.py:207
 msgid "Enter your password again."
 msgstr ""
 
-#: profiles/forms.py:310
+#: profiles/forms.py:305
 msgid "New password"
 msgstr "Modifier mon mot de passe"
 
-#: profiles/forms.py:320
+#: profiles/forms.py:315
 msgid "Confirm your new password"
 msgstr "Confirmez votre nouveau mot de passe"
 
-#: profiles/forms.py:323 profiles/forms.py:361
+#: profiles/forms.py:318 profiles/forms.py:356
 msgid "Enter the same password as above."
 msgstr "Saisissez de nouveau votre mot de passe."
 
-#: profiles/forms.py:360
+#: profiles/forms.py:355
 msgid "Confirm your password"
 msgstr "Confirmez votre mot de passe"
 
-#: profiles/forms.py:411
+#: profiles/forms.py:406
 msgid "Email already exists"
 msgstr "L’adresse courriel existe déjà"
 
-#: profiles/forms.py:413
+#: profiles/forms.py:408
 msgid "An invitation hasn’t been sent to this address"
 msgstr "L’invitation n’a pu être envoyée."
 
-#: profiles/forms.py:446
+#: profiles/forms.py:441
 msgid "Confirm your phone number"
 msgstr "Confirmez votre numéro de téléphone mobile"
 
-#: profiles/forms.py:469
+#: profiles/forms.py:464
 msgid "The phone numbers didn’t match."
 msgstr "Les numéro de téléphone ne sont pas identiques."
 
-#: profiles/forms.py:497
+#: profiles/forms.py:492
 msgid "This email address already has a portal account."
 msgstr "Cette adresse courriel est déjà associée à un compte pour le portail."
 
-#: profiles/forms.py:510
+#: profiles/forms.py:505
 #, python-format
 msgid ""
 "You cannot invite ‘%(email)s’ to create an account because ‘@%(domain)s’ is "
@@ -1322,15 +1322,15 @@ msgstr ""
 "Impossible d’inviter ‘%(email)s’ à créer un compte parce que ‘@%(domain)s’ "
 "ne fait pas partie de la liste de confiance du portail."
 
-#: profiles/forms.py:551 profiles/forms.py:584
+#: profiles/forms.py:546 profiles/forms.py:579
 msgid "Token"
 msgstr "Clé"
 
-#: profiles/forms.py:573
+#: profiles/forms.py:568
 msgid "Unable to validate the token with the device."
 msgstr ""
 
-#: profiles/forms.py:604
+#: profiles/forms.py:599
 msgid "The token is not valid for this device."
 msgstr ""
 
