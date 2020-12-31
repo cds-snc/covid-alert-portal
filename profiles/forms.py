@@ -206,7 +206,7 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
     password1.error_messages["required"] = validation_messages["password"]["required"]
 
     password2 = forms.CharField(
-        label=_("Enter your password again."),
+        label=_("Enter your password again"),
         widget=forms.PasswordInput(),
         strip=False,
         help_text=None,
