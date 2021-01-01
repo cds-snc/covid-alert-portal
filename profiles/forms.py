@@ -199,9 +199,7 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
         label=_("Password"),
         strip=False,
         widget=forms.PasswordInput(),
-        help_text=_(
-            f"Your password must be at least {settings.PASSWORD_MINIMUM_LENGTH} characters."
-        ),
+        help_text=password_validation.password_validators_help_text_html(),
     )
     password1.error_messages["required"] = validation_messages["password"]["required"]
 
@@ -241,12 +239,6 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
             try:
                 password_validation.validate_password(password, self.user)
             except ValidationError as error:
-                for error in error.error_list:
-                    if error.code == "password_too_short":
-                        # Let's remove the help text to prevent displaying
-                        # the same message twice, we might argue we should
-                        # always remove the help_text when there is an error
-                        self.fields["password1"].help_text = None
                 self.add_error("password1", error)
 
     def save(self, commit=True):
