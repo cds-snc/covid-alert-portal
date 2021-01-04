@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-17 21:54+0000\n"
+"POT-Creation-Date: 2021-01-01 18:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1216,8 +1216,8 @@ msgstr "Ce compte est inactif."
 msgid "Enter a valid email address"
 msgstr "Entrez une adresse courriel valide"
 
-#: profiles/forms.py:80 profiles/forms.py:262 profiles/forms.py:344
-#: profiles/forms.py:475
+#: profiles/forms.py:80 profiles/forms.py:267 profiles/forms.py:349
+#: profiles/forms.py:480
 #: profiles/templates/invitations/templates/invite_list.html:18
 #: profiles/templates/profiles/healthcareuser_detail.html:44
 #: profiles/templates/profiles/healthcareuser_list.html:18
@@ -1229,7 +1229,7 @@ msgstr "Adresse courriel"
 msgid "Change your name"
 msgstr "Modifier votre nom"
 
-#: profiles/forms.py:145 profiles/forms.py:348 profiles/models.py:73
+#: profiles/forms.py:145 profiles/forms.py:353 profiles/models.py:73
 msgid "Full name"
 msgstr "Nom complet"
 
@@ -1238,12 +1238,12 @@ msgstr "Nom complet"
 msgid "Change your mobile phone number"
 msgstr "Modifier votre numéro de téléphone"
 
-#: profiles/forms.py:157 profiles/forms.py:431
+#: profiles/forms.py:157 profiles/forms.py:436
 #: profiles/templates/profiles/healthcareuser_detail.html:48
 msgid "Mobile phone number"
 msgstr "Numéro de téléphone mobile"
 
-#: profiles/forms.py:159 profiles/forms.py:433 profiles/models.py:77
+#: profiles/forms.py:159 profiles/forms.py:438 profiles/models.py:77
 msgid ""
 "You must enter a new security code each time you log in. We’ll text the code "
 "to your mobile phone number."
@@ -1255,7 +1255,7 @@ msgstr ""
 msgid "Confirm your mobile phone number"
 msgstr "Confirmez votre numéro de téléphone mobile"
 
-#: profiles/forms.py:168 profiles/forms.py:442
+#: profiles/forms.py:168 profiles/forms.py:447
 msgid "Enter the same mobile number as above."
 msgstr "Saisissez de nouveau votre numéro de téléphone."
 
@@ -1272,43 +1272,48 @@ msgstr "Vous avez saisi 2 mots de passe différents"
 msgid "Password"
 msgstr "Mot de passe"
 
-#: profiles/forms.py:207 profiles/forms.py:355
-msgid "Confirm your password"
-msgstr "Confirmez votre mot de passe"
+#: profiles/forms.py:206
+#| msgid "Enter your password"
+msgid "Enter your password again."
+msgstr ""
 
-#: profiles/forms.py:210 profiles/forms.py:318 profiles/forms.py:356
-msgid "Enter the same password as above."
-msgstr "Saisissez de nouveau votre mot de passe."
-
-#: profiles/forms.py:305
+#: profiles/forms.py:310
 msgid "New password"
 msgstr "Modifier mon mot de passe"
 
-#: profiles/forms.py:315
+#: profiles/forms.py:320
 msgid "Confirm your new password"
 msgstr "Confirmez votre nouveau mot de passe"
 
-#: profiles/forms.py:406
+#: profiles/forms.py:323 profiles/forms.py:361
+msgid "Enter the same password as above."
+msgstr "Saisissez de nouveau votre mot de passe."
+
+#: profiles/forms.py:360
+msgid "Confirm your password"
+msgstr "Confirmez votre mot de passe"
+
+#: profiles/forms.py:411
 msgid "Email already exists"
 msgstr "L’adresse courriel existe déjà"
 
-#: profiles/forms.py:408
+#: profiles/forms.py:413
 msgid "An invitation hasn’t been sent to this address"
 msgstr "L’invitation n’a pu être envoyée."
 
-#: profiles/forms.py:441
+#: profiles/forms.py:446
 msgid "Confirm your phone number"
 msgstr "Confirmez votre numéro de téléphone mobile"
 
-#: profiles/forms.py:464
+#: profiles/forms.py:469
 msgid "The phone numbers didn’t match."
 msgstr "Les numéro de téléphone ne sont pas identiques."
 
-#: profiles/forms.py:492
+#: profiles/forms.py:497
 msgid "This email address already has a portal account."
 msgstr "Cette adresse courriel est déjà associée à un compte pour le portail."
 
-#: profiles/forms.py:505
+#: profiles/forms.py:510
 #, python-format
 msgid ""
 "You cannot invite ‘%(email)s’ to create an account because ‘@%(domain)s’ is "
@@ -1317,15 +1322,15 @@ msgstr ""
 "Impossible d’inviter ‘%(email)s’ à créer un compte parce que ‘@%(domain)s’ "
 "ne fait pas partie de la liste de confiance du portail."
 
-#: profiles/forms.py:546 profiles/forms.py:579
+#: profiles/forms.py:551 profiles/forms.py:584
 msgid "Token"
 msgstr "Clé"
 
-#: profiles/forms.py:568
+#: profiles/forms.py:573
 msgid "Unable to validate the token with the device."
 msgstr ""
 
-#: profiles/forms.py:599
+#: profiles/forms.py:604
 msgid "The token is not valid for this device."
 msgstr ""
 

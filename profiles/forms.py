@@ -204,10 +204,10 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
     password1.error_messages["required"] = validation_messages["password"]["required"]
 
     password2 = forms.CharField(
-        label=_("Confirm your password"),
+        label=_("Enter your password again."),
         widget=forms.PasswordInput(),
         strip=False,
-        help_text=_("Enter the same password as above."),
+        help_text=None,
     )
     password2.error_messages["required"] = validation_messages["password2"]["required"]
 
@@ -237,7 +237,7 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
         password = self.cleaned_data.get("password1")
         if password:
             try:
-                password_validation.validate_password(password, self.instance)
+                password_validation.validate_password(password, self.user)
             except ValidationError as error:
                 self.add_error("password1", error)
 
