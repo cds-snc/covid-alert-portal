@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add accordion-like "side" nav for mobile-sized about pages
 - Prevent visually-hidden text from being selectable
+- Remove bottom padding from main nav links on mobile
 
 ## [1.13.0] - 2020-12-16
 
