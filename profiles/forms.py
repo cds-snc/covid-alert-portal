@@ -199,7 +199,9 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
         label=_("Password"),
         strip=False,
         widget=forms.PasswordInput(),
-        help_text=password_validation.password_validators_help_text_html(),
+        help_text=_(
+            "Choose a password that is hard to guess, with at least 12 characters including 1 letter.\n The password cannot include your name, email or words related to Covid or the portal."
+        ),
     )
     password1.error_messages["required"] = validation_messages["password"]["required"]
 
@@ -303,19 +305,20 @@ class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
 class HealthcarePasswordResetConfirm(HealthcareBaseForm, SetPasswordForm):
     new_password1 = forms.CharField(
         label=_("New password"),
-        widget=forms.PasswordInput(),
         strip=False,
-        help_text=password_validation.password_validators_help_text_html(),
+        widget=forms.PasswordInput(),
+        help_text=_(
+            "Choose a password that is hard to guess, with at least 12 characters including 1 letter.\n The password cannot include your name, email or words related to Covid or the portal."
+        ),
     )
     new_password1.error_messages["required"] = validation_messages["password"][
         "required"
     ]
 
     new_password2 = forms.CharField(
-        label=_("Confirm your new password"),
+        label=_("Enter your password again"),
         strip=False,
         widget=forms.PasswordInput(),
-        help_text=_("Enter the same password as above."),
     )
 
     def clean_new_password1(self):
@@ -348,12 +351,19 @@ class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):
     name = forms.CharField(label=_("Full name"), validators=[MaxLengthValidator(200)])
     name.error_messages["required"] = validation_messages["name"]["required"]
 
-    # overwrite the password1 validation message in the __init__ method
-    # password1 is inherited from the UserCreationFrom base class: https://github.com/django/django/blob/302caa40e4caab7d95ef7d0a88a90f935039ab09/django/contrib/auth/forms.py#L90
+    # password1 overwrites the one in the UserCreationFrom base class: https://github.com/django/django/blob/302caa40e4caab7d95ef7d0a88a90f935039ab09/django/contrib/auth/forms.py#L90
+    password1 = forms.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput(),
+        help_text=_(
+            "Choose a password that is hard to guess, with at least 12 characters including 1 letter.\n The password cannot include your name, email or words related to Covid or the portal."
+        ),
+    )
+    password1.error_messages["required"] = validation_messages["password"]["required"]
 
     password2 = forms.CharField(
-        label=_("Confirm your password"),
-        help_text=_("Enter the same password as above."),
+        label=_("Enter your password again"),
         strip=False,
         widget=forms.PasswordInput(),
     )
