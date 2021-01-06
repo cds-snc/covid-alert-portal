@@ -13,6 +13,12 @@
   clip: rect(0, 0, 0, 0) !important;
   white-space: nowrap !important;
   border: 0 !important;
+
+  /* don't allow users to accidentally select hidden text */
+  -webkit-user-select: none; /* Chrome / Safari / Edge */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
 }
 
 @mixin chevron($direction: "right") {
@@ -30,6 +36,14 @@
   } @else if $direction == "left" {
     border-width: 0 0 0.15em 0.15em;
     right: 0.3em;
+  } @else if $direction == "down" {
+    border-width: 0 0.15em 0.15em 0;
+    bottom: 0.25em;
+    left: 0.6em;
+  } @else if $direction == "up" {
+    border-width: 0.15em 0 0 0.15em;
+    top: 0;
+    left: 0.6em;
   }
 }
 
