@@ -423,6 +423,27 @@ class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):
             except ValidationError as error:
                 self.add_error("password1", error)
 
+    def send_mail(self, language, admin_email):
+        """
+        Send a confirmation email to the newly signed-up user
+        """
+        notifications_client = NotificationsAPIClient(
+            settings.NOTIFY_API_KEY, base_url=settings.NOTIFY_ENDPOINT
+        )
+
+        try:
+            notifications_client.send_email_notification(
+                email_address=self.cleaned_data.get("email"),
+                template_id=settings.CONFIRMATION_EMAIL_TEMPLATE_ID.get(
+                    language or "en"
+                ),
+                personalisation={
+                    "admin_email": admin_email,
+                },
+            )
+        except HTTPError as e:
+            raise Exception(e)
+
 
 class SignupForm2fa(HealthcareBaseForm, forms.ModelForm):
     """A form for adding a phonenumber to an account on signup."""

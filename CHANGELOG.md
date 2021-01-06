@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Added a confirmation email that is sent to new users upon successful signup
+
 ## [1.13.0] - 2020-12-16
 
 ### Added

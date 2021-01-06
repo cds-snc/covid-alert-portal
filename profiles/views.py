@@ -149,13 +149,9 @@ class SignUpView(FormView):
         return super().get(request, *args, **kwargs)
 
     def get_initial(self):
-        invited_email = self.request.session.get("account_verified_email", None)
-
-        # get invite object and the admin user who sent the invite
-        inviter_id = Invitation.objects.get(email__iexact=invited_email).inviter_id
-        inviter = HealthcareUser.objects.get(id=inviter_id)
-
         # preload the signup form with the email and the province of the admin
+        invited_email = self.request.session.get("account_verified_email", None)
+        inviter = self.get_inviter()
         return {
             "email": invited_email,
             "province": inviter.province.abbr,
@@ -169,6 +165,8 @@ class SignUpView(FormView):
             password=form.cleaned_data.get("password1"),
         )
         user_signed_up.send(sender=user.__class__, request=self.request, user=user)
+        inviter = self.get_inviter()
+        form.send_mail(self.request.LANGUAGE_CODE, inviter.email)
         login(self.request, user)
 
         # delete matching access attempts for this user
@@ -176,6 +174,13 @@ class SignUpView(FormView):
         HealthcareFailedAccessAttempt.objects.filter(username=user.email).delete()
 
         return super(SignUpView, self).form_valid(form)
+
+    def get_inviter(self):
+        # get invite object and the admin user who sent the invite
+        invited_email = self.request.session.get("account_verified_email", None)
+        invitation = Invitation.objects.get(email__iexact=invited_email)
+        admin = HealthcareUser.objects.get(id=invitation.inviter_id)
+        return admin
 
 
 class SignUp2FAView(LoginRequiredMixin, FormView):
