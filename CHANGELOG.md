@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.14.0] - 2021-01-06
+
+### Added
+
 - Add accordion-like "side" nav for mobile-sized about pages
+
+### Updated
+
+- Updated content for backup code pages and password rules
 - Prevent visually-hidden text from being selectable
 - Remove bottom padding from main nav links on mobile
 
