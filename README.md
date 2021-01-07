@@ -64,6 +64,8 @@ We are using Notify to send user-facing emails (eg, invitation emails and passwo
 
 - `BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_EN` and `BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_FR` : Template IDs for the English and French versions of the email that staff users send to admins requesting a new backup code.
 
+- `CONFIRMATION_EMAIL_TEMPLATE_ID_EN` and `CONFIRMATION_EMAIL_TEMPLATE_ID_FR` : Template IDs for the English and French versions of the confirmation emails that is sent to new users after successfully signing-up.
+
 #### OTP (2-factor) configuration
 
 We use Notify and django-otp to send 2FA auth codes via SMS.
