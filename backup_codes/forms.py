@@ -1,7 +1,8 @@
 from django.conf import settings
-from notifications_python_client.errors import HTTPError
-from notifications_python_client.notifications import NotificationsAPIClient
 from portal.forms import HealthcareBaseForm
+from dependency_injector.wiring import inject, Provide
+from portal.containers import Container
+from portal.services import NotifyService
 
 
 class RequestBackupCodesForm(HealthcareBaseForm):
@@ -16,22 +17,20 @@ class RequestBackupCodesForm(HealthcareBaseForm):
 
         return True
 
-    def send_mail(self, language):
-        notifications_client = NotificationsAPIClient(
-            settings.NOTIFY_API_KEY, base_url=settings.NOTIFY_ENDPOINT
+    @inject
+    def send_mail(
+        self,
+        language,
+        notify_service: NotifyService = Provide[Container.notify_service],
+    ):
+        notify_service.send_email(
+            address=self.admin.email,
+            template_id=settings.BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID.get(
+                language or "en"
+            ),
+            details={
+                "name": self.admin.name,
+                "user_email": self.user.email,
+                "user_name": self.user.name,
+            },
         )
-
-        try:
-            notifications_client.send_email_notification(
-                email_address=self.admin.email,
-                template_id=settings.BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID.get(
-                    language or "en"
-                ),
-                personalisation={
-                    "name": self.admin.name,
-                    "user_email": self.user.email,
-                    "user_name": self.user.name,
-                },
-            )
-        except HTTPError as e:
-            raise Exception(e)

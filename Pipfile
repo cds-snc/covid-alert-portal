@@ -42,6 +42,7 @@ django-widget-tweaks = "*"
 notifications-python-client = "*"
 django-waffle = "*"
 django-solo = "*"
+dependency-injector = "*"
 
 [pipenv]
 allow_prereleases = true

@@ -12,6 +12,7 @@ from axes.models import AccessAttempt
 from datetime import datetime, timedelta
 from freezegun import freeze_time
 
+from .views import SignUpView
 from .apps import ProfilesConfig
 from .forms import SignupForm, HealthcarePhoneEditForm
 from .models import (
@@ -21,6 +22,8 @@ from .models import (
 )
 from .validators import BannedPasswordValidator
 from .utils.invitation_adapter import user_signed_up
+from portal.services import NotifyService
+from portal import container
 
 User = get_user_model()
 
@@ -467,6 +470,7 @@ class InvitationFlow(TestCase):
 class SignupView(AdminUserTestCase):
     def setUp(self):
         super().setUp()
+        container.notify_service.override(NotifyService())  # Prevent sending emails
         self.invite = Invitation.create(
             self.invited_email, inviter=self.user, sent=timezone.now()
         )
@@ -481,6 +485,25 @@ class SignupView(AdminUserTestCase):
             "password1": password,
             "password2": password,
         }
+
+    def test_get_inviter_method(self):
+        session = self.client.session
+        session["account_verified_email"] = self.invite.email
+        session.save()
+
+        # Get the request object from the client response instead of
+        # using RequestFactory since the later will not contain the
+        # session which is required for the get_inviter helper method.
+        response = self.client.get(reverse("signup"))
+        request = response.wsgi_request
+
+        # setup the view directly using the request
+        view = SignUpView()
+        view.setup(request)
+
+        # Get the "inviter" and ensure that it equals to the authenticated user
+        inviter = view.get_inviter()
+        self.assertEqual(inviter, self.user)
 
     def test_email_and_province_on_signup_page(self):
         session = self.client.session

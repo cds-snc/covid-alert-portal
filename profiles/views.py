@@ -166,15 +166,9 @@ class SignUpView(FormView):
         )
         user_signed_up.send(sender=user.__class__, request=self.request, user=user)
 
-        # Send a confirmation email (unless in debug mode)
-        if settings.DEBUG:
-            email = form.cleaned_data.get("email")
-            print(
-                f"DEBUG ONLY: Confirmation Email message would have been sent to {email}"
-            )
-        else:
-            inviter = self.get_inviter()
-            form.send_mail(self.request.LANGUAGE_CODE, inviter.email)
+        # Trigger sending a confirmation email
+        inviter = self.get_inviter()
+        form.send_mail(self.request.LANGUAGE_CODE, inviter.email)
 
         login(self.request, user)
 

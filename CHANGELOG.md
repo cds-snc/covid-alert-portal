@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Added package "dependency-injector" for managing the GC notification client as a service
 - Added a confirmation email that is sent to new users upon successful signup
 - Add accordion-like "side" nav for mobile-sized about pages
 - Prevent visually-hidden text from being selectable
