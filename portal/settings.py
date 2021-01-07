@@ -307,9 +307,15 @@ PASSWORD_RESET_EMAIL_TEMPLATE_ID = {
     "en": os.getenv("PASSWORD_RESET_EMAIL_TEMPLATE_ID_EN"),
     "fr": os.getenv("PASSWORD_RESET_EMAIL_TEMPLATE_ID_FR"),
 }
+
 INVITATION_EMAIL_TEMPLATE_ID = {
     "en": os.getenv("INVITATION_EMAIL_TEMPLATE_ID_EN"),
     "fr": os.getenv("INVITATION_EMAIL_TEMPLATE_ID_FR"),
+}
+
+CONFIRMATION_EMAIL_TEMPLATE_ID = {
+    "en": os.getenv("CONFIRMATION_EMAIL_TEMPLATE_ID_EN"),
+    "fr": os.getenv("CONFIRMATION_EMAIL_TEMPLATE_ID_FR"),
 }
 
 # Create default Super User with this password

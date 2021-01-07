@@ -17,9 +17,6 @@ from django.utils.translation import get_language
 
 from phonenumber_field.formfields import PhoneNumberField
 
-from notifications_python_client.errors import HTTPError
-from notifications_python_client.notifications import NotificationsAPIClient
-
 from otp_yubikey.models import RemoteYubikeyDevice, ValidationService
 
 from invitations.models import Invitation
@@ -32,6 +29,10 @@ from invitations.forms import (
 from portal.forms import HealthcareBaseForm
 from .models import HealthcareUser, HealthcareProvince, AuthorizedDomain
 from .utils import generate_2fa_code
+
+from dependency_injector.wiring import inject, Provide
+from portal.containers import Container
+from portal.services import NotifyService
 
 
 validation_messages = {
@@ -266,6 +267,7 @@ class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
             "required"
         ]
 
+    @inject
     def send_mail(
         self,
         subject_template_name,
@@ -274,6 +276,7 @@ class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
         from_email,
         to_email,
         html_email_template_name=None,
+        notify_service: NotifyService = Provide[Container.notify_service],
     ):
         user = context.get("user")
         url = context.get("base_url") + reverse(
@@ -283,23 +286,16 @@ class HealthcarePasswordResetForm(HealthcareBaseForm, PasswordResetForm):
                 "token": context.get("token"),
             },
         )
-        notifications_client = NotificationsAPIClient(
-            settings.NOTIFY_API_KEY, base_url=settings.NOTIFY_ENDPOINT
+        notify_service.send_email(
+            address=user.email,
+            template_id=settings.PASSWORD_RESET_EMAIL_TEMPLATE_ID.get(
+                context.get("language") or "en"
+            ),
+            details={
+                "name": user.name,
+                "url": url,
+            },
         )
-
-        try:
-            notifications_client.send_email_notification(
-                email_address=user.email,
-                template_id=settings.PASSWORD_RESET_EMAIL_TEMPLATE_ID.get(
-                    context.get("language") or "en"
-                ),
-                personalisation={
-                    "name": user.name,
-                    "url": url,
-                },
-            )
-        except HTTPError as e:
-            raise Exception(e)
 
 
 class HealthcarePasswordResetConfirm(HealthcareBaseForm, SetPasswordForm):
@@ -432,6 +428,24 @@ class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):
                 password_validation.validate_password(password, self.instance)
             except ValidationError as error:
                 self.add_error("password1", error)
+
+    @inject
+    def send_mail(
+        self,
+        language,
+        admin_email,
+        notify_service: NotifyService = Provide[Container.notify_service],
+    ):
+        """
+        Send a confirmation email to the newly signed-up user
+        """
+        notify_service.send_email(
+            address=self.cleaned_data.get("email"),
+            template_id=settings.CONFIRMATION_EMAIL_TEMPLATE_ID.get(language or "en"),
+            details={
+                "admin_email": admin_email,
+            },
+        )
 
 
 class SignupForm2fa(HealthcareBaseForm, forms.ModelForm):

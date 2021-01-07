@@ -27,6 +27,8 @@ data "aws_iam_policy_document" "covidportal_secrets_manager" {
       aws_secretsmanager_secret_version.api_endpoint.arn,
       aws_secretsmanager_secret_version.invitation_email_template_id_en.arn,
       aws_secretsmanager_secret_version.invitation_email_template_id_fr.arn,
+      aws_secretsmanager_secret_version.confirmation_email_template_id_en.arn,
+      aws_secretsmanager_secret_version.confirmation_email_template_id_fr.arn,
       aws_secretsmanager_secret_version.password_reset_email_template_id_en.arn,
       aws_secretsmanager_secret_version.password_reset_email_template_id_fr.arn,
       aws_secretsmanager_secret_version.backup_code_admin_email_template_id_en.arn,
