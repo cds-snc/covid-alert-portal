@@ -22,7 +22,7 @@
       {% csrf_token %}
       <button type="submit">{% trans "Get new security codes" %}</button>
     </form>
-    <a href="{% url 'user_profile' pk=user.id %}" class="secondary" role='button' draggable='false'>{% trans "Back to your account" %}</a>
+    <a href="{% url 'user_profile' pk=user.id %}" class="secondary" role='button' draggable='false'>{% trans "Back to Manage your account" %}</a>
   </div>
 
 {% endblock %}
