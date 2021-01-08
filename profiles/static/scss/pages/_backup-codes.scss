@@ -15,7 +15,7 @@
     font-size: 1.5em;
   }
 
-  ol {
+  ol[aria-hidden="true"] {
     font-family: monospace;
     padding-left: 0;
     margin-bottom: 0;
@@ -39,7 +39,7 @@
         }
       }
 
-      [aria-hidden="true"] span:last-of-type {
+      span:last-of-type {
         padding-left: $space-xs;
       }
     }

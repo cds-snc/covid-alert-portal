@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.15.1] - 2021-01-11
+
+### Updated
+
+- Changed HTML rendering for backup codes so they won't be duplicated when copied
+- More explicit content around saving your backup codes
+
 ## [1.15.0] - 2021-01-07
 
 ### Added

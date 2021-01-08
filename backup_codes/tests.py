@@ -97,15 +97,15 @@ class BackupCodesView(AdminUserTestCase):
         for token in tokens:
             self.assertContains(
                 response,
-                '<span class="visually-hidden">{}</span>'.format(
-                    " ".join(token.upper())
-                ),
+                "<li>{}</li>".format(" ".join(token.upper())),
+                html=True,
             )
             self.assertContains(
                 response,
-                '<span aria-hidden="true"><span>{}</span><span>{}</span>'.format(
+                "<li><span>{}</span><span>{}</span></li>".format(
                     token[:4].upper(), token[-4:].upper()
                 ),
+                html=True,
             )
 
     def test_user_codes_empty_HTML(self):
@@ -127,7 +127,7 @@ class BackupCodesView(AdminUserTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
-            '<li aria-hidden="true" class="empty"><span></span></li>',
+            '<li class="empty"><span></span></li>',
             count=9,
             html=True,
         )
@@ -190,9 +190,10 @@ class AdminBackupCodesView(AdminUserTestCase):
         # see the code on the screen
         self.assertContains(
             response,
-            '<span aria-hidden="true"><span>{}</span><span>{}</span>'.format(
+            "<li><span>{}</span><span>{}</span></li>".format(
                 token[:4].upper(), token[-4:].upper()
             ),
+            html=True,
         )
 
     def test_admin_getting_security_code_for_staff_user_replaces_existing_codes(self):
