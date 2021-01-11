@@ -29,7 +29,7 @@
     {% else %}
       <a href="{% url 'login' %}">
     {% endif %}
-    {% trans "Manage your account" %}</a>. {% trans "Keep the codes somewhere only you can access." %}</p>
+    {% trans "Manage your account" %}</a>. <strong>{% trans "Before you do anything else, save these codes somewhere that only you can access." %}</strong></p>
 
     <div class="content-next-link">
       <a href="{% url 'about:one_time_keys' %}" class="chevron-right">{% trans "Next:" %} {% trans "One-time keys" %}</a>

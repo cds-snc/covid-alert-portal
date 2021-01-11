@@ -1,13 +1,19 @@
 <div class="static-codes{% if class %} {{ class }}{% endif %}">
-  <ol>
+  <ol class="visually-hidden">
+  {% for code in codes %}
+    {% if code %}
+      <li>{{ code.token|upper|join:" " }}</li>
+    {% endif %}
+  {% endfor %}
+  </ol>
+  <ol aria-hidden="true">
   {% for code in codes %}
     {% if code %}
       <li>
-        <span class="visually-hidden">{{ code.token|upper|join:" " }}</span>
-        <span aria-hidden="true"><span>{{ code.token|upper|slice:":4" }}</span><span>{{ code.token|upper|slice:"4:" }}</span></span>
+        <span>{{ code.token|upper|slice:":4" }}</span><span>{{ code.token|upper|slice:"4:" }}</span>
       </li>
     {% else %}
-      <li aria-hidden="true" class="empty">
+      <li class="empty">
         <span></span>
       </li>
     {% endif %}
