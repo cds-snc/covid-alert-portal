@@ -298,6 +298,11 @@ INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP = True
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 INVITATIONS_ADAPTER = "profiles.utils.invitation_adapter.HealthcareInvitationAdapter"
 
+OTK_SMS_TEMPLATE_ID = {
+    "en": os.getenv("OTK_SMS_TEMPLATE_ID_EN"),
+    "fr": os.getenv("OTK_SMS_TEMPLATE_ID_FR"),
+}
+
 BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID = {
     "en": os.getenv("BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_EN"),
     "fr": os.getenv("BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_FR"),

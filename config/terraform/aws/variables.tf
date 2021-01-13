@@ -80,6 +80,14 @@ variable "ecs_secret_api_endpoint" {
   type = string
 }
 
+variable "ecs_secret_otk_sms_template_id_en" {
+  type = string
+}
+
+variable "ecs_secret_otk_sms_template_id_fr" {
+  type = string
+}
+
 variable "ecs_secret_invitation_email_template_id_en" {
   type = string
 }

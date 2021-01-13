@@ -10,6 +10,9 @@ from django.conf import settings
 from profiles.models import HealthcareUser
 from profiles.tests import AdminUserTestCase, get_other_credentials
 
+from portal.services import NotifyService
+from portal import container
+
 from .apps import CovidKeyConfig
 from .models import COVIDKey
 from .views import CodeView
@@ -134,3 +137,58 @@ class KeyViewCSRFEnabled(AdminUserTestCase):
         response = self.client.post(reverse("key"))
 
         self.assertEqual(response.status_code, 403)
+
+
+class OtkSmsViewTests(AdminUserTestCase):
+    def setUp(self):
+        super().setUp()
+        container.notify_service.override(NotifyService())  # Prevent sending emails/SMS
+
+    def test_otk_sms_view_no_key(self):
+        """
+        Test that this view redirects back to start when there is no OTK
+        cached in the request session
+        """
+        self.login()
+        response = self.client.get(reverse("otk_sms"))
+        self.assertEqual(response.status_code, 302)
+
+    def test_otk_sms_view_with_key(self):
+        """
+        Test that this view is rendered when there is an OTK cached
+        """
+        self.login()
+        self.client.post(
+            reverse("key")
+        )  # generate a key so it can be cached in session
+        response = self.client.get(reverse("otk_sms"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Text key to patient</h1>")
+
+    def test_otk_sms_view_submit_redirect(self):
+        """
+        Test that we're redirected to otk_sms_sent on form submission
+        """
+        self.login()
+        self.client.post(
+            reverse("key")
+        )  # generate a key so it can be cached in session
+        response = self.client.post(
+            reverse("otk_sms"),
+            {"phone_number": "+12125552368", "phone_number2": "+12125552368"},
+        )
+        self.assertEqual(response.status_code, 302)
+
+    def test_otk_sms_sent_view(self):
+        """
+        Test that the otk_sms_sent view is rendered
+        """
+        self.login()
+        self.client.post(
+            reverse("key")
+        )  # generate a key so it can be cached in session
+        response = self.client.get(
+            reverse("otk_sms_sent", kwargs={"phone_number": "+12125552368"})
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Check patient received key</h1>")

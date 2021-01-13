@@ -8,6 +8,7 @@
   <code>{{ code }}</code>
   <hr aria-hidden="true"/>
   {% include "includes/phonetic.html" %}
+  <a href="{% url 'otk_sms' %}" role='button' draggable='false' class="info">{% trans "Text key to patient" %}</a>
   <hr aria-hidden="true"/>
   {% if with_example %}
     {% blocktrans %}

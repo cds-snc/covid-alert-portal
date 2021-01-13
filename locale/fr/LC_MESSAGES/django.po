@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-11 16:08+0000\n"
+"POT-Creation-Date: 2021-01-13 18:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -505,6 +505,7 @@ msgstr ""
 "seul, nous vous dirons comment en obtenir d’autres."
 
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html:22
+#: covid_key/templates/covid_key/otk_sms_sent.html:39
 #: profiles/templates/profiles/2fa.html:27
 #: profiles/templates/profiles/signup.html:14
 #: profiles/templates/profiles/signup_2fa.html:15
@@ -605,10 +606,12 @@ msgid "Give patient this key"
 msgstr "Donnez la clé suivante au patient"
 
 #: covid_key/templates/covid_key/key.html:16
+#: covid_key/templates/covid_key/otk_sms_sent.html:17
 msgid "Instructions for entering key"
 msgstr "Instructions pour entrer une clé dans l’application"
 
 #: covid_key/templates/covid_key/key.html:20
+#: covid_key/templates/covid_key/otk_sms_sent.html:21
 msgid "To enter the key, the phone must be connected to the internet."
 msgstr ""
 "Le patient doit connecter son téléphone à Internet pour pouvoir entrer la "
@@ -626,6 +629,39 @@ msgstr "Limite de génération clé atteinte"
 #: covid_key/templates/covid_key/locked.html:8
 msgid "You are generating too many keys. Try again later."
 msgstr "Vous générez trop de clés. Réessayez plus tard."
+
+#: covid_key/templates/covid_key/otk_sms.html:5
+#: covid_key/templates/covid_key/otk_sms.html:9
+#: portal/templates/includes/big-code.html:11
+#, fuzzy
+#| msgid "Tell the patient:"
+msgid "Text key to patient"
+msgstr "Dites au patient :"
+
+#: covid_key/templates/covid_key/otk_sms.html:11
+msgid "Follow these steps if the patient wants you to send their mobile phone:"
+msgstr ""
+
+#: covid_key/templates/covid_key/otk_sms.html:16
+#, fuzzy
+#| msgid "Send"
+msgid "Send key"
+msgstr "Envoyer"
+
+#: covid_key/templates/covid_key/otk_sms.html:16
+msgid "Cancel"
+msgstr ""
+
+#: covid_key/templates/covid_key/otk_sms_sent.html:5
+#: covid_key/templates/covid_key/otk_sms_sent.html:9
+#, fuzzy
+#| msgid "Help patient enter key"
+msgid "Check patient received key"
+msgstr "Aider le patient avec sa clé"
+
+#: covid_key/templates/covid_key/otk_sms_sent.html:13
+msgid "The text takes about 30 seconds to arrive."
+msgstr ""
 
 #: covid_key/templates/covid_key/start.html:4
 #: covid_key/templates/covid_key/start.html:7
@@ -660,7 +696,7 @@ msgstr "Besoin d’en savoir plus sur le portail?"
 msgid "Visit"
 msgstr "Consultez"
 
-#: covid_key/views.py:77
+#: covid_key/views.py:105
 msgid "Something went wrong. Contact your administrator."
 msgstr ""
 "Une erreur est survenue. Veuillez contacter votre admistrateur du portail."
@@ -681,7 +717,7 @@ msgstr ""
 msgid "Google Analytics V4 Tracking Code"
 msgstr "Code pour Google Analytics version 4"
 
-#: portal/settings.py:340
+#: portal/settings.py:345
 msgid "This account has been locked due to too many failed log in attempts."
 msgstr ""
 "Ce compte a été verrouillé en raison d’un trop grand nombre de tentatives "
@@ -770,7 +806,7 @@ msgstr "Gouvernement du Canada"
 msgid "EXAMPLE ONLY. NOT A VALID ONE-TIME KEY."
 msgstr "CLÉ À TITRE D’EXEMPLE (NON VALIDE)"
 
-#: portal/templates/includes/big-code.html:13
+#: portal/templates/includes/big-code.html:14
 msgid ""
 "\n"
 "        <p>The <strong>key expires in 24 hours</strong>.</p>\n"
@@ -779,7 +815,7 @@ msgstr ""
 "\n"
 "<p>La clé <strong>expire après 24 heures</strong>.</p>"
 
-#: portal/templates/includes/big-code.html:19
+#: portal/templates/includes/big-code.html:20
 msgid "No new keys after expiry."
 msgstr "Elle ne peut pas être regénérée si elle expire."
 

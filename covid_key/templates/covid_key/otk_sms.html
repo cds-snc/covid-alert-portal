@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block title %}{% trans "Text key to patient" %}{% endblock %}
+
+{% block content %}
+  {% include  "includes/flash_messages.html" %}
+  <h1>{% trans "Text key to patient" %}</h1>
+
+  <p>{% trans "Follow these steps if the patient wants you to send their mobile phone:" %}</p>
+
+  <div class="otk">{{ code }}</div>
+
+  {% url 'key' as cancel_url %}
+  {% include "includes/cds_form.html" with submit_text=_("Send key") secondary_action_text=_('Cancel') secondary_action_url=cancel_url %}
+
+{% endblock %}
