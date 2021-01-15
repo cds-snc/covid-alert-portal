@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-11 16:08+0000\n"
+"POT-Creation-Date: 2021-01-13 20:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1360,16 +1360,13 @@ msgid "Account already exists for ‘%(email)s’"
 msgstr "Un compte existe déjà pour « %(email)s »"
 
 #: profiles/templates/invitations/messages/invite_expired.txt:3
-msgid "Your invitation has expired."
-msgstr "Votre invitation est expirée."
+msgid "This link has expired."
+msgstr "Le lien est expiré."
 
 #: profiles/templates/invitations/messages/invite_invalid.txt:3
-msgid ""
-"Your invitation has expired. Contact your administrator for a new invitation "
-"link."
+msgid "This link is invalid. Ask your administrator for a new link."
 msgstr ""
-"Votre invitation est expirée. Contactez votre admistrateur du portail pour "
-"un nouveau lien."
+"Le lien n’est pas valide. Demandez un nouveau lien à votre administrateur."
 
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html:6
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html:12
@@ -1434,12 +1431,16 @@ msgstr "Voir les invitations"
 
 #: profiles/templates/invitations/templates/invite_expired.html:4
 #: profiles/templates/invitations/templates/invite_expired.html:8
-msgid "You need a new link to create an account"
-msgstr "Vous avez besoin d’un nouveau lien pour créer un compte"
+msgid "Ask your administrator for a new link"
+msgstr "Demandez un nouveau lien à votre administrateur"
 
 #: profiles/templates/invitations/templates/invite_expired.html:9
-msgid "Contact your administrator."
-msgstr "Contactez l’admistrateur du portail."
+msgid ""
+"You’ll find their email address in the invitation to create your portal "
+"account."
+msgstr ""
+"Vous trouverez son adresse courriel dans l’invitation reçue pour créer votre "
+"compte."
 
 #: profiles/templates/invitations/templates/invite_list.html:6
 #: profiles/templates/invitations/templates/invite_list.html:11
@@ -2004,3 +2005,12 @@ msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
 "portail."
+
+#~ msgid "Your invitation has expired."
+#~ msgstr "Votre invitation est expirée."
+
+#~ msgid "You need a new link to create an account"
+#~ msgstr "Vous avez besoin d’un nouveau lien pour créer un compte"
+
+#~ msgid "Contact your administrator."
+#~ msgstr "Contactez l’admistrateur du portail."

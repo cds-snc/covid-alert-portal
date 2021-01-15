@@ -1,4 +1,4 @@
 {% load i18n %}
 {% autoescape off %}
-{% blocktrans %}Your invitation has expired.{% endblocktrans %}
+{% blocktrans %}This link has expired.{% endblocktrans %}
 {% endautoescape %}

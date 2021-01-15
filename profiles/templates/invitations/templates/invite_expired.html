@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "You need a new link to create an account" %}{% endblock %}
+{% block title %}{% trans "Ask your administrator for a new link" %}{% endblock %}
 
 {% block content %}
     {% include  "includes/flash_messages.html" %}
-    <h1>{% trans "You need a new link to create an account" %}</h1>
-    <p>{% trans "Contact your administrator." %}</p>
+    <h1>{% trans "Ask your administrator for a new link" %}</h1>
+    <p>{% trans "You’ll find their email address in the invitation to create your portal account." %}</p>
 {% endblock %}

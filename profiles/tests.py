@@ -869,7 +869,7 @@ class InviteErrorView(AdminUserTestCase):
         self.assertEqual(response.request["PATH_INFO"], "/en/invite/expired")
         self.assertContains(
             response,
-            "<h1>You need a new link to create an account</h1>",
+            "<h1>Ask your administrator for a new link</h1>",
             html=True,
         )
 
@@ -885,7 +885,7 @@ class InviteErrorView(AdminUserTestCase):
         self.assertEqual(response.request["PATH_INFO"], "/en/login/")
         self.assertContains(
             response,
-            '<li class="error">Your invitation has expired. Contact your administrator for a new invitation link.</li>',
+            '<li class="error">This link is invalid. Ask your administrator for a new link.</li>',
             html=True,
         )
 
