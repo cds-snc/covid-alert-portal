@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-13 18:45+0000\n"
+"POT-Creation-Date: 2021-01-18 14:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -410,6 +410,8 @@ msgstr "Connexion"
 
 #: backup_codes/templates/backup_codes/backup_codes_help.html:5
 #: contact/templates/contact/form.html:5
+#: covid_key/templates/covid_key/otk_sms.html:6
+#: covid_key/templates/covid_key/otk_sms_sent.html:6
 #: portal/templates/registration/login.html:6
 #: portal/templates/registration/password_reset_confirm.html:6
 #: portal/templates/registration/password_reset_form.html:5
@@ -505,7 +507,7 @@ msgstr ""
 "seul, nous vous dirons comment en obtenir d’autres."
 
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html:22
-#: covid_key/templates/covid_key/otk_sms_sent.html:39
+#: covid_key/templates/covid_key/otk_sms_sent.html:31
 #: profiles/templates/profiles/2fa.html:27
 #: profiles/templates/profiles/signup.html:14
 #: profiles/templates/profiles/signup_2fa.html:15
@@ -606,12 +608,12 @@ msgid "Give patient this key"
 msgstr "Donnez la clé suivante au patient"
 
 #: covid_key/templates/covid_key/key.html:16
-#: covid_key/templates/covid_key/otk_sms_sent.html:17
+#: covid_key/templates/covid_key/otk_sms_sent.html:21
 msgid "Instructions for entering key"
 msgstr "Instructions pour entrer une clé dans l’application"
 
 #: covid_key/templates/covid_key/key.html:20
-#: covid_key/templates/covid_key/otk_sms_sent.html:21
+#: covid_key/templates/covid_key/otk_sms_sent.html:25
 msgid "To enter the key, the phone must be connected to the internet."
 msgstr ""
 "Le patient doit connecter son téléphone à Internet pour pouvoir entrer la "
@@ -630,36 +632,36 @@ msgstr "Limite de génération clé atteinte"
 msgid "You are generating too many keys. Try again later."
 msgstr "Vous générez trop de clés. Réessayez plus tard."
 
-#: covid_key/templates/covid_key/otk_sms.html:5
-#: covid_key/templates/covid_key/otk_sms.html:9
+#: covid_key/templates/covid_key/otk_sms.html:7
+#: covid_key/templates/covid_key/otk_sms.html:13
 #: portal/templates/includes/big-code.html:11
 #, fuzzy
 #| msgid "Tell the patient:"
 msgid "Text key to patient"
 msgstr "Dites au patient :"
 
-#: covid_key/templates/covid_key/otk_sms.html:11
+#: covid_key/templates/covid_key/otk_sms.html:15
 msgid "Follow these steps if the patient wants you to send their mobile phone:"
 msgstr ""
 
-#: covid_key/templates/covid_key/otk_sms.html:16
+#: covid_key/templates/covid_key/otk_sms.html:20
 #, fuzzy
 #| msgid "Send"
 msgid "Send key"
 msgstr "Envoyer"
 
-#: covid_key/templates/covid_key/otk_sms.html:16
+#: covid_key/templates/covid_key/otk_sms.html:20
 msgid "Cancel"
 msgstr ""
 
-#: covid_key/templates/covid_key/otk_sms_sent.html:5
-#: covid_key/templates/covid_key/otk_sms_sent.html:9
+#: covid_key/templates/covid_key/otk_sms_sent.html:7
+#: covid_key/templates/covid_key/otk_sms_sent.html:13
 #, fuzzy
 #| msgid "Help patient enter key"
 msgid "Check patient received key"
 msgstr "Aider le patient avec sa clé"
 
-#: covid_key/templates/covid_key/otk_sms_sent.html:13
+#: covid_key/templates/covid_key/otk_sms_sent.html:17
 msgid "The text takes about 30 seconds to arrive."
 msgstr ""
 
@@ -717,7 +719,7 @@ msgstr ""
 msgid "Google Analytics V4 Tracking Code"
 msgstr "Code pour Google Analytics version 4"
 
-#: portal/settings.py:345
+#: portal/settings.py:353
 msgid "This account has been locked due to too many failed log in attempts."
 msgstr ""
 "Ce compte a été verrouillé en raison d’un trop grand nombre de tentatives "
@@ -1396,16 +1398,13 @@ msgid "Account already exists for ‘%(email)s’"
 msgstr "Un compte existe déjà pour « %(email)s »"
 
 #: profiles/templates/invitations/messages/invite_expired.txt:3
-msgid "Your invitation has expired."
-msgstr "Votre invitation est expirée."
+msgid "This link has expired."
+msgstr "Le lien est expiré."
 
 #: profiles/templates/invitations/messages/invite_invalid.txt:3
-msgid ""
-"Your invitation has expired. Contact your administrator for a new invitation "
-"link."
+msgid "This link is invalid. Ask your administrator for a new link."
 msgstr ""
-"Votre invitation est expirée. Contactez votre admistrateur du portail pour "
-"un nouveau lien."
+"Le lien n’est pas valide. Demandez un nouveau lien à votre administrateur."
 
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html:6
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html:12
@@ -1470,12 +1469,16 @@ msgstr "Voir les invitations"
 
 #: profiles/templates/invitations/templates/invite_expired.html:4
 #: profiles/templates/invitations/templates/invite_expired.html:8
-msgid "You need a new link to create an account"
-msgstr "Vous avez besoin d’un nouveau lien pour créer un compte"
+msgid "Ask your administrator for a new link"
+msgstr "Demandez un nouveau lien à votre administrateur"
 
 #: profiles/templates/invitations/templates/invite_expired.html:9
-msgid "Contact your administrator."
-msgstr "Contactez l’admistrateur du portail."
+msgid ""
+"You’ll find their email address in the invitation to create your portal "
+"account."
+msgstr ""
+"Vous trouverez son adresse courriel dans l’invitation reçue pour créer votre "
+"compte."
 
 #: profiles/templates/invitations/templates/invite_list.html:6
 #: profiles/templates/invitations/templates/invite_list.html:11
@@ -2040,3 +2043,12 @@ msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
 "portail."
+
+#~ msgid "Your invitation has expired."
+#~ msgstr "Votre invitation est expirée."
+
+#~ msgid "You need a new link to create an account"
+#~ msgstr "Vous avez besoin d’un nouveau lien pour créer un compte"
+
+#~ msgid "Contact your administrator."
+#~ msgstr "Contactez l’admistrateur du portail."
