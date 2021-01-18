@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import sys
-
+import django
 import dj_database_url
 from dotenv import load_dotenv
 from datetime import timedelta
@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     "about",
     "backup_codes",
     "axes",
+    "django.forms",  # Required for finding custom widget templates in the 'portal' folder
     "django.contrib.sites",  # Required for invitations
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -117,10 +118,17 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "portal.urls"
 
+# Changing the form renderer forces the widget template loader to respect the
+# template settings and thus allows us to place the widget templates there.
+FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "portal", "templates")],
+        "DIRS": [
+            django.__path__[0] + "/forms/templates",  # default widget templates
+            os.path.join(BASE_DIR, "portal", "templates"),
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

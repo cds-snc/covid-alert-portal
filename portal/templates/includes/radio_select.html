@@ -1,0 +1,15 @@
+{% with id=widget.attrs.id %}
+<div {% if id %} id="{{ id }}"{% endif %} class="multiple-choice multiple-choice--radios">
+  {% for group, options, index in widget.optgroups %}
+    {% if group %}
+      <div class="multiple-choice--group">{{ group }}</div>
+    {% endif %}
+    {% for option in options %}
+      <div class="multiple-choice__item">
+        <input type="radio" name="{{ option.name }}" value="{{ option.value|stringformat:'s' }}">
+        <label {% if option.attrs.id %} for="{{ option.attrs.id }}"{% endif %}>{{ option.label }}</label>
+      </div>
+    {% endfor %}
+  {% endfor %}
+</div>
+{% endwith %}

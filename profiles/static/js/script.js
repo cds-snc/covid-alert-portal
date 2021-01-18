@@ -18,11 +18,3 @@ if (form) {
     form.querySelector("button").disabled = true;
   });
 }
-
-var radios = document.getElementsByName('otk-sent-next');
-radios.forEach(function(radio) {
-    radio.addEventListener('click', function(e) {
-        let value = document.querySelector('input[name="otk-sent-next"]:checked').value;
-        document.getElementById('otk_sms_sent_next').href = radio.value;
-    });
-});

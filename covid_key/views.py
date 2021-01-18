@@ -14,7 +14,7 @@ from django.urls import reverse_lazy
 
 from portal.mixins import ThrottledMixin, Is2FAMixin
 
-from .forms import OtkSmsForm
+from .forms import OtkSmsForm, OtkSmsSentForm
 from .models import COVIDKey
 
 
@@ -153,4 +153,25 @@ class OtkSmsView(FormView, SessionTemplateView):
     def form_valid(self, form):
         self.phone_number = str(form.cleaned_data.get("phone_number"))
         form.send_sms(self.request.LANGUAGE_CODE, self.request.session.get("otk"))
+        return super().form_valid(form)
+
+
+class OtkSmsSentView(FormView, SessionTemplateView):
+    form_class = OtkSmsSentForm
+    template_name = "covid_key/otk_sms_sent.html"
+
+    def __init__(self):
+        super().__init__()
+        self.redirect_choice = "start"
+
+    def get_success_url(self):
+        return reverse_lazy(self.redirect_choice)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["code"] = self.request.session.get("otk")["code"]
+        return context
+
+    def form_valid(self, form):
+        self.redirect_choice = form.cleaned_data.get("redirect_choice")
         return super().form_valid(form)

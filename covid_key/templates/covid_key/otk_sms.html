@@ -2,9 +2,13 @@
 {% load static i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 
-{% block title %}{% trans "Text key to patient" %}{% endblock %}
+{% block title %}
+  {% if form.errors %}{% trans "Error: "%}{% endif %}
+  {% trans "Text key to patient" %}
+{% endblock %}
 
 {% block content %}
+  {% include  "includes/error_list.html" %}
   {% include  "includes/flash_messages.html" %}
   <h1>{% trans "Text key to patient" %}</h1>
 

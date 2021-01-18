@@ -16,27 +16,19 @@ urlpatterns = [
         "generate-key/",
         login_required(
             otp_required(
-                otp_required(
-                    TemplateView.as_view(template_name="covid_key/generate_key.html")
-                )
+                TemplateView.as_view(template_name="covid_key/generate_key.html")
             )
         ),
         name="generate_key",
     ),
     path(
-        "otk_sms/",
+        "otk-sms/",
         login_required(otp_required(views.OtkSmsView.as_view())),
         name="otk_sms",
     ),
     re_path(
-        r"otk_sms_sent/(?P<phone_number>[+\d]{0,50})$",
-        login_required(
-            otp_required(
-                views.SessionTemplateView.as_view(
-                    template_name="covid_key/otk_sms_sent.html"
-                )
-            )
-        ),
+        r"otk-sms-sent/(?P<phone_number>[+\d]{0,50})$",
+        login_required(otp_required(views.OtkSmsSentView.as_view())),
         name="otk_sms_sent",
     ),
 ]

@@ -2,9 +2,13 @@
 {% load static i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 
-{% block title %}{% trans "Check patient received key" %}{% endblock %}
+{% block title %}
+  {% if form.errors %}{% trans "Error: "%}{% endif %}
+  {% trans "Check patient received key" %}
+{% endblock %}
 
 {% block content %}
+  {% include  "includes/error_list.html" %}
   {% include  "includes/flash_messages.html" %}
   <h1>{% trans "Check patient received key" %}</h1>
 
@@ -24,18 +28,6 @@
     </div>
   </details>
 
-  <div>
-    <strong>Did {{ phone_number }} get the key?</strong>
-    <div>
-      <input type="radio" id="start" name="otk-sent-next" value="{% url 'start' %}" checked>
-      <label for="start">Yes, generate another key</label><br>
-      <input type="radio" id="otk_sms" name="otk-sent-next" value="{% url 'otk_sms' %}">
-      <label for="otk_sms">No, try different phone number</label><br>
-      <input type="radio" id="key" name="otk-sent-next" value="{% url 'key' %}">
-      <label for="key">No, read key</label>
-    </div>
-  </div>
-
-  <div class="content-button"><a id="otk_sms_sent_next" href="{% url 'start' %}" role='button' draggable='false'>{% trans "Next" %}</a></div>
+  {% include "includes/cds_form.html" with submit_text=_("Next") %}
 
 {% endblock %}

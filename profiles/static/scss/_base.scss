@@ -168,16 +168,3 @@ main {
     }
   }
 }
-
-input[type="radio"] {
-    -ms-transform: scale(2.5); /* IE 9 */
-    -webkit-transform: scale(2.5); /* Chrome, Safari, Opera */
-    transform: scale(2.5);
-    margin-left: 10px;
-
-    + label {
-        margin-left: 15px;
-        padding: 5px;
-        display: inline-block;
-    }
-}
