@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.16.0] - 2021-01-19
+
+### Added
+
+- Added the Northern Inter-Tribal Health Authority as their own province
+
 ## [1.15.1] - 2021-01-11
 
 ### Updated
