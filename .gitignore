@@ -14,3 +14,5 @@ secrets.tfvars
 .terraform/
 *.tfplan
 .coverage
+.supervisord.log
+.supervisord.pid

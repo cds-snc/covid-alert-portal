@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Added 'supervisord' to the dockerfile in order to run multiple processes within the container.
+  This currently includes the Django server and Cron. We use Cron to schedule the 
+  clearing audit logs job.
+  
 ## [1.16.0] - 2021-01-19
 
 ### Added

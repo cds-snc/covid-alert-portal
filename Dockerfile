@@ -8,6 +8,8 @@ ENV GITHUB_SHA=$GITHUB_SHA_ARG
 
 # Installs gettext utilities required to makemessages and compilemessages
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    supervisor \
+    cron \
 	gettext \
 	make \
 	build-essential \
@@ -19,7 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /code
 
 # Install pipenv
-RUN pip install 'pipenv==2018.11.26' uwsgi
+RUN pip install 'pipenv==2020.11.15' uwsgi
 
 # Install dependencies
 COPY Pipfile Pipfile.lock /code/
@@ -33,7 +35,6 @@ ENV PYTHONUNBUFFERED 1
 COPY . /code
 
 # Build static files
-
 RUN python manage.py sass profiles/static/scss/styles.scss profiles/static/css/
 
 RUN python manage.py collectstatic --noinput -i scss
@@ -43,8 +44,6 @@ RUN python manage.py compilemessages
 RUN groupadd -r django && useradd --no-log-init -M -g django django
 
 RUN chown -R django:django /code
-
-USER django:django
 
 EXPOSE 8000
 

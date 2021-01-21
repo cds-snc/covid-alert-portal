@@ -8,10 +8,11 @@ python manage.py migrate --noinput
 echo "Check if creating default super user"
 python manage.py createdefaultsuperuser
 
-# Start server
-echo "Starting server"
-if [[ ${DJANGO_ENV} == 'development' ]]; then
-	python manage.py runserver 0.0.0.0:8000
-else
-	uwsgi --http :8000 --master --module portal.wsgi --static-map /static=/code/staticfiles --enable-threads --processes 2
-fi
+# add the crontab
+crontab cronjobs.txt
+
+# set desired environment variables globally so that the cronjob can access them
+env | grep DATABASE_URL >> /etc/environment
+
+# Run supervisor
+/usr/bin/supervisord -nc /code/supervisord.conf
