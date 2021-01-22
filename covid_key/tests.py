@@ -7,7 +7,7 @@ from django_otp import DEVICE_ID_SESSION_KEY
 from django.contrib.auth import get_user_model
 from django.conf import settings
 
-from profiles.models import HealthcareUser
+from profiles.models import HealthcareUser, HealthcareProvince
 from profiles.tests import AdminUserTestCase, get_other_credentials
 
 from portal.services import NotifyService
@@ -143,6 +143,11 @@ class OtkSmsViewTests(AdminUserTestCase):
     def setUp(self):
         super().setUp()
         container.notify_service.override(NotifyService())  # Prevent sending emails/SMS
+
+        # Ensure that manitoba has sms enabled (test user is located in manitoba)
+        manitoba = HealthcareProvince.objects.get(name="Manitoba")
+        manitoba.sms_enabled = True
+        manitoba.save()
 
     def test_otk_sms_view_no_key(self):
         """
