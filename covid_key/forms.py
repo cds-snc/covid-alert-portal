@@ -47,12 +47,7 @@ class OtkSmsForm(HealthcareBaseForm):
         notify_service.send_sms(
             phone_number=str(self.cleaned_data.get("phone_number")),
             template_id=settings.OTK_SMS_TEMPLATE_ID.get(language or "en"),
-            details={
-                "code": otk["code"],
-                "expiry": datetime.fromtimestamp(otk["expiry"]).strftime(
-                    "%B %d %Y, %I:%M %p"
-                ),
-            },
+            details={"code": otk["code"]},
         )
 
 
