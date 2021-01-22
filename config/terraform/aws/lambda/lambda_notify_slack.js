@@ -13,7 +13,7 @@ function getMessage(message) {
 exports.handler = function(event, context) {
 
     var postData = {
-        "channel": "#exposure-healthcare-dev",
+        "channel": "#en-healthcare-dev",
         "username": "COVID Alert Portal Notifier",
         "text": "*Staging Environment*",
         "icon_emoji": ":loudspeaker:"
