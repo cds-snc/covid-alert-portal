@@ -4,6 +4,8 @@ from datetime import datetime
 
 from phonenumber_field.formfields import PhoneNumberField
 
+from django.forms import ValidationError
+from django.utils.translation import gettext_lazy as _
 from dependency_injector.wiring import inject, Provide
 from portal.containers import Container
 from portal.services import NotifyService
@@ -16,12 +18,24 @@ class OtkSmsForm(HealthcareBaseForm):
     A form to specify patient phone number for receiving one time key (otk) by SMS
     """
 
+    error_messages = {
+        "phone_number2": _("Phone numbers must match."),
+    }
+
     phone_number = PhoneNumberField(
         label="Enter patient’s mobile phone number", max_length=100
     )
     phone_number2 = PhoneNumberField(
         label="Confirm patient’s mobile phone number", max_length=100
     )
+
+    def clean(self):
+        super().clean()
+        if self.cleaned_data["phone_number"] != self.cleaned_data["phone_number2"]:
+            raise ValidationError(
+                {"phone_number2": [self.error_messages["phone_number2"]]}
+            )
+        return self.cleaned_data
 
     @inject
     def send_sms(

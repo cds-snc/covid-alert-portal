@@ -165,6 +165,20 @@ class OtkSmsViewTests(AdminUserTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "<h1>Text key to patient</h1>")
 
+    def test_otk_sms_view_submit_error(self):
+        """
+        Test that we see an error message if mismatching phone numbers are entered
+        """
+        self.login()
+        self.client.post(
+            reverse("key")
+        )  # generate a key so it can be cached in session
+        response = self.client.post(
+            reverse("otk_sms"),
+            {"phone_number": "+12125551111", "phone_number2": "+12125552222"},
+        )
+        self.assertContains(response, "Phone numbers must match.")
+
     def test_otk_sms_view_submit_redirect(self):
         """
         Test that we're redirected to otk_sms_sent on form submission
@@ -187,8 +201,6 @@ class OtkSmsViewTests(AdminUserTestCase):
         self.client.post(
             reverse("key")
         )  # generate a key so it can be cached in session
-        response = self.client.get(
-            reverse("otk_sms_sent", kwargs={"phone_number": "+12125552368"})
-        )
+        response = self.client.get(reverse("otk_sms_sent"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "<h1>Check patient received key</h1>")

@@ -6,7 +6,7 @@
     {% endif %}
     {% for option in options %}
       <div class="multiple-choice__item">
-        <input type="radio" name="{{ option.name }}" value="{{ option.value|stringformat:'s' }}">
+        <input {% if option.attrs.id %} id="{{ option.attrs.id }}"{% endif %} type="radio" name="{{ option.name }}" value="{{ option.value|stringformat:'s' }}">
         <label {% if option.attrs.id %} for="{{ option.attrs.id }}"{% endif %}>{{ option.label }}</label>
       </div>
     {% endfor %}
