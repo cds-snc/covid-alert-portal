@@ -355,6 +355,29 @@ class ProfilesView(Is2FAMixin, IsAdminMixin, ListView):
         ).order_by("-current_user_email", "-is_admin", "email")
 
 
+class SupportView(TemplateView):
+    template_name = "profiles/templates/support.html"
+
+    @cached_property
+    def user_admin(self):
+        if self.user_was_invited:
+            invitation = Invitation.objects.filter(
+                email__iexact=self.request.user.email
+            ).first()
+            if HealthcareUser.objects.filter(
+                email__iexact=invitation.inviter.email
+            ).exists():
+                return invitation.inviter
+        return {
+            "email": "assistance+healthcare@cds-snc.ca",
+            "name": "Portal Super Admin",
+        }
+
+    @cached_property
+    def user_was_invited(self):
+        return Invitation.objects.filter(email__iexact=self.request.user.email).exists()
+
+
 class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):
     model = HealthcareUser
 
