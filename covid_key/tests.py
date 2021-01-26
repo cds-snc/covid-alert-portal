@@ -17,6 +17,8 @@ from .apps import CovidKeyConfig
 from .models import COVIDKey
 from .views import CodeView
 
+User = get_user_model()
+
 
 class CovidKeyConfigTest(TestCase):
     def test_apps(self):
@@ -169,6 +171,26 @@ class OtkSmsViewTests(AdminUserTestCase):
         response = self.client.get(reverse("otk_sms"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "<h1>Text key to patient</h1>")
+
+    def test_otk_sms_view_disabled_province(self):
+        """
+        Test that a province that's opted out of SMS cannot reach the sms_view
+        """
+        credentials = {
+            "email": "test3@test.com",
+            "name": "testuser3",
+            "province": HealthcareProvince.objects.get(abbr="QC"),
+            "is_admin": True,
+            "password": "testpassword",
+            "phone_number": "+12125552368",
+        }
+        User.objects.create_user(**credentials)
+        self.login(credentials)
+        self.client.post(
+            reverse("key")
+        )  # generate a key so it can be cached in session
+        response = self.client.get(reverse("otk_sms"))
+        self.assertEqual(response.status_code, 302)  # Redirect to start
 
     def test_otk_sms_view_submit_error(self):
         """
