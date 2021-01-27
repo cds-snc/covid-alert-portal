@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-27 00:15+0000\n"
+"POT-Creation-Date: 2021-01-27 00:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -566,32 +566,22 @@ msgid "New patient"
 msgstr "Nouveau patient"
 
 #: covid_key/forms.py:22
-#, fuzzy
-#| msgid "The phone numbers didn’t match."
 msgid "Phone numbers must match"
 msgstr "Les numéros de téléphone sont différents"
 
 #: covid_key/forms.py:26
-#, fuzzy
-#| msgid "Enter patient's mobile phone number"
 msgid "Enter patient’s mobile phone number"
 msgstr "Entrez le numéro de téléphone mobile du patient"
 
 #: covid_key/forms.py:29
-#, fuzzy
-#| msgid "Confirm your mobile phone number"
 msgid "Confirm patient’s mobile phone number"
 msgstr "Entrez de nouveau le numéro de téléphone"
 
 #: covid_key/forms.py:62
-#, fuzzy
-#| msgid "Yes, generate a key"
 msgid "Yes, generate a key for another patient."
 msgstr "Oui, générer une clé pour un autre patient."
 
 #: covid_key/forms.py:63
-#, fuzzy
-#| msgid "You entered 2 different phone numbers."
 msgid "No, try again or use different phone number."
 msgstr "Non, réessayer ou utiliser un autre numéro de téléphone."
 
@@ -668,8 +658,6 @@ msgstr "Vous générez trop de clés. Réessayez plus tard."
 
 #: covid_key/templates/covid_key/otk_sms.html:7
 #: portal/templates/includes/big-code.html:10
-#, fuzzy
-#| msgid "Tell the patient:"
 msgid "Text key to patient"
 msgstr "Texter la clé au patient"
 
@@ -678,15 +666,11 @@ msgid "If patient gives permission, text this key to their phone"
 msgstr "Si le patient accepte, textez-lui la clé suivante"
 
 #: covid_key/templates/covid_key/otk_sms.html:17
-#, fuzzy
-#| msgid "Send"
 msgid "Text key"
 msgstr "Texter la clé"
 
 #: covid_key/templates/covid_key/otk_sms_sent.html:7
 #: covid_key/templates/covid_key/otk_sms_sent.html:13
-#, fuzzy
-#| msgid "Help patient enter key"
 msgid "Check patient received this key"
 msgstr "Vérifiez que le patient a reçu la clé suivante"
 
@@ -695,8 +679,7 @@ msgid "The text takes about 30 seconds to arrive."
 msgstr "Le message texte met environ 30 secondes pour arriver."
 
 #: covid_key/templates/covid_key/otk_sms_sent.html:31
-#, fuzzy, python-format
-#| msgid "Did {{phone_number}} get the key?"
+#, python-format
 msgid "Did %(phone_number)s get the key?"
 msgstr "La clé a-t-elle été reçue au numéro %(phone_number)s?"
 
@@ -2078,17 +2061,3 @@ msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
 "portail."
-
-#, fuzzy
-#~| msgid "Help patient enter key"
-#~ msgid "Check patient received key"
-#~ msgstr "Vérifiez que le patient a reçu la clé suivante"
-
-#~ msgid "Your invitation has expired."
-#~ msgstr "Votre invitation est expirée."
-
-#~ msgid "You need a new link to create an account"
-#~ msgstr "Vous avez besoin d’un nouveau lien pour créer un compte"
-
-#~ msgid "Contact your administrator."
-#~ msgstr "Contactez l’admistrateur du portail."
