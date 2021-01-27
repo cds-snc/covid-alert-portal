@@ -12,7 +12,6 @@ from django_otp.plugins.otp_static.models import StaticDevice, StaticToken
 from portal.mixins import Is2FAMixin, ProvinceAdminMixin, GetUserAdminMixin
 
 from backup_codes.forms import RequestBackupCodesForm
-from invitations.models import Invitation
 from profiles.models import HealthcareUser
 from announcements.models import Announcement
 
