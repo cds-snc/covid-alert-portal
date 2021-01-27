@@ -10,13 +10,10 @@
 {% block content %}
   {% include  "includes/error_list.html" %}
   {% include  "includes/flash_messages.html" %}
-  <h1>{% trans "Text key to patient" %}</h1>
-
-  <p>{% trans "Follow these steps if the patient wants you to send their mobile phone:" %}</p>
+  <h1>{% trans "If patient gives permission, text this key to their phone" %}</h1>
 
   <div class="otk">{{ code }}</div>
 
-  {% url 'key' as cancel_url %}
-  {% include "includes/cds_form.html" with submit_text=_("Send key") secondary_action_text=_('Cancel') secondary_action_url=cancel_url %}
+  {% include "includes/cds_form.html" with submit_text=_("Text key") %}
 
 {% endblock %}

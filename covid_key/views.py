@@ -147,6 +147,7 @@ class OtkSmsView(PermissionRequiredMixin, FormView, SessionTemplateView):
 
     def __init__(self):
         super().__init__()
+        self.phone_number = None
 
     def handle_no_permission(self):
         """
@@ -156,7 +157,7 @@ class OtkSmsView(PermissionRequiredMixin, FormView, SessionTemplateView):
         return redirect(reverse_lazy("start"))
 
     def get_success_url(self):
-        return reverse_lazy("otk_sms_sent")
+        return reverse_lazy("otk_sms_sent", kwargs={"phone_number": self.phone_number})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -164,6 +165,7 @@ class OtkSmsView(PermissionRequiredMixin, FormView, SessionTemplateView):
         return context
 
     def form_valid(self, form):
+        self.phone_number = str(form.cleaned_data.get("phone_number"))
         form.send_sms(self.request.LANGUAGE_CODE, self.request.session.get("otk"))
         return super().form_valid(form)
 
@@ -190,6 +192,7 @@ class OtkSmsSentView(PermissionRequiredMixin, FormView, SessionTemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["code"] = self.request.session.get("otk")["code"]
+        context["phone_number"] = self.kwargs["phone_number"]
         return context
 
     def form_valid(self, form):

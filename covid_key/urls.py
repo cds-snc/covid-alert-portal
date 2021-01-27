@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from django.views.generic import TemplateView
 from django_otp.decorators import otp_required
 from django.contrib.auth.views import login_required
@@ -26,8 +26,8 @@ urlpatterns = [
         login_required(otp_required(views.OtkSmsView.as_view())),
         name="otk_sms",
     ),
-    path(
-        "otk-sms-sent/",
+    re_path(
+        r"otk_sms_sent/(?P<phone_number>[+\d]{0,50})$",
         login_required(otp_required(views.OtkSmsSentView.as_view())),
         name="otk_sms_sent",
     ),

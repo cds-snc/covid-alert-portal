@@ -19,14 +19,14 @@ class OtkSmsForm(HealthcareBaseForm):
     """
 
     error_messages = {
-        "phone_number2": _("Phone numbers must match."),
+        "phone_number2": _("Phone numbers must match"),
     }
 
     phone_number = PhoneNumberField(
-        label="Enter patient’s mobile phone number", max_length=100
+        label=_("Enter patient’s mobile phone number"), max_length=100
     )
     phone_number2 = PhoneNumberField(
-        label="Confirm patient’s mobile phone number", max_length=100
+        label=_("Confirm patient’s mobile phone number"), max_length=100
     )
 
     def clean(self):
@@ -57,11 +57,11 @@ class OtkSmsSentForm(HealthcareBaseForm):
     """
 
     redirect_choice = forms.ChoiceField(
-        label="Did the patient get the key?",
+        label="",
         choices=[
-            ("start", "Yes, generate another key"),
-            ("otk_sms", "No, try different phone number"),
-            ("key", "No, read key"),
+            ("start", _("Yes, generate a key for another patient.")),
+            ("otk_sms", _("No, try again or use different phone number.")),
+            ("key", _("No, read key.")),
         ],
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )

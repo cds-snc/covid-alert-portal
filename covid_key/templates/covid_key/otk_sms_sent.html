@@ -4,13 +4,13 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Check patient received key" %}
+  {% trans "Check patient received this key" %}
 {% endblock %}
 
 {% block content %}
   {% include  "includes/error_list.html" %}
   {% include  "includes/flash_messages.html" %}
-  <h1>{% trans "Check patient received key" %}</h1>
+  <h1>{% trans "Check patient received this key" %}</h1>
 
   <div class="otk">{{ request.session.otk.code }}</div>
 
@@ -28,6 +28,7 @@
     </div>
   </details>
 
+  <strong>{% blocktrans %}Did {{ phone_number }} get the key?{% endblocktrans %}</strong>
   {% include "includes/cds_form.html" with submit_text=_("Next") %}
 
 {% endblock %}
