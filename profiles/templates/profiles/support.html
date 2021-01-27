@@ -6,32 +6,31 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{% trans "Support" %}</h1>
-    <h2>{% trans "If you cannot log in to the portal" %}</h2>
-    <p>{% trans "Ask your administrator for a security code." %}</p>
+  <h1>{% trans "Support" %}</h1>
 
-    <h2>{% trans "If the portal is down" %}</h2>
-    <p>{% trans "Follow local procedures for patients who need keys." %}</p>
-    <p>{% trans "Public health authorities must determine what to do for:" %}</p>
-    <ul>
-      <li>{% trans "Situations when an individual healthcare worker cannot use their portal account." %}</li>
-      <li>{% trans "System-wide portal outages." %}</li>
-    </ul>
+  <h2>{% trans "For portal team members" %}</h2>
 
-    <h2>{% trans "For any other help with the portal" %}</h2>
-    {% url 'contact:index' as contact_url %}
-    {% blocktrans %}
-        <p><a href="{{ contact_url }}">Contact us</a>.</p>
-    {% endblocktrans %}
+  <h3>{% trans "Help with portal invitations, logging in, or changes to your account" %}</h3>
 
-    <h2>{% trans "For help with the app" %}</h2>
-    <p>{% trans "Patients can get support by:" %}</p>
-    <ul>
-      <li>{% trans "Phone:" %} 1-833-784-4397</li>
-      <li>{% trans "TTY (text telephone):" %} 1-800-465-7735</li>
-      <li>{% trans "Email:" %} <a href="mailto:hc.AlerteCOVIDAlert.sc@canada.ca">hc.AlerteCOVIDAlert.sc@canada.ca</a></li>
-    </ul>
+  {% if request.user.is_authenticated %}
+    <p>{% blocktrans with view.user_admin.email as admin_email %}Contact your administrator at <a href="mailto:{{ admin_email }}">{{ admin_email }}</a>.{% endblocktrans %}</p>
+  {% else %}
+    <p>{% trans "Contact your administrator. You’ll find their contact information in the email “Account confirmation and useful links”." %}</p>
+  {% endif %}
 
-    <p>{% trans "Patients can also read about <a href='https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert/help.html' target='_blank'>common support issues</a>." %}</p>
-  </div>
+  <h3>{% trans "If the portal is down and patients need keys" %}</h3>
+  <p>{% trans "Follow your health authority's procedures. Ask your administrator if you need more information." %}</p>
+
+  <h3>{% trans "For any other help with the portal" %}</h3>
+
+  {% url 'contact:index' as contact_url %}
+  {% blocktrans %}
+      <p><a href="{{ contact_url }}">Contact us</a>.</p>
+  {% endblocktrans %}
+
+  <h2>{% trans "For patients using the app" %}</h2>
+
+  <p>{% trans "Patients can <a href='https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert/help.html#a17' target='_blank'>contact direct support</a>." %}</p>
+
+  <p>{% trans "They can also read about <a href='https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert/help.html' target='_blank'>common support issues</a>." %}</p>
 {% endblock %}
