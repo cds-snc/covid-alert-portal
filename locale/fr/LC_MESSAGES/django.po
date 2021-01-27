@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-27 16:29+0000\n"
+"POT-Creation-Date: 2021-01-27 17:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2004,46 +2004,3 @@ msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
 "portail."
-
-#~ msgid "If you cannot log in to the portal"
-#~ msgstr "Si vous n’arrivez pas à vous connecter"
-
-#~ msgid "Ask your administrator for a security code."
-#~ msgstr "Demandez un code de sécurité à votre administrateur."
-
-#~ msgid "Follow local procedures for patients who need keys."
-#~ msgstr "Suivez le protocole local pour les patients ayant besoin d’une clé."
-
-#~ msgid "Public health authorities must determine what to do for:"
-#~ msgstr "Les autorités sanitaires doivent définir un protocole pour :"
-
-#~ msgid ""
-#~ "Situations when an individual healthcare worker cannot use their portal "
-#~ "account."
-#~ msgstr ""
-#~ "Les situations où un membre d’équipe n’est pas capable d’utiliser son "
-#~ "compte pour le portail."
-
-#~ msgid "System-wide portal outages."
-#~ msgstr "Les interruptions de service généralisées du portail."
-
-#~ msgid "Patients can get support by:"
-#~ msgstr "Les patients peuvent recevoir de l’aide par :"
-
-#~ msgid "Phone:"
-#~ msgstr "Téléphone :"
-
-#~ msgid "TTY (text telephone):"
-#~ msgstr "Téléscripteur (ATS) :"
-
-#~ msgid "Email:"
-#~ msgstr "Courriel :"
-
-#~ msgid "Your invitation has expired."
-#~ msgstr "Votre invitation est expirée."
-
-#~ msgid "You need a new link to create an account"
-#~ msgstr "Vous avez besoin d’un nouveau lien pour créer un compte"
-
-#~ msgid "Contact your administrator."
-#~ msgstr "Contactez l’admistrateur du portail."
