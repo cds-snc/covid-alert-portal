@@ -28,7 +28,13 @@ from django.urls import translate_url
 
 from otp_yubikey.models import RemoteYubikeyDevice
 
-from portal.mixins import ThrottledMixin, Is2FAMixin, IsAdminMixin, ProvinceAdminMixin
+from portal.mixins import (
+    ThrottledMixin,
+    Is2FAMixin,
+    IsAdminMixin,
+    ProvinceAdminMixin,
+    GetUserAdminMixin,
+)
 from backup_codes.views import get_user_static_device
 from invitations.models import Invitation
 from axes.models import AccessAttempt
@@ -355,27 +361,8 @@ class ProfilesView(Is2FAMixin, IsAdminMixin, ListView):
         ).order_by("-current_user_email", "-is_admin", "email")
 
 
-class SupportView(TemplateView):
+class SupportView(GetUserAdminMixin, TemplateView):
     template_name = "profiles/templates/support.html"
-
-    @cached_property
-    def user_admin(self):
-        if self.user_was_invited:
-            invitation = Invitation.objects.filter(
-                email__iexact=self.request.user.email
-            ).first()
-            if HealthcareUser.objects.filter(
-                email__iexact=invitation.inviter.email
-            ).exists():
-                return invitation.inviter
-        return {
-            "email": "assistance+healthcare@cds-snc.ca",
-            "name": "Portal Super Admin",
-        }
-
-    @cached_property
-    def user_was_invited(self):
-        return Invitation.objects.filter(email__iexact=self.request.user.email).exists()
 
 
 class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):

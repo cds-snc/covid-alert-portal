@@ -4,8 +4,31 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.views import redirect_to_login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import ImproperlyConfigured
+from django.utils.functional import cached_property
 from django.utils.timezone import now
 from datetime import timedelta
+
+from invitations.models import Invitation
+
+
+class GetUserAdminMixin:
+    @cached_property
+    def user_admin(self):
+        if self.user_was_invited:
+            invitation = Invitation.objects.filter(
+                email__iexact=self.request.user.email
+            ).first()
+            User = get_user_model()
+            if User.objects.filter(email__iexact=invitation.inviter.email).exists():
+                return invitation.inviter
+        return {
+            "email": "assistance+healthcare@cds-snc.ca",
+            "name": "Portal Super Admin",
+        }
+
+    @cached_property
+    def user_was_invited(self):
+        return Invitation.objects.filter(email__iexact=self.request.user.email).exists()
 
 
 class ThrottledMixin:
