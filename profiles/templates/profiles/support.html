@@ -11,9 +11,9 @@
   <h2>{% trans "For portal team members" %}</h2>
 
   <h3>{% trans "Help with portal invitations, logging in, or changes to your account" %}</h3>
-  
+
   {% if request.user.is_authenticated %}
-    <p>{% blocktrans with view.user_admin.email as admin_email %}Contact your administrator at <a href="mailto:{{ admin_email }}">{{ admin_email }}</a>{% endblocktrans %}</p>
+    <p>{% blocktrans with view.user_admin.email as admin_email %}Contact your administrator at <a href="mailto:{{ admin_email }}">{{ admin_email }}</a>.{% endblocktrans %}</p>
   {% else %}
     <p>{% trans "Contact your administrator. You’ll find their contact information in the email “Account confirmation and useful links”." %}</p>
   {% endif %}
@@ -22,13 +22,15 @@
   <p>{% trans "Follow your health authority's procedures. Ask your administrator if you need more information." %}</p>
 
   <h3>{% trans "For any other help with the portal" %}</h3>
+
+  {% url 'contact:index' as contact_url %}
   {% blocktrans %}
       <p><a href="{{ contact_url }}">Contact us</a>.</p>
   {% endblocktrans %}
 
   <h2>{% trans "For patients using the app" %}</h2>
 
-  <p>{% trans "Patients can <a href='https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert/help.html#a17'>contact direct support</a>." %}</p>
-  
+  <p>{% trans "Patients can <a href='https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert/help.html#a17' target='_blank'>contact direct support</a>." %}</p>
+
   <p>{% trans "They can also read about <a href='https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert/help.html' target='_blank'>common support issues</a>." %}</p>
 {% endblock %}
