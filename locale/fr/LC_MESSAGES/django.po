@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-27 00:32+0000\n"
+"POT-Creation-Date: 2021-01-27 16:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1801,9 +1801,7 @@ msgid "Help with portal invitations, logging in, or changes to your account"
 msgstr "Invitations pour le portail, connexion ou modifications au compte"
 
 #: profiles/templates/profiles/support.html:16
-#, fuzzy, python-format
-#| msgid ""
-#| "Ask your administrator for a code. You can email them at %(admin_email)s."
+#, python-format
 msgid ""
 "Contact your administrator at <a href=\"mailto:%(admin_email)s\">"
 "%(admin_email)s</a>"
@@ -1820,8 +1818,6 @@ msgstr ""
 "courriel intitulé « Confirmation de compte et liens utiles »."
 
 #: profiles/templates/profiles/support.html:21
-#, fuzzy
-#| msgid "If the portal is down"
 msgid "If the portal is down and patients need keys"
 msgstr "En cas d’interruption de service du portail"
 
@@ -1838,11 +1834,7 @@ msgid "For any other help with the portal"
 msgstr "Pour toute autre assistance avec le portail"
 
 #: profiles/templates/profiles/support.html:25
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "        <p><a href=\"%(contact_url)s\">Contact us</a>.</p>\n"
-#| "    "
+#, python-format
 msgid ""
 "\n"
 "      <p><a href=\"%(contact_url)s\">Contact us</a>.</p>\n"
@@ -1853,17 +1845,10 @@ msgstr ""
 "    "
 
 #: profiles/templates/profiles/support.html:29
-#, fuzzy
-#| msgid "For help with the app"
 msgid "For patients using the app"
 msgstr "Pour les patients utilisant l’application mobile"
 
 #: profiles/templates/profiles/support.html:31
-#, fuzzy
-#| msgid ""
-#| "Patients can also read about <a href='https://www.canada.ca/en/public-"
-#| "health/services/diseases/coronavirus-disease-covid-19/covid-alert/help."
-#| "html' target='_blank'>common support issues</a>."
 msgid ""
 "Patients can <a href='https://www.canada.ca/en/public-health/services/"
 "diseases/coronavirus-disease-covid-19/covid-alert/help.html#a17'>contact "
@@ -1874,11 +1859,6 @@ msgstr ""
 "target='_blank'>obtenir une aide directe</a>."
 
 #: profiles/templates/profiles/support.html:33
-#, fuzzy
-#| msgid ""
-#| "Patients can also read about <a href='https://www.canada.ca/en/public-"
-#| "health/services/diseases/coronavirus-disease-covid-19/covid-alert/help."
-#| "html' target='_blank'>common support issues</a>."
 msgid ""
 "They can also read about <a href='https://www.canada.ca/en/public-health/"
 "services/diseases/coronavirus-disease-covid-19/covid-alert/help.html' "
