@@ -15,7 +15,7 @@
   {% if request.user.is_authenticated %}
     <p>{% blocktrans with view.user_admin.email as admin_email %}Contact your administrator at <a href="mailto:{{ admin_email }}">{{ admin_email }}</a>{% endblocktrans %}</p>
   {% else %}
-    <p>{% trans "Contact your administrator. You’ll find their contact information in the email “Account confirmation and useful links”." %}
+    <p>{% trans "Contact your administrator. You’ll find their contact information in the email “Account confirmation and useful links”." %}</p>
   {% endif %}
 
   <h3>{% trans "If the portal is down and patients need keys" %}</h3>
