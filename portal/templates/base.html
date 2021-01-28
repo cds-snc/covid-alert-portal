@@ -57,8 +57,13 @@
         </div>
       </header>
       <main id="content">
-
-        {% include  "includes/nav_main.html" %}
+        {% if request and 'register' in request.resolver_match.app_names %}
+          <div class="phase-banner">
+            <div><span>BETA</span><span>This is a new service — your feedback will help us improve it.</span></div>
+          </div>
+        {% else %}
+          {% include  "includes/nav_main.html" %}
+        {% endif %}
 
         <div class="page--container" id="page--content" tabindex="-1">
           {% if request.resolver_match.url_name != 'login' %}
