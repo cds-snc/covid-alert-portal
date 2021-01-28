@@ -10,6 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - OTK sent via SMS using new html pages
 - OTK is temporarily cached in the session
 
+## [1.16.1] - 2021-01-27
+
+### Updated
+
+- Added some context to the Support page for when to contact portal team vs admin
+
 ## [1.16.0] - 2021-01-19
 
 ### Added

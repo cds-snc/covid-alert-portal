@@ -87,7 +87,7 @@ urlpatterns = [
     ),
     path(
         "support/",
-        TemplateView.as_view(template_name="profiles/support.html"),
+        views.SupportView.as_view(template_name="profiles/support.html"),
         name="support",
     ),
     path(

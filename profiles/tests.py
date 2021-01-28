@@ -168,14 +168,27 @@ class UnauthenticatedView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "<h1>Terms of use</h1>")
 
-    def test_support_page(self):
-        response = self.client.get(reverse("support"))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Support</h1>")
-
     def test_quick_guide_redirects_to_support(self):
         response = self.client.get("/en/quick-guide/", follow=False)
         self.assertRedirects(response, reverse("support"), status_code=301)
+
+
+class SupportView(AdminUserTestCase):
+    def test_support_page_NOT_logged_in(self):
+        response = self.client.get(reverse("support"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Support</h1>")
+        self.assertContains(response, "Contact your administrator. You")
+
+    def test_support_page_logged_in(self):
+        self.login()
+        response = self.client.get(reverse("support"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Support</h1>")
+        self.assertContains(
+            response,
+            'Contact your administrator at <a href="mailto:assistance+healthcare@cds-snc.ca">assistance+healthcare@cds-snc.ca</a>',
+        )
 
 
 class RestrictedPageViews(TestCase):

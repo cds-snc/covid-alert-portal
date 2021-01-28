@@ -4,16 +4,14 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
 from django.utils.translation import gettext as _
-from django.utils.functional import cached_property
 from django.db.models import Q
 
 from django_otp import devices_for_user
 from django_otp.plugins.otp_static.models import StaticDevice, StaticToken
 
-from portal.mixins import Is2FAMixin, ProvinceAdminMixin
+from portal.mixins import Is2FAMixin, ProvinceAdminMixin, GetUserAdminMixin
 
 from backup_codes.forms import RequestBackupCodesForm
-from invitations.models import Invitation
 from profiles.models import HealthcareUser
 from announcements.models import Announcement
 
@@ -86,30 +84,10 @@ class SignupBackupCodeListView(LoginRequiredMixin, ListView):
         return _get_backup_codes_list(self.request.user)
 
 
-class RequestBackupCodes(LoginRequiredMixin, FormView):
+class RequestBackupCodes(GetUserAdminMixin, LoginRequiredMixin, FormView):
     form_class = RequestBackupCodesForm
     template_name = "backup_codes/backup_codes_help.html"
     success_url = reverse_lazy("login_2fa")
-
-    @cached_property
-    def user_admin(self):
-        if self.user_was_invited:
-            invitation = Invitation.objects.filter(
-                email__iexact=self.request.user.email
-            ).first()
-            if HealthcareUser.objects.filter(
-                email__iexact=invitation.inviter.email
-            ).exists():
-                return invitation.inviter
-
-        return {
-            "email": "assistance+healthcare@cds-snc.ca",
-            "name": "Portal Super Admin",
-        }
-
-    @cached_property
-    def user_was_invited(self):
-        return Invitation.objects.filter(email__iexact=self.request.user.email).exists()
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
