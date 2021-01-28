@@ -77,6 +77,7 @@ INSTALLED_APPS = [
     "contact",
     "about",
     "backup_codes",
+    "register",
     "axes",
     "django.contrib.sites",  # Required for invitations
     "django.contrib.auth",

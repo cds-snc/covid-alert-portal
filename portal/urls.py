@@ -69,4 +69,5 @@ urlpatterns += i18n_patterns(
         include(invitation_patterns, namespace="invitations"),
     ),
     path("announcements/", include("announcements.urls")),
+    path("register/", include("register.urls")),
 )
