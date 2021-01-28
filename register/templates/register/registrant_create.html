@@ -2,10 +2,13 @@
 {% load i18n %}
 
 {% block title %}
+  {% if form.errors %}{% trans "Error: "%}{% endif %}
   {% trans "Where should we send your poster?" %}
 {% endblock %}
 
 {% block content %}
+  {% include  "includes/error_list.html" %}
+
   <h1>{% trans "Where should we send your poster?" %}</h1>
   <p>Your COVID Alert QR code poster will be sent to this email address. We will ask you to verify this email address.</p>
   {% include "includes/cds_form.html" with submit_text=_("Continue") %}

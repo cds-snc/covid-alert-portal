@@ -11,7 +11,6 @@ urlpatterns = [
         views.RegisterConfirmationPageView.as_view(),
         name="confirmation",
     ),
-    path("list", views.RegistrantListView.as_view(), name="list"),
     path("create", views.RegistrantCreate.as_view(), name="create"),
     path("<uuid:pk>/name", views.RegistrantUpdate.as_view(), name="name"),
 ]
