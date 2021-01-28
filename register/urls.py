@@ -1,9 +1,14 @@
 from django.urls import path
 
-from .views import RegisterStartPageView
+from . import views
 
 app_name = "register"
 
 urlpatterns = [
-    path("", RegisterStartPageView.as_view(), name="start"),
+    path("", views.RegisterStartPageView.as_view(), name="start"),
+    path(
+        "confirmation",
+        views.RegisterConfirmationPageView.as_view(),
+        name="confirmation",
+    ),
 ]

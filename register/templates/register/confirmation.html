@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  Your request for a poster has been submitted
+{% endblock %}
+
+{% block content %}
+  <div class="jumbotron">
+    <h1>Your request for a poster has been submitted</h1>
+  </div>
+  <h2>What happens next</h2>
+
+  <p>Thank you. As soon as it’s ready, your poster will be emailed to name@example.com</p>
+  <p>If you don’t receive your poster within a few hours, please contact us.</p>
+
+  <div class="info-message">
+    If your business organization or event operates across multiple branches, you will need to create a poster for each unique location.
+  </div>
+
+  <h2>Further information</h2>
+  <p>Please see our FAQs</p>
+
+  <div class="content-button">
+      <a href="{% url 'register:start' %}" role='button' draggable='false'>{% trans "Generate different poster" %}</a>
+      <a href="{% url 'register:start' %}" role='button' draggable='false' class="secondary">{% trans "I am finished" %}</a>
+  </div>
+
+{% endblock %}
