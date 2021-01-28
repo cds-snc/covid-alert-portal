@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% trans "Where should we send your poster?" %}
+{% endblock %}
+
+{% block content %}
+  <h1>{% trans "Where should we send your poster?" %}</h1>
+  <p>Your COVID Alert QR code poster will be sent to this email address. We will ask you to verify this email address.</p>
+  {% include "includes/cds_form.html" with submit_text=_("Continue") %}
+{% endblock %}
