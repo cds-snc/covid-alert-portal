@@ -5,11 +5,8 @@ from portal.forms import HealthcareBaseForm
 from .models import Registrant
 
 
-class RegistrantCreateForm(HealthcareBaseForm, forms.ModelForm):
-    class Meta:
-        model = Registrant
-
-        fields = ("email",)
+class EmailForm(HealthcareBaseForm, forms.Form):
+    email = forms.EmailField(label="Email address")
 
 
 class RegistrantNameForm(HealthcareBaseForm, forms.ModelForm):

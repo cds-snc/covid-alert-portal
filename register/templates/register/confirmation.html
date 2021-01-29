@@ -2,23 +2,28 @@
 {% load i18n %}
 
 {% block title %}
-  Your request for a poster has been submitted
+  {% trans "Your request for a poster has been submitted" %}
 {% endblock %}
 
 {% block content %}
   <div class="jumbotron">
-    <h1>Your request for a poster has been submitted</h1>
+    <h1>{% trans "Your request for a poster has been submitted" %}</h1>
   </div>
-  <h2>What happens next</h2>
 
-  <p>Thank you. As soon as it’s ready, your poster will be emailed to name@example.com</p>
-  <p>If you don’t receive your poster within a few hours, please contact us.</p>
+  <h2>{% trans "What happens next" %}</h2>
+
+  {% if registrant_email %}
+    <p>{% trans "Thank you. As soon as it’s ready, your poster will be emailed to" %} <a href="mailto:{{registrant_email}}">{{ registrant_email }}</a>.</p>
+  {% else %}
+    <p>{% trans "Thank you. As soon as it’s ready, your poster will be emailed to you." %}</p>
+  {% endif %}
+  <p>{% trans "If you don’t receive your poster within a few hours, please contact us." %}</p>
 
   <div class="info-message">
-    If your business organization or event operates across multiple branches, you will need to create a poster for each unique location.
+    {% trans "If your business organization or event operates across multiple branches, you will need to create a poster for each unique location." %}
   </div>
 
-  <h2>Further information</h2>
+  <h2>{% trans "Further information" %}</h2>
   <p>Please see our FAQs</p>
 
   <div class="content-button">

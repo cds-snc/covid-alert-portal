@@ -21,7 +21,7 @@
     <p><strong>{% trans "Is this patient ready?" %}</strong></p>
    <form action="{% url 'key' %}" method="post">
     {% csrf_token %}
-      <button type="submit" class="start">{% trans "Yes, generate a key" %}</button>
+      <button type="submit" class="start with-chevron">{% trans "Yes, generate a key" %}</button>
     </form>
   </div>
 {% endblock %}

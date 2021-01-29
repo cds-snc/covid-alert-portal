@@ -10,6 +10,6 @@
   {% include  "includes/error_list.html" %}
 
   <h1>{% trans "What is your name?" %}</h1>
-  <p>We will use this to address the email that we send with your COVID Alert QR code poster.</p>
+  <p>{% trans "We will use this to address the email that we send with your COVID Alert QR code poster." %}</p>
   {% include "includes/cds_form.html" with submit_text=_("Continue") %}
 {% endblock %}

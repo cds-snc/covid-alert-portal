@@ -1,25 +1,35 @@
-from django.views.generic import TemplateView, ListView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import TemplateView, FormView
+from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
-from django.shortcuts import render
 
 from .models import Registrant
-from .forms import RegistrantCreateForm, RegistrantNameForm
+from .forms import EmailForm, RegistrantNameForm
 
 
-class RegistrantCreate(CreateView):
-    form_class = RegistrantCreateForm
-    template_name = "register/registrant_create.html"
+class RegistrantEmailView(FormView):
+    form_class = EmailForm
+    template_name = "register/registrant_email.html"
+
+    def form_valid(self, form):
+        email = form.cleaned_data.get("email")
+        obj, created = Registrant.objects.get_or_create(
+            email=email,
+        )
+
+        self._object = obj
+        self.request.session["registrant_email"] = email
+
+        return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy("register:name", kwargs={"pk": self.object.pk})
+        return reverse_lazy("register:name", kwargs={"pk": self._object.pk})
 
 
-class RegistrantUpdate(UpdateView):
+class RegistrantNameView(UpdateView):
     model = Registrant
     form_class = RegistrantNameForm
     success_url = reverse_lazy("register:confirmation")
-    template_name = "register/registrant_create.html"
+    template_name = "register/registrant_name.html"
 
 
 class RegisterStartPageView(TemplateView):
@@ -28,3 +38,8 @@ class RegisterStartPageView(TemplateView):
 
 class RegisterConfirmationPageView(TemplateView):
     template_name = "register/confirmation.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["registrant_email"] = self.request.session.get("registrant_email")
+        return context
