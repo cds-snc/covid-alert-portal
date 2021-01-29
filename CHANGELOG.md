@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.17.1] - 2021-01-29
+
+### Added
+
 - OTK sent via SMS using new html pages
 - OTK is temporarily cached in the session
 
