@@ -1,31 +1,61 @@
 import logging
 import requests
-from datetime import timedelta
+from datetime import timedelta, datetime
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_protect
+from django.views.generic.edit import FormView
+from django.urls import reverse_lazy
 
 from portal.mixins import ThrottledMixin, Is2FAMixin
 
+from .forms import OtkSmsForm, OtkSmsSentForm
 from .models import COVIDKey
 
 
 logger = logging.getLogger(__name__)
 
 
-class CodeView(Is2FAMixin, ThrottledMixin, TemplateView):
+class StartView(TemplateView):
+    template_name = "covid_key/start.html"
+
+    def get(self, request):
+        # clear any existing one time keys
+        self.request.session.pop("otk", None)
+        return super().get(request)
+
+
+class SessionTemplateView(TemplateView):
+    def get(self, request, **kwargs):
+        if "otk" in self.request.session:
+            # if we have a cached OTK, let's display it
+            return super().get(request, kwargs)
+        else:
+            # if we don't have a cached OTK then redirect back to the start
+            return redirect("start")
+
+
+class CodeView(Is2FAMixin, ThrottledMixin, SessionTemplateView):
     throttled_model = COVIDKey
     throttled_limit = settings.COVID_KEY_MAX_PER_USER
     throttled_time_range = settings.COVID_KEY_MAX_PER_USER_PERIOD_SECONDS
     template_name = "covid_key/key.html"
 
-    def get(self, request):
-        return redirect("start")
+    def get_context_data(self, **kwargs):
+        # Load cached OTK when displaying from a GET request
+        context = super().get_context_data(**kwargs)
+        context["sms_enabled"] = self.request.user.province.sms_enabled
+        context["code"] = self.request.session.get("otk")["code"]
+        context["expiry"] = datetime.fromtimestamp(
+            self.request.session.get("otk")["expiry"]
+        )
+        return context
 
     @method_decorator(csrf_protect)
     def post(self, request):
@@ -89,8 +119,18 @@ class CodeView(Is2FAMixin, ThrottledMixin, TemplateView):
             f"{diagnosis_code[0:3]} {diagnosis_code[3:6]} " f"{diagnosis_code[6:10]}"
         )
 
+        # Cache the key temporarily
+        self.request.session["otk"] = {
+            "code": diagnosis_code,
+            "expiry": expiry.timestamp(),
+        }
+
         return self.render_to_response(
-            {"code": diagnosis_code, "expiry": expiry},
+            {
+                "code": diagnosis_code,
+                "expiry": expiry,
+                "sms_enabled": request.user.province.sms_enabled,
+            }
         )
 
     def limit_reached(self):
@@ -98,3 +138,63 @@ class CodeView(Is2FAMixin, ThrottledMixin, TemplateView):
             f"User {self.request.user.email} has hit the limit of {settings.COVID_KEY_MAX_PER_USER} keys per 24h."
         )
         return render(self.request, "covid_key/locked.html", status=403)
+
+
+class OtkSmsView(PermissionRequiredMixin, FormView, SessionTemplateView):
+    form_class = OtkSmsForm
+    template_name = "covid_key/otk_sms.html"
+    permission_required = ["sms_enabled"]
+
+    def __init__(self):
+        super().__init__()
+        self.phone_number = None
+
+    def handle_no_permission(self):
+        """
+        Override here to redirect back to start when users are from
+        a province that disallows SMS
+        """
+        return redirect(reverse_lazy("start"))
+
+    def get_success_url(self):
+        return reverse_lazy("otk_sms_sent", kwargs={"phone_number": self.phone_number})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["code"] = self.request.session.get("otk")["code"]
+        return context
+
+    def form_valid(self, form):
+        self.phone_number = str(form.cleaned_data.get("phone_number"))
+        form.send_sms(self.request.LANGUAGE_CODE, self.request.session.get("otk"))
+        return super().form_valid(form)
+
+
+class OtkSmsSentView(PermissionRequiredMixin, FormView, SessionTemplateView):
+    form_class = OtkSmsSentForm
+    template_name = "covid_key/otk_sms_sent.html"
+    permission_required = ["sms_enabled"]
+
+    def __init__(self):
+        super().__init__()
+        self.redirect_choice = "start"
+
+    def handle_no_permission(self):
+        """
+        Override here to redirect back to start when users are from
+        a province that disallows SMS
+        """
+        return redirect(reverse_lazy("start"))
+
+    def get_success_url(self):
+        return reverse_lazy(self.redirect_choice)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["code"] = self.request.session.get("otk")["code"]
+        context["phone_number"] = self.kwargs["phone_number"]
+        return context
+
+    def form_valid(self, form):
+        self.redirect_choice = form.cleaned_data.get("redirect_choice")
+        return super().form_valid(form)

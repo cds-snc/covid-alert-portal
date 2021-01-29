@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block title %}
+  {% if form.errors %}{% trans "Error: "%}{% endif %}
+  {% trans "Check patient received this key" %}
+{% endblock %}
+
+{% block content %}
+  {% include  "includes/error_list.html" %}
+  {% include  "includes/flash_messages.html" %}
+  <h1>{% trans "Check patient received this key" %}</h1>
+
+  <div class="otk">{{ request.session.otk.code }}</div>
+
+  <div><p> {% trans "The text takes about 30 seconds to arrive." %} </p></div>
+
+  <details>
+    <summary>
+      <span>{% trans "Help patient enter key" %}</span>
+    </summary>
+
+    <div>
+      <p><strong>{% trans "To enter the key, the phone must be connected to the internet." %}</strong></p>
+      <br />
+      {% include "includes/detailed_instructions.html" %}
+    </div>
+  </details>
+
+  <strong>{% blocktrans %}Did {{ phone_number }} get the key?{% endblocktrans %}</strong>
+  {% include "includes/cds_form.html" with submit_text=_("Next") %}
+
+{% endblock %}

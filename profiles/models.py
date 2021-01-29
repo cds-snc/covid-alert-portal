@@ -9,6 +9,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 class HealthcareProvince(models.Model):
     name = models.CharField(max_length=100, unique=True)
     abbr = models.SlugField(max_length=5, allow_unicode=True, unique=True)
+    sms_enabled = models.BooleanField(default=False)
     api_key = models.CharField(
         null=True, blank=True, max_length=256, verbose_name=_("Bearer token")
     )
@@ -98,6 +99,12 @@ class HealthcareUser(AbstractBaseUser):
     def has_perm(self, perm, obj=None):
         """Does the user have a specific permission?"""
         # Simplest possible answer: Yes, always
+        return True
+
+    def has_perms(self, perms, obj=None):
+        """Validate list of view permissions"""
+        if "sms_enabled" in perms:
+            return self.province.sms_enabled
         return True
 
     def has_module_perms(self, app_label):

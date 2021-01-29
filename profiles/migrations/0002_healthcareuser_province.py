@@ -13,6 +13,20 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='healthcareuser',
             name='province',
-            field=models.CharField(choices=[('bc', 'British Columbia'), ('ab', 'Alberta'), ('sk', 'Saskachewan'), ('mb', 'Manitoba'), ('on', 'Ontario'), ('qc', 'Quebec'), ('ns', 'Nova Scotia'), ('nb', 'New Brunswick'), ('nl', 'Newfoundland'), ('pe', 'Prince Edward Island'), ('yk', 'Yukon'), ('nt', 'Northwest Territories'), ('nu', 'Nunavut')], default='nu', max_length=25),
+            field=models.CharField(choices=[
+                ('bc', 'British Columbia'),
+                ('ab', 'Alberta'),
+                ('sk', 'Saskachewan'),
+                ('mb', 'Manitoba'),
+                ('on', 'Ontario'),
+                ('qc', 'Quebec'),
+                ('ns', 'Nova Scotia'),
+                ('nb', 'New Brunswick'),
+                ('nl', 'Newfoundland'),
+                ('pe', 'Prince Edward Island'),
+                ('yk', 'Yukon'),
+                ('nt', 'Northwest Territories'),
+                ('nu', 'Nunavut')
+            ], default='nu', max_length=25),
         ),
     ]

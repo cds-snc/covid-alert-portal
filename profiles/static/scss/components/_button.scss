@@ -85,6 +85,15 @@
     }
   }
 
+  &.info {
+    background-color: $color-blue-dark;
+    box-shadow: 0 2px 0 black;
+
+    &:hover {
+      background-color: $color-blue-medium;
+    }
+  }
+
   &.danger {
     color: $color-white;
     background-color: $color-red;

@@ -32,6 +32,26 @@ resource "aws_secretsmanager_secret_version" "api_endpoint" {
   secret_string = var.ecs_secret_api_endpoint
 }
 
+resource "aws_secretsmanager_secret" "otk_sms_template_id_en" {
+  name                    = "otk_sms_template_id_en"
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret_version" "otk_sms_template_id_en" {
+  secret_id     = aws_secretsmanager_secret.otk_sms_template_id_en.id
+  secret_string = var.ecs_secret_otk_sms_template_id_en
+}
+
+resource "aws_secretsmanager_secret" "otk_sms_template_id_fr" {
+  name                    = "otk_sms_template_id_fr"
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret_version" "otk_sms_template_id_fr" {
+  secret_id     = aws_secretsmanager_secret.otk_sms_template_id_fr.id
+  secret_string = var.ecs_secret_otk_sms_template_id_fr
+}
+
 resource "aws_secretsmanager_secret" "invitation_email_template_id_en" {
   name                    = "invitation_email_template_id_en"
   recovery_window_in_days = 0

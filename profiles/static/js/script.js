@@ -18,4 +18,3 @@ if (form) {
     form.querySelector("button").disabled = true;
   });
 }
-
