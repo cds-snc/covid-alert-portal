@@ -1,10 +1,16 @@
 from django.test import TestCase
 from django.urls import reverse
 
+from waffle.models import Switch
+
+
 from .models import Registrant
 
 
 class RegisterView(TestCase):
+    def setUp(self):
+        Switch.objects.create(name="QR_CODES", active=True)
+
     def test_start_page(self):
         response = self.client.get(reverse("register:start"))
         self.assertEqual(response.status_code, 200)
