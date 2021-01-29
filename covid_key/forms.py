@@ -25,13 +25,14 @@ class OtkSmsForm(HealthcareBaseForm):
     phone_number = PhoneNumberField(
         label=_("Enter patient’s mobile phone number"), max_length=100
     )
-    phone_number2 = PhoneNumberField(
-        label=_("Confirm patient’s mobile phone number"), max_length=100
-    )
+    phone_number2 = PhoneNumberField(label=_("Enter the number again"), max_length=100)
 
     def clean(self):
         super().clean()
-        if self.cleaned_data["phone_number"] != self.cleaned_data["phone_number2"]:
+        if (
+            "phone_number" in self.cleaned_data
+            and self.cleaned_data["phone_number"] != self.cleaned_data["phone_number2"]
+        ):
             raise ValidationError(
                 {"phone_number2": [self.error_messages["phone_number2"]]}
             )

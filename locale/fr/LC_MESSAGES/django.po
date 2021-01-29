@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-28 14:34+0000\n"
+"POT-Creation-Date: 2021-01-29 18:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,7 +80,7 @@ msgstr ""
 #: about/templates/about/4_give_a_key.html:32
 #: about/templates/about/5_help_patient_enter_key.html:20
 msgid "Next:"
-msgstr "Suivant:"
+msgstr "Suivant :"
 
 #: about/templates/about/1_index.html:27
 #: about/templates/about/2_create_account.html:5
@@ -232,6 +232,8 @@ msgstr ""
 #: about/templates/about/5_help_patient_enter_key.html:5
 #: about/templates/about/5_help_patient_enter_key.html:15
 #: about/templates/includes/_nav_about.html:9
+#: covid_key/templates/covid_key/key.html:16
+#: covid_key/templates/covid_key/otk_sms_sent.html:21
 msgid "Help patient enter key"
 msgstr "Aider le patient avec sa clé"
 
@@ -573,19 +575,19 @@ msgstr "Les numéros de téléphone sont différents"
 msgid "Enter patient’s mobile phone number"
 msgstr "Entrez le numéro de téléphone mobile du patient"
 
-#: covid_key/forms.py:29
-msgid "Confirm patient’s mobile phone number"
+#: covid_key/forms.py:28
+msgid "Enter the number again"
 msgstr "Entrez de nouveau le numéro de téléphone"
 
-#: covid_key/forms.py:62
+#: covid_key/forms.py:63
 msgid "Yes, generate a key for another patient."
 msgstr "Oui, générer une clé pour un autre patient."
 
-#: covid_key/forms.py:63
+#: covid_key/forms.py:64
 msgid "No, try again or use different phone number."
 msgstr "Non, réessayer ou utiliser un autre numéro de téléphone."
 
-#: covid_key/forms.py:64
+#: covid_key/forms.py:65
 msgid "No, read key."
 msgstr "Non, lire la clé au téléphone."
 
@@ -631,11 +633,6 @@ msgstr "Oui, générer une clé"
 msgid "Give patient this key"
 msgstr "Donnez la clé suivante au patient"
 
-#: covid_key/templates/covid_key/key.html:16
-#: covid_key/templates/covid_key/otk_sms_sent.html:21
-msgid "Instructions for entering key"
-msgstr "Instructions pour entrer une clé dans l’application"
-
 #: covid_key/templates/covid_key/key.html:20
 #: covid_key/templates/covid_key/otk_sms_sent.html:25
 msgid "To enter the key, the phone must be connected to the internet."
@@ -643,7 +640,17 @@ msgstr ""
 "Le patient doit connecter son téléphone à Internet pour pouvoir entrer la "
 "clé."
 
-#: covid_key/templates/covid_key/key.html:26
+#: covid_key/templates/covid_key/key.html:25
+msgid ""
+"Patients can also <a href=\"https://www.canada.ca/en/public-health/services/"
+"diseases/coronavirus-disease-covid-19/covid-alert/help.html#a17\" target="
+"\"_blank\">contact direct app support</a>"
+msgstr ""
+"Les patients peuvent aussi <a href='https://www.canada.ca/fr/sante-publique/"
+"services/maladies/maladie-coronavirus-covid-19/alerte-covid/aide.html#a17' "
+"target='_blank'>obtenir une aide directe</a>"
+
+#: covid_key/templates/covid_key/key.html:27
 msgid "Generate another key"
 msgstr "Générer une autre clé"
 
@@ -977,8 +984,14 @@ msgid "Support"
 msgstr "Assistance"
 
 #: portal/templates/includes/phonetic.html:7
-msgid "Read key phonetically and ask patient to read it back to you:"
-msgstr "Lisez la clé de façon phonétique et demandez au patient de la répéter."
+msgid "Read key phonetically to confirm patient understands letters:"
+msgstr ""
+"Lisez la clé de façon phonétique pour aider le patient à noter les bonnes "
+"lettres :"
+
+#: portal/templates/includes/phonetic.html:23
+msgid "Ask patient to read key back to you."
+msgstr "Demandez au patient de vous répéter la clé."
 
 #: portal/templates/locked_out.html:5
 msgid "Account locked"
@@ -2060,3 +2073,9 @@ msgid "Your session timed out. Log in again to continue using the portal."
 msgstr ""
 "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le "
 "portail."
+
+#~ msgid "Confirm patient’s mobile phone number"
+#~ msgstr "Entrez de nouveau le numéro de téléphone"
+
+#~ msgid "Instructions for entering key"
+#~ msgstr "Instructions pour entrer une clé dans l’application"
