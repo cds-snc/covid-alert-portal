@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% trans "Your request for a poster has been submitted" %}
+{% endblock %}
+
+{% block content %}
+  <div class="jumbotron">
+    <h1>{% trans "Your request for a poster has been submitted" %}</h1>
+  </div>
+
+  <h2>{% trans "What happens next" %}</h2>
+
+  {% if registrant_email %}
+    <p>{% trans "Thank you. As soon as it’s ready, your poster will be emailed to" %} <a href="mailto:{{registrant_email}}">{{ registrant_email }}</a>.</p>
+  {% else %}
+    <p>{% trans "Thank you. As soon as it’s ready, your poster will be emailed to you." %}</p>
+  {% endif %}
+  <p>{% trans "If you don’t receive your poster within a few hours, please contact us." %}</p>
+
+  <div class="info-message">
+    {% trans "If your business organization or event operates across multiple branches, you will need to create a poster for each unique location." %}
+  </div>
+
+  <h2>{% trans "Further information" %}</h2>
+  <p>Please see our FAQs</p>
+
+  <div class="content-button">
+      <a href="{% url 'register:start' %}" role='button' draggable='false'>{% trans "Generate different poster" %}</a>
+      <a href="{% url 'register:start' %}" role='button' draggable='false' class="secondary">{% trans "I am finished" %}</a>
+  </div>
+
+{% endblock %}
