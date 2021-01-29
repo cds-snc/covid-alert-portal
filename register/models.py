@@ -15,6 +15,7 @@ class Registrant(models.Model):
     def __str__(self):  # new
         return "{} ({})".format(self.name, self.email)
 
+
 class Location(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     category = models.CharField(max_length=200, verbose_name=_("Location category"))
@@ -28,4 +29,6 @@ class Location(models.Model):
     contact_phone = models.CharField(max_length=255, verbose_name=_("Contact phone"))
 
     def __str__(self):
-        return "{} - {}, {}, {}, {}".format(self.name, self.address, self.city, self.province, self.postal_code)
+        return "{} - {}, {}, {}, {}".format(
+            self.name, self.address, self.city, self.province, self.postal_code
+        )
