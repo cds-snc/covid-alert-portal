@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block title %}
+  {% if form.errors %}{% trans "Error: "%}{% endif %}
+  {% trans "Text key to patient" %}
+{% endblock %}
+
+{% block content %}
+  {% include  "includes/error_list.html" %}
+  {% include  "includes/flash_messages.html" %}
+  <h1>{% trans "If patient gives permission, text this key to their phone" %}</h1>
+
+  <div class="otk">{{ code }}</div>
+
+  {% include "includes/cds_form.html" with submit_text=_("Text key") %}
+
+{% endblock %}

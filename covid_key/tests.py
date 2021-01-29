@@ -7,12 +7,17 @@ from django_otp import DEVICE_ID_SESSION_KEY
 from django.contrib.auth import get_user_model
 from django.conf import settings
 
-from profiles.models import HealthcareUser
+from profiles.models import HealthcareUser, HealthcareProvince
 from profiles.tests import AdminUserTestCase, get_other_credentials
+
+from portal.services import NotifyService
+from portal import container
 
 from .apps import CovidKeyConfig
 from .models import COVIDKey
 from .views import CodeView
+
+User = get_user_model()
 
 
 class CovidKeyConfigTest(TestCase):
@@ -134,3 +139,100 @@ class KeyViewCSRFEnabled(AdminUserTestCase):
         response = self.client.post(reverse("key"))
 
         self.assertEqual(response.status_code, 403)
+
+
+class OtkSmsViewTests(AdminUserTestCase):
+    def setUp(self):
+        super().setUp()
+        container.notify_service.override(NotifyService())  # Prevent sending emails/SMS
+
+        # Ensure that manitoba has sms enabled (test user is located in manitoba)
+        manitoba = HealthcareProvince.objects.get(name="Manitoba")
+        manitoba.sms_enabled = True
+        manitoba.save()
+
+    def test_otk_sms_view_no_key(self):
+        """
+        Test that this view redirects back to start when there is no OTK
+        cached in the request session
+        """
+        self.login()
+        response = self.client.get(reverse("otk_sms"))
+        self.assertEqual(response.status_code, 302)
+
+    def test_otk_sms_view_with_key(self):
+        """
+        Test that this view is rendered when there is an OTK cached
+        """
+        self.login()
+        self.client.post(
+            reverse("key")
+        )  # generate a key so it can be cached in session
+        response = self.client.get(reverse("otk_sms"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            "<h1>If patient gives permission, text this key to their phone</h1>",
+        )
+
+    def test_otk_sms_view_disabled_province(self):
+        """
+        Test that a province that's opted out of SMS cannot reach the sms_view
+        """
+        credentials = {
+            "email": "test3@test.com",
+            "name": "testuser3",
+            "province": HealthcareProvince.objects.get(abbr="QC"),
+            "is_admin": True,
+            "password": "testpassword",
+            "phone_number": "+12125552368",
+        }
+        User.objects.create_user(**credentials)
+        self.login(credentials)
+        self.client.post(
+            reverse("key")
+        )  # generate a key so it can be cached in session
+        response = self.client.get(reverse("otk_sms"))
+        self.assertEqual(response.status_code, 302)  # Redirect to start
+
+    def test_otk_sms_view_submit_error(self):
+        """
+        Test that we see an error message if mismatching phone numbers are entered
+        """
+        self.login()
+        self.client.post(
+            reverse("key")
+        )  # generate a key so it can be cached in session
+        response = self.client.post(
+            reverse("otk_sms"),
+            {"phone_number": "+12125551111", "phone_number2": "+12125552222"},
+        )
+        self.assertContains(response, "Phone numbers must match")
+
+    def test_otk_sms_view_submit_redirect(self):
+        """
+        Test that we're redirected to otk_sms_sent on form submission
+        """
+        self.login()
+        self.client.post(
+            reverse("key")
+        )  # generate a key so it can be cached in session
+        response = self.client.post(
+            reverse("otk_sms"),
+            {"phone_number": "+12125552368", "phone_number2": "+12125552368"},
+        )
+        self.assertEqual(response.status_code, 302)
+
+    def test_otk_sms_sent_view(self):
+        """
+        Test that the otk_sms_sent view is rendered
+        """
+        self.login()
+        self.client.post(
+            reverse("key")
+        )  # generate a key so it can be cached in session
+        response = self.client.get(
+            reverse("otk_sms_sent", kwargs={"phone_number": "+12125552368"})
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Check patient received this key</h1>")

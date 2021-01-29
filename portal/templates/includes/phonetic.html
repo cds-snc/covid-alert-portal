@@ -4,7 +4,7 @@
         {% if intro %}
             {{ intro }}
         {% else %}
-            {% trans "Read key phonetically and ask patient to read it back to you:" %}
+            {% trans "Read key phonetically to confirm patient understands letters:" %}
         {% endif %}
     </p>
     <div class="phonetic__alphabet">
@@ -20,4 +20,5 @@
         {% endfor %}
         </div>
     </div>
+    <p>{% trans "Ask patient to read key back to you." %}</p>
 </div>

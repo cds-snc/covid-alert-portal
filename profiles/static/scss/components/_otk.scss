@@ -1,0 +1,36 @@
+div.otk {
+    display: inline-block;
+    position: relative;
+    font-size: xx-large;
+    background-color: $color-grey-footer;
+    border-radius: 4px;
+    padding: 10px 100px;
+    margin: 20px;
+
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 1%;
+        left: 2.5%;
+        width: 0;
+        height: 0;
+        border: 20px solid transparent;
+        border-top-color: $color-grey-footer;
+        border-bottom: 0;
+        border-left: 0;
+        margin-left: -10px;
+        margin-bottom: -20px;
+    }
+}
+
+div.otk-corner {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      height: 100px;
+      width: 100px;
+      background: green;
+      border: 5px solid dimgray;
+      transform: rotate(45deg);
+    }

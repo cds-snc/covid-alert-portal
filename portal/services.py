@@ -38,3 +38,26 @@ class NotifyService:
                 raise Exception(e)
         else:
             logging.info(f"Notifications disabled. Otherwise would email: {address}.")
+
+    def send_sms(self, phone_number, template_id, details):
+        """
+        Send a new SMS using the GC notification client
+
+        Args:
+            phone_number: The phone number to send to
+            template_id: The id of the template to use
+            details: Dictionary of personalization variables
+        """
+        if self.client:
+            try:
+                self.client.send_sms_notification(
+                    phone_number=phone_number,
+                    template_id=template_id,
+                    personalisation=details,
+                )
+            except HTTPError as e:
+                raise Exception(e)
+        else:
+            logging.info(
+                f"Notifications disabled. Otherwise would text to: {phone_number}."
+            )

@@ -6,6 +6,9 @@
     <div class="example-text">{% blocktrans %}EXAMPLE ONLY. NOT A VALID ONE-TIME KEY.{% endblocktrans %}</div>
   {% endif %}
   <code>{{ code }}</code>
+  {% if sms_enabled %}
+    <a href="{% url 'otk_sms' %}" role='button' draggable='false' class="info">{% trans "Text key to patient" %}</a>
+  {% endif %}
   <hr aria-hidden="true"/>
   {% include "includes/phonetic.html" %}
   <hr aria-hidden="true"/>

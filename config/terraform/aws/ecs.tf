@@ -38,6 +38,8 @@ data "template_file" "covidportal_task" {
     tracer_provider                        = var.tracer_provider
     api_authorization                      = aws_secretsmanager_secret_version.api_authorization.arn
     api_endpoint                           = aws_secretsmanager_secret_version.api_endpoint.arn
+    otk_sms_template_id_en                 = aws_secretsmanager_secret_version.otk_sms_template_id_en.arn
+    otk_sms_template_id_fr                 = aws_secretsmanager_secret_version.otk_sms_template_id_fr.arn
     invitation_email_template_id_en        = aws_secretsmanager_secret_version.invitation_email_template_id_en.arn
     invitation_email_template_id_fr        = aws_secretsmanager_secret_version.invitation_email_template_id_fr.arn
     password_reset_email_template_id_en    = aws_secretsmanager_secret_version.password_reset_email_template_id_en.arn

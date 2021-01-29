@@ -58,6 +58,8 @@ Environment variables are used to control app settings, and configuration for ut
 
 We are using Notify to send user-facing emails (eg, invitation emails and password reset emails), as well as for our OTP SMS codes through an `django-otp-` plugin.
 
+- `OTK_SMS_TEMPLATE_ID_EN` and `OTK_SMS_TEMPLATE_ID_FR` : Template IDs for the English and French versions of the one-time-key SMS notification
+  
 - `PASSWORD_RESET_EMAIL_TEMPLATE_ID_EN` and `PASSWORD_RESET_EMAIL_TEMPLATE_ID_FR` : Template IDs for the English and French versions of the password reset email
 
 - `INVITATION_EMAIL_TEMPLATE_ID_EN` and `INVITATION_EMAIL_TEMPLATE_ID_FR` : Template IDs for the English and French versions of the user account creation email
