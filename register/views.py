@@ -8,6 +8,9 @@ from waffle.mixins import WaffleSwitchMixin
 from .models import Registrant
 from .forms import EmailForm, RegistrantNameForm
 
+from django.http import HttpResponseRedirect
+from formtools.wizard.views import SessionWizardView
+
 
 class RegistrantEmailView(WaffleSwitchMixin, FormView):
     waffle_switch = "QR_CODES"
@@ -41,6 +44,16 @@ class RegisterStartPageView(WaffleSwitchMixin, TemplateView):
     waffle_switch = "QR_CODES"
     template_name = "register/start.html"
 
+class LocationWizard(SessionWizardView):
+    template_name = "register/location_wizard.html"
+    def done(self, form_list, form_dict, **kwargs):
+        # do_something_with_the_form_data(form_list)
+        print(form_dict)
+        return HttpResponseRedirect('/register/confirmation')
+
+class RegisterLocationCategoryView(WaffleSwitchMixin, TemplateView):
+    waffle_switch = "QR_CODES"
+    template_name = "register/location_category.html"
 
 class RegisterConfirmationPageView(WaffleSwitchMixin, TemplateView):
     waffle_switch = "QR_CODES"
