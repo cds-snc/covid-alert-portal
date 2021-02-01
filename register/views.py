@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView, FormView
 from django.views.generic.edit import UpdateView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 from waffle.mixins import WaffleSwitchMixin
 
@@ -16,7 +16,7 @@ from .forms import (
 )
 
 from django.http import HttpResponseRedirect
-from formtools.wizard.views import SessionWizardView
+from formtools.wizard.views import NamedUrlSessionWizardView
 
 
 class RegistrantEmailView(WaffleSwitchMixin, FormView):
@@ -48,7 +48,7 @@ class RegistrantNameView(WaffleSwitchMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy(
-            "register:location_category", kwargs={"pk": self.kwargs.get("pk")}
+            "register:location_step", kwargs={"pk": self.kwargs.get("pk"), "step": "category"}
         )
 
 
@@ -57,12 +57,6 @@ class RegisterStartPageView(WaffleSwitchMixin, TemplateView):
     template_name = "register/start.html"
 
 
-FORMS = [
-    ("category", LocationCategoryForm),
-    ("name", LocationNameForm),
-    ("address", LocationAddressForm),
-    ("contact", LocationContactForm),
-]
 TEMPLATES = {
     "category": "register/location_category.html",
     "name": "register/location_name.html",
@@ -71,9 +65,12 @@ TEMPLATES = {
 }
 
 
-class LocationWizard(SessionWizardView):
+class LocationWizard(NamedUrlSessionWizardView):
     def get_template_names(self):
         return [TEMPLATES[self.steps.current]]
+
+    def get_step_url(self, step):
+        return reverse(self.url_name, kwargs={"pk": self.kwargs.get("pk"), 'step': step})
 
     def done(self, form_list, form_dict, **kwargs):
         # do_something_with_the_form_data(form_list)
