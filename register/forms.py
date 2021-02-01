@@ -20,8 +20,8 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
     category = forms.ChoiceField(
         label="",
         choices=[
-            ("accommodation", _("Yes, generate a key for another patient.")),
-            ("childcare", _("No, try again or use different phone number.")),
+            ("accommodation", _("Accommodation")),
+            ("childcare", _("Childcare")),
             ("education", _("Education")),
             ("medical", _("Medical Facility")),
             ("restaurant", _("Restaurant, cafe, pub or bar")),
@@ -34,3 +34,14 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
 
 class LocationNameForm(HealthcareBaseForm, forms.Form):
     name = forms.CharField(label="What is the name of your business, organization or event?")
+
+class LocationAddressForm(HealthcareBaseForm, forms.Form):
+    address = forms.CharField(label="Address line 1")
+    address_2 = forms.CharField(label="Address line 2")
+    city = forms.CharField(label="City")
+    province = forms.CharField(label="Province")
+    postal_code = forms.CharField(label="Postal code")
+
+class LocationContactForm(HealthcareBaseForm, forms.Form):
+    contact_email = forms.EmailField(label="Contact email")
+    contact_phone = forms.CharField(label="Contact phone")

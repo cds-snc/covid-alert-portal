@@ -6,7 +6,7 @@ from waffle.mixins import WaffleSwitchMixin
 
 
 from .models import Registrant
-from .forms import EmailForm, RegistrantNameForm
+from .forms import EmailForm, RegistrantNameForm, LocationCategoryForm, LocationNameForm, LocationAddressForm, LocationContactForm
 
 from django.http import HttpResponseRedirect
 from formtools.wizard.views import SessionWizardView
@@ -36,16 +36,34 @@ class RegistrantNameView(WaffleSwitchMixin, UpdateView):
     waffle_switch = "QR_CODES"
     model = Registrant
     form_class = RegistrantNameForm
-    success_url = reverse_lazy("register:confirmation")
+    # success_url = reverse_lazy("register:confirmation")
     template_name = "register/registrant_name.html"
+
+    def get_success_url(self):
+        return reverse_lazy("register:location_category", kwargs={"pk": self.kwargs.get('pk')})
 
 
 class RegisterStartPageView(WaffleSwitchMixin, TemplateView):
     waffle_switch = "QR_CODES"
     template_name = "register/start.html"
 
+FORMS = [
+    ("category", LocationCategoryForm),
+    ("name", LocationNameForm),
+    ("address", LocationAddressForm),
+    ("contact", LocationContactForm)
+]
+TEMPLATES = {
+    "category": "register/location_category.html",
+    "name": "register/location_name.html",
+    "address": "register/location_address.html",
+    "contact": "register/location_contact.html"
+}
+
 class LocationWizard(SessionWizardView):
-    template_name = "register/location_wizard.html"
+    def get_template_names(self):
+        return [TEMPLATES[self.steps.current]]
+
     def done(self, form_list, form_dict, **kwargs):
         # do_something_with_the_form_data(form_list)
         print(form_dict)

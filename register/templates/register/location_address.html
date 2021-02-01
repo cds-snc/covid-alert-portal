@@ -3,13 +3,13 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "What is your name?" %}
+  {% trans "Where is your business, organization or event located?" %}
 {% endblock %}
 
 {% block content %}
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "What is your name?" %}</h1>
-
+  <h1>{% trans "Where is your business, organization or event located?" %}</h1>
+  
   {% include "includes/cds_form.html" with submit_text=_("Continue") %}
 {% endblock %}
