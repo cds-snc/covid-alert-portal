@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% trans "Check your answers before submitting your form" %}
+{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Check your answers before submitting your form" %}</h1>
+
+    <h2>{% trans "Personal Details" %}</h2>
+
+    <dl class="summary-list">
+        <div class="summary-list__row">
+            <dt class="summary-list__key">
+                {% trans "Poster receiver email" %}
+            </dt>
+            <dd class="summary-list__value">
+                email@domain.com
+            </dd>
+            <dd class="summary-list__actions">
+                <a href="#">
+                    Change<span class="visually-hidden"> contact email</span>
+                </a>
+            </dd>
+        </div>
+        <div class="summary-list__row">
+            <dt class="summary-list__key">
+                {% trans "Poster receiver name" %}
+            </dt>
+            <dd class="summary-list__value">
+                Firstname Lastname
+            </dd>
+            <dd class="summary-list__actions">
+                <a href="#">
+                    Change<span class="visually-hidden"> contact name</span>
+                </a>
+            </dd>
+        </div>
+    </dl>
+    
+    <h2>{% trans "Location Details" %}</h2>
+
+    <dl class="summary-list">
+        <div class="summary-list__row">
+            <dt class="summary-list__key">
+                {% trans "Type" %}
+            </dt>
+            <dd class="summary-list__value">
+                {{ form_data.category }}
+            </dd>
+            <dd class="summary-list__actions">
+                <a href="#">
+                    Change<span class="visually-hidden"> business type</span>
+                </a>
+            </dd>
+        </div>
+        <div class="summary-list__row">
+            <dt class="summary-list__key">
+                {% trans "Business, organization or event name" %}
+            </dt>
+            <dd class="summary-list__value">
+                {{ form_data.name }}
+            </dd>
+            <dd class="summary-list__actions">
+                <a href="#">
+                    Change<span class="visually-hidden"> business, organization or event name</span>
+                </a>
+            </dd>
+        </div>
+
+        <div class="summary-list__row">
+            <dt class="summary-list__key">
+                {% trans "Address" %}
+            </dt>
+            <dd class="summary-list__value">
+                {{ form_data.address }}<br>
+                {{ form_data.address_2 }}<br>
+                {{ form_data.city }}<br>
+                {{ form_data.province }}<br>
+                {{ form_data.postal_code }}
+            </dd>
+            <dd class="summary-list__actions">
+                <a href="#">
+                    Change<span class="visually-hidden"> address</span>
+                </a>
+            </dd>
+        </div>
+
+        <div class="summary-list__row">
+            <dt class="summary-list__key">
+                {% trans "Who can we contact at this address?" %}
+            </dt>
+            <dd class="summary-list__value">
+                {{ form_data.contact_email }}<br>
+                {{ form_data.contact_phone }}
+            </dd>
+            <dd class="summary-list__actions">
+                <a href="#">
+                    Change<span class="visually-hidden"> contact</span>
+                </a>
+            </dd>
+        </div>
+    </dl>
+
+    <h2>{% trans "Now submit your answers to create your poster" %}</h2>
+
+    <p>{% trans "By submitting this form you are confirming that to the best of your knowledge, the details you are providing are correct." %}
+
+    <form action="" method="post">
+    {% csrf_token %}
+      <button type="submit">{% trans "Submit" %}</button>
+    </form>
+{% endblock %}

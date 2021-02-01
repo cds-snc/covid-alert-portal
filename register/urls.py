@@ -23,15 +23,16 @@ location_wizard = views.LocationWizard.as_view(
 
 urlpatterns = [
     path("", views.RegisterStartPageView.as_view(), name="start"),
-    path(
-        "confirmation",
-        views.RegisterConfirmationPageView.as_view(),
-        name="confirmation",
-    ),
     path("email", views.RegistrantEmailView.as_view(), name="email"),
     path("<uuid:pk>/name", views.RegistrantNameView.as_view(), name="name"),
     re_path(
         r"^(?P<pk>.+)/location/(?P<step>.+)/$", location_wizard, name="location_step"
     ),
     path("<uuid:pk>/location/", location_wizard, name="location"),
+    path("<uuid:pk>/summary", views.RegisterSummaryPageView.as_view(), name="summary"),
+    path(
+        "confirmation",
+        views.RegisterConfirmationPageView.as_view(),
+        name="confirmation",
+    ),
 ]
