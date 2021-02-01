@@ -16,6 +16,7 @@ class RegistrantNameForm(HealthcareBaseForm, forms.ModelForm):
 
         fields = ("name",)
 
+
 class LocationCategoryForm(HealthcareBaseForm, forms.Form):
     category = forms.ChoiceField(
         label="",
@@ -32,8 +33,12 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
 
+
 class LocationNameForm(HealthcareBaseForm, forms.Form):
-    name = forms.CharField(label="What is the name of your business, organization or event?")
+    name = forms.CharField(
+        label="What is the name of your business, organization or event?"
+    )
+
 
 class LocationAddressForm(HealthcareBaseForm, forms.Form):
     address = forms.CharField(label="Address line 1")
@@ -41,6 +46,7 @@ class LocationAddressForm(HealthcareBaseForm, forms.Form):
     city = forms.CharField(label="City")
     province = forms.CharField(label="Province")
     postal_code = forms.CharField(label="Postal code")
+
 
 class LocationContactForm(HealthcareBaseForm, forms.Form):
     contact_email = forms.EmailField(label="Contact email")

@@ -6,7 +6,14 @@ from waffle.mixins import WaffleSwitchMixin
 
 
 from .models import Registrant
-from .forms import EmailForm, RegistrantNameForm, LocationCategoryForm, LocationNameForm, LocationAddressForm, LocationContactForm
+from .forms import (
+    EmailForm,
+    RegistrantNameForm,
+    LocationCategoryForm,
+    LocationNameForm,
+    LocationAddressForm,
+    LocationContactForm,
+)
 
 from django.http import HttpResponseRedirect
 from formtools.wizard.views import SessionWizardView
@@ -40,25 +47,29 @@ class RegistrantNameView(WaffleSwitchMixin, UpdateView):
     template_name = "register/registrant_name.html"
 
     def get_success_url(self):
-        return reverse_lazy("register:location_category", kwargs={"pk": self.kwargs.get('pk')})
+        return reverse_lazy(
+            "register:location_category", kwargs={"pk": self.kwargs.get("pk")}
+        )
 
 
 class RegisterStartPageView(WaffleSwitchMixin, TemplateView):
     waffle_switch = "QR_CODES"
     template_name = "register/start.html"
 
+
 FORMS = [
     ("category", LocationCategoryForm),
     ("name", LocationNameForm),
     ("address", LocationAddressForm),
-    ("contact", LocationContactForm)
+    ("contact", LocationContactForm),
 ]
 TEMPLATES = {
     "category": "register/location_category.html",
     "name": "register/location_name.html",
     "address": "register/location_address.html",
-    "contact": "register/location_contact.html"
+    "contact": "register/location_contact.html",
 }
+
 
 class LocationWizard(SessionWizardView):
     def get_template_names(self):
@@ -67,11 +78,13 @@ class LocationWizard(SessionWizardView):
     def done(self, form_list, form_dict, **kwargs):
         # do_something_with_the_form_data(form_list)
         print(form_dict)
-        return HttpResponseRedirect('/register/confirmation')
+        return HttpResponseRedirect("/register/confirmation")
+
 
 class RegisterLocationCategoryView(WaffleSwitchMixin, TemplateView):
     waffle_switch = "QR_CODES"
     template_name = "register/location_category.html"
+
 
 class RegisterConfirmationPageView(WaffleSwitchMixin, TemplateView):
     waffle_switch = "QR_CODES"

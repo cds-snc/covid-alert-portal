@@ -14,5 +14,5 @@ urlpatterns = [
     ),
     path("email", views.RegistrantEmailView.as_view(), name="email"),
     path("<uuid:pk>/name", views.RegistrantNameView.as_view(), name="name"),
-    path("<uuid:pk>/location", views.LocationWizard.as_view(views.FORMS))
+    path("<uuid:pk>/location", views.LocationWizard.as_view(views.FORMS)),
 ]
