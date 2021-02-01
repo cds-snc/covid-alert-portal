@@ -67,6 +67,8 @@ TEMPLATES = {
 }
 
 from collections import ChainMap
+
+
 class LocationWizard(NamedUrlSessionWizardView):
     def get_template_names(self):
         return [TEMPLATES[self.steps.current]]
@@ -80,9 +82,14 @@ class LocationWizard(NamedUrlSessionWizardView):
         forms = [form.cleaned_data for form in form_list]
         combined = dict(ChainMap(*forms))
         # TODO: should probably redirect rather than render here
-        return render(self.request, 'register/summary.html', {
-            'form_data': combined,
-        })
+        return render(
+            self.request,
+            "register/summary.html",
+            {
+                "form_data": combined,
+            },
+        )
+
 
 class RegisterConfirmationPageView(WaffleSwitchMixin, TemplateView):
     waffle_switch = "QR_CODES"
@@ -92,6 +99,7 @@ class RegisterConfirmationPageView(WaffleSwitchMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["registrant_email"] = self.request.session.get("registrant_email")
         return context
+
 
 class RegisterSummaryPageView(WaffleSwitchMixin, TemplateView):
     waffle_switch = "QR_CODES"
