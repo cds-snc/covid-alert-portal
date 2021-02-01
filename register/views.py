@@ -48,7 +48,8 @@ class RegistrantNameView(WaffleSwitchMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy(
-            "register:location_step", kwargs={"pk": self.kwargs.get("pk"), "step": "category"}
+            "register:location_step",
+            kwargs={"pk": self.kwargs.get("pk"), "step": "category"},
         )
 
 
@@ -70,7 +71,9 @@ class LocationWizard(NamedUrlSessionWizardView):
         return [TEMPLATES[self.steps.current]]
 
     def get_step_url(self, step):
-        return reverse(self.url_name, kwargs={"pk": self.kwargs.get("pk"), 'step': step})
+        return reverse(
+            self.url_name, kwargs={"pk": self.kwargs.get("pk"), "step": step}
+        )
 
     def done(self, form_list, form_dict, **kwargs):
         # do_something_with_the_form_data(form_list)
