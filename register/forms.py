@@ -2,7 +2,7 @@ from django import forms
 
 from portal.forms import HealthcareBaseForm
 from django.utils.translation import gettext_lazy as _
-from .models import Registrant
+from .models import Registrant, Location
 from portal.widgets import CDSRadioWidget
 
 
@@ -17,7 +17,11 @@ class RegistrantNameForm(HealthcareBaseForm, forms.ModelForm):
         fields = ("name",)
 
 
-class LocationCategoryForm(HealthcareBaseForm, forms.Form):
+class LocationCategoryForm(HealthcareBaseForm, forms.ModelForm):
+    class Meta:
+        model = Location
+        fields = ("category",)
+
     category = forms.ChoiceField(
         label="",
         choices=[
@@ -34,13 +38,21 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
     )
 
 
-class LocationNameForm(HealthcareBaseForm, forms.Form):
+class LocationNameForm(HealthcareBaseForm, forms.ModelForm):
+    class Meta:
+        model = Location
+        fields = ("name",)
+
     name = forms.CharField(
         label="What is the name of your business, organization or event?"
     )
 
 
-class LocationAddressForm(HealthcareBaseForm, forms.Form):
+class LocationAddressForm(HealthcareBaseForm, forms.ModelForm):
+    class Meta:
+        model = Location
+        fields = ("address", "address_2", "city", "province", "postal_code")
+
     address = forms.CharField(label="Address line 1")
     address_2 = forms.CharField(label="Address line 2")
     city = forms.CharField(label="City")
@@ -48,6 +60,10 @@ class LocationAddressForm(HealthcareBaseForm, forms.Form):
     postal_code = forms.CharField(label="Postal code")
 
 
-class LocationContactForm(HealthcareBaseForm, forms.Form):
+class LocationContactForm(HealthcareBaseForm, forms.ModelForm):
+    class Meta:
+        model = Location
+        fields = ("contact_email", "contact_phone")
+
     contact_email = forms.EmailField(label="Contact email")
     contact_phone = forms.CharField(label="Contact phone")
