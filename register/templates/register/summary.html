@@ -41,6 +41,7 @@
     
     <h2>{% trans "Location Details" %}</h2>
     <form action="" method="post" class="summary_form">
+        {% csrf_token %}
         <dl class="summary-list">
             <div class="summary-list__row">
                 <dt class="summary-list__key">
@@ -99,7 +100,6 @@
 
         <p>{% trans "By submitting this form you are confirming that to the best of your knowledge, the details you are providing are correct." %}
 
-        {% csrf_token %}
         <button type="submit">{% trans "Submit" %}</button>
     </form>
 {% endblock %}
