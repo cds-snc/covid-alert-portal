@@ -6,6 +6,7 @@ from .forms import (
     LocationNameForm,
     LocationAddressForm,
     LocationContactForm,
+    RegisterSummaryForm,
 )
 
 app_name = "register"
@@ -15,10 +16,13 @@ named_location_forms = (
     ("name", LocationNameForm),
     ("address", LocationAddressForm),
     ("contact", LocationContactForm),
+    ("summary", RegisterSummaryForm),
 )
 
 location_wizard = views.LocationWizard.as_view(
-    named_location_forms, url_name="register:location_step", done_step_name="summary"
+    named_location_forms,
+    url_name="register:location_step",
+    done_step_name="confirmation",
 )
 
 urlpatterns = [
@@ -29,7 +33,6 @@ urlpatterns = [
         r"^(?P<pk>.+)/location/(?P<step>.+)/$", location_wizard, name="location_step"
     ),
     path("<uuid:pk>/location/", location_wizard, name="location"),
-    path("<uuid:pk>/summary", views.RegisterSummaryPageView.as_view(), name="summary"),
     path(
         "confirmation",
         views.RegisterConfirmationPageView.as_view(),

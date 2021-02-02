@@ -56,6 +56,7 @@ TEMPLATES = {
     "name": "register/location_name.html",
     "address": "register/location_address.html",
     "contact": "register/location_contact.html",
+    "summary": "register/summary.html",
 }
 
 
@@ -68,6 +69,13 @@ class LocationWizard(NamedUrlSessionWizardView):
             self.url_name, kwargs={"pk": self.kwargs.get("pk"), "step": step}
         )
 
+    def get_context_data(self, form, **kwargs):
+        context = super(LocationWizard, self).get_context_data(form=form, **kwargs)
+        registrant = Registrant.objects.get(id=self.kwargs.get("pk"))
+        context["form_data"] = self.get_all_cleaned_data
+        context["registrant"] = registrant
+        return context
+
     def done(self, form_list, form_dict, **kwargs):
         forms = [form.cleaned_data for form in form_list]
         location = dict(ChainMap(*forms))
@@ -76,7 +84,7 @@ class LocationWizard(NamedUrlSessionWizardView):
         # TODO: should we redirect instead of render here?
         return render(
             self.request,
-            "register/summary.html",
+            "register/confirmation.html",
             {
                 "registrant": registrant,
                 "form_data": location,
@@ -92,8 +100,3 @@ class RegisterConfirmationPageView(WaffleSwitchMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["registrant_email"] = self.request.session.get("registrant_email")
         return context
-
-
-class RegisterSummaryPageView(WaffleSwitchMixin, TemplateView):
-    waffle_switch = "QR_CODES"
-    template_name = "register/summary.html"

@@ -67,3 +67,11 @@ class LocationContactForm(HealthcareBaseForm, forms.ModelForm):
 
     contact_email = forms.EmailField(label="Contact email")
     contact_phone = forms.CharField(label="Contact phone")
+
+
+class RegisterSummaryForm(HealthcareBaseForm, forms.Form):
+    """
+    A form to show an information panel.
+    """
+
+    pass
