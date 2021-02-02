@@ -5,9 +5,9 @@ from django.shortcuts import render
 
 from waffle.mixins import WaffleSwitchMixin
 
-
 from .models import Registrant
 from .forms import EmailForm, RegistrantNameForm
+from collections import ChainMap
 
 from formtools.wizard.views import NamedUrlSessionWizardView
 
@@ -57,8 +57,6 @@ TEMPLATES = {
     "address": "register/location_address.html",
     "contact": "register/location_contact.html",
 }
-
-from collections import ChainMap
 
 
 class LocationWizard(NamedUrlSessionWizardView):
