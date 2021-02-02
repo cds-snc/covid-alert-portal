@@ -82,7 +82,7 @@ class LocationWizard(NamedUrlSessionWizardView):
         forms = [form.cleaned_data for form in form_list]
         location = dict(ChainMap(*forms))
         registrant = Registrant.objects.get(id=self.kwargs.get("pk"))
-        print(registrant)
+
         # TODO: should we redirect instead of render here?
         return render(
             self.request,
