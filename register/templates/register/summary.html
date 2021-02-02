@@ -16,7 +16,7 @@
                 {% trans "Poster receiver email" %}
             </dt>
             <dd class="summary-list__value">
-                email@domain.com
+                {{ registrant.email }}
             </dd>
             <dd class="summary-list__actions">
                 <a href="#">
@@ -29,7 +29,7 @@
                 {% trans "Poster receiver name" %}
             </dt>
             <dd class="summary-list__value">
-                Firstname Lastname
+                {{ registrant.name }}
             </dd>
             <dd class="summary-list__actions">
                 <a href="#">

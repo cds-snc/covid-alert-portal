@@ -80,13 +80,16 @@ class LocationWizard(NamedUrlSessionWizardView):
 
     def done(self, form_list, form_dict, **kwargs):
         forms = [form.cleaned_data for form in form_list]
-        combined = dict(ChainMap(*forms))
-        # TODO: should probably redirect rather than render here
+        location = dict(ChainMap(*forms))
+        registrant = Registrant.objects.get(id=self.kwargs.get("pk"))
+        print(registrant)
+        # TODO: should we redirect instead of render here?
         return render(
             self.request,
             "register/summary.html",
             {
-                "form_data": combined,
+                "registrant": registrant,
+                "form_data": location,
             },
         )
 
