@@ -7,16 +7,8 @@ from waffle.mixins import WaffleSwitchMixin
 
 
 from .models import Registrant
-from .forms import (
-    EmailForm,
-    RegistrantNameForm,
-    LocationCategoryForm,
-    LocationNameForm,
-    LocationAddressForm,
-    LocationContactForm,
-)
+from .forms import EmailForm, RegistrantNameForm
 
-from django.http import HttpResponseRedirect
 from formtools.wizard.views import NamedUrlSessionWizardView
 
 
