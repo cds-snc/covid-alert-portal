@@ -17,11 +17,7 @@ class RegistrantNameForm(HealthcareBaseForm, forms.ModelForm):
         fields = ("name",)
 
 
-class LocationCategoryForm(HealthcareBaseForm, forms.ModelForm):
-    class Meta:
-        model = Location
-        fields = ("category",)
-
+class LocationCategoryForm(HealthcareBaseForm, forms.Form):
     category = forms.ChoiceField(
         label="",
         choices=[
@@ -38,21 +34,13 @@ class LocationCategoryForm(HealthcareBaseForm, forms.ModelForm):
     )
 
 
-class LocationNameForm(HealthcareBaseForm, forms.ModelForm):
-    class Meta:
-        model = Location
-        fields = ("name",)
-
+class LocationNameForm(HealthcareBaseForm, forms.Form):
     name = forms.CharField(
         label="What is the name of your business, organization or event?"
     )
 
 
-class LocationAddressForm(HealthcareBaseForm, forms.ModelForm):
-    class Meta:
-        model = Location
-        fields = ("address", "address_2", "city", "province", "postal_code")
-
+class LocationAddressForm(HealthcareBaseForm, forms.Form):
     address = forms.CharField(label="Address line 1")
     address_2 = forms.CharField(label="Address line 2")
     city = forms.CharField(label="City")
@@ -60,11 +48,7 @@ class LocationAddressForm(HealthcareBaseForm, forms.ModelForm):
     postal_code = forms.CharField(label="Postal code")
 
 
-class LocationContactForm(HealthcareBaseForm, forms.ModelForm):
-    class Meta:
-        model = Location
-        fields = ("contact_email", "contact_phone")
-
+class LocationContactForm(HealthcareBaseForm, forms.Form):
     contact_email = forms.EmailField(label="Contact email")
     contact_phone = forms.CharField(label="Contact phone")
 
