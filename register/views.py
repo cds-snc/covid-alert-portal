@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 from waffle.mixins import WaffleSwitchMixin
 
-from .models import Registrant
+from .models import Registrant, Location
 from .forms import EmailForm, RegistrantNameForm
 from collections import ChainMap
 
@@ -80,8 +80,20 @@ class LocationWizard(NamedUrlSessionWizardView):
         forms = [form.cleaned_data for form in form_list]
         location = dict(ChainMap(*forms))
         registrant = Registrant.objects.get(id=self.kwargs.get("pk"))
+        print(location)
 
-        # TODO: should we redirect instead of render here?
+        obj, created = Location.objects.get_or_create(
+            category=location["category"],
+            name=location["name"],
+            address=location["address"],
+            address_2=location["address_2"],
+            city=location["city"],
+            province=location["province"],
+            postal_code=location["postal_code"],
+            contact_email=location["contact_email"],
+            contact_phone=location["contact_phone"],
+        )
+
         return render(
             self.request,
             "register/confirmation.html",
