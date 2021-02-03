@@ -29,7 +29,7 @@ class RegistrantEmailView(WaffleSwitchMixin, FormView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy("register:name", kwargs={"pk": self._object.pk})
+        return reverse_lazy("register:registrant_name", kwargs={"pk": self._object.pk})
 
 
 class RegistrantNameView(WaffleSwitchMixin, UpdateView):

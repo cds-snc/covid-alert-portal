@@ -21,7 +21,7 @@ class RegisterView(TestCase):
         )
 
     def test_email_page(self):
-        response = self.client.get(reverse("register:email"))
+        response = self.client.get(reverse("register:registrant_email"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
@@ -32,7 +32,9 @@ class RegisterView(TestCase):
     def test_name_page(self):
         r = Registrant.objects.create(email="test@test.com")
 
-        response = self.client.get(reverse("register:name", kwargs={"pk": r.pk}))
+        response = self.client.get(
+            reverse("register:registrant_name", kwargs={"pk": r.pk})
+        )
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
