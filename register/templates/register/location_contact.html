@@ -10,6 +10,7 @@
   {% include  "includes/error_list.html" %}
 
   <h1>{% trans "Who is responsible for this location?" %}</h1>
+  <p>{% trans "This could be you, or a different person, such as a store manager. We will contact them if there is an outbreak." %}
   
   {% include "includes/cds_form.html" with submit_text=_("Continue") %}
 {% endblock %}

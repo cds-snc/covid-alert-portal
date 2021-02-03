@@ -35,9 +35,7 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
 
 
 class LocationNameForm(HealthcareBaseForm, forms.Form):
-    name = forms.CharField(
-        label="What is the name of your business, organization or event?"
-    )
+    name = forms.CharField(label="")
 
 
 class LocationAddressForm(HealthcareBaseForm, forms.Form):
