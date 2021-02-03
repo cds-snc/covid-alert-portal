@@ -42,6 +42,9 @@
     <h2>{% trans "Location Details" %}</h2>
     <form action="" method="post" class="summary_form">
         {% csrf_token %}
+        {{ wizard.management_form }}
+        <!-- temporary hack for wizard goto step bug -->
+        <button name="wizard_goto_step" value="category" class="hidden"></button>
         <dl class="summary-list">
             <div class="summary-list__row">
                 <dt class="summary-list__key">
@@ -100,6 +103,8 @@
 
         <p>{% trans "By submitting this form you are confirming that to the best of your knowledge, the details you are providing are correct." %}
 
-        <button type="submit">{% trans "Submit" %}</button>
+        <div class="content-button">
+            <button type="submit">{% trans "Submit" %}</button>
+        </div>
     </form>
 {% endblock %}
