@@ -83,7 +83,7 @@ class LocationWizard(NamedUrlSessionWizardView):
         registrant = Registrant.objects.get(id=self.kwargs.get("pk"))
         print(location)
 
-        obj, created = Location.objects.get_or_create(
+        Location.objects.get_or_create(
             category=location["category"],
             name=location["name"],
             address=location["address"],
