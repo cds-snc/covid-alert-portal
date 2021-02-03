@@ -2,7 +2,7 @@ from django import forms
 
 from portal.forms import HealthcareBaseForm
 from django.utils.translation import gettext_lazy as _
-from .models import Registrant, Location
+from .models import Registrant
 from portal.widgets import CDSRadioWidget
 
 
