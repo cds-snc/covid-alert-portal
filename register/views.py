@@ -36,7 +36,6 @@ class RegistrantNameView(WaffleSwitchMixin, UpdateView):
     waffle_switch = "QR_CODES"
     model = Registrant
     form_class = RegistrantNameForm
-    # success_url = reverse_lazy("register:confirmation")
     template_name = "register/registrant_name.html"
 
     def get_success_url(self):
@@ -61,6 +60,8 @@ TEMPLATES = {
 
 
 class LocationWizard(NamedUrlSessionWizardView):
+    waffle_switch = "QR_CODES"
+
     def get_template_names(self):
         return [TEMPLATES[self.steps.current]]
 
