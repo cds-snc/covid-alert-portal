@@ -73,7 +73,7 @@ class LocationWizard(NamedUrlSessionWizardView):
     def get_context_data(self, form, **kwargs):
         context = super(LocationWizard, self).get_context_data(form=form, **kwargs)
         registrant = Registrant.objects.get(id=self.kwargs.get("pk"))
-        context["form_data"] = self.get_all_cleaned_data
+        context["form_data"] = self.get_all_cleaned_data()
         context["registrant"] = registrant
         return context
 
