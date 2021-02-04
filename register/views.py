@@ -81,7 +81,6 @@ class LocationWizard(NamedUrlSessionWizardView):
         forms = [form.cleaned_data for form in form_list]
         location = dict(ChainMap(*forms))
         registrant = Registrant.objects.get(id=self.kwargs.get("pk"))
-        print(location)
 
         Location.objects.get_or_create(
             category=location["category"],
