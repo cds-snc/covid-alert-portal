@@ -1,6 +1,7 @@
 from uuid import uuid4
 from django.db import models
 from django.utils.translation import gettext as _
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Registrant(models.Model):
@@ -26,7 +27,7 @@ class Location(models.Model):
     province = models.CharField(max_length=100, verbose_name=_("Province"))
     postal_code = models.CharField(max_length=10, verbose_name=_("Postal code"))
     contact_email = models.EmailField(verbose_name=_("Email address"), max_length=255)
-    contact_phone = models.CharField(max_length=255, verbose_name=_("Contact phone"))
+    contact_phone = PhoneNumberField(blank=True)
 
     def __str__(self):
         return "{} - {}, {}, {}, {}".format(

@@ -4,6 +4,7 @@ from portal.forms import HealthcareBaseForm
 from django.utils.translation import gettext_lazy as _
 from .models import Registrant
 from portal.widgets import CDSRadioWidget
+from phonenumber_field.formfields import PhoneNumberField
 
 
 class EmailForm(HealthcareBaseForm, forms.Form):
@@ -48,7 +49,7 @@ class LocationAddressForm(HealthcareBaseForm, forms.Form):
 
 class LocationContactForm(HealthcareBaseForm, forms.Form):
     contact_email = forms.EmailField(label="Contact email")
-    contact_phone = forms.CharField(label="Contact phone")
+    contact_phone = PhoneNumberField(label="Contact phone")
 
 
 class RegisterSummaryForm(HealthcareBaseForm, forms.Form):
