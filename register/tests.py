@@ -84,17 +84,17 @@ class RegisterLocationDetails(TestCase):
 
         self.assertEqual(form.errors["address"], ["This field is required."])
 
-    def test_location_address_address_field_empty(self):
+    def test_location_address_city_field_empty(self):
         form = forms.LocationAddressForm(data={"city": ""})
 
         self.assertEqual(form.errors["city"], ["This field is required."])
 
-    def test_location_address_address_field_empty(self):
+    def test_location_address_province_field_empty(self):
         form = forms.LocationAddressForm(data={"province": ""})
 
         self.assertEqual(form.errors["province"], ["This field is required."])
 
-    def test_location_address_address_field_empty(self):
+    def test_location_address_postal_field_empty(self):
         form = forms.LocationAddressForm(data={"postal_code": ""})
 
         self.assertEqual(form.errors["postal_code"], ["This field is required."])
