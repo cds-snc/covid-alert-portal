@@ -1,0 +1,52 @@
+.summary-list {
+    font-weight: 400;
+    color: #0b0c0c;
+    margin: 0;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    margin-bottom: 30px;
+    &__row {
+        font-weight: 400;
+        color: #0b0c0c;
+        display: table-row;
+    }
+    &__key {
+        color: #0b0c0c;
+        margin: 0;
+        display: table-cell;
+        padding-top: 10px;
+        padding-right: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #b1b4b6;
+        overflow-wrap: break-word;
+        margin-bottom: 5px;
+        font-weight: 700;
+        width: 30%;
+    }
+    &__value {
+        font-weight: 400;
+        color: #0b0c0c;
+        margin: 0;
+        display: table-cell;
+        padding-top: 10px;
+        padding-right: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #b1b4b6;
+        overflow-wrap: break-word;
+        width: 50%;
+    }
+    &__actions {
+        font-weight: 400;
+        color: #0b0c0c;
+        margin: 0;
+        display: table-cell;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #b1b4b6;
+        margin-bottom: 15px;
+        width: 20%;
+        padding-right: 0;
+        text-align: right;
+    }
+}

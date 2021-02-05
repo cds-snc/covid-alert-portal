@@ -3,6 +3,9 @@
 <form method="post" id="form--{{ request.resolver_match.url_name }}" {% if form_class %}class="{{ form_class }}"{% endif %} >
   {% csrf_token %}
 
+  {# Required for wizard view #}
+  {{ wizard.management_form }}
+  
   {# Include the hidden fields #}
   {% for hidden in form.hidden_fields %}
     {{ hidden }}

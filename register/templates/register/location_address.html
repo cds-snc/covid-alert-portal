@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% if form.errors %}{% trans "Error: "%}{% endif %}
+  {% trans "Where is your business, organization or event located?" %}
+{% endblock %}
+
+{% block content %}
+  {% include  "includes/error_list.html" %}
+
+  <h1>{% trans "Where is your business, organization or event located?" %}</h1>
+
+  <div class="info-message">
+  <p><strong>{% trans "If your business, organization or event operates across multiple branches, you will need to create a poster for each unique location" %}</strong></p>
+  <p>{% trans "You will be able to create another QR code poster later" %}</p>
+  </div>
+
+  {% include "includes/cds_form.html" with submit_text=_("Continue") %}
+{% endblock %}

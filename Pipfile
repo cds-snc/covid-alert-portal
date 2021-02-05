@@ -43,6 +43,7 @@ notifications-python-client = "*"
 django-waffle = "*"
 django-solo = "*"
 dependency-injector = "*"
+django-formtools = "*"
 
 [pipenv]
 allow_prereleases = true

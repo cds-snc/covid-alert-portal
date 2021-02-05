@@ -11,6 +11,10 @@ main form {
     }
   }
 
+  &.summary_form {
+    max-width: none;
+  }
+
   + p {
     margin-bottom: $space-xxl;
 

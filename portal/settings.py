@@ -98,6 +98,7 @@ INSTALLED_APPS = [
     "announcements",
     "solo",
     "google_analytics",
+    "formtools",  # for form wizard
 ]
 
 MIDDLEWARE = [

@@ -3,13 +3,14 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "What is your name?" %}
+  {% trans "What is the name of your business, organization or event?" %}
 {% endblock %}
 
 {% block content %}
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "What is your name?" %}</h1>
-
+  <h1>{% trans "What is the name of your business, organization or event?" %}</h1>
+  <p>{% trans "This will be displayed on the QR code poster for users to scan" %}</p>
+  
   {% include "includes/cds_form.html" with submit_text=_("Continue") %}
 {% endblock %}

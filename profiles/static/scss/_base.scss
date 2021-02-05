@@ -140,6 +140,10 @@ main {
   @include visuallyHidden();
 }
 
+.hidden {
+  display: none !important;
+}
+
 .print-only {
   display: none;
 }
