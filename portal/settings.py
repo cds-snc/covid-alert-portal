@@ -138,13 +138,26 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "announcements.context_processors.announcement",
-                "portal.context_processors.logout_messages",
             ],
             "libraries": {"alphabet": "portal.templatetags.alphabet"},
         },
     },
 ]
+
+# Switch between serving the "portal" (PORTAL) or "qrcode registration" (QRCODE) functionality, or unit test suite (UNIT)
+APP_SWITCH = os.getenv("APP_SWITCH", "UNIT")
+
+# App-specific template context processors
+if APP_SWITCH == "PORTAL" or APP_SWITCH == "UNIT":
+    TEMPLATES[0]["OPTIONS"]["context_processors"] += [
+        "announcements.context_processors.announcement",
+        "profiles.context_processors.logout_messages",
+        "profiles.context_processors.general_settings",
+    ]
+elif APP_SWITCH == "QRCODE" or APP_SWITCH == "UNIT":
+    TEMPLATES[0]["OPTIONS"]["context_processors"] += [
+        "register.context_processors.general_settings",
+    ]
 
 AUTHENTICATION_BACKENDS = [
     "axes.backends.AxesBackend",  # Needs to be first

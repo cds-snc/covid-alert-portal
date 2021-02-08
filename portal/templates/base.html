@@ -32,7 +32,7 @@
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 
-    <title>{% block title %}{% trans "COVID Alert Portal" %}{% endblock %}{% block title_suffix %} {% trans "— COVID Alert Portal" %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}{% block title_suffix %} {{ title_suffix }}{% endblock %}</title>
   </head>
   <body class="{% block body_class %}{% endblock %}">
     {% if request.user.is_authenticated %}
@@ -57,7 +57,7 @@
         </div>
       </header>
       <main id="content">
-        {% if request and 'register' in request.resolver_match.app_names %}
+        {% if 'APP_SWITCH'|get_setting == 'QRCODE' %}
           <div class="phase-banner">
             <div><span>BETA</span><span>This is a new service — your feedback will help us improve it.</span></div>
           </div>
@@ -66,7 +66,7 @@
         {% endif %}
 
         <div class="page--container" id="page--content" tabindex="-1">
-          {% if request.resolver_match.url_name != 'login' %}
+          {% if 'APP_SWITCH'|get_setting != 'QRCODE' and request.resolver_match.url_name != 'login' %}
             {% include "announcements/announcements.html" %}
           {% endif %}
           <div class="content--container {% block content_class %}{% endblock %}">

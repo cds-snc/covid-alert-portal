@@ -3,7 +3,6 @@ from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import render
 
-from waffle.mixins import WaffleSwitchMixin
 
 from .models import Registrant, Location
 from .forms import EmailForm, RegistrantNameForm
@@ -12,8 +11,7 @@ from collections import ChainMap
 from formtools.wizard.views import NamedUrlSessionWizardView
 
 
-class RegistrantEmailView(WaffleSwitchMixin, FormView):
-    waffle_switch = "QR_CODES"
+class RegistrantEmailView(FormView):
     form_class = EmailForm
     template_name = "register/registrant_email.html"
 
@@ -32,8 +30,7 @@ class RegistrantEmailView(WaffleSwitchMixin, FormView):
         return reverse_lazy("register:registrant_name", kwargs={"pk": self._object.pk})
 
 
-class RegistrantNameView(WaffleSwitchMixin, UpdateView):
-    waffle_switch = "QR_CODES"
+class RegistrantNameView(UpdateView):
     model = Registrant
     form_class = RegistrantNameForm
     template_name = "register/registrant_name.html"
@@ -45,8 +42,7 @@ class RegistrantNameView(WaffleSwitchMixin, UpdateView):
         )
 
 
-class RegisterStartPageView(WaffleSwitchMixin, TemplateView):
-    waffle_switch = "QR_CODES"
+class RegisterStartPageView(TemplateView):
     template_name = "register/start.html"
 
 
@@ -60,8 +56,6 @@ TEMPLATES = {
 
 
 class LocationWizard(NamedUrlSessionWizardView):
-    waffle_switch = "QR_CODES"
-
     def get_template_names(self):
         return [TEMPLATES[self.steps.current]]
 
@@ -104,8 +98,7 @@ class LocationWizard(NamedUrlSessionWizardView):
         )
 
 
-class RegisterConfirmationPageView(WaffleSwitchMixin, TemplateView):
-    waffle_switch = "QR_CODES"
+class RegisterConfirmationPageView(TemplateView):
     template_name = "register/confirmation.html"
 
     def get_context_data(self, **kwargs):

@@ -1,6 +1,6 @@
 [
   {
-    "name": "covid-portal_staging",
+    "name": "${ecs_covid_portal_name}",
     "image": "${image}",
     "portMappings": [
       {
@@ -44,6 +44,10 @@
       {
         "name": "URL_DUAL_DOMAINS",
         "value": "${dual_urls}"
+      },
+      {
+        "name": "APP_SWITCH",
+        "value": "${app_switch}"
       }
     ],
     "secrets": [

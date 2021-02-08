@@ -2,8 +2,8 @@
 # AWS LB - Key Retrieval
 ###
 
-resource "aws_lb_target_group" "covidportal" {
-  name                 = "covidportal"
+resource "aws_lb_target_group" "qrcode" {
+  name                 = "qrcode"
   port                 = 8000
   protocol             = "HTTP"
   target_type          = "ip"
@@ -22,13 +22,13 @@ resource "aws_lb_target_group" "covidportal" {
   }
 
   tags = {
-    Name                  = "covidportal"
+    Name                  = "qrcode"
     (var.billing_tag_key) = var.billing_tag_value
   }
 }
 
-resource "aws_lb_target_group" "covidportal_2" {
-  name                 = "covidportal-2"
+resource "aws_lb_target_group" "qrcode_2" {
+  name                 = "qrcode-2"
   port                 = 8000
   protocol             = "HTTP"
   target_type          = "ip"
@@ -47,40 +47,40 @@ resource "aws_lb_target_group" "covidportal_2" {
   }
 
   tags = {
-    Name                  = "covidportal-2"
+    Name                  = "qrcode-2"
     (var.billing_tag_key) = var.billing_tag_value
   }
 }
 
-resource "aws_lb" "covidportal" {
-  name               = "covidportal"
+resource "aws_lb" "qrcode" {
+  name               = "qrcode"
   internal           = false #tfsec:ignore:AWS005
   load_balancer_type = "application"
   security_groups = [
-    aws_security_group.covidportal_load_balancer.id
+    aws_security_group.qrcode_load_balancer.id
   ]
   subnets = aws_subnet.covidportal_public.*.id
 
   tags = {
-    Name                  = "covidportal"
+    Name                  = "qrcode"
     (var.billing_tag_key) = var.billing_tag_value
   }
 }
 
-resource "aws_lb_listener" "covidportal_https" {
+resource "aws_lb_listener" "qrcode_https" {
   depends_on = [
-    aws_acm_certificate.covidportal_staging
+    aws_acm_certificate_validation.cert2
   ]
 
-  load_balancer_arn = aws_lb.covidportal.arn
+  load_balancer_arn = aws_lb.qrcode.arn
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-FS-1-2-Res-2019-08"
-  certificate_arn   = aws_acm_certificate.covidportal_staging.arn
+  certificate_arn   = aws_acm_certificate_validation.cert2.certificate_arn
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.covidportal.arn
+    target_group_arn = aws_lb_target_group.qrcode.arn
   }
 
   lifecycle {
@@ -90,8 +90,8 @@ resource "aws_lb_listener" "covidportal_https" {
   }
 }
 
-resource "aws_lb_listener" "covidportal_http" {
-  load_balancer_arn = aws_lb.covidportal.arn
+resource "aws_lb_listener" "qrcode_http" {
+  load_balancer_arn = aws_lb.qrcode.arn
   port              = "80"
   protocol          = "HTTP"
 

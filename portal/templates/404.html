@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n settings %}
 
 {% block title %}
     {% trans "Page not found" %}
@@ -11,10 +11,12 @@
     <p>{% trans "If you typed the web address, make sure it’s correct." %}</p>
     <p>{% trans "If you pasted the web address, make sure you copied the entire address." %}</p>
     <div class="content-button push-down">
-        {% if user.is_authenticated %}
-            <a href="{% url 'start' %}" role='button' draggable='false'>{% trans "New patient" %}</a>
-        {% else %}
-            <a href="{% url 'login' %}" role='button' draggable='false'>{% trans "Log in" %}</a>
+        {% if 'APP_SWITCH'|get_setting != 'QRCODE' %}
+            {% if user.is_authenticated %}
+                <a href="{% url 'start' %}" role='button' draggable='false'>{% trans "New patient" %}</a>
+            {% else %}
+                <a href="{% url 'login' %}" role='button' draggable='false'>{% trans "Log in" %}</a>
+            {% endif %}
         {% endif %}
     </div>
 {% endblock %}
