@@ -44,6 +44,7 @@ django-waffle = "*"
 django-solo = "*"
 dependency-injector = "*"
 django-formtools = "*"
+qrcode = {extras = ["pil"], version = "*"}
 
 [pipenv]
 allow_prereleases = true
