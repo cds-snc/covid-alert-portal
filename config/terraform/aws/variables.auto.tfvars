@@ -11,7 +11,7 @@ billing_tag_value = "CovidPortal_Staging"
 # AWS Cloud Watch - cloudwatch.tf
 ###
 
-cloudwatch_log_group_name = "covidportal_staging"
+cloudwatch_log_group_name        = "covidportal_staging"
 cloudwatch_log_group_name_qrcode = "qrcode_staging"
 
 ###
