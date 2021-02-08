@@ -1,7 +1,6 @@
 from django.views.generic import TemplateView, FormView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy, reverse
-from django.shortcuts import render
 
 from waffle.mixins import WaffleSwitchMixin
 
@@ -81,7 +80,6 @@ class LocationWizard(NamedUrlSessionWizardView):
     def done(self, form_list, form_dict, **kwargs):
         forms = [form.cleaned_data for form in form_list]
         location = dict(ChainMap(*forms))
-        registrant = Registrant.objects.get(id=self.kwargs.get("pk"))
 
         Location.objects.create(
             category=location["category"],
