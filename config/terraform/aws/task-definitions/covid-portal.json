@@ -1,6 +1,6 @@
 [
   {
-    "name": "${ecs_covid_portal_name}",
+    "name": "${name}",
     "image": "${image}",
     "portMappings": [
       {

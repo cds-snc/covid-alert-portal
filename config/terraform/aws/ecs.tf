@@ -30,6 +30,7 @@ data "template_file" "covidportal_task" {
 
   vars = {
     app_switch                             = "PORTAL"
+    name                                   = var.ecs_covid_portal_name
     image                                  = "${local.portal_repo}"
     awslogs-group                          = aws_cloudwatch_log_group.covidportal.name
     awslogs-region                         = var.region
@@ -68,6 +69,7 @@ data "template_file" "qrcode_registration_task" {
 
   vars = {
     app_switch                             = "QRCODE"
+    name                                   = var.ecs_covid_portal_name
     image                                  = "${local.portal_repo}"
     awslogs-group                          = aws_cloudwatch_log_group.qrcode.name
     awslogs-region                         = var.region
