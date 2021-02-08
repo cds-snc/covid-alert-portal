@@ -22,7 +22,7 @@ resource "aws_cloudfront_distribution" "maintenance_mode" {
   enabled             = true
   comment             = "This will host the maintenance mode site for COVID Alert Portal"
   default_root_object = "en.htm"
-  aliases             = ["staging.covid-hcportal.cdssandbox.xyz"]
+  aliases             = ["portal.covid-hcportal.cdssandbox.xyz", "register.covid-hcportal.cdssandbox.xyz"]
 
   default_cache_behavior {
     compress         = true
