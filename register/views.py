@@ -10,6 +10,7 @@ from .forms import EmailForm, RegistrantNameForm
 from collections import ChainMap
 
 from formtools.wizard.views import NamedUrlSessionWizardView
+from django.http import HttpResponseRedirect
 
 
 class RegistrantEmailView(WaffleSwitchMixin, FormView):
@@ -82,7 +83,7 @@ class LocationWizard(NamedUrlSessionWizardView):
         location = dict(ChainMap(*forms))
         registrant = Registrant.objects.get(id=self.kwargs.get("pk"))
 
-        Location.objects.get_or_create(
+        Location.objects.create(
             category=location["category"],
             name=location["name"],
             address=location["address"],
@@ -94,13 +95,8 @@ class LocationWizard(NamedUrlSessionWizardView):
             contact_phone=location["contact_phone"],
         )
 
-        return render(
-            self.request,
-            "register/confirmation.html",
-            {
-                "registrant": registrant,
-                "form_data": location,
-            },
+        return HttpResponseRedirect(
+            reverse("register:confirmation", kwargs={"pk": self.kwargs.get("pk")})
         )
 
 
