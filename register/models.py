@@ -2,6 +2,7 @@ from uuid import uuid4
 from django.db import models
 from django.utils.translation import gettext as _
 from phonenumber_field.modelfields import PhoneNumberField
+from .utils import generate_random_key
 
 
 class Registrant(models.Model):
@@ -36,7 +37,7 @@ class Location(models.Model):
     def save(self, *args, **kwargs):
         if not self.short_code:
             while True:
-                short_code = uuid4().hex[:8].upper()
+                short_code = generate_random_key()
                 if not Location.objects.filter(short_code=short_code).exists():
                     break
             self.short_code = short_code
