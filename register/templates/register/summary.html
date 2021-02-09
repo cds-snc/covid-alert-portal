@@ -43,8 +43,7 @@
     <form action="" method="post" class="summary_form">
         {% csrf_token %}
         {{ wizard.management_form }}
-        <!-- temporary hack for wizard goto step bug -->
-        <button name="wizard_goto_step" value="category" class="hidden"></button>
+        
         <dl class="summary-list">
             <div class="summary-list__row">
                 <dt class="summary-list__key">
@@ -54,7 +53,7 @@
                     {{ form_data.category }}
                 </dd>
                 <dd class="summary-list__actions">
-                    <button name="wizard_goto_step" value="category" class="link">Change<span class="visually-hidden"> business type</span></button>
+                    <a href="{% url 'register:location_step' pk=pk step='category' %}">Change <span class="visually-hidden"> business type</span></a>
                 </dd>
             </div>
             <div class="summary-list__row">
@@ -65,7 +64,7 @@
                     {{ form_data.name }}
                 </dd>
                 <dd class="summary-list__actions">
-                    <button name="wizard_goto_step" value="name" class="link">Change<span class="visually-hidden"> business, organization or event name</span></button>
+                    <a href="{% url 'register:location_step' pk=pk step='name' %}">Change <span class="visually-hidden"> business, organization or event name</span></a>
                 </dd>
             </div>
 
@@ -81,7 +80,7 @@
                     {{ form_data.postal_code }}
                 </dd>
                 <dd class="summary-list__actions">
-                    <button name="wizard_goto_step" value="address" class="link">Change<span class="visually-hidden"> address</span></button>
+                    <a href="{% url 'register:location_step' pk=pk step='address' %}">Change <span class="visually-hidden"> address</span></a>
                 </dd>
             </div>
 
@@ -94,7 +93,7 @@
                     {{ form_data.contact_phone }}
                 </dd>
                 <dd class="summary-list__actions">
-                    <button name="wizard_goto_step" value="contact" class="link">Change<span class="visually-hidden"> contact</span></button>
+                    <a href="{% url 'register:location_step' pk=pk step='contact' %}">Change <span class="visually-hidden"> contact</span></a>
                 </dd>
             </div>
         </dl>
