@@ -11,10 +11,6 @@ class EmailForm(HealthcareBaseForm, forms.Form):
     email = forms.EmailField(label="Email address")
 
 
-class EmailConfirmationForm(HealthcareBaseForm, forms.Form):
-    code = forms.CharField(label="Verification code")
-
-
 class RegistrantNameForm(HealthcareBaseForm, forms.ModelForm):
     class Meta:
         model = Registrant
