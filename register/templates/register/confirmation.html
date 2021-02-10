@@ -27,7 +27,7 @@
   <p><a href="">Please see our FAQs for further advice for businesses and organizations</a></p>
 
   <div class="content-button">
-      <a href="{% url 'register:start' %}" role='button' draggable='false'>{% trans "Generate different poster" %}</a>
+      <a href="{% url 'register:location_step' pk=pk step='category' %}" role='button' draggable='false'>{% trans "Generate different poster" %}</a>
       <a href="{% url 'register:start' %}" role='button' draggable='false' class="secondary">{% trans "I am finished" %}</a>
   </div>
 

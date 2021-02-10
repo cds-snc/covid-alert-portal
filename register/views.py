@@ -1,7 +1,6 @@
 from django.views.generic import TemplateView, FormView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy, reverse
-from django.shortcuts import render
 
 
 from .models import Registrant, Location
@@ -9,6 +8,7 @@ from .forms import EmailForm, RegistrantNameForm
 from collections import ChainMap
 
 from formtools.wizard.views import NamedUrlSessionWizardView
+from django.http import HttpResponseRedirect
 
 
 class RegistrantEmailView(FormView):
@@ -74,9 +74,8 @@ class LocationWizard(NamedUrlSessionWizardView):
     def done(self, form_list, form_dict, **kwargs):
         forms = [form.cleaned_data for form in form_list]
         location = dict(ChainMap(*forms))
-        registrant = Registrant.objects.get(id=self.kwargs.get("pk"))
 
-        Location.objects.get_or_create(
+        Location.objects.create(
             category=location["category"],
             name=location["name"],
             address=location["address"],
@@ -88,13 +87,8 @@ class LocationWizard(NamedUrlSessionWizardView):
             contact_phone=location["contact_phone"],
         )
 
-        return render(
-            self.request,
-            "register/confirmation.html",
-            {
-                "registrant": registrant,
-                "form_data": location,
-            },
+        return HttpResponseRedirect(
+            reverse("register:confirmation", kwargs={"pk": self.kwargs.get("pk")})
         )
 
 

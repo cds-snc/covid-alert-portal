@@ -50,7 +50,11 @@ class RegisterView(TestCase):
         session["registrant_email"] = email
         session.save()
 
-        response = self.client.get(reverse("register:confirmation"))
+        r = Registrant.objects.create(email=email)
+
+        response = self.client.get(
+            reverse("register:confirmation", kwargs={"pk": r.pk})
+        )
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,

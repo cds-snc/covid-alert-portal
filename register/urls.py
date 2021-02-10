@@ -34,7 +34,7 @@ urlpatterns = [
     ),
     path("<uuid:pk>/location/", location_wizard, name="location"),
     path(
-        "confirmation",
+        "<uuid:pk>/confirmation",
         views.RegisterConfirmationPageView.as_view(),
         name="confirmation",
     ),
