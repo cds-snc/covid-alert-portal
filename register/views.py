@@ -5,7 +5,7 @@ from django.urls import reverse_lazy, reverse
 from waffle.mixins import WaffleSwitchMixin
 
 from .models import Registrant, Location
-from .forms import EmailForm, RegistrantNameForm
+from .forms import EmailForm, EmailConfirmationForm, RegistrantNameForm
 from collections import ChainMap
 
 from formtools.wizard.views import NamedUrlSessionWizardView
@@ -30,6 +30,10 @@ class RegistrantEmailView(WaffleSwitchMixin, FormView):
 
     def get_success_url(self):
         return reverse_lazy("register:registrant_name", kwargs={"pk": self._object.pk})
+
+
+class RegistrantEmailConfirmationView(FormView):
+    form_class = EmailConfirmationForm
 
 
 class RegistrantNameView(WaffleSwitchMixin, UpdateView):

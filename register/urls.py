@@ -28,6 +28,11 @@ location_wizard = views.LocationWizard.as_view(
 urlpatterns = [
     path("", views.RegisterStartPageView.as_view(), name="start"),
     path("email", views.RegistrantEmailView.as_view(), name="registrant_email"),
+    path(
+        "confirm",
+        views.RegistrantEmailConfirmationView.as_view(),
+        name="email_confirm",
+    ),
     path("<uuid:pk>/name", views.RegistrantNameView.as_view(), name="registrant_name"),
     re_path(
         r"^(?P<pk>.+)/location/(?P<step>.+)/$", location_wizard, name="location_step"
