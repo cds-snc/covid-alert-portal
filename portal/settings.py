@@ -148,13 +148,13 @@ TEMPLATES = [
 APP_SWITCH = os.getenv("APP_SWITCH", "UNIT")
 
 # App-specific template context processors
-if APP_SWITCH == "PORTAL" or APP_SWITCH == "UNIT":
+if APP_SWITCH != "QRCODE":
     TEMPLATES[0]["OPTIONS"]["context_processors"] += [
         "announcements.context_processors.announcement",
         "profiles.context_processors.logout_messages",
         "profiles.context_processors.general_settings",
     ]
-elif APP_SWITCH == "QRCODE" or APP_SWITCH == "UNIT":
+else:
     TEMPLATES[0]["OPTIONS"]["context_processors"] += [
         "register.context_processors.general_settings",
     ]

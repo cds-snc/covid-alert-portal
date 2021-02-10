@@ -1,4 +1,3 @@
-from urllib.parse import unquote, urlparse
 from django.conf import settings
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, authenticate
@@ -21,10 +20,6 @@ from django.urls import reverse_lazy
 from django_otp import DEVICE_ID_SESSION_KEY, devices_for_user
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.expressions import RawSQL
-from django.utils.translation import LANGUAGE_SESSION_KEY, check_for_language
-from django.utils.http import url_has_allowed_host_and_scheme
-from django.http import HttpResponseRedirect
-from django.urls import translate_url
 
 from otp_yubikey.models import RemoteYubikeyDevice
 
