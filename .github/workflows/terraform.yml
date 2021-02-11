@@ -56,6 +56,9 @@ jobs:
       - name: Terraform Init
         run: |
           terraform init
+      - name: Terraform Get
+        run: |
+          terraform get
       - name: Terraform Format
         run: terraform fmt -check
 
