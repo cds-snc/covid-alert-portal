@@ -17,6 +17,12 @@ class Registrant(models.Model):
         return "{} ({})".format(self.name, self.email)
 
 
+class EmailConfirmation(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    email = models.EmailField(verbose_name="email", max_length=255)
+    created = models.DateTimeField(auto_now_add=True)
+
+
 class Location(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     category = models.CharField(max_length=200, verbose_name=_("Location category"))
