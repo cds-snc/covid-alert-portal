@@ -4,7 +4,8 @@ from django.urls import reverse
 from waffle.models import Switch
 
 from . import forms
-from .models import Registrant
+from .models import Registrant, Location
+from .utils import generate_random_key
 
 
 class RegisterView(TestCase):
@@ -125,3 +126,35 @@ class RegisterLocationDetails(TestCase):
             form.errors["contact_phone"],
             ["Enter a valid phone number (e.g. +12125552368)."],
         )
+
+
+class LocationModel(TestCase):
+    def test_location_model_generates_short_code_on_save(self):
+        location = Location.objects.create(
+            category="category",
+            name="Name of venue",
+            address="Address line 1",
+            city="Ottawa",
+            province="ON",
+            postal_code="K1K 1K1",
+            contact_email="test@test.com",
+            contact_phone="613-555-5555",
+        )
+
+        self.assertNotEqual(location.short_code, "")
+        self.assertEqual(len(location.short_code), 8)
+        self.assertTrue(location.short_code.isalnum)
+
+
+class Utils(TestCase):
+    def test_generate_short_code_default_length(self):
+        code = generate_random_key()
+        self.assertEqual(len(code), 8)
+
+    def test_generate_short_code_custom_length(self):
+        code = generate_random_key(5)
+        self.assertEqual(len(code), 5)
+
+    def test_generate_short_code_alphanumeric(self):
+        code = generate_random_key()
+        self.assertTrue(code.isalnum())
