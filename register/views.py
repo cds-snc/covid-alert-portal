@@ -4,8 +4,8 @@ from django.urls import reverse_lazy, reverse
 
 from waffle.mixins import WaffleSwitchMixin
 
-from .models import Registrant, Location
-from .forms import EmailForm, EmailConfirmationForm, RegistrantNameForm
+from .models import Registrant, Location, EmailConfirmation
+from .forms import EmailForm, RegistrantNameForm
 from collections import ChainMap
 
 from formtools.wizard.views import NamedUrlSessionWizardView
@@ -19,21 +19,22 @@ class RegistrantEmailView(WaffleSwitchMixin, FormView):
 
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
-        obj, created = Registrant.objects.get_or_create(
-            email=email,
-        )
-
-        self._object = obj
-        self.request.session["registrant_email"] = email
+        # create confirmation entry
+        EmailConfirmation.objects.create(email=email)
+        # TODO: send email
 
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy("register:registrant_name", kwargs={"pk": self._object.pk})
+        return reverse_lazy("register:email_submitted")
 
 
-class RegistrantEmailConfirmationView(FormView):
-    form_class = EmailConfirmationForm
+class RegistrantEmailSubmittedView(TemplateView):
+    template_name = "register/registrant_email_submitted.html"
+
+
+class RegistrantEmailConfirmView(TemplateView):
+    pass
 
 
 class RegistrantNameView(WaffleSwitchMixin, UpdateView):

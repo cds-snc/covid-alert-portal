@@ -29,8 +29,13 @@ urlpatterns = [
     path("", views.RegisterStartPageView.as_view(), name="start"),
     path("email", views.RegistrantEmailView.as_view(), name="registrant_email"),
     path(
-        "confirm",
-        views.RegistrantEmailConfirmationView.as_view(),
+        "email/submitted",
+        views.RegistrantEmailSubmittedView.as_view(),
+        name="email_submitted",
+    ),
+    path(
+        "email/<uuid:pk>/confirm",
+        views.RegistrantEmailConfirmView.as_view(),
         name="email_confirm",
     ),
     path("<uuid:pk>/name", views.RegistrantNameView.as_view(), name="registrant_name"),

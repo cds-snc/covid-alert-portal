@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% if form.errors %}{% trans "Error: "%}{% endif %}
+  {% trans "Confirm your email address" %}
+{% endblock %}
+
+{% block content %}
+  {% include  "includes/error_list.html" %}
+
+  <h1>{% trans "Confirm your email address" %}</h1>
+  <p>{% trans "We sent a link to [your-email@address.com]." %}</p>
+  <p>{% trans "If you did not get the email, check your junk or spam folder." %}
+
+{% endblock %}
