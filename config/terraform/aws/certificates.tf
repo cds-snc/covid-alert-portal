@@ -30,7 +30,7 @@ resource "aws_route53_record" "cert_validation" {
   records         = [each.value.record]
   ttl             = 60
   type            = each.value.type
-  zone_id         = aws_route53_zone.covidportal.zone_id
+  zone_id         = "Z00598741VQJ24WH6COK9"
 }
 
 resource "aws_acm_certificate_validation" "cert" {
