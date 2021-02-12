@@ -35,8 +35,13 @@ urlpatterns = [
     ),
     path(
         "email/<uuid:pk>/confirm",
-        views.RegistrantEmailConfirmView.as_view(),
+        views.confirm_email,
         name="email_confirm",
+    ),
+    path(
+        "email/confirm/error",
+        views.RegistrantEmailConfirmError.as_view(),
+        name="confirm_email_error",
     ),
     path("<uuid:pk>/name", views.RegistrantNameView.as_view(), name="registrant_name"),
     re_path(

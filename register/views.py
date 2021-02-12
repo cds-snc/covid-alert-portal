@@ -10,6 +10,8 @@ from collections import ChainMap
 
 from formtools.wizard.views import NamedUrlSessionWizardView
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
+from datetime import datetime, timedelta
 
 
 class RegistrantEmailView(WaffleSwitchMixin, FormView):
@@ -19,8 +21,9 @@ class RegistrantEmailView(WaffleSwitchMixin, FormView):
 
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
-        # create confirmation entry
-        EmailConfirmation.objects.create(email=email)
+        confirm = EmailConfirmation.objects.create(email=email)
+        url = reverse_lazy("register:email_confirm", kwargs={"pk": confirm.pk})
+        print("LINK: " + str(url))
         # TODO: send email
 
         return super().form_valid(form)
@@ -33,8 +36,28 @@ class RegistrantEmailSubmittedView(TemplateView):
     template_name = "register/registrant_email_submitted.html"
 
 
-class RegistrantEmailConfirmView(TemplateView):
-    pass
+# TODO: Maybe this should be an UpdateView? (see below)
+def confirm_email(request, pk):
+    time_threshold = datetime.now() - timedelta(hours=24)
+
+    try:
+        confirm = EmailConfirmation.objects.get(id=pk, created__gt=time_threshold)
+        request.session["registrant_email"] = confirm.email
+
+        # TODO: Don't create the registrant object (just name/email set to session)
+        registrant, created = Registrant.objects.get_or_create(email=confirm.email)
+
+        confirm.delete()
+
+        return redirect(
+            reverse_lazy("register:registrant_name", kwargs={"pk": registrant.pk})
+        )
+    except (EmailConfirmation.DoesNotExist):
+        return redirect(reverse_lazy("register:confirm_email_error"))
+
+
+class RegistrantEmailConfirmError(TemplateView):
+    template_name = "register/error.html"
 
 
 class RegistrantNameView(WaffleSwitchMixin, UpdateView):
