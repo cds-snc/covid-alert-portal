@@ -1,10 +1,11 @@
 ###
 # Cloudfront requires client certificate to be created in us-east-1
+# This certificate is only for the maintenance mode static site
 ###
 resource "aws_acm_certificate" "covidportal_certificate" {
   provider                  = aws.us-east-1
-  domain_name               = "portal.covid-hcportal.cdssandbox.xyz"
-  subject_alternative_names = ["register.covid-hcportal.cdssandbox.xyz"]
+  domain_name               = "covid-hcportal.cdssandbox.xyz"
+  subject_alternative_names = ["*.covid-hcportal.cdssandbox.xyz"]
   validation_method         = "DNS"
 
   tags = {
@@ -43,14 +44,9 @@ resource "aws_acm_certificate_validation" "cert" {
 # ELB requires client certificate to be created in the same region as the ELB
 ###
 resource "aws_acm_certificate" "covidportal_certificate2" {
-  domain_name = "portal.${aws_route53_zone.covidportal.name}"
-  subject_alternative_names = [
-    "register.${aws_route53_zone.covidportal.name}",
-    "portal.covid-hcportal.cdssandbox.xyz",
-    "register.covid-hcportal.cdssandbox.xyz",
-    "staging.covid-hcportal.cdssandbox.xyz"
-  ]
-  validation_method = "DNS"
+  domain_name               = "covid-hcportal.cdssandbox.xyz"
+  subject_alternative_names = ["*.covid-hcportal.cdssandbox.xyz"]
+  validation_method         = "DNS"
 
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
@@ -61,23 +57,13 @@ resource "aws_acm_certificate" "covidportal_certificate2" {
   }
 }
 
-locals {
-  hz = {
-    "portal.covid-hcportal.cdssandbox.xyz" : "Z00598741VQJ24WH6COK9",
-    "register.covid-hcportal.cdssandbox.xyz" : "Z00598741VQJ24WH6COK9",
-    "staging.covid-hcportal.cdssandbox.xyz" : "Z00598741VQJ24WH6COK9",
-    "portal.${aws_route53_zone.covidportal.name}" : aws_route53_zone.covidportal.zone_id,
-    "register.${aws_route53_zone.covidportal.name}" : aws_route53_zone.covidportal.zone_id
-  }
-}
-
-resource "aws_route53_record" "cert_validation2" {
+# Add the certificates to the main subdomain hosted zone
+resource "aws_route53_record" "cert_validation3" {
   for_each = {
     for dvo in aws_acm_certificate.covidportal_certificate2.domain_validation_options : dvo.domain_name => {
-      domain_name = dvo.domain_name
-      name        = dvo.resource_record_name
-      record      = dvo.resource_record_value
-      type        = dvo.resource_record_type
+      name   = dvo.resource_record_name
+      record = dvo.resource_record_value
+      type   = dvo.resource_record_type
     }
   }
 
@@ -86,7 +72,25 @@ resource "aws_route53_record" "cert_validation2" {
   records         = [each.value.record]
   ttl             = 60
   type            = each.value.type
-  zone_id         = lookup(local.hz, each.value.domain_name)
+  zone_id         = "Z00598741VQJ24WH6COK9"
+}
+
+# Add the certificates to the sub-subdomain hosted zone
+resource "aws_route53_record" "cert_validation2" {
+  for_each = {
+    for dvo in aws_acm_certificate.covidportal_certificate2.domain_validation_options : dvo.domain_name => {
+      name   = dvo.resource_record_name
+      record = dvo.resource_record_value
+      type   = dvo.resource_record_type
+    }
+  }
+
+  allow_overwrite = true
+  name            = each.value.name
+  records         = [each.value.record]
+  ttl             = 60
+  type            = each.value.type
+  zone_id         = aws_route53_zone.covidportal.zone_id
 }
 
 resource "aws_acm_certificate_validation" "cert2" {
