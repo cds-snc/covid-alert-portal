@@ -48,7 +48,7 @@ resource "aws_acm_certificate" "covidportal_certificate2" {
     "register.${aws_route53_zone.covidportal.name}",
     "portal.covid-hcportal.cdssandbox.xyz",
     "register.covid-hcportal.cdssandbox.xyz",
-    "staging.covid-hcportal.cdssandbox.xyz",
+    "staging.covid-hcportal.cdssandbox.xyz"
   ]
   validation_method         = "DNS"
 
