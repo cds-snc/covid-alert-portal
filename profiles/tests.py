@@ -5,6 +5,7 @@ from django.test import TestCase, Client, override_settings
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.utils import translation, timezone
+from django.utils.translation import activate
 from django.core.exceptions import ValidationError
 from django_otp import DEVICE_ID_SESSION_KEY
 from invitations.models import Invitation
@@ -405,10 +406,12 @@ class i18nTestView(TestCase):
         response = self.client.get("/", follow=True)
         self.assertContains(response, "Français")
 
-        response = self.client.get("/en/switch-language/", follow=True)
+        activate("en")
+        response = self.client.get(reverse("switch_language"), follow=True)
         self.assertContains(response, "English")
 
-        response = self.client.get("/fr/switch-language/", follow=True)
+        activate("fr")
+        response = self.client.get(reverse("switch_language"), follow=True)
         self.assertContains(response, "Français")
 
         response = self.client.get(reverse("privacy"))

@@ -1,4 +1,5 @@
 from django.contrib.messages.api import get_messages
+from django.utils.translation import gettext as _
 
 
 def logout_messages(request):
@@ -7,3 +8,7 @@ def logout_messages(request):
     return {
         "logout_messages": messages,
     }
+
+
+def general_settings(request):
+    return {"title_suffix": _("— COVID Alert Portal")}

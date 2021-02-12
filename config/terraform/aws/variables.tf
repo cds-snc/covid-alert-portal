@@ -28,6 +28,10 @@ variable "cloudwatch_log_group_name" {
   type = string
 }
 
+variable "cloudwatch_log_group_name_qrcode" {
+  type = string
+}
+
 ###
 # AWS ECS - ecs.tf
 ###
@@ -67,6 +71,10 @@ variable "max_capacity" {
 
 # Task Covid Portal
 variable "ecs_covid_portal_name" {
+  type = string
+}
+
+variable "ecs_qrcode_name" {
   type = string
 }
 

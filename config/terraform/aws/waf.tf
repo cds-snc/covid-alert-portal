@@ -298,6 +298,11 @@ resource "aws_wafv2_web_acl_association" "covid_portal_assocation" {
   web_acl_arn  = aws_wafv2_web_acl.covidportal_acl.arn
 }
 
+resource "aws_wafv2_web_acl_association" "covid_qrcode_assocation" {
+  resource_arn = aws_lb.qrcode.arn
+  web_acl_arn  = aws_wafv2_web_acl.covidportal_acl.arn
+}
+
 ###
 # AWS WAF - Logging
 ###

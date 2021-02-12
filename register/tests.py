@@ -10,7 +10,7 @@ from .utils import generate_random_key
 
 class RegisterView(TestCase):
     def setUp(self):
-        Switch.objects.create(name="QR_CODES", active=True)
+        pass
 
     def test_start_page(self):
         response = self.client.get(reverse("register:start"))

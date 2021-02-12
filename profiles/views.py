@@ -1,4 +1,3 @@
-from urllib.parse import unquote, urlparse
 from django.conf import settings
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, authenticate
@@ -21,10 +20,6 @@ from django.urls import reverse_lazy
 from django_otp import DEVICE_ID_SESSION_KEY, devices_for_user
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.expressions import RawSQL
-from django.utils.translation import LANGUAGE_SESSION_KEY, check_for_language
-from django.utils.http import url_has_allowed_host_and_scheme
-from django.http import HttpResponseRedirect
-from django.urls import translate_url
 
 from otp_yubikey.models import RemoteYubikeyDevice
 
@@ -459,54 +454,6 @@ def password_reset_complete(request):
     else:
         generate_2fa_code(request.user)
         return redirect(reverse_lazy("login_2fa"))
-
-
-def switch_language(request):
-    current_lang = request.LANGUAGE_CODE
-    lang = "en"
-    if current_lang == "en":
-        lang = "fr"
-
-    if check_for_language(lang) is False:
-        # Make sure the lang has been enabled in the config. If not, default to en
-        lang = "en"
-
-    # Take the referer by default
-    next_url = urlparse(request.META.get("HTTP_REFERER"))
-    # but if a ?next_url has been provided, let's make sure it's clean
-
-    next_url = next_url.path and unquote(next_url.path)
-    if not url_has_allowed_host_and_scheme(
-        url=next_url,
-        allowed_hosts={request.get_host()},
-        require_https=request.is_secure(),
-    ):
-        # if it is not clean, let's default to /
-        next_url = "/"
-
-    root_domain = ""
-    if settings.URL_DUAL_DOMAINS:
-        root_domain = (
-            settings.URL_FR_PRODUCTION if lang == "fr" else settings.URL_EN_PRODUCTION
-        )
-
-    next_url = root_domain + translate_url(next_url, lang)
-    response = HttpResponseRedirect(next_url)
-
-    if hasattr(request, "session"):
-        request.session[LANGUAGE_SESSION_KEY] = lang
-
-    response.set_cookie(
-        settings.LANGUAGE_COOKIE_NAME,
-        lang,
-        max_age=settings.LANGUAGE_COOKIE_AGE,
-        path=settings.LANGUAGE_COOKIE_PATH,
-        domain=settings.LANGUAGE_COOKIE_DOMAIN,
-        secure=settings.LANGUAGE_COOKIE_SECURE,
-        httponly=settings.LANGUAGE_COOKIE_HTTPONLY,
-        samesite=settings.LANGUAGE_COOKIE_SAMESITE,
-    )
-    return response
 
 
 def _reset_all_devices_failure_count(user):
