@@ -61,6 +61,16 @@ resource "aws_acm_certificate" "covidportal_certificate2" {
   }
 }
 
+locals {
+  hz = {
+    "portal.covid-hcportal.cdssandbox.xyz" : "Z00598741VQJ24WH6COK9",
+    "register.covid-hcportal.cdssandbox.xyz" : "Z00598741VQJ24WH6COK9",
+    "staging.covid-hcportal.cdssandbox.xyz" : "Z00598741VQJ24WH6COK9",
+    "portal.${aws_route53_zone.covidportal.name}" : aws_route53_zone.covidportal.zone_id,
+    "register.${aws_route53_zone.covidportal.name}" : aws_route53_zone.covidportal.zone_id
+  }
+}
+
 resource "aws_route53_record" "cert_validation2" {
   for_each = {
     for dvo in aws_acm_certificate.covidportal_certificate2.domain_validation_options : dvo.domain_name => {
@@ -75,7 +85,7 @@ resource "aws_route53_record" "cert_validation2" {
   records         = [each.value.record]
   ttl             = 60
   type            = each.value.type
-  zone_id         = aws_route53_zone.covidportal.zone_id
+  zone_id         = lookup(local.hz, each.value.domain_name)
 }
 
 resource "aws_acm_certificate_validation" "cert2" {
