@@ -43,9 +43,14 @@ resource "aws_acm_certificate_validation" "cert" {
 # ELB requires client certificate to be created in the same region as the ELB
 ###
 resource "aws_acm_certificate" "covidportal_certificate2" {
-  domain_name               = "portal.${aws_route53_zone.covidportal.name}"
-  subject_alternative_names = ["register.${aws_route53_zone.covidportal.name}"]
-  validation_method         = "DNS"
+  domain_name = "portal.${aws_route53_zone.covidportal.name}"
+  subject_alternative_names = [
+    "register.${aws_route53_zone.covidportal.name}",
+    "portal.covid-hcportal.cdssandbox.xyz",
+    "register.covid-hcportal.cdssandbox.xyz",
+    "staging.covid-hcportal.cdssandbox.xyz"
+  ]
+  validation_method = "DNS"
 
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
