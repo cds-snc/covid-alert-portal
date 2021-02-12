@@ -3,10 +3,13 @@
 # This certificate is only for the maintenance mode static site
 ###
 resource "aws_acm_certificate" "covidportal_certificate" {
-  provider                  = aws.us-east-1
-  domain_name               = "covid-hcportal.cdssandbox.xyz"
-  subject_alternative_names = ["*.covid-hcportal.cdssandbox.xyz"]
-  validation_method         = "DNS"
+  provider    = aws.us-east-1
+  domain_name = "portal.covid-hcportal.cdssandbox.xyz"
+  subject_alternative_names = [
+    "register.covid-hcportal.cdssandbox.xyz",
+    "staging.covid-hcportal.cdssandbox.xyz"
+  ]
+  validation_method = "DNS"
 
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
