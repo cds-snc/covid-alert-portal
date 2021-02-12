@@ -3,8 +3,8 @@
 ###
 resource "aws_acm_certificate" "covidportal_certificate" {
   provider                  = aws.us-east-1
-  domain_name               = "portal.${aws_route53_zone.covidportal.name}"
-  subject_alternative_names = ["register.${aws_route53_zone.covidportal.name}"]
+  domain_name               = "portal.covid-hcportal.cdssandbox.xyz"
+  subject_alternative_names = ["register.covid-hcportal.cdssandbox.xyz"]
   validation_method         = "DNS"
 
   tags = {
