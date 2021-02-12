@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.18.1] - 2021-02-12
+
+### Added
+
+- New AWS infrastructure for hosting a separate ECS task for QR Code registration
+- Modified Portal Django project so that it can host either the Portal or the QR Code registration
+
 ## [1.17.1] - 2021-01-29
 
 ### Added
