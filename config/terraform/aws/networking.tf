@@ -317,6 +317,88 @@ resource "aws_security_group" "covidportal_load_balancer" {
   }
 }
 
+resource "aws_security_group" "qrcode" {
+  name        = "qrcode"
+  description = "Ingress - QR Code registration"
+  vpc_id      = aws_vpc.covidportal.id
+
+  tags = {
+    (var.billing_tag_key) = var.billing_tag_value
+  }
+}
+
+resource "aws_security_group_rule" "qrcode_ingress_alb" {
+  description              = "Security group rule for QR Code registration Ingress ALB"
+  type                     = "ingress"
+  from_port                = 8000
+  to_port                  = 8000
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.qrcode.id
+  source_security_group_id = aws_security_group.qrcode_load_balancer.id
+}
+
+resource "aws_security_group_rule" "qrcode_egress_privatelink" {
+  description              = "Security group rule for QR Code registration egress through privatelink"
+  type                     = "egress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.qrcode.id
+  source_security_group_id = aws_security_group.privatelink.id
+}
+
+resource "aws_security_group_rule" "qrcode_egress_s3_privatelink" {
+  description       = "Security group rule for Retrieval S3 egress through privatelink"
+  type              = "egress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  security_group_id = aws_security_group.qrcode.id
+  prefix_list_ids = [
+    aws_vpc_endpoint.s3.prefix_list_id
+  ]
+}
+
+resource "aws_security_group_rule" "qrcode_egress_database" {
+  description              = "Security group rule for Portal DB egress through privatelink"
+  type                     = "egress"
+  from_port                = 5432
+  to_port                  = 5432
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.qrcode.id
+  source_security_group_id = aws_security_group.covidportal_database.id
+}
+
+resource "aws_security_group" "qrcode_load_balancer" {
+  name        = "qrcode-load-balancer"
+  description = "Ingress - QR Code registration Load Balancer"
+  vpc_id      = aws_vpc.covidportal.id
+
+  ingress {
+    protocol    = "tcp"
+    from_port   = 443
+    to_port     = 443
+    cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:AWS008
+  }
+  ingress {
+    protocol    = "tcp"
+    from_port   = 80
+    to_port     = 80
+    cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:AWS008
+  }
+
+  egress {
+    protocol    = "tcp"
+    from_port   = 8000
+    to_port     = 8000
+    cidr_blocks = [var.vpc_cidr_block]
+  }
+
+  tags = {
+    (var.billing_tag_key) = var.billing_tag_value
+  }
+}
+
 resource "aws_security_group" "covidportal_database" {
   name        = "covidportal-database"
   description = "Ingress - covidportal Database"
@@ -328,6 +410,7 @@ resource "aws_security_group" "covidportal_database" {
     to_port   = 5432
     security_groups = [
       aws_security_group.covidportal.id,
+      aws_security_group.qrcode.id,
     ]
   }
 
@@ -346,6 +429,16 @@ resource "aws_security_group" "covidportal_egress" {
   }
 }
 
+resource "aws_security_group" "qrcode_egress" {
+  name        = "egress-anywhere-qrcode"
+  description = "Egress - CovidShield External Services"
+  vpc_id      = aws_vpc.covidportal.id
+
+  tags = {
+    (var.billing_tag_key) = var.billing_tag_value
+  }
+}
+
 resource "aws_security_group_rule" "covidportal_egress_email" {
   description       = "Security group rule for Portal email egress"
   type              = "egress"
@@ -356,6 +449,16 @@ resource "aws_security_group_rule" "covidportal_egress_email" {
   cidr_blocks       = ["0.0.0.0/0"] #tfsec:ignore:AWS007
 }
 
+resource "aws_security_group_rule" "qrcode_egress_email" {
+  description       = "Security group rule for QR Code registration email egress"
+  type              = "egress"
+  from_port         = 587
+  to_port           = 587
+  protocol          = "tcp"
+  security_group_id = aws_security_group.qrcode_egress.id
+  cidr_blocks       = ["0.0.0.0/0"] #tfsec:ignore:AWS007
+}
+
 resource "aws_security_group_rule" "covidportal_egress_new_relic" {
   description       = "Security group rule for Portal New Relic egress"
   type              = "egress"
@@ -363,6 +466,16 @@ resource "aws_security_group_rule" "covidportal_egress_new_relic" {
   to_port           = 443
   protocol          = "tcp"
   security_group_id = aws_security_group.covidportal_egress.id
+  cidr_blocks       = ["0.0.0.0/0"] #tfsec:ignore:AWS007
+}
+
+resource "aws_security_group_rule" "qrcode_egress_new_relic" {
+  description       = "Security group rule for QR Code registration New Relic egress"
+  type              = "egress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  security_group_id = aws_security_group.qrcode_egress.id
   cidr_blocks       = ["0.0.0.0/0"] #tfsec:ignore:AWS007
 }
 
@@ -384,6 +497,16 @@ resource "aws_security_group_rule" "privatelink_portal_ingress" {
   protocol                 = "tcp"
   security_group_id        = aws_security_group.privatelink.id
   source_security_group_id = aws_security_group.covidportal.id
+}
+
+resource "aws_security_group_rule" "privatelink_qrcode_ingress" {
+  description              = "Security group rule for QR Code registration ingress"
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.privatelink.id
+  source_security_group_id = aws_security_group.qrcode.id
 }
 
 ###

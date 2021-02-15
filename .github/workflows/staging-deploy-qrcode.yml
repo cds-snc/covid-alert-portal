@@ -1,11 +1,11 @@
-name: Deploy to Staging
+name: Deploy QR code app to Staging
 
 on:
   push:
     branches: [main]
 
 jobs:
-  deploy-portal-service:
+  deploy-qrcode-service:
     runs-on: ubuntu-latest
     steps:
       - name: Wait for container to be built and pushed
@@ -38,36 +38,36 @@ jobs:
         id: cluster
         run: |
           echo "##[set-output name=name;]$(aws ecs list-clusters | jq -r '.clusterArns[0]' | cut -f 2 -d "/" )"
-      - name: Download Covid Portal task definition
-        id: download-taskdef-portal
+      - name: Download QR Code task definition
+        id: download-taskdef-qrcode
         run: |
-          aws ecs describe-task-definition --task-definition covid-portal_staging --query taskDefinition > task-definition-portal.json
-          echo "##[set-output name=container_name;]$(jq -r '.containerDefinitions[0].name' task-definition-portal.json)"
-      - name: Render image for portal service
-        id: taskdef-portal
+          aws ecs describe-task-definition --task-definition qrcode_staging --query taskDefinition > task-definition-qrcode.json
+          echo "##[set-output name=container_name;]$(jq -r '.containerDefinitions[0].name' task-definition-qrcode.json)"
+      - name: Render image for QR Code service
+        id: taskdef-qrcode
         # v1.0.10
         uses: aws-actions/amazon-ecs-render-task-definition@9666dc9d3bf790a3a6a49737b240f17fa599a5f2
         with:
-          task-definition: task-definition-portal.json
-          container-name: ${{ steps.download-taskdef-portal.outputs.container_name }}
+          task-definition: task-definition-qrcode.json
+          container-name: ${{ steps.download-taskdef-qrcode.outputs.container_name }}
           image: ${{ steps.login-ecr.outputs.registry }}/covid-alert-portal-terraform:${{ github.sha }}
 
-      - name: Render appspec for portal service
+      - name: Render appspec for qrcode service
         run: |
-          CONTAINER_PORT=`jq '.containerDefinitions[0].portMappings[0].containerPort' task-definition-portal.json`
-          CONTAINER_NAME=${{ steps.download-taskdef-portal.outputs.container_name }}
-          TASKDEF_ARN=`jq -r '.taskDefinitionArn' task-definition-portal.json | cut -f 1-6 -d "/"`
-          jq  --argjson port "$CONTAINER_PORT" --arg cname "$CONTAINER_NAME" --arg taskdefarn "$TASKDEF_ARN" '.Resources[0].TargetService.Properties.TaskDefinition = $taskdefarn | .Resources[0].TargetService.Properties.LoadBalancerInfo.ContainerName = $cname | .Resources[0].TargetService.Properties.LoadBalancerInfo.ContainerPort = $port' config/infrastructure/aws/appspec-template.json > covid-alert-portal-appspec.json
-      - name: Deploy image for Covid Alert Portal
+          CONTAINER_PORT=`jq '.containerDefinitions[0].portMappings[0].containerPort' task-definition-qrcode.json`
+          CONTAINER_NAME=${{ steps.download-taskdef-qrcode.outputs.container_name }}
+          TASKDEF_ARN=`jq -r '.taskDefinitionArn' task-definition-qrcode.json | cut -f 1-6 -d "/"`
+          jq  --argjson port "$CONTAINER_PORT" --arg cname "$CONTAINER_NAME" --arg taskdefarn "$TASKDEF_ARN" '.Resources[0].TargetService.Properties.TaskDefinition = $taskdefarn | .Resources[0].TargetService.Properties.LoadBalancerInfo.ContainerName = $cname | .Resources[0].TargetService.Properties.LoadBalancerInfo.ContainerPort = $port' config/infrastructure/aws/appspec-template.json > qrcode-appspec.json
+      - name: Deploy image for QR Code app
         timeout-minutes: 10
         # v1.4.2
         uses: aws-actions/amazon-ecs-deploy-task-definition@c74a8ca2cd0dd04d25f469715e23cb6c2fe0f01a
         with:
-          task-definition: ${{ steps.taskdef-portal.outputs.task-definition }}
-          service: covid-portal_staging
+          task-definition: ${{ steps.taskdef-qrcode.outputs.task-definition }}
+          service: qrcode_staging
           cluster: ${{ steps.cluster.outputs.name }}
           wait-for-service-stability: true
-          codedeploy-appspec: ${{ github.workspace }}/covid-alert-portal-appspec.json
+          codedeploy-appspec: ${{ github.workspace }}/qrcode-appspec.json
 
       - name: Logout of Amazon ECR
         if: always()

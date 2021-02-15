@@ -119,11 +119,6 @@ urlpatterns = [
         views.YubikeyDeleteView.as_view(),
         name="yubikey_delete",
     ),
-    path(
-        "switch-language/",
-        views.switch_language,
-        name="switch_language",
-    ),
 ]
 
 # Django.contrib.auth urls have underscore in them, let's change that for dashes

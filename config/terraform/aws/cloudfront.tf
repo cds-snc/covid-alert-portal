@@ -22,7 +22,7 @@ resource "aws_cloudfront_distribution" "maintenance_mode" {
   enabled             = true
   comment             = "This will host the maintenance mode site for COVID Alert Portal"
   default_root_object = "en.htm"
-  aliases             = ["staging.covid-hcportal.cdssandbox.xyz"]
+  aliases             = ["portal.covid-hcportal.cdssandbox.xyz", "register.covid-hcportal.cdssandbox.xyz"]
 
   default_cache_behavior {
     compress         = true
@@ -54,7 +54,7 @@ resource "aws_cloudfront_distribution" "maintenance_mode" {
     }
   }
   viewer_certificate {
-    acm_certificate_arn      = aws_acm_certificate.covidportal_maintenance.arn
+    acm_certificate_arn      = aws_acm_certificate_validation.cert.certificate_arn
     minimum_protocol_version = "TLSv1.2_2019"
     ssl_support_method       = "sni-only"
   }

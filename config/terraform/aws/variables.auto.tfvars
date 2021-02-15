@@ -11,7 +11,8 @@ billing_tag_value = "CovidPortal_Staging"
 # AWS Cloud Watch - cloudwatch.tf
 ###
 
-cloudwatch_log_group_name = "covidportal_staging"
+cloudwatch_log_group_name        = "covidportal_staging"
+cloudwatch_log_group_name_qrcode = "qrcode_staging"
 
 ###
 # AWS ECS - ecs.tf
@@ -23,6 +24,7 @@ tracer_provider       = "stdout"
 django_env            = "production"
 django_allowed_hosts  = ".cdssandbox.xyz"
 ecs_covid_portal_name = "covid-portal_staging"
+ecs_qrcode_name       = "qrcode_staging"
 new_relic_app_name    = "Staging-Terraform-Covid-Portal"
 dual_urls             = "False"
 

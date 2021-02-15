@@ -26,6 +26,9 @@ handler403 = views.permission_denied_view
 handler404 = views.page_not_found
 handler500 = views.internal_error
 
+# ----
+# URL paths shared among all apps
+# ----
 urlpatterns = [
     re_path(
         r"^robots.txt",
@@ -39,35 +42,60 @@ urlpatterns = [
         ),
         name="status",
     ),
-    path("admin/", admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
     path("403/", views.permission_denied_view),
     path("404/", views.page_not_found),
     path("500/", views.internal_error),
+    path(
+        "switch-language/",
+        views.switch_language,
+        name="switch_language",
+    ),
 ]
 
-invitation_patterns = (
-    [
-        # https://github.com/bee-keeper/django-invitations/blob/master/invitations/urls.py
-        re_path(
-            r"^accept-invite/(?P<key>\w+)/?$",
-            AcceptInvite.as_view(),
-            name="accept-invite",
-        ),
-    ],
-    "invitations",
-)
+# ----
+# URL paths used when serving the OTK Portal site
+# ----
+if settings.APP_SWITCH == "PORTAL" or settings.APP_SWITCH == "UNIT":
+    invitation_patterns = (
+        [
+            # https://github.com/bee-keeper/django-invitations/blob/master/invitations/urls.py
+            re_path(
+                r"^accept-invite/(?P<key>\w+)/?$",
+                AcceptInvite.as_view(),
+                name="accept-invite",
+            ),
+        ],
+        "invitations",
+    )
 
-urlpatterns += i18n_patterns(
-    path("", include("profiles.urls")),
-    path("", include("covid_key.urls")),
-    path("contact/", include("contact.urls")),
-    path("about/", include("about.urls")),
-    path("", include("backup_codes.urls")),
-    path(
-        "invitations/",
-        include(invitation_patterns, namespace="invitations"),
-    ),
-    path("announcements/", include("announcements.urls")),
-    path("register/", include("register.urls")),
-)
+    urlpatterns += [
+        path("admin/", admin.site.urls),
+    ]
+
+    urlpatterns += i18n_patterns(
+        path("", include("profiles.urls")),
+        path("", include("covid_key.urls")),
+        path("contact/", include("contact.urls")),
+        path("about/", include("about.urls")),
+        path("", include("backup_codes.urls")),
+        path(
+            "invitations/",
+            include(invitation_patterns, namespace="invitations"),
+        ),
+        path("announcements/", include("announcements.urls")),
+    )
+
+# ----
+# URL Paths used when serving the QR Code registration site
+# ----
+if settings.APP_SWITCH == "QRCODE":
+    urlpatterns += i18n_patterns(
+        path("", include("register.urls")),
+        path("contact/", include("contact.urls")),
+    )
+
+if settings.APP_SWITCH == "UNIT":
+    urlpatterns += i18n_patterns(
+        path("register", include("register.urls")),
+    )
