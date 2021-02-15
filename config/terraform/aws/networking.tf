@@ -234,6 +234,10 @@ resource "aws_route_table_association" "covidportal_private_route" {
 # AWS Security Groups
 ###
 
+resource "aws_default_security_group" "default" {
+  vpc_id = aws_vpc.covidportal.id
+}
+
 resource "aws_security_group" "covidportal" {
   name        = "covidportal"
   description = "Ingress - Covid Portal"
