@@ -10,7 +10,11 @@
   {% include  "includes/error_list.html" %}
 
   <h1>{% trans "Confirm your email address" %}</h1>
-  <p>{% trans "We sent a link to [your-email@address.com]." %}</p>
+  
+  {% blocktrans with email=submitted_email %}
+    <p>We sent a link to {{ email }}.</p>
+  {% endblocktrans %}
+
   <p>{% trans "If you did not get the email, check your junk or spam folder." %}
 
 {% endblock %}

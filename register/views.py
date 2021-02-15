@@ -3,6 +3,7 @@ from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy, reverse
 
 from waffle.mixins import WaffleSwitchMixin
+from django.contrib import messages
 
 from .models import Registrant, Location, EmailConfirmation
 from .forms import EmailForm, RegistrantNameForm
@@ -10,7 +11,7 @@ from collections import ChainMap
 
 from formtools.wizard.views import NamedUrlSessionWizardView
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from datetime import datetime, timedelta
 
 
@@ -21,10 +22,13 @@ class RegistrantEmailView(WaffleSwitchMixin, FormView):
 
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
+        self.submitted_email = email
         confirm = EmailConfirmation.objects.create(email=email)
 
+        # get the base url and strip the trailing slash
         base_url = self.request.build_absolute_uri("/")[:-1]
         
+        # build the email confirmation link
         url = base_url + reverse(
             "register:email_confirm",
             kwargs={
@@ -32,29 +36,43 @@ class RegistrantEmailView(WaffleSwitchMixin, FormView):
             },
         )
 
+        # send that email
         form.send_mail(self.request.LANGUAGE_CODE, email, url)
 
         return super().form_valid(form)
 
     def get_success_url(self):
+        self.request.session["submitted_email"] = self.submitted_email
         return reverse_lazy("register:email_submitted")
 
 
 class RegistrantEmailSubmittedView(TemplateView):
     template_name = "register/registrant_email_submitted.html"
 
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.session.get("submitted_email"):
+            return redirect(reverse_lazy("register:registrant_email"))
+        return super(RegistrantEmailSubmittedView, self).dispatch(request, *args, **kwargs)
 
-# TODO: Maybe this should be an UpdateView? (see below)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["submitted_email"] = self.request.session.get("submitted_email")
+        del self.request.session["submitted_email"]
+        return context
+
+
 def confirm_email(request, pk):
-    time_threshold = datetime.now() - timedelta(hours=24)
-
     try:
+        # Confirmation emails are only valid for 24hrs
+        time_threshold = datetime.now() - timedelta(hours=24)
+        
         confirm = EmailConfirmation.objects.get(id=pk, created__gt=time_threshold)
         request.session["registrant_email"] = confirm.email
 
-        # TODO: Don't create the registrant object (just name/email set to session)
+        # Create the Registrant
         registrant, created = Registrant.objects.get_or_create(email=confirm.email)
 
+        # Delete the confirmation
         confirm.delete()
 
         return redirect(
