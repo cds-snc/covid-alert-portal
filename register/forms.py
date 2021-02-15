@@ -5,10 +5,29 @@ from django.utils.translation import gettext_lazy as _
 from .models import Registrant
 from portal.widgets import CDSRadioWidget
 from phonenumber_field.formfields import PhoneNumberField
+from dependency_injector.wiring import inject, Provide
+from portal.containers import Container
+from portal.services import NotifyService
 
 
 class EmailForm(HealthcareBaseForm, forms.Form):
     email = forms.EmailField(label="Email address")
+
+    @inject
+    def send_mail(
+        self,
+        language,
+        email,
+        link,
+        notify_service: NotifyService = Provide[Container.notify_service],
+    ):
+        notify_service.send_email(
+            address=email,
+            template_id="69512434-970a-4504-8f0e-eaec81fa570b",
+            details={
+                "verification_link": link
+            },
+        )
 
 
 class RegistrantNameForm(HealthcareBaseForm, forms.ModelForm):

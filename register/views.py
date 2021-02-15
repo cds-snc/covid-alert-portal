@@ -22,9 +22,17 @@ class RegistrantEmailView(WaffleSwitchMixin, FormView):
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
         confirm = EmailConfirmation.objects.create(email=email)
-        url = reverse_lazy("register:email_confirm", kwargs={"pk": confirm.pk})
-        print("LINK: " + str(url))
-        # TODO: send email
+
+        base_url = self.request.build_absolute_uri("/")[:-1]
+        
+        url = base_url + reverse(
+            "register:email_confirm",
+            kwargs={
+                "pk": confirm.pk
+            },
+        )
+
+        form.send_mail(self.request.LANGUAGE_CODE, email, url)
 
         return super().form_valid(form)
 
