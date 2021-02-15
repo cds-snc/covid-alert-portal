@@ -27,13 +27,11 @@ class RegistrantEmailView(FormView):
 
         # get the base url and strip the trailing slash
         base_url = self.request.build_absolute_uri("/")[:-1]
-        
+
         # build the email confirmation link
         url = base_url + reverse(
             "register:email_confirm",
-            kwargs={
-                "pk": confirm.pk
-            },
+            kwargs={"pk": confirm.pk},
         )
 
         # Just log it if we're in debug
@@ -57,7 +55,9 @@ class RegistrantEmailSubmittedView(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         if not self.request.session.get("submitted_email"):
             return redirect(reverse_lazy("register:registrant_email"))
-        return super(RegistrantEmailSubmittedView, self).dispatch(request, *args, **kwargs)
+        return super(RegistrantEmailSubmittedView, self).dispatch(
+            request, *args, **kwargs
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -70,7 +70,7 @@ def confirm_email(request, pk):
     try:
         # Confirmation emails are only valid for 24hrs
         time_threshold = datetime.now() - timedelta(hours=24)
-        
+
         confirm = EmailConfirmation.objects.get(id=pk, created__gt=time_threshold)
         request.session["registrant_email"] = confirm.email
 
