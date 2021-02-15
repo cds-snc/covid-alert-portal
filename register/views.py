@@ -34,13 +34,7 @@ class RegistrantEmailView(FormView):
             kwargs={"pk": confirm.pk},
         )
 
-        # Just log it if we're in debug
-        if settings.DEBUG:
-            print(
-                f"DEBUG ONLY: Email message would have been sent to {email}. Confirmation link: {url}"
-            )
-        else:
-            form.send_mail(self.request.LANGUAGE_CODE, email, url)
+        form.send_mail(self.request.LANGUAGE_CODE, email, url)
 
         return super().form_valid(form)
 
