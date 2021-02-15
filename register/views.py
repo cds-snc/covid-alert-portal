@@ -4,6 +4,7 @@ from django.urls import reverse_lazy, reverse
 
 from waffle.mixins import WaffleSwitchMixin
 from django.contrib import messages
+from django.conf import settings
 
 from .models import Registrant, Location, EmailConfirmation
 from .forms import EmailForm, RegistrantNameForm
@@ -36,8 +37,13 @@ class RegistrantEmailView(WaffleSwitchMixin, FormView):
             },
         )
 
-        # send that email
-        form.send_mail(self.request.LANGUAGE_CODE, email, url)
+        # Just log it if we're in debug
+        if settings.DEBUG:
+            print(
+                f"DEBUG ONLY: Email message would have been sent to {email}. Confirmation link: {url}"
+            )
+        else:
+            form.send_mail(self.request.LANGUAGE_CODE, email, url)
 
         return super().form_valid(form)
 
