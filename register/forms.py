@@ -1,4 +1,5 @@
 from django import forms
+from django.conf import settings
 
 from portal.forms import HealthcareBaseForm
 from django.utils.translation import gettext_lazy as _
@@ -17,13 +18,13 @@ class EmailForm(HealthcareBaseForm, forms.Form):
     def send_mail(
         self,
         language,
-        email,
+        to_email,
         link,
         notify_service: NotifyService = Provide[Container.notify_service],
     ):
         notify_service.send_email(
-            address=email,
-            template_id="69512434-970a-4504-8f0e-eaec81fa570b",
+            address=to_email,
+            template_id=settings.REGISTER_EMAIL_CONFIRMATION_ID.get(language or "en"),
             details={
                 "verification_link": link
             },
