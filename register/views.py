@@ -67,7 +67,7 @@ def confirm_email(request, pk):
         confirm = EmailConfirmation.objects.get(id=pk)
 
         # Expired token
-        if(confirm.created < time_threshold):
+        if confirm.created < time_threshold:
             print("Error: Email verification token has expired")
             return redirect(reverse_lazy("register:confirm_email_error"))
 
