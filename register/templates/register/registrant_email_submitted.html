@@ -17,4 +17,8 @@
 
   <p>{% trans "If you did not get the email, check your junk or spam folder." %}
 
+  <div class="content-button">
+    <a href="{% url 'register:registrant_email' %}" role="button" draggable="false">{% trans "Send email again" %}</a>
+  </div>
+
 {% endblock %}
