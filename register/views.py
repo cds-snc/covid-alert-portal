@@ -87,10 +87,6 @@ def confirm_email(request, pk):
         return redirect(reverse_lazy("register:confirm_email_error"))
 
 
-class RegistrantEmailConfirmError(TemplateView):
-    template_name = "register/error.html"
-
-
 class RegistrantNameView(UpdateView):
     model = Registrant
     form_class = RegistrantNameForm
@@ -101,10 +97,6 @@ class RegistrantNameView(UpdateView):
             "register:location_step",
             kwargs={"pk": self.kwargs.get("pk"), "step": "category"},
         )
-
-
-class RegisterStartPageView(TemplateView):
-    template_name = "register/start.html"
 
 
 TEMPLATES = {
