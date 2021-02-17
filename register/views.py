@@ -14,6 +14,7 @@ from formtools.wizard.views import NamedUrlSessionWizardView
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from datetime import datetime, timedelta
+import pytz
 
 
 class RegistrantEmailView(FormView):
@@ -60,10 +61,16 @@ class RegistrantEmailSubmittedView(TemplateView):
 
 def confirm_email(request, pk):
     try:
-        # Confirmation emails are only valid for 24hrs
-        time_threshold = datetime.now() - timedelta(hours=24)
+        # Confirmation tokens are only valid for 24hrs
+        time_threshold = pytz.utc.localize(datetime.now() - timedelta(hours=24))
 
-        confirm = EmailConfirmation.objects.get(id=pk, created__gt=time_threshold)
+        confirm = EmailConfirmation.objects.get(id=pk)
+
+        # Expired token
+        if(confirm.created < time_threshold):
+            print("Error: Email verification token has expired")
+            return redirect(reverse_lazy("register:confirm_email_error"))
+
         request.session["registrant_email"] = confirm.email
 
         # Create the Registrant
@@ -76,6 +83,7 @@ def confirm_email(request, pk):
             reverse_lazy("register:registrant_name", kwargs={"pk": registrant.pk})
         )
     except (EmailConfirmation.DoesNotExist):
+        print("Error: Email verification token does not exist")
         return redirect(reverse_lazy("register:confirm_email_error"))
 
 
