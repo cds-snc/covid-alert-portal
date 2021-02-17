@@ -19,6 +19,7 @@ from datetime import datetime, timedelta
 class RegistrantEmailView(FormView):
     form_class = EmailForm
     template_name = "register/registrant_email.html"
+    success_url = reverse_lazy("register:email_submitted")
 
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
@@ -35,12 +36,9 @@ class RegistrantEmailView(FormView):
         )
 
         form.send_mail(self.request.LANGUAGE_CODE, email, url)
+        self.request.session["submitted_email"] = self.submitted_email
 
         return super().form_valid(form)
-
-    def get_success_url(self):
-        self.request.session["submitted_email"] = self.submitted_email
-        return reverse_lazy("register:email_submitted")
 
 
 class RegistrantEmailSubmittedView(TemplateView):
