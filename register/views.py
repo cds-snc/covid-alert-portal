@@ -2,17 +2,13 @@ from django.views.generic import TemplateView, FormView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy, reverse
 
-from waffle.mixins import WaffleSwitchMixin
-from django.contrib import messages
-from django.conf import settings
-
 from .models import Registrant, Location, EmailConfirmation
 from .forms import EmailForm, RegistrantNameForm
 from collections import ChainMap
 
 from formtools.wizard.views import NamedUrlSessionWizardView
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from datetime import datetime, timedelta
 import pytz
 
