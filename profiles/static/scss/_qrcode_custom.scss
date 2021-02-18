@@ -2,4 +2,11 @@ body.qrcode {
     header {
         border-bottom: 3px solid black;
     }
+
+    .hero {
+        background-color: #FCAF17;
+        .page--container {
+            padding: 10px;
+        }
+    }
 }
