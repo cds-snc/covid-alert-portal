@@ -1,6 +1,6 @@
 
 {% extends 'register/base.html' %}
-{% load i18n %}
+{% load static i18n %}
 
 {% block title %}
   {% trans "Make a COVID Alert poster" %}
@@ -8,8 +8,11 @@
 
 {% block hero %}
 <div class="hero">
-  <div class="page--container">
+  <div class="hero-inner">
     <h1>{% trans "Display a QR code to slow the spread of COVID-19" %}</h1>
+    <div class="hero-image">
+      <img src="{% static 'img/register-start.png' %}" alt="" />
+    </div>
   </div>
 </div>
 {% endblock %}

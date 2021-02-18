@@ -5,8 +5,22 @@ body.qrcode {
 
     .hero {
         background-color: #FCAF17;
-        .page--container {
+        position: relative;
+        .hero-inner {
+            @extend %page-container;
             padding: 10px;
+            display: flex;
+            align-items: center;
+            h1 {
+                flex-basis: 60%;
+            }
+            .hero-image {
+                flex-basis: 40%;
+                text-align: right;
+                img {
+                    height: 10em;
+                }
+            }
         }
     }
 }
