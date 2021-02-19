@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Confirm notification" %}
+{% endblock %}
+
+{% block content %}
+    <div class="content-back-link">
+        <a href="{% url 'exposure_notifications:severity' %}" class="chevron-left">{% trans "Back" %}</a>
+    </div>
+
+    <h1>{% trans "Confirm and send" %}</h1>
+
+    <table>
+      <caption class="visually-hidden">{% trans "Notification details" %}</caption>
+      <tbody>
+        <tr>
+            <td>{% trans "Name" %}</td>
+            <td>{{ location.name }}</td>
+            <td><a href="{% url 'exposure_notifications:start' %}"><span>{% trans "change" %}</span></a></td>
+        </tr>
+        <tr>
+            <td>{% trans "Address" %}</td>
+            <td>
+                <span> {{ location.address }} </span>
+                <span> {{ location.city }}, {{ location.province }} </span>
+                <span> {{ location.postal_code }} </span>
+            </td>
+            <td>
+                <a href="{{ map_link }}" target="_blank">
+                    <span>{% trans "Show on map" %}</span>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>{% trans "Type" %}</td>
+            <td>{{ location.category }}</td>
+            <td><a href="{% url 'exposure_notifications:start' %}"><span>{% trans "change" %}</span></a></td>
+        </tr>
+        <tr>
+            <td>{% trans "Date(s)" %}</td>
+            <td>{{ alert_datetime }}</td>
+            <td><a href="{% url 'exposure_notifications:datetime' %}"><span>{% trans "change" %}</span></a></td>
+        </tr>
+        <tr>
+            <td>{% trans "Severity" %}</td>
+            <td>{{ alert_level }}</td>
+            <td><a href="{% url 'exposure_notifications:severity' %}"><span>{% trans "change" %}</span></a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>{% trans "By selecting “Notify people who were there”,  you confirm you believe this information is correct and complete." %}</p>
+
+  {% include "includes/cds_form.html" with submit_text=_("Notify people who were there") submit_class="warning" %}
+
+{% endblock %}

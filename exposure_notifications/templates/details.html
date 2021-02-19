@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Details of public exposure" %}
+{% endblock %}
+
+{% block content %}
+    <div class="content-back-link">
+        <a href="{% url 'exposure_notifications:history' %}" class="chevron-left">{% trans "Back" %}</a>
+    </div>
+
+  {% if location %}
+    <h1>{% trans "Details of public exposure" %}</h1>
+
+    <table>
+      <caption class="visually-hidden">{% trans "Exposure details" %}</caption>
+      <tbody>
+        <tr>
+            <td>{% trans "Name" %}</td>
+            <td>{{ location.name }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>{% trans "Address" %}</td>
+            <td>
+                <span> {{ location.address }} </span>
+                <span> {{ location.city }}, {{ location.province }} </span>
+                <span> {{ location.postal_code }} </span>
+            </td>
+            <td>
+                <a href="{{ map_link }}" target="_blank">
+                    <span>{% trans "Show on map" %}</span>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>{% trans "Sender" %}</td>
+            <td>
+                <span>{{ notification.created_by.name }}</span>
+                <span>{{ notification.created_by.email }}</span>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>{% trans "Date of public exposure" %}</td>
+            <td>{{ notification.start_date|date:'d/m/Y' }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>{% trans "Date of notification" %}</td>
+            <td>{{ notification.created_date|date:'d/m/Y' }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>{% trans "Severity" %}</td>
+            <td>{{ notification.severity }}</td>
+            <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+  {% else %}
+    <p>{% trans "Exposure details not found." %}</p>
+  {% endif %}
+
+{% endblock %}

@@ -21,10 +21,14 @@ main table {
     padding: $space-md $space-sm $space-sm 0;
     border-bottom: 1px solid $color-grey-light;
     text-align: left;
-    vertical-align: top;
+    vertical-align: middle;
 
     &:last-child {
       padding-right: 0;
+    }
+
+    span {
+        display: block;
     }
   }
 
@@ -36,4 +40,12 @@ main table {
       }
     }
   }
+}
+
+.pagination {
+  text-align: right;
+}
+
+.current {
+  display: block;
 }

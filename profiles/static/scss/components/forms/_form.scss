@@ -28,8 +28,36 @@ main form {
     margin-bottom: $space-md;
   }
 
+  .search_bar {
+    div {
+        display: inline-block;
+        width: 100%;
+    }
+
+    input {
+        display: inline-block;
+        width: 75%;
+    }
+
+    button {
+        display: inline-block;
+        vertical-align: baseline;
+        padding: 0px 18px;
+        margin-top: 0px;
+        line-height: inherit;
+    }
+  }
+
   .fieldWrapper {
     margin-bottom: $space-lg;
+
+    .date_entry {
+      display: inline-block;
+
+      label {
+        font-weight: bold;
+      }
+    }
 
     > * {
       display: block;

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Location profile" %}
+{% endblock %}
+
+{% block content %}
+    <div class="content-back-link">
+        <a href="{% url 'exposure_notifications:start' %}" class="chevron-left">{% trans "Back" %}</a>
+    </div>
+
+  {% if location %}
+    <h1>{% trans "Place profile" %}</h1>
+
+    <table>
+      <caption class="visually-hidden">{% trans "Location profile" %}</caption>
+      <tbody>
+        <tr>
+            <td>{% trans "Name" %}</td>
+            <td>{{ location.name }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>{% trans "Address" %}</td>
+            <td>
+                <span> {{ location.address }} </span>
+                <span> {{ location.city }}, {{ location.province }} </span>
+                <span> {{ location.postal_code }} </span>
+            </td>
+            <td>
+                <a href="{{ map_link }}" target="_blank">
+                    <span>{% trans "Show on map" %}</span>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>{% trans "Contact email" %}</td>
+            <td>{{ location.contact_email }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>{% trans "Contact phone" %}</td>
+            <td>{{ location.contact_phone }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>{% trans "Number of prior notifications" %}</td>
+            <td>{{ num_notifications }}</td>
+            <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+  {% else %}
+    <p>{% trans "Place not found." %}</p>
+  {% endif %}
+
+  {% include "includes/cds_form.html" with submit_text=_("Notify people who were there") %}
+
+{% endblock %}

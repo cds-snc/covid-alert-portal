@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     "about",
     "backup_codes",
     "register",
+    "exposure_notifications",
     "axes",
     "django.forms",  # Required for finding custom widget templates in the 'portal' folder
     "django.contrib.sites",  # Required for invitations

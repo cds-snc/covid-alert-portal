@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load i18n param_replace %}
+
+{% block title %}
+  {% if form.errors %}{% trans "Error: "%}{% endif %}
+  {% trans "Public exposures" %}
+{% endblock %}
+
+{% block content %}
+  {% include  "includes/flash_messages.html" %}
+  <h1>{% trans "Public exposures" %}</h1>
+
+  <p>{% trans "You’ll send notifications of a public exposure to people who have installed COVID alert" %}</p>
+
+  <form method="post" id="form--{{ request.resolver_match.url_name }}">
+    {% csrf_token %}
+
+    <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %} search_bar">
+      <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
+        <b>{{ form.search_text.label_tag }}</b>
+        {% if form.search_text.errors %}
+          <div id="error--{{ form.search_text.html_name }}" class="validation-error">{{ form.search_text.errors|first }}</div>
+        {% endif %}
+        {{ form.search_text }}
+        <button type="submit">
+          {{ _("Search") }}
+        </button>
+      </div>
+    </div>
+  </form>
+
+  {% if object_list %}
+    <table class="with-actions">
+      <caption class="visually-hidden">{% trans "Available locations" %}</caption>
+      <thead>
+          <tr>
+            <th scope="col">{% trans "Place name" %}</th>
+            <th scope="col">{% trans "Address" %}</th>
+            <th scope="col"></th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for location in object_list %}
+          <tr>
+            <td>{{ location.name }}</td>
+            <td>
+              <span> {{ location.address }} </span>
+              <span> {{ location.city }}, {{ location.province }} </span>
+              <span> {{ location.postal_code }} </span>
+            </td>
+            <td>
+              <a href="{% url 'exposure_notifications:profile' location.id %}">
+                <span aria-hidden="true">{% trans "Send alert" %}</span>
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <span class="step-links">
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_previous %}
+            <a href="?{% param_replace page=1 %}">&laquo; first</a>
+            <a href="?{% param_replace page=page_obj.previous_page_number %}">previous</a>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <a href="?{% param_replace page=page_obj.next_page_number %}">next</a>
+            <a href="?{% param_replace page=page_obj.paginator.num_pages %}">last &raquo;</a>
+        {% endif %}
+      </span>
+    </div>
+
+  {% endif %}
+
+<div class="content-button">
+  <a class="secondary" href="{% url 'exposure_notifications:history' %}" role='button' draggable='false'>{% trans "Check notification history" %}</a>
+</div>
+
+<p>
+  <b>{% trans "New or need a refresher?" %}</b><br>
+  Visit <a href="{% url 'about:create_account' %}">about public exposures</a>
+</p>
+{% endblock %}

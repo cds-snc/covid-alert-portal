@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Notification sent" %}
+{% endblock %}
+
+{% block content %}
+  <h1>{% trans "You’ve notified people" %}</h1>
+
+  <p>
+      {% trans "People who’ve installed the app will get a notification if they were at" %}
+      {{ location.name }} ({{ location.address }}, {{ location.city }}, {{ location.province }})
+      {% trans "on one or more of these dates:" %}
+  </p>
+  <ul>
+      <li>{{ start_date }}</li>
+  </ul>
+
+  <div class="content-button">
+    <a href="{% url 'exposure_notifications:start' %}" role='button' draggable='false'>{% trans "Notify of another public exposure" %}</a>
+    <a class="secondary" href="{% url 'exposure_notifications:history' %}" role='button' draggable='false'>{% trans "Check notification history" %}</a>
+  </div>
+
+{% endblock %}
