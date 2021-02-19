@@ -7,6 +7,8 @@
 {% endblock %}
 
 {% block content %}
+  {% include 'register/includes/back.html' with link='register:registrant_email' %}
+
   {% include  "includes/error_list.html" %}
 
   <h1>{% trans "Confirm your email address" %}</h1>

@@ -5,12 +5,13 @@ from django.urls import reverse_lazy, reverse
 from .models import Registrant, Location, EmailConfirmation
 from .forms import EmailForm, RegistrantNameForm
 from collections import ChainMap
-
+from django.utils.translation import gettext as _
 from formtools.wizard.views import NamedUrlSessionWizardView
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from datetime import datetime, timedelta
 import pytz
+from django.contrib import messages
 
 
 class RegistrantEmailView(FormView):
@@ -74,6 +75,12 @@ def confirm_email(request, pk):
 
         # Delete the confirmation
         confirm.delete()
+
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            _("You've confirmed your email address")
+        )
 
         return redirect(
             reverse_lazy("register:registrant_name", kwargs={"pk": registrant.pk})

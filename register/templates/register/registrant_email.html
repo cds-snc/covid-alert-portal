@@ -7,13 +7,7 @@
 {% endblock %}
 
 {% block content %}
-  <div class="back-button"> 
-    <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M9 1.5L2 8.49999L8.99999 15.5" stroke="#2B4380" stroke-width="2"/>
-    </svg>
-
-    <a href="{% url 'register:start' %}">Back</a>
-  </div>
+  {% include 'register/includes/back.html' with link='register:start' %}
 
   {% include  "includes/error_list.html" %}
 

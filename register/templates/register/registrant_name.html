@@ -7,9 +7,14 @@
 {% endblock %}
 
 {% block content %}
+  {% include 'register/includes/back.html' with link='register:registrant_email' %}
+
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "What is your name?" %}</h1>
+  {% include  "includes/flash_messages.html" %}
+
+  <h1>{% trans "Your name" %}</h1>
+  <p>{% trans "We’ll use your name when we email you." %}
 
   {% include "includes/cds_form.html" with submit_text=_("Continue") %}
 {% endblock %}
