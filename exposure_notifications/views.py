@@ -48,12 +48,12 @@ class StartView(PermissionRequiredMixin, Is2FAMixin, ListView, FormView):
             if self.request.user.is_superuser:
                 return Location.objects.filter(
                     Q(name__icontains=search) | Q(address__icontains=search)
-                ).order_by('name')
+                ).order_by("name")
             else:
                 return Location.objects.filter(
                     Q(province=province)
                     & Q(Q(name__icontains=search) | Q(address__icontains=search))
-                ).order_by('name')
+                ).order_by("name")
         return Location.objects.none()
 
 
@@ -173,8 +173,10 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
     def form_valid(self, form):
         try:
             # Ensure that the datetime is aware (might not be if unit testing or something)
-            tz = pytz.timezone(settings.TIME_ZONE or 'UTC')
-            dt = datetime.fromtimestamp(self.request.session["alert_datetime"]).replace(tzinfo=tz)
+            tz = pytz.timezone(settings.TIME_ZONE or "UTC")
+            dt = datetime.fromtimestamp(self.request.session["alert_datetime"]).replace(
+                tzinfo=tz
+            )
 
             # Create the notification
             notification = Notification(
@@ -247,8 +249,9 @@ class HistoryView(PermissionRequiredMixin, Is2FAMixin, ListView, FormView):
             # search within the same province as the user or CDS
             if self.request.user.is_superuser:
                 return Notification.objects.filter(
-                    Q(location__name__icontains=search) | Q(location__address__icontains=search)
-                ).order_by('-created_date')
+                    Q(location__name__icontains=search)
+                    | Q(location__address__icontains=search)
+                ).order_by("-created_date")
             else:
                 return Notification.objects.filter(
                     Q(location__province=province)
@@ -256,12 +259,14 @@ class HistoryView(PermissionRequiredMixin, Is2FAMixin, ListView, FormView):
                         Q(location__name__icontains=search)
                         | Q(location__address__icontains=search)
                     )
-                ).order_by('-created_date')
+                ).order_by("-created_date")
 
         # If we don't have search text then just return all results within this province
         if self.request.user.is_superuser:
-            return Notification.objects.all().order_by('-created_date')
-        return Notification.objects.filter(location__province=province).order_by('-created_date')
+            return Notification.objects.all().order_by("-created_date")
+        return Notification.objects.filter(location__province=province).order_by(
+            "-created_date"
+        )
 
 
 class ExposureDetailsView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
