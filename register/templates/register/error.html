@@ -1,0 +1,11 @@
+
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% trans "Invalid / expired link" %}
+{% endblock %}
+
+{% block content %}
+  {% trans "Sorry, that confirmation link has expired or has already been used." %}
+{% endblock %}
