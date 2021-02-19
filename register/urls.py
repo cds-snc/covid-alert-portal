@@ -13,9 +13,9 @@ from .forms import (
 app_name = "register"
 
 named_location_forms = (
+    ("address", LocationAddressForm),
     ("category", LocationCategoryForm),
     ("name", LocationNameForm),
-    ("address", LocationAddressForm),
     ("contact", LocationContactForm),
     ("summary", RegisterSummaryForm),
 )

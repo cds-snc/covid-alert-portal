@@ -98,14 +98,14 @@ class RegistrantNameView(UpdateView):
     def get_success_url(self):
         return reverse_lazy(
             "register:location_step",
-            kwargs={"pk": self.kwargs.get("pk"), "step": "category"},
+            kwargs={"pk": self.kwargs.get("pk"), "step": "address"},
         )
 
 
 TEMPLATES = {
+    "address": "register/location_address.html",
     "category": "register/location_category.html",
     "name": "register/location_name.html",
-    "address": "register/location_address.html",
     "contact": "register/location_contact.html",
     "summary": "register/summary.html",
 }

@@ -3,17 +3,18 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Where is your business, organization or event located?" %}
+  {% trans "Address of service or event" %}
 {% endblock %}
 
 {% block content %}
+  {% include 'register/includes/back.html' with link='register:registrant_name' %}
+
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "Where is your business, organization or event located?" %}</h1>
+  <h1>{% trans "Address of service or event" %}</h1>
 
   <div class="info-message">
-  <p><strong>{% trans "If your business, organization or event operates across multiple branches, you will need to create a poster for each unique location" %}</strong></p>
-  <p>{% trans "You will be able to create another QR code poster later" %}</p>
+    <p>{% trans "If the event or service has several addresses, you need a poster for each.  After you finish this poster, we’ll remind you to make more." %}
   </div>
 
   {% include "includes/cds_form.html" with submit_text=_("Continue") %}
