@@ -32,7 +32,7 @@
                 {{ registrant.name }}
             </dd>
             <dd class="summary-list__actions">
-                <a href="{% url 'register:registrant_name' request.resolver_match.kwargs.pk %}">
+                <a href="{% url 'register:registrant_name' %}">
                     Change<span class="visually-hidden"> contact name</span>
                 </a>
             </dd>
@@ -53,7 +53,7 @@
                     {{ form_data.category }}
                 </dd>
                 <dd class="summary-list__actions">
-                    <a href="{% url 'register:location_step' pk=pk step='category' %}">Change <span class="visually-hidden"> business type</span></a>
+                    <a href="{% url 'register:location_step' step='category' %}">Change <span class="visually-hidden"> business type</span></a>
                 </dd>
             </div>
             <div class="summary-list__row">
@@ -64,7 +64,7 @@
                     {{ form_data.name }}
                 </dd>
                 <dd class="summary-list__actions">
-                    <a href="{% url 'register:location_step' pk=pk step='name' %}">Change <span class="visually-hidden"> business, organization or event name</span></a>
+                    <a href="{% url 'register:location_step' step='name' %}">Change <span class="visually-hidden"> business, organization or event name</span></a>
                 </dd>
             </div>
 
@@ -80,7 +80,7 @@
                     {{ form_data.postal_code }}
                 </dd>
                 <dd class="summary-list__actions">
-                    <a href="{% url 'register:location_step' pk=pk step='address' %}">Change <span class="visually-hidden"> address</span></a>
+                    <a href="{% url 'register:location_step' step='address' %}">Change <span class="visually-hidden"> address</span></a>
                 </dd>
             </div>
 
@@ -93,7 +93,7 @@
                     {{ form_data.contact_phone }}
                 </dd>
                 <dd class="summary-list__actions">
-                    <a href="{% url 'register:location_step' pk=pk step='contact' %}">Change <span class="visually-hidden"> contact</span></a>
+                    <a href="{% url 'register:location_step' step='contact' %}">Change <span class="visually-hidden"> contact</span></a>
                 </dd>
             </div>
         </dl>
