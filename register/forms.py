@@ -61,7 +61,7 @@ class LocationAddressForm(HealthcareBaseForm, forms.Form):
     address = forms.CharField(label="Address line 1")
     address_2 = forms.CharField(label="Address line 2", required=False)
     city = forms.CharField(label="City")
-    province = forms.CharField(label="Province")
+    province = forms.CharField(label="Province or territory")
     postal_code = forms.CharField(label="Postal code")
 
 
