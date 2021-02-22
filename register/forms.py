@@ -37,6 +37,16 @@ class RegistrantNameForm(HealthcareBaseForm, forms.ModelForm):
 
 
 class LocationCategoryForm(HealthcareBaseForm, forms.Form):
+    help_text = {
+        'arts_culture': 'For example, cinemas, museums, and art galleries',
+        'community': 'Both public or private daycare',
+        'fitness': 'For example, schools and universities',
+        'food_service': 'For example, hospitals and family practices',
+        'private_event': 'Both essential and non-essential',
+        'rental': 'For example, hospitals and family practices',
+        'retail': 'What does this include in Canada?'
+    }
+
     category = forms.ChoiceField(
         label="",
         choices=[
@@ -51,7 +61,7 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
             ("sports", _("Sports & recreation facilities")),
             ("other", _("Other")),
         ],
-        widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
+        widget=CDSRadioWidget(attrs={"class": "multichoice-radio", "help_text": help_text}),
     )
 
 

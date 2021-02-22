@@ -65,4 +65,12 @@ body.qrcode {
         display: flex;
         justify-content: space-between;
     }
+
+    label {
+        .help-text {
+            display: block;
+            font-size: 90%;
+            line-height: 2em;
+        }
+    }
 }
