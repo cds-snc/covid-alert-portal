@@ -137,6 +137,7 @@ class LocationWizard(NamedUrlSessionWizardView):
             city=location["city"],
             province=location["province"],
             postal_code=location["postal_code"],
+            contact_name=location["contact_name"],
             contact_email=location["contact_email"],
             contact_phone=location["contact_phone"],
         )
