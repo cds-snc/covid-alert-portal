@@ -7,7 +7,8 @@
 {% endblock %}
 
 {% block content %}
-  {% include 'register/includes/back.html' with link='register:start' %}
+  {% url 'register:start' as back_link %}
+  {% include 'register/includes/back.html' with link=back_link %}
 
   {% include  "includes/error_list.html" %}
 

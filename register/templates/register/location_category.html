@@ -3,13 +3,16 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "What best describes the type of your business, organization or event?" %}
+  {% trans "Type of service or event" %}
 {% endblock %}
 
 {% block content %}
+  {% url 'register:location_step' step='address' as back_link %}
+  {% include 'register/includes/back.html' with link=back_link %}
+
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "What best describes the type of your business, organization or event?" %}</h1>
+  <h1>{% trans "Type of service or event" %}</h1>
   
-  {% include "includes/cds_form.html" with submit_text=_("Continue") %}
+  {% include "includes/cds_form.html" with submit_text=_("Next") %}
 {% endblock %}
