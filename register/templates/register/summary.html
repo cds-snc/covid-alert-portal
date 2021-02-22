@@ -2,72 +2,52 @@
 {% load i18n %}
 
 {% block title %}
-  {% trans "Check your answers before submitting your form" %}
+  {% trans "Check your answers before making your poster" %}
 {% endblock %}
 
 {% block content %}
-    <h1>{% trans "Check your answers before submitting your form" %}</h1>
+    {% url 'register:location_step' step='contact' as back_link %}
+    {% include 'register/includes/back.html' with link=back_link %}
 
-    <h2>{% trans "Personal Details" %}</h2>
+    <h1>{% trans "Check your answers before making your poster" %}</h1>
+
+    <h2>{% trans "Personal information" %}</h2>
 
     <dl class="summary-list">
         <div class="summary-list__row">
             <dt class="summary-list__key">
-                {% trans "Poster receiver email" %}
+                {% trans "Your email address" %}
             </dt>
             <dd class="summary-list__value">
                 {{ registrant.email }}
             </dd>
             <dd class="summary-list__actions">
                 <a href="{% url 'register:registrant_email'  %}">
-                    Change<span class="visually-hidden"> contact email</span>
+                    Change<span class="visually-hidden"> your email</span>
                 </a>
             </dd>
         </div>
         <div class="summary-list__row">
             <dt class="summary-list__key">
-                {% trans "Poster receiver name" %}
+                {% trans "Your name" %}
             </dt>
             <dd class="summary-list__value">
                 {{ registrant.name }}
             </dd>
             <dd class="summary-list__actions">
                 <a href="{% url 'register:registrant_name' %}">
-                    Change<span class="visually-hidden"> contact name</span>
+                    Change<span class="visually-hidden"> your name</span>
                 </a>
             </dd>
         </div>
     </dl>
     
-    <h2>{% trans "Location Details" %}</h2>
+    <h2>{% trans "Service or event details" %}</h2>
     <form action="" method="post" class="summary_form">
         {% csrf_token %}
         {{ wizard.management_form }}
         
         <dl class="summary-list">
-            <div class="summary-list__row">
-                <dt class="summary-list__key">
-                    {% trans "Type" %}
-                </dt>
-                <dd class="summary-list__value">
-                    {{ form_data.category }}
-                </dd>
-                <dd class="summary-list__actions">
-                    <a href="{% url 'register:location_step' step='category' %}">Change <span class="visually-hidden"> business type</span></a>
-                </dd>
-            </div>
-            <div class="summary-list__row">
-                <dt class="summary-list__key">
-                    {% trans "Business, organization or event name" %}
-                </dt>
-                <dd class="summary-list__value">
-                    {{ form_data.name }}
-                </dd>
-                <dd class="summary-list__actions">
-                    <a href="{% url 'register:location_step' step='name' %}">Change <span class="visually-hidden"> business, organization or event name</span></a>
-                </dd>
-            </div>
-
             <div class="summary-list__row">
                 <dt class="summary-list__key">
                     {% trans "Address" %}
@@ -83,12 +63,37 @@
                     <a href="{% url 'register:location_step' step='address' %}">Change <span class="visually-hidden"> address</span></a>
                 </dd>
             </div>
+            
+            <div class="summary-list__row">
+                <dt class="summary-list__key">
+                    {% trans "Type" %}
+                </dt>
+                <dd class="summary-list__value">
+                    {{ form_data.category }}
+                </dd>
+                <dd class="summary-list__actions">
+                    <a href="{% url 'register:location_step' step='category' %}">Change <span class="visually-hidden"> business type</span></a>
+                </dd>
+            </div>
 
             <div class="summary-list__row">
                 <dt class="summary-list__key">
-                    {% trans "Who can we contact at this address?" %}
+                    {% trans "Name" %}
                 </dt>
                 <dd class="summary-list__value">
+                    {{ form_data.name }}
+                </dd>
+                <dd class="summary-list__actions">
+                    <a href="{% url 'register:location_step' step='name' %}">Change <span class="visually-hidden"> business, organization or event name</span></a>
+                </dd>
+            </div>
+
+            <div class="summary-list__row">
+                <dt class="summary-list__key">
+                    {% trans "Contact person for the location" %}
+                </dt>
+                <dd class="summary-list__value">
+                    {{ form_data.contact_name }}<br>
                     {{ form_data.contact_email }}<br>
                     {{ form_data.contact_phone }}
                 </dd>
@@ -98,12 +103,12 @@
             </div>
         </dl>
 
-        <h2>{% trans "Now submit your answers to create your poster" %}</h2>
+        <h2>{% trans "We’ll use this information to make your poster" %}</h2>
 
-        <p>{% trans "By submitting this form you are confirming that to the best of your knowledge, the details you are providing are correct." %}
+        <p>{% trans "By selecting “Make poster”, you confirm your answers are correct and complete." %}
 
         <div class="content-button">
-            <button type="submit">{% trans "Submit" %}</button>
+            <button type="submit">{% trans "Make poster" %}</button>
         </div>
     </form>
 {% endblock %}
