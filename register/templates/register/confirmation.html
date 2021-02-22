@@ -14,7 +14,9 @@
     </svg>
 
     <h1>{% trans "We've got the information for your poster" %}</h1>
-    <p>{% trans "We’ll email the poster to your-email@address.com" %}</p>
+    {% blocktrans with email=request.session.registrant_email %}
+      <p>We’ll email the poster to {{ email }}</p>
+    {% endblocktrans %}
   </div>
 
   <h2>{% trans "Next steps" %}</h2>
@@ -52,7 +54,7 @@
   </div>
 
   <div class="content-button">
-      <a href="{% url 'register:location_step' step='category' %}" role='button' draggable='false'>{% trans "Make another poster" %}</a>
+      <a href="{% url 'register:location_step' step='address' %}" role='button' draggable='false'>{% trans "Make another poster" %}</a>
       <a href="{% url 'register:start' %}" role='button' draggable='false' class="secondary">{% trans "Done" %}</a>
   </div>
 
