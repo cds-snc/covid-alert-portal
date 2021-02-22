@@ -26,9 +26,7 @@ class RegisterView(TestCase):
         session["registrant_id"] = str(r.id)
         session.save()
 
-        response = self.client.get(
-            reverse("register:registrant_name")
-        )
+        response = self.client.get(reverse("register:registrant_name"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
@@ -47,9 +45,7 @@ class RegisterView(TestCase):
         r = Registrant.objects.create(email=email)
         session["registrant_id"] = r.id
 
-        response = self.client.get(
-            reverse("register:confirmation")
-        )
+        response = self.client.get(reverse("register:confirmation"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,

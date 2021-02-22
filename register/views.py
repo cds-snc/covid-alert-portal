@@ -78,14 +78,10 @@ def confirm_email(request, pk):
         confirm.delete()
 
         messages.add_message(
-            request,
-            messages.SUCCESS,
-            _("You've confirmed your email address")
+            request, messages.SUCCESS, _("You've confirmed your email address")
         )
 
-        return redirect(
-            reverse_lazy("register:registrant_name")
-        )
+        return redirect(reverse_lazy("register:registrant_name"))
     except (EmailConfirmation.DoesNotExist):
         print("Error: Email verification token does not exist")
         return redirect(reverse_lazy("register:confirm_email_error"))
@@ -98,7 +94,7 @@ class RegistrantNameView(UpdateView):
 
     def get_object(self):
         return Registrant.objects.get(pk=self.request.session["registrant_id"])
-        
+
     def get_success_url(self):
         return reverse_lazy(
             "register:location_step",
@@ -120,9 +116,7 @@ class LocationWizard(NamedUrlSessionWizardView):
         return [TEMPLATES[self.steps.current]]
 
     def get_step_url(self, step):
-        return reverse(
-            self.url_name, kwargs={"step": step}
-        )
+        return reverse(self.url_name, kwargs={"step": step})
 
     def get_context_data(self, form, **kwargs):
         context = super(LocationWizard, self).get_context_data(form=form, **kwargs)
@@ -147,9 +141,7 @@ class LocationWizard(NamedUrlSessionWizardView):
             contact_phone=location["contact_phone"],
         )
 
-        return HttpResponseRedirect(
-            reverse("register:confirmation")
-        )
+        return HttpResponseRedirect(reverse("register:confirmation"))
 
 
 class RegisterConfirmationPageView(TemplateView):
