@@ -42,17 +42,6 @@ class RegisterView(TestCase):
 
         response = self.client.get(reverse("register:confirmation"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(
-            response,
-            "<h1>Your request for a poster has been submitted</h1>",
-            html=True,
-        )
-        self.assertContains(
-            response,
-            'Thank you. As soon as it’s ready, your poster will be emailed to <a href="mailto:{0}">{0}</a>'.format(
-                email
-            ),
-        )
 
 
 class RegisterLocationDetails(TestCase):
