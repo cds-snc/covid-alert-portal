@@ -2,33 +2,62 @@
 {% load i18n %}
 
 {% block title %}
-  {% trans "Your request for a poster has been submitted" %}
+  {% trans "We've got the information for your poster" %}
 {% endblock %}
 
 {% block content %}
   <div class="jumbotron">
-    <h1>{% trans "Your request for a poster has been submitted" %}</h1>
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="44" height="44" rx="22" fill="#E6FAE8"/>
+      <path d="M10.5 24L19.5 33L37.5 15" stroke="#008751" stroke-width="4"/>
+      <rect x="2" y="2" width="44" height="44" rx="22" stroke="#008751" stroke-width="4"/>
+    </svg>
+
+    <h1>{% trans "We've got the information for your poster" %}</h1>
+    <p>{% trans "We’ll email the poster to your-email@address.com" %}</p>
   </div>
 
-  <h2>{% trans "What happens next" %}</h2>
+  <h2>{% trans "Next steps" %}</h2>
 
-  {% if registrant_email %}
-    <p>{% trans "Thank you. As soon as it’s ready, your poster will be emailed to" %} <a href="mailto:{{registrant_email}}">{{ registrant_email }}</a>.</p>
-  {% else %}
-    <p>{% trans "Thank you. As soon as it’s ready, your poster will be emailed to you." %}</p>
-  {% endif %}
-  <p>{% trans "If you don’t receive your poster within a few hours, please contact us." %}</p>
-
-  <div class="info-message">
-    {% trans "If your business organization or event operates across multiple branches, you will need to create a poster for each unique location." %}
+  <div class="next-steps">
+    <div>
+      <p>{% trans "<a href=''>Contact us</a> if you do not get the email within X hours or if you have questions." %}</p>
+      <p>{% trans "Remember to make more posters if your service or event has other addresses. You can come back later if you do not have time now." %}</p>
+    </div>
+    <svg width="104" height="132" viewBox="0 0 104 132" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0)">
+      <path d="M0 0H104V131.2H0V0Z" fill="white"/>
+      <rect y="23.8555" width="104" height="83.4909" fill="#FFEAC0"/>
+      <rect width="72" height="71.5636" transform="translate(16 29.8184)" fill="white"/>
+      <rect x="26" y="62.127" width="16" height="6.94546" fill="black" stroke="black" stroke-width="2"/>
+      <rect x="48.5" y="39.7637" width="7" height="6.94545" fill="black" stroke="black" stroke-width="2"/>
+      <rect x="71" y="62.127" width="7" height="6.94546" fill="black" stroke="black" stroke-width="2"/>
+      <rect x="48.5" y="53.1816" width="7" height="6.94545" fill="black" stroke="black" stroke-width="2"/>
+      <rect x="71" y="84.4902" width="7" height="6.94545" fill="black" stroke="black" stroke-width="2"/>
+      <rect x="57.5" y="84.4902" width="7" height="6.94545" fill="black" stroke="black" stroke-width="2"/>
+      <rect x="48.5" y="71.0723" width="7" height="20.3636" fill="black" stroke="black" stroke-width="2"/>
+      <rect x="57.5" y="62.127" width="7" height="6.94546" fill="black" stroke="black" stroke-width="2"/>
+      <rect x="71" y="71.0723" width="7" height="6.94546" fill="black" stroke="black" stroke-width="2"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M37 44.7273H31V50.6909H37V44.7273ZM25 38.7637V56.6546H43V38.7637H25Z" fill="black"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M37 80.5086H31V86.4722H37V80.5086ZM25 74.5449V92.4358H43V74.5449H25Z" fill="black"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M73 44.7273H67V50.6909H73V44.7273ZM61 38.7637V56.6546H79V38.7637H61Z" fill="black"/>
+      </g>
+      <path d="M0 0V-5H-5V0H0ZM104 0H109V-5H104V0ZM104 131.2V136.2H109V131.2H104ZM0 131.2H-5V136.2H0V131.2ZM0 5H104V-5H0V5ZM99 0V131.2H109V0H99ZM104 126.2H0V136.2H104V126.2ZM5 131.2V0H-5V131.2H5Z" fill="black"/>
+      <defs>
+      <clipPath id="clip0">
+      <path d="M0 0H104V131.2H0V0Z" fill="white"/>
+      </clipPath>
+      </defs>
+    </svg>
   </div>
-
-  <h2>{% trans "Further information" %}</h2>
-  <p><a href="">Please see our FAQs for further advice for businesses and organizations</a></p>
 
   <div class="content-button">
-      <a href="{% url 'register:location_step' step='category' %}" role='button' draggable='false'>{% trans "Generate different poster" %}</a>
-      <a href="{% url 'register:start' %}" role='button' draggable='false' class="secondary">{% trans "I am finished" %}</a>
+      <a href="{% url 'register:location_step' step='category' %}" role='button' draggable='false'>{% trans "Make another poster" %}</a>
+      <a href="{% url 'register:start' %}" role='button' draggable='false' class="secondary">{% trans "Done" %}</a>
   </div>
+
+  <p><a href="">{% trans "Learn more about QR codes and public health" %}</a></p>
+  <p>{% trans "Thank you for helping slow the spread of COVID-19." %}</p>
+  <p><a href="">{% trans "Please answer some questions to help improve the COVID Alert system." %}</a></p>
 
 {% endblock %}

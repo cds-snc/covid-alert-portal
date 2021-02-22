@@ -47,4 +47,22 @@ body.qrcode {
             }
         }
     }
+
+    .jumbotron {
+        margin-top: 2em;
+        color: black;
+        background-color: #E6FAE8;
+        text-align: left;
+    }
+
+    .next-steps {
+        div {
+            flex-basis: 80%;
+        }
+        svg {
+            
+        }
+        display: flex;
+        justify-content: space-between;
+    }
 }
