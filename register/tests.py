@@ -15,31 +15,24 @@ class RegisterView(TestCase):
     def test_start_page(self):
         response = self.client.get(reverse("register:start"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(
-            response,
-            "<h1>Create a COVID Alert QR code for your venue</h1>",
-            html=True,
-        )
 
     def test_email_page(self):
         response = self.client.get(reverse("register:registrant_email"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(
-            response,
-            "<h1>Where should we send your poster?</h1>",
-            html=True,
-        )
 
     def test_name_page(self):
         r = Registrant.objects.create(email="test@test.com")
+        session = self.client.session
+        session["registrant_id"] = str(r.id)
+        session.save()
 
         response = self.client.get(
-            reverse("register:registrant_name", kwargs={"pk": r.pk})
+            reverse("register:registrant_name")
         )
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
-            "<h1>What is your name?</h1>",
+            "<h1>Your name</h1>",
             html=True,
         )
 
@@ -52,9 +45,10 @@ class RegisterView(TestCase):
         session.save()
 
         r = Registrant.objects.create(email=email)
+        session["registrant_id"] = r.id
 
         response = self.client.get(
-            reverse("register:confirmation", kwargs={"pk": r.pk})
+            reverse("register:confirmation")
         )
         self.assertEqual(response.status_code, 200)
         self.assertContains(
