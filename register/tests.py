@@ -28,11 +28,6 @@ class RegisterView(TestCase):
 
         response = self.client.get(reverse("register:registrant_name"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(
-            response,
-            "<h1>Your name</h1>",
-            html=True,
-        )
 
     def test_confirmation_page(self):
         email = "test@test.com"
