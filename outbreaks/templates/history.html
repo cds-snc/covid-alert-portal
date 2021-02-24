@@ -49,7 +49,7 @@
                 <span> {{ notification.location.postal_code }} </span>
               </address>
             </td>
-            <td>{{ notification.start_date|date:'d/m/Y' }}</td>
+            <td>{{ notification.start_date|date:'Y-m-d' }}</td>
             <td>
               <a href="{% url 'outbreaks:details' notification.id %}">
                 <span class="visually-hidden">{% trans "See more notification " %}</span>{% trans "Details" %}

@@ -17,7 +17,7 @@ from datetime import datetime
 import pytz
 
 
-DATETIME_FORMAT = "%d/%m/%Y"
+DATETIME_FORMAT = "%Y-%m-%d"
 
 
 class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView, FormView):
