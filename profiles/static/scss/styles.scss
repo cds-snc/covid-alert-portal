@@ -34,13 +34,12 @@
 @import "./components/forms/_input";
 @import "./components/forms/_select";
 
-@import "./qrcode_custom";
-
 /* Print styles */
 @import "./_print";
 
 /* Announcement styles */
 @import "announcements/scss/_announcements";
 
-/* Announcement styles */
+/* QR Code Registration Site styles */
 @import "register/scss/_phase-banner";
+@import "register/scss/_custom";
