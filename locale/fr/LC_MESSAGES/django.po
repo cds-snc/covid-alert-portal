@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-24 18:38+0000\n"
+"POT-Creation-Date: 2021-02-24 18:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2442,10 +2442,8 @@ msgid "Make poster"
 msgstr "Créer l’affiche"
 
 #: register/views.py:81
-#, fuzzy
-#| msgid "Enter your email address"
 msgid "You've confirmed your email address"
-msgstr "Saisissez votre adresse courriel"
+msgstr "Votre adresse courriel est validée."
 
 #, fuzzy
 #~| msgid "Change your name"
