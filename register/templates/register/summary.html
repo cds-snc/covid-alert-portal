@@ -6,8 +6,9 @@
 {% endblock %}
 
 {% block content %}
-    {% url 'register:location_step' step='contact' as back_link %}
-    {% include 'register/includes/back.html' with link=back_link %}
+    <div class="content-back-link">
+        <a href="{% url 'register:location_step' step='contact' %}" class="chevron-left">{% trans "Back" %}</a>
+    </div>
 
     <h1>{% trans "Check your answers before making your poster" %}</h1>
 

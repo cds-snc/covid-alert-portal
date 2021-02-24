@@ -7,8 +7,9 @@
 {% endblock %}
 
 {% block content %}
-  {% url 'register:start' as back_link %}
-  {% include 'register/includes/back.html' with link=back_link %}
+  <div class="content-back-link">
+    <a href="{% url 'register:start' %}" class="chevron-left">{% trans "Back" %}</a>
+  </div>
 
   {% include  "includes/error_list.html" %}
 
