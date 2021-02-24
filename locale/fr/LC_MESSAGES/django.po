@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-23 20:27+0000\n"
+"POT-Creation-Date: 2021-02-24 18:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -610,6 +610,7 @@ msgid "When patient is ready, generate a key"
 msgstr "Si le patient est prêt, générez une clé"
 
 #: covid_key/templates/covid_key/generate_key.html:8
+#: register/templates/register/includes/back.html:8
 msgid "Back"
 msgstr "Retour"
 
@@ -1313,7 +1314,7 @@ msgstr "Entrez une adresse courriel valide"
 #: profiles/forms.py:499
 #: profiles/templates/invitations/templates/invite_list.html:18
 #: profiles/templates/profiles/healthcareuser_detail.html:44
-#: profiles/templates/profiles/healthcareuser_list.html:18
+#: profiles/templates/profiles/healthcareuser_list.html:18 register/forms.py:15
 #: register/models.py:42
 msgid "Email address"
 msgstr "Adresse courriel"
@@ -2138,6 +2139,44 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
+#: register/forms.py:75 register/models.py:34
+msgid "Address line 1"
+msgstr "Adresse ligne 1"
+
+#: register/forms.py:76 register/models.py:35
+msgid "Address line 2"
+msgstr "Adresse ligne 2"
+
+#: register/forms.py:77 register/models.py:36
+msgid "City"
+msgstr "Ville"
+
+#: register/forms.py:78
+msgid "Province or territory"
+msgstr "Province ou territoire"
+
+#: register/forms.py:79 register/models.py:38
+msgid "Postal code"
+msgstr "Code postal"
+
+#: register/forms.py:83
+#, fuzzy
+#| msgid "Name of service or event"
+msgid "Name of contact"
+msgstr "Nom du service ou de l´événement"
+
+#: register/forms.py:84
+#, fuzzy
+#| msgid "Contact us"
+msgid "Contact email"
+msgstr "Nous joindre"
+
+#: register/forms.py:85
+#, fuzzy
+#| msgid "Mobile phone number"
+msgid "Contact phone number"
+msgstr "Numéro de téléphone mobile"
+
 #: register/models.py:30
 #, fuzzy
 #| msgid "Security code"
@@ -2152,25 +2191,9 @@ msgstr ""
 msgid "Location name"
 msgstr ""
 
-#: register/models.py:34
-msgid "Address line 1"
-msgstr "Adresse ligne 1"
-
-#: register/models.py:35
-msgid "Address line 2"
-msgstr "Adresse ligne 2"
-
-#: register/models.py:36
-msgid "City"
-msgstr "Ville"
-
 #: register/models.py:37
-msgid "Province or territory"
-msgstr "Province ou territoire"
-
-#: register/models.py:38
-msgid "Postal code"
-msgstr "Code postal"
+msgid "Province"
+msgstr ""
 
 #: register/models.py:40
 #, fuzzy
@@ -2215,13 +2238,17 @@ msgid ""
 "<a href=''>Contact us</a> if you do not get the email within X hours or if "
 "you have questions."
 msgstr ""
-"<a href=''>Contactez-nous</a> si vous ne recevez pas le courriel d’ici X heures ou si vous avez des questions."
+"<a href=''>Contactez-nous</a> si vous ne recevez pas le courriel d’ici X "
+"heures ou si vous avez des questions."
 
 #: register/templates/register/confirmation.html:27
 msgid ""
 "Remember to make more posters if your service or event has other addresses. "
 "You can come back later if you do not have time now."
-msgstr "N’oubliez pas de créer d’autres affiches si votre service ou votre événement comprend plusieurs adresses. Vous pouvez revenir plus tard si vous n’avez pas le temps maintenant."
+msgstr ""
+"N’oubliez pas de créer d’autres affiches si votre service ou votre événement "
+"comprend plusieurs adresses. Vous pouvez revenir plus tard si vous n’avez "
+"pas le temps maintenant."
 
 #: register/templates/register/confirmation.html:57
 msgid "Make another poster"
@@ -2241,7 +2268,9 @@ msgstr "Merci d’aider à ralentir la propagation de la COVID-19."
 
 #: register/templates/register/confirmation.html:63
 msgid "Please answer some questions to help improve the COVID Alert system."
-msgstr "Répondez à quelques questions pour nous aider à améliorer le système Alerte COVID."
+msgstr ""
+"Répondez à quelques questions pour nous aider à améliorer le système Alerte "
+"COVID."
 
 #: register/templates/register/error.html:5
 msgid "Invalid / expired link"
@@ -2265,8 +2294,9 @@ msgid ""
 "If the event or service has several addresses, you need a poster for each.  "
 "After you finish this poster, we’ll remind you to make more."
 msgstr ""
-"Si le service ou l’événement comporte plusieurs adresses, vous devrez créer une affiche pour chacune d’elles."
-"Quand vous aurez terminé la présente affiche, nous vous le rappelerons."
+"Si le service ou l’événement comporte plusieurs adresses, vous devrez créer "
+"une affiche pour chacune d’elles.Quand vous aurez terminé la présente "
+"affiche, nous vous le rappelerons."
 
 #: register/templates/register/location_category.html:6
 #: register/templates/register/location_category.html:15
@@ -2280,12 +2310,16 @@ msgstr "Personne-ressource"
 
 #: register/templates/register/location_contact.html:16
 msgid "This could be you, or a different person, such as a store manager."
-msgstr "La personne-ressource peut être vous-même ou bien une autre personne, par exemple un gérant de boutique."
+msgstr ""
+"La personne-ressource peut être vous-même ou bien une autre personne, par "
+"exemple un gérant de boutique."
 
 #: register/templates/register/location_contact.html:17
 msgid ""
 "We’ll contact them with any important health information for the address."
-msgstr "Nous contacterons cette personne pour toute information de santé importante relative à l’adresse fournie."
+msgstr ""
+"Nous contacterons cette personne pour toute information de santé importante "
+"relative à l’adresse fournie."
 
 #: register/templates/register/location_name.html:6
 #: register/templates/register/location_name.html:15
@@ -2307,7 +2341,6 @@ msgstr "Nous vous enverrons un hyperlien pour valider votre adresse courriel."
 
 #: register/templates/register/registrant_email_submitted.html:6
 #: register/templates/register/registrant_email_submitted.html:15
-
 msgid "Confirm your email address"
 msgstr "Validez votre adresse courriel"
 
@@ -2331,11 +2364,6 @@ msgid "Send email again"
 msgstr "Renvoyer le courriel"
 
 #: register/templates/register/registrant_name.html:6
-#, fuzzy
-#| msgid "Change your name"
-msgid "What is your name?"
-msgstr "Modifier votre nom"
-
 #: register/templates/register/registrant_name.html:17
 #: register/templates/register/summary.html:32
 msgid "Your name"
@@ -2357,14 +2385,16 @@ msgstr "Affichez un code QR pour contribuer à ralentir la COVID-19"
 msgid ""
 "Answer questions to make a poster with a code for your service or event."
 msgstr ""
-"Répondez à quelques questions pour créer une affiche à code QR pour votre service ou votre événement."
+"Répondez à quelques questions pour créer une affiche à code QR pour votre "
+"service ou votre événement."
 
 #: register/templates/register/start.html:22
 msgid ""
 "Visitors can scan the QR code on their phone. This helps COVID Alert notify "
 "people who’ve been exposed to COVID-19."
 msgstr ""
-"Les visiteurs pourront scanner le code avec leur téléphone. Alerte COVID pourra ensuite les notifier s’ils ont été exposés à la COVID-19."
+"Les visiteurs pourront scanner le code avec leur téléphone. Alerte COVID "
+"pourra ensuite les notifier s’ils ont été exposés à la COVID-19."
 
 #: register/templates/register/start.html:25
 msgid "Start now"
@@ -2403,7 +2433,9 @@ msgstr "Nous utiliserons ces renseignements pour créer votre affiche"
 msgid ""
 "By selecting “Make poster”, you confirm your answers are correct and "
 "complete."
-msgstr "En cliquant sur « Créer l’affiche », vous confirmez que vos réponses sont exactes."
+msgstr ""
+"En cliquant sur « Créer l’affiche », vous confirmez que vos réponses sont "
+"exactes."
 
 #: register/templates/register/summary.html:111
 msgid "Make poster"
@@ -2414,6 +2446,11 @@ msgstr "Créer l’affiche"
 #| msgid "Enter your email address"
 msgid "You've confirmed your email address"
 msgstr "Saisissez votre adresse courriel"
+
+#, fuzzy
+#~| msgid "Change your name"
+#~ msgid "What is your name?"
+#~ msgstr "Modifier votre nom"
 
 #~ msgid "Confirm patient’s mobile phone number"
 #~ msgstr "Entrez de nouveau le numéro de téléphone"
