@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from register.models import Location
 from .models import Notification, SEVERITY
 from django import forms
@@ -21,7 +20,7 @@ import pytz
 DATETIME_FORMAT = "%d/%m/%Y"
 
 
-class StartView(PermissionRequiredMixin, Is2FAMixin, ListView, FormView):
+class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView, FormView):
     permission_required = ["profiles.can_send_alerts"]
     paginate_by = 5
     model = Location
@@ -33,7 +32,7 @@ class StartView(PermissionRequiredMixin, Is2FAMixin, ListView, FormView):
         POST request (user submitted search) will populate the search_text query parameter for the subsequent forward to the same page as a GET request
         """
         return "{}?search_text={}".format(
-            reverse_lazy("exposure_notifications:start"),
+            reverse_lazy("outbreaks:search"),
             self.request.POST.get("search_text"),
         )
 
@@ -61,7 +60,7 @@ class ProfileView(PermissionRequiredMixin, Is2FAMixin, FormView):
     permission_required = ["profiles.can_send_alerts"]
     template_name = "profile.html"
     form_class = forms.Form
-    success_url = reverse_lazy("exposure_notifications:datetime")
+    success_url = reverse_lazy("outbreaks:datetime")
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -90,12 +89,12 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
     permission_required = ["profiles.can_send_alerts"]
     template_name = "datetime.html"
     form_class = DateForm
-    success_url = reverse_lazy("exposure_notifications:severity")
+    success_url = reverse_lazy("outbreaks:severity")
 
     def get(self, request, *args, **kwargs):
         # Ensure we have a cached location
         if "alert_location" not in request.session:
-            return redirect(reverse_lazy("exposure_notifications:start"))
+            return redirect(reverse_lazy("outbreaks:search"))
         return super().get(request, *args, **kwargs)
 
     def get_initial(self):
@@ -121,7 +120,7 @@ class SeverityView(PermissionRequiredMixin, Is2FAMixin, FormView):
     permission_required = ["profiles.can_send_alerts"]
     template_name = "severity.html"
     form_class = SeverityForm
-    success_url = reverse_lazy("exposure_notifications:confirm")
+    success_url = reverse_lazy("outbreaks:confirm")
 
     def get_initial(self):
         # Populate the form with initial session data if we have it
@@ -133,7 +132,7 @@ class SeverityView(PermissionRequiredMixin, Is2FAMixin, FormView):
             "alert_location" not in request.session
             or "alert_datetime" not in request.session
         ):
-            return redirect(reverse_lazy("exposure_notifications:start"))
+            return redirect(reverse_lazy("outbreaks:search"))
         return super().get(request, *args, **kwargs)
 
     def form_valid(self, form):
@@ -147,7 +146,7 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
     permission_required = ["profiles.can_send_alerts"]
     template_name = "confirm.html"
     form_class = forms.Form
-    success_url = reverse_lazy("exposure_notifications:confirmed")
+    success_url = reverse_lazy("outbreaks:confirmed")
 
     def get(self, request, *args, **kwargs):
         # Ensure we have all necessary data cached
@@ -156,7 +155,7 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
             or "alert_datetime" not in request.session
             or "alert_level" not in request.session
         ):
-            return redirect(reverse_lazy("exposure_notifications:start"))
+            return redirect(reverse_lazy("outbreaks:search"))
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
@@ -194,7 +193,7 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
 
         except KeyError:
             # Post request without having data cached in session
-            return redirect(reverse_lazy("exposure_notifications:start"))
+            return redirect(reverse_lazy("outbreaks:search"))
 
 
 class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
@@ -208,7 +207,7 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
             or "alert_datetime" not in request.session
             or "alert_level" not in request.session
         ):
-            return redirect(reverse_lazy("exposure_notifications:start"))
+            return redirect(reverse_lazy("outbreaks:search"))
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
@@ -236,7 +235,7 @@ class HistoryView(PermissionRequiredMixin, Is2FAMixin, ListView, FormView):
         POST request (user submitted search) will populate the search_text query parameter for the subsequent forward to the same page as a GET request
         """
         return "{}?search_text={}".format(
-            reverse_lazy("exposure_notifications:history"),
+            reverse_lazy("outbreaks:history"),
             self.request.POST.get("search_text"),
         )
 

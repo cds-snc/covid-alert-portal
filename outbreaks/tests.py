@@ -74,13 +74,13 @@ class SearchView(NotificationsTestCase):
         credentials = get_other_credentials()
         User.objects.create(**credentials)
         self.login(credentials)
-        response = self.client.get(reverse("exposure_notifications:start"))
+        response = self.client.get(reverse("outbreaks:search"))
         self.assertEqual(response.status_code, 302)
 
     def test_initial_view(self):
         # Assert that the correct template is loaded and there are no search results initially
         self.login()
-        response = self.client.get(reverse("exposure_notifications:start"))
+        response = self.client.get(reverse("outbreaks:search"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "search.html")
 
@@ -91,19 +91,19 @@ class SearchView(NotificationsTestCase):
         # Test that posting the form will redirect back to the same page, but with query params
         self.login()
         response = self.client.post(
-            reverse("exposure_notifications:start"), {"search_text": "nandos"}
+            reverse("outbreaks:search"), {"search_text": "nandos"}
         )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
             response.url,
-            reverse("exposure_notifications:start") + "?search_text=nandos",
+            reverse("outbreaks:search") + "?search_text=nandos",
         )
 
     def test_search_functionality(self):
         # Test that GET with a query param produces search results
         self.login()
         response = self.client.get(
-            reverse("exposure_notifications:start"), {"search_text": "nandos"}
+            reverse("outbreaks:search"), {"search_text": "nandos"}
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "search.html")
@@ -114,9 +114,7 @@ class SearchView(NotificationsTestCase):
     def test_province_filter(self):
         # Test that searching for 'bobs' will only produce one result because the other is in a different province
         self.login()
-        response = self.client.get(
-            reverse("exposure_notifications:start"), {"search_text": "bobs"}
-        )
+        response = self.client.get(reverse("outbreaks:search"), {"search_text": "bobs"})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "search.html")
 
@@ -128,9 +126,7 @@ class SearchView(NotificationsTestCase):
         credentials = get_other_credentials(is_superuser=True)
         User.objects.create_superuser(**credentials)
         self.login(credentials)
-        response = self.client.get(
-            reverse("exposure_notifications:start"), {"search_text": "bobs"}
-        )
+        response = self.client.get(reverse("outbreaks:search"), {"search_text": "bobs"})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "search.html")
 
@@ -143,9 +139,7 @@ class ProfileView(NotificationsTestCase):
         # Ensure that the profile view is rendered correctly
         self.login()
         location = Location.objects.get(name="Nandos")
-        response = self.client.get(
-            reverse("exposure_notifications:profile", args=[location.id])
-        )
+        response = self.client.get(reverse("outbreaks:profile", args=[location.id]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "profile.html")
 
@@ -154,15 +148,15 @@ class DatetimeView(NotificationsTestCase):
     def test_datetime_view_no_location(self):
         # Ensure that the datetime view is not accessible if there is no location cached in the session
         self.login()
-        response = self.client.get(reverse("exposure_notifications:datetime"))
+        response = self.client.get(reverse("outbreaks:datetime"))
         self.assertEqual(response.status_code, 302)
 
     def test_datetime_view(self):
         # Ensure that the datetime view is rendered correctly with a cached location
         self.login()
         location = Location.objects.get(name="Nandos")
-        self.client.get(reverse("exposure_notifications:profile", args=[location.id]))
-        response = self.client.get(reverse("exposure_notifications:datetime"))
+        self.client.get(reverse("outbreaks:profile", args=[location.id]))
+        response = self.client.get(reverse("outbreaks:datetime"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "datetime.html")
 
@@ -182,19 +176,19 @@ class SeverityView(NotificationsTestCase):
     def test_severity_view_no_cache(self):
         # Ensure that the severity view is not accessible if there is no location/datetime cached in the session
         self.login()
-        response = self.client.get(reverse("exposure_notifications:severity"))
+        response = self.client.get(reverse("outbreaks:severity"))
         self.assertEqual(response.status_code, 302)
 
     def test_severity_view(self):
         # Ensure that the severity view is rendered correctly with previously cached data
         self.login()
         location = Location.objects.get(name="Nandos")
-        self.client.get(reverse("exposure_notifications:profile", args=[location.id]))
+        self.client.get(reverse("outbreaks:profile", args=[location.id]))
         self.client.post(
-            reverse("exposure_notifications:datetime"),
+            reverse("outbreaks:datetime"),
             {"day": 1, "month": 1, "year": 2021},
         )
-        response = self.client.get(reverse("exposure_notifications:severity"))
+        response = self.client.get(reverse("outbreaks:severity"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "severity.html")
 
@@ -210,43 +204,43 @@ class ConfirmView(NotificationsTestCase):
     def test_confirm_view_no_cache(self):
         # Ensure that the confirm view is not accessible if there is no location/datetime/severity cached in the session
         self.login()
-        response = self.client.get(reverse("exposure_notifications:confirm"))
+        response = self.client.get(reverse("outbreaks:confirm"))
         self.assertEqual(response.status_code, 302)
 
     def test_confirm_view(self):
         # Ensure that the confirm view is rendered correctly with previously cached data
         self.login()
         location = Location.objects.get(name="Nandos")
-        self.client.get(reverse("exposure_notifications:profile", args=[location.id]))
+        self.client.get(reverse("outbreaks:profile", args=[location.id]))
         self.client.post(
-            reverse("exposure_notifications:datetime"),
+            reverse("outbreaks:datetime"),
             {"day": 1, "month": 1, "year": 2021},
         )
-        self.client.post(reverse("exposure_notifications:severity"), {"alert_level": 1})
-        response = self.client.get(reverse("exposure_notifications:confirm"))
+        self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
+        response = self.client.get(reverse("outbreaks:confirm"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "confirm.html")
 
     def test_notification_not_creation(self):
         # Ensure that no notifications are created if we don't have cached data
         self.login()
-        response = self.client.post(reverse("exposure_notifications:confirm"), {})
+        response = self.client.post(reverse("outbreaks:confirm"), {})
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, reverse("exposure_notifications:start"))
+        self.assertEqual(response.url, reverse("outbreaks:search"))
 
     def test_notification_creation(self):
         # Ensure that a notificatioon can successfully be created
         self.login()
         location = Location.objects.get(name="Nandos")
-        self.client.get(reverse("exposure_notifications:profile", args=[location.id]))
+        self.client.get(reverse("outbreaks:profile", args=[location.id]))
         self.client.post(
-            reverse("exposure_notifications:datetime"),
+            reverse("outbreaks:datetime"),
             {"day": 1, "month": 1, "year": 2021},
         )
-        self.client.post(reverse("exposure_notifications:severity"), {"alert_level": 1})
-        response = self.client.post(reverse("exposure_notifications:confirm"), {})
+        self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
+        response = self.client.post(reverse("outbreaks:confirm"), {})
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, reverse("exposure_notifications:confirmed"))
+        self.assertEqual(response.url, reverse("outbreaks:confirmed"))
         notifications = Notification.objects.all()
         self.assertEqual(len(notifications), 3)
 
@@ -255,20 +249,20 @@ class ConfirmedView(NotificationsTestCase):
     def test_confirmed_view_no_cache(self):
         # Ensure that the confirmed view is not accessible if there is no location/datetime/severity cached in the session
         self.login()
-        response = self.client.get(reverse("exposure_notifications:confirmed"))
+        response = self.client.get(reverse("outbreaks:confirmed"))
         self.assertEqual(response.status_code, 302)
 
     def test_confirmed_view(self):
         # Ensure that the confirmed view is rendered correctly with previously cached data
         self.login()
         location = Location.objects.get(name="Nandos")
-        self.client.get(reverse("exposure_notifications:profile", args=[location.id]))
+        self.client.get(reverse("outbreaks:profile", args=[location.id]))
         self.client.post(
-            reverse("exposure_notifications:datetime"),
+            reverse("outbreaks:datetime"),
             {"day": 1, "month": 1, "year": 2021},
         )
-        self.client.post(reverse("exposure_notifications:severity"), {"alert_level": 1})
-        response = self.client.get(reverse("exposure_notifications:confirmed"))
+        self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
+        response = self.client.get(reverse("outbreaks:confirmed"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "confirmed.html")
 
@@ -277,7 +271,7 @@ class HistoryView(NotificationsTestCase):
     def test_initial_view(self):
         # Assert that the correct template is loaded and that all results are visible
         self.login()
-        response = self.client.get(reverse("exposure_notifications:history"))
+        response = self.client.get(reverse("outbreaks:history"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "history.html")
 
@@ -288,19 +282,19 @@ class HistoryView(NotificationsTestCase):
         # Test that posting the form will redirect back to the same page, but with query params
         self.login()
         response = self.client.post(
-            reverse("exposure_notifications:history"), {"search_text": "nandos"}
+            reverse("outbreaks:history"), {"search_text": "nandos"}
         )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(
             response.url,
-            reverse("exposure_notifications:history") + "?search_text=nandos",
+            reverse("outbreaks:history") + "?search_text=nandos",
         )
 
     def test_search_functionality(self):
         # Test that GET with a query param produces search results
         self.login()
         response = self.client.get(
-            reverse("exposure_notifications:history"), {"search_text": "nandos"}
+            reverse("outbreaks:history"), {"search_text": "nandos"}
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "history.html")
@@ -314,8 +308,6 @@ class DetailsView(NotificationsTestCase):
         # Ensure that the details view is rendered correctly
         self.login()
         notification = Notification.objects.get(location__name="Nandos")
-        response = self.client.get(
-            reverse("exposure_notifications:details", args=[notification.id])
-        )
+        response = self.client.get(reverse("outbreaks:details", args=[notification.id]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "details.html")

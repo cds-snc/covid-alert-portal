@@ -12,7 +12,7 @@
       {% endif %}
       <li><a {% if request.resolver_match.url_name == 'support' %}class="active"{% endif %} href="{% url 'support' %}">{% trans "Support" %}</a></li>
       {% if perms.profiles.can_send_alert %}
-        <li><a {% if request.resolver_match.url_name == 'public_exposures/start' %}class="active"{% endif %} href="{% url 'exposure_notifications:start' %}">{% trans "Public exposures" %}</a></li>
+        <li><a {% if request.resolver_match.url_name == 'search' %}class="active"{% endif %} href="{% url 'outbreaks:search' %}">{% trans "Public exposures" %}</a></li>
       {% endif %}
     </ul>
   </div>

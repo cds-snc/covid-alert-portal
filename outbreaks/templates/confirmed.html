@@ -18,8 +18,8 @@
   </ul>
 
   <div class="content-button">
-    <a href="{% url 'exposure_notifications:start' %}" role='button' draggable='false'>{% trans "Notify of another public exposure" %}</a>
-    <a class="secondary" href="{% url 'exposure_notifications:history' %}" role='button' draggable='false'>{% trans "Check notification history" %}</a>
+    <a href="{% url 'outbreaks:search' %}" role='button' draggable='false'>{% trans "Notify of another public exposure" %}</a>
+    <a class="secondary" href="{% url 'outbreaks:history' %}" role='button' draggable='false'>{% trans "Check notification history" %}</a>
   </div>
 
 {% endblock %}

@@ -49,8 +49,8 @@
               <span> {{ location.postal_code }} </span>
             </td>
             <td>
-              <a href="{% url 'exposure_notifications:profile' location.id %}">
-                <span aria-hidden="true">{% trans "Send alert" %}</span>
+              <a href="{% url 'outbreaks:profile' location.id %}">
+                {% trans "Send alert" %}<span class="visually-hidden">{% trans "to location named " %}{{location.name}}</span>
               </a>
             </td>
           </tr>
@@ -80,7 +80,7 @@
   {% endif %}
 
 <div class="content-button">
-  <a class="secondary" href="{% url 'exposure_notifications:history' %}" role='button' draggable='false'>{% trans "Check notification history" %}</a>
+  <a class="secondary" href="{% url 'outbreaks:history' %}" role='button' draggable='false'>{% trans "Check notification history" %}</a>
 </div>
 
 <p>
