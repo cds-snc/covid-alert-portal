@@ -12,7 +12,7 @@ from portal.services import NotifyService
 
 
 class EmailForm(HealthcareBaseForm, forms.Form):
-    email = forms.EmailField(label="Email address")
+    email = forms.EmailField(label=_("Email address"))
 
     @inject
     def send_mail(
@@ -72,17 +72,17 @@ class LocationNameForm(HealthcareBaseForm, forms.Form):
 
 
 class LocationAddressForm(HealthcareBaseForm, forms.Form):
-    address = forms.CharField(label="Address line 1")
-    address_2 = forms.CharField(label="Address line 2", required=False)
-    city = forms.CharField(label="City")
-    province = forms.CharField(label="Province or territory")
-    postal_code = forms.CharField(label="Postal code")
+    address = forms.CharField(label=_("Address line 1"))
+    address_2 = forms.CharField(label=_("Address line 2"), required=False)
+    city = forms.CharField(label=_("City"))
+    province = forms.CharField(label=_("Province or territory"))
+    postal_code = forms.CharField(label=_("Postal code"))
 
 
 class LocationContactForm(HealthcareBaseForm, forms.Form):
-    contact_name = forms.CharField(label="Name of contact")
-    contact_email = forms.EmailField(label="Contact email")
-    contact_phone = PhoneNumberField(label="Contact phone number")
+    contact_name = forms.CharField(label=_("Name of contact"))
+    contact_email = forms.EmailField(label=_("Contact email"))
+    contact_phone = PhoneNumberField(label=_("Contact phone number"))
 
 
 class RegisterSummaryForm(HealthcareBaseForm, forms.Form):
