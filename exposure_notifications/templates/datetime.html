@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n static %}
+{% load i18n static fieldset_date %}
 
 {% block title %}
     {% trans "Exposure date and time" %}
@@ -17,40 +17,50 @@
   <form method="post" id="form--{{ request.resolver_match.url_name }}">
     {% csrf_token %}
 
-    <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %}">
-      <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
-        <div class="date_entry">
-          {{ form.day.label_tag }}
-          {% if form.day.errors %}
-            <div id="error--{{ form.day.html_name }}" class="validation-error">{{ form.day.errors|first }}</div>
-          {% endif %}
-          {{ form.day }}
-        </div>
-        <div class="date_entry">
-          {{ form.month.label_tag }}
-          {% if form.month.errors %}
-            <div id="error--{{ form.month.html_name }}" class="validation-error">{{ form.month.errors|first }}</div>
-          {% endif %}
-          {{ form.month }}
-        </div>
-        <div class="date_entry">
-          {{ form.year.label_tag }}
-          {% if form.year.errors %}
-            <div id="error--{{ form.year.html_name }}" class="validation-error">{{ form.year.errors|first }}</div>
-          {% endif %}
-          {{ form.year }}
-        </div>
+    {% for fieldset in form.fieldsets %}
+      <div class="fieldWrapper--container{% if fieldset.error %} fieldWrapper--container--has-error{% endif %}">
+        <div class="fieldWrapper{% if fieldset.error %} fieldWrapper--has-error{% endif %}">
 
-        <label for="date">{% trans "select date" %}</label>
+          {% if fieldset.error %}
+            <div id="error--{{ form.html_name }}-{{group}}" class="validation-error"> {{ fieldset.error }} </div>
+          {% endif %}
 
-        <div class="content-button">
-          <button type="submit">
-            {{ _("Next") }}
-          </button>
+          {% for field in fieldset %}
+            <div class="date_entry">
+              {{ field.label_tag }}
+              {{ field }}
+            </div>
+          {% endfor %}
+
+          <button type="button" class="link datepicker_button" id="{{ fieldset.title }}">{% trans "select date" %}</button>
+
+          <duet-date-picker
+                  id="datepicker_{{ fieldset.title }}"
+                  value="{{ fieldset|fieldset_date }}"
+                  min="{{min_date}}"
+                  max="{{max_date}}"
+                  language="{{language}}"
+          ></duet-date-picker>
+
         </div>
-
       </div>
+    {% endfor %}
+
+    <div class="content-button">
+      <button name="adjust_dates" value="add" class="secondary">
+        {{ _("Add another date") }}
+      </button>
+      <button name="adjust_dates" value="remove" class="secondary">
+        {{ _("Remove a date") }}
+      </button>
+    </div>
+
+    <div class="content-button">
+      <button type="submit">
+        {{ _("Next") }}
+      </button>
     </div>
   </form>
 
+  <script src="{% static 'js/datepicker.js' %}"></script>
 {% endblock %}

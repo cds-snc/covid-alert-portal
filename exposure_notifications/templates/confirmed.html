@@ -14,7 +14,9 @@
       {% trans "on one or more of these dates:" %}
   </p>
   <ul>
-      <li>{{ start_date }}</li>
+      {% for date in dates %}
+        <li>{{ date }}</li>
+      {% endfor %}
   </ul>
 
   <div class="content-button">

@@ -40,7 +40,7 @@
         </tr>
         <tr>
             <td>{% trans "Date(s)" %}</td>
-            <td>{{ alert_datetime }}</td>
+            <td>{{ dates|join:", " }}</td>
             <td><a href="{% url 'exposure_notifications:datetime' %}"><span>{% trans "change" %}</span></a></td>
         </tr>
         <tr>
