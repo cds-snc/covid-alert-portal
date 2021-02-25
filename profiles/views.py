@@ -387,12 +387,12 @@ class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):
         )
 
         try:
-            context["last_updated_datetime"] = str(
+            context["last_updated_datetime"] = (
                 CRUDEvent.objects.filter(user_id=self.request.user.id)
                 .filter(changed_fields__icontains="password")
                 .first()
                 .datetime
-            ).split(" ")[0]
+            ).strftime("%b %d %Y")
         except AttributeError:
             context["last_updated_datetime"] = ""
 
