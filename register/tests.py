@@ -4,10 +4,11 @@ from django.urls import reverse
 from waffle.models import Switch
 
 from . import forms
-from .models import Registrant, Location
+from .models import Registrant, Location, EmailConfirmation
 from .utils import generate_random_key
 from django.contrib.messages import get_messages
-
+from portal.services import NotifyService
+from portal import container
 
 class RegisterView(TestCase):
     def setUp(self):
@@ -43,6 +44,55 @@ class RegisterView(TestCase):
         session.save()
 
         response = self.client.get(reverse("register:confirmation"))
+        self.assertEqual(response.status_code, 200)
+
+
+class RegisterEmailConfirmation(TestCase):
+    def setUp(self):
+        Switch.objects.create(name="QR_CODES", active=True)
+        container.notify_service.override(NotifyService())  # Prevent sending emails
+
+    def test_email_form_empty(self):
+        form = forms.EmailForm(data={})
+
+        self.assertEqual(form.errors["email"], ["This field is required."])
+
+    def test_can_confirm_email(self):
+        email = "test@test.com"
+        # submit email
+        response = self.client.post(
+            reverse('register:registrant_email'), data={"email": email}
+        )
+        self.assertEqual(response.status_code, 302)
+
+        # confirmation screen
+        response = self.client.get(
+            reverse('register:email_submitted')
+        )
+        
+        self.assertContains(response, "Confirm your email address")
+        self.assertContains(response, email)
+
+        # check the confirmation record
+        confirm = EmailConfirmation.objects.get(email=email)
+        self.assertEquals(confirm.email, email)
+
+        # generate the confirmation link
+        confirm_url = reverse(
+            "register:email_confirm",
+            kwargs={"pk": confirm.pk},
+        )
+
+        # visit the confirmation link
+        self.client.get(confirm_url)
+
+        # confirmation record should be deleted
+        self.assertIsNone(
+            EmailConfirmation.objects.filter(email=email).first(),
+        )
+
+        # email confirmed, should be able to get to the name step
+        self.client.get(reverse('register:registrant_name'))
         self.assertEqual(response.status_code, 200)
 
 
