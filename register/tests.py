@@ -6,11 +6,12 @@ from waffle.models import Switch
 from . import forms
 from .models import Registrant, Location
 from .utils import generate_random_key
+from django.contrib.messages import get_messages
 
 
 class RegisterView(TestCase):
     def setUp(self):
-        pass
+        Switch.objects.create(name="QR_CODES", active=True)
 
     def test_start_page(self):
         response = self.client.get(reverse("register:start"))
@@ -31,22 +32,68 @@ class RegisterView(TestCase):
         response = self.client.get(reverse("register:registrant_name"))
         self.assertEqual(response.status_code, 200)
 
-    def test_confirmation_page(self):
+    def test_confirmation_page_logged_in(self):
         email = "test@test.com"
-
-        # add email to session
-        session = self.client.session
-        session["registrant_email"] = email
-        session.save()
-
         r = Registrant.objects.create(email=email)
-        session["registrant_id"] = r.id
+
+        # add id and email to session (happens at confirmation)
+        session = self.client.session
+        session["registrant_id"] = str(r.id)
+        session["registrant_email"] = r.email
+        session.save()
 
         response = self.client.get(reverse("register:confirmation"))
         self.assertEqual(response.status_code, 200)
 
 
-class RegisterLocationDetails(TestCase):
+class RegisterConfirmedEmailRequiredPages(TestCase):
+    def setUp(self):
+        Switch.objects.create(name="QR_CODES", active=True)
+
+    def test_registrant_name_not_logged_in(self):
+        response = self.client.get(reverse("register:registrant_name"))
+        self.assertRedirects(response, reverse("register:registrant_email"))
+        message = list(get_messages(response.wsgi_request))[0]
+        self.assertEqual(message.tags, "error")
+
+    def test_location_address_not_logged_in(self):
+        response = self.client.get(reverse("register:location_step", kwargs={"step": "address"}))
+        self.assertRedirects(response, reverse("register:registrant_email"))
+        message = list(get_messages(response.wsgi_request))[0]
+        self.assertEqual(message.tags, "error")
+
+    def test_location_category_not_logged_in(self):
+        response = self.client.get(reverse("register:location_step", kwargs={"step": "category"}))
+        self.assertRedirects(response, reverse("register:registrant_email"))
+        message = list(get_messages(response.wsgi_request))[0]
+        self.assertEqual(message.tags, "error")
+
+    def test_location_name_not_logged_in(self):
+        response = self.client.get(reverse("register:location_step", kwargs={"step": "name"}))
+        self.assertRedirects(response, reverse("register:registrant_email"))
+        message = list(get_messages(response.wsgi_request))[0]
+        self.assertEqual(message.tags, "error")
+
+    def test_location_contact_not_logged_in(self):
+        response = self.client.get(reverse("register:location_step", kwargs={"step": "contact"}))
+        self.assertRedirects(response, reverse("register:registrant_email"))
+        message = list(get_messages(response.wsgi_request))[0]
+        self.assertEqual(message.tags, "error")
+
+    def test_location_summary_not_logged_in(self):
+        response = self.client.get(reverse("register:location_step", kwargs={"step": "summary"}))
+        self.assertRedirects(response, reverse("register:registrant_email"))
+        message = list(get_messages(response.wsgi_request))[0]
+        self.assertEqual(message.tags, "error")
+
+    def test_confirmation_not_logged_in(self):
+        response = self.client.get(reverse("register:confirmation"))
+        self.assertRedirects(response, reverse("register:registrant_email"))
+        message = list(get_messages(response.wsgi_request))[0]
+        self.assertEqual(message.tags, "error")
+
+
+class RegisterLocationDetailsValidation(TestCase):
     def setUp(self):
         Switch.objects.create(name="QR_CODES", active=True)
 
