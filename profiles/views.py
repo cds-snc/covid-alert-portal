@@ -385,8 +385,12 @@ class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):
         context["backup_codes_count"] = (
             _devices.token_set.all().count() if _devices else 0
         )
-        
-        context["last_updated_datetime"] = str(CRUDEvent.objects.filter(user_id=self.request.user.id).filter(changed_fields__icontains="password").first().datetime).split(" ")[0]
+         
+        try:
+            context["last_updated_datetime"] = str(CRUDEvent.objects.filter(user_id=self.request.user.id).filter(changed_fields__icontains="password").first().datetime).split(" ")[0]
+        except:
+            context["last_updated_datetime"] = ""
+
         return context
 
 
