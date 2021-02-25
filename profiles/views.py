@@ -393,7 +393,7 @@ class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):
                 .first()
                 .datetime
             ).split(" ")[0]
-        except:
+        except AttributeError:
             context["last_updated_datetime"] = ""
 
         return context
