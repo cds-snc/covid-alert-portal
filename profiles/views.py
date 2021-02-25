@@ -14,7 +14,7 @@ from django.views.generic import (
     DetailView,
 )
 from django.views.generic.edit import UpdateView
-
+from easyaudit.models import CRUDEvent
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django_otp import DEVICE_ID_SESSION_KEY, devices_for_user
@@ -385,6 +385,8 @@ class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):
         context["backup_codes_count"] = (
             _devices.token_set.all().count() if _devices else 0
         )
+
+        context["last_updated_datetime"] = CRUDEvent.objects.filter(user_id=self.request.user.id).filter(changed_fields__icontains="password").first().datetime
         return context
 
 
