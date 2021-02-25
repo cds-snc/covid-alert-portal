@@ -15,10 +15,12 @@ class RegisterView(TestCase):
     def test_start_page(self):
         response = self.client.get(reverse("register:start"))
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "register/start.html")
 
     def test_email_page(self):
         response = self.client.get(reverse("register:registrant_email"))
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "register/registrant_email.html")
 
     def test_name_page(self):
         r = Registrant.objects.create(email="test@test.com")
