@@ -10,6 +10,7 @@ from django.contrib.messages import get_messages
 from portal.services import NotifyService
 from portal import container
 
+
 class RegisterView(TestCase):
     def setUp(self):
         Switch.objects.create(name="QR_CODES", active=True)
@@ -61,15 +62,13 @@ class RegisterEmailConfirmation(TestCase):
         email = "test@test.com"
         # submit email
         response = self.client.post(
-            reverse('register:registrant_email'), data={"email": email}
+            reverse("register:registrant_email"), data={"email": email}
         )
         self.assertEqual(response.status_code, 302)
 
         # confirmation screen
-        response = self.client.get(
-            reverse('register:email_submitted')
-        )
-        
+        response = self.client.get(reverse("register:email_submitted"))
+
         self.assertContains(response, "Confirm your email address")
         self.assertContains(response, email)
 
@@ -92,7 +91,7 @@ class RegisterEmailConfirmation(TestCase):
         )
 
         # email confirmed, should be able to get to the name step
-        self.client.get(reverse('register:registrant_name'))
+        self.client.get(reverse("register:registrant_name"))
         self.assertEqual(response.status_code, 200)
 
 
@@ -107,31 +106,41 @@ class RegisterConfirmedEmailRequiredPages(TestCase):
         self.assertEqual(message.tags, "error")
 
     def test_location_address_not_logged_in(self):
-        response = self.client.get(reverse("register:location_step", kwargs={"step": "address"}))
+        response = self.client.get(
+            reverse("register:location_step", kwargs={"step": "address"})
+        )
         self.assertRedirects(response, reverse("register:registrant_email"))
         message = list(get_messages(response.wsgi_request))[0]
         self.assertEqual(message.tags, "error")
 
     def test_location_category_not_logged_in(self):
-        response = self.client.get(reverse("register:location_step", kwargs={"step": "category"}))
+        response = self.client.get(
+            reverse("register:location_step", kwargs={"step": "category"})
+        )
         self.assertRedirects(response, reverse("register:registrant_email"))
         message = list(get_messages(response.wsgi_request))[0]
         self.assertEqual(message.tags, "error")
 
     def test_location_name_not_logged_in(self):
-        response = self.client.get(reverse("register:location_step", kwargs={"step": "name"}))
+        response = self.client.get(
+            reverse("register:location_step", kwargs={"step": "name"})
+        )
         self.assertRedirects(response, reverse("register:registrant_email"))
         message = list(get_messages(response.wsgi_request))[0]
         self.assertEqual(message.tags, "error")
 
     def test_location_contact_not_logged_in(self):
-        response = self.client.get(reverse("register:location_step", kwargs={"step": "contact"}))
+        response = self.client.get(
+            reverse("register:location_step", kwargs={"step": "contact"})
+        )
         self.assertRedirects(response, reverse("register:registrant_email"))
         message = list(get_messages(response.wsgi_request))[0]
         self.assertEqual(message.tags, "error")
 
     def test_location_summary_not_logged_in(self):
-        response = self.client.get(reverse("register:location_step", kwargs={"step": "summary"}))
+        response = self.client.get(
+            reverse("register:location_step", kwargs={"step": "summary"})
+        )
         self.assertRedirects(response, reverse("register:registrant_email"))
         message = list(get_messages(response.wsgi_request))[0]
         self.assertEqual(message.tags, "error")

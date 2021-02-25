@@ -96,9 +96,11 @@ class RegistrantNameView(UpdateView):
     def dispatch(self, request, *args, **kwargs):
         if not self.request.session.get("registrant_id"):
             messages.add_message(
-                self.request, messages.ERROR, _("There has been an error, you need to confirm your email address")
+                self.request,
+                messages.ERROR,
+                _("There has been an error, you need to confirm your email address"),
             )
-            return redirect('register:registrant_email')
+            return redirect("register:registrant_email")
         return super().dispatch(request, *args, **kwargs)
 
     def get_object(self):
@@ -127,7 +129,9 @@ class LocationWizard(NamedUrlSessionWizardView):
     def render(self, form=None, **kwargs):
         if not self.request.session.get("registrant_id"):
             messages.add_message(
-                self.request, messages.ERROR, _("There has been an error, you need to confirm your email address")
+                self.request,
+                messages.ERROR,
+                _("There has been an error, you need to confirm your email address"),
             )
             return redirect(reverse_lazy("register:registrant_email"))
         return super().render(form, **kwargs)
@@ -168,9 +172,11 @@ class RegisterConfirmationPageView(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         if not self.request.session.get("registrant_id"):
             messages.add_message(
-                self.request, messages.ERROR, _("There has been an error, you need to confirm your email address")
+                self.request,
+                messages.ERROR,
+                _("There has been an error, you need to confirm your email address"),
             )
-            return redirect('register:registrant_email')
+            return redirect("register:registrant_email")
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
