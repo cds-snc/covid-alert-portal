@@ -92,6 +92,11 @@ class RegistrantNameView(UpdateView):
     form_class = RegistrantNameForm
     template_name = "register/registrant_name.html"
 
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.has_profile():
+            return redirect('users:userprofile')
+        return super().dispatch(request, *args, **kwargs)
+
     def get_object(self):
         return Registrant.objects.get(pk=self.request.session["registrant_id"])
 
@@ -121,6 +126,7 @@ class LocationWizard(NamedUrlSessionWizardView):
                 self.request, messages.ERROR, _("There has been an error, you need to confirm your email address again")
             )
             return redirect(reverse_lazy("register:registrant_email"))
+        # maybe we don't need all this just return super render?
         form = form or self.get_form()
         context = self.get_context_data(form=form, **kwargs)
         return self.render_to_response(context)
