@@ -13,6 +13,8 @@
 
   {% include  "includes/error_list.html" %}
 
+  {% include  "includes/flash_messages.html" %}
+
   <h1>{% trans "Email address for your poster" %}</h1>
   <p>{% trans "We’ll send you a link. Use the link to confirm your email address." %}</p>
   {% include "includes/cds_form.html" with submit_text=_("Next") %}

@@ -115,6 +115,16 @@ class LocationWizard(NamedUrlSessionWizardView):
     def get_template_names(self):
         return [TEMPLATES[self.steps.current]]
 
+    def render(self, form=None, **kwargs):
+        if not self.request.session.get("registrant_id"):
+            messages.add_message(
+                self.request, messages.ERROR, _("There has been an error, you need to confirm your email address again")
+            )
+            return redirect(reverse_lazy("register:registrant_email"))
+        form = form or self.get_form()
+        context = self.get_context_data(form=form, **kwargs)
+        return self.render_to_response(context)
+
     def get_step_url(self, step):
         return reverse(self.url_name, kwargs={"step": step})
 
