@@ -2,12 +2,12 @@ from django.urls import path
 from . import views
 
 
-app_name = "exposure_notifications"
+app_name = "outbreaks"
 urlpatterns = [
     path(
         "",
-        views.StartView.as_view(),
-        name="start",
+        views.SearchView.as_view(),
+        name="search",
     ),
     path(
         "<uuid:pk>/profile",

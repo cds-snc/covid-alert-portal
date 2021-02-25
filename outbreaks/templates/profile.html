@@ -7,7 +7,7 @@
 
 {% block content %}
     <div class="content-back-link">
-        <a href="{% url 'exposure_notifications:start' %}" class="chevron-left">{% trans "Back" %}</a>
+        <a href="{% url 'outbreaks:search' %}" class="chevron-left">{% trans "Back" %}</a>
     </div>
 
   {% if location %}
@@ -17,16 +17,18 @@
       <caption class="visually-hidden">{% trans "Location profile" %}</caption>
       <tbody>
         <tr>
-            <td>{% trans "Name" %}</td>
+            <th scope="row">{% trans "Name" %}</th>
             <td>{{ location.name }}</td>
             <td></td>
         </tr>
         <tr>
-            <td>{% trans "Address" %}</td>
+            <th scope="row">{% trans "Address" %}</th>
             <td>
-                <span> {{ location.address }} </span>
-                <span> {{ location.city }}, {{ location.province }} </span>
-                <span> {{ location.postal_code }} </span>
+                <address>
+                    <span> {{ location.address }} </span>
+                    <span> {{ location.city }}, {{ location.province }} </span>
+                    <span> {{ location.postal_code }} </span>
+                </address>
             </td>
             <td>
                 <a href="{{ map_link }}" target="_blank">
@@ -35,17 +37,17 @@
             </td>
         </tr>
         <tr>
-            <td>{% trans "Contact email" %}</td>
+            <th scope="row">{% trans "Contact email" %}</th>
             <td>{{ location.contact_email }}</td>
             <td></td>
         </tr>
         <tr>
-            <td>{% trans "Contact phone" %}</td>
+            <th scope="row">{% trans "Contact phone" %}</th>
             <td>{{ location.contact_phone }}</td>
             <td></td>
         </tr>
         <tr>
-            <td>{% trans "Number of prior notifications" %}</td>
+            <th scope="row">{% trans "Number of prior notifications" %}</th>
             <td>{{ num_notifications }}</td>
             <td></td>
         </tr>

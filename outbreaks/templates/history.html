@@ -39,14 +39,16 @@
           <tr>
             <td>{{ notification.location.name }}</td>
             <td>
-              <span> {{ notification.location.address }} </span>
-              <span> {{ notification.location.city }}, {{ notification.location.province }} </span>
-              <span> {{ notification.location.postal_code }} </span>
+              <address>
+                <span> {{ notification.location.address }} </span>
+                <span> {{ notification.location.city }}, {{ notification.location.province }} </span>
+                <span> {{ notification.location.postal_code }} </span>
+              </address>
             </td>
-            <td>{{ notification.start_date|date:'d/m/Y' }}</td>
+            <td>{{ notification.start_date|date:'Y-m-d' }}</td>
             <td>
-              <a href="{% url 'exposure_notifications:details' notification.id %}">
-                <span aria-hidden="true">{% trans "Details" %}</span>
+              <a href="{% url 'outbreaks:details' notification.id %}">
+                <span class="visually-hidden">{% trans "See more notification " %}</span>{% trans "Details" %}
               </a>
             </td>
           </tr>

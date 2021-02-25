@@ -52,7 +52,7 @@ class DateForm(HealthcareBaseForm):
 
 class SeverityForm(HealthcareBaseForm):
     alert_level = forms.ChoiceField(
-        label=_("Select level of public exposure"),
+        label="",
         choices=[
             ("1", _("Somebody sneezed...")),
             ("2", _("Sirens and lights flashing everywhere!")),

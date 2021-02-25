@@ -2,12 +2,12 @@
 {% load i18n %}
 
 {% block title %}
-    {% trans "Exposure level" %}
+    {% trans "Select notification message" %}
 {% endblock %}
 
 {% block content %}
     <div class="content-back-link">
-        <a href="{% url 'exposure_notifications:datetime' %}" class="chevron-left">{% trans "Back" %}</a>
+        <a href="{% url 'outbreaks:datetime' %}" class="chevron-left">{% trans "Back" %}</a>
     </div>
 
   <h1>{% trans "Select notification message" %}</h1>

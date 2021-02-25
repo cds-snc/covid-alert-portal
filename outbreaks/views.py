@@ -19,10 +19,10 @@ from datetime import datetime
 import pytz
 
 
-DATETIME_FORMAT = "%d/%m/%Y"
+DATETIME_FORMAT = "%Y-%m-%d"
 
 
-class StartView(PermissionRequiredMixin, Is2FAMixin, ListView):
+class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
     permission_required = ["profiles.can_send_alerts"]
     paginate_by = 5
     model = Location
@@ -52,7 +52,7 @@ class ProfileView(PermissionRequiredMixin, Is2FAMixin, FormView):
     permission_required = ["profiles.can_send_alerts"]
     template_name = "profile.html"
     form_class = forms.Form
-    success_url = reverse_lazy("exposure_notifications:datetime")
+    success_url = reverse_lazy("outbreaks:datetime")
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -81,12 +81,12 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
     permission_required = ["profiles.can_send_alerts"]
     template_name = "datetime.html"
     form_class = DateForm
-    success_url = reverse_lazy("exposure_notifications:severity")
+    success_url = reverse_lazy("outbreaks:severity")
 
     def get(self, request, *args, **kwargs):
         # Ensure we have a cached location
         if "alert_location" not in request.session:
-            return redirect(reverse_lazy("exposure_notifications:start"))
+            return redirect(reverse_lazy("outbreaks:search"))
 
         # Ensure that we set the initial number of dates
         if 'num_dates' not in request.session:
@@ -144,7 +144,7 @@ class SeverityView(PermissionRequiredMixin, Is2FAMixin, FormView):
     permission_required = ["profiles.can_send_alerts"]
     template_name = "severity.html"
     form_class = SeverityForm
-    success_url = reverse_lazy("exposure_notifications:confirm")
+    success_url = reverse_lazy("outbreaks:confirm")
 
     def get_initial(self):
         # Populate the form with initial session data if we have it
@@ -156,7 +156,7 @@ class SeverityView(PermissionRequiredMixin, Is2FAMixin, FormView):
             "alert_location" not in request.session
             or "alert_datetime_0" not in request.session
         ):
-            return redirect(reverse_lazy("exposure_notifications:start"))
+            return redirect(reverse_lazy("outbreaks:search"))
         return super().get(request, *args, **kwargs)
 
     def form_valid(self, form):
@@ -170,7 +170,7 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
     permission_required = ["profiles.can_send_alerts"]
     template_name = "confirm.html"
     form_class = forms.Form
-    success_url = reverse_lazy("exposure_notifications:confirmed")
+    success_url = reverse_lazy("outbreaks:confirmed")
 
     def get(self, request, *args, **kwargs):
         # Ensure we have all necessary data cached
@@ -179,7 +179,7 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
             or "alert_datetime_0" not in request.session
             or "alert_level" not in request.session
         ):
-            return redirect(reverse_lazy("exposure_notifications:start"))
+            return redirect(reverse_lazy("outbreaks:search"))
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
@@ -210,7 +210,8 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
                 return response
 
         except KeyError:
-            return redirect(reverse_lazy("exposure_notifications:start"))
+            # Post request without having data cached in session
+            return redirect(reverse_lazy("outbreaks:search"))
         except IntegrityError:
             # TODO: redirect to page warning of existing entry
             raise
@@ -244,7 +245,7 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
             or "alert_datetime_0" not in request.session
             or "alert_level" not in request.session
         ):
-            return redirect(reverse_lazy("exposure_notifications:start"))
+            return redirect(reverse_lazy("outbreaks:search"))
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
