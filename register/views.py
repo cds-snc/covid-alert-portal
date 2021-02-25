@@ -73,6 +73,7 @@ def confirm_email(request, pk):
 
         # Save to session
         request.session["registrant_id"] = str(registrant.id)
+        request.session["registrant_email"] = registrant.email
 
         # Delete the confirmation
         confirm.delete()
@@ -93,8 +94,11 @@ class RegistrantNameView(UpdateView):
     template_name = "register/registrant_name.html"
 
     def dispatch(self, request, *args, **kwargs):
-        if not self.request.user.has_profile():
-            return redirect('users:userprofile')
+        if not self.request.session.get("registrant_id"):
+            messages.add_message(
+                self.request, messages.ERROR, _("There has been an error, you need to confirm your email address")
+            )
+            return redirect('register:registrant_email')
         return super().dispatch(request, *args, **kwargs)
 
     def get_object(self):
@@ -123,13 +127,10 @@ class LocationWizard(NamedUrlSessionWizardView):
     def render(self, form=None, **kwargs):
         if not self.request.session.get("registrant_id"):
             messages.add_message(
-                self.request, messages.ERROR, _("There has been an error, you need to confirm your email address again")
+                self.request, messages.ERROR, _("There has been an error, you need to confirm your email address")
             )
             return redirect(reverse_lazy("register:registrant_email"))
-        # maybe we don't need all this just return super render?
-        form = form or self.get_form()
-        context = self.get_context_data(form=form, **kwargs)
-        return self.render_to_response(context)
+        return super().render(form, **kwargs)
 
     def get_step_url(self, step):
         return reverse(self.url_name, kwargs={"step": step})
@@ -163,6 +164,14 @@ class LocationWizard(NamedUrlSessionWizardView):
 
 class RegisterConfirmationPageView(TemplateView):
     template_name = "register/confirmation.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.session.get("registrant_id"):
+            messages.add_message(
+                self.request, messages.ERROR, _("There has been an error, you need to confirm your email address")
+            )
+            return redirect('register:registrant_email')
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
