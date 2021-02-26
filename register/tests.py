@@ -12,9 +12,6 @@ from portal import container
 
 
 class RegisterView(TestCase):
-    def setUp(self):
-        Switch.objects.create(name="QR_CODES", active=True)
-
     def test_start_page(self):
         response = self.client.get(reverse("register:start"))
         self.assertEqual(response.status_code, 200)
@@ -50,7 +47,6 @@ class RegisterView(TestCase):
 
 class RegisterEmailConfirmation(TestCase):
     def setUp(self):
-        Switch.objects.create(name="QR_CODES", active=True)
         container.notify_service.override(NotifyService())  # Prevent sending emails
 
     def test_email_form_empty(self):
@@ -96,9 +92,6 @@ class RegisterEmailConfirmation(TestCase):
 
 
 class RegisterConfirmedEmailRequiredPages(TestCase):
-    def setUp(self):
-        Switch.objects.create(name="QR_CODES", active=True)
-
     def test_registrant_name_not_logged_in(self):
         response = self.client.get(reverse("register:registrant_name"))
         self.assertRedirects(response, reverse("register:registrant_email"))
@@ -153,9 +146,6 @@ class RegisterConfirmedEmailRequiredPages(TestCase):
 
 
 class RegisterLocationDetailsValidation(TestCase):
-    def setUp(self):
-        Switch.objects.create(name="QR_CODES", active=True)
-
     def test_location_category_empty(self):
         form = forms.LocationCategoryForm(data={})
 
