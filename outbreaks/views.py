@@ -4,7 +4,7 @@ from django import forms
 from django.conf import settings
 from django.urls import reverse_lazy
 from django.db.models import Q
-from django.db import transaction
+from django.db import transaction, IntegrityError
 from django.shortcuts import redirect
 from django.utils.translation import get_language
 from django.views.generic import (
@@ -105,7 +105,7 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
                 if num_dates > 1:
                     self.request.session['num_dates'] = num_dates - 1
                     self.request.session.pop(f'alert_datetime_{num_dates - 1}', None)
-            return redirect(reverse_lazy("exposure_notifications:datetime"))
+            return redirect(reverse_lazy("outbreaks:datetime"))
         return super().post(request, *args, **kwargs)
 
     def get_form_kwargs(self):
@@ -132,12 +132,15 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
         return initial_data
 
     def form_valid(self, form):
-        # Cache the datetime list for the next step
+        self._cache_dates(form)
+        response = super().form_valid(form)
+        return response
+
+    def _cache_dates(self, form):
+        # Cache the datetime list for the next step.
         for i in range(self.request.session.get('num_dates', 1)):
             dt = form.cleaned_data.get(f'date_{i}')
             self.request.session[f'alert_datetime_{i}'] = dt.timestamp()
-        response = super().form_valid(form)
-        return response
 
 
 class SeverityView(PermissionRequiredMixin, Is2FAMixin, FormView):
@@ -188,6 +191,7 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         location = Location.objects.get(id=self.request.session["alert_location"])
         context["location"] = location
         context["map_link"] = "https://maps.google.com/?q=" + str(location)
+        context["alert_level"] = self.request.session["alert_level"]
 
         num_dates = self.request.session.get('num_dates', 1)
         context['num_dates'] = num_dates
@@ -259,7 +263,7 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
         context['num_dates'] = num_dates
         context['dates'] = []
         for i in range(num_dates):
-            dt = datetime.fromtimestamp(self.request.session[f'alert_datetime_{i}'])
+            dt = datetime.fromtimestamp(self.request.session.pop(f'alert_datetime_{i}'))
             context['dates'].append(dt.strftime(DATETIME_FORMAT))
 
         return context

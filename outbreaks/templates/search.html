@@ -12,7 +12,7 @@
 
   <p>{% trans "You’ll send notifications of a public exposure to people who have installed COVID alert" %}</p>
 
-  <form action="{% url 'exposure_notifications:start' %}" method="get" id="form--{{ request.resolver_match.url_name }}">
+  <form action="{% url 'outbreaks:search' %}" method="get" id="form--{{ request.resolver_match.url_name }}">
     {% csrf_token %}
 
     <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %} search_bar">
