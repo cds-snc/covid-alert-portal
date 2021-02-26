@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- QR Code Registration form with Email verification
+
 ## [1.19.1] - 2021-02-25
 
 ### Added
