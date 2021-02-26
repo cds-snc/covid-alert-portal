@@ -56,6 +56,7 @@ import locale
 import datetime
 import time
 
+
 class YubikeyVerifyView(FormView):
     form_class = YubikeyVerifyForm
     template_name = "profiles/yubikey_verify.html"
@@ -389,17 +390,17 @@ class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):
         )
 
         try:
-            
+
             recent_date = (
                 CRUDEvent.objects.filter(user_id=self.request.user.id)
                 .filter(changed_fields__icontains="password")
                 .first()
                 .datetime
             ).strftime("%b %d %Y")
-            print(recent_date)
-            context["last_updated_datetime"] = datetime.datetime.strptime(recent_date, "%b %d %Y").date()
-            #locale.setlocale(locale.LC_ALL, "fr_FR.UTF-8")
-            #context["last_updated_datetime"] = recent_date
+
+            context["last_updated_datetime"] = datetime.datetime.strptime(
+                recent_date, "%b %d %Y"
+            ).date()
 
         except AttributeError:
             context["last_updated_datetime"] = ""
