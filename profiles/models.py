@@ -1,7 +1,11 @@
 from uuid import uuid4
 from django.db import models
 from django.utils.translation import gettext as _
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import (
+    BaseUserManager,
+    AbstractBaseUser,
+    PermissionsMixin,
+)
 from django.conf import settings
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -64,7 +68,7 @@ class HealthcareUserManager(BaseUserManager):
         return user
 
 
-class HealthcareUser(AbstractBaseUser):
+class HealthcareUser(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     email = models.EmailField(
         verbose_name="email address",
@@ -98,19 +102,13 @@ class HealthcareUser(AbstractBaseUser):
 
     def has_perm(self, perm, obj=None):
         """Does the user have a specific permission?"""
-        # Simplest possible answer: Yes, always
-        return True
-
-    def has_perms(self, perms, obj=None):
-        """Validate list of view permissions"""
-        if "sms_enabled" in perms:
+        if perm == "sms_enabled":
+            # sms_enabled requires a special check because it's not an actual permission, but a property of the province
             return self.province.sms_enabled
-        return True
+        return super().has_perm(perm, obj)
 
-    def has_module_perms(self, app_label):
-        """Does the user have permissions to view the app `app_label`?"""
-        # Simplest possible answer: Yes, always
-        return True
+    class Meta:
+        permissions = [("can_send_alerts", "Can send outbreak alerts")]
 
     @property
     def api_key(self):

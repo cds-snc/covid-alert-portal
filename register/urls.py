@@ -13,9 +13,9 @@ from .forms import (
 app_name = "register"
 
 named_location_forms = (
+    ("address", LocationAddressForm),
     ("category", LocationCategoryForm),
     ("name", LocationNameForm),
-    ("address", LocationAddressForm),
     ("contact", LocationContactForm),
     ("summary", RegisterSummaryForm),
 )
@@ -44,13 +44,11 @@ urlpatterns = [
         TemplateView.as_view(template_name="register/error.html"),
         name="confirm_email_error",
     ),
-    path("<uuid:pk>/name", views.RegistrantNameView.as_view(), name="registrant_name"),
-    re_path(
-        r"^(?P<pk>.+)/location/(?P<step>.+)/$", location_wizard, name="location_step"
-    ),
-    path("<uuid:pk>/location/", location_wizard, name="location"),
+    path("name", views.RegistrantNameView.as_view(), name="registrant_name"),
+    re_path(r"^location/(?P<step>.+)/$", location_wizard, name="location_step"),
+    path("location/", location_wizard, name="location"),
     path(
-        "<uuid:pk>/confirmation",
+        "confirmation",
         views.RegisterConfirmationPageView.as_view(),
         name="confirmation",
     ),

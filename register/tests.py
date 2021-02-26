@@ -4,76 +4,148 @@ from django.urls import reverse
 from waffle.models import Switch
 
 from . import forms
-from .models import Registrant, Location
+from .models import Registrant, Location, EmailConfirmation
 from .utils import generate_random_key
+from django.contrib.messages import get_messages
+from portal.services import NotifyService
+from portal import container
 
 
 class RegisterView(TestCase):
-    def setUp(self):
-        pass
-
     def test_start_page(self):
         response = self.client.get(reverse("register:start"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(
-            response,
-            "<h1>Create a COVID Alert QR code for your venue</h1>",
-            html=True,
-        )
+        self.assertTemplateUsed(response, "register/start.html")
 
     def test_email_page(self):
         response = self.client.get(reverse("register:registrant_email"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(
-            response,
-            "<h1>Where should we send your poster?</h1>",
-            html=True,
-        )
+        self.assertTemplateUsed(response, "register/registrant_email.html")
 
     def test_name_page(self):
         r = Registrant.objects.create(email="test@test.com")
-
-        response = self.client.get(
-            reverse("register:registrant_name", kwargs={"pk": r.pk})
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(
-            response,
-            "<h1>What is your name?</h1>",
-            html=True,
-        )
-
-    def test_confirmation_page(self):
-        email = "test@test.com"
-
-        # add email to session
         session = self.client.session
-        session["registrant_email"] = email
+        session["registrant_id"] = str(r.id)
         session.save()
 
+        response = self.client.get(reverse("register:registrant_name"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_confirmation_page_logged_in(self):
+        email = "test@test.com"
         r = Registrant.objects.create(email=email)
 
-        response = self.client.get(
-            reverse("register:confirmation", kwargs={"pk": r.pk})
-        )
+        # add id and email to session (happens at confirmation)
+        session = self.client.session
+        session["registrant_id"] = str(r.id)
+        session["registrant_email"] = r.email
+        session.save()
+
+        response = self.client.get(reverse("register:confirmation"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(
-            response,
-            "<h1>Your request for a poster has been submitted</h1>",
-            html=True,
-        )
-        self.assertContains(
-            response,
-            'Thank you. As soon as it’s ready, your poster will be emailed to <a href="mailto:{0}">{0}</a>'.format(
-                email
-            ),
-        )
 
 
-class RegisterLocationDetails(TestCase):
+class RegisterEmailConfirmation(TestCase):
     def setUp(self):
-        Switch.objects.create(name="QR_CODES", active=True)
+        container.notify_service.override(NotifyService())  # Prevent sending emails
 
+    def test_email_form_empty(self):
+        form = forms.EmailForm(data={})
+
+        self.assertEqual(form.errors["email"], ["This field is required."])
+
+    def test_can_confirm_email(self):
+        email = "test@test.com"
+        # submit email
+        response = self.client.post(
+            reverse("register:registrant_email"), data={"email": email}
+        )
+        self.assertEqual(response.status_code, 302)
+
+        # confirmation screen
+        response = self.client.get(reverse("register:email_submitted"))
+
+        self.assertContains(response, "Confirm your email address")
+        self.assertContains(response, email)
+
+        # check the confirmation record
+        confirm = EmailConfirmation.objects.get(email=email)
+        self.assertEquals(confirm.email, email)
+
+        # generate the confirmation link
+        confirm_url = reverse(
+            "register:email_confirm",
+            kwargs={"pk": confirm.pk},
+        )
+
+        # visit the confirmation link
+        self.client.get(confirm_url)
+
+        # confirmation record should be deleted
+        self.assertIsNone(
+            EmailConfirmation.objects.filter(email=email).first(),
+        )
+
+        # email confirmed, should be able to get to the name step
+        self.client.get(reverse("register:registrant_name"))
+        self.assertEqual(response.status_code, 200)
+
+
+class RegisterConfirmedEmailRequiredPages(TestCase):
+    def test_registrant_name_not_logged_in(self):
+        response = self.client.get(reverse("register:registrant_name"))
+        self.assertRedirects(response, reverse("register:registrant_email"))
+        message = list(get_messages(response.wsgi_request))[0]
+        self.assertEqual(message.tags, "error")
+
+    def test_location_address_not_logged_in(self):
+        response = self.client.get(
+            reverse("register:location_step", kwargs={"step": "address"})
+        )
+        self.assertRedirects(response, reverse("register:registrant_email"))
+        message = list(get_messages(response.wsgi_request))[0]
+        self.assertEqual(message.tags, "error")
+
+    def test_location_category_not_logged_in(self):
+        response = self.client.get(
+            reverse("register:location_step", kwargs={"step": "category"})
+        )
+        self.assertRedirects(response, reverse("register:registrant_email"))
+        message = list(get_messages(response.wsgi_request))[0]
+        self.assertEqual(message.tags, "error")
+
+    def test_location_name_not_logged_in(self):
+        response = self.client.get(
+            reverse("register:location_step", kwargs={"step": "name"})
+        )
+        self.assertRedirects(response, reverse("register:registrant_email"))
+        message = list(get_messages(response.wsgi_request))[0]
+        self.assertEqual(message.tags, "error")
+
+    def test_location_contact_not_logged_in(self):
+        response = self.client.get(
+            reverse("register:location_step", kwargs={"step": "contact"})
+        )
+        self.assertRedirects(response, reverse("register:registrant_email"))
+        message = list(get_messages(response.wsgi_request))[0]
+        self.assertEqual(message.tags, "error")
+
+    def test_location_summary_not_logged_in(self):
+        response = self.client.get(
+            reverse("register:location_step", kwargs={"step": "summary"})
+        )
+        self.assertRedirects(response, reverse("register:registrant_email"))
+        message = list(get_messages(response.wsgi_request))[0]
+        self.assertEqual(message.tags, "error")
+
+    def test_confirmation_not_logged_in(self):
+        response = self.client.get(reverse("register:confirmation"))
+        self.assertRedirects(response, reverse("register:registrant_email"))
+        message = list(get_messages(response.wsgi_request))[0]
+        self.assertEqual(message.tags, "error")
+
+
+class RegisterLocationDetailsValidation(TestCase):
     def test_location_category_empty(self):
         form = forms.LocationCategoryForm(data={})
 

@@ -1,15 +1,19 @@
-{% extends 'base.html' %}
+{% extends 'register/base.html' %}
 {% load i18n %}
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "What best describes the type of your business, organization or event?" %}
+  {% trans "Type of service or event" %}
 {% endblock %}
 
 {% block content %}
+  <div class="content-back-link">
+    <a href="{% url 'register:location_step' step='address' %}" class="chevron-left">{% trans "Back" %}</a>
+  </div>
+
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "What best describes the type of your business, organization or event?" %}</h1>
+  <h1>{% trans "Type of service or event" %}</h1>
   
-  {% include "includes/cds_form.html" with submit_text=_("Continue") %}
+  {% include "includes/cds_form.html" with submit_text=_("Next") %}
 {% endblock %}

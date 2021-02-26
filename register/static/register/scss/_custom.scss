@@ -1,0 +1,76 @@
+body.qrcode {
+    header {
+        border-bottom: 3px solid black;
+    }
+
+    .hero {
+        background-color: #FCAF17;
+        position: relative;
+        .hero-inner {
+            @extend %page-container;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            h1 {
+                flex-basis: 60%;
+            }
+            .hero-image {
+                flex-basis: 40%;
+                text-align: right;
+                img {
+                    margin: 1em 0;
+                }
+            }
+        }
+    }
+
+    .back-button {
+        margin-top: 1em;
+        a {
+            margin-left: .5em;
+        }
+    }
+
+    .messages {
+        width: 100%;
+        &--container {
+            font-weight: normal;
+            margin-top: 1.5em;
+            ul {
+                li {
+                    &.success {
+                        border-left: 4px solid #008751;
+            
+                        background: #E6FAE8;
+                    }
+                }
+            }
+        }
+    }
+
+    .jumbotron {
+        margin-top: 2em;
+        color: black;
+        background-color: #E6FAE8;
+        text-align: left;
+    }
+
+    .next-steps {
+        div {
+            flex-basis: 80%;
+        }
+        svg {
+            
+        }
+        display: flex;
+        justify-content: space-between;
+    }
+
+    label {
+        .help-text {
+            display: block;
+            font-size: 90%;
+            line-height: 2em;
+        }
+    }
+}
