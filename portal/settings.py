@@ -347,6 +347,11 @@ CONFIRMATION_EMAIL_TEMPLATE_ID = {
     "fr": os.getenv("CONFIRMATION_EMAIL_TEMPLATE_ID_FR"),
 }
 
+REGISTER_EMAIL_CONFIRMATION_ID = {
+    "en": "69512434-970a-4504-8f0e-eaec81fa570b",
+    "fr": "719e51e3-5946-4699-b980-ce04dd2d6590",
+}
+
 # Create default Super User with this password
 SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
 
