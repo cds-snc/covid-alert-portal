@@ -11,6 +11,9 @@
         <li><a {% if request.resolver_match.url_name == 'profiles' %}class="active"{% endif %} href="{% url 'profiles' %}">{% trans "Manage team" %}</a></li>
       {% endif %}
       <li><a {% if request.resolver_match.url_name == 'support' %}class="active"{% endif %} href="{% url 'support' %}">{% trans "Support" %}</a></li>
+      {% if perms.profiles.can_send_alert %}
+        <li><a {% if request.resolver_match.url_name == 'search' %}class="active"{% endif %} href="{% url 'outbreaks:search' %}">{% trans "Public exposures" %}</a></li>
+      {% endif %}
     </ul>
   </div>
 </nav>
