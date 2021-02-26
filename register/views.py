@@ -5,12 +5,13 @@ from django.urls import reverse_lazy, reverse
 from .models import Registrant, Location, EmailConfirmation
 from .forms import EmailForm, RegistrantNameForm
 from collections import ChainMap
-
+from django.utils.translation import gettext as _
 from formtools.wizard.views import NamedUrlSessionWizardView
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from datetime import datetime, timedelta
 import pytz
+from django.contrib import messages
 
 
 class RegistrantEmailView(FormView):
@@ -67,17 +68,21 @@ def confirm_email(request, pk):
             print("Error: Email verification token has expired")
             return redirect(reverse_lazy("register:confirm_email_error"))
 
-        request.session["registrant_email"] = confirm.email
-
         # Create the Registrant
         registrant, created = Registrant.objects.get_or_create(email=confirm.email)
+
+        # Save to session
+        request.session["registrant_id"] = str(registrant.id)
+        request.session["registrant_email"] = registrant.email
 
         # Delete the confirmation
         confirm.delete()
 
-        return redirect(
-            reverse_lazy("register:registrant_name", kwargs={"pk": registrant.pk})
+        messages.add_message(
+            request, messages.SUCCESS, _("You've confirmed your email address")
         )
+
+        return redirect(reverse_lazy("register:registrant_name"))
     except (EmailConfirmation.DoesNotExist):
         print("Error: Email verification token does not exist")
         return redirect(reverse_lazy("register:confirm_email_error"))
@@ -88,17 +93,30 @@ class RegistrantNameView(UpdateView):
     form_class = RegistrantNameForm
     template_name = "register/registrant_name.html"
 
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.session.get("registrant_id"):
+            messages.add_message(
+                self.request,
+                messages.ERROR,
+                _("There has been an error, you need to confirm your email address"),
+            )
+            return redirect("register:registrant_email")
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_object(self):
+        return Registrant.objects.get(pk=self.request.session["registrant_id"])
+
     def get_success_url(self):
         return reverse_lazy(
             "register:location_step",
-            kwargs={"pk": self.kwargs.get("pk"), "step": "category"},
+            kwargs={"step": "address"},
         )
 
 
 TEMPLATES = {
+    "address": "register/location_address.html",
     "category": "register/location_category.html",
     "name": "register/location_name.html",
-    "address": "register/location_address.html",
     "contact": "register/location_contact.html",
     "summary": "register/summary.html",
 }
@@ -108,14 +126,22 @@ class LocationWizard(NamedUrlSessionWizardView):
     def get_template_names(self):
         return [TEMPLATES[self.steps.current]]
 
+    def render(self, form=None, **kwargs):
+        if not self.request.session.get("registrant_id"):
+            messages.add_message(
+                self.request,
+                messages.ERROR,
+                _("There has been an error, you need to confirm your email address"),
+            )
+            return redirect(reverse_lazy("register:registrant_email"))
+        return super().render(form, **kwargs)
+
     def get_step_url(self, step):
-        return reverse(
-            self.url_name, kwargs={"pk": self.kwargs.get("pk"), "step": step}
-        )
+        return reverse(self.url_name, kwargs={"step": step})
 
     def get_context_data(self, form, **kwargs):
         context = super(LocationWizard, self).get_context_data(form=form, **kwargs)
-        registrant = Registrant.objects.get(id=self.kwargs.get("pk"))
+        registrant = Registrant.objects.get(id=self.request.session["registrant_id"])
         context["form_data"] = self.get_all_cleaned_data()
         context["registrant"] = registrant
         return context
@@ -132,17 +158,26 @@ class LocationWizard(NamedUrlSessionWizardView):
             city=location["city"],
             province=location["province"],
             postal_code=location["postal_code"],
+            contact_name=location["contact_name"],
             contact_email=location["contact_email"],
             contact_phone=location["contact_phone"],
         )
 
-        return HttpResponseRedirect(
-            reverse("register:confirmation", kwargs={"pk": self.kwargs.get("pk")})
-        )
+        return HttpResponseRedirect(reverse("register:confirmation"))
 
 
 class RegisterConfirmationPageView(TemplateView):
     template_name = "register/confirmation.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.session.get("registrant_id"):
+            messages.add_message(
+                self.request,
+                messages.ERROR,
+                _("There has been an error, you need to confirm your email address"),
+            )
+            return redirect("register:registrant_email")
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

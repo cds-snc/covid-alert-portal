@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- QR Code Registration form with Email verification
+
+## [1.19.1] - 2021-02-25
+
+### Added
+
+- The initial flow for creating outbreak alert notifications. This includes:
+  - A new app named 'outbreak' with a 'notification' model
+  - A new main menu navigation only accessible for users with 'can_send_alert' permission
+  - A new flow for creating these alert notifications, if permitted
+  
 ## [1.18.1] - 2021-02-12
 
 ### Added

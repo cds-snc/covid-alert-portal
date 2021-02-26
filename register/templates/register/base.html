@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load static i18n settings %}
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    {% with version="DJVERSION_VERSION"|get_setting %}
+      <meta name="VERSION" content="{{ version }}">
+    {% endwith %}
+
+    {% with sha="GITHUB_SHA"|get_setting %}
+      {% if sha %}
+        <meta name="GITHUB_SHA" content="{{ sha }}">
+      {% endif %}
+    {% endwith %}
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Lato:400,700%7CNoto+Sans:400,700&amp;display=fallback" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700%7CNoto+Sans:400,700&amp;display=fallback" >
+
+    <!-- Google Analytics-->
+    {% include "includes/google_analytics.html" %}
+
+    <link href="{% static 'css/normalize.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
+    <title>{% block title %}{% endblock %}{% block title_suffix %} {{ title_suffix }}{% endblock %}</title>
+  </head>
+  <body class="{% block body_class %}{% endblock %} qrcode">
+
+    <div id="skip-link-container"><a href="#page--content" id="skip-link">{% trans "Skip to main content" %}</a></div>
+
+    <div class="container">
+      <header>
+        <div class="phase-banner">
+          <div><span>{% trans "BETA" %}</span><span>{% trans "This is a new service — your feedback will help us improve it." %}</span></div>
+        </div>
+        <div class="page--container">
+          <div class="fip-container">
+            {% include  "includes/FIP_header.html" %}
+            {# on the CSRF error page, the request context is missing #}
+            {% if request %}
+              {% include  "register/includes/nav_header.html" %}
+            {% endif %}
+          </div>
+        </div>
+        <div class="page--container">
+          <div id="site-name">
+            {% trans "Make a COVID Alert Poster" %}
+            <img class="print-only" src="{% static 'img/logo-minimal.svg' %}" alt="" />
+          </div>
+        </div>
+      </header>
+      <main id="content">
+        {% block hero %}{% endblock %}
+        <div class="page--container" id="page--content" tabindex="-1">
+          <div class="content--container {% block content_class %}{% endblock %}">
+            {% block content %}{% endblock %}
+          </div>
+        </div>
+
+      </main>
+
+      {% include  "register/includes/footer.html" %}
+
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+  </body>
+</html>

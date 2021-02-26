@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Select notification message" %}
+{% endblock %}
+
+{% block content %}
+    <div class="content-back-link">
+        <a href="{% url 'outbreaks:datetime' %}" class="chevron-left">{% trans "Back" %}</a>
+    </div>
+
+  <h1>{% trans "Select notification message" %}</h1>
+
+  {% include "includes/cds_form.html" with submit_text=_("Next") %}
+
+{% endblock %}

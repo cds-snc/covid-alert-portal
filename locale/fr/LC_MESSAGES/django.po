@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-26 18:05+0000\n"
+"POT-Creation-Date: 2021-02-26 21:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,7 +126,7 @@ msgstr ""
 "sécurité dans"
 
 #: about/templates/about/2_create_account.html:32
-#: portal/templates/includes/nav_header.html:10
+#: portal/templates/includes/nav_header.html:9
 #: profiles/templates/profiles/healthcareuser_detail.html:6
 #: profiles/templates/profiles/healthcareuser_detail.html:15
 msgid "Manage your account"
@@ -402,7 +402,7 @@ msgstr "Votre administrateur vous donnera un code."
 
 #: backup_codes/templates/backup_codes/backup_codes_contacted.html:12
 #: contact/templates/contact/success.html:16 portal/templates/403.html:17
-#: portal/templates/404.html:18 portal/templates/includes/nav_header.html:14
+#: portal/templates/404.html:18 portal/templates/includes/nav_header.html:13
 #: portal/templates/locked_out.html:9
 #: portal/templates/registration/login.html:7
 #: portal/templates/registration/login.html:19
@@ -414,6 +414,7 @@ msgstr "Connexion"
 #: contact/templates/contact/form.html:5
 #: covid_key/templates/covid_key/otk_sms.html:6
 #: covid_key/templates/covid_key/otk_sms_sent.html:6
+#: outbreaks/templates/history.html:5 outbreaks/templates/search.html:5
 #: portal/templates/registration/login.html:6
 #: portal/templates/registration/password_reset_confirm.html:6
 #: portal/templates/registration/password_reset_form.html:5
@@ -517,9 +518,15 @@ msgstr ""
 
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html:22
 #: covid_key/templates/covid_key/otk_sms_sent.html:32
+#: outbreaks/templates/datetime.html:48 outbreaks/templates/severity.html:15
 #: profiles/templates/profiles/2fa.html:27
 #: profiles/templates/profiles/signup.html:14
 #: profiles/templates/profiles/signup_2fa.html:15
+#: register/templates/register/location_address.html:22
+#: register/templates/register/location_category.html:18
+#: register/templates/register/location_contact.html:20
+#: register/templates/register/location_name.html:19
+#: register/templates/register/registrant_email.html:20
 msgid "Next"
 msgstr "Suivant"
 
@@ -527,7 +534,7 @@ msgstr "Suivant"
 msgid "Your name (optional)"
 msgstr "Votre nom (facultatif)"
 
-#: contact/forms.py:16
+#: contact/forms.py:16 register/templates/register/summary.html:20
 msgid "Your email address"
 msgstr "Votre adresse courriel"
 
@@ -552,7 +559,8 @@ msgstr ""
 "commentaires par courriel à assistance+healthcare@cds-snc.ca."
 
 #: contact/templates/contact/form.html:6 contact/templates/contact/form.html:13
-#: portal/templates/500.html:17 portal/templates/includes/footer.html:9
+#: portal/templates/500.html:17 portal/templates/includes/footer.html:8
+#: register/templates/register/includes/footer.html:8
 msgid "Contact us"
 msgstr "Nous joindre"
 
@@ -604,6 +612,17 @@ msgid "When patient is ready, generate a key"
 msgstr "Si le patient est prêt, générez une clé"
 
 #: covid_key/templates/covid_key/generate_key.html:8
+#: outbreaks/templates/confirm.html:10 outbreaks/templates/datetime.html:10
+#: outbreaks/templates/details.html:10 outbreaks/templates/profile.html:10
+#: outbreaks/templates/severity.html:10
+#: register/templates/register/location_address.html:11
+#: register/templates/register/location_category.html:11
+#: register/templates/register/location_contact.html:11
+#: register/templates/register/location_name.html:11
+#: register/templates/register/registrant_email.html:11
+#: register/templates/register/registrant_email_submitted.html:11
+#: register/templates/register/registrant_name.html:11
+#: register/templates/register/summary.html:10
 msgid "Back"
 msgstr "Retour"
 
@@ -723,6 +742,7 @@ msgid "Yes, continue"
 msgstr "Oui, continuer"
 
 #: covid_key/templates/covid_key/start.html:22
+#: outbreaks/templates/search.html:87
 msgid "New or need a refresher?"
 msgstr "Besoin d’en savoir plus sur le portail?"
 
@@ -751,7 +771,280 @@ msgstr ""
 msgid "Google Analytics V4 Tracking Code"
 msgstr "Code pour Google Analytics version 4"
 
-#: portal/settings.py:373
+#: outbreaks/forms.py:12
+msgid "Search for place name or address"
+msgstr ""
+
+#: outbreaks/forms.py:21
+msgid "Day"
+msgstr ""
+
+#: outbreaks/forms.py:23
+msgid "Month"
+msgstr ""
+
+#: outbreaks/forms.py:26
+msgid "Year"
+msgstr ""
+
+#: outbreaks/forms.py:34
+msgid "Somebody sneezed..."
+msgstr ""
+
+#: outbreaks/forms.py:35
+msgid "Sirens and lights flashing everywhere!"
+msgstr ""
+
+#: outbreaks/forms.py:36
+msgid "Zombie apocalypse!!!!"
+msgstr ""
+
+#: outbreaks/templates/confirm.html:5
+msgid "Confirm notification"
+msgstr ""
+
+#: outbreaks/templates/confirm.html:13
+#, fuzzy
+#| msgid "Confirm delete user"
+msgid "Confirm and send"
+msgstr "Confirmez la suppression de l’utilisateur"
+
+#: outbreaks/templates/confirm.html:16
+#, fuzzy
+#| msgid "No invitations yet"
+msgid "Notification details"
+msgstr "Aucune invitation pour le moment"
+
+#: outbreaks/templates/confirm.html:19 outbreaks/templates/details.html:20
+#: outbreaks/templates/profile.html:20
+#: profiles/templates/profiles/healthcareuser_detail.html:25
+#: register/templates/register/summary.html:82
+msgid "Name"
+msgstr "Nom"
+
+#: outbreaks/templates/confirm.html:21 outbreaks/templates/confirm.html:39
+#: outbreaks/templates/confirm.html:44 outbreaks/templates/confirm.html:49
+#: profiles/templates/profiles/healthcareuser_detail.html:38
+#: profiles/templates/profiles/healthcareuser_detail.html:61
+#: profiles/templates/profiles/healthcareuser_detail.html:109
+msgid "Change"
+msgstr "Modifier"
+
+#: outbreaks/templates/confirm.html:21 outbreaks/templates/confirm.html:39
+#, fuzzy
+#| msgid "Actions"
+msgid "location"
+msgstr "Actions"
+
+#: outbreaks/templates/confirm.html:24 outbreaks/templates/details.html:25
+#: outbreaks/templates/history.html:36 outbreaks/templates/profile.html:25
+#: outbreaks/templates/search.html:38
+#: register/templates/register/summary.html:54
+msgid "Address"
+msgstr "Adresse"
+
+#: outbreaks/templates/confirm.html:33 outbreaks/templates/details.html:35
+#: outbreaks/templates/profile.html:35
+msgid "Show on map"
+msgstr ""
+
+#: outbreaks/templates/confirm.html:37
+#: register/templates/register/summary.html:70
+msgid "Type"
+msgstr "Type"
+
+#: outbreaks/templates/confirm.html:42
+msgid "Date(s)"
+msgstr ""
+
+#: outbreaks/templates/confirm.html:44
+#, fuzzy
+#| msgid "Update"
+msgid "dates"
+msgstr "Mettre à jour"
+
+#: outbreaks/templates/confirm.html:47 outbreaks/templates/details.html:58
+msgid "Severity"
+msgstr ""
+
+#: outbreaks/templates/confirm.html:49
+msgid "severity"
+msgstr ""
+
+#: outbreaks/templates/confirm.html:54
+#, fuzzy
+#| msgid ""
+#| "By selecting “Make poster”, you confirm your answers are correct and "
+#| "complete."
+msgid ""
+"By selecting “Notify people who were there”,  you confirm you believe this "
+"information is correct and complete."
+msgstr ""
+"En cliquant sur « Créer l’affiche », vous confirmez que vos réponses sont "
+"exactes."
+
+#: outbreaks/templates/confirm.html:56 outbreaks/templates/profile.html:61
+msgid "Notify people who were there"
+msgstr ""
+
+#: outbreaks/templates/confirmed.html:5
+#, fuzzy
+#| msgid "Invitation sent"
+msgid "Notification sent"
+msgstr "Invitation envoyée"
+
+#: outbreaks/templates/confirmed.html:9
+msgid "You’ve notified people"
+msgstr ""
+
+#: outbreaks/templates/confirmed.html:12
+msgid "People who’ve installed the app will get a notification if they were at"
+msgstr ""
+
+#: outbreaks/templates/confirmed.html:14
+msgid "on one or more of these dates:"
+msgstr ""
+
+#: outbreaks/templates/confirmed.html:21
+msgid "Notify of another public exposure"
+msgstr ""
+
+#: outbreaks/templates/confirmed.html:22 outbreaks/templates/search.html:83
+#, fuzzy
+#| msgid "Check invitations"
+msgid "Check notification history"
+msgstr "Voir les invitations"
+
+#: outbreaks/templates/datetime.html:5 outbreaks/templates/datetime.html:13
+msgid "Exposure date and time"
+msgstr ""
+
+#: outbreaks/templates/datetime.html:15
+msgid ""
+"We’ll notify people who scanned the QR code on that date. Remember to add "
+"all dates of this public exposure."
+msgstr ""
+
+#: outbreaks/templates/datetime.html:44
+msgid "select date"
+msgstr ""
+
+#: outbreaks/templates/details.html:5 outbreaks/templates/details.html:14
+msgid "Details of public exposure"
+msgstr ""
+
+#: outbreaks/templates/details.html:17
+msgid "Exposure details"
+msgstr ""
+
+#: outbreaks/templates/details.html:40
+#, fuzzy
+#| msgid "Send"
+msgid "Sender"
+msgstr "Envoyer"
+
+#: outbreaks/templates/details.html:48
+msgid "Date of public exposure"
+msgstr ""
+
+#: outbreaks/templates/details.html:53
+msgid "Date of notification"
+msgstr ""
+
+#: outbreaks/templates/details.html:66
+msgid "Exposure details not found."
+msgstr ""
+
+#: outbreaks/templates/history.html:6 outbreaks/templates/history.html:11
+msgid "Notification history"
+msgstr ""
+
+#: outbreaks/templates/history.html:24 outbreaks/templates/search.html:26
+msgid "Search"
+msgstr ""
+
+#: outbreaks/templates/history.html:32
+msgid "Prior notifications"
+msgstr ""
+
+#: outbreaks/templates/history.html:35 outbreaks/templates/search.html:37
+#, fuzzy
+#| msgid "Change name"
+msgid "Place name"
+msgstr "Modifier le nom"
+
+#: outbreaks/templates/history.html:37
+msgid "Date of exposure"
+msgstr ""
+
+#: outbreaks/templates/history.html:55
+msgid "See more notification "
+msgstr ""
+
+#: outbreaks/templates/history.html:55
+msgid "Details"
+msgstr ""
+
+#: outbreaks/templates/profile.html:5 outbreaks/templates/profile.html:17
+msgid "Location profile"
+msgstr ""
+
+#: outbreaks/templates/profile.html:14
+#, fuzzy
+#| msgid "User profile"
+msgid "Place profile"
+msgstr "Profil utilisateur"
+
+#: outbreaks/templates/profile.html:40 register/forms.py:84
+#, fuzzy
+#| msgid "Contact us"
+msgid "Contact email"
+msgstr "Nous joindre"
+
+#: outbreaks/templates/profile.html:45
+#, fuzzy
+#| msgid "Contact us"
+msgid "Contact phone"
+msgstr "Nous joindre"
+
+#: outbreaks/templates/profile.html:50
+msgid "Number of prior notifications"
+msgstr ""
+
+#: outbreaks/templates/profile.html:58
+#, fuzzy
+#| msgid "Page not found"
+msgid "Place not found."
+msgstr "Page introuvable"
+
+#: outbreaks/templates/search.html:6 outbreaks/templates/search.html:11
+#: portal/templates/includes/nav_main.html:15
+msgid "Public exposures"
+msgstr ""
+
+#: outbreaks/templates/search.html:13
+msgid ""
+"You’ll send notifications of a public exposure to people who have installed "
+"COVID alert"
+msgstr ""
+
+#: outbreaks/templates/search.html:34
+msgid "Available locations"
+msgstr ""
+
+#: outbreaks/templates/search.html:53
+msgid "Send alert"
+msgstr ""
+
+#: outbreaks/templates/search.html:53
+msgid "to location named "
+msgstr ""
+
+#: outbreaks/templates/severity.html:5 outbreaks/templates/severity.html:13
+msgid "Select notification message"
+msgstr ""
+
+#: portal/settings.py:374
 msgid "This account has been locked due to too many failed log in attempts."
 msgstr ""
 "Ce compte a été verrouillé en raison d’un trop grand nombre de tentatives "
@@ -819,11 +1112,11 @@ msgstr ""
 "Veuillez utiliser <a href=\"%(login_url)s\">le site principal pour vous "
 "connecter</a>."
 
-#: portal/templates/base.html:41
+#: portal/templates/base.html:40 register/templates/register/base.html:35
 msgid "Skip to main content"
 msgstr "Passer au contenu principal"
 
-#: portal/templates/base.html:56
+#: portal/templates/base.html:55
 msgid "COVID Alert Portal"
 msgstr "Portail Alerte COVID"
 
@@ -850,7 +1143,6 @@ msgid "No new keys after expiry."
 msgstr "Elle ne peut pas être regénérée si elle expire."
 
 #: portal/templates/includes/cds_form.html:47
-#: register/templates/register/summary.html:106
 msgid "Submit"
 msgstr "Soumettre"
 
@@ -940,30 +1232,35 @@ msgstr "La clé <strong>expire le</strong>"
 msgid "at"
 msgstr "à"
 
-#: portal/templates/includes/footer.html:10
+#: portal/templates/includes/footer.html:9
 #: profiles/templates/profiles/privacy.html:5
+#: register/templates/register/includes/footer.html:9
 msgid "Privacy"
 msgstr "Confidentialité"
 
-#: portal/templates/includes/footer.html:11
+#: portal/templates/includes/footer.html:10
 #: profiles/templates/profiles/terms.html:5
 #: profiles/templates/profiles/terms.html:9
+#: register/templates/register/includes/footer.html:10
 msgid "Terms of use"
 msgstr "Conditions d’utilisation"
 
-#: portal/templates/includes/footer.html:15
+#: portal/templates/includes/footer.html:13
+#: register/templates/register/includes/footer.html:13
 msgid "Symbol of the Government of Canada"
 msgstr "Symbole du gouvernement du Canada"
 
 #: portal/templates/includes/nav_header.html:3
+#: register/templates/register/includes/nav_header.html:3
 msgid "Language and account navigation"
 msgstr "Navigation de compte et changement de langue"
 
-#: portal/templates/includes/nav_header.html:12
+#: portal/templates/includes/nav_header.html:11
 msgid "Log out"
 msgstr "Déconnexion"
 
-#: portal/templates/includes/nav_header.html:22
+#: portal/templates/includes/nav_header.html:20
+#: register/templates/register/includes/nav_header.html:10
 msgid "Language selection"
 msgstr "Choix de langue"
 
@@ -1305,8 +1602,8 @@ msgstr "Entrez une adresse courriel valide"
 #: profiles/forms.py:499
 #: profiles/templates/invitations/templates/invite_list.html:18
 #: profiles/templates/profiles/healthcareuser_detail.html:44
-#: profiles/templates/profiles/healthcareuser_list.html:18
-#: register/models.py:39
+#: profiles/templates/profiles/healthcareuser_list.html:18 register/forms.py:15
+#: register/models.py:42
 msgid "Email address"
 msgstr "Adresse courriel"
 
@@ -1315,7 +1612,7 @@ msgstr "Adresse courriel"
 msgid "Change your name"
 msgstr "Modifier votre nom"
 
-#: profiles/forms.py:146 profiles/forms.py:347 profiles/models.py:74
+#: profiles/forms.py:146 profiles/forms.py:347 profiles/models.py:78
 #: register/models.py:15
 msgid "Full name"
 msgstr "Nom complet"
@@ -1330,7 +1627,7 @@ msgstr "Modifier votre numéro de téléphone"
 msgid "Mobile phone number"
 msgstr "Numéro de téléphone mobile"
 
-#: profiles/forms.py:160 profiles/forms.py:457 profiles/models.py:78
+#: profiles/forms.py:160 profiles/forms.py:457 profiles/models.py:82
 msgid ""
 "You must enter a new security code each time you log in. We’ll text the code "
 "to your mobile phone number."
@@ -1420,16 +1717,16 @@ msgstr ""
 msgid "The token is not valid for this device."
 msgstr ""
 
-#: profiles/models.py:14
+#: profiles/models.py:18
 msgid "Bearer token"
 msgstr "Jeton d’API"
 
-#: profiles/models.py:87
+#: profiles/models.py:91
 msgid "If set, the user will be blocked until that time."
 msgstr ""
 "Si cette option est activée, l’utilisateur sera verrouillé jusqu’à ce moment."
 
-#: profiles/models.py:135
+#: profiles/models.py:133
 msgid "Attempt Time"
 msgstr "L’heure de la tentative"
 
@@ -1650,19 +1947,9 @@ msgstr "Non, conserver"
 msgid "User profile"
 msgstr "Profil utilisateur"
 
-#: profiles/templates/profiles/healthcareuser_detail.html:25
-msgid "Name"
-msgstr "Nom"
-
 #: profiles/templates/profiles/healthcareuser_detail.html:35
 msgid "Change name"
 msgstr "Modifier le nom"
-
-#: profiles/templates/profiles/healthcareuser_detail.html:38
-#: profiles/templates/profiles/healthcareuser_detail.html:61
-#: profiles/templates/profiles/healthcareuser_detail.html:109
-msgid "Change"
-msgstr "Modifier"
 
 #: profiles/templates/profiles/healthcareuser_detail.html:58
 msgid "Change mobile phone number"
@@ -2008,12 +2295,7 @@ msgstr "Ajouter une clé Yubikey"
 
 #: profiles/templates/profiles/yubikey_create.html:14
 #: profiles/templates/profiles/yubikey_verify.html:14
-#: register/templates/register/location_address.html:19
-#: register/templates/register/location_category.html:14
-#: register/templates/register/location_contact.html:15
-#: register/templates/register/location_name.html:15
-#: register/templates/register/registrant_email.html:14
-#: register/templates/register/registrant_name.html:14
+#: register/templates/register/registrant_name.html:21
 msgid "Continue"
 msgstr "Continuer"
 
@@ -2098,41 +2380,77 @@ msgstr ""
 msgid "— Scan a place registration"
 msgstr ""
 
-#: register/forms.py:43
-#, fuzzy
-#| msgid "Actions"
-msgid "Accommodation"
-msgstr "Actions"
+#: register/forms.py:53
+msgid "Arts & culture"
+msgstr "Arts et culture"
 
-#: register/forms.py:44
-msgid "Childcare"
+#: register/forms.py:54
+msgid "Community spaces & libraries"
+msgstr "Bibliothèques et espaces communautaires"
+
+#: register/forms.py:55
+msgid "Fitness"
+msgstr "Fitness"
+
+#: register/forms.py:56
+msgid "Food service & licensed establishments"
 msgstr ""
 
-#: register/forms.py:45
-#, fuzzy
-#| msgid "Actions"
-msgid "Education"
-msgstr "Actions"
-
-#: register/forms.py:46
-msgid "Medical Facility"
+#: register/forms.py:57
+msgid "Personal care services"
 msgstr ""
 
-#: register/forms.py:47
-msgid "Restaurant, cafe, pub or bar"
+#: register/forms.py:58
+msgid "Private events/functions"
 msgstr ""
 
-#: register/forms.py:48
-msgid "Retail store"
+#: register/forms.py:59
+msgid "Rented meeting, event & rehearsal spaces"
 msgstr ""
 
-#: register/forms.py:49
-msgid "Transport"
+#: register/forms.py:60
+msgid "Retail/shopping"
 msgstr ""
 
-#: register/forms.py:50
+#: register/forms.py:61
+msgid "Sports & recreation facilities"
+msgstr ""
+
+#: register/forms.py:62
 msgid "Other"
 msgstr ""
+
+#: register/forms.py:75 register/models.py:34
+msgid "Address line 1"
+msgstr "Adresse ligne 1"
+
+#: register/forms.py:76 register/models.py:35
+msgid "Address line 2"
+msgstr "Adresse ligne 2"
+
+#: register/forms.py:77 register/models.py:36
+msgid "City"
+msgstr "Ville"
+
+#: register/forms.py:78
+msgid "Province or territory"
+msgstr "Province ou territoire"
+
+#: register/forms.py:79 register/models.py:38
+msgid "Postal code"
+msgstr "Code postal"
+
+#: register/forms.py:83
+#, fuzzy
+#| msgid "Name of service or event"
+msgid "Name of contact"
+msgstr "Nom du service ou de l´événement"
+
+#: register/forms.py:85
+#, fuzzy
+#| msgid "Mobile phone number"
+msgid "Contact phone number"
+msgstr "Numéro de téléphone mobile"
 
 #: register/models.py:30
 #, fuzzy
@@ -2141,82 +2459,105 @@ msgid "Short code"
 msgstr "Code de sécurité"
 
 #: register/models.py:32
-#, fuzzy
-#| msgid "Creation date"
 msgid "Location category"
-msgstr "Date de création"
+msgstr ""
 
 #: register/models.py:33
-#, fuzzy
-#| msgid "Creation date"
 msgid "Location name"
-msgstr "Date de création"
-
-#: register/models.py:34
-msgid "Address line 1"
-msgstr ""
-
-#: register/models.py:35
-msgid "Address line 2"
-msgstr ""
-
-#: register/models.py:36
-msgid "City"
 msgstr ""
 
 #: register/models.py:37
 msgid "Province"
 msgstr ""
 
-#: register/models.py:38
-msgid "Postal code"
+#: register/models.py:40
+#, fuzzy
+#| msgid "Contact us"
+msgid "Contact name"
+msgstr "Nous joindre"
+
+#: register/templates/register/base.html:40
+msgid "BETA"
 msgstr ""
+
+#: register/templates/register/base.html:40
+msgid "This is a new service — your feedback will help us improve it."
+msgstr ""
+
+#: register/templates/register/base.html:53
+msgid "Make a COVID Alert Poster"
+msgstr "Créer une affiche Alerte COVID"
 
 #: register/templates/register/confirmation.html:5
-#: register/templates/register/confirmation.html:10
-msgid "Your request for a poster has been submitted"
-msgstr ""
+#, fuzzy
+#| msgid "We've got the information for your poster"
+msgid "We’ve got the information for your poster"
+msgstr "Nous avons bien reçu vos renseignements"
+
+#: register/templates/register/confirmation.html:12
+msgid "We've got the information for your poster"
+msgstr "Nous avons bien reçu vos renseignements"
 
 #: register/templates/register/confirmation.html:13
-msgid "What happens next"
+#, python-format
+msgid ""
+"\n"
+"      <p>We’ll email the poster to %(email)s</p>\n"
+"    "
 msgstr ""
-
-#: register/templates/register/confirmation.html:16
-msgid "Thank you. As soon as it’s ready, your poster will be emailed to"
-msgstr ""
+"\n"
+"      <p>Nous enverrons votre affiche à %(email)s</p>\n"
+"    "
 
 #: register/templates/register/confirmation.html:18
-msgid "Thank you. As soon as it’s ready, your poster will be emailed to you."
-msgstr ""
+msgid "Next steps"
+msgstr "Prochaines étapes"
 
-#: register/templates/register/confirmation.html:20
-msgid "If you don’t receive your poster within a few hours, please contact us."
+#: register/templates/register/confirmation.html:22
+msgid ""
+"<a href=''>Contact us</a> if you do not get the email within X hours or if "
+"you have questions."
 msgstr ""
+"<a href=''>Contactez-nous</a> si vous ne recevez pas le courriel d’ici X "
+"heures ou si vous avez des questions."
 
 #: register/templates/register/confirmation.html:23
 msgid ""
-"If your business organization or event operates across multiple branches, "
-"you will need to create a poster for each unique location."
+"Remember to make more posters if your service or event has other addresses. "
+"You can come back later if you do not have time now."
 msgstr ""
+"N’oubliez pas de créer d’autres affiches si votre service ou votre événement "
+"comprend plusieurs adresses. Vous pouvez revenir plus tard si vous n’avez "
+"pas le temps maintenant."
 
-#: register/templates/register/confirmation.html:26
-#, fuzzy
-#| msgid "Enter information to continue"
-msgid "Further information"
-msgstr "Entrez les renseignements demandés pour continuer"
+#: register/templates/register/confirmation.html:29
+msgid "Make another poster"
+msgstr "Créer une autre affiche"
 
 #: register/templates/register/confirmation.html:30
-#, fuzzy
-#| msgid "You entered 2 different passwords."
-msgid "Generate different poster"
-msgstr "Vous avez saisi 2 mots de passe différents"
+msgid "Done"
+msgstr "Terminé"
 
-#: register/templates/register/confirmation.html:31
-msgid "I am finished"
+#: register/templates/register/confirmation.html:33
+msgid "Learn more about QR codes and public health"
+msgstr "En savoir plus sur les codes QR et la santé publique."
+
+#: register/templates/register/confirmation.html:34
+msgid "Thank you for helping slow the spread of COVID-19."
+msgstr "Merci d’aider à ralentir la propagation de la COVID-19."
+
+#: register/templates/register/confirmation.html:35
+msgid "Please answer some questions to help improve the COVID Alert system."
+msgstr ""
+"Répondez à quelques questions pour nous aider à améliorer le système Alerte "
+"COVID."
+
+#: register/templates/register/error.html:5
+msgid "Invalid / expired link"
 msgstr ""
 
-#: register/templates/register/error.html:6
-msgid "Invalid / expired link"
+#: register/templates/register/error.html:9
+msgid "Invalid / Expired"
 msgstr ""
 
 #: register/templates/register/error.html:10
@@ -2224,160 +2565,166 @@ msgid "Sorry, that confirmation link has expired or has already been used."
 msgstr ""
 
 #: register/templates/register/location_address.html:6
-#: register/templates/register/location_address.html:12
-msgid "Where is your business, organization or event located?"
-msgstr ""
-
-#: register/templates/register/location_address.html:15
-msgid ""
-"If your business, organization or event operates across multiple branches, "
-"you will need to create a poster for each unique location"
-msgstr ""
-
 #: register/templates/register/location_address.html:16
-msgid "You will be able to create another QR code poster later"
+msgid "Address of service or event"
+msgstr "Adresse du service ou de l’événement"
+
+#: register/templates/register/location_address.html:19
+msgid ""
+"If the event or service has several addresses, you need a poster for each.  "
+"After you finish this poster, we’ll remind you to make more."
 msgstr ""
+"Si le service ou l’événement comporte plusieurs adresses, vous devrez créer "
+"une affiche pour chacune d’elles.Quand vous aurez terminé la présente "
+"affiche, nous vous le rappelerons."
 
 #: register/templates/register/location_category.html:6
-#: register/templates/register/location_category.html:12
-msgid "What best describes the type of your business, organization or event?"
-msgstr ""
+#: register/templates/register/location_category.html:16
+msgid "Type of service or event"
+msgstr "Type de service ou d´événement"
 
 #: register/templates/register/location_contact.html:6
-#: register/templates/register/location_contact.html:12
-msgid "Who is responsible for this location?"
-msgstr ""
+#: register/templates/register/location_contact.html:16
+msgid "Contact for the address"
+msgstr "Personne-ressource"
 
-#: register/templates/register/location_contact.html:13
-msgid ""
-"This could be you, or a different person, such as a store manager. We will "
-"contact them if there is an outbreak."
+#: register/templates/register/location_contact.html:17
+msgid "This could be you, or a different person, such as a store manager."
 msgstr ""
+"La personne-ressource peut être vous-même ou bien une autre personne, par "
+"exemple un gérant de boutique."
+
+#: register/templates/register/location_contact.html:18
+msgid ""
+"We’ll contact them with any important health information for the address."
+msgstr ""
+"Nous contacterons cette personne pour toute information de santé importante "
+"relative à l’adresse fournie."
 
 #: register/templates/register/location_name.html:6
-#: register/templates/register/location_name.html:12
-msgid "What is the name of your business, organization or event?"
-msgstr ""
+#: register/templates/register/location_name.html:16
+msgid "Name of service or event"
+msgstr "Nom du service ou de l´événement"
 
-#: register/templates/register/location_name.html:13
-msgid "This will be displayed on the QR code poster for users to scan"
-msgstr ""
+#: register/templates/register/location_name.html:17
+msgid "We’ll display the name on the poster with your QR code."
+msgstr "Le nom sera inscrit sur l´affiche, à côté de votre code QR."
 
 #: register/templates/register/registrant_email.html:6
-#: register/templates/register/registrant_email.html:12
-msgid "Where should we send your poster?"
-msgstr ""
+#: register/templates/register/registrant_email.html:18
+msgid "Email address for your poster"
+msgstr "Adresse courriel pour votre affiche"
 
-#: register/templates/register/registrant_email.html:13
-msgid ""
-"Your COVID Alert QR code poster will be sent to this email address. We will "
-"ask you to verify this email address."
-msgstr ""
+#: register/templates/register/registrant_email.html:19
+msgid "We’ll send you a link. Use the link to confirm your email address."
+msgstr "Nous vous enverrons un hyperlien pour valider votre adresse courriel."
 
 #: register/templates/register/registrant_email_submitted.html:6
-#: register/templates/register/registrant_email_submitted.html:12
-#, fuzzy
-#| msgid "Enter your email address"
+#: register/templates/register/registrant_email_submitted.html:16
 msgid "Confirm your email address"
-msgstr "Saisissez votre adresse courriel"
+msgstr "Validez votre adresse courriel"
 
-#: register/templates/register/registrant_email_submitted.html:14
+#: register/templates/register/registrant_email_submitted.html:18
 #, python-format
 msgid ""
 "\n"
 "    <p>We sent a link to %(email)s.</p>\n"
 "  "
 msgstr ""
+"\n"
+"    <p>Nous avons envoyé un hyperlien à %(email)s.</p>\n"
+"  "
 
-#: register/templates/register/registrant_email_submitted.html:18
-#, fuzzy
-#| msgid "If you did not get the code, we can send it again."
+#: register/templates/register/registrant_email_submitted.html:22
 msgid "If you did not get the email, check your junk or spam folder."
-msgstr "Si vous n’avez pas reçu de code, nous pouvons vous en renvoyer un."
+msgstr "Si vous n’avez pas reçu le courriel, vérifiez vos pourriels."
 
-#: register/templates/register/registrant_email_submitted.html:21
+#: register/templates/register/registrant_email_submitted.html:25
 msgid "Send email again"
-msgstr ""
+msgstr "Renvoyer le courriel"
 
 #: register/templates/register/registrant_name.html:6
-#: register/templates/register/registrant_name.html:12
-#, fuzzy
-#| msgid "Change your name"
-msgid "What is your name?"
-msgstr "Modifier votre nom"
+#: register/templates/register/registrant_name.html:18
+#: register/templates/register/summary.html:33
+msgid "Your name"
+msgstr "Votre nom"
+
+#: register/templates/register/registrant_name.html:19
+msgid "We’ll use your name when we email you."
+msgstr "Nous utiliserons votre nom dans les courriels que nous vous envoyons."
 
 #: register/templates/register/start.html:6
-#: register/templates/register/start.html:10
-msgid "Create a COVID Alert QR code for your venue"
-msgstr ""
-
-#: register/templates/register/start.html:11
-msgid ""
-"Use this service to create a QR code for display in your venue. Get visitors "
-"to scan the QR code when they arrive, using the COVID Alert app. This is to "
-"help trace and stop the spread of coronavirus (COVID-19)."
-msgstr ""
+msgid "Make a COVID Alert poster"
+msgstr "Créer une affiche Alerte COVID"
 
 #: register/templates/register/start.html:12
-msgid ""
-"If you have more than one venue, you need to create a separate QR code for "
-"each location. You can add multiple locations in the service."
-msgstr ""
+msgid "Display a QR code to slow the spread of COVID-19"
+msgstr "Affichez un code QR pour contribuer à ralentir la COVID-19"
 
-#: register/templates/register/start.html:15
-#, fuzzy
-#| msgid "Start over"
+#: register/templates/register/start.html:21
+msgid ""
+"Answer questions to make a poster with a code for your service or event."
+msgstr ""
+"Répondez à quelques questions pour créer une affiche à code QR pour votre "
+"service ou votre événement."
+
+#: register/templates/register/start.html:22
+msgid ""
+"Visitors can scan the QR code on their phone. This helps COVID Alert notify "
+"people who’ve been exposed to COVID-19."
+msgstr ""
+"Les visiteurs pourront scanner le code avec leur téléphone. Alerte COVID "
+"pourra ensuite les notifier s’ils ont été exposés à la COVID-19."
+
+#: register/templates/register/start.html:25
 msgid "Start now"
-msgstr "Recommencer"
+msgstr "Commencer"
 
 #: register/templates/register/summary.html:5
-#: register/templates/register/summary.html:9
-msgid "Check your answers before submitting your form"
-msgstr ""
+#: register/templates/register/summary.html:13
+msgid "Check your answers before making your poster"
+msgstr "Vérifiez vos réponses avant de créer votre affiche"
 
-#: register/templates/register/summary.html:11
-msgid "Personal Details"
-msgstr ""
+#: register/templates/register/summary.html:15
+msgid "Personal information"
+msgstr "Renseignements personnels"
 
-#: register/templates/register/summary.html:16
-msgid "Poster receiver email"
-msgstr ""
+#: register/templates/register/summary.html:46
+msgid "Service or event details"
+msgstr "Renseignements sur le service ou l’événement"
 
-#: register/templates/register/summary.html:29
-msgid "Poster receiver name"
-msgstr ""
+#: register/templates/register/summary.html:94
+msgid "Contact person for the location"
+msgstr "Personne-ressource pour le lieu"
 
-#: register/templates/register/summary.html:42
-msgid "Location Details"
-msgstr ""
+#: register/templates/register/summary.html:107
+msgid "We’ll use this information to make your poster"
+msgstr "Nous utiliserons ces renseignements pour créer votre affiche"
 
-#: register/templates/register/summary.html:50
-msgid "Type"
-msgstr ""
-
-#: register/templates/register/summary.html:61
-msgid "Business, organization or event name"
-msgstr ""
-
-#: register/templates/register/summary.html:73
-#, fuzzy
-#| msgid "Email address"
-msgid "Address"
-msgstr "Adresse courriel"
-
-#: register/templates/register/summary.html:89
-msgid "Who can we contact at this address?"
-msgstr ""
-
-#: register/templates/register/summary.html:101
-msgid "Now submit your answers to create your poster"
-msgstr ""
-
-#: register/templates/register/summary.html:103
+#: register/templates/register/summary.html:109
 msgid ""
-"By submitting this form you are confirming that to the best of your "
-"knowledge, the details you are providing are correct."
+"By selecting “Make poster”, you confirm your answers are correct and "
+"complete."
 msgstr ""
+"En cliquant sur « Créer l’affiche », vous confirmez que vos réponses sont "
+"exactes."
+
+#: register/templates/register/summary.html:112
+msgid "Make poster"
+msgstr "Créer l’affiche"
+
+#: register/views.py:82
+msgid "You've confirmed your email address"
+msgstr "Votre adresse courriel est validée."
+
+#: register/views.py:101 register/views.py:134 register/views.py:177
+msgid "There has been an error, you need to confirm your email address"
+msgstr "[MISSING TRANSLATION]."
+
+#, fuzzy
+#~| msgid "Change your name"
+#~ msgid "What is your name?"
+#~ msgstr "Modifier votre nom"
 
 #~ msgid "Confirm patient’s mobile phone number"
 #~ msgstr "Entrez de nouveau le numéro de téléphone"

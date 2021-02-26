@@ -78,6 +78,7 @@ if settings.APP_SWITCH == "PORTAL" or settings.APP_SWITCH == "UNIT":
         path("", include("covid_key.urls")),
         path("contact/", include("contact.urls")),
         path("about/", include("about.urls")),
+        path("outbreaks/", include("outbreaks.urls")),
         path("", include("backup_codes.urls")),
         path(
             "invitations/",

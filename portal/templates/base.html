@@ -5,10 +5,9 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    {% if 'APP_SWITCH'|get_setting != 'QRCODE' %}
-      {% if request.user.is_authenticated %}
-        <meta http-equiv="Refresh" content="{{ "SESSION_COOKIE_AGE"|get_setting|add:1 }}; url={% url 'session_timed_out' %}">
-      {% endif %}
+
+    {% if request.user.is_authenticated %}
+      <meta http-equiv="Refresh" content="{{ "SESSION_COOKIE_AGE"|get_setting|add:1 }}; url={% url 'session_timed_out' %}">
     {% endif %}
 
     {% with version="DJVERSION_VERSION"|get_setting %}
@@ -59,16 +58,10 @@
         </div>
       </header>
       <main id="content">
-        {% if 'APP_SWITCH'|get_setting == 'QRCODE' %}
-          <div class="phase-banner">
-            <div><span>BETA</span><span>This is a new service — your feedback will help us improve it.</span></div>
-          </div>
-        {% else %}
-          {% include  "includes/nav_main.html" %}
-        {% endif %}
+        {% include  "includes/nav_main.html" %}
 
         <div class="page--container" id="page--content" tabindex="-1">
-          {% if 'APP_SWITCH'|get_setting != 'QRCODE' and request.resolver_match.url_name != 'login' %}
+          {% if request.resolver_match.url_name != 'login' %}
             {% include "announcements/announcements.html" %}
           {% endif %}
           <div class="content--container {% block content_class %}{% endblock %}">
