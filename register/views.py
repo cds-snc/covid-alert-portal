@@ -2,32 +2,85 @@ from django.views.generic import TemplateView, FormView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy, reverse
 
-
-from .models import Registrant, Location
+from .models import Registrant, Location, EmailConfirmation
 from .forms import EmailForm, RegistrantNameForm
 from collections import ChainMap
 
 from formtools.wizard.views import NamedUrlSessionWizardView
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
+from datetime import datetime, timedelta
+import pytz
 
 
 class RegistrantEmailView(FormView):
     form_class = EmailForm
     template_name = "register/registrant_email.html"
+    success_url = reverse_lazy("register:email_submitted")
 
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
-        obj, created = Registrant.objects.get_or_create(
-            email=email,
+        self.submitted_email = email
+        confirm = EmailConfirmation.objects.create(email=email)
+
+        # get the base url and strip the trailing slash
+        base_url = self.request.build_absolute_uri("/")[:-1]
+
+        # build the email confirmation link
+        url = base_url + reverse(
+            "register:email_confirm",
+            kwargs={"pk": confirm.pk},
         )
 
-        self._object = obj
-        self.request.session["registrant_email"] = email
+        form.send_mail(self.request.LANGUAGE_CODE, email, url)
+        self.request.session["submitted_email"] = self.submitted_email
 
         return super().form_valid(form)
 
-    def get_success_url(self):
-        return reverse_lazy("register:registrant_name", kwargs={"pk": self._object.pk})
+
+class RegistrantEmailSubmittedView(TemplateView):
+    template_name = "register/registrant_email_submitted.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.session.get("submitted_email"):
+            return redirect(reverse_lazy("register:registrant_email"))
+        return super(RegistrantEmailSubmittedView, self).dispatch(
+            request, *args, **kwargs
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["submitted_email"] = self.request.session.get("submitted_email")
+        del self.request.session["submitted_email"]
+        return context
+
+
+def confirm_email(request, pk):
+    try:
+        # Confirmation tokens are only valid for 24hrs
+        time_threshold = pytz.utc.localize(datetime.now() - timedelta(hours=24))
+
+        confirm = EmailConfirmation.objects.get(id=pk)
+
+        # Expired token
+        if confirm.created < time_threshold:
+            print("Error: Email verification token has expired")
+            return redirect(reverse_lazy("register:confirm_email_error"))
+
+        request.session["registrant_email"] = confirm.email
+
+        # Create the Registrant
+        registrant, created = Registrant.objects.get_or_create(email=confirm.email)
+
+        # Delete the confirmation
+        confirm.delete()
+
+        return redirect(
+            reverse_lazy("register:registrant_name", kwargs={"pk": registrant.pk})
+        )
+    except (EmailConfirmation.DoesNotExist):
+        print("Error: Email verification token does not exist")
+        return redirect(reverse_lazy("register:confirm_email_error"))
 
 
 class RegistrantNameView(UpdateView):
@@ -40,10 +93,6 @@ class RegistrantNameView(UpdateView):
             "register:location_step",
             kwargs={"pk": self.kwargs.get("pk"), "step": "category"},
         )
-
-
-class RegisterStartPageView(TemplateView):
-    template_name = "register/start.html"
 
 
 TEMPLATES = {
