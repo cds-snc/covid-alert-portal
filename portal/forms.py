@@ -7,9 +7,13 @@ Monkey-patch ModelFormOptions so that we can specify the fieldsets ourselves.
 Idea taken from: https://schinckel.net/2013/06/14/django-fieldsets/
 """
 _old_init = ModelFormOptions.__init__
+
+
 def _new_init(self, options=None):
     _old_init(self, options)
-    self.fieldsets = getattr(options, 'fieldsets', None)
+    self.fieldsets = getattr(options, "fieldsets", None)
+
+
 ModelFormOptions.__init__ = _new_init
 
 
@@ -17,6 +21,7 @@ class Fieldset(object):
     """
     Define a fieldset for the datetime forms
     """
+
     def __init__(self, form, title, fields, classes, error):
         self.form = form
         self.title = title
@@ -44,7 +49,7 @@ class HealthcareBaseForm(forms.Form):
             self.fields[field].widget.attrs.update({"autocomplete": "off"})
 
     def fieldsets(self):
-        meta = getattr(self, 'Meta', None)
+        meta = getattr(self, "Meta", None)
         if not meta or not meta.fieldsets:
             return
 
@@ -52,7 +57,7 @@ class HealthcareBaseForm(forms.Form):
             yield Fieldset(
                 form=self,
                 title=name,
-                fields=(self[f] for f in data.get('fields', ())),
-                classes=data.get('classes', ''),
-                error=data.get('error', None),
+                fields=(self[f] for f in data.get("fields", ())),
+                classes=data.get("classes", ""),
+                error=data.get("error", None),
             )

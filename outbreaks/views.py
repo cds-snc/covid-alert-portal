@@ -89,46 +89,50 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
             return redirect(reverse_lazy("outbreaks:search"))
 
         # Ensure that we set the initial number of dates
-        if 'num_dates' not in request.session:
-            request.session['num_dates'] = 1
+        if "num_dates" not in request.session:
+            request.session["num_dates"] = 1
 
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        adjust_dates = request.POST.get('adjust_dates')
+        adjust_dates = request.POST.get("adjust_dates")
         if adjust_dates:
-            num_dates = self.request.session['num_dates']
-            if adjust_dates == 'add':
+            num_dates = self.request.session["num_dates"]
+            if adjust_dates == "add":
                 if num_dates < 5:
-                    self.request.session['num_dates'] = num_dates + 1
+                    self.request.session["num_dates"] = num_dates + 1
             else:
                 if num_dates > 1:
-                    self.request.session['num_dates'] = num_dates - 1
-                    self.request.session.pop(f'alert_datetime_{num_dates - 1}', None)
+                    self.request.session["num_dates"] = num_dates - 1
+                    self.request.session.pop(f"alert_datetime_{num_dates - 1}", None)
             return redirect(reverse_lazy("outbreaks:datetime"))
         return super().post(request, *args, **kwargs)
 
     def get_form_kwargs(self):
         # This provides init arguments for the form instance
         kwargs = super().get_form_kwargs()
-        kwargs['num_dates'] = self.request.session.get('num_dates', 1)
+        kwargs["num_dates"] = self.request.session.get("num_dates", 1)
         return kwargs
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['min_date'] = '2021-01-01'  # Start of the year for simplicity
-        context['max_date'] = datetime.now().strftime('%Y-%m-%d')  # Set max date to today
-        context['language'] = get_language()
+        context["min_date"] = "2021-01-01"  # Start of the year for simplicity
+        context["max_date"] = datetime.now().strftime(
+            "%Y-%m-%d"
+        )  # Set max date to today
+        context["language"] = get_language()
         return context
 
     def get_initial(self):
         # Populate the form with initial session data if we have it
         initial_data = {}
-        for i in range(self.request.session.get('num_dates', 1)):
-            ts = self.request.session.get(f'alert_datetime_{i}')
+        for i in range(self.request.session.get("num_dates", 1)):
+            ts = self.request.session.get(f"alert_datetime_{i}")
             if ts:
                 dt = datetime.fromtimestamp(ts)
-                initial_data.update({f'year_{i}': dt.year, f'month_{i}': dt.month, f'day_{i}': dt.day})
+                initial_data.update(
+                    {f"year_{i}": dt.year, f"month_{i}": dt.month, f"day_{i}": dt.day}
+                )
         return initial_data
 
     def form_valid(self, form):
@@ -138,9 +142,9 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
 
     def _cache_dates(self, form):
         # Cache the datetime list for the next step.
-        for i in range(self.request.session.get('num_dates', 1)):
-            dt = form.cleaned_data.get(f'date_{i}')
-            self.request.session[f'alert_datetime_{i}'] = dt.timestamp()
+        for i in range(self.request.session.get("num_dates", 1)):
+            dt = form.cleaned_data.get(f"date_{i}")
+            self.request.session[f"alert_datetime_{i}"] = dt.timestamp()
 
 
 class SeverityView(PermissionRequiredMixin, Is2FAMixin, FormView):
@@ -193,12 +197,12 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         context["map_link"] = "https://maps.google.com/?q=" + str(location)
         context["alert_level"] = self.request.session["alert_level"]
 
-        num_dates = self.request.session.get('num_dates', 1)
-        context['num_dates'] = num_dates
-        context['dates'] = []
+        num_dates = self.request.session.get("num_dates", 1)
+        context["num_dates"] = num_dates
+        context["dates"] = []
         for i in range(num_dates):
-            dt = datetime.fromtimestamp(self.request.session[f'alert_datetime_{i}'])
-            context['dates'].append(dt.strftime(DATETIME_FORMAT))
+            dt = datetime.fromtimestamp(self.request.session[f"alert_datetime_{i}"])
+            context["dates"].append(dt.strftime(DATETIME_FORMAT))
         return context
 
     @transaction.atomic
@@ -206,7 +210,7 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         # Use a transaction to commit all or nothing for the notifications
         try:
             with transaction.atomic():
-                for i in range(self.request.session.get('num_dates', 1)):
+                for i in range(self.request.session.get("num_dates", 1)):
                     self.post_notification(form, i)
 
                 # Continue with the redirect
@@ -223,16 +227,16 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
     def post_notification(self, form, i):
         # Ensure that the datetime is aware (might not be if unit testing or something)
         tz = pytz.timezone(settings.TIME_ZONE or "UTC")
-        dt = datetime.fromtimestamp(self.request.session[f'alert_datetime_{i}']).replace(
-            tzinfo=tz
-        )
+        dt = datetime.fromtimestamp(
+            self.request.session[f"alert_datetime_{i}"]
+        ).replace(tzinfo=tz)
 
         # Create the notification
         notification = Notification(
-            severity=self.request.session['alert_level'],
+            severity=self.request.session["alert_level"],
             start_date=dt,
             end_date=dt,
-            location_id=self.request.session['alert_location'],
+            location_id=self.request.session["alert_location"],
             created_by=self.request.user,
         )
         notification.save()
@@ -259,12 +263,12 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
         context["severity"] = self.request.session.pop("alert_level")
         context["location"] = location
 
-        num_dates = self.request.session.pop('num_dates', 1)
-        context['num_dates'] = num_dates
-        context['dates'] = []
+        num_dates = self.request.session.pop("num_dates", 1)
+        context["num_dates"] = num_dates
+        context["dates"] = []
         for i in range(num_dates):
-            dt = datetime.fromtimestamp(self.request.session.pop(f'alert_datetime_{i}'))
-            context['dates'].append(dt.strftime(DATETIME_FORMAT))
+            dt = datetime.fromtimestamp(self.request.session.pop(f"alert_datetime_{i}"))
+            context["dates"].append(dt.strftime(DATETIME_FORMAT))
 
         return context
 

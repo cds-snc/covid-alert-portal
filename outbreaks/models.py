@@ -20,7 +20,7 @@ class Notification(models.Model):
 
     class Meta:
         indexes = [
-            models.Index(fields=['start_date']),
-            models.Index(fields=['end_date']),
+            models.Index(fields=["start_date"]),
+            models.Index(fields=["end_date"]),
         ]
-        unique_together = [['start_date', 'end_date', 'location']]
+        unique_together = [["start_date", "end_date", "location"]]
