@@ -1,0 +1,12 @@
+{% extends 'register/base.html' %}
+{% load i18n settings %}
+
+{% block title %}
+    {% trans "No entry" %}
+{% endblock %}
+
+
+{% block content %}
+    <h1>{% trans "No entry" %}</h1>
+    <p>{% trans "You do not have permission to visit this page." %}</p>
+{% endblock %}
