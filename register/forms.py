@@ -37,7 +37,7 @@ class RegistrantNameForm(HealthcareBaseForm, forms.ModelForm):
 
 
 class LocationCategoryForm(HealthcareBaseForm, forms.Form):
-    
+
     category = forms.ChoiceField(
         label="",
         choices=[
@@ -48,9 +48,7 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
             ("religious_space", _("Religious space")),
             ("other", _("Something else")),
         ],
-        widget=CDSRadioWidget(
-            attrs={"class": "multichoice-radio"}
-        ),
+        widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
 
 
