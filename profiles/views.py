@@ -52,8 +52,7 @@ from .forms import (
     YubikeyDeviceCreateForm,
     YubikeyVerifyForm,
 )
-import locale
-import datetime
+
 from django.utils import translation
 
 
