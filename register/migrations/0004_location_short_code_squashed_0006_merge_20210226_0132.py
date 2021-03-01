@@ -23,11 +23,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='location',
-            name='contact_name',
-            field=models.CharField(max_length=200, null=True, verbose_name='Contact name'),
-        ),
-        migrations.AddField(
-            model_name='location',
             name='short_code',
             field=models.CharField(max_length=8, null=True, unique=True, verbose_name='Short code'),
         ),
