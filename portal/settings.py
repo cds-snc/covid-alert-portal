@@ -413,6 +413,7 @@ CSP_SCRIPT_SRC = [
 CSP_CONNECT_SRC = [
     "'self'",
     "https://www.google-analytics.com",
+    "ws1.postescanada-canadapost.ca/",
 ]
 CSP_INCLUDE_NONCE_IN = ["script-src"]
 
