@@ -54,7 +54,7 @@ from .forms import (
 )
 import locale
 import datetime
-import time
+from django.utils import translation
 
 
 class YubikeyVerifyView(FormView):
@@ -391,16 +391,27 @@ class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):
 
         try:
 
+            cur_lang = translation.get_language()
+
             recent_date = (
                 CRUDEvent.objects.filter(user_id=self.request.user.id)
                 .filter(changed_fields__icontains="password")
                 .first()
                 .datetime
-            ).strftime("%b %d %Y")
-
-            context["last_updated_datetime"] = datetime.datetime.strptime(
-                recent_date, "%b %d %Y"
             ).date()
+
+            get_day = str(recent_date.day)
+            get_month = translation.gettext(recent_date.strftime("%B"))
+            get_year = str(recent_date.year)
+
+            if cur_lang == "en":
+                context["last_updated_datetime"] = (
+                    get_month + " " + get_day + ", " + get_year
+                )
+            if cur_lang == "fr":
+                context["last_updated_datetime"] = (
+                    get_day + " " + get_month + " " + get_year
+                )
 
         except AttributeError:
             context["last_updated_datetime"] = ""

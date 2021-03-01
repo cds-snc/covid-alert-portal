@@ -44,6 +44,8 @@ django-waffle = "*"
 django-solo = "*"
 dependency-injector = "*"
 django-formtools = "*"
+uwsgi = "*"
+freezegun = "*"
 
 [pipenv]
 allow_prereleases = true
