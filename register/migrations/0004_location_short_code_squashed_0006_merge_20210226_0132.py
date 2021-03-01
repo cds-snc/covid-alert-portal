@@ -6,7 +6,7 @@ import uuid
 
 class Migration(migrations.Migration):
 
-    replaces = [('register', '0004_location_short_code'), ('register', '0004_emailconfirmation'), ('register', '0005_merge_20210215_2050'), ('register', '0005_auto_20210215_1913'), ('register', '0006_merge_20210226_0132')]
+    replaces = [('register', '0004_location_short_code'), ('register', '0004_emailconfirmation')]
 
     dependencies = [
         ('register', '0003_auto_20210204_1508'),
@@ -20,6 +20,11 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(max_length=255, verbose_name='email')),
                 ('created', models.DateTimeField(auto_now_add=True)),
             ],
+        ),
+        migrations.AddField(
+            model_name='location',
+            name='contact_name',
+            field=models.CharField(max_length=200, null=True, verbose_name='Contact name'),
         ),
         migrations.AddField(
             model_name='location',
