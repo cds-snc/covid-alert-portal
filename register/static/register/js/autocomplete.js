@@ -1,9 +1,34 @@
-const url = 'http://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/Find/v2.10/json3.ws';
+// const url = 'http://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/Find/v2.10/wsdlnew.ws';
+const url = 'https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/Find/v2.10/json3.ws';
 const key = 'BC76-EY79-GM26-BZ52'
 
 var results = [];
 
 function hinter(query, populateResults) {
+
+    var searchParams = new URLSearchParams({
+        'Key': key,
+        'SearchTerm': query,
+        'Country': 'CAN'
+    });
+
+    // let formData = new FormData();
+
+    console.log(searchParams.toString());
+
+    fetch(url, {
+        'method': 'POST',
+        headers: {
+            'Content-type': 'application/x-www-form-urlencoded'
+        },
+        body: searchParams
+    }).then(data => {
+        console.log(data);
+    }).catch(error => {
+        console.error(error);
+    })
+    
+/*
     var params = '';
     params += "&Key=" + encodeURIComponent(key);
     params += "&SearchTerm=" + encodeURIComponent(query);
@@ -39,6 +64,7 @@ function hinter(query, populateResults) {
         }
     }
     http.send(params);
+    */
 }
 
 
