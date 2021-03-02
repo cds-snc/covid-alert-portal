@@ -1,15 +1,22 @@
-{% extends 'base.html' %}
+{% extends 'register/base.html' %}
 {% load i18n %}
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "What is your name?" %}
+  {% trans "Your name" %}
 {% endblock %}
 
 {% block content %}
+  <div class="content-back-link">
+    <a href="{% url 'register:registrant_email' %}" class="chevron-left">{% trans "Back" %}</a>
+  </div>
+
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "What is your name?" %}</h1>
+  {% include  "includes/flash_messages.html" %}
+
+  <h1>{% trans "Your name" %}</h1>
+  <p>{% trans "We’ll use your name when we email you." %}
 
   {% include "includes/cds_form.html" with submit_text=_("Continue") %}
 {% endblock %}

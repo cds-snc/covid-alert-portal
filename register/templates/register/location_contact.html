@@ -1,16 +1,21 @@
-{% extends 'base.html' %}
+{% extends 'register/base.html' %}
 {% load i18n %}
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Who is responsible for this location?" %}
+  {% trans "Contact for the address" %}
 {% endblock %}
 
 {% block content %}
+  <div class="content-back-link">
+    <a href="{% url 'register:location_step' step='name' %}" class="chevron-left">{% trans "Back" %}</a>
+  </div>
+
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "Who is responsible for this location?" %}</h1>
-  <p>{% trans "This could be you, or a different person, such as a store manager. We will contact them if there is an outbreak." %}
+  <h1>{% trans "Contact for the address" %}</h1>
+  <p>{% trans "This could be you, or a different person, such as a store manager." %}<p>
+  <p>{% trans "We’ll contact them with any important health information for the address." %}</p>
   
-  {% include "includes/cds_form.html" with submit_text=_("Continue") %}
+  {% include "includes/cds_form.html" with submit_text=_("Next") %}
 {% endblock %}
