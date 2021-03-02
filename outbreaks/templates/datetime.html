@@ -10,6 +10,17 @@
         <a href="{% url 'outbreaks:search' %}" class="chevron-left">{% trans "Back" %}</a>
     </div>
 
+  {% if form.non_field_errors %}
+    <div class="messages--container" role="alert">
+        <ul class="messages">
+            <li class="error"><b> {{ form.non_field_errors.0 }} </b></li>
+            <li class="error">
+              {% trans "To see all public exposures for this place, visit" %} <a href="{% url 'outbreaks:history' %}">‘{% trans "Notification history" %}’</a>
+            </li>
+        </ul>
+    </div>
+  {% endif %}
+
   <h1>{% trans "Exposure date and time" %}</h1>
 
   <p>{% trans "We’ll notify people who scanned the QR code on that date. Remember to add all dates of this public exposure." %}</p>

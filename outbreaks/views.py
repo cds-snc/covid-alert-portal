@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.db.models import Q
 from django.db import transaction, IntegrityError
 from django.shortcuts import redirect
+from django.utils.translation import gettext_lazy as _
 from django.utils.translation import get_language
 from django.views.generic import (
     FormView,
@@ -136,15 +137,25 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
         return initial_data
 
     def form_valid(self, form):
-        self._cache_dates(form)
-        response = super().form_valid(form)
-        return response
-
-    def _cache_dates(self, form):
-        # Cache the datetime list for the next step.
         for i in range(self.request.session.get("num_dates", 1)):
             dt = form.cleaned_data.get(f"date_{i}")
+
+            # Ensure that the date doesn't exist already for this location
+            if self.notification_exists(dt):
+                form.add_duplicate_error(i)
+                return self.form_invalid(form)
+
+            # Cache the datetime list for the next step.
             self.request.session[f"alert_datetime_{i}"] = dt.timestamp()
+
+        return super().form_valid(form)
+
+    def notification_exists(self, dt):
+        try:
+            Notification.objects.get(start_date=dt)
+            return True
+        except Notification.DoesNotExist:
+            return False
 
 
 class SeverityView(PermissionRequiredMixin, Is2FAMixin, FormView):
@@ -221,7 +232,8 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
             # Post request without having data cached in session
             return redirect(reverse_lazy("outbreaks:search"))
         except IntegrityError:
-            # TODO: redirect to page warning of existing entry
+            # The duplicate validation is in the datetime view so this
+            # should theoretically never happen
             raise
 
     def post_notification(self, form, i):

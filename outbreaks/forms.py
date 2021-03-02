@@ -1,9 +1,11 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
+from django.conf import settings
 from portal.widgets import CDSRadioWidget
 from portal.forms import HealthcareBaseForm
 from datetime import datetime
+import pytz
 
 
 class DateForm(HealthcareBaseForm):
@@ -41,11 +43,13 @@ class DateForm(HealthcareBaseForm):
         error_msg = _("Invalid date specified.")
         for i in range(self.num_dates):
             try:
+                tz = pytz.timezone(settings.TIME_ZONE or "UTC")
                 cleaned_data[f"date_{i}"] = datetime(
                     year=cleaned_data.get(f"year_{i}", -1),
                     month=cleaned_data.get(f"month_{i}", -1),
                     day=cleaned_data.get(f"day_{i}", -1),
-                )
+                ).replace(tzinfo=tz)
+
             except ValueError:
                 is_valid = False
                 meta = getattr(self, "Meta", None)
@@ -53,6 +57,14 @@ class DateForm(HealthcareBaseForm):
 
         if not is_valid:
             raise ValidationError(error_msg)
+
+    def add_duplicate_error(self, index):
+        error_msg = _(
+            "Someone already notified people who were there at this date and time."
+        )
+        meta = getattr(self, "Meta", None)
+        meta.fieldsets[index][1]["error"] = error_msg
+        self.add_error(None, error_msg)  # Add a non-field error to flag this state
 
 
 class SeverityForm(HealthcareBaseForm):

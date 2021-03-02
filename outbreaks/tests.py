@@ -203,6 +203,33 @@ class DatetimeView(NotificationsTestCase):
         self.assertContains(response, "day_0")
         self.assertNotContains(response, "day_1")
 
+    def test_duplicate_error(self):
+        """
+        Assert that setting the datetime to a duplicate raises an error
+        """
+
+        # Login and ensure that a location has been cached
+        self.login()
+        location = Location.objects.get(name="Nandos")
+        self.client.get(reverse("outbreaks:profile", args=[location.id]))
+
+        # Post a date
+        self.client.post(
+            reverse("outbreaks:datetime"), {"day_0": 1, "month_0": 1, "year_0": 2021}
+        )
+        self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
+        response = self.client.post(reverse("outbreaks:confirm"), {})
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse("outbreaks:confirmed"))
+
+        # Post duplicate date
+        response = self.client.post(
+            reverse("outbreaks:datetime"), {"day_0": 1, "month_0": 1, "year_0": 2021}
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "datetime.html")
+        self.assertContains(response, "error")
+
 
 class SeverityView(NotificationsTestCase):
     def test_severity_view_no_cache(self):
