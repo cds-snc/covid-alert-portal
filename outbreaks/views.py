@@ -97,7 +97,7 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
     def post(self, request, *args, **kwargs):
         adjust_dates = request.POST.get("adjust_dates")
         if adjust_dates:
-            num_dates = self.request.session["num_dates"]
+            num_dates = self.request.session.get("num_dates", 1)
             if adjust_dates == "add":
                 if num_dates < 5:
                     self.request.session["num_dates"] = num_dates + 1
