@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-02 21:58+0000\n"
+"POT-Creation-Date: 2021-03-02 22:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2432,23 +2432,17 @@ msgstr "Province ou territoire"
 msgid "Postal code"
 msgstr "Code postal"
 
-#: register/forms.py:68
-#, fuzzy
-#| msgid "Name of service or event"
+#: register/forms.py:68 register/models.py:40
 msgid "Name of contact"
-msgstr "Nom du service ou de l’événement"
+msgstr "Nom de la personne-ressource"
 
 #: register/forms.py:70
-#, fuzzy
-#| msgid "Mobile phone number"
 msgid "Contact phone number"
-msgstr "Numéro de téléphone mobile"
+msgstr "Numéro de téléphone"
 
 #: register/models.py:30
-#, fuzzy
-#| msgid "Security code"
 msgid "Short code"
-msgstr "Code de sécurité"
+msgstr "Short code [FR]"
 
 #: register/models.py:32
 msgid "Location category"
@@ -2461,12 +2455,6 @@ msgstr ""
 #: register/models.py:37
 msgid "Province"
 msgstr "Province"
-
-#: register/models.py:40
-#, fuzzy
-#| msgid "Contact us"
-msgid "Contact name"
-msgstr "Nous joindre"
 
 #: register/templates/register/base.html:40
 msgid "BETA"
@@ -2481,8 +2469,6 @@ msgid "Make a COVID Alert Poster"
 msgstr "Créer une affiche Alerte COVID"
 
 #: register/templates/register/confirmation.html:5
-#, fuzzy
-#| msgid "We've got the information for your poster"
 msgid "We’ve got the information for your poster"
 msgstr "Nous avons bien reçu vos renseignements."
 
@@ -2506,10 +2492,6 @@ msgid "Next steps"
 msgstr "Prochaines étapes"
 
 #: register/templates/register/confirmation.html:22
-#, fuzzy
-#| msgid ""
-#| "<a href=''>Contact us</a> if you do not get the email within X hours or "
-#| "if you have questions."
 msgid ""
 "<a href=''>Contact us</a> if you do not get the email within 2 hours or if "
 "you have questions."
@@ -2654,8 +2636,6 @@ msgid "Make a COVID Alert poster"
 msgstr "Créer une affiche Alerte COVID"
 
 #: register/templates/register/start.html:12
-#, fuzzy
-#| msgid "Display a QR code to slow the spread of COVID-19"
 msgid "Display a QR code to help slow the spread of COVID-19"
 msgstr "Affichez un code QR pour contribuer à ralentir la COVID-19"
 
@@ -2681,26 +2661,18 @@ msgid "You’ll need:"
 msgstr "Assurez-vous d’avoir :"
 
 #: register/templates/register/start.html:26
-#, fuzzy
-#| msgid "Your email address"
 msgid "Your email address."
 msgstr "Votre adresse courriel"
 
 #: register/templates/register/start.html:27
-#, fuzzy
-#| msgid "Name of service or event"
 msgid "Name of service or event."
 msgstr "Nom du service ou de l’événement"
 
 #: register/templates/register/start.html:28
-#, fuzzy
-#| msgid "Address of service or event"
 msgid "Address or addresses of service or event."
 msgstr "La ou les adresses du service ou de l’événement."
 
 #: register/templates/register/start.html:29
-#, fuzzy
-#| msgid "Contact for the address"
 msgid "Contact person for each address."
 msgstr "Les coordonnées d’une personne-ressource pour chacune des adresses."
 
@@ -2756,33 +2728,3 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py:101 register/views.py:134 register/views.py:177
 msgid "There has been an error, you need to confirm your email address"
 msgstr "[MISSING TRANSLATION]."
-
-#, fuzzy
-#~| msgid "Your email address"
-#~ msgid "•  Your email address."
-#~ msgstr "Votre adresse courriel."
-
-#, fuzzy
-#~| msgid "Name of service or event"
-#~ msgid "•  Name of service or event."
-#~ msgstr "Le nom du service ou de l’événement."
-
-#~ msgid "Arts & culture"
-#~ msgstr "Arts et culture"
-
-#~ msgid "Community spaces & libraries"
-#~ msgstr "Bibliothèques et espaces communautaires"
-
-#~ msgid "Fitness"
-#~ msgstr "Fitness"
-
-#, fuzzy
-#~| msgid "Change your name"
-#~ msgid "What is your name?"
-#~ msgstr "Modifier votre nom"
-
-#~ msgid "Confirm patient’s mobile phone number"
-#~ msgstr "Entrez de nouveau le numéro de téléphone"
-
-#~ msgid "Instructions for entering key"
-#~ msgstr "Instructions pour entrer une clé dans l’application"
