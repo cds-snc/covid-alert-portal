@@ -20,15 +20,21 @@
 {% block content %}
   <p>{% trans "Answer questions to make a poster with a code for your service or event." %}</p>
   <p>{% trans "Visitors can scan the QR code on their phone. This helps COVID Alert notify people who’ve been exposed to COVID-19." %}</p>
-  <p><b>{% trans "Before you start" %}</b></p>
-   <p> {% trans "You’ll need:" %} </p>
-   <p> {% trans "•  Your email address." %} </p>
-   <p> {% trans "•  Name of service or event." %} </p>
-   <p> {% trans "•  Address or addresses of service or event." %} </p>
-   <p> {% trans "•  Contact person for each address." %}</p>
+  <h2>{% trans "Before you start" %}</h2>
+  <p>{% trans "You’ll need:" %}</p>
+  <ul>
+   <li> {% trans "Your email address." %} </li>
+   <li> {% trans "Name of service or event." %} </li>
+   <li> {% trans "Address or addresses of service or event." %} </li>
+   <li> {% trans "Contact person for each address." %}</li>
+  </ul>
   <div class="content-button">
     <a href="{% url 'register:registrant_email' %}" role="button" draggable="false" class="with-chevron">{% trans "Start now" %}</a>
   </div>
-  <h1><b> {% trans "Questions?" %}</b></h1>
-    <a href="">{% trans "Visit Help with your poster" %}</a><p>Or</p><a href ="">{% trans "Contact us" %}</a>
+  <h2> {% trans "Questions?" %} </h2>
+    <p>
+     <a href="">{% trans "Visit Help with your poster" %}</a><br>
+      Or<br>
+     <a href ="">{% trans "Contact us" %}</a>
+   </p>
 {% endblock %}
