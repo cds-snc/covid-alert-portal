@@ -56,6 +56,7 @@ from .forms import (
 from django.utils import translation
 import locale
 
+
 class YubikeyVerifyView(FormView):
     form_class = YubikeyVerifyForm
     template_name = "profiles/yubikey_verify.html"
@@ -400,10 +401,10 @@ class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):
             )
 
             if cur_lang == "en":
-                locale.setlocale(locale.LC_ALL, 'en_ca')
+                locale.setlocale(locale.LC_ALL, "en_ca")
                 context["last_updated_datetime"] = recent_date.strftime("%B %d, %Y")
             if cur_lang == "fr":
-                locale.setlocale(locale.LC_ALL, 'fr_ca')
+                locale.setlocale(locale.LC_ALL, "fr_ca")
                 context["last_updated_datetime"] = recent_date.strftime("%d %B %Y")
 
         except AttributeError:
