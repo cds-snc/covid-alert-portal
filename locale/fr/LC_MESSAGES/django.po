@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-02 17:37+0000\n"
+"POT-Creation-Date: 2021-03-02 21:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -563,7 +563,7 @@ msgstr ""
 #: portal/templates/500.html:17 portal/templates/includes/footer.html:8
 #: register/templates/register/500.html:17
 #: register/templates/register/includes/footer.html:8
-#: register/templates/register/start.html:33
+#: register/templates/register/start.html:38
 msgid "Contact us"
 msgstr "Nous joindre"
 
@@ -2664,14 +2664,13 @@ msgid ""
 "Answer questions to make a poster with a code for your service or event."
 msgstr ""
 "Les visiteurs scanneront le code QR avec leur téléphone. Alerte COVID leur "
-"enverra ensuite une notification s’ils ont été exposés à la COVID-19.
+"enverra ensuite une notification s’ils ont été exposés à la COVID-19."
 
 #: register/templates/register/start.html:22
 msgid ""
 "Visitors can scan the QR code on their phone. This helps COVID Alert notify "
 "people who’ve been exposed to COVID-19."
-msgstr ""
-"Répondez à quelques questions pour créer une affiche avec votre code."
+msgstr "Répondez à quelques questions pour créer une affiche avec votre code."
 
 #: register/templates/register/start.html:23
 msgid "Before you start"
@@ -2681,39 +2680,39 @@ msgstr "Avant de commencer"
 msgid "You’ll need:"
 msgstr "Assurez-vous d’avoir :"
 
-#: register/templates/register/start.html:25
-#, fuzzy
-#| msgid "Your email address"
-msgid "•  Your email address."
-msgstr "Votre adresse courriel."
-
 #: register/templates/register/start.html:26
 #, fuzzy
-#| msgid "Name of service or event"
-msgid "•  Name of service or event."
-msgstr "Le nom du service ou de l’événement."
+#| msgid "Your email address"
+msgid "Your email address."
+msgstr "Votre adresse courriel"
 
 #: register/templates/register/start.html:27
 #, fuzzy
-#| msgid "Address of service or event"
-msgid "•  Address or addresses of service or event."
-msgstr "La ou les adresses du service ou de l’événement."
+#| msgid "Name of service or event"
+msgid "Name of service or event."
+msgstr "Nom du service ou de l’événement"
 
 #: register/templates/register/start.html:28
 #, fuzzy
+#| msgid "Address of service or event"
+msgid "Address or addresses of service or event."
+msgstr "La ou les adresses du service ou de l’événement."
+
+#: register/templates/register/start.html:29
+#, fuzzy
 #| msgid "Contact for the address"
-msgid "•  Contact person for each address."
+msgid "Contact person for each address."
 msgstr "Les coordonnées d’une personne-ressource pour chacune des adresses."
 
-#: register/templates/register/start.html:30
+#: register/templates/register/start.html:32
 msgid "Start now"
 msgstr "Commencer"
 
-#: register/templates/register/start.html:32
+#: register/templates/register/start.html:34
 msgid "Questions?"
 msgstr "Des questions?"
 
-#: register/templates/register/start.html:33
+#: register/templates/register/start.html:36
 msgid "Visit Help with your poster"
 msgstr ""
 
@@ -2757,6 +2756,16 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py:101 register/views.py:134 register/views.py:177
 msgid "There has been an error, you need to confirm your email address"
 msgstr "[MISSING TRANSLATION]."
+
+#, fuzzy
+#~| msgid "Your email address"
+#~ msgid "•  Your email address."
+#~ msgstr "Votre adresse courriel."
+
+#, fuzzy
+#~| msgid "Name of service or event"
+#~ msgid "•  Name of service or event."
+#~ msgstr "Le nom du service ou de l’événement."
 
 #~ msgid "Arts & culture"
 #~ msgstr "Arts et culture"
