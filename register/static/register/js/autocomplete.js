@@ -4,31 +4,7 @@ const key = 'BC76-EY79-GM26-BZ52'
 
 var results = [];
 
-function hinter(query, populateResults) {
-
-    var searchParams = new URLSearchParams({
-        'Key': key,
-        'SearchTerm': query,
-        'Country': 'CAN'
-    });
-
-    // let formData = new FormData();
-
-    console.log(searchParams.toString());
-
-    fetch(url, {
-        'method': 'POST',
-        headers: {
-            'Content-type': 'application/x-www-form-urlencoded'
-        },
-        body: searchParams
-    }).then(data => {
-        console.log(data);
-    }).catch(error => {
-        console.error(error);
-    })
-    
-/*
+function hinter(query, populateResults) {    
     var params = '';
     params += "&Key=" + encodeURIComponent(key);
     params += "&SearchTerm=" + encodeURIComponent(query);
@@ -64,7 +40,6 @@ function hinter(query, populateResults) {
         }
     }
     http.send(params);
-    */
 }
 
 
