@@ -8,14 +8,20 @@ from urllib.parse import unquote, urlparse
 
 
 def permission_denied_view(request, exception=None):
+    if settings.APP_SWITCH == "QRCODE":
+        return render(request, "register/403.html", status=403)
     return render(request, "403.html", status=403)
 
 
 def page_not_found(request, exception=None):
+    if settings.APP_SWITCH == "QRCODE":
+        return render(request, "register/404.html", status=404)
     return render(request, "404.html", status=404)
 
 
 def internal_error(request):
+    if settings.APP_SWITCH == "QRCODE":
+        return render(request, "register/500.html", status=500)
     return render(request, "500.html", status=500)
 
 
