@@ -54,7 +54,7 @@ from .forms import (
 )
 
 from django.utils import translation
-
+import locale
 
 class YubikeyVerifyView(FormView):
     form_class = YubikeyVerifyForm
@@ -397,20 +397,14 @@ class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):
                 .filter(changed_fields__icontains="password")
                 .first()
                 .datetime
-            ).date()
-
-            get_day = str(recent_date.day)
-            get_month = translation.gettext(recent_date.strftime("%B"))
-            get_year = str(recent_date.year)
+            )
 
             if cur_lang == "en":
-                context["last_updated_datetime"] = (
-                    get_month + " " + get_day + ", " + get_year
-                )
+                locale.setlocale(locale.LC_ALL, 'en_ca')
+                context["last_updated_datetime"] = recent_date.strftime("%B %d, %Y")
             if cur_lang == "fr":
-                context["last_updated_datetime"] = (
-                    get_day + " " + get_month + " " + get_year
-                )
+                locale.setlocale(locale.LC_ALL, 'fr_ca')
+                context["last_updated_datetime"] = recent_date.strftime("%d %B %Y")
 
         except AttributeError:
             context["last_updated_datetime"] = ""
