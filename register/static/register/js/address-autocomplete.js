@@ -32,7 +32,7 @@ const xhr = function(method, url, params, callback) {
  */
 function autocomplete(query, callback) {
     // autocomplete url
-    const url = 'http://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/AutoComplete/v1.00/json3.ws'
+    const url = 'https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/AutoComplete/v1.00/json3.ws'
 
     let params = '';
     params += "&Key=" + encodeURIComponent(key);
@@ -62,7 +62,7 @@ function autocomplete(query, callback) {
  * @param {string} id 
  */
 function getDetails(id, callback) {
-    const url = 'http://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/RetrieveById/v1.00/json3.ws';
+    const url = 'https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/RetrieveById/v1.00/json3.ws';
 
     let params = '';
     params += "&Key=" + encodeURIComponent(key);
