@@ -1,9 +1,5 @@
-// const url = 'http://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/Find/v2.10/wsdlnew.ws';
-// const url = 'https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/Find/v2.10/json3.ws';
-
-// gives CORS errors, but this is the one we should use:
+// gives CORS errors, but this is the one we apparently should use?:
 // const url = 'https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/AutoComplete/v1.00/wsdlnew.ws';
-
 
 const key = 'BC76-EY79-GM26-BZ52'
 
@@ -82,21 +78,27 @@ function details(id) {
                 return obj.FieldGroup === 'Common' && obj.FieldName === 'PostalCode'
             })
 
-            console.log({
+            const address = {
                 'line1': line1.FormattedValue,
                 'city': city.FormattedValue,
                 'province': province.FormattedValue,
                 'postal': postal.FormattedValue
-            });
+            };
+
+            document.getElementsByName("address-address")[0].value = address.line1;
+            document.getElementsByName("address-city")[0].value = address.city;
+            document.getElementsByName("address-province")[0].value = address.province;
+            document.getElementsByName("address-postal_code")[0].value = address.postal;
         }
     })
 }
 
 
 accessibleAutocomplete({
-    element: document.querySelector('#my-autocomplete-container'),
-    id: 'my-autocomplete', // To match it to the existing <label>.
+    element: document.querySelector('#address-autocomplete-container'),
+    id: 'address-autocomplete', // To match it to the existing <label>.
     source: hinter,
+    name: 'address-address',
     onConfirm: function(confirmed) {
         details(confirmed.id)
     },
