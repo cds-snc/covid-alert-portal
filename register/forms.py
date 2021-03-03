@@ -12,6 +12,7 @@ from portal.services import NotifyService
 
 from .widgets import AutocompleteWidget
 
+
 class EmailForm(HealthcareBaseForm, forms.Form):
     email = forms.EmailField(label=_("Email address"))
 
@@ -59,10 +60,7 @@ class LocationNameForm(HealthcareBaseForm, forms.Form):
 
 class LocationAddressForm(HealthcareBaseForm, forms.Form):
     # address = forms.CharField(label=_("Address line 1"))
-    address = forms.CharField(
-        label=_("Address line 1"),
-        widget=AutocompleteWidget()
-    )
+    address = forms.CharField(label=_("Address line 1"), widget=AutocompleteWidget())
     address_2 = forms.CharField(label=_("Address line 2"), required=False)
     city = forms.CharField(label=_("City"))
     province = forms.CharField(label=_("Province or territory"))
