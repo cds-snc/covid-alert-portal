@@ -101,12 +101,14 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
             num_dates = self.request.session.get("num_dates", 1)
             if adjust_dates == "add":
                 if num_dates < 5:
-                    self.request.session["num_dates"] = num_dates + 1
+                    num_dates += 1
+                    self.request.session["num_dates"] = num_dates
             else:
                 if num_dates > 1:
-                    self.request.session["num_dates"] = num_dates - 1
+                    num_dates -= 1
+                    self.request.session["num_dates"] = num_dates
                     self.request.session.pop(f"alert_datetime_{num_dates - 1}", None)
-            return redirect(reverse_lazy("outbreaks:datetime"))
+            return redirect(reverse_lazy("outbreaks:datetime") + f"?num_dates={num_dates}")
         return super().post(request, *args, **kwargs)
 
     def get_form_kwargs(self):
@@ -122,6 +124,21 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
             "%Y-%m-%d"
         )  # Set max date to today
         context["language"] = get_language()
+
+        """
+        A little bit of trickery going on here. If we have 'num_dates' as a query parameter
+        then we'll set the focus on the day element of the last date in the form. This is here
+        to create to create a smoother experience in terms of accessibility. When a user using
+        voice-over adds or removes a date, the focus should be returned on this newly added element
+        """
+        num_dates = self.request.GET.get('num_dates')
+        if num_dates:
+            i = int(num_dates) - 1
+            try:
+                context['form'].fields[f'day_{i}'].widget.attrs.update({'autofocus': 'autofocus'})
+            except KeyError:
+                # People just trying random numbers in the query param, so ignore it
+                pass
         return context
 
     def get_initial(self):
