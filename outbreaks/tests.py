@@ -184,7 +184,7 @@ class DatetimeView(NotificationsTestCase):
             reverse("outbreaks:datetime"), {"adjust_dates": "add"}
         )
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, reverse("outbreaks:datetime"))
+        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime")))
 
         # Assert that getting the same page now returns two dates
         response = self.client.get(reverse("outbreaks:datetime"))
@@ -196,7 +196,7 @@ class DatetimeView(NotificationsTestCase):
             reverse("outbreaks:datetime"), {"adjust_dates": "remove"}
         )
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, reverse("outbreaks:datetime"))
+        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime")))
 
         # Assert that getting the same page now returns a single date
         response = self.client.get(reverse("outbreaks:datetime"))
