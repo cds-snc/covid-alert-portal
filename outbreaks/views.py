@@ -128,7 +128,7 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
         """
         A little bit of trickery going on here. If we have 'num_dates' as a query parameter
         then we'll set the focus on the day element of the last date in the form. This is here
-        to create to create a smoother experience in terms of accessibility. When a user using
+        to create a smoother experience in terms of accessibility. When a user using
         voice-over adds or removes a date, the focus should be returned on this newly added element
         """
         num_dates = self.request.GET.get('num_dates')
@@ -137,7 +137,7 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
             try:
                 context['form'].fields[f'day_{i}'].widget.attrs.update({'autofocus': 'autofocus'})
             except KeyError:
-                # People just trying random numbers in the query param, so ignore it
+                # Only legit numbers should work otherwise ignore it
                 pass
         return context
 
