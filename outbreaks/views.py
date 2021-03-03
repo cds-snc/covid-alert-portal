@@ -307,6 +307,22 @@ class HistoryView(PermissionRequiredMixin, Is2FAMixin, ListView):
     paginate_by = 10
     model = Notification
     template_name = "history.html"
+    sort_options = ['name', 'address', 'date']
+
+    def get(self, request, *args, **kwargs):
+        # Ensure there is a clean sort and order column
+        sort = self.request.GET.get('sort')
+        order = self.request.GET.get('order')
+        if not sort or sort not in self.sort_options or order not in ['asc', 'desc']:
+            return redirect(reverse_lazy("outbreaks:history") + '?sort=name&order=asc')
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        # send the sort and order info to the template
+        context = super().get_context_data(*args, **kwargs)
+        context['sort'] = self.request.GET.get("sort")
+        context['order'] = self.request.GET.get("order")
+        return context
 
     def get_queryset(self):
         province = self.request.user.province.abbr
@@ -316,25 +332,34 @@ class HistoryView(PermissionRequiredMixin, Is2FAMixin, ListView):
             # Fuzzy search either the name or the address field
             # search within the same province as the user or CDS
             if self.request.user.is_superuser:
-                return Notification.objects.filter(
+                qs = Notification.objects.filter(
                     Q(location__name__icontains=search)
                     | Q(location__address__icontains=search)
-                ).order_by("-created_date")
+                )
             else:
-                return Notification.objects.filter(
+                qs = Notification.objects.filter(
                     Q(location__province=province)
                     & Q(
                         Q(location__name__icontains=search)
                         | Q(location__address__icontains=search)
                     )
-                ).order_by("-created_date")
+                )
+        else:
+            # If we don't have search text then just return all results within this province
+            if self.request.user.is_superuser:
+                qs = Notification.objects.all()
+            else:
+                qs = Notification.objects.filter(location__province=province)\
 
-        # If we don't have search text then just return all results within this province
-        if self.request.user.is_superuser:
-            return Notification.objects.all().order_by("-created_date")
-        return Notification.objects.filter(location__province=province).order_by(
-            "-created_date"
-        )
+        # Order the queryset
+        sort = self.request.GET.get("sort")
+        order = '' if self.request.GET.get("order") == 'asc' else '-'
+        if sort == 'name':
+            return qs.order_by(order + "location__name")
+        elif sort == 'address':
+            return qs.order_by(order + "location__address")
+        else:
+            return qs.order_by(order + "created_date")
 
 
 class ExposureDetailsView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
