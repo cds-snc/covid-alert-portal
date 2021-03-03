@@ -108,7 +108,9 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
                     num_dates -= 1
                     self.request.session["num_dates"] = num_dates
                     self.request.session.pop(f"alert_datetime_{num_dates - 1}", None)
-            return redirect(reverse_lazy("outbreaks:datetime") + f"?num_dates={num_dates}")
+            return redirect(
+                reverse_lazy("outbreaks:datetime") + f"?num_dates={num_dates}"
+            )
         return super().post(request, *args, **kwargs)
 
     def get_form_kwargs(self):
@@ -131,11 +133,13 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
         to create a smoother experience in terms of accessibility. When a user using
         voice-over adds or removes a date, the focus should be returned on this newly added element
         """
-        num_dates = self.request.GET.get('num_dates')
+        num_dates = self.request.GET.get("num_dates")
         if num_dates:
             i = int(num_dates) - 1
             try:
-                context['form'].fields[f'day_{i}'].widget.attrs.update({'autofocus': 'autofocus'})
+                context["form"].fields[f"day_{i}"].widget.attrs.update(
+                    {"autofocus": "autofocus"}
+                )
             except KeyError:
                 # Only legit numbers should work otherwise ignore it
                 pass
@@ -307,21 +311,21 @@ class HistoryView(PermissionRequiredMixin, Is2FAMixin, ListView):
     paginate_by = 10
     model = Notification
     template_name = "history.html"
-    sort_options = ['name', 'address', 'date']
+    sort_options = ["name", "address", "date"]
 
     def get(self, request, *args, **kwargs):
         # Ensure there is a clean sort and order column
-        sort = self.request.GET.get('sort')
-        order = self.request.GET.get('order')
-        if not sort or sort not in self.sort_options or order not in ['asc', 'desc']:
-            return redirect(reverse_lazy("outbreaks:history") + '?sort=name&order=asc')
+        sort = self.request.GET.get("sort")
+        order = self.request.GET.get("order")
+        if not sort or sort not in self.sort_options or order not in ["asc", "desc"]:
+            return redirect(reverse_lazy("outbreaks:history") + "?sort=name&order=asc")
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
         # send the sort and order info to the template
         context = super().get_context_data(*args, **kwargs)
-        context['sort'] = self.request.GET.get("sort")
-        context['order'] = self.request.GET.get("order")
+        context["sort"] = self.request.GET.get("sort")
+        context["order"] = self.request.GET.get("order")
         return context
 
     def get_queryset(self):
@@ -349,14 +353,13 @@ class HistoryView(PermissionRequiredMixin, Is2FAMixin, ListView):
             if self.request.user.is_superuser:
                 qs = Notification.objects.all()
             else:
-                qs = Notification.objects.filter(location__province=province)\
-
+                qs = Notification.objects.filter(location__province=province)
         # Order the queryset
         sort = self.request.GET.get("sort")
-        order = '' if self.request.GET.get("order") == 'asc' else '-'
-        if sort == 'name':
+        order = "" if self.request.GET.get("order") == "asc" else "-"
+        if sort == "name":
             return qs.order_by(order + "location__name")
-        elif sort == 'address':
+        elif sort == "address":
             return qs.order_by(order + "location__address")
         else:
             return qs.order_by(order + "created_date")

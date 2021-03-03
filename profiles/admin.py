@@ -39,7 +39,9 @@ class UserChangeForm(forms.ModelForm):
     """
 
     password = ReadOnlyPasswordHashField()
-    can_send_alerts = forms.BooleanField(label=_('Allow user to send outbreak alerts'), required=False)
+    can_send_alerts = forms.BooleanField(
+        label=_("Allow user to send outbreak alerts"), required=False
+    )
 
     class Meta:
         model = HealthcareUser
@@ -57,10 +59,10 @@ class UserChangeForm(forms.ModelForm):
         )
 
     def __init__(self, *args, **kwargs):
-        if 'instance' in kwargs:
-            user = kwargs['instance']
-            initial = {'can_send_alerts': user.has_perm('profiles.can_send_alerts')}
-            kwargs['initial'] = initial
+        if "instance" in kwargs:
+            user = kwargs["instance"]
+            initial = {"can_send_alerts": user.has_perm("profiles.can_send_alerts")}
+            kwargs["initial"] = initial
         super().__init__(*args, **kwargs)
 
     def clean_password(self):
@@ -72,8 +74,8 @@ class UserChangeForm(forms.ModelForm):
     def save(self, commit=True):
         # Save the custom permission
         user = super().save(commit=False)
-        permission = Permission.objects.get(codename='can_send_alerts')
-        if self.cleaned_data['can_send_alerts']:
+        permission = Permission.objects.get(codename="can_send_alerts")
+        if self.cleaned_data["can_send_alerts"]:
             user.user_permissions.add(permission)
         else:
             user.user_permissions.remove(permission)
@@ -86,7 +88,9 @@ class UserAddForm(UserCreationForm):
     """A form for creating new users. Extends from UserCreationForm form, which
     means it includes a repeated password."""
 
-    can_send_alerts = forms.BooleanField(label=_('Allow user to send outbreak alerts'), required=False)
+    can_send_alerts = forms.BooleanField(
+        label=_("Allow user to send outbreak alerts"), required=False
+    )
 
     class Meta:
         model = HealthcareUser
@@ -107,8 +111,8 @@ class UserAddForm(UserCreationForm):
     def save(self, commit=True):
         # Save the custom permission
         user = super().save(commit=False)
-        permission = Permission.objects.get(codename='can_send_alerts')
-        if self.cleaned_data['can_send_alerts']:
+        permission = Permission.objects.get(codename="can_send_alerts")
+        if self.cleaned_data["can_send_alerts"]:
             user.user_permissions.add(permission)
         else:
             user.user_permissions.remove(permission)
@@ -142,7 +146,8 @@ class UserAdmin(BaseUserAdmin):
     )
 
     def can_send_alerts(self, user: HealthcareUser):
-        return user.has_perm('profiles.can_send_alerts')
+        return user.has_perm("profiles.can_send_alerts")
+
     can_send_alerts.boolean = True
 
     def number_keys_generated(self, user: HealthcareUser):
@@ -183,7 +188,15 @@ class UserAdmin(BaseUserAdmin):
 
         permissions_tuple = (
             "Permissions",
-            {"fields": ("is_admin", "is_superuser", "is_active", "blocked_until", "can_send_alerts")},
+            {
+                "fields": (
+                    "is_admin",
+                    "is_superuser",
+                    "is_active",
+                    "blocked_until",
+                    "can_send_alerts",
+                )
+            },
         )
         fieldsets = (
             (None, {"fields": ("email", "password")}),
