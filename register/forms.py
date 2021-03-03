@@ -38,13 +38,13 @@ class RegistrantNameForm(HealthcareBaseForm, forms.ModelForm):
 
 class LocationCategoryForm(HealthcareBaseForm, forms.Form):
     location_choices = [
-            ("restaurant_bar_coffee", _("Restaurant, bar, coffee shop")),
-            ("fitness_recreation", _("Fitness and recreation")),
-            ("arts_entertainment", _("Arts and entertainment")),
-            ("grooming_wellness", _("Grooming and wellness")),
-            ("religious_space", _("Religious space")),
-            ("other", _("Something else")),
-        ]
+        ("restaurant_bar_coffee", _("Restaurant, bar, coffee shop")),
+        ("fitness_recreation", _("Fitness and recreation")),
+        ("arts_entertainment", _("Arts and entertainment")),
+        ("grooming_wellness", _("Grooming and wellness")),
+        ("religious_space", _("Religious space")),
+        ("other", _("Something else")),
+    ]
 
     category = forms.ChoiceField(
         label="",

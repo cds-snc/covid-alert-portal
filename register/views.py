@@ -14,6 +14,7 @@ import pytz
 from django.contrib import messages
 from .forms import LocationCategoryForm as choices
 
+
 class RegistrantEmailView(FormView):
     form_class = EmailForm
     template_name = "register/registrant_email.html"
@@ -144,9 +145,11 @@ class LocationWizard(NamedUrlSessionWizardView):
         registrant = Registrant.objects.get(id=self.request.session["registrant_id"])
         context["form_data"] = self.get_all_cleaned_data()
         context["registrant"] = registrant
-        if("category" in context["form_data"]):
-            context["form_data"]["category"] = dict(choices.location_choices)[context["form_data"]["category"]]
-            
+        if "category" in context["form_data"]:
+            context["form_data"]["category"] = dict(choices.location_choices)[
+                context["form_data"]["category"]
+            ]
+
         return context
 
     def done(self, form_list, form_dict, **kwargs):
