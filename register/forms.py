@@ -10,6 +10,15 @@ from dependency_injector.wiring import inject, Provide
 from portal.containers import Container
 from portal.services import NotifyService
 
+location_choices = [
+    ("restaurant_bar_coffee", _("Restaurant, bar, coffee shop")),
+    ("fitness_recreation", _("Fitness and recreation")),
+    ("arts_entertainment", _("Arts and entertainment")),
+    ("grooming_wellness", _("Grooming and wellness")),
+    ("religious_space", _("Religious space")),
+    ("other", _("Something else")),
+]
+
 
 class EmailForm(HealthcareBaseForm, forms.Form):
     email = forms.EmailField(label=_("Email address"))
@@ -37,14 +46,6 @@ class RegistrantNameForm(HealthcareBaseForm, forms.ModelForm):
 
 
 class LocationCategoryForm(HealthcareBaseForm, forms.Form):
-    location_choices = [
-        ("restaurant_bar_coffee", _("Restaurant, bar, coffee shop")),
-        ("fitness_recreation", _("Fitness and recreation")),
-        ("arts_entertainment", _("Arts and entertainment")),
-        ("grooming_wellness", _("Grooming and wellness")),
-        ("religious_space", _("Religious space")),
-        ("other", _("Something else")),
-    ]
 
     category = forms.ChoiceField(
         label="",
