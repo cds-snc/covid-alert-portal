@@ -4,16 +4,15 @@
 // gives CORS errors, but this is the one we should use:
 // const url = 'https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/AutoComplete/v1.00/wsdlnew.ws';
 
-// autocomplete url
-const url = 'http://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/AutoComplete/v1.00/json3.ws'
-
-
 
 const key = 'BC76-EY79-GM26-BZ52'
 
 var results = [];
 
-function hinter(query, populateResults) {    
+function hinter(query, populateResults) {
+    // autocomplete url
+    const url = 'http://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/AutoComplete/v1.00/json3.ws'
+
     var params = '';
     params += "&Key=" + encodeURIComponent(key);
     params += "&SearchTerm=" + encodeURIComponent(query);
@@ -35,17 +34,74 @@ function hinter(query, populateResults) {
                 if (response.Items.length == 0)
                     alert("Sorry, there were no results");
                 else {
-                    console.log(response.Items)
+                    // console.log(response.Items)
                     var results = response.Items.map(function(result) {
                         return {
                             'name': result['Text'],
-                            'id': result['Id']
+                            'id': result['Id'],
+                            'retrievable': result['isRetrievable']
                         }
                     })
-                    console.log(results);
+                    // console.log(results);
                     populateResults(results)
                 }
         }
+        }
+    }
+    http.send(params);
+}
+
+function details(id) {
+    const retrieveByIdUrl = 'http://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/RetrieveById/v1.00/json3.ws';
+
+    var params = '';
+    params += "&Key=" + encodeURIComponent(key);
+    params += "&Id=" + encodeURIComponent(id);
+    // params += "&Application=" + encodeURIComponent(Application);
+    var http = new XMLHttpRequest();
+    http.open('POST', retrieveByIdUrl, true);
+    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            var response = JSON.parse(http.responseText);
+            // Test for an error
+            if (response.Items.length == 1 && typeof(response.Items[0].Error) != "undefined") {
+                // Show the error message
+                alert(response.Items[0].Description);
+            }
+            else {
+                // Check if there were any items found
+                if (response.Items.length == 0)
+                    alert("Sorry, there were no results");
+                else {
+                    console.log(response.Items)
+                    var results = response.Items;
+
+                    var line1 = results.find(obj => {
+                        return obj.FieldGroup === 'Common' && obj.FieldName === 'Line1'
+                    });
+
+                    var city = results.find(obj => {
+                        return obj.FieldGroup === 'Common' && obj.FieldName === 'City'
+                    })
+
+                    var province = results.find(obj => {
+                        return obj.FieldGroup === 'Common' && obj.FieldName === 'ProvinceCode'
+                    })
+
+                    var postal = results.find(obj => {
+                        return obj.FieldGroup === 'Common' && obj.FieldName === 'PostalCode'
+                    })
+
+                    console.log({
+                        'line1': line1.FormattedValue,
+                        'city': city.FormattedValue,
+                        'province': province.FormattedValue,
+                        'postal': postal.FormattedValue
+                    });
+                }
+            }
         }
     }
     http.send(params);
@@ -58,6 +114,7 @@ accessibleAutocomplete({
     source: hinter,
     onConfirm: function(confirmed) {
         console.log(confirmed)
+        details(confirmed.id)
     },
     templates: {
         suggestion: function(item) {
