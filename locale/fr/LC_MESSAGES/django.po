@@ -2532,15 +2532,15 @@ msgstr ""
 
 #: register/templates/register/error.html:5
 msgid "Invalid / expired link"
-msgstr ""
+msgstr "Lien non valide ou expiré"
 
 #: register/templates/register/error.html:9
 msgid "Invalid / Expired"
-msgstr ""
+msgstr "Invalide ou expiré"
 
 #: register/templates/register/error.html:10
 msgid "Sorry, that confirmation link has expired or has already been used."
-msgstr ""
+msgstr "Désolé, le lien de validation est expiré ou a déjà été utilisé."
 
 #: register/templates/register/location_address.html:6
 #: register/templates/register/location_address.html:16
