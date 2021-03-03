@@ -147,20 +147,22 @@ class LocationWizard(NamedUrlSessionWizardView):
 
     def done(self, form_list, form_dict, **kwargs):
         forms = [form.cleaned_data for form in form_list]
-        location = dict(ChainMap(*forms))
+        data = dict(ChainMap(*forms))
 
-        Location.objects.create(
-            category=location["category"],
-            name=location["name"],
-            address=location["address"],
-            address_2=location["address_2"],
-            city=location["city"],
-            province=location["province"],
-            postal_code=location["postal_code"],
-            contact_name=location["contact_name"],
-            contact_email=location["contact_email"],
-            contact_phone=location["contact_phone"],
+        location, created = Location.objects.get_or_create(
+            name=data["name"],
+            address=data["address"],
+            address_2=data["address_2"],
+            city=data["city"],
+            province=data["province"],
+            postal_code=data["postal_code"],
         )
+
+        location.category = data["category"]
+        location.contact_name = data["contact_name"]
+        location.contact_email = data["contact_email"]
+        location.contact_phone = data["contact_phone"]
+        location.save()
 
         return HttpResponseRedirect(reverse("register:confirmation"))
 
