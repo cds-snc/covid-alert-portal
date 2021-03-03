@@ -67,7 +67,6 @@ function getDetails(id, callback) {
     let params = '';
     params += "&Key=" + encodeURIComponent(key);
     params += "&Id=" + encodeURIComponent(id);
-    // params += "&Application=" + encodeURIComponent(Application);
 
     xhr('post', url, params, function(response) {
         if (response.Items.length == 0) {
