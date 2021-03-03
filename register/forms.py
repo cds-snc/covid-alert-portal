@@ -59,7 +59,6 @@ class LocationNameForm(HealthcareBaseForm, forms.Form):
 
 
 class LocationAddressForm(HealthcareBaseForm, forms.Form):
-    # address = forms.CharField(label=_("Address line 1"))
     address = forms.CharField(label=_("Address line 1"), widget=AutocompleteWidget())
     address_2 = forms.CharField(label=_("Address line 2"), required=False)
     city = forms.CharField(label=_("City"))
