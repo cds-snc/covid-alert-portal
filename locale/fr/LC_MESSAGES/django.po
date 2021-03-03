@@ -2458,7 +2458,7 @@ msgstr "Province"
 
 #: register/templates/register/base.html:40
 msgid "BETA"
-msgstr ""
+msgstr "BÊTA"
 
 #: register/templates/register/base.html:40
 msgid "This is a new service — your feedback will help us improve it."
@@ -2496,8 +2496,8 @@ msgid ""
 "<a href=''>Contact us</a> if you do not get the email within 2 hours or if "
 "you have questions."
 msgstr ""
-"<a href=''>Contactez-nous</a> si vous ne recevez pas le courriel d’ici 2 "
-"heures ou si vous avez des questions."
+"<a href=''>Contactez-nous</a> si vous ne recevez pas le courriel d’ici "
+"2 heures ou si vous avez des questions."
 
 #: register/templates/register/confirmation.html:23
 msgid ""
@@ -2532,15 +2532,15 @@ msgstr ""
 
 #: register/templates/register/error.html:5
 msgid "Invalid / expired link"
-msgstr ""
+msgstr "Lien non valide ou expiré"
 
 #: register/templates/register/error.html:9
 msgid "Invalid / Expired"
-msgstr ""
+msgstr "Invalide ou expiré"
 
 #: register/templates/register/error.html:10
 msgid "Sorry, that confirmation link has expired or has already been used."
-msgstr ""
+msgstr "Désolé, le lien de validation est expiré ou a déjà été utilisé."
 
 #: register/templates/register/location_address.html:6
 #: register/templates/register/location_address.html:16
@@ -2553,8 +2553,8 @@ msgid ""
 "After you finish this poster, we’ll remind you to make more."
 msgstr ""
 "Si le service ou l’événement comporte plusieurs adresses, vous devrez créer "
-"une affiche pour chaque adresse. Quand vous aurez terminé la présente "
-"affiche, nous vous le rappelerons."
+"une affiche pour chaque adresse. Nous vous rappelerons de le faire quand "
+"vous aurez terminé la présente affiche."
 
 #: register/templates/register/location_category.html:6
 #: register/templates/register/location_category.html:16
@@ -2570,7 +2570,7 @@ msgstr "Personne-ressource"
 msgid "This could be you, or a different person, such as a store manager."
 msgstr ""
 "La personne-ressource peut être vous-même ou bien une autre personne, par "
-"exemple un gérant de boutique."
+"exemple le gérant de boutique."
 
 #: register/templates/register/location_contact.html:18
 msgid ""
@@ -2662,11 +2662,11 @@ msgstr "Assurez-vous d’avoir :"
 
 #: register/templates/register/start.html:26
 msgid "Your email address."
-msgstr "Votre adresse courriel"
+msgstr "Votre adresse courriel."
 
 #: register/templates/register/start.html:27
 msgid "Name of service or event."
-msgstr "Nom du service ou de l’événement"
+msgstr "Le nom du service ou de l’événement."
 
 #: register/templates/register/start.html:28
 msgid "Address or addresses of service or event."
@@ -2686,7 +2686,7 @@ msgstr "Des questions?"
 
 #: register/templates/register/start.html:36
 msgid "Visit Help with your poster"
-msgstr ""
+msgstr "Consultez la page Aide pour votre affiche."
 
 #: register/templates/register/summary.html:5
 #: register/templates/register/summary.html:13
@@ -2727,4 +2727,4 @@ msgstr "Votre adresse courriel est validée."
 
 #: register/views.py:101 register/views.py:134 register/views.py:177
 msgid "There has been an error, you need to confirm your email address"
-msgstr "[MISSING TRANSLATION]."
+msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
