@@ -34,7 +34,7 @@ function autocomplete(query, callback) {
     // autocomplete url
     const url = 'http://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/AutoComplete/v1.00/json3.ws'
 
-    var params = '';
+    let params = '';
     params += "&Key=" + encodeURIComponent(key);
     params += "&SearchTerm=" + encodeURIComponent(query);
     params += "&Country=" + encodeURIComponent('CAN')
@@ -44,7 +44,7 @@ function autocomplete(query, callback) {
             // TODO: handle this sitch
             console.log("no results");
         } else {
-            var results = response.Items.map(function(result) {
+            const results = response.Items.map(function(result) {
                 return {
                     'id': result['Id'],
                     'name': result['Text'],
@@ -64,7 +64,7 @@ function autocomplete(query, callback) {
 function getDetails(id, callback) {
     const url = 'http://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/RetrieveById/v1.00/json3.ws';
 
-    var params = '';
+    let params = '';
     params += "&Key=" + encodeURIComponent(key);
     params += "&Id=" + encodeURIComponent(id);
     // params += "&Application=" + encodeURIComponent(Application);
@@ -74,21 +74,21 @@ function getDetails(id, callback) {
             // TODO: handle this sitch
             console.log("no results");
         } else {
-            var results = response.Items;
+            const results = response.Items;
 
-            var line1 = results.find(obj => {
+            const line1 = results.find(obj => {
                 return obj.FieldGroup === 'Common' && obj.FieldName === 'Line1'
             });
 
-            var city = results.find(obj => {
+            const city = results.find(obj => {
                 return obj.FieldGroup === 'Common' && obj.FieldName === 'City'
             })
 
-            var province = results.find(obj => {
+            const province = results.find(obj => {
                 return obj.FieldGroup === 'Common' && obj.FieldName === 'ProvinceCode'
             })
 
-            var postal = results.find(obj => {
+            const postal = results.find(obj => {
                 return obj.FieldGroup === 'Common' && obj.FieldName === 'PostalCode'
             })
 
@@ -103,7 +103,6 @@ function getDetails(id, callback) {
         }
     })
 }
-
 
 accessibleAutocomplete({
     element: document.querySelector('#address-autocomplete-container'),
