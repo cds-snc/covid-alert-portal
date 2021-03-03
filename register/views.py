@@ -79,7 +79,7 @@ def confirm_email(request, pk):
         confirm.delete()
 
         messages.add_message(
-            request, messages.SUCCESS, _("You've confirmed your email address")
+            request, messages.SUCCESS, _("You've confirmed your email address.")
         )
 
         return redirect(reverse_lazy("register:registrant_name"))
