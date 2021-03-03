@@ -3,7 +3,13 @@
 
 const key = 'BC76-EY79-GM26-BZ52'
 
-// just a wrapper around xhr
+/**
+ * Just a wrapper around xhr for convenience.
+ * @param {string} method 
+ * @param {string} url 
+ * @param {string} params 
+ * @param {function} callback 
+ */
 const xhr = function(method, url, params, callback) {
     const xhr = new XMLHttpRequest();
     
@@ -19,8 +25,12 @@ const xhr = function(method, url, params, callback) {
     xhr.send(params);
 }
 
-
-function hinter(query, populateResults) {
+/**
+ * Ajax autocomplete from Canada Post Address Complete API
+ * @param {string} query 
+ * @param {functino} callback 
+ */
+function autocomplete(query, callback) {
     // autocomplete url
     const url = 'http://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/AutoComplete/v1.00/json3.ws'
 
@@ -42,11 +52,15 @@ function hinter(query, populateResults) {
                     'retrievable': result['IsRetrievable']
                 }
             })
-            populateResults(results)
+            callback(results)
         }
     })
 }
 
+/**
+ * Get the address details from Canada Post RetrieveById API
+ * @param {string} id 
+ */
 function details(id) {
     const url = 'http://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/RetrieveById/v1.00/json3.ws';
 
@@ -97,7 +111,7 @@ function details(id) {
 accessibleAutocomplete({
     element: document.querySelector('#address-autocomplete-container'),
     id: 'address-autocomplete', // To match it to the existing <label>.
-    source: hinter,
+    source: autocomplete,
     name: 'address-address',
     onConfirm: function(confirmed) {
         details(confirmed.id)
@@ -111,48 +125,3 @@ accessibleAutocomplete({
         }
     }
 })
-
-  // var ac_input = document.getElementById('my-autocomplete');
-  //   ac_input.addEventListener("keyup", function(event){hinter(event)});
-
-
-  /* SAMPLE FROM CANADA POST
-var params = '';
-    params += "&Key=" + encodeURIComponent(Key);
-    params += "&SearchTerm=" + encodeURIComponent(SearchTerm);
-    params += "&LastId=" + encodeURIComponent(LastId);
-    params += "&SearchFor=" + encodeURIComponent(SearchFor);
-    params += "&Country=" + encodeURIComponent(Country);
-    params += "&LanguagePreference=" + encodeURIComponent(LanguagePreference);
-    params += "&MaxSuggestions=" + encodeURIComponent(MaxSuggestions);
-    params += "&MaxResults=" + encodeURIComponent(MaxResults);
-var http = new XMLHttpRequest();
-http.open('POST', url, true);
-http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-http.onreadystatechange = function() {
-  if(http.readyState == 4 && http.status == 200) {
-      var response = JSON.parse(http.responseText);
-      // Test for an error
-      if (response.Items.length == 1 && typeof(response.Items[0].Error) != "undefined") {
-        // Show the error message
-        alert(response.Items[0].Description);
-      }
-      else {
-        // Check if there were any items found
-        if (response.Items.length == 0)
-            alert("Sorry, there were no results");
-        else {
-            // PUT YOUR CODE HERE
-            //FYI: The output is an array of key value pairs (e.g. response.Items[0].Id), the keys being:
-            //Id
-            //Text
-            //Highlight
-            //Cursor
-            //Description
-            //Next
-        }
-    }
-  }
-}
-http.send(params);
-*/
