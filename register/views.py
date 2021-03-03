@@ -85,7 +85,6 @@ def confirm_email(request, pk):
 
         return redirect(reverse_lazy("register:registrant_name"))
     except (EmailConfirmation.DoesNotExist):
-        print("Error: Email verification token does not exist")
         return redirect(reverse_lazy("register:confirm_email_error"))
 
 
