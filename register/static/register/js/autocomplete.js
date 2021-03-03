@@ -61,7 +61,7 @@ function autocomplete(query, callback) {
  * Get the address details from Canada Post RetrieveById API
  * @param {string} id 
  */
-function details(id) {
+function getDetails(id, callback) {
     const url = 'http://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/RetrieveById/v1.00/json3.ws';
 
     var params = '';
@@ -99,10 +99,7 @@ function details(id) {
                 'postal': postal.FormattedValue
             };
 
-            document.getElementsByName("address-address")[0].value = address.line1;
-            document.getElementsByName("address-city")[0].value = address.city;
-            document.getElementsByName("address-province")[0].value = address.province;
-            document.getElementsByName("address-postal_code")[0].value = address.postal;
+            callback(address);
         }
     })
 }
@@ -114,11 +111,16 @@ accessibleAutocomplete({
     source: autocomplete,
     name: 'address-address',
     onConfirm: function(confirmed) {
-        details(confirmed.id)
+        getDetails(confirmed.id, function(address) {
+            document.getElementsByName("address-address")[0].value = address.line1;
+            document.getElementsByName("address-city")[0].value = address.city;
+            document.getElementsByName("address-province")[0].value = address.province;
+            document.getElementsByName("address-postal_code")[0].value = address.postal;
+        })
     },
     templates: {
         suggestion: function(item) {
-            return item.name
+            return item.name + ' ' + item.description
         },
         inputValue: function (item) {
             return item ? item.name : ''
