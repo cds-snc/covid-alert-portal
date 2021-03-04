@@ -26,12 +26,12 @@ import logging
 
 DATETIME_FORMAT = "%Y-%m-%d"
 SERVER_ERROR_CODES = {
-    0: 'NONE',
-    1: 'UNKNOWN',
-    2: 'INVALID_ID',
-    3: 'MISSING_TIMESTAMP',
-    4: 'PERIOD_INVALID',
-    5: 'SERVER_ERROR'
+    0: "NONE",
+    1: "UNKNOWN",
+    2: "INVALID_ID",
+    3: "MISSING_TIMESTAMP",
+    4: "PERIOD_INVALID",
+    5: "SERVER_ERROR",
 }
 
 
@@ -296,14 +296,14 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         token = self.request.user.api_key
         if token:
             try:
-                url = settings.API_ENDPOINT.rsplit('/', 1)[0] + '/qr/new-event'
+                url = settings.API_ENDPOINT.rsplit("/", 1)[0] + "/qr/new-event"
                 r = requests.post(
                     url,
                     headers={
                         "Authorization": f"Bearer {token}",
-                        "Content-Type": "application/protobuf"
+                        "Content-Type": "application/protobuf",
                     },
-                    data=self.notification_to_pb(notification).SerializeToString()
+                    data=self.notification_to_pb(notification).SerializeToString(),
                 )
 
                 # If we don't get a valid response, throw an exception
@@ -314,11 +314,15 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
                 logging.exception(
                     f"Received response code {r.status_code} with error code {code}, {SERVER_ERROR_CODES[code]}."
                 )
-                logging.exception(f'Unable to notify server of outbreak id: {notification.id}')
+                logging.exception(
+                    f"Unable to notify server of outbreak id: {notification.id}"
+                )
                 raise err
             except requests.exceptions.RequestException as err:
                 logging.exception(f"Something went wrong {err}")
-                logging.exception(f'Unable to notify server of outbreak id: {notification.id}')
+                logging.exception(
+                    f"Unable to notify server of outbreak id: {notification.id}"
+                )
                 raise err
 
     def notification_to_pb(self, notification):
