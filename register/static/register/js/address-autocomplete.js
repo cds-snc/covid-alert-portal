@@ -123,10 +123,16 @@ accessibleAutocomplete({
     defaultValue: document.getElementById("autocomplete-hidden-address").value,
     templates: {
         suggestion: function(item) {
+            if(typeof item !== 'object') {
+                return ''
+            }
             return item.name + ' ' + item.description
         },
         inputValue: function (item) {
-            return item ? item.name : ''
+            if(typeof item !== 'object') {
+                return ''
+            }
+            return item.name;
         }
     }
 })
