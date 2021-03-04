@@ -21,9 +21,18 @@ from google.protobuf.timestamp_pb2 import Timestamp
 from datetime import datetime
 import pytz
 import requests
+import logging
 
 
 DATETIME_FORMAT = "%Y-%m-%d"
+SERVER_ERROR_CODES = {
+    0: 'NONE',
+    1: 'UNKNOWN',
+    2: 'INVALID_ID',
+    3: 'MISSING_TIMESTAMP',
+    4: 'PERIOD_INVALID',
+    5: 'SERVER_ERROR'
+}
 
 
 class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
@@ -287,8 +296,9 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         token = self.request.user.api_key
         if token:
             try:
+                url = settings.API_ENDPOINT.rsplit('/', 1)[0] + '/qr/new-event'
                 r = requests.post(
-                    settings.API_ENDPOINT,
+                    url,
                     headers={
                         "Authorization": f"Bearer {token}",
                         "Content-Type": "application/protobuf"
@@ -299,12 +309,10 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
                 # If we don't get a valid response, throw an exception
                 r.raise_for_status()
 
-                print('\n\n\n')
-                print(r.content)
-                print('\n\n\n')
             except requests.exceptions.HTTPError as err:
+                code = outbreak_pb2.OutbreakEventResponse().ParseFromString(r.content)
                 logging.exception(
-                    f"Received {r.status_code} with message " f"{err.response.text}."
+                    f"Received response code {r.status_code} with error code {code}, {SERVER_ERROR_CODES[code]}."
                 )
                 logging.exception(f'Unable to notify server of outbreak id: {notification.id}')
                 raise err
