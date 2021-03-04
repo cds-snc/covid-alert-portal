@@ -45,10 +45,7 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
             ("fitness_recreation", _("Fitness and recreation")),
             ("arts_entertainment", _("Arts and entertainment")),
             ("grooming_wellness", _("Grooming and wellness")),
-            (
-                "religious_space",
-                _("Religious spaceccccccjfghutndlrvienebhilldvgijhthdkbtrjucrt"),
-            ),
+            ("religious_space", _("Religious space")),
             ("other", _("Something else")),
         ],
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
