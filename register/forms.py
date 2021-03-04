@@ -45,7 +45,10 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
             ("fitness_recreation", _("Fitness and recreation")),
             ("arts_entertainment", _("Arts and entertainment")),
             ("grooming_wellness", _("Grooming and wellness")),
-            ("religious_space", _("Religious spaceccccccjfghutndlrvienebhilldvgijhthdkbtrjucrt")),
+            (
+                "religious_space",
+                _("Religious spaceccccccjfghutndlrvienebhilldvgijhthdkbtrjucrt"),
+            ),
             ("other", _("Something else")),
         ],
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
@@ -77,13 +80,16 @@ class RegisterSummaryForm(HealthcareBaseForm, forms.Form):
 
     pass
 
+
 class ContactUsForm(HealthcareBaseForm, forms.Form):
     help_category = forms.ChoiceField(
         label="",
-        choices = [("get_help", "Get Help"),
-                    ("give_feedback","Give Feedback"),
-                    ("something_else", "Something Else")],
-        widget = CDSRadioWidget(attrs={"class":"multichoice-radio"})
+        choices=[
+            ("get_help", "Get Help"),
+            ("give_feedback", "Give Feedback"),
+            ("something_else", "Something Else"),
+        ],
+        widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
     more_info = forms.CharField(label="Tell us more about the issue")
     contact_email = forms.EmailField(label="Email address if you want a reply")

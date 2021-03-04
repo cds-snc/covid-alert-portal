@@ -119,7 +119,7 @@ TEMPLATES = {
     "name": "register/location_name.html",
     "contact": "register/location_contact.html",
     "summary": "register/summary.html",
-    "contactus":"register/contact_us.html",
+    "contactus": "register/contact_us.html",
 }
 
 
@@ -185,10 +185,11 @@ class RegisterConfirmationPageView(TemplateView):
         context["registrant_email"] = self.request.session.get("registrant_email")
         return context
 
+
 class ContactUsPageView(TemplateView):
     template_name = "register/contact_us.html"
     form_class = ContactUsForm
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
-
