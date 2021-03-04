@@ -52,4 +52,5 @@ urlpatterns = [
         views.RegisterConfirmationPageView.as_view(),
         name="confirmation",
     ),
+    path("contactus", views.ContactUsPageView.as_view(), name="contactus"),
 ]

@@ -1,0 +1,15 @@
+{% extends 'register/base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% trans "Contact Us" %}
+{% endblock %}
+
+{% block content %}
+  <h2>{% trans "Contact Us" %}</h2>
+
+  <p>{% trans "What do you want to do?" %}</p>
+
+{% include "includes/cds_form.html" with submit_text=_("Send") %}
+
+{% endblock %}
