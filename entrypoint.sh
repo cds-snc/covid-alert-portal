@@ -8,6 +8,9 @@ python manage.py migrate --noinput
 echo "Check if creating default super user"
 python manage.py createdefaultsuperuser
 
+# Compile the protobufs (manually add more steps here if necessary)
+protoc -I outbreaks/protobufs --python_out=outbreaks/protobufs outbreaks/protobufs/outbreak.proto
+
 # Start server
 echo "Starting server"
 if [[ ${DJANGO_ENV} == 'development' ]]; then

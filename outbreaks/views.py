@@ -16,8 +16,11 @@ from django.views.generic import (
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from portal.mixins import Is2FAMixin
 from .forms import DateForm, SeverityForm
+from .protobufs import outbreak_pb2
+from google.protobuf.timestamp_pb2 import Timestamp
 from datetime import datetime
 import pytz
+import requests
 
 
 DATETIME_FORMAT = "%Y-%m-%d"
@@ -242,8 +245,13 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         # Use a transaction to commit all or nothing for the notifications
         try:
             with transaction.atomic():
+                notifications = []
                 for i in range(self.request.session.get("num_dates", 1)):
-                    self.post_notification(form, i)
+                    notifications.append(self.post_notification(form, i))
+
+                # Post the saved notifications to the server
+                for notification in notifications:
+                    self.notify_server(notification)
 
                 # Continue with the redirect
                 response = super().form_valid(form)
@@ -273,6 +281,44 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
             created_by=self.request.user,
         )
         notification.save()
+        return notification
+
+    def notify_server(self, notification):
+        token = self.request.user.api_key
+        if token:
+            try:
+                r = requests.post(
+                    settings.API_ENDPOINT,
+                    headers={
+                        "Authorization": f"Bearer {token}",
+                        "Content-Type": "application/protobuf"
+                    },
+                    data=self.notification_to_pb(notification).SerializeToString()
+                )
+
+                # If we don't get a valid response, throw an exception
+                r.raise_for_status()
+
+                print('\n\n\n')
+                print(r.content)
+                print('\n\n\n')
+            except requests.exceptions.HTTPError as err:
+                logging.exception(
+                    f"Received {r.status_code} with message " f"{err.response.text}."
+                )
+                logging.exception(f'Unable to notify server of outbreak id: {notification.id}')
+                raise err
+            except requests.exceptions.RequestException as err:
+                logging.exception(f"Something went wrong {err}")
+                logging.exception(f'Unable to notify server of outbreak id: {notification.id}')
+                raise err
+
+    def notification_to_pb(self, notification):
+        pb = outbreak_pb2.OutbreakEvent()
+        pb.location_id = notification.location.short_code
+        pb.start_time.FromDatetime(notification.start_date)
+        pb.end_time.FromDatetime(notification.end_date)
+        return pb
 
 
 class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
