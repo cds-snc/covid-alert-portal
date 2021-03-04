@@ -19,10 +19,17 @@ class DateForm(HealthcareBaseForm):
                 label=_("Day"), min_value=1, max_value=31, widget=forms.TextInput
             )
             self.fields[f"month_{i}"] = forms.IntegerField(
-                label=_("Month"), min_value=1, max_value=datetime.now().month, widget=forms.TextInput
+                label=_("Month"),
+                min_value=1,
+                max_value=datetime.now().month,
+                widget=forms.TextInput,
             )
             self.fields[f"year_{i}"] = forms.IntegerField(
-                label=_("Year"), min_value=2021, max_value=2021, initial=2021, widget=forms.TextInput
+                label=_("Year"),
+                min_value=2021,
+                max_value=2021,
+                initial=2021,
+                widget=forms.TextInput,
             )
 
         # Add the fieldset to the meta class
