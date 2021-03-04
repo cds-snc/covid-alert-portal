@@ -109,13 +109,17 @@ accessibleAutocomplete({
     source: autocomplete,
     name: 'address-address',
     onConfirm: function(confirmed) {
-        getDetails(confirmed.id, function(address) {
-            document.getElementsByName("address-address")[0].value = address.line1;
-            document.getElementsByName("address-city")[0].value = address.city;
-            document.getElementsByName("address-province")[0].value = address.province;
-            document.getElementsByName("address-postal_code")[0].value = address.postal;
-        })
+        if(typeof confirmed !== 'undefined') {
+            getDetails(confirmed.id, function(address) {
+                document.getElementsByName("address-address")[0].value = address.line1;
+                document.getElementsByName("address-city")[0].value = address.city;
+                document.getElementsByName("address-province")[0].value = address.province;
+                document.getElementsByName("address-postal_code")[0].value = address.postal;
+            })
+        }
     },
+    minLength: 2,
+    confirmOnBlur: false,
     defaultValue: document.getElementById("autocomplete-hidden-address").value,
     templates: {
         suggestion: function(item) {
