@@ -12,6 +12,7 @@ from django.shortcuts import redirect
 from datetime import datetime, timedelta
 import pytz
 from django.contrib import messages
+from .forms import location_choices
 
 
 class RegistrantEmailView(FormView):
@@ -143,6 +144,11 @@ class LocationWizard(NamedUrlSessionWizardView):
         registrant = Registrant.objects.get(id=self.request.session["registrant_id"])
         context["form_data"] = self.get_all_cleaned_data()
         context["registrant"] = registrant
+        if "category" in context["form_data"]:
+            context["form_data"]["category"] = dict(location_choices)[
+                context["form_data"]["category"]
+            ]
+
         return context
 
     def done(self, form_list, form_dict, **kwargs):
