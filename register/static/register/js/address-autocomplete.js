@@ -120,6 +120,7 @@ accessibleAutocomplete({
     },
     minLength: 2,
     confirmOnBlur: false,
+    displayMenu: 'overlay',
     defaultValue: document.getElementById("autocomplete-hidden-address").value,
     templates: {
         suggestion: function(item) {
