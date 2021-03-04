@@ -17,7 +17,7 @@ main table {
   }
 
   th,
-  td {
+  td:not(.duet-date__cell) {
     padding: $space-md $space-sm $space-sm 0;
     border-bottom: 1px solid $color-grey-light;
     text-align: left;
