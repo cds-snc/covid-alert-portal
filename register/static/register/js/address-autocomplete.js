@@ -1,7 +1,9 @@
-// gives CORS errors, but this is the one we apparently should use?:
-// const url = 'https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/AutoComplete/v1.00/wsdlnew.ws';
-
-const key = 'BC76-EY79-GM26-BZ52'
+/**
+ * This is the Canada Post API key. Yes it's weird to see it here
+ * but it'll be locked to our domain and is not sensitive
+ * https://www.canadapost.ca/pca/support/kb/address-complete-basics/#safe
+ */
+const key = 'KN31-NC34-UE92-KU11'
 
 /**
  * Just a wrapper around xhr for convenience.
@@ -31,7 +33,6 @@ const xhr = function(method, url, params, callback) {
  * @param {functino} callback 
  */
 function autocomplete(query, callback) {
-    // autocomplete url
     const url = 'https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/AutoComplete/v1.00/json3.ws'
 
     let params = '';
@@ -105,7 +106,7 @@ function getDetails(id, callback) {
 
 accessibleAutocomplete({
     element: document.querySelector('#address-autocomplete-container'),
-    id: 'address-autocomplete', // To match it to the existing <label>.
+    id: 'address-autocomplete',
     source: autocomplete,
     name: 'address-address',
     onConfirm: function(confirmed) {
