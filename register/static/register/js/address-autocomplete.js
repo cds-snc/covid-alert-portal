@@ -116,6 +116,7 @@ accessibleAutocomplete({
             document.getElementsByName("address-postal_code")[0].value = address.postal;
         })
     },
+    defaultValue: document.getElementById("autocomplete-hidden-address").value,
     templates: {
         suggestion: function(item) {
             return item.name + ' ' + item.description
