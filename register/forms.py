@@ -10,6 +10,15 @@ from dependency_injector.wiring import inject, Provide
 from portal.containers import Container
 from portal.services import NotifyService
 
+location_choices = [
+    ("restaurant_bar_coffee", _("Restaurant, bar, coffee shop")),
+    ("fitness_recreation", _("Fitness and recreation")),
+    ("arts_entertainment", _("Arts and entertainment")),
+    ("grooming_wellness", _("Grooming and wellness")),
+    ("religious_space", _("Religious space")),
+    ("other", _("Something else")),
+]
+
 
 class EmailForm(HealthcareBaseForm, forms.Form):
     email = forms.EmailField(label=_("Email address"))
@@ -40,14 +49,7 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
 
     category = forms.ChoiceField(
         label="",
-        choices=[
-            ("restaurant_bar_coffee", _("Restaurant, bar, coffee shop")),
-            ("fitness_recreation", _("Fitness and recreation")),
-            ("arts_entertainment", _("Arts and entertainment")),
-            ("grooming_wellness", _("Grooming and wellness")),
-            ("religious_space", _("Religious space")),
-            ("other", _("Something else")),
-        ],
+        choices=location_choices,
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
 
