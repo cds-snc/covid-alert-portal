@@ -37,7 +37,7 @@ class Location(models.Model):
     province = models.CharField(max_length=100, verbose_name=_("Province"))
     postal_code = models.CharField(max_length=10, verbose_name=_("Postal code"))
     contact_name = models.CharField(
-        max_length=200, null=True, verbose_name=_("Contact name")
+        max_length=200, null=True, verbose_name=_("Name of contact")
     )
     contact_email = models.EmailField(verbose_name=_("Email address"), max_length=255)
     contact_phone = PhoneNumberField(blank=True)

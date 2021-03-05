@@ -10,6 +10,15 @@ from dependency_injector.wiring import inject, Provide
 from portal.containers import Container
 from portal.services import NotifyService
 
+location_choices = [
+    ("restaurant_bar_coffee", _("Restaurant, bar, coffee shop")),
+    ("fitness_recreation", _("Fitness and recreation")),
+    ("arts_entertainment", _("Arts and entertainment")),
+    ("grooming_wellness", _("Grooming and wellness")),
+    ("religious_space", _("Religious space")),
+    ("other", _("Something else")),
+]
+
 
 class EmailForm(HealthcareBaseForm, forms.Form):
     email = forms.EmailField(label=_("Email address"))
@@ -37,33 +46,11 @@ class RegistrantNameForm(HealthcareBaseForm, forms.ModelForm):
 
 
 class LocationCategoryForm(HealthcareBaseForm, forms.Form):
-    help_text = {
-        "arts_culture": "For example, cinemas, museums, and art galleries",
-        "community": "Both public or private daycare",
-        "fitness": "For example, schools and universities",
-        "food_service": "For example, hospitals and family practices",
-        "private_event": "Both essential and non-essential",
-        "rental": "For example, hospitals and family practices",
-        "retail": "What does this include in Canada?",
-    }
 
     category = forms.ChoiceField(
         label="",
-        choices=[
-            ("arts_culture", _("Arts & culture")),
-            ("community", _("Community spaces & libraries")),
-            ("fitness", _("Fitness")),
-            ("food_service", _("Food service & licensed establishments")),
-            ("personal_care", _("Personal care services")),
-            ("private_event", _("Private events/functions")),
-            ("rental", _("Rented meeting, event & rehearsal spaces")),
-            ("retail", _("Retail/shopping")),
-            ("sports", _("Sports & recreation facilities")),
-            ("other", _("Other")),
-        ],
-        widget=CDSRadioWidget(
-            attrs={"class": "multichoice-radio", "help_text": help_text}
-        ),
+        choices=location_choices,
+        widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
 
 
