@@ -12,6 +12,7 @@ from django.shortcuts import redirect
 from datetime import datetime, timedelta
 import pytz
 from django.contrib import messages
+from .forms import location_choices
 
 
 class RegistrantEmailView(FormView):
@@ -84,7 +85,6 @@ def confirm_email(request, pk):
 
         return redirect(reverse_lazy("register:registrant_name"))
     except (EmailConfirmation.DoesNotExist):
-        print("Error: Email verification token does not exist")
         return redirect(reverse_lazy("register:confirm_email_error"))
 
 
@@ -145,24 +145,31 @@ class LocationWizard(NamedUrlSessionWizardView):
         registrant = Registrant.objects.get(id=self.request.session["registrant_id"])
         context["form_data"] = self.get_all_cleaned_data()
         context["registrant"] = registrant
+        if "category" in context["form_data"]:
+            context["form_data"]["category"] = dict(location_choices)[
+                context["form_data"]["category"]
+            ]
+
         return context
 
     def done(self, form_list, form_dict, **kwargs):
         forms = [form.cleaned_data for form in form_list]
-        location = dict(ChainMap(*forms))
+        data = dict(ChainMap(*forms))
 
-        Location.objects.create(
-            category=location["category"],
-            name=location["name"],
-            address=location["address"],
-            address_2=location["address_2"],
-            city=location["city"],
-            province=location["province"],
-            postal_code=location["postal_code"],
-            contact_name=location["contact_name"],
-            contact_email=location["contact_email"],
-            contact_phone=location["contact_phone"],
+        location, created = Location.objects.get_or_create(
+            name=data["name"],
+            address=data["address"],
+            address_2=data["address_2"],
+            city=data["city"],
+            province=data["province"],
+            postal_code=data["postal_code"],
         )
+
+        location.category = data["category"]
+        location.contact_name = data["contact_name"]
+        location.contact_email = data["contact_email"]
+        location.contact_phone = data["contact_phone"]
+        location.save()
 
         return HttpResponseRedirect(reverse("register:confirmation"))
 
