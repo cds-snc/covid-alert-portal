@@ -170,6 +170,19 @@ class LocationWizard(NamedUrlSessionWizardView):
         location.contact_phone = data["contact_phone"]
         location.save()
 
+        # Create payload
+        payload = "{short_code}\n{name}\n{address}, {city}".format(
+            short_code=location.short_code,
+            name=location.name,
+            address=location.address,
+            city=location.city,
+        )
+
+        # Encode payload
+        # Sign payload
+        # Generate QR Code
+        # Generate Poster
+
         return HttpResponseRedirect(reverse("register:confirmation"))
 
 
