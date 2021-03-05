@@ -53,4 +53,9 @@ urlpatterns = [
         name="confirmation",
     ),
     path("contactus", views.ContactUsPageView.as_view(), name="contactus"),
+    path(
+        "success",
+        TemplateView.as_view(template_name="register/success.html"),
+        name="success",
+    ),
 ]

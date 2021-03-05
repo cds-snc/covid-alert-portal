@@ -84,16 +84,17 @@ class ContactUsForm(HealthcareBaseForm, forms.Form):
     help_category = forms.ChoiceField(
         label="",
         choices=[
-            ("get_help", "Get Help"),
-            ("give_feedback", "Give Feedback"),
-            ("something_else", "Something Else"),
+            ("get_help", _("Get Help.")),
+            ("give_feedback", _("Give Feedback.")),
+            ("something_else", _("Something Else.")),
         ],
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
     more_info = forms.CharField(
-        label="Tell us more about the issue", widget=forms.Textarea
+        label=_("Tell us more about the issue"), widget=forms.Textarea,
     )
     contact_email = forms.EmailField(
-        label="Email address if you want a reply",
-        help_text="We'll use this if we need to contact you. We will not use your email address for anything else.",
+        label=_("Email address if you want a reply"),
+        help_text=_("We'll use this if we need to contact you. We will not use your email address for anything else."),
+        required = False,
     )

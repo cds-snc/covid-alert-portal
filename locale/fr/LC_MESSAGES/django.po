@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-02 22:11+0000\n"
+"POT-Creation-Date: 2021-03-05 02:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -568,15 +568,19 @@ msgid "Contact us"
 msgstr "Nous joindre"
 
 #: contact/templates/contact/form.html:14
+#: register/templates/register/contact_us.html:20
 msgid "Send"
 msgstr "Envoyer"
 
 #: contact/templates/contact/success.html:5
 #: contact/templates/contact/success.html:10
+#: register/templates/register/success.html:5
+#: register/templates/register/success.html:10
 msgid "Thank you for contacting us"
 msgstr "Merci de nous avoir contactés."
 
 #: contact/templates/contact/success.html:11
+#: register/templates/register/success.html:11
 msgid "We’ll reply as soon as possible."
 msgstr "Nous vous répondrons le plus rapidement possible."
 
@@ -618,6 +622,7 @@ msgstr "Si le patient est prêt, générez une clé"
 #: outbreaks/templates/confirm.html:10 outbreaks/templates/datetime.html:10
 #: outbreaks/templates/details.html:10 outbreaks/templates/profile.html:10
 #: outbreaks/templates/severity.html:10
+#: register/templates/register/contact_us.html:12
 #: register/templates/register/location_address.html:11
 #: register/templates/register/location_category.html:11
 #: register/templates/register/location_contact.html:11
@@ -998,7 +1003,7 @@ msgstr ""
 msgid "Place profile"
 msgstr "Profil utilisateur"
 
-#: outbreaks/templates/profile.html:40 register/forms.py:69
+#: outbreaks/templates/profile.html:40 register/forms.py:71
 #, fuzzy
 #| msgid "Contact us"
 msgid "Contact email"
@@ -1290,6 +1295,7 @@ msgstr "Gérer l’équipe"
 #: portal/templates/includes/nav_main.html:13
 #: profiles/templates/profiles/support.html:5
 #: profiles/templates/profiles/support.html:9
+#: register/templates/register/contact_us.html:16
 msgid "Support"
 msgstr "Assistance"
 
@@ -1611,7 +1617,7 @@ msgstr "Entrez une adresse courriel valide"
 #: profiles/forms.py:499
 #: profiles/templates/invitations/templates/invite_list.html:18
 #: profiles/templates/profiles/healthcareuser_detail.html:44
-#: profiles/templates/profiles/healthcareuser_list.html:18 register/forms.py:15
+#: profiles/templates/profiles/healthcareuser_list.html:18 register/forms.py:24
 #: register/models.py:42
 msgid "Email address"
 msgstr "Adresse courriel"
@@ -2388,57 +2394,85 @@ msgstr ""
 msgid "— Scan a place registration"
 msgstr ""
 
-#: register/forms.py:44
+#: register/forms.py:14
 msgid "Restaurant, bar, coffee shop"
 msgstr "Restaurants, bars et cafés"
 
-#: register/forms.py:45
+#: register/forms.py:15
 msgid "Fitness and recreation"
 msgstr "Entraînement et activités physiques"
 
-#: register/forms.py:46
+#: register/forms.py:16
 msgid "Arts and entertainment"
 msgstr "Arts et divertissement"
 
-#: register/forms.py:47
+#: register/forms.py:17
 msgid "Grooming and wellness"
 msgstr "Soins de beauté et bien-être"
 
-#: register/forms.py:48
+#: register/forms.py:18
 msgid "Religious space"
 msgstr "Espaces religieux"
 
-#: register/forms.py:49
+#: register/forms.py:19
 msgid "Something else"
 msgstr "Autre"
 
-#: register/forms.py:60 register/models.py:34
+#: register/forms.py:62 register/models.py:34
 msgid "Address line 1"
 msgstr "Adresse ligne 1"
 
-#: register/forms.py:61 register/models.py:35
+#: register/forms.py:63 register/models.py:35
 msgid "Address line 2"
 msgstr "Adresse ligne 2"
 
-#: register/forms.py:62 register/models.py:36
+#: register/forms.py:64 register/models.py:36
 msgid "City"
 msgstr "Ville"
 
-#: register/forms.py:63
+#: register/forms.py:65
 msgid "Province or territory"
 msgstr "Province ou territoire"
 
-#: register/forms.py:64 register/models.py:38
+#: register/forms.py:66 register/models.py:38
 msgid "Postal code"
 msgstr "Code postal"
 
-#: register/forms.py:68 register/models.py:40
+#: register/forms.py:70 register/models.py:40
 msgid "Name of contact"
 msgstr "Nom de la personne-ressource"
 
-#: register/forms.py:70
+#: register/forms.py:72
 msgid "Contact phone number"
 msgstr "Numéro de téléphone"
+
+#: register/forms.py:87
+msgid "Get Help."
+msgstr "Obtenir de l’aide."
+
+#: register/forms.py:88
+msgid "Give Feedback."
+msgstr "Donner des commentaires."
+
+#: register/forms.py:89
+msgid "Something Else."
+msgstr "Autre chose."
+
+#: register/forms.py:94
+msgid "Tell us more about the issue"
+msgstr "Dites-nous en plus sur le problème"
+
+#: register/forms.py:97
+msgid "Email address if you want a reply"
+msgstr "Adresse courriel pour vous répondre"
+
+#: register/forms.py:98
+msgid ""
+"We'll use this if we need to contact you. We will not use your email address "
+"for anything else."
+msgstr ""
+"Nous utiliserons votre adresse si, et seulement si, nous avons besoin de "
+"communiquer avec vous."
 
 #: register/models.py:30
 msgid "Short code"
@@ -2496,8 +2530,8 @@ msgid ""
 "<a href=''>Contact us</a> if you do not get the email within 2 hours or if "
 "you have questions."
 msgstr ""
-"<a href=''>Contactez-nous</a> si vous ne recevez pas le courriel d’ici "
-"2 heures ou si vous avez des questions."
+"<a href=''>Contactez-nous</a> si vous ne recevez pas le courriel d’ici 2 "
+"heures ou si vous avez des questions."
 
 #: register/templates/register/confirmation.html:23
 msgid ""
@@ -2529,6 +2563,21 @@ msgid "Please answer some questions to help improve the COVID Alert system."
 msgstr ""
 "Répondez à quelques questions pour nous aider à améliorer le système Alerte "
 "COVID."
+
+#: register/templates/register/contact_us.html:5
+#: register/templates/register/contact_us.html:14
+#, fuzzy
+#| msgid "Contact us"
+msgid "Contact Us"
+msgstr "Nous joindre"
+
+#: register/templates/register/contact_us.html:16
+msgid "For information about common issues, visit"
+msgstr "Consultez la section pour les questions fréquentes."
+
+#: register/templates/register/contact_us.html:18
+msgid "What do you want to do?"
+msgstr "Pourquoi voulez-vous nous joindre?"
 
 #: register/templates/register/error.html:5
 msgid "Invalid / expired link"
@@ -2721,10 +2770,10 @@ msgstr ""
 msgid "Make poster"
 msgstr "Créer l’affiche"
 
-#: register/views.py:82
+#: register/views.py:83
 msgid "You've confirmed your email address."
 msgstr "Votre adresse courriel est validée."
 
-#: register/views.py:101 register/views.py:134 register/views.py:177
+#: register/views.py:101 register/views.py:135 register/views.py:185
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."

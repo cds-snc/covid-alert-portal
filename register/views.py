@@ -119,7 +119,7 @@ TEMPLATES = {
     "name": "register/location_name.html",
     "contact": "register/location_contact.html",
     "summary": "register/summary.html",
-    "contactus": "register/contact_us.html",
+    "success": "register/success.html",
 }
 
 
@@ -200,3 +200,6 @@ class ContactUsPageView(FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+    
+    def get_success_url(self):
+        return reverse_lazy("register:success")
