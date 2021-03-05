@@ -186,7 +186,7 @@ class RegisterConfirmationPageView(TemplateView):
         return context
 
 
-class ContactUsPageView(TemplateView):
+class ContactUsPageView(FormView):
     template_name = "register/contact_us.html"
     form_class = ContactUsForm
 

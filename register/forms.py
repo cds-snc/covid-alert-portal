@@ -89,4 +89,4 @@ class ContactUsForm(HealthcareBaseForm, forms.Form):
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
     more_info = forms.CharField(label="Tell us more about the issue")
-    contact_email = forms.EmailField(label="Email address if you want a reply")
+    contact_email = forms.EmailField(label="Email address if you want a reply", help_text="We'll use this if we need to contact you. We will not use your email address for anything else.")
