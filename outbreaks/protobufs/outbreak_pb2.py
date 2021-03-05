@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto2',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0eoutbreak.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x82\x01\n\rOutbreakEvent\x12\x13\n\x0blocation_id\x18\x01 \x01(\t\x12.\n\nstart_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xb9\x01\n\x15OutbreakEventResponse\x12/\n\x05\x65rror\x18\x01 \x01(\x0e\x32 .OutbreakEventResponse.ErrorCode\"o\n\tErrorCode\x12\x08\n\x04NONE\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0e\n\nINVALID_ID\x10\x02\x12\x15\n\x11MISSING_TIMESTAMP\x10\x03\x12\x12\n\x0ePERIOD_INVALID\x10\x04\x12\x10\n\x0cSERVER_ERROR\x10\x05'
+  serialized_pb=b'\n\x0eoutbreak.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x94\x01\n\rOutbreakEvent\x12\x13\n\x0blocation_id\x18\x01 \x01(\t\x12.\n\nstart_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08severity\x18\x04 \x01(\r\"\xb9\x01\n\x15OutbreakEventResponse\x12/\n\x05\x65rror\x18\x01 \x01(\x0e\x32 .OutbreakEventResponse.ErrorCode\"o\n\tErrorCode\x12\x08\n\x04NONE\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0e\n\nINVALID_ID\x10\x02\x12\x15\n\x11MISSING_TIMESTAMP\x10\x03\x12\x12\n\x0ePERIOD_INVALID\x10\x04\x12\x10\n\x0cSERVER_ERROR\x10\x05'
   ,
   dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,])
 
@@ -68,8 +68,8 @@ _OUTBREAKEVENTRESPONSE_ERRORCODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=259,
-  serialized_end=370,
+  serialized_start=277,
+  serialized_end=388,
 )
 _sym_db.RegisterEnumDescriptor(_OUTBREAKEVENTRESPONSE_ERRORCODE)
 
@@ -103,6 +103,13 @@ _OUTBREAKEVENT = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='severity', full_name='OutbreakEvent.severity', index=3,
+      number=4, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -116,7 +123,7 @@ _OUTBREAKEVENT = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=52,
-  serialized_end=182,
+  serialized_end=200,
 )
 
 
@@ -148,8 +155,8 @@ _OUTBREAKEVENTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=185,
-  serialized_end=370,
+  serialized_start=203,
+  serialized_end=388,
 )
 
 _OUTBREAKEVENT.fields_by_name['start_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP

@@ -330,6 +330,7 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         pb.location_id = notification.location.short_code
         pb.start_time.FromDatetime(notification.start_date)
         pb.end_time.FromDatetime(notification.end_date)
+        pb.severity = int(notification.severity)
         return pb
 
 
