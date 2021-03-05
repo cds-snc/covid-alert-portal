@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-05 02:21+0000\n"
+"POT-Creation-Date: 2021-03-05 02:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2462,11 +2462,11 @@ msgstr "Autre chose."
 msgid "Tell us more about the issue"
 msgstr "Dites-nous en plus sur le problème"
 
-#: register/forms.py:97
+#: register/forms.py:98
 msgid "Email address if you want a reply"
 msgstr "Adresse courriel pour vous répondre"
 
-#: register/forms.py:98
+#: register/forms.py:100
 msgid ""
 "We'll use this if we need to contact you. We will not use your email address "
 "for anything else."
@@ -2573,7 +2573,7 @@ msgstr "Nous joindre"
 
 #: register/templates/register/contact_us.html:16
 msgid "For information about common issues, visit"
-msgstr "Consultez la section pour les questions fréquentes."
+msgstr "Consultez la section pour les questions fréquentes"
 
 #: register/templates/register/contact_us.html:18
 msgid "What do you want to do?"
