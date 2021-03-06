@@ -18,21 +18,13 @@ from portal.mixins import Is2FAMixin
 from .forms import DateForm, SeverityForm
 from .protobufs import outbreak_pb2
 from google.protobuf.timestamp_pb2 import Timestamp
-from datetime import datetime
+from datetime import datetime, timedelta
 import pytz
 import requests
 import logging
 
 
 DATETIME_FORMAT = "%Y-%m-%d"
-SERVER_ERROR_CODES = {
-    0: "NONE",
-    1: "UNKNOWN",
-    2: "INVALID_ID",
-    3: "MISSING_TIMESTAMP",
-    4: "PERIOD_INVALID",
-    5: "SERVER_ERROR",
-}
 
 
 class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
@@ -285,7 +277,7 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         notification = Notification(
             severity=self.request.session["alert_level"],
             start_date=dt,
-            end_date=dt,
+            end_date=dt + timedelta(hours=2),  # server expects valid interval
             location_id=self.request.session["alert_location"],
             created_by=self.request.user,
         )
@@ -310,9 +302,10 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
                 r.raise_for_status()
 
             except requests.exceptions.HTTPError as err:
-                code = outbreak_pb2.OutbreakEventResponse().ParseFromString(r.content)
+                pb_response = outbreak_pb2.OutbreakEventResponse()
+                pb_response.ParseFromString(r.content)
                 logging.exception(
-                    f"Received response code {r.status_code} with error code {code}, {SERVER_ERROR_CODES[code]}."
+                    f"Received response code {r.status_code} with {pb_response}."
                 )
                 logging.exception(
                     f"Unable to notify server of outbreak id: {notification.id}"
