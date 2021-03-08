@@ -327,10 +327,19 @@ class ConfirmedView(NotificationsTestCase):
 
 
 class HistoryView(NotificationsTestCase):
-    def test_initial_view(self):
-        # Assert that the correct template is loaded and that all results are visible
+    def test_initial_view_redirect(self):
+        # Ensure that the initial view redirects to add sort params
         self.login()
         response = self.client.get(reverse("outbreaks:history"))
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.url.startswith(reverse("outbreaks:history")))
+
+    def test_initial_view_all_results(self):
+        # Assert that the correct template is loaded and that all results are visible
+        self.login()
+        response = self.client.get(
+            reverse("outbreaks:history"), {"sort": "name", "order": "asc"}
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "history.html")
 
@@ -341,7 +350,8 @@ class HistoryView(NotificationsTestCase):
         # Test that GET with a query param produces search results
         self.login()
         response = self.client.get(
-            reverse("outbreaks:history"), {"search_text": "nandos"}
+            reverse("outbreaks:history"),
+            {"search_text": "nandos", "sort": "name", "order": "asc"},
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "history.html")
