@@ -402,7 +402,13 @@ CSP_DEFAULT_SRC = [
     "covid-alert-portal.alpha.canada.ca",
     "portail-alerte-covid.alpha.canada.ca",
 ]
-CSP_STYLE_SRC = ["'self'", "fonts.googleapis.com"]
+CSP_STYLE_SRC = [
+    "'self'",
+    "'sha256-wj97CBnjU4ly4cqQnM0huquRQF943qGisXfpavz3YsU='",
+    "'sha256-uwPeycnNJj5VRuojI2kTqwzlRkuYgdlJ3laHnGO8S64='",
+    "fonts.googleapis.com",
+    "cdn.jsdelivr.net",
+]
 CSP_FONT_SRC = ["'self'", "fonts.gstatic.com"]
 CSP_IMG_SRC = [
     "'self'",
@@ -411,7 +417,9 @@ CSP_IMG_SRC = [
 ]
 CSP_SCRIPT_SRC = [
     "'self'",
+    "blob:",
     "cdnjs.cloudflare.com",
+    "cdn.jsdelivr.net",
 ]
 CSP_CONNECT_SRC = [
     "'self'",
