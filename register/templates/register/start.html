@@ -9,7 +9,7 @@
 {% block hero %}
 <div class="hero">
   <div class="hero-inner">
-    <h1>{% trans "Display a QR code to slow the spread of COVID-19" %}</h1>
+    <h1>{% trans "Display a QR code to help slow the spread of COVID-19" %}</h1>
     <div class="hero-image">
       <img src="{% static 'img/register-start.svg' %}" alt="" />
     </div>
@@ -20,8 +20,21 @@
 {% block content %}
   <p>{% trans "Answer questions to make a poster with a code for your service or event." %}</p>
   <p>{% trans "Visitors can scan the QR code on their phone. This helps COVID Alert notify people who’ve been exposed to COVID-19." %}</p>
-  
+  <h2>{% trans "Before you start" %}</h2>
+  <p>{% trans "You’ll need:" %}</p>
+  <ul>
+   <li> {% trans "Your email address." %} </li>
+   <li> {% trans "Name of service or event." %} </li>
+   <li> {% trans "Address or addresses of service or event." %} </li>
+   <li> {% trans "Contact person for each address." %}</li>
+  </ul>
   <div class="content-button">
     <a href="{% url 'register:registrant_email' %}" role="button" draggable="false" class="with-chevron">{% trans "Start now" %}</a>
   </div>
+  <h2> {% trans "Questions?" %} </h2>
+    <p>
+     <a href="">{% trans "Visit Help with your poster" %}</a><br>
+      Or
+      <a href ="">{% trans "Contact us" %}</a>
+   </p>
 {% endblock %}

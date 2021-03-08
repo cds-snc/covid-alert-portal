@@ -99,7 +99,12 @@
         {% endif %}
         {% if user.id == healthcareuser.id %}
             <tr>
-              <th scope="row" colspan="2">{% trans "Password" %}</th>
+              <th scope="row">{% trans "Password" %}</th>
+                <td>
+                  {% if last_updated_datetime %}
+                    {% trans "Last changed" %} {{last_updated_datetime}}
+                  {% endif %}
+                  </td>
               <td>
                   <a href="{% url 'user_edit_password' healthcareuser.id %}">
                       <span class="visually-hidden">{% trans "Change your password" %}</span>

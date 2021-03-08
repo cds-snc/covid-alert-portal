@@ -15,7 +15,7 @@
     {# Include the visible fields #}
     {% for field in form.visible_fields %}
       <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
-          {{ field.label_tag }}
+          <strong>{{ field.label_tag }}</strong>
           {% if field.errors %}
             <div id="error--{{ field.html_name }}" class="validation-error">{{ field.errors|first }}</div>
           {% endif %}
