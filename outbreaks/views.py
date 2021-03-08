@@ -17,7 +17,6 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from portal.mixins import Is2FAMixin
 from .forms import DateForm, SeverityForm
 from .protobufs import outbreak_pb2
-from google.protobuf.timestamp_pb2 import Timestamp
 from datetime import datetime, timedelta
 import pytz
 import requests
