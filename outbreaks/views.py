@@ -3,6 +3,7 @@ from .models import Notification, SEVERITY
 from django import forms
 from django.conf import settings
 from django.urls import reverse_lazy
+from django.db.models.functions import Lower
 from django.db.models import Q
 from django.db import transaction, IntegrityError
 from django.shortcuts import redirect
@@ -158,11 +159,12 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
         return initial_data
 
     def form_valid(self, form):
+        location = self.request.session["alert_location"]
         for i in range(self.request.session.get("num_dates", 1)):
             dt = form.cleaned_data.get(f"date_{i}")
 
             # Ensure that the date doesn't exist already for this location
-            if self.notification_exists(dt):
+            if self.notification_exists(dt, location):
                 form.add_duplicate_error(i)
                 return self.form_invalid(form)
 
@@ -171,9 +173,9 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
 
         return super().form_valid(form)
 
-    def notification_exists(self, dt):
+    def notification_exists(self, dt, location):
         try:
-            Notification.objects.get(start_date=dt)
+            Notification.objects.get(start_date=dt, location__id=location)
             return True
         except Notification.DoesNotExist:
             return False
@@ -317,8 +319,11 @@ class HistoryView(PermissionRequiredMixin, Is2FAMixin, ListView):
         # Ensure there is a clean sort and order column
         sort = self.request.GET.get("sort")
         order = self.request.GET.get("order")
+        search = self.request.GET.get("search_text")
         if not sort or sort not in self.sort_options or order not in ["asc", "desc"]:
-            return redirect(reverse_lazy("outbreaks:history") + "?sort=name&order=asc")
+            pstr = "?sort=name&order=asc"
+            params = f"{pstr}&search_text={search}" if search else pstr
+            return redirect(reverse_lazy("outbreaks:history") + params)
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
@@ -354,15 +359,22 @@ class HistoryView(PermissionRequiredMixin, Is2FAMixin, ListView):
                 qs = Notification.objects.all()
             else:
                 qs = Notification.objects.filter(location__province=province)
+
         # Order the queryset
+        return self._order_queryset(qs)
+
+    def _order_queryset(self, qs):
+        order = self.request.GET.get("order")
         sort = self.request.GET.get("sort")
-        order = "" if self.request.GET.get("order") == "asc" else "-"
         if sort == "name":
-            return qs.order_by(order + "location__name")
+            col = Lower("location__name")
+            return qs.order_by(col if order == "asc" else col.desc())
         elif sort == "address":
-            return qs.order_by(order + "location__address")
+            col = Lower("location__address")
+            return qs.order_by(col if order == "asc" else col.desc())
         else:
-            return qs.order_by(order + "created_date")
+            col = "start_date"
+            return qs.order_by(col if order == "asc" else f"-{col}")
 
 
 class ExposureDetailsView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
