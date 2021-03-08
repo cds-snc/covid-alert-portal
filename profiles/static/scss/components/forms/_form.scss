@@ -39,7 +39,7 @@ main form {
         width: 75%;
     }
 
-    button {
+    button[type='submit'] {
         display: inline-block;
         vertical-align: baseline;
         padding: 0px 18px;
@@ -56,6 +56,10 @@ main form {
 
       label {
         font-weight: bold;
+      }
+
+      input {
+        width: 70px;
       }
     }
 

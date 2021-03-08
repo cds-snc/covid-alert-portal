@@ -17,3 +17,10 @@ class Notification(models.Model):
         HealthcareUser, on_delete=models.PROTECT, editable=False
     )
     location = models.ForeignKey(Location, on_delete=models.PROTECT, editable=False)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["start_date"]),
+            models.Index(fields=["end_date"]),
+        ]
+        unique_together = [["start_date", "end_date", "location"]]
