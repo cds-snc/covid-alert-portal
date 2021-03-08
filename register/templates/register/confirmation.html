@@ -19,7 +19,10 @@
 
   <div class="next-steps">
     <div>
-      <p>{% trans "<a href='{% url register:contactus %}'>Contact us</a> if you do not get the email within 2 hours or if you have questions." %}</p>
+      {%url "register:contactus" as link%}
+      {% blocktrans %}
+      <p><a href='{{link}}'>Contact us</a> if you do not get the email within 2 hours or if you have questions.</p>
+      {% endblocktrans %}
       <p>{% trans "Remember to make more posters if your service or event has other addresses. You can come back later if you do not have time now." %}</p>
     </div>
     <img src="{% static 'register/img/sample_poster_img.svg' %}" alt="">
