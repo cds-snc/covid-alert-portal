@@ -16,13 +16,20 @@ class DateForm(HealthcareBaseForm):
         # Generate the desired number of date fields
         for i in range(num_dates):
             self.fields[f"day_{i}"] = forms.IntegerField(
-                label=_("Day"), min_value=1, max_value=31
+                label=_("Day"), min_value=1, max_value=31, widget=forms.TextInput
             )
             self.fields[f"month_{i}"] = forms.IntegerField(
-                label=_("Month"), min_value=1, max_value=datetime.now().month
+                label=_("Month"),
+                min_value=1,
+                max_value=datetime.now().month,
+                widget=forms.TextInput,
             )
             self.fields[f"year_{i}"] = forms.IntegerField(
-                label=_("Year"), min_value=2021, max_value=2021, initial=2021
+                label=_("Year"),
+                min_value=2021,
+                max_value=2021,
+                initial=2021,
+                widget=forms.TextInput,
             )
 
         # Add the fieldset to the meta class
