@@ -2,7 +2,7 @@
 sleep 5
 # Apply database migrations
 echo "Apply database migrations"
-python manage.py migrate --noinput
+python manage.py migrate --noinput --check
 
 # Create default superuser if variables are set
 echo "Check if creating default super user"
