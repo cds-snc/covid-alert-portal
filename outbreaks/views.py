@@ -4,7 +4,10 @@ from django import forms
 from django.conf import settings
 from django.urls import reverse_lazy
 from django.db.models import Q
+from django.db import transaction, IntegrityError
 from django.shortcuts import redirect
+from django.utils.translation import gettext_lazy as _
+from django.utils.translation import get_language
 from django.views.generic import (
     FormView,
     ListView,
@@ -12,7 +15,7 @@ from django.views.generic import (
 )
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from portal.mixins import Is2FAMixin
-from .forms import SearchForm, DateForm, SeverityForm
+from .forms import DateForm, SeverityForm
 from datetime import datetime
 import pytz
 
@@ -20,21 +23,11 @@ import pytz
 DATETIME_FORMAT = "%Y-%m-%d"
 
 
-class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView, FormView):
+class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
     permission_required = ["profiles.can_send_alerts"]
     paginate_by = 5
     model = Location
-    form_class = SearchForm
     template_name = "search.html"
-
-    def get_success_url(self):
-        """
-        POST request (user submitted search) will populate the search_text query parameter for the subsequent forward to the same page as a GET request
-        """
-        return "{}?search_text={}".format(
-            reverse_lazy("outbreaks:search"),
-            self.request.POST.get("search_text"),
-        )
 
     def get_queryset(self):
         search = self.request.GET.get("search_text")
@@ -95,25 +88,95 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
         # Ensure we have a cached location
         if "alert_location" not in request.session:
             return redirect(reverse_lazy("outbreaks:search"))
+
+        # Ensure that we set the initial number of dates
+        if "num_dates" not in request.session:
+            request.session["num_dates"] = 1
+
         return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        adjust_dates = request.POST.get("adjust_dates")
+        if adjust_dates:
+            num_dates = self.request.session.get("num_dates", 1)
+            if adjust_dates == "add":
+                if num_dates < 5:
+                    num_dates += 1
+                    self.request.session["num_dates"] = num_dates
+            else:
+                if num_dates > 1:
+                    num_dates -= 1
+                    self.request.session["num_dates"] = num_dates
+                    self.request.session.pop(f"alert_datetime_{num_dates - 1}", None)
+            return redirect(
+                reverse_lazy("outbreaks:datetime") + f"?num_dates={num_dates}"
+            )
+        return super().post(request, *args, **kwargs)
+
+    def get_form_kwargs(self):
+        # This provides init arguments for the form instance
+        kwargs = super().get_form_kwargs()
+        kwargs["num_dates"] = self.request.session.get("num_dates", 1)
+        return kwargs
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["min_date"] = "2021-01-01"  # Start of the year for simplicity
+        context["max_date"] = datetime.now().strftime(
+            "%Y-%m-%d"
+        )  # Set max date to today
+        context["language"] = get_language()
+
+        """
+        A little bit of trickery going on here. If we have 'num_dates' as a query parameter
+        then we'll set the focus on the day element of the last date in the form. This is here
+        to create a smoother experience in terms of accessibility. When a user using
+        voice-over adds or removes a date, the focus should be returned on this newly added element
+        """
+        num_dates = self.request.GET.get("num_dates")
+        if num_dates:
+            i = int(num_dates) - 1
+            try:
+                context["form"].fields[f"day_{i}"].widget.attrs.update(
+                    {"autofocus": "autofocus"}
+                )
+            except KeyError:
+                # Only legit numbers should work otherwise ignore it
+                pass
+        return context
 
     def get_initial(self):
         # Populate the form with initial session data if we have it
-        ts = self.request.session.get("alert_datetime")
-        if ts:
-            dt = datetime.fromtimestamp(ts)
-            return {"year": dt.year, "month": dt.month, "day": dt.day}
+        initial_data = {}
+        for i in range(self.request.session.get("num_dates", 1)):
+            ts = self.request.session.get(f"alert_datetime_{i}")
+            if ts:
+                dt = datetime.fromtimestamp(ts)
+                initial_data.update(
+                    {f"year_{i}": dt.year, f"month_{i}": dt.month, f"day_{i}": dt.day}
+                )
+        return initial_data
 
     def form_valid(self, form):
-        # Cache the datetime list for the next step
-        dt = datetime(
-            form.cleaned_data.get("year"),
-            form.cleaned_data.get("month"),
-            form.cleaned_data.get("day"),
-        )
-        self.request.session["alert_datetime"] = dt.timestamp()
-        response = super().form_valid(form)
-        return response
+        for i in range(self.request.session.get("num_dates", 1)):
+            dt = form.cleaned_data.get(f"date_{i}")
+
+            # Ensure that the date doesn't exist already for this location
+            if self.notification_exists(dt):
+                form.add_duplicate_error(i)
+                return self.form_invalid(form)
+
+            # Cache the datetime list for the next step.
+            self.request.session[f"alert_datetime_{i}"] = dt.timestamp()
+
+        return super().form_valid(form)
+
+    def notification_exists(self, dt):
+        try:
+            Notification.objects.get(start_date=dt)
+            return True
+        except Notification.DoesNotExist:
+            return False
 
 
 class SeverityView(PermissionRequiredMixin, Is2FAMixin, FormView):
@@ -130,7 +193,7 @@ class SeverityView(PermissionRequiredMixin, Is2FAMixin, FormView):
         # Ensure we have a cached location and datetime
         if (
             "alert_location" not in request.session
-            or "alert_datetime" not in request.session
+            or "alert_datetime_0" not in request.session
         ):
             return redirect(reverse_lazy("outbreaks:search"))
         return super().get(request, *args, **kwargs)
@@ -152,7 +215,7 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         # Ensure we have all necessary data cached
         if (
             "alert_location" not in request.session
-            or "alert_datetime" not in request.session
+            or "alert_datetime_0" not in request.session
             or "alert_level" not in request.session
         ):
             return redirect(reverse_lazy("outbreaks:search"))
@@ -164,36 +227,52 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         location = Location.objects.get(id=self.request.session["alert_location"])
         context["location"] = location
         context["map_link"] = "https://maps.google.com/?q=" + str(location)
+        context["alert_level"] = self.request.session["alert_level"]
 
-        dt = datetime.fromtimestamp(self.request.session["alert_datetime"])
-        context["alert_datetime"] = dt.strftime(DATETIME_FORMAT)
+        num_dates = self.request.session.get("num_dates", 1)
+        context["num_dates"] = num_dates
+        context["dates"] = []
+        for i in range(num_dates):
+            dt = datetime.fromtimestamp(self.request.session[f"alert_datetime_{i}"])
+            context["dates"].append(dt.strftime(DATETIME_FORMAT))
         return context
 
+    @transaction.atomic
     def form_valid(self, form):
+        # Use a transaction to commit all or nothing for the notifications
         try:
-            # Ensure that the datetime is aware (might not be if unit testing or something)
-            tz = pytz.timezone(settings.TIME_ZONE or "UTC")
-            dt = datetime.fromtimestamp(self.request.session["alert_datetime"]).replace(
-                tzinfo=tz
-            )
+            with transaction.atomic():
+                for i in range(self.request.session.get("num_dates", 1)):
+                    self.post_notification(form, i)
 
-            # Create the notification
-            notification = Notification(
-                severity=self.request.session["alert_level"],
-                start_date=dt,
-                end_date=dt,
-                location_id=self.request.session["alert_location"],
-                created_by=self.request.user,
-            )
-            notification.save()
-
-            # Continue with the redirect
-            response = super().form_valid(form)
-            return response
+                # Continue with the redirect
+                response = super().form_valid(form)
+                return response
 
         except KeyError:
             # Post request without having data cached in session
             return redirect(reverse_lazy("outbreaks:search"))
+        except IntegrityError:
+            # The duplicate validation is in the datetime view so this
+            # should theoretically never happen
+            raise
+
+    def post_notification(self, form, i):
+        # Ensure that the datetime is aware (might not be if unit testing or something)
+        tz = pytz.timezone(settings.TIME_ZONE or "UTC")
+        dt = datetime.fromtimestamp(
+            self.request.session[f"alert_datetime_{i}"]
+        ).replace(tzinfo=tz)
+
+        # Create the notification
+        notification = Notification(
+            severity=self.request.session["alert_level"],
+            start_date=dt,
+            end_date=dt,
+            location_id=self.request.session["alert_location"],
+            created_by=self.request.user,
+        )
+        notification.save()
 
 
 class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
@@ -204,7 +283,7 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
         # Ensure we have all necessary data cached
         if (
             "alert_location" not in request.session
-            or "alert_datetime" not in request.session
+            or "alert_datetime_0" not in request.session
             or "alert_level" not in request.session
         ):
             return redirect(reverse_lazy("outbreaks:search"))
@@ -212,32 +291,26 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         # Fetch and clear the session data for this notification
-        dt = datetime.fromtimestamp(self.request.session.pop("alert_datetime"))
-        str_dt = dt.strftime(DATETIME_FORMAT)
         location = Location.objects.get(id=self.request.session.pop("alert_location"))
         context = super().get_context_data(*args, **kwargs)
         context["severity"] = self.request.session.pop("alert_level")
-        context["start_date"] = str_dt
-        context["end_date"] = str_dt
         context["location"] = location
+
+        num_dates = self.request.session.pop("num_dates", 1)
+        context["num_dates"] = num_dates
+        context["dates"] = []
+        for i in range(num_dates):
+            dt = datetime.fromtimestamp(self.request.session.pop(f"alert_datetime_{i}"))
+            context["dates"].append(dt.strftime(DATETIME_FORMAT))
+
         return context
 
 
-class HistoryView(PermissionRequiredMixin, Is2FAMixin, ListView, FormView):
+class HistoryView(PermissionRequiredMixin, Is2FAMixin, ListView):
     permission_required = ["profiles.can_send_alerts"]
     paginate_by = 10
     model = Notification
-    form_class = SearchForm
     template_name = "history.html"
-
-    def get_success_url(self):
-        """
-        POST request (user submitted search) will populate the search_text query parameter for the subsequent forward to the same page as a GET request
-        """
-        return "{}?search_text={}".format(
-            reverse_lazy("outbreaks:history"),
-            self.request.POST.get("search_text"),
-        )
 
     def get_queryset(self):
         province = self.request.user.province.abbr

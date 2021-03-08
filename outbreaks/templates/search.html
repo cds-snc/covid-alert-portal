@@ -12,16 +12,12 @@
 
   <p>{% trans "You’ll send notifications of a public exposure to people who have installed COVID alert" %}</p>
 
-  <form method="post" id="form--{{ request.resolver_match.url_name }}">
+  <form action="{% url 'outbreaks:search' %}" method="get" id="form--{{ request.resolver_match.url_name }}">
     {% csrf_token %}
 
     <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %} search_bar">
       <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
-        <b>{{ form.search_text.label_tag }}</b>
-        {% if form.search_text.errors %}
-          <div id="error--{{ form.search_text.html_name }}" class="validation-error">{{ form.search_text.errors|first }}</div>
-        {% endif %}
-        {{ form.search_text }}
+        <input type="text" name="search_text" size="30" autocomplete="on" id="id_search_text">
         <button type="submit">
           {{ _("Search") }}
         </button>

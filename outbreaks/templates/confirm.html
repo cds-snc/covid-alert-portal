@@ -40,7 +40,7 @@
         </tr>
         <tr>
             <th scope="row">{% trans "Date(s)" %}</th>
-            <td>{{ alert_datetime }}</td>
+            <td>{{ dates|join:", " }}</td>
             <td><a href="{% url 'outbreaks:datetime' %}">{% trans "Change" %}<span class="visually-hidden">{% trans "dates" %}</span></a></td>
         </tr>
         <tr>
