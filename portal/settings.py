@@ -401,7 +401,8 @@ CSP_DEFAULT_SRC = [
 ]
 CSP_STYLE_SRC = [
     "'self'",
-    "'unsafe-inline'",
+    "'sha256-wj97CBnjU4ly4cqQnM0huquRQF943qGisXfpavz3YsU='",
+    "'sha256-uwPeycnNJj5VRuojI2kTqwzlRkuYgdlJ3laHnGO8S64='",
     "fonts.googleapis.com",
     "cdn.jsdelivr.net",
 ]
@@ -413,8 +414,7 @@ CSP_IMG_SRC = [
 ]
 CSP_SCRIPT_SRC = [
     "'self'",
-    "'unsafe-eval'",
-    "'unsafe-inline'",
+    "blob:",
     "cdnjs.cloudflare.com",
     "cdn.jsdelivr.net",
 ]

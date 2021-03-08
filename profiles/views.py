@@ -14,7 +14,7 @@ from django.views.generic import (
     DetailView,
 )
 from django.views.generic.edit import UpdateView
-
+from easyaudit.models import CRUDEvent
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django_otp import DEVICE_ID_SESSION_KEY, devices_for_user
@@ -52,6 +52,9 @@ from .forms import (
     YubikeyDeviceCreateForm,
     YubikeyVerifyForm,
 )
+
+from django.utils import translation
+import locale
 
 
 class YubikeyVerifyView(FormView):
@@ -385,6 +388,28 @@ class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):
         context["backup_codes_count"] = (
             _devices.token_set.all().count() if _devices else 0
         )
+
+        try:
+
+            cur_lang = translation.get_language()
+
+            recent_date = (
+                CRUDEvent.objects.filter(user_id=self.request.user.id)
+                .filter(changed_fields__icontains="password")
+                .first()
+                .datetime
+            )
+
+            if cur_lang == "en":
+                locale.setlocale(locale.LC_ALL, "en_ca")
+                context["last_updated_datetime"] = recent_date.strftime("%B %d, %Y")
+            if cur_lang == "fr":
+                locale.setlocale(locale.LC_ALL, "fr_ca")
+                context["last_updated_datetime"] = recent_date.strftime("%d %B %Y")
+
+        except AttributeError:
+            context["last_updated_datetime"] = ""
+
         return context
 
 
