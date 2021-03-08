@@ -7,7 +7,7 @@ main table {
   border-spacing: 0;
   border-collapse: collapse;
 
-  thead th:last-child {
+  thead th:last-child:not(.duet-date__table-header) {
     color: transparent;
   }
 
@@ -16,8 +16,8 @@ main table {
     text-align: left;
   }
 
-  th,
-  td {
+  th:not(.duet-date__table-header),
+  td:not(.duet-date__cell) {
     padding: $space-md $space-sm $space-sm 0;
     border-bottom: 1px solid $color-grey-light;
     text-align: left;
@@ -48,4 +48,10 @@ main table {
 
 .current {
   display: block;
+}
+
+.duet-date__table-header {
+    span {
+        text-align: center;
+    }
 }
