@@ -18,12 +18,12 @@ def is_svg(contents):
     tag = None
     f = io.BytesIO(contents.encode())
     try:
-        for event, el in et.iterparse(f, ('start',)):
+        for event, el in et.iterparse(f, ("start",)):
             tag = el.tag
             break
     except et.ParseError:
         pass
-    return tag == '{http://www.w3.org/2000/svg}svg'
+    return tag == "{http://www.w3.org/2000/svg}svg"
 
 
 def is_base64(sb):
