@@ -3,6 +3,7 @@ from django.contrib import admin
 from datetime import timedelta
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import Permission
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationForm
 from django.contrib.admin.templatetags.admin_list import _boolean_icon
@@ -38,6 +39,9 @@ class UserChangeForm(forms.ModelForm):
     """
 
     password = ReadOnlyPasswordHashField()
+    can_send_alerts = forms.BooleanField(
+        label=_("Allow user to send outbreak alerts"), required=False
+    )
 
     class Meta:
         model = HealthcareUser
@@ -49,9 +53,17 @@ class UserChangeForm(forms.ModelForm):
             "is_active",
             "is_admin",
             "is_superuser",
+            "can_send_alerts",
             "phone_number",
             "blocked_until",
         )
+
+    def __init__(self, *args, **kwargs):
+        if "instance" in kwargs:
+            user = kwargs["instance"]
+            initial = {"can_send_alerts": user.has_perm("profiles.can_send_alerts")}
+            kwargs["initial"] = initial
+        super().__init__(*args, **kwargs)
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -59,10 +71,26 @@ class UserChangeForm(forms.ModelForm):
         # field does not have access to the initial value
         return self.initial["password"]
 
+    def save(self, commit=True):
+        # Save the custom permission
+        user = super().save(commit=False)
+        permission = Permission.objects.get(codename="can_send_alerts")
+        if self.cleaned_data["can_send_alerts"]:
+            user.user_permissions.add(permission)
+        else:
+            user.user_permissions.remove(permission)
+        if commit:
+            user.save()
+        return user
+
 
 class UserAddForm(UserCreationForm):
     """A form for creating new users. Extends from UserCreationForm form, which
     means it includes a repeated password."""
+
+    can_send_alerts = forms.BooleanField(
+        label=_("Allow user to send outbreak alerts"), required=False
+    )
 
     class Meta:
         model = HealthcareUser
@@ -72,12 +100,25 @@ class UserAddForm(UserCreationForm):
             "province",
             "is_admin",
             "is_superuser",
+            "can_send_alerts",
             "phone_number",
         )
 
     def clean_email(self):
         email = self.cleaned_data.get("email", "").lower()
         return email
+
+    def save(self, commit=True):
+        # Save the custom permission
+        user = super().save(commit=False)
+        permission = Permission.objects.get(codename="can_send_alerts")
+        if self.cleaned_data["can_send_alerts"]:
+            user.user_permissions.add(permission)
+        else:
+            user.user_permissions.remove(permission)
+        if commit:
+            user.save()
+        return user
 
 
 class UserAdmin(BaseUserAdmin):
@@ -95,6 +136,7 @@ class UserAdmin(BaseUserAdmin):
         "is_active",
         "is_admin",
         "is_superuser",
+        "can_send_alerts",
         "number_keys_generated",
     )
     list_filter = (
@@ -102,6 +144,11 @@ class UserAdmin(BaseUserAdmin):
         "is_superuser",
         "is_active",
     )
+
+    def can_send_alerts(self, user: HealthcareUser):
+        return user.has_perm("profiles.can_send_alerts")
+
+    can_send_alerts.boolean = True
 
     def number_keys_generated(self, user: HealthcareUser):
         return user.covidkey_set.filter(
@@ -129,7 +176,7 @@ class UserAdmin(BaseUserAdmin):
                 ),
             },
         ),
-        ("Permissions", {"fields": ("is_admin", "is_superuser")}),
+        ("Permissions", {"fields": ("is_admin", "is_superuser", "can_send_alerts")}),
     )
     search_fields = ("email",)
     ordering = ("email",)
@@ -141,7 +188,15 @@ class UserAdmin(BaseUserAdmin):
 
         permissions_tuple = (
             "Permissions",
-            {"fields": ("is_admin", "is_superuser", "is_active", "blocked_until")},
+            {
+                "fields": (
+                    "is_admin",
+                    "is_superuser",
+                    "is_active",
+                    "blocked_until",
+                    "can_send_alerts",
+                )
+            },
         )
         fieldsets = (
             (None, {"fields": ("email", "password")}),

@@ -9,6 +9,7 @@ from phonenumber_field.formfields import PhoneNumberField
 from dependency_injector.wiring import inject, Provide
 from portal.containers import Container
 from portal.services import NotifyService
+from .widgets import AutocompleteWidget
 
 location_choices = [
     ("restaurant_bar_coffee", _("Restaurant, bar, coffee shop")),
@@ -59,7 +60,7 @@ class LocationNameForm(HealthcareBaseForm, forms.Form):
 
 
 class LocationAddressForm(HealthcareBaseForm, forms.Form):
-    address = forms.CharField(label=_("Address line 1"))
+    address = forms.CharField(label=_("Address line 1"), widget=AutocompleteWidget())
     address_2 = forms.CharField(label=_("Address line 2"), required=False)
     city = forms.CharField(label=_("City"))
     province = forms.CharField(label=_("Province or territory"))
