@@ -170,7 +170,8 @@ class LocationWizard(NamedUrlSessionWizardView):
         location.contact_phone = data["contact_phone"]
         location.save()
 
-        print(reverse('register:poster_view', kwargs={"pk": location.pk}))
+        poster_url = reverse('register:poster_view', kwargs={"pk": location.pk})
+        print("http://localhost:8000{url}".format(url=poster_url))
         # Generate poster and send
 
         return HttpResponseRedirect(reverse("register:confirmation"))
