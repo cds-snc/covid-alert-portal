@@ -45,7 +45,7 @@ django-solo = "*"
 dependency-injector = "*"
 django-formtools = "*"
 pynacl = "*"
-qrcode = {extras = ["pil"], version = "*"}
+pyqrcode = "*"
 
 [pipenv]
 allow_prereleases = true
