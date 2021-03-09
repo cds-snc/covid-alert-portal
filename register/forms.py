@@ -79,12 +79,14 @@ class RegisterSummaryForm(HealthcareBaseForm, forms.Form):
 
     pass
 
+
 class LocationUnavailableForm(HealthcareBaseForm, forms.Form):
     """
     A form to show a detour to unavailable locations.
     """
 
     pass
+
 
 class ContactUsForm(HealthcareBaseForm, forms.Form):
     help_category = forms.ChoiceField(

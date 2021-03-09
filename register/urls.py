@@ -28,7 +28,7 @@ location_wizard = views.LocationWizard.as_view(
     named_location_forms,
     url_name="register:location_step",
     done_step_name="confirmation",
-    condition_dict={"unavailable":check_for_province},
+    condition_dict={"unavailable": check_for_province},
 )
 
 urlpatterns = [

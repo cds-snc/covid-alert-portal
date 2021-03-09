@@ -115,7 +115,7 @@ class RegistrantNameView(UpdateView):
 
 TEMPLATES = {
     "address": "register/location_address.html",
-    "unavailable":"register/location_unavailable.html",
+    "unavailable": "register/location_unavailable.html",
     "category": "register/location_category.html",
     "name": "register/location_name.html",
     "contact": "register/location_contact.html",
@@ -125,14 +125,14 @@ TEMPLATES = {
 
 included_provinces = {"ON", "SK"}
 
-def check_for_province(wizard):
-   data = wizard.get_cleaned_data_for_step('address') or {}
-   print(included_provinces.__contains__(data.get('province')))
-   if(data.get('province') is not None):
-       print(not included_provinces.__contains__(data.get('province')))
-       return not included_provinces.__contains__(data.get('province'))
-   return False
 
+def check_for_province(wizard):
+    data = wizard.get_cleaned_data_for_step("address") or {}
+    print(included_provinces.__contains__(data.get("province")))
+    if data.get("province") is not None:
+        print(not included_provinces.__contains__(data.get("province")))
+        return not included_provinces.__contains__(data.get("province"))
+    return False
 
 
 class LocationWizard(NamedUrlSessionWizardView):
