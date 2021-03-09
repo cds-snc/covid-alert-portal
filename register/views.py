@@ -13,7 +13,7 @@ from datetime import datetime, timedelta
 import pytz
 from django.contrib import messages
 from .forms import location_choices
-
+from .utils import generate_qr_code
 
 class RegistrantEmailView(FormView):
     form_class = EmailForm
@@ -170,20 +170,26 @@ class LocationWizard(NamedUrlSessionWizardView):
         location.contact_phone = data["contact_phone"]
         location.save()
 
-        # Create payload
-        payload = "{short_code}\n{name}\n{address}, {city}".format(
-            short_code=location.short_code,
-            name=location.name,
-            address=location.address,
-            city=location.city,
-        )
-
-        # Encode payload
-        # Sign payload
-        # Generate QR Code
-        # Generate Poster
+        print(reverse('register:poster_view', kwargs={"pk": location.pk}))
+        # Generate poster and send
 
         return HttpResponseRedirect(reverse("register:confirmation"))
+
+
+class PosterView(TemplateView):
+    template_name = "register/poster.svg"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        location = Location.objects.get(id=self.kwargs["pk"])
+
+        qr_code = generate_qr_code(location)
+
+        context['qr_code'] = qr_code
+        context['name'] = location.name
+        context['address'] = location.address
+        context['address_details'] = "{city}, {province} {postal_code}".format(city=location.city, province=location.province, postal_code=location.postal_code)
+        return context
 
 
 class RegisterConfirmationPageView(TemplateView):
