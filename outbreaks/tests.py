@@ -87,18 +87,6 @@ class SearchView(NotificationsTestCase):
         # assert that there are no locations listed
         self.assertEqual(len(response.context["object_list"]), 0)
 
-    def test_post_request(self):
-        # Test that posting the form will redirect back to the same page, but with query params
-        self.login()
-        response = self.client.post(
-            reverse("outbreaks:search"), {"search_text": "nandos"}
-        )
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(
-            response.url,
-            reverse("outbreaks:search") + "?search_text=nandos",
-        )
-
     def test_search_functionality(self):
         # Test that GET with a query param produces search results
         self.login()
@@ -162,14 +150,85 @@ class DatetimeView(NotificationsTestCase):
 
     def test_invalid_data(self):
         # Ensure that the datetime form handles data errors
-        self.assertTrue(DateForm({"day": 1, "month": 2, "year": 2021}).is_valid())
-        self.assertFalse(DateForm({"day": 1, "year": 2021}).is_valid())
-        self.assertFalse(DateForm({"day": 1, "month": 2, "year": 2020}).is_valid())
-        self.assertFalse(DateForm({"day": 1, "month": 2}).is_valid())
-        self.assertFalse(DateForm({"month": 2, "year": 2021}).is_valid())
-        self.assertFalse(DateForm({"day": 0, "month": 2, "year": 2021}).is_valid())
-        self.assertFalse(DateForm({"day": 32, "month": 2, "year": 2021}).is_valid())
-        self.assertFalse(DateForm({"day": 1, "month": 13, "year": 2021}).is_valid())
+        self.assertTrue(
+            DateForm(1, {"day_0": 1, "month_0": 2, "year_0": 2021}).is_valid()
+        )
+        self.assertFalse(DateForm(1, {"day_0": 1, "year_0": 2021}).is_valid())
+        self.assertFalse(
+            DateForm(1, {"day_0": 1, "month_0": 2, "year_0": 2020}).is_valid()
+        )
+        self.assertFalse(DateForm(1, {"day_0": 1, "month_0": 2}).is_valid())
+        self.assertFalse(DateForm(1, {"month_0": 2, "year_0": 2021}).is_valid())
+        self.assertFalse(
+            DateForm(1, {"day_0": 0, "month_0": 2, "year_0": 2021}).is_valid()
+        )
+        self.assertFalse(
+            DateForm(1, {"day_0": 32, "month_0": 2, "year_0": 2021}).is_valid()
+        )
+        self.assertFalse(
+            DateForm(1, {"day_0": 1, "month_0": 13, "year_0": 2021}).is_valid()
+        )
+
+    def test_add_remove_date(self):
+        """
+        Assert that adding/removing a new date will lead us back to the same page, but with new form fields
+        """
+
+        # Login and ensure that a location has been cached
+        self.login()
+        location = Location.objects.get(name="Nandos")
+        self.client.get(reverse("outbreaks:profile", args=[location.id]))
+
+        # Post an 'add date' request and ensure it redirects back to the same page
+        response = self.client.post(
+            reverse("outbreaks:datetime"), {"adjust_dates": "add"}
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime")))
+
+        # Assert that getting the same page now returns two dates
+        response = self.client.get(reverse("outbreaks:datetime"))
+        self.assertContains(response, "day_0")
+        self.assertContains(response, "day_1")
+
+        # Post a 'remove date' request and ensure it redirects back to the same page
+        response = self.client.post(
+            reverse("outbreaks:datetime"), {"adjust_dates": "remove"}
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime")))
+
+        # Assert that getting the same page now returns a single date
+        response = self.client.get(reverse("outbreaks:datetime"))
+        self.assertContains(response, "day_0")
+        self.assertNotContains(response, "day_1")
+
+    def test_duplicate_error(self):
+        """
+        Assert that setting the datetime to a duplicate raises an error
+        """
+
+        # Login and ensure that a location has been cached
+        self.login()
+        location = Location.objects.get(name="Nandos")
+        self.client.get(reverse("outbreaks:profile", args=[location.id]))
+
+        # Post a date
+        self.client.post(
+            reverse("outbreaks:datetime"), {"day_0": 1, "month_0": 1, "year_0": 2021}
+        )
+        self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
+        response = self.client.post(reverse("outbreaks:confirm"), {})
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse("outbreaks:confirmed"))
+
+        # Post duplicate date
+        response = self.client.post(
+            reverse("outbreaks:datetime"), {"day_0": 1, "month_0": 1, "year_0": 2021}
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "datetime.html")
+        self.assertContains(response, "error")
 
 
 class SeverityView(NotificationsTestCase):
@@ -186,7 +245,7 @@ class SeverityView(NotificationsTestCase):
         self.client.get(reverse("outbreaks:profile", args=[location.id]))
         self.client.post(
             reverse("outbreaks:datetime"),
-            {"day": 1, "month": 1, "year": 2021},
+            {"day_0": 1, "month_0": 1, "year_0": 2021},
         )
         response = self.client.get(reverse("outbreaks:severity"))
         self.assertEqual(response.status_code, 200)
@@ -214,7 +273,7 @@ class ConfirmView(NotificationsTestCase):
         self.client.get(reverse("outbreaks:profile", args=[location.id]))
         self.client.post(
             reverse("outbreaks:datetime"),
-            {"day": 1, "month": 1, "year": 2021},
+            {"day_0": 1, "month_0": 1, "year_0": 2021},
         )
         self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
         response = self.client.get(reverse("outbreaks:confirm"))
@@ -235,7 +294,7 @@ class ConfirmView(NotificationsTestCase):
         self.client.get(reverse("outbreaks:profile", args=[location.id]))
         self.client.post(
             reverse("outbreaks:datetime"),
-            {"day": 1, "month": 1, "year": 2021},
+            {"day_0": 1, "month_0": 1, "year_0": 2021},
         )
         self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
         response = self.client.post(reverse("outbreaks:confirm"), {})
@@ -259,7 +318,7 @@ class ConfirmedView(NotificationsTestCase):
         self.client.get(reverse("outbreaks:profile", args=[location.id]))
         self.client.post(
             reverse("outbreaks:datetime"),
-            {"day": 1, "month": 1, "year": 2021},
+            {"day_0": 1, "month_0": 1, "year_0": 2021},
         )
         self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
         response = self.client.get(reverse("outbreaks:confirmed"))
@@ -268,33 +327,31 @@ class ConfirmedView(NotificationsTestCase):
 
 
 class HistoryView(NotificationsTestCase):
-    def test_initial_view(self):
-        # Assert that the correct template is loaded and that all results are visible
+    def test_initial_view_redirect(self):
+        # Ensure that the initial view redirects to add sort params
         self.login()
         response = self.client.get(reverse("outbreaks:history"))
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.url.startswith(reverse("outbreaks:history")))
+
+    def test_initial_view_all_results(self):
+        # Assert that the correct template is loaded and that all results are visible
+        self.login()
+        response = self.client.get(
+            reverse("outbreaks:history"), {"sort": "name", "order": "asc"}
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "history.html")
 
         # assert that there all notifications are listed
         self.assertEqual(len(response.context["object_list"]), 2)
 
-    def test_post_request(self):
-        # Test that posting the form will redirect back to the same page, but with query params
-        self.login()
-        response = self.client.post(
-            reverse("outbreaks:history"), {"search_text": "nandos"}
-        )
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(
-            response.url,
-            reverse("outbreaks:history") + "?search_text=nandos",
-        )
-
     def test_search_functionality(self):
         # Test that GET with a query param produces search results
         self.login()
         response = self.client.get(
-            reverse("outbreaks:history"), {"search_text": "nandos"}
+            reverse("outbreaks:history"),
+            {"search_text": "nandos", "sort": "name", "order": "asc"},
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "history.html")

@@ -27,6 +27,7 @@
     <link href="{% static 'css/normalize.css' %}" rel="stylesheet">
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alphagov/accessible-autocomplete/dist/accessible-autocomplete.min.css" />
 
     <title>{% block title %}{% endblock %}{% block title_suffix %} {{ title_suffix }}{% endblock %}</title>
   </head>
@@ -69,5 +70,6 @@
 
     </div>
     <script src="{% static 'js/script.js' %}"></script>
+    {% block scripts %}{% endblock %}
   </body>
 </html>

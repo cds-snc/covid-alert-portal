@@ -10,16 +10,12 @@
   {% include  "includes/flash_messages.html" %}
   <h1>{% trans "Notification history" %}</h1>
 
-  <form method="post" id="form--{{ request.resolver_match.url_name }}">
+  <form method="get" id="form--{{ request.resolver_match.url_name }}">
     {% csrf_token %}
 
     <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %} search_bar">
       <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
-        <b>{{ form.search_text.label_tag }}</b>
-        {% if form.search_text.errors %}
-          <div id="error--{{ form.search_text.html_name }}" class="validation-error">{{ form.search_text.errors|first }}</div>
-        {% endif %}
-        {{ form.search_text }}
+        <input type="text" name="search_text" size="30" autocomplete="on" id="id_search_text">
         <button type="submit">
           {{ _("Search") }}
         </button>
@@ -32,9 +28,36 @@
       <caption class="visually-hidden">{% trans "Prior notifications" %}</caption>
       <thead>
           <tr>
-            <th scope="col">{% trans "Place name" %}</th>
-            <th scope="col">{% trans "Address" %}</th>
-            <th scope="col">{% trans "Date of exposure" %}</th>
+            <th scope="col">
+              <a href="?{% param_replace sort='name' order='asc' %}" class="icon-arrow up {% if sort == 'name' and order == 'asc' %} selected {% endif %}">
+                <span class="visually-hidden">{% trans "Sort by name, ascending" %}</span>
+              </a>
+              <a href="?{% param_replace sort='name' order='desc' %}" class="icon-arrow down {% if sort == 'name' and order == 'desc' %} selected {% endif %}">
+                <span class="visually-hidden">{% trans "Sort by name, descending" %}</span>
+              </a>
+              <br>
+              {% trans "Place name" %}
+            </th>
+            <th scope="col">
+              <a href="?{% param_replace sort='address' order='asc' %}" class="icon-arrow up {% if sort == 'address' and order == 'asc' %} selected {% endif %}">
+                <span class="visually-hidden">{% trans "Sort by address, ascending" %}</span>
+              </a>
+              <a href="?{% param_replace sort='address' order='desc' %}" class="icon-arrow down {% if sort == 'address' and order == 'desc' %} selected {% endif %}">
+                <span class="visually-hidden">{% trans "Sort by address, descending" %}</span>
+              </a>
+              <br>
+              {% trans "Address" %}
+            </th>
+            <th scope="col">
+              <a href="?{% param_replace sort='date' order='asc' %}" class="icon-arrow up {% if sort == 'date' and order == 'asc' %} selected {% endif %}">
+                <span class="visually-hidden">{% trans "Sort by date of exposure, ascending" %}</span>
+              </a>
+              <a href="?{% param_replace sort='date' order='desc' %}" class="icon-arrow down {% if sort == 'date' and order == 'desc' %} selected {% endif %}">
+                <span class="visually-hidden">{% trans "Sort by date of exposure, descending" %}</span>
+              </a>
+              <br>
+              {% trans "Date of exposure" %}
+            </th>
             <th scope="col"></th>
           </tr>
       </thead>
