@@ -276,7 +276,8 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         notification = Notification(
             severity=self.request.session["alert_level"],
             start_date=dt,
-            end_date=dt + timedelta(hours=2),  # server expects valid interval
+            # server expects valid interval, give the end of current day
+            end_date=dt.replace(hour=23, minute=59, second=59, microsecond=0),
             location_id=self.request.session["alert_location"],
             created_by=self.request.user,
         )
