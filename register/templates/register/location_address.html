@@ -1,5 +1,5 @@
 {% extends 'register/base.html' %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
@@ -20,4 +20,9 @@
   </div>
 
   {% include "includes/cds_form.html" with submit_text=_("Next") %}
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://cdn.jsdelivr.net/gh/alphagov/accessible-autocomplete/dist/accessible-autocomplete.min.js"></script>
+  <script src="{% static 'register/js/address-autocomplete.js' %}"></script>
 {% endblock %}
