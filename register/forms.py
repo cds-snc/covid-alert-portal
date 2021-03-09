@@ -9,6 +9,7 @@ from phonenumber_field.formfields import PhoneNumberField
 from dependency_injector.wiring import inject, Provide
 from portal.containers import Container
 from portal.services import NotifyService
+from .widgets import AutocompleteWidget
 
 location_choices = [
     ("restaurant_bar_coffee", _("Restaurant, bar, coffee shop")),
@@ -59,7 +60,7 @@ class LocationNameForm(HealthcareBaseForm, forms.Form):
 
 
 class LocationAddressForm(HealthcareBaseForm, forms.Form):
-    address = forms.CharField(label=_("Address line 1"))
+    address = forms.CharField(label=_("Address line 1"), widget=AutocompleteWidget())
     address_2 = forms.CharField(label=_("Address line 2"), required=False)
     city = forms.CharField(label=_("City"))
     province = forms.CharField(label=_("Province or territory"))
@@ -78,3 +79,26 @@ class RegisterSummaryForm(HealthcareBaseForm, forms.Form):
     """
 
     pass
+
+
+class ContactUsForm(HealthcareBaseForm, forms.Form):
+    help_category = forms.ChoiceField(
+        label="",
+        choices=[
+            ("get_help", _("Get Help.")),
+            ("give_feedback", _("Give Feedback.")),
+            ("something_else", _("Something Else.")),
+        ],
+        widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
+    )
+    more_info = forms.CharField(
+        label=_("Tell us more about the issue"),
+        widget=forms.Textarea,
+    )
+    contact_email = forms.EmailField(
+        label=_("Email address if you want a reply"),
+        help_text=_(
+            "We'll use this if we need to contact you. We will not use your email address for anything else."
+        ),
+        required=False,
+    )

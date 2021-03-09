@@ -23,26 +23,26 @@ pickers.forEach(function(picker) {
     const language = picker.getAttribute("language");
     if (language == 'fr') {
         picker.localization = {
-            buttonLabel: "Choose date",
-            prevMonthLabel: "Previous month",
-            nextMonthLabel: "Next month",
-            monthSelectLabel: "Month",
-            yearSelectLabel: "Year",
-            closeLabel: "Close dialog",
-            keyboardInstruction: "You can use arrow keys to navigate dates",
-            calendarHeading: "Select date",
+            buttonLabel: "Choisissez la date",
+            prevMonthLabel: "Le mois précédent",
+            nextMonthLabel: "Le mois prochain",
+            monthSelectLabel: "Mois",
+            yearSelectLabel: "An",
+            closeLabel: "Fermer la boîte de dialogue",
+            keyboardInstruction: "Vous pouvez utiliser les touches fléchées pour parcourir les dates",
+            calendarHeading: "Sélectionner une date",
             dayNames: [
-              "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
-              "Friday", "Saturday"
+              "dimanche", "lundi", "mardi", "mercredi", "jeudi",
+              "vendredi", "samedi"
             ],
             monthNames: [
-              "January", "February", "March", "April",
-              "May", "June", "July", "August",
-              "September", "October", "November", "December"
+              "janvier", "février", "mars", "avril",
+              "mai", "juin", "juillet", "août",
+              "septembre", "octobre", "novembre", "décembre"
             ],
             monthNamesShort: [
-              "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-              "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+              "janv", "févr", "mars", "avril", "mai", "juin",
+              "juil", "août", "sept", "oct", "nov", "déc"
             ],
             locale: "ca-FR",
         }
