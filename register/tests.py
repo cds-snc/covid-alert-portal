@@ -5,10 +5,39 @@ from waffle.models import Switch
 
 from . import forms
 from .models import Registrant, Location, EmailConfirmation
-from .utils import generate_random_key
+from . import utils
 from django.contrib.messages import get_messages
 from portal.services import NotifyService
 from portal import container
+import base64
+import xml.etree.cElementTree as et
+import io
+
+
+def is_svg(contents):
+    tag = None
+    f = io.BytesIO(contents.encode())
+    try:
+        for event, el in et.iterparse(f, ('start',)):
+            tag = el.tag
+            break
+    except et.ParseError:
+        pass
+    return tag == '{http://www.w3.org/2000/svg}svg'
+
+
+def is_base64(sb):
+    try:
+        if isinstance(sb, str):
+            # If there's any unicode here, an exception will be thrown and the function will return false
+            sb_bytes = bytes(sb, "ascii")
+        elif isinstance(sb, bytes):
+            sb_bytes = sb
+        else:
+            raise ValueError("Argument must be string or bytes")
+        return base64.b64encode(base64.b64decode(sb_bytes)) == sb_bytes
+    except Exception:
+        return False
 
 
 class RegisterView(TestCase):
@@ -220,13 +249,68 @@ class LocationModel(TestCase):
 
 class Utils(TestCase):
     def test_generate_short_code_default_length(self):
-        code = generate_random_key()
+        code = utils.generate_random_key()
         self.assertEqual(len(code), 8)
 
     def test_generate_short_code_custom_length(self):
-        code = generate_random_key(5)
+        code = utils.generate_random_key(5)
         self.assertEqual(len(code), 5)
 
     def test_generate_short_code_alphanumeric(self):
-        code = generate_random_key()
+        code = utils.generate_random_key()
         self.assertTrue(code.isalnum())
+
+    def test_generate_payload(self):
+        location = Location.objects.create(
+            category="category",
+            name="Name of venue",
+            address="Address line 1",
+            city="Ottawa",
+            province="ON",
+            postal_code="K1K 1K1",
+            contact_email="test@test.com",
+            contact_phone="613-555-5555",
+        )
+
+        payload = utils.generate_payload(location)
+        self.assertIn(location.short_code, payload)
+        self.assertIn(location.name, payload)
+        self.assertIn(location.address, payload)
+        self.assertIn(location.city, payload)
+
+    def test_sign_payload(self):
+        location = Location.objects.create(
+            category="category",
+            name="Name of venue",
+            address="Address line 1",
+            city="Ottawa",
+            province="ON",
+            postal_code="K1K 1K1",
+            contact_email="test@test.com",
+            contact_phone="613-555-5555",
+        )
+
+        payload = utils.generate_payload(location)
+        signed = utils.sign_payload(payload)
+        self.assertTrue(is_base64(signed))
+
+    def test_generate_qr_code(self):
+        url = "http://thisisjustatesturl.com/#thiswouldbethesignedpayload"
+
+        qrcode = utils.generate_qrcode(url)
+        self.assertTrue(is_svg(qrcode))
+
+    def test_get_signed_qrcode(self):
+        location = Location.objects.create(
+            category="category",
+            name="Name of venue",
+            address="Address line 1",
+            city="Ottawa",
+            province="ON",
+            postal_code="K1K 1K1",
+            contact_email="test@test.com",
+            contact_phone="613-555-5555",
+        )
+
+        qrcode = utils.get_signed_qrcode(location)
+        self.assertTrue(is_svg(qrcode))

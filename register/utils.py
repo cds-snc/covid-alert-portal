@@ -34,43 +34,42 @@ def load_signature_key():
     return signing_key
 
 
-def get_poster_payload():
-    pass
-
-
-def sign_payload():
-    pass
-
-def generate_qr_code(location):
-
-    # Create payload
+def generate_payload(location):
     payload = "{short_code}\n{name}\n{address}, {city}".format(
         short_code=location.short_code,
         name=location.name,
         address=location.address,
         city=location.city,
     )
-    print(payload)
+    return payload
 
-    # Encode payload
+
+def sign_payload(payload):
     payload_bytes = payload.encode()
-    print("Payload bytes:")
-    print(payload_bytes)
-
-    # Sign payload
     signing_key = load_signature_key()
     signed_b64 = signing_key.sign(payload_bytes, encoder=Base64Encoder)
-    print("Signed base64")
-    print(signed_b64)
+    return signed_b64.decode()
 
-    # Build URL
-    url_prefix = "https://retrieval.wild-samphire.cdssandbox.xyz/exposure-configuration/download.html#"
-    url = url_prefix + str(signed_b64.decode())
-    print(url)
 
+def generate_qrcode(url):
     qrcode = pyqrcode.create(url)
 
     buffer = io.BytesIO()
     qrcode.svg(buffer, xmldecl=False, scale=3)
-    
+
     return buffer.getvalue().decode()
+
+
+def get_signed_qrcode(location):
+    # Create payload
+    payload = generate_payload(location)
+
+    # Sign payload
+    signed = sign_payload(payload)
+
+    # Build URL
+    url_prefix = "https://retrieval.wild-samphire.cdssandbox.xyz/exposure-configuration/download.html#"
+    url = url_prefix + str(signed)
+
+    qrcode = generate_qrcode(url)
+    return qrcode

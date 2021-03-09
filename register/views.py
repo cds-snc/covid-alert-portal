@@ -13,7 +13,8 @@ from datetime import datetime, timedelta
 import pytz
 from django.contrib import messages
 from .forms import location_choices
-from .utils import generate_qr_code
+from .utils import get_signed_qrcode
+
 
 class RegistrantEmailView(FormView):
     form_class = EmailForm
@@ -170,7 +171,7 @@ class LocationWizard(NamedUrlSessionWizardView):
         location.contact_phone = data["contact_phone"]
         location.save()
 
-        poster_url = reverse('register:poster_view', kwargs={"pk": location.pk})
+        poster_url = reverse("register:poster_view", kwargs={"pk": location.pk})
         print("http://localhost:8000{url}".format(url=poster_url))
         # Generate poster and send
 
@@ -184,12 +185,16 @@ class PosterView(TemplateView):
         context = super().get_context_data(**kwargs)
         location = Location.objects.get(id=self.kwargs["pk"])
 
-        qr_code = generate_qr_code(location)
+        qr_code = get_signed_qrcode(location)
 
-        context['qr_code'] = qr_code
-        context['name'] = location.name
-        context['address'] = location.address
-        context['address_details'] = "{city}, {province} {postal_code}".format(city=location.city, province=location.province, postal_code=location.postal_code)
+        context["qr_code"] = qr_code
+        context["name"] = location.name
+        context["address"] = location.address
+        context["address_details"] = "{city}, {province} {postal_code}".format(
+            city=location.city,
+            province=location.province,
+            postal_code=location.postal_code,
+        )
         return context
 
 
