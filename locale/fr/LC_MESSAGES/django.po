@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-09 17:34+0000\n"
+"POT-Creation-Date: 2021-03-09 19:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -568,15 +568,19 @@ msgid "Contact us"
 msgstr "Nous joindre"
 
 #: contact/templates/contact/form.html:14
+#: register/templates/register/contact_us.html:20
 msgid "Send"
 msgstr "Envoyer"
 
 #: contact/templates/contact/success.html:5
 #: contact/templates/contact/success.html:10
+#: register/templates/register/success.html:5
+#: register/templates/register/success.html:10
 msgid "Thank you for contacting us"
 msgstr "Merci de nous avoir contactés."
 
 #: contact/templates/contact/success.html:11
+#: register/templates/register/success.html:11
 msgid "We’ll reply as soon as possible."
 msgstr "Nous vous répondrons le plus rapidement possible."
 
@@ -618,6 +622,7 @@ msgstr "Si le patient est prêt, générez une clé"
 #: outbreaks/templates/confirm.html:10 outbreaks/templates/datetime.html:10
 #: outbreaks/templates/details.html:10 outbreaks/templates/profile.html:10
 #: outbreaks/templates/severity.html:10
+#: register/templates/register/contact_us.html:12
 #: register/templates/register/location_address.html:11
 #: register/templates/register/location_category.html:11
 #: register/templates/register/location_contact.html:11
@@ -1333,6 +1338,7 @@ msgstr "Gérer l’équipe"
 #: portal/templates/includes/nav_main.html:13
 #: profiles/templates/profiles/support.html:5
 #: profiles/templates/profiles/support.html:9
+#: register/templates/register/contact_us.html:16
 msgid "Support"
 msgstr "Assistance"
 
@@ -2487,6 +2493,34 @@ msgstr "Nom de la personne-ressource"
 msgid "Contact phone number"
 msgstr "Numéro de téléphone"
 
+#: register/forms.py:88
+msgid "Get Help."
+msgstr "Obtenir de l’aide."
+
+#: register/forms.py:89
+msgid "Give Feedback."
+msgstr "Donner des commentaires."
+
+#: register/forms.py:90
+msgid "Something Else."
+msgstr "Autre chose."
+
+#: register/forms.py:95
+msgid "Tell us more about the issue"
+msgstr "Dites-nous en plus sur le problème"
+
+#: register/forms.py:99
+msgid "Email address if you want a reply"
+msgstr "Adresse courriel pour vous répondre"
+
+#: register/forms.py:101
+msgid ""
+"We'll use this if we need to contact you. We will not use your email address "
+"for anything else."
+msgstr ""
+"Nous utiliserons votre adresse si, et seulement si, nous avons besoin de "
+"communiquer avec vous."
+
 #: register/models.py:30
 msgid "Short code"
 msgstr "Short code [FR]"
@@ -2538,15 +2572,21 @@ msgstr ""
 msgid "Next steps"
 msgstr "Prochaines étapes"
 
-#: register/templates/register/confirmation.html:22
+#: register/templates/register/confirmation.html:23
+#, fuzzy, python-format
+#| msgid ""
+#| "<a href=''>Contact us</a> if you do not get the email within 2 hours or "
+#| "if you have questions."
 msgid ""
-"<a href=''>Contact us</a> if you do not get the email within 2 hours or if "
-"you have questions."
+"\n"
+"      <p><a href='%(link)s'>Contact us</a> if you do not get the email "
+"within 2 hours or if you have questions.</p>\n"
+"      "
 msgstr ""
 "<a href=''>Contactez-nous</a> si vous ne recevez pas le courriel d’ici 2 "
 "heures ou si vous avez des questions."
 
-#: register/templates/register/confirmation.html:23
+#: register/templates/register/confirmation.html:26
 msgid ""
 "Remember to make more posters if your service or event has other addresses. "
 "You can come back later if you do not have time now."
@@ -2555,27 +2595,40 @@ msgstr ""
 "comprend plusieurs adresses. Vous pouvez revenir plus tard si vous n’avez "
 "pas le temps maintenant."
 
-#: register/templates/register/confirmation.html:29
+#: register/templates/register/confirmation.html:32
 msgid "Make another poster"
 msgstr "Créer une autre affiche"
 
-#: register/templates/register/confirmation.html:30
+#: register/templates/register/confirmation.html:33
 msgid "Done"
 msgstr "Terminé"
 
-#: register/templates/register/confirmation.html:33
+#: register/templates/register/confirmation.html:36
 msgid "Learn more about QR codes and public health"
 msgstr "En savoir plus sur les codes QR et la santé publique."
 
-#: register/templates/register/confirmation.html:34
+#: register/templates/register/confirmation.html:37
 msgid "Thank you for helping slow the spread of COVID-19."
 msgstr "Merci d’aider à ralentir la propagation de la COVID-19."
 
-#: register/templates/register/confirmation.html:35
+#: register/templates/register/confirmation.html:38
 msgid "Please answer some questions to help improve the COVID Alert system."
 msgstr ""
 "Répondez à quelques questions pour nous aider à améliorer le système Alerte "
 "COVID."
+
+#: register/templates/register/contact_us.html:5
+#: register/templates/register/contact_us.html:14
+msgid "Contact Us"
+msgstr "Nous joindre"
+
+#: register/templates/register/contact_us.html:16
+msgid "For information about common issues, visit"
+msgstr "Consultez la section pour les questions fréquentes"
+
+#: register/templates/register/contact_us.html:18
+msgid "What do you want to do?"
+msgstr "Pourquoi voulez-vous nous joindre?"
 
 #: register/templates/register/error.html:5
 msgid "Invalid / expired link"
@@ -2772,6 +2825,6 @@ msgstr "Créer l’affiche"
 msgid "You've confirmed your email address."
 msgstr "Votre adresse courriel est validée."
 
-#: register/views.py:101 register/views.py:134 register/views.py:184
+#: register/views.py:101 register/views.py:135 register/views.py:185
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
