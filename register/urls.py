@@ -8,7 +8,10 @@ from .forms import (
     LocationAddressForm,
     LocationContactForm,
     RegisterSummaryForm,
+    LocationUnavailableForm,
 )
+
+from register.views import check_for_province
 
 app_name = "register"
 
@@ -18,12 +21,14 @@ named_location_forms = (
     ("name", LocationNameForm),
     ("contact", LocationContactForm),
     ("summary", RegisterSummaryForm),
+    ("unavailable", LocationUnavailableForm),
 )
 
 location_wizard = views.LocationWizard.as_view(
     named_location_forms,
     url_name="register:location_step",
     done_step_name="confirmation",
+    condition_dict={"unavailable":check_for_province},
 )
 
 urlpatterns = [
