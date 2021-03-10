@@ -46,6 +46,7 @@ dependency-injector = "*"
 django-formtools = "*"
 pynacl = "*"
 pyqrcode = "*"
+protobuf = "*"
 
 [pipenv]
 allow_prereleases = true
