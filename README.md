@@ -21,9 +21,10 @@ Install [`pipenv`](https://pypi.org/project/pipenv/).
 
 ```sh
 # cd into project folder
-pipenv --three  # create a new virtualenv
-pipenv shell    # activate virtualenv
-pipenv install  # install dependencies
+pipenv --three       # create a new virtualenv
+pipenv shell         # activate virtualenv
+pipenv install       # install dependencies
+pipenv install --dev # install dev dependencies
 ```
 
 ### Environment variables
