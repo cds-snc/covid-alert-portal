@@ -29,6 +29,7 @@
     {% csrf_token %}
 
     {% for fieldset in form.fieldsets %}
+    <div class="datetime">
       <div class="fieldWrapper--container{% if fieldset.error %} fieldWrapper--container--has-error{% endif %}">
         <div class="fieldWrapper{% if fieldset.error %} fieldWrapper--has-error{% endif %}">
 
@@ -37,13 +38,16 @@
           {% endif %}
 
           {% for field in fieldset %}
-            <div class="date_entry">
-              {{ field.label_tag }}
-              {{ field }}
-            </div>
+            {% if forloop.counter < 4 %}
+              <div class="date_entry">
+                {{ field.label_tag }}
+                {{ field }}
+              </div>
+            {% endif %}
           {% endfor %}
 
-          <button type="button" class="link datepicker_button" id="{{ fieldset.title }}">{% trans "select date" %}</button>
+
+          <button type="button" class="link datepicker_button" id="{{ fieldset.title }}">{% trans "Select date" %}</button>
 
           <duet-date-picker
                   id="datepicker_{{ fieldset.title }}"
@@ -53,7 +57,17 @@
                   language="{{language}}"
           ></duet-date-picker>
 
+          {% for field in fieldset %}
+            {% if forloop.counter > 3 %}
+              <div class="date_entry">
+                {{ field.label_tag }}
+                {{ field }}
+              </div>
+            {% endif %}
+          {% endfor %}
+
         </div>
+      </div>
       </div>
     {% endfor %}
 

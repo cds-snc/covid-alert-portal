@@ -57,7 +57,7 @@ class HealthcareBaseForm(forms.Form):
             yield Fieldset(
                 form=self,
                 title=name,
-                fields=(self[f] for f in data.get("fields", ())),
+                fields=list(self[f] for f in data.get("fields", ())),
                 classes=data.get("classes", ""),
                 error=data.get("error", None),
             )

@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.conf import settings
-from portal.widgets import CDSRadioWidget
+from portal.widgets import CDSSelectWidget, CDSRadioWidget
 from portal.forms import HealthcareBaseForm
 from datetime import datetime
 import pytz
@@ -21,22 +21,35 @@ class DateForm(HealthcareBaseForm):
             self.fields[f"month_{i}"] = forms.IntegerField(
                 label=_("Month"),
                 min_value=1,
-                max_value=datetime.now().month,
+                max_value=12,
                 widget=forms.TextInput,
             )
             self.fields[f"year_{i}"] = forms.IntegerField(
                 label=_("Year"),
                 min_value=2021,
-                max_value=2021,
+                max_value=datetime.now().year,
                 initial=2021,
                 widget=forms.TextInput,
             )
-
+            self.fields[f"start_time_{i}"] = forms.IntegerField(
+                label=_("From"),
+                min_value=0,
+                max_value=23,
+                initial=0,
+                widget=forms.TextInput, # CDSSelectWidget()
+            )
+            self.fields[f"end_time_{i}"] = forms.IntegerField(
+                label=_("To"),
+                min_value=1,
+                max_value=24,
+                initial=0,
+                widget=forms.TextInput, # CDSSelectWidget()
+            )
         # Add the fieldset to the meta class
         # Idea adapted from: https://schinckel.net/2013/06/14/django-fieldsets/
         meta = getattr(self, "Meta", None)
         meta.fieldsets = tuple(
-            (f"date_{i}", {"fields": (f"day_{i}", f"month_{i}", f"year_{i}")})
+            (f"date_{i}", {"fields": (f"day_{i}", f"month_{i}", f"year_{i}", f"start_time_{i}", f"end_time_{i}")})
             for i in range(num_dates)
         )
 
