@@ -2,7 +2,7 @@
 # AWS S3 bucket - WAF log target
 ###
 resource "aws_s3_bucket" "firehose_waf_logs" {
-  bucket = "staging-covid-portal-terraform-waf-logs"
+  bucket = "dev-covid-portal-terraform-waf-logs"
   acl    = "private"
   server_side_encryption_configuration {
     rule {
@@ -18,7 +18,7 @@ resource "aws_s3_bucket" "firehose_waf_logs" {
 # AWS S3 bucket - Maintenance mode HTML
 
 resource "aws_s3_bucket" "portal_maintenance_mode" {
-  bucket = "staging-covid-portal-maintenance-mode"
+  bucket = "dev-covid-portal-maintenance-mode"
   acl    = "private"
   server_side_encryption_configuration {
     rule {
@@ -33,7 +33,7 @@ resource "aws_s3_bucket" "portal_maintenance_mode" {
 resource "aws_s3_bucket_object" "html_files" {
   for_each      = fileset("./maintenance_mode/", "*.htm")
   content_type  = "text/html"
-  bucket        = "staging-covid-portal-maintenance-mode"
+  bucket        = "dev-covid-portal-maintenance-mode"
   key           = each.value
   source        = "./maintenance_mode/${each.value}"
   etag          = filemd5("./maintenance_mode/${each.value}")
@@ -43,7 +43,7 @@ resource "aws_s3_bucket_object" "html_files" {
 resource "aws_s3_bucket_object" "html_supporting_css" {
   for_each     = fileset("./maintenance_mode/", "*.css")
   content_type = "text/css"
-  bucket       = "staging-covid-portal-maintenance-mode"
+  bucket       = "dev-covid-portal-maintenance-mode"
   key          = each.value
   source       = "./maintenance_mode/${each.value}"
   etag         = filemd5("./maintenance_mode/${each.value}")
@@ -52,7 +52,7 @@ resource "aws_s3_bucket_object" "html_supporting_css" {
 resource "aws_s3_bucket_object" "html_supporting_svg" {
   for_each     = fileset("./maintenance_mode/", "*.svg")
   content_type = "image/svg+xml"
-  bucket       = "staging-covid-portal-maintenance-mode"
+  bucket       = "dev-covid-portal-maintenance-mode"
   key          = each.value
   source       = "./maintenance_mode/${each.value}"
   etag         = filemd5("./maintenance_mode/${each.value}")
@@ -61,7 +61,7 @@ resource "aws_s3_bucket_object" "html_supporting_svg" {
 resource "aws_s3_bucket_object" "html_supporting_ico" {
   for_each     = fileset("./maintenance_mode/", "*.ico")
   content_type = "image/png"
-  bucket       = "staging-covid-portal-maintenance-mode"
+  bucket       = "dev-covid-portal-maintenance-mode"
   key          = each.value
   source       = "./maintenance_mode/${each.value}"
   etag         = filemd5("./maintenance_mode/${each.value}")

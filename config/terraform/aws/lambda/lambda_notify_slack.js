@@ -15,7 +15,7 @@ exports.handler = function(event, context) {
     var postData = {
         "channel": "#en-healthcare-dev",
         "username": "COVID Alert Portal Notifier",
-        "text": "*Staging Environment*",
+        "text": "*Dev Environment*",
         "icon_emoji": ":loudspeaker:"
     };
 

@@ -1,1 +1,1 @@
-storage_bucket = "covid-portal-terraform"
+storage_bucket = "covid-portal-terraform-dev"

@@ -13,7 +13,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
             "width": 15,
             "height": 6,
             "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @message\n| filter @message like /HTTP\\/1.1 400/ and @message not like /\\/status/\n| parse @message \"() {*} [*] * * => generated\" toss1, toss2, method, url\n| filter url != \"/\"\n| stats concat(method,\" \", url) as path, count(path) as attempts by path\n| sort by attempts desc",
+                "query": "SOURCE 'covidportal_dev' | fields @message\n| filter @message like /HTTP\\/1.1 400/ and @message not like /\\/status/\n| parse @message \"() {*} [*] * * => generated\" toss1, toss2, method, url\n| filter url != \"/\"\n| stats concat(method,\" \", url) as path, count(path) as attempts by path\n| sort by attempts desc",
                 "region": "ca-central-1",
                 "stacked": false,
                 "title": "Attempts that passed WAF but returned HTML Error 400 from COVID Alert Portal",
@@ -27,7 +27,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
             "width": 12,
             "height": 9,
             "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| sort @timestamp desc\n| limit 15\n| display province, super_admins, admins, staff\n\n\n",
+                "query": "SOURCE 'covidportal_dev' | fields @timestamp, @message\n| filter @message like /LOGGING user_count/\n| parse @message '* LOGGING user_count province: \"*\" super_admins: * admins: * staff: *' logtime, province, super_admins, admins, staff\n| sort @timestamp desc\n| limit 15\n| display province, super_admins, admins, staff\n\n\n",
                 "region": "ca-central-1",
                 "stacked": false,
                 "title": "User type by Province",
@@ -41,7 +41,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
             "width": 9,
             "height": 6,
             "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @message\n| filter @message like /LOGIN login_type:login/\n| parse @message \"LOGIN login_type:login user_id:* remote_ip:*\" as userID, remoteIP\n| stats count_distinct(userID) as NumberOfUsers by remoteIP\n| filter (NumberOfUsers>1)",
+                "query": "SOURCE 'covidportal_dev' | fields @message\n| filter @message like /LOGIN login_type:login/\n| parse @message \"LOGIN login_type:login user_id:* remote_ip:*\" as userID, remoteIP\n| stats count_distinct(userID) as NumberOfUsers by remoteIP\n| filter (NumberOfUsers>1)",
                 "region": "ca-central-1",
                 "stacked": false,
                 "title": "Multiple Users per IP",
@@ -55,7 +55,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
             "width": 6,
             "height": 3,
             "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @message\n| filter @message like /model:profiles.healthcareuser/\n| parse @message \"CRUD event_type:* model:profiles.healthcareuser\" as action\n| stats sum(strcontains(action, \"CREATE\")) as CreatedUsers, sum(strcontains(action,\"DELETE\")) as DeletedUsers\n",
+                "query": "SOURCE 'covidportal_dev' | fields @message\n| filter @message like /model:profiles.healthcareuser/\n| parse @message \"CRUD event_type:* model:profiles.healthcareuser\" as action\n| stats sum(strcontains(action, \"CREATE\")) as CreatedUsers, sum(strcontains(action,\"DELETE\")) as DeletedUsers\n",
                 "region": "ca-central-1",
                 "stacked": false,
                 "title": "Total User Modification Actiivty",
@@ -213,7 +213,7 @@ resource "aws_cloudwatch_dashboard" "ocio_report" {
             "width": 24,
             "height": 3,
             "properties": {
-                "query": "SOURCE 'covidportal_staging' | fields @message\n| filter @message like /\\/status\\//\n| stats (count()/51500)*100 as Analysis_Progress by bin (1d)",
+                "query": "SOURCE 'covidportal_dev' | fields @message\n| filter @message like /\\/status\\//\n| stats (count()/51500)*100 as Analysis_Progress by bin (1d)",
                 "region": "ca-central-1",
                 "stacked": false,
                 "title": "Report Generation Progress Indicator",
