@@ -3,7 +3,7 @@ from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy, reverse
 
 from .models import Registrant, Location, EmailConfirmation
-from .forms import EmailForm, RegistrantNameForm
+from .forms import EmailForm, RegistrantNameForm, ContactUsForm
 from collections import ChainMap
 from django.utils.translation import gettext as _
 from formtools.wizard.views import NamedUrlSessionWizardView
@@ -120,6 +120,7 @@ TEMPLATES = {
     "name": "register/location_name.html",
     "contact": "register/location_contact.html",
     "summary": "register/summary.html",
+    "success": "register/success.html",
 }
 
 
@@ -215,3 +216,15 @@ class RegisterConfirmationPageView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["registrant_email"] = self.request.session.get("registrant_email")
         return context
+
+
+class ContactUsPageView(FormView):
+    template_name = "register/contact_us.html"
+    form_class = ContactUsForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy("register:success")

@@ -1,0 +1,22 @@
+{% extends 'register/base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% trans "Contact Us" %}
+{% endblock %}
+
+
+{% block content %}
+
+  <div class="content-back-link">
+    <a href="{% url 'register:start' %}" class="chevron-left">{% trans "Back" %}</a>
+  </div>
+  <h2>{% trans "Contact Us" %}</h2>
+ 
+  <p>{% trans "For information about common issues, visit" %} <a href="">{% trans "Support" %}</a>.</p>
+
+  <p>{% trans "What do you want to do?" %}</p>
+
+{% include "includes/cds_form.html" with submit_text=_("Send") %}
+
+{% endblock %}
