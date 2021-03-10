@@ -18,8 +18,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Set work directory
 WORKDIR /code
 
+# Install protobuf directly from a github release
+# so that it also includes the well-known types
+COPY protoc-3.15.4-linux-x86_64/bin/protoc /usr/local/bin/protoc
+COPY protoc-3.15.4-linux-x86_64/include/google /usr/local/include/google
+
 # Install pipenv
-RUN pip install 'pipenv==2018.11.26' uwsgi
+RUN pip install 'pipenv==2020.11.15' uwsgi
 
 # Install dependencies
 COPY Pipfile Pipfile.lock /code/
