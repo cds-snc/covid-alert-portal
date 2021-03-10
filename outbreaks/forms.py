@@ -13,6 +13,7 @@ severity_choices = [
     ("3", _("Get tested immediately")),
 ]
 
+
 class DateForm(HealthcareBaseForm):
     def __init__(self, num_dates=1, *args, **kwargs):
         super().__init__(*args, **kwargs)
