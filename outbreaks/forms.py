@@ -7,6 +7,11 @@ from portal.forms import HealthcareBaseForm
 from datetime import datetime
 import pytz
 
+severity_choices = [
+    ("1", _("Self-monitor")),
+    ("2", _("Self-isolate")),
+    ("3", _("Get tested immediately")),
+]
 
 class DateForm(HealthcareBaseForm):
     def __init__(self, num_dates=1, *args, **kwargs):
@@ -77,10 +82,6 @@ class DateForm(HealthcareBaseForm):
 class SeverityForm(HealthcareBaseForm):
     alert_level = forms.ChoiceField(
         label="",
-        choices=[
-            ("1", _("Somebody sneezed...")),
-            ("2", _("Sirens and lights flashing everywhere!")),
-            ("3", _("Zombie apocalypse!!!!")),
-        ],
+        choices=severity_choices,
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )

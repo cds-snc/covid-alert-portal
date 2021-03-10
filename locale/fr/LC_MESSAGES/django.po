@@ -796,16 +796,16 @@ msgid "Year"
 msgstr ""
 
 #: outbreaks/forms.py:34
-msgid "Somebody sneezed..."
-msgstr ""
+msgid "Self-monitor"
+msgstr "Serveillez vos symptômes"
 
 #: outbreaks/forms.py:35
-msgid "Sirens and lights flashing everywhere!"
-msgstr ""
+msgid "Self-isolate"
+msgstr "Isolez-vous"
 
 #: outbreaks/forms.py:36
-msgid "Zombie apocalypse!!!!"
-msgstr ""
+msgid "Get tested immediately"
+msgstr "Faites-vous tester immédiatement"
 
 #: outbreaks/templates/confirm.html:5
 msgid "Confirm notification"
