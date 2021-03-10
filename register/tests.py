@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from waffle.models import Switch
@@ -247,6 +247,11 @@ class LocationModel(TestCase):
         self.assertTrue(location.short_code.isalnum)
 
 
+# Generate signing key for following tests
+signing_key = utils.generate_signature_key()
+
+
+@override_settings(QRCODE_SIGNATURE_PRIVATE_KEY=signing_key)
 class Utils(TestCase):
     def test_generate_short_code_default_length(self):
         code = utils.generate_random_key()
