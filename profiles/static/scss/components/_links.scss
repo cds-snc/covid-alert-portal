@@ -12,7 +12,7 @@
   margin-bottom: $space-xl;
 
   a {
-    padding-left: 0.3em;
+    padding-left: 0.45em;
 
     &::before {
       @include chevron("left");
