@@ -36,7 +36,11 @@
           {% if fieldset.error %}
             <div id="error--{{ form.html_name }}-{{group}}" class="validation-error"> {{ fieldset.error }} </div>
           {% endif %}
-
+          <div class="remove-container">
+            <button name="adjust_dates" value="remove" class="secondary">
+              {{ _("Remove") }}
+            </button>
+          </div>
           {% for field in fieldset %}
             {% if forloop.counter < 4 %}
               <div class="date_entry">
@@ -74,9 +78,6 @@
     <div class="content-button">
       <button name="adjust_dates" value="add" class="secondary">
         {{ _("Add another date") }}
-      </button>
-      <button name="adjust_dates" value="remove" class="secondary">
-        {{ _("Remove a date") }}
       </button>
     </div>
 

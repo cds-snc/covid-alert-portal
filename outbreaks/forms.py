@@ -8,7 +8,6 @@ from datetime import datetime
 import pytz
 
 
-
 hours = [
     (str(hour), datetime.strftime(datetime(2020, 1, 1, hour), "%H:%S"))
     for hour in range(24)
