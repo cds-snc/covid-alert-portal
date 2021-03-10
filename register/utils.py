@@ -17,7 +17,7 @@ def generate_signature_key():
     Generate a new random signing key and return the hex-encoded bytestring
     """
     signing_key = SigningKey.generate()
-    return signing_key.encode(encoder=HexEncoder).decode("utf-8")
+    return signing_key.encode(encoder=Base64Encoder).decode("utf-8")
 
 
 def load_signature_key():
@@ -68,7 +68,7 @@ def get_signed_qrcode(location):
     signed = sign_payload(payload)
 
     # Build URL
-    url_prefix = "https://retrieval.wild-samphire.cdssandbox.xyz/exposure-configuration/download.html#"
+    url_prefix = "https://alpha.canada.ca/covid-alert.html#"
     url = url_prefix + str(signed)
 
     qrcode = generate_qrcode(url)
