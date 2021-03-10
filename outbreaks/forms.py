@@ -8,6 +8,11 @@ from datetime import datetime
 import pytz
 
 
+
+hours = [
+    (str(hour), datetime.strftime(datetime(2020, 1, 1, hour), "%H:%S"))
+    for hour in range(24)
+]
 class DateForm(HealthcareBaseForm):
     def __init__(self, num_dates=1, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -31,19 +36,15 @@ class DateForm(HealthcareBaseForm):
                 initial=2021,
                 widget=forms.TextInput,
             )
-            self.fields[f"start_time_{i}"] = forms.IntegerField(
+            self.fields[f"start_time_{i}"] = forms.ChoiceField(
                 label=_("From"),
-                min_value=0,
-                max_value=23,
-                initial=0,
-                widget=forms.TextInput, # CDSSelectWidget()
+                choices=hours,
+                # widget=CDSSelectWidget,
             )
-            self.fields[f"end_time_{i}"] = forms.IntegerField(
+            self.fields[f"end_time_{i}"] = forms.ChoiceField(
                 label=_("To"),
-                min_value=1,
-                max_value=24,
-                initial=0,
-                widget=forms.TextInput, # CDSSelectWidget()
+                choices=hours,
+                # widget=CDSSelectWidget,
             )
         # Add the fieldset to the meta class
         # Idea adapted from: https://schinckel.net/2013/06/14/django-fieldsets/
