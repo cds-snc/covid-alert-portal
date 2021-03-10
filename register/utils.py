@@ -24,12 +24,17 @@ def load_signature_key():
     """
     Load the signature key from the environment
     """
-    key = settings.QRCODE_SIGNATURE_PRIVATE_KEY
-    key_bytes = key.encode("utf-8")
+    try:
+        key = settings.QRCODE_SIGNATURE_PRIVATE_KEY
+        key_bytes = key.encode("utf-8")
+    except AttributeError:
+        print("Missing QRCode signing key")
+        raise
+
     try:
         signing_key = SigningKey(key_bytes, encoder=Base64Encoder)
     except TypeError:
-        print("Missing or faulty QRCode signing key")
+        print("Faulty QRCode signing key")
         raise
     return signing_key
 
