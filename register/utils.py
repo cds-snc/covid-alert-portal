@@ -3,7 +3,7 @@ import string
 from django.conf import settings
 from nacl.signing import SigningKey
 from nacl.encoding import Base64Encoder
-import pyqrcode
+import segno
 import io
 
 
@@ -57,10 +57,10 @@ def sign_payload(payload):
 
 
 def generate_qrcode(url):
-    qrcode = pyqrcode.create(url)
+    qrcode = segno.make_qr(url)
 
     buffer = io.BytesIO()
-    qrcode.svg(buffer, xmldecl=False, scale=3)
+    qrcode.save(buffer, kind='svg', xmldecl=False, scale=5, omitsize=True)
 
     return buffer.getvalue().decode()
 
