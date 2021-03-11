@@ -55,7 +55,9 @@
                 </dt>
                 <dd class="summary-list__value">
                     {{ form_data.address }}<br>
-                    {{ form_data.address_2 }}<br>
+                    {% if form_data.address_2 %}
+                        {{ form_data.address_2 }}<br>
+                    {% endif %}
                     {{ form_data.city }}<br>
                     {{ form_data.province }}<br>
                     {{ form_data.postal_code }}
