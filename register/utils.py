@@ -60,7 +60,7 @@ def generate_qrcode(url):
     qrcode = segno.make_qr(url)
 
     buffer = io.BytesIO()
-    qrcode.save(buffer, kind='svg', xmldecl=False, scale=5, omitsize=True)
+    qrcode.save(buffer, kind="svg", xmldecl=False, scale=5, omitsize=True)
 
     return buffer.getvalue().decode()
 
