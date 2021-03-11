@@ -89,6 +89,16 @@
     }
   }
 
+  &.warning {
+    background-color: $color-yellow-warning;
+    box-shadow: 0 2px 0 black;
+    color: black;
+
+    &:hover {
+      background-color: $color-yellow;
+    }
+  }
+
   &.danger {
     color: $color-white;
     background-color: $color-red;
