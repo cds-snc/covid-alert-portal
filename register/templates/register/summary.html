@@ -24,7 +24,7 @@
             </dd>
             <dd class="summary-list__actions">
                 <a href="{% url 'register:registrant_email'  %}">
-                    {% trans "Change" %}<span class="visually-hidden"> your email</span>
+                    {% blocktrans %} Change<span class="visually-hidden"> your email</span> {% endblocktrans %}
                 </a>
             </dd>
         </div>
@@ -37,7 +37,7 @@
             </dd>
             <dd class="summary-list__actions">
                 <a href="{% url 'register:registrant_name' %}">
-                    {% trans "Change" %}<span class="visually-hidden"> your name</span>
+                    {% blocktrans %} Change<span class="visually-hidden"> your name</span> {% endblocktrans %}
                 </a>
             </dd>
         </div>
@@ -61,7 +61,7 @@
                     {{ form_data.postal_code }}
                 </dd>
                 <dd class="summary-list__actions">
-                    <a href="{% url 'register:location_step' step='address' %}">{% trans "Change" %} <span class="visually-hidden"> address</span></a>
+                    <a href="{% url 'register:location_step' step='address' %}">{% blocktrans %} Change <span class="visually-hidden"> address</span> {% endblocktrans %} </a>
                 </dd>
             </div>
             
@@ -73,7 +73,7 @@
                     {{ form_data.category }}
                 </dd>
                 <dd class="summary-list__actions">
-                    <a href="{% url 'register:location_step' step='category' %}">{% trans "Change" %} <span class="visually-hidden"> business type</span></a>
+                    <a href="{% url 'register:location_step' step='category' %}">{% blocktrans %} Change <span class="visually-hidden"> business type</span>{% endblocktrans %}</a>
                 </dd>
             </div>
 
@@ -85,7 +85,7 @@
                     {{ form_data.name }}
                 </dd>
                 <dd class="summary-list__actions">
-                    <a href="{% url 'register:location_step' step='name' %}">{% trans "Change" %} <span class="visually-hidden"> business, organization or event name</span></a>
+                    <a href="{% url 'register:location_step' step='name' %}"> {% blocktrans %} Change <span class="visually-hidden"> business, organization or event name</span>{% endblocktrans %}</a>
                 </dd>
             </div>
 
@@ -99,7 +99,7 @@
                     {{ form_data.contact_phone }}
                 </dd>
                 <dd class="summary-list__actions">
-                    <a href="{% url 'register:location_step' step='contact' %}">{% trans "Change" %} <span class="visually-hidden"> contact</span></a>
+                    <a href="{% url 'register:location_step' step='contact' %}"> {% blocktrans %} Change <span class="visually-hidden"> contact</span> {% endblocktrans %} </a>
                 </dd>
             </div>
         </dl>

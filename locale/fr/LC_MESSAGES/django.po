@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-10 18:27+0000\n"
+"POT-Creation-Date: 2021-03-11 00:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -563,7 +563,6 @@ msgstr ""
 #: portal/templates/500.html:17 portal/templates/includes/footer.html:8
 #: register/templates/register/500.html:17
 #: register/templates/register/includes/footer.html:8
-#: register/templates/register/start.html:38
 msgid "Contact us"
 msgstr "Nous joindre"
 
@@ -755,7 +754,6 @@ msgid "New or need a refresher?"
 msgstr "Besoin d’en savoir plus sur le portail?"
 
 #: covid_key/templates/covid_key/start.html:23
-#: register/templates/register/start.html:36
 msgid "Visit"
 msgstr "Consultez la page"
 
@@ -836,12 +834,6 @@ msgstr "Nom"
 #: profiles/templates/profiles/healthcareuser_detail.html:38
 #: profiles/templates/profiles/healthcareuser_detail.html:61
 #: profiles/templates/profiles/healthcareuser_detail.html:111
-#: register/templates/register/summary.html:27
-#: register/templates/register/summary.html:40
-#: register/templates/register/summary.html:64
-#: register/templates/register/summary.html:76
-#: register/templates/register/summary.html:88
-#: register/templates/register/summary.html:102
 msgid "Change"
 msgstr "Modifier"
 
@@ -2782,17 +2774,24 @@ msgstr "Les coordonnées d’une personne-ressource pour chacune des adresses."
 msgid "Start now"
 msgstr "Commencer"
 
-#: register/templates/register/start.html:34
-msgid "Questions?"
-msgstr "Des questions?"
-
 #: register/templates/register/start.html:36
-msgid "Help with your poster"
-msgstr "Aide pour votre affiche"
-
-#: register/templates/register/start.html:37
-msgid "Or"
-msgstr "Sinon"
+#, python-format
+msgid ""
+"\n"
+"  <h2> Questions? </h2>\n"
+"    <p>\n"
+"      Visit <a href=\"\">Help with your poster</a><br>\n"
+"      Or <a href =\"%(link)s\">Contact us</a>\n"
+"   </p>\n"
+"   "
+msgstr ""
+"\n"
+"  <h2> Des questions? </h2>\n"
+"    <p>\n"
+"      Consultez la page <a href=\"\">Aide pour votre affiche</a><br>\n"
+"      Sinon, <a href =\"%(link)s\">contactez-nous</a>\n"
+"   </p>\n"
+"   "
 
 #: register/templates/register/summary.html:5
 #: register/templates/register/summary.html:13
@@ -2803,13 +2802,41 @@ msgstr "Vérifiez vos réponses avant de créer votre affiche"
 msgid "Personal information"
 msgstr "Renseignements personnels"
 
+#: register/templates/register/summary.html:27
+msgid " Change<span class=\"visually-hidden\"> your email</span> "
+msgstr "Modifier<span class=\"visually-hidden\"> votre adresse courriel</span>"
+
+#: register/templates/register/summary.html:40
+msgid " Change<span class=\"visually-hidden\"> your name</span> "
+msgstr "Modifier<span class=\"visually-hidden\"> Votre nom </span>"
+
 #: register/templates/register/summary.html:46
 msgid "Service or event details"
 msgstr "Renseignements sur le service ou l’événement"
 
+#: register/templates/register/summary.html:64
+msgid " Change <span class=\"visually-hidden\"> address</span> "
+msgstr "Modifier <span class=\"visually-hidden\"> Adresse</span> "
+
+#: register/templates/register/summary.html:76
+msgid " Change <span class=\"visually-hidden\"> business type</span>"
+msgstr "Modifier <span class=\"visually-hidden\"> business type</span>"
+
+#: register/templates/register/summary.html:88
+msgid ""
+" Change <span class=\"visually-hidden\"> business, organization or event "
+"name</span>"
+msgstr ""
+"Modifier <span class=\"visually-hidden\"> business, organization or event "
+"name</span>"
+
 #: register/templates/register/summary.html:94
 msgid "Contact person for the location"
 msgstr "Personne-ressource"
+
+#: register/templates/register/summary.html:102
+msgid " Change <span class=\"visually-hidden\"> contact</span> "
+msgstr " Modifier <span class=\"visually-hidden\"> contact</span>"
 
 #: register/templates/register/summary.html:107
 msgid "We’ll use this information to make your poster"
@@ -2834,6 +2861,15 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py:101 register/views.py:135 register/views.py:185
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Questions?"
+#~ msgstr "Des questions?"
+
+#~ msgid "Help with your poster"
+#~ msgstr "Aide pour votre affiche"
+
+#~ msgid "Or"
+#~ msgstr "Sinon"
 
 #, fuzzy
 #~| msgid "No invitations yet"

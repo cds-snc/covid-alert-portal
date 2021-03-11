@@ -31,10 +31,13 @@
   <div class="content-button">
     <a href="{% url 'register:registrant_email' %}" role="button" draggable="false" class="with-chevron">{% trans "Start now" %}</a>
   </div>
-  <h2> {% trans "Questions?" %} </h2>
+
+  {%url "register:contactus" as link%}
+  {% blocktranslate %}
+  <h2> Questions? </h2>
     <p>
-      {% trans "Visit" %} <a href="">{% trans "Help with your poster" %}</a><br>
-      {% trans "Or" %}
-      <a href ="{% url 'register:contactus' %}">{% trans "Contact us" %}</a>
+      Visit <a href="">Help with your poster</a><br>
+      Or <a href ="{{link}}">Contact us</a>
    </p>
+   {% endblocktranslate %}
 {% endblock %}
