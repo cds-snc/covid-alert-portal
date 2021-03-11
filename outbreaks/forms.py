@@ -18,6 +18,8 @@ hours = [
     (str(hour), datetime.strftime(datetime(2020, 1, 1, hour), "%H:%S"))
     for hour in range(24)
 ]
+
+
 class DateForm(HealthcareBaseForm):
     def __init__(self, num_dates=1, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -53,7 +55,18 @@ class DateForm(HealthcareBaseForm):
         # Idea adapted from: https://schinckel.net/2013/06/14/django-fieldsets/
         meta = getattr(self, "Meta", None)
         meta.fieldsets = tuple(
-            (f"date_{i}", {"fields": (f"day_{i}", f"month_{i}", f"year_{i}", f"start_hour_{i}", f"end_hour_{i}")})
+            (
+                f"date_{i}",
+                {
+                    "fields": (
+                        f"day_{i}",
+                        f"month_{i}",
+                        f"year_{i}",
+                        f"start_hour_{i}",
+                        f"end_hour_{i}",
+                    )
+                },
+            )
             for i in range(num_dates)
         )
 
@@ -67,8 +80,12 @@ class DateForm(HealthcareBaseForm):
         error_msg = _("Invalid date specified.")
         for i in range(self.num_dates):
             try:
-                cleaned_data[f"start_date_{i}"] = self.get_valid_date(cleaned_data, i, "start")
-                cleaned_data[f"end_date_{i}"] = self.get_valid_date(cleaned_data, i, "end")
+                cleaned_data[f"start_date_{i}"] = self.get_valid_date(
+                    cleaned_data, i, "start"
+                )
+                cleaned_data[f"end_date_{i}"] = self.get_valid_date(
+                    cleaned_data, i, "end"
+                )
             except ValueError:
                 is_valid = False
                 meta = getattr(self, "Meta", None)

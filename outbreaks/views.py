@@ -185,23 +185,26 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
             if start_ts:
                 start_dt = datetime.fromtimestamp(start_ts)
                 initial_data.update(
-                    {f"year_{i}": start_dt.year, f"month_{i}": start_dt.month, f"day_{i}": start_dt.day, f"start_hour_{i}": start_dt.hour }
+                    {
+                        f"year_{i}": start_dt.year,
+                        f"month_{i}": start_dt.month,
+                        f"day_{i}": start_dt.day,
+                        f"start_hour_{i}": start_dt.hour,
+                    }
                 )
             if end_ts:
                 end_dt = datetime.fromtimestamp(end_ts)
-                initial_data.update(
-                    {f"end_hour_{i}": end_dt.hour }
-                )
+                initial_data.update({f"end_hour_{i}": end_dt.hour})
         return initial_data
 
     def form_valid(self, form):
         location = self.request.session["alert_location"]
         for i in range(self.request.session.get("num_dates", 1)):
-            start_dt = form.cleaned_data.get(f"start_date_{i}") 
+            start_dt = form.cleaned_data.get(f"start_date_{i}")
             end_dt = form.cleaned_data.get(f"end_date_{i}")
 
             # Ensure that the date doesn't exist already for this location
-            if self.notification_exists(start_dt, location): # fix this
+            if self.notification_exists(start_dt, location):  # fix this
                 form.add_duplicate_error(i)
                 return self.form_invalid(form)
 
@@ -275,9 +278,18 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         context["num_dates"] = num_dates
         context["dates"] = []
         for i in range(num_dates):
-            start_dt = datetime.fromtimestamp(self.request.session[f"alert_datetime_start_{i}"])
-            end_dt = datetime.fromtimestamp(self.request.session[f"alert_datetime_end_{i}"])
-            context["dates"].append({'start': start_dt.strftime(DATETIME_FORMAT), 'end': end_dt.strftime(TIME_FORMAT)})
+            start_dt = datetime.fromtimestamp(
+                self.request.session[f"alert_datetime_start_{i}"]
+            )
+            end_dt = datetime.fromtimestamp(
+                self.request.session[f"alert_datetime_end_{i}"]
+            )
+            context["dates"].append(
+                {
+                    "start": start_dt.strftime(DATETIME_FORMAT),
+                    "end": end_dt.strftime(TIME_FORMAT),
+                }
+            )
         return context
 
     @transaction.atomic
@@ -394,9 +406,18 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
         context["num_dates"] = num_dates
         context["dates"] = []
         for i in range(num_dates):
-            start_dt = datetime.fromtimestamp(self.request.session[f"alert_datetime_start_{i}"])
-            end_dt = datetime.fromtimestamp(self.request.session[f"alert_datetime_end_{i}"])
-            context["dates"].append({'start': start_dt.strftime(DATETIME_FORMAT), 'end': end_dt.strftime(TIME_FORMAT)})
+            start_dt = datetime.fromtimestamp(
+                self.request.session[f"alert_datetime_start_{i}"]
+            )
+            end_dt = datetime.fromtimestamp(
+                self.request.session[f"alert_datetime_end_{i}"]
+            )
+            context["dates"].append(
+                {
+                    "start": start_dt.strftime(DATETIME_FORMAT),
+                    "end": end_dt.strftime(TIME_FORMAT),
+                }
+            )
         return context
 
 
