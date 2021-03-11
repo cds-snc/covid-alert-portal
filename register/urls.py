@@ -8,8 +8,9 @@ from .forms import (
     LocationAddressForm,
     LocationContactForm,
     RegisterSummaryForm,
-    LocationUnavailableForm,
 )
+
+from .forms import *;
 
 from register.views import check_for_province
 
@@ -19,7 +20,7 @@ app_name = "register"
 # order matters here
 named_location_forms = (
     ("address", LocationAddressForm),
-    ("unavailable", LocationUnavailableForm),
+    ("unavailable", forms.Form),
     ("category", LocationCategoryForm),
     ("name", LocationNameForm),
     ("contact", LocationContactForm),

@@ -130,15 +130,12 @@ def check_for_province(wizard):
     provinces = HealthcareProvince.objects.filter(qr_code_enabled=True)
     provinces_values = provinces.values_list("abbr", flat=True)
     provinces_list = list(provinces_values)
-
-    if data.get("province") is not None:
-        return not provinces_list.__contains__(data.get("province"))
-    return False
+    
+    return data.get("province") not in provinces_list
 
 
 class LocationWizard(NamedUrlSessionWizardView):
     def get_template_names(self):
-        print(self.steps.current)
         return [TEMPLATES[self.steps.current]]
 
     def render(self, form=None, **kwargs):
