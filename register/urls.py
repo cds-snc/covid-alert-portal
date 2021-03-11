@@ -8,7 +8,7 @@ from .forms import (
     LocationAddressForm,
     LocationContactForm,
     RegisterSummaryForm,
-    forms
+    forms,
 )
 
 from register.views import check_for_province
