@@ -36,7 +36,11 @@
         </div>
         <div class="summary-list__row">
             <dt class="summary-list__key">{% trans "Date(s)" %}</dt>
-            <dd class="summary-list__value">{{ dates|join:", " }}</dd>
+            <dd class="summary-list__value">
+                {% for date in dates %}
+                    <span>{{ date.start }} {% trans "to" %} {{ date.end }}</span><br/>
+                {% endfor %}
+            </dd>
             <dd class="summary-list__actions"><a href="{% url 'outbreaks:datetime' %}">{% trans "Change" %}<span class="visually-hidden">{% trans "dates" %}</span></a></dd>
         </div>
         <div class="summary-list__row">

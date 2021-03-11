@@ -26,7 +26,8 @@ import requests
 import logging
 
 
-DATETIME_FORMAT = "%Y-%m-%d"
+DATETIME_FORMAT = "%Y-%m-%d %H:%S"
+TIME_FORMAT = "%H:%S"
 
 
 class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
@@ -117,12 +118,10 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
                 )
             elif adjust_dates == "remove":
                 # Remove the last date even if there are some errors
-                date_to_remove = adjust_dates.split("_")[-1]
 
                 if num_dates > 1:
                     num_dates -= 1
                     self.request.session["num_dates"] = num_dates
-                    # self.request.session.pop(f"alert_datetime_start_{date_to_remove}", None)
                     self.request.session.pop(f"alert_datetime_start_{num_dates}", None)
                 return redirect(
                     reverse_lazy("outbreaks:datetime") + f"?num_dates={num_dates}"
@@ -276,8 +275,9 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         context["num_dates"] = num_dates
         context["dates"] = []
         for i in range(num_dates):
-            dt = datetime.fromtimestamp(self.request.session[f"alert_datetime_start_{i}"])
-            context["dates"].append(dt.strftime(DATETIME_FORMAT))
+            start_dt = datetime.fromtimestamp(self.request.session[f"alert_datetime_start_{i}"])
+            end_dt = datetime.fromtimestamp(self.request.session[f"alert_datetime_end_{i}"])
+            context["dates"].append({'start': start_dt.strftime(DATETIME_FORMAT), 'end': end_dt.strftime(TIME_FORMAT)})
         return context
 
     @transaction.atomic
@@ -394,9 +394,9 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
         context["num_dates"] = num_dates
         context["dates"] = []
         for i in range(num_dates):
-            dt = datetime.fromtimestamp(self.request.session.pop(f"alert_datetime_start_{i}"))
-            context["dates"].append(dt.strftime(DATETIME_FORMAT))
-
+            start_dt = datetime.fromtimestamp(self.request.session[f"alert_datetime_start_{i}"])
+            end_dt = datetime.fromtimestamp(self.request.session[f"alert_datetime_end_{i}"])
+            context["dates"].append({'start': start_dt.strftime(DATETIME_FORMAT), 'end': end_dt.strftime(TIME_FORMAT)})
         return context
 
 

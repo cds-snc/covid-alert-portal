@@ -15,7 +15,7 @@
   </p>
   <ul>
       {% for date in dates %}
-        <li>{{ date }}</li>
+        <li>{{ date.start }} {% trans "to" %} {{ date.end }}</li>
       {% endfor %}
   </ul>
 
