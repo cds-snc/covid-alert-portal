@@ -1,6 +1,6 @@
 from uuid import uuid4
 from django.db import models
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 from .utils import generate_random_key
 
