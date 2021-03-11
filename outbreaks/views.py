@@ -20,6 +20,8 @@ from .forms import DateForm, SeverityForm
 from .protobufs import outbreak_pb2
 from datetime import datetime, timedelta
 import pytz
+from .forms import severity_choices
+from register.forms import location_choices
 import requests
 import logging
 
@@ -231,9 +233,11 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         # At this point the location PK should be valid so we don't catch the not found exception
         location = Location.objects.get(id=self.request.session["alert_location"])
         context["location"] = location
+        context["location_category"] = dict(location_choices)[location.category]
         context["map_link"] = "https://maps.google.com/?q=" + str(location)
-        context["alert_level"] = self.request.session["alert_level"]
-
+        context["alert_level"] = dict(severity_choices)[
+            self.request.session["alert_level"]
+        ]
         num_dates = self.request.session.get("num_dates", 1)
         context["num_dates"] = num_dates
         context["dates"] = []
