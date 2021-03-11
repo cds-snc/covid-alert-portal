@@ -122,8 +122,8 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
                 if num_dates > 1:
                     num_dates -= 1
                     self.request.session["num_dates"] = num_dates
-                    # self.request.session.pop(f"alert_datetime_{date_to_remove}", None)
-                    self.request.session.pop(f"alert_datetime_{num_dates}", None)
+                    # self.request.session.pop(f"alert_datetime_start_{date_to_remove}", None)
+                    self.request.session.pop(f"alert_datetime_start_{num_dates}", None)
                 return redirect(
                     reverse_lazy("outbreaks:datetime") + f"?num_dates={num_dates}"
                 )
@@ -140,7 +140,7 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
         for i in range(self.request.session.get("num_dates", 1)):
             try:
                 dt = form.get_valid_date(form.data, i)
-                self.request.session[f"alert_datetime_{i}"] = dt.timestamp()
+                self.request.session[f"alert_datetime_start_{i}"] = dt.timestamp()
             except ValueError:
                 # Don't cache invalid dates
                 pass
@@ -181,11 +181,17 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
         # Populate the form with initial session data if we have it
         initial_data = {}
         for i in range(self.request.session.get("num_dates", 1)):
-            ts = self.request.session.get(f"alert_datetime_{i}")
-            if ts:
-                dt = datetime.fromtimestamp(ts)
+            start_ts = self.request.session.get(f"alert_datetime_start_{i}")
+            end_ts = self.request.session.get(f"alert_datetime_end_{i}")
+            if start_ts:
+                start_dt = datetime.fromtimestamp(start_ts)
                 initial_data.update(
-                    {f"year_{i}": dt.year, f"month_{i}": dt.month, f"day_{i}": dt.day, f"start_hour_{i}": dt.hour}
+                    {f"year_{i}": start_dt.year, f"month_{i}": start_dt.month, f"day_{i}": start_dt.day, f"start_hour_{i}": start_dt.hour }
+                )
+            if end_ts:
+                end_dt = datetime.fromtimestamp(end_ts)
+                initial_data.update(
+                    {f"end_hour_{i}": end_dt.hour }
                 )
         return initial_data
 
@@ -201,7 +207,8 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
                 return self.form_invalid(form)
 
             # Cache the datetime list for the next step.
-            self.request.session[f"alert_datetime_{i}"] = start_dt.timestamp()
+            self.request.session[f"alert_datetime_start_{i}"] = start_dt.timestamp()
+            self.request.session[f"alert_datetime_end_{i}"] = end_dt.timestamp()
 
         return super().form_valid(form)
 
@@ -227,7 +234,7 @@ class SeverityView(PermissionRequiredMixin, Is2FAMixin, FormView):
         # Ensure we have a cached location and datetime
         if (
             "alert_location" not in request.session
-            or "alert_datetime_0" not in request.session
+            or "alert_datetime_start_0" not in request.session
         ):
             return redirect(reverse_lazy("outbreaks:search"))
         return super().get(request, *args, **kwargs)
@@ -249,7 +256,7 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         # Ensure we have all necessary data cached
         if (
             "alert_location" not in request.session
-            or "alert_datetime_0" not in request.session
+            or "alert_datetime_start_0" not in request.session
             or "alert_level" not in request.session
         ):
             return redirect(reverse_lazy("outbreaks:search"))
@@ -269,7 +276,7 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         context["num_dates"] = num_dates
         context["dates"] = []
         for i in range(num_dates):
-            dt = datetime.fromtimestamp(self.request.session[f"alert_datetime_{i}"])
+            dt = datetime.fromtimestamp(self.request.session[f"alert_datetime_start_{i}"])
             context["dates"].append(dt.strftime(DATETIME_FORMAT))
         return context
 
@@ -301,16 +308,18 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
     def post_notification(self, form, i):
         # Ensure that the datetime is aware (might not be if unit testing or something)
         tz = pytz.timezone(settings.TIME_ZONE or "UTC")
-        dt = datetime.fromtimestamp(
-            self.request.session[f"alert_datetime_{i}"]
+        start_dt = datetime.fromtimestamp(
+            self.request.session[f"alert_datetime_start_{i}"]
+        ).replace(tzinfo=tz)
+        end_dt = datetime.fromtimestamp(
+            self.request.session[f"alert_datetime_end_{i}"]
         ).replace(tzinfo=tz)
 
         # Create the notification
         notification = Notification(
             severity=self.request.session["alert_level"],
-            start_date=dt,
-            # server expects valid interval, give the end of current day
-            end_date=dt.replace(hour=23, minute=59, second=59, microsecond=0),
+            start_date=start_dt,
+            end_date=end_dt,
             location_id=self.request.session["alert_location"],
             created_by=self.request.user,
         )
@@ -368,7 +377,7 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
         # Ensure we have all necessary data cached
         if (
             "alert_location" not in request.session
-            or "alert_datetime_0" not in request.session
+            or "alert_datetime_start_0" not in request.session
             or "alert_level" not in request.session
         ):
             return redirect(reverse_lazy("outbreaks:search"))
@@ -385,7 +394,7 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
         context["num_dates"] = num_dates
         context["dates"] = []
         for i in range(num_dates):
-            dt = datetime.fromtimestamp(self.request.session.pop(f"alert_datetime_{i}"))
+            dt = datetime.fromtimestamp(self.request.session.pop(f"alert_datetime_start_{i}"))
             context["dates"].append(dt.strftime(DATETIME_FORMAT))
 
         return context
