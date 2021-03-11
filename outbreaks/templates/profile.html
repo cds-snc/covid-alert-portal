@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block title %}
-    {% trans "Location profile" %}
+    {% trans "Place profile" %}
 {% endblock %}
 
 {% block content %}
@@ -53,6 +53,6 @@
     <p>{% trans "Place not found." %}</p>
   {% endif %}
 
-  {% include "includes/cds_form.html" with submit_text=_("Notify people who were there") %}
+  {% include "includes/cds_form.html" with submit_text=_("Next") %}
 
 {% endblock %}

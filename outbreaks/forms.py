@@ -78,9 +78,9 @@ class SeverityForm(HealthcareBaseForm):
     alert_level = forms.ChoiceField(
         label="",
         choices=[
-            ("1", _("Somebody sneezed...")),
-            ("2", _("Sirens and lights flashing everywhere!")),
-            ("3", _("Zombie apocalypse!!!!")),
+            ("1", _("Self-monitor")),
+            ("2", _("Self-isolate")),
+            ("3", _("Get tested immediately")),
         ],
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
