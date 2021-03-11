@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.conf import settings
-from portal.widgets import CDSSelectWidget, CDSRadioWidget
+from portal.widgets import CDSRadioWidget
 from portal.forms import HealthcareBaseForm
 from datetime import datetime
 import pytz
@@ -44,12 +44,10 @@ class DateForm(HealthcareBaseForm):
             self.fields[f"start_hour_{i}"] = forms.ChoiceField(
                 label=_("From"),
                 choices=hours,
-                # widget=CDSSelectWidget,
             )
             self.fields[f"end_hour_{i}"] = forms.ChoiceField(
                 label=_("To"),
                 choices=hours,
-                # widget=CDSSelectWidget,
             )
         # Add the fieldset to the meta class
         # Idea adapted from: https://schinckel.net/2013/06/14/django-fieldsets/
