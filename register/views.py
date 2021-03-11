@@ -15,6 +15,7 @@ from django.contrib import messages
 from .forms import location_choices
 from profiles.models import HealthcareProvince
 
+
 class RegistrantEmailView(FormView):
     form_class = EmailForm
     template_name = "register/registrant_email.html"
@@ -127,7 +128,7 @@ TEMPLATES = {
 def check_for_province(wizard):
     data = wizard.get_cleaned_data_for_step("address") or {}
     provinces = HealthcareProvince.objects.filter(qr_code_enabled=True)
-    provinces_values = provinces.values_list('abbr',flat=True)
+    provinces_values = provinces.values_list("abbr", flat=True)
     provinces_list = list(provinces_values)
 
     if data.get("province") is not None:
