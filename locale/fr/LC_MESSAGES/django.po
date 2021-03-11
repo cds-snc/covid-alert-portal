@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-11 00:55+0000\n"
+"POT-Creation-Date: 2021-03-11 16:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -779,37 +779,37 @@ msgstr ""
 msgid "Google Analytics V4 Tracking Code"
 msgstr "Code pour Google Analytics version 4"
 
-#: outbreaks/forms.py:19
-msgid "Day"
-msgstr "Jour"
-
-#: outbreaks/forms.py:22
-msgid "Month"
-msgstr "Mois"
-
-#: outbreaks/forms.py:28
-msgid "Year"
-msgstr "Année"
-
-#: outbreaks/forms.py:50
-msgid "Invalid date specified."
-msgstr "Invalide ou expiré"
-
-#: outbreaks/forms.py:70
-msgid "Someone already notified people who were there at this date and time."
-msgstr "Une notification a déjà été envoyée pour ce lieu et cette date."
-
-#: outbreaks/forms.py:81
+#: outbreaks/forms.py:11
 msgid "Self-monitor"
 msgstr "Serveillez vos symptômes"
 
-#: outbreaks/forms.py:82
+#: outbreaks/forms.py:12
 msgid "Self-isolate"
 msgstr "Isolez-vous"
 
-#: outbreaks/forms.py:83
+#: outbreaks/forms.py:13
 msgid "Get tested immediately"
 msgstr "Faites-vous tester immédiatement"
+
+#: outbreaks/forms.py:25
+msgid "Day"
+msgstr "Jour"
+
+#: outbreaks/forms.py:28
+msgid "Month"
+msgstr "Mois"
+
+#: outbreaks/forms.py:34
+msgid "Year"
+msgstr "Année"
+
+#: outbreaks/forms.py:56
+msgid "Invalid date specified."
+msgstr "Invalide ou expiré"
+
+#: outbreaks/forms.py:76
+msgid "Someone already notified people who were there at this date and time."
+msgstr "Une notification a déjà été envoyée pour ce lieu et cette date."
 
 #: outbreaks/templates/confirm.html:5
 msgid "Confirm notification"
