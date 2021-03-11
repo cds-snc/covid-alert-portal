@@ -35,12 +35,12 @@ class DateForm(HealthcareBaseForm):
                 initial=2021,
                 widget=forms.TextInput,
             )
-            self.fields[f"start_time_{i}"] = forms.ChoiceField(
+            self.fields[f"start_hour_{i}"] = forms.ChoiceField(
                 label=_("From"),
                 choices=hours,
                 # widget=CDSSelectWidget,
             )
-            self.fields[f"end_time_{i}"] = forms.ChoiceField(
+            self.fields[f"end_hour_{i}"] = forms.ChoiceField(
                 label=_("To"),
                 choices=hours,
                 # widget=CDSSelectWidget,
@@ -49,7 +49,7 @@ class DateForm(HealthcareBaseForm):
         # Idea adapted from: https://schinckel.net/2013/06/14/django-fieldsets/
         meta = getattr(self, "Meta", None)
         meta.fieldsets = tuple(
-            (f"date_{i}", {"fields": (f"day_{i}", f"month_{i}", f"year_{i}", f"start_time_{i}", f"end_time_{i}")})
+            (f"date_{i}", {"fields": (f"day_{i}", f"month_{i}", f"year_{i}", f"start_hour_{i}", f"end_hour_{i}")})
             for i in range(num_dates)
         )
 
@@ -64,12 +64,18 @@ class DateForm(HealthcareBaseForm):
         for i in range(self.num_dates):
             try:
                 tz = pytz.timezone(settings.TIME_ZONE or "UTC")
-                cleaned_data[f"date_{i}"] = datetime(
+                cleaned_data[f"start_date_{i}"] = datetime(
                     year=cleaned_data.get(f"year_{i}", -1),
                     month=cleaned_data.get(f"month_{i}", -1),
                     day=cleaned_data.get(f"day_{i}", -1),
+                    hour=int(cleaned_data.get(f"start_hour_{i}", -1)),
                 ).replace(tzinfo=tz)
-
+                cleaned_data[f"end_date_{i}"] = datetime(
+                    year=cleaned_data.get(f"year_{i}", -1),
+                    month=cleaned_data.get(f"month_{i}", -1),
+                    day=cleaned_data.get(f"day_{i}", -1),
+                    hour=int(cleaned_data.get(f"end_hour_{i}", -1)),
+                ).replace(tzinfo=tz)
             except ValueError:
                 is_valid = False
                 meta = getattr(self, "Meta", None)

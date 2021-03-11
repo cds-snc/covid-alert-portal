@@ -102,6 +102,9 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
     def post(self, request, *args, **kwargs):
         adjust_dates = request.POST.get("adjust_dates")
         if adjust_dates:
+            # form = self.get_form()
+            # if form.is_valid():
+            #     form.save()
             num_dates = self.request.session.get("num_dates", 1)
             if adjust_dates == "add":
                 if num_dates < 5:
@@ -158,14 +161,15 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
             if ts:
                 dt = datetime.fromtimestamp(ts)
                 initial_data.update(
-                    {f"year_{i}": dt.year, f"month_{i}": dt.month, f"day_{i}": dt.day}
+                    {f"year_{i}": dt.year, f"month_{i}": dt.month, f"day_{i}": dt.day, f"start_hour_{i}": dt.hour}
                 )
         return initial_data
 
     def form_valid(self, form):
         location = self.request.session["alert_location"]
         for i in range(self.request.session.get("num_dates", 1)):
-            dt = form.cleaned_data.get(f"date_{i}")
+            start_dt = form.cleaned_data.get(f"start_date_{i}")
+            end_dt = form.cleaned_data.get(f"end_date_{i}")
 
             # Ensure that the date doesn't exist already for this location
             if self.notification_exists(dt, location):
@@ -173,7 +177,7 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
                 return self.form_invalid(form)
 
             # Cache the datetime list for the next step.
-            self.request.session[f"alert_datetime_{i}"] = dt.timestamp()
+            self.request.session[f"alert_datetime_{i}"] = start_dt.timestamp()
 
         return super().form_valid(form)
 
