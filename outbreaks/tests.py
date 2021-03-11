@@ -20,7 +20,7 @@ class NotificationsTestCase(AdminUserTestCase):
 
         # Populate test data
         location1 = Location.objects.create(
-            category="Restaurant",
+            category="restaurant_bar_coffee",
             name="Nandos",
             address="123 main street",
             city="Winnipeg",
@@ -30,7 +30,7 @@ class NotificationsTestCase(AdminUserTestCase):
             contact_phone="6136666666",
         )
         location2 = Location.objects.create(
-            category="Restaurant",
+            category="restaurant_bar_coffee",
             name="Bobs",
             address="123 main street",
             city="Winnipeg",
@@ -40,7 +40,7 @@ class NotificationsTestCase(AdminUserTestCase):
             contact_phone="6136666666",
         )
         Location.objects.create(
-            category="Restaurant",
+            category="restaurant_bar_coffee",
             name="Bobs",
             address="123 main street",
             city="Winnipeg",
