@@ -37,7 +37,7 @@
             <div id="error--{{ form.html_name }}-{{group}}" class="validation-error"> {{ fieldset.error }} </div>
           {% endif %}
           <div class="remove-container">
-            <button name="adjust_dates" value="remove" class="secondary">
+            <button name="adjust_dates" value="remove_{{fieldset.title}}" class="secondary">
               {{ _("Remove") }}
             </button>
           </div>

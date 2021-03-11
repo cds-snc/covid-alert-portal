@@ -108,10 +108,11 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
                     num_dates += 1
                     self.request.session["num_dates"] = num_dates
             else:
+                date_to_remove = adjust_dates.split("_")[-1]
                 if num_dates > 1:
                     num_dates -= 1
                     self.request.session["num_dates"] = num_dates
-                    self.request.session.pop(f"alert_datetime_{num_dates - 1}", None)
+                    self.request.session.pop(f"alert_datetime_{date_to_remove}", None)
             return redirect(
                 reverse_lazy("outbreaks:datetime") + f"?num_dates={num_dates}"
             )
