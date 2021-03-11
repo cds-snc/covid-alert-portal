@@ -10,14 +10,16 @@
   {% include  "includes/flash_messages.html" %}
   <h1>{% trans "Public exposures" %}</h1>
 
-  <p>{% trans "You’ll send notifications of a public exposure to people who have installed COVID alert" %}</p>
+  <p>{% trans "You’ll send notifications of a public exposure to people who have installed COVID Alert." %}</p>
 
   <form action="{% url 'outbreaks:search' %}" method="get" id="form--{{ request.resolver_match.url_name }}">
     {% csrf_token %}
 
     <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %} search_bar">
       <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
-        <label for="id_search_text" class="visually-hidden">Search: </label>
+        <label for="id_search_text">
+          <b>{% trans "Search for place name or address" %}</b>
+        </label>
         <input type="text" name="search_text" size="30" autocomplete="on" id="id_search_text">
         <button type="submit">
           {{ _("Search") }}
@@ -47,7 +49,7 @@
             </td>
             <td>
               <a href="{% url 'outbreaks:profile' location.id %}">
-                {% trans "Send alert" %}<span class="visually-hidden">{% trans "to location named " %}{{location.name}}</span>
+                {% trans "Select" %}<span class="visually-hidden">{% trans "location named " %}{{location.name}}</span>
               </a>
             </td>
           </tr>
@@ -63,13 +65,13 @@
         </span>
 
         {% if page_obj.has_previous %}
-            <a href="?{% param_replace page=1 %}">&laquo; first</a>
-            <a href="?{% param_replace page=page_obj.previous_page_number %}">previous</a>
+            <a href="?{% param_replace page=1 %}">&laquo; {% trans "first" %}</a>
+            <a href="?{% param_replace page=page_obj.previous_page_number %}">{% trans "previous page" %}</a>
         {% endif %}
 
         {% if page_obj.has_next %}
-            <a href="?{% param_replace page=page_obj.next_page_number %}">next</a>
-            <a href="?{% param_replace page=page_obj.paginator.num_pages %}">last &raquo;</a>
+            <a href="?{% param_replace page=page_obj.next_page_number %}">{% trans "next page" %}</a>
+            <a href="?{% param_replace page=page_obj.paginator.num_pages %}">{% trans "last" %} &raquo;</a>
         {% endif %}
       </span>
     </div>
@@ -77,11 +79,11 @@
   {% endif %}
 
 <div class="content-button">
-  <a class="secondary" href="{% url 'outbreaks:history' %}" role='button' draggable='false'>{% trans "Check notification history" %}</a>
+  <a class="secondary" href="{% url 'outbreaks:history' %}" role='button' draggable='false'>{% trans "Search notification history" %}</a>
 </div>
 
 <p>
   <b>{% trans "New or need a refresher?" %}</b><br>
-  Visit <a href="{% url 'about:create_account' %}">about public exposures</a>
+  {% trans "Visit" %} <a href="{% url 'about:create_account' %}">{% trans "About public exposures." %}</a>
 </p>
 {% endblock %}
