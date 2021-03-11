@@ -12,7 +12,7 @@ from profiles.models import HealthcareUser, HealthcareProvince, AuthorizedDomain
 
 
 class ProvinceAdmin(admin.ModelAdmin):
-    list_display = ["id", "abbr", "name", "sms_enabled", "is_api_key_set"]
+    list_display = ["id", "abbr", "name", "sms_enabled", "qr_code_enabled", "is_api_key_set"]
     readonly_fields = [
         "abbr",
         "name",

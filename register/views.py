@@ -13,7 +13,7 @@ from datetime import datetime, timedelta
 import pytz
 from django.contrib import messages
 from .forms import location_choices
-
+from profiles.models import HealthcareProvince
 
 class RegistrantEmailView(FormView):
     form_class = EmailForm
@@ -123,15 +123,15 @@ TEMPLATES = {
     "success": "register/success.html",
 }
 
-included_provinces = {"ON", "SK"}
-
 
 def check_for_province(wizard):
     data = wizard.get_cleaned_data_for_step("address") or {}
-    print(included_provinces.__contains__(data.get("province")))
+    provinces = HealthcareProvince.objects.filter(qr_code_enabled=True)
+    provinces_values = provinces.values_list('abbr',flat=True)
+    provinces_list = list(provinces_values)
+
     if data.get("province") is not None:
-        print(not included_provinces.__contains__(data.get("province")))
-        return not included_provinces.__contains__(data.get("province"))
+        return not provinces_list.__contains__(data.get("province"))
     return False
 
 
