@@ -20,6 +20,8 @@ from .forms import DateForm, SeverityForm
 from .protobufs import outbreak_pb2
 from datetime import datetime, timedelta
 import pytz
+from .forms import severity_choices
+from register.forms import location_choices
 import requests
 import logging
 
@@ -100,26 +102,48 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        self.save_form_dates()
         adjust_dates = request.POST.get("adjust_dates")
         if adjust_dates:
-            # form = self.get_form()
-            # if form.is_valid():
-            #     form.save()
             num_dates = self.request.session.get("num_dates", 1)
-            if adjust_dates == "add":
+            if adjust_dates == "add" and self.get_form().is_valid():
+                # Only add a new date if the current ones are all valid
                 if num_dates < 5:
                     num_dates += 1
                     self.request.session["num_dates"] = num_dates
-            else:
+                return redirect(
+                    reverse_lazy("outbreaks:datetime") + f"?num_dates={num_dates}"
+                )
+            elif adjust_dates == "remove":
+                # Remove the last date even if there are some errors
                 date_to_remove = adjust_dates.split("_")[-1]
+
                 if num_dates > 1:
                     num_dates -= 1
                     self.request.session["num_dates"] = num_dates
-                    self.request.session.pop(f"alert_datetime_{date_to_remove}", None)
-            return redirect(
-                reverse_lazy("outbreaks:datetime") + f"?num_dates={num_dates}"
-            )
-        return super().post(request, *args, **kwargs)
+                    # self.request.session.pop(f"alert_datetime_{date_to_remove}", None)
+                    self.request.session.pop(f"alert_datetime_{num_dates}", None)
+                return redirect(
+                    reverse_lazy("outbreaks:datetime") + f"?num_dates={num_dates}"
+                )
+
+        # Proceed to success or form error
+        return response
+
+    def save_form_dates(self):
+        """
+        Cache the currently entered valid datetime entries before adding/removing new entries so that the
+        user hopefully doesn't experience strange jumps in continuity with values changing/disappearing
+        """
+        form = self.get_form()
+        for i in range(self.request.session.get("num_dates", 1)):
+            try:
+                dt = form.get_valid_date(form.data, i)
+                self.request.session[f"alert_datetime_{i}"] = dt.timestamp()
+            except ValueError:
+                # Don't cache invalid dates
+                pass
 
     def get_form_kwargs(self):
         # This provides init arguments for the form instance
@@ -168,11 +192,11 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
     def form_valid(self, form):
         location = self.request.session["alert_location"]
         for i in range(self.request.session.get("num_dates", 1)):
-            start_dt = form.cleaned_data.get(f"start_date_{i}")
+            start_dt = form.cleaned_data.get(f"start_date_{i}") 
             end_dt = form.cleaned_data.get(f"end_date_{i}")
 
             # Ensure that the date doesn't exist already for this location
-            if self.notification_exists(dt, location):
+            if self.notification_exists(start_dt, location): # fix this
                 form.add_duplicate_error(i)
                 return self.form_invalid(form)
 
@@ -236,9 +260,11 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         # At this point the location PK should be valid so we don't catch the not found exception
         location = Location.objects.get(id=self.request.session["alert_location"])
         context["location"] = location
+        context["location_category"] = dict(location_choices)[location.category]
         context["map_link"] = "https://maps.google.com/?q=" + str(location)
-        context["alert_level"] = self.request.session["alert_level"]
-
+        context["alert_level"] = dict(severity_choices)[
+            self.request.session["alert_level"]
+        ]
         num_dates = self.request.session.get("num_dates", 1)
         context["num_dates"] = num_dates
         context["dates"] = []

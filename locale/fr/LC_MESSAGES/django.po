@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-05 02:28+0000\n"
+"POT-Creation-Date: 2021-03-11 16:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -518,8 +518,8 @@ msgstr ""
 
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html:22
 #: covid_key/templates/covid_key/otk_sms_sent.html:32
-#: outbreaks/templates/datetime.html:48 outbreaks/templates/severity.html:15
-#: profiles/templates/profiles/2fa.html:27
+#: outbreaks/templates/datetime.html:71 outbreaks/templates/profile.html:56
+#: outbreaks/templates/severity.html:15 profiles/templates/profiles/2fa.html:27
 #: profiles/templates/profiles/signup.html:14
 #: profiles/templates/profiles/signup_2fa.html:15
 #: register/templates/register/location_address.html:22
@@ -563,7 +563,6 @@ msgstr ""
 #: portal/templates/500.html:17 portal/templates/includes/footer.html:8
 #: register/templates/register/500.html:17
 #: register/templates/register/includes/footer.html:8
-#: register/templates/register/start.html:38
 msgid "Contact us"
 msgstr "Nous joindre"
 
@@ -750,13 +749,14 @@ msgid "Yes, continue"
 msgstr "Oui, continuer"
 
 #: covid_key/templates/covid_key/start.html:22
-#: outbreaks/templates/search.html:87
+#: outbreaks/templates/search.html:86
 msgid "New or need a refresher?"
 msgstr "Besoin d’en savoir plus sur le portail?"
 
 #: covid_key/templates/covid_key/start.html:23
+#: outbreaks/templates/search.html:87
 msgid "Visit"
-msgstr "Consultez"
+msgstr "Consultez la page"
 
 #: covid_key/views.py:107
 msgid "Something went wrong. Contact your administrator."
@@ -779,278 +779,310 @@ msgstr ""
 msgid "Google Analytics V4 Tracking Code"
 msgstr "Code pour Google Analytics version 4"
 
+#: outbreaks/forms.py:11
+msgid "Self-monitor"
+msgstr "Serveillez vos symptômes"
+
 #: outbreaks/forms.py:12
-msgid "Search for place name or address"
-msgstr ""
+msgid "Self-isolate"
+msgstr "Isolez-vous"
 
-#: outbreaks/forms.py:21
+#: outbreaks/forms.py:13
+msgid "Get tested immediately"
+msgstr "Faites-vous tester immédiatement"
+
+#: outbreaks/forms.py:25
 msgid "Day"
-msgstr ""
+msgstr "Jour"
 
-#: outbreaks/forms.py:23
+#: outbreaks/forms.py:28
 msgid "Month"
-msgstr ""
-
-#: outbreaks/forms.py:26
-msgid "Year"
-msgstr ""
+msgstr "Mois"
 
 #: outbreaks/forms.py:34
-msgid "Somebody sneezed..."
-msgstr ""
+msgid "Year"
+msgstr "Année"
 
-#: outbreaks/forms.py:35
-msgid "Sirens and lights flashing everywhere!"
-msgstr ""
+#: outbreaks/forms.py:56
+msgid "Invalid date specified."
+msgstr "Invalide ou expiré"
 
-#: outbreaks/forms.py:36
-msgid "Zombie apocalypse!!!!"
-msgstr ""
+#: outbreaks/forms.py:76
+msgid "Someone already notified people who were there at this date and time."
+msgstr "Une notification a déjà été envoyée pour ce lieu et cette date."
 
 #: outbreaks/templates/confirm.html:5
 msgid "Confirm notification"
 msgstr ""
 
 #: outbreaks/templates/confirm.html:13
-#, fuzzy
-#| msgid "Confirm delete user"
 msgid "Confirm and send"
-msgstr "Confirmez la suppression de l’utilisateur"
+msgstr "Confirmer et envoyer"
 
-#: outbreaks/templates/confirm.html:16
-#, fuzzy
-#| msgid "No invitations yet"
-msgid "Notification details"
-msgstr "Aucune invitation pour le moment"
-
-#: outbreaks/templates/confirm.html:19 outbreaks/templates/details.html:20
-#: outbreaks/templates/profile.html:20
+#: outbreaks/templates/confirm.html:17 outbreaks/templates/details.html:20
+#: outbreaks/templates/profile.html:18
 #: profiles/templates/profiles/healthcareuser_detail.html:25
-#: register/templates/register/summary.html:82
+#: register/templates/register/summary.html:84
 msgid "Name"
 msgstr "Nom"
 
-#: outbreaks/templates/confirm.html:21 outbreaks/templates/confirm.html:39
-#: outbreaks/templates/confirm.html:44 outbreaks/templates/confirm.html:49
+#: outbreaks/templates/confirm.html:19 outbreaks/templates/confirm.html:35
+#: outbreaks/templates/confirm.html:40 outbreaks/templates/confirm.html:45
 #: profiles/templates/profiles/healthcareuser_detail.html:38
 #: profiles/templates/profiles/healthcareuser_detail.html:61
 #: profiles/templates/profiles/healthcareuser_detail.html:111
 msgid "Change"
 msgstr "Modifier"
 
-#: outbreaks/templates/confirm.html:21 outbreaks/templates/confirm.html:39
+#: outbreaks/templates/confirm.html:19 outbreaks/templates/confirm.html:35
 #, fuzzy
 #| msgid "Actions"
 msgid "location"
 msgstr "Actions"
 
-#: outbreaks/templates/confirm.html:24 outbreaks/templates/details.html:25
-#: outbreaks/templates/history.html:36 outbreaks/templates/profile.html:25
-#: outbreaks/templates/search.html:38
+#: outbreaks/templates/confirm.html:22 outbreaks/templates/details.html:25
+#: outbreaks/templates/history.html:52 outbreaks/templates/profile.html:23
+#: outbreaks/templates/search.html:37
 #: register/templates/register/summary.html:54
 msgid "Address"
 msgstr "Adresse"
 
-#: outbreaks/templates/confirm.html:33 outbreaks/templates/details.html:35
-#: outbreaks/templates/profile.html:35
+#: outbreaks/templates/confirm.html:29 outbreaks/templates/details.html:35
+#: outbreaks/templates/profile.html:31
 msgid "Show on map"
-msgstr ""
+msgstr "Montrer sur la carte"
 
-#: outbreaks/templates/confirm.html:37
-#: register/templates/register/summary.html:70
+#: outbreaks/templates/confirm.html:33
+#: register/templates/register/summary.html:72
 msgid "Type"
 msgstr "Type"
 
-#: outbreaks/templates/confirm.html:42
+#: outbreaks/templates/confirm.html:38
 msgid "Date(s)"
 msgstr ""
 
-#: outbreaks/templates/confirm.html:44
+#: outbreaks/templates/confirm.html:40
 #, fuzzy
 #| msgid "Update"
 msgid "dates"
 msgstr "Mettre à jour"
 
-#: outbreaks/templates/confirm.html:47 outbreaks/templates/details.html:58
+#: outbreaks/templates/confirm.html:43 outbreaks/templates/details.html:58
 msgid "Severity"
 msgstr ""
 
-#: outbreaks/templates/confirm.html:49
+#: outbreaks/templates/confirm.html:45
 msgid "severity"
-msgstr ""
+msgstr "Gravité"
 
-#: outbreaks/templates/confirm.html:54
-#, fuzzy
-#| msgid ""
-#| "By selecting “Make poster”, you confirm your answers are correct and "
-#| "complete."
+#: outbreaks/templates/confirm.html:49
 msgid ""
 "By selecting “Notify people who were there”,  you confirm you believe this "
 "information is correct and complete."
 msgstr ""
-"En cliquant sur « Créer l’affiche », vous confirmez que vos réponses sont "
-"exactes."
+"En cliquant sur « Notifier les visiteurs de ce lieu », vous confirmez que "
+"ces renseignements sont exacts et complets selon vous."
 
-#: outbreaks/templates/confirm.html:56 outbreaks/templates/profile.html:61
+#: outbreaks/templates/confirm.html:51
 msgid "Notify people who were there"
-msgstr ""
+msgstr "Notifier les visiteurs de ce lieu"
 
 #: outbreaks/templates/confirmed.html:5
-#, fuzzy
-#| msgid "Invitation sent"
 msgid "Notification sent"
-msgstr "Invitation envoyée"
+msgstr "Notification envoyée"
 
 #: outbreaks/templates/confirmed.html:9
 msgid "You’ve notified people"
-msgstr ""
+msgstr "Notification envoyée"
 
 #: outbreaks/templates/confirmed.html:12
 msgid "People who’ve installed the app will get a notification if they were at"
 msgstr ""
+"Les personnes qui ont installé l’application recevront une notification si "
+"elles ont fréquenté"
 
 #: outbreaks/templates/confirmed.html:14
 msgid "on one or more of these dates:"
-msgstr ""
+msgstr "à l’une ou plusieurs des dates suivantes:"
 
-#: outbreaks/templates/confirmed.html:21
+#: outbreaks/templates/confirmed.html:23
 msgid "Notify of another public exposure"
-msgstr ""
+msgstr "Notifier les visiteurs d’un autre lieu"
 
-#: outbreaks/templates/confirmed.html:22 outbreaks/templates/search.html:83
-#, fuzzy
-#| msgid "Check invitations"
-msgid "Check notification history"
-msgstr "Voir les invitations"
+#: outbreaks/templates/confirmed.html:24 outbreaks/templates/search.html:82
+msgid "Search notification history"
+msgstr "Consulter l’historique des notifications"
 
-#: outbreaks/templates/datetime.html:5 outbreaks/templates/datetime.html:13
-msgid "Exposure date and time"
-msgstr ""
+#: outbreaks/templates/datetime.html:5 outbreaks/templates/datetime.html:24
+#: outbreaks/templates/datetime.html:46
+msgid "Select date"
+msgstr "Trouver une date"
 
-#: outbreaks/templates/datetime.html:15
+#: outbreaks/templates/datetime.html:18
+msgid "To see all public exposures for this place, visit"
+msgstr "Pour voir les expositions publiques passées de ce lieu consultez"
+
+#: outbreaks/templates/datetime.html:18 outbreaks/templates/history.html:6
+#: outbreaks/templates/history.html:11
+msgid "Notification history"
+msgstr "Historique de notification"
+
+#: outbreaks/templates/datetime.html:26
 msgid ""
 "We’ll notify people who scanned the QR code on that date. Remember to add "
 "all dates of this public exposure."
 msgstr ""
+"Nous notifierons les personnes qui ont scanné le code QR à la date indiquée. "
+"S’il y a plus d’une date, ajoutez toutes les dates d’exposition."
 
-#: outbreaks/templates/datetime.html:44
-msgid "select date"
-msgstr ""
+#: outbreaks/templates/datetime.html:62
+msgid "Add another date"
+msgstr "Ajouter une date"
+
+#: outbreaks/templates/datetime.html:65
+msgid "Remove a date"
+msgstr "Supprimer une date"
 
 #: outbreaks/templates/details.html:5 outbreaks/templates/details.html:14
 msgid "Details of public exposure"
-msgstr ""
+msgstr "Détails de l’exposition publique"
 
 #: outbreaks/templates/details.html:17
 msgid "Exposure details"
-msgstr ""
+msgstr "Détails de l’exposition publique"
 
 #: outbreaks/templates/details.html:40
-#, fuzzy
-#| msgid "Send"
 msgid "Sender"
-msgstr "Envoyer"
+msgstr "Émetteur"
 
-#: outbreaks/templates/details.html:48
+#: outbreaks/templates/details.html:48 outbreaks/templates/history.html:62
 msgid "Date of public exposure"
-msgstr ""
+msgstr "Date d’exposition publique"
 
 #: outbreaks/templates/details.html:53
 msgid "Date of notification"
-msgstr ""
+msgstr "Date de la notification"
 
 #: outbreaks/templates/details.html:66
 msgid "Exposure details not found."
 msgstr ""
 
-#: outbreaks/templates/history.html:6 outbreaks/templates/history.html:11
-msgid "Notification history"
-msgstr ""
+#: outbreaks/templates/history.html:19 outbreaks/templates/search.html:21
+msgid "Search for place name or address"
+msgstr "Cherchez un lieu par nom ou par adresse"
 
-#: outbreaks/templates/history.html:24 outbreaks/templates/search.html:26
+#: outbreaks/templates/history.html:23 outbreaks/templates/search.html:25
 msgid "Search"
-msgstr ""
+msgstr "Chercher"
 
-#: outbreaks/templates/history.html:32
+#: outbreaks/templates/history.html:31
 msgid "Prior notifications"
-msgstr ""
+msgstr "Notifications antérieures"
 
-#: outbreaks/templates/history.html:35 outbreaks/templates/search.html:37
-#, fuzzy
-#| msgid "Change name"
+#: outbreaks/templates/history.html:36
+msgid "Sort by name, ascending"
+msgstr "Trier par nom, par ordre croissant"
+
+#: outbreaks/templates/history.html:39
+msgid "Sort by name, descending"
+msgstr "Trier par nom, par ordre décroissant"
+
+#: outbreaks/templates/history.html:42 outbreaks/templates/search.html:36
 msgid "Place name"
-msgstr "Modifier le nom"
+msgstr "Nom du lieu"
 
-#: outbreaks/templates/history.html:37
-msgid "Date of exposure"
-msgstr ""
+#: outbreaks/templates/history.html:46
+msgid "Sort by address, ascending"
+msgstr "Trier par adresse, par ordre croissant"
 
-#: outbreaks/templates/history.html:55
+#: outbreaks/templates/history.html:49
+msgid "Sort by address, descending"
+msgstr "Trier par adresse, par ordre décroissant"
+
+#: outbreaks/templates/history.html:56
+msgid "Sort by date of exposure, ascending"
+msgstr "Trier par date d'exposition, par ordre croissant"
+
+#: outbreaks/templates/history.html:59
+msgid "Sort by date of exposure, descending"
+msgstr "Trier par date d'exposition, par ordre décroissant"
+
+#: outbreaks/templates/history.html:81
 msgid "See more notification "
-msgstr ""
+msgstr "Voir plus de notification "
 
-#: outbreaks/templates/history.html:55
+#: outbreaks/templates/history.html:81
 msgid "Details"
-msgstr ""
+msgstr "Détails"
 
-#: outbreaks/templates/profile.html:5 outbreaks/templates/profile.html:17
-msgid "Location profile"
-msgstr ""
+#: outbreaks/templates/history.html:97 outbreaks/templates/search.html:68
+msgid "first"
+msgstr "première page"
 
-#: outbreaks/templates/profile.html:14
-#, fuzzy
-#| msgid "User profile"
+#: outbreaks/templates/history.html:98 outbreaks/templates/search.html:69
+msgid "previous page"
+msgstr "page précédente"
+
+#: outbreaks/templates/history.html:102 outbreaks/templates/search.html:73
+msgid "next page"
+msgstr "Page suivante"
+
+#: outbreaks/templates/history.html:103 outbreaks/templates/search.html:74
+msgid "last"
+msgstr "dernière page"
+
+#: outbreaks/templates/profile.html:5 outbreaks/templates/profile.html:14
 msgid "Place profile"
-msgstr "Profil utilisateur"
+msgstr "Profil du lieu d’exposition"
 
-#: outbreaks/templates/profile.html:40 register/forms.py:71
-#, fuzzy
-#| msgid "Contact us"
+#: outbreaks/templates/profile.html:36 register/forms.py:72
 msgid "Contact email"
-msgstr "Nous joindre"
+msgstr "Adresse courriel"
 
-#: outbreaks/templates/profile.html:45
-#, fuzzy
-#| msgid "Contact us"
+#: outbreaks/templates/profile.html:41
 msgid "Contact phone"
-msgstr "Nous joindre"
+msgstr "Numéro du contact"
 
-#: outbreaks/templates/profile.html:50
+#: outbreaks/templates/profile.html:46
 msgid "Number of prior notifications"
-msgstr ""
+msgstr "Nombre de notifications passées"
 
-#: outbreaks/templates/profile.html:58
-#, fuzzy
-#| msgid "Page not found"
+#: outbreaks/templates/profile.html:53
 msgid "Place not found."
-msgstr "Page introuvable"
+msgstr "Lieu introuvable"
 
 #: outbreaks/templates/search.html:6 outbreaks/templates/search.html:11
 #: portal/templates/includes/nav_main.html:15
 msgid "Public exposures"
-msgstr ""
+msgstr "Expositions publiques"
 
 #: outbreaks/templates/search.html:13
 msgid ""
 "You’ll send notifications of a public exposure to people who have installed "
-"COVID alert"
+"COVID Alert."
 msgstr ""
+"Vous enverrez une notification d’exposition aux personnes qui ont installé "
+"l’application Alerte COVID."
 
-#: outbreaks/templates/search.html:34
+#: outbreaks/templates/search.html:33
 msgid "Available locations"
 msgstr ""
 
-#: outbreaks/templates/search.html:53
-msgid "Send alert"
+#: outbreaks/templates/search.html:52
+msgid "Select"
+msgstr "Sélectionner"
+
+#: outbreaks/templates/search.html:52
+msgid "location named "
 msgstr ""
 
-#: outbreaks/templates/search.html:53
-msgid "to location named "
-msgstr ""
+#: outbreaks/templates/search.html:87
+msgid "About public exposures."
+msgstr "À propos des expositions publiques."
 
 #: outbreaks/templates/severity.html:5 outbreaks/templates/severity.html:13
 msgid "Select notification message"
-msgstr ""
+msgstr "Choisissez le message de la notification"
 
 #: portal/settings.py:374
 msgid "This account has been locked due to too many failed log in attempts."
@@ -1126,11 +1158,11 @@ msgstr ""
 "Veuillez utiliser <a href=\"%(login_url)s\">le site principal pour vous "
 "connecter</a>."
 
-#: portal/templates/base.html:40 register/templates/register/base.html:35
+#: portal/templates/base.html:43 register/templates/register/base.html:36
 msgid "Skip to main content"
 msgstr "Passer au contenu principal"
 
-#: portal/templates/base.html:55
+#: portal/templates/base.html:58
 msgid "COVID Alert Portal"
 msgstr "Portail Alerte COVID"
 
@@ -1552,11 +1584,15 @@ msgstr "Y comme dans Yoga."
 msgid "Z as in Zebra."
 msgstr "Z comme dans Zèbre."
 
-#: profiles/admin.py:25
+#: profiles/admin.py:26
 msgid "Has a bearer token"
 msgstr "A un jeton d’API"
 
-#: profiles/admin.py:112
+#: profiles/admin.py:43 profiles/admin.py:92
+msgid "Allow user to send outbreak alerts"
+msgstr ""
+
+#: profiles/admin.py:159
 msgid "Number of keys generated in the last 24 hours"
 msgstr "Nombre de clés générées dans les dernières 24 heures"
 
@@ -1617,7 +1653,7 @@ msgstr "Entrez une adresse courriel valide"
 #: profiles/forms.py:499
 #: profiles/templates/invitations/templates/invite_list.html:18
 #: profiles/templates/profiles/healthcareuser_detail.html:44
-#: profiles/templates/profiles/healthcareuser_list.html:18 register/forms.py:24
+#: profiles/templates/profiles/healthcareuser_list.html:18 register/forms.py:25
 #: register/models.py:42
 msgid "Email address"
 msgstr "Adresse courriel"
@@ -2394,79 +2430,79 @@ msgstr ""
 msgid "— Scan a place registration"
 msgstr ""
 
-#: register/forms.py:14
+#: register/forms.py:15
 msgid "Restaurant, bar, coffee shop"
 msgstr "Restaurants, bars et cafés"
 
-#: register/forms.py:15
+#: register/forms.py:16
 msgid "Fitness and recreation"
 msgstr "Entraînement et activités physiques"
 
-#: register/forms.py:16
+#: register/forms.py:17
 msgid "Arts and entertainment"
 msgstr "Arts et divertissement"
 
-#: register/forms.py:17
+#: register/forms.py:18
 msgid "Grooming and wellness"
 msgstr "Soins de beauté et bien-être"
 
-#: register/forms.py:18
+#: register/forms.py:19
 msgid "Religious space"
 msgstr "Espaces religieux"
 
-#: register/forms.py:19
+#: register/forms.py:20
 msgid "Something else"
 msgstr "Autre"
 
-#: register/forms.py:62 register/models.py:34
+#: register/forms.py:63 register/models.py:34
 msgid "Address line 1"
 msgstr "Adresse ligne 1"
 
-#: register/forms.py:63 register/models.py:35
+#: register/forms.py:64 register/models.py:35
 msgid "Address line 2"
 msgstr "Adresse ligne 2"
 
-#: register/forms.py:64 register/models.py:36
+#: register/forms.py:65 register/models.py:36
 msgid "City"
 msgstr "Ville"
 
-#: register/forms.py:65
+#: register/forms.py:66
 msgid "Province or territory"
 msgstr "Province ou territoire"
 
-#: register/forms.py:66 register/models.py:38
+#: register/forms.py:67 register/models.py:38
 msgid "Postal code"
 msgstr "Code postal"
 
-#: register/forms.py:70 register/models.py:40
+#: register/forms.py:71 register/models.py:40
 msgid "Name of contact"
 msgstr "Nom de la personne-ressource"
 
-#: register/forms.py:72
+#: register/forms.py:73
 msgid "Contact phone number"
 msgstr "Numéro de téléphone"
 
-#: register/forms.py:87
+#: register/forms.py:88
 msgid "Get Help."
 msgstr "Obtenir de l’aide."
 
-#: register/forms.py:88
+#: register/forms.py:89
 msgid "Give Feedback."
 msgstr "Donner des commentaires."
 
-#: register/forms.py:89
+#: register/forms.py:90
 msgid "Something Else."
 msgstr "Autre chose."
 
-#: register/forms.py:94
+#: register/forms.py:95
 msgid "Tell us more about the issue"
 msgstr "Dites-nous en plus sur le problème"
 
-#: register/forms.py:98
+#: register/forms.py:99
 msgid "Email address if you want a reply"
 msgstr "Adresse courriel pour vous répondre"
 
-#: register/forms.py:100
+#: register/forms.py:101
 msgid ""
 "We'll use this if we need to contact you. We will not use your email address "
 "for anything else."
@@ -2490,15 +2526,15 @@ msgstr ""
 msgid "Province"
 msgstr "Province"
 
-#: register/templates/register/base.html:40
+#: register/templates/register/base.html:41
 msgid "BETA"
 msgstr "BÊTA"
 
-#: register/templates/register/base.html:40
+#: register/templates/register/base.html:41
 msgid "This is a new service — your feedback will help us improve it."
 msgstr ""
 
-#: register/templates/register/base.html:53
+#: register/templates/register/base.html:54
 msgid "Make a COVID Alert Poster"
 msgstr "Créer une affiche Alerte COVID"
 
@@ -2525,15 +2561,21 @@ msgstr ""
 msgid "Next steps"
 msgstr "Prochaines étapes"
 
-#: register/templates/register/confirmation.html:22
+#: register/templates/register/confirmation.html:23
+#, fuzzy, python-format
+#| msgid ""
+#| "<a href=''>Contact us</a> if you do not get the email within 2 hours or "
+#| "if you have questions."
 msgid ""
-"<a href=''>Contact us</a> if you do not get the email within 2 hours or if "
-"you have questions."
+"\n"
+"      <p><a href='%(link)s'>Contact us</a> if you do not get the email "
+"within 2 hours or if you have questions.</p>\n"
+"      "
 msgstr ""
 "<a href=''>Contactez-nous</a> si vous ne recevez pas le courriel d’ici 2 "
 "heures ou si vous avez des questions."
 
-#: register/templates/register/confirmation.html:23
+#: register/templates/register/confirmation.html:26
 msgid ""
 "Remember to make more posters if your service or event has other addresses. "
 "You can come back later if you do not have time now."
@@ -2542,23 +2584,23 @@ msgstr ""
 "comprend plusieurs adresses. Vous pouvez revenir plus tard si vous n’avez "
 "pas le temps maintenant."
 
-#: register/templates/register/confirmation.html:29
+#: register/templates/register/confirmation.html:32
 msgid "Make another poster"
 msgstr "Créer une autre affiche"
 
-#: register/templates/register/confirmation.html:30
+#: register/templates/register/confirmation.html:33
 msgid "Done"
 msgstr "Terminé"
 
-#: register/templates/register/confirmation.html:33
+#: register/templates/register/confirmation.html:36
 msgid "Learn more about QR codes and public health"
 msgstr "En savoir plus sur les codes QR et la santé publique."
 
-#: register/templates/register/confirmation.html:34
+#: register/templates/register/confirmation.html:37
 msgid "Thank you for helping slow the spread of COVID-19."
 msgstr "Merci d’aider à ralentir la propagation de la COVID-19."
 
-#: register/templates/register/confirmation.html:35
+#: register/templates/register/confirmation.html:38
 msgid "Please answer some questions to help improve the COVID Alert system."
 msgstr ""
 "Répondez à quelques questions pour nous aider à améliorer le système Alerte "
@@ -2566,8 +2608,6 @@ msgstr ""
 
 #: register/templates/register/contact_us.html:5
 #: register/templates/register/contact_us.html:14
-#, fuzzy
-#| msgid "Contact us"
 msgid "Contact Us"
 msgstr "Nous joindre"
 
@@ -2729,13 +2769,24 @@ msgstr "Les coordonnées d’une personne-ressource pour chacune des adresses."
 msgid "Start now"
 msgstr "Commencer"
 
-#: register/templates/register/start.html:34
-msgid "Questions?"
-msgstr "Des questions?"
-
 #: register/templates/register/start.html:36
-msgid "Visit Help with your poster"
-msgstr "Consultez la page Aide pour votre affiche."
+#, python-format
+msgid ""
+"\n"
+"  <h2> Questions? </h2>\n"
+"    <p>\n"
+"      Visit <a href=\"\">Help with your poster</a><br>\n"
+"      Or <a href =\"%(link)s\">Contact us</a>\n"
+"   </p>\n"
+"   "
+msgstr ""
+"\n"
+"  <h2> Des questions? </h2>\n"
+"    <p>\n"
+"      Consultez la page <a href=\"\">Aide pour votre affiche</a><br>\n"
+"      Sinon, <a href =\"%(link)s\">contactez-nous</a>\n"
+"   </p>\n"
+"   "
 
 #: register/templates/register/summary.html:5
 #: register/templates/register/summary.html:13
@@ -2746,19 +2797,47 @@ msgstr "Vérifiez vos réponses avant de créer votre affiche"
 msgid "Personal information"
 msgstr "Renseignements personnels"
 
+#: register/templates/register/summary.html:27
+msgid " Change<span class=\"visually-hidden\"> your email</span> "
+msgstr "Modifier<span class=\"visually-hidden\"> votre adresse courriel</span>"
+
+#: register/templates/register/summary.html:40
+msgid " Change<span class=\"visually-hidden\"> your name</span> "
+msgstr "Modifier<span class=\"visually-hidden\"> Votre nom </span>"
+
 #: register/templates/register/summary.html:46
 msgid "Service or event details"
 msgstr "Renseignements sur le service ou l’événement"
 
-#: register/templates/register/summary.html:94
+#: register/templates/register/summary.html:66
+msgid " Change <span class=\"visually-hidden\"> address</span> "
+msgstr "Modifier <span class=\"visually-hidden\"> Adresse</span> "
+
+#: register/templates/register/summary.html:78
+msgid " Change <span class=\"visually-hidden\"> business type</span>"
+msgstr "Modifier <span class=\"visually-hidden\"> business type</span>"
+
+#: register/templates/register/summary.html:90
+msgid ""
+" Change <span class=\"visually-hidden\"> business, organization or event "
+"name</span>"
+msgstr ""
+"Modifier <span class=\"visually-hidden\"> business, organization or event "
+"name</span>"
+
+#: register/templates/register/summary.html:96
 msgid "Contact person for the location"
 msgstr "Personne-ressource"
 
-#: register/templates/register/summary.html:107
+#: register/templates/register/summary.html:104
+msgid " Change <span class=\"visually-hidden\"> contact</span> "
+msgstr " Modifier <span class=\"visually-hidden\"> contact</span>"
+
+#: register/templates/register/summary.html:109
 msgid "We’ll use this information to make your poster"
 msgstr "Nous utiliserons ces renseignements pour créer votre affiche."
 
-#: register/templates/register/summary.html:109
+#: register/templates/register/summary.html:111
 msgid ""
 "By selecting “Make poster”, you confirm your answers are correct and "
 "complete."
@@ -2766,7 +2845,7 @@ msgstr ""
 "En cliquant sur « Créer l’affiche », vous confirmez que vos réponses sont "
 "exactes et complètes."
 
-#: register/templates/register/summary.html:112
+#: register/templates/register/summary.html:114
 msgid "Make poster"
 msgstr "Créer l’affiche"
 
@@ -2777,3 +2856,20 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py:101 register/views.py:135 register/views.py:185
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Location profile"
+#~ msgstr "Profil du lieu d’exposition"
+
+#~ msgid "Questions?"
+#~ msgstr "Des questions?"
+
+#~ msgid "Help with your poster"
+#~ msgstr "Aide pour votre affiche"
+
+#~ msgid "Or"
+#~ msgstr "Sinon"
+
+#, fuzzy
+#~| msgid "No invitations yet"
+#~ msgid "Notification details"
+#~ msgstr "Aucune invitation pour le moment"
