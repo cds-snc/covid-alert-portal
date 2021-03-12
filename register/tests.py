@@ -12,6 +12,7 @@ from portal import container
 import base64
 import xml.etree.cElementTree as et
 import io
+from nacl.encoding import Base64Encoder
 
 
 def is_svg(contents):
@@ -297,7 +298,16 @@ class Utils(TestCase):
 
         payload = utils.generate_payload(location)
         signed = utils.sign_payload(payload)
+        
+        # Is the payload base64 encoded?
         self.assertTrue(is_base64(signed))
+
+        # Extract the verify key from the signature key
+        signature_key = utils.load_signature_key()
+        verify_key = signature_key.verify_key
+
+        # Verify the signed payload with the verify key
+        verify_key.verify(signed.encode(), encoder=Base64Encoder)
 
     def test_generate_qr_code(self):
         url = "http://thisisjustatesturl.com/#thiswouldbethesignedpayload"
