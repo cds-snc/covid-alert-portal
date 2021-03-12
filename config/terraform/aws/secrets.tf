@@ -201,3 +201,13 @@ resource "aws_secretsmanager_secret_version" "notify_template_id" {
   secret_id     = aws_secretsmanager_secret.notify_template_id.id
   secret_string = var.ecs_secret_notify_template_id
 }
+
+resource "aws_secretsmanager_secret" "qrcode_signature_private_key" {
+  name                        = "qrcode_signature_private_key"
+  recovery_window_in_days     = 0
+}
+
+resource "aws_secretsmanager_secret_version" "qrcode_signature_private_key" {
+  secret_id                   = aws_secretsmanager_secret.qrcode_signature_private_key.id
+  secret_string               = var.ecs_secret_qrcode_signature_private_key
+}
