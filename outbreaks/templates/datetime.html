@@ -38,31 +38,21 @@
           {% endif %}
 
           {% for field in fieldset %}
-            {% if forloop.counter < 4 %}
-              <div class="date_entry">
-                {{ field.label_tag }}
-                {{ field }}
-              </div>
-            {% endif %}
-          {% endfor %}
+            <div class="date_entry">
+              {{ field.label_tag }}
+              {{ field }}
+            </div>
+            
+            {% if forloop.counter == 3 %}
+              <button type="button" class="link datepicker_button" id="{{ fieldset.title }}">{% trans "Select date" %}</button>
 
-
-          <button type="button" class="link datepicker_button" id="{{ fieldset.title }}">{% trans "Select date" %}</button>
-
-          <duet-date-picker
-                  id="datepicker_{{ fieldset.title }}"
-                  value="{{ fieldset|fieldset_date }}"
-                  min="{{min_date}}"
-                  max="{{max_date}}"
-                  language="{{language}}"
-          ></duet-date-picker>
-
-          {% for field in fieldset %}
-            {% if forloop.counter > 3 %}
-              <div class="date_entry">
-                {{ field.label_tag }}
-                {{ field }}
-              </div>
+              <duet-date-picker
+                      id="datepicker_{{ fieldset.title }}"
+                      value="{{ fieldset|fieldset_date }}"
+                      min="{{min_date}}"
+                      max="{{max_date}}"
+                      language="{{language}}"
+              ></duet-date-picker>
             {% endif %}
           {% endfor %}
 
