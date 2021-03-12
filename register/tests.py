@@ -254,6 +254,18 @@ signing_key = utils.generate_signature_key()
 
 @override_settings(QRCODE_SIGNATURE_PRIVATE_KEY=signing_key)
 class Utils(TestCase):
+    def setUp(self):
+        self.location = Location.objects.create(
+            category="category",
+            name="Name of venue",
+            address="Address line 1",
+            city="Ottawa",
+            province="ON",
+            postal_code="K1K 1K1",
+            contact_email="test@test.com",
+            contact_phone="613-555-5555",
+        )
+
     def test_generate_short_code_default_length(self):
         code = utils.generate_random_key()
         self.assertEqual(len(code), 8)
@@ -267,36 +279,14 @@ class Utils(TestCase):
         self.assertTrue(code.isalnum())
 
     def test_generate_payload(self):
-        location = Location.objects.create(
-            category="category",
-            name="Name of venue",
-            address="Address line 1",
-            city="Ottawa",
-            province="ON",
-            postal_code="K1K 1K1",
-            contact_email="test@test.com",
-            contact_phone="613-555-5555",
-        )
-
-        payload = utils.generate_payload(location)
-        self.assertIn(location.short_code, payload)
-        self.assertIn(location.name, payload)
-        self.assertIn(location.address, payload)
-        self.assertIn(location.city, payload)
+        payload = utils.generate_payload(self.location)
+        self.assertIn(self.location.short_code, payload)
+        self.assertIn(self.location.name, payload)
+        self.assertIn(self.location.address, payload)
+        self.assertIn(self.location.city, payload)
 
     def test_sign_payload(self):
-        location = Location.objects.create(
-            category="category",
-            name="Name of venue",
-            address="Address line 1",
-            city="Ottawa",
-            province="ON",
-            postal_code="K1K 1K1",
-            contact_email="test@test.com",
-            contact_phone="613-555-5555",
-        )
-
-        payload = utils.generate_payload(location)
+        payload = utils.generate_payload(self.location)
         signed = utils.sign_payload(payload)
 
         # Is the payload base64 encoded?
@@ -316,16 +306,5 @@ class Utils(TestCase):
         self.assertTrue(is_svg(qrcode))
 
     def test_get_signed_qrcode(self):
-        location = Location.objects.create(
-            category="category",
-            name="Name of venue",
-            address="Address line 1",
-            city="Ottawa",
-            province="ON",
-            postal_code="K1K 1K1",
-            contact_email="test@test.com",
-            contact_phone="613-555-5555",
-        )
-
-        qrcode = utils.get_signed_qrcode(location)
+        qrcode = utils.get_signed_qrcode(self.location)
         self.assertTrue(is_svg(qrcode))
