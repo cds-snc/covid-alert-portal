@@ -230,3 +230,24 @@ class Utils(TestCase):
     def test_generate_short_code_alphanumeric(self):
         code = generate_random_key()
         self.assertTrue(code.isalnum())
+
+
+class DetourPage(TestCase):
+    def test_detour_page(self):
+        RegisterEmailConfirmation.test_can_confirm_email(self)
+        response = self.client.post(
+            reverse("register:location_step", kwargs={"step": "address"}),
+            data={
+                "address": "a",
+                "address_2": "",
+                "city": "a",
+                "province": "BC",
+                "postal_code": "K2b5v5",
+                "location_wizard-current_step": "address",
+            },
+        )
+        print(response.content)
+        self.assertRedirects(
+            response, reverse("register:location_step", kwargs={"step": "unavailable"}),status_code=302,target_status_code=200,fetch_redirect_response=True
+        )
+        
