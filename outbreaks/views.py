@@ -26,8 +26,16 @@ import requests
 import logging
 
 
-DATETIME_FORMAT = "%Y-%m-%d %H:%S"
-TIME_FORMAT = "%H:%S"
+def get_datetime_format(language):
+    if language == "fr":
+        return "%Y-%m-%d %-H:%M"
+    return "%Y-%m-%d %-I:%M %p"
+
+
+def get_time_format(language):
+    if language == "fr":
+        return "%-H:%M"
+    return "%-I:%M %p"
 
 
 class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
@@ -288,10 +296,11 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
             end_dt = datetime.fromtimestamp(
                 self.request.session[f"alert_datetime_end_{i}"]
             )
+            language = get_language()
             context["dates"].append(
                 {
-                    "start": start_dt.strftime(DATETIME_FORMAT),
-                    "end": end_dt.strftime(TIME_FORMAT),
+                    "start": start_dt.strftime(get_datetime_format(language)),
+                    "end": end_dt.strftime(get_time_format(language)),
                 }
             )
         return context
@@ -416,10 +425,11 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
             end_dt = datetime.fromtimestamp(
                 self.request.session[f"alert_datetime_end_{i}"]
             )
+            language = get_language()
             context["dates"].append(
                 {
-                    "start": start_dt.strftime(DATETIME_FORMAT),
-                    "end": end_dt.strftime(TIME_FORMAT),
+                    "start": start_dt.strftime(get_datetime_format(language)),
+                    "end": end_dt.strftime(get_time_format(language)),
                 }
             )
         return context
