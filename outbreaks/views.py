@@ -24,6 +24,7 @@ from .forms import severity_choices
 from register.forms import location_choices
 import requests
 import logging
+from dateutil import tz
 
 
 DATETIME_FORMAT = "%Y-%m-%d"
@@ -134,9 +135,13 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
         user hopefully doesn't experience strange jumps in continuity with values changing/disappearing
         """
         form = self.get_form()
+        tz_offset_str = self.request.POST.get("tz-offset")
+        tz_offset_m = 0 if not tz_offset_str else int(tz_offset_str)
+        tz_offset_s = -1 * 60 * tz_offset_m
+        self.request.session["tz_offset_s"] = tz_offset_s
         for i in range(self.request.session.get("num_dates", 1)):
             try:
-                dt = form.get_valid_date(form.data, i)
+                dt = form.get_valid_date(form.data, i, tz_offset_s)
                 self.request.session[f"alert_datetime_{i}"] = dt.timestamp()
             except ValueError:
                 # Don't cache invalid dates
@@ -264,9 +269,14 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         num_dates = self.request.session.get("num_dates", 1)
         context["num_dates"] = num_dates
         context["dates"] = []
+        tz_offset_s = self.request.session.get("tz_offset_s", 0)
+        tz_local = tz.tzoffset("NA", tz_offset_s)
         for i in range(num_dates):
-            dt = datetime.fromtimestamp(self.request.session[f"alert_datetime_{i}"])
-            context["dates"].append(dt.strftime(DATETIME_FORMAT))
+            dt_utc = datetime.fromtimestamp(
+                self.request.session[f"alert_datetime_{i}"]
+            ).replace(tzinfo=pytz.timezone("UTC"))
+            dt_local = dt_utc.astimezone(tz_local)
+            context["dates"].append(dt_local.strftime(DATETIME_FORMAT))
         return context
 
     @transaction.atomic
@@ -297,16 +307,16 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
     def post_notification(self, form, i):
         # Ensure that the datetime is aware (might not be if unit testing or something)
         tz = pytz.timezone(settings.TIME_ZONE or "UTC")
-        dt = datetime.fromtimestamp(
+        dt_utc = datetime.fromtimestamp(
             self.request.session[f"alert_datetime_{i}"]
         ).replace(tzinfo=tz)
 
         # Create the notification
         notification = Notification(
             severity=self.request.session["alert_level"],
-            start_date=dt,
-            # server expects valid interval, give the end of current day
-            end_date=dt.replace(hour=23, minute=59, second=59, microsecond=0),
+            start_date=dt_utc,
+            # note: this end_date is incorrect
+            end_date=dt_utc.replace(hour=23, minute=59, second=59, microsecond=0),
             location_id=self.request.session["alert_location"],
             created_by=self.request.user,
         )
@@ -376,14 +386,17 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
         context = super().get_context_data(*args, **kwargs)
         context["severity"] = self.request.session.pop("alert_level")
         context["location"] = location
-
         num_dates = self.request.session.pop("num_dates", 1)
         context["num_dates"] = num_dates
         context["dates"] = []
+        tz_offset_s = self.request.session.get("tz_offset_s", 0)
+        tz_local = tz.tzoffset("NA", tz_offset_s)
         for i in range(num_dates):
-            dt = datetime.fromtimestamp(self.request.session.pop(f"alert_datetime_{i}"))
-            context["dates"].append(dt.strftime(DATETIME_FORMAT))
-
+            dt_utc = datetime.fromtimestamp(
+                self.request.session.pop(f"alert_datetime_{i}")
+            ).replace(tzinfo=pytz.timezone("UTC"))
+            dt_local = dt_utc.astimezone(tz_local)
+            context["dates"].append(dt_local.strftime(DATETIME_FORMAT))
         return context
 
 

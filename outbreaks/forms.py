@@ -6,6 +6,7 @@ from portal.widgets import CDSRadioWidget
 from portal.forms import HealthcareBaseForm
 from datetime import datetime
 import pytz
+from dateutil import tz
 
 severity_choices = [
     ("1", _("Self-monitor")),
@@ -65,15 +66,13 @@ class DateForm(HealthcareBaseForm):
         if not is_valid:
             raise ValidationError(error_msg)
 
-    def get_valid_date(self, data, i):
-        tz = pytz.timezone(settings.TIME_ZONE or "UTC")
-        print("settings.TIME_ZONE", settings.TIME_ZONE)
-        print("tz", tz)
+    def get_valid_date(self, data, i, tz_offset_s=0):
+        tz_local = tz.tzoffset("NA", tz_offset_s)
         return datetime(
             year=int(data.get(f"year_{i}", -1)),
             month=int(data.get(f"month_{i}", -1)),
             day=int(data.get(f"day_{i}", -1)),
-        ).replace(tzinfo=tz)
+        ).replace(tzinfo=tz_local)
 
     def add_duplicate_error(self, index):
         error_msg = _(
