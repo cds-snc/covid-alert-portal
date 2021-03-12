@@ -22,4 +22,4 @@ if (form) {
 // get user's timezone
 var now = new Date();
 var timezoneOffset = now.getTimezoneOffset();
-document.querySelector("#timezone-offset").innerHTML = timezoneOffset;
+document.querySelector("#tz-offset").setAttribute("value", timezoneOffset);

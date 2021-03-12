@@ -28,6 +28,8 @@
   <form method="post" id="form--{{ request.resolver_match.url_name }}">
     {% csrf_token %}
 
+    <input type="hidden" id="tz-offset" name="tz-offset" value="" />
+
     {% for fieldset in form.fieldsets %}
       <div class="fieldWrapper--container{% if fieldset.error %} fieldWrapper--container--has-error{% endif %}">
         <div class="fieldWrapper{% if fieldset.error %} fieldWrapper--has-error{% endif %}">
@@ -65,8 +67,6 @@
         {{ _("Remove a date") }}
       </button>
     </div>
-
-    <div id="timezone-offset">abc</div>
 
     <div class="content-button">
       <button type="submit">
