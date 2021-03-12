@@ -20,6 +20,7 @@ hours = [
 ]
 hours.append(("24", "23:59"))
 
+
 class DateForm(HealthcareBaseForm):
     def __init__(self, num_dates=1, *args, **kwargs):
         super().__init__(*args, **kwargs)

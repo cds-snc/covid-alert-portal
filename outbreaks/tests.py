@@ -151,22 +151,67 @@ class DatetimeView(NotificationsTestCase):
     def test_invalid_data(self):
         # Ensure that the datetime form handles data errors
         self.assertTrue(
-            DateForm(1, {"day_0": 1, "month_0": 2, "year_0": 2021, 'start_hour_0': 0, 'end_hour_0': 12}).is_valid()
+            DateForm(
+                1,
+                {
+                    "day_0": 1,
+                    "month_0": 2,
+                    "year_0": 2021,
+                    "start_hour_0": 0,
+                    "end_hour_0": 12,
+                },
+            ).is_valid()
         )
         self.assertFalse(DateForm(1, {"day_0": 1, "year_0": 2021}).is_valid())
         self.assertFalse(
-            DateForm(1, {"day_0": 1, "month_0": 2, "year_0": 2020, 'start_hour_0': 0, 'end_hour_0': 12}).is_valid()
+            DateForm(
+                1,
+                {
+                    "day_0": 1,
+                    "month_0": 2,
+                    "year_0": 2020,
+                    "start_hour_0": 0,
+                    "end_hour_0": 12,
+                },
+            ).is_valid()
         )
         self.assertFalse(DateForm(1, {"day_0": 1, "month_0": 2}).is_valid())
         self.assertFalse(DateForm(1, {"month_0": 2, "year_0": 2021}).is_valid())
         self.assertFalse(
-            DateForm(1, {"day_0": 0, "month_0": 2, "year_0": 2021, 'start_hour_0': 0, 'end_hour_0': 12}).is_valid()
+            DateForm(
+                1,
+                {
+                    "day_0": 0,
+                    "month_0": 2,
+                    "year_0": 2021,
+                    "start_hour_0": 0,
+                    "end_hour_0": 12,
+                },
+            ).is_valid()
         )
         self.assertFalse(
-            DateForm(1, {"day_0": 32, "month_0": 2, "year_0": 2021, 'start_hour_0': 0, 'end_hour_0': 12}).is_valid()
+            DateForm(
+                1,
+                {
+                    "day_0": 32,
+                    "month_0": 2,
+                    "year_0": 2021,
+                    "start_hour_0": 0,
+                    "end_hour_0": 12,
+                },
+            ).is_valid()
         )
         self.assertFalse(
-            DateForm(1, {"day_0": 1, "month_0": 13, "year_0": 2021, 'start_hour_0': 0, 'end_hour_0': 12}).is_valid()
+            DateForm(
+                1,
+                {
+                    "day_0": 1,
+                    "month_0": 13,
+                    "year_0": 2021,
+                    "start_hour_0": 0,
+                    "end_hour_0": 12,
+                },
+            ).is_valid()
         )
 
     def test_add_remove_date(self):
@@ -182,7 +227,14 @@ class DatetimeView(NotificationsTestCase):
         # Post an 'add date' request and ensure it redirects back to the same page
         response = self.client.post(
             reverse("outbreaks:datetime"),
-            {"day_0": 1, "month_0": 1, "year_0": 2021, 'start_hour_0': 0, 'end_hour_0': 12, "adjust_dates": "add"},
+            {
+                "day_0": 1,
+                "month_0": 1,
+                "year_0": 2021,
+                "start_hour_0": 0,
+                "end_hour_0": 12,
+                "adjust_dates": "add",
+            },
         )
         self.assertEqual(response.status_code, 302)
         self.assertTrue(response.url.startswith(reverse("outbreaks:datetime")))
@@ -216,7 +268,14 @@ class DatetimeView(NotificationsTestCase):
 
         # Post a date
         self.client.post(
-            reverse("outbreaks:datetime"), {"day_0": 1, "month_0": 1, "year_0": 2021, 'start_hour_0': 0, 'end_hour_0': 12}
+            reverse("outbreaks:datetime"),
+            {
+                "day_0": 1,
+                "month_0": 1,
+                "year_0": 2021,
+                "start_hour_0": 0,
+                "end_hour_0": 12,
+            },
         )
         self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
         response = self.client.post(reverse("outbreaks:confirm"), {})
@@ -225,7 +284,14 @@ class DatetimeView(NotificationsTestCase):
 
         # Post duplicate date
         response = self.client.post(
-            reverse("outbreaks:datetime"), {"day_0": 1, "month_0": 1, "year_0": 2021, 'start_hour_0': 0, 'end_hour_0': 12}
+            reverse("outbreaks:datetime"),
+            {
+                "day_0": 1,
+                "month_0": 1,
+                "year_0": 2021,
+                "start_hour_0": 0,
+                "end_hour_0": 12,
+            },
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "datetime.html")
@@ -246,7 +312,13 @@ class SeverityView(NotificationsTestCase):
         self.client.get(reverse("outbreaks:profile", args=[location.id]))
         self.client.post(
             reverse("outbreaks:datetime"),
-            {"day_0": 1, "month_0": 1, "year_0": 2021, "start_hour_0": 0, "end_hour_0": 12},
+            {
+                "day_0": 1,
+                "month_0": 1,
+                "year_0": 2021,
+                "start_hour_0": 0,
+                "end_hour_0": 12,
+            },
         )
         response = self.client.get(reverse("outbreaks:severity"))
         self.assertEqual(response.status_code, 200)
@@ -274,7 +346,13 @@ class ConfirmView(NotificationsTestCase):
         self.client.get(reverse("outbreaks:profile", args=[location.id]))
         self.client.post(
             reverse("outbreaks:datetime"),
-            {"day_0": 1, "month_0": 1, "year_0": 2021, "start_hour_0": 0, "end_hour_0": 12},
+            {
+                "day_0": 1,
+                "month_0": 1,
+                "year_0": 2021,
+                "start_hour_0": 0,
+                "end_hour_0": 12,
+            },
         )
         self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
         response = self.client.get(reverse("outbreaks:confirm"))
@@ -295,7 +373,13 @@ class ConfirmView(NotificationsTestCase):
         self.client.get(reverse("outbreaks:profile", args=[location.id]))
         self.client.post(
             reverse("outbreaks:datetime"),
-            {"day_0": 1, "month_0": 1, "year_0": 2021, "start_hour_0": 0, "end_hour_0": 12},
+            {
+                "day_0": 1,
+                "month_0": 1,
+                "year_0": 2021,
+                "start_hour_0": 0,
+                "end_hour_0": 12,
+            },
         )
         self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
         response = self.client.post(reverse("outbreaks:confirm"), {})
@@ -319,7 +403,13 @@ class ConfirmedView(NotificationsTestCase):
         self.client.get(reverse("outbreaks:profile", args=[location.id]))
         self.client.post(
             reverse("outbreaks:datetime"),
-            {"day_0": 1, "month_0": 1, "year_0": 2021, "start_hour_0": 0, "end_hour_0": 12},
+            {
+                "day_0": 1,
+                "month_0": 1,
+                "year_0": 2021,
+                "start_hour_0": 0,
+                "end_hour_0": 12,
+            },
         )
         self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
         response = self.client.get(reverse("outbreaks:confirmed"))
