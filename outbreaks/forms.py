@@ -1,10 +1,10 @@
 from django import forms
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import get_language, gettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.conf import settings
 from portal.widgets import CDSRadioWidget
 from portal.forms import HealthcareBaseForm
-from datetime import datetime, timedelta
+from datetime import datetime
 import pytz
 
 severity_choices = [
@@ -14,17 +14,19 @@ severity_choices = [
 ]
 
 
-hours = [
-    (str(hour), datetime.strftime(datetime(2020, 1, 1, hour), "%H:%S"))
-    for hour in range(24)
-]
-hours.append(("24", "23:59"))
-
-
 class DateForm(HealthcareBaseForm):
     def __init__(self, num_dates=1, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.num_dates = num_dates
+
+        hour_format = "%-H:%M" if get_language() == "fr" else "%-I:%M %p"
+        hours = [
+            (str(hour), datetime.strftime(datetime(2020, 1, 1, hour), hour_format))
+            for hour in range(24)
+        ]
+        hours.append(
+            ("24", datetime.strftime(datetime(2020, 1, 1, 23, 59), hour_format))
+        )
 
         # Generate the desired number of date fields
         for i in range(num_dates):
@@ -100,15 +102,14 @@ class DateForm(HealthcareBaseForm):
     def get_valid_date(self, data, i, start_or_end="start"):
         tz = pytz.timezone(settings.TIME_ZONE or "UTC")
         hour = int(data.get(f"{start_or_end}_hour_{i}", -1))
-        dt = datetime(
+        return datetime(
             year=int(data.get(f"year_{i}", -1)),
             month=int(data.get(f"month_{i}", -1)),
             day=int(data.get(f"day_{i}", -1)),
-            hour=hour if hour != 24 else 0,
+            hour=hour if hour != 24 else 23,
+            minute=0 if hour != 24 else 59,
+            second=0 if hour != 24 else 59,
         ).replace(tzinfo=tz)
-        if hour != 24:
-            return dt
-        return dt + timedelta(hours=23, minutes=59, seconds=59)
 
     def add_duplicate_error(self, index):
         error_msg = _(
