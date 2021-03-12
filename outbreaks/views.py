@@ -137,8 +137,10 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
         form = self.get_form()
         for i in range(self.request.session.get("num_dates", 1)):
             try:
-                dt = form.get_valid_date(form.data, i)
-                self.request.session[f"alert_datetime_start_{i}"] = dt.timestamp()
+                start_dt = form.get_valid_date(form.data, i, "start")
+                end_dt = form.get_valid_date(form.data, i, "end")
+                self.request.session[f"alert_datetime_start_{i}"] = start_dt.timestamp()
+                self.request.session[f"alert_datetime_end_{i}"] = end_dt.timestamp()
             except ValueError:
                 # Don't cache invalid dates
                 pass
@@ -193,7 +195,10 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, FormView):
                 )
             if end_ts:
                 end_dt = datetime.fromtimestamp(end_ts)
-                initial_data.update({f"end_hour_{i}": end_dt.hour})
+                if end_dt.hour == 23 and end_dt.minute == 59:
+                    initial_data.update({f"end_hour_{i}": 24})
+                else:
+                    initial_data.update({f"end_hour_{i}": end_dt.hour})
         return initial_data
 
     def form_valid(self, form):

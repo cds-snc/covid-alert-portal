@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.conf import settings
 from portal.widgets import CDSRadioWidget
 from portal.forms import HealthcareBaseForm
-from datetime import datetime
+from datetime import datetime, timedelta
 import pytz
 
 severity_choices = [
@@ -18,7 +18,7 @@ hours = [
     (str(hour), datetime.strftime(datetime(2020, 1, 1, hour), "%H:%S"))
     for hour in range(24)
 ]
-
+hours.append(("24", "23:59"))
 
 class DateForm(HealthcareBaseForm):
     def __init__(self, num_dates=1, *args, **kwargs):
@@ -45,11 +45,13 @@ class DateForm(HealthcareBaseForm):
             )
             self.fields[f"start_hour_{i}"] = forms.ChoiceField(
                 label=_("From"),
-                choices=hours,
+                choices=hours[:-1],
+                initial=hours[0],
             )
             self.fields[f"end_hour_{i}"] = forms.ChoiceField(
                 label=_("To"),
-                choices=hours,
+                choices=hours[1:],
+                initial=hours[-1],
             )
         # Add the fieldset to the meta class
         # Idea adapted from: https://schinckel.net/2013/06/14/django-fieldsets/
@@ -96,12 +98,16 @@ class DateForm(HealthcareBaseForm):
 
     def get_valid_date(self, data, i, start_or_end="start"):
         tz = pytz.timezone(settings.TIME_ZONE or "UTC")
-        return datetime(
+        hour = int(data.get(f"{start_or_end}_hour_{i}", -1))
+        dt = datetime(
             year=int(data.get(f"year_{i}", -1)),
             month=int(data.get(f"month_{i}", -1)),
             day=int(data.get(f"day_{i}", -1)),
-            hour=int(data.get(f"{start_or_end}_hour_{i}", -1)),
+            hour=hour if hour != 24 else 0,
         ).replace(tzinfo=tz)
+        if hour != 24:
+            return dt
+        return dt + timedelta(hours=23, minutes=59, seconds=59)
 
     def add_duplicate_error(self, index):
         error_msg = _(
