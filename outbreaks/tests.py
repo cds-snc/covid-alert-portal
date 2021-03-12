@@ -181,7 +181,8 @@ class DatetimeView(NotificationsTestCase):
 
         # Post an 'add date' request and ensure it redirects back to the same page
         response = self.client.post(
-            reverse("outbreaks:datetime"), {"adjust_dates": "add"}
+            reverse("outbreaks:datetime"),
+            {"day_0": 1, "month_0": 1, "year_0": 2021, "adjust_dates": "add"},
         )
         self.assertEqual(response.status_code, 302)
         self.assertTrue(response.url.startswith(reverse("outbreaks:datetime")))
