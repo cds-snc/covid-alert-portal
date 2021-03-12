@@ -67,6 +67,8 @@ class DateForm(HealthcareBaseForm):
 
     def get_valid_date(self, data, i):
         tz = pytz.timezone(settings.TIME_ZONE or "UTC")
+        print("settings.TIME_ZONE", settings.TIME_ZONE)
+        print("tz", tz)
         return datetime(
             year=int(data.get(f"year_{i}", -1)),
             month=int(data.get(f"month_{i}", -1)),

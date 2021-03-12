@@ -18,3 +18,8 @@ if (form) {
     form.querySelector("button").disabled = true;
   });
 }
+
+// get user's timezone
+var now = new Date();
+var timezoneOffset = now.getTimezoneOffset();
+document.querySelector("#timezone-offset").innerHTML = timezoneOffset;
