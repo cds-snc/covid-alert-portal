@@ -298,7 +298,7 @@ class Utils(TestCase):
 
         payload = utils.generate_payload(location)
         signed = utils.sign_payload(payload)
-        
+
         # Is the payload base64 encoded?
         self.assertTrue(is_base64(signed))
 
