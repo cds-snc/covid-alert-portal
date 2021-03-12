@@ -20,6 +20,9 @@ if (form) {
 }
 
 // get user's timezone
-var now = new Date();
-var timezoneOffset = now.getTimezoneOffset();
-document.querySelector("#tz-offset").setAttribute("value", timezoneOffset);
+var tzInput = document.querySelector("#tz-offset");
+if (tzInput) {
+  var now = new Date();
+  var timezoneOffset = now.getTimezoneOffset();
+  tzInput.setAttribute("value", timezoneOffset);
+}
