@@ -237,17 +237,15 @@ class DetourPage(TestCase):
         RegisterEmailConfirmation.test_can_confirm_email(self)
         response = self.client.post(
             reverse("register:location_step", kwargs={"step": "address"}),
-            data={
-                "address": "a",
-                "address_2": "",
-                "city": "a",
-                "province": "BC",
-                "postal_code": "K2b5v5",
+            {
+                "address-address": "a",
+                "address-address_2": "",
+                "address-city": "a",
+                "address-province": "ON",
+                "address-postal_code": "K2b5v5",
                 "location_wizard-current_step": "address",
             },
         )
-        print(response.content)
         self.assertRedirects(
-            response, reverse("register:location_step", kwargs={"step": "unavailable"}),status_code=302,target_status_code=200,fetch_redirect_response=True
+            response, reverse("register:location_step", kwargs={"step": "unavailable"})
         )
-        
