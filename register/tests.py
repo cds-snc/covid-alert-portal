@@ -309,6 +309,7 @@ class Utils(TestCase):
         qrcode = utils.get_signed_qrcode(self.location)
         self.assertTrue(is_svg(qrcode))
 
+
 class DetourPage(TestCase):
     def test_detour_page(self):
         RegisterEmailConfirmation.test_can_confirm_email(self)
