@@ -14,6 +14,7 @@ import pytz
 from django.contrib import messages
 from .forms import location_choices
 from .utils import get_signed_qrcode
+from profiles.models import HealthcareProvince
 
 
 class RegistrantEmailView(FormView):
@@ -116,12 +117,22 @@ class RegistrantNameView(UpdateView):
 
 TEMPLATES = {
     "address": "register/location_address.html",
+    "unavailable": "register/location_unavailable.html",
     "category": "register/location_category.html",
     "name": "register/location_name.html",
     "contact": "register/location_contact.html",
     "summary": "register/summary.html",
     "success": "register/success.html",
 }
+
+
+def check_for_province(wizard):
+    data = wizard.get_cleaned_data_for_step("address") or {}
+    provinces = HealthcareProvince.objects.filter(qr_code_enabled=True)
+    provinces_values = provinces.values_list("abbr", flat=True)
+    provinces_list = list(provinces_values)
+
+    return data.get("province") not in provinces_list
 
 
 class LocationWizard(NamedUrlSessionWizardView):
