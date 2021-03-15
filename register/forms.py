@@ -53,6 +53,13 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
         choices=location_choices,
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
+    category_description = forms.CharField(label="", required=False)
+    def __init__(self, data=None, *args, **kwargs):
+        super(LocationCategoryForm, self).__init__(data, *args, **kwargs)
+
+        # If 'something else' is chosen, set category_description as required
+        if data and data.get('category_description', None) == "other":
+            self.fields['category_description'].required = True
 
 
 class LocationNameForm(HealthcareBaseForm, forms.Form):

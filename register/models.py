@@ -30,6 +30,7 @@ class Location(models.Model):
         max_length=8, unique=True, null=True, verbose_name=_("Short code")
     )
     category = models.CharField(max_length=200, verbose_name=_("Location category"))
+    category_description = models.CharField(max_length=200, null=True, verbose_name=_("Location category description"))
     name = models.CharField(max_length=200, verbose_name=_("Location name"))
     address = models.CharField(max_length=200, verbose_name=_("Address line 1"))
     address_2 = models.CharField(max_length=200, verbose_name=_("Address line 2"))

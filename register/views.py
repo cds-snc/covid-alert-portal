@@ -166,6 +166,7 @@ class LocationWizard(NamedUrlSessionWizardView):
         )
 
         location.category = data["category"]
+        location.category_description = data["category_description"]
         location.contact_name = data["contact_name"]
         location.contact_email = data["contact_email"]
         location.contact_phone = data["contact_phone"]
