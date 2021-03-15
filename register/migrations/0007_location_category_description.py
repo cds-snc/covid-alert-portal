@@ -5,10 +5,6 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('register', '0006_auto_20210315_1415'),
-    ]
-
     operations = [
         migrations.AddField(
             model_name='location',

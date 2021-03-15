@@ -51,7 +51,7 @@ class OtherFieldInput(HealthcareBaseForm, forms.Form):
 
 
 class LocationCategoryForm(HealthcareBaseForm, forms.Form):
-
+    
     category = forms.ChoiceField(
         label="",
         choices=location_choices,
@@ -63,9 +63,8 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
 
     def __init__(self, data=None, *args, **kwargs):
         super(LocationCategoryForm, self).__init__(data, *args, **kwargs)
-
         # If 'something else' is chosen, set category_description as required
-        if data and data.get("category_description", None) == "other":
+        if data and data.get("category-category", None) == "other":
             self.fields["category_description"].required = True
 
 
