@@ -51,7 +51,7 @@ class OtherFieldInput(HealthcareBaseForm, forms.Form):
 
 
 class LocationCategoryForm(HealthcareBaseForm, forms.Form):
-    
+
     category = forms.ChoiceField(
         label="",
         choices=location_choices,
