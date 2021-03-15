@@ -14,6 +14,7 @@ class HealthcareProvince(models.Model):
     name = models.CharField(max_length=100, unique=True)
     abbr = models.SlugField(max_length=5, allow_unicode=True, unique=True)
     sms_enabled = models.BooleanField(default=False)
+    qr_code_enabled = models.BooleanField(default=False)
     api_key = models.CharField(
         null=True, blank=True, max_length=256, verbose_name=_("Bearer token")
     )
