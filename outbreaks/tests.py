@@ -20,7 +20,7 @@ class NotificationsTestCase(AdminUserTestCase):
 
         # Populate test data
         location1 = Location.objects.create(
-            category="Restaurant",
+            category="restaurant_bar_coffee",
             name="Nandos",
             address="123 main street",
             city="Winnipeg",
@@ -30,7 +30,7 @@ class NotificationsTestCase(AdminUserTestCase):
             contact_phone="6136666666",
         )
         location2 = Location.objects.create(
-            category="Restaurant",
+            category="restaurant_bar_coffee",
             name="Bobs",
             address="123 main street",
             city="Winnipeg",
@@ -40,7 +40,7 @@ class NotificationsTestCase(AdminUserTestCase):
             contact_phone="6136666666",
         )
         Location.objects.create(
-            category="Restaurant",
+            category="restaurant_bar_coffee",
             name="Bobs",
             address="123 main street",
             city="Winnipeg",
@@ -181,7 +181,8 @@ class DatetimeView(NotificationsTestCase):
 
         # Post an 'add date' request and ensure it redirects back to the same page
         response = self.client.post(
-            reverse("outbreaks:datetime"), {"adjust_dates": "add"}
+            reverse("outbreaks:datetime"),
+            {"day_0": 1, "month_0": 1, "year_0": 2021, "adjust_dates": "add"},
         )
         self.assertEqual(response.status_code, 302)
         self.assertTrue(response.url.startswith(reverse("outbreaks:datetime")))

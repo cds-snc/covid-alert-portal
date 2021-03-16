@@ -21,9 +21,10 @@ Install [`pipenv`](https://pypi.org/project/pipenv/).
 
 ```sh
 # cd into project folder
-pipenv --three  # create a new virtualenv
-pipenv shell    # activate virtualenv
-pipenv install  # install dependencies
+pipenv --three       # create a new virtualenv
+pipenv shell         # activate virtualenv
+pipenv install       # install dependencies
+pipenv install --dev # install dev dependencies
 ```
 
 ### Environment variables
@@ -43,6 +44,8 @@ Environment variables are used to control app settings, and configuration for ut
 - `DJANGO_ALLOWED_HOSTS`: A list of strings representing the host/domain names that this Django site can serve. Only needs to be set in prod. [Read the docs here](https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts).
 
 - `SU_DEFAULT_PASSWORD`: Setting to trigger the creation of a default superuser the first time the app is provisioned. If this variable exists, a default superuser will be created at `admin@cds-snc.ca` with this password.
+
+- `QRCODE_SIGNATURE_PRIVATE_KEY`: Private key for signing QR Code payloads. Should be a Base64 encoded key generated with the [PyNaCl encryption library](https://pynacl.readthedocs.io/)
 
 ##### database configuration
 
@@ -259,9 +262,10 @@ Installez [`pipenv`](https://pypi.org/project/pipenv/).
 
 ```sh
 # cd into project folder
-pipenv --three  # create a new virtualenv
-pipenv shell    # activate virtualenv
-pipenv install  # install dependencies
+pipenv --three        # create a new virtualenv
+pipenv shell          # activate virtualenv
+pipenv install        # install dependencies
+pipenv install --dev  # install dependencies
 ```
 
 ### Exécuter l’appli pour une première fois

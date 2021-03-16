@@ -7,6 +7,12 @@ from portal.forms import HealthcareBaseForm
 from datetime import datetime
 import pytz
 
+severity_choices = [
+    ("1", _("Self-monitor")),
+    ("2", _("Self-isolate")),
+    ("3", _("Get tested immediately")),
+]
+
 
 class DateForm(HealthcareBaseForm):
     def __init__(self, num_dates=1, *args, **kwargs):
@@ -50,13 +56,7 @@ class DateForm(HealthcareBaseForm):
         error_msg = _("Invalid date specified.")
         for i in range(self.num_dates):
             try:
-                tz = pytz.timezone(settings.TIME_ZONE or "UTC")
-                cleaned_data[f"date_{i}"] = datetime(
-                    year=cleaned_data.get(f"year_{i}", -1),
-                    month=cleaned_data.get(f"month_{i}", -1),
-                    day=cleaned_data.get(f"day_{i}", -1),
-                ).replace(tzinfo=tz)
-
+                cleaned_data[f"date_{i}"] = self.get_valid_date(cleaned_data, i)
             except ValueError:
                 is_valid = False
                 meta = getattr(self, "Meta", None)
@@ -64,6 +64,14 @@ class DateForm(HealthcareBaseForm):
 
         if not is_valid:
             raise ValidationError(error_msg)
+
+    def get_valid_date(self, data, i):
+        tz = pytz.timezone(settings.TIME_ZONE or "UTC")
+        return datetime(
+            year=int(data.get(f"year_{i}", -1)),
+            month=int(data.get(f"month_{i}", -1)),
+            day=int(data.get(f"day_{i}", -1)),
+        ).replace(tzinfo=tz)
 
     def add_duplicate_error(self, index):
         error_msg = _(
@@ -77,10 +85,6 @@ class DateForm(HealthcareBaseForm):
 class SeverityForm(HealthcareBaseForm):
     alert_level = forms.ChoiceField(
         label="",
-        choices=[
-            ("1", _("Somebody sneezed...")),
-            ("2", _("Sirens and lights flashing everywhere!")),
-            ("3", _("Zombie apocalypse!!!!")),
-        ],
+        choices=severity_choices,
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
