@@ -1,14 +1,44 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from waffle.models import Switch
 
 from . import forms
 from .models import Registrant, Location, EmailConfirmation
-from .utils import generate_random_key
+from . import utils
 from django.contrib.messages import get_messages
 from portal.services import NotifyService
 from portal import container
+import base64
+import xml.etree.cElementTree as et
+import io
+from nacl.encoding import Base64Encoder
+
+
+def is_svg(contents):
+    tag = None
+    f = io.BytesIO(contents.encode())
+    try:
+        for event, el in et.iterparse(f, ("start",)):
+            tag = el.tag
+            break
+    except et.ParseError:
+        pass
+    return tag == "{http://www.w3.org/2000/svg}svg"
+
+
+def is_base64(sb):
+    try:
+        if isinstance(sb, str):
+            # If there's any unicode here, an exception will be thrown and the function will return false
+            sb_bytes = bytes(sb, "ascii")
+        elif isinstance(sb, bytes):
+            sb_bytes = sb
+        else:
+            raise ValueError("Argument must be string or bytes")
+        return base64.b64encode(base64.b64decode(sb_bytes)) == sb_bytes
+    except Exception:
+        return False
 
 
 class RegisterView(TestCase):
@@ -218,15 +248,82 @@ class LocationModel(TestCase):
         self.assertTrue(location.short_code.isalnum)
 
 
+# Generate signing key for following tests
+signing_key = utils.generate_signature_key()
+
+
+@override_settings(QRCODE_SIGNATURE_PRIVATE_KEY=signing_key)
 class Utils(TestCase):
+    def setUp(self):
+        self.location = Location.objects.create(
+            category="category",
+            name="Name of venue",
+            address="Address line 1",
+            city="Ottawa",
+            province="ON",
+            postal_code="K1K 1K1",
+            contact_email="test@test.com",
+            contact_phone="613-555-5555",
+        )
+
     def test_generate_short_code_default_length(self):
-        code = generate_random_key()
+        code = utils.generate_random_key()
         self.assertEqual(len(code), 8)
 
     def test_generate_short_code_custom_length(self):
-        code = generate_random_key(5)
+        code = utils.generate_random_key(5)
         self.assertEqual(len(code), 5)
 
     def test_generate_short_code_alphanumeric(self):
-        code = generate_random_key()
+        code = utils.generate_random_key()
         self.assertTrue(code.isalnum())
+
+    def test_generate_payload(self):
+        payload = utils.generate_payload(self.location)
+        self.assertIn(self.location.short_code, payload)
+        self.assertIn(self.location.name, payload)
+        self.assertIn(self.location.address, payload)
+        self.assertIn(self.location.city, payload)
+
+    def test_sign_payload(self):
+        payload = utils.generate_payload(self.location)
+        signed = utils.sign_payload(payload)
+
+        # Is the payload base64 encoded?
+        self.assertTrue(is_base64(signed))
+
+        # Extract the verify key from the signature key
+        signature_key = utils.load_signature_key()
+        verify_key = signature_key.verify_key
+
+        # Verify the signed payload with the verify key
+        verify_key.verify(signed.encode(), encoder=Base64Encoder)
+
+    def test_generate_qr_code(self):
+        url = "http://thisisjustatesturl.com/#thiswouldbethesignedpayload"
+
+        qrcode = utils.generate_qrcode(url)
+        self.assertTrue(is_svg(qrcode))
+
+    def test_get_signed_qrcode(self):
+        qrcode = utils.get_signed_qrcode(self.location)
+        self.assertTrue(is_svg(qrcode))
+
+
+class DetourPage(TestCase):
+    def test_detour_page(self):
+        RegisterEmailConfirmation.test_can_confirm_email(self)
+        response = self.client.post(
+            reverse("register:location_step", kwargs={"step": "address"}),
+            {
+                "address-address": "a",
+                "address-address_2": "",
+                "address-city": "a",
+                "address-province": "ON",
+                "address-postal_code": "K2b5v5",
+                "location_wizard-current_step": "address",
+            },
+        )
+        self.assertRedirects(
+            response, reverse("register:location_step", kwargs={"step": "unavailable"})
+        )

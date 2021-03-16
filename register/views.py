@@ -13,6 +13,8 @@ from datetime import datetime, timedelta
 import pytz
 from django.contrib import messages
 from .forms import location_choices
+from .utils import get_signed_qrcode
+from profiles.models import HealthcareProvince
 
 
 class RegistrantEmailView(FormView):
@@ -115,12 +117,22 @@ class RegistrantNameView(UpdateView):
 
 TEMPLATES = {
     "address": "register/location_address.html",
+    "unavailable": "register/location_unavailable.html",
     "category": "register/location_category.html",
     "name": "register/location_name.html",
     "contact": "register/location_contact.html",
     "summary": "register/summary.html",
     "success": "register/success.html",
 }
+
+
+def check_for_province(wizard):
+    data = wizard.get_cleaned_data_for_step("address") or {}
+    provinces = HealthcareProvince.objects.filter(qr_code_enabled=True)
+    provinces_values = provinces.values_list("abbr", flat=True)
+    provinces_list = list(provinces_values)
+
+    return data.get("province") not in provinces_list
 
 
 class LocationWizard(NamedUrlSessionWizardView):
@@ -171,7 +183,37 @@ class LocationWizard(NamedUrlSessionWizardView):
         location.contact_phone = data["contact_phone"]
         location.save()
 
+        base_url = self.request.build_absolute_uri("/")[:-1]
+        poster_url = "{base_url}{poster_url}".format(
+            base_url=base_url,
+            poster_url=reverse("register:poster_view", kwargs={"pk": location.pk}),
+        )
+        print(poster_url)
+        self.request.session["poster_url"] = poster_url
+
+        # Generate PDF and send
+
         return HttpResponseRedirect(reverse("register:confirmation"))
+
+
+class PosterView(TemplateView):
+    template_name = "register/poster.svg"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        location = Location.objects.get(id=self.kwargs["pk"])
+
+        qr_code = get_signed_qrcode(location)
+
+        context["qr_code"] = qr_code
+        context["name"] = location.name
+        context["address"] = location.address
+        context["address_details"] = "{city}, {province} {postal_code}".format(
+            city=location.city,
+            province=location.province,
+            postal_code=location.postal_code,
+        )
+        return context
 
 
 class RegisterConfirmationPageView(TemplateView):

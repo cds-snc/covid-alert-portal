@@ -45,6 +45,8 @@ Environment variables are used to control app settings, and configuration for ut
 
 - `SU_DEFAULT_PASSWORD`: Setting to trigger the creation of a default superuser the first time the app is provisioned. If this variable exists, a default superuser will be created at `admin@cds-snc.ca` with this password.
 
+- `QRCODE_SIGNATURE_PRIVATE_KEY`: Private key for signing QR Code payloads. Should be a Base64 encoded key generated with the [PyNaCl encryption library](https://pynacl.readthedocs.io/)
+
 ##### database configuration
 
 - `DATABASE_URL`: A string containing the database scheme, host, username, password, and port. The `DATABASE_URL` is parsed by [`dj-django-url`](https://pypi.org/project/dj-database-url/).
