@@ -61,6 +61,7 @@ data "template_file" "covidportal_task" {
     dual_urls                              = var.dual_urls
     notify_api_key                         = aws_secretsmanager_secret_version.notify_api_key.arn
     notify_template_id                     = aws_secretsmanager_secret_version.notify_template_id.arn
+    qrcode_signature_private_key           = aws_secretsmanager_secret_version.qrcode_signature_private_key.arn
   }
 }
 
@@ -100,6 +101,7 @@ data "template_file" "qrcode_registration_task" {
     dual_urls                              = var.dual_urls
     notify_api_key                         = aws_secretsmanager_secret_version.notify_api_key.arn
     notify_template_id                     = aws_secretsmanager_secret_version.notify_template_id.arn
+    qrcode_signature_private_key           = aws_secretsmanager_secret_version.qrcode_signature_private_key.arn
   }
 }
 
