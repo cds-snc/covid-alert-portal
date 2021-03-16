@@ -38,7 +38,7 @@ env:
   TF_VAR_ecs_secret_notify_template_id: ${{ secrets.NOTIFY_TEMPLATE_ID }}
   TF_VAR_rds_server_db_password: ${{ secrets.DB_PASSWORD }}
   TF_VAR_slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
-  TF_VAR_qrcode_signature_private_key: ${{ secrets.QRCODE_SIGNATURE_PRIVATE_KEY }}
+  TF_VAR_ecs_secret_qrcode_signature_private_key: ${{ secrets.QRCODE_SIGNATURE_PRIVATE_KEY }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
