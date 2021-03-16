@@ -59,17 +59,20 @@ body.qrcode {
         color: black;
         background-color: #E6FAE8;
         text-align: left;
+
     }
 
     .next-steps {
-        div {
-            flex-basis: 80%;
-        }
         svg {
             
         }
         display: flex;
         justify-content: space-between;
+        @include sm {
+            flex-direction: row;
+        }
+        flex-direction: column;
+
     }
 
     label {

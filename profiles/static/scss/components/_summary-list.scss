@@ -23,7 +23,7 @@
         margin-bottom: 5px;
         font-weight: 700;
         width: 50%;
-        @include md {
+        @include sm {
             display: table-cell;
             border-bottom: 1px solid #b1b4b6;
             width: 30%;
@@ -38,7 +38,7 @@
         padding-right: 20px;
         overflow-wrap: break-word;
         width: 60%;
-        @include md {
+        @include sm {
             display: table-cell;
             border-bottom: 1px solid #b1b4b6;
             padding-bottom: 10px;
@@ -58,7 +58,7 @@
         width: 100%;
         padding-right: 0;
         text-align: left;
-        @include md {
+        @include sm {
             display: table-cell;
             border-bottom: 1px solid #b1b4b6;
             width: 20%;
