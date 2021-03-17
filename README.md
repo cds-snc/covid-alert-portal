@@ -199,7 +199,7 @@ Add your string to a template using the `trans` tag.
 <h1>{% trans "Generate code for Exposure Notification app" %}</h1>
 ```
 
-Run `python manage.py makemessages -l fr` to update the `django.po` translations file inside of `/locale`.
+Run `python manage.py makemessages -l fr --add-location=file --no-wrap` to update the `django.po` translations file inside of `/locale`.
 
 ```
 # locale/fr/LC_MESSAGES/django.po
@@ -347,7 +347,7 @@ Ajoutez votre chaîne de caractères à un modèle en utilisant le tag `trans`.
 <h1>{% trans "Generate code for Exposure Notification app" %}</h1>
 ```
 
-Exécutez `python manage.py makemessages -l fr` pour mettre à jour le fichier de traductions `django.po` à l’intérieur de `/locale`.
+Exécutez `python manage.py makemessages -l fr --add-location=file --no-wrap` pour mettre à jour le fichier de traductions `django.po` à l’intérieur de `/locale`.
 
 ```
 # locale/fr/LC_MESSAGES/django.po
