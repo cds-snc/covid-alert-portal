@@ -13,6 +13,11 @@
     {% blocktrans with email=request.session.registrant_email %}
       <p>We’ll email the poster to {{ email }}</p>
     {% endblocktrans %}
+    
+    <!-- TODO: This is here temporarily until we send by email -->
+    {% blocktrans with url=request.session.poster_url %}
+      <p><a href="{{ url }}" target="_blank">View Poster</a></p>
+    {% endblocktrans %}
   </div>
 
   <h2>{% trans "Next steps" %}</h2>

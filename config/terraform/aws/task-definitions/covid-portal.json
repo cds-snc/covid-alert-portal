@@ -130,6 +130,10 @@
       {
         "name": "OTP_NOTIFY_TEMPLATE_ID",
         "valueFrom": "${notify_template_id}"
+      },
+      {
+        "name": "QRCODE_SIGNATURE_PRIVATE_KEY",
+        "valueFrom": "${qrcode_signature_private_key}"
       }
     ]
   }
