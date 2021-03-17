@@ -36,6 +36,7 @@ location_wizard = views.LocationWizard.as_view(
 urlpatterns = [
     path("", TemplateView.as_view(template_name="register/start.html"), name="start"),
     path("email", views.RegistrantEmailView.as_view(), name="registrant_email"),
+    path("locations/<uuid:pk>/poster", views.PosterView.as_view(), name="poster_view"),
     path(
         "email/submitted",
         views.RegistrantEmailSubmittedView.as_view(),
