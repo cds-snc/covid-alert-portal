@@ -58,7 +58,8 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
     category_description = forms.CharField(
-        label="Give brief description of service or event", required=False
+        label="Give brief description of service or event",
+        required=False
     )
 
     def __init__(self, data=None, *args, **kwargs):
