@@ -64,11 +64,28 @@ class LocationNameForm(HealthcareBaseForm, forms.Form):
     name = forms.CharField(label="")
 
 
+provinces = [
+    ("AB", "AB"),
+    ("BC", "BC"),
+    ("MB", "MB"),
+    ("NB", "NB"),
+    ("NL", "NL"),
+    ("NS", "NS"),
+    ("NT", "NT"),
+    ("NU", "NU"),
+    ("ON", "ON"),
+    ("PE", "PE"),
+    ("QC", "QC"),
+    ("SK", "SK"),
+    ("YT", "YT"),
+]
+
+
 class LocationAddressForm(HealthcareBaseForm, forms.Form):
     address = forms.CharField(label=_("Address line 1"), widget=AutocompleteWidget())
     address_2 = forms.CharField(label=_("Address line 2"), required=False)
     city = forms.CharField(label=_("City"))
-    province = forms.CharField(label=_("Province or territory"))
+    province = forms.ChoiceField(label=_("Province or territory"), choices=provinces)
     postal_code = forms.CharField(label=_("Postal code"))
 
 
