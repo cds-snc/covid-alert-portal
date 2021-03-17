@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-17 17:20+0000\n"
+"POT-Creation-Date: 2021-03-17 20:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -652,6 +652,14 @@ msgid "Year"
 msgstr "Année"
 
 #: outbreaks/forms.py
+msgid "From"
+msgstr ""
+
+#: outbreaks/forms.py
+msgid "To"
+msgstr ""
+
+#: outbreaks/forms.py
 msgid "Invalid date specified."
 msgstr "Invalide ou expiré"
 
@@ -702,6 +710,10 @@ msgstr "Type"
 
 #: outbreaks/templates/confirm.html
 msgid "Date(s)"
+msgstr ""
+
+#: outbreaks/templates/confirm.html outbreaks/templates/confirmed.html
+msgid "to"
 msgstr ""
 
 #: outbreaks/templates/confirm.html
@@ -771,8 +783,8 @@ msgid "Add another date"
 msgstr "Ajouter une date"
 
 #: outbreaks/templates/datetime.html
-msgid "Remove a date"
-msgstr "Supprimer une date"
+msgid "Remove last date"
+msgstr ""
 
 #: outbreaks/templates/details.html
 msgid "Details of public exposure"
