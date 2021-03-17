@@ -9,6 +9,8 @@ body.qrcode {
         .hero-inner {
             @extend %page-container;
             padding: 15px;
+            padding-right: 30px;
+            padding-left: 30px;
             display: flex;
             align-items: flex-start;
             flex-direction: column-reverse;
