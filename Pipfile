@@ -44,7 +44,9 @@ django-waffle = "*"
 django-solo = "*"
 dependency-injector = "*"
 django-formtools = "*"
+pynacl = "*"
 protobuf = "*"
+segno = "*"
 
 [pipenv]
 allow_prereleases = true
