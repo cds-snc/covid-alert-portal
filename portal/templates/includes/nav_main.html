@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n waffle_tags %}
 
 <nav class="nav--main"  aria-label="{% trans 'Product navigation' %}">
   <div class="page--container">
@@ -11,9 +11,11 @@
         <li><a {% if request.resolver_match.url_name == 'profiles' %}class="active"{% endif %} href="{% url 'profiles' %}">{% trans "Manage team" %}</a></li>
       {% endif %}
       <li><a {% if request.resolver_match.url_name == 'support' %}class="active"{% endif %} href="{% url 'support' %}">{% trans "Support" %}</a></li>
-      {% if perms.profiles.can_send_alerts and user.is_verified %}
-        <li><a {% if request.resolver_match.url_name == 'search' %}class="active"{% endif %} href="{% url 'outbreaks:search' %}">{% trans "Public exposures" %}</a></li>
-      {% endif %}
+      {% switch "qr_codes" %}
+        {% if perms.profiles.can_send_alerts and user.is_verified %}
+          <li><a {% if request.resolver_match.url_name == 'search' %}class="active"{% endif %} href="{% url 'outbreaks:search' %}">{% trans "Public exposures" %}</a></li>
+        {% endif %}
+      {% endswitch %}
     </ul>
   </div>
 </nav>
