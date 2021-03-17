@@ -352,6 +352,9 @@ REGISTER_EMAIL_CONFIRMATION_ID = {
     "fr": "719e51e3-5946-4699-b980-ce04dd2d6590",
 }
 
+# QRCode signing key
+QRCODE_SIGNATURE_PRIVATE_KEY = os.getenv("QRCODE_SIGNATURE_PRIVATE_KEY", None)
+
 # Create default Super User with this password
 SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
 
@@ -403,6 +406,7 @@ CSP_STYLE_SRC = [
     "'self'",
     "'sha256-wj97CBnjU4ly4cqQnM0huquRQF943qGisXfpavz3YsU='",
     "'sha256-uwPeycnNJj5VRuojI2kTqwzlRkuYgdlJ3laHnGO8S64='",
+    "'sha256-02Ng9/HVM3BYHN831rXFi5caahDECG0zaxyAT5OwIaM='",
     "fonts.googleapis.com",
     "cdn.jsdelivr.net",
 ]
