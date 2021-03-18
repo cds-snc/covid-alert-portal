@@ -68,7 +68,7 @@ class ProfileView(PermissionRequiredMixin, Is2FAMixin, FormView):
             location = Location.objects.get(id=self.kwargs["pk"])
             context["location"] = location
             context["map_link"] = "https://maps.google.com/?q=" + str(location)
-
+            location.category = dict(location_choices)[location.category]
             # Cache the location for the next steps
             self.request.session["alert_location"] = self.kwargs["pk"].hex
 
@@ -376,7 +376,7 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
         context = super().get_context_data(*args, **kwargs)
         context["severity"] = self.request.session.pop("alert_level")
         context["location"] = location
-
+        
         num_dates = self.request.session.pop("num_dates", 1)
         context["num_dates"] = num_dates
         context["dates"] = []
