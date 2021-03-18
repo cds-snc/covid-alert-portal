@@ -13,6 +13,7 @@ class Registrant(models.Model):
         unique=True,
     )
     name = models.CharField(max_length=200, verbose_name=_("Full name"))
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):  # new
         return "{} ({})".format(self.name, self.email)
@@ -21,7 +22,7 @@ class Registrant(models.Model):
 class EmailConfirmation(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     email = models.EmailField(verbose_name="email", max_length=255)
-    created = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
 class Location(models.Model):
@@ -41,6 +42,7 @@ class Location(models.Model):
     )
     contact_email = models.EmailField(verbose_name=_("Email address"), max_length=255)
     contact_phone = PhoneNumberField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     # Override save method to generate a unique short code for poster
     def save(self, *args, **kwargs):
