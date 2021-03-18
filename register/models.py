@@ -22,7 +22,7 @@ class Registrant(models.Model):
 class EmailConfirmation(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     email = models.EmailField(verbose_name="email", max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
 
 
 class Location(models.Model):
