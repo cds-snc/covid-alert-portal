@@ -376,7 +376,7 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
         context = super().get_context_data(*args, **kwargs)
         context["severity"] = self.request.session.pop("alert_level")
         context["location"] = location
-        
+
         num_dates = self.request.session.pop("num_dates", 1)
         context["num_dates"] = num_dates
         context["dates"] = []
