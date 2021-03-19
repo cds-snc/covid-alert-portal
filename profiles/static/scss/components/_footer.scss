@@ -10,8 +10,8 @@ footer {
     font-size: 0.85em;
 
     ul {
-      list-style: none;
-      margin: 0;
+      list-style-position: outside;
+      margin-left: $space-md;
       padding: 0;
       margin-bottom: 0;
 
@@ -38,8 +38,28 @@ footer {
   }
 
   .canada-wordmark {
+    margin-top: $space-lg;
     padding-bottom: $space-md;
     width: 147.2px;
+  }
+
+
+  .button-text-style {
+    color: black;
+    text-decoration: none;
+
+    &::after {
+      @include chevron("up");
+    }
+  }
+  .box-style {
+    margin-left: $space-xxs - 5px;
+    padding: $space-sm $space-lg $space-sm $space-sm;
+    width: 165px;
+    background-color: white;
+    border: 0em;
+    text-decoration: none;
+
   }
 
   @include md {
