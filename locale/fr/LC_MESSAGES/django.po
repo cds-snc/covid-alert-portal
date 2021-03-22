@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-22 17:11+0000\n"
+"POT-Creation-Date: 2021-03-22 19:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -501,7 +501,6 @@ msgstr "Si le patient est prêt, générez une clé"
 #: register/templates/register/location_contact.html
 #: register/templates/register/location_name.html
 #: register/templates/register/location_unavailable.html
-#: register/templates/register/qr_support_page.html
 #: register/templates/register/registrant_email.html
 #: register/templates/register/registrant_email_submitted.html
 #: register/templates/register/registrant_name.html
@@ -2264,28 +2263,43 @@ msgid "You’ve got the email with your QR code poster. Now what?"
 msgstr "Vous avez reçu votre affiche à code QR par courriel. Et ensuite?"
 
 #: register/templates/register/qr_support_page.html
-msgid "Read about saving and printing."
-msgstr "En savoir plus sur l’enregistrement et l’impression de l’affiche."
+msgid "Read about "
+msgstr "En savoir plus sur "
 
 #: register/templates/register/qr_support_page.html
-msgid "Help visitors find and scan your poster."
-msgstr "Aider les visiteurs à trouver et scanner votre affiche."
+msgid "saving and printing."
+msgstr "l’enregistrement et l’impression de l’affiche."
 
 #: register/templates/register/qr_support_page.html
-msgid "Learn how QR posters work."
-msgstr "En savoir plus sur le fonctionnement des affiches à code QR."
+msgid "Help visitors "
+msgstr "Aider les visiteurs à "
 
 #: register/templates/register/qr_support_page.html
-msgid "To ask for the email again, contact us."
-msgstr "Pour recevoir à nouveau le courriel, contactez-nous."
+msgid "find and scan your poster."
+msgstr "trouver et scanner votre affiche."
+
+#: register/templates/register/qr_support_page.html
+msgid "Learn "
+msgstr "En savoir plus sur le"
+
+#: register/templates/register/qr_support_page.html
+msgid "how QR posters work."
+msgstr "fonctionnement des affiches à code QR."
+
+#: register/templates/register/qr_support_page.html
+
+msgid "To ask for the email again, "
+msgstr "Pour recevoir à nouveau le courriel, "
+
+#: register/templates/register/qr_support_page.html
+msgid "contact us."
+msgstr "contactez-nous."
 
 #: register/templates/register/qr_support_page.html
 msgid "Posters are mandatory in some places"
 msgstr "Affiches obligatoires dans certains endroits"
 
 #: register/templates/register/qr_support_page.html
-#, fuzzy
-#| msgid "Check which services and events require posters in your province or territory"
 msgid "Check which services and events require posters in your province or territory:"
 msgstr "Renseignez-vous sur les services et événements qui doivent avoir une affiche dans votre province ou territoire:"
 
@@ -2348,14 +2362,16 @@ msgid "For help with the app"
 msgstr "Pour toute autre assistance avec le portail"
 
 #: register/templates/register/qr_support_page.html
-#, fuzzy
-#| msgid "Contact us"
 msgid "Contact us."
-msgstr "Nous joindre"
+msgstr "Contactez-nous."
 
 #: register/templates/register/qr_support_page.html
-msgid "Read app information about QR Codes."
-msgstr "Consultez l’information sur l’application et les codes QR."
+msgid "Read "
+msgstr "Consultez "
+
+#: register/templates/register/qr_support_page.html
+msgid "app information about QR Codes."
+msgstr "l’information sur l’application et les codes QR."
 
 #: register/templates/register/qr_support_page.html
 msgid "You can also:"

@@ -8,6 +8,7 @@
 
 {% block content %}
 <div class="support">
+  {%url "register:contactus" as link%}
     <h1 >{% trans "Help with your poster" %}</h1>
     <h2>{% trans "You’ve got the email with your QR code poster. Now what?" %}</h2>
   <ul >
@@ -15,7 +16,7 @@
       <li>{% trans "Help visitors " %}<a href="">{% trans "find and scan your poster." %}</a></li>
       <li>{% trans "Learn " %}<a href="">{% trans "how QR posters work." %}</a></li>
   </ul>
-  <p class="spacing">{% trans "To ask for the email again, " %}<a href="">{% trans "contact us." %}</a></p>
+  <p class="spacing">{% trans "To ask for the email again, " %}<a href="{{link}}">{% trans "contact us." %}</a></p>
 
   <h2>{% trans "Posters are mandatory in some places" %}</h2>
 
@@ -38,7 +39,7 @@
   </ul>
 
   <h2>{% trans "For help with the app" %}</h2>
-  <a href="">{% trans "Contact us." %}</a>
+  <a href="{{link}}">{% trans "Contact us." %}</a>
 
   <h2>{% trans "For help with the app" %}</h2>
   <p>{% trans "Read " %}<a href="">{% trans "app information about QR Codes." %}</a></p>
