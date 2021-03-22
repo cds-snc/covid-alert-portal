@@ -328,13 +328,13 @@ OTK_SMS_TEMPLATE_ID = {
 }
 
 BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID = {
-    "en": os.getenv("BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_EN"),
-    "fr": os.getenv("BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_FR"),
+    "en": "158a633d-da11-4a6f-acf3-9797adf0d1ae",
+    "fr": "e3bf4a89-eec2-4af6-ac1a-1145cc8a211c",
 }
 
 PASSWORD_RESET_EMAIL_TEMPLATE_ID = {
-    "en": os.getenv("PASSWORD_RESET_EMAIL_TEMPLATE_ID_EN"),
-    "fr": os.getenv("PASSWORD_RESET_EMAIL_TEMPLATE_ID_FR"),
+    "en": "610b49ce-ed71-42df-a003-53c9abdf7368",
+    "fr": "8ab7edfe-aaf5-4e78-80a6-0d72e7e0ad3b",
 }
 
 INVITATION_EMAIL_TEMPLATE_ID = {

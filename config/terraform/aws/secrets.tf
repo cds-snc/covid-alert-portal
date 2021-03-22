@@ -92,46 +92,6 @@ resource "aws_secretsmanager_secret_version" "confirmation_email_template_id_fr"
   secret_string = var.ecs_secret_confirmation_email_template_id_fr
 }
 
-resource "aws_secretsmanager_secret" "password_reset_email_template_id_en" {
-  name                    = "password_reset_email_template_id_en"
-  recovery_window_in_days = 0
-}
-
-resource "aws_secretsmanager_secret_version" "password_reset_email_template_id_en" {
-  secret_id     = aws_secretsmanager_secret.password_reset_email_template_id_en.id
-  secret_string = var.ecs_secret_password_reset_email_template_id_en
-}
-
-resource "aws_secretsmanager_secret" "password_reset_email_template_id_fr" {
-  name                    = "password_reset_email_template_id_fr"
-  recovery_window_in_days = 0
-}
-
-resource "aws_secretsmanager_secret_version" "password_reset_email_template_id_fr" {
-  secret_id     = aws_secretsmanager_secret.password_reset_email_template_id_fr.id
-  secret_string = var.ecs_secret_password_reset_email_template_id_fr
-}
-
-resource "aws_secretsmanager_secret" "backup_code_admin_email_template_id_en" {
-  name                    = "backup_code_admin_email_template_id_en"
-  recovery_window_in_days = 0
-}
-
-resource "aws_secretsmanager_secret_version" "backup_code_admin_email_template_id_en" {
-  secret_id     = aws_secretsmanager_secret.backup_code_admin_email_template_id_en.id
-  secret_string = var.ecs_secret_backup_code_admin_email_template_id_en
-}
-
-resource "aws_secretsmanager_secret" "backup_code_admin_email_template_id_fr" {
-  name                    = "backup_code_admin_email_template_id_fr"
-  recovery_window_in_days = 0
-}
-
-resource "aws_secretsmanager_secret_version" "backup_code_admin_email_template_id_fr" {
-  secret_id     = aws_secretsmanager_secret.backup_code_admin_email_template_id_fr.id
-  secret_string = var.ecs_secret_backup_code_admin_email_template_id_fr
-}
-
 resource "aws_secretsmanager_secret" "django_secret_key" {
   name                    = "django_secret_key"
   recovery_window_in_days = 0
