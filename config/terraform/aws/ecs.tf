@@ -59,29 +59,29 @@ data "template_file" "qrcode_registration_task" {
   template = file("task-definitions/covid-portal.json")
 
   vars = {
-    app_switch                             = "QRCODE"
-    name                                   = var.ecs_covid_portal_name
-    image                                  = "${local.portal_repo}"
-    awslogs-group                          = aws_cloudwatch_log_group.qrcode.name
-    awslogs-region                         = var.region
-    awslogs-stream-prefix                  = "ecs-${var.ecs_qrcode_name}"
-    database_url                           = aws_secretsmanager_secret_version.server_database_url.arn
-    metric_provider                        = var.metric_provider
-    tracer_provider                        = var.tracer_provider
-    api_authorization                      = aws_secretsmanager_secret_version.api_authorization.arn
-    api_endpoint                           = aws_secretsmanager_secret_version.api_endpoint.arn
-    django_secret_key                      = aws_secretsmanager_secret_version.django_secret_key.arn
-    freshdesk_api_endpoint                 = aws_secretsmanager_secret_version.freshdesk_api_endpoint.arn
-    freshdesk_api_key                      = aws_secretsmanager_secret_version.freshdesk_api_key.arn
-    freshdesk_product_id                   = aws_secretsmanager_secret_version.freshdesk_product_id.arn
-    new_relic_license_key                  = aws_secretsmanager_secret_version.new_relic_license_key.arn
-    django_env                             = var.django_env
-    django_allowed_hosts                   = var.django_allowed_hosts
-    new_relic_app_name                     = var.new_relic_app_name
-    dual_urls                              = var.dual_urls
-    notify_api_key                         = aws_secretsmanager_secret_version.notify_api_key.arn
-    notify_template_id                     = aws_secretsmanager_secret_version.notify_template_id.arn
-    qrcode_signature_private_key           = aws_secretsmanager_secret_version.qrcode_signature_private_key.arn
+    app_switch                   = "QRCODE"
+    name                         = var.ecs_covid_portal_name
+    image                        = "${local.portal_repo}"
+    awslogs-group                = aws_cloudwatch_log_group.qrcode.name
+    awslogs-region               = var.region
+    awslogs-stream-prefix        = "ecs-${var.ecs_qrcode_name}"
+    database_url                 = aws_secretsmanager_secret_version.server_database_url.arn
+    metric_provider              = var.metric_provider
+    tracer_provider              = var.tracer_provider
+    api_authorization            = aws_secretsmanager_secret_version.api_authorization.arn
+    api_endpoint                 = aws_secretsmanager_secret_version.api_endpoint.arn
+    django_secret_key            = aws_secretsmanager_secret_version.django_secret_key.arn
+    freshdesk_api_endpoint       = aws_secretsmanager_secret_version.freshdesk_api_endpoint.arn
+    freshdesk_api_key            = aws_secretsmanager_secret_version.freshdesk_api_key.arn
+    freshdesk_product_id         = aws_secretsmanager_secret_version.freshdesk_product_id.arn
+    new_relic_license_key        = aws_secretsmanager_secret_version.new_relic_license_key.arn
+    django_env                   = var.django_env
+    django_allowed_hosts         = var.django_allowed_hosts
+    new_relic_app_name           = var.new_relic_app_name
+    dual_urls                    = var.dual_urls
+    notify_api_key               = aws_secretsmanager_secret_version.notify_api_key.arn
+    notify_template_id           = aws_secretsmanager_secret_version.notify_template_id.arn
+    qrcode_signature_private_key = aws_secretsmanager_secret_version.qrcode_signature_private_key.arn
   }
 }
 
