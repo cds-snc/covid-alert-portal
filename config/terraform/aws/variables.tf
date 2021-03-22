@@ -96,10 +96,6 @@ variable "ecs_secret_otk_sms_template_id_fr" {
   type = string
 }
 
-variable "ecs_secret_confirmation_email_template_id_fr" {
-  type = string
-}
-
 variable "ecs_secret_django_secret_key" {
   type = string
 }

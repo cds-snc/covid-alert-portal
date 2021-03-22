@@ -42,7 +42,6 @@ data "template_file" "covidportal_task" {
     api_endpoint                           = aws_secretsmanager_secret_version.api_endpoint.arn
     otk_sms_template_id_en                 = aws_secretsmanager_secret_version.otk_sms_template_id_en.arn
     otk_sms_template_id_fr                 = aws_secretsmanager_secret_version.otk_sms_template_id_fr.arn
-    confirmation_email_template_id_fr      = aws_secretsmanager_secret_version.confirmation_email_template_id_fr.arn
     django_secret_key                      = aws_secretsmanager_secret_version.django_secret_key.arn
     freshdesk_api_endpoint                 = aws_secretsmanager_secret_version.freshdesk_api_endpoint.arn
     freshdesk_api_key                      = aws_secretsmanager_secret_version.freshdesk_api_key.arn
@@ -75,7 +74,6 @@ data "template_file" "qrcode_registration_task" {
     api_endpoint                           = aws_secretsmanager_secret_version.api_endpoint.arn
     otk_sms_template_id_en                 = aws_secretsmanager_secret_version.otk_sms_template_id_en.arn
     otk_sms_template_id_fr                 = aws_secretsmanager_secret_version.otk_sms_template_id_fr.arn
-    confirmation_email_template_id_fr      = aws_secretsmanager_secret_version.confirmation_email_template_id_fr.arn
     django_secret_key                      = aws_secretsmanager_secret_version.django_secret_key.arn
     freshdesk_api_endpoint                 = aws_secretsmanager_secret_version.freshdesk_api_endpoint.arn
     freshdesk_api_key                      = aws_secretsmanager_secret_version.freshdesk_api_key.arn
