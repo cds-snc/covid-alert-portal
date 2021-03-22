@@ -42,7 +42,6 @@ data "template_file" "covidportal_task" {
     api_endpoint                           = aws_secretsmanager_secret_version.api_endpoint.arn
     otk_sms_template_id_en                 = aws_secretsmanager_secret_version.otk_sms_template_id_en.arn
     otk_sms_template_id_fr                 = aws_secretsmanager_secret_version.otk_sms_template_id_fr.arn
-    invitation_email_template_id_en        = aws_secretsmanager_secret_version.invitation_email_template_id_en.arn
     invitation_email_template_id_fr        = aws_secretsmanager_secret_version.invitation_email_template_id_fr.arn
     confirmation_email_template_id_en      = aws_secretsmanager_secret_version.confirmation_email_template_id_en.arn
     confirmation_email_template_id_fr      = aws_secretsmanager_secret_version.confirmation_email_template_id_fr.arn
@@ -78,7 +77,6 @@ data "template_file" "qrcode_registration_task" {
     api_endpoint                           = aws_secretsmanager_secret_version.api_endpoint.arn
     otk_sms_template_id_en                 = aws_secretsmanager_secret_version.otk_sms_template_id_en.arn
     otk_sms_template_id_fr                 = aws_secretsmanager_secret_version.otk_sms_template_id_fr.arn
-    invitation_email_template_id_en        = aws_secretsmanager_secret_version.invitation_email_template_id_en.arn
     invitation_email_template_id_fr        = aws_secretsmanager_secret_version.invitation_email_template_id_fr.arn
     confirmation_email_template_id_en      = aws_secretsmanager_secret_version.confirmation_email_template_id_en.arn
     confirmation_email_template_id_fr      = aws_secretsmanager_secret_version.confirmation_email_template_id_fr.arn

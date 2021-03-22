@@ -52,16 +52,6 @@ resource "aws_secretsmanager_secret_version" "otk_sms_template_id_fr" {
   secret_string = var.ecs_secret_otk_sms_template_id_fr
 }
 
-resource "aws_secretsmanager_secret" "invitation_email_template_id_en" {
-  name                    = "invitation_email_template_id_en"
-  recovery_window_in_days = 0
-}
-
-resource "aws_secretsmanager_secret_version" "invitation_email_template_id_en" {
-  secret_id     = aws_secretsmanager_secret.invitation_email_template_id_en.id
-  secret_string = var.ecs_secret_invitation_email_template_id_en
-}
-
 resource "aws_secretsmanager_secret" "invitation_email_template_id_fr" {
   name                    = "invitation_email_template_id_fr"
   recovery_window_in_days = 0
