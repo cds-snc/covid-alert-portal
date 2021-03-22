@@ -51,13 +51,11 @@ class OtherFieldInput(HealthcareBaseForm, forms.Form):
 
 
 class LocationCategoryForm(HealthcareBaseForm, forms.Form):
-
     category = forms.ChoiceField(
         label="",
         choices=location_choices,
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
-    data = forms.CharField(label="Give brief description of service or event")
 
 
 class LocationNameForm(HealthcareBaseForm, forms.Form):
