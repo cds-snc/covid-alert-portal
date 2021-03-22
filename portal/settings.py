@@ -343,7 +343,7 @@ INVITATION_EMAIL_TEMPLATE_ID = {
 }
 
 CONFIRMATION_EMAIL_TEMPLATE_ID = {
-    "en": os.getenv("CONFIRMATION_EMAIL_TEMPLATE_ID_EN"),
+    "en": "bdbb9cb0-2e44-41c1-9aed-58507ec92fef",
     "fr": os.getenv("CONFIRMATION_EMAIL_TEMPLATE_ID_FR"),
 }
 
