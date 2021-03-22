@@ -323,8 +323,8 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 INVITATIONS_ADAPTER = "profiles.utils.invitation_adapter.HealthcareInvitationAdapter"
 
 OTK_SMS_TEMPLATE_ID = {
-    "en": os.getenv("OTK_SMS_TEMPLATE_ID_EN"),
-    "fr": os.getenv("OTK_SMS_TEMPLATE_ID_FR"),
+    "en": "40864010-5323-49e9-9828-3ae8e376535c",
+    "fr": "1ccf1412-b84e-4e3d-a7a9-6555b0f5b727",
 }
 
 BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID = {

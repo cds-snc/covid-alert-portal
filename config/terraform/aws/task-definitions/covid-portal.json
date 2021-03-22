@@ -64,14 +64,6 @@
         "valueFrom": "${api_endpoint}"
       },
       {
-        "name": "OTK_SMS_TEMPLATE_ID_EN",
-        "valueFrom": "${otk_sms_template_id_en}"
-      },
-      {
-        "name": "OTK_SMS_TEMPLATE_ID_FR",
-        "valueFrom": "${otk_sms_template_id_fr}"
-      },
-      {
         "name": "DJANGO_SECRET_KEY",
         "valueFrom": "${django_secret_key}"
       },
