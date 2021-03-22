@@ -63,7 +63,7 @@ class LocationNameForm(HealthcareBaseForm, forms.Form):
 
 
 provinces = [
-    ('', _('Select a province or territory')),
+    ("", _("Select a province or territory")),
     ("AB", "Alberta"),
     ("BC", "British Columbia"),
     ("MB", "Manitoba"),
