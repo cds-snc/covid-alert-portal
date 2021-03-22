@@ -6,7 +6,6 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('register', '0007_location_category_description'),
         ('register', '0006_auto_20210308_1515'),
     ]
 

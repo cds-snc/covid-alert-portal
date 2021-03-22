@@ -12,6 +12,7 @@ for (var i = 0, len = radios.length; i < len; i++) {
     radios[i].onclick = function() {
       if (this.checked && this.value === "other") {
         document.getElementById("id_category-category_description").parentElement.style.display = 'block';
+        document.getElementById("id_category-category_description").value = "";
       } else {
         document.getElementById("id_category-category_description").parentElement.style.display = 'none';
       }
