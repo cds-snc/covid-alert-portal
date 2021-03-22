@@ -54,14 +54,21 @@ footer {
   }
   .box-style {
     margin-left: $space-xxs - 5px;
-    padding: $space-sm $space-lg $space-sm $space-sm;
+    padding: $space-xs $space-sm $space-xs $space-sm;
     width: 165px;
     background-color: white;
     border: 0em;
     text-decoration: none;
 
   }
-
+  @include sm {
+    .box-style {
+      display: none;
+    }
+    .button-text-style {
+      display: none;
+    }
+  }
   @include md {
     .page--container {
       display: flex;
