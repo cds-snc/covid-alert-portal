@@ -2469,16 +2469,6 @@ msgid "Start now"
 msgstr "Commencer"
 
 #: register/templates/register/start.html
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  <h2> Questions? </h2>\n"
-#| "    <p>\n"
-#| "      \n"
-#| "      Visit <a href=\"%(qrlink)s\">Help with your poster</a><br>\n"
-#| "      Or <a href =\"%(link)s\">Contact us</a>\n"
-#| "   </p>\n"
-#| "   "
 msgid ""
 "\n"
 "  <h2> Questions? </h2>\n"
