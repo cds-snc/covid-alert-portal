@@ -47,7 +47,7 @@ class RegistrantNameForm(HealthcareBaseForm, forms.ModelForm):
 
 
 class OtherFieldInput(HealthcareBaseForm, forms.Form):
-    data = forms.CharField(label="Give brief description of service or event")
+    data = forms.CharField(label=_("Give brief description of service or event"))
 
 
 class LocationCategoryForm(HealthcareBaseForm, forms.Form):
