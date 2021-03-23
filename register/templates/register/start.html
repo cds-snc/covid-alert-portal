@@ -33,10 +33,13 @@
   </div>
 
   {%url "register:contactus" as link%}
+  {%url "register:qrsupport" as qrlink%}
+  
   {% blocktranslate %}
   <h2> Questions? </h2>
     <p>
-      Visit <a href="">Help with your poster</a><br>
+      
+      Visit <a href="{{qrlink}}">Help with your poster</a><br>
       Or <a href ="{{link}}">Contact us</a>
    </p>
    {% endblocktranslate %}
