@@ -2039,7 +2039,7 @@ msgstr "Autre"
 
 #: register/forms.py
 msgid "Give brief description of service or event"
-msgstr ""
+msgstr "Décrivez brièvement votre service ou événement"
 
 #: register/forms.py register/models.py
 msgid "Address line 1"
