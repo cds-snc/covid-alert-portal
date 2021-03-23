@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-22 19:10+0000\n"
+"POT-Creation-Date: 2021-03-23 15:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2253,8 +2253,6 @@ msgid "People in your province or territory are not yet able to scan a QR code f
 msgstr ""
 
 #: register/templates/register/qr_support_page.html
-#, fuzzy
-#| msgid "Make another poster"
 msgid "Help with your poster"
 msgstr "Créer une autre affiche"
 
@@ -2287,7 +2285,6 @@ msgid "how QR posters work."
 msgstr "fonctionnement des affiches à code QR."
 
 #: register/templates/register/qr_support_page.html
-
 msgid "To ask for the email again, "
 msgstr "Pour recevoir à nouveau le courriel, "
 
@@ -2356,14 +2353,16 @@ msgid "Yukon"
 msgstr "Yukon"
 
 #: register/templates/register/qr_support_page.html
-#, fuzzy
-#| msgid "For any other help with the portal"
-msgid "For help with the app"
-msgstr "Pour toute autre assistance avec le portail"
+msgid "For more help"
+msgstr "Pour de l’aide supplémentaire"
 
 #: register/templates/register/qr_support_page.html
 msgid "Contact us."
 msgstr "Contactez-nous."
+
+#: register/templates/register/qr_support_page.html
+msgid "For help with the app"
+msgstr "Pour de l’aide relative à l’application"
 
 #: register/templates/register/qr_support_page.html
 msgid "Read "
@@ -2475,7 +2474,8 @@ msgstr "Commencer"
 #| "\n"
 #| "  <h2> Questions? </h2>\n"
 #| "    <p>\n"
-#| "      Visit <a href=\"\">Help with your poster</a><br>\n"
+#| "      \n"
+#| "      Visit <a href=\"%(qrlink)s\">Help with your poster</a><br>\n"
 #| "      Or <a href =\"%(link)s\">Contact us</a>\n"
 #| "   </p>\n"
 #| "   "
