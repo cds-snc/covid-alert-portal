@@ -5,6 +5,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from .utils import generate_random_key
 from django.utils import timezone
 
+
 class Registrant(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     email = models.EmailField(
