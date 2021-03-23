@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 17:13+0000\n"
+"POT-Creation-Date: 2021-03-23 18:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2040,57 +2040,59 @@ msgstr "Autre"
 msgid "Select a province or territory"
 msgstr ""
 
-#: register/forms.py
+#: register/forms.py register/templates/register/qr_support_page.html
 msgid "Alberta"
-msgstr ""
+msgstr "Alberta"
 
-#: register/forms.py
+#: register/forms.py register/templates/register/qr_support_page.html
 msgid "British Columbia"
-msgstr ""
+msgstr "Colombie-Britannique"
 
-#: register/forms.py
+#: register/forms.py register/templates/register/qr_support_page.html
 msgid "Manitoba"
-msgstr ""
+msgstr "Manitoba"
 
-#: register/forms.py
+#: register/forms.py register/templates/register/qr_support_page.html
 msgid "New Brunswick"
-msgstr ""
+msgstr "Nouveau-Brunswick"
 
-#: register/forms.py
+#: register/forms.py register/templates/register/qr_support_page.html
 msgid "Newfoundland and Labrador"
-msgstr ""
+msgstr "Terre-Neuve-et-Labrador"
 
-#: register/forms.py
+#: register/forms.py register/templates/register/qr_support_page.html
 msgid "Nova Scotia"
-msgstr ""
+msgstr "Nouvelle-Écosse"
 
 #: register/forms.py
+#, fuzzy
+#| msgid "Northwest Terrirtories"
 msgid "Northwest Territories"
-msgstr ""
+msgstr "Territoires du Nord-Ouest"
 
-#: register/forms.py
+#: register/forms.py register/templates/register/qr_support_page.html
 msgid "Nunavut"
-msgstr ""
+msgstr "Nunavut"
 
-#: register/forms.py
+#: register/forms.py register/templates/register/qr_support_page.html
 msgid "Ontario"
-msgstr ""
+msgstr "Ontario"
 
-#: register/forms.py
+#: register/forms.py register/templates/register/qr_support_page.html
 msgid "Prince Edward Island"
-msgstr ""
+msgstr "le-du-Prince-Édouard"
 
-#: register/forms.py
+#: register/forms.py register/templates/register/qr_support_page.html
 msgid "Quebec"
-msgstr ""
+msgstr "Quebec"
 
-#: register/forms.py
+#: register/forms.py register/templates/register/qr_support_page.html
 msgid "Saskatchewan"
-msgstr ""
+msgstr "Saskatchewan"
 
-#: register/forms.py
+#: register/forms.py register/templates/register/qr_support_page.html
 msgid "Yukon"
-msgstr ""
+msgstr "Yukon"
 
 #: register/forms.py register/models.py
 msgid "Address line 1"
@@ -2244,6 +2246,7 @@ msgid "Please answer some questions to help improve the COVID Alert system."
 msgstr "Répondez à quelques questions pour nous aider à améliorer le système Alerte COVID."
 
 #: register/templates/register/contact_us.html
+#: register/templates/register/qr_support_page.html
 msgid "Contact Us"
 msgstr "Nous joindre"
 
@@ -2310,6 +2313,90 @@ msgstr ""
 #: register/templates/register/location_unavailable.html
 msgid "People in your province or territory are not yet able to scan a QR code for COVID Alert.You can still make a poster with your code.  That way, you’ll be ready when people are able to scan these codes."
 msgstr ""
+
+#: register/templates/register/qr_support_page.html
+msgid "Help with your poster"
+msgstr "Créer une autre affiche"
+
+#: register/templates/register/qr_support_page.html
+msgid "You’ve got the email with your QR code poster. Now what?"
+msgstr "Vous avez reçu votre affiche à code QR par courriel. Et ensuite?"
+
+#: register/templates/register/qr_support_page.html
+msgid "Read about "
+msgstr "En savoir plus sur "
+
+#: register/templates/register/qr_support_page.html
+msgid "saving and printing."
+msgstr "l’enregistrement et l’impression de l’affiche."
+
+#: register/templates/register/qr_support_page.html
+msgid "Help visitors "
+msgstr "Aider les visiteurs à "
+
+#: register/templates/register/qr_support_page.html
+msgid "find and scan your poster."
+msgstr "trouver et scanner votre affiche."
+
+#: register/templates/register/qr_support_page.html
+msgid "Learn "
+msgstr "En savoir plus sur le"
+
+#: register/templates/register/qr_support_page.html
+msgid "how QR posters work."
+msgstr "fonctionnement des affiches à code QR."
+
+#: register/templates/register/qr_support_page.html
+msgid "To ask for the email again, "
+msgstr "Pour recevoir à nouveau le courriel, "
+
+#: register/templates/register/qr_support_page.html
+msgid "contact us."
+msgstr "contactez-nous."
+
+#: register/templates/register/qr_support_page.html
+msgid "Posters are mandatory in some places"
+msgstr "Affiches obligatoires dans certains endroits"
+
+#: register/templates/register/qr_support_page.html
+msgid "Check which services and events require posters in your province or territory:"
+msgstr "Renseignez-vous sur les services et événements qui doivent avoir une affiche dans votre province ou territoire:"
+
+#: register/templates/register/qr_support_page.html
+msgid "Northwest Terrirtories"
+msgstr "Territoires du Nord-Ouest"
+
+#: register/templates/register/qr_support_page.html
+msgid "For more help"
+msgstr "Pour de l’aide supplémentaire"
+
+#: register/templates/register/qr_support_page.html
+msgid "Contact us."
+msgstr "Contactez-nous."
+
+#: register/templates/register/qr_support_page.html
+msgid "For help with the app"
+msgstr "Pour de l’aide relative à l’application"
+
+#: register/templates/register/qr_support_page.html
+msgid "Read "
+msgstr "Consultez "
+
+#: register/templates/register/qr_support_page.html
+msgid "app information about QR Codes."
+msgstr "l’information sur l’application et les codes QR."
+
+#: register/templates/register/qr_support_page.html
+msgid "You can also:"
+msgstr "Vous pouvez également :"
+
+#: register/templates/register/qr_support_page.html
+msgid "Contact direct support"
+msgstr "Contacter le soutien direct."
+
+#: register/templates/register/qr_support_page.html
+msgid "Read about common support issues"
+msgstr "Consulter les problèmes fréquents."
 
 #: register/templates/register/registrant_email.html
 msgid "Email address for your poster"
@@ -2396,12 +2483,22 @@ msgid "Start now"
 msgstr "Commencer"
 
 #: register/templates/register/start.html
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <h2> Questions? </h2>\n"
+#| "    <p>\n"
+#| "      \n"
+#| "      Visit <a href=\"%(qrlink)s\">Help with your poster</a><br>\n"
+#| "      Or <a href =\"%(link)s\">Contact us</a>\n"
+#| "   </p>\n"
+#| "   "
 msgid ""
 "\n"
 "  <h2> Questions? </h2>\n"
 "    <p>\n"
-"      Visit <a href=\"\">Help with your poster</a><br>\n"
+"      \n"
+"      Visit <a href=\"%(qrlink)s\">Help with your poster</a><br>\n"
 "      Or <a href =\"%(link)s\">Contact us</a>\n"
 "   </p>\n"
 "   "
