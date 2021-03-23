@@ -64,19 +64,19 @@ class LocationNameForm(HealthcareBaseForm, forms.Form):
 
 provinces = [
     ("", _("Select a province or territory")),
-    ("AB", "Alberta"),
-    ("BC", "British Columbia"),
-    ("MB", "Manitoba"),
-    ("NB", "New Brunswick"),
-    ("NL", "Newfoundland and Labrador"),
-    ("NS", "Nova Scotia"),
-    ("NT", "Northwest Territories"),
-    ("NU", "Nunavut"),
-    ("ON", "Ontario"),
-    ("PE", "Prince Edward Island"),
-    ("QC", "Quebec"),
-    ("SK", "Saskatchewan"),
-    ("YT", "Yukon"),
+    ("AB", _("Alberta")),
+    ("BC", _("British Columbia")),
+    ("MB", _("Manitoba")),
+    ("NB", _("New Brunswick")),
+    ("NL", _("Newfoundland and Labrador")),
+    ("NS", _("Nova Scotia")),
+    ("NT", _("Northwest Territories")),
+    ("NU", _("Nunavut")),
+    ("ON", _("Ontario")),
+    ("PE", _("Prince Edward Island")),
+    ("QC", _("Quebec")),
+    ("SK", _("Saskatchewan")),
+    ("YT", _("Yukon")),
 ]
 
 
