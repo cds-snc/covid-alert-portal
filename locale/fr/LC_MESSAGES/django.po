@@ -2038,10 +2038,8 @@ msgid "Something else"
 msgstr "Autre"
 
 #: register/forms.py
-#, fuzzy
-#| msgid "Address of service or event"
 msgid "Give brief description of service or event"
-msgstr "Adresse du service ou de l’événement"
+msgstr ""
 
 #: register/forms.py register/models.py
 msgid "Address line 1"
