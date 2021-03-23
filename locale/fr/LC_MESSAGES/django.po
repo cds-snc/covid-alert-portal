@@ -2212,6 +2212,10 @@ msgstr "Invalide ou expiré"
 msgid "Sorry, that confirmation link has expired or has already been used."
 msgstr "Désolé, le lien de validation est expiré ou a déjà été utilisé."
 
+#: register/templates/register/includes/footer.html
+msgid "Top of Page"
+msgstr "Haut de page"
+
 #: register/templates/register/location_address.html
 msgid "Address of service or event"
 msgstr "Adresse du service ou de l’événement"
