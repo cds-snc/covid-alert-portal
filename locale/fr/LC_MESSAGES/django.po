@@ -2038,7 +2038,7 @@ msgstr "Autre"
 
 #: register/forms.py
 msgid "Select a province or territory"
-msgstr ""
+msgstr "Sélectionnez une province ou un territoire"
 
 #: register/forms.py register/templates/register/qr_support_page.html
 msgid "Alberta"
@@ -2078,11 +2078,11 @@ msgstr "Ontario"
 
 #: register/forms.py register/templates/register/qr_support_page.html
 msgid "Prince Edward Island"
-msgstr "le-du-Prince-Édouard"
+msgstr "Île-du-Prince-Édouard"
 
 #: register/forms.py register/templates/register/qr_support_page.html
 msgid "Quebec"
-msgstr "Quebec"
+msgstr "Québec"
 
 #: register/forms.py register/templates/register/qr_support_page.html
 msgid "Saskatchewan"
