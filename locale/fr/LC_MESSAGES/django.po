@@ -2037,10 +2037,8 @@ msgid "Something else"
 msgstr "Autre"
 
 #: register/forms.py
-#, fuzzy
-#| msgid "Province or territory"
 msgid "Select a province or territory"
-msgstr "Province ou territoire"
+msgstr ""
 
 #: register/forms.py
 msgid "Alberta"
