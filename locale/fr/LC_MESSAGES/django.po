@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 15:24+0000\n"
+"POT-Creation-Date: 2021-03-23 18:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2036,6 +2036,62 @@ msgstr "Espaces religieux"
 msgid "Something else"
 msgstr "Autre"
 
+#: register/forms.py
+msgid "Select a province or territory"
+msgstr "Sélectionnez une province ou un territoire"
+
+#: register/forms.py register/templates/register/qr_support_page.html
+msgid "Alberta"
+msgstr "Alberta"
+
+#: register/forms.py register/templates/register/qr_support_page.html
+msgid "British Columbia"
+msgstr "Colombie-Britannique"
+
+#: register/forms.py register/templates/register/qr_support_page.html
+msgid "Manitoba"
+msgstr "Manitoba"
+
+#: register/forms.py register/templates/register/qr_support_page.html
+msgid "New Brunswick"
+msgstr "Nouveau-Brunswick"
+
+#: register/forms.py register/templates/register/qr_support_page.html
+msgid "Newfoundland and Labrador"
+msgstr "Terre-Neuve-et-Labrador"
+
+#: register/forms.py register/templates/register/qr_support_page.html
+msgid "Nova Scotia"
+msgstr "Nouvelle-Écosse"
+
+#: register/forms.py
+msgid "Northwest Territories"
+msgstr "Territoires du Nord-Ouest"
+
+#: register/forms.py register/templates/register/qr_support_page.html
+msgid "Nunavut"
+msgstr "Nunavut"
+
+#: register/forms.py register/templates/register/qr_support_page.html
+msgid "Ontario"
+msgstr "Ontario"
+
+#: register/forms.py register/templates/register/qr_support_page.html
+msgid "Prince Edward Island"
+msgstr "Île-du-Prince-Édouard"
+
+#: register/forms.py register/templates/register/qr_support_page.html
+msgid "Quebec"
+msgstr "Québec"
+
+#: register/forms.py register/templates/register/qr_support_page.html
+msgid "Saskatchewan"
+msgstr "Saskatchewan"
+
+#: register/forms.py register/templates/register/qr_support_page.html
+msgid "Yukon"
+msgstr "Yukon"
+
 #: register/forms.py register/models.py
 msgid "Address line 1"
 msgstr "Adresse ligne 1"
@@ -2305,56 +2361,8 @@ msgid "Check which services and events require posters in your province or terri
 msgstr "Renseignez-vous sur les services et événements qui doivent avoir une affiche dans votre province ou territoire:"
 
 #: register/templates/register/qr_support_page.html
-msgid "Alberta"
-msgstr "Alberta"
-
-#: register/templates/register/qr_support_page.html
-msgid "British Columbia"
-msgstr "Colombie-Britannique"
-
-#: register/templates/register/qr_support_page.html
-msgid "Manitoba"
-msgstr "Manitoba"
-
-#: register/templates/register/qr_support_page.html
-msgid "New Brunswick"
-msgstr "Nouveau-Brunswick"
-
-#: register/templates/register/qr_support_page.html
-msgid "Newfoundland and Labrador"
-msgstr "Terre-Neuve-et-Labrador"
-
-#: register/templates/register/qr_support_page.html
 msgid "Northwest Terrirtories"
 msgstr "Territoires du Nord-Ouest"
-
-#: register/templates/register/qr_support_page.html
-msgid "Nova Scotia"
-msgstr "Nouvelle-Écosse"
-
-#: register/templates/register/qr_support_page.html
-msgid "Nunavut"
-msgstr "Nunavut"
-
-#: register/templates/register/qr_support_page.html
-msgid "Ontario"
-msgstr "Ontario"
-
-#: register/templates/register/qr_support_page.html
-msgid "Prince Edward Island"
-msgstr "le-du-Prince-Édouard"
-
-#: register/templates/register/qr_support_page.html
-msgid "Quebec"
-msgstr "Quebec"
-
-#: register/templates/register/qr_support_page.html
-msgid "Saskatchewan"
-msgstr "Saskatchewan"
-
-#: register/templates/register/qr_support_page.html
-msgid "Yukon"
-msgstr "Yukon"
 
 #: register/templates/register/qr_support_page.html
 msgid "For more help"
@@ -2473,6 +2481,16 @@ msgid "Start now"
 msgstr "Commencer"
 
 #: register/templates/register/start.html
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <h2> Questions? </h2>\n"
+#| "    <p>\n"
+#| "      \n"
+#| "      Visit <a href=\"%(qrlink)s\">Help with your poster</a><br>\n"
+#| "      Or <a href =\"%(link)s\">Contact us</a>\n"
+#| "   </p>\n"
+#| "   "
 msgid ""
 "\n"
 "  <h2> Questions? </h2>\n"
