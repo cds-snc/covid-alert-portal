@@ -159,7 +159,9 @@ main {
     margin-bottom: $space-xxl;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    @include sm {
+      align-items: flex-start;
+    }
 
     form {
       width: auto;
