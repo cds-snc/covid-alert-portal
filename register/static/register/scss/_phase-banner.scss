@@ -11,10 +11,9 @@
     padding-top: $space-sm;
     padding-bottom: $space-sm;
     margin-bottom: $space-sm;
+    vertical-align: middle;
+    align-items: center;
 
-    @include sm {
-      align-items: center;
-    }
   }
 
   span {
