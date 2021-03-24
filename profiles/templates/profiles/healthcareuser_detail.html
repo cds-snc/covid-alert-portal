@@ -114,7 +114,7 @@
             </tr>
         {% endif %}
         <tr>
-          <th scope="row">{% trans "Security Codes" %}</th>
+          <th scope="row">{% trans "Log in codes" %}</th>
           <td>
             <span>
             {% if backup_codes_set %}
@@ -136,7 +136,7 @@
                   <button type="submit" class="link">{% trans "Generate codes" %}</button>
                 </form>
               {% else %}
-                <a href="{% url 'backup_codes' %}">{% trans "View security codes" %}</a>
+                <a href="{% url 'backup_codes' %}">{% trans "View log in codes" %}</a>
               {% endif %}
 
             {% else %}
