@@ -186,7 +186,7 @@ class LocationWizard(NamedUrlSessionWizardView):
         location.contact_email = data["contact_email"]
         location.contact_phone = data["contact_phone"]
         location.save()
-        
+
         self.request.session["location_id"] = str(location.id)
 
         # Generate PDF and send
@@ -203,10 +203,12 @@ def download_poster(request, pk):
         poster_url=reverse("register:poster_view", kwargs={"pk": pk}),
     )
 
-    cairosvg.svg2pdf(url=poster_view_url, write_to=buffer, output_width=2550, output_height=3300)
+    cairosvg.svg2pdf(
+        url=poster_view_url, write_to=buffer, output_width=2550, output_height=3300
+    )
 
     buffer.seek(0)
-    return FileResponse(buffer, as_attachment=True, filename='poster.pdf')
+    return FileResponse(buffer, as_attachment=True, filename="poster.pdf")
 
 
 class PosterView(TemplateView):
