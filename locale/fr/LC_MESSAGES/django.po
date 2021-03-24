@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-24 18:35+0000\n"
+"POT-Creation-Date: 2021-03-24 18:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2038,10 +2038,8 @@ msgid "Something else"
 msgstr "Autre"
 
 #: register/forms.py
-#, fuzzy
-#| msgid "Address of service or event"
 msgid "Give brief description of service or event"
-msgstr "Adresse du service ou de l’événement"
+msgstr "Décrivez brièvement votre service ou événement"
 
 #: register/forms.py
 msgid "Select a province or territory"
