@@ -13,7 +13,7 @@ from datetime import datetime, timedelta
 import pytz
 from django.contrib import messages
 from .forms import location_choices
-from .utils import get_pdf_poster, get_signed_qrcode
+from .utils import get_pdf_poster
 from profiles.models import HealthcareProvince
 
 from django.http import FileResponse
@@ -198,26 +198,6 @@ def download_poster(request, pk):
     poster = get_pdf_poster(location)
 
     return FileResponse(poster, as_attachment=True, filename="poster.pdf")
-
-
-class PosterView(TemplateView):
-    template_name = "register/poster.svg"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        location = Location.objects.get(id=self.kwargs["pk"])
-
-        qr_code = get_signed_qrcode(location)
-
-        context["qr_code"] = qr_code
-        context["name"] = location.name
-        context["address"] = location.address
-        context["address_details"] = "{city}, {province} {postal_code}".format(
-            city=location.city,
-            province=location.province,
-            postal_code=location.postal_code,
-        )
-        return context
 
 
 class RegisterConfirmationPageView(TemplateView):
