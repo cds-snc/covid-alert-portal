@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 18:34+0000\n"
+"POT-Creation-Date: 2021-03-24 18:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -696,7 +696,8 @@ msgstr "Adresse"
 msgid "Show on map"
 msgstr "Montrer sur la carte"
 
-#: outbreaks/templates/confirm.html register/templates/register/summary.html
+#: outbreaks/templates/confirm.html outbreaks/templates/profile.html
+#: register/templates/register/summary.html
 msgid "Type"
 msgstr "Type"
 
@@ -2037,6 +2038,10 @@ msgid "Something else"
 msgstr "Autre"
 
 #: register/forms.py
+msgid "Give brief description of service or event"
+msgstr "Décrivez brièvement votre service ou événement"
+
+#: register/forms.py
 msgid "Select a province or territory"
 msgstr "Sélectionnez une province ou un territoire"
 
@@ -2150,6 +2155,10 @@ msgstr "Short code [FR]"
 
 #: register/models.py
 msgid "Location category"
+msgstr ""
+
+#: register/models.py
+msgid "Location category description"
 msgstr ""
 
 #: register/models.py
