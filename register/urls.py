@@ -62,6 +62,7 @@ urlpatterns = [
         name="confirmation",
     ),
     path("contactus", views.ContactUsPageView.as_view(), name="contactus"),
+    path("qrsupport", views.QRSupportPageView.as_view(), name="qrsupport"),
     path(
         "success",
         TemplateView.as_view(template_name="register/success.html"),

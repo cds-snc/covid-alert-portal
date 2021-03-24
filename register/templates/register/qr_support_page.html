@@ -1,0 +1,54 @@
+{% extends 'register/base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% trans "Contact Us" %}
+{% endblock %}
+
+
+{% block content %}
+<div class="support">
+  {%url "register:contactus" as link%}
+    <h1 >{% trans "Help with your poster" %}</h1>
+    <h2>{% trans "You’ve got the email with your QR code poster. Now what?" %}</h2>
+  <ul >
+      <li>{% trans "Read about " %}<a href="">{% trans "saving and printing." %}</a></li>
+      <li>{% trans "Help visitors " %}<a href="">{% trans "find and scan your poster." %}</a></li>
+      <li>{% trans "Learn " %}<a href="">{% trans "how QR posters work." %}</a></li>
+  </ul>
+  <p class="spacing">{% trans "To ask for the email again, " %}<a href="{{link}}">{% trans "contact us." %}</a></p>
+
+  <h2>{% trans "Posters are mandatory in some places" %}</h2>
+
+  <p class="spacing">{% trans "Check which services and events require posters in your province or territory:" %}</p>
+
+  <ul>
+      <li>{% trans "Alberta" %}</li>
+      <li>{% trans "British Columbia" %}</li>
+      <li>{% trans "Manitoba" %}</li>
+      <li>{% trans "New Brunswick" %}</li>
+      <li>{% trans "Newfoundland and Labrador" %}</li>
+      <li>{% trans "Northwest Terrirtories" %}</li>
+      <li>{% trans "Nova Scotia" %}</li>
+      <li>{% trans "Nunavut" %}</li>
+      <li>{% trans "Ontario" %}</li>
+      <li>{% trans "Prince Edward Island" %}</li>
+      <li>{% trans "Quebec" %}</li>
+      <li>{% trans "Saskatchewan" %}</li>
+      <li>{% trans "Yukon" %}</li>
+  </ul>
+
+  <h2>{% trans "For more help" %}</h2>
+  <a href="{{link}}">{% trans "Contact us." %}</a>
+
+  <h2>{% trans "For help with the app" %}</h2>
+  <p>{% trans "Read " %}<a href="">{% trans "app information about QR Codes." %}</a></p>
+
+  <p>{% trans "You can also:" %}</p>
+  <ul>
+    <li><a href="">{% trans "Contact direct support" %}</a></li>
+    <li><a href="">{% trans "Read about common support issues" %}</a></li>
+  </ul>
+</div>
+
+{% endblock %}

@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 from .utils import generate_random_key
+from django.utils import timezone
 
 
 class Registrant(models.Model):
@@ -13,6 +14,7 @@ class Registrant(models.Model):
         unique=True,
     )
     name = models.CharField(max_length=200, verbose_name=_("Full name"))
+    created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):  # new
         return "{} ({})".format(self.name, self.email)
@@ -41,6 +43,7 @@ class Location(models.Model):
     )
     contact_email = models.EmailField(verbose_name=_("Email address"), max_length=255)
     contact_phone = PhoneNumberField(blank=True)
+    created = models.DateTimeField(default=timezone.now)
 
     # Override save method to generate a unique short code for poster
     def save(self, *args, **kwargs):
