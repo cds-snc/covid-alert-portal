@@ -199,12 +199,15 @@ def download_poster(request, pk):
     location = Location.objects.get(id=pk)
     qr_code = get_signed_qrcode(location)
 
-    rendered = render_to_string('register/poster.svg', {
-        'qr_code': qr_code,
-        'name': location.name,
-        'address': location.address,
-        'address_details': 'Address details',
-    })
+    rendered = render_to_string(
+        "register/poster.svg",
+        {
+            "qr_code": qr_code,
+            "name": location.name,
+            "address": location.address,
+            "address_details": "Address details",
+        },
+    )
 
     print(rendered)
 
@@ -221,7 +224,10 @@ def download_poster(request, pk):
     # )
 
     cairosvg.svg2pdf(
-        bytestring=rendered.encode('UTF-8'), write_to=buffer, output_width=2550, output_height=3300
+        bytestring=rendered.encode("UTF-8"),
+        write_to=buffer,
+        output_width=2550,
+        output_height=3300,
     )
 
     buffer.seek(0)
