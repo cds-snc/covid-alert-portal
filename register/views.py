@@ -178,7 +178,7 @@ class LocationWizard(NamedUrlSessionWizardView):
         )
 
         location.category = data["category"]
-        if(location.category == "other"):
+        if location.category == "other":
             location.category_description = data["category_description"]
         else:
             location.category_description = ""
