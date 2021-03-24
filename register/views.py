@@ -13,13 +13,10 @@ from datetime import datetime, timedelta
 import pytz
 from django.contrib import messages
 from .forms import location_choices
-from .utils import get_signed_qrcode
+from .utils import get_pdf_poster, get_signed_qrcode
 from profiles.models import HealthcareProvince
 
-import cairosvg
-import io
 from django.http import FileResponse
-from django.template.loader import render_to_string
 
 
 class RegistrantEmailView(FormView):
@@ -197,41 +194,10 @@ class LocationWizard(NamedUrlSessionWizardView):
 
 def download_poster(request, pk):
     location = Location.objects.get(id=pk)
-    qr_code = get_signed_qrcode(location)
+  
+    poster = get_pdf_poster(location)
 
-    rendered = render_to_string(
-        "register/poster.svg",
-        {
-            "qr_code": qr_code,
-            "name": location.name,
-            "address": location.address,
-            "address_details": "Address details",
-        },
-    )
-
-    print(rendered)
-
-    buffer = io.BytesIO()
-    # base_url = request.build_absolute_uri("/")[:-1]
-
-    # poster_view_url = "{base_url}{poster_url}".format(
-    #    base_url=base_url,
-    #    poster_url=reverse("register:poster_view", kwargs={"pk": pk}),
-    # )
-
-    # cairosvg.svg2pdf(
-    #    url=poster_view_url, write_to=buffer, output_width=2550, output_height=3300
-    # )
-
-    cairosvg.svg2pdf(
-        bytestring=rendered.encode("UTF-8"),
-        write_to=buffer,
-        output_width=2550,
-        output_height=3300,
-    )
-
-    buffer.seek(0)
-    return FileResponse(buffer, as_attachment=True, filename="poster.pdf")
+    return FileResponse(poster, as_attachment=True, filename="poster.pdf")
 
 
 class PosterView(TemplateView):
