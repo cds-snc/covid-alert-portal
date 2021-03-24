@@ -15,18 +15,18 @@
     {% endblocktrans %}
     
     <!-- TODO: This is here temporarily until we send by email -->
-    {% blocktrans with url=request.session.poster_url %}
-      <p><a href="{{ url }}" target="_blank">View Poster</a></p>
-    {% endblocktrans %}
+
+    <p><a href="{% url "register:poster_download" pk=location_id %}" target="_blank">{% trans "Download Poster" %}</a></p>
+
   </div>
 
   <h2>{% trans "Next steps" %}</h2>
 
   <div class="next-steps">
     <div>
-      {%url "register:contactus" as link%}
+      {% url "register:contactus" as link %}
       {% blocktrans %}
-      <p><a href='{{link}}'>Contact us</a> if you do not get the email within 2 hours or if you have questions.</p>
+      <p><a href='{{ link }}'>Contact us</a> if you do not get the email within 2 hours or if you have questions.</p>
       {% endblocktrans %}
       <p>{% trans "Remember to make more posters if your service or event has other addresses. You can come back later if you do not have time now." %}</p>
     </div>

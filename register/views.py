@@ -16,6 +16,10 @@ from .forms import location_choices
 from .utils import get_signed_qrcode
 from profiles.models import HealthcareProvince
 
+import cairosvg
+import io
+from django.http import FileResponse
+
 
 class RegistrantEmailView(FormView):
     form_class = EmailForm
@@ -182,18 +186,27 @@ class LocationWizard(NamedUrlSessionWizardView):
         location.contact_email = data["contact_email"]
         location.contact_phone = data["contact_phone"]
         location.save()
-
-        base_url = self.request.build_absolute_uri("/")[:-1]
-        poster_url = "{base_url}{poster_url}".format(
-            base_url=base_url,
-            poster_url=reverse("register:poster_view", kwargs={"pk": location.pk}),
-        )
-        print(poster_url)
-        self.request.session["poster_url"] = poster_url
+        
+        self.request.session["location_id"] = str(location.id)
 
         # Generate PDF and send
 
         return HttpResponseRedirect(reverse("register:confirmation"))
+
+
+def download_poster(request, pk):
+    buffer = io.BytesIO()
+    base_url = request.build_absolute_uri("/")[:-1]
+
+    poster_view_url = "{base_url}{poster_url}".format(
+        base_url=base_url,
+        poster_url=reverse("register:poster_view", kwargs={"pk": pk}),
+    )
+
+    cairosvg.svg2pdf(url=poster_view_url, write_to=buffer, output_width=2550, output_height=3300)
+
+    buffer.seek(0)
+    return FileResponse(buffer, as_attachment=True, filename='poster.pdf')
 
 
 class PosterView(TemplateView):
@@ -232,6 +245,7 @@ class RegisterConfirmationPageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["registrant_email"] = self.request.session.get("registrant_email")
+        context["location_id"] = self.request.session.get("location_id")
         return context
 
 
