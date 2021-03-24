@@ -261,3 +261,7 @@ class ContactUsPageView(FormView):
 
     def get_success_url(self):
         return reverse_lazy("register:success")
+
+
+class QRSupportPageView(TemplateView):
+    template_name = "register/qr_support_page.html"
