@@ -143,7 +143,7 @@
 
                 <form action="{% url 'backup_codes_admin' healthcareuser.id %}" method="post">
                   {% csrf_token %}
-                  <button type="submit" class="link">{% trans "Get a security code" %}</button>
+                  <button type="submit" class="link">{% trans "Get a log in code" %}</button>
                 </form>
 
             {% endif %}

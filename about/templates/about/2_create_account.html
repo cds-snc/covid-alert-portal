@@ -17,13 +17,13 @@
     <p>{% trans "Follow the directions in the invitation to create your account." %}</p>
 
     <h2>{% trans "Keep a mobile phone with you" %}</h2>
-    <p>{% trans "The portal texts a security code to your mobile phone:" %}</p>
+    <p>{% trans "The portal texts a log in code to your mobile phone:" %}</p>
     <ul>
       <li>{% trans "When you create your account." %}</li>
       <li>{% trans "Anytime you log in." %}</li>
     </ul>
 
-    <p>{% trans "If you do not have a mobile phone, you can get security codes by visiting" %}
+    <p>{% trans "If you do not have a mobile phone, you can get log in codes by visiting" %}
     {% if user.id %}
       <a href="{% url 'user_profile' user.id %}">
     {% else %}

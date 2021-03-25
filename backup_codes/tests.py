@@ -33,7 +33,7 @@ class BackupCodesView(AdminUserTestCase):
         response = self.client.get(reverse("user_profile", kwargs={"pk": self.user.id}))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Never generated", html=True)
-        ## get security codes button
+        ## get log in codes button
         self.assertContains(
             response, '<button type="submit" class="link">Generate codes</button>'
         )
@@ -46,9 +46,9 @@ class BackupCodesView(AdminUserTestCase):
         response = self.client.get(reverse("user_profile", kwargs={"pk": self.user.id}))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "10 codes left", html=True)
-        ## view security codes link
+        ## view log in codes link
         self.assertContains(
-            response, '<a href="/en/backup-codes">View security codes</a>'
+            response, '<a href="/en/backup-codes">View log in codes</a>'
         )
 
     def test_user_redirected_from_backup_codes_page_without_codes(self):
@@ -60,7 +60,7 @@ class BackupCodesView(AdminUserTestCase):
         self.login()
         response = self.client.post(reverse("backup_codes"), follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Security codes</h1>")
+        self.assertContains(response, "<h1>Log in codes</h1>")
 
         device = StaticDevice.objects.get(user__id=self.user.id)
         self.assertEqual(len(device.token_set.all()), 10)
@@ -89,7 +89,7 @@ class BackupCodesView(AdminUserTestCase):
         self.login()
         response = self.client.post(reverse("backup_codes"), follow=True)
         self.assertRedirects(response, "/en/backup-codes")
-        self.assertContains(response, "<h1>Security codes</h1>")
+        self.assertContains(response, "<h1>Log in codes</h1>")
         device = StaticDevice.objects.get(user__id=self.user.id)
 
         tokens = [t.token for t in device.token_set.all()]
@@ -148,7 +148,7 @@ class BackupCodesView(AdminUserTestCase):
         # make sure there is an announcement at the top of the page
         self.assertContains(
             response,
-            '<div class="title">You have 1 security code left.</div>',
+            '<div class="title">You have 1 log in code left.</div>',
             html=True,
         )
 
@@ -169,7 +169,7 @@ class AdminBackupCodesView(AdminUserTestCase):
         # see the "get a code" link in the profile of the user
         self.assertContains(
             response,
-            '<button type="submit" class="link">Get a security code</button>',
+            '<button type="submit" class="link">Get a log in code</button>',
             html=True,
         )
 
@@ -186,7 +186,7 @@ class AdminBackupCodesView(AdminUserTestCase):
         self.assertEqual(len(device.token_set.all()), 1)
         token = device.token_set.first().token
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Security code</h1>", html=True)
+        self.assertContains(response, "<h1>Log in code</h1>", html=True)
         # see the code on the screen
         self.assertContains(
             response,
