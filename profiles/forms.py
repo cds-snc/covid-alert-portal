@@ -120,7 +120,7 @@ class Resend2FACodeForm(HealthcareBaseForm):
 class Healthcare2FAForm(HealthcareBaseForm):
     code = forms.CharField(
         widget=forms.TextInput,
-        label=_("Security code"),
+        label=_("Log in code"),
         required=True,
     )
     code.error_messages["required"] = validation_messages["code"]["required"]
@@ -166,7 +166,7 @@ class HealthcarePhoneEditForm(HealthcareBaseEditForm):
 
     phone_number2 = PhoneNumberField(
         label=_("Confirm your mobile phone number"),
-        help_text=_("Enter the same mobile number as above."),
+        help_text=_("Enter the phone number again."),
     )
     phone_number2.error_messages["required"] = validation_messages["phone_number2"][
         "required"
@@ -463,7 +463,7 @@ class SignupForm2fa(HealthcareBaseForm, forms.ModelForm):
 
     phone_number_confirmation = PhoneNumberField(
         label=_("Confirm your phone number"),
-        help_text=_("Enter the same mobile number as above."),
+        help_text=_("Enter the phone number again."),
     )
 
     field_order = [

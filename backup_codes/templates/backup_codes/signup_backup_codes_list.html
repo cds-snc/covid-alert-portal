@@ -8,11 +8,10 @@
 {% block content %}
   {% include  "includes/flash_messages.html" %}
   <h1>{% trans "No mobile phone?" %}</h1>
-  <h2 class="header--print print-only">Security codes for {{ user.email }}</h2>
 
-  <p>{% trans "Log into the portal using one of the security codes below. You can use each code only once.  When you have 1 code left, we’ll tell you how to get more." %}</p>
+  <p>{% trans "Log into the portal using one of the codes below. You can use each code only once.  When you have 1 code left, we’ll tell you how to get more." %}</p>
   <p>
-    <strong>{% trans "Before you do anything else, save these codes somewhere that only you can access."%}</strong>
+    <strong>{% trans "Keep the codes somewhere that only you can access."%}</strong>
     {% trans "Do not email them to yourself or anyone else, do not keep them on a shared computer or on any device that is not protected by a password." %}
   </p>
 
