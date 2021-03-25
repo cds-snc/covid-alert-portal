@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 sleep 5
 
-. refresh_outbreak_register_migrations.sh
-
-# Continue with the usual...
-
 # Apply database migrations
 echo "Apply database migrations"
 python manage.py migrate --noinput
