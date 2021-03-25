@@ -134,5 +134,9 @@ class ContactUsForm(HealthcareBaseForm, forms.Form):
         notify_service.send_email(
             address=self.cleaned_data.get("contact_email"),
             template_id=settings.ISED_TEMPLATE_ID,
-            details={"subject_type": subject_type, "message": message, "from_email": from_email}
+            details={
+                "subject_type": subject_type,
+                "message": message,
+                "from_email": from_email,
+            },
         )

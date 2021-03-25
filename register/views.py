@@ -234,7 +234,10 @@ class RegisterConfirmationPageView(TemplateView):
         context["registrant_email"] = self.request.session.get("registrant_email")
         return context
 
+
 subject = {"get_help": "Help", "give_feedback": "Feedback", "something_else": "Other"}
+
+
 class ContactUsPageView(FormView):
     template_name = "register/contact_us.html"
     form_class = ContactUsForm
@@ -249,9 +252,9 @@ class ContactUsPageView(FormView):
     def form_valid(self, form):
         from_email = form.cleaned_data.get("contact_email")
         message = form.cleaned_data.get("more_info")
-        
+
         help_category = form.cleaned_data.get("help_category")
-        
+
         form.send_mail(subject.get(help_category), message, from_email)
         return super().form_valid(form)
 
