@@ -178,6 +178,10 @@ class LocationWizard(NamedUrlSessionWizardView):
         )
 
         location.category = data["category"]
+        if location.category == "other":
+            location.category_description = data["category_description"]
+        else:
+            location.category_description = ""
         location.contact_name = data["contact_name"]
         location.contact_email = data["contact_email"]
         location.contact_phone = data["contact_phone"]
@@ -245,3 +249,7 @@ class ContactUsPageView(FormView):
 
     def get_success_url(self):
         return reverse_lazy("register:success")
+
+
+class QRSupportPageView(TemplateView):
+    template_name = "register/qr_support_page.html"
