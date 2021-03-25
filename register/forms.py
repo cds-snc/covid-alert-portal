@@ -47,7 +47,7 @@ class RegistrantNameForm(HealthcareBaseForm, forms.ModelForm):
 
 
 class OtherFieldInput(HealthcareBaseForm, forms.Form):
-    data = forms.CharField(label="Give brief description of service or event")
+    data = forms.CharField(label=_("Give brief description of service or event"))
 
 
 class LocationCategoryForm(HealthcareBaseForm, forms.Form):
@@ -56,6 +56,15 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
         choices=location_choices,
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
+    category_description = forms.CharField(
+        label="Give brief description of service or event", required=False
+    )
+
+    def __init__(self, data=None, *args, **kwargs):
+        super(LocationCategoryForm, self).__init__(data, *args, **kwargs)
+        # If 'something else' is chosen, set category_description as required
+        if data and data.get("category-category", None) == "other":
+            self.fields["category_description"].required = True
 
 
 class LocationNameForm(HealthcareBaseForm, forms.Form):
@@ -63,19 +72,20 @@ class LocationNameForm(HealthcareBaseForm, forms.Form):
 
 
 provinces = [
-    ("AB", "AB"),
-    ("BC", "BC"),
-    ("MB", "MB"),
-    ("NB", "NB"),
-    ("NL", "NL"),
-    ("NS", "NS"),
-    ("NT", "NT"),
-    ("NU", "NU"),
-    ("ON", "ON"),
-    ("PE", "PE"),
-    ("QC", "QC"),
-    ("SK", "SK"),
-    ("YT", "YT"),
+    ("", _("Select a province or territory")),
+    ("AB", _("Alberta")),
+    ("BC", _("British Columbia")),
+    ("MB", _("Manitoba")),
+    ("NB", _("New Brunswick")),
+    ("NL", _("Newfoundland and Labrador")),
+    ("NS", _("Nova Scotia")),
+    ("NT", _("Northwest Territories")),
+    ("NU", _("Nunavut")),
+    ("ON", _("Ontario")),
+    ("PE", _("Prince Edward Island")),
+    ("QC", _("Quebec")),
+    ("SK", _("Saskatchewan")),
+    ("YT", _("Yukon")),
 ]
 
 

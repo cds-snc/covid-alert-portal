@@ -68,7 +68,7 @@ class ProfileView(PermissionRequiredMixin, Is2FAMixin, FormView):
             location = Location.objects.get(id=self.kwargs["pk"])
             context["location"] = location
             context["map_link"] = "https://maps.google.com/?q=" + str(location)
-
+            location.category = dict(location_choices)[location.category]
             # Cache the location for the next steps
             self.request.session["alert_location"] = self.kwargs["pk"].hex
 
