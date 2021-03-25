@@ -15,7 +15,11 @@ from django.contrib import messages
 from .forms import location_choices
 from .utils import get_pdf_poster
 from profiles.models import HealthcareProvince
-
+from dependency_injector.wiring import inject, Provide
+from portal.containers import Container
+from portal.services import NotifyService
+from django.conf import settings
+import base64
 from django.http import FileResponse
 
 
@@ -137,6 +141,28 @@ def check_for_province(wizard):
     return data.get("province") not in provinces_list
 
 
+@inject
+def send_mail(
+    self,
+    language,
+    to_email,
+    location_name,
+    encoded_file,
+    notify_service: NotifyService = Provide[Container.notify_service],
+):
+    notify_service.send_email(
+        address=to_email,
+        template_id=settings.POSTER_LINKED_EMAIL_TEMPLATE_ID.get(language or "en"),
+        details={
+            "location_name": location_name,
+            "link_to_file": {
+                "file": encoded_file,
+                "filename": "poster.pdf"
+            }
+        },
+    )
+
+
 class LocationWizard(NamedUrlSessionWizardView):
     def get_template_names(self):
         return [TEMPLATES[self.steps.current]]
@@ -188,6 +214,21 @@ class LocationWizard(NamedUrlSessionWizardView):
         self.request.session["location_id"] = str(location.id)
 
         # Generate PDF and send
+        email = self.request.session["registrant_email"]
+        poster = get_pdf_poster(location)
+        poster_str = poster.read()
+        # print(poster_str)
+
+        # poster_txt = poster_str.decode()
+        # print(poster_txt)
+
+        poster_encoded = base64.b64encode(poster_str)
+        # print(poster_encoded)
+        
+        # form.send_mail(self.request.LANGUAGE_CODE, email, url)
+        send_mail(
+            self.request.LANGUAGE_CODE, email, location.name, poster_encoded
+        )
 
         return HttpResponseRedirect(reverse("register:confirmation"))
 
