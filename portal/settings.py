@@ -352,11 +352,17 @@ REGISTER_EMAIL_CONFIRMATION_ID = {
     "fr": "719e51e3-5946-4699-b980-ce04dd2d6590",
 }
 
+ISED_TEMPLATE_ID = "fa50eed6-0948-45e0-979e-0ac4943b4635"
+
 # QRCode signing key
 QRCODE_SIGNATURE_PRIVATE_KEY = os.getenv("QRCODE_SIGNATURE_PRIVATE_KEY", None)
 
 # Create default Super User with this password
 SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
+
+# ISED Email Address
+# Replace None for own email address for testing
+ISED_EMAIL_ADDRESS = os.getenv("ISED_EMAIL_ADDRESS", None)
 
 # Login Rate Limiting
 if TESTING:

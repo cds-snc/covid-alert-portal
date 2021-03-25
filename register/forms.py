@@ -122,3 +122,17 @@ class ContactUsForm(HealthcareBaseForm, forms.Form):
         ),
         required=False,
     )
+
+    @inject
+    def send_mail(
+        self,
+        subject_type,
+        message,
+        from_email,
+        notify_service: NotifyService = Provide[Container.notify_service],
+    ):
+        notify_service.send_email(
+            address=self.cleaned_data.get("contact_email"),
+            template_id=settings.ISED_TEMPLATE_ID,
+            details={"subject_type": subject_type, "message": message, "from_email": from_email}
+        )
