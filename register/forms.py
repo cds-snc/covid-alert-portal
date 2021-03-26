@@ -111,6 +111,19 @@ class RegisterSummaryForm(HealthcareBaseForm, forms.Form):
     pass
 
 
+@inject
+def send_mail(
+    to_email,
+    payload,
+    template_id,
+    notify_service: NotifyService = Provide[Container.notify_service],
+):
+
+    notify_service.send_email(
+        address=to_email,
+        template_id=template_id,
+        details=payload
+    )
 class ContactUsForm(HealthcareBaseForm, forms.Form):
     help_category = forms.ChoiceField(
         label="",
@@ -133,20 +146,8 @@ class ContactUsForm(HealthcareBaseForm, forms.Form):
         required=False,
     )
 
-    @inject
-    def send_mail(
-        self,
-        subject_type,
-        message,
-        from_email,
-        notify_service: NotifyService = Provide[Container.notify_service],
-    ):
-        notify_service.send_email(
-            address=self.cleaned_data.get("contact_email"),
-            template_id=settings.ISED_TEMPLATE_ID,
-            details={
-                "subject_type": subject_type,
-                "message": message,
-                "from_email": from_email,
-            },
-        )
+    def __init__(self, data=None, *args, **kwargs):
+        super(ContactUsForm, self).__init__(data, *args, **kwargs)
+        # If the user selects 'Get Help', email field is mandatory
+        if data and data.get("help_category", None) == "get_help":
+            self.fields["contact_email"].required = True
