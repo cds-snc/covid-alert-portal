@@ -9,23 +9,25 @@
     <h1>{% trans "Terms of use" %}</h1>
     {% url 'contact:index' as contact_url %}
     {% blocktrans %}
-        <p>The COVID Alert Portal is only for authorized healthcare workers in Canada.</p>
-        <p>By using the portal, you agree to:</p>
+        <p>The COVID Alert Portal is only for authorized staff in Canada.</p>
+        <p>By using the portal, you agree to folllow your health authority’s procedures.</p>
+        <p>You also agree to:</p>
+        <strong><p>Only generate keys for real patients</p></strong>
+        <p>Give only 1 key per positive test.</p>
+        <p>For a sample key, visit "<a href="#">Give a key</a>".</p>
+        <strong><p>Confirm the patient meets 2 conditions</p></strong>
+        <p>They've:</p>
         <ul class="expanded">
-            <li>Follow your healthcare authority’s procedures.</li>
-            <li>Only give one key per each patient diagnosed with COVID-19 by your healthcare authority. Do not generate a key for any other reason.</li>
-            <li>Prevent other people from using your account.  You must protect your username and password, even from other people working for a healthcare authority.</li>
-            <li>
-            Immediately report any security issues with your account to both:
-                <ul>
-                    <li>your administrator</li>
-                    <li><a href="mailto:security@cds-snc.ca">security@cds-snc.ca</a></li>
-                </ul>
-            </li>
+            <li>Tested positive for COVID-19, and,</li>
+            <li>Installed the COVID Alert app on their phone.</li>
         </ul>
+        <strong><p>Get the patient’s consent before texting a key</p></strong>
+        <p>Some patients may want you to text the one-time key to their mobile phone.  If your health authority offers this feature, the portal displays the button “Text key to patient”.</p>
+        <strong><p>Prevent others from using your account</p></strong>
+        <p>Protect your username and password, even from other people working for a health authority.</p>
+        <strong><p>Keep the portal secure</p></strong>
+        <p>Immediately report any security issues to your administrator <strong>and</strong> <a href="mailto:security@cds-snc.ca">security@cds-snc.ca</a></p>
         <p>If we detect any misuse of the portal or security issues with your account, we’ll immediately disable your account.</p>
-        <h2>Questions?</h2>
-        <p>For questions about these terms of use, or to report a technical issue, <a href="{{ contact_url }}">contact us</a>.</p>
     {% endblocktrans %}
 
 {% endblock %}
