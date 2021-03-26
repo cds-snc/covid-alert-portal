@@ -72,7 +72,11 @@
                     {% trans "Type" %}
                 </dt>
                 <dd class="summary-list__value">
-                    {{ form_data.category }}
+                    {{ form_data.category }}<br>
+                    {% if form_data.category_description %}
+                        {{ form_data.category_description }}<br>
+                    {% endif %}
+
                 </dd>
                 <dd class="summary-list__actions">
                     <a href="{% url 'register:location_step' step='category' %}">{% blocktrans %} Change <span class="visually-hidden"> business type</span>{% endblocktrans %}</a>

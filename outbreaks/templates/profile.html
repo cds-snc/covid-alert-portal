@@ -33,6 +33,16 @@
             </dd>
         </div>
         <div class="summary-list__row">
+            <dt class="summary-list__key">{% trans "Type" %}</dt>
+            <dd class="summary-list__value">
+                {{ location.category }}
+                {% if location.category_description%}
+                - {{ location.category_description }}
+                {% endif %}
+            </dd>
+            <dd class="summary-list__actions"></dd>
+        </div>
+        <div class="summary-list__row">
             <dt class="summary-list__key">{% trans "Contact email" %}</dt>
             <dd class="summary-list__value">{{ location.contact_email }}</dd>
             <dd class="summary-list__actions"></dd>
