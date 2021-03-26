@@ -120,10 +120,10 @@ def send_mail(
 ):
 
     notify_service.send_email(
-        address=to_email,
-        template_id=template_id,
-        details=payload
+        address=to_email, template_id=template_id, details=payload
     )
+
+
 class ContactUsForm(HealthcareBaseForm, forms.Form):
     help_category = forms.ChoiceField(
         label="",
