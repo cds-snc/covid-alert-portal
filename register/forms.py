@@ -29,9 +29,7 @@ def send_email(
     notify_service: NotifyService = Provide[Container.notify_service],
 ):
     notify_service.send_email(
-        address=to_email,
-        template_id=template_id,
-        details=payload
+        address=to_email, template_id=template_id, details=payload
     )
 
 

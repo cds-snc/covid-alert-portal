@@ -40,10 +40,13 @@ class RegistrantEmailView(FormView):
         )
 
         send_email(
-            email, {
+            email,
+            {
                 "verification_link": url,
             },
-            settings.REGISTER_EMAIL_CONFIRMATION_ID.get(self.request.LANGUAGE_CODE or "en")
+            settings.REGISTER_EMAIL_CONFIRMATION_ID.get(
+                self.request.LANGUAGE_CODE or "en"
+            ),
         )
 
         self.request.session["submitted_email"] = self.submitted_email
@@ -209,18 +212,21 @@ class LocationWizard(NamedUrlSessionWizardView):
 
         poster_encoded = base64.b64encode(poster_str).decode()
         # print(poster_encoded)
-        
+
         # form.send_mail(self.request.LANGUAGE_CODE, email, url)
         send_email(
-            email, {
+            email,
+            {
                 "location_name": location.name,
                 "link_to_file": {
                     "file": poster_encoded,
                     "filename": "poster.pdf",
-                    "sending_method": "attach"
-                }
+                    "sending_method": "attach",
+                },
             },
-            settings.POSTER_LINKED_EMAIL_TEMPLATE_ID.get(self.request.LANGUAGE_CODE or "en")
+            settings.POSTER_LINKED_EMAIL_TEMPLATE_ID.get(
+                self.request.LANGUAGE_CODE or "en"
+            ),
         )
 
         return HttpResponseRedirect(reverse("register:confirmation"))
@@ -228,7 +234,7 @@ class LocationWizard(NamedUrlSessionWizardView):
 
 def download_poster(request, pk):
     location = Location.objects.get(id=pk)
-  
+
     poster = get_pdf_poster(location)
 
     return FileResponse(poster, as_attachment=True, filename="poster.pdf")
