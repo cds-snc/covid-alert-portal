@@ -1,0 +1,18 @@
+{% extends 'register/base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="content-back-link">
+    <a href="{% url 'register:registrant_email' %}" class="chevron-left">{% trans "Back" %}</a>
+</div>
+
+<h1>{% trans "Re-send Email" %}</h1>
+
+<p>{% trans "If you did not get the email, we can send it again." %}</p>
+<p>{% trans "Check your junk or spam folder first." %}</p>
+
+<div class="content-button">
+    <a href="{% url 'register:registrant_email' %}" role="button" draggable="false">{% trans "Re-send Email" %}</a>
+</div>
+
+{% endblock %}

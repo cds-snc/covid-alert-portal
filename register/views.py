@@ -253,3 +253,6 @@ class ContactUsPageView(FormView):
 
 class QRSupportPageView(TemplateView):
     template_name = "register/qr_support_page.html"
+
+class ResendEmailView(TemplateView):
+    template_name = "register/resend_email.html"

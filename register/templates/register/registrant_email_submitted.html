@@ -3,7 +3,7 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Confirm your email address" %}
+  {% trans "Check your email" %}
 {% endblock %}
 
 {% block content %}
@@ -13,7 +13,7 @@
 
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "Confirm your email address" %}</h1>
+  <h1>{% trans "Check your email" %}</h1>
   
   {% blocktrans with email=submitted_email %}
     <p>We sent a link to {{ email }}.</p>
@@ -21,8 +21,8 @@
 
   <p>{% trans "If you did not get the email, check your junk or spam folder." %}
 
-  <div class="content-button">
-    <a href="{% url 'register:registrant_email' %}" role="button" draggable="false">{% trans "Send email again" %}</a>
+  <div>
+    <a href="{% url 'register:resendemail' %}">{% trans "Re-send Email" %}</a>
   </div>
 
 {% endblock %}

@@ -67,4 +67,5 @@ urlpatterns = [
         TemplateView.as_view(template_name="register/success.html"),
         name="success",
     ),
+    path('resendemail', views.ResendEmailView.as_view(), name="resendemail")
 ]
