@@ -101,6 +101,7 @@ class LocationContactForm(HealthcareBaseForm, forms.Form):
     contact_name = forms.CharField(label=_("Name of contact"))
     contact_email = forms.EmailField(label=_("Contact email"))
     contact_phone = PhoneNumberField(label=_("Contact phone number"))
+    contact_phone_ext = PhoneNumberField(label=_("Extension"))
 
 
 class RegisterSummaryForm(HealthcareBaseForm, forms.Form):

@@ -185,6 +185,7 @@ class LocationWizard(NamedUrlSessionWizardView):
         location.contact_name = data["contact_name"]
         location.contact_email = data["contact_email"]
         location.contact_phone = data["contact_phone"]
+        location.contact_phone_ext = data["contact_phone_ext"]
         location.save()
 
         base_url = self.request.build_absolute_uri("/")[:-1]
