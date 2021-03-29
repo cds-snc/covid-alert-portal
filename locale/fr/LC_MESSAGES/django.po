@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-29 18:37+0000\n"
+"POT-Creation-Date: 2021-03-29 19:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -299,10 +299,8 @@ msgid "Read the code phonetically and ask the team member to read it back to you
 msgstr "Lisez le code de façon phonétique puis demandez au membre de vous le répéter :"
 
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html
-#, fuzzy
-#| msgid "After they log in, they can follow the instructions to get more security codes."
 msgid "After they log in, they can follow the instructions to get more codes."
-msgstr "Après s’être connecté, l’employé pourra suivre les instructions pour obtenir plus de codes de sécurité."
+msgstr "Après s’être connecté, l’employé pourra suivre les instructions pour obtenir plus de codes de connexion."
 
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html
 msgid "Back to Manage team"
@@ -355,10 +353,8 @@ msgstr "Erreur : "
 
 #: backup_codes/templates/backup_codes/backup_codes_help.html
 #: profiles/templates/profiles/2fa.html
-#, fuzzy
-#| msgid "No security code?"
 msgid "No log in code?"
-msgstr "Pas de code de sécurité?"
+msgstr "Pas de code de connexion?"
 
 #: backup_codes/templates/backup_codes/backup_codes_help.html
 #, python-format
@@ -373,28 +369,28 @@ msgstr "Demander un code"
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html
 #: profiles/templates/profiles/healthcareuser_detail.html
-#, fuzzy
-#| msgid "Log in"
 msgid "Log in codes"
-msgstr "Connexion"
+msgstr "Codes de connexion"
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html
-#, fuzzy
-#| msgid "Log into the portal using one of the security codes below. You can use each code only once.  When you have 1 code left, we’ll tell you how to get more."
-msgid "Log into the portal using one of the codes below. When you have 1 code left, we’ll tell you how to get more."
-msgstr "Utilisez l’un des codes de sécurité suivants pour vous connecter au portail. Chaque code ne peut être utilisé qu’une fois. Quand il n’en restera qu’un seul, nous vous dirons comment en obtenir d’autres."
+msgid "Use these codes to log in to the portal. The code proves it's you."
+msgstr "Utilisez les codes suivants pour vous connecter au portail. Ils servent à vous authentifier."
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html
-#, fuzzy
-#| msgid "Do not email them to yourself or anyone else, do not keep them on a shared computer or on any device that is not protected by a password."
+msgid "You can use each code only once."
+msgstr "Chaque code ne peut être utilisé qu’une fois."
+
+#: backup_codes/templates/backup_codes/backup_codes_list.html
 msgid "Keep the codes somewhere that only you can access. Do not email them to yourself or anyone else, do not keep them on a shared computer or on any device that is not protected by a password."
-msgstr "Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne. Ne les enregistrez pas sur un ordinateur partagé ni sur un appareil non protégé par un mot de passe."
+msgstr "Notez les codes à un endroit connu de vous seul. Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne. Ne les enregistrez pas sur un ordinateur partagé ni sur un appareil non protégé par un mot de passe."
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html
-#, fuzzy
-#| msgid "Get new security codes"
+msgid "When you get new codes, your old codes will no longer work, even if you have not used them yet."
+msgstr "Quand vous générez de nouveaux codes, tous les codes précédents qui n’ont pas été utilisés deviennent invalides."
+
+#: backup_codes/templates/backup_codes/backup_codes_list.html
 msgid "Get new log in codes"
-msgstr "Obtenez des codes de sécurité"
+msgstr "Obtenir de nouveaux codes"
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html
 msgid "Back to Manage your account"
@@ -408,7 +404,7 @@ msgstr "Pas de téléphone mobile?"
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html
 #, fuzzy
 #| msgid "Log into the portal using one of the security codes below. You can use each code only once.  When you have 1 code left, we’ll tell you how to get more."
-msgid "Log into the portal using one of the codes below. You can use each log in code only once.  When you have 1 code left, we’ll tell you how to get more."
+msgid "Log into the portal using one of the codes below. You can use each log in code only once. When you have 1 code left, we’ll tell you how to get more."
 msgstr "Utilisez l’un des codes de sécurité suivants pour vous connecter au portail. Chaque code ne peut être utilisé qu’une fois. Quand il n’en restera qu’un seul, nous vous dirons comment en obtenir d’autres."
 
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html
@@ -563,7 +559,7 @@ msgstr "Le patient doit connecter son téléphone à Internet pour pouvoir entre
 
 #: covid_key/templates/covid_key/key.html
 msgid "Patients can also <a href=\"https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert/help.html#a17\" target=\"_blank\">contact direct app support</a>"
-msgstr "Les patients peuvent aussi <a href='https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid/aide.html#a17' target='_blank'>obtenir une aide directe</a>"
+msgstr "Les patients peuvent aussi <a href='https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid/aide.html#a17' target='_blank'>obtenir une aide directe pour l’application.</a>"
 
 #: covid_key/templates/covid_key/key.html
 msgid "Generate another key"
@@ -701,7 +697,7 @@ msgstr "Nom"
 #: outbreaks/templates/confirm.html profiles/templates/profiles/edit.html
 #: profiles/templates/profiles/healthcareuser_detail.html
 msgid "Change"
-msgstr "Modifier"
+msgstr "Mettre à jour"
 
 #: outbreaks/templates/confirm.html
 #, fuzzy
@@ -1148,10 +1144,8 @@ msgid "Forgot your password?"
 msgstr "Mot de passe oublié?"
 
 #: portal/templates/registration/login.html
-#, fuzzy
-#| msgid "Only an authorized healthcare worker can use a portal account and give a COVID Alert key."
 msgid "Only an authorized staff member can use a portal account and give a COVID Alert key."
-msgstr "Seuls les professionnels de la santé autorisés peuvent utiliser un compte du Portail et fournir une clé Alerte COVID."
+msgstr "Seuls les employés autorisés peuvent avoir un compte pour le portail et fournir une clé Alerte COVID."
 
 #: portal/templates/registration/login.html
 msgid "Thanks for your essential work"
@@ -1435,20 +1429,16 @@ msgid "Mobile phone number"
 msgstr "Numéro de téléphone mobile"
 
 #: profiles/forms.py
-#, fuzzy
-#| msgid "You must enter a new security code each time you log in. We’ll text the code to your mobile phone number."
 msgid "You must enter a new log in code each time you log in. We’ll text the code to your mobile phone number."
-msgstr "Il faut entrer un nouveau code de sécurité à chaque connexion. Nous vous enverrons le code par message texte."
+msgstr "Il faut entrer un nouveau code à chaque connexion. Nous texterons le code à votre numéro mobile."
 
 #: profiles/forms.py
 msgid "Confirm your mobile phone number"
 msgstr "Confirmez votre numéro de téléphone mobile"
 
 #: profiles/forms.py
-#, fuzzy
-#| msgid "Enter the same phone number again"
 msgid "Enter the phone number again."
-msgstr "Saisissez le même numéro de téléphone."
+msgstr "Saisissez de nouveau votre numéro mobile."
 
 #: profiles/forms.py
 msgid "You entered 2 different phone numbers."
@@ -1662,10 +1652,8 @@ msgid "You are sending too many invitations. Try again later."
 msgstr "Vous envoyez trop d’invitations. Réessayer plus tard."
 
 #: profiles/templates/profiles/2fa-resend.html
-#, fuzzy
-#| msgid "Re-send security code"
 msgid "Re-send log in code"
-msgstr "Renvoyer un code de sécurité"
+msgstr "Renvoyer un code de connexion"
 
 #: profiles/templates/profiles/2fa-resend.html
 msgid "If you did not get the code, we can send it again."
@@ -1680,40 +1668,28 @@ msgid "Validate your code"
 msgstr "Valider votre code"
 
 #: profiles/templates/profiles/2fa.html
-#, fuzzy
-#| msgid "Enter your security code"
 msgid "Enter your log in code"
-msgstr "Entrez votre code de sécurité"
+msgstr "Entrez votre code de connexion"
 
 #: profiles/templates/profiles/2fa.html
-#, fuzzy
-#| msgid "You kept these codes somewhere safe."
 msgid "You kept these codes somewhere safe.  You can use each code only once."
-msgstr "Vous devriez avoir conservé vos codes dans un endroit sûr."
+msgstr "Vous devriez avoir conservé vos codes dans un endroit sûr. Chaque code ne peut être utilisé qu’une fois."
 
 #: profiles/templates/profiles/2fa.html
-#, fuzzy
-#| msgid "We’ve texted you a code and you also kept codes somewhere safe."
 msgid "We’ve texted you a code and you also kept codes somewhere safe. Use 1 of these codes to log in. You can use each code only once."
-msgstr "Utilisez le code reçu par message texte ou l’un de ceux que avez conservés dans un endroit sûr."
+msgstr "Utilisez le code reçu par message texte ou l’un de ceux que avez conservés dans un endroit sûr. Chaque code ne peut être utilisé qu’une fois."
 
 #: profiles/templates/profiles/2fa.html
-#, fuzzy
-#| msgid "You need to enter something if you want to contact us"
 msgid "You need to enter a new code each time you log in."
-msgstr "Écrivez quelque chose si vous souhaitez nous joindre"
+msgstr "You need to enter a new code each time you log in."
 
 #: profiles/templates/profiles/2fa.html
-#, fuzzy
-#| msgid "We’ve sent you a text message with a security code."
 msgid "We’ve just sent a text message with your new code."
-msgstr "Nous vous avons envoyé un code de sécurité par message texte."
+msgstr "Nous venons de vous envoyer un nouveau code par message texte."
 
 #: profiles/templates/profiles/2fa.html
-#, fuzzy
-#| msgid "Resend security code?"
 msgid "Resend log in code?"
-msgstr "Renvoyer le code de sécurité"
+msgstr "Renvoyer un code de connexion"
 
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html
 msgid "Confirm delete user"
@@ -1812,10 +1788,8 @@ msgid "View log in codes"
 msgstr "Voyez vos codes de sécurité"
 
 #: profiles/templates/profiles/healthcareuser_detail.html
-#, fuzzy
-#| msgid "Get a security code"
-msgid "Get a log in code"
-msgstr "Obtenir un code de sécurité"
+msgid "Get log in codes"
+msgstr "Obtenir un code"
 
 #: profiles/templates/profiles/healthcareuser_detail.html
 msgid "Back to accounts"
@@ -2637,20 +2611,16 @@ msgstr "Votre adresse courriel est validée."
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
 
+#, fuzzy
+#~| msgid "Log into the portal using one of the security codes below. You can use each code only once.  When you have 1 code left, we’ll tell you how to get more."
+#~ msgid "Log into the portal using one of the codes below. When you have 1 code left, we’ll tell you how to get more."
+#~ msgstr "Utilisez l’un des codes de sécurité suivants pour vous connecter au portail. Chaque code ne peut être utilisé qu’une fois. Quand il n’en restera qu’un seul, nous vous dirons comment en obtenir d’autres."
+
 #~ msgid "Security code"
 #~ msgstr "Code de sécurité"
 
 #~ msgid "Security codes"
 #~ msgstr "Code de sécurité"
-
-#~ msgid "Use these security codes to login to the portal. The code proves it’s you."
-#~ msgstr "Utilisez les codes suivants pour vous connecter au portail. Ils servent à vous authentifier."
-
-#~ msgid "You can use each code only once."
-#~ msgstr "Chaque code ne peut être utilisé qu’une fois."
-
-#~ msgid "When you get new codes, your old codes will no longer work, even if you have not used them yet."
-#~ msgstr "Quand vous générez de nouveaux codes, tous les codes précédents qui n’ont pas été utilisés deviennent invalides."
 
 #~ msgid "Enter the same mobile number as above."
 #~ msgstr "Saisissez de nouveau votre numéro de téléphone."
