@@ -2,14 +2,14 @@
 {% load static i18n %}
 
 {% block title %}
-  {% trans "We’ve got the information for your poster" %}
+  {% trans "Your poster is ready" %}
 {% endblock %}
 
 {% block content %}
   <div class="jumbotron">
     <img src="{% static 'register/img/check.svg' %}" alt="">
 
-    <h1>{% trans "We've got the information for your poster" %}</h1>
+    <h1>{% trans "Your poster is ready" %}</h1>
 
     <p>
       <a href="{% url "register:poster_download" pk=location_id lang='en' %}" target="_blank">{% trans "Download English Poster" %}</a><br>
