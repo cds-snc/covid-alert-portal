@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-python manage.py makemessages -l fr --add-location=file --no-wrap
-python manage.py compilemessages
