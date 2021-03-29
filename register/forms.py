@@ -139,15 +139,9 @@ class ContactUsForm(HealthcareBaseForm, forms.Form):
         widget=forms.Textarea,
     )
     contact_email = forms.EmailField(
-        label=_("Email address if you want a reply"),
+        label=_("Email address"),
         help_text=_(
             "We'll use this if we need to contact you. We will not use your email address for anything else."
         ),
-        required=False,
+        required=True,
     )
-
-    def __init__(self, data=None, *args, **kwargs):
-        super(ContactUsForm, self).__init__(data, *args, **kwargs)
-        # If the user selects 'Get Help', email field is mandatory
-        if data and data.get("help_category", None) == "get_help":
-            self.fields["contact_email"].required = True

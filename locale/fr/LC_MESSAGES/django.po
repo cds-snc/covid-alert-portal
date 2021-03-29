@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-24 18:37+0000\n"
+"POT-Creation-Date: 2021-03-29 14:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1389,6 +1389,7 @@ msgstr "Entrez une adresse courriel valide"
 #: profiles/templates/profiles/healthcareuser_detail.html
 #: profiles/templates/profiles/healthcareuser_list.html register/forms.py
 #: register/models.py
+#: register/forms.py
 msgid "Email address"
 msgstr "Adresse courriel"
 
@@ -2142,10 +2143,6 @@ msgid "Tell us more about the issue"
 msgstr "Dites-nous en plus sur le problème"
 
 #: register/forms.py
-msgid "Email address if you want a reply"
-msgstr "Adresse courriel pour vous répondre"
-
-#: register/forms.py
 msgid "We'll use this if we need to contact you. We will not use your email address for anything else."
 msgstr "Nous utiliserons votre adresse si, et seulement si, nous avons besoin de communiquer avec vous."
 
@@ -2577,3 +2574,4 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
