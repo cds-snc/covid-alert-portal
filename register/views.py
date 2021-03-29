@@ -202,7 +202,7 @@ class LocationWizard(NamedUrlSessionWizardView):
         location.contact_phone = data["contact_phone"]
         location.save()
 
-        # Save location id to session for next step 
+        # Save location id to session for next step
         # (@TODO: should we just put it on the url?)
         self.request.session["location_id"] = str(location.id)
 
