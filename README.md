@@ -260,6 +260,10 @@ Pour plus d’information sur la façon dont tout cela fonctionne, référez-vou
 
 ## Configuration
 
+### Dépendances externes
+
+Si vous exécutez l’application à l’aide de Docker Compose et du conteneur inclus, cette dépendance est déjà comprise. Si toutefois l’exécution se fait dans un environnement virtuel local, vous devrez installer cairo pour générer les affiches PDF : `brew install cairo`
+
 ### Activer un virtualenv
 
 Installez [`pipenv`](https://pypi.org/project/pipenv/).
