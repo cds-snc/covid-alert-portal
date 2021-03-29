@@ -17,7 +17,7 @@ The COVID Alert Portal is a Django application: it can be run as a python proces
 
 ### External dependencies
 
-If you are running the app using Docker Compose and the included container, this dependency is already included. If you are running in a local virtual environment, you'll need to install cairo `brew install cairo`
+If you are running the app using Docker Compose and the included container, this dependency is already included. If you are running in a local virtual environment, you'll need to install cairo for PDF poster generation: `brew install cairo`
 
 ### Activating a virtualenv
 
