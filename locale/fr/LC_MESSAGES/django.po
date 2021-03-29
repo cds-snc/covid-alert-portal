@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-24 18:37+0000\n"
+"POT-Creation-Date: 2021-03-29 19:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2190,29 +2190,21 @@ msgid "We've got the information for your poster"
 msgstr "Nous avons bien reçu vos renseignements."
 
 #: register/templates/register/confirmation.html
-#, python-format
+msgid "Download English Poster"
+msgstr "Télécharger l’affiche en anglais"
+
+#: register/templates/register/confirmation.html
+msgid "Download French Poster"
+msgstr "Télécharger l’affiche en français"
+
+#: register/templates/register/confirmation.html
 msgid ""
 "\n"
-"      <p>We’ll email the poster to %(email)s</p>\n"
+"      <p>We’ll also email the poster to %(email)s</p>\n"
 "    "
 msgstr ""
 "\n"
 "      <p>Nous enverrons votre affiche à %(email)s</p>\n"
-"    "
-
-#: register/templates/register/confirmation.html
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      <p><a href=\"%(contact_url)s\">Contact us</a>.</p>\n"
-#| "  "
-msgid ""
-"\n"
-"      <p><a href=\"%(url)s\" target=\"_blank\">View Poster</a></p>\n"
-"    "
-msgstr ""
-"\n"
-"        <p><a href=\"%(contact_url)s\">Contactez-nous</a>.</p>\n"
 "    "
 
 #: register/templates/register/confirmation.html
@@ -2577,3 +2569,17 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| "\n"
+#~| "      <p><a href=\"%(contact_url)s\">Contact us</a>.</p>\n"
+#~| "  "
+#~ msgid ""
+#~ "\n"
+#~ "      <p><a href=\"%(url)s\" target=\"_blank\">View Poster</a></p>\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "        <p><a href=\"%(contact_url)s\">Contactez-nous</a>.</p>\n"
+#~ "    "

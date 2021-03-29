@@ -10,16 +10,15 @@
     <img src="{% static 'register/img/check.svg' %}" alt="">
 
     <h1>{% trans "We've got the information for your poster" %}</h1>
-    {% blocktrans with email=request.session.registrant_email %}
-      <p>We’ll email the poster to {{ email }}</p>
-    {% endblocktrans %}
-    
-    <!-- TODO: This is here temporarily until we send by email -->
 
     <p>
       <a href="{% url "register:poster_download" pk=location_id lang='en' %}" target="_blank">{% trans "Download English Poster" %}</a><br>
       <a href="{% url "register:poster_download" pk=location_id lang='fr' %}" target="_blank">{% trans "Download French Poster" %}</a>
     </p>
+
+    {% blocktrans with email=request.session.registrant_email %}
+      <p>We’ll also email the poster to {{ email }}</p>
+    {% endblocktrans %}
 
   </div>
 
