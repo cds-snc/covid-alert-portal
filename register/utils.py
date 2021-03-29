@@ -7,6 +7,7 @@ import segno
 import io
 import cairosvg
 from django.template.loader import render_to_string
+import base64
 
 
 # Will generate a random alphanumeric string with 62^length possible combinations
@@ -82,9 +83,10 @@ def get_signed_qrcode(location):
     return qrcode
 
 
-def get_pdf_poster(location):
+def get_pdf_poster(location, lang="en"):
     # Generate the qr code
     qr_code = get_signed_qrcode(location)
+    poster_template = "register/posters/{lang}.svg".format(lang=lang)
 
     address_details = "{city}, {province} {postal_code}".format(
         city=location.city,
@@ -94,7 +96,7 @@ def get_pdf_poster(location):
 
     # Render the qr code and address details into the svg template
     rendered = render_to_string(
-        "register/poster.svg",
+        poster_template,
         {
             "qr_code": qr_code,
             "name": location.name,
@@ -115,3 +117,12 @@ def get_pdf_poster(location):
 
     buffer.seek(0)
     return buffer
+
+
+def get_encoded_poster(location, lang="en"):
+    poster = get_pdf_poster(location)
+    poster_str = poster.read()
+
+    # Base64-encode the poster for attaching
+    poster_encoded = base64.b64encode(poster_str).decode()
+    return poster_encoded

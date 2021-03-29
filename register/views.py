@@ -13,9 +13,8 @@ from datetime import datetime, timedelta
 import pytz
 from django.contrib import messages
 from .forms import location_choices, send_email
-from .utils import get_pdf_poster
+from .utils import get_pdf_poster, get_encoded_poster
 from profiles.models import HealthcareProvince
-import base64
 from django.http import FileResponse
 from django.conf import settings
 
@@ -180,6 +179,7 @@ class LocationWizard(NamedUrlSessionWizardView):
         forms = [form.cleaned_data for form in form_list]
         data = dict(ChainMap(*forms))
 
+        # Save the location (matching duplicates)
         location, created = Location.objects.get_or_create(
             name=data["name"],
             address=data["address"],
@@ -189,38 +189,41 @@ class LocationWizard(NamedUrlSessionWizardView):
             postal_code=data["postal_code"],
         )
 
+        # Only set the category description if "other" selected
         location.category = data["category"]
         if location.category == "other":
             location.category_description = data["category_description"]
         else:
             location.category_description = ""
+
+        # Update contact info
         location.contact_name = data["contact_name"]
         location.contact_email = data["contact_email"]
         location.contact_phone = data["contact_phone"]
         location.save()
 
+        # Save location id to session for next step 
+        # (@TODO: should we just put it on the url?)
         self.request.session["location_id"] = str(location.id)
 
         # Generate PDF and send
-        email = self.request.session["registrant_email"]
-        poster = get_pdf_poster(location)
-        poster_str = poster.read()
-        # print(poster_str)
+        en_poster = get_encoded_poster(location, "en")
+        fr_poster = get_encoded_poster(location, "fr")
 
-        # poster_txt = poster_str.decode()
-        # print(poster_txt)
+        to_email = self.request.session["registrant_email"]
 
-        poster_encoded = base64.b64encode(poster_str).decode()
-        # print(poster_encoded)
-
-        # form.send_mail(self.request.LANGUAGE_CODE, email, url)
         send_email(
-            email,
+            to_email,
             {
                 "location_name": location.name,
-                "link_to_file": {
-                    "file": poster_encoded,
-                    "filename": "poster.pdf",
+                "english_poster": {
+                    "file": en_poster,
+                    "filename": "poster-en.pdf",
+                    "sending_method": "attach",
+                },
+                "french_poster": {
+                    "file": fr_poster,
+                    "filename": "poster-fr.pdf",
                     "sending_method": "attach",
                 },
             },
@@ -232,12 +235,12 @@ class LocationWizard(NamedUrlSessionWizardView):
         return HttpResponseRedirect(reverse("register:confirmation"))
 
 
-def download_poster(request, pk):
+def download_poster(request, pk, lang):
     location = Location.objects.get(id=pk)
+    filename = "poster-{lang}.pdf".format(lang=lang)
+    poster = get_pdf_poster(location, lang)
 
-    poster = get_pdf_poster(location)
-
-    return FileResponse(poster, as_attachment=True, filename="poster.pdf")
+    return FileResponse(poster, as_attachment=True, filename=filename)
 
 
 class RegisterConfirmationPageView(TemplateView):

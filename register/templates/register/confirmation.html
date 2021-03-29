@@ -16,7 +16,10 @@
     
     <!-- TODO: This is here temporarily until we send by email -->
 
-    <p><a href="{% url "register:poster_download" pk=location_id %}" target="_blank">{% trans "Download Poster" %}</a></p>
+    <p>
+      <a href="{% url "register:poster_download" pk=location_id lang='en' %}" target="_blank">{% trans "Download English Poster" %}</a><br>
+      <a href="{% url "register:poster_download" pk=location_id lang='fr' %}" target="_blank">{% trans "Download French Poster" %}</a>
+    </p>
 
   </div>
 
