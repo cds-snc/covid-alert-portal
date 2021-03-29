@@ -1,5 +1,5 @@
 {% extends 'register/base.html' %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
@@ -16,4 +16,8 @@
   <h1>{% trans "Type of service or event" %}</h1>
   
   {% include "includes/cds_form.html" with submit_text=_("Next") %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'register/js/something-else.js' %}"></script>
 {% endblock %}
