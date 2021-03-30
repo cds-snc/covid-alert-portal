@@ -112,10 +112,6 @@ variable "ecs_secret_notify_api_key" {
   type = string
 }
 
-variable "ecs_secret_notify_template_id" {
-  type = string
-}
-
 variable "ecs_secret_qrcode_signature_private_key" {
   type = string
 }
