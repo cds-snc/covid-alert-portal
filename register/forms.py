@@ -34,7 +34,9 @@ class EmailForm(HealthcareBaseForm, forms.Form):
     ):
         notify_service.send_email(
             address=to_email,
-            template_id=settings.REGISTER_EMAIL_CONFIRMATION_ID.get(language or "en"),
+            template_id=settings.REGISTER_EMAIL_CONFIRMATION_TEMPLATE_ID.get(
+                language or "en"
+            ),
             details={"verification_link": link},
         )
 

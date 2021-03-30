@@ -273,7 +273,7 @@ OTP_NOTIFY_ENDPOINT = (
 NOTIFY_ENDPOINT = OTP_NOTIFY_ENDPOINT
 OTP_NOTIFY_API_KEY = os.getenv("OTP_NOTIFY_API_KEY")
 NOTIFY_API_KEY = OTP_NOTIFY_API_KEY
-OTP_NOTIFY_TEMPLATE_ID = os.getenv("OTP_NOTIFY_TEMPLATE_ID")
+OTP_NOTIFY_TEMPLATE_ID = "eac546b3-90c3-4834-82fb-7fb9be564c81"
 OTP_NOTIFY_TOKEN_VALIDITY = 90
 OTP_EMAIL_THROTTLE_FACTOR = 3
 # When DEBUG is on, we display the code directly in the form, no need to send it
@@ -323,31 +323,31 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 INVITATIONS_ADAPTER = "profiles.utils.invitation_adapter.HealthcareInvitationAdapter"
 
 OTK_SMS_TEMPLATE_ID = {
-    "en": os.getenv("OTK_SMS_TEMPLATE_ID_EN"),
-    "fr": os.getenv("OTK_SMS_TEMPLATE_ID_FR"),
+    "en": "40864010-5323-49e9-9828-3ae8e376535c",
+    "fr": "1ccf1412-b84e-4e3d-a7a9-6555b0f5b727",
 }
 
 BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID = {
-    "en": os.getenv("BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_EN"),
-    "fr": os.getenv("BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_FR"),
+    "en": "158a633d-da11-4a6f-acf3-9797adf0d1ae",
+    "fr": "e3bf4a89-eec2-4af6-ac1a-1145cc8a211c",
 }
 
 PASSWORD_RESET_EMAIL_TEMPLATE_ID = {
-    "en": os.getenv("PASSWORD_RESET_EMAIL_TEMPLATE_ID_EN"),
-    "fr": os.getenv("PASSWORD_RESET_EMAIL_TEMPLATE_ID_FR"),
+    "en": "610b49ce-ed71-42df-a003-53c9abdf7368",
+    "fr": "8ab7edfe-aaf5-4e78-80a6-0d72e7e0ad3b",
 }
 
 INVITATION_EMAIL_TEMPLATE_ID = {
-    "en": os.getenv("INVITATION_EMAIL_TEMPLATE_ID_EN"),
-    "fr": os.getenv("INVITATION_EMAIL_TEMPLATE_ID_FR"),
+    "en": "6407660d-1747-4c01-896d-da25566402e0",
+    "fr": "83ee8ec9-93e8-4cca-8c6a-3eeb174bfbd9",
 }
 
 CONFIRMATION_EMAIL_TEMPLATE_ID = {
-    "en": os.getenv("CONFIRMATION_EMAIL_TEMPLATE_ID_EN"),
-    "fr": os.getenv("CONFIRMATION_EMAIL_TEMPLATE_ID_FR"),
+    "en": "bdbb9cb0-2e44-41c1-9aed-58507ec92fef",
+    "fr": "4d9c284d-fedf-46a7-8ca1-0133bc98ca6e",
 }
 
-REGISTER_EMAIL_CONFIRMATION_ID = {
+REGISTER_EMAIL_CONFIRMATION_TEMPLATE_ID = {
     "en": "69512434-970a-4504-8f0e-eaec81fa570b",
     "fr": "719e51e3-5946-4699-b980-ce04dd2d6590",
 }
