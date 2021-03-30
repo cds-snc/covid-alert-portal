@@ -2,10 +2,12 @@ import logging
 from django import forms
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
+from django.utils.safestring import mark_safe
 from django.forms import ValidationError
 from requests import post
 
 from portal.forms import HealthcareBaseForm
+
 
 logger = logging.getLogger(__name__)
 
@@ -22,6 +24,7 @@ class ContactForm(HealthcareBaseForm):
     feedback = forms.CharField(
         label=_("Ask questions or give feedback"),
         error_messages={"required": FEEDBACK_MESSAGE},
+        help_text=_("Do not include any personal details"),
         widget=forms.Textarea,
     )
 

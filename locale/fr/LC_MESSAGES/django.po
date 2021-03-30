@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-29 19:48+0000\n"
+"POT-Creation-Date: 2021-03-29 21:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -454,6 +454,10 @@ msgid "Ask questions or give feedback"
 msgstr "Questions ou commentaires"
 
 #: contact/forms.py
+msgid "Do not include any personal details"
+msgstr "N’inscrivez pas de renseignements personnels."
+
+#: contact/forms.py
 msgid "There was a problem and your feedback wasn’t submitted. Please email your feedback to assistance+healthcare@cds-snc.ca."
 msgstr "Il y a eu un problème et vos commentaires n’ont pas été envoyés. Envoyer vos commentaires par courriel à assistance+healthcare@cds-snc.ca."
 
@@ -563,7 +567,7 @@ msgstr "Les patients peuvent aussi <a href='https://www.canada.ca/fr/sante-publi
 
 #: covid_key/templates/covid_key/key.html
 msgid "Generate another key"
-msgstr "Générer une autre clé"
+msgstr "Générer une nouvelle clé"
 
 #: covid_key/templates/covid_key/locked.html
 msgid "Key generation limit reached"
@@ -1476,11 +1480,9 @@ msgstr "L’adresse courriel existe déjà"
 msgid "An invitation hasn’t been sent to this address"
 msgstr "L’invitation n’a pu être envoyée."
 
-#: profiles/forms.py
-#, fuzzy
-#| msgid "You must enter a new security code each time you log in. We’ll text the code to your mobile phone number."
+#: profiles/forms.py profiles/models.py
 msgid "You must enter a new code each time you log in. We’ll text the log in code to your mobile phone number."
-msgstr "Il faut entrer un nouveau code de sécurité à chaque connexion. Nous vous enverrons le code par message texte."
+msgstr "Il faut entrer un nouveau code à chaque connexion. Nous texterons le code à votre numéro mobile."
 
 #: profiles/forms.py
 msgid "Confirm your phone number"
@@ -1516,12 +1518,6 @@ msgid "Bearer token"
 msgstr "Jeton d’API"
 
 #: profiles/models.py
-#, fuzzy
-#| msgid "You must enter a new security code each time you log in. We’ll text the code to your mobile phone number."
-msgid "You must enter a new code each time you log in. We’ll text the code to your mobile phone number."
-msgstr "Il faut entrer un nouveau code de sécurité à chaque connexion. Nous vous enverrons le code par message texte."
-
-#: profiles/models.py
 msgid "If set, the user will be blocked until that time."
 msgstr "Si cette option est activée, l’utilisateur sera verrouillé jusqu’à ce moment."
 
@@ -1540,7 +1536,7 @@ msgstr "Le lien est expiré."
 
 #: profiles/templates/invitations/messages/invite_invalid.txt
 msgid "This link is invalid. Ask your administrator for a new link."
-msgstr "Le lien n’est pas valide. Demandez un nouveau lien à votre administrateur."
+msgstr "Le lien est expiré. Demandez un nouveau lien à votre administrateur."
 
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html
 #, python-format
@@ -1598,8 +1594,6 @@ msgid "Ask your administrator for a new link"
 msgstr "Demandez un nouveau lien à votre administrateur"
 
 #: profiles/templates/invitations/templates/invite_expired.html
-#, fuzzy
-#| msgid "You’ll find their email address in the invitation to create your portal account."
 msgid "You’ll find their email address in the invitation to create your account."
 msgstr "Vous trouverez son adresse courriel dans l’invitation reçue pour créer votre compte."
 
@@ -2610,6 +2604,11 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#, fuzzy
+#~| msgid "You must enter a new security code each time you log in. We’ll text the code to your mobile phone number."
+#~ msgid "You must enter a new code each time you log in. We’ll text the code to your mobile phone number."
+#~ msgstr "Il faut entrer un nouveau code de sécurité à chaque connexion. Nous vous enverrons le code par message texte."
 
 #, fuzzy
 #~| msgid "Log into the portal using one of the security codes below. You can use each code only once.  When you have 1 code left, we’ll tell you how to get more."
