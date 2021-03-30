@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 18:33+0000\n"
+"POT-Creation-Date: 2021-03-30 18:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -195,8 +195,10 @@ msgid "Help patient enter key"
 msgstr "Aider le patient avec sa clé"
 
 #: about/templates/about/5_help_patient_enter_key.html
-msgid "Check the phone is connected to the internet."
-msgstr "Vérifiez que son téléphone est connecté à Internet."
+#: covid_key/templates/covid_key/key.html
+#: covid_key/templates/covid_key/otk_sms_sent.html
+msgid "To enter the key, the phone must be connected to the internet."
+msgstr "Le patient doit connecter son téléphone à Internet pour pouvoir entrer la clé."
 
 #: about/templates/about/5_help_patient_enter_key.html
 #: about/templates/about/6_admin_accounts.html
@@ -225,10 +227,8 @@ msgid "Delete portal accounts."
 msgstr "Supprimer des comptes."
 
 #: about/templates/about/6_admin_accounts.html
-#, fuzzy
-#| msgid "Give security codes to healthcare workers who are locked out of the portal."
 msgid "Give log in codes to team members who are locked out of the portal."
-msgstr "Fournir des codes de sécurité aux membres incapables de se connecter au portail."
+msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
 
 #: about/templates/includes/_nav_about.html
 msgid "Table of contents: About the Portal"
@@ -567,11 +567,6 @@ msgstr "Oui, générer une clé"
 #: covid_key/templates/covid_key/key.html
 msgid "Give patient this key"
 msgstr "Donnez la clé suivante au patient"
-
-#: covid_key/templates/covid_key/key.html
-#: covid_key/templates/covid_key/otk_sms_sent.html
-msgid "To enter the key, the phone must be connected to the internet."
-msgstr "Le patient doit connecter son téléphone à Internet pour pouvoir entrer la clé."
 
 #: covid_key/templates/covid_key/key.html
 msgid "Patients can also <a href=\"https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert/help.html#a17\" target=\"_blank\">contact direct app support</a>"
@@ -2621,6 +2616,9 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Check the phone is connected to the internet."
+#~ msgstr "Vérifiez que son téléphone est connecté à Internet."
 
 #~ msgid "After you generate a key, the next screen shows a combination of letters and numbers. The screen gives 1 word that you’ll read for each letter. This helps the patient check they heard the correct letter."
 #~ msgstr "Après avoir généré une clé, vous verrez une suite de chiffres et de lettres apparaître à l’écran suivant. Pour chacune des lettres, vous aurez à lire le mot indiqué pour aider le patient à noter les bonnes lettres."
