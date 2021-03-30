@@ -157,7 +157,7 @@ class HealthcarePhoneEditForm(HealthcareBaseEditForm):
     phone_number = PhoneNumberField(
         label=_("Mobile phone number"),
         help_text=_(
-            "You must enter a new log in code each time you log in. We’ll text the code to your mobile phone number."
+            "You must enter a new log in code each time you log in. We’ll text the log in code to your mobile phone number."
         ),
     )
     phone_number.error_messages["required"] = validation_messages["phone_number"][
