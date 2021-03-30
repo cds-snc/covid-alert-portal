@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 18:15+0000\n"
+"POT-Creation-Date: 2021-03-30 18:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -144,19 +144,35 @@ msgid "Give a key"
 msgstr "Fournir une clé"
 
 #: about/templates/about/4_give_a_key.html
-msgid "After you generate a key, the next screen shows a combination of letters and numbers. The screen gives 1 word that you’ll read for each letter. This helps the patient check they heard the correct letter."
-msgstr "Après avoir généré une clé, vous verrez une suite de chiffres et de lettres apparaître à l’écran suivant. Pour chacune des lettres, vous aurez à lire le mot indiqué pour aider le patient à noter les bonnes lettres."
+msgid "The key is a combination of letters and numbers."
+msgstr "La clé est composée de lettres et de chiffres."
 
 #: about/templates/about/4_give_a_key.html
-msgid "Confirm patient understood the key"
-msgstr "Vérifiez que le patient a noté la bonne clé"
+msgid "Read key phonetically"
+msgstr "Lecture de la clé de façon phonétique"
+
+#: about/templates/about/4_give_a_key.html
+msgid "We’ve chosen words for each letter so patients understand letters correctly."
+msgstr "Nous avons choisi des mots pour épeler les lettres de la clé et aider les patients à noter les bonnes lettres."
+
+#: about/templates/about/4_give_a_key.html
+msgid "You may be able to text the key"
+msgstr "Possibilité d’envoyer la clé par message texte"
+
+#: about/templates/about/4_give_a_key.html
+msgid "If permitted by your health authority, the portal displays the button 'Text key to patient'. That button guides you through next steps if the patient agrees to get the key by text."
+msgstr "Si votre autorité de santé publique le permet, le portail vous offrira de « Texter la clé au patient ». Si le patient accepte de recevoir la clé ainsi, ce bouton vous guidera vers les prochaines étapes."
+
+#: about/templates/about/4_give_a_key.html
+msgid "How the portal displays keys"
+msgstr "Affichage d’une clé dans le portail"
 
 #: about/templates/about/4_give_a_key.html
 msgid "The app guides the patient through the next steps"
 msgstr "L’application explique au patient les étapes à suivre"
 
 #: about/templates/about/4_give_a_key.html
-msgid "First the patient enters the key. Then the app guides them through the steps to notify people of possible exposure."
+msgid "The patient enters the key. Then the app guides them through the steps to notify people of possible exposure."
 msgstr "Le patient sera guidé étape par étape pour qu’il entre sa clé et notifie les personnes d’une exposition potentielle."
 
 #: about/templates/about/4_give_a_key.html
@@ -2605,6 +2621,12 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "After you generate a key, the next screen shows a combination of letters and numbers. The screen gives 1 word that you’ll read for each letter. This helps the patient check they heard the correct letter."
+#~ msgstr "Après avoir généré une clé, vous verrez une suite de chiffres et de lettres apparaître à l’écran suivant. Pour chacune des lettres, vous aurez à lire le mot indiqué pour aider le patient à noter les bonnes lettres."
+
+#~ msgid "Confirm patient understood the key"
+#~ msgstr "Vérifiez que le patient a noté la bonne clé"
 
 #~ msgid "Keep a mobile phone with you"
 #~ msgstr "Ayez un téléphone mobile avec vous"
