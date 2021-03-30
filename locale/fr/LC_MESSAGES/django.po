@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-26 20:18+0000\n"
+"POT-Creation-Date: 2021-03-30 14:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2432,10 +2432,8 @@ msgstr "Si vous n’avez pas reçu le courriel, vérifiez vos pourriels."
 
 #: register/templates/register/registrant_email_submitted.html
 #: register/templates/register/resend_email.html
-#, fuzzy
-#| msgid "Resend"
 msgid "Re-send Email"
-msgstr "Renvoyer"
+msgstr "Renvoyer le courriel"
 
 #: register/templates/register/registrant_name.html
 #: register/templates/register/summary.html
@@ -2447,16 +2445,12 @@ msgid "We’ll use your name when we email you."
 msgstr "Nous utiliserons votre nom dans les courriels que nous vous envoyons."
 
 #: register/templates/register/resend_email.html
-#, fuzzy
-#| msgid "If you did not get the code, we can send it again."
 msgid "If you did not get the email, we can send it again."
-msgstr "Si vous n’avez pas reçu de code, nous pouvons vous en renvoyer un."
+msgstr "Si vous n’avez pas reçu le courriel, nous pouvons vous le renvoyer."
 
 #: register/templates/register/resend_email.html
-#, fuzzy
-#| msgid "If you did not get the email, check your junk or spam folder."
 msgid "Check your junk or spam folder first."
-msgstr "Si vous n’avez pas reçu le courriel, vérifiez vos pourriels."
+msgstr "Vérifiez d’abord s’il est dans vos pourriels."
 
 #: register/templates/register/start.html
 msgid "Make a COVID Alert poster"
@@ -2590,9 +2584,3 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
-
-#~ msgid "Confirm your email address"
-#~ msgstr "Validez votre adresse courriel"
-
-#~ msgid "Send email again"
-#~ msgstr "Renvoyer le courriel"
