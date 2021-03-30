@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-29 21:18+0000\n"
+"POT-Creation-Date: 2021-03-30 18:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,51 +59,57 @@ msgstr "Suivant :"
 
 #: about/templates/about/1_index.html
 #: about/templates/about/2_create_account.html
-#: about/templates/includes/_nav_about.html
 msgid "Create an account"
 msgstr "Créer un compte"
+
+#: about/templates/about/2_create_account.html
+#: about/templates/includes/_nav_about.html
+msgid "Log in to the portal"
+msgstr "Se connecter au portail"
 
 #: about/templates/about/2_create_account.html
 msgid "If your administrator decides you need a portal account, you’ll get an email invitation. Check your spam folder if you’re expecting an invitation."
 msgstr "Vous recevrez une invitation par courriel si votre administrateur détermine que vous avez besoin d’un compte pour le portail. Vérifiez vos pourriels si vous attendez une invitation."
 
 #: about/templates/about/2_create_account.html
-msgid "Follow the directions in the invitation to create your account."
-msgstr "Suivez les instructions dans l’invitation pour créer votre compte."
+msgid "Follow the directions in the invitation to create your account and get your first log in code."
+msgstr "Suivez les instructions dans l’invitation pour créer votre compte et obtenir votre premier code de connexion."
 
 #: about/templates/about/2_create_account.html
-msgid "Keep a mobile phone with you"
-msgstr "Ayez un téléphone mobile avec vous"
-
-#: about/templates/about/2_create_account.html
-#, fuzzy
-#| msgid "The portal texts a security code to your mobile phone:"
-msgid "The portal texts a log in code to your mobile phone:"
-msgstr "Le portail vous envoie un code de sécurité par message texte :"
-
-#: about/templates/about/2_create_account.html
-msgid "When you create your account."
-msgstr "Au moment de créer votre compte."
-
-#: about/templates/about/2_create_account.html
-msgid "Anytime you log in."
-msgstr "Lors de chaque connexion."
-
-#: about/templates/about/2_create_account.html
-#, fuzzy
-#| msgid "If you do not have a mobile phone, you can get security codes by visiting"
-msgid "If you do not have a mobile phone, you can get log in codes by visiting"
-msgstr "Si vous n’avez pas de téléphone mobile, vous pouvez obtenir des codes de sécurité dans"
-
-#: about/templates/about/2_create_account.html
-#: portal/templates/includes/nav_header.html
+#: backup_codes/templates/backup_codes/backup_codes_list.html
 #: profiles/templates/profiles/healthcareuser_detail.html
-msgid "Manage your account"
-msgstr "Gérer votre compte"
+msgid "Log in codes"
+msgstr "Codes de connexion"
 
 #: about/templates/about/2_create_account.html
-msgid "Before you do anything else, save these codes somewhere that only you can access."
-msgstr "Avant toute autre chose, enregistrez ces codes dans un endroit auquel vous seul pouvez accéder."
+msgid "The portal texts a code to your mobile phone each time you log in."
+msgstr "Vous recevrez un code par texto lors de chaque connexion au portail."
+
+#: about/templates/about/2_create_account.html
+msgid "If you need to change your mobile number, visit"
+msgstr "Si vous souhaitez changer votre numéro de téléphone mobile, allez dans"
+
+#: about/templates/about/2_create_account.html
+msgid "Manage your account."
+msgstr "Gérer votre compte."
+
+#: about/templates/about/2_create_account.html
+#: backup_codes/templates/backup_codes/signup_backup_codes_list.html
+#: profiles/templates/profiles/signup_2fa.html
+msgid "No mobile phone?"
+msgstr "Pas de téléphone mobile?"
+
+#: about/templates/about/2_create_account.html
+msgid "You can get log in codes by visiting"
+msgstr "Vous pouvez obtenir des codes de connexion dans"
+
+#: about/templates/about/2_create_account.html
+msgid "Keep the codes somewhere only you can access."
+msgstr "Conservez vos codes dans un endroit connu de vous seul."
+
+#: about/templates/about/2_create_account.html
+msgid "You can use each log in code 1 time only."
+msgstr "Chaque code ne peut être utilisé qu’une fois."
 
 #: about/templates/about/2_create_account.html
 #: about/templates/about/3_one_time_keys.html
@@ -368,11 +374,6 @@ msgid "Get code from admin"
 msgstr "Demander un code"
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html
-#: profiles/templates/profiles/healthcareuser_detail.html
-msgid "Log in codes"
-msgstr "Codes de connexion"
-
-#: backup_codes/templates/backup_codes/backup_codes_list.html
 msgid "Use these codes to log in to the portal. The code proves it's you."
 msgstr "Utilisez les codes suivants pour vous connecter au portail. Ils servent à vous authentifier."
 
@@ -395,11 +396,6 @@ msgstr "Obtenir de nouveaux codes"
 #: backup_codes/templates/backup_codes/backup_codes_list.html
 msgid "Back to Manage your account"
 msgstr "Retour à Gérer votre compte"
-
-#: backup_codes/templates/backup_codes/signup_backup_codes_list.html
-#: profiles/templates/profiles/signup_2fa.html
-msgid "No mobile phone?"
-msgstr "Pas de téléphone mobile?"
 
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html
 #, fuzzy
@@ -1093,6 +1089,11 @@ msgstr "Symbole du gouvernement du Canada"
 #: register/templates/register/includes/nav_header.html
 msgid "Language and account navigation"
 msgstr "Navigation de compte et changement de langue"
+
+#: portal/templates/includes/nav_header.html
+#: profiles/templates/profiles/healthcareuser_detail.html
+msgid "Manage your account"
+msgstr "Gérer votre compte"
 
 #: portal/templates/includes/nav_header.html
 msgid "Log out"
@@ -2604,6 +2605,18 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Keep a mobile phone with you"
+#~ msgstr "Ayez un téléphone mobile avec vous"
+
+#~ msgid "When you create your account."
+#~ msgstr "Au moment de créer votre compte."
+
+#~ msgid "Anytime you log in."
+#~ msgstr "Lors de chaque connexion."
+
+#~ msgid "Before you do anything else, save these codes somewhere that only you can access."
+#~ msgstr "Avant toute autre chose, enregistrez ces codes dans un endroit auquel vous seul pouvez accéder."
 
 #, fuzzy
 #~| msgid "You must enter a new security code each time you log in. We’ll text the code to your mobile phone number."
