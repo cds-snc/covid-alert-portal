@@ -98,7 +98,7 @@ def confirm_email(request, pk):
         return redirect(
             reverse_lazy(
                 "register:location_step",
-                kwargs={"step": "address"},
+                kwargs={"step": "category"},
             )
         )
     except (EmailConfirmation.DoesNotExist):
@@ -106,10 +106,10 @@ def confirm_email(request, pk):
 
 
 TEMPLATES = {
-    "address": "register/location_address.html",
-    "unavailable": "register/location_unavailable.html",
     "category": "register/location_category.html",
     "name": "register/location_name.html",
+    "address": "register/location_address.html",
+    "unavailable": "register/location_unavailable.html",
     "contact": "register/location_contact.html",
     "summary": "register/summary.html",
     "success": "register/success.html",

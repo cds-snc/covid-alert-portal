@@ -8,10 +8,14 @@
 
 {% block content %}
   <div class="content-back-link">
-    <a href="{% url 'register:location_step' step='address' %}" class="chevron-left">{% trans "Back" %}</a>
+    <a href="{% url 'register:registrant_email' %}" class="chevron-left">{% trans "Back" %}</a>
   </div>
 
+  <p>{% trans "Step 1 of 5" %}</p>
+
   {% include  "includes/error_list.html" %}
+
+  {% include  "includes/flash_messages.html" %}
 
   <h1>{% trans "Type of service or event" %}</h1>
   

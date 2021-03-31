@@ -18,10 +18,10 @@ app_name = "register"
 
 # order matters here
 named_location_forms = (
-    ("address", LocationAddressForm),
-    ("unavailable", forms.Form),
     ("category", LocationCategoryForm),
     ("name", LocationNameForm),
+    ("address", LocationAddressForm),
+    ("unavailable", forms.Form),
     ("contact", LocationContactForm),
     ("summary", RegisterSummaryForm),
 )
