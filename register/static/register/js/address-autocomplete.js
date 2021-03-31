@@ -75,7 +75,7 @@ function getDetails(id, callback) {
             console.log("no results");
         } else {
             const results = response.Items;
-
+            console.log(results);
             const line1 = results.find(obj => {
                 return obj.FieldGroup === 'Common' && obj.FieldName === 'Line1'
             });
