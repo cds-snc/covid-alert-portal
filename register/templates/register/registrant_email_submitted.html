@@ -3,7 +3,7 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Check your email" %}
+  {% trans "Confirm your email address" %}
 {% endblock %}
 
 {% block content %}
@@ -13,16 +13,14 @@
 
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "Check your email" %}</h1>
+  <h1>{% trans "Confirm your email address" %}</h1>
   
   {% blocktrans with email=submitted_email %}
     <p>We sent a link to {{ email }}.</p>
   {% endblocktrans %}
 
-  <p>{% trans "If you did not get the email, check your junk or spam folder." %}
+  <p>{% trans "Check your inbox, junk or spam folder for an email with the subject line <b>“Confirm email for your poster”.</b>" %}</p>
 
-  <div>
-    <a href="{% url 'register:resendemail' %}">{% trans "Re-send Email" %}</a>
-  </div>
+  <p>{% trans "If you did not get the email, we can " %} <a href="{% url 'register:registrant_email' %}">{% trans "send it again" %}</a></p>
 
 {% endblock %}

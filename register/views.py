@@ -41,6 +41,17 @@ class RegistrantEmailView(FormView):
 
         return super().form_valid(form)
 
+    def get_initial(self):
+        initial = super().get_initial()
+
+        try:
+            submitted = self.request.session["submitted_email"]
+            initial["email"] = submitted
+        except:
+            initial["email"] = ""
+
+        return initial
+
 
 class RegistrantEmailSubmittedView(TemplateView):
     template_name = "register/registrant_email_submitted.html"
@@ -55,7 +66,6 @@ class RegistrantEmailSubmittedView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["submitted_email"] = self.request.session.get("submitted_email")
-        del self.request.session["submitted_email"]
         return context
 
 
@@ -253,4 +263,3 @@ class ContactUsPageView(FormView):
 
 class QRSupportPageView(TemplateView):
     template_name = "register/qr_support_page.html"
-
