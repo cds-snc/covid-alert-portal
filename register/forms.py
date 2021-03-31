@@ -37,13 +37,6 @@ class EmailForm(HealthcareBaseForm, forms.Form):
     email = forms.EmailField(label=_("Email address"))
 
 
-class RegistrantNameForm(HealthcareBaseForm, forms.ModelForm):
-    class Meta:
-        model = Registrant
-
-        fields = ("name",)
-
-
 class OtherFieldInput(HealthcareBaseForm, forms.Form):
     data = forms.CharField(label=_("Give brief description of service or event"))
 

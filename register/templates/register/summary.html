@@ -28,19 +28,6 @@
                 </a>
             </dd>
         </div>
-        <div class="summary-list__row">
-            <dt class="summary-list__key">
-                {% trans "Your name" %}
-            </dt>
-            <dd class="summary-list__value">
-                {{ registrant.name }}
-            </dd>
-            <dd class="summary-list__actions">
-                <a href="{% url 'register:registrant_name' %}">
-                    {% blocktrans %} Change<span class="visually-hidden"> your name</span> {% endblocktrans %}
-                </a>
-            </dd>
-        </div>
     </dl>
     
     <h2>{% trans "Service or event details" %}</h2>
