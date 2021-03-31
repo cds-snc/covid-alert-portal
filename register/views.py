@@ -3,7 +3,7 @@ from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy, reverse
 
 from .models import Registrant, Location, EmailConfirmation
-from .forms import EmailForm, RegistrantNameForm, ContactUsForm, send_mail
+from .forms import EmailForm, RegistrantNameForm, ContactUsForm, send_email
 from collections import ChainMap
 from django.utils.translation import gettext as _
 from formtools.wizard.views import NamedUrlSessionWizardView
@@ -283,7 +283,7 @@ class ContactUsPageView(FormView):
 
         help_category = form.cleaned_data.get("help_category")
 
-        send_mail(
+        send_email(
             settings.ISED_EMAIL_ADDRESS,
             {
                 "subject_type": subject.get(help_category),
