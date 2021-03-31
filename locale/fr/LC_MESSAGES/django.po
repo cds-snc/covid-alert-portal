@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 19:26+0000\n"
+"POT-Creation-Date: 2021-03-31 18:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1444,10 +1444,8 @@ msgstr "Modifier votre numéro de téléphone"
 msgid "Mobile phone number"
 msgstr "Numéro de téléphone mobile"
 
-#: profiles/forms.py
-#, fuzzy
-#| msgid "You must enter a new log in code each time you log in. We’ll text the code to your mobile phone number."
-msgid "You must enter a new log in code each time you log in. We’ll text the log in code to your mobile phone number."
+#: profiles/forms.py profiles/models.py
+msgid "You must enter a new code each time you log in. We’ll text the log in code to your mobile phone number."
 msgstr "Il faut entrer un nouveau code à chaque connexion. Nous texterons le code à votre numéro mobile."
 
 #: profiles/forms.py
@@ -1493,10 +1491,6 @@ msgstr "L’adresse courriel existe déjà"
 #: profiles/forms.py
 msgid "An invitation hasn’t been sent to this address"
 msgstr "L’invitation n’a pu être envoyée."
-
-#: profiles/forms.py profiles/models.py
-msgid "You must enter a new code each time you log in. We’ll text the log in code to your mobile phone number."
-msgstr "Il faut entrer un nouveau code à chaque connexion. Nous texterons le code à votre numéro mobile."
 
 #: profiles/forms.py
 msgid "Confirm your phone number"
@@ -2618,6 +2612,11 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#, fuzzy
+#~| msgid "You must enter a new log in code each time you log in. We’ll text the code to your mobile phone number."
+#~ msgid "You must enter a new log in code each time you log in. We’ll text the log in code to your mobile phone number."
+#~ msgstr "Il faut entrer un nouveau code à chaque connexion. Nous texterons le code à votre numéro mobile."
 
 #, fuzzy
 #~| msgid "You must enter a new security code each time you log in. We’ll text the code to your mobile phone number."
