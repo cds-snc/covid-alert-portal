@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 18:18+0000\n"
+"POT-Creation-Date: 2021-03-29 19:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2217,18 +2217,22 @@ msgid "Make a COVID Alert Poster"
 msgstr "Créer une affiche Alerte COVID"
 
 #: register/templates/register/confirmation.html
-msgid "We’ve got the information for your poster"
-msgstr "Nous avons bien reçu vos renseignements."
+msgid "Your poster is ready"
+msgstr ""
 
 #: register/templates/register/confirmation.html
-msgid "We've got the information for your poster"
-msgstr "Nous avons bien reçu vos renseignements."
+msgid "Download English Poster"
+msgstr "Télécharger l’affiche en anglais"
+
+#: register/templates/register/confirmation.html
+msgid "Download French Poster"
+msgstr "Télécharger l’affiche en français"
 
 #: register/templates/register/confirmation.html
 #, python-format
 msgid ""
 "\n"
-"      <p>We’ll email the poster to %(email)s</p>\n"
+"      <p>We’ll also email the poster to %(email)s</p>\n"
 "    "
 msgstr ""
 "\n"
@@ -2236,32 +2240,16 @@ msgstr ""
 "    "
 
 #: register/templates/register/confirmation.html
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      <p><a href=\"%(contact_url)s\">Contact us</a>.</p>\n"
-#| "  "
-msgid ""
-"\n"
-"      <p><a href=\"%(url)s\" target=\"_blank\">View Poster</a></p>\n"
-"    "
-msgstr ""
-"\n"
-"        <p><a href=\"%(contact_url)s\">Contactez-nous</a>.</p>\n"
-"    "
-
-#: register/templates/register/confirmation.html
 msgid "Next steps"
 msgstr "Prochaines étapes"
 
 #: register/templates/register/confirmation.html
-#, fuzzy, python-format
-#| msgid "<a href=''>Contact us</a> if you do not get the email within 2 hours or if you have questions."
+#, python-format
 msgid ""
 "\n"
 "      <p><a href='%(link)s'>Contact us</a> if you do not get the email within 2 hours or if you have questions.</p>\n"
 "      "
-msgstr "<a href=''>Contactez-nous</a> si vous ne recevez pas le courriel d’ici 2 heures ou si vous avez des questions."
+msgstr ""
 
 #: register/templates/register/confirmation.html
 msgid "Remember to make more posters if your service or event has other addresses. You can come back later if you do not have time now."
