@@ -12,9 +12,11 @@ from django.shortcuts import redirect
 from datetime import datetime, timedelta
 import pytz
 from django.contrib import messages
-from .forms import location_choices
-from .utils import get_signed_qrcode
+from .forms import location_choices, send_email
+from .utils import get_pdf_poster, get_encoded_poster
 from profiles.models import HealthcareProvince
+from django.http import FileResponse
+from django.conf import settings
 
 
 class RegistrantEmailView(FormView):
@@ -36,7 +38,16 @@ class RegistrantEmailView(FormView):
             kwargs={"pk": confirm.pk},
         )
 
-        form.send_mail(self.request.LANGUAGE_CODE, email, url)
+        send_email(
+            email,
+            {
+                "verification_link": url,
+            },
+            settings.REGISTER_EMAIL_CONFIRMATION_TEMPLATE_ID.get(
+                self.request.LANGUAGE_CODE or "en"
+            ),
+        )
+
         self.request.session["submitted_email"] = self.submitted_email
 
         return super().form_valid(form)
@@ -168,6 +179,7 @@ class LocationWizard(NamedUrlSessionWizardView):
         forms = [form.cleaned_data for form in form_list]
         data = dict(ChainMap(*forms))
 
+        # Save the location (matching duplicates)
         location, created = Location.objects.get_or_create(
             name=data["name"],
             address=data["address"],
@@ -177,47 +189,58 @@ class LocationWizard(NamedUrlSessionWizardView):
             postal_code=data["postal_code"],
         )
 
+        # Only set the category description if "other" selected
         location.category = data["category"]
         if location.category == "other":
             location.category_description = data["category_description"]
         else:
             location.category_description = ""
+
+        # Update contact info
         location.contact_name = data["contact_name"]
         location.contact_email = data["contact_email"]
         location.contact_phone = data["contact_phone"]
         location.save()
 
-        base_url = self.request.build_absolute_uri("/")[:-1]
-        poster_url = "{base_url}{poster_url}".format(
-            base_url=base_url,
-            poster_url=reverse("register:poster_view", kwargs={"pk": location.pk}),
-        )
-        print(poster_url)
-        self.request.session["poster_url"] = poster_url
+        # Save location id to session for next step
+        # (@TODO: should we just put it on the url?)
+        self.request.session["location_id"] = str(location.id)
 
         # Generate PDF and send
+        en_poster = get_encoded_poster(location, "en")
+        fr_poster = get_encoded_poster(location, "fr")
+
+        to_email = self.request.session["registrant_email"]
+
+        send_email(
+            to_email,
+            {
+                "location_name": location.name,
+                "english_poster": {
+                    "file": en_poster,
+                    "filename": "poster-en.pdf",
+                    "sending_method": "attach",
+                },
+                "french_poster": {
+                    "file": fr_poster,
+                    "filename": "poster-fr.pdf",
+                    "sending_method": "attach",
+                },
+            },
+            settings.POSTER_LINKED_EMAIL_TEMPLATE_ID.get(
+                self.request.LANGUAGE_CODE or "en"
+            ),
+        )
 
         return HttpResponseRedirect(reverse("register:confirmation"))
 
 
-class PosterView(TemplateView):
-    template_name = "register/poster.svg"
+def download_poster(request, pk, lang):
+    location = Location.objects.get(id=pk)
+    filename = "poster-{lang}.pdf".format(lang=lang)
+    poster = get_pdf_poster(location, lang)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        location = Location.objects.get(id=self.kwargs["pk"])
-
-        qr_code = get_signed_qrcode(location)
-
-        context["qr_code"] = qr_code
-        context["name"] = location.name
-        context["address"] = location.address
-        context["address_details"] = "{city}, {province} {postal_code}".format(
-            city=location.city,
-            province=location.province,
-            postal_code=location.postal_code,
-        )
-        return context
+    return FileResponse(poster, as_attachment=True, filename=filename)
 
 
 class RegisterConfirmationPageView(TemplateView):
@@ -236,6 +259,7 @@ class RegisterConfirmationPageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["registrant_email"] = self.request.session.get("registrant_email")
+        context["location_id"] = self.request.session.get("location_id")
         return context
 
 
