@@ -1,5 +1,4 @@
 from django.views.generic import TemplateView, FormView
-from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy, reverse
 
 from .models import Registrant, Location, EmailConfirmation

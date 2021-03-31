@@ -2,7 +2,6 @@ from django import forms
 
 from portal.forms import HealthcareBaseForm
 from django.utils.translation import gettext_lazy as _
-from .models import Registrant
 from portal.widgets import CDSRadioWidget
 from phonenumber_field.formfields import PhoneNumberField
 from dependency_injector.wiring import inject, Provide
