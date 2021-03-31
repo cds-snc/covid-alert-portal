@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 20:04+0000\n"
+"POT-Creation-Date: 2021-03-31 20:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2271,6 +2271,10 @@ msgid "Address of service or event"
 msgstr "Adresse du service ou de l’événement"
 
 #: register/templates/register/location_address.html
+msgid "Step 3 of 5"
+msgstr "Étape 3 de 5"
+
+#: register/templates/register/location_address.html
 msgid "If the event or service has several addresses, you need a poster for each.  After you finish this poster, we’ll remind you to make more."
 msgstr "Si le service ou l’événement comporte plusieurs adresses, vous devrez créer une affiche pour chaque adresse. Nous vous rappelerons de le faire quand vous aurez terminé la présente affiche."
 
@@ -2278,9 +2282,17 @@ msgstr "Si le service ou l’événement comporte plusieurs adresses, vous devre
 msgid "Type of service or event"
 msgstr "Type de service ou d’événement"
 
+#: register/templates/register/location_category.html
+msgid "Step 1 of 5"
+msgstr "Étape 1 de 5"
+
 #: register/templates/register/location_contact.html
 msgid "Contact for the address"
 msgstr "Personne-ressource"
+
+#: register/templates/register/location_contact.html
+msgid "Step 4 of 5"
+msgstr "Étape 4 de 5"
 
 #: register/templates/register/location_contact.html
 msgid "This could be you, or a different person, such as a store manager."
@@ -2293,6 +2305,10 @@ msgstr "Nous contacterons cette personne pour toute information sanitaire import
 #: register/templates/register/location_name.html
 msgid "Name of service or event"
 msgstr "Nom du service ou de l’événement"
+
+#: register/templates/register/location_name.html
+msgid "Step 2 of 5"
+msgstr "Étape 2 de 5"
 
 #: register/templates/register/location_name.html
 msgid "We’ll display the name on the poster with your QR code."
@@ -2497,6 +2513,10 @@ msgstr ""
 #: register/templates/register/summary.html
 msgid "Check your answers before making your poster"
 msgstr "Vérifiez vos réponses avant de créer votre affiche"
+
+#: register/templates/register/summary.html
+msgid "Step 5 of 5"
+msgstr "Étape 5 de 5"
 
 #: register/templates/register/summary.html
 msgid "Personal information"
