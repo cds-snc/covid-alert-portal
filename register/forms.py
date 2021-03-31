@@ -1,5 +1,6 @@
 from django import forms
 from django.conf import settings
+from django.forms import MultiWidget, TextInput
 
 from portal.forms import HealthcareBaseForm
 from django.utils.translation import gettext_lazy as _
@@ -9,7 +10,7 @@ from phonenumber_field.formfields import PhoneNumberField
 from dependency_injector.wiring import inject, Provide
 from portal.containers import Container
 from portal.services import NotifyService
-from .widgets import AutocompleteWidget
+from .widgets import AutocompleteWidget, PhoneExtensionWidget
 
 location_choices = [
     ("restaurant_bar_coffee", _("Restaurant, bar, coffee shop")),
@@ -100,10 +101,9 @@ class LocationAddressForm(HealthcareBaseForm, forms.Form):
 class LocationContactForm(HealthcareBaseForm, forms.Form):
     contact_name = forms.CharField(label=_("Name of contact"))
     contact_email = forms.EmailField(label=_("Contact email"))
-    contact_phone = PhoneNumberField(label=_("Contact phone number"))
-    contact_phone_ext = PhoneNumberField(label=_("Extension"))
-
-
+    contact_phone = forms.CharField(label=_("Contact phone number"), widget=PhoneExtensionWidget())
+    # contact_phone_ext = PhoneNumberField(label=_("Extension"))
+    
 class RegisterSummaryForm(HealthcareBaseForm, forms.Form):
     """
     A form to show an information panel.
