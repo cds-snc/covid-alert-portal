@@ -58,7 +58,7 @@ class RegistrantEmailView(FormView):
         try:
             submitted = self.request.session["submitted_email"]
             initial["email"] = submitted
-        except:
+        except KeyError:
             initial["email"] = ""
 
         return initial
