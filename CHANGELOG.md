@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - QR Code Registration form with Email verification
 - Location search with Canada Post Address Complete API
+- Made content changes for iteration v1.1: https://www.figma.com/file/znPqLTQQDcUkaNjdDcShiz/Exposure-Notification---Health-Portal?node-id=3300%3A16157
 
 ## [1.19.2] - 2021-03-17
 
