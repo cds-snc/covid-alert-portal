@@ -96,10 +96,12 @@ def confirm_email(request, pk):
             request, messages.SUCCESS, _("You've confirmed your email address.")
         )
 
-        return redirect(reverse_lazy(
-            "register:location_step",
-            kwargs={"step": "address"},
-        ))
+        return redirect(
+            reverse_lazy(
+                "register:location_step",
+                kwargs={"step": "address"},
+            )
+        )
     except (EmailConfirmation.DoesNotExist):
         return redirect(reverse_lazy("register:confirm_email_error"))
 

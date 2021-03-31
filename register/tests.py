@@ -112,10 +112,12 @@ class RegisterEmailConfirmation(TestCase):
         )
 
         # email confirmed, should be able to get to the next step
-        self.client.get(reverse(
-            "register:location_step",
-            kwargs={"step": "address"},
-        ))
+        self.client.get(
+            reverse(
+                "register:location_step",
+                kwargs={"step": "address"},
+            )
+        )
         self.assertEqual(response.status_code, 200)
 
 
