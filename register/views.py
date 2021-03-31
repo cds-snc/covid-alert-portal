@@ -3,7 +3,7 @@ from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy, reverse
 
 from .models import Registrant, Location, EmailConfirmation
-from .forms import EmailForm, RegistrantNameForm, ContactUsForm, send_email
+from .forms import EmailForm, RegistrantNameForm, ContactUsForm
 from collections import ChainMap
 from django.utils.translation import gettext as _
 from formtools.wizard.views import NamedUrlSessionWizardView
