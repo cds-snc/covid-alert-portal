@@ -6,6 +6,7 @@ resource "aws_cloudfront_origin_access_identity" "maintenance_access_identity" {
   comment = "Access Identity for the Maintenance Website"
 }
 
+#tfsec:ignore:AWS071
 resource "aws_cloudfront_distribution" "maintenance_mode" {
   http_version = "http2"
 

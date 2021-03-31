@@ -25,23 +25,12 @@ data "aws_iam_policy_document" "covidportal_secrets_manager" {
       aws_secretsmanager_secret.server_database_url.arn,
       aws_secretsmanager_secret_version.api_authorization.arn,
       aws_secretsmanager_secret_version.api_endpoint.arn,
-      aws_secretsmanager_secret_version.otk_sms_template_id_en.arn,
-      aws_secretsmanager_secret_version.otk_sms_template_id_fr.arn,
-      aws_secretsmanager_secret_version.invitation_email_template_id_en.arn,
-      aws_secretsmanager_secret_version.invitation_email_template_id_fr.arn,
-      aws_secretsmanager_secret_version.confirmation_email_template_id_en.arn,
-      aws_secretsmanager_secret_version.confirmation_email_template_id_fr.arn,
-      aws_secretsmanager_secret_version.password_reset_email_template_id_en.arn,
-      aws_secretsmanager_secret_version.password_reset_email_template_id_fr.arn,
-      aws_secretsmanager_secret_version.backup_code_admin_email_template_id_en.arn,
-      aws_secretsmanager_secret_version.backup_code_admin_email_template_id_fr.arn,
       aws_secretsmanager_secret_version.django_secret_key.arn,
       aws_secretsmanager_secret_version.freshdesk_api_endpoint.arn,
       aws_secretsmanager_secret_version.freshdesk_api_key.arn,
       aws_secretsmanager_secret_version.freshdesk_product_id.arn,
       aws_secretsmanager_secret_version.new_relic_license_key.arn,
       aws_secretsmanager_secret_version.notify_api_key.arn,
-      aws_secretsmanager_secret_version.notify_template_id.arn,
       aws_secretsmanager_secret_version.qrcode_signature_private_key.arn
     ]
   }

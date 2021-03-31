@@ -15,6 +15,10 @@ The COVID Alert Portal is a Django application: it can be run as a python proces
 
 ## Setup
 
+### External dependencies
+
+If you are running the app using Docker Compose and the included container, this dependency is already included. If you are running in a local virtual environment, you'll need to install cairo for PDF poster generation: `brew install cairo`
+
 ### Activating a virtualenv
 
 Install [`pipenv`](https://pypi.org/project/pipenv/).
@@ -57,27 +61,11 @@ Environment variables are used to control app settings, and configuration for ut
 
 - `API_AUTHORIZATION`: The credentials required to authenticate with the one-time code API. Otherwise the request will return a `401` Forbidden response.
 
-#### Notify configuration
-
-We are using Notify to send user-facing emails (eg, invitation emails and password reset emails), as well as for our OTP SMS codes through an `django-otp-` plugin.
-
-- `OTK_SMS_TEMPLATE_ID_EN` and `OTK_SMS_TEMPLATE_ID_FR` : Template IDs for the English and French versions of the one-time-key SMS notification
-  
-- `PASSWORD_RESET_EMAIL_TEMPLATE_ID_EN` and `PASSWORD_RESET_EMAIL_TEMPLATE_ID_FR` : Template IDs for the English and French versions of the password reset email
-
-- `INVITATION_EMAIL_TEMPLATE_ID_EN` and `INVITATION_EMAIL_TEMPLATE_ID_FR` : Template IDs for the English and French versions of the user account creation email
-
-- `BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_EN` and `BACKUP_CODE_ADMIN_EMAIL_TEMPLATE_ID_FR` : Template IDs for the English and French versions of the email that staff users send to admins requesting a new backup code.
-
-- `CONFIRMATION_EMAIL_TEMPLATE_ID_EN` and `CONFIRMATION_EMAIL_TEMPLATE_ID_FR` : Template IDs for the English and French versions of the confirmation emails that is sent to new users after successfully signing-up.
-
 #### OTP (2-factor) configuration
 
 We use Notify and django-otp to send 2FA auth codes via SMS.
 
 - `OTP_NOTIFY_ENDPOINT`: Changes the default Notify endpoint used.
-
-- `OTP_NOTIFY_TEMPLATE_ID`: The is the SMS template used and created via the Notify dashboard.
 
 - `OTP_NOTIFY_API_KEY`: The API key used to call Notify
 
@@ -255,6 +243,10 @@ Ce dépôt met en oeuvre un portail de soins de santé qui accompagne l’[appli
 Pour plus d’information sur la façon dont tout cela fonctionne, référez-vous au [raisonnement derrière COVID Shield](https://github.com/CovidShield/rationale) (en anglais).
 
 ## Configuration
+
+### Dépendances externes
+
+Si vous exécutez l’application à l’aide de Docker Compose et du conteneur inclus, cette dépendance est déjà comprise. Si toutefois l’exécution se fait dans un environnement virtuel local, vous devrez installer cairo pour générer les affiches PDF : `brew install cairo`
 
 ### Activer un virtualenv
 

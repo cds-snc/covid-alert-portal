@@ -47,6 +47,7 @@ django-formtools = "*"
 pynacl = "*"
 protobuf = "*"
 segno = "*"
+cairosvg = "*"
 
 [pipenv]
 allow_prereleases = true
