@@ -99,7 +99,7 @@ class RegisterEmailConfirmation(TestCase):
         # confirmation screen
         response = self.client.get(reverse("register:email_submitted"))
 
-        self.assertContains(response, "Check your email")
+        self.assertContains(response, "Confirm your email address")
         self.assertContains(response, email)
 
         # check the confirmation record
