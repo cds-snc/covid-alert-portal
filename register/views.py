@@ -43,7 +43,7 @@ class RegistrantEmailView(FormView):
             {
                 "verification_link": url,
             },
-            settings.REGISTER_EMAIL_CONFIRMATION_ID.get(
+            settings.REGISTER_EMAIL_CONFIRMATION_TEMPLATE_ID.get(
                 self.request.LANGUAGE_CODE or "en"
             ),
         )
