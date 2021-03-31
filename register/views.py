@@ -1,7 +1,6 @@
 from django.views.generic import TemplateView, FormView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy, reverse
-from django.conf import settings
 
 from .models import Registrant, Location, EmailConfirmation
 from .forms import EmailForm, RegistrantNameForm, ContactUsForm, send_mail
