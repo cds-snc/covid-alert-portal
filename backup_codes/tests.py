@@ -169,7 +169,7 @@ class AdminBackupCodesView(AdminUserTestCase):
         # see the "get a code" link in the profile of the user
         self.assertContains(
             response,
-            '<button type="submit" class="link">Get a log in code</button>',
+            '<button type="submit" class="link">Get log in codes</button>',
             html=True,
         )
 
