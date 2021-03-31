@@ -67,5 +67,4 @@ urlpatterns = [
         TemplateView.as_view(template_name="register/success.html"),
         name="success",
     ),
-    path("email/resend", TemplateView.as_view(template_name="register/resend_email.html"), name="resendemail"),
 ]

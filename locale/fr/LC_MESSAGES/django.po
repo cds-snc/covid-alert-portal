@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 14:19+0000\n"
+"POT-Creation-Date: 2021-03-31 17:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -504,7 +504,6 @@ msgstr "Si le patient est prêt, générez une clé"
 #: register/templates/register/registrant_email.html
 #: register/templates/register/registrant_email_submitted.html
 #: register/templates/register/registrant_name.html
-#: register/templates/register/resend_email.html
 #: register/templates/register/summary.html
 msgid "Back"
 msgstr "Retour"
@@ -1155,7 +1154,6 @@ msgid "If you still need a new password, <a href=\"%(url)s\">send a new password
 msgstr "Si vous avez encore besoin d’un nouveau mot de passe, <a href=\"%(url)s\">envoyer un nouveau courriel pour changer votre mot de passe</a>."
 
 #: portal/templates/registration/password_reset_done.html
-#: register/templates/register/registrant_email_submitted.html
 msgid "Check your email"
 msgstr "Vérifiez vos courriels"
 
@@ -2416,6 +2414,10 @@ msgid "We’ll send you a link. Use the link to confirm your email address."
 msgstr "Nous vous enverrons un lien pour valider votre adresse courriel."
 
 #: register/templates/register/registrant_email_submitted.html
+msgid "Confirm your email address"
+msgstr "Validez votre adresse courriel"
+
+#: register/templates/register/registrant_email_submitted.html
 #, python-format
 msgid ""
 "\n"
@@ -2427,13 +2429,16 @@ msgstr ""
 "  "
 
 #: register/templates/register/registrant_email_submitted.html
-msgid "If you did not get the email, check your junk or spam folder."
-msgstr "Si vous n’avez pas reçu le courriel, vérifiez vos pourriels."
+msgid "Check your inbox, junk or spam folder for an email with the subject line Confirm email for your poster."
+msgstr "Cherchez un courriel intitulé « Validation du courriel pour votre affiche » dans votre boîte de réception ou vos pourriels."
 
 #: register/templates/register/registrant_email_submitted.html
-#: register/templates/register/resend_email.html
-msgid "Re-send Email"
-msgstr "Renvoyer le courriel"
+msgid "If you did not get the email, we can "
+msgstr "Si vous n’avez rien reçu, nous pouvons "
+
+#: register/templates/register/registrant_email_submitted.html
+msgid "send it again"
+msgstr "renvoyer le courriel."
 
 #: register/templates/register/registrant_name.html
 #: register/templates/register/summary.html
@@ -2443,14 +2448,6 @@ msgstr "Votre nom"
 #: register/templates/register/registrant_name.html
 msgid "We’ll use your name when we email you."
 msgstr "Nous utiliserons votre nom dans les courriels que nous vous envoyons."
-
-#: register/templates/register/resend_email.html
-msgid "If you did not get the email, we can send it again."
-msgstr "Si vous n’avez pas reçu le courriel, nous pouvons vous le renvoyer."
-
-#: register/templates/register/resend_email.html
-msgid "Check your junk or spam folder first."
-msgstr "Vérifiez d’abord s’il est dans vos pourriels."
 
 #: register/templates/register/start.html
 msgid "Make a COVID Alert poster"
