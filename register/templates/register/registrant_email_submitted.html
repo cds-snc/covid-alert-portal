@@ -19,7 +19,10 @@
     <p>We sent a link to {{ email }}.</p>
   {% endblocktrans %}
 
-  <p>{% trans "Check your inbox, junk or spam folder for an email with the subject line <q>Confirm Email for your poster</q>" %}</p>
-  <p>{% trans "If you did not get the email, we can " %} <a href="{% url 'register:registrant_email' %}">{% trans "send it again" %}</a></p>
+  {% url 'register:registrant_email' as register_url %}
+  {% blocktranslate with confirm="Confirm Email for your poster"%}
+    <p>Check your inbox, junk or spam folder for an email with the subject line <q>{{ confirm }}</q></p>
+    <p>If you did not get the email, we can <a href="{{ register_url }}">send it again</a></p>
+  {% endblocktranslate %}
 
 {% endblock %}
