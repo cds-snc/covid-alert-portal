@@ -65,10 +65,14 @@ class RegisterView(TestCase):
         email = "test@test.com"
         r = Registrant.objects.create(email=email)
 
-        # add id and email to session (happens at confirmation)
         session = self.client.session
+
+        # add id and email to session (logged in)
         session["registrant_id"] = str(r.id)
         session["registrant_email"] = r.email
+
+        # need a fake location_id in the session for the poster url
+        session["location_id"] = str(r.id)
         session.save()
 
         response = self.client.get(reverse("register:confirmation"))

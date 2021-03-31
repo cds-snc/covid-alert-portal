@@ -1,5 +1,4 @@
 from django import forms
-from django.conf import settings
 
 from portal.forms import HealthcareBaseForm
 from django.utils.translation import gettext_lazy as _
@@ -11,6 +10,7 @@ from portal.containers import Container
 from portal.services import NotifyService
 from .widgets import AutocompleteWidget
 
+
 location_choices = [
     ("restaurant_bar_coffee", _("Restaurant, bar, coffee shop")),
     ("fitness_recreation", _("Fitness and recreation")),
@@ -21,22 +21,20 @@ location_choices = [
 ]
 
 
+@inject
+def send_email(
+    to_email,
+    payload,
+    template_id,
+    notify_service: NotifyService = Provide[Container.notify_service],
+):
+    notify_service.send_email(
+        address=to_email, template_id=template_id, details=payload
+    )
+
+
 class EmailForm(HealthcareBaseForm, forms.Form):
     email = forms.EmailField(label=_("Email address"))
-
-    @inject
-    def send_mail(
-        self,
-        language,
-        to_email,
-        link,
-        notify_service: NotifyService = Provide[Container.notify_service],
-    ):
-        notify_service.send_email(
-            address=to_email,
-            template_id=settings.REGISTER_EMAIL_CONFIRMATION_ID.get(language or "en"),
-            details={"verification_link": link},
-        )
 
 
 class RegistrantNameForm(HealthcareBaseForm, forms.ModelForm):
@@ -109,19 +107,6 @@ class RegisterSummaryForm(HealthcareBaseForm, forms.Form):
     """
 
     pass
-
-
-@inject
-def send_mail(
-    to_email,
-    payload,
-    template_id,
-    notify_service: NotifyService = Provide[Container.notify_service],
-):
-
-    notify_service.send_email(
-        address=to_email, template_id=template_id, details=payload
-    )
 
 
 class ContactUsForm(HealthcareBaseForm, forms.Form):
