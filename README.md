@@ -15,6 +15,10 @@ The COVID Alert Portal is a Django application: it can be run as a python proces
 
 ## Setup
 
+### External dependencies
+
+If you are running the app using Docker Compose and the included container, this dependency is already included. If you are running in a local virtual environment, you'll need to install cairo for PDF poster generation: `brew install cairo`
+
 ### Activating a virtualenv
 
 Install [`pipenv`](https://pypi.org/project/pipenv/).
@@ -239,6 +243,10 @@ Ce dépôt met en oeuvre un portail de soins de santé qui accompagne l’[appli
 Pour plus d’information sur la façon dont tout cela fonctionne, référez-vous au [raisonnement derrière COVID Shield](https://github.com/CovidShield/rationale) (en anglais).
 
 ## Configuration
+
+### Dépendances externes
+
+Si vous exécutez l’application à l’aide de Docker Compose et du conteneur inclus, cette dépendance est déjà comprise. Si toutefois l’exécution se fait dans un environnement virtuel local, vous devrez installer cairo pour générer les affiches PDF : `brew install cairo`
 
 ### Activer un virtualenv
 
