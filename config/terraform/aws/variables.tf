@@ -88,46 +88,6 @@ variable "ecs_secret_api_endpoint" {
   type = string
 }
 
-variable "ecs_secret_otk_sms_template_id_en" {
-  type = string
-}
-
-variable "ecs_secret_otk_sms_template_id_fr" {
-  type = string
-}
-
-variable "ecs_secret_invitation_email_template_id_en" {
-  type = string
-}
-
-variable "ecs_secret_invitation_email_template_id_fr" {
-  type = string
-}
-
-variable "ecs_secret_password_reset_email_template_id_en" {
-  type = string
-}
-
-variable "ecs_secret_password_reset_email_template_id_fr" {
-  type = string
-}
-
-variable "ecs_secret_backup_code_admin_email_template_id_en" {
-  type = string
-}
-
-variable "ecs_secret_backup_code_admin_email_template_id_fr" {
-  type = string
-}
-
-variable "ecs_secret_confirmation_email_template_id_en" {
-  type = string
-}
-
-variable "ecs_secret_confirmation_email_template_id_fr" {
-  type = string
-}
-
 variable "ecs_secret_django_secret_key" {
   type = string
 }
@@ -149,10 +109,6 @@ variable "ecs_secret_new_relic_license_key" {
 }
 
 variable "ecs_secret_notify_api_key" {
-  type = string
-}
-
-variable "ecs_secret_notify_template_id" {
   type = string
 }
 
