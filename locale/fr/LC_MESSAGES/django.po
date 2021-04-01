@@ -2417,12 +2417,16 @@ msgstr ""
 "  "
 
 #: register/templates/register/registrant_email_submitted.html
-msgid "If you did not get the email, check your junk or spam folder."
-msgstr "Si vous n’avez pas reçu le courriel, vérifiez vos pourriels."
+msgid "Check your inbox, junk or spam folder for an email with the subject line Confirm email for your poster."
+msgstr "Cherchez un courriel intitulé « Validation du courriel pour votre affiche » dans votre boîte de réception ou vos pourriels."
 
 #: register/templates/register/registrant_email_submitted.html
-msgid "Send email again"
-msgstr "Renvoyer le courriel"
+msgid "If you did not get the email, we can "
+msgstr "Si vous n’avez rien reçu, nous pouvons "
+
+#: register/templates/register/registrant_email_submitted.html
+msgid "send it again"
+msgstr "renvoyer le courriel."
 
 #: register/templates/register/registrant_name.html
 #: register/templates/register/summary.html
