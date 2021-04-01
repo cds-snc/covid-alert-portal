@@ -106,7 +106,7 @@ function getDetails(id, callback) {
 
 accessibleAutocomplete({
     element: document.querySelector('#address-autocomplete-container'),
-    id: 'address-autocomplete',
+    id: 'id_address-address',
     source: autocomplete,
     name: 'address-address',
     onConfirm: function(confirmed) {
