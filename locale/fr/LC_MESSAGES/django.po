@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-29 19:50+0000\n"
+"POT-Creation-Date: 2021-03-31 17:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2140,10 +2140,6 @@ msgstr "Autre chose."
 #: register/forms.py
 msgid "Tell us more about the issue"
 msgstr "Dites-nous en plus sur le problème"
-
-#: register/forms.py
-msgid "Email address if you want a reply"
-msgstr "Adresse courriel pour vous répondre"
 
 #: register/forms.py
 msgid "We'll use this if we need to contact you. We will not use your email address for anything else."

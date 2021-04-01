@@ -273,6 +273,9 @@ class RegisterConfirmationPageView(TemplateView):
         return context
 
 
+subject = {"get_help": "Help", "give_feedback": "Feedback", "something_else": "Other"}
+
+
 class ContactUsPageView(FormView):
     template_name = "register/contact_us.html"
     form_class = ContactUsForm
@@ -283,6 +286,23 @@ class ContactUsPageView(FormView):
 
     def get_success_url(self):
         return reverse_lazy("register:success")
+
+    def form_valid(self, form):
+        from_email = form.cleaned_data.get("contact_email")
+        message = form.cleaned_data.get("more_info")
+
+        help_category = form.cleaned_data.get("help_category")
+
+        send_email(
+            settings.ISED_EMAIL_ADDRESS,
+            {
+                "subject_type": subject.get(help_category),
+                "message": message,
+                "from_email": from_email,
+            },
+            settings.ISED_TEMPLATE_ID,
+        )
+        return super().form_valid(form)
 
 
 class QRSupportPageView(TemplateView):
