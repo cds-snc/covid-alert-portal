@@ -52,15 +52,6 @@ class RegisterView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "register/registrant_email.html")
 
-    def test_name_page(self):
-        r = Registrant.objects.create(email="test@test.com")
-        session = self.client.session
-        session["registrant_id"] = str(r.id)
-        session.save()
-
-        response = self.client.get(reverse("register:registrant_name"))
-        self.assertEqual(response.status_code, 200)
-
     def test_confirmation_page_logged_in(self):
         email = "test@test.com"
         r = Registrant.objects.create(email=email)
@@ -120,18 +111,17 @@ class RegisterEmailConfirmation(TestCase):
             EmailConfirmation.objects.filter(email=email).first(),
         )
 
-        # email confirmed, should be able to get to the name step
-        self.client.get(reverse("register:registrant_name"))
+        # email confirmed, should be able to get to the next step
+        self.client.get(
+            reverse(
+                "register:location_step",
+                kwargs={"step": "address"},
+            )
+        )
         self.assertEqual(response.status_code, 200)
 
 
 class RegisterConfirmedEmailRequiredPages(TestCase):
-    def test_registrant_name_not_logged_in(self):
-        response = self.client.get(reverse("register:registrant_name"))
-        self.assertRedirects(response, reverse("register:registrant_email"))
-        message = list(get_messages(response.wsgi_request))[0]
-        self.assertEqual(message.tags, "error")
-
     def test_location_address_not_logged_in(self):
         response = self.client.get(
             reverse("register:location_step", kwargs={"step": "address"})

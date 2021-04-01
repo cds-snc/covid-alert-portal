@@ -5,7 +5,7 @@ from .models import Registrant, Location
 
 # Register your models here.
 class RegistrantAdmin(admin.ModelAdmin):
-    list_display = ["id", "name", "email"]
+    list_display = ["id", "email"]
 
 
 class LocationAdmin(admin.ModelAdmin):
