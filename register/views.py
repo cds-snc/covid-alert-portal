@@ -1,9 +1,8 @@
 from django.views.generic import TemplateView, FormView
-from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy, reverse
 
 from .models import Registrant, Location, EmailConfirmation
-from .forms import EmailForm, RegistrantNameForm, ContactUsForm
+from .forms import EmailForm, ContactUsForm
 from collections import ChainMap
 from django.utils.translation import gettext as _
 from formtools.wizard.views import NamedUrlSessionWizardView
@@ -106,34 +105,14 @@ def confirm_email(request, pk):
             request, messages.SUCCESS, _("You've confirmed your email address.")
         )
 
-        return redirect(reverse_lazy("register:registrant_name"))
+        return redirect(
+            reverse_lazy(
+                "register:location_step",
+                kwargs={"step": "address"},
+            )
+        )
     except (EmailConfirmation.DoesNotExist):
         return redirect(reverse_lazy("register:confirm_email_error"))
-
-
-class RegistrantNameView(UpdateView):
-    model = Registrant
-    form_class = RegistrantNameForm
-    template_name = "register/registrant_name.html"
-
-    def dispatch(self, request, *args, **kwargs):
-        if not self.request.session.get("registrant_id"):
-            messages.add_message(
-                self.request,
-                messages.ERROR,
-                _("There has been an error, you need to confirm your email address"),
-            )
-            return redirect("register:registrant_email")
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_object(self):
-        return Registrant.objects.get(pk=self.request.session["registrant_id"])
-
-    def get_success_url(self):
-        return reverse_lazy(
-            "register:location_step",
-            kwargs={"step": "address"},
-        )
 
 
 TEMPLATES = {
