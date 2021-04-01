@@ -366,7 +366,7 @@ SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
 
 # ISED Email Address
 # Replace None for own email address for testing
-ISED_EMAIL_ADDRESS = os.getenv("ISED_EMAIL_ADDRESS", None)
+ISED_EMAIL_ADDRESS = os.getenv("ISED_EMAIL_ADDRESS", 'ISED-ISDE@canada.ca')
 
 # Login Rate Limiting
 if TESTING:

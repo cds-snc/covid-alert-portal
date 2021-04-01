@@ -128,5 +128,4 @@ class ContactUsForm(HealthcareBaseForm, forms.Form):
         help_text=_(
             "We'll use this if we need to contact you. We will not use your email address for anything else."
         ),
-        required=True,
     )
