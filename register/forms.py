@@ -1,10 +1,10 @@
 from django import forms
 from django.conf import settings
-from django.forms import MultiWidget, TextInput
+from django.forms import MultiWidget, TextInput, fields
 
 from portal.forms import HealthcareBaseForm
 from django.utils.translation import gettext_lazy as _
-from .models import Registrant
+from .models import Registrant, Location
 from portal.widgets import CDSRadioWidget
 from phonenumber_field.formfields import PhoneNumberField
 from dependency_injector.wiring import inject, Provide
@@ -97,12 +97,31 @@ class LocationAddressForm(HealthcareBaseForm, forms.Form):
     postal_code = forms.CharField(label=_("Postal code"))
 
 
+class PhoneMultiWidget(forms.widgets.MultiWidget):
+    def __init__(self, attrs=None):
+        widgets = [forms.TextInput(),
+                   PhoneExtensionWidget]
+        super(PhoneMultiWidget, self).__init__(widgets, attrs)
+
+    def decompress(self, value):
+        if value:
+            return value.split("|")
+        return ['', '']
+class PhoneField(forms.fields.MultiValueField):
+    def __init__(self, *args, **kwargs):
+        list_fields = [forms.fields.CharField(max_length=31),
+                       forms.fields.CharField(max_length=31)]
+        super(PhoneField, self).__init__(list_fields, *args, **kwargs)
+
+    def compress(self, values):
+         if values:
+             return '|'.join(values) 
 class LocationContactForm(HealthcareBaseForm, forms.Form):
     contact_name = forms.CharField(label=_("Name of contact"))
     contact_email = forms.EmailField(label=_("Contact email"))
-    contact_phone = forms.CharField(label=_("Contact phone number"), widget=PhoneExtensionWidget())
-    # contact_phone_ext = PhoneNumberField(label=_("Extension"))
-    
+    contact_phone = PhoneNumberField(label=_(""), widget=PhoneExtensionWidget())
+  
+
 class RegisterSummaryForm(HealthcareBaseForm, forms.Form):
     """
     A form to show an information panel.
