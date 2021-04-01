@@ -11,6 +11,8 @@
     <a href="{% url 'register:location_step' step='category' %}" class="chevron-left">{% trans "Back" %}</a>
   </div>
 
+  <p>{% trans "Step 2 of 5" %}</p>
+
   {% include  "includes/error_list.html" %}
 
   <h1>{% trans "Name of service or event" %}</h1>
