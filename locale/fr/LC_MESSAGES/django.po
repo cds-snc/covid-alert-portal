@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-29 19:50+0000\n"
+"POT-Creation-Date: 2021-03-31 17:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2142,10 +2142,6 @@ msgid "Tell us more about the issue"
 msgstr "Dites-nous en plus sur le problème"
 
 #: register/forms.py
-msgid "Email address if you want a reply"
-msgstr "Adresse courriel pour vous répondre"
-
-#: register/forms.py
 msgid "We'll use this if we need to contact you. We will not use your email address for anything else."
 msgstr "Nous utiliserons votre adresse si, et seulement si, nous avons besoin de communiquer avec vous."
 
@@ -2417,12 +2413,16 @@ msgstr ""
 "  "
 
 #: register/templates/register/registrant_email_submitted.html
-msgid "If you did not get the email, check your junk or spam folder."
-msgstr "Si vous n’avez pas reçu le courriel, vérifiez vos pourriels."
+msgid "Check your inbox, junk or spam folder for an email with the subject line Confirm email for your poster."
+msgstr "Cherchez un courriel intitulé « Validation du courriel pour votre affiche » dans votre boîte de réception ou vos pourriels."
 
 #: register/templates/register/registrant_email_submitted.html
-msgid "Send email again"
-msgstr "Renvoyer le courriel"
+msgid "If you did not get the email, we can "
+msgstr "Si vous n’avez rien reçu, nous pouvons "
+
+#: register/templates/register/registrant_email_submitted.html
+msgid "send it again"
+msgstr "renvoyer le courriel."
 
 #: register/templates/register/registrant_name.html
 #: register/templates/register/summary.html

@@ -352,6 +352,7 @@ REGISTER_EMAIL_CONFIRMATION_TEMPLATE_ID = {
     "fr": "719e51e3-5946-4699-b980-ce04dd2d6590",
 }
 
+ISED_TEMPLATE_ID = "fa50eed6-0948-45e0-979e-0ac4943b4635"
 POSTER_LINKED_EMAIL_TEMPLATE_ID = {
     "en": "79b032d6-34f7-4410-9f6e-764a7aea9735",
     "fr": "66804d87-3174-48a4-b796-7d268e1e0d79",
@@ -362,6 +363,10 @@ QRCODE_SIGNATURE_PRIVATE_KEY = os.getenv("QRCODE_SIGNATURE_PRIVATE_KEY", None)
 
 # Create default Super User with this password
 SU_DEFAULT_PASSWORD = os.getenv("SU_DEFAULT_PASSWORD", None)
+
+# ISED Email Address
+# Replace None for own email address for testing
+ISED_EMAIL_ADDRESS = os.getenv("ISED_EMAIL_ADDRESS", "ISED-ISDE@canada.ca")
 
 # Login Rate Limiting
 if TESTING:

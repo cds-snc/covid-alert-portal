@@ -52,6 +52,17 @@ class RegistrantEmailView(FormView):
 
         return super().form_valid(form)
 
+    def get_initial(self):
+        initial = super().get_initial()
+
+        try:
+            submitted = self.request.session["submitted_email"]
+            initial["email"] = submitted
+        except KeyError:
+            initial["email"] = ""
+
+        return initial
+
 
 class RegistrantEmailSubmittedView(TemplateView):
     template_name = "register/registrant_email_submitted.html"
@@ -66,7 +77,6 @@ class RegistrantEmailSubmittedView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["submitted_email"] = self.request.session.get("submitted_email")
-        del self.request.session["submitted_email"]
         return context
 
 
@@ -263,6 +273,9 @@ class RegisterConfirmationPageView(TemplateView):
         return context
 
 
+subject = {"get_help": "Help", "give_feedback": "Feedback", "something_else": "Other"}
+
+
 class ContactUsPageView(FormView):
     template_name = "register/contact_us.html"
     form_class = ContactUsForm
@@ -273,6 +286,23 @@ class ContactUsPageView(FormView):
 
     def get_success_url(self):
         return reverse_lazy("register:success")
+
+    def form_valid(self, form):
+        from_email = form.cleaned_data.get("contact_email")
+        message = form.cleaned_data.get("more_info")
+
+        help_category = form.cleaned_data.get("help_category")
+
+        send_email(
+            settings.ISED_EMAIL_ADDRESS,
+            {
+                "subject_type": subject.get(help_category),
+                "message": message,
+                "from_email": from_email,
+            },
+            settings.ISED_TEMPLATE_ID,
+        )
+        return super().form_valid(form)
 
 
 class QRSupportPageView(TemplateView):
