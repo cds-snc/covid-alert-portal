@@ -96,26 +96,6 @@ class LocationAddressForm(HealthcareBaseForm, forms.Form):
     province = forms.ChoiceField(label=_("Province or territory"), choices=provinces)
     postal_code = forms.CharField(label=_("Postal code"))
 
-
-class PhoneMultiWidget(forms.widgets.MultiWidget):
-    def __init__(self, attrs=None):
-        widgets = [forms.TextInput(),
-                   PhoneExtensionWidget]
-        super(PhoneMultiWidget, self).__init__(widgets, attrs)
-
-    def decompress(self, value):
-        if value:
-            return value.split("|")
-        return ['', '']
-class PhoneField(forms.fields.MultiValueField):
-    def __init__(self, *args, **kwargs):
-        list_fields = [forms.fields.CharField(max_length=31),
-                       forms.fields.CharField(max_length=31)]
-        super(PhoneField, self).__init__(list_fields, *args, **kwargs)
-
-    def compress(self, values):
-         if values:
-             return '|'.join(values) 
 class LocationContactForm(HealthcareBaseForm, forms.Form):
     contact_name = forms.CharField(label=_("Name of contact"))
     contact_email = forms.EmailField(label=_("Contact email"))

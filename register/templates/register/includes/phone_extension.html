@@ -1,14 +1,14 @@
 <div class="phone">
     
         <label id="id_contact_phone" for="contact_phone"><strong>Contact Phone Number</strong></label>
-        <input id="id_contact_phone" type="tel" value="" name="contact_phone">
+        <input id="id_contact_phone" type="tel" name="contact_phone" value="{{ widget.value }}">
 
     <label name="ext-label" id="id-ext-label" class="ext_button">Add phone extension</label>
     
-    <!-- <div class="ext-div">
+    <div class="ext-div" id="id_ext-div">
         <label class="ext-label"><strong>Extension</strong></label>
-        <input id="id_extension" type="tel" value="" name="extension">
-    </div> -->
+        <input id="id_extension" type="tel" name="extension" value="{{ widget.value }}">
+    </div>
     
 
 

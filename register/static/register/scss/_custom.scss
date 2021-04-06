@@ -85,3 +85,35 @@ body.qrcode {
         }
     }
 }
+.phone {
+    #id_contact_phone{
+        width: 60%;
+    }
+    #id_extension {
+        width: 30%;
+    }
+    .phone_field{
+        position: absolute;
+        top: 5;
+    }
+    .inactiveLink {
+        pointer-events: none;
+        cursor: default;
+     }
+     .ext_button {
+        position: relative;
+        left: 65%;
+        padding: 0;
+        bottom: 30px;
+        border: none;
+        background: transparent;
+        text-decoration: underline;
+        -webkit-appearance: none;
+        cursor: pointer;
+     }
+     .ext-div{
+        position: relative;
+        left: 70%;
+        bottom: 74px;
+     }
+}
