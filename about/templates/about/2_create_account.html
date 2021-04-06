@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block title %}
-{% trans "Create an account" %}
+{% trans "Log in to the portal" %}
 {% endblock %}
 
 {% block content_class %}row{% endblock %}
@@ -12,24 +12,16 @@
   </div>
 
   <div class="column column--2-3">
-    <h1>{% trans "Create an account" %}</h1>
+    <h1>{% trans "Log in to the portal" %}</h1>
+    <h2>{% trans "Create an account" %}</h2>
     <p>{% trans "If your administrator decides you need a portal account, you’ll get an email invitation. Check your spam folder if you’re expecting an invitation." %}</p>
-    <p>{% trans "Follow the directions in the invitation to create your account." %}</p>
-
-    <h2>{% trans "Keep a mobile phone with you" %}</h2>
-    <p>{% trans "The portal texts a security code to your mobile phone:" %}</p>
-    <ul>
-      <li>{% trans "When you create your account." %}</li>
-      <li>{% trans "Anytime you log in." %}</li>
-    </ul>
-
-    <p>{% trans "If you do not have a mobile phone, you can get security codes by visiting" %}
-    {% if user.id %}
-      <a href="{% url 'user_profile' user.id %}">
-    {% else %}
-      <a href="{% url 'login' %}">
-    {% endif %}
-    {% trans "Manage your account" %}</a>. <strong>{% trans "Before you do anything else, save these codes somewhere that only you can access." %}</strong></p>
+    <p>{% trans "Follow the directions in the invitation to create your account and get your first log in code." %}</p>
+    <h2>{% trans "Log in codes" %}</h2>
+    <p>{% trans "The portal texts a code to your mobile phone each time you log in." %}</p>
+    <p>{% trans "If you need to change your mobile number, visit" %}  {% if user.id %}<a href="{% url 'user_profile' user.id %}">{% else %}<a href="{% url 'login' %}">{% endif %}{% trans "Manage your account." %}</a></p>
+    <h2>{% trans "No mobile phone?" %}</h2>
+    <p>{% trans "You can get log in codes by visiting" %}  {% if user.id %}<a href="{% url 'user_profile' user.id %}">{% else %}<a href="{% url 'login' %}">{% endif %}{% trans "Manage your account." %}</a> {% trans "Keep the codes somewhere only you can access." %}</p>
+    <p><strong>{% trans "You can use each log in code 1 time only." %}</strong></p>
 
     <div class="content-next-link">
       <a href="{% url 'about:one_time_keys' %}" class="chevron-right">{% trans "Next:" %} {% trans "One-time keys" %}</a>

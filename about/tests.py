@@ -24,10 +24,10 @@ class AboutView(TestCase):
     def test_about_create_account_page(self):
         response = self.client.get(reverse("about:create_account"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Create an account</h1>", html=True)
+        self.assertContains(response, "<h1>Log in to the portal</h1>", html=True)
         self.assertContains(
             response,
-            '<a class="active" href="/en/about/create-an-account">Create an account</a>',
+            '<a class="active" href="/en/about/create-an-account">Log in to the portal</a>',
             html=True,
         )
 

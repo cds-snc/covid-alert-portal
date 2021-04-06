@@ -293,7 +293,7 @@ class Resend2FAView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         is_valid = super().form_valid(form)
         if is_valid:
-            messages.success(self.request, _("Security code has been sent."))
+            messages.success(self.request, _("Log in code has been sent."))
 
         return is_valid
 
@@ -382,7 +382,7 @@ class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):
             and healthcareuser.is_admin
         )
 
-        # Get the number of Security Codes that currently exist
+        # Get the number of log in Codes that currently exist
         _devices = get_user_static_device(healthcareuser)
         context["backup_codes_set"] = True if _devices else False
         context["backup_codes_count"] = (
