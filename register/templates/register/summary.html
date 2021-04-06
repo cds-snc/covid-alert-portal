@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block title %}
-  {% trans "Check your answers before making your poster" %}
+  {% trans "Check your answers" %}
 {% endblock %}
 
 {% block content %}
@@ -12,27 +12,8 @@
 
     <p>{% trans "Step 5 of 5" %}</p>
 
-    <h1>{% trans "Check your answers before making your poster" %}</h1>
-
-    <h2>{% trans "Personal information" %}</h2>
-
-    <dl class="summary-list">
-        <div class="summary-list__row">
-            <dt class="summary-list__key">
-                {% trans "Your email address" %}
-            </dt>
-            <dd class="summary-list__value">
-                {{ registrant.email }}
-            </dd>
-            <dd class="summary-list__actions">
-                <a href="{% url 'register:registrant_email'  %}">
-                    {% blocktrans %} Change<span class="visually-hidden"> your email</span> {% endblocktrans %}
-                </a>
-            </dd>
-        </div>
-    </dl>
+    <h1>{% trans "Check your answers" %}</h1>
     
-    <h2>{% trans "Service or event details" %}</h2>
     <form action="" method="post" class="summary_form">
         {% csrf_token %}
         {{ wizard.management_form }}
@@ -40,22 +21,18 @@
         <dl class="summary-list">
             <div class="summary-list__row">
                 <dt class="summary-list__key">
-                    {% trans "Address" %}
+                    {% trans "Your email address" %}
                 </dt>
                 <dd class="summary-list__value">
-                    {{ form_data.address }}<br>
-                    {% if form_data.address_2 %}
-                        {{ form_data.address_2 }}<br>
-                    {% endif %}
-                    {{ form_data.city }}<br>
-                    {{ form_data.province }}<br>
-                    {{ form_data.postal_code }}
+                    {{ registrant.email }}
                 </dd>
                 <dd class="summary-list__actions">
-                    <a href="{% url 'register:location_step' step='address' %}">{% blocktrans %} Change <span class="visually-hidden"> address</span> {% endblocktrans %} </a>
+                    <a href="{% url 'register:registrant_email'  %}">
+                        {% blocktrans %} Change<span class="visually-hidden"> your email</span> {% endblocktrans %}
+                    </a>
                 </dd>
             </div>
-            
+
             <div class="summary-list__row">
                 <dt class="summary-list__key">
                     {% trans "Type" %}
@@ -75,6 +52,7 @@
             <div class="summary-list__row">
                 <dt class="summary-list__key">
                     {% trans "Name" %}
+                    <span class="tag tag--yellow">Shows on poster</span>
                 </dt>
                 <dd class="summary-list__value">
                     {{ form_data.name }}
@@ -86,7 +64,26 @@
 
             <div class="summary-list__row">
                 <dt class="summary-list__key">
-                    {% trans "Contact person for the location" %}
+                    {% trans "Address" %}
+                    <span class="tag tag--yellow">Shows on poster</span>
+                </dt>
+                <dd class="summary-list__value">
+                    {{ form_data.address }}<br>
+                    {% if form_data.address_2 %}
+                        {{ form_data.address_2 }}<br>
+                    {% endif %}
+                    {{ form_data.city }}<br>
+                    {{ form_data.province }}<br>
+                    {{ form_data.postal_code }}
+                </dd>
+                <dd class="summary-list__actions">
+                    <a href="{% url 'register:location_step' step='address' %}">{% blocktrans %} Change <span class="visually-hidden"> address</span> {% endblocktrans %} </a>
+                </dd>
+            </div>
+
+            <div class="summary-list__row">
+                <dt class="summary-list__key">
+                    {% trans "Contact person for this address" %}
                 </dt>
                 <dd class="summary-list__value">
                     {{ form_data.contact_name }}<br>
@@ -99,12 +96,19 @@
             </div>
         </dl>
 
-        <h2>{% trans "We’ll use this information to make your poster" %}</h2>
+        <h2>{% trans "We’ll use these answers to make your poster" %}</h2>
 
-        <p>{% trans "By selecting “Make poster”, you confirm your answers are correct and complete." %}
+        <div class="messages--container" role="alert">
+            <ul class="messages">
+                <li class="info">
+                    {% trans "By selecting “Make poster” you confirm your answers are correct and complete." %}
+                </li>
+            </ul>
+        </div>
+
 
         <div class="content-button">
-            <button type="submit">{% trans "Make poster" %}</button>
+            <button type="submit" class="start with-chevron">{% trans "Make poster" %}</button>
         </div>
     </form>
 {% endblock %}
