@@ -177,7 +177,7 @@ class LocationWizard(NamedUrlSessionWizardView):
             city=data["city"],
             province=data["province"],
             postal_code=data["postal_code"],
-            registrant=registrant
+            registrant=registrant,
         )
 
         # Only set the category description if "other" selected
