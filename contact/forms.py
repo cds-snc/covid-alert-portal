@@ -7,6 +7,7 @@ from requests import post
 
 from portal.forms import HealthcareBaseForm
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -22,6 +23,7 @@ class ContactForm(HealthcareBaseForm):
     feedback = forms.CharField(
         label=_("Ask questions or give feedback"),
         error_messages={"required": FEEDBACK_MESSAGE},
+        help_text=_("Do not include any personal details"),
         widget=forms.Textarea,
     )
 

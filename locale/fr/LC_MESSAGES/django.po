@@ -60,49 +60,57 @@ msgstr "Suivant :"
 
 #: about/templates/about/1_index.html
 #: about/templates/about/2_create_account.html
-#: about/templates/includes/_nav_about.html
 msgid "Create an account"
 msgstr "Créer un compte"
+
+#: about/templates/about/2_create_account.html
+#: about/templates/includes/_nav_about.html
+msgid "Log in to the portal"
+msgstr "Se connecter au portail"
 
 #: about/templates/about/2_create_account.html
 msgid "If your administrator decides you need a portal account, you’ll get an email invitation. Check your spam folder if you’re expecting an invitation."
 msgstr "Vous recevrez une invitation par courriel si votre administrateur détermine que vous avez besoin d’un compte pour le portail. Vérifiez vos pourriels si vous attendez une invitation."
 
 #: about/templates/about/2_create_account.html
-msgid "Follow the directions in the invitation to create your account."
-msgstr "Suivez les instructions dans l’invitation pour créer votre compte."
-
-#: about/templates/about/2_create_account.html
-msgid "Keep a mobile phone with you"
-msgstr "Ayez un téléphone mobile avec vous"
-
-#: about/templates/about/2_create_account.html
-msgid "The portal texts a security code to your mobile phone:"
-msgstr "Le portail vous envoie un code de sécurité par message texte :"
-
-#: about/templates/about/2_create_account.html
-msgid "When you create your account."
-msgstr "Au moment de créer votre compte."
-
-#: about/templates/about/2_create_account.html
-msgid "Anytime you log in."
-msgstr "Lors de chaque connexion."
-
-#: about/templates/about/2_create_account.html
-msgid "If you do not have a mobile phone, you can get security codes by visiting"
-msgstr "Si vous n’avez pas de téléphone mobile, vous pouvez obtenir des codes de sécurité dans"
-
-#: about/templates/about/2_create_account.html
-#: portal/templates/includes/nav_header.html
-#: profiles/templates/profiles/healthcareuser_detail.html
-msgid "Manage your account"
-msgstr "Gérer votre compte"
+msgid "Follow the directions in the invitation to create your account and get your first log in code."
+msgstr "Suivez les instructions dans l’invitation pour créer votre compte et obtenir votre premier code de connexion."
 
 #: about/templates/about/2_create_account.html
 #: backup_codes/templates/backup_codes/backup_codes_list.html
+#: profiles/templates/profiles/healthcareuser_detail.html
+msgid "Log in codes"
+msgstr "Codes de connexion"
+
+#: about/templates/about/2_create_account.html
+msgid "The portal texts a code to your mobile phone each time you log in."
+msgstr "Vous recevrez un code par texto lors de chaque connexion au portail."
+
+#: about/templates/about/2_create_account.html
+msgid "If you need to change your mobile number, visit"
+msgstr "Si vous souhaitez changer votre numéro de téléphone mobile, allez dans"
+
+#: about/templates/about/2_create_account.html
+msgid "Manage your account."
+msgstr "Gérer votre compte."
+
+#: about/templates/about/2_create_account.html
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html
-msgid "Before you do anything else, save these codes somewhere that only you can access."
-msgstr "Avant toute autre chose, enregistrez ces codes dans un endroit auquel vous seul pouvez accéder."
+#: profiles/templates/profiles/signup_2fa.html
+msgid "No mobile phone?"
+msgstr "Pas de téléphone mobile?"
+
+#: about/templates/about/2_create_account.html
+msgid "You can get log in codes by visiting"
+msgstr "Vous pouvez obtenir des codes de connexion dans"
+
+#: about/templates/about/2_create_account.html
+msgid "Keep the codes somewhere only you can access."
+msgstr "Conservez vos codes dans un endroit connu de vous seul."
+
+#: about/templates/about/2_create_account.html
+msgid "You can use each log in code 1 time only."
+msgstr "Chaque code ne peut être utilisé qu’une fois."
 
 #: about/templates/about/2_create_account.html
 #: about/templates/about/3_one_time_keys.html
@@ -137,19 +145,35 @@ msgid "Give a key"
 msgstr "Fournir une clé"
 
 #: about/templates/about/4_give_a_key.html
-msgid "After you generate a key, the next screen shows a combination of letters and numbers. The screen gives 1 word that you’ll read for each letter. This helps the patient check they heard the correct letter."
-msgstr "Après avoir généré une clé, vous verrez une suite de chiffres et de lettres apparaître à l’écran suivant. Pour chacune des lettres, vous aurez à lire le mot indiqué pour aider le patient à noter les bonnes lettres."
+msgid "The key is a combination of letters and numbers."
+msgstr "La clé est composée de lettres et de chiffres."
 
 #: about/templates/about/4_give_a_key.html
-msgid "Confirm patient understood the key"
-msgstr "Vérifiez que le patient a noté la bonne clé"
+msgid "Read key phonetically"
+msgstr "Lecture de la clé de façon phonétique"
+
+#: about/templates/about/4_give_a_key.html
+msgid "We’ve chosen words for each letter so patients understand letters correctly."
+msgstr "Nous avons choisi des mots pour épeler les lettres de la clé et aider les patients à noter les bonnes lettres."
+
+#: about/templates/about/4_give_a_key.html
+msgid "You may be able to text the key"
+msgstr "Possibilité d’envoyer la clé par message texte"
+
+#: about/templates/about/4_give_a_key.html
+msgid "If permitted by your health authority, the portal displays the button 'Text key to patient'. That button guides you through next steps if the patient agrees to get the key by text."
+msgstr "Si votre autorité de santé publique le permet, le portail vous offrira de « Texter la clé au patient ». Si le patient accepte de recevoir la clé ainsi, ce bouton vous guidera vers les prochaines étapes."
+
+#: about/templates/about/4_give_a_key.html
+msgid "How the portal displays keys"
+msgstr "Affichage d’une clé dans le portail"
 
 #: about/templates/about/4_give_a_key.html
 msgid "The app guides the patient through the next steps"
 msgstr "L’application explique au patient les étapes à suivre"
 
 #: about/templates/about/4_give_a_key.html
-msgid "First the patient enters the key. Then the app guides them through the steps to notify people of possible exposure."
+msgid "The patient enters the key. Then the app guides them through the steps to notify people of possible exposure."
 msgstr "Le patient sera guidé étape par étape pour qu’il entre sa clé et notifie les personnes d’une exposition potentielle."
 
 #: about/templates/about/4_give_a_key.html
@@ -172,8 +196,10 @@ msgid "Help patient enter key"
 msgstr "Aider le patient avec sa clé"
 
 #: about/templates/about/5_help_patient_enter_key.html
-msgid "Check the phone is connected to the internet."
-msgstr "Vérifiez que son téléphone est connecté à Internet."
+#: covid_key/templates/covid_key/key.html
+#: covid_key/templates/covid_key/otk_sms_sent.html
+msgid "To enter the key, the phone must be connected to the internet."
+msgstr "Le patient doit connecter son téléphone à Internet pour pouvoir entrer la clé."
 
 #: about/templates/about/5_help_patient_enter_key.html
 #: about/templates/about/6_admin_accounts.html
@@ -202,8 +228,8 @@ msgid "Delete portal accounts."
 msgstr "Supprimer des comptes."
 
 #: about/templates/about/6_admin_accounts.html
-msgid "Give security codes to healthcare workers who are locked out of the portal."
-msgstr "Fournir des codes de sécurité aux membres incapables de se connecter au portail."
+msgid "Give log in codes to team members who are locked out of the portal."
+msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
 
 #: about/templates/includes/_nav_about.html
 msgid "Table of contents: About the Portal"
@@ -281,8 +307,10 @@ msgstr "Révocable"
 
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html
 #: profiles/forms.py
-msgid "Security code"
-msgstr "Code de sécurité"
+#, fuzzy
+#| msgid "Log in"
+msgid "Log in code"
+msgstr "Connexion"
 
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html
 #, python-format
@@ -294,8 +322,8 @@ msgid "Read the code phonetically and ask the team member to read it back to you
 msgstr "Lisez le code de façon phonétique puis demandez au membre de vous le répéter :"
 
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html
-msgid "After they log in, they can follow the instructions to get more security codes."
-msgstr "Après s’être connecté, l’employé pourra suivre les instructions pour obtenir plus de codes de sécurité."
+msgid "After they log in, they can follow the instructions to get more codes."
+msgstr "Après s’être connecté, l’employé pourra suivre les instructions pour obtenir plus de codes de connexion."
 
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html
 msgid "Back to Manage team"
@@ -347,8 +375,8 @@ msgstr "Erreur : "
 
 #: backup_codes/templates/backup_codes/backup_codes_help.html
 #: profiles/templates/profiles/2fa.html
-msgid "No security code?"
-msgstr "Pas de code de sécurité?"
+msgid "No log in code?"
+msgstr "Pas de code de connexion?"
 
 #: backup_codes/templates/backup_codes/backup_codes_help.html
 #, python-format
@@ -356,15 +384,13 @@ msgid "Ask your administrator for a code. You can email them at %(admin_email)s.
 msgstr "Demandez à votre administrateur de vous donner un code. Vous pouvez leur envoyer un courriel à %(admin_email)s."
 
 #: backup_codes/templates/backup_codes/backup_codes_help.html
-msgid "Get codes from admin"
+#, fuzzy
+#| msgid "Get codes from admin"
+msgid "Get code from admin"
 msgstr "Demander un code"
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html
-msgid "Security codes"
-msgstr "Code de sécurité"
-
-#: backup_codes/templates/backup_codes/backup_codes_list.html
-msgid "Use these security codes to login to the portal. The code proves it’s you."
+msgid "Use these codes to log in to the portal. The code proves it's you."
 msgstr "Utilisez les codes suivants pour vous connecter au portail. Ils servent à vous authentifier."
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html
@@ -372,30 +398,36 @@ msgid "You can use each code only once."
 msgstr "Chaque code ne peut être utilisé qu’une fois."
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html
-#: backup_codes/templates/backup_codes/signup_backup_codes_list.html
-msgid "Do not email them to yourself or anyone else, do not keep them on a shared computer or on any device that is not protected by a password."
-msgstr "Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne. Ne les enregistrez pas sur un ordinateur partagé ni sur un appareil non protégé par un mot de passe."
+msgid "Keep the codes somewhere that only you can access. Do not email them to yourself or anyone else, do not keep them on a shared computer or on any device that is not protected by a password."
+msgstr "Notez les codes à un endroit connu de vous seul. Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne. Ne les enregistrez pas sur un ordinateur partagé ni sur un appareil non protégé par un mot de passe."
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html
 msgid "When you get new codes, your old codes will no longer work, even if you have not used them yet."
 msgstr "Quand vous générez de nouveaux codes, tous les codes précédents qui n’ont pas été utilisés deviennent invalides."
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html
-msgid "Get new security codes"
-msgstr "Obtenez des codes de sécurité"
+msgid "Get new log in codes"
+msgstr "Obtenir de nouveaux codes"
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html
 msgid "Back to Manage your account"
 msgstr "Retour à Gérer votre compte"
 
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html
-#: profiles/templates/profiles/signup_2fa.html
-msgid "No mobile phone?"
-msgstr "Pas de téléphone mobile?"
+#, fuzzy
+#| msgid "Log into the portal using one of the security codes below. You can use each code only once.  When you have 1 code left, we’ll tell you how to get more."
+msgid "Log into the portal using one of the codes below. You can use each log in code only once. When you have 1 code left, we’ll tell you how to get more."
+msgstr "Utilisez l’un des codes de sécurité suivants pour vous connecter au portail. Chaque code ne peut être utilisé qu’une fois. Quand il n’en restera qu’un seul, nous vous dirons comment en obtenir d’autres."
 
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html
-msgid "Log into the portal using one of the security codes below. You can use each code only once.  When you have 1 code left, we’ll tell you how to get more."
-msgstr "Utilisez l’un des codes de sécurité suivants pour vous connecter au portail. Chaque code ne peut être utilisé qu’une fois. Quand il n’en restera qu’un seul, nous vous dirons comment en obtenir d’autres."
+#, fuzzy
+#| msgid "Before you do anything else, save these codes somewhere that only you can access."
+msgid "Keep the codes somewhere that only you can access."
+msgstr "Avant toute autre chose, enregistrez ces codes dans un endroit auquel vous seul pouvez accéder."
+
+#: backup_codes/templates/backup_codes/signup_backup_codes_list.html
+msgid "Do not email them to yourself or anyone else, do not keep them on a shared computer or on any device that is not protected by a password."
+msgstr "Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne. Ne les enregistrez pas sur un ordinateur partagé ni sur un appareil non protégé par un mot de passe."
 
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html
 #: covid_key/templates/covid_key/otk_sms_sent.html
@@ -431,6 +463,10 @@ msgstr "Écrivez quelque chose si vous souhaitez nous joindre"
 #: contact/forms.py
 msgid "Ask questions or give feedback"
 msgstr "Questions ou commentaires"
+
+#: contact/forms.py
+msgid "Do not include any personal details"
+msgstr "N’inscrivez pas de renseignements personnels."
 
 #: contact/forms.py
 msgid "There was a problem and your feedback wasn’t submitted. Please email your feedback to assistance+healthcare@cds-snc.ca."
@@ -531,17 +567,12 @@ msgid "Give patient this key"
 msgstr "Donnez la clé suivante au patient"
 
 #: covid_key/templates/covid_key/key.html
-#: covid_key/templates/covid_key/otk_sms_sent.html
-msgid "To enter the key, the phone must be connected to the internet."
-msgstr "Le patient doit connecter son téléphone à Internet pour pouvoir entrer la clé."
-
-#: covid_key/templates/covid_key/key.html
 msgid "Patients can also <a href=\"https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert/help.html#a17\" target=\"_blank\">contact direct app support</a>"
-msgstr "Les patients peuvent aussi <a href='https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid/aide.html#a17' target='_blank'>obtenir une aide directe</a>"
+msgstr "Les patients peuvent aussi <a href='https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid/aide.html#a17' target='_blank'>obtenir une aide directe pour l’application.</a>"
 
 #: covid_key/templates/covid_key/key.html
 msgid "Generate another key"
-msgstr "Générer une autre clé"
+msgstr "Générer une nouvelle clé"
 
 #: covid_key/templates/covid_key/locked.html
 msgid "Key generation limit reached"
@@ -672,10 +703,10 @@ msgstr "Confirmer et envoyer"
 msgid "Name"
 msgstr "Nom"
 
-#: outbreaks/templates/confirm.html
+#: outbreaks/templates/confirm.html profiles/templates/profiles/edit.html
 #: profiles/templates/profiles/healthcareuser_detail.html
 msgid "Change"
-msgstr "Modifier"
+msgstr "Mettre à jour"
 
 #: outbreaks/templates/confirm.html
 #, fuzzy
@@ -1069,6 +1100,11 @@ msgid "Language and account navigation"
 msgstr "Navigation de compte et changement de langue"
 
 #: portal/templates/includes/nav_header.html
+#: profiles/templates/profiles/healthcareuser_detail.html
+msgid "Manage your account"
+msgstr "Gérer votre compte"
+
+#: portal/templates/includes/nav_header.html
 msgid "Log out"
 msgstr "Déconnexion"
 
@@ -1122,8 +1158,8 @@ msgid "Forgot your password?"
 msgstr "Mot de passe oublié?"
 
 #: portal/templates/registration/login.html
-msgid "Only an authorized healthcare worker can use a portal account and give a COVID Alert key."
-msgstr "Seuls les professionnels de la santé autorisés peuvent utiliser un compte du Portail et fournir une clé Alerte COVID."
+msgid "Only an authorized staff member can use a portal account and give a COVID Alert key."
+msgstr "Seuls les employés autorisés peuvent avoir un compte pour le portail et fournir une clé Alerte COVID."
 
 #: portal/templates/registration/login.html
 msgid "Thanks for your essential work"
@@ -1407,16 +1443,16 @@ msgid "Mobile phone number"
 msgstr "Numéro de téléphone mobile"
 
 #: profiles/forms.py profiles/models.py
-msgid "You must enter a new security code each time you log in. We’ll text the code to your mobile phone number."
-msgstr "Il faut entrer un nouveau code de sécurité à chaque connexion. Nous vous enverrons le code par message texte."
+msgid "You must enter a new code each time you log in. We’ll text the log in code to your mobile phone number."
+msgstr "Il faut entrer un nouveau code à chaque connexion. Nous texterons le code à votre numéro mobile."
 
 #: profiles/forms.py
 msgid "Confirm your mobile phone number"
 msgstr "Confirmez votre numéro de téléphone mobile"
 
 #: profiles/forms.py
-msgid "Enter the same mobile number as above."
-msgstr "Saisissez de nouveau votre numéro de téléphone."
+msgid "Enter the phone number again."
+msgstr "Saisissez de nouveau votre numéro mobile."
 
 #: profiles/forms.py
 msgid "You entered 2 different phone numbers."
@@ -1506,7 +1542,7 @@ msgstr "Le lien est expiré."
 
 #: profiles/templates/invitations/messages/invite_invalid.txt
 msgid "This link is invalid. Ask your administrator for a new link."
-msgstr "Le lien n’est pas valide. Demandez un nouveau lien à votre administrateur."
+msgstr "Le lien est expiré. Demandez un nouveau lien à votre administrateur."
 
 #: profiles/templates/invitations/templates/invitation_confirm_delete.html
 #, python-format
@@ -1564,7 +1600,7 @@ msgid "Ask your administrator for a new link"
 msgstr "Demandez un nouveau lien à votre administrateur"
 
 #: profiles/templates/invitations/templates/invite_expired.html
-msgid "You’ll find their email address in the invitation to create your portal account."
+msgid "You’ll find their email address in the invitation to create your account."
 msgstr "Vous trouverez son adresse courriel dans l’invitation reçue pour créer votre compte."
 
 #: profiles/templates/invitations/templates/invite_list.html
@@ -1616,8 +1652,8 @@ msgid "You are sending too many invitations. Try again later."
 msgstr "Vous envoyez trop d’invitations. Réessayer plus tard."
 
 #: profiles/templates/profiles/2fa-resend.html
-msgid "Re-send security code"
-msgstr "Renvoyer un code de sécurité"
+msgid "Re-send log in code"
+msgstr "Renvoyer un code de connexion"
 
 #: profiles/templates/profiles/2fa-resend.html
 msgid "If you did not get the code, we can send it again."
@@ -1632,28 +1668,28 @@ msgid "Validate your code"
 msgstr "Valider votre code"
 
 #: profiles/templates/profiles/2fa.html
-msgid "Enter your security code"
-msgstr "Entrez votre code de sécurité"
+msgid "Enter your log in code"
+msgstr "Entrez votre code de connexion"
 
 #: profiles/templates/profiles/2fa.html
-msgid "You kept these codes somewhere safe."
-msgstr "Vous devriez avoir conservé vos codes dans un endroit sûr."
+msgid "You kept these codes somewhere safe. You can use each code only once."
+msgstr "Vous devriez avoir conservé vos codes dans un endroit sûr. Chaque code ne peut être utilisé qu’une fois."
 
 #: profiles/templates/profiles/2fa.html
-msgid "We’ve sent you a text message with a security code."
-msgstr "Nous vous avons envoyé un code de sécurité par message texte."
+msgid "You need to enter a new code each time you log in."
+msgstr "Il faut entrer un nouveau code à chaque connexion."
 
 #: profiles/templates/profiles/2fa.html
-msgid "We’ve texted you a code and you also kept codes somewhere safe."
-msgstr "Utilisez le code reçu par message texte ou l’un de ceux que avez conservés dans un endroit sûr."
+msgid "We’ve just sent a text message with your new code."
+msgstr "Nous venons de vous envoyer un nouveau code par message texte."
 
 #: profiles/templates/profiles/2fa.html
-msgid "Resend security code?"
-msgstr "Renvoyer le code de sécurité"
+msgid "We’ve texted you a code and you also kept codes somewhere safe. Use 1 of these codes to log in. You can use each code only once."
+msgstr "Utilisez le code reçu par message texte ou l’un de ceux que avez conservés dans un endroit sûr. Chaque code ne peut être utilisé qu’une fois."
 
-#: profiles/templates/profiles/edit.html
-msgid "Update"
-msgstr "Mettre à jour"
+#: profiles/templates/profiles/2fa.html
+msgid "Resend log in code?"
+msgstr "Renvoyer un code de connexion"
 
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html
 msgid "Confirm delete user"
@@ -1726,10 +1762,6 @@ msgid "Last changed"
 msgstr "Dernière modification"
 
 #: profiles/templates/profiles/healthcareuser_detail.html
-msgid "Security Codes"
-msgstr "Codes de sécurité"
-
-#: profiles/templates/profiles/healthcareuser_detail.html
 msgid "code"
 msgstr "code"
 
@@ -1750,12 +1782,14 @@ msgid "Generate codes"
 msgstr "Générer des codes"
 
 #: profiles/templates/profiles/healthcareuser_detail.html
-msgid "View security codes"
+#, fuzzy
+#| msgid "View security codes"
+msgid "View log in codes"
 msgstr "Voyez vos codes de sécurité"
 
 #: profiles/templates/profiles/healthcareuser_detail.html
-msgid "Get a security code"
-msgstr "Obtenir un code de sécurité"
+msgid "Get log in codes"
+msgstr "Obtenir un code"
 
 #: profiles/templates/profiles/healthcareuser_detail.html
 msgid "Back to accounts"
@@ -1906,30 +1940,29 @@ msgid "They can also read about <a href='https://www.canada.ca/en/public-health/
 msgstr "Ils peuvent aussi consulter les <a href='https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid/aide.html' target='_blank'>questions fréquentes relatives à l’application</a>."
 
 #: profiles/templates/profiles/terms.html
-#, python-format
 msgid ""
 "\n"
-"        <p>The COVID Alert Portal is only for authorized healthcare workers in Canada.</p>\n"
-"        <p>By using the portal, you agree to:</p>\n"
+"        <p>The COVID Alert Portal is only for authorized staff in Canada.</p>\n"
+"        <p>By using the portal, you agree to follow your health authority’s procedures.</p>\n"
+"        <p>You also agree to:</p>\n"
+"        <strong><p>Only generate keys for real patients</p></strong>\n"
+"        <p>Give only 1 key per positive test.</p>\n"
+"        <p>For a sample key, visit \"<a href=\"#\">Give a key</a>\".</p>\n"
+"        <strong><p>Confirm the patient meets 2 conditions</p></strong>\n"
+"        <p>They've:</p>\n"
 "        <ul class=\"expanded\">\n"
-"            <li>Follow your healthcare authority’s procedures.</li>\n"
-"            <li>Only give one key per each patient diagnosed with COVID-19 by your healthcare authority. Do not generate a key for any other reason.</li>\n"
-"            <li>Prevent other people from using your account.  You must protect your username and password, even from other people working for a healthcare authority.</li>\n"
-"            <li>\n"
-"            Immediately report any security issues with your account to both:\n"
-"                <ul>\n"
-"                    <li>your administrator</li>\n"
-"                    <li><a href=\"mailto:security@cds-snc.ca\">security@cds-snc.ca</a></li>\n"
-"                </ul>\n"
-"            </li>\n"
+"            <li>Tested positive for COVID-19, and,</li>\n"
+"            <li>Installed the COVID Alert app on their phone.</li>\n"
 "        </ul>\n"
+"        <strong><p>Get the patient’s consent before texting a key</p></strong>\n"
+"        <p>Some patients may want you to text the one-time key to their mobile phone.  If your health authority offers this feature, the portal displays the button “Text key to patient”.</p>\n"
+"        <strong><p>Prevent others from using your account</p></strong>\n"
+"        <p>Protect your username and password, even from other people working for a health authority.</p>\n"
+"        <strong><p>Keep the portal secure</p></strong>\n"
+"        <p>Immediately report any security issues to your administrator <strong>and</strong> <a href=\"mailto:security@cds-snc.ca\">security@cds-snc.ca</a></p>\n"
 "        <p>If we detect any misuse of the portal or security issues with your account, we’ll immediately disable your account.</p>\n"
-"        <h2>Questions?</h2>\n"
-"        <p>For questions about these terms of use, or to report a technical issue, <a href=\"%(contact_url)s\">contact us</a>.</p>\n"
 "    "
 msgstr ""
-"\n"
-"<p>Le portail Alerte COVID est uniquement conçu pour les professionnels de la santé du Canada autorisés.</p><p>En utilisant le portail, vous acceptez de :</p><ul class=\"expanded\"><li>Suivre les procédures établies par votre autorité sanitaire.</li><li>Ne donner qu’une seule clé aux patients chez qui la COVID-19 est diagnostiquée et ne pas générer de clé pour aucune autre raison qui soit.</li><li>Empêcher d’autres personnes d’utiliser votre compte. Vous devez éviter de divulguer votre nom d’utilisateur et votre mot de passe, même aux personnes travaillant pour une autorité sanitaire.</li><li>Signaler immédiatement tout problème de sécurité en lien avec votre compte aux instances suivantes :<ul><li>l’administrateur du portail</li><li><a href=\"mailto:security@cds-snc.ca\">security@cds-snc.ca</a></li></ul></li></ul><p>Si nous détectons toute mauvaise utilisation du portail ou tout problème de sécurité lié à votre compte, nous désactiverons immédiatement votre compte.</p><h2>Des questions?</h2><p>Pour des questions sur les conditions d’utilisation ou pour signaler un problème technique, <a href=\"%(contact_url)s\">contactez-nous</a>.</p>"
 
 #: profiles/templates/profiles/yubikey_create.html
 msgid "Add Yubikey token"
@@ -1995,7 +2028,9 @@ msgid "You entered the wrong code."
 msgstr "Vous n’avez pas saisi le bon code."
 
 #: profiles/views.py
-msgid "Security code has been sent."
+#, fuzzy
+#| msgid "Security code has been sent."
+msgid "Log in code has been sent."
 msgstr "Le code de sécurité a été envoyé."
 
 #: profiles/views.py

@@ -345,7 +345,7 @@ class AuthenticatedView(AdminUserTestCase):
         #  Get the 2fa page
         response = self.client.get(reverse("login_2fa"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Enter your security code</h1>")
+        self.assertContains(response, "<h1>Enter your log in code</h1>")
         self.assertNotContains(response, "Your account")
         self.assertContains(response, "Log out")
 
@@ -1078,7 +1078,7 @@ class ProfileView(AdminUserTestCase):
         user2 = User.objects.create_user(**get_other_credentials(is_admin=True))
         response = self.client.get(reverse("user_profile", kwargs={"pk": user2.id}))
         self.assertEqual(response.status_code, 200)
-        ## no security codes link present
+        ## no log in codes link present
         self.assertNotContains(response, '<a href="/en/backup-codes">')
 
 
