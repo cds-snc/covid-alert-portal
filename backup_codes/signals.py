@@ -27,7 +27,7 @@ def add_low_on_tokens_notification(sender, instance, **kwargs):
         _remove_low_on_codes_notification(for_user)
 
         Announcement.objects.create(
-            title_en=f"You have {users_static_codes_remaining} security code{'s' if users_static_codes_remaining == 0 else ''} left.",
+            title_en=f"You have {users_static_codes_remaining} log in code{'s' if users_static_codes_remaining == 0 else ''} left.",
             title_fr=f"Il vous reste {users_static_codes_remaining} code{'s' if users_static_codes_remaining == 0 else ''} de sécurité.",
             content_en=f"To get more codes, visit ‘<a href='/profiles/{for_user.id}'>Manage your Account</a>’",
             content_fr=f"Pour obtenir plus de codes, visitez <a href='/profiles/{for_user.id}'>Gérer votre compte</a>",

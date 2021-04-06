@@ -1,30 +1,29 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Security codes" %}{% endblock %}
+{% block title %}{% trans "Log in codes" %}{% endblock %}
 
 {% block body_class %}backup_codes{% endblock %}
 
 {% block content %}
   {% include  "includes/flash_messages.html" %}
-  <h1>{% trans "Security codes" %}</h1>
-  <h2 class="header--print print-only">Security codes for {{ user.email }}</h2>
+  <h1>{% trans "Log in codes" %}</h1>
+  <h2 class="header--print print-only">log in codes for {{ user.email }}</h2>
 
-  <p>{% trans "Use these security codes to login to the portal. The code proves it’s you." %}</p>
+  <p>{% trans "Use these codes to log in to the portal. The code proves it's you." %}</p>
   <p>{% trans "You can use each code only once." %}</p>
 
   <p>
-    <strong>{% trans "Before you do anything else, save these codes somewhere that only you can access."%}</strong>
-    {% trans "Do not email them to yourself or anyone else, do not keep them on a shared computer or on any device that is not protected by a password." %}
+    {% trans "Keep the codes somewhere that only you can access. Do not email them to yourself or anyone else, do not keep them on a shared computer or on any device that is not protected by a password." %}
   </p>
 
   {% include "includes/codes.html" with codes=backup_code_list %}
-
+  
   <p>{% trans "When you get new codes, your old codes will no longer work, even if you have not used them yet." %}</p>
   <div class="content-button">
     <form action="{% url 'backup_codes' %}" method="post">
       {% csrf_token %}
-      <button type="submit">{% trans "Get new security codes" %}</button>
+      <button type="submit">{% trans "Get new log in codes" %}</button>
     </form>
     <a href="{% url 'user_profile' pk=user.id %}" class="secondary" role='button' draggable='false'>{% trans "Back to Manage your account" %}</a>
   </div>

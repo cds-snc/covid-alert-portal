@@ -3,14 +3,14 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "No security code?" %}
+  {% trans "No log in code?" %}
 {% endblock %}
 
 {% block content %}
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "No security code?" %}</h1>
+  <h1>{% trans "No log in code?" %}</h1>
   <p>{% blocktrans with view.user_admin.email as admin_email %}Ask your administrator for a code. You can email them at {{ admin_email }}.{% endblocktrans %}</p>
-  {% include "includes/cds_form.html" with submit_text=_("Get codes from admin") %}
+  {% include "includes/cds_form.html" with submit_text=_("Get code from admin") %}
 
 {% endblock %}

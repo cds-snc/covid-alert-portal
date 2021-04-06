@@ -3,16 +3,16 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Re-send security code" %}
+  {% trans "Re-send log in code" %}
 {% endblock %}
 
 
 {% block content %}
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "Re-send security code" %}</h1>
+  <h1>{% trans "Re-send log in code" %}</h1>
   <p>{% trans "If you did not get the code, we can send it again." %}</p>
-  {% include "includes/cds_form.html" with submit_text=_("Re-send security code") %}
+  {% include "includes/cds_form.html" with submit_text=_("Re-send log in code") %}
   <a href="{% url 'backup_codes_help' %}">{{ _("Cannot get text messages?") }}</a>
 
 {% endblock %}

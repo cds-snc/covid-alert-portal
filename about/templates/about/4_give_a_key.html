@@ -13,15 +13,19 @@
 
   <div class="column column--2-3">
     <h1>{% trans "Give a key" %}</h1>
-    <p>{% trans "After you generate a key, the next screen shows a combination of letters and numbers. The screen gives 1 word that you’ll read for each letter. This helps the patient check they heard the correct letter." %}</p>
+    <p>{% trans "The key is a combination of letters and numbers." %}</p>
+    <h2>{% trans "Read key phonetically" %}</h2>
+    <p>{% trans "We’ve chosen words for each letter so patients understand letters correctly." %}</p>
+    <h2>{% trans "You may be able to text the key" %}</h2>
+    <p>{% trans "If permitted by your health authority, the portal displays the button 'Text key to patient'. That button guides you through next steps if the patient agrees to get the key by text." %}</p>
 
-    <h2>{% trans "Confirm patient understood the key" %}</h2>
+    <h2>{% trans "How the portal displays keys" %}</h2>
     {% with code="AHJ 232 ZWFA" with_example="true" %}
         {% include "includes/big-code.html" %}
     {% endwith %}
 
     <h2>{% trans "The app guides the patient through the next steps" %}</h2>
-    <p>{% trans "First the patient enters the key. Then the app guides them through the steps to notify people of possible exposure." %}
+    <p>{% trans "The patient enters the key. Then the app guides them through the steps to notify people of possible exposure." %}
 
     {% url 'about:help_patient_enter_key' as help_url %}
     {% blocktrans %}

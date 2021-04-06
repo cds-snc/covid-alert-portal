@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - QR Code Registration form with Email verification
 - Location search with Canada Post Address Complete API
+- Content changes for Portal iteration v1.1
 
 ## [1.19.2] - 2021-03-17
 
