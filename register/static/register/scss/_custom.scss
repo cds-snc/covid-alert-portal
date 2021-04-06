@@ -86,9 +86,7 @@ body.qrcode {
     }
 }
 .phone {
-    #id_contact_phone{
-        width: 60%;
-    }
+
     #id_extension {
         width: 30%;
     }
@@ -102,9 +100,9 @@ body.qrcode {
      }
      .ext_button {
         position: relative;
-        left: 65%;
+        left: 70%;
         padding: 0;
-        bottom: 30px;
+        bottom: 60px;
         border: none;
         background: transparent;
         text-decoration: underline;
@@ -114,6 +112,9 @@ body.qrcode {
      .ext-div{
         position: relative;
         left: 70%;
-        bottom: 74px;
+        bottom: 103px;
      }
+}
+#id_contact-contact_phone{
+    width: 60%;
 }
