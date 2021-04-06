@@ -88,12 +88,15 @@ class LocationAddressForm(HealthcareBaseForm, forms.Form):
     province = forms.ChoiceField(label=_("Province or territory"), choices=provinces)
     postal_code = forms.CharField(label=_("Postal code"))
 
+
 class LocationContactForm(HealthcareBaseForm, forms.Form):
     contact_name = forms.CharField(label=_("Name of contact"))
     contact_email = forms.EmailField(label=_("Contact email"))
     contact_phone = PhoneNumberField(label=_("Contact phone number"))
-    contact_phone_ext = forms.CharField(label=_(""), required=False, widget=PhoneExtensionWidget())
-  
+    contact_phone_ext = forms.CharField(
+        label=_(""), required=False, widget=PhoneExtensionWidget()
+    )
+
 
 class RegisterSummaryForm(HealthcareBaseForm, forms.Form):
     """
