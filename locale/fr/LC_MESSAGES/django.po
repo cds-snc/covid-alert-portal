@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-29 19:50+0000\n"
+"POT-Creation-Date: 2021-03-31 17:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -369,7 +369,6 @@ msgstr "Connexion"
 #: register/templates/register/location_name.html
 #: register/templates/register/registrant_email.html
 #: register/templates/register/registrant_email_submitted.html
-#: register/templates/register/registrant_name.html
 msgid "Error: "
 msgstr "Erreur : "
 
@@ -441,7 +440,6 @@ msgstr "Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne.
 #: register/templates/register/location_name.html
 #: register/templates/register/location_unavailable.html
 #: register/templates/register/registrant_email.html
-#: register/templates/register/registrant_name.html
 msgid "Next"
 msgstr "Suivant"
 
@@ -539,7 +537,6 @@ msgstr "Si le patient est prêt, générez une clé"
 #: register/templates/register/location_unavailable.html
 #: register/templates/register/registrant_email.html
 #: register/templates/register/registrant_email_submitted.html
-#: register/templates/register/registrant_name.html
 #: register/templates/register/summary.html
 msgid "Back"
 msgstr "Retour"
@@ -1432,7 +1429,7 @@ msgstr "Adresse courriel"
 msgid "Change your name"
 msgstr "Modifier votre nom"
 
-#: profiles/forms.py profiles/models.py register/models.py
+#: profiles/forms.py profiles/models.py
 msgid "Full name"
 msgstr "Nom complet"
 
@@ -2177,10 +2174,6 @@ msgid "Tell us more about the issue"
 msgstr "Dites-nous en plus sur le problème"
 
 #: register/forms.py
-msgid "Email address if you want a reply"
-msgstr "Adresse courriel pour vous répondre"
-
-#: register/forms.py
 msgid "We'll use this if we need to contact you. We will not use your email address for anything else."
 msgstr "Nous utiliserons votre adresse si, et seulement si, nous avons besoin de communiquer avec vous."
 
@@ -2309,6 +2302,10 @@ msgid "Address of service or event"
 msgstr "Adresse du service ou de l’événement"
 
 #: register/templates/register/location_address.html
+msgid "Step 3 of 5"
+msgstr "Étape 3 de 5"
+
+#: register/templates/register/location_address.html
 msgid "If the event or service has several addresses, you need a poster for each.  After you finish this poster, we’ll remind you to make more."
 msgstr "Si le service ou l’événement comporte plusieurs adresses, vous devrez créer une affiche pour chaque adresse. Nous vous rappelerons de le faire quand vous aurez terminé la présente affiche."
 
@@ -2316,9 +2313,17 @@ msgstr "Si le service ou l’événement comporte plusieurs adresses, vous devre
 msgid "Type of service or event"
 msgstr "Type de service ou d’événement"
 
+#: register/templates/register/location_category.html
+msgid "Step 1 of 5"
+msgstr "Étape 1 de 5"
+
 #: register/templates/register/location_contact.html
 msgid "Contact for the address"
 msgstr "Personne-ressource"
+
+#: register/templates/register/location_contact.html
+msgid "Step 4 of 5"
+msgstr "Étape 4 de 5"
 
 #: register/templates/register/location_contact.html
 msgid "This could be you, or a different person, such as a store manager."
@@ -2331,6 +2336,10 @@ msgstr "Nous contacterons cette personne pour toute information sanitaire import
 #: register/templates/register/location_name.html
 msgid "Name of service or event"
 msgstr "Nom du service ou de l’événement"
+
+#: register/templates/register/location_name.html
+msgid "Step 2 of 5"
+msgstr "Étape 2 de 5"
 
 #: register/templates/register/location_name.html
 msgid "We’ll display the name on the poster with your QR code."
@@ -2452,21 +2461,16 @@ msgstr ""
 "  "
 
 #: register/templates/register/registrant_email_submitted.html
-msgid "If you did not get the email, check your junk or spam folder."
-msgstr "Si vous n’avez pas reçu le courriel, vérifiez vos pourriels."
+msgid "Check your inbox, junk or spam folder for an email with the subject line Confirm email for your poster."
+msgstr "Cherchez un courriel intitulé « Validation du courriel pour votre affiche » dans votre boîte de réception ou vos pourriels."
 
 #: register/templates/register/registrant_email_submitted.html
-msgid "Send email again"
-msgstr "Renvoyer le courriel"
+msgid "If you did not get the email, we can "
+msgstr "Si vous n’avez rien reçu, nous pouvons "
 
-#: register/templates/register/registrant_name.html
-#: register/templates/register/summary.html
-msgid "Your name"
-msgstr "Votre nom"
-
-#: register/templates/register/registrant_name.html
-msgid "We’ll use your name when we email you."
-msgstr "Nous utiliserons votre nom dans les courriels que nous vous envoyons."
+#: register/templates/register/registrant_email_submitted.html
+msgid "send it again"
+msgstr "renvoyer le courriel."
 
 #: register/templates/register/start.html
 msgid "Make a COVID Alert poster"
@@ -2546,16 +2550,16 @@ msgid "Check your answers before making your poster"
 msgstr "Vérifiez vos réponses avant de créer votre affiche"
 
 #: register/templates/register/summary.html
+msgid "Step 5 of 5"
+msgstr "Étape 5 de 5"
+
+#: register/templates/register/summary.html
 msgid "Personal information"
 msgstr "Renseignements personnels"
 
 #: register/templates/register/summary.html
 msgid " Change<span class=\"visually-hidden\"> your email</span> "
 msgstr "Modifier<span class=\"visually-hidden\"> votre adresse courriel</span>"
-
-#: register/templates/register/summary.html
-msgid " Change<span class=\"visually-hidden\"> your name</span> "
-msgstr "Modifier<span class=\"visually-hidden\"> Votre nom </span>"
 
 #: register/templates/register/summary.html
 msgid "Service or event details"

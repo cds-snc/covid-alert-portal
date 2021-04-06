@@ -10,6 +10,8 @@
         <a href="{% url 'register:location_step' step='contact' %}" class="chevron-left">{% trans "Back" %}</a>
     </div>
 
+    <p>{% trans "Step 5 of 5" %}</p>
+
     <h1>{% trans "Check your answers before making your poster" %}</h1>
 
     <h2>{% trans "Personal information" %}</h2>
@@ -25,19 +27,6 @@
             <dd class="summary-list__actions">
                 <a href="{% url 'register:registrant_email'  %}">
                     {% blocktrans %} Change<span class="visually-hidden"> your email</span> {% endblocktrans %}
-                </a>
-            </dd>
-        </div>
-        <div class="summary-list__row">
-            <dt class="summary-list__key">
-                {% trans "Your name" %}
-            </dt>
-            <dd class="summary-list__value">
-                {{ registrant.name }}
-            </dd>
-            <dd class="summary-list__actions">
-                <a href="{% url 'register:registrant_name' %}">
-                    {% blocktrans %} Change<span class="visually-hidden"> your name</span> {% endblocktrans %}
                 </a>
             </dd>
         </div>

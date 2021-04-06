@@ -13,11 +13,10 @@ class Registrant(models.Model):
         max_length=255,
         unique=True,
     )
-    name = models.CharField(max_length=200, verbose_name=_("Full name"))
     created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):  # new
-        return "{} ({})".format(self.name, self.email)
+        return "{}".format(self.email)
 
 
 class EmailConfirmation(models.Model):
