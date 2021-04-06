@@ -2511,28 +2511,16 @@ msgstr ""
 "   "
 
 #: register/templates/register/summary.html
-msgid "Check your answers before making your poster"
-msgstr "Vérifiez vos réponses avant de créer votre affiche"
+msgid "Check your answers"
+msgstr "Vérifiez vos réponses"
 
 #: register/templates/register/summary.html
 msgid "Step 5 of 5"
 msgstr "Étape 5 de 5"
 
 #: register/templates/register/summary.html
-msgid "Personal information"
-msgstr "Renseignements personnels"
-
-#: register/templates/register/summary.html
 msgid " Change<span class=\"visually-hidden\"> your email</span> "
 msgstr "Modifier<span class=\"visually-hidden\"> votre adresse courriel</span>"
-
-#: register/templates/register/summary.html
-msgid "Service or event details"
-msgstr "Renseignements sur le service ou l’événement"
-
-#: register/templates/register/summary.html
-msgid " Change <span class=\"visually-hidden\"> address</span> "
-msgstr "Modifier <span class=\"visually-hidden\"> Adresse</span> "
 
 #: register/templates/register/summary.html
 msgid " Change <span class=\"visually-hidden\"> business type</span>"
@@ -2543,19 +2531,23 @@ msgid " Change <span class=\"visually-hidden\"> business, organization or event 
 msgstr "Modifier <span class=\"visually-hidden\"> business, organization or event name</span>"
 
 #: register/templates/register/summary.html
-msgid "Contact person for the location"
-msgstr "Personne-ressource"
+msgid " Change <span class=\"visually-hidden\"> address</span> "
+msgstr "Modifier <span class=\"visually-hidden\"> Adresse</span> "
+
+#: register/templates/register/summary.html
+msgid "Contact person for this address"
+msgstr "Personne-ressource pour l’adresse"
 
 #: register/templates/register/summary.html
 msgid " Change <span class=\"visually-hidden\"> contact</span> "
 msgstr " Modifier <span class=\"visually-hidden\"> contact</span>"
 
 #: register/templates/register/summary.html
-msgid "We’ll use this information to make your poster"
-msgstr "Nous utiliserons ces renseignements pour créer votre affiche."
+msgid "We’ll use these answers to make your poster"
+msgstr "Nous créerons votre affiche à l’aide de ces réponses"
 
 #: register/templates/register/summary.html
-msgid "By selecting “Make poster”, you confirm your answers are correct and complete."
+msgid "By selecting “Make poster” you confirm your answers are correct and complete."
 msgstr "En cliquant sur « Créer l’affiche », vous confirmez que vos réponses sont exactes et complètes."
 
 #: register/templates/register/summary.html
