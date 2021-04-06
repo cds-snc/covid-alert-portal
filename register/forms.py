@@ -4,7 +4,6 @@ from django.forms import MultiWidget, TextInput, fields
 
 from portal.forms import HealthcareBaseForm
 from django.utils.translation import gettext_lazy as _
-from .models import Registrant, Location
 from portal.widgets import CDSRadioWidget
 from phonenumber_field.formfields import PhoneNumberField
 from dependency_injector.wiring import inject, Provide
@@ -37,13 +36,6 @@ def send_email(
 
 class EmailForm(HealthcareBaseForm, forms.Form):
     email = forms.EmailField(label=_("Email address"))
-
-
-class RegistrantNameForm(HealthcareBaseForm, forms.ModelForm):
-    class Meta:
-        model = Registrant
-
-        fields = ("name",)
 
 
 class OtherFieldInput(HealthcareBaseForm, forms.Form):
@@ -126,9 +118,8 @@ class ContactUsForm(HealthcareBaseForm, forms.Form):
         widget=forms.Textarea,
     )
     contact_email = forms.EmailField(
-        label=_("Email address if you want a reply"),
+        label=_("Email address"),
         help_text=_(
             "We'll use this if we need to contact you. We will not use your email address for anything else."
         ),
-        required=False,
     )

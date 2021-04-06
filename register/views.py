@@ -1,9 +1,8 @@
 from django.views.generic import TemplateView, FormView
-from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy, reverse
 
 from .models import Registrant, Location, EmailConfirmation
-from .forms import EmailForm, RegistrantNameForm, ContactUsForm
+from .forms import EmailForm, ContactUsForm
 from collections import ChainMap
 from django.utils.translation import gettext as _
 from formtools.wizard.views import NamedUrlSessionWizardView
@@ -106,41 +105,21 @@ def confirm_email(request, pk):
             request, messages.SUCCESS, _("You've confirmed your email address.")
         )
 
-        return redirect(reverse_lazy("register:registrant_name"))
+        return redirect(
+            reverse_lazy(
+                "register:location_step",
+                kwargs={"step": "category"},
+            )
+        )
     except (EmailConfirmation.DoesNotExist):
         return redirect(reverse_lazy("register:confirm_email_error"))
 
 
-class RegistrantNameView(UpdateView):
-    model = Registrant
-    form_class = RegistrantNameForm
-    template_name = "register/registrant_name.html"
-
-    def dispatch(self, request, *args, **kwargs):
-        if not self.request.session.get("registrant_id"):
-            messages.add_message(
-                self.request,
-                messages.ERROR,
-                _("There has been an error, you need to confirm your email address"),
-            )
-            return redirect("register:registrant_email")
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_object(self):
-        return Registrant.objects.get(pk=self.request.session["registrant_id"])
-
-    def get_success_url(self):
-        return reverse_lazy(
-            "register:location_step",
-            kwargs={"step": "address"},
-        )
-
-
 TEMPLATES = {
-    "address": "register/location_address.html",
-    "unavailable": "register/location_unavailable.html",
     "category": "register/location_category.html",
     "name": "register/location_name.html",
+    "address": "register/location_address.html",
+    "unavailable": "register/location_unavailable.html",
     "contact": "register/location_contact.html",
     "summary": "register/summary.html",
     "success": "register/success.html",
@@ -274,6 +253,9 @@ class RegisterConfirmationPageView(TemplateView):
         return context
 
 
+subject = {"get_help": "Help", "give_feedback": "Feedback", "something_else": "Other"}
+
+
 class ContactUsPageView(FormView):
     template_name = "register/contact_us.html"
     form_class = ContactUsForm
@@ -284,6 +266,23 @@ class ContactUsPageView(FormView):
 
     def get_success_url(self):
         return reverse_lazy("register:success")
+
+    def form_valid(self, form):
+        from_email = form.cleaned_data.get("contact_email")
+        message = form.cleaned_data.get("more_info")
+
+        help_category = form.cleaned_data.get("help_category")
+
+        send_email(
+            settings.ISED_EMAIL_ADDRESS,
+            {
+                "subject_type": subject.get(help_category),
+                "message": message,
+                "from_email": from_email,
+            },
+            settings.ISED_TEMPLATE_ID,
+        )
+        return super().form_valid(form)
 
 
 class QRSupportPageView(TemplateView):
