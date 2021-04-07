@@ -11,10 +11,13 @@
 
     <h1>{% trans "Your poster is ready" %}</h1>
 
-    <p>
+    <!-- <p>
       <a href="{% url "register:poster_download" pk=location_id lang='en' %}" target="_blank">{% trans "Download English Poster" %}</a><br>
       <a href="{% url "register:poster_download" pk=location_id lang='fr' %}" target="_blank">{% trans "Download French Poster" %}</a>
-    </p>
+    </p> -->
+    <div class="content-button">
+      <a  href="{% url "register:poster_download" pk=location_id lang='en' %}" target="_blank" role='button' draggable='false'>{% trans "Download PDF" %}</a>
+    </div>
 
     {% blocktrans with email=request.session.registrant_email %}
       <p>We’ll also email the poster to {{ email }}</p>
