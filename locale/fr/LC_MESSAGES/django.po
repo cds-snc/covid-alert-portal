@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 17:04+0000\n"
+"POT-Creation-Date: 2021-04-07 19:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2066,6 +2066,10 @@ msgid "Religious space"
 msgstr "Espaces religieux"
 
 #: register/forms.py
+msgid "Events, for example festivals or funerals."
+msgstr "Événements (p. ex., festivals, funérailles)."
+
+#: register/forms.py
 msgid "Something else"
 msgstr "Autre"
 
@@ -2310,12 +2314,16 @@ msgid "If the event or service has several addresses, you need a poster for each
 msgstr "Si le service ou l’événement comporte plusieurs adresses, vous devrez créer une affiche pour chaque adresse. Nous vous rappelerons de le faire quand vous aurez terminé la présente affiche."
 
 #: register/templates/register/location_category.html
-msgid "Type of service or event"
-msgstr "Type de service ou d’événement"
+msgid "Type of establishment or event"
+msgstr "Type d’établissement ou d’événement"
 
 #: register/templates/register/location_category.html
 msgid "Step 1 of 5"
 msgstr "Étape 1 de 5"
+
+#: register/templates/register/location_category.html
+msgid "Choose the type that best fits your situation."
+msgstr "Choisissez le type qui représente le mieux votre situation."
 
 #: register/templates/register/location_contact.html
 msgid "Contact for the address"

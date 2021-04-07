@@ -3,7 +3,7 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Type of service or event" %}
+  {% trans "Type of establishment or event" %}
 {% endblock %}
 
 {% block content %}
@@ -16,8 +16,10 @@
   {% include  "includes/error_list.html" %}
 
   {% include  "includes/flash_messages.html" %}
-
-  <h1>{% trans "Type of service or event" %}</h1>
+  <div class="step-one-info">
+    <h1>{% trans "Type of establishment or event" %}</h1>
+    <p>{% trans "Choose the type that best fits your situation." %}</p>
+  </div>
   
   {% include "includes/cds_form.html" with submit_text=_("Next") %}
 {% endblock %}

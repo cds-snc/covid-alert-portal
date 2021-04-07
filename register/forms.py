@@ -16,6 +16,7 @@ location_choices = [
     ("arts_entertainment", _("Arts and entertainment")),
     ("grooming_wellness", _("Grooming and wellness")),
     ("religious_space", _("Religious space")),
+    ("events", _("Events, for example festivals or funerals.")),
     ("other", _("Something else")),
 ]
 
