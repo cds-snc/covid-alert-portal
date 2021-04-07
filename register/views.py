@@ -165,6 +165,7 @@ class LocationWizard(NamedUrlSessionWizardView):
         return context
 
     def done(self, form_list, form_dict, **kwargs):
+        registrant = Registrant.objects.get(id=self.request.session["registrant_id"])
         forms = [form.cleaned_data for form in form_list]
         data = dict(ChainMap(*forms))
 
@@ -176,6 +177,7 @@ class LocationWizard(NamedUrlSessionWizardView):
             city=data["city"],
             province=data["province"],
             postal_code=data["postal_code"],
+            registrant=registrant,
         )
 
         # Only set the category description if "other" selected

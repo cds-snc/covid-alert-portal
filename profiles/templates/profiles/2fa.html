@@ -10,26 +10,29 @@
 {% block content %}
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "Enter your security code" %}</h1>
+  <h1>{% trans "Enter your log in code" %}</h1>
 
+  
   {% if view.has_static_code and not view.has_mobile %}
-  <p>{% trans "You kept these codes somewhere safe." %}</p>
+  <p>{% trans "You kept these codes somewhere safe. You can use each code only once." %}</p>
   {% endif %}
 
   {% if not view.has_static_code and view.has_mobile  %}
-    <p>{% trans "We’ve sent you a text message with a security code." %}</p>
+    <p>{% trans "You need to enter a new code each time you log in." %}</p>
+     <p>{% trans "We’ve just sent a text message with your new code." %}</p>
   {% endif %}
 
+   
   {% if view.has_static_code and view.has_mobile  %}
-    <p>{% trans "We’ve texted you a code and you also kept codes somewhere safe." %}</p>
+    <p>{% trans "We’ve texted you a code and you also kept codes somewhere safe. Use 1 of these codes to log in. You can use each code only once." %}</p>
   {% endif %}
 
   {% include "includes/cds_form.html" with submit_text=_("Next") form_class="small" %}
 
   {% if view.has_mobile %}
-    <a href="{% url 'resend_2fa' %}">{{ _("Resend security code?") }}</a>
+    <a href="{% url 'resend_2fa' %}">{{ _("Resend log in code?") }}</a>
   {% else %}
-    <a href="{% url 'backup_codes_help' %}">{{ _("No security code?") }}</a>
+    <a href="{% url 'backup_codes_help' %}">{{ _("No log in code?") }}</a>
   {% endif %}
 
 {% endblock %}

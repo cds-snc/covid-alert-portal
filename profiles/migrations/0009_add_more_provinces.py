@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
             model_name="healthcareuser",
             name="phone_number",
             field=phonenumber_field.modelfields.PhoneNumberField(
-                help_text="You must enter a new security code each time you log in. We’ll send the code to your phone number.",
+                help_text="You must enter a new code each time you log in. We’ll send the code to your phone number.",
                 max_length=128,
                 region=None,
             ),
