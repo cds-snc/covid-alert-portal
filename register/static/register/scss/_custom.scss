@@ -62,6 +62,13 @@ body.qrcode {
         background-color: #E6FAE8;
         text-align: left;
         width: 100%;
+        a {
+            display: inline;
+        }
+        img {
+            margin-left: $space-sm;
+            vertical-align: middle;
+        }
 
     }
 

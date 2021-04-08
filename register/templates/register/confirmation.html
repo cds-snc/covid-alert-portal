@@ -11,7 +11,11 @@
 
     <h1>{% trans "Your poster is ready" %}</h1>
     <div class="content-button">
-      <a  href="{% url "register:poster_download" pk=location_id lang='en' %}" target="_blank" role='button' draggable='false'>{% trans "Download PDF" %}</a>
+      <a  href="{% url "register:poster_download" pk=location_id lang='en' %}" target="_blank" role='button' draggable='false'>{% trans "Download English poster" %}<img src="{% static 'register/img/PDF_icon_white.svg' %}" alt=""></a>
+      
+    </div>
+    <div class="content-button">
+      <a  href="{% url "register:poster_download" pk=location_id lang='en' %}" target="_blank" role='button' draggable='false' class="secondary">{% trans "Download French poster" %}<img src="{% static 'register/img/PDF_icon_black.svg' %}" alt=""></a>
     </div>
 
     {% blocktrans with email=request.session.registrant_email %}
@@ -26,7 +30,7 @@
       <img src="{% static 'register/img/hand_reminder.svg' %}" alt="">
     </div>
     <div class="reminder-text">
-      <p>{% trans "Remember to make posters for all addresses of the establishment or event." %}</p>
+      <p>{% trans "Remember to make a poster for each address of the establishment or event. " %}</p>
     </div>
 
     
@@ -37,12 +41,11 @@
   </div>
 
   <div class="display-poster">
-    <h1>{% trans "How to display the poster" %}</h1>
+    <h1>{% trans "Display your poster" %}</h1>
     <div class="display-poster-list">
-      <li>{% trans "Put a copy at each entrance and inside." %}</li>
-      <li>{% trans "Place posters about 130 cm from the ground." %}</li>
-      <li>{% trans "Avoid visual and physical barriers to scanning the QR code. " %}</li>
-      <li>{% trans "Consider the needs of a variety of visitors." %}</li>
+      <li>{% trans "At each entrance and inside." %}</li>
+      <li>{% trans "About 130 cm (4 feet 3 inches) from the ground." %}</li>
+      <li>{% trans "On flat surfaces that do not move." %}</li>
     </div>
     <p><strong>{% trans "Thank you for helping slow the spread of COVID-19." %}</strong></p>
   </div>
