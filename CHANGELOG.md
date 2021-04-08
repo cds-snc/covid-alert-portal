@@ -9,9 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - QR Code Registration form with Email verification
 - Location search with Canada Post Address Complete API
+
+## [1.19.3] - 2021-04-08
+
+### Updated
+
+- Update Django to 3.2
 - Content changes for Portal iteration v1.1
 
 ## [1.19.2] - 2021-03-17
+
+### Updated
 
 - Update Django dependencies
 - Update screenshots to reflect updated App menu
