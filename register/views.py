@@ -177,7 +177,6 @@ class LocationWizard(NamedUrlSessionWizardView):
             city=data["city"],
             province=data["province"],
             postal_code=data["postal_code"],
-            registrant=registrant,
         )
 
         # Only set the category description if "other" selected
@@ -191,6 +190,8 @@ class LocationWizard(NamedUrlSessionWizardView):
         location.contact_name = data["contact_name"]
         location.contact_email = data["contact_email"]
         location.contact_phone = data["contact_phone"]
+        location.contact_phone_ext = data["contact_phone_ext"]
+        location.registrant = registrant
         location.save()
 
         # Save location id to session for next step
