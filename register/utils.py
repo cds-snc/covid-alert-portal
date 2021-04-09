@@ -126,3 +126,5 @@ def get_encoded_poster(location, lang="en"):
     # Base64-encode the poster for attaching
     poster_encoded = base64.b64encode(poster_str).decode()
     return poster_encoded
+
+# def get_service_or_event_name(type):    
