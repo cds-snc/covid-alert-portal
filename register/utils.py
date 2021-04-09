@@ -120,7 +120,7 @@ def get_pdf_poster(location, lang="en"):
 
 
 def get_encoded_poster(location, lang="en"):
-    poster = get_pdf_poster(location)
+    poster = get_pdf_poster(location, lang)
     poster_str = poster.read()
 
     # Base64-encode the poster for attaching
