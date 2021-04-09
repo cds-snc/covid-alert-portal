@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-08 16:03+0000\n"
+"POT-Creation-Date: 2021-04-07 18:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2474,16 +2474,17 @@ msgstr ""
 "  "
 
 #: register/templates/register/registrant_email_submitted.html
-msgid "Check your inbox, junk or spam folder for an email with the subject line Confirm email for your poster."
-msgstr "Cherchez un courriel intitulé « Validation du courriel pour votre affiche » dans votre boîte de réception ou vos pourriels."
-
-#: register/templates/register/registrant_email_submitted.html
-msgid "If you did not get the email, we can "
-msgstr "Si vous n’avez rien reçu, nous pouvons "
-
-#: register/templates/register/registrant_email_submitted.html
-msgid "send it again"
-msgstr "renvoyer le courriel."
+#, python-format
+msgid ""
+"\n"
+"    <p>Check your inbox, junk or spam folder for an email with the subject line <q>Confirm Email for your poster</q></p>\n"
+"    <p>If you did not get the email, we can <a href=\"%(register_url)s\">send it again</a></p>\n"
+"  "
+msgstr ""
+"\n"
+"    <p>Cherchez un courriel intitulé <q> Validation du courriel pour votre affiche </q> dans votre boîte de réception ou vos pourriels.</p>\n"
+"    <p>Si vous n’avez rien reçu, nous pouvons <a href=\"%(register_url)s\">renvoyer le courriel</a>.</p>\n"
+"  "
 
 #: register/templates/register/start.html
 msgid "Make a COVID Alert poster"
