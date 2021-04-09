@@ -107,6 +107,7 @@ body.qrcode {
     }
 
     .phone {
+        margin-bottom: -$space-xxl;
 
         #id_contact-contact_phone_ext {
             width: 30%;
@@ -131,7 +132,7 @@ body.qrcode {
             -webkit-appearance: none;
             cursor: pointer;
          }
-         .ext-div{
+         .ext-div {
             position: relative;
             left: 70%;
             bottom: 103px;

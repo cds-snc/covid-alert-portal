@@ -6,7 +6,7 @@ if (ext_input.value) {
     extensionInput();
 }
 
-ext.onclick = extensionInput();
+ext.onclick = extensionInput;
 
 function extensionInput() {
     document.getElementById("id-ext-label").style.display = 'none';
