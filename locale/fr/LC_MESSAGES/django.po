@@ -2218,11 +2218,11 @@ msgid "Your poster is ready"
 msgstr ""
 
 #: register/templates/register/confirmation.html
-msgid "Download English Poster"
+msgid "Download English poster"
 msgstr "Télécharger l’affiche en anglais"
 
 #: register/templates/register/confirmation.html
-msgid "Download French Poster"
+msgid "Download French poster"
 msgstr "Télécharger l’affiche en français"
 
 #: register/templates/register/confirmation.html
@@ -2237,40 +2237,53 @@ msgstr ""
 "    "
 
 #: register/templates/register/confirmation.html
-msgid "Next steps"
-msgstr "Prochaines étapes"
-
-#: register/templates/register/confirmation.html
-#, python-format
-msgid ""
-"\n"
-"      <p><a href='%(link)s'>Contact us</a> if you do not get the email within 2 hours or if you have questions.</p>\n"
-"      "
-msgstr ""
-
-#: register/templates/register/confirmation.html
-msgid "Remember to make more posters if your service or event has other addresses. You can come back later if you do not have time now."
-msgstr "N’oubliez pas de créer d’autres affiches si votre service ou votre événement comprend plusieurs adresses. Vous pouvez revenir plus tard si vous n’avez pas le temps maintenant."
+msgid "Remember to make a poster for each address of the establishment or event. "
+msgstr "N’oubliez pas de créer une affiche pour chacune des adresses de votre établissement ou événement."
 
 #: register/templates/register/confirmation.html
 msgid "Make another poster"
 msgstr "Créer une autre affiche"
 
 #: register/templates/register/confirmation.html
-msgid "Done"
-msgstr "Terminé"
+msgid "Display your poster"
+msgstr "Où poser votre affiche"
 
 #: register/templates/register/confirmation.html
-msgid "Learn more about QR codes and public health"
-msgstr "En savoir plus sur les codes QR et la santé publique."
+msgid "At each entrance and inside."
+msgstr "À chaque entrée et à l’intérieur."
+
+#: register/templates/register/confirmation.html
+msgid "About 130 cm (4 feet 3 inches) from the ground."
+msgstr "À une hauteur d’environ 130 cm (4 pieds 3 pouces)."
+
+#: register/templates/register/confirmation.html
+msgid "On flat surfaces that do not move."
+msgstr "Sur des surfaces planes qui ne bougent pas."
 
 #: register/templates/register/confirmation.html
 msgid "Thank you for helping slow the spread of COVID-19."
 msgstr "Merci d’aider à ralentir la propagation de la COVID-19."
 
 #: register/templates/register/confirmation.html
-msgid "Please answer some questions to help improve the COVID Alert system."
-msgstr "Répondez à quelques questions pour nous aider à améliorer le système Alerte COVID."
+msgid "Return to home page"
+msgstr "Revenir à la page d’accueil"
+
+#: register/templates/register/confirmation.html
+msgid "Questions?"
+msgstr "Des questions?"
+
+#: register/templates/register/confirmation.html
+msgid ""
+"\n"
+"    <p>Visit <a href=\"%(helplink)s\">Help with your poster</a></p>\n"
+"    <p>Or <a href=\"%(contactlink)s\">Contact us</a></p>\n"
+"    "
+msgstr ""
+"\n"
+"    <p>Consultez la page <a href=\"%(helplink)s\">Aide pour votre affiche</a></p>\n"
+"    <p>Sinon, <a href=\"%(contactlink)s\">contactez-nous</a></p>\n"
+"    "
+
 
 #: register/templates/register/contact_us.html
 #: register/templates/register/qr_support_page.html
@@ -2469,16 +2482,17 @@ msgstr ""
 "  "
 
 #: register/templates/register/registrant_email_submitted.html
-msgid "Check your inbox, junk or spam folder for an email with the subject line Confirm email for your poster."
-msgstr "Cherchez un courriel intitulé « Validation du courriel pour votre affiche » dans votre boîte de réception ou vos pourriels."
-
-#: register/templates/register/registrant_email_submitted.html
-msgid "If you did not get the email, we can "
-msgstr "Si vous n’avez rien reçu, nous pouvons "
-
-#: register/templates/register/registrant_email_submitted.html
-msgid "send it again"
-msgstr "renvoyer le courriel."
+#, python-format
+msgid ""
+"\n"
+"    <p>Check your inbox, junk or spam folder for an email with the subject line <q>Confirm Email for your poster</q></p>\n"
+"    <p>If you did not get the email, we can <a href=\"%(register_url)s\">send it again</a></p>\n"
+"  "
+msgstr ""
+"\n"
+"    <p>Cherchez un courriel intitulé <q> Validation du courriel pour votre affiche </q> dans votre boîte de réception ou vos pourriels.</p>\n"
+"    <p>Si vous n’avez rien reçu, nous pouvons <a href=\"%(register_url)s\">renvoyer le courriel</a>.</p>\n"
+"  "
 
 #: register/templates/register/start.html
 msgid "Make a COVID Alert poster"

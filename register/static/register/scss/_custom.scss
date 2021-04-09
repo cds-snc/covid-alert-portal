@@ -61,10 +61,18 @@ body.qrcode {
         color: black;
         background-color: #E6FAE8;
         text-align: left;
+        width: 100%;
+        a {
+            display: inline;
+        }
+        img {
+            margin-left: $space-sm;
+            vertical-align: middle;
+        }
 
     }
 
-    .next-steps {
+    .reminder {
         svg {
             
         }
@@ -74,6 +82,19 @@ body.qrcode {
             flex-direction: row;
         }
         flex-direction: column;
+
+    }
+    .reminder-text {
+        width: 90%;
+    }
+    .display-poster {
+        margin-bottom: $space-lg;
+        .display-poster-list {
+            margin: $space-sm;
+            li {
+                margin: $space-sm; 
+            }
+        }
 
     }
 
