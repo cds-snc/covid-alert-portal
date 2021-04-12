@@ -41,17 +41,19 @@ def is_base64(sb):
         return False
 
 
-def verified_user(session):
+def verified_email(session):
     email = "test@test.com"
-    r = Registrant.objects.create(email=email)
+    registrant = Registrant.objects.create(email=email)
 
     session = session
 
     # add id and email to session (logged in)
-    session["registrant_id"] = str(r.id)
-    session["registrant_email"] = r.email
+    session["registrant_id"] = str(registrant.id)
+    session["registrant_email"] = registrant.email
 
     session.save()
+
+    return registrant
 
 
 class RegisterView(TestCase):
@@ -172,7 +174,7 @@ class ConfirmationPage(TestCase):
 
     def test_confirmation_page_logged_in_no_location(self):
         session = self.client.session
-        verified_user(session)
+        verified_email(session)
 
         response = self.client.get(reverse("register:confirmation"))
         self.assertRedirects(
@@ -181,7 +183,7 @@ class ConfirmationPage(TestCase):
 
     def test_confirmation_page_logged_in_with_location(self):
         session = self.client.session
-        verified_user(session)
+        verified_email(session)
 
         location = Location.objects.create(
             category="category",
@@ -338,7 +340,7 @@ class Utils(TestCase):
 
 class DetourPage(TestCase):
     def test_detour_page(self):
-        verified_user(self.client.session)
+        verified_email(self.client.session)
 
         response = self.client.get(
             reverse(
