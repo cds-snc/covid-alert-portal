@@ -11,6 +11,7 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: ${{ matrix.python-version }}
+
       - uses: dschep/install-pipenv-action@v1
       - name: Install dependecies
         uses: VaultVulp/action-pipenv@v2.0.1
@@ -31,6 +32,13 @@ jobs:
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
           command: run css
+
+      - uses: vishnudxb/cancel-workflow@v1.2
+        if: failure()
+        with:
+          repo: octocat/hello-world
+          workflow_id: ${{ github.run_id }}
+          access_token: ${{ github.token }}
       
   test:
     runs-on: ubuntu-latest
