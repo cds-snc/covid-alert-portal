@@ -80,7 +80,7 @@ class HealthcareUser(AbstractBaseUser, PermissionsMixin):
     province = models.ForeignKey(HealthcareProvince, on_delete=models.PROTECT)
     phone_number = PhoneNumberField(
         help_text=_(
-            "You must enter a new security code each time you log in. We’ll text the code to your mobile phone number."
+            "You must enter a new code each time you log in. We’ll text the log in code to your mobile phone number."
         ),
         blank=True,
     )

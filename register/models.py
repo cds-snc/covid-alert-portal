@@ -45,7 +45,9 @@ class Location(models.Model):
     )
     contact_email = models.EmailField(verbose_name=_("Email address"), max_length=255)
     contact_phone = PhoneNumberField(blank=True)
+    contact_phone_ext = PhoneNumberField(blank=True, max_length=20)
     created = models.DateTimeField(default=timezone.now)
+    registrant = models.ForeignKey(Registrant, on_delete=models.SET_NULL, null=True)
 
     # Override save method to generate a unique short code for poster
     def save(self, *args, **kwargs):

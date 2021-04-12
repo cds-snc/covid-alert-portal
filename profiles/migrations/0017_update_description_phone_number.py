@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             name="phone_number",
             field=phonenumber_field.modelfields.PhoneNumberField(
                 blank=True,
-                help_text="You must enter a new security code each time you log in. We’ll text the code to your mobile phone number.",
+                help_text="You must enter a new code each time you log in. We’ll text the code to your mobile phone number.",
                 max_length=128,
                 region=None,
             ),

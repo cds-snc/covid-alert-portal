@@ -19,6 +19,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='healthcareuser',
             name='phone_number',
-            field=phonenumber_field.modelfields.PhoneNumberField(help_text='You must enter a new security code each time you log in. We’ll text the code to your mobile phone number.', max_length=128, region=None),
+            field=phonenumber_field.modelfields.PhoneNumberField(help_text='You must enter a new log in code each time you log in. We’ll text the code to your mobile phone number.', max_length=128, region=None),
         ),
     ]

@@ -7,7 +7,7 @@ from phonenumber_field.formfields import PhoneNumberField
 from dependency_injector.wiring import inject, Provide
 from portal.containers import Container
 from portal.services import NotifyService
-from .widgets import AutocompleteWidget
+from .widgets import AutocompleteWidget, PhoneExtensionWidget
 
 
 location_choices = [
@@ -16,6 +16,7 @@ location_choices = [
     ("arts_entertainment", _("Arts and entertainment")),
     ("grooming_wellness", _("Grooming and wellness")),
     ("religious_space", _("Religious space")),
+    ("events", _("Events, for example festivals or funerals.")),
     ("other", _("Something else")),
 ]
 
@@ -91,6 +92,9 @@ class LocationContactForm(HealthcareBaseForm, forms.Form):
     contact_name = forms.CharField(label=_("Name of contact"))
     contact_email = forms.EmailField(label=_("Contact email"))
     contact_phone = PhoneNumberField(label=_("Contact phone number"))
+    contact_phone_ext = forms.CharField(
+        label=_(""), required=False, widget=PhoneExtensionWidget()
+    )
 
 
 class RegisterSummaryForm(HealthcareBaseForm, forms.Form):

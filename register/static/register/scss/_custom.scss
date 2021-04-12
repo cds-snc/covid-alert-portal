@@ -61,10 +61,18 @@ body.qrcode {
         color: black;
         background-color: #E6FAE8;
         text-align: left;
+        width: 100%;
+        a {
+            display: inline;
+        }
+        img {
+            margin-left: $space-sm;
+            vertical-align: middle;
+        }
 
     }
 
-    .next-steps {
+    .reminder {
         svg {
             
         }
@@ -76,6 +84,19 @@ body.qrcode {
         flex-direction: column;
 
     }
+    .reminder-text {
+        width: 90%;
+    }
+    .display-poster {
+        margin-bottom: $space-lg;
+        .display-poster-list {
+            margin: $space-sm;
+            li {
+                margin: $space-sm; 
+            }
+        }
+
+    }
 
     label {
         .help-text {
@@ -83,5 +104,45 @@ body.qrcode {
             font-size: 90%;
             line-height: 2em;
         }
+    }
+
+    .phone {
+
+        #id_contact-contact_phone_ext {
+            width: 30%;
+        }
+        .phone_field{
+            position: absolute;
+            top: 5;
+        }
+        .inactiveLink {
+            pointer-events: none;
+            cursor: default;
+         }
+         .ext_button {
+            position: relative;
+            color: #2B4380;
+            left: 70%;
+            padding: 0;
+            bottom: 60px;
+            border: none;
+            background: transparent;
+            text-decoration: underline;
+            -webkit-appearance: none;
+            cursor: pointer;
+         }
+         .ext-div{
+            position: relative;
+            left: 70%;
+            bottom: 103px;
+         }
+    }
+    
+    #id_contact-contact_phone {
+        width: 60%;
+    }
+      
+    .step-one-info {
+        margin-bottom: $space-lg;
     }
 }

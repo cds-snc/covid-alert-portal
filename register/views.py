@@ -165,6 +165,7 @@ class LocationWizard(NamedUrlSessionWizardView):
         return context
 
     def done(self, form_list, form_dict, **kwargs):
+        registrant = Registrant.objects.get(id=self.request.session["registrant_id"])
         forms = [form.cleaned_data for form in form_list]
         data = dict(ChainMap(*forms))
 
@@ -189,6 +190,8 @@ class LocationWizard(NamedUrlSessionWizardView):
         location.contact_name = data["contact_name"]
         location.contact_email = data["contact_email"]
         location.contact_phone = data["contact_phone"]
+        location.contact_phone_ext = data["contact_phone_ext"]
+        location.registrant = registrant
         location.save()
 
         # Save location id to session for next step

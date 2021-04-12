@@ -10,11 +10,13 @@
     <img src="{% static 'register/img/check.svg' %}" alt="">
 
     <h1>{% trans "Your poster is ready" %}</h1>
-
-    <p>
-      <a href="{% url "register:poster_download" pk=location_id lang='en' %}" target="_blank">{% trans "Download English Poster" %}</a><br>
-      <a href="{% url "register:poster_download" pk=location_id lang='fr' %}" target="_blank">{% trans "Download French Poster" %}</a>
-    </p>
+    <div class="content-button">
+      <a  href="{% url "register:poster_download" pk=location_id lang='en' %}" target="_blank" role='button' draggable='false'>{% trans "Download English poster" %}<img src="{% static 'register/img/PDF_icon_white.svg' %}" alt=""></a>
+      
+    </div>
+    <div class="content-button">
+      <a  href="{% url "register:poster_download" pk=location_id lang='fr' %}" target="_blank" role='button' draggable='false' class="secondary">{% trans "Download French poster" %}<img src="{% static 'register/img/PDF_icon_black.svg' %}" alt=""></a>
+    </div>
 
     {% blocktrans with email=request.session.registrant_email %}
       <p>We’ll also email the poster to {{ email }}</p>
@@ -22,29 +24,45 @@
 
   </div>
 
-  <h2>{% trans "Next steps" %}</h2>
 
-  <div class="next-steps">
+  <div class="reminder">
     <div>
-      {% url "register:contactus" as link %}
-      {% blocktrans %}
-      <p><a href='{{ link }}'>Contact us</a> if you do not get the email within 2 hours or if you have questions.</p>
-      {% endblocktrans %}
-      <p>{% trans "Remember to make more posters if your service or event has other addresses. You can come back later if you do not have time now." %}</p>
+      <img src="{% static 'register/img/hand_reminder.svg' %}" alt="">
     </div>
-    <div>
-      <img src="{% static 'register/img/sample_poster_img.svg' %}" alt="">
+    <div class="reminder-text">
+      <p>{% trans "Remember to make a poster for each address of the establishment or event. " %}</p>
     </div>
+
     
   </div>
 
   <div class="content-button">
-      <a href="{% url 'register:location_step' step='category' %}" role='button' draggable='false'>{% trans "Make another poster" %}</a>
-      <a href="{% url 'register:start' %}" role='button' draggable='false' class="secondary">{% trans "Done" %}</a>
+      <a href="{% url 'register:location_step' step='category' %}" role='button' draggable='false' class="secondary">{% trans "Make another poster" %}</a>
   </div>
 
-  <p><a href="">{% trans "Learn more about QR codes and public health" %}</a></p>
-  <p>{% trans "Thank you for helping slow the spread of COVID-19." %}</p>
-  <p><a href="">{% trans "Please answer some questions to help improve the COVID Alert system." %}</a></p>
+  <div class="display-poster">
+    <h1>{% trans "Display your poster" %}</h1>
+    <div class="display-poster-list">
+      <li>{% trans "At each entrance and inside." %}</li>
+      <li>{% trans "About 130 cm (4 feet 3 inches) from the ground." %}</li>
+      <li>{% trans "On flat surfaces that do not move." %}</li>
+    </div>
+    <p><strong>{% trans "Thank you for helping slow the spread of COVID-19." %}</strong></p>
+  </div>
+
+  {% url "register:start" as start %}
+  <p><a href="{{ start }}">{% trans "Return to home page" %}</a></p>
+
+  <h1>{% trans "Questions?" %}</h1>
+  <div>
+    {% url "register:contactus" as contactlink %}
+    {% url "register:qrsupport" as helplink %}
+    {% blocktrans %}
+    <p>Visit <a href="{{ helplink }}">Help with your poster</a></p>
+    <p>Or <a href="{{ contactlink }}">Contact us</a></p>
+    {% endblocktrans %}
+  </div>
+  
+  
 
 {% endblock %}
