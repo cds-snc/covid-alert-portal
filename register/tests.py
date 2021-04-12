@@ -168,9 +168,7 @@ class RegisterConfirmedEmailRequiredPages(TestCase):
 class ConfirmationPage(TestCase):
     def test_confirmation_page_logged_out(self):
         response = self.client.get(reverse("register:confirmation"))
-        self.assertRedirects(
-            response, reverse("register:registrant_email")
-        )
+        self.assertRedirects(response, reverse("register:registrant_email"))
 
     def test_confirmation_page_logged_in_no_location(self):
         session = self.client.session
@@ -195,7 +193,7 @@ class ConfirmationPage(TestCase):
             contact_email="test@test.com",
             contact_phone="613-555-5555",
         )
-        session['location_id'] = str(location.id)
+        session["location_id"] = str(location.id)
         session.save()
 
         response = self.client.get(reverse("register:confirmation"))
@@ -340,8 +338,17 @@ class Utils(TestCase):
 
 class DetourPage(TestCase):
     def test_detour_page(self):
-        RegisterEmailConfirmation.test_can_confirm_email(self)
-        response = self.client.post(
+        verified_user(self.client.session)
+
+        response = self.client.get(
+            reverse(
+                "register:location_step",
+                kwargs={"step": "address"},
+            )
+        )
+        self.assertEqual(response.status_code, 200)
+
+        response2 = self.client.post(
             reverse("register:location_step", kwargs={"step": "address"}),
             {
                 "address-address": "a",
@@ -352,6 +359,7 @@ class DetourPage(TestCase):
                 "location_wizard-current_step": "address",
             },
         )
+
         self.assertRedirects(
-            response, reverse("register:location_step", kwargs={"step": "unavailable"})
+            response2, reverse("register:location_step", kwargs={"step": "unavailable"})
         )

@@ -250,10 +250,12 @@ class RegisterConfirmationPageView(TemplateView):
 
         # Must have completed location wizard
         if not self.request.session.get("location_id"):
-            return redirect(reverse_lazy(
-                "register:location_step",
-                kwargs={"step": "category"},
-            ))
+            return redirect(
+                reverse_lazy(
+                    "register:location_step",
+                    kwargs={"step": "category"},
+                )
+            )
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
