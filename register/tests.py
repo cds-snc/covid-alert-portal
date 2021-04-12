@@ -41,6 +41,19 @@ def is_base64(sb):
         return False
 
 
+def verified_user(session):
+    email = "test@test.com"
+    r = Registrant.objects.create(email=email)
+
+    session = session
+
+    # add id and email to session (logged in)
+    session["registrant_id"] = str(r.id)
+    session["registrant_email"] = r.email
+
+    session.save()
+
+
 class RegisterView(TestCase):
     def test_start_page(self):
         response = self.client.get(reverse("register:start"))
@@ -51,23 +64,6 @@ class RegisterView(TestCase):
         response = self.client.get(reverse("register:registrant_email"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "register/registrant_email.html")
-
-    def test_confirmation_page_logged_in(self):
-        email = "test@test.com"
-        r = Registrant.objects.create(email=email)
-
-        session = self.client.session
-
-        # add id and email to session (logged in)
-        session["registrant_id"] = str(r.id)
-        session["registrant_email"] = r.email
-
-        # need a fake location_id in the session for the poster url
-        session["location_id"] = str(r.id)
-        session.save()
-
-        response = self.client.get(reverse("register:confirmation"))
-        self.assertEqual(response.status_code, 200)
 
 
 class RegisterEmailConfirmation(TestCase):
@@ -167,6 +163,44 @@ class RegisterConfirmedEmailRequiredPages(TestCase):
         self.assertRedirects(response, reverse("register:registrant_email"))
         message = list(get_messages(response.wsgi_request))[0]
         self.assertEqual(message.tags, "error")
+
+
+class ConfirmationPage(TestCase):
+    def test_confirmation_page_logged_out(self):
+        response = self.client.get(reverse("register:confirmation"))
+        self.assertRedirects(
+            response, reverse("register:registrant_email")
+        )
+
+    def test_confirmation_page_logged_in_no_location(self):
+        session = self.client.session
+        verified_user(session)
+
+        response = self.client.get(reverse("register:confirmation"))
+        self.assertRedirects(
+            response, reverse("register:location_step", kwargs={"step": "category"})
+        )
+
+    def test_confirmation_page_logged_in_with_location(self):
+        session = self.client.session
+        verified_user(session)
+
+        location = Location.objects.create(
+            category="category",
+            name="Name of venue",
+            address="Address line 1",
+            city="Ottawa",
+            province="ON",
+            postal_code="K1K 1K1",
+            contact_email="test@test.com",
+            contact_phone="613-555-5555",
+        )
+        session['location_id'] = str(location.id)
+        session.save()
+
+        response = self.client.get(reverse("register:confirmation"))
+
+        self.assertEqual(response.status_code, 200)
 
 
 class RegisterLocationDetailsValidation(TestCase):
