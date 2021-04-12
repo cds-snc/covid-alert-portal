@@ -239,6 +239,7 @@ class RegisterConfirmationPageView(TemplateView):
     template_name = "register/confirmation.html"
 
     def dispatch(self, request, *args, **kwargs):
+        # Must have a verified email
         if not self.request.session.get("registrant_id"):
             messages.add_message(
                 self.request,
@@ -246,6 +247,13 @@ class RegisterConfirmationPageView(TemplateView):
                 _("There has been an error, you need to confirm your email address"),
             )
             return redirect("register:registrant_email")
+
+        # Must have completed location wizard
+        if not self.request.session.get("location_id"):
+            return redirect(reverse_lazy(
+                "register:location_step",
+                kwargs={"step": "category"},
+            ))
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
