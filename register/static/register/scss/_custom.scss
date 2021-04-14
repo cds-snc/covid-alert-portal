@@ -106,49 +106,21 @@ body.qrcode {
         }
     }
 
-    .phone {
-        // margin-bottom: -$space-xxl;
 
-        #id_contact-contact_phone_ext {
-            // width: 30%;
-        }
-        .phone_field{
-            position: absolute;
-            top: 5;
-        }
-        .inactiveLink {
-            pointer-events: none;
-            cursor: default;
-         }
-         .ext_button {
-            // position: relative;
-            color: #2B4380;
-            box-shadow: none;
-            border: none;
-            width: 165%;
-            // margin-top: $space-xl + 5px;
-            background: transparent;
-            text-decoration: underline;
-            -webkit-appearance: none;
-            cursor: pointer;
-            &:hover {
-                background-color: transparent;
-            }
-         }
-         .ext-div {
-            position: relative;
-            margin-top: 10px;
-         }
-    }
 
     
     #id_contact-contact_phone {
-        width: 60%;
+        width: 300px;
     }
       
     .step-one-info {
         margin-bottom: $space-lg;
     }
+    .ext-div {
+        left: 15%;
+        margin-top: 10px;
+     }
+    
 
     .phone-number-field {
         display: flex;
@@ -159,19 +131,16 @@ body.qrcode {
             width: 30%;
         }
 
-        .ext_div {
+        .contact-phone-div {
             margin-top: 10px;
-            display: flex;
+            display: inline-flex;
             width: max-content;
-            .phone_input {
-                width: 70%;
-            }
+            margin-bottom: -$space-xxl;
             .ext_button {
                 color: #2B4380;
                 box-shadow: none;
                 border: none;
-                left: 20%;
-                width: 60%;
+                left: 5%;
                 background: transparent;
                 bottom: 10px;
                 text-decoration: underline;
@@ -180,6 +149,13 @@ body.qrcode {
                 &:hover {
                     background-color: transparent;
                 }
+                
+             }
+
+             .ext-div {
+                position: relative;
+                width: 50%;
+                bottom: 10px;
              }
 
         }

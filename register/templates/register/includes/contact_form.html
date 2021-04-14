@@ -37,14 +37,12 @@
         <strong>{{ form.contact_phone.label_tag }}</strong>
         {% if form.contact_phone.errors %}
             <div id="error--{{ form.contact_phone.html_name }}" class="validation-error">{{ form.contact_phone.errors|first }}</div>
-            <!-- <button id="id-ext-label" class="ext_button" type="button">{% trans "Add phone extension" %}</button> -->
         {% endif %}
         {% if form.contact_phone.help_text %}
             <div class="help--{{ form.contact_phone.html_name }}">{{ form.contact_phone.help_text|linebreaks }}</div>
         {% endif %}
-        <!-- <button id="id-ext-label" class="ext_button" type="button">{% trans "Add phone extension" %}</button> -->
         {% with "aria-describedby:error--"|add:form.contact_phone.html_name as describedBy %}
-        <div class="ext_div">
+        <div class="contact-phone-div">
             {{ form.contact_phone|add_error_attr:describedBy  }}
             <button id="id-ext-label" class="ext_button" type="button">{% trans "Add phone extension" %}</button>
         </div>
@@ -55,14 +53,11 @@
 ​
     <div class="fieldWrapper{% if form.contact_phone_ext.errors %} fieldWrapper--has-error{% endif %} w-30">
         <strong>{{ form.contact_phone_ext.label_tag }}</strong>
-        <!-- <button id="id-ext-label" class="ext_button" type="button">{% trans "Add phone extension" %}</button> -->
         {% if form.contact_phone_ext.errors %}
             <div id="error--{{ form.contact_phone_ext.html_name }}" class="validation-error">{{ form.contact_phone_ext.errors|first }}</div>
-            <!-- <button id="id-ext-label" class="ext_button" type="button">{% trans "Add phone extension" %}</button> -->
         {% endif %}
         {% if form.contact_phone_ext.help_text %}
-            <!-- <div class="help--{{ form.contact_phone_ext.html_name }}">{{ form.contact_phone_ext.help_text|linebreaks }}</div> -->
-            <!-- <button id="id-ext-label" class="ext_button" type="button">{% trans "Add phone extension" %}</button> -->
+            <div class="help--{{ form.contact_phone_ext.html_name }}">{{ form.contact_phone_ext.help_text|linebreaks }}</div>
         {% endif %}
         {% with "aria-describedby:error--"|add:form.contact_phone_ext.html_name as describedBy %}
             {{ form.contact_phone_ext|add_error_attr:describedBy  }}

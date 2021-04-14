@@ -11,4 +11,5 @@ ext.onclick = extensionInput;
 function extensionInput() {
     document.getElementById("id-ext-label").style.display = 'none';
     document.getElementById("id_ext-div").style.display = 'block'
+    document.getElementById("id_contact-contact_phone_ext").focus();
 }
