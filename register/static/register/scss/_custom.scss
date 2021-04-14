@@ -64,12 +64,11 @@ body.qrcode {
         width: 100%;
         a {
             display: inline;
+            img {
+                margin-left: $space-sm;
+                vertical-align: middle;
+            }
         }
-        img {
-            margin-left: $space-sm;
-            vertical-align: middle;
-        }
-
     }
 
     .reminder {
