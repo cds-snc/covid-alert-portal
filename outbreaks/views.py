@@ -112,7 +112,7 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
         if "alert_location" not in request.session:
             return redirect(reverse_lazy("outbreaks:search"))
         idx = kwargs.pop('idx', None)
-        if idx is not None:
+        if idx is not None: # time to delete a thing
             request.session['selected_dates'] = \
                 [dt for i, dt in enumerate(request.session.get('selected_dates', [])) if i != idx]
         form = DateForm()
@@ -221,7 +221,8 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
         date_entry = {
             "start_ts": start_ts,
             "end_ts": end_ts,
-            "notification_txt": notification_txt
+            "notification_txt": notification_txt,
+
         }
         selected_dates.append(date_entry)
         self.request.session['selected_dates'] = selected_dates

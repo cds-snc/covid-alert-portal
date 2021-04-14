@@ -28,11 +28,24 @@ for hour in range(24):
     end_hours.append(display_hour_29)
     end_hours.append(display_hour_59)
 
-month_choices = [(i + 1, month_name[i+1]) for i in range(12)]
+month_choices = [(i + 1, month_name[i + 1]) for i in range(12)]
+
+
+def format_tz(tz):
+    return f"{tz[:len(tz) - 2]}:{tz[len(tz) - 2:]}"
+
+
+timezones = pytz.country_timezones('ca')
+timezones_map = {tz: (
+    datetime.now(pytz.timezone(tz)).strftime('%z'),
+    format_tz(datetime.now(pytz.timezone(tz)).strftime('%z')),
+    f"{tz} (GMT {format_tz(datetime.now(pytz.timezone(tz)).strftime('%z'))})"
+) for tz in timezones}
+timezone_choices = [(tz, timezones_map[tz][2]) for tz in timezones]
 
 
 class DateForm(HealthcareBaseForm):
-    day = forms.IntegerField(label=_("Day"), min_value=1, max_value=31, widget=forms.TextInput)
+    day = forms.IntegerField(label=_("Day"), min_value=1, max_value=31, widget=forms.NumberInput)
     month = forms.ChoiceField(
         label=_("Month"),
         choices=month_choices,
@@ -43,7 +56,10 @@ class DateForm(HealthcareBaseForm):
         min_value=2021,
         max_value=datetime.now().year,
         initial=2021,
-        widget=forms.TextInput,
+        widget=forms.NumberInput,
+    )
+    timezone = forms.CharField(
+        widget=forms.HiddenInput
     )
 
     def __init__(self, *args, **kwargs):
@@ -76,25 +92,21 @@ class DateForm(HealthcareBaseForm):
                 raise ValidationError(start_later_end_error_msg)
             notifications = self.get_notification_intersection(start_date, end_date, self.alert_location)
             if notifications:
-                notification_exist_error_msg = ''
+                error_list = []
                 for idx, notification in enumerate(notifications):
-                    if idx > 0:
-                        notification_exist_error_msg += "\n"
-                    notification_exist_error_msg += overlap_notification_error_tmpl.format(
+                    error_list.append(overlap_notification_error_tmpl.format(
                         notification.start_date.strftime('%c'),
                         notification.end_date.strftime('%c')
-                    )
-                self.add_error(None, notification_exist_error_msg)
-                raise ValidationError(notification_exist_error_msg)
+                    ))
+                self.add_error(None, error_list)
         except ValueError as e:
             self.add_error(None, invalid_date_error_msg)
-            raise ValidationError(invalid_date_error_msg)
 
     def get_valid_date(self, data, start_or_end="start"):
-        tz = pytz.timezone(settings.TIME_ZONE or "UTC")
+        tz = pytz.timezone(data.get('timezone'))
         default_time = '0:00:00:000000' if start_or_end == "start" else '23:59:59:999999'
         hour, minute, second, ms = [int(x) for x in data.get(f"{start_or_end}_time", default_time).split(':')]
-        return datetime(
+        return tz.localize(datetime(
             year=int(data.get(f"year", -1)),
             month=int(data.get(f"month", -1)),
             day=int(data.get(f"day", -1)),
@@ -102,7 +114,7 @@ class DateForm(HealthcareBaseForm):
             minute=minute,
             second=second,
             microsecond=ms
-        ).replace(tzinfo=tz)
+        ))
 
     def get_notification_intersection(self, start_date, end_date, location):
         return Notification.objects.filter(
