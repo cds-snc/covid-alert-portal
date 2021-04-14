@@ -1,6 +1,6 @@
 {% load i18n widget_tweaks %}
 
-<form method="post" id="form--{{ request.resolver_match.url_name }}" {% if form_class %}class="{{ form_class }}"{% endif %} class="contact-form">
+<form method="post" id="form--{{ request.resolver_match.url_name }}" {% if form_class %}class="{{ form_class }}"{% endif %} class="registration-contact-form">
   {% csrf_token %}
 
   {# Required for wizard view #}
