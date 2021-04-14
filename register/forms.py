@@ -7,7 +7,7 @@ from phonenumber_field.formfields import PhoneNumberField
 from dependency_injector.wiring import inject, Provide
 from portal.containers import Container
 from portal.services import NotifyService
-from .widgets import AutocompleteWidget, PhoneExtensionWidget
+from .widgets import AutocompleteWidget
 
 
 location_choices = [
