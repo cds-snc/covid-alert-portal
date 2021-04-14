@@ -93,7 +93,7 @@ class LocationContactForm(HealthcareBaseForm, forms.Form):
     contact_email = forms.EmailField(label=_("Contact email"))
     contact_phone = PhoneNumberField(label=_("Contact phone number"))
     contact_phone_ext = forms.CharField(
-        label=_(""), required=False, widget=PhoneExtensionWidget()
+        label=_("Extension"), required=False
     )
 
 

@@ -104,57 +104,34 @@ body.qrcode {
             line-height: 2em;
         }
     }
-
-
-
-    
-    #id_contact-contact_phone {
-        width: 300px;
-    }
       
     .step-one-info {
         margin-bottom: $space-lg;
     }
-    
 
-    .phone-number-field {
-        display: flex;
-        .w-70 {
-            width: 70%;
-        }
-        .w-30 {
-            width: 30%;
-        }
+    .contact-form {
+        max-width: none;
+        .fieldWrapper--container {
+            width: 500px;
+            &.phone-number-fields {
+                width: 100%;
+                display: flex;
+                flex-flow: row;
+                align-items: flex-end;
 
-        .contact-phone-div {
-            margin-top: 10px;
-            display: inline-flex;
-            width: max-content;
-            margin-bottom: -$space-xxl;
-            .ext_button {
-                color: #2B4380;
-                box-shadow: none;
-                border: none;
-                left: 5%;
-                background: transparent;
-                bottom: 10px;
-                text-decoration: underline;
-                -webkit-appearance: none;
-                cursor: pointer;
-                &:hover {
-                    background-color: transparent;
+                .phone-number-part {
+                    width: 350px;
+                    padding-right: 10px;
                 }
-                
-             }
 
-             .ext-div {
-                margin-top: 10px;
-                position: relative;
-                width: 50%;
-                bottom: 10px;
-             }
-
+                #extension-part {
+                    width: 150px;
+                }
+                #add-extension-link {
+                    margin-bottom: 30px;
+                    margin-left: 10px;
+                }
+            }
         }
-
     }
 }

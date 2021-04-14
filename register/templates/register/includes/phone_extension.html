@@ -1,9 +1,0 @@
-{% load i18n %}
-<div class="contact-phone-div">
-    
-    <div class="ext-div" id="id_ext-div">
-        <label class="ext-label" for="id_contact-contact_phone_ext"><strong>{% trans "Extension" %}</strong></label>
-        <input id="id_contact-contact_phone_ext" type="text" name="contact-contact_phone_ext" value="{{ widget.value|default_if_none:""|stringformat:'s' }}">
-    </div>
-    
-</div>
