@@ -140,4 +140,8 @@ body.qrcode {
         margin-left: 18px;
         padding-left: 20px;
     }
+
+    input[name="address-postal_code"] {
+        width: 30%;
+    }
 }
