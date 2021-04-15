@@ -51,11 +51,13 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
         label="Give brief description of service or event", required=False
     )
 
-    def __init__(self, data=None, *args, **kwargs):
-        super(LocationCategoryForm, self).__init__(data, *args, **kwargs)
-        # If 'something else' is chosen, set category_description as required
-        if data and data.get("category-category", None) == "other":
-            self.fields["category_description"].required = True
+    def clean(self):
+        cleaned_data = super().clean()
+        other_selected = cleaned_data.get("category") == "other"
+        category_description = cleaned_data.get("category_description")
+
+        if other_selected and not category_description:
+            raise forms.ValidationError(_("Give brief description of service or event"))
 
 
 class LocationNameForm(HealthcareBaseForm, forms.Form):
