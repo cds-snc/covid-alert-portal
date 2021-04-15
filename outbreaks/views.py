@@ -232,7 +232,9 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
         # context = super().get_context_data(*args, **kwargs)
         context = {**kwargs}
         context["min_date"] = "2021-01-01"  # Start of the year for simplicity
-        context["max_date"] = datetime.now().strftime(
+        context["max_date"] = datetime.utcnow().replace(
+            tzinfo=pytz.timezone(settings.PORTAL_LOCAL_TZ) # TODO this may need refactoring for client side max date calculation beyond PORTAL_LOCAL_TZ
+        ).strftime(
             "%Y-%m-%d"
         )  # Set max date to today
         context["language"] = get_language()
@@ -298,13 +300,16 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         # Use a transaction to commit all or nothing for the notifications
         with transaction.atomic():
             notifications = []
-            for date_entry in self.request.session['selected_dates']:
-                notifications.append(self.post_notification(
-                    date_entry,
-                    self.request.session["alert_level"],
-                    self.request.session["alert_location"],
-                    self.request.user
-                ))
+            try:
+                for date_entry in self.request.session['selected_dates']:
+                    notifications.append(self.post_notification(
+                        date_entry,
+                        self.request.session["alert_level"],
+                        self.request.session["alert_location"],
+                        self.request.user
+                    ))
+            except KeyError:
+                return redirect(reverse_lazy("outbreaks:search"))
 
             # Post the saved notifications to the server
             for notification in notifications:

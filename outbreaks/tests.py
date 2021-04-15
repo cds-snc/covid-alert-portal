@@ -151,22 +151,22 @@ class DatetimeView(NotificationsTestCase):
     def test_invalid_data(self):
         # Ensure that the datetime form handles data errors
         self.assertTrue(
-            DateForm(1, {"day_0": 1, "month_0": 2, "year_0": 2021}).is_valid()
+            DateForm({"day": 1, "month": 2, "year": 2021}).is_valid()
         )
-        self.assertFalse(DateForm(1, {"day_0": 1, "year_0": 2021}).is_valid())
+        self.assertFalse(DateForm({"day": 1, "year": 2021}).is_valid())
         self.assertFalse(
-            DateForm(1, {"day_0": 1, "month_0": 2, "year_0": 2020}).is_valid()
+            DateForm({"day": 1, "month": 2, "year": 2020}).is_valid()
         )
-        self.assertFalse(DateForm(1, {"day_0": 1, "month_0": 2}).is_valid())
-        self.assertFalse(DateForm(1, {"month_0": 2, "year_0": 2021}).is_valid())
+        self.assertFalse(DateForm({"day": 1, "month": 2}).is_valid())
+        self.assertFalse(DateForm({"month": 2, "year": 2021}).is_valid())
         self.assertFalse(
-            DateForm(1, {"day_0": 0, "month_0": 2, "year_0": 2021}).is_valid()
-        )
-        self.assertFalse(
-            DateForm(1, {"day_0": 32, "month_0": 2, "year_0": 2021}).is_valid()
+            DateForm({"day": 0, "month": 2, "year": 2021}).is_valid()
         )
         self.assertFalse(
-            DateForm(1, {"day_0": 1, "month_0": 13, "year_0": 2021}).is_valid()
+            DateForm({"day": 32, "month": 2, "year": 2021}).is_valid()
+        )
+        self.assertFalse(
+            DateForm({"day": 1, "month": 13, "year": 2021}).is_valid()
         )
 
     def test_add_remove_date(self):
@@ -182,27 +182,25 @@ class DatetimeView(NotificationsTestCase):
         # Post an 'add date' request and ensure it redirects back to the same page
         response = self.client.post(
             reverse("outbreaks:datetime"),
-            {"day_0": 1, "month_0": 1, "year_0": 2021, "adjust_dates": "add"},
+            {"day": 1, "month": 1, "year": 2021, "do_post": "add_date"},
         )
         self.assertEqual(response.status_code, 302)
         self.assertTrue(response.url.startswith(reverse("outbreaks:datetime")))
 
-        # Assert that getting the same page now returns two dates
+        # Assert that getting the same page now returns a deletion link for the first
         response = self.client.get(reverse("outbreaks:datetime"))
-        self.assertContains(response, "day_0")
-        self.assertContains(response, "day_1")
+        self.assertContains(response, "datetime/0/delete")
 
-        # Post a 'remove date' request and ensure it redirects back to the same page
-        response = self.client.post(
-            reverse("outbreaks:datetime"), {"adjust_dates": "remove"}
+        # Get a 'remove date' request and ensure it loads the same page
+        response = self.client.get(
+            reverse("outbreaks:datetime_delete", kwargs={"idx": 0})
         )
-        self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime")))
+        self.assertEqual(response.status_code, 200)
 
-        # Assert that getting the same page now returns a single date
+        # Assert that getting the same page now returns a new form
         response = self.client.get(reverse("outbreaks:datetime"))
-        self.assertContains(response, "day_0")
-        self.assertNotContains(response, "day_1")
+        self.assertNotContains(response, "datetime/0/delete")
+        self.assertContains(response, "add_date")
 
     def test_duplicate_error(self):
         """
@@ -216,7 +214,7 @@ class DatetimeView(NotificationsTestCase):
 
         # Post a date
         self.client.post(
-            reverse("outbreaks:datetime"), {"day_0": 1, "month_0": 1, "year_0": 2021}
+            reverse("outbreaks:datetime"), {"day": 1, "month": 1, "year": 2021, 'do_post': 'add_date'}
         )
         self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
         response = self.client.post(reverse("outbreaks:confirm"), {})
@@ -225,7 +223,7 @@ class DatetimeView(NotificationsTestCase):
 
         # Post duplicate date
         response = self.client.post(
-            reverse("outbreaks:datetime"), {"day_0": 1, "month_0": 1, "year_0": 2021}
+            reverse("outbreaks:datetime"), {"day": 1, "month": 1, "year": 2021, 'do_post': 'add_date'}
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "datetime.html")
@@ -246,7 +244,7 @@ class SeverityView(NotificationsTestCase):
         self.client.get(reverse("outbreaks:profile", args=[location.id]))
         self.client.post(
             reverse("outbreaks:datetime"),
-            {"day_0": 1, "month_0": 1, "year_0": 2021},
+            {"day": 1, "month": 1, "year": 2021, 'do_post': 'add_date'},
         )
         response = self.client.get(reverse("outbreaks:severity"))
         self.assertEqual(response.status_code, 200)
@@ -274,7 +272,7 @@ class ConfirmView(NotificationsTestCase):
         self.client.get(reverse("outbreaks:profile", args=[location.id]))
         self.client.post(
             reverse("outbreaks:datetime"),
-            {"day_0": 1, "month_0": 1, "year_0": 2021},
+            {"day": 10, "month": 1, "year": 2021, 'do_post': 'add_date'},
         )
         self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
         response = self.client.get(reverse("outbreaks:confirm"))
@@ -293,9 +291,9 @@ class ConfirmView(NotificationsTestCase):
         self.login()
         location = Location.objects.get(name="Nandos")
         self.client.get(reverse("outbreaks:profile", args=[location.id]))
-        self.client.post(
+        resp = self.client.post(
             reverse("outbreaks:datetime"),
-            {"day_0": 1, "month_0": 1, "year_0": 2021},
+            {"day": 1, "month": 1, "year": 2021, 'do_post': 'add_date'},
         )
         self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
         response = self.client.post(reverse("outbreaks:confirm"), {})
@@ -307,7 +305,8 @@ class ConfirmView(NotificationsTestCase):
 
 class ConfirmedView(NotificationsTestCase):
     def test_confirmed_view_no_cache(self):
-        # Ensure that the confirmed view is not accessible if there is no location/datetime/severity cached in the session
+        # Ensure that the confirmed view is not accessible if there is no location/datetime/severity cached in the
+        # session
         self.login()
         response = self.client.get(reverse("outbreaks:confirmed"))
         self.assertEqual(response.status_code, 302)
@@ -319,7 +318,7 @@ class ConfirmedView(NotificationsTestCase):
         self.client.get(reverse("outbreaks:profile", args=[location.id]))
         self.client.post(
             reverse("outbreaks:datetime"),
-            {"day_0": 1, "month_0": 1, "year_0": 2021},
+            {"day": 1, "month": 1, "year": 2021, 'do_post': 'add_date'},
         )
         self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
         response = self.client.get(reverse("outbreaks:confirmed"))

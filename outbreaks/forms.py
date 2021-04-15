@@ -8,6 +8,7 @@ from portal.widgets import CDSRadioWidget
 from portal.forms import HealthcareBaseForm
 from datetime import datetime
 from calendar import month_name
+from django.utils import timezone
 import pytz
 
 severity_choices = [
@@ -30,26 +31,12 @@ for hour in range(24):
 
 month_choices = [(i + 1, month_name[i + 1]) for i in range(12)]
 
-
-def format_tz(tz):
-    return f"{tz[:len(tz) - 2]}:{tz[len(tz) - 2:]}"
-
-
-timezones = pytz.country_timezones('ca')
-timezones_map = {tz: (
-    datetime.now(pytz.timezone(tz)).strftime('%z'),
-    format_tz(datetime.now(pytz.timezone(tz)).strftime('%z')),
-    f"{tz} (GMT {format_tz(datetime.now(pytz.timezone(tz)).strftime('%z'))})"
-) for tz in timezones}
-timezone_choices = [(tz, timezones_map[tz][2]) for tz in timezones]
-
-
 class DateForm(HealthcareBaseForm):
     day = forms.IntegerField(label=_("Day"), min_value=1, max_value=31, widget=forms.NumberInput)
     month = forms.ChoiceField(
         label=_("Month"),
         choices=month_choices,
-        initial=datetime.now().month
+        initial=timezone.now().month
     )
     year = forms.IntegerField(
         label=_("Year"),
@@ -57,9 +44,6 @@ class DateForm(HealthcareBaseForm):
         max_value=datetime.now().year,
         initial=2021,
         widget=forms.NumberInput,
-    )
-    timezone = forms.CharField(
-        widget=forms.HiddenInput
     )
 
     def __init__(self, *args, **kwargs):
@@ -103,7 +87,7 @@ class DateForm(HealthcareBaseForm):
             self.add_error(None, invalid_date_error_msg)
 
     def get_valid_date(self, data, start_or_end="start"):
-        tz = pytz.timezone(data.get('timezone'))
+        tz = pytz.timezone(settings.PORTAL_LOCAL_TZ) # TODO (mvp pilot setting) Change this for multi-tz rollout
         default_time = '0:00:00:000000' if start_or_end == "start" else '23:59:59:999999'
         hour, minute, second, ms = [int(x) for x in data.get(f"{start_or_end}_time", default_time).split(':')]
         return tz.localize(datetime(

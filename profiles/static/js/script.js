@@ -20,9 +20,3 @@ if (form) {
     }, 1)
   })
 }
-
-// get user's timezone
-var tzInput = document.getElementById("id_timezone");
-if (tzInput) {
-  tzInput.value = Intl.DateTimeFormat().resolvedOptions().timeZone;
-}

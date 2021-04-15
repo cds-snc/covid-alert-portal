@@ -20,6 +20,10 @@ main .messages {
           color: $color-red;
           background: $color-red-light;
         }
+        &.warning {
+          border-left: 4px solid $color-yellow-dark;
+          background: $color-yellow-warning-light;
+        }
       }
     }
   }

@@ -14,9 +14,9 @@
     <div class="messages--container" role="alert">
       <ul class="messages">
         {% for err in form.non_field_errors %}
-          <li class="error"><b> {{ err }} </b></li>
+          <li class="warning"><b> {{ err }} </b></li>
         {% endfor %}
-        <li class="error">
+        <li class="warning">
           {% trans "To see all public exposures for this place, visit" %} <a
           href="{% url 'outbreaks:history' %}">‘{% trans "Notification history" %}’</a>
         </li>
@@ -28,33 +28,34 @@
 
   <p>{% trans "We’ll notify people who scanned the QR code on that date. Remember to add all dates of this public exposure." %}</p>
 
-  <form method="post" id="form--{{ request.resolver_match.url_name }}">
+  <form method="post" id="form--{{ request.resolver_match.url_name }}" class="outbreaks-datetime">
     {% csrf_token %}
 
     {% if show_date_form %}
       <div
-        class="fieldWrapper--container{% if form.error and show_errors %} fieldWrapper--container--has-error{% endif %}">
-        <div class="fieldWrapper{% if form.error and show_errors %} fieldWrapper--has-error{% endif %}">
+        class="fieldWrapper--container{% if form.non_field_errors and show_errors %} fieldWrapper--container--has-warning{% endif %}">
+        <div class="fieldWrapper{% if form.non_field_errors and show_errors %} fieldWrapper--has-warning{% endif %}">
 
-          {% if form.error and show_errors %}
+          {% if form.non_field_errors and show_errors %}
             <div id="error--{{ form.html_name }}-{{ group }}" class="validation-error"> {{ form.error }} </div>
           {% endif %}
 
-          <div class="flex row">
-            <div class="date_entry">
+          <div class="row">
+            <div class="date_entry col">
               {{ form.day.label_tag }}
               {{ form.day }}
             </div>
-            <div class="date_entry">
+            <div class="date_entry col">
               {{ form.month.label_tag }}
               {{ form.month }}
             </div>
-            <div class="date_entry">
+            <div class="date_entry col">
               {{ form.year.label_tag }}
               {{ form.year }}
             </div>
-            <div class="">
+            <div class="col">
               <button type="button" class="link" id="button_datepicker">{% trans "Select date" %}
+                <img src="{% static 'img/calendar_today_24px.svg' %}" alt=""/>
               </button>
               <duet-date-picker
                 id="form_datepicker"
@@ -65,22 +66,25 @@
               ></duet-date-picker>
             </div>
 
-              {{ form.timezone }}
+            {{ form.timezone }}
 
           </div>
           {% if  show_time_fields %}
-              <div class="date_entry">
+            <div class="row">
+              <div class="date_entry col">
                 {{ form.start_time.label_tag }}
                 {{ form.start_time }}
               </div>
-              <div class="date_entry">
+              <div class="date_entry col">
                 {{ form.end_time.label_tag }}
                 {{ form.end_time }}
               </div>
-              <button name="do_post" value="clear_time" class="link validation-error">
-                {{ _("Remove time range") }}
-              </button>
-
+              <div class="col">
+                <button name="do_post" value="clear_time" class="link destructive-link">
+                  {{ _("Remove time range") }}
+                </button>
+              </div>
+            </div>
 
           {% endif %}
         </div>
@@ -91,6 +95,7 @@
         <div>
           <button name="do_post" value="add_time" class="link">
             {{ _("Add a time range") }}
+            <img src="{% static 'img/access_time_24px.svg' %}" alt=""/>
           </button>
         </div>
       {% endif %}
@@ -126,7 +131,7 @@
               {{ date_entry.notification_txt }}
             </td>
             <td>
-              <a class="validation-error"
+              <a class="destructive-link"
                  href="{% url "outbreaks:datetime_delete" forloop.counter0 %}">{% trans "Delete" %}</a>
             </td>
           </tr>
