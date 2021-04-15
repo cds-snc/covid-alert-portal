@@ -1,90 +1,58 @@
+{% extends "includes/cds_form_base.html" %}
 {% load i18n widget_tweaks %}
 
-<form method="post" id="form--{{ request.resolver_match.url_name }}" {% if form_class %}class="{{ form_class }}"{% endif %} class="registration-contact-form">
-  {% csrf_token %}
+{% block content %}
 
-  {# Required for wizard view #}
-  {{ wizard.management_form }}
-  
-  {# Include the hidden fields #}
-  {% for hidden in form.hidden_fields %}
-    {{ hidden }}
+<div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %}">
+  {# Include the visible fields #}
+  {% for field in form.visible_fields %}
+    {# Handle everything except the phone number fields #}
+    {% if field.html_name != 'contact-contact_phone' and field.html_name != 'contact-contact_phone_ext' %}
+      <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
+          <strong>{{ field.label_tag }}</strong>
+          {% if field.errors %}
+              <div id="error--{{ field.html_name }}" class="validation-error">{{ field.errors|first }}</div>
+          {% endif %}
+          {% if field.help_text %}
+              <div class="help--{{ field.html_name }}">{{ field.help_text|linebreaks }}</div>
+          {% endif %}
+          {% with "aria-describedby:error--"|add:field.html_name as describedBy %}
+              {{ field|add_error_attr:describedBy  }}
+          {% endwith %}
+      </div>        
+    {% endif %}
   {% endfor %}
+</div>
 
-  <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %}">
-    {# Include the visible fields #}
-    {% for field in form.visible_fields %}
-      {# Handle everything except the phone number fields #}
-      {% if field.html_name != 'contact-contact_phone' and field.html_name != 'contact-contact_phone_ext' %}
-        <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
-            <strong>{{ field.label_tag }}</strong>
-            {% if field.errors %}
-                <div id="error--{{ field.html_name }}" class="validation-error">{{ field.errors|first }}</div>
-            {% endif %}
-            {% if field.help_text %}
-                <div class="help--{{ field.html_name }}">{{ field.help_text|linebreaks }}</div>
-            {% endif %}
-            {% with "aria-describedby:error--"|add:field.html_name as describedBy %}
-                {{ field|add_error_attr:describedBy  }}
-            {% endwith %}
-        </div>        
+<div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %} phone-number-fields">
+  <div class="fieldWrapper{% if form.contact_phone.errors %} fieldWrapper--has-error{% endif %} phone-number-part">
+      <strong>{{ form.contact_phone.label_tag }}</strong>
+      {% if form.contact_phone.errors %}
+          <div id="error--{{ form.contact_phone.html_name }}" class="validation-error">{{ form.contact_phone.errors|first }}</div>
       {% endif %}
-    {% endfor %}
-  </div>
-
-  <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %} phone-number-fields">
-    <div class="fieldWrapper{% if form.contact_phone.errors %} fieldWrapper--has-error{% endif %} phone-number-part">
-        <strong>{{ form.contact_phone.label_tag }}</strong>
-        {% if form.contact_phone.errors %}
-            <div id="error--{{ form.contact_phone.html_name }}" class="validation-error">{{ form.contact_phone.errors|first }}</div>
-        {% endif %}
-        {% if form.contact_phone.help_text %}
-            <div class="help--{{ form.contact_phone.html_name }}">{{ form.contact_phone.help_text|linebreaks }}</div>
-        {% endif %}
-        {% with "aria-describedby:error--"|add:form.contact_phone.html_name as describedBy %}
-            {{ form.contact_phone|add_error_attr:describedBy  }}
-        {% endwith %}
-    </div>
-
-    <div class="fieldWrapper{% if form.contact_phone_ext.errors %} fieldWrapper--has-error{% endif %} hidden" id="extension-part">
-        <strong>{{ form.contact_phone_ext.label_tag }}</strong>
-        {% if form.contact_phone_ext.errors %}
-            <div id="error--{{ form.contact_phone_ext.html_name }}" class="validation-error">{{ form.contact_phone_ext.errors|first }}</div>
-        {% endif %}
-        {% if form.contact_phone_ext.help_text %}
-            <div class="help--{{ form.contact_phone_ext.html_name }}">{{ form.contact_phone_ext.help_text|linebreaks }}</div>
-        {% endif %}
-        {% with "aria-describedby:error--"|add:form.contact_phone_ext.html_name as describedBy %}
-          {{ form.contact_phone_ext|add_error_attr:describedBy }}
-        {% endwith %}
-    </div>
-    <div id="add-extension-link">
-      <button id="id-ext-label" class="ext_button link" type="button">{% trans "Add phone extension" %}</button>
-    </div>
-  </div>
-
-  {% if before_submit %}
-    <div class="before-submit">
-      {{ before_submit }}
-    </div>
-  {% endif %}
-
-<div class="content-button">
-    {% if secondary_action_text and secondary_action_before %}
-      <a href="{{ secondary_action_url }}" class="secondary" role="button" draggable="false">{{ secondary_action_text }}</a>
-    {% endif %}
-
-    <button type="submit" {% if submit_class %}class="{{ submit_class }}"{% endif %}>
-      {% if submit_text %}
-        {{ submit_text }}
-      {% else %}
-        {% trans "Submit" %}
+      {% if form.contact_phone.help_text %}
+          <div class="help--{{ form.contact_phone.html_name }}">{{ form.contact_phone.help_text|linebreaks }}</div>
       {% endif %}
-    </button>
-
-    {% if secondary_action_text and not secondary_action_before %}
-      <a href="{{ secondary_action_url }}" class="secondary" role="button" draggable="false">{{ secondary_action_text }}</a>
-    {% endif %}
+      {% with "aria-describedby:error--"|add:form.contact_phone.html_name as describedBy %}
+          {{ form.contact_phone|add_error_attr:describedBy  }}
+      {% endwith %}
   </div>
 
-</form>
+  <div class="fieldWrapper{% if form.contact_phone_ext.errors %} fieldWrapper--has-error{% endif %} hidden" id="extension-part">
+      <strong>{{ form.contact_phone_ext.label_tag }}</strong>
+      {% if form.contact_phone_ext.errors %}
+          <div id="error--{{ form.contact_phone_ext.html_name }}" class="validation-error">{{ form.contact_phone_ext.errors|first }}</div>
+      {% endif %}
+      {% if form.contact_phone_ext.help_text %}
+          <div class="help--{{ form.contact_phone_ext.html_name }}">{{ form.contact_phone_ext.help_text|linebreaks }}</div>
+      {% endif %}
+      {% with "aria-describedby:error--"|add:form.contact_phone_ext.html_name as describedBy %}
+        {{ form.contact_phone_ext|add_error_attr:describedBy }}
+      {% endwith %}
+  </div>
+  <div id="add-extension-link">
+    <button id="id-ext-label" class="ext_button link" type="button">{% trans "Add phone extension" %}</button>
+  </div>
+</div>
+
+{% endblock %}
