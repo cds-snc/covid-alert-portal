@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#: register/forms.py
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-07 19:34+0000\n"
+"POT-Creation-Date: 2021-04-06 19:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2618,3 +2619,11 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#: register/templates/register/includes/phone_extension.html
+msgid "Add phone extension"
+msgstr "Ajouter un numéro de poste"
+
+#: register/templates/register/includes/phone_extension.html
+msgid "Extension"
+msgstr "Nᵒ de poste"

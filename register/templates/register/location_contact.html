@@ -1,5 +1,5 @@
 {% extends 'register/base.html' %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
@@ -20,4 +20,8 @@
   <p>{% trans "We’ll contact them with any important health information for the address." %}</p>
   
   {% include "includes/cds_form.html" with submit_text=_("Next") %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'register/js/phone-extension.js' %}"></script>
 {% endblock %}

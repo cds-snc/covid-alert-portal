@@ -89,6 +89,9 @@
                     {{ form_data.contact_name }}<br>
                     {{ form_data.contact_email }}<br>
                     {{ form_data.contact_phone }}
+                    {% if form_data.contact_phone_ext %}
+                       ext. {{ form_data.contact_phone_ext }}<br>
+                    {% endif %}
                 </dd>
                 <dd class="summary-list__actions">
                     <a href="{% url 'register:location_step' step='contact' %}"> {% blocktrans %} Change <span class="visually-hidden"> contact</span> {% endblocktrans %} </a>

@@ -15,7 +15,7 @@
       
     </div>
     <div class="content-button">
-      <a  href="{% url "register:poster_download" pk=location_id lang='en' %}" target="_blank" role='button' draggable='false' class="secondary">{% trans "Download French poster" %}<img src="{% static 'register/img/PDF_icon_black.svg' %}" alt=""></a>
+      <a  href="{% url "register:poster_download" pk=location_id lang='fr' %}" target="_blank" role='button' draggable='false' class="secondary">{% trans "Download French poster" %}<img src="{% static 'register/img/PDF_icon_black.svg' %}" alt=""></a>
     </div>
 
     {% blocktrans with email=request.session.registrant_email %}
