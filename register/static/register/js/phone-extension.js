@@ -1,14 +1,16 @@
-const ext = document.getElementById("id-ext-label")
-const ext_input = document.getElementById("id_contact-contact_phone_ext")
-document.getElementById("id_ext-div").style.display = 'none'
+const extensionLink = document.getElementById("add-extension-link")
+const extensionInput = document.getElementById("id_contact-contact_phone_ext")
+const extensionInputContainer = document.getElementById("extension-part")
 
-if (ext_input.value) {
-    extensionInput();
+if (extensionInput.value) {
+    extensionInputContainer.classList.remove("hidden")
+    extensionLink.classList.add("hidden")
 }
 
-ext.onclick = extensionInput();
+extensionLink.onclick = showExtensionInput;
 
-function extensionInput() {
-    document.getElementById("id-ext-label").style.display = 'none';
-    document.getElementById("id_ext-div").style.display = 'block'
+function showExtensionInput() {
+    extensionInputContainer.classList.remove("hidden")
+    extensionLink.classList.add("hidden")
+    extensionInput.focus();
 }
