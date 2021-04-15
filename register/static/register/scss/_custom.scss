@@ -112,7 +112,8 @@ body.qrcode {
     .registration-contact-form {
         max-width: none;
         .fieldWrapper--container {
-            width: 500px;
+            max-width: 500px;
+            
             &.phone-number-fields {
                 width: 100%;
                 display: flex;
@@ -139,6 +140,7 @@ body.qrcode {
         border-left: 4px solid #C4C4C4;
         margin-left: 18px;
         padding-left: 20px;
+        max-width: 450px !important;
     }
 
     input[name="address-postal_code"] {
