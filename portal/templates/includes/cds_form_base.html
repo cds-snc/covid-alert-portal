@@ -1,0 +1,40 @@
+{% load i18n widget_tweaks %}
+
+<form method="post" id="form--{{ request.resolver_match.url_name }}" {% if form_class %}class="{{ form_class }}"{% endif %} >
+  {% csrf_token %}
+
+  {# Required for wizard view #}
+  {{ wizard.management_form }}
+  
+  {# Include the hidden fields #}
+  {% for hidden in form.hidden_fields %}
+    {{ hidden }}
+  {% endfor %}
+
+  {% block content %}{% endblock %}
+
+  {% if before_submit %}
+    <div class="before-submit">
+      {{ before_submit }}
+    </div>
+  {% endif %}
+
+  <div class="content-button">
+    {% if secondary_action_text and secondary_action_before %}
+      <a href="{{ secondary_action_url }}" class="secondary" role="button" draggable="false">{{ secondary_action_text }}</a>
+    {% endif %}
+
+    <button type="submit" {% if submit_class %}class="{{ submit_class }}"{% endif %}>
+      {% if submit_text %}
+        {{ submit_text }}
+      {% else %}
+        {% trans "Submit" %}
+      {% endif %}
+    </button>
+
+    {% if secondary_action_text and not secondary_action_before %}
+      <a href="{{ secondary_action_url }}" class="secondary" role="button" draggable="false">{{ secondary_action_text }}</a>
+    {% endif %}
+  </div>
+
+</form>
