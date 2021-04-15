@@ -18,29 +18,29 @@
 {% endblock %}
 
 {% block content %}
-  <p>{% trans "Answer questions to make a poster with a code for your service or event." %}</p>
-  <p>{% trans "Visitors can scan the QR code on their phone. This helps COVID Alert notify people who’ve been exposed to COVID-19." %}</p>
-  <h2>{% trans "Before you start" %}</h2>
-  <p>{% trans "You’ll need:" %}</p>
+  <p>{% trans "COVID-19 spreads quickly in enclosed spaces, like establishments and events. Help slow the spread. Make a COVID Alert poster for your business, community organization or social gathering." %}</p>
+
+  <p>{% trans "Visitors scan the poster’s QR code to add a visit with the <a href='https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html'>COVID Alert app</a>.  Then they’ll be notified if they were exposed during their visit." %}</p>
+
+  <h2>{% trans "You’ll need:" %}</h2>
   <ul>
-   <li> {% trans "Your email address." %} </li>
-   <li> {% trans "Name of service or event." %} </li>
-   <li> {% trans "Address or addresses of service or event." %} </li>
-   <li> {% trans "Contact person for each address." %}</li>
+    <li>{% trans "An email address where we can send the poster." %}</li>
+    <li>{% trans "Name and address of establishment or event." %}</li>
+    <li>{% trans "Contact information for the address." %}</li>
   </ul>
+
+  <p>{% trans "If there are several addresses, make a different QR poster for each.  After you finish this poster, we’ll remind you to make more." %}
+
   <div class="content-button">
     <a href="{% url 'register:registrant_email' %}" role="button" draggable="false" class="with-chevron">{% trans "Start now" %}</a>
   </div>
 
-  {%url "register:contactus" as link%}
-  {%url "register:qrsupport" as qrlink%}
+  {% url "register:contactus" as link %}
+  {% url "register:qrsupport" as qrlink %}
   
   {% blocktranslate %}
-  <h2> Questions? </h2>
-    <p>
-      
-      Visit <a href="{{qrlink}}">Help with your poster</a><br>
-      Or <a href ="{{link}}">Contact us</a>
-   </p>
+    <h2> Questions? </h2>
+    <p>Visit <a href="{{ qrlink }}">Help with your poster</a><br>
+      Or <a href ="{{ link }}">Contact us</a></p>
    {% endblocktranslate %}
 {% endblock %}
