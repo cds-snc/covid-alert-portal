@@ -10,12 +10,7 @@ from django.db.models.functions import Lower
 from django.db.models import Q
 from django.db import transaction
 from django.shortcuts import redirect, render
-from django.views.generic import (
-    FormView,
-    ListView,
-    TemplateView,
-    View
-)
+from django.views.generic import FormView, ListView, TemplateView, View
 from django.utils.translation import get_language, gettext_lazy as _
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from portal.mixins import Is2FAMixin
@@ -76,8 +71,8 @@ class ProfileView(PermissionRequiredMixin, Is2FAMixin, FormView):
 
     def get(self, request, *args, **kwargs):
         # purge selected dates to reset wizard flow
-        if request.session.get('selected_dates'):
-            del request.session['selected_dates']
+        if request.session.get("selected_dates"):
+            del request.session["selected_dates"]
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
@@ -111,20 +106,27 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
         # Ensure we have a cached location
         if "alert_location" not in request.session:
             return redirect(reverse_lazy("outbreaks:search"))
-        idx = kwargs.pop('idx', None)
+        idx = kwargs.pop("idx", None)
         if idx is not None:  # time to delete a thing
-            request.session['selected_dates'] = \
-                [dt for i, dt in enumerate(request.session.get('selected_dates', [])) if i != idx]
+            request.session["selected_dates"] = [
+                dt
+                for i, dt in enumerate(request.session.get("selected_dates", []))
+                if i != idx
+            ]
         form = DateForm()
-        next_button_submit_form_ind = not request.session.get('selected_dates')
+        next_button_submit_form_ind = not request.session.get("selected_dates")
         next_button_show = True
-        show_date_form = not request.session.get('selected_dates')
-        return render(request, self.template_name, self.get_context_data(
-            form=form,
-            show_date_form=show_date_form,
-            next_button_show=next_button_show,
-            next_button_submit_form_ind=next_button_submit_form_ind,
-        ))
+        show_date_form = not request.session.get("selected_dates")
+        return render(
+            request,
+            self.template_name,
+            self.get_context_data(
+                form=form,
+                show_date_form=show_date_form,
+                next_button_show=next_button_show,
+                next_button_submit_form_ind=next_button_submit_form_ind,
+            ),
+        )
 
     def post(self, request, *args, **kwargs):
         """
@@ -143,42 +145,43 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
         success_url = reverse_lazy("outbreaks:severity")
         do_post = request.POST.get("do_post", None)
         post_data = request.POST
-        next_button_show = not request.session.get('selected_dates')
-        next_button_submit_form_ind = not request.session.get('selected_dates')
+        next_button_show = not request.session.get("selected_dates")
+        next_button_submit_form_ind = not request.session.get("selected_dates")
         form = None
         if not do_post:  # no form to submit, going next
-            if not request.session.get('selected_dates'):
-                return HttpResponseRedirect(reverse_lazy('outbreaks:datetime'))
+            if not request.session.get("selected_dates"):
+                return HttpResponseRedirect(reverse_lazy("outbreaks:datetime"))
             return HttpResponseRedirect(success_url)
 
-        if do_post == 'add_date':  # submitting a form
+        if do_post == "add_date":  # submitting a form
             form = DateForm(
                 post_data,
-                alert_location=request.session['alert_location'],
-                show_time_fields=post_data.get("start_time", None)
+                alert_location=request.session["alert_location"],
+                show_time_fields=post_data.get("start_time", None),
             )
             if form.is_valid():
                 if self.save_form_dates(form):
-                    return HttpResponseRedirect(reverse_lazy('outbreaks:datetime'))
+                    return HttpResponseRedirect(reverse_lazy("outbreaks:datetime"))
             show_errors = True
 
         # not submitting a form, other toggles or form invalid
         elif do_post == "cancel":
-            return HttpResponseRedirect(reverse_lazy('outbreaks:datetime'))
-        elif do_post == 'show_date_form':
+            return HttpResponseRedirect(reverse_lazy("outbreaks:datetime"))
+        elif do_post == "show_date_form":
             show_date_form = True
             post_data = None  # re-init form
-        if request.POST.get("start_time", None) or \
-            do_post == 'add_time':
+        if request.POST.get("start_time", None) or do_post == "add_time":
             show_time_fields = True
-            if do_post == 'add_time':
+            if do_post == "add_time":
                 post_data = request.POST.copy()  # make it mutable to init end_time
-                post_data.appendlist('end_time', end_hours[-1])
+                post_data.appendlist("end_time", end_hours[-1])
         if do_post == "clear_time":
             show_time_fields = False
 
         # only re-rendering form if shifting time mode, or failed validation
-        form = DateForm(post_data, show_time_fields=show_time_fields) if not form else form
+        form = (
+            DateForm(post_data, show_time_fields=show_time_fields) if not form else form
+        )
         context = self.get_context_data(
             form=form,
             show_errors=show_errors,  # we're not submitting here
@@ -195,22 +198,30 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
         Cache the currently entered valid datetime entries before adding/removing new entries so that the
         user hopefully doesn't experience strange jumps in continuity with values changing/disappearing
         """
-        selected_dates = self.request.session.get('selected_dates', [])
+        selected_dates = self.request.session.get("selected_dates", [])
         start_dt = form.get_valid_date(form.data)
-        end_dt = form.get_valid_date(form.data, 'end')
+        end_dt = form.get_valid_date(form.data, "end")
         start_ts = start_dt.timestamp()
         end_ts = end_dt.timestamp()
-        overlap_notification_error_tmpl = _("A conflicting notification: ({}) was entered below.")
+        overlap_notification_error_tmpl = _(
+            "A conflicting notification: ({}) was entered below."
+        )
         date_entry_tmpl = _("{} from {} to {}")
 
         for date_entry in selected_dates:  # check local intersection
-            selected_start_ts = date_entry['start_ts']
-            selected_end_ts = date_entry['end_ts']
+            selected_start_ts = date_entry["start_ts"]
+            selected_end_ts = date_entry["end_ts"]
             # thanks Martin! https://wiki.c2.com/?TestIfDateRangesOverlap
             if start_ts <= selected_end_ts and selected_start_ts <= end_ts:
-                form.add_error(None, ValidationError(overlap_notification_error_tmpl.format(
-                    date_entry['notification_txt']
-                ), code='warning'))
+                form.add_error(
+                    None,
+                    ValidationError(
+                        overlap_notification_error_tmpl.format(
+                            date_entry["notification_txt"]
+                        ),
+                        code="warning",
+                    ),
+                )
                 return False
 
         start_dmy_fmt = "%e %B %Y"
@@ -222,25 +233,28 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
             "start_ts": start_ts,
             "end_ts": end_ts,
             "notification_txt": notification_txt,
-
         }
         selected_dates.append(date_entry)
-        self.request.session['selected_dates'] = selected_dates
+        self.request.session["selected_dates"] = selected_dates
         return True
 
     def get_context_data(self, *args, **kwargs):
         # context = super().get_context_data(*args, **kwargs)
         context = {**kwargs}
         context["min_date"] = "2021-01-01"  # Start of the year for simplicity
-        context["max_date"] = datetime.utcnow().replace(
-            tzinfo=pytz.timezone(settings.PORTAL_LOCAL_TZ)
-            # TODO this may need refactoring for client side max date calculation beyond PORTAL_LOCAL_TZ
-        ).strftime(
-            "%Y-%m-%d"
+        context["max_date"] = (
+            datetime.utcnow()
+            .replace(
+                tzinfo=pytz.timezone(settings.PORTAL_LOCAL_TZ)
+                # TODO this may need refactoring for client side max date calculation beyond PORTAL_LOCAL_TZ
+            )
+            .strftime("%Y-%m-%d")
         )  # Set max date to today
         context["language"] = get_language()
-        if context.get('show_errors', False):
-            context['warning_ind'] = context['form'].non_field_errors().data[0].code == 'warning'
+        if context.get("show_errors", False):
+            context["warning_ind"] = (
+                context["form"].non_field_errors().data[0].code == "warning"
+            )
         return context
 
 
@@ -256,9 +270,8 @@ class SeverityView(PermissionRequiredMixin, Is2FAMixin, FormView):
 
     def get(self, request, *args, **kwargs):
         # Ensure we have a cached location and datetime
-        if (
-            "alert_location" not in request.session
-            or not request.session.get('selected_dates', None)
+        if "alert_location" not in request.session or not request.session.get(
+            "selected_dates", None
         ):
             return redirect(reverse_lazy("outbreaks:search"))
         return super().get(request, *args, **kwargs)
@@ -280,7 +293,7 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         # Ensure we have all necessary data cached
         if (
             "alert_location" not in request.session
-            or not request.session.get('selected_dates', None)
+            or not request.session.get("selected_dates", None)
             or "alert_level" not in request.session
         ):
             return redirect(reverse_lazy("outbreaks:search"))
@@ -296,7 +309,7 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         context["alert_level"] = dict(severity_choices)[
             self.request.session["alert_level"]
         ]
-        context["dates"] = self.request.session['selected_dates']
+        context["dates"] = self.request.session["selected_dates"]
         return context
 
     def form_valid(self, form):
@@ -304,13 +317,15 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
         with transaction.atomic():
             notifications = []
             try:
-                for date_entry in self.request.session['selected_dates']:
-                    notifications.append(self.post_notification(
-                        date_entry,
-                        self.request.session["alert_level"],
-                        self.request.session["alert_location"],
-                        self.request.user
-                    ))
+                for date_entry in self.request.session["selected_dates"]:
+                    notifications.append(
+                        self.post_notification(
+                            date_entry,
+                            self.request.session["alert_level"],
+                            self.request.session["alert_location"],
+                            self.request.user,
+                        )
+                    )
             except KeyError:
                 return redirect(reverse_lazy("outbreaks:search"))
 
@@ -325,8 +340,8 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
     def post_notification(self, date_entry, severity, location_id, user):
         # Ensure that the datetime is aware (might not be if unit testing or something)
         tz = pytz.timezone(settings.TIME_ZONE or "UTC")
-        start_dt = datetime.fromtimestamp(date_entry['start_ts']).replace(tzinfo=tz)
-        end_dt = datetime.fromtimestamp(date_entry['end_ts']).replace(tzinfo=tz)
+        start_dt = datetime.fromtimestamp(date_entry["start_ts"]).replace(tzinfo=tz)
+        end_dt = datetime.fromtimestamp(date_entry["end_ts"]).replace(tzinfo=tz)
 
         # Create the notification
         notification = Notification(
@@ -390,7 +405,7 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
         # Ensure we have all necessary data cached
         if (
             "alert_location" not in request.session
-            or not request.session.get('selected_dates', None)
+            or not request.session.get("selected_dates", None)
             or "alert_level" not in request.session
         ):
             return redirect(reverse_lazy("outbreaks:search"))
@@ -402,7 +417,7 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
         context = super().get_context_data(*args, **kwargs)
         context["severity"] = self.request.session.pop("alert_level")
         context["location"] = location
-        context["dates"] = self.request.session['selected_dates']
+        context["dates"] = self.request.session["selected_dates"]
         return context
 
 

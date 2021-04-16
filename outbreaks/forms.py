@@ -19,21 +19,35 @@ hour_format = "%-H:%M" if get_language() == "fr" else "%-I:%M %p"
 start_hours = []
 end_hours = []
 for hour in range(24):
-    display_hour = (f"{hour}:00:00:000000", datetime.strftime(datetime(2020, 1, 1, hour), hour_format))
-    display_hour_30 = (f"{hour}:30:00:000000", datetime.strftime(datetime(2020, 1, 1, hour, 30), hour_format))
-    display_hour_29 = (f"{hour}:29:59:999999", datetime.strftime(datetime(2020, 1, 1, hour, 29, 59), hour_format))
-    display_hour_59 = (f"{hour}:59:59:999999", datetime.strftime(datetime(2020, 1, 1, hour, 59, 59), hour_format))
+    display_hour = (
+        f"{hour}:00:00:000000",
+        datetime.strftime(datetime(2020, 1, 1, hour), hour_format),
+    )
+    display_hour_30 = (
+        f"{hour}:30:00:000000",
+        datetime.strftime(datetime(2020, 1, 1, hour, 30), hour_format),
+    )
+    display_hour_29 = (
+        f"{hour}:29:59:999999",
+        datetime.strftime(datetime(2020, 1, 1, hour, 29, 59), hour_format),
+    )
+    display_hour_59 = (
+        f"{hour}:59:59:999999",
+        datetime.strftime(datetime(2020, 1, 1, hour, 59, 59), hour_format),
+    )
     start_hours.append(display_hour)
     start_hours.append(display_hour_30)
     end_hours.append(display_hour_29)
     end_hours.append(display_hour_59)
 
 month_choices = [(i + 1, month_name[i + 1]) for i in range(12)]
-month_choices.insert(0, (-1, _('Select')))
+month_choices.insert(0, (-1, _("Select")))
 
 
 class DateForm(HealthcareBaseForm):
-    day = forms.IntegerField(label=_("Day"), min_value=1, max_value=31, widget=forms.NumberInput)
+    day = forms.IntegerField(
+        label=_("Day"), min_value=1, max_value=31, widget=forms.NumberInput
+    )
     month = forms.ChoiceField(
         label=_("Month"),
         choices=month_choices,
@@ -46,8 +60,8 @@ class DateForm(HealthcareBaseForm):
     )
 
     def __init__(self, *args, **kwargs):
-        show_time_fields = kwargs.pop('show_time_fields', None)
-        alert_location = kwargs.pop('alert_location', None)
+        show_time_fields = kwargs.pop("show_time_fields", None)
+        alert_location = kwargs.pop("alert_location", None)
         super().__init__(*args, **kwargs)
 
         self.alert_location = alert_location
@@ -65,44 +79,61 @@ class DateForm(HealthcareBaseForm):
         # Validate each date provided to ensure that it is in fact a correct date
         cleaned_data = super().clean()
         invalid_date_error_msg = _("Invalid date specified.")
-        start_later_end_error_msg = _("\"To\" must be later than \"From\".")
-        overlap_notification_error_tmpl = _("Notification between {} and {} already exists.")
+        start_later_end_error_msg = _('"To" must be later than "From".')
+        overlap_notification_error_tmpl = _(
+            "Notification between {} and {} already exists."
+        )
         try:
-            start_date = self.get_valid_date(cleaned_data, 'start')
-            end_date = self.get_valid_date(cleaned_data, 'end')
+            start_date = self.get_valid_date(cleaned_data, "start")
+            end_date = self.get_valid_date(cleaned_data, "end")
             if start_date >= end_date:
                 self.add_error(None, start_later_end_error_msg)
                 raise ValidationError(start_later_end_error_msg)
-            notifications = self.get_notification_intersection(start_date, end_date, self.alert_location)
+            notifications = self.get_notification_intersection(
+                start_date, end_date, self.alert_location
+            )
             if notifications:
                 error_list = []
                 for idx, notification in enumerate(notifications):
-                    error_list.append(ValidationError(overlap_notification_error_tmpl.format(
-                        notification.start_date.strftime('%c'),
-                        notification.end_date.strftime('%c')
-                    ), code='warning'))
+                    error_list.append(
+                        ValidationError(
+                            overlap_notification_error_tmpl.format(
+                                notification.start_date.strftime("%c"),
+                                notification.end_date.strftime("%c"),
+                            ),
+                            code="warning",
+                        )
+                    )
                 self.add_error(None, error_list)
         except ValueError as e:
             self.add_error(None, invalid_date_error_msg)
 
     def get_valid_date(self, data, start_or_end="start"):
-        tz = pytz.timezone(settings.PORTAL_LOCAL_TZ)  # TODO (mvp pilot setting) Change this for multi-tz rollout
-        default_time = '0:00:00:000000' if start_or_end == "start" else '23:59:59:999999'
-        hour, minute, second, ms = [int(x) for x in data.get(f"{start_or_end}_time", default_time).split(':')]
-        return tz.localize(datetime(
-            year=int(data.get("year", -1)),
-            month=int(data.get("month", -1)),
-            day=int(data.get("day", -1)),
-            hour=hour,
-            minute=minute,
-            second=second,
-            microsecond=ms
-        ))
+        tz = pytz.timezone(
+            settings.PORTAL_LOCAL_TZ
+        )  # TODO (mvp pilot setting) Change this for multi-tz rollout
+        default_time = (
+            "0:00:00:000000" if start_or_end == "start" else "23:59:59:999999"
+        )
+        hour, minute, second, ms = [
+            int(x) for x in data.get(f"{start_or_end}_time", default_time).split(":")
+        ]
+        return tz.localize(
+            datetime(
+                year=int(data.get("year", -1)),
+                month=int(data.get("month", -1)),
+                day=int(data.get("day", -1)),
+                hour=hour,
+                minute=minute,
+                second=second,
+                microsecond=ms,
+            )
+        )
 
     def get_notification_intersection(self, start_date, end_date, location):
         return Notification.objects.filter(
-            Q(start_date__range=[start_date, end_date], location__id=location) |
-            Q(end_date__range=[start_date, end_date], location__id=location)
+            Q(start_date__range=[start_date, end_date], location__id=location)
+            | Q(end_date__range=[start_date, end_date], location__id=location)
         )
 
 
