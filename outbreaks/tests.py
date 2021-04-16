@@ -229,6 +229,76 @@ class DatetimeView(NotificationsTestCase):
         self.assertTemplateUsed(response, "datetime.html")
         self.assertContains(response, "error")
 
+    def test_duplicate_same_session_error(self):
+        """
+        Assert cannot add duplicates in same session
+        """
+        self.login()
+        location = Location.objects.get(name="Nandos")
+        self.client.get(reverse("outbreaks:profile", args=[location.id]))
+
+        # Post a date
+        response = self.client.post(
+            reverse("outbreaks:datetime"), {"day": 1, "month": 1, "year": 2021, 'do_post': 'add_date'}
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime")))
+
+        response = self.client.post(
+            reverse("outbreaks:datetime"), {"day": 1, "month": 1, "year": 2021, 'do_post': 'add_date'}
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "datetime.html")
+        self.assertContains(response, "error")
+
+    def test_custom_time_range_form_show_hide(self):
+        """
+        Can send a custom time range
+        Can show multiple saved notifications in session
+        Can toggle form show and hide
+        """
+        self.login()
+        location = Location.objects.get(name="Nandos")
+        self.client.get(reverse("outbreaks:profile", args=[location.id]))
+
+        # Post a date
+        response = self.client.post(
+            reverse("outbreaks:datetime"), {"day": 1, "month": 1, "year": 2021, 'do_post': 'add_date',
+                                            "start_time": '0:00:00:000000', "end_time": "9:59:59:999999"}
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime")))
+        response = self.client.get(reverse("outbreaks:datetime"))
+        self.assertContains(response, "datetime/0/delete")
+
+        response = self.client.post(
+            reverse("outbreaks:datetime"), {"day": 1, "month": 1, "year": 2021, 'do_post': 'add_date',
+                                            "start_time": '10:00:00:000000', "end_time": "22:59:59:999999"}
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime")))
+        response = self.client.get(reverse("outbreaks:datetime"))
+        self.assertContains(response, "datetime/1/delete")
+
+        # verify form isn't showing
+        self.assertTemplateUsed(response, "datetime.html")
+        self.assertNotContains(response, "button_datepicker")
+        self.assertContains(response, "Add new date")
+
+        response = self.client.post(
+            reverse("outbreaks:datetime"), {'do_post': 'show_date_form'}
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "datetime.html")
+        self.assertContains(response, 'button_datepicker')
+        self.assertNotContains(response, "error")
+
+        response = self.client.post(
+            reverse("outbreaks:datetime"), {'do_post': 'cancel'}
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('outbreaks:datetime'))
+
 
 class SeverityView(NotificationsTestCase):
     def test_severity_view_no_cache(self):

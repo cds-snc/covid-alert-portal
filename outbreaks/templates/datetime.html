@@ -11,30 +11,56 @@
   </div>
 
   {% if form.non_field_errors and show_errors %}
-    <div class="messages--container" role="alert">
-      <ul class="messages">
-        {% for err in form.non_field_errors %}
-          <li class="warning"><b> {{ err }} </b></li>
-        {% endfor %}
-        <li class="warning">
-          {% trans "To see all public exposures for this place, visit" %} <a
-          href="{% url 'outbreaks:history' %}">‘{% trans "Notification history" %}’</a>
-        </li>
-      </ul>
-    </div>
+    {% if warning_ind %}
+      <div class="messages--container" role="alert">
+
+        <ul class="messages">
+          {% for err in form.non_field_errors.data %}
+            <li class="warning"><b> {{ err.message }} </b></li>
+          {% endfor %}
+          <li class="warning">
+            {% trans "To see all public exposures for this place, visit" %} <a
+            href="{% url 'outbreaks:history' %}">‘{% trans "Notification history" %}’</a>
+          </li>
+        </ul>
+      </div>
+    {% else %}
+      <div class="errorlist--container" role="alert">
+        <h2 class="errorlist--heading">
+          {% trans "Please correct the errors on the page" %}
+        </h2>
+        <ol class="errorlist">
+          {% for key,value in form.errors.items %}
+            <li>
+              {% if key == '__all__' %}
+                <a href="#form--{{ request.resolver_match.url_name }}">
+              {% else %}
+                <a href="#id_{{ key }}">
+              {% endif %}
+              {{ value|first }}
+              </a>
+            </li>
+          {% endfor %}
+        </ol>
+      </div>
+    {% endif %}
   {% endif %}
 
   <h1>{% trans "Select date and time" %}</h1>
 
-  <p>{% trans "We’ll notify people who scanned the QR code on that date. Remember to add all dates of this public exposure." %}</p>
+  <p>{% trans "We’ll notify people who scanned the QR codeon that date. Remember to add all dates of this public exposure." %}</p>
 
   <form method="post" id="form--{{ request.resolver_match.url_name }}" class="outbreaks-datetime">
     {% csrf_token %}
 
     {% if show_date_form %}
       <div
-        class="fieldWrapper--container{% if form.non_field_errors and show_errors %} fieldWrapper--container--has-warning{% endif %}">
-        <div class="fieldWrapper{% if form.non_field_errors and show_errors %} fieldWrapper--has-warning{% endif %}">
+        class="fieldWrapper--container{% if form.non_field_errors and show_errors %}
+        fieldWrapper--container--has-{% if warning_ind %}warning{% else %}error{% endif %}
+        {% endif %}">
+        <div class="fieldWrapper{% if form.non_field_errors and show_errors %}
+        fieldWrapper--has-{% if warning_ind %}warning{% else %}error{% endif %}
+        {% endif %}">
 
           {% if form.non_field_errors and show_errors %}
             <div id="error--{{ form.html_name }}-{{ group }}" class="validation-error"> {{ form.error }} </div>
@@ -80,7 +106,7 @@
                 {{ form.end_time }}
               </div>
               <div class="col">
-                <button name="do_post" value="clear_time" class="link destructive-link">
+                <button name="do_post" value="clear_time" class="link">
                   {{ _("Remove time range") }}
                 </button>
               </div>

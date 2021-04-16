@@ -1,6 +1,11 @@
 form.outbreaks-datetime {
   max-width: 100%;
 
+  select {
+    width: 100%;
+    display: flex
+  }
+
   .row {
     display: flex;
     flex-wrap: nowrap;
@@ -25,5 +30,4 @@ form.outbreaks-datetime {
     color: $color-red;
   }
 }
-
 

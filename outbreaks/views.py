@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
 
 from register.models import Location
@@ -112,7 +113,7 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
         if "alert_location" not in request.session:
             return redirect(reverse_lazy("outbreaks:search"))
         idx = kwargs.pop('idx', None)
-        if idx is not None: # time to delete a thing
+        if idx is not None:  # time to delete a thing
             request.session['selected_dates'] = \
                 [dt for i, dt in enumerate(request.session.get('selected_dates', [])) if i != idx]
         form = DateForm()
@@ -152,7 +153,6 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
             return HttpResponseRedirect(success_url)
 
         if do_post == 'add_date':  # submitting a form
-            show_errors = True
             form = DateForm(
                 post_data,
                 alert_location=request.session['alert_location'],
@@ -161,18 +161,19 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
             if form.is_valid():
                 if self.save_form_dates(form):
                     return HttpResponseRedirect(reverse_lazy('outbreaks:datetime'))
+            show_errors = True
 
         # not submitting a form, other toggles or form invalid
         elif do_post == "cancel":
             return HttpResponseRedirect(reverse_lazy('outbreaks:datetime'))
         elif do_post == 'show_date_form':
             show_date_form = True
-            post_data = None # re-init form
+            post_data = None  # re-init form
         if request.POST.get("start_time", None) or \
             do_post == 'add_time':
             show_time_fields = True
             if do_post == 'add_time':
-                post_data = request.POST.copy() # make it mutable to init end_time
+                post_data = request.POST.copy()  # make it mutable to init end_time
                 post_data.appendlist('end_time', end_hours[-1])
         if do_post == "clear_time":
             show_time_fields = False
@@ -200,17 +201,17 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
         end_dt = form.get_valid_date(form.data, 'end')
         start_ts = start_dt.timestamp()
         end_ts = end_dt.timestamp()
-        overlap_notification_error_tmpl = _("A conflicting notification: \n({}) was entered below.")
+        overlap_notification_error_tmpl = _("A conflicting notification: ({}) was entered below.")
         date_entry_tmpl = _("{} from {} to {}")
 
-        for date_entry in selected_dates: # check local intersection
+        for date_entry in selected_dates:  # check local intersection
             selected_start_ts = date_entry['start_ts']
             selected_end_ts = date_entry['end_ts']
             # thanks Martin! https://wiki.c2.com/?TestIfDateRangesOverlap
             if start_ts <= selected_end_ts and selected_start_ts <= end_ts:
-                form.add_error(None, overlap_notification_error_tmpl.format(
+                form.add_error(None, ValidationError(overlap_notification_error_tmpl.format(
                     date_entry['notification_txt']
-                ))
+                ), code='warning'))
                 return False
 
         start_dmy_fmt = "%e %B %Y"
@@ -233,11 +234,14 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
         context = {**kwargs}
         context["min_date"] = "2021-01-01"  # Start of the year for simplicity
         context["max_date"] = datetime.utcnow().replace(
-            tzinfo=pytz.timezone(settings.PORTAL_LOCAL_TZ) # TODO this may need refactoring for client side max date calculation beyond PORTAL_LOCAL_TZ
+            tzinfo=pytz.timezone(settings.PORTAL_LOCAL_TZ)
+            # TODO this may need refactoring for client side max date calculation beyond PORTAL_LOCAL_TZ
         ).strftime(
             "%Y-%m-%d"
         )  # Set max date to today
         context["language"] = get_language()
+        if context.get('show_errors', False):
+            context['warning_ind'] = context['form'].non_field_errors().data[0].code == 'warning'
         return context
 
 

@@ -23,6 +23,7 @@ main .messages {
         &.warning {
           border-left: 4px solid $color-yellow-dark;
           background: $color-yellow-warning-light;
+          font-weight: normal;
         }
       }
     }

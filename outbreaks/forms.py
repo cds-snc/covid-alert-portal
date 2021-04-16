@@ -8,7 +8,6 @@ from portal.widgets import CDSRadioWidget
 from portal.forms import HealthcareBaseForm
 from datetime import datetime
 from calendar import month_name
-from django.utils import timezone
 import pytz
 
 severity_choices = [
@@ -30,19 +29,19 @@ for hour in range(24):
     end_hours.append(display_hour_59)
 
 month_choices = [(i + 1, month_name[i + 1]) for i in range(12)]
+month_choices.insert(0, (-1, _('Select')))
+
 
 class DateForm(HealthcareBaseForm):
     day = forms.IntegerField(label=_("Day"), min_value=1, max_value=31, widget=forms.NumberInput)
     month = forms.ChoiceField(
         label=_("Month"),
         choices=month_choices,
-        initial=timezone.now().month
     )
     year = forms.IntegerField(
         label=_("Year"),
         min_value=2021,
         max_value=datetime.now().year,
-        initial=2021,
         widget=forms.NumberInput,
     )
 
@@ -78,16 +77,16 @@ class DateForm(HealthcareBaseForm):
             if notifications:
                 error_list = []
                 for idx, notification in enumerate(notifications):
-                    error_list.append(overlap_notification_error_tmpl.format(
+                    error_list.append(ValidationError(overlap_notification_error_tmpl.format(
                         notification.start_date.strftime('%c'),
                         notification.end_date.strftime('%c')
-                    ))
+                    ), code='warning'))
                 self.add_error(None, error_list)
         except ValueError as e:
             self.add_error(None, invalid_date_error_msg)
 
     def get_valid_date(self, data, start_or_end="start"):
-        tz = pytz.timezone(settings.PORTAL_LOCAL_TZ) # TODO (mvp pilot setting) Change this for multi-tz rollout
+        tz = pytz.timezone(settings.PORTAL_LOCAL_TZ)  # TODO (mvp pilot setting) Change this for multi-tz rollout
         default_time = '0:00:00:000000' if start_or_end == "start" else '23:59:59:999999'
         hour, minute, second, ms = [int(x) for x in data.get(f"{start_or_end}_time", default_time).split(':')]
         return tz.localize(datetime(
