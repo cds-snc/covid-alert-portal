@@ -1,4 +1,4 @@
-const pickers = document.querySelectorAll("duet-date-picker")
+const pickers = document.querySelectorAll("duet-date-picker");
 
 pickers.forEach(function(picker) {
     // Replace the default input and button combo with our own 'show' button

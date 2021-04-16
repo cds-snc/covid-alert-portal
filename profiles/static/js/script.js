@@ -20,3 +20,13 @@ if (form) {
     }, 1)
   })
 }
+
+// This prevents enter on the date picker from accidentally submitting the form when hitting enter on the month/year
+document.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      if (e.target.id.indexOf('DuetDateMonth') === 0 || e.target.id.indexOf('DuetDateYear') === 0){
+        e.preventDefault();
+        document.querySelectorAll("duet-date-picker")[0].hide();
+      }
+    }
+});
