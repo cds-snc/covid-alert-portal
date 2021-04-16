@@ -90,9 +90,9 @@ class DateForm(HealthcareBaseForm):
         default_time = '0:00:00:000000' if start_or_end == "start" else '23:59:59:999999'
         hour, minute, second, ms = [int(x) for x in data.get(f"{start_or_end}_time", default_time).split(':')]
         return tz.localize(datetime(
-            year=int(data.get(f"year", -1)),
-            month=int(data.get(f"month", -1)),
-            day=int(data.get(f"day", -1)),
+            year=int(data.get("year", -1)),
+            month=int(data.get("month", -1)),
+            day=int(data.get("day", -1)),
             hour=hour,
             minute=minute,
             second=second,

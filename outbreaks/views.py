@@ -106,7 +106,6 @@ class ProfileView(PermissionRequiredMixin, Is2FAMixin, FormView):
 class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
     permission_required = ["profiles.can_send_alerts"]
     template_name = "datetime.html"
-    success_url = reverse_lazy("outbreaks:datetime")
 
     def get(self, request, *args, **kwargs):
         # Ensure we have a cached location
