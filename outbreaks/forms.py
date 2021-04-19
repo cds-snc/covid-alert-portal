@@ -105,7 +105,7 @@ class DateForm(HealthcareBaseForm):
                         )
                     )
                 self.add_error(None, error_list)
-        except ValueError as e:
+        except ValueError:
             self.add_error(None, invalid_date_error_msg)
 
     def get_valid_date(self, data, start_or_end="start"):

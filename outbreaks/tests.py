@@ -369,7 +369,7 @@ class ConfirmView(NotificationsTestCase):
         self.login()
         location = Location.objects.get(name="Nandos")
         self.client.get(reverse("outbreaks:profile", args=[location.id]))
-        resp = self.client.post(
+        self.client.post(
             reverse("outbreaks:datetime"),
             {"day": 1, "month": 1, "year": 2021, "do_post": "add_date"},
         )
