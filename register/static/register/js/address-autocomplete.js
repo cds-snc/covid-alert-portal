@@ -76,21 +76,21 @@ function getDetails(id, callback) {
         } else {
             const results = response.Items;
 
-            const line1 = results.find(obj => {
+            const line1 = results.filter(function(obj) {
                 return obj.FieldGroup === 'Common' && obj.FieldName === 'Line1'
-            });
+            })[0];
 
-            const city = results.find(obj => {
+            const city = results.filter(function(obj) {
                 return obj.FieldGroup === 'Common' && obj.FieldName === 'City'
-            })
+            })[0]
 
-            const province = results.find(obj => {
+            const province = results.filter(function(obj) {
                 return obj.FieldGroup === 'Common' && obj.FieldName === 'ProvinceCode'
-            })
+            })[0]
 
-            const postal = results.find(obj => {
+            const postal = results.filter(function(obj) {
                 return obj.FieldGroup === 'Common' && obj.FieldName === 'PostalCode'
-            })
+            })[0]
 
             const address = {
                 'line1': line1.FormattedValue,
