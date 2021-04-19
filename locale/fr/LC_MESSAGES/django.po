@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-15 21:14+0000\n"
+"POT-Creation-Date: 2021-04-19 20:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -367,6 +367,7 @@ msgstr "Connexion"
 #: register/templates/register/location_name.html
 #: register/templates/register/registrant_email.html
 #: register/templates/register/registrant_email_submitted.html
+#: register/templates/register/registrant_name.html
 msgid "Error: "
 msgstr "Erreur : "
 
@@ -432,6 +433,7 @@ msgstr "Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne.
 #: register/templates/register/location_name.html
 #: register/templates/register/location_unavailable.html
 #: register/templates/register/registrant_email.html
+#: register/templates/register/registrant_name.html
 msgid "Next"
 msgstr "Suivant"
 
@@ -529,6 +531,7 @@ msgstr "Si le patient est prêt, générez une clé"
 #: register/templates/register/location_unavailable.html
 #: register/templates/register/registrant_email.html
 #: register/templates/register/registrant_email_submitted.html
+#: register/templates/register/registrant_name.html
 #: register/templates/register/summary.html
 msgid "Back"
 msgstr "Retour"
@@ -659,6 +662,10 @@ msgstr "Isolez-vous"
 msgid "Get tested immediately"
 msgstr "Faites-vous tester immédiatement"
 
+#: outbreaks/forms.py outbreaks/templates/search.html
+msgid "Select"
+msgstr "Sélectionner"
+
 #: outbreaks/forms.py
 msgid "Day"
 msgstr "Jour"
@@ -672,12 +679,24 @@ msgid "Year"
 msgstr "Année"
 
 #: outbreaks/forms.py
+msgid "From"
+msgstr "De"
+
+#: outbreaks/forms.py
+msgid "To"
+msgstr "À"
+
+#: outbreaks/forms.py
 msgid "Invalid date specified."
 msgstr "Invalide ou expiré"
 
 #: outbreaks/forms.py
-msgid "Someone already notified people who were there at this date and time."
-msgstr "Une notification a déjà été envoyée pour ce lieu et cette date."
+msgid "\"To\" must be later than \"From\"."
+msgstr "\"À\" doit être postérieur à \"De\""
+
+#: outbreaks/forms.py
+msgid "Someone already notified people who were there between {} and {}."
+msgstr "Quelqu'un a déjà prévenu les personnes qui étaient là entre {} et {}."
 
 #: outbreaks/templates/confirm.html
 msgid "Confirm notification"
@@ -768,8 +787,8 @@ msgid "Search notification history"
 msgstr "Consulter l’historique des notifications"
 
 #: outbreaks/templates/datetime.html
-msgid "Select date"
-msgstr "Trouver une date"
+msgid "Select date and time"
+msgstr "Indiquer la date et l'heure"
 
 #: outbreaks/templates/datetime.html
 msgid "To see all public exposures for this place, visit"
@@ -779,17 +798,51 @@ msgstr "Pour voir les expositions publiques passées de ce lieu consultez"
 msgid "Notification history"
 msgstr "Historique de notification"
 
+#: outbreaks/templates/datetime.html portal/templates/includes/error_list.html
+msgid "Please correct the errors on the page"
+msgstr "Veuillez corriger les erreurs trouvées dans la page"
+
 #: outbreaks/templates/datetime.html
 msgid "We’ll notify people who scanned the QR code on that date. Remember to add all dates of this public exposure."
 msgstr "Nous notifierons les personnes qui ont scanné le code QR à la date indiquée. S’il y a plus d’une date, ajoutez toutes les dates d’exposition."
 
 #: outbreaks/templates/datetime.html
-msgid "Add another date"
+msgid "Select date"
+msgstr "Trouver une date"
+
+#: outbreaks/templates/datetime.html
+msgid "Remove time range"
+msgstr "Supprimer la plage horaire"
+
+#: outbreaks/templates/datetime.html
+msgid "Add a time range"
+msgstr "Ajouter une plage horaire"
+
+#: outbreaks/templates/datetime.html
+msgid "Add date"
 msgstr "Ajouter une date"
 
 #: outbreaks/templates/datetime.html
-msgid "Remove a date"
-msgstr "Supprimer une date"
+msgid "Cancel"
+msgstr "Annuler"
+
+#: outbreaks/templates/datetime.html
+msgid "Add new date +"
+msgstr "Ajouter une date +"
+
+#: outbreaks/templates/datetime.html
+msgid "Selected dates"
+msgstr "Dates sélectionnées"
+
+#: outbreaks/templates/datetime.html
+msgid "Delete selected date"
+msgstr "Supprimer la date sélectionnée"
+
+#: outbreaks/templates/datetime.html
+#: profiles/templates/invitations/templates/invite_list.html
+#: profiles/templates/profiles/healthcareuser_list.html
+msgid "Delete"
+msgstr "Supprimer"
 
 #: outbreaks/templates/details.html
 msgid "Details of public exposure"
@@ -912,10 +965,6 @@ msgid "Available locations"
 msgstr ""
 
 #: outbreaks/templates/search.html
-msgid "Select"
-msgstr "Sélectionner"
-
-#: outbreaks/templates/search.html
 msgid "location named "
 msgstr ""
 
@@ -926,6 +975,14 @@ msgstr "À propos des expositions publiques."
 #: outbreaks/templates/severity.html
 msgid "Select notification message"
 msgstr "Choisissez le message de la notification"
+
+#: outbreaks/views.py
+msgid "A conflicting time range: ({}) was entered below."
+msgstr "Une plage horaire conflictuelle : ({}) a été saisie ci-dessous."
+
+#: outbreaks/views.py
+msgid "{} from {} to {}"
+msgstr "{} de {} à {}"
 
 #: portal/settings.py
 msgid "This account has been locked due to too many failed log in attempts."
@@ -1053,10 +1110,6 @@ msgstr "L’écran qui suit demande l’autorisation de partager des renseigneme
 #: portal/templates/includes/detailed_instructions.html
 msgid "COVID Alert will ask permission to upload random codes daily for the next 13 days."
 msgstr "Chaque jour, pendant les 13 jours qui suivent, Alerte COVID demandera l’autorisation de téléverser les codes aléatoires."
-
-#: portal/templates/includes/error_list.html
-msgid "Please correct the errors on the page"
-msgstr "Veuillez corriger les erreurs trouvées dans la page"
 
 #: portal/templates/includes/expires_string.html
 msgid "Key <strong>expires on</strong>"
@@ -1616,11 +1669,6 @@ msgstr "Renvoyer"
 #, python-format
 msgid "Resend invitation to %(email)s"
 msgstr "Retirer l’invitation envoyée à %(email)s"
-
-#: profiles/templates/invitations/templates/invite_list.html
-#: profiles/templates/profiles/healthcareuser_list.html
-msgid "Delete"
-msgstr "Supprimer"
 
 #: profiles/templates/invitations/templates/invite_list.html
 #, python-format
@@ -2486,6 +2534,16 @@ msgstr ""
 "    <p>Cherchez un courriel intitulé <q> Validation du courriel pour votre affiche </q> dans votre boîte de réception ou vos pourriels.</p>\n"
 "    <p>Si vous n’avez rien reçu, nous pouvons <a href=\"%(register_url)s\">renvoyer le courriel</a>.</p>\n"
 "  "
+
+#: register/templates/register/registrant_name.html
+#, fuzzy
+#| msgid "Enter your name"
+msgid "Your name"
+msgstr "Saisissez votre nom"
+
+#: register/templates/register/registrant_name.html
+msgid "We’ll use your name when we email you."
+msgstr ""
 
 #: register/templates/register/start.html
 msgid "Make a COVID Alert poster"
