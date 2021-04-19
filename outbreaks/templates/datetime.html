@@ -144,13 +144,17 @@
 
     {% if request.session.selected_dates %}
       <table>
-        <tbody>
+        <thead>
         <tr>
           <th>
-            Selected dates
+            {{ _("Selected dates") }}
           </th>
-          <td></td>
+          <th>
+            <span class="visually-hidden">{% _("Delete selected date") %}</span>
+          </th>
         </tr>
+        </thead>
+        <tbody>
         {% for date_entry in request.session.selected_dates %}
           <tr>
             <td>
@@ -158,7 +162,12 @@
             </td>
             <td>
               <a class="destructive-link"
-                 href="{% url "outbreaks:datetime_delete" forloop.counter0 %}">{% trans "Delete" %}</a>
+                 href="{% url "outbreaks:datetime_delete" forloop.counter0 %}">
+                <span aria-hidden="true">{{ _('Delete') }}</span>
+                <span class="visually-hidden">
+                  {{ _('Delete') }}{{ date_entry.notification_txt }}
+                </span>
+              </a>
             </td>
           </tr>
         {% endfor %}

@@ -81,7 +81,7 @@ class DateForm(HealthcareBaseForm):
         invalid_date_error_msg = _("Invalid date specified.")
         start_later_end_error_msg = _('"To" must be later than "From".')
         overlap_notification_error_tmpl = _(
-            "Notification between {} and {} already exists."
+            "Someone already notified people who were there between {} and {}."
         )
         try:
             start_date = self.get_valid_date(cleaned_data, "start")

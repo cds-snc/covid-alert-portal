@@ -204,7 +204,7 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
         start_ts = start_dt.timestamp()
         end_ts = end_dt.timestamp()
         overlap_notification_error_tmpl = _(
-            "A conflicting notification: ({}) was entered below."
+            "A conflicting time range: ({}) was entered below."
         )
         date_entry_tmpl = _("{} from {} to {}")
 
