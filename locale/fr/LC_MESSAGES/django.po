@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-19 20:43+0000\n"
+"POT-Creation-Date: 2021-04-20 14:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -367,7 +367,6 @@ msgstr "Connexion"
 #: register/templates/register/location_name.html
 #: register/templates/register/registrant_email.html
 #: register/templates/register/registrant_email_submitted.html
-#: register/templates/register/registrant_name.html
 msgid "Error: "
 msgstr "Erreur : "
 
@@ -433,7 +432,6 @@ msgstr "Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne.
 #: register/templates/register/location_name.html
 #: register/templates/register/location_unavailable.html
 #: register/templates/register/registrant_email.html
-#: register/templates/register/registrant_name.html
 msgid "Next"
 msgstr "Suivant"
 
@@ -531,7 +529,6 @@ msgstr "Si le patient est prêt, générez une clé"
 #: register/templates/register/location_unavailable.html
 #: register/templates/register/registrant_email.html
 #: register/templates/register/registrant_email_submitted.html
-#: register/templates/register/registrant_name.html
 #: register/templates/register/summary.html
 msgid "Back"
 msgstr "Retour"
@@ -2534,16 +2531,6 @@ msgstr ""
 "    <p>Cherchez un courriel intitulé <q> Validation du courriel pour votre affiche </q> dans votre boîte de réception ou vos pourriels.</p>\n"
 "    <p>Si vous n’avez rien reçu, nous pouvons <a href=\"%(register_url)s\">renvoyer le courriel</a>.</p>\n"
 "  "
-
-#: register/templates/register/registrant_name.html
-#, fuzzy
-#| msgid "Enter your name"
-msgid "Your name"
-msgstr "Saisissez votre nom"
-
-#: register/templates/register/registrant_name.html
-msgid "We’ll use your name when we email you."
-msgstr ""
 
 #: register/templates/register/start.html
 msgid "Make a COVID Alert poster"
