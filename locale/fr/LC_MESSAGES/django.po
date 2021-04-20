@@ -2248,7 +2248,7 @@ msgstr "Créer une affiche Alerte COVID"
 
 #: register/templates/register/confirmation.html
 msgid "Your poster is ready"
-msgstr ""
+msgstr "Votre affiche est prête"
 
 #: register/templates/register/confirmation.html
 msgid "Download English poster"
@@ -2279,7 +2279,7 @@ msgstr "Créer une autre affiche"
 
 #: register/templates/register/confirmation.html
 msgid "Display your poster"
-msgstr "Où poser votre affiche"
+msgstr "Où placer votre affiche"
 
 #: register/templates/register/confirmation.html
 msgid "At each entrance and inside."
