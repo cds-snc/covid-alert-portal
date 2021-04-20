@@ -57,7 +57,7 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
         category_description = cleaned_data.get("category_description")
 
         if other_selected and not category_description:
-            raise forms.ValidationError(_("Give brief description of service or event"))
+            raise forms.ValidationError(_("Tell us the type of establishment."))
 
 
 class LocationNameForm(HealthcareBaseForm, forms.Form):
