@@ -14,7 +14,7 @@
   <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %}">
     {# Include the visible fields #}
     {% for field in form.visible_fields %}
-      {# Handle everything except the phone number fields #}
+      {# Handle everything except the category description field #}
       {% if field.html_name != 'category-category_description' %}
         <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
             <strong>{{ field.label_tag }}</strong>
