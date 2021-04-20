@@ -459,3 +459,5 @@ else:
     }
 
 WAFFLE_CREATE_MISSING_SWITCHES = True
+
+PORTAL_LOCAL_TZ = "America/Toronto"  # TODO Refactor this fallback, assumption baked in here for portal users
