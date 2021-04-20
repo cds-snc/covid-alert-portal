@@ -1,77 +1,192 @@
 {% extends 'base.html' %}
-{% load i18n static fieldset_date %}
+{% load i18n static form_date %}
 
 {% block title %}
-    {% trans "Select date" %}
+  {% trans "Select date and time" %}
 {% endblock %}
 
 {% block content %}
-    <div class="content-back-link">
-        <a href="{% url 'outbreaks:search' %}" class="chevron-left">{% trans "Back" %}</a>
-    </div>
+  <div class="content-back-link">
+    <a href="{% url 'outbreaks:search' %}" class="chevron-left">{% trans "Back" %}</a>
+  </div>
 
-  {% if form.non_field_errors %}
-    <div class="messages--container" role="alert">
+  {% if form.non_field_errors and show_errors %}
+    {% if warning_ind %}
+      <div class="messages--container" role="alert">
+
         <ul class="messages">
-            <li class="error"><b> {{ form.non_field_errors.0 }} </b></li>
-            <li class="error">
-              {% trans "To see all public exposures for this place, visit" %} <a href="{% url 'outbreaks:history' %}">‘{% trans "Notification history" %}’</a>
-            </li>
+          {% for err in form.non_field_errors.data %}
+            <li class="warning"><b> {{ err.message }} </b></li>
+          {% endfor %}
+          <li class="warning">
+            {% trans "To see all public exposures for this place, visit" %} <a
+            href="{% url 'outbreaks:history' %}">‘{% trans "Notification history" %}’</a>
+          </li>
         </ul>
-    </div>
+      </div>
+    {% else %}
+      <div class="errorlist--container" role="alert">
+        <h2 class="errorlist--heading">
+          {% trans "Please correct the errors on the page" %}
+        </h2>
+        <ol class="errorlist">
+          {% for key,value in form.errors.items %}
+            <li>
+              {% if key == '__all__' %}
+                <a href="#form--{{ request.resolver_match.url_name }}">
+              {% else %}
+                <a href="#id_{{ key }}">
+              {% endif %}
+              {{ value|first }}
+              </a>
+            </li>
+          {% endfor %}
+        </ol>
+      </div>
+    {% endif %}
   {% endif %}
 
-  <h1>{% trans "Select date" %}</h1>
+  <h1>{% trans "Select date and time" %}</h1>
 
   <p>{% trans "We’ll notify people who scanned the QR code on that date. Remember to add all dates of this public exposure." %}</p>
 
-  <form method="post" id="form--{{ request.resolver_match.url_name }}">
+  <form method="post" id="form--{{ request.resolver_match.url_name }}" class="outbreaks-datetime">
     {% csrf_token %}
 
-    {% for fieldset in form.fieldsets %}
-      <div class="fieldWrapper--container{% if fieldset.error %} fieldWrapper--container--has-error{% endif %}">
-        <div class="fieldWrapper{% if fieldset.error %} fieldWrapper--has-error{% endif %}">
+    {% if show_date_form %}
+      <div
+        class="fieldWrapper--container{% if form.non_field_errors and show_errors %}
+        fieldWrapper--container--has-{% if warning_ind %}warning{% else %}error{% endif %}
+        {% endif %}">
+        <div class="fieldWrapper{% if form.non_field_errors and show_errors %}
+        fieldWrapper--has-{% if warning_ind %}warning{% else %}error{% endif %}
+        {% endif %}">
 
-          {% if fieldset.error %}
-            <div id="error--{{ form.html_name }}-{{group}}" class="validation-error"> {{ fieldset.error }} </div>
+          {% if form.non_field_errors and show_errors %}
+            <div id="error--{{ form.html_name }}-{{ group }}" class="validation-error"> {{ form.error }} </div>
           {% endif %}
 
-          {% for field in fieldset %}
-            <div class="date_entry">
-              {{ field.label_tag }}
-              {{ field }}
+          <div class="row">
+            <div class="date_entry col">
+              {{ form.day.label_tag }}
+              {{ form.day }}
             </div>
-          {% endfor %}
+            <div class="date_entry col">
+              {{ form.month.label_tag }}
+              {{ form.month }}
+            </div>
+            <div class="date_entry col">
+              {{ form.year.label_tag }}
+              {{ form.year }}
+            </div>
+            <div class="col">
+              <button type="button" class="link" id="button_datepicker">{% trans "Select date" %}
+                <img src="{% static 'img/calendar_today_24px.svg' %}" alt=""/>
+              </button>
+              <duet-date-picker
+                id="form_datepicker"
+                value="{{ form|form_date }}"
+                min="{{ min_date }}"
+                max="{{ max_date }}"
+                language="{{ language }}"
+              ></duet-date-picker>
+            </div>
 
-          <button type="button" class="link datepicker_button" id="{{ fieldset.title }}">{% trans "Select date" %}</button>
+            {{ form.timezone }}
 
-          <duet-date-picker
-                  id="datepicker_{{ fieldset.title }}"
-                  value="{{ fieldset|fieldset_date }}"
-                  min="{{min_date}}"
-                  max="{{max_date}}"
-                  language="{{language}}"
-          ></duet-date-picker>
+          </div>
+          {% if  show_time_fields %}
+            <div class="row">
+              <div class="date_entry col">
+                {{ form.start_time.label_tag }}
+                {{ form.start_time }}
+              </div>
+              <div class="date_entry col">
+                {{ form.end_time.label_tag }}
+                {{ form.end_time }}
+              </div>
+              <div class="col">
+                <button name="do_post" value="clear_time" class="link">
+                  {{ _("Remove time range") }}
+                </button>
+              </div>
+            </div>
 
+          {% endif %}
         </div>
+
       </div>
-    {% endfor %}
 
-    <div class="content-button">
-      <button name="adjust_dates" value="add" class="secondary">
-        {{ _("Add another date") }}
-      </button>
-      <button name="adjust_dates" value="remove" class="secondary">
-        {{ _("Remove a date") }}
-      </button>
-    </div>
+      {% if not show_time_fields %}
+        <div>
+          <button name="do_post" value="add_time" class="link">
+            {{ _("Add a time range") }}
+            <img src="{% static 'img/access_time_24px.svg' %}" alt=""/>
+          </button>
+        </div>
+      {% endif %}
 
-    <div class="content-button">
-      <button type="submit">
-        {{ _("Next") }}
-      </button>
-    </div>
+      {% if show_date_form and not next_button_show %}
+        <div class="content-button">
+          <button name="do_post" value="add_date" class="">
+            {{ _("Add date") }}
+          </button>
+          <button name="do_post" value="cancel" class="secondary">
+            {{ _("Cancel") }}
+          </button>
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="row">
+        <button name="do_post" value="show_date_form" class="secondary">{{ _("Add new date +") }}</button>
+      </div>
+    {% endif %}
+
+    {% if request.session.selected_dates %}
+      <table>
+        <thead>
+        <tr>
+          <th>
+            {{ _("Selected dates") }}
+          </th>
+          <th>
+            <span class="visually-hidden">{{ _("Delete selected date") }}</span>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for date_entry in request.session.selected_dates %}
+          <tr>
+            <td>
+              {{ date_entry.notification_txt }}
+            </td>
+            <td>
+              <a class="destructive-link"
+                 href="{% url "outbreaks:datetime_delete" forloop.counter0 %}">
+                <span aria-hidden="true">{{ _('Delete') }}</span>
+                <span class="visually-hidden">
+                  {{ _('Delete') }}{{ date_entry.notification_txt }}
+                </span>
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+    {% if next_button_show %}
+      <div class="content-button">
+        <button type="submit" {% if next_button_submit_form_ind %}name="do_post" value="add_date"{% endif %}>
+          {{ _("Next") }}
+        </button>
+      </div>
+    {% endif %}
+
+
   </form>
 
-  <script src="{% static 'js/datepicker.js' %}"></script>
+  {% if show_date_form %}
+    <script src="{% static 'js/datepicker.js' %}"></script>
+  {% endif %}
 {% endblock %}
