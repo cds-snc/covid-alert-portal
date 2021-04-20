@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: register/forms.py
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-06 19:52+0000\n"
+"POT-Creation-Date: 2021-04-15 21:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -307,10 +306,8 @@ msgstr "Révocable"
 
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html
 #: profiles/forms.py
-#, fuzzy
-#| msgid "Log in"
 msgid "Log in code"
-msgstr "Connexion"
+msgstr ""
 
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html
 #, python-format
@@ -384,10 +381,8 @@ msgid "Ask your administrator for a code. You can email them at %(admin_email)s.
 msgstr "Demandez à votre administrateur de vous donner un code. Vous pouvez leur envoyer un courriel à %(admin_email)s."
 
 #: backup_codes/templates/backup_codes/backup_codes_help.html
-#, fuzzy
-#| msgid "Get codes from admin"
 msgid "Get code from admin"
-msgstr "Demander un code"
+msgstr ""
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html
 msgid "Use these codes to log in to the portal. The code proves it's you."
@@ -414,14 +409,10 @@ msgid "Back to Manage your account"
 msgstr "Retour à Gérer votre compte"
 
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html
-#, fuzzy
-#| msgid "Log into the portal using one of the security codes below. You can use each code only once.  When you have 1 code left, we’ll tell you how to get more."
 msgid "Log into the portal using one of the codes below. You can use each log in code only once. When you have 1 code left, we’ll tell you how to get more."
 msgstr "Utilisez l’un des codes de sécurité suivants pour vous connecter au portail. Chaque code ne peut être utilisé qu’une fois. Quand il n’en restera qu’un seul, nous vous dirons comment en obtenir d’autres."
 
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html
-#, fuzzy
-#| msgid "Before you do anything else, save these codes somewhere that only you can access."
 msgid "Keep the codes somewhere that only you can access."
 msgstr "Avant toute autre chose, enregistrez ces codes dans un endroit auquel vous seul pouvez accéder."
 
@@ -709,10 +700,8 @@ msgid "Change"
 msgstr "Mettre à jour"
 
 #: outbreaks/templates/confirm.html
-#, fuzzy
-#| msgid "Actions"
 msgid "location"
-msgstr "Actions"
+msgstr ""
 
 #: outbreaks/templates/confirm.html outbreaks/templates/details.html
 #: outbreaks/templates/history.html outbreaks/templates/profile.html
@@ -735,10 +724,8 @@ msgid "Date(s)"
 msgstr ""
 
 #: outbreaks/templates/confirm.html
-#, fuzzy
-#| msgid "Update"
 msgid "dates"
-msgstr "Mettre à jour"
+msgstr ""
 
 #: outbreaks/templates/confirm.html outbreaks/templates/details.html
 msgid "Severity"
@@ -1027,6 +1014,7 @@ msgid "No new keys after expiry."
 msgstr "Elle ne peut pas être regénérée si elle expire."
 
 #: portal/templates/includes/cds_form.html
+#: register/templates/register/includes/contact_form.html
 msgid "Submit"
 msgstr "Soumettre"
 
@@ -1782,10 +1770,8 @@ msgid "Generate codes"
 msgstr "Générer des codes"
 
 #: profiles/templates/profiles/healthcareuser_detail.html
-#, fuzzy
-#| msgid "View security codes"
 msgid "View log in codes"
-msgstr "Voyez vos codes de sécurité"
+msgstr ""
 
 #: profiles/templates/profiles/healthcareuser_detail.html
 msgid "Get log in codes"
@@ -2028,10 +2014,8 @@ msgid "You entered the wrong code."
 msgstr "Vous n’avez pas saisi le bon code."
 
 #: profiles/views.py
-#, fuzzy
-#| msgid "Security code has been sent."
 msgid "Log in code has been sent."
-msgstr "Le code de sécurité a été envoyé."
+msgstr ""
 
 #: profiles/views.py
 #, python-format
@@ -2163,6 +2147,10 @@ msgid "Contact phone number"
 msgstr "Numéro de téléphone"
 
 #: register/forms.py
+msgid "Extension"
+msgstr ""
+
+#: register/forms.py
 msgid "Get Help."
 msgstr "Obtenir de l’aide."
 
@@ -2274,6 +2262,7 @@ msgid "Questions?"
 msgstr "Des questions?"
 
 #: register/templates/register/confirmation.html
+#, python-format
 msgid ""
 "\n"
 "    <p>Visit <a href=\"%(helplink)s\">Help with your poster</a></p>\n"
@@ -2284,7 +2273,6 @@ msgstr ""
 "    <p>Consultez la page <a href=\"%(helplink)s\">Aide pour votre affiche</a></p>\n"
 "    <p>Sinon, <a href=\"%(contactlink)s\">contactez-nous</a></p>\n"
 "    "
-
 
 #: register/templates/register/contact_us.html
 #: register/templates/register/qr_support_page.html
@@ -2310,6 +2298,10 @@ msgstr "Invalide ou expiré"
 #: register/templates/register/error.html
 msgid "Sorry, that confirmation link has expired or has already been used."
 msgstr "Désolé, le lien de validation est expiré ou a déjà été utilisé."
+
+#: register/templates/register/includes/contact_form.html
+msgid "Add phone extension"
+msgstr "Ajouter un numéro de poste"
 
 #: register/templates/register/includes/footer.html
 msgid "Top of Page"
@@ -2504,68 +2496,50 @@ msgid "Display a QR code to help slow the spread of COVID-19"
 msgstr "Affichez un code QR pour contribuer à ralentir la COVID-19"
 
 #: register/templates/register/start.html
-msgid "Answer questions to make a poster with a code for your service or event."
-msgstr "Les visiteurs scanneront le code QR avec leur téléphone. Alerte COVID leur enverra ensuite une notification s’ils ont été exposés à la COVID-19."
+msgid "COVID-19 spreads quickly in enclosed spaces, like establishments and events. Help slow the spread. Make a COVID Alert poster for your business, community organization or social gathering."
+msgstr "La COVID-19 se transmet rapidement dans les espaces fermés comme les établissements et lors d’événements. Ralentissons cette transmission. Créez une affiche Alerte COVID pour votre entreprise, votre organisme communautaire ou votre événement."
 
 #: register/templates/register/start.html
-msgid "Visitors can scan the QR code on their phone. This helps COVID Alert notify people who’ve been exposed to COVID-19."
-msgstr "Répondez à quelques questions pour créer une affiche avec votre code."
-
-#: register/templates/register/start.html
-msgid "Before you start"
-msgstr "Avant de commencer"
+msgid "Visitors scan the poster’s QR code to add a visit with the <a href='https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html'>COVID Alert app</a>.  Then they’ll be notified if they were exposed during their visit."
+msgstr "Les visiteurs scanneront le code QR de l’affiche pour ajouter une visite avec l’<a href='https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid.html'>application Alerte COVID</a>. Ils pourront ainsi être avisés s’ils ont été exposés au virus pendant leur visite."
 
 #: register/templates/register/start.html
 msgid "You’ll need:"
 msgstr "Assurez-vous d’avoir :"
 
 #: register/templates/register/start.html
-msgid "Your email address."
-msgstr "Votre adresse courriel."
+msgid "An email address where we can send the poster."
+msgstr ""
 
 #: register/templates/register/start.html
-msgid "Name of service or event."
-msgstr "Le nom du service ou de l’événement."
+msgid "Name and address of establishment or event."
+msgstr ""
 
 #: register/templates/register/start.html
-msgid "Address or addresses of service or event."
-msgstr "La ou les adresses du service ou de l’événement."
+msgid "Contact information for the address."
+msgstr ""
 
 #: register/templates/register/start.html
-msgid "Contact person for each address."
-msgstr "Les coordonnées d’une personne-ressource pour chacune des adresses."
+msgid "If there are several addresses, make a different QR poster for each.  After you finish this poster, we’ll remind you to make more."
+msgstr "Si votre espace a plusieurs adresses, vous devrez créer une affiche différente pour chacune d’elles. Quand vous aurez terminé la première affiche, nous vous rappelerons."
 
 #: register/templates/register/start.html
 msgid "Start now"
 msgstr "Commencer"
 
 #: register/templates/register/start.html
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  <h2> Questions? </h2>\n"
-#| "    <p>\n"
-#| "      \n"
-#| "      Visit <a href=\"%(qrlink)s\">Help with your poster</a><br>\n"
-#| "      Or <a href =\"%(link)s\">Contact us</a>\n"
-#| "   </p>\n"
-#| "   "
+#, python-format
 msgid ""
 "\n"
-"  <h2> Questions? </h2>\n"
-"    <p>\n"
-"      \n"
-"      Visit <a href=\"%(qrlink)s\">Help with your poster</a><br>\n"
-"      Or <a href =\"%(link)s\">Contact us</a>\n"
-"   </p>\n"
+"    <h2> Questions? </h2>\n"
+"    <p>Visit <a href=\"%(qrlink)s\">Help with your poster</a><br>\n"
+"      Or <a href =\"%(link)s\">Contact us</a></p>\n"
 "   "
 msgstr ""
 "\n"
 "  <h2> Des questions? </h2>\n"
-"    <p>\n"
-"      Consultez la page <a href=\"\">Aide pour votre affiche</a><br>\n"
-"      Sinon, <a href =\"%(link)s\">contactez-nous</a>\n"
-"   </p>\n"
+"    <p>Consultez la page <a href=\"%(qrlink)s\">Aide pour votre affiche</a><br>\n"
+"      Sinon, <a href =\"%(link)s\">contactez-nous</a></p>\n"
 "   "
 
 #: register/templates/register/summary.html
@@ -2619,11 +2593,3 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
-
-#: register/templates/register/includes/phone_extension.html
-msgid "Add phone extension"
-msgstr "Ajouter un numéro de poste"
-
-#: register/templates/register/includes/phone_extension.html
-msgid "Extension"
-msgstr "Nᵒ de poste"
