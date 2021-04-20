@@ -464,4 +464,4 @@ WAFFLE_CREATE_MISSING_SWITCHES = True
 # New in Django 3.2 - define DEFAULT_AUTO_FIELD to prevent future unwanted migrations to BigAutoField
 # https://docs.djangoproject.com/en/3.2/releases/3.2/#customizing-type-of-auto-created-primary-keys
 #
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
