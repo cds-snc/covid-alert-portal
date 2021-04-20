@@ -208,6 +208,7 @@ class LocationWizard(NamedUrlSessionWizardView):
             to_email,
             {
                 "location_name": location.name,
+                "location_address": location.address,
                 "english_poster": {
                     "file": en_poster,
                     "filename": "poster-en.pdf",
