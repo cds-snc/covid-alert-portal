@@ -113,6 +113,10 @@ body.qrcode {
         max-width: none;
         .fieldWrapper--container {
             max-width: 500px;
+            @include md {
+                width: 500px;
+                max-width: none;
+            }
             
             &.phone-number-fields {
                 width: 100%;
