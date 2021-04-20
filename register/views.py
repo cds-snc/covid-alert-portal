@@ -2,7 +2,7 @@ from django.views.generic import TemplateView, FormView
 from django.urls import reverse_lazy, reverse
 
 from .models import Registrant, Location, EmailConfirmation
-from .forms import EmailForm, ContactUsForm
+from .forms import EmailForm, ContactUsForm, location_category_type_map
 from collections import ChainMap
 from django.utils.translation import gettext as _
 from formtools.wizard.views import NamedUrlSessionWizardView
@@ -158,10 +158,10 @@ class LocationWizard(NamedUrlSessionWizardView):
         context["form_data"] = self.get_all_cleaned_data()
         context["registrant"] = registrant
         if "category" in context["form_data"]:
+            context["form_data"]['category_type'] = location_category_type_map[context['form_data']['category']]
             context["form_data"]["category"] = dict(location_choices)[
                 context["form_data"]["category"]
             ]
-
         return context
 
     def done(self, form_list, form_dict, **kwargs):

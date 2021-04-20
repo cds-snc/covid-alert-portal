@@ -15,7 +15,7 @@
 
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "Name of service or event" %}</h1>
+  <h1>{% trans "Name of" %} {{ form_data.category_type }}</h1>
   <p>{% trans "We’ll display the name on the poster with your QR code." %}</p>
   
   {% include "includes/cds_form.html" with submit_text=_("Next") %}

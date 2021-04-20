@@ -9,15 +9,35 @@ from portal.containers import Container
 from portal.services import NotifyService
 from .widgets import AutocompleteWidget
 
+type_event = _('event')
+type_establishment = _('establishment')
+type_event_or_establishment = _('establishment or event')
+location_restaurant_bar_coffee = 'restaurant_bar_coffee'
+location_fitness_recreation = 'fitness_recreation'
+location_arts_entertainment = 'arts_entertainment'
+location_grooming_wellness = 'grooming_wellness'
+location_religious_space = 'religious_space'
+location_events = 'events'
+location_other = 'other'
+
+location_category_type_map = {
+    location_restaurant_bar_coffee: type_establishment,
+    location_fitness_recreation: type_establishment,
+    location_arts_entertainment: type_establishment,
+    location_grooming_wellness: type_establishment,
+    location_religious_space: type_establishment,
+    location_events: type_event,
+    location_other: type_event_or_establishment,
+}
 
 location_choices = [
-    ("restaurant_bar_coffee", _("Restaurant, bar, coffee shop")),
-    ("fitness_recreation", _("Fitness and recreation")),
-    ("arts_entertainment", _("Arts and entertainment")),
-    ("grooming_wellness", _("Grooming and wellness")),
-    ("religious_space", _("Religious space")),
-    ("events", _("Events, for example festivals or funerals.")),
-    ("other", _("Something else")),
+    (location_restaurant_bar_coffee, _("Restaurant, bar, coffee shop")),
+    (location_fitness_recreation, _("Fitness and recreation")),
+    (location_arts_entertainment, _("Arts and entertainment")),
+    (location_grooming_wellness, _("Grooming and wellness")),
+    (location_religious_space, _("Religious space")),
+    (location_events, _("Events, for example festivals or funerals.")),
+    (location_other, _("Something else")),
 ]
 
 

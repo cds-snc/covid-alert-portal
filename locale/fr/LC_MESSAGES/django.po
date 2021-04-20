@@ -2356,8 +2356,8 @@ msgid "Top of Page"
 msgstr "Haut de page"
 
 #: register/templates/register/location_address.html
-msgid "Address of service or event"
-msgstr "Adresse du service ou de l’événement"
+msgid "Address of"
+msgstr "Adresse du"
 
 #: register/templates/register/location_address.html
 msgid "Step 3 of 5"
@@ -2380,7 +2380,7 @@ msgid "Choose the type that best fits your situation."
 msgstr "Choisissez le type qui représente le mieux votre situation."
 
 #: register/templates/register/location_contact.html
-msgid "Contact for the address"
+msgid "Contact person"
 msgstr "Personne-ressource"
 
 #: register/templates/register/location_contact.html
@@ -2396,8 +2396,8 @@ msgid "We’ll contact them with any important health information for the addres
 msgstr "Nous contacterons cette personne pour toute information sanitaire importante en lien avec l’adresse fournie."
 
 #: register/templates/register/location_name.html
-msgid "Name of service or event"
-msgstr "Nom du service ou de l’événement"
+msgid "Name of"
+msgstr "Nom du"
 
 #: register/templates/register/location_name.html
 msgid "Step 2 of 5"
