@@ -1,0 +1,33 @@
+form.outbreaks-datetime {
+  max-width: 100%;
+
+  select {
+    width: 100%;
+    display: flex
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-top: 20px;
+  }
+
+  .col {
+    padding-right: .5rem;
+    display: flex;
+    flex-direction: column;
+
+    button {
+      margin-top: auto;
+    }
+  }
+
+  .content-button {
+    margin-bottom: 30px;
+  }
+
+  .destructive-link {
+    color: $color-red;
+  }
+}
+

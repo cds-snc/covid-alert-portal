@@ -11,6 +11,7 @@
     {{ hidden }}
   {% endfor %}
 
+  {% block content %}
   <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %}">
     {# Include the visible fields #}
     {% for field in form.visible_fields %}
@@ -28,6 +29,7 @@
       </div>
     {% endfor %}
   </div>
+{% endblock %}
 
   {% if before_submit %}
     <div class="before-submit">

@@ -14,8 +14,8 @@
       {% trans "on one or more of these dates:" %}
   </p>
   <ul>
-      {% for date in dates %}
-        <li>{{ date }}</li>
+      {% for date_entry in dates %}
+        <li>{{ date_entry.notification_txt }}</li>
       {% endfor %}
   </ul>
 

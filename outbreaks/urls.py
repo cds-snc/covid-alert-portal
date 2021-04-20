@@ -20,6 +20,11 @@ urlpatterns = [
         name="datetime",
     ),
     path(
+        "datetime/<int:idx>/delete",
+        views.DatetimeView.as_view(),
+        name="datetime_delete",
+    ),
+    path(
         "severity",
         views.SeverityView.as_view(),
         name="severity",

@@ -25,13 +25,27 @@ main form {
 
   .fieldWrapper--has-error {
     input,
-    textarea {
+    textarea,
+    select {
       border: 2px solid $color-red;
 
       &:focus {
         border: 2px solid $color-black;
         -webkit-box-shadow: inset 0 0 0 2px $color-red;
         box-shadow: inset 0 0 0 2px $color-red;
+      }
+    }
+  }
+  .fieldWrapper--has-warning {
+    input,
+    textarea,
+    select {
+      border: 2px solid $color-yellow-dark;
+
+      &:focus {
+        border: 2px solid $color-black;
+        -webkit-box-shadow: inset 0 0 0 2px $color-yellow-dark;
+        box-shadow: inset 0 0 0 2px $color-yellow-dark;
       }
     }
   }
