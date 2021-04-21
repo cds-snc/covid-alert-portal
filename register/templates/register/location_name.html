@@ -3,7 +3,7 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Name of service or event" %}
+  {% trans "Name of" %} {{ form_data.category_type }}
 {% endblock %}
 
 {% block content %}

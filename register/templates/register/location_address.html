@@ -3,7 +3,7 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Address of service or event" %}
+  {% trans "Address of" %} {{ form_data.category_type }}
 {% endblock %}
 
 {% block content %}
