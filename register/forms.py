@@ -9,16 +9,16 @@ from portal.containers import Container
 from portal.services import NotifyService
 from .widgets import AutocompleteWidget
 
-type_event = _('event')
-type_establishment = _('establishment')
-type_event_or_establishment = _('establishment or event')
-location_restaurant_bar_coffee = 'restaurant_bar_coffee'
-location_fitness_recreation = 'fitness_recreation'
-location_arts_entertainment = 'arts_entertainment'
-location_grooming_wellness = 'grooming_wellness'
-location_religious_space = 'religious_space'
-location_events = 'events'
-location_other = 'other'
+type_event = _("event")
+type_establishment = _("establishment")
+type_event_or_establishment = _("establishment or event")
+location_restaurant_bar_coffee = "restaurant_bar_coffee"
+location_fitness_recreation = "fitness_recreation"
+location_arts_entertainment = "arts_entertainment"
+location_grooming_wellness = "grooming_wellness"
+location_religious_space = "religious_space"
+location_events = "events"
+location_other = "other"
 
 location_category_type_map = {
     location_restaurant_bar_coffee: type_establishment,
