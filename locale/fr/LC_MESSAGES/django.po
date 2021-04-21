@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-19 20:43+0000\n"
+"POT-Creation-Date: 2021-04-20 16:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -367,7 +367,6 @@ msgstr "Connexion"
 #: register/templates/register/location_name.html
 #: register/templates/register/registrant_email.html
 #: register/templates/register/registrant_email_submitted.html
-#: register/templates/register/registrant_name.html
 msgid "Error: "
 msgstr "Erreur : "
 
@@ -433,7 +432,6 @@ msgstr "Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne.
 #: register/templates/register/location_name.html
 #: register/templates/register/location_unavailable.html
 #: register/templates/register/registrant_email.html
-#: register/templates/register/registrant_name.html
 msgid "Next"
 msgstr "Suivant"
 
@@ -531,7 +529,6 @@ msgstr "Si le patient est prêt, générez une clé"
 #: register/templates/register/location_unavailable.html
 #: register/templates/register/registrant_email.html
 #: register/templates/register/registrant_email_submitted.html
-#: register/templates/register/registrant_name.html
 #: register/templates/register/summary.html
 msgid "Back"
 msgstr "Précédent"
@@ -1071,7 +1068,6 @@ msgid "No new keys after expiry."
 msgstr "Elle ne peut pas être regénérée si elle expire."
 
 #: portal/templates/includes/cds_form.html
-#: register/templates/register/includes/contact_form.html
 msgid "Submit"
 msgstr "Soumettre"
 
@@ -2252,7 +2248,7 @@ msgstr "Créer une affiche Alerte COVID"
 
 #: register/templates/register/confirmation.html
 msgid "Your poster is ready"
-msgstr ""
+msgstr "Votre affiche est prête"
 
 #: register/templates/register/confirmation.html
 msgid "Download English poster"
@@ -2283,7 +2279,7 @@ msgstr "Créer une autre affiche"
 
 #: register/templates/register/confirmation.html
 msgid "Display your poster"
-msgstr "Où poser votre affiche"
+msgstr "Où placer votre affiche"
 
 #: register/templates/register/confirmation.html
 msgid "At each entrance and inside."
@@ -2605,6 +2601,10 @@ msgstr "Modifier<span class=\"visually-hidden\"> votre adresse courriel</span>"
 #: register/templates/register/summary.html
 msgid " Change <span class=\"visually-hidden\"> business type</span>"
 msgstr "Modifier <span class=\"visually-hidden\"> business type</span>"
+
+#: register/templates/register/summary.html
+msgid "Shows on poster"
+msgstr "Visible sur l’affiche"
 
 #: register/templates/register/summary.html
 msgid " Change <span class=\"visually-hidden\"> business, organization or event name</span>"
