@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-22 16:56+0000\n"
+"POT-Creation-Date: 2021-04-19 20:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2248,7 +2248,7 @@ msgstr "Créer une affiche Alerte COVID"
 
 #: register/templates/register/confirmation.html
 msgid "Your poster is ready"
-msgstr ""
+msgstr "Votre affiche est prête"
 
 #: register/templates/register/confirmation.html
 msgid "Download English poster"
@@ -2279,7 +2279,7 @@ msgstr "Créer une autre affiche"
 
 #: register/templates/register/confirmation.html
 msgid "Display your poster"
-msgstr "Où poser votre affiche"
+msgstr "Où placer votre affiche"
 
 #: register/templates/register/confirmation.html
 msgid "At each entrance and inside."
@@ -2593,6 +2593,10 @@ msgstr "Modifier<span class=\"visually-hidden\"> votre adresse courriel</span>"
 #: register/templates/register/summary.html
 msgid " Change <span class=\"visually-hidden\"> business type</span>"
 msgstr "Modifier <span class=\"visually-hidden\"> business type</span>"
+
+#: register/templates/register/summary.html
+msgid "Shows on poster"
+msgstr "Visible sur l’affiche"
 
 #: register/templates/register/summary.html
 msgid " Change <span class=\"visually-hidden\"> business, organization or event name</span>"
