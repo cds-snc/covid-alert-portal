@@ -2628,27 +2628,27 @@ msgstr "Créer l’affiche"
 
 #: register/templatetags/location_type_str.py
 msgid "Address of establishment"
-msgstr "Adresse de l'établissement"
+msgstr "Adresse de l’établissement"
 
 #: register/templatetags/location_type_str.py
 msgid "Address of event"
-msgstr "Adresse de l'événement"
+msgstr "Adresse de l’événement"
 
 #: register/templatetags/location_type_str.py
 msgid "Address of establishment or event"
-msgstr "Adresse de l'établissement ou de l'événement"
+msgstr "Adresse de l’établissement ou de l’événement"
 
 #: register/templatetags/location_type_str.py
 msgid "Name of establishment"
-msgstr "Nom de l'établissement"
+msgstr "Nom de l’établissement"
 
 #: register/templatetags/location_type_str.py
 msgid "Name of event"
-msgstr "Nom de l'événement"
+msgstr "Nom de de l’événement"
 
 #: register/templatetags/location_type_str.py
 msgid "Name of establishment or event"
-msgstr "Nom de l'établissement ou de l'événement"
+msgstr "Nom de l’établissement ou de l’événement"
 
 #: register/views.py
 msgid "You've confirmed your email address."
