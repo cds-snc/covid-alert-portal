@@ -9,9 +9,9 @@ from portal.containers import Container
 from portal.services import NotifyService
 from .widgets import AutocompleteWidget
 
-type_event = _("event")
-type_establishment = _("establishment")
-type_event_or_establishment = _("establishment or event")
+type_event = 1
+type_establishment = 2
+type_event_or_establishment = 3
 location_restaurant_bar_coffee = "restaurant_bar_coffee"
 location_fitness_recreation = "fitness_recreation"
 location_arts_entertainment = "arts_entertainment"

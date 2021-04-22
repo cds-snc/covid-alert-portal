@@ -1,9 +1,9 @@
 {% extends 'register/base.html' %}
-{% load i18n static %}
+{% load i18n static location_type_str %}
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Address of" %} {{ form_data.category_type }}
+  {% location_type_str form_data.category 'address' %}
 {% endblock %}
 
 {% block content %}
@@ -17,7 +17,7 @@
 
   {% include  "includes/flash_messages.html" %}
 
-  <h1>{% trans "Address of" %} {{ form_data.category_type }}</h1>
+  <h1>{% location_type_str form_data.category 'address' %}</h1>
 
   <div class="info-message">
     <p>{% trans "If the event or service has several addresses, you need a poster for each.  After you finish this poster, we’ll remind you to make more." %}
