@@ -2,7 +2,7 @@ from django.views.generic import TemplateView, FormView
 from django.urls import reverse_lazy, reverse
 
 from .models import Registrant, Location, EmailConfirmation
-from .forms import EmailForm, ContactUsForm, location_category_type_map
+from .forms import EmailForm, ContactUsForm
 from collections import ChainMap
 from django.utils.translation import gettext as _
 from formtools.wizard.views import NamedUrlSessionWizardView
