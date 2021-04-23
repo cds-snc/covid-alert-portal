@@ -2107,6 +2107,10 @@ msgid "Give brief description of service or event"
 msgstr "Décrivez brièvement votre service ou événement"
 
 #: register/forms.py
+msgid "Tell us the type of establishment."
+msgstr "Quel est le type de votre établissement?"
+
+#: register/forms.py
 msgid "Select a province or territory"
 msgstr "Sélectionnez une province ou un territoire"
 
