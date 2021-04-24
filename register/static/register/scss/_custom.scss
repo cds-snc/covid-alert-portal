@@ -112,7 +112,12 @@ body.qrcode {
     .registration-contact-form {
         max-width: none;
         .fieldWrapper--container {
-            width: 500px;
+            max-width: 500px;
+            @include md {
+                width: 500px;
+                max-width: none;
+            }
+
             &.phone-number-fields {
                 width: 100%;
                 display: flex;
@@ -133,6 +138,17 @@ body.qrcode {
                 }
             }
         }
+    }
+
+    .category-other {
+        border-left: 4px solid #C4C4C4;
+        margin-left: 18px;
+        padding-left: 20px;
+        max-width: 450px;
+    }
+
+    input[name="address-postal_code"] {
+        width: 30%;
     }
     .center-div-img-txt {
         display: flex;

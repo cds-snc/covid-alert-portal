@@ -1,0 +1,42 @@
+{% extends "includes/cds_form.html" %}
+{% load i18n widget_tweaks %}
+
+{% block content %}
+
+  <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %}">
+    {# Include the visible fields #}
+    {% for field in form.visible_fields %}
+      {# Handle everything except the category description field #}
+      {% if field.html_name != 'category-category_description' %}
+        <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
+            <strong>{{ field.label_tag }}</strong>
+            {% if field.errors %}
+                <div id="error--{{ field.html_name }}" class="validation-error">{{ field.errors|first }}</div>
+            {% endif %}
+            {% if field.help_text %}
+                <div class="help--{{ field.html_name }}">{{ field.help_text|linebreaks }}</div>
+            {% endif %}
+            {% with "aria-describedby:error--"|add:field.html_name as describedBy %}
+                {{ field|add_error_attr:describedBy  }}
+            {% endwith %}
+        </div>        
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %} category-other">
+    <div class="fieldWrapper{% if form.category_description.errors %} fieldWrapper--has-error{% endif %}">
+        <strong>{{ form.category_description.label_tag }}</strong>
+        {% if form.category_description.errors %}
+            <div id="error--{{ form.category_description.html_name }}" class="validation-error">{{ form.category_description.errors|first }}</div>
+        {% endif %}
+        {% if form.category_description.help_text %}
+            <div class="help--{{ form.category_description.html_name }}">{{ form.category_description.help_text|linebreaks }}</div>
+        {% endif %}
+        {% with "aria-describedby:error--"|add:form.category_description.html_name as describedBy %}
+            {{ form.category_description|add_error_attr:describedBy  }}
+        {% endwith %}
+    </div>
+  </div>
+
+{% endblock %}
