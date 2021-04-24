@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-23 00:51+0000\n"
+"POT-Creation-Date: 2021-04-23 01:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2412,7 +2412,7 @@ msgid "Print in black and white or colour. Or display on a computer monitor, tab
 msgstr "Vous pouvez imprimer l’affiche en noir et blanc ou en couleur. Vous pouvez aussi l’afficher sur un écran, une tablette ou une télévision. Montrez l’affiche complète, avec l’en-tête et le pied de page."
 
 #: register/templates/register/how_display_poster.html
-msgid "Visitors can find and scan if you put posters"
+msgid "Visitors can find and scan if you put posters:"
 msgstr "Pour que les affiches soient faciles à trouver et à scanner, placez-les:"
 
 #: register/templates/register/how_display_poster.html
@@ -2645,48 +2645,3 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
-
-#~ msgid "Help with your poster"
-#~ msgstr "Créer une autre affiche"
-
-#~ msgid "You’ve got the email with your QR code poster. Now what?"
-#~ msgstr "Vous avez reçu votre affiche à code QR par courriel. Et ensuite?"
-
-#~ msgid "saving and printing."
-#~ msgstr "l’enregistrement et l’impression de l’affiche."
-
-#~ msgid "Help visitors "
-#~ msgstr "Aider les visiteurs à "
-
-#~ msgid "Learn "
-#~ msgstr "En savoir plus sur le"
-
-#~ msgid "how QR posters work."
-#~ msgstr "fonctionnement des affiches à code QR."
-
-#~ msgid "To ask for the email again, "
-#~ msgstr "Pour recevoir à nouveau le courriel, "
-
-#~ msgid "contact us."
-#~ msgstr "contactez-nous."
-
-#~ msgid "Posters are mandatory in some places"
-#~ msgstr "Affiches obligatoires dans certains endroits"
-
-#~ msgid "Check which services and events require posters in your province or territory:"
-#~ msgstr "Renseignez-vous sur les services et événements qui doivent avoir une affiche dans votre province ou territoire:"
-
-#~ msgid "Northwest Terrirtories"
-#~ msgstr "Territoires du Nord-Ouest"
-
-#~ msgid "For more help"
-#~ msgstr "Pour de l’aide supplémentaire"
-
-#~ msgid "Read "
-#~ msgstr "Consultez "
-
-#~ msgid "app information about QR Codes."
-#~ msgstr "l’information sur l’application et les codes QR."
-
-#~ msgid "You can also:"
-#~ msgstr "Vous pouvez également :"
