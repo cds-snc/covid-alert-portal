@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-20 16:19+0000\n"
+"POT-Creation-Date: 2021-04-23 00:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2110,27 +2110,27 @@ msgstr "Décrivez brièvement votre service ou événement"
 msgid "Select a province or territory"
 msgstr "Sélectionnez une province ou un territoire"
 
-#: register/forms.py register/templates/register/qr_support_page.html
+#: register/forms.py
 msgid "Alberta"
 msgstr "Alberta"
 
-#: register/forms.py register/templates/register/qr_support_page.html
+#: register/forms.py
 msgid "British Columbia"
 msgstr "Colombie-Britannique"
 
-#: register/forms.py register/templates/register/qr_support_page.html
+#: register/forms.py
 msgid "Manitoba"
 msgstr "Manitoba"
 
-#: register/forms.py register/templates/register/qr_support_page.html
+#: register/forms.py
 msgid "New Brunswick"
 msgstr "Nouveau-Brunswick"
 
-#: register/forms.py register/templates/register/qr_support_page.html
+#: register/forms.py
 msgid "Newfoundland and Labrador"
 msgstr "Terre-Neuve-et-Labrador"
 
-#: register/forms.py register/templates/register/qr_support_page.html
+#: register/forms.py
 msgid "Nova Scotia"
 msgstr "Nouvelle-Écosse"
 
@@ -2138,27 +2138,27 @@ msgstr "Nouvelle-Écosse"
 msgid "Northwest Territories"
 msgstr "Territoires du Nord-Ouest"
 
-#: register/forms.py register/templates/register/qr_support_page.html
+#: register/forms.py
 msgid "Nunavut"
 msgstr "Nunavut"
 
-#: register/forms.py register/templates/register/qr_support_page.html
+#: register/forms.py
 msgid "Ontario"
 msgstr "Ontario"
 
-#: register/forms.py register/templates/register/qr_support_page.html
+#: register/forms.py
 msgid "Prince Edward Island"
 msgstr "Île-du-Prince-Édouard"
 
-#: register/forms.py register/templates/register/qr_support_page.html
+#: register/forms.py
 msgid "Quebec"
 msgstr "Québec"
 
-#: register/forms.py register/templates/register/qr_support_page.html
+#: register/forms.py
 msgid "Saskatchewan"
 msgstr "Saskatchewan"
 
-#: register/forms.py register/templates/register/qr_support_page.html
+#: register/forms.py
 msgid "Yukon"
 msgstr "Yukon"
 
@@ -2282,14 +2282,17 @@ msgid "Display your poster"
 msgstr "Où placer votre affiche"
 
 #: register/templates/register/confirmation.html
+#: register/templates/register/how_display_poster.html
 msgid "At each entrance and inside."
 msgstr "À chaque entrée et à l’intérieur."
 
 #: register/templates/register/confirmation.html
+#: register/templates/register/how_display_poster.html
 msgid "About 130 cm (4 feet 3 inches) from the ground."
 msgstr "À une hauteur d’environ 130 cm (4 pieds 3 pouces)."
 
 #: register/templates/register/confirmation.html
+#: register/templates/register/how_display_poster.html
 msgid "On flat surfaces that do not move."
 msgstr "Sur des surfaces planes qui ne bougent pas."
 
@@ -2319,7 +2322,6 @@ msgstr ""
 "    "
 
 #: register/templates/register/contact_us.html
-#: register/templates/register/qr_support_page.html
 msgid "Contact Us"
 msgstr "Nous joindre"
 
@@ -2342,6 +2344,88 @@ msgstr "Invalide ou expiré"
 #: register/templates/register/error.html
 msgid "Sorry, that confirmation link has expired or has already been used."
 msgstr "Désolé, le lien de validation est expiré ou a déjà été utilisé."
+
+#: register/templates/register/help_page.html
+#: register/templates/register/how_display_poster.html
+#: register/templates/register/includes/footer.html
+msgid "Help and information"
+msgstr "Aide et information"
+
+#: register/templates/register/help_page.html
+msgid "Learn about"
+msgstr "Pour en savoir plus"
+
+#: register/templates/register/help_page.html
+msgid "Changes to name, address or contact information."
+msgstr "Changements au nom, à l’adresse ou aux coordonnées."
+
+#: register/templates/register/help_page.html
+msgid "How QR posters help slow the spread."
+msgstr "Comment les affiches à code QR aident à ralentir la COVID-19."
+
+#: register/templates/register/help_page.html
+msgid "How to display your poster."
+msgstr "Comment placer votre affiche."
+
+#: register/templates/register/help_page.html
+msgid "Ottawa and eastern Ontario pilot"
+msgstr "Projet pilote dans les régions d’Ottawa et de l’est de l’Ontario"
+
+#: register/templates/register/help_page.html
+msgid "Right now there’s only scanning in Ottawa and eastern Ontario."
+msgstr "Pour l’instant, il est possible de scanner des codes QR dans les régions d’Ottawa et de l’est de l’Ontario seulement."
+
+#: register/templates/register/help_page.html
+msgid "Outside of these regions, you can still make a poster for your establishment or event.  Then you’ll be ready when your region starts using QR codes."
+msgstr "Si vous êtes en dehors de ces régions, vous pouvez tout de même créer une affiche pour votre établissement ou votre événement. Vous serez alors prêt lorsque votre région commencera à utiliser les codes QR."
+
+#: register/templates/register/help_page.html
+msgid "For more help with posters"
+msgstr "Pour de l’aide supplémentaire"
+
+#: register/templates/register/help_page.html
+msgid "Contact us."
+msgstr "Contactez-nous."
+
+#: register/templates/register/help_page.html
+msgid "For help with the app"
+msgstr "Pour de l’aide relative à l’application"
+
+#: register/templates/register/help_page.html
+msgid "Contact app support"
+msgstr "Contacter le soutien direct."
+
+#: register/templates/register/help_page.html
+msgid "Read about common support issues"
+msgstr "Consulter les problèmes fréquents."
+
+#: register/templates/register/how_display_poster.html
+msgid "How to display your COVID Alert poster"
+msgstr "Comment placer votre affiche Alerte COVID"
+
+#: register/templates/register/how_display_poster.html
+msgid "Print in black and white or colour. Or display on a computer monitor, tablet or TV.  Show the whole poster including header and footer."
+msgstr "Vous pouvez imprimer l’affiche en noir et blanc ou en couleur. Vous pouvez aussi l’afficher sur un écran, une tablette ou une télévision. Montrez l’affiche complète, avec l’en-tête et le pied de page."
+
+#: register/templates/register/how_display_poster.html
+msgid "Visitors can find and scan if you put posters"
+msgstr "Pour que les affiches soient faciles à trouver et à scanner, placez-les:"
+
+#: register/templates/register/how_display_poster.html
+msgid "Add or move posters to meet your visitors’ needs."
+msgstr "N’hésitez pas à déplacer les affiches pour répondre aux besoins de vos visiteurs."
+
+#: register/templates/register/how_display_poster.html
+msgid "For best results"
+msgstr "Pour de meilleurs résultats"
+
+#: register/templates/register/how_display_poster.html
+msgid "Put posters where there’s light but not glare. Find places where people can get close with their phones while distancing."
+msgstr "Placez les affiches dans un endroit éclairé mais sans reflets. Les personnes devraient pouvoir s’approcher de l’affiche avec leur téléphone tout en maintenant la distanciation."
+
+#: register/templates/register/how_display_poster.html
+msgid "COVID Alert posters are designed for standard letter size paper. But you can also use other paper sizes."
+msgstr "Les affiches Alerte COVID s’impriment idéalement sur du papier format lettre, mais vous pouvez aussi utiliser d’autres formats."
 
 #: register/templates/register/includes/contact_form.html
 msgid "Add phone extension"
@@ -2410,90 +2494,6 @@ msgstr ""
 #: register/templates/register/location_unavailable.html
 msgid "People in your province or territory are not yet able to scan a QR code for COVID Alert.You can still make a poster with your code.  That way, you’ll be ready when people are able to scan these codes."
 msgstr ""
-
-#: register/templates/register/qr_support_page.html
-msgid "Help with your poster"
-msgstr "Créer une autre affiche"
-
-#: register/templates/register/qr_support_page.html
-msgid "You’ve got the email with your QR code poster. Now what?"
-msgstr "Vous avez reçu votre affiche à code QR par courriel. Et ensuite?"
-
-#: register/templates/register/qr_support_page.html
-msgid "Read about "
-msgstr "En savoir plus sur "
-
-#: register/templates/register/qr_support_page.html
-msgid "saving and printing."
-msgstr "l’enregistrement et l’impression de l’affiche."
-
-#: register/templates/register/qr_support_page.html
-msgid "Help visitors "
-msgstr "Aider les visiteurs à "
-
-#: register/templates/register/qr_support_page.html
-msgid "find and scan your poster."
-msgstr "trouver et scanner votre affiche."
-
-#: register/templates/register/qr_support_page.html
-msgid "Learn "
-msgstr "En savoir plus sur le"
-
-#: register/templates/register/qr_support_page.html
-msgid "how QR posters work."
-msgstr "fonctionnement des affiches à code QR."
-
-#: register/templates/register/qr_support_page.html
-msgid "To ask for the email again, "
-msgstr "Pour recevoir à nouveau le courriel, "
-
-#: register/templates/register/qr_support_page.html
-msgid "contact us."
-msgstr "contactez-nous."
-
-#: register/templates/register/qr_support_page.html
-msgid "Posters are mandatory in some places"
-msgstr "Affiches obligatoires dans certains endroits"
-
-#: register/templates/register/qr_support_page.html
-msgid "Check which services and events require posters in your province or territory:"
-msgstr "Renseignez-vous sur les services et événements qui doivent avoir une affiche dans votre province ou territoire:"
-
-#: register/templates/register/qr_support_page.html
-msgid "Northwest Terrirtories"
-msgstr "Territoires du Nord-Ouest"
-
-#: register/templates/register/qr_support_page.html
-msgid "For more help"
-msgstr "Pour de l’aide supplémentaire"
-
-#: register/templates/register/qr_support_page.html
-msgid "Contact us."
-msgstr "Contactez-nous."
-
-#: register/templates/register/qr_support_page.html
-msgid "For help with the app"
-msgstr "Pour de l’aide relative à l’application"
-
-#: register/templates/register/qr_support_page.html
-msgid "Read "
-msgstr "Consultez "
-
-#: register/templates/register/qr_support_page.html
-msgid "app information about QR Codes."
-msgstr "l’information sur l’application et les codes QR."
-
-#: register/templates/register/qr_support_page.html
-msgid "You can also:"
-msgstr "Vous pouvez également :"
-
-#: register/templates/register/qr_support_page.html
-msgid "Contact direct support"
-msgstr "Contacter le soutien direct."
-
-#: register/templates/register/qr_support_page.html
-msgid "Read about common support issues"
-msgstr "Consulter les problèmes fréquents."
 
 #: register/templates/register/registrant_email.html
 msgid "Email address for your poster"
@@ -2641,3 +2641,48 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Help with your poster"
+#~ msgstr "Créer une autre affiche"
+
+#~ msgid "You’ve got the email with your QR code poster. Now what?"
+#~ msgstr "Vous avez reçu votre affiche à code QR par courriel. Et ensuite?"
+
+#~ msgid "saving and printing."
+#~ msgstr "l’enregistrement et l’impression de l’affiche."
+
+#~ msgid "Help visitors "
+#~ msgstr "Aider les visiteurs à "
+
+#~ msgid "Learn "
+#~ msgstr "En savoir plus sur le"
+
+#~ msgid "how QR posters work."
+#~ msgstr "fonctionnement des affiches à code QR."
+
+#~ msgid "To ask for the email again, "
+#~ msgstr "Pour recevoir à nouveau le courriel, "
+
+#~ msgid "contact us."
+#~ msgstr "contactez-nous."
+
+#~ msgid "Posters are mandatory in some places"
+#~ msgstr "Affiches obligatoires dans certains endroits"
+
+#~ msgid "Check which services and events require posters in your province or territory:"
+#~ msgstr "Renseignez-vous sur les services et événements qui doivent avoir une affiche dans votre province ou territoire:"
+
+#~ msgid "Northwest Terrirtories"
+#~ msgstr "Territoires du Nord-Ouest"
+
+#~ msgid "For more help"
+#~ msgstr "Pour de l’aide supplémentaire"
+
+#~ msgid "Read "
+#~ msgstr "Consultez "
+
+#~ msgid "app information about QR Codes."
+#~ msgstr "l’information sur l’application et les codes QR."
+
+#~ msgid "You can also:"
+#~ msgstr "Vous pouvez également :"

@@ -134,4 +134,12 @@ body.qrcode {
             }
         }
     }
+    .center-div-img-txt {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        div {
+          padding-right: 15px;
+        }
+    }
 }

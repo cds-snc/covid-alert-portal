@@ -1,0 +1,55 @@
+{% extends 'register/base.html' %}
+{% load i18n static %}
+
+{% block title %}
+  {% trans "How to display your COVID Alert poster" %}
+{% endblock %}
+
+
+{% block content %}
+  <div class="support">
+    <div class="content-back-link">
+      <a href="{% url 'register:help' %}" class="chevron-left">{% trans "Help and information" %}</a>
+    </div>
+    <h1>{% trans "How to display your COVID Alert poster" %}</h1>
+
+    <p>
+      {% trans 'Print in black and white or colour. Or display on a computer monitor, tablet or TV.  Show the whole poster including header and footer.' %}
+    </p>
+
+    <div class="info-message">
+      <p>
+        {% trans 'Visitors can find and scan if you put posters:' %}
+      </p>
+      <ul>
+        <li>
+          {% trans 'At each entrance and inside.' %}
+        </li>
+        <li>
+          {% trans 'About 130 cm (4 feet 3 inches) from the ground.' %}
+        </li>
+        <li>
+          {% trans 'On flat surfaces that do not move.' %}
+        </li>
+      </ul>
+      <p>
+        {% trans 'Add or move posters to meet your visitors’ needs.' %}
+      </p>
+    </div>
+    <div class="center-div-img-txt">
+      <div>
+        <img src="{% static 'img/lightbulb_24px.svg' %}" alt=""/>
+      </div>
+      <div>
+        <h2>{% trans "For best results" %}</h2>
+      </div>
+    </div>
+
+    <p>
+      {% trans 'Put posters where there’s light but not glare. Find places where people can get close with their phones while distancing.' %}
+    </p>
+    <p>
+      {% trans 'COVID Alert posters are designed for standard letter size paper. But you can also use other paper sizes.' %}
+    </p>
+  </div>
+{% endblock %}
