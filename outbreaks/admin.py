@@ -1,5 +1,5 @@
 from django.contrib import admin
-
+from .models import Notification
 
 class NotificationAdmin(admin.ModelAdmin):
     list_display = [
@@ -10,7 +10,11 @@ class NotificationAdmin(admin.ModelAdmin):
         "created_by",
         "severity",
         "location",
+        "short_code"
     ]
+
+    def short_code(self, obj):
+        return obj.location.short_code
 
     def has_add_permission(self, request, obj=None):
         return False
@@ -20,3 +24,5 @@ class NotificationAdmin(admin.ModelAdmin):
 
     def has_change_permission(self, request, obj=None):
         return False
+
+admin.site.register(Notification, NotificationAdmin)
