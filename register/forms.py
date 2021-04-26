@@ -113,7 +113,12 @@ class LocationAddressForm(HealthcareBaseForm, forms.Form):
 class LocationContactForm(HealthcareBaseForm, forms.Form):
     contact_name = forms.CharField(label=_("Name of contact"))
     contact_email = forms.EmailField(label=_("Contact email"))
-    contact_phone = PhoneNumberField(label=_("Contact phone number"), error_messages={'invalid': _('Enter a valid phone number (e.g. 613-555-5555).')})
+    contact_phone = PhoneNumberField(
+        label=_("Contact phone number"),
+        error_messages={
+            "invalid": _("Enter a valid phone number (e.g. 613-555-5555).")
+        },
+    )
     contact_phone_ext = forms.CharField(label=_("Extension"), required=False)
 
 
