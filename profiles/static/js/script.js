@@ -30,3 +30,9 @@ document.addEventListener('keypress', function (e) {
       }
     }
 });
+
+var validationSummary = document.getElementById('validation-errors');
+
+if (validationSummary) {
+  validationSummary.focus();
+}
