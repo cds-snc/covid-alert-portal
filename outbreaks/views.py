@@ -53,12 +53,12 @@ class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
 
             if self.request.user.is_superuser:
                 return Location.objects.filter(
-                    Q(name__icontains=search) | Q(address__icontains=search)
+                    Q(name__icontains=search) | Q(address__icontains=search) | Q(postal_code__icontains=search) | Q(city__icontains=search)
                 ).order_by("name")
             else:
                 return Location.objects.filter(
                     Q(province=province)
-                    & Q(Q(name__icontains=search) | Q(address__icontains=search))
+                    & Q(Q(name__icontains=search) | Q(address__icontains=search) | Q(postal_code__icontains=search) | Q(city_icontains=search))
                 ).order_by("name")
         return Location.objects.none()
 
