@@ -99,8 +99,12 @@ provinces = [
 
 
 class LocationAddressForm(HealthcareBaseForm, forms.Form):
-    address = forms.CharField(label=_("Address line 1"), widget=AutocompleteWidget(), max_length=200)
-    address_2 = forms.CharField(label=_("Address line 2"), required=False, max_length=200)
+    address = forms.CharField(
+        label=_("Address line 1"), widget=AutocompleteWidget(), max_length=200
+    )
+    address_2 = forms.CharField(
+        label=_("Address line 2"), required=False, max_length=200
+    )
     city = forms.CharField(label=_("City"), max_length=100)
     province = forms.ChoiceField(label=_("Province or territory"), choices=provinces)
     postal_code = forms.CharField(label=_("Postal code"), max_length=10)
@@ -110,7 +114,9 @@ class LocationContactForm(HealthcareBaseForm, forms.Form):
     contact_name = forms.CharField(label=_("Name of contact"), max_length=200)
     contact_email = forms.EmailField(label=_("Contact email"), max_length=255)
     contact_phone = PhoneNumberField(label=_("Contact phone number"))
-    contact_phone_ext = forms.CharField(label=_("Extension"), required=False, max_length=20)
+    contact_phone_ext = forms.CharField(
+        label=_("Extension"), required=False, max_length=20
+    )
 
 
 class RegisterSummaryForm(HealthcareBaseForm, forms.Form):
