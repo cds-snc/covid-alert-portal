@@ -10,20 +10,32 @@
     <img src="{% static 'register/img/check.svg' %}" alt="">
 
     <h1>{% trans "Your poster is ready" %}</h1>
-    <div class="content-button">
-      <a  href="{% url "register:poster_download" pk=location_id lang='en' %}" target="_blank" role='button' draggable='false'>{% trans "Download English poster" %}<img src="{% static 'register/img/PDF_icon_white.svg' %}" alt=""></a>
-      
-    </div>
-    <div class="content-button">
-      <a  href="{% url "register:poster_download" pk=location_id lang='fr' %}" target="_blank" role='button' draggable='false' class="secondary">{% trans "Download French poster" %}<img src="{% static 'register/img/PDF_icon_black.svg' %}" alt=""></a>
-    </div>
+
+    {% with current_language=request.LANGUAGE_CODE available_langs='en fr' %}
+      <div class="download-links {% if current_language == 'fr' %}download-links-reverse{% endif %}">
+        {% for lang in available_langs.split %}
+          <div class="content-button">
+            <a  href="{% url "register:poster_download" pk=location_id lang=lang %}" target="_blank" role='button' draggable='false' {% if lang != current_language %}class="secondary"{% endif %}>
+              {% if lang == 'en' %}
+                {% trans "Download English poster" %}
+              {% else %}
+                {% trans "Download French poster" %}
+              {% endif %}
+              {% if lang == current_language %}
+                <img src="{% static 'register/img/PDF_icon_white.svg' %}" alt="">
+              {% else %}
+                <img src="{% static 'register/img/PDF_icon_black.svg' %}" alt="">
+              {% endif %}
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    {% endwith %}
 
     {% blocktrans with email=request.session.registrant_email %}
       <p>We’ll also email the poster to {{ email }}</p>
     {% endblocktrans %}
-
   </div>
-
 
   <div class="reminder">
     <div>
@@ -32,8 +44,6 @@
     <div class="reminder-text">
       <p>{% trans "Remember to make a poster for each address of the establishment or event. " %}</p>
     </div>
-
-    
   </div>
 
   <div class="content-button">
@@ -62,7 +72,4 @@
     <p>Or <a href="{{ contactlink }}">Contact us</a></p>
     {% endblocktrans %}
   </div>
-  
-  
-
 {% endblock %}
