@@ -1,9 +1,9 @@
 {% extends 'register/base.html' %}
-{% load i18n %}
+{% load i18n location_type_str %}
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Name of service or event" %}
+  {% location_type_str form_data.category 'name' %}
 {% endblock %}
 
 {% block content %}
@@ -15,7 +15,7 @@
 
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "Name of service or event" %}</h1>
+  <h1>{% location_type_str form_data.category 'name' %}</h1>
   <p>{% trans "We’ll display the name on the poster with your QR code." %}</p>
   
   {% include "includes/cds_form.html" with submit_text=_("Next") %}

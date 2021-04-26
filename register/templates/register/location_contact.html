@@ -2,8 +2,8 @@
 {% load i18n static %}
 
 {% block title %}
-  {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Contact for the address" %}
+  {% if form.errors %}{% trans "Error: " %}{% endif %}
+  {% trans "Contact person" %}
 {% endblock %}
 
 {% block content %}
@@ -15,14 +15,25 @@
 
   {% include  "includes/error_list.html" %}
 
-  <h1>{% trans "Contact for the address" %}</h1>
-  <p>{% trans "This could be you, or a different person, such as a store manager." %}<p>
-  <p>{% trans "We’ll contact them with any important health information for the address." %}</p>
+  <h1>{% trans "Contact person" %}</h1>
+  <p><b>
+    {{ form_data.name }}
+    <br>
+    {{ form_data.address }}
+    <br>
+    {{ form_data.address_2 }}
+  </b></p>
+  <br>
+  <p>
+    {% trans "This could be you, or a different person, such as a store manager." %}
+    </br>
+    {% trans "We’ll contact them with any important health information for the address." %}
+  </p>
 
 
   {% include "register/includes/contact_form.html" with submit_text=_("Next") form_class="registration-contact-form" %}
 {% endblock %}
 
 {% block scripts %}
-<script src="{% static 'register/js/phone-extension.js' %}"></script>
+  <script src="{% static 'register/js/phone-extension.js' %}"></script>
 {% endblock %}
