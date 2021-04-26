@@ -254,7 +254,7 @@ class RegisterLocationDetailsValidation(TestCase):
 
         self.assertEqual(
             form.errors["contact_phone"],
-            ["Enter a valid phone number (e.g. +12125552368)."],
+            ["Enter a valid phone number (e.g. 613-555-5555)."],
         )
 
 
