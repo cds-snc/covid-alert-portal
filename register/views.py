@@ -158,10 +158,9 @@ class LocationWizard(NamedUrlSessionWizardView):
         context["form_data"] = self.get_all_cleaned_data()
         context["registrant"] = registrant
         if "category" in context["form_data"]:
-            context["form_data"]["category"] = dict(location_choices)[
+            context["form_data"]["category_txt"] = dict(location_choices)[
                 context["form_data"]["category"]
             ]
-
         return context
 
     def done(self, form_list, form_dict, **kwargs):

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-20 16:19+0000\n"
+"POT-Creation-Date: 2021-04-22 17:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2356,10 +2356,6 @@ msgid "Top of Page"
 msgstr "Haut de page"
 
 #: register/templates/register/location_address.html
-msgid "Address of service or event"
-msgstr "Adresse du service ou de l’événement"
-
-#: register/templates/register/location_address.html
 msgid "Step 3 of 5"
 msgstr "Étape 3 de 5"
 
@@ -2380,7 +2376,7 @@ msgid "Choose the type that best fits your situation."
 msgstr "Choisissez le type qui représente le mieux votre situation."
 
 #: register/templates/register/location_contact.html
-msgid "Contact for the address"
+msgid "Contact person"
 msgstr "Personne-ressource"
 
 #: register/templates/register/location_contact.html
@@ -2394,10 +2390,6 @@ msgstr "La personne-ressource peut être vous-même ou bien une autre personne, 
 #: register/templates/register/location_contact.html
 msgid "We’ll contact them with any important health information for the address."
 msgstr "Nous contacterons cette personne pour toute information sanitaire importante en lien avec l’adresse fournie."
-
-#: register/templates/register/location_name.html
-msgid "Name of service or event"
-msgstr "Nom du service ou de l’événement"
 
 #: register/templates/register/location_name.html
 msgid "Step 2 of 5"
@@ -2637,6 +2629,30 @@ msgstr "En cliquant sur « Créer l’affiche », vous confirmez que vos répo
 #: register/templates/register/summary.html
 msgid "Make poster"
 msgstr "Créer l’affiche"
+
+#: register/templatetags/location_type_str.py
+msgid "Address of establishment"
+msgstr "Adresse de l’établissement"
+
+#: register/templatetags/location_type_str.py
+msgid "Address of event"
+msgstr "Adresse de l’événement"
+
+#: register/templatetags/location_type_str.py
+msgid "Address of establishment or event"
+msgstr "Adresse de l’établissement ou de l’événement"
+
+#: register/templatetags/location_type_str.py
+msgid "Name of establishment"
+msgstr "Nom de l’établissement"
+
+#: register/templatetags/location_type_str.py
+msgid "Name of event"
+msgstr "Nom de de l’événement"
+
+#: register/templatetags/location_type_str.py
+msgid "Name of establishment or event"
+msgstr "Nom de l’établissement ou de l’événement"
 
 #: register/views.py
 msgid "You've confirmed your email address."
