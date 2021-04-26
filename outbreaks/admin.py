@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Notification
 
+
 class NotificationAdmin(admin.ModelAdmin):
     list_display = [
         "id",
@@ -10,7 +11,7 @@ class NotificationAdmin(admin.ModelAdmin):
         "created_by",
         "severity",
         "location",
-        "short_code"
+        "short_code",
     ]
 
     def short_code(self, obj):
