@@ -47,7 +47,8 @@ class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
     def get_queryset(self):
         searchStr = self.request.GET.get("search_text")
         if searchStr:
-
+            # Heads-up: this relies on Postgres full text search
+            # features, so will not work with a SQLite database
             queryset = (
                 Location.objects.annotate(
                     search=SearchVector("name", "address", "city", "postal_code")
