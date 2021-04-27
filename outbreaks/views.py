@@ -22,6 +22,7 @@ from .forms import severity_choices
 from register.forms import location_choices
 import requests
 import logging
+import itertools
 
 
 def get_datetime_format(language):
@@ -41,33 +42,53 @@ class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
     paginate_by = 5
     model = Location
     template_name = "search.html"
+    search_fields = ["name", "address", "city", "postal_code"]
 
     def get_queryset(self):
         search = self.request.GET.get("search_text")
         if search:
-            # 'icontains' will produce a case-insensitive SQL 'LIKE' statement which adds a certain level of
-            # 'fuzziness' to the search
-            # Fuzzy search either the name or the address field
-            # search within the same province as the user or CDS
-            province = self.request.user.province.abbr
+            #
+            # Most of this dynamic query search code is copied directly from:
+            # https://spapas.github.io/2016/09/12/django-split-query/
+            #
+            q_parts = search.split()  # split the search string up
+            q_totals = Q()  # init a query object
 
-            if self.request.user.is_superuser:
-                return Location.objects.filter(
-                    Q(name__icontains=search)
-                    | Q(address__icontains=search)
-                    | Q(postal_code__icontains=search)
-                    | Q(city__icontains=search)
-                ).order_by("name")
-            else:
-                return Location.objects.filter(
-                    Q(province=province)
-                    & Q(
-                        Q(name__icontains=search)
-                        | Q(address__icontains=search)
-                        | Q(postal_code__icontains=search)
-                        | Q(city_icontains=search)
-                    )
-                ).order_by("name")
+            # This part will get us all possible segmantiation of the query parts and put it in the possibilities list
+            combinatorics = itertools.product([True, False], repeat=len(q_parts) - 1)
+            possibilities = []
+            for combination in combinatorics:
+                i = 0
+                one_such_combination = [q_parts[i]]
+                for slab in combination:
+                    i += 1
+                    if not slab:  # there is a join
+                        one_such_combination[-1] += " " + q_parts[i]
+                    else:
+                        one_such_combination += [q_parts[i]]
+                possibilities.append(one_such_combination)
+
+            # Now, for all possiblities we'll append all the Q objects using OR
+            for p in possibilities:
+                list1 = self.search_fields
+                list2 = p
+                perms = [
+                    zip(x, list2) for x in itertools.permutations(list1, len(list2))
+                ]
+
+                for perm in perms:
+                    q_part = Q()
+                    for p in perm:
+                        q_part = q_part & Q(**{p[0] + "__icontains": p[1]})
+                    q_totals = q_totals | q_part
+
+            # If you're not a superuser, search only in your province
+            if not self.request.user.is_superuser:
+                province = self.request.user.province.abbr
+                q_totals = q_totals & Q(province=province)
+
+            return Location.objects.filter(q_totals)
+
         return Location.objects.none()
 
 
