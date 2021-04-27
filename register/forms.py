@@ -116,7 +116,7 @@ class LocationContactForm(HealthcareBaseForm, forms.Form):
     contact_phone = PhoneNumberField(
         label=_("Contact phone number"),
         error_messages={
-            "invalid": _("Enter a valid phone number (e.g. 613-555-5555).")
+            "invalid": _("Your phone number must have 10 digits")
         },
     )
     contact_phone_ext = forms.CharField(label=_("Extension"), required=False)

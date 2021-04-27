@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-26 20:27+0000\n"
+"POT-Creation-Date: 2021-04-27 21:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2103,6 +2103,10 @@ msgid "Something else"
 msgstr "Autre"
 
 #: register/forms.py
+msgid "Give brief description of service or event"
+msgstr "Décrivez brièvement votre service ou événement"
+
+#: register/forms.py
 msgid "Tell us the type of establishment."
 msgstr "Quel est le type de votre établissement?"
 
@@ -2191,8 +2195,8 @@ msgid "Contact phone number"
 msgstr "Numéro de téléphone"
 
 #: register/forms.py
-msgid "Enter a valid phone number (e.g. 613-555-5555)."
-msgstr ""
+msgid "Your phone number must have 10 digits"
+msgstr "Votre numéro de téléphone doit avoir 10 chiffres."
 
 #: register/forms.py
 msgid "Extension"
@@ -2661,6 +2665,3 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
-
-#~ msgid "Give brief description of service or event"
-#~ msgstr "Décrivez brièvement votre service ou événement"
