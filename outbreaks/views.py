@@ -50,7 +50,7 @@ class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
 
             queryset = Location.objects.annotate(
                 search=SearchVector('name', 'address', 'city', 'postal_code')
-            ).filter(search=SearchQuery(searchStr))
+            ).filter(search=SearchQuery(searchStr)).order_by('name')
 
             # If you're not a superuser, search only in your province
             if not self.request.user.is_superuser:
