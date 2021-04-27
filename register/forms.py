@@ -54,11 +54,7 @@ def send_email(
 
 
 class EmailForm(HealthcareBaseForm, forms.Form):
-    email = forms.EmailField(label=_("Email address"))
-
-
-class OtherFieldInput(HealthcareBaseForm, forms.Form):
-    data = forms.CharField(label=_("Give brief description of service or event"))
+    email = forms.EmailField(label=_("Email address"), max_length=255)
 
 
 class LocationCategoryForm(HealthcareBaseForm, forms.Form):
@@ -68,7 +64,7 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
     category_description = forms.CharField(
-        label=_("Tell us the type of establishment."), required=False
+        label=_("Tell us the type of establishment."), required=False, max_length=200
     )
 
     def clean(self):
@@ -81,7 +77,7 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
 
 
 class LocationNameForm(HealthcareBaseForm, forms.Form):
-    name = forms.CharField(label="")
+    name = forms.CharField(label="", max_length=200)
 
 
 provinces = [
@@ -103,23 +99,29 @@ provinces = [
 
 
 class LocationAddressForm(HealthcareBaseForm, forms.Form):
-    address = forms.CharField(label=_("Address line 1"), widget=AutocompleteWidget())
-    address_2 = forms.CharField(label=_("Address line 2"), required=False)
-    city = forms.CharField(label=_("City"))
+    address = forms.CharField(
+        label=_("Address line 1"), widget=AutocompleteWidget(), max_length=200
+    )
+    address_2 = forms.CharField(
+        label=_("Address line 2"), required=False, max_length=200
+    )
+    city = forms.CharField(label=_("City"), max_length=100)
     province = forms.ChoiceField(label=_("Province or territory"), choices=provinces)
-    postal_code = forms.CharField(label=_("Postal code"))
+    postal_code = forms.CharField(label=_("Postal code"), max_length=10)
 
 
 class LocationContactForm(HealthcareBaseForm, forms.Form):
-    contact_name = forms.CharField(label=_("Name of contact"))
-    contact_email = forms.EmailField(label=_("Contact email"))
+    contact_name = forms.CharField(label=_("Name of contact"), max_length=200)
+    contact_email = forms.EmailField(label=_("Contact email"), max_length=255)
     contact_phone = PhoneNumberField(
         label=_("Contact phone number"),
         error_messages={
             "invalid": _("Your phone number must have 10 digits")
         },
     )
-    contact_phone_ext = forms.CharField(label=_("Extension"), required=False)
+    contact_phone_ext = forms.CharField(
+        label=_("Extension"), required=False, max_length=20
+    )
 
 
 class RegisterSummaryForm(HealthcareBaseForm, forms.Form):
