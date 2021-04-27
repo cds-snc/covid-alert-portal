@@ -1,16 +1,18 @@
 from django.contrib import admin
 
-from .models import Registrant, Location
+from .models import Registrant, Location, LocationSummary
 
 
-# Register your models here.
+@admin.register(Registrant)
 class RegistrantAdmin(admin.ModelAdmin):
-    list_display = ["id", "email"]
+    list_display = ["id", "email", "created"]
 
 
+@admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
-    list_display = ["id", "name", "city", "province"]
-
-
-admin.site.register(Registrant, RegistrantAdmin)
-admin.site.register(Location, LocationAdmin)
+    date_hierarchy = 'created'
+    list_display = ['name', 'city', 'province', 'short_code', 'registrant']
+    list_filter = (
+        'province',
+        'city',
+    )
