@@ -10,6 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - QR Code Registration form with Email verification
 - Location search with Canada Post Address Complete API
 
+## [1.19.4] - 2021-04-28
+
+### Updated
+
+- Fix for manage profiles page when showing last password change timestamp
+
 ## [1.19.3] - 2021-04-08
 
 ### Updated
