@@ -1,0 +1,105 @@
+{% extends "admin/change_list.html" %}
+
+{% load percentof %}
+
+{% block content_title %}
+    <h1>Locations/Posters Summary</h1>
+{% endblock %}
+
+{% block result_list %}
+    <div class="results flex mt-10">
+
+    <div class="w-1/3">
+        <h2>Breakdown by Province</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <div class="text">
+                            <a href="#">Province</a>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="text">
+                            <a href="#">Total</a>
+                        </div>
+                    </th>
+                    
+                    <th>
+                        <div class="text">
+                            <a href="#">
+                            <strong>% Of Total</strong>
+                            </a>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in province_summary %}
+                    <tr class="{% cycle 'row1' 'row2' %}">
+                        <td> {{ row.province }} </td>
+                        <td> {{ row.total }} </td>
+                        <td>
+                        {{ row.total | default:0 | percentof:province_summary_total.total }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            
+                <tr style=”font-weight:bold; border-top:2px solid #DDDDDD;”>
+                    <td> Total </td>
+                    <td> {{ province_summary_total.total }} </td>
+                    <td> 100% </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="w-1/2 ml-8">
+        <h2>Breakdown by City</h2>
+        <table> 
+            <thead>
+                <tr>
+                    <th>
+                    <div class="text">
+                        <a href="#">City</a>
+                    </div>
+                    </th>
+                    <th>
+                    <div class="text">
+                        <a href="#">Total</a>
+                    </div>
+                    </th>
+                    
+                    <th>
+                    <div class="text">
+                        <a href="#">
+                        <strong>% Of Total</strong>
+                        </a>
+                    </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in city_summary %}
+                    <tr class="{% cycle 'row1' 'row2' %}">
+                        <td> {{ row.city }} </td>
+                        <td> {{ row.total }} </td>
+                        <td>
+                        {{ row.total | default:0 | percentof:city_summary_total.total }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr style=”font-weight:bold; border-top:2px solid #DDDDDD;”>
+                    <td> Total </td>
+                    <td> {{ city_summary_total.total }} </td>
+                    <td> 100% </td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block pagination %}{% endblock %}
