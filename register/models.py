@@ -68,5 +68,5 @@ class Location(models.Model):
 class LocationSummary(Location):
     class Meta:
         proxy = True
-        verbose_name = 'Location summary'
-        verbose_name_plural = 'Locations summary'
+        verbose_name = "Location summary"
+        verbose_name_plural = "Locations summary"
