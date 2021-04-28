@@ -140,6 +140,15 @@ body.qrcode {
         }
     }
 
+    .download-links {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .download-links-reverse {
+        flex-direction: column-reverse;
+    }
+
     .category-other {
         border-left: 4px solid #C4C4C4;
         margin-left: 18px;
