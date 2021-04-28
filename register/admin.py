@@ -4,9 +4,22 @@ from .models import Registrant, Location, LocationSummary
 from django.db.models import Count
 
 
+class LocationInline(admin.TabularInline):
+    model = Location
+    readonly_fields = ["short_code", "name", "category", "address", "city", "province", "postal_code"]
+    exclude = ["address_2", "category_description", "postal_code", "contact_name", "contact_phone", "contact_phone_ext", "contact_email"]
+    extra = 0
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+
 @admin.register(Registrant)
 class RegistrantAdmin(admin.ModelAdmin):
     list_display = ["id", "email", "created"]
+    inlines = [
+        LocationInline,
+    ]
 
 
 @admin.register(Location)
