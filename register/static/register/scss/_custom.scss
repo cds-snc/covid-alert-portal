@@ -159,4 +159,8 @@ body.qrcode {
     input[name="address-postal_code"] {
         width: 30%;
     }
+
+    #address-autocomplete-container {
+        margin-top: 8px;
+    }
 }
