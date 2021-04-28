@@ -8,7 +8,7 @@ class TZMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        browser_tz = request.COOKIES.get('browserTimezone')
+        browser_tz = request.COOKIES.get("browserTimezone")
         tz = None
         if browser_tz:
             try:
@@ -20,8 +20,10 @@ class TZMiddleware:
 
         def replace_to_local_tz(dttm):
             return dttm.replace(tzinfo=tz)
+
         def localize_dttm(dttm):
             return tz.localize(dttm)
+
         def convert_to_local_tz_from_utc(utc_dttm):
             return utc_dttm.astimezone(tz=tz)
 

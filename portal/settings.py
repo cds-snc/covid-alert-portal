@@ -117,7 +117,7 @@ MIDDLEWARE = [
     "csp.middleware.CSPMiddleware",
     "easyaudit.middleware.easyaudit.EasyAuditMiddleware",
     "waffle.middleware.WaffleMiddleware",
-    "portal.middleware.TZMiddleware"
+    "portal.middleware.TZMiddleware",
 ]
 
 ROOT_URLCONF = "portal.urls"

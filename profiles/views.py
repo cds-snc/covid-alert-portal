@@ -401,7 +401,9 @@ class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):
                 .datetime
             )
             recent_date = self.request.convert_to_local_tz_from_utc(recent_date)
-            context["last_updated_datetime"] = recent_date.strftime(get_time_format(cur_lang))
+            context["last_updated_datetime"] = recent_date.strftime(
+                get_time_format(cur_lang)
+            )
 
         except AttributeError:
             context["last_updated_datetime"] = ""
