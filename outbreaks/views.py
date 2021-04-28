@@ -42,7 +42,6 @@ class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
     paginate_by = 5
     model = Location
     template_name = "search.html"
-    search_fields = ["name", "address", "city", "postal_code"]
 
     def get_queryset(self):
         searchStr = self.request.GET.get("search_text")
