@@ -1,7 +1,7 @@
 {% load i18n %}
 
 {% if form.errors %}
-  <div class="errorlist--container" role="alert">
+  <div class="errorlist--container" role="alert" id="validation-errors" tabindex=-1>
     <h2 class="errorlist--heading">
       {% trans "Please correct the errors on the page" %}
     </h2>
