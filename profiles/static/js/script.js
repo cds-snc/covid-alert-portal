@@ -36,3 +36,5 @@ var validationSummary = document.getElementById('validation-errors');
 if (validationSummary) {
   validationSummary.focus();
 }
+
+document.cookie = 'browserTimezone=' + Intl.DateTimeFormat().resolvedOptions().timeZone + '; path=/';
