@@ -23,6 +23,7 @@ from django.db.models.expressions import RawSQL
 
 from otp_yubikey.models import RemoteYubikeyDevice
 
+from outbreaks.views import get_time_format
 from portal.mixins import (
     ThrottledMixin,
     Is2FAMixin,
@@ -54,7 +55,6 @@ from .forms import (
 )
 
 from django.utils import translation
-import locale
 
 
 class YubikeyVerifyView(FormView):
@@ -390,23 +390,16 @@ class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):
         )
 
         try:
-
-            cur_lang = translation.get_language()
-
             recent_date = (
                 CRUDEvent.objects.filter(user_id=self.request.user.id)
                 .filter(changed_fields__icontains="password")
                 .first()
                 .datetime
             )
-
-            if cur_lang == "en":
-                locale.setlocale(locale.LC_ALL, "en_ca")
-                context["last_updated_datetime"] = recent_date.strftime("%B %d, %Y")
-            if cur_lang == "fr":
-                locale.setlocale(locale.LC_ALL, "fr_ca")
-                context["last_updated_datetime"] = recent_date.strftime("%d %B %Y")
-
+            recent_date = self.request.convert_to_local_tz_from_utc(recent_date)
+            context["last_updated_datetime"] = recent_date.strftime(
+                get_time_format(translation.get_language())
+            )
         except AttributeError:
             context["last_updated_datetime"] = ""
 
