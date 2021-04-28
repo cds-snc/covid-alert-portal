@@ -39,6 +39,16 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.6, 3.7, 3.8]
+    services:
+      postgres:
+        image: postgres:11.8
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: covid_portal
+        ports:
+        - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - uses: actions/checkout@v2
@@ -61,3 +71,5 @@ jobs:
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
           command: run test # Run custom `test` command defined in the `[scripts]` block of Pipfile
+        env:
+          DATABASE_URL: postgres://postgres:postgres@postgres:5432/covid_portal
