@@ -30,3 +30,5 @@ document.addEventListener('keypress', function (e) {
       }
     }
 });
+
+document.cookie = 'browserTimezone=' + Intl.DateTimeFormat().resolvedOptions().timeZone + '; path=/';
