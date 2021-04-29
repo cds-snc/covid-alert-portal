@@ -64,7 +64,12 @@ urlpatterns = [
         name="confirmation",
     ),
     path("contactus", views.ContactUsPageView.as_view(), name="contactus"),
-    path("qrsupport", views.QRSupportPageView.as_view(), name="qrsupport"),
+    path("help", views.HelpPageView.as_view(), name="help"),
+    path(
+        "display",
+        TemplateView.as_view(template_name="register/how_display_poster.html"),
+        name="howtodisplay",
+    ),
     path(
         "success",
         TemplateView.as_view(template_name="register/success.html"),
