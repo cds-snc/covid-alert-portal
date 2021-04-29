@@ -6,11 +6,30 @@ from django.db.models import Count
 
 class LocationInline(admin.TabularInline):
     model = Location
-    readonly_fields = ["short_code", "name", "category", "address", "city", "province", "postal_code"]
-    exclude = ["address_2", "category_description", "postal_code", "contact_name", "contact_phone", "contact_phone_ext", "contact_email"]
+    readonly_fields = [
+        "short_code",
+        "name",
+        "category",
+        "address",
+        "city",
+        "province",
+        "postal_code",
+    ]
+    exclude = [
+        "address_2",
+        "category_description",
+        "postal_code",
+        "contact_name",
+        "contact_phone",
+        "contact_phone_ext",
+        "contact_email",
+    ]
     extra = 0
 
     def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request, obj=None):
         return False
 
 
@@ -21,6 +40,9 @@ class RegistrantAdmin(admin.ModelAdmin):
         LocationInline,
     ]
 
+    def has_change_permission(self, request, obj=None):
+        return False
+
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
@@ -30,6 +52,12 @@ class LocationAdmin(admin.ModelAdmin):
         "province",
         "city",
     )
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(LocationSummary)

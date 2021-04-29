@@ -15,6 +15,8 @@ class NotificationAdmin(admin.ModelAdmin):
         "short_code",
     ]
 
+    list_display_links = None
+
     def short_code(self, obj):
         return obj.location.short_code
 
