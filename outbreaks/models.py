@@ -29,5 +29,5 @@ class Notification(models.Model):
 class NotificationSummary(Notification):
     class Meta:
         proxy = True
-        verbose_name = "Outbreak summary"
-        verbose_name_plural = "Outbreaks summary"
+        verbose_name = "Notification summary"
+        verbose_name_plural = "Notifications summary"

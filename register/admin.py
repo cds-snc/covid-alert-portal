@@ -39,7 +39,7 @@ class RegistrantAdmin(admin.ModelAdmin):
     inlines = [
         LocationInline,
     ]
-    search_fields = ['id', 'email']
+    search_fields = ["id", "email"]
 
     def has_change_permission(self, request, obj=None):
         return False

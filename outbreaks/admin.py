@@ -51,7 +51,9 @@ class NotificationSummaryAdmin(admin.ModelAdmin):
             return response
 
         qs_province = (
-            qs.values("location__province").annotate(total=Count("location__province")).order_by("-total")
+            qs.values("location__province")
+            .annotate(total=Count("location__province"))
+            .order_by("-total")
         )
         response.context_data["province_summary"] = list(qs_province)
 
@@ -59,7 +61,11 @@ class NotificationSummaryAdmin(admin.ModelAdmin):
             qs.aggregate(total=Count("location__province"))
         )
 
-        qs_city = qs.values("location__city").annotate(total=Count("location__city")).order_by("-total")
+        qs_city = (
+            qs.values("location__city")
+            .annotate(total=Count("location__city"))
+            .order_by("-total")
+        )
 
         response.context_data["city_summary"] = list(qs_city)
         response.context_data["city_summary_total"] = dict(
