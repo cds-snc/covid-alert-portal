@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-22 17:05+0000\n"
+"POT-Creation-Date: 2021-04-29 02:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2103,10 +2103,6 @@ msgid "Something else"
 msgstr "Autre"
 
 #: register/forms.py
-msgid "Give brief description of service or event"
-msgstr "Décrivez brièvement votre service ou événement"
-
-#: register/forms.py
 msgid "Tell us the type of establishment."
 msgstr "Quel est le type de votre établissement?"
 
@@ -2358,6 +2354,10 @@ msgstr "Désolé, le lien de validation est expiré ou a déjà été utilisé."
 #: register/templates/register/includes/footer.html
 msgid "Help and information"
 msgstr "Aide et information"
+
+#: register/templates/register/help_page.html
+msgid "Home"
+msgstr ""
 
 #: register/templates/register/help_page.html
 msgid "Learn about"

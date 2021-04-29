@@ -8,6 +8,9 @@
 
 {% block content %}
   <div class="support">
+    <div class="content-back-link">
+      <a href="{% url 'register:start' %}" class="chevron-left">{% trans "Home" %}</a>
+    </div>
     {% url "register:contactus" as link %}
     <h1>{% trans "Help and information" %}</h1>
     <h2>{% trans "Learn about" %}</h2>
