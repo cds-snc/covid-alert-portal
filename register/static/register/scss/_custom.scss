@@ -117,7 +117,7 @@ body.qrcode {
                 width: 500px;
                 max-width: none;
             }
-            
+
             &.phone-number-fields {
                 width: 100%;
                 display: flex;
@@ -162,5 +162,15 @@ body.qrcode {
 
     #address-autocomplete-container {
         margin-top: 8px;
+    }
+
+    .center-div-img-txt {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        div {
+          padding-right: 15px;
+            display: flex;
+        }
     }
 }

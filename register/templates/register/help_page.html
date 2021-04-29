@@ -1,0 +1,55 @@
+{% extends 'register/base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% trans "Help and information" %}
+{% endblock %}
+
+
+{% block content %}
+  <div class="support">
+    <div class="content-back-link">
+      <a href="{% url 'register:start' %}" class="chevron-left">{% trans "Home" %}</a>
+    </div>
+    {% url "register:contactus" as link %}
+    <h1>{% trans "Help and information" %}</h1>
+    <h2>{% trans "Learn about" %}</h2>
+    <ul>
+      <li><a href="">{% trans "Changes to name, address or contact information." %}</a></li>
+      <li><a href="">{% trans "How QR posters help slow the spread." %}</a></li>
+      <li><a href="{% url 'register:howtodisplay' %}">{% trans "How to display your poster." %}</a></li>
+    </ul>
+    <br>
+    <h2>{% trans "Ottawa and eastern Ontario pilot" %}</h2>
+
+    <p>
+      {% trans 'Right now there’s only scanning in Ottawa and eastern Ontario.' %}
+    </p>
+    <p>
+      {% trans 'Outside of these regions, you can still make a poster for your establishment or event.  Then you’ll be ready when your region starts using QR codes.' %}
+    </p>
+    <br>
+    <h2>{% trans "For more help with posters" %}</h2>
+    <p>
+      <a href="{{ link }}">{% trans "Contact us." %}</a>
+    </p>
+    <br>
+
+    <h2>{% trans "For help with the app" %}</h2>
+    <ul>
+      <li>
+        <a
+          href="https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html#a13">
+          {% trans "Contact app support" %}
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert/help.html">
+          {% trans "Read about common support issues" %}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+{% endblock %}
