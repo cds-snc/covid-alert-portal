@@ -113,7 +113,10 @@ class LocationAddressForm(HealthcareBaseForm, forms.Form):
 class LocationContactForm(HealthcareBaseForm, forms.Form):
     contact_name = forms.CharField(label=_("Name of contact"), max_length=200)
     contact_email = forms.EmailField(label=_("Contact email"), max_length=255)
-    contact_phone = PhoneNumberField(label=_("Contact phone number"))
+    contact_phone = PhoneNumberField(
+        label=_("Contact phone number"),
+        error_messages={"invalid": _("Your phone number must have 10 digits")},
+    )
     contact_phone_ext = forms.CharField(
         label=_("Extension"), required=False, max_length=20
     )

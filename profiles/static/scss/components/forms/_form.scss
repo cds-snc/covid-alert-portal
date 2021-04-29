@@ -30,21 +30,21 @@ main form {
 
   .search_bar {
     div {
-        display: inline-block;
-        width: 100%;
+      display: inline-block;
+      width: 100%;
     }
 
     input {
-        display: inline-block;
-        width: 70%;
+      display: inline-block;
+      width: 70%;
     }
 
     button[type='submit'] {
-        display: inline-block;
-        vertical-align: baseline;
-        padding: 0px 18px;
-        margin-top: 0px;
-        line-height: inherit;
+      display: inline-block;
+      vertical-align: baseline;
+      padding: 0px 18px;
+      margin-top: 0px;
+      line-height: inherit;
     }
   }
 
@@ -61,6 +61,10 @@ main form {
       input {
         width: 70px;
       }
+
+      #id_year {
+        width: 80px;
+      }
     }
 
     > * {
@@ -75,7 +79,7 @@ main form {
       &:not([disabled]) {
         &:focus {
           border-radius: 0;
-          outline: 3px solid #fd0;
+          outline: 3px solid #ffbf47;
           outline-offset: 0;
           -webkit-box-shadow: inset 0 0 0 2px;
           box-shadow: inset 0 0 0 2px;
