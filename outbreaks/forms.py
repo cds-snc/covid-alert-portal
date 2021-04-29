@@ -83,7 +83,9 @@ class DateForm(HealthcareBaseForm):
         try:
             start_date = self.get_valid_date(cleaned_data, "start")
             end_date = self.get_valid_date(cleaned_data, "end")
-            DateForm.validate_date_entry(self, start_date, end_date, self.alert_location)
+            DateForm.validate_date_entry(
+                self, start_date, end_date, self.alert_location
+            )
         except ValueError:
             self.add_error(None, invalid_date_error_msg)
 
