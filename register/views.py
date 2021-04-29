@@ -297,5 +297,5 @@ class ContactUsPageView(FormView):
         return super().form_valid(form)
 
 
-class QRSupportPageView(TemplateView):
-    template_name = "register/qr_support_page.html"
+class HelpPageView(TemplateView):
+    template_name = "register/help_page.html"

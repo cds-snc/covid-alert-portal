@@ -2,10 +2,12 @@ main .messages {
   &--container {
     font-weight: bold;
     margin-bottom: 20px;
+
     ul {
       padding-left: 0px;
       list-style-type: none;
       margin-bottom: 0;
+
       li {
         padding: $space-sm;
 
@@ -15,11 +17,13 @@ main .messages {
           color: $color-blue-dark;
           background: rgba(78, 136, 185, 0.1);
         }
+
         &.error {
           border-left: 4px solid $color-red;
           color: $color-red;
           background: $color-red-light;
         }
+
         &.warning {
           border-left: 4px solid $color-yellow-dark;
           background: $color-yellow-warning-light;
@@ -35,4 +39,10 @@ main .info-message {
   padding: $space-sm $space-md;
   border-left: 4px solid $color-blue;
   background: rgba(78, 136, 185, 0.1);
+
+  ul {
+    li {
+      margin-bottom: 0;
+    }
+  }
 }
