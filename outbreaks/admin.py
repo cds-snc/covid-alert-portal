@@ -41,7 +41,7 @@ class NotificationSummaryAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request, obj=None):
         return False
-        
+
     def changelist_view(self, request, extra_context=None):
         response = super().changelist_view(
             request,
