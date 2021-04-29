@@ -23,7 +23,7 @@ from django.db.models.expressions import RawSQL
 
 from otp_yubikey.models import RemoteYubikeyDevice
 
-from outbreaks.views import get_time_format
+from outbreaks.views import get_datetime_format
 from portal.mixins import (
     ThrottledMixin,
     Is2FAMixin,
@@ -398,7 +398,7 @@ class UserProfileView(Is2FAMixin, ProvinceAdminMixin, DetailView):
             )
             recent_date = self.request.convert_to_local_tz_from_utc(recent_date)
             context["last_updated_datetime"] = recent_date.strftime(
-                get_time_format(translation.get_language())
+                get_datetime_format(translation.get_language())
             )
         except AttributeError:
             context["last_updated_datetime"] = ""
