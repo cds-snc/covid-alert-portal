@@ -72,4 +72,15 @@ class NotificationSummaryAdmin(admin.ModelAdmin):
             qs.aggregate(total=Count("location__city"))
         )
 
+        qs_location = (
+            qs.values("location__name")
+            .annotate(total=Count("location__name"))
+            .order_by("-total")
+        )
+
+        response.context_data["location_summary"] = list(qs_location)
+        response.context_data["location_summary_total"] = dict(
+            qs.aggregate(total=Count("location"))
+        )
+
         return response

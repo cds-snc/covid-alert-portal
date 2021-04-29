@@ -52,16 +52,61 @@
                 </tr>
             </tbody>
         </table>
+
+        <div class="mt-8">
+            <h2>Breakdown by City</h2>
+            <table> 
+                <thead>
+                    <tr>
+                        <th>
+                        <div class="text">
+                            <a href="#">City</a>
+                        </div>
+                        </th>
+                        <th>
+                        <div class="text">
+                            <a href="#">Total</a>
+                        </div>
+                        </th>
+                        
+                        <th>
+                        <div class="text">
+                            <a href="#">
+                            <strong>% Of Total</strong>
+                            </a>
+                        </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in city_summary %}
+                        <tr class="{% cycle 'row1' 'row2' %}">
+                            <td> {{ row.location__city }} </td>
+                            <td> {{ row.total }} </td>
+                            <td>
+                            {{ row.total | default:0 | percentof:city_summary_total.total }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr style=”font-weight:bold; border-top:2px solid #DDDDDD;”>
+                        <td> Total </td>
+                        <td> {{ city_summary_total.total }} </td>
+                        <td> 100% </td>
+                    </tr>
+                </tbody>
+                
+            </table>
+        </div>
     </div>
 
     <div class="w-1/2 ml-8">
-        <h2>Breakdown by City</h2>
+        <h2>Breakdown by Location</h2>
         <table> 
             <thead>
                 <tr>
                     <th>
                     <div class="text">
-                        <a href="#">City</a>
+                        <a href="#">Location</a>
                     </div>
                     </th>
                     <th>
@@ -80,18 +125,18 @@
                 </tr>
             </thead>
             <tbody>
-                {% for row in city_summary %}
+                {% for row in location_summary %}
                     <tr class="{% cycle 'row1' 'row2' %}">
-                        <td> {{ row.location__city }} </td>
+                        <td> {{ row.location__name }} </td>
                         <td> {{ row.total }} </td>
                         <td>
-                        {{ row.total | default:0 | percentof:city_summary_total.total }}
+                        {{ row.total | default:0 | percentof:location_summary_total.total }}
                         </td>
                     </tr>
                 {% endfor %}
                 <tr style=”font-weight:bold; border-top:2px solid #DDDDDD;”>
                     <td> Total </td>
-                    <td> {{ city_summary_total.total }} </td>
+                    <td> {{ location_summary_total.total }} </td>
                     <td> 100% </td>
                 </tr>
             </tbody>
