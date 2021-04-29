@@ -9,4 +9,6 @@
 {% block content %}
     <h1>{% trans "Thank you for contacting us" %}</h1>
     <p>{% trans "We’ll reply as soon as possible." %}</p>
+    <p><a href="{% url "register:start" %}">{% trans "Return to home page" %}</a></p>
 {% endblock %}
+
