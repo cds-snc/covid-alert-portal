@@ -41,17 +41,17 @@ def get_time_format(language):
 def process_query(s):
     """
     Converts the user's search string into something suitable for passing to
-    to_tsquery. Supports wildcard/partial strings and assumes AND operator 
+    to_tsquery. Supports wildcard/partial strings and assumes AND operator
     For example: "Tim:* & Horton:* & Toronto:*"
     """
-    query = re.sub(r'[!\'()|&]', ' ', s).strip()
-    
+    query = re.sub(r"[!\'()|&]", " ", s).strip()
+
     if query:
         # Append wildcard to each substring
-        query = " ".join([s + ':*' for s in query.split()])
+        query = " ".join([s + ":*" for s in query.split()])
 
         # add AND operator between search terms
-        query = re.sub(r'\s+', ' & ', query)
+        query = re.sub(r"\s+", " & ", query)
 
     return query
 
@@ -72,20 +72,20 @@ class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
             # but they don't support partial string search so refactored
             # to use postgres directly, see:
             # https://www.fusionbox.com/blog/detail/partial-word-search-with-postgres-full-text-search-in-django/632/
-            
+
             query = process_query(searchStr)
             queryset = Location.objects.all()
 
             queryset = queryset.extra(
                 where=[
-                    '''
+                    """
                     to_tsvector('english', unaccent(concat_ws(' ',
                         register_location.name,
                         register_location.address,
                         register_location.city,
                         register_location.postal_code
                     ))) @@ to_tsquery('english', unaccent(%s))
-                    '''
+                    """
                 ],
                 params=[query],
             )
