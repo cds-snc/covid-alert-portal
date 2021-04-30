@@ -321,7 +321,10 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
                     start_date = datetime.fromtimestamp(date_entry["start_ts"])
                     end_date = datetime.fromtimestamp(date_entry["end_ts"])
                     DateForm.validate_date_entry(
-                        form, start_date, end_date, self.request.session["alert_location"]
+                        form,
+                        start_date,
+                        end_date,
+                        self.request.session["alert_location"],
                     )
                     if not form.is_valid():
                         return super().form_invalid(form)
