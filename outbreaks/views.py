@@ -22,6 +22,7 @@ from .forms import severity_choices
 from register.forms import location_choices
 import requests
 import logging
+from django.contrib.postgres.search import SearchVector, SearchQuery
 
 
 def get_datetime_format(language):
@@ -43,23 +44,25 @@ class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
     template_name = "search.html"
 
     def get_queryset(self):
-        search = self.request.GET.get("search_text")
-        if search:
-            # 'icontains' will produce a case-insensitive SQL 'LIKE' statement which adds a certain level of
-            # 'fuzziness' to the search
-            # Fuzzy search either the name or the address field
-            # search within the same province as the user or CDS
-            province = self.request.user.province.abbr
+        searchStr = self.request.GET.get("search_text")
+        if searchStr:
+            # Heads-up: this relies on Postgres full text search
+            # features, so will not work with a SQLite database
+            queryset = (
+                Location.objects.annotate(
+                    search=SearchVector("name", "address", "city", "postal_code")
+                )
+                .filter(search=SearchQuery(searchStr))
+                .order_by("name")
+            )
 
-            if self.request.user.is_superuser:
-                return Location.objects.filter(
-                    Q(name__icontains=search) | Q(address__icontains=search)
-                ).order_by("name")
-            else:
-                return Location.objects.filter(
-                    Q(province=province)
-                    & Q(Q(name__icontains=search) | Q(address__icontains=search))
-                ).order_by("name")
+            # If you're not a superuser, search only in your province
+            if not self.request.user.is_superuser:
+                province = self.request.user.province.abbr
+                queryset = queryset.filter(province=province)
+
+            return queryset
+
         return Location.objects.none()
 
 
