@@ -23,6 +23,7 @@ from register.forms import location_choices
 import requests
 import logging
 from django.contrib.postgres.search import SearchVector, SearchQuery
+import re
 
 
 def get_datetime_format(language):
@@ -37,6 +38,24 @@ def get_time_format(language):
     return "%-I:%M %p"
 
 
+def process_query(s):
+    """
+    Converts the user's search string into something suitable for passing to
+    to_tsquery. Supports wildcard/partial strings and assumes AND operator 
+    For example: "Tim:* & Horton:* & Toronto:*"
+    """
+    query = re.sub(r'[!\'()|&]', ' ', s).strip()
+    
+    if query:
+        # Append wildcard to each substring
+        query = " ".join([s + ':*' for s in query.split()])
+
+        # add AND operator between search terms
+        query = re.sub(r'\s+', ' & ', query)
+
+    return query
+
+
 class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
     permission_required = ["profiles.can_send_alerts"]
     paginate_by = 5
@@ -46,14 +65,29 @@ class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
     def get_queryset(self):
         searchStr = self.request.GET.get("search_text")
         if searchStr:
-            # Heads-up: this relies on Postgres full text search
+            # Heads-up: this code relies on Postgres full text search
             # features, so will not work with a SQLite database
-            queryset = (
-                Location.objects.annotate(
-                    search=SearchVector("name", "address", "city", "postal_code")
-                )
-                .filter(search=SearchQuery(searchStr))
-                .order_by("name")
+            #
+            # Also note: this was originally based on Django built-in functions,
+            # but they don't support partial string search so refactored
+            # to use postgres directly, see:
+            # https://www.fusionbox.com/blog/detail/partial-word-search-with-postgres-full-text-search-in-django/632/
+            
+            query = process_query(searchStr)
+            queryset = Location.objects.all()
+
+            queryset = queryset.extra(
+                where=[
+                    '''
+                    to_tsvector('english', unaccent(concat_ws(' ',
+                        register_location.name,
+                        register_location.address,
+                        register_location.city,
+                        register_location.postal_code
+                    ))) @@ to_tsquery('english', unaccent(%s))
+                    '''
+                ],
+                params=[query],
             )
 
             # If you're not a superuser, search only in your province
