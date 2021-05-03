@@ -78,12 +78,12 @@ class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
             queryset = queryset.extra(
                 where=[
                     """
-                    to_tsvector('english', unaccent(concat_ws(' ',
+                    to_tsvector(unaccent(concat_ws(' ',
                         register_location.name,
                         register_location.address,
                         register_location.city,
                         register_location.postal_code
-                    ))) @@ to_tsquery('english', unaccent(%s))
+                    ))) @@ to_tsquery(unaccent(%s))
                     """
                 ],
                 params=[query],
