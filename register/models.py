@@ -63,3 +63,10 @@ class Location(models.Model):
         return "{} - {}, {}, {}, {}".format(
             self.name, self.address, self.city, self.province, self.postal_code
         )
+
+
+class LocationSummary(Location):
+    class Meta:
+        proxy = True
+        verbose_name = "Location summary"
+        verbose_name_plural = "Locations summary"

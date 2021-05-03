@@ -24,3 +24,10 @@ class Notification(models.Model):
             models.Index(fields=["end_date"]),
         ]
         unique_together = [["start_date", "end_date", "location"]]
+
+
+class NotificationSummary(Notification):
+    class Meta:
+        proxy = True
+        verbose_name = "Notification summary"
+        verbose_name_plural = "Notifications summary"
