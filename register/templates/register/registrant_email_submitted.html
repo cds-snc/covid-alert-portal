@@ -15,9 +15,15 @@
 
   <h1>{% trans "Confirm your email address" %}</h1>
   
-  {% blocktrans with email=submitted_email %}
-    <p>We sent a link to {{ email }}.</p>
-  {% endblocktrans %}
+  <div class="messages--container" role="alert">
+      <ul class="messages">
+        <li class="success">
+          {% blocktrans with email=submitted_email %}
+            We sent a link to {{ email }}.
+          {% endblocktrans %}
+        </li>
+      </ul>
+  </div>
 
   {% url 'register:registrant_email' as register_url %}
   {% blocktranslate %}
