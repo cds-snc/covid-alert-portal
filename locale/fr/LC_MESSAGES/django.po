@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-03 14:28+0000\n"
+"POT-Creation-Date: 2021-05-04 17:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -627,7 +627,7 @@ msgstr "Oui, continuer"
 msgid "New or need a refresher?"
 msgstr "Besoin d’en savoir plus sur le portail?"
 
-#: covid_key/templates/covid_key/start.html outbreaks/templates/search.html
+#: covid_key/templates/covid_key/start.html
 msgid "Visit"
 msgstr "Consultez la page"
 
@@ -698,6 +698,15 @@ msgstr "Quelqu’un a déjà prévenu les personnes qui étaient là entre {} et
 #: outbreaks/templates/confirm.html
 msgid "Confirm notification"
 msgstr ""
+
+#: outbreaks/templates/confirm.html outbreaks/templates/datetime.html
+msgid "To see all public exposures for this place, visit"
+msgstr "Pour voir les expositions publiques passées de ce lieu consultez"
+
+#: outbreaks/templates/confirm.html outbreaks/templates/datetime.html
+#: outbreaks/templates/history.html
+msgid "Notification history"
+msgstr "Historique de notification"
 
 #: outbreaks/templates/confirm.html
 msgid "Confirm and send"
@@ -779,21 +788,13 @@ msgstr "à l’une ou plusieurs des dates suivantes:"
 msgid "Notify of another public exposure"
 msgstr "Notifier les visiteurs d’un autre lieu"
 
-#: outbreaks/templates/confirmed.html outbreaks/templates/search.html
+#: outbreaks/templates/confirmed.html
 msgid "Search notification history"
 msgstr "Consulter l’historique des notifications"
 
 #: outbreaks/templates/datetime.html
 msgid "Select date and time"
 msgstr "Indiquer la date et l’heure"
-
-#: outbreaks/templates/datetime.html
-msgid "To see all public exposures for this place, visit"
-msgstr "Pour voir les expositions publiques passées de ce lieu consultez"
-
-#: outbreaks/templates/datetime.html outbreaks/templates/history.html
-msgid "Notification history"
-msgstr "Historique de notification"
 
 #: outbreaks/templates/datetime.html portal/templates/includes/error_list.html
 msgid "Please correct the errors on the page"
@@ -865,7 +866,7 @@ msgstr "Date de la notification"
 msgid "Exposure details not found."
 msgstr ""
 
-#: outbreaks/templates/history.html outbreaks/templates/search.html
+#: outbreaks/templates/history.html
 msgid "Search for place name or address"
 msgstr "Cherchez un lieu par nom ou par adresse"
 
@@ -949,13 +950,17 @@ msgstr "Nombre de notifications passées"
 msgid "Place not found."
 msgstr "Lieu introuvable"
 
-#: outbreaks/templates/search.html portal/templates/includes/nav_main.html
-msgid "Public exposures"
-msgstr "Expositions publiques"
+#: outbreaks/templates/search.html
+msgid "Find QR places and events"
+msgstr "Trouver un lieu ou un événement"
 
 #: outbreaks/templates/search.html
-msgid "You’ll send notifications of a public exposure to people who have installed COVID Alert."
-msgstr "Vous enverrez une notification d’exposition aux personnes qui ont installé l’application Alerte COVID."
+msgid "Alert people who scanned the QR code during an exposure."
+msgstr "Les personnes qui ont scanné le code QR de ce lieu ou de cet événement seront alertées d’une exposition."
+
+#: outbreaks/templates/search.html
+msgid "Search by name or address"
+msgstr "Recherche par nom ou adresse"
 
 #: outbreaks/templates/search.html
 msgid "Available locations"
@@ -966,8 +971,18 @@ msgid "location named "
 msgstr ""
 
 #: outbreaks/templates/search.html
-msgid "About public exposures."
-msgstr "À propos des expositions publiques."
+msgid "Search alert history."
+msgstr "Consulter l’historique des alertes"
+
+#: outbreaks/templates/search.html
+msgid ""
+"\n"
+"      Visit <a href=\"\">Sending QR alerts</a>\n"
+"    "
+msgstr ""
+"\n"
+"      Consultez la page <a href=\"\">À propos des alertes QR</a>.\n"
+"    "
 
 #: outbreaks/templates/severity.html
 msgid "Select notification message"
@@ -1157,6 +1172,10 @@ msgstr "Navigation du produit"
 #: portal/templates/includes/nav_main.html
 msgid "Generate keys"
 msgstr "Générer des clés"
+
+#: portal/templates/includes/nav_main.html
+msgid "QR Alerts"
+msgstr "Alertes QR"
 
 #: portal/templates/includes/nav_main.html
 #: profiles/templates/profiles/healthcareuser_list.html

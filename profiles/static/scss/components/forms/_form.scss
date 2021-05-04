@@ -28,6 +28,10 @@ main form {
     margin-bottom: $space-md;
   }
 
+  .search_form {
+    max-width: 550px;
+  }
+
   .search_bar {
     div {
       display: inline-block;
