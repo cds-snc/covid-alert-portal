@@ -10,6 +10,21 @@
     <a href="{% url 'outbreaks:severity' %}" class="chevron-left">{% trans "Back" %}</a>
   </div>
 
+  {% if form.non_field_errors %}
+      <div class="messages--container" role="alert">
+
+        <ul class="messages">
+          {% for err in form.non_field_errors.data %}
+            <li class="warning"><b> {{ err.message }} </b></li>
+          {% endfor %}
+          <li class="warning">
+            {% trans "To see all public exposures for this place, visit" %} <a
+            href="{% url 'outbreaks:history' %}">‘{% trans "Notification history" %}’</a>
+          </li>
+        </ul>
+      </div>
+  {% endif %}
+
   <h1>{% trans "Confirm and send" %}</h1>
 
   <dl class="summary-list">

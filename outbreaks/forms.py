@@ -79,34 +79,42 @@ class DateForm(HealthcareBaseForm):
         # Validate each date provided to ensure that it is in fact a correct date
         cleaned_data = super().clean()
         invalid_date_error_msg = _("Invalid date specified.")
+
+        try:
+            start_date = self.get_valid_date(cleaned_data, "start")
+            end_date = self.get_valid_date(cleaned_data, "end")
+            DateForm.validate_date_entry(
+                self, start_date, end_date, self.alert_location
+            )
+        except ValueError:
+            self.add_error(None, invalid_date_error_msg)
+
+    @staticmethod
+    def validate_date_entry(form, start_date, end_date, alert_location):
+        tz = pytz.timezone(settings.PORTAL_LOCAL_TZ or settings.TIME_ZONE or "UTC")
         start_later_end_error_msg = _('"To" must be later than "From".')
         overlap_notification_error_tmpl = _(
             "Someone already notified people who were there between {} and {}."
         )
-        try:
-            start_date = self.get_valid_date(cleaned_data, "start")
-            end_date = self.get_valid_date(cleaned_data, "end")
-            if start_date >= end_date:
-                self.add_error(None, start_later_end_error_msg)
-                raise ValidationError(start_later_end_error_msg)
-            notifications = self.get_notification_intersection(
-                start_date, end_date, self.alert_location
-            )
-            if notifications:
-                error_list = []
-                for idx, notification in enumerate(notifications):
-                    error_list.append(
-                        ValidationError(
-                            overlap_notification_error_tmpl.format(
-                                notification.start_date.strftime("%c"),
-                                notification.end_date.strftime("%c"),
-                            ),
-                            code="warning",
-                        )
+        if start_date >= end_date:
+            form.add_error(None, start_later_end_error_msg)
+            raise ValidationError(start_later_end_error_msg)
+        notifications = DateForm.get_notification_intersection(
+            start_date, end_date, alert_location
+        )
+        if notifications:
+            error_list = []
+            for idx, notification in enumerate(notifications):
+                error_list.append(
+                    ValidationError(
+                        overlap_notification_error_tmpl.format(
+                            notification.start_date.astimezone(tz).strftime("%c"),
+                            notification.end_date.astimezone(tz).strftime("%c"),
+                        ),
+                        code="warning",
                     )
-                self.add_error(None, error_list)
-        except ValueError:
-            self.add_error(None, invalid_date_error_msg)
+                )
+            form.add_error(None, error_list)
 
     def get_valid_date(self, data, start_or_end="start"):
         tz = pytz.timezone(
@@ -130,7 +138,8 @@ class DateForm(HealthcareBaseForm):
             )
         )
 
-    def get_notification_intersection(self, start_date, end_date, location):
+    @staticmethod
+    def get_notification_intersection(start_date, end_date, location):
         return Notification.objects.filter(
             Q(start_date__range=[start_date, end_date], location__id=location)
             | Q(end_date__range=[start_date, end_date], location__id=location)
