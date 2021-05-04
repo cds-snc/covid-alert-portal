@@ -3,7 +3,7 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Notification history" %}
+  {% trans "Alert history" %}
 {% endblock %}
 
 {% block content %}
@@ -12,7 +12,7 @@
   </div>
 
   {% include  "includes/flash_messages.html" %}
-  <h1>{% trans "Notification history" %}</h1>
+  <h1>{% trans "Alert history" %}</h1>
 
   <form method="get" id="form--{{ request.resolver_match.url_name }}">
     {% csrf_token %}
@@ -20,7 +20,7 @@
     <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %} search_bar">
       <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
         <label for="id_search_text">
-          <b>{% trans "Search for place name or address" %}</b>
+          <b>{% trans "Search by name or address" %}</b>
         </label>
         <input type="text" name="search_text" size="30" autocomplete="on" id="id_search_text">
         <button type="submit">
@@ -43,7 +43,7 @@
                 <span class="visually-hidden">{% trans "Sort by name, descending" %}</span>
               </a>
               <br>
-              {% trans "Place name" %}
+              {% trans "Name" %}
             </th>
             <th scope="col">
               <a href="?{% param_replace sort='address' order='asc' %}" class="icon-arrow up {% if sort == 'address' and order == 'asc' %} selected {% endif %}">
