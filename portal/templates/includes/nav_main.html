@@ -7,15 +7,15 @@
         <li><a {% if request.resolver_match.url_name == 'start' or request.resolver_match.url_name == 'generate_key' %}class="active"{% endif %} href="{% url 'start' %}">{% trans "Generate keys" %}</a></li>
       {% endif %}
       <li><a {% if 'about' in request.path %}class="active"{% endif %} href="{% url 'about:index' %}">{% trans "About the portal" %}</a></li>
+      {% switch "qr_codes" %}
+        {% if perms.profiles.can_send_alerts and user.is_verified %}
+          <li><a {% if request.resolver_match.url_name == 'search' %}class="active"{% endif %} href="{% url 'outbreaks:search' %}">{% trans "QR Alerts" %}</a></li>
+        {% endif %}
+      {% endswitch %}
       {% if user.is_admin and user.is_verified %}
         <li><a {% if request.resolver_match.url_name == 'profiles' %}class="active"{% endif %} href="{% url 'profiles' %}">{% trans "Manage team" %}</a></li>
       {% endif %}
       <li><a {% if request.resolver_match.url_name == 'support' %}class="active"{% endif %} href="{% url 'support' %}">{% trans "Support" %}</a></li>
-      {% switch "qr_codes" %}
-        {% if perms.profiles.can_send_alerts and user.is_verified %}
-          <li><a {% if request.resolver_match.url_name == 'search' %}class="active"{% endif %} href="{% url 'outbreaks:search' %}">{% trans "Public exposures" %}</a></li>
-        {% endif %}
-      {% endswitch %}
     </ul>
   </div>
 </nav>
