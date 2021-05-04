@@ -3,14 +3,14 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Public exposures" %}
+  {% trans "Find QR places and events" %}
 {% endblock %}
 
 {% block content %}
   {% include  "includes/flash_messages.html" %}
-  <h1>{% trans "Public exposures" %}</h1>
+  <h1>{% trans "Find QR places and events" %}</h1>
 
-  <p>{% trans "You’ll send notifications of a public exposure to people who have installed COVID Alert." %}</p>
+  <p>{% trans "Alert people who scanned the QR code during an exposure." %}</p>
 
   <form action="{% url 'outbreaks:search' %}" method="get" id="form--{{ request.resolver_match.url_name }}">
     {% csrf_token %}
@@ -18,7 +18,7 @@
     <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %} search_bar">
       <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
         <label for="id_search_text">
-          <b>{% trans "Search for place name or address" %}</b>
+          <b>{% trans "Search by name or address" %}</b>
         </label>
         <input type="text" name="search_text" size="30" autocomplete="on" id="id_search_text">
         <button type="submit">
@@ -78,12 +78,12 @@
 
   {% endif %}
 
-<div class="content-button">
-  <a class="secondary" href="{% url 'outbreaks:history' %}" role='button' draggable='false'>{% trans "Search notification history" %}</a>
-</div>
+  <p><a href="{% url 'outbreaks:history' %}">{% trans "Search alert history." %}</a></p>
 
-<p>
-  <b>{% trans "New or need a refresher?" %}</b><br>
-  {% trans "Visit" %} <a href="{% url 'about:create_account' %}">{% trans "About public exposures." %}</a>
-</p>
+  <p>
+    <b>{% trans "New or need a refresher?" %}</b><br>
+    {% blocktrans %}
+      Visit <a href="">Sending QR alerts</a>
+    {% endblocktrans %}
+  </p>
 {% endblock %}
