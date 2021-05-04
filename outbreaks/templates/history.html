@@ -7,6 +7,10 @@
 {% endblock %}
 
 {% block content %}
+  <div class="content-back-link">
+      <a href="{% url 'outbreaks:search' %}" class="chevron-left">{% trans "Find QR places and events" %}</a>
+  </div>
+
   {% include  "includes/flash_messages.html" %}
   <h1>{% trans "Notification history" %}</h1>
 

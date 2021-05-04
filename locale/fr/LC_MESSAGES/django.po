@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-04 17:28+0000\n"
+"POT-Creation-Date: 2021-05-04 19:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -866,6 +866,10 @@ msgstr "Date de la notification"
 msgid "Exposure details not found."
 msgstr ""
 
+#: outbreaks/templates/history.html outbreaks/templates/search.html
+msgid "Find QR places and events"
+msgstr "Trouver un lieu ou un événement"
+
 #: outbreaks/templates/history.html
 msgid "Search for place name or address"
 msgstr "Cherchez un lieu par nom ou par adresse"
@@ -949,10 +953,6 @@ msgstr "Nombre de notifications passées"
 #: outbreaks/templates/profile.html
 msgid "Place not found."
 msgstr "Lieu introuvable"
-
-#: outbreaks/templates/search.html
-msgid "Find QR places and events"
-msgstr "Trouver un lieu ou un événement"
 
 #: outbreaks/templates/search.html
 msgid "Alert people who scanned the QR code during an exposure."
