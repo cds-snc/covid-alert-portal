@@ -351,8 +351,22 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
     def form_valid(self, form):
         # Use a transaction to commit all or nothing for the notifications
         with transaction.atomic():
-            notifications = []
+
             try:
+                for date_entry in self.request.session["selected_dates"]:
+                    start_date = datetime.fromtimestamp(date_entry["start_ts"])
+                    end_date = datetime.fromtimestamp(date_entry["end_ts"])
+                    DateForm.validate_date_entry(
+                        form,
+                        start_date,
+                        end_date,
+                        self.request.session["alert_location"],
+                    )
+                    if not form.is_valid():
+                        return super().form_invalid(form)
+
+                notifications = []
+
                 for date_entry in self.request.session["selected_dates"]:
                     notifications.append(
                         self.post_notification(
