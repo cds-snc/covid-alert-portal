@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-29 02:51+0000\n"
+"POT-Creation-Date: 2021-05-03 14:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2305,6 +2305,7 @@ msgid "Thank you for helping slow the spread of COVID-19."
 msgstr "Merci d’aider à ralentir la propagation de la COVID-19."
 
 #: register/templates/register/confirmation.html
+#: register/templates/register/success.html
 msgid "Return to home page"
 msgstr "Revenir à la page d’accueil"
 
@@ -2511,12 +2512,12 @@ msgstr "Validez votre adresse courriel"
 #, python-format
 msgid ""
 "\n"
-"    <p>We sent a link to %(email)s.</p>\n"
-"  "
+"            We sent a link to %(email)s.\n"
+"          "
 msgstr ""
 "\n"
-"    <p>Nous avons envoyé un lien à %(email)s.</p>\n"
-"  "
+"            Nous avons envoyé un lien à %(email)s.\n"
+"          "
 
 #: register/templates/register/registrant_email_submitted.html
 #, python-format

@@ -1,0 +1,9 @@
+.results-container {
+  margin-top: 8px;
+  display: flex;
+}
+
+.results-container .col {
+  width: 50%;
+  padding-right: 8px;
+}
