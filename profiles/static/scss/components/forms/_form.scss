@@ -28,10 +28,15 @@ main form {
     margin-bottom: $space-md;
   }
 
+  .search_form {
+    max-width: 550px;
+  }
+
   .search_bar {
     div {
       display: inline-block;
       width: 100%;
+      white-space: nowrap;
     }
 
     input {

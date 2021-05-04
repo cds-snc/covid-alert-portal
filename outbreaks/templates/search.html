@@ -12,7 +12,7 @@
 
   <p>{% trans "Alert people who scanned the QR code during an exposure." %}</p>
 
-  <form action="{% url 'outbreaks:search' %}" method="get" id="form--{{ request.resolver_match.url_name }}">
+  <form action="{% url 'outbreaks:search' %}" method="get" id="form--{{ request.resolver_match.url_name }} search_form">
     {% csrf_token %}
 
     <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %} search_bar">
