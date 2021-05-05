@@ -497,12 +497,12 @@
     .big { 
         font-family: Noto Sans;
         font-size: 13px;
-        font-weight: bolder;
+        font-weight: bold;
      }
     .regular { 
         font-family: Noto Sans;
         font-size: 12px;
-        font-weight: 700;
+        font-weight: normal;
      }
 </style>
 
