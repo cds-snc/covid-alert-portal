@@ -23,7 +23,6 @@ from register.forms import location_choices
 import requests
 import logging
 from django.contrib.postgres.search import SearchVector, SearchQuery
-from django.utils.html import escape
 
 
 def get_datetime_format(language):
