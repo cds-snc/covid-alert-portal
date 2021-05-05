@@ -153,8 +153,6 @@ class SeverityForm(HealthcareBaseForm):
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
 
+
 class SearchForm(HealthcareBaseForm):
-    search_text = forms.CharField(
-        label="",
-        min_length=3
-    )
+    search_text = forms.CharField(label="", min_length=3)

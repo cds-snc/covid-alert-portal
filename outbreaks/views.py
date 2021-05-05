@@ -45,7 +45,7 @@ class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
     template_name = "search.html"
 
     def get_queryset(self):
-        if 'search_text' in self.request.GET:
+        if "search_text" in self.request.GET:
             self.form = SearchForm(self.request.GET)
             if self.form.is_valid():
                 # Heads-up: this relies on Postgres full text search
@@ -54,8 +54,10 @@ class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
                     Location.objects.annotate(
                         search=SearchVector("name", "address", "city", "postal_code")
                     )
-                        .filter(search=SearchQuery(self.form.cleaned_data.get('search_text')))
-                        .order_by("name")
+                    .filter(
+                        search=SearchQuery(self.form.cleaned_data.get("search_text"))
+                    )
+                    .order_by("name")
                 )
 
                 # If you're not a superuser, search only in your province
@@ -69,9 +71,11 @@ class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['form'] = self.form if hasattr(self, 'form') else None
-        context['search_text'] = self.form.cleaned_data.get('search_text') if hasattr(self, 'form') else None
-        context['search_result_count'] = len(self.object_list)
+        context["form"] = self.form if hasattr(self, "form") else None
+        context["search_text"] = (
+            self.form.cleaned_data.get("search_text") if hasattr(self, "form") else None
+        )
+        context["search_result_count"] = len(self.object_list)
         return context
 
 
@@ -256,11 +260,11 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
         context["min_date"] = "2021-01-01"  # Start of the year for simplicity
         context["max_date"] = (
             datetime.utcnow()
-                .replace(
+            .replace(
                 tzinfo=pytz.timezone(settings.PORTAL_LOCAL_TZ)
                 # TODO this may need refactoring for client side max date calculation beyond PORTAL_LOCAL_TZ
             )
-                .strftime("%Y-%m-%d")
+            .strftime("%Y-%m-%d")
         )  # Set max date to today
         context["language"] = get_language()
         if context.get("show_errors", False):
@@ -470,8 +474,8 @@ class HistoryView(PermissionRequiredMixin, Is2FAMixin, ListView):
         context = super().get_context_data(*args, **kwargs)
         context["sort"] = self.request.GET.get("sort")
         context["order"] = self.request.GET.get("order")
-        context['search_text'] = self.request.GET.get("search_text", '').strip()
-        context['search_result_count'] = len(self.object_list)
+        context["search_text"] = self.request.GET.get("search_text", "").strip()
+        context["search_result_count"] = len(self.object_list)
         return context
 
     def get_queryset(self):
