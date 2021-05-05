@@ -14,7 +14,7 @@ from django.views.generic import FormView, ListView, TemplateView, View
 from django.utils.translation import get_language, gettext_lazy as _
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from portal.mixins import Is2FAMixin
-from .forms import end_hours, DateForm, SeverityForm
+from .forms import end_hours, DateForm, SeverityForm, SearchForm
 from .protobufs import outbreak_pb2
 from datetime import datetime
 import pytz
@@ -23,6 +23,7 @@ from register.forms import location_choices
 import requests
 import logging
 from django.contrib.postgres.search import SearchVector, SearchQuery
+from django.utils.html import escape
 
 
 def get_datetime_format(language):
@@ -39,31 +40,39 @@ def get_time_format(language):
 
 class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
     permission_required = ["profiles.can_send_alerts"]
-    paginate_by = 5
+    paginate_by = 10
     model = Location
     template_name = "search.html"
 
     def get_queryset(self):
-        searchStr = self.request.GET.get("search_text")
-        if searchStr:
-            # Heads-up: this relies on Postgres full text search
-            # features, so will not work with a SQLite database
-            queryset = (
-                Location.objects.annotate(
-                    search=SearchVector("name", "address", "city", "postal_code")
+        if 'search_text' in self.request.GET:
+            self.form = SearchForm(self.request.GET)
+            if self.form.is_valid():
+                # Heads-up: this relies on Postgres full text search
+                # features, so will not work with a SQLite database
+                queryset = (
+                    Location.objects.annotate(
+                        search=SearchVector("name", "address", "city", "postal_code")
+                    )
+                    .filter(search=SearchQuery(self.form.cleaned_data.get('search_text')))
+                    .order_by("name")
                 )
-                .filter(search=SearchQuery(searchStr))
-                .order_by("name")
-            )
 
-            # If you're not a superuser, search only in your province
-            if not self.request.user.is_superuser:
-                province = self.request.user.province.abbr
-                queryset = queryset.filter(province=province)
+                # If you're not a superuser, search only in your province
+                if not self.request.user.is_superuser:
+                    province = self.request.user.province.abbr
+                    queryset = queryset.filter(province=province)
 
-            return queryset
+                return queryset
 
         return Location.objects.none()
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['form'] = self.form if hasattr(self, 'form') else None
+        context['search_text'] = self.form.cleaned_data.get('search_text') if hasattr(self, 'form') else None
+        context['search_result_count'] = len(self.object_list)
+        return context
 
 
 class ProfileView(PermissionRequiredMixin, Is2FAMixin, FormView):

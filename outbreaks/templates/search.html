@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-{% load i18n param_replace %}
+{% load i18n param_replace static %}
 
 {% block title %}
-  {% if form.errors %}{% trans "Error: "%}{% endif %}
+  {% if form.errors %}{% trans "Error: " %}{% endif %}
   {% trans "Find QR places and events" %}
 {% endblock %}
 
@@ -12,48 +12,58 @@
 
   <p>{% trans "Alert people who scanned the QR code during an exposure." %}</p>
 
-  <form action="{% url 'outbreaks:search' %}" method="get" id="form--{{ request.resolver_match.url_name }} search_form">
+  <form action="{% url 'outbreaks:search' %}" method="get" id="form--{{ request.resolver_match.url_name }} search_form"
+  class="outbreaks-search">
     {% csrf_token %}
 
-    <div class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %} search_bar">
-      <div class="fieldWrapper{% if field.errors %} fieldWrapper--has-error{% endif %}">
+    <div
+      class="fieldWrapper--container{% if form.non_field_errors %} fieldWrapper--container--has-error{% endif %} search_bar">
+      <div class="fieldWrapper{% if form.visible_fields.0.errors %} fieldWrapper--has-error{% endif %}">
         <label for="id_search_text">
           <b>{% trans "Search by name or address" %}</b>
         </label>
-        <input type="text" name="search_text" size="30" autocomplete="on" id="id_search_text">
+        {% if form.visible_fields.0.errors %}
+          <div id="error--{{ form.visible_fields.0.html_name }}"
+               class="validation-error">{{ form.visible_fields.0.errors|first }}</div>
+        {% endif %}
+        <input type="search" name="search_text" size="30" autocomplete="on" id="id_search_text"
+               value="{{ form.visible_fields.0.data }}">
         <button type="submit">
           {{ _("Search") }}
+          <img src="{% static 'img/search_24px.svg' %}" alt=""/>
         </button>
       </div>
     </div>
   </form>
 
   {% if object_list %}
+    <b>{{ search_result_count }} {% trans 'results for' %}</b> {{ search_text }}.
+    <br>
     <table class="with-actions">
       <caption class="visually-hidden">{% trans "Available locations" %}</caption>
       <thead>
-          <tr>
-            <th scope="col">{% trans "Place name" %}</th>
-            <th scope="col">{% trans "Address" %}</th>
-            <th scope="col"></th>
-          </tr>
+      <tr>
+        <th scope="col">{% trans "Name" %}</th>
+        <th scope="col">{% trans "Address" %}</th>
+        <th scope="col"></th>
+      </tr>
       </thead>
       <tbody>
-        {% for location in object_list %}
-          <tr>
-            <td>{{ location.name }}</td>
-            <td>
-              <span> {{ location.address }} </span>
-              <span> {{ location.city }}, {{ location.province }} </span>
-              <span> {{ location.postal_code }} </span>
-            </td>
-            <td>
-              <a href="{% url 'outbreaks:profile' location.id %}">
-                {% trans "Select" %}<span class="visually-hidden">{% trans "location named " %}{{location.name}}</span>
-              </a>
-            </td>
-          </tr>
-        {% endfor %}
+      {% for location in object_list %}
+        <tr>
+          <td>{{ location.name }}</td>
+          <td>
+            <span> {{ location.address }} </span>
+            <span> {{ location.city }}, {{ location.province }} </span>
+            <span> {{ location.postal_code }} </span>
+          </td>
+          <td>
+            <a href="{% url 'outbreaks:profile' location.id %}">
+              {% trans "Choose" %}<span class="visually-hidden">{% trans "location named " %}{{ location.name }}</span>
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
       </tbody>
     </table>
 
@@ -61,24 +71,36 @@
       <span class="step-links">
 
         <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            {% trans 'Page' %} {{ page_obj.number }} {% trans 'of' %} {{ page_obj.paginator.num_pages }}.
         </span>
 
         {% if page_obj.has_previous %}
-            <a href="?{% param_replace page=1 %}">&laquo; {% trans "first" %}</a>
-            <a href="?{% param_replace page=page_obj.previous_page_number %}">{% trans "previous page" %}</a>
+          <a href="?{% param_replace page=1 %}" class="no-underline-link"><</a>&nbsp;&nbsp;
+          <a href="?{% param_replace page=page_obj.previous_page_number %}">{% trans "Previous page" %}</a>
+        {% endif %}
+
+      {% if page_obj.has_next and page_obj.has_previous%}
+        &nbsp;
         {% endif %}
 
         {% if page_obj.has_next %}
-            <a href="?{% param_replace page=page_obj.next_page_number %}">{% trans "next page" %}</a>
-            <a href="?{% param_replace page=page_obj.paginator.num_pages %}">{% trans "last" %} &raquo;</a>
+          <a href="?{% param_replace page=page_obj.next_page_number %}">{% trans "Next page" %}</a>&nbsp;&nbsp;
+          <a href="?{% param_replace page=page_obj.paginator.num_pages %}" class="no-underline-link">></a>
         {% endif %}
       </span>
     </div>
 
+  {% else %}
+    {% if search_text %}
+      <p>
+        <b>{% trans 'No results for' %}</b> {{ search_text }}.
+        <br><br>
+        {% trans 'Follow local procedures for places or events that do not have QR codes.' %}
+      </p>
+    {% endif %}
   {% endif %}
 
-  <p><a href="{% url 'outbreaks:history' %}">{% trans "Search alert history." %}</a></p>
+  <p><a href="{% url 'outbreaks:history' %}">{% trans "Search alert history" %}</a></p>
 
   <p>
     <b>{% trans "New or need a refresher?" %}</b><br>
