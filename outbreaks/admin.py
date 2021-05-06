@@ -1,10 +1,11 @@
+from portal.mixins import ExportCsvMixin
 from django.contrib import admin
 from .models import Notification, NotificationSummary
 from django.db.models import Count
 
 
 @admin.register(Notification)
-class NotificationAdmin(admin.ModelAdmin):
+class NotificationAdmin(admin.ModelAdmin, ExportCsvMixin):
     list_display = [
         "id",
         "start_date",
@@ -15,6 +16,7 @@ class NotificationAdmin(admin.ModelAdmin):
         "location",
         "short_code",
     ]
+    actions = ["export_as_csv"]
 
     list_display_links = None
 
