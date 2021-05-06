@@ -37,9 +37,27 @@ def get_time_format(language):
     return "%-I:%M %p"
 
 
-class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
+class SearchListBaseView(PermissionRequiredMixin, Is2FAMixin, ListView):
     permission_required = ["profiles.can_send_alerts"]
     paginate_by = 10
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["search_result_count"] = len(self.object_list)
+        context["search_result_page_min"] = (
+            (context["page_obj"].number - 1) * self.paginate_by
+        ) + 1
+        page_result_max = context["page_obj"].number * self.paginate_by
+        search_result_page_max = (
+            page_result_max
+            if page_result_max < len(self.object_list)
+            else len(self.object_list)
+        )
+        context["search_result_page_max"] = search_result_page_max
+        return context
+
+
+class SearchView(SearchListBaseView):
     model = Location
     template_name = "search.html"
 
@@ -74,7 +92,6 @@ class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
         context["search_text"] = (
             self.form.cleaned_data.get("search_text") if hasattr(self, "form") else None
         )
-        context["search_result_count"] = len(self.object_list)
         return context
 
 
@@ -450,9 +467,7 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
         return context
 
 
-class HistoryView(PermissionRequiredMixin, Is2FAMixin, ListView):
-    permission_required = ["profiles.can_send_alerts"]
-    paginate_by = 10
+class HistoryView(SearchListBaseView):
     model = Notification
     template_name = "history.html"
     sort_options = ["name", "address", "date"]
@@ -474,7 +489,6 @@ class HistoryView(PermissionRequiredMixin, Is2FAMixin, ListView):
         context["sort"] = self.request.GET.get("sort")
         context["order"] = self.request.GET.get("order")
         context["search_text"] = self.request.GET.get("search_text", "").strip()
-        context["search_result_count"] = len(self.object_list)
         return context
 
     def get_queryset(self):

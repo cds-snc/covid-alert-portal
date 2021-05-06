@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 20:59+0000\n"
+"POT-Creation-Date: 2021-05-06 06:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -423,8 +423,8 @@ msgstr "Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne.
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html
 #: covid_key/templates/covid_key/otk_sms_sent.html
 #: outbreaks/templates/datetime.html outbreaks/templates/profile.html
-#: outbreaks/templates/severity.html profiles/templates/profiles/2fa.html
-#: profiles/templates/profiles/signup.html
+#: outbreaks/templates/search.html outbreaks/templates/severity.html
+#: profiles/templates/profiles/2fa.html profiles/templates/profiles/signup.html
 #: profiles/templates/profiles/signup_2fa.html
 #: register/templates/register/location_address.html
 #: register/templates/register/location_category.html
@@ -623,8 +623,7 @@ msgstr "Le patient remplit-il les deux conditions?"
 msgid "Yes, continue"
 msgstr "Oui, continuer"
 
-#: covid_key/templates/covid_key/start.html outbreaks/templates/history.html
-#: outbreaks/templates/search.html
+#: covid_key/templates/covid_key/start.html outbreaks/templates/search.html
 msgid "New or need a refresher?"
 msgstr "Besoin d’en savoir plus sur le portail?"
 
@@ -875,6 +874,10 @@ msgstr "Historique des alertes"
 msgid "Find QR places and events"
 msgstr "Trouver un lieu ou un événement"
 
+#: outbreaks/templates/history.html
+msgid "Browse below for alerts send to date in your province. For more specific results, use the search bar."
+msgstr ""
+
 #: outbreaks/templates/history.html outbreaks/templates/search.html
 msgid "Search by name or address"
 msgstr "Recherche par nom ou adresse"
@@ -924,7 +927,7 @@ msgid "Details"
 msgstr "Détails"
 
 #: outbreaks/templates/history.html outbreaks/templates/search.html
-msgid "Page"
+msgid "Showing"
 msgstr ""
 
 #: outbreaks/templates/history.html outbreaks/templates/search.html
@@ -932,26 +935,20 @@ msgid "of"
 msgstr ""
 
 #: outbreaks/templates/history.html outbreaks/templates/search.html
+msgid "results."
+msgstr "résultats affichés."
+
+#: outbreaks/templates/history.html
 msgid "Previous page"
 msgstr "Page précédente"
 
-#: outbreaks/templates/history.html outbreaks/templates/search.html
+#: outbreaks/templates/history.html
 msgid "Next page"
 msgstr "Page suivante"
 
 #: outbreaks/templates/history.html
 msgid "No prior alerts for"
 msgstr "Aucune alerte n’a été envoyée pour"
-
-#: outbreaks/templates/history.html outbreaks/templates/search.html
-msgid ""
-"\n"
-"      Visit <a href=\"\">Sending QR alerts</a>\n"
-"    "
-msgstr ""
-"\n"
-"      Consultez la page <a href=\"\">À propos des alertes QR</a>.\n"
-"    "
 
 #: outbreaks/templates/profile.html
 msgid "Place profile"
@@ -990,6 +987,10 @@ msgid "location named "
 msgstr ""
 
 #: outbreaks/templates/search.html
+msgid "Previous"
+msgstr "précédent"
+
+#: outbreaks/templates/search.html
 msgid "No results for"
 msgstr "Aucun résultat pour"
 
@@ -1000,6 +1001,16 @@ msgstr ""
 #: outbreaks/templates/search.html
 msgid "Search alert history"
 msgstr "Consulter l’historique des alertes"
+
+#: outbreaks/templates/search.html
+msgid ""
+"\n"
+"      Visit <a href=\"\">Sending QR alerts</a>\n"
+"    "
+msgstr ""
+"\n"
+"      Consultez la page <a href=\"\">À propos des alertes QR</a>.\n"
+"    "
 
 #: outbreaks/templates/severity.html
 msgid "Select notification message"

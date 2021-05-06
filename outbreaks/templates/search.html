@@ -13,7 +13,7 @@
   <p>{% trans "Alert people who scanned the QR code during an exposure." %}</p>
 
   <form action="{% url 'outbreaks:search' %}" method="get" id="form--{{ request.resolver_match.url_name }} search_form"
-  class="outbreaks-search">
+        class="outbreaks-search">
     {% csrf_token %}
 
     <div
@@ -71,20 +71,20 @@
       <span class="step-links">
 
         <span class="current">
-            {% trans 'Page' %} {{ page_obj.number }} {% trans 'of' %} {{ page_obj.paginator.num_pages }}.
+            {% trans 'Showing' %} {{ search_result_page_min }} &mdash; {{ search_result_page_max }} {% trans 'of' %} {{ search_result_count }} {% trans 'results.' %}.
         </span>
 
         {% if page_obj.has_previous %}
           <a href="?{% param_replace page=1 %}" class="no-underline-link"><</a>&nbsp;&nbsp;
-          <a href="?{% param_replace page=page_obj.previous_page_number %}">{% trans "Previous page" %}</a>
+          <a href="?{% param_replace page=page_obj.previous_page_number %}">{% trans "Previous" %}</a>
         {% endif %}
 
-      {% if page_obj.has_next and page_obj.has_previous%}
-        &nbsp;
+        {% if page_obj.has_next and page_obj.has_previous %}
+          &nbsp;
         {% endif %}
 
         {% if page_obj.has_next %}
-          <a href="?{% param_replace page=page_obj.next_page_number %}">{% trans "Next page" %}</a>&nbsp;&nbsp;
+          <a href="?{% param_replace page=page_obj.next_page_number %}">{% trans "Next" %}</a>&nbsp;&nbsp;
           <a href="?{% param_replace page=page_obj.paginator.num_pages %}" class="no-underline-link">></a>
         {% endif %}
       </span>
@@ -94,15 +94,16 @@
     {% if search_text %}
       <p>
         <b>{% trans 'No results for' %}</b> {{ search_text }}.
-        <br><br>
+      <p>
         {% trans 'Follow local procedures for places or events that do not have QR codes.' %}
+      </p>
       </p>
     {% endif %}
   {% endif %}
-
+  <br>
   <p><a href="{% url 'outbreaks:history' %}">{% trans "Search alert history" %}</a></p>
-
   <p>
+    <br>
     <b>{% trans "New or need a refresher?" %}</b><br>
     {% blocktrans %}
       Visit <a href="">Sending QR alerts</a>

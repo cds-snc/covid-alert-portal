@@ -13,6 +13,9 @@
 
   {% include  "includes/flash_messages.html" %}
   <h1>{% trans "Alert history" %}</h1>
+  <p>
+  {% trans 'Browse below for alerts send to date in your province. For more specific results, use the search bar.' %}
+  </p>
 
   <form method="get" id="form--{{ request.resolver_match.url_name }}" class="outbreaks-search">
     {% csrf_token %}
@@ -107,7 +110,7 @@
       <span class="step-links">
 
         <span class="current">
-            {% trans 'Page' %} {{ page_obj.number }} {% trans 'of' %} {{ page_obj.paginator.num_pages }}.
+            {% trans 'Showing' %} {{ search_result_page_min }} &mdash; {{ search_result_page_max }} {% trans 'of' %} {{ search_result_count }} {% trans 'results.' %}.
         </span>
 
         {% if page_obj.has_previous %}
@@ -132,10 +135,4 @@
       </p>
     {% endif %}
   {% endif %}
-  <p>
-    <b>{% trans "New or need a refresher?" %}</b><br>
-    {% blocktrans %}
-      Visit <a href="">Sending QR alerts</a>
-    {% endblocktrans %}
-  </p>
 {% endblock %}
