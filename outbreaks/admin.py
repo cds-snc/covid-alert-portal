@@ -14,14 +14,11 @@ class NotificationAdmin(admin.ModelAdmin, ExportCsvMixin):
         "created_by",
         "severity",
         "location",
-        "short_code",
+        "location_shortcode",
     ]
     actions = ["export_as_csv"]
 
     list_display_links = None
-
-    def short_code(self, obj):
-        return obj.location.short_code
 
     def has_add_permission(self, request, obj=None):
         return False
