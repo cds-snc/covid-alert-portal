@@ -155,4 +155,8 @@ class SeverityForm(HealthcareBaseForm):
 
 
 class SearchForm(HealthcareBaseForm):
-    search_text = forms.CharField(label="", min_length=3)
+    search_text = forms.CharField(
+        label="",
+        min_length=3,
+        error_messages={"required": _("Enter information to continue.")},
+    )

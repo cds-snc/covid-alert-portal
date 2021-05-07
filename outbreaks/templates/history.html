@@ -8,7 +8,7 @@
 
 {% block content %}
   <div class="content-back-link">
-    <a href="{% url 'outbreaks:search' %}" class="chevron-left">{% trans "Find QR places and events" %}</a>
+    <a href="{% url 'outbreaks:search' %}">{% trans "Find QR places and events" %}</a>
   </div>
 
   {% include  "includes/flash_messages.html" %}
@@ -114,7 +114,7 @@
         </span>
 
         {% if page_obj.has_previous %}
-          <a href="?{% param_replace page=1 %}" class="no-underline-link"><</a>&nbsp;&nbsp;
+          <a href="?{% param_replace page=1 %}" class="no-underline-link page-back-link"></a>&nbsp;&nbsp;
           <a href="?{% param_replace page=page_obj.previous_page_number %}">{% trans "Previous" %}</a>
         {% endif %}
 
@@ -123,8 +123,8 @@
         {% endif %}
 
         {% if page_obj.has_next %}
-          <a href="?{% param_replace page=page_obj.next_page_number %}">{% trans "Next" %}</a>&nbsp;&nbsp;
-          <a href="?{% param_replace page=page_obj.paginator.num_pages %}" class="no-underline-link">></a>
+          <a href="?{% param_replace page=page_obj.next_page_number %}">{% trans "Next" %}</a>&nbsp;
+          <a href="?{% param_replace page=page_obj.paginator.num_pages %}" class="no-underline-link page-next-link"></a>
         {% endif %}
       </span>
     </div>

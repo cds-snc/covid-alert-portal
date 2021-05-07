@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-06 08:38+0000\n"
+"POT-Creation-Date: 2021-05-06 12:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -696,6 +696,10 @@ msgstr "\"À\" doit être après \"De\""
 msgid "Someone already notified people who were there between {} and {}."
 msgstr "Quelqu’un a déjà prévenu les personnes qui étaient là entre {} et {}."
 
+#: outbreaks/forms.py
+msgid "Enter information to continue."
+msgstr "Entrez les informations pour continuer."
+
 #: outbreaks/templates/confirm.html
 msgid "Confirm notification"
 msgstr ""
@@ -970,6 +974,10 @@ msgstr "Lieu introuvable"
 #: outbreaks/templates/search.html
 msgid "Alert people who scanned the QR code during an exposure."
 msgstr "Les personnes qui ont scanné le code QR de ce lieu ou de cet événement seront alertées d’une exposition."
+
+#: outbreaks/templates/search.html
+msgid "Enter at least 3 characters"
+msgstr ""
 
 #: outbreaks/templates/search.html
 msgid "Available locations"

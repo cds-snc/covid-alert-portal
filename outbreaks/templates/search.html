@@ -25,6 +25,8 @@
         {% if form.visible_fields.0.errors %}
           <div id="error--{{ form.visible_fields.0.html_name }}"
                class="validation-error">{{ form.visible_fields.0.errors|first }}</div>
+          {% else %}
+          <span>{% trans 'Enter at least 3 characters' %}</span>
         {% endif %}
         <input type="search" name="search_text" size="30" autocomplete="on" id="id_search_text"
                value="{{ form.visible_fields.0.data }}">
@@ -71,11 +73,11 @@
       <span class="step-links">
 
         <span class="current">
-            {% trans 'Showing' %} {{ search_result_page_min }} &mdash; {{ search_result_page_max }} {% trans 'of' %} {{ search_result_count }} {% trans 'results.' %}.
+            {% trans 'Showing' %} {{ search_result_page_min }} &mdash; {{ search_result_page_max }} {% trans 'of' %} {{ search_result_count }} {% trans 'results.' %}
         </span>
 
         {% if page_obj.has_previous %}
-          <a href="?{% param_replace page=1 %}" class="no-underline-link"><</a>&nbsp;&nbsp;
+          <a href="?{% param_replace page=1 %}" class="no-underline-link page-back-link"></a>&nbsp;&nbsp;
           <a href="?{% param_replace page=page_obj.previous_page_number %}">{% trans "Previous" %}</a>
         {% endif %}
 
@@ -84,8 +86,8 @@
         {% endif %}
 
         {% if page_obj.has_next %}
-          <a href="?{% param_replace page=page_obj.next_page_number %}">{% trans "Next" %}</a>&nbsp;&nbsp;
-          <a href="?{% param_replace page=page_obj.paginator.num_pages %}" class="no-underline-link">></a>
+          <a href="?{% param_replace page=page_obj.next_page_number %}">{% trans "Next" %}</a>&nbsp;
+          <a href="?{% param_replace page=page_obj.paginator.num_pages %}" class="no-underline-link page-next-link"></a>
         {% endif %}
       </span>
     </div>
