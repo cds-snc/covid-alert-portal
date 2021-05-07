@@ -19,3 +19,34 @@
     }
   }
 }
+
+.no-underline-link {
+  text-decoration: none;
+}
+
+.page-next-link {
+  @include chevron();
+  border-style: solid;
+  content: "";
+  display: inline-block;
+  height: 0.45em;
+  position: relative;
+  width: 0.45em;
+  border-width: 0 0 0.15em 0.15em;
+  box-sizing: content-box;
+  transform: rotate(225deg);
+  right: 0;
+}
+
+.page-back-link {
+  @include chevron();
+  border-style: solid;
+  content: "";
+  display: inline-block;
+  height: 0.45em;
+  position: relative;
+  width: 0.45em;
+  border-width: 0 0 0.15em 0.15em;
+  box-sizing: content-box;
+  right: 0;
+}
