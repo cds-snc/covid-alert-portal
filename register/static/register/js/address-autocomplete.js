@@ -45,6 +45,10 @@ function autocomplete(query, callback) {
             // TODO: handle this sitch
             console.log("no results");
         } else {
+            if (response.Items[0].Error) {
+                return
+            }
+
             const results = response.Items.map(function(result) {
                 return {
                     'id': result['Id'],

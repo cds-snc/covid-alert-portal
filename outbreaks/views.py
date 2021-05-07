@@ -22,7 +22,7 @@ from .forms import severity_choices
 from register.forms import location_choices
 import requests
 import logging
-from django.contrib.postgres.search import SearchVector, SearchQuery
+import re
 
 
 def get_datetime_format(language):
@@ -35,6 +35,23 @@ def get_time_format(language):
     if language == "fr":
         return "%-H:%M"
     return "%-I:%M %p"
+
+def process_query(s):
+    """
+    Converts the user's search string into something suitable for passing to
+    to_tsquery. Supports wildcard/partial strings and assumes AND operator
+    For example: "Tim:* & Horton:* & Toronto:*"
+    """
+    query = re.sub(r"[!\'()|&]", " ", s).strip()
+
+    if query:
+        # Append wildcard to each substring
+        query = " ".join([s + ":*" for s in query.split()])
+
+        # add AND operator between search terms
+        query = re.sub(r"\s+", " & ", query)
+
+    return query
 
 
 class SearchListBaseView(PermissionRequiredMixin, Is2FAMixin, ListView):
@@ -65,16 +82,30 @@ class SearchView(SearchListBaseView):
         if "search_text" in self.request.GET:
             self.form = SearchForm(self.request.GET)
             if self.form.is_valid():
-                # Heads-up: this relies on Postgres full text search
+                # Heads-up: this code relies on Postgres full text search
                 # features, so will not work with a SQLite database
-                queryset = (
-                    Location.objects.annotate(
-                        search=SearchVector("name", "address", "city", "postal_code")
-                    )
-                    .filter(
-                        search=SearchQuery(self.form.cleaned_data.get("search_text"))
-                    )
-                    .order_by("name")
+                #
+                # Also note: this was originally based on Django built-in functions,
+                # but they don't support partial string search so refactored
+                # to use postgres directly, see:
+                # https://www.fusionbox.com/blog/detail/partial-word-search-with-postgres-full-text-search-in-django
+                # /632/
+
+                query = process_query(self.form.cleaned_data.get("search_text"))
+                queryset = Location.objects.all()
+
+                queryset = queryset.extra(
+                    where=[
+                        """
+                        to_tsvector(unaccent(concat_ws(' ',
+                            register_location.name,
+                            register_location.address,
+                            register_location.city,
+                            register_location.postal_code
+                        ))) @@ to_tsquery(unaccent(%s))
+                        """
+                    ],
+                    params=[query],
                 )
 
                 # If you're not a superuser, search only in your province
