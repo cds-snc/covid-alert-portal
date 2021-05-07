@@ -64,8 +64,8 @@ class SearchListBaseView(PermissionRequiredMixin, Is2FAMixin, ListView):
         context = super().get_context_data(*args, **kwargs)
         context["search_result_count"] = len(self.object_list)
         context["search_result_page_min"] = (
-                                                (context["page_obj"].number - 1) * self.paginate_by
-                                            ) + 1
+            (context["page_obj"].number - 1) * self.paginate_by
+        ) + 1
         page_result_max = context["page_obj"].number * self.paginate_by
         search_result_page_max = (
             page_result_max
@@ -309,11 +309,11 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
         context["min_date"] = "2021-01-01"  # Start of the year for simplicity
         context["max_date"] = (
             datetime.utcnow()
-                .replace(
+            .replace(
                 tzinfo=pytz.timezone(settings.PORTAL_LOCAL_TZ)
                 # TODO this may need refactoring for client side max date calculation beyond PORTAL_LOCAL_TZ
             )
-                .strftime("%Y-%m-%d")
+            .strftime("%Y-%m-%d")
         )  # Set max date to today
         context["language"] = get_language()
         if context.get("show_errors", False):
