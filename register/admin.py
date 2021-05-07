@@ -50,7 +50,7 @@ class RegistrantAdmin(admin.ModelAdmin, ExportCsvMixin):
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin, ExportCsvMixin):
     date_hierarchy = "created"
-    list_display = ["name", "city", "province", "short_code", "registrant"]
+    list_display = ["name", "city", "province", "short_code", "registrant_id", "registrant_email"]
     list_filter = (
         "province",
         "city",
