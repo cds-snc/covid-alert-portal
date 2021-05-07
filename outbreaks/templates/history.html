@@ -115,7 +115,7 @@
 
         {% if page_obj.has_previous %}
           <a href="?{% param_replace page=1 %}" class="no-underline-link"><</a>&nbsp;&nbsp;
-          <a href="?{% param_replace page=page_obj.previous_page_number %}">{% trans "Previous page" %}</a>
+          <a href="?{% param_replace page=page_obj.previous_page_number %}">{% trans "Previous" %}</a>
         {% endif %}
 
         {% if page_obj.has_next and page_obj.has_previous %}
@@ -123,7 +123,7 @@
         {% endif %}
 
         {% if page_obj.has_next %}
-          <a href="?{% param_replace page=page_obj.next_page_number %}">{% trans "Next page" %}</a>&nbsp;&nbsp;
+          <a href="?{% param_replace page=page_obj.next_page_number %}">{% trans "Next" %}</a>&nbsp;&nbsp;
           <a href="?{% param_replace page=page_obj.paginator.num_pages %}" class="no-underline-link">></a>
         {% endif %}
       </span>

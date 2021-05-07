@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-06 06:12+0000\n"
+"POT-Creation-Date: 2021-05-06 08:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -422,9 +422,10 @@ msgstr "Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne.
 
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html
 #: covid_key/templates/covid_key/otk_sms_sent.html
-#: outbreaks/templates/datetime.html outbreaks/templates/profile.html
-#: outbreaks/templates/search.html outbreaks/templates/severity.html
-#: profiles/templates/profiles/2fa.html profiles/templates/profiles/signup.html
+#: outbreaks/templates/datetime.html outbreaks/templates/history.html
+#: outbreaks/templates/profile.html outbreaks/templates/search.html
+#: outbreaks/templates/severity.html profiles/templates/profiles/2fa.html
+#: profiles/templates/profiles/signup.html
 #: profiles/templates/profiles/signup_2fa.html
 #: register/templates/register/location_address.html
 #: register/templates/register/location_category.html
@@ -876,7 +877,7 @@ msgstr "Trouver un lieu ou un événement"
 
 #: outbreaks/templates/history.html
 msgid "Browse below for alerts send to date in your province. For more specific results, use the search bar."
-msgstr ""
+msgstr "Cherchez une alerte précise envoyée pour un lieu ou un événement."
 
 #: outbreaks/templates/history.html outbreaks/templates/search.html
 msgid "Search by name or address"
@@ -938,13 +939,9 @@ msgstr ""
 msgid "results."
 msgstr "résultats affichés."
 
-#: outbreaks/templates/history.html
-msgid "Previous page"
-msgstr "Page précédente"
-
-#: outbreaks/templates/history.html
-msgid "Next page"
-msgstr "Page suivante"
+#: outbreaks/templates/history.html outbreaks/templates/search.html
+msgid "Previous"
+msgstr "précédent"
 
 #: outbreaks/templates/history.html
 msgid "No prior alerts for"
@@ -985,10 +982,6 @@ msgstr "Sélectionner"
 #: outbreaks/templates/search.html
 msgid "location named "
 msgstr ""
-
-#: outbreaks/templates/search.html
-msgid "Previous"
-msgstr "précédent"
 
 #: outbreaks/templates/search.html
 msgid "No results for"
@@ -2713,3 +2706,9 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Previous page"
+#~ msgstr "Page précédente"
+
+#~ msgid "Next page"
+#~ msgstr "Page suivante"
