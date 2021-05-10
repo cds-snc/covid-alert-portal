@@ -12,6 +12,7 @@ from django.db import transaction
 from django.shortcuts import redirect, render
 from django.views.generic import FormView, ListView, TemplateView, View
 from django.utils.translation import get_language, gettext_lazy as _
+from django.utils.html import conditional_escape
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from portal.mixins import Is2FAMixin
 from .forms import end_hours, DateForm, SeverityForm, SearchForm
@@ -62,8 +63,8 @@ class SearchListBaseView(PermissionRequiredMixin, Is2FAMixin, ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context["search_result_count"] = len(self.object_list)
-        context["search_result_page_min"] = (
+        search_result_count = len(self.object_list)
+        search_result_page_min = (
             (context["page_obj"].number - 1) * self.paginate_by
         ) + 1
         page_result_max = context["page_obj"].number * self.paginate_by
@@ -72,7 +73,12 @@ class SearchListBaseView(PermissionRequiredMixin, Is2FAMixin, ListView):
             if page_result_max < len(self.object_list)
             else len(self.object_list)
         )
+        paging_phrase = _(
+            "Showing {} {} {} of {} results.").format(search_result_page_min,"\u2014",search_result_page_max,search_result_count)
+        context["search_result_page_min"] = search_result_page_min
         context["search_result_page_max"] = search_result_page_max
+        context["search_result_count"] = search_result_count
+        context["paging_phrase"] = conditional_escape(paging_phrase)
         return context
 
 

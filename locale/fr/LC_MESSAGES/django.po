@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-06 12:09+0000\n"
+"POT-Creation-Date: 2021-05-09 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -932,18 +932,6 @@ msgid "Details"
 msgstr "Détails"
 
 #: outbreaks/templates/history.html outbreaks/templates/search.html
-msgid "Showing"
-msgstr ""
-
-#: outbreaks/templates/history.html outbreaks/templates/search.html
-msgid "of"
-msgstr ""
-
-#: outbreaks/templates/history.html outbreaks/templates/search.html
-msgid "results."
-msgstr "résultats affichés."
-
-#: outbreaks/templates/history.html outbreaks/templates/search.html
 msgid "Previous"
 msgstr "précédent"
 
@@ -977,7 +965,7 @@ msgstr "Les personnes qui ont scanné le code QR de ce lieu ou de cet événeme
 
 #: outbreaks/templates/search.html
 msgid "Enter at least 3 characters"
-msgstr ""
+msgstr "Saisissez au moins 3 caractères"
 
 #: outbreaks/templates/search.html
 msgid "Available locations"
@@ -997,7 +985,7 @@ msgstr "Aucun résultat pour"
 
 #: outbreaks/templates/search.html
 msgid "Follow local procedures for places or events that do not have QR codes."
-msgstr ""
+msgstr "Pour les lieux ou événements qui n’ont pas de code QR, suivez les procédures locales."
 
 #: outbreaks/templates/search.html
 msgid "Search alert history"
@@ -1016,6 +1004,10 @@ msgstr ""
 #: outbreaks/templates/severity.html
 msgid "Select notification message"
 msgstr "Choisissez le message de la notification"
+
+#: outbreaks/views.py
+msgid "Showing {} {} {} of {} results."
+msgstr "Résultats {} {} {} sur {}."
 
 #: outbreaks/views.py
 msgid "A conflicting time range: ({}) was entered below."

@@ -110,7 +110,7 @@
       <span class="step-links">
 
         <span class="current">
-            {% trans 'Showing' %} {{ search_result_page_min }} &mdash; {{ search_result_page_max }} {% trans 'of' %} {{ search_result_count }} {% trans 'results.' %}.
+            {{ paging_phrase }}
         </span>
 
         {% if page_obj.has_previous %}
