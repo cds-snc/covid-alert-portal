@@ -24,7 +24,6 @@ from register.forms import location_choices
 import requests
 import logging
 import re
-from django.contrib.postgres.search import SearchVector, SearchQuery
 
 
 def get_datetime_format(language):
