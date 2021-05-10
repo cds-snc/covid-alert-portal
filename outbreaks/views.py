@@ -73,8 +73,12 @@ class SearchListBaseView(PermissionRequiredMixin, Is2FAMixin, ListView):
             if page_result_max < len(self.object_list)
             else len(self.object_list)
         )
-        paging_phrase = _(
-            "Showing {} {} {} of {} results.").format(search_result_page_min,"\u2014",search_result_page_max,search_result_count)
+        paging_phrase = _("Showing {} {} {} of {} results.").format(
+            search_result_page_min,
+            "\u2014",
+            search_result_page_max,
+            search_result_count,
+        )
         context["search_result_page_min"] = search_result_page_min
         context["search_result_page_max"] = search_result_page_max
         context["search_result_count"] = search_result_count
