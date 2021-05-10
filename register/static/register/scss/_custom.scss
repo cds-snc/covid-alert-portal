@@ -1,176 +1,199 @@
 body.qrcode {
-    header {
-        border-bottom: 3px solid black;
-    }
+  header {
+    border-bottom: 3px solid black;
+  }
 
-    .hero {
-        background-color: #FCAF17;
-        position: relative;
-        .hero-inner {
-            @extend %page-container;
-            padding: 15px;
-            padding-right: 30px;
-            padding-left: 30px;
-            display: flex;
-            align-items: flex-start;
-            flex-direction: column-reverse;
-            @include sm {
-                flex-direction: row;
-                align-items: center;
-                padding: 10px 10px 10px 18px;
-            }
-            h1 {
-                flex-basis: 60%;
-            }
-            .hero-image {
-                flex-basis: 40%;
-                text-align: right;
-                img {
-                    margin: 1em 0;
-                }
-            }
-        }
-    }
+  .hero {
+    background-color: #FCAF17;
+    position: relative;
 
-    .back-button {
-        margin-top: 1em;
-        a {
-            margin-left: .5em;
-        }
-    }
-
-    .messages {
-        width: 100%;
-        &--container {
-            font-weight: normal;
-            margin-top: 1.5em;
-            ul {
-                li {
-                    &.success {
-                        border-left: 4px solid #008751;
-            
-                        background: #E6FAE8;
-                    }
-                }
-            }
-        }
-    }
-
-    .jumbotron {
-        margin-top: 2em;
-        color: black;
-        background-color: #E6FAE8;
-        text-align: left;
-        width: 100%;
-        a {
-            display: inline;
-            img {
-                margin-left: $space-sm;
-                vertical-align: middle;
-            }
-        }
-    }
-
-    .reminder {
-        svg {
-            
-        }
-        display: flex;
-        justify-content: space-between;
-        @include sm {
-            flex-direction: row;
-        }
-        flex-direction: column;
-
-    }
-    .reminder-text {
-        width: 90%;
-    }
-    .display-poster {
-        margin-bottom: $space-lg;
-        .display-poster-list {
-            margin: $space-sm;
-            li {
-                margin: $space-sm; 
-            }
-        }
-
-    }
-
-    label {
-        .help-text {
-            display: block;
-            font-size: 90%;
-            line-height: 2em;
-        }
-    }
-      
-    .step-one-info {
-        margin-bottom: $space-lg;
-    }
-
-    .registration-contact-form {
-        max-width: none;
-        .fieldWrapper--container {
-            max-width: 500px;
-            @include md {
-                width: 500px;
-                max-width: none;
-            }
-
-            &.phone-number-fields {
-                width: 100%;
-                display: flex;
-                flex-flow: row;
-                align-items: flex-end;
-
-                .phone-number-part {
-                    width: 350px;
-                    padding-right: 10px;
-                }
-
-                #extension-part {
-                    width: 150px;
-                }
-                #add-extension-link {
-                    margin-bottom: 30px;
-                    margin-left: 10px;
-                }
-            }
-        }
-    }
-
-    .download-links {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .download-links-reverse {
-        flex-direction: column-reverse;
-    }
-
-    .category-other {
-        border-left: 4px solid #C4C4C4;
-        margin-left: 18px;
-        padding-left: 20px;
-        max-width: 450px;
-    }
-
-    input[name="address-postal_code"] {
-        width: 30%;
-    }
-
-    #address-autocomplete-container {
-        margin-top: 8px;
-    }
-
-    .center-div-img-txt {
-        display: flex;
+    .hero-inner {
+      @extend %page-container;
+      padding: 15px;
+      padding-right: 30px;
+      padding-left: 30px;
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column-reverse;
+      @include sm {
         flex-direction: row;
         align-items: center;
-        div {
-          padding-right: 15px;
-            display: flex;
+        padding: 10px 10px 10px 18px;
+      }
+
+      h1 {
+        flex-basis: 60%;
+      }
+
+      .hero-image {
+        flex-basis: 40%;
+        text-align: right;
+
+        img {
+          margin: 1em 0;
         }
+      }
     }
+  }
+
+  .back-button {
+    margin-top: 1em;
+
+    a {
+      margin-left: .5em;
+    }
+  }
+
+  .messages {
+    width: 100%;
+
+    &--container {
+      font-weight: normal;
+      margin-top: 1.5em;
+
+      ul {
+        li {
+          &.success {
+            border-left: 4px solid #008751;
+
+            background: #E6FAE8;
+          }
+        }
+      }
+    }
+  }
+
+  .jumbotron {
+    margin-top: 2em;
+    color: black;
+    background-color: #E6FAE8;
+    text-align: left;
+    width: 100%;
+
+    h1 {
+      display: inherit;
+      padding-left: $space-sm;
+    }
+
+    a {
+      display: inline;
+
+      img {
+        margin-left: $space-sm;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .reminder {
+    svg {
+
+    }
+
+    display: flex;
+    justify-content: space-between;
+    @include sm {
+      flex-direction: row;
+    }
+    flex-direction: column;
+
+  }
+
+  .reminder-text {
+    width: 90%;
+  }
+
+  .display-poster {
+    margin-bottom: $space-lg;
+
+    .display-poster-list {
+      li {
+        margin-bottom: $space-sm;
+      }
+    }
+
+  }
+
+  label {
+    .help-text {
+      display: block;
+      font-size: 90%;
+      line-height: 2em;
+    }
+  }
+
+  .step-one-info {
+    margin-bottom: $space-lg;
+  }
+
+  .registration-contact-form {
+    max-width: none;
+
+    .fieldWrapper--container {
+      max-width: 500px;
+      @include md {
+        width: 500px;
+        max-width: none;
+      }
+
+      &.phone-number-fields {
+        width: 100%;
+        display: flex;
+        flex-flow: row;
+        align-items: flex-end;
+
+        .phone-number-part {
+          width: 350px;
+          padding-right: 10px;
+        }
+
+        #extension-part {
+          width: 150px;
+        }
+
+        #add-extension-link {
+          margin-bottom: 30px;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+
+  .download-links {
+    display: flex;
+    flex-direction: column;
+    .content-button {
+      margin-bottom: $space-sm;
+    }
+  }
+
+  .download-links-reverse {
+    flex-direction: column-reverse;
+  }
+
+  .category-other {
+    border-left: 4px solid #C4C4C4;
+    margin-left: 18px;
+    padding-left: 20px;
+    max-width: 450px;
+  }
+
+  input[name="address-postal_code"] {
+    width: 30%;
+  }
+
+  #address-autocomplete-container {
+    margin-top: 8px;
+  }
+
+  .center-div-img-txt {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    div {
+      padding-right: 15px;
+      display: flex;
+    }
+  }
 }
