@@ -558,3 +558,9 @@ class ExposureDetailsView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
         except Location.DoesNotExist:
             pass
         return context
+
+
+class LocationHistoryView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
+    permission_required = ["profiles.can_send_alerts"]
+    template_name = "location_history.html"
+    
