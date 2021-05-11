@@ -138,9 +138,10 @@ class ProvinceAdminMixin(UserPassesTestMixin):
 
 class ExportCsvMixin:
     def export_as_csv(self, request, queryset):
-
         meta = self.model._meta
-        field_names = [field.name for field in meta.fields]
+
+        # Will only work if list_display is made up of only model properties
+        field_names = self.list_display
 
         response = HttpResponse(content_type="text/csv")
         response["Content-Disposition"] = "attachment; filename={}.csv".format(meta)
