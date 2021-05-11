@@ -71,8 +71,18 @@ body.qrcode {
     width: 100%;
 
     h1 {
-      display: inherit;
-      padding-left: $space-sm;
+      display: inline-block;
+      img {
+        vertical-align: middle;
+      }
+      span {
+        vertical-align: middle;
+        padding-left: $space-sm;
+      }
+    }
+
+    p {
+      margin-top: $space-sm;
     }
 
     a {

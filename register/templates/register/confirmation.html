@@ -7,9 +7,7 @@
 
 {% block content %}
   <div class="jumbotron">
-    <img src="{% static 'register/img/check.svg' %}" alt="">
-
-    <h1>{% trans "Your poster is ready" %}</h1>
+    <h1><img src="{% static 'register/img/check.svg' %}" alt=""> <span>{% trans "Your poster is ready" %}</span></h1>
 
     {% with current_language=request.LANGUAGE_CODE available_langs='en fr' %}
       <div class="download-links {% if current_language == 'fr' %}download-links-reverse{% endif %}">
