@@ -18,6 +18,10 @@ class Notification(models.Model):
     )
     location = models.ForeignKey(Location, on_delete=models.PROTECT, editable=False)
 
+    @property
+    def location_shortcode(self):
+        return self.location.short_code
+
     class Meta:
         indexes = [
             models.Index(fields=["start_date"]),

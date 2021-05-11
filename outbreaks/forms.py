@@ -152,3 +152,11 @@ class SeverityForm(HealthcareBaseForm):
         choices=severity_choices,
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
+
+
+class SearchForm(HealthcareBaseForm):
+    search_text = forms.CharField(
+        label="",
+        min_length=3,
+        error_messages={"required": _("Enter information to continue.")},
+    )
