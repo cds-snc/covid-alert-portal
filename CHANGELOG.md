@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [2.0.1] - 2021-05-12
+
+### Updated
+
+- Added English and French URL config for Registration Site to fix language switching
+
 ## [2.0] - 2021-05-12
 
 ### Added
