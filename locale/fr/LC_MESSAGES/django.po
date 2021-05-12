@@ -422,7 +422,8 @@ msgstr "Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne.
 
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html
 #: covid_key/templates/covid_key/otk_sms_sent.html
-#: outbreaks/templates/datetime.html outbreaks/templates/profile.html
+#: outbreaks/templates/datetime.html outbreaks/templates/history.html
+#: outbreaks/templates/profile.html outbreaks/templates/search.html
 #: outbreaks/templates/severity.html profiles/templates/profiles/2fa.html
 #: profiles/templates/profiles/signup.html
 #: profiles/templates/profiles/signup_2fa.html
@@ -659,7 +660,7 @@ msgstr "Isolez-vous"
 msgid "Get tested immediately"
 msgstr "Faites-vous tester immédiatement"
 
-#: outbreaks/forms.py outbreaks/templates/search.html
+#: outbreaks/forms.py
 msgid "Select"
 msgstr "Sélectionner"
 
@@ -695,6 +696,10 @@ msgstr "\"À\" doit être après \"De\""
 msgid "Someone already notified people who were there between {} and {}."
 msgstr "Quelqu’un a déjà prévenu les personnes qui étaient là entre {} et {}."
 
+#: outbreaks/forms.py
+msgid "Enter information to continue."
+msgstr "Entrez les informations pour continuer."
+
 #: outbreaks/templates/confirm.html
 msgid "Confirm notification"
 msgstr ""
@@ -713,6 +718,7 @@ msgstr "Confirmer et envoyer"
 
 #: outbreaks/templates/confirm.html outbreaks/templates/details.html
 #: outbreaks/templates/history.html outbreaks/templates/profile.html
+#: outbreaks/templates/search.html
 #: profiles/templates/profiles/healthcareuser_detail.html
 #: register/templates/register/summary.html
 msgid "Name"
@@ -873,6 +879,10 @@ msgstr "Historique des alertes"
 msgid "Find QR places and events"
 msgstr "Trouver un lieu ou un événement"
 
+#: outbreaks/templates/history.html
+msgid "Browse below for alerts send to date in your province. For more specific results, use the search bar."
+msgstr "Cherchez une alerte précise envoyée pour un lieu ou un événement."
+
 #: outbreaks/templates/history.html outbreaks/templates/search.html
 msgid "Search by name or address"
 msgstr "Recherche par nom ou adresse"
@@ -880,6 +890,10 @@ msgstr "Recherche par nom ou adresse"
 #: outbreaks/templates/history.html outbreaks/templates/search.html
 msgid "Search"
 msgstr "Chercher"
+
+#: outbreaks/templates/history.html outbreaks/templates/search.html
+msgid "results for"
+msgstr "résultats pour"
 
 #: outbreaks/templates/history.html
 msgid "Prior notifications"
@@ -918,20 +932,12 @@ msgid "Details"
 msgstr "Détails"
 
 #: outbreaks/templates/history.html outbreaks/templates/search.html
-msgid "first"
-msgstr "première page"
+msgid "Previous"
+msgstr "précédent"
 
-#: outbreaks/templates/history.html outbreaks/templates/search.html
-msgid "previous page"
-msgstr "page précédente"
-
-#: outbreaks/templates/history.html outbreaks/templates/search.html
-msgid "next page"
-msgstr "Page suivante"
-
-#: outbreaks/templates/history.html outbreaks/templates/search.html
-msgid "last"
-msgstr "dernière page"
+#: outbreaks/templates/history.html
+msgid "No prior alerts for"
+msgstr "Aucune alerte n’a été envoyée pour"
 
 #: outbreaks/templates/profile.html
 msgid "Place profile"
@@ -958,19 +964,31 @@ msgid "Alert people who scanned the QR code during an exposure."
 msgstr "Les personnes qui ont scanné le code QR de ce lieu ou de cet événement seront alertées d’une exposition."
 
 #: outbreaks/templates/search.html
+msgid "Enter at least 3 characters"
+msgstr "Saisissez au moins 3 caractères"
+
+#: outbreaks/templates/search.html
 msgid "Available locations"
 msgstr ""
 
 #: outbreaks/templates/search.html
-msgid "Place name"
-msgstr "Nom du lieu"
+msgid "Choose"
+msgstr "Sélectionner"
 
 #: outbreaks/templates/search.html
 msgid "location named "
 msgstr ""
 
 #: outbreaks/templates/search.html
-msgid "Search alert history."
+msgid "No results for"
+msgstr "Aucun résultat pour"
+
+#: outbreaks/templates/search.html
+msgid "Follow local procedures for places or events that do not have QR codes."
+msgstr "Pour les lieux ou événements qui n’ont pas de code QR, suivez les procédures locales."
+
+#: outbreaks/templates/search.html
+msgid "Search alert history"
 msgstr "Consulter l’historique des alertes"
 
 #: outbreaks/templates/search.html
@@ -986,6 +1004,10 @@ msgstr ""
 #: outbreaks/templates/severity.html
 msgid "Select notification message"
 msgstr "Choisissez le message de la notification"
+
+#: outbreaks/views.py
+msgid "Showing {} {} {} of {} results."
+msgstr "Résultats {} {} {} sur {}."
 
 #: outbreaks/views.py
 msgid "A conflicting time range: ({}) was entered below."
