@@ -97,7 +97,6 @@ INSTALLED_APPS = [
     "djversion",
     "widget_tweaks",
     "announcements",
-    "solo",
     "google_analytics",
     "formtools",  # for form wizard
 ]
@@ -156,10 +155,12 @@ if APP_SWITCH != "QRCODE":
         "profiles.context_processors.logout_messages",
         "profiles.context_processors.general_settings",
     ]
+    GA_ID = os.getenv("PORTAL_GA_ID", None)
 else:
     TEMPLATES[0]["OPTIONS"]["context_processors"] += [
         "register.context_processors.general_settings",
     ]
+    GA_ID = os.getenv("QRCODE_GA_ID", None)
 
 AUTHENTICATION_BACKENDS = [
     "axes.backends.AxesBackend",  # Needs to be first
