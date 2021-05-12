@@ -1,12 +1,20 @@
 {% load ga_id %}
 
 {% block content %}
-    <script nonce={{request.csp_nonce}} async src="https://www.googletagmanager.com/gtag/js?id={% get_ga_id %}"></script>
-    <script nonce={{request.csp_nonce}}>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+  {% get_ga_id as id %}
+  {% if id %}
+    <script nonce={{ request.csp_nonce }} async
+            src="https://www.googletagmanager.com/gtag/js?id={{ id }}"></script>
+    <script nonce={{ request.csp_nonce }}>
+      window.dataLayer = window.dataLayer || []
 
-      gtag('config', '{% get_ga_id %}');
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+
+      gtag('js', new Date())
+
+      gtag('config', '{{ id }}')
     </script>
+  {% endif %}
 {% endblock %}

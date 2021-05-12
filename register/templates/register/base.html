@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load static i18n settings ga_id %}
+{% load static i18n settings %}
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
   <head>
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700%7CNoto+Sans:400,700&amp;display=fallback" >
 
     <!-- Google Analytics-->
-    {% get_ga_script %}
+    {% include "includes/google_analytics.html" %}
 
     <link href="{% static 'css/normalize.css' %}" rel="stylesheet">
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
