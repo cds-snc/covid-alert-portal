@@ -53,7 +53,9 @@ ALLOWED_HOSTS = [
     gethostname(),
 ]
 
-if is_prod and "alpha.canada.ca" in gethostname():
+URL_DUAL_DOMAINS = os.getenv("URL_DUAL_DOMAINS", "False") == "True"
+
+if is_prod and URL_DUAL_DOMAINS:
     LANGUAGE_COOKIE_DOMAIN = "alpha.canada.ca"
 
 if not DEBUG and not TESTING:
@@ -68,8 +70,6 @@ if os.getenv("DJANGO_ALLOWED_HOSTS"):
     ALLOWED_HOSTS.extend(os.getenv("DJANGO_ALLOWED_HOSTS").split(","))
 
 GITHUB_SHA = os.getenv("GITHUB_SHA") or None
-
-URL_DUAL_DOMAINS = os.getenv("URL_DUAL_DOMAINS", "False") == "True"
 
 # Application definition
 
