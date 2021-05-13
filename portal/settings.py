@@ -53,7 +53,7 @@ ALLOWED_HOSTS = [
     gethostname(),
 ]
 
-if is_prod:
+if is_prod and "alpha.canada.ca" in gethostname():
     LANGUAGE_COOKIE_DOMAIN = "alpha.canada.ca"
 
 if not DEBUG and not TESTING:
