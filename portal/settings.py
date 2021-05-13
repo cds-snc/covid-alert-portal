@@ -69,6 +69,8 @@ if os.getenv("DJANGO_ALLOWED_HOSTS"):
 
 GITHUB_SHA = os.getenv("GITHUB_SHA") or None
 
+URL_DUAL_DOMAINS = os.getenv("URL_DUAL_DOMAINS", "False") == "True"
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -128,7 +130,7 @@ BASICAUTH_USERS = {
     os.getenv("BASICAUTH_USER", "cds"): os.getenv("BASICAUTH_PASS", "cds")
 }
 
-if os.getenv("APP_SWITCH") == "QRCODE" and "alpha.canada.ca" in gethostname():
+if os.getenv("APP_SWITCH") == "QRCODE" and URL_DUAL_DOMAINS:
     MIDDLEWARE.insert(0, "basicauth.middleware.BasicAuthMiddleware")
 
 ROOT_URLCONF = "portal.urls"
@@ -408,8 +410,6 @@ AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
 ]
 AXES_HANDLER = "profiles.login_handler.HealthcareLoginHandler"
 # Site Setup for Separate Domains
-
-URL_DUAL_DOMAINS = os.getenv("URL_DUAL_DOMAINS", "False") == "True"
 
 if APP_SWITCH == "QRCODE":
     URL_EN_PRODUCTION = os.getenv(
