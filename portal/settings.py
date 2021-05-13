@@ -122,11 +122,11 @@ MIDDLEWARE = [
 
 # Just a temporary basic user/pass to prevent early access to reg form
 BASICAUTH_USERS = {
-    os.getenv("BASICAUTH_USER", "cds") : os.getenv("BASICAUTH_PASS", "cds")
+    os.getenv("BASICAUTH_USER", "cds"): os.getenv("BASICAUTH_PASS", "cds")
 }
 
-if os.getenv("APP_SWITCH") == 'QRCODE':
-    MIDDLEWARE.insert(0, 'basicauth.middleware.BasicAuthMiddleware')
+if os.getenv("APP_SWITCH") == "QRCODE":
+    MIDDLEWARE.insert(0, "basicauth.middleware.BasicAuthMiddleware")
 
 ROOT_URLCONF = "portal.urls"
 
