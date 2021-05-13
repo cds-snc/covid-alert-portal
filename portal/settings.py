@@ -53,6 +53,9 @@ ALLOWED_HOSTS = [
     gethostname(),
 ]
 
+if is_prod:
+    LANGUAGE_COOKIE_DOMAIN = "alpha.canada.ca"
+
 if not DEBUG and not TESTING:
     try:
         # this will fail locally because the macbook name can't be resolved to an IP
