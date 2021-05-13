@@ -128,7 +128,7 @@ BASICAUTH_USERS = {
     os.getenv("BASICAUTH_USER", "cds"): os.getenv("BASICAUTH_PASS", "cds")
 }
 
-if os.getenv("APP_SWITCH") == "QRCODE":
+if os.getenv("APP_SWITCH") == "QRCODE" and "alpha.canada.ca" in gethostname():
     MIDDLEWARE.insert(0, "basicauth.middleware.BasicAuthMiddleware")
 
 ROOT_URLCONF = "portal.urls"
