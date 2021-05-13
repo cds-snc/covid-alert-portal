@@ -408,12 +408,20 @@ AXES_HANDLER = "profiles.login_handler.HealthcareLoginHandler"
 
 URL_DUAL_DOMAINS = os.getenv("URL_DUAL_DOMAINS", "False") == "True"
 
-URL_EN_PRODUCTION = os.getenv(
-    "URL_EN_PRODUCTION", "https://covid-alert-portal.alpha.canada.ca"
-)
-URL_FR_PRODUCTION = os.getenv(
-    "URL_FR_PRODUCTION", "https://portail-alerte-covid.alpha.canada.ca"
-)
+if APP_SWITCH == "QRCODE":
+    URL_EN_PRODUCTION = os.getenv(
+        "URL_EN_PRODUCTION", "https://covid-alert-qr-poster.alpha.canada.ca"
+    )
+    URL_FR_PRODUCTION = os.getenv(
+        "URL_FR_PRODUCTION", "https://alerte-covid-affiche-qr.alpha.canada.ca"
+    )
+else:
+    URL_EN_PRODUCTION = os.getenv(
+        "URL_EN_PRODUCTION", "https://covid-alert-portal.alpha.canada.ca"
+    )
+    URL_FR_PRODUCTION = os.getenv(
+        "URL_FR_PRODUCTION", "https://portail-alerte-covid.alpha.canada.ca"
+    )
 
 CSP_DEFAULT_SRC = [
     "'self'",
