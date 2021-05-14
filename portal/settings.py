@@ -53,6 +53,11 @@ ALLOWED_HOSTS = [
     gethostname(),
 ]
 
+URL_DUAL_DOMAINS = os.getenv("URL_DUAL_DOMAINS", "False") == "True"
+
+if is_prod and URL_DUAL_DOMAINS:
+    LANGUAGE_COOKIE_DOMAIN = "alpha.canada.ca"
+
 if not DEBUG and not TESTING:
     try:
         # this will fail locally because the macbook name can't be resolved to an IP
@@ -118,6 +123,14 @@ MIDDLEWARE = [
     "waffle.middleware.WaffleMiddleware",
     "portal.middleware.TZMiddleware",
 ]
+
+# Just a temporary basic user/pass to prevent early access to reg form
+BASICAUTH_USERS = {
+    os.getenv("BASICAUTH_USER", "cds"): os.getenv("BASICAUTH_PASS", "cds")
+}
+
+if os.getenv("APP_SWITCH") == "QRCODE" and URL_DUAL_DOMAINS:
+    MIDDLEWARE.insert(0, "basicauth.middleware.BasicAuthMiddleware")
 
 ROOT_URLCONF = "portal.urls"
 
@@ -399,14 +412,20 @@ AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
 AXES_HANDLER = "profiles.login_handler.HealthcareLoginHandler"
 # Site Setup for Separate Domains
 
-URL_DUAL_DOMAINS = os.getenv("URL_DUAL_DOMAINS", "False") == "True"
-
-URL_EN_PRODUCTION = os.getenv(
-    "URL_EN_PRODUCTION", "https://covid-alert-portal.alpha.canada.ca"
-)
-URL_FR_PRODUCTION = os.getenv(
-    "URL_FR_PRODUCTION", "https://portail-alerte-covid.alpha.canada.ca"
-)
+if APP_SWITCH == "QRCODE":
+    URL_EN_PRODUCTION = os.getenv(
+        "URL_EN_PRODUCTION", "https://covid-alert-qr-poster.alpha.canada.ca"
+    )
+    URL_FR_PRODUCTION = os.getenv(
+        "URL_FR_PRODUCTION", "https://alerte-covid-affiche-qr.alpha.canada.ca"
+    )
+else:
+    URL_EN_PRODUCTION = os.getenv(
+        "URL_EN_PRODUCTION", "https://covid-alert-portal.alpha.canada.ca"
+    )
+    URL_FR_PRODUCTION = os.getenv(
+        "URL_FR_PRODUCTION", "https://portail-alerte-covid.alpha.canada.ca"
+    )
 
 CSP_DEFAULT_SRC = [
     "'self'",
