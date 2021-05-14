@@ -1,16 +1,20 @@
-{% load solo_tags %}
+{% load ga_id %}
 
 {% block content %}
-  {% get_solo 'google_analytics.GoogleAnalytics' as ga_config %}
-  {% if ga_config.ga_code %}
-    <script nonce={{request.csp_nonce}} async src="https://www.googletagmanager.com/gtag/js?id={{ga_config.ga_code}}"></script>
-    <script nonce={{request.csp_nonce}}>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+  {% get_ga_id as id %}
+  {% if id %}
+    <script nonce={{ request.csp_nonce }} async
+            src="https://www.googletagmanager.com/gtag/js?id={{ id }}"></script>
+    <script nonce={{ request.csp_nonce }}>
+      window.dataLayer = window.dataLayer || []
 
-      gtag('config', '{{ga_config.ga_code}}');
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+
+      gtag('js', new Date())
+
+      gtag('config', '{{ id }}')
     </script>
   {% endif %}
-
 {% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-11 09:32+0000\n"
+"POT-Creation-Date: 2021-05-11 14:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -634,18 +634,6 @@ msgstr "Consultez la page"
 #: covid_key/views.py
 msgid "Something went wrong. Contact your administrator."
 msgstr "Une erreur est survenue. Veuillez contacter votre admistrateur du portail."
-
-#: google_analytics/models.py
-msgid "Google Analytics Code"
-msgstr "Code pour Google Analytics"
-
-#: google_analytics/models.py
-msgid "If no tracking code provided Google Analytics will not record any data for site."
-msgstr "Si aucun code est soumis Google Analytics ne serait pas en mesure de captures les données pour ce site."
-
-#: google_analytics/models.py
-msgid "Google Analytics V4 Tracking Code"
-msgstr "Code pour Google Analytics version 4"
 
 #: outbreaks/forms.py
 msgid "Self-monitor"
