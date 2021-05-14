@@ -5,7 +5,7 @@ from basicauth.response import HttpResponseUnauthorized
 
 class BasicAuthMiddleware(MiddlewareMixin):
     def process_request(self, request):
-        if request.path == '/status/':
+        if 'status' in request.path:
             return None
 
         if not validate_request(request):
