@@ -48,6 +48,10 @@
       {
         "name": "APP_SWITCH",
         "value": "${app_switch}"
+      },
+      {
+        "name": "QRCODE_GA_ID",
+        "value": "G-J1BT97XQ6P"
       }
     ],
     "secrets": [
