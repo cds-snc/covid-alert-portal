@@ -130,7 +130,7 @@ BASICAUTH_USERS = {
 }
 
 if os.getenv("APP_SWITCH") == "QRCODE" and URL_DUAL_DOMAINS:
-    MIDDLEWARE.insert(0, "basicauth.middleware.BasicAuthMiddleware")
+    MIDDLEWARE.insert(0, "register.middleware.BasicAuthMiddleware")
 
 ROOT_URLCONF = "portal.urls"
 
