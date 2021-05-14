@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n param_replace %}
 
 {% block title %}
     {% trans "Place history" %}
@@ -12,44 +12,52 @@
 
     <h1>{% trans "Alert history" %}</h1>
 
-    <table class="with-actions">
-      <caption class="visually-hidden">{% trans "Prior notifications" %}</caption>
-      <thead>
-          <tr>
-            <th scope="col">
-              <a href="?{% param_replace sort='name' order='asc' %}" class="icon-arrow up {% if sort == 'name' and order == 'asc' %} selected {% endif %}">
-                <span class="visually-hidden">{% trans "Sort by name, ascending" %}</span>
-              </a>
-              <a href="?{% param_replace sort='name' order='desc' %}" class="icon-arrow down {% if sort == 'name' and order == 'desc' %} selected {% endif %}">
-                <span class="visually-hidden">{% trans "Sort by name, descending" %}</span>
-              </a>
-              <br>
-              {% trans "Name" %}
-            </th>
-            <th scope="col">
-              <a href="?{% param_replace sort='address' order='asc' %}" class="icon-arrow up {% if sort == 'address' and order == 'asc' %} selected {% endif %}">
-                <span class="visually-hidden">{% trans "Sort by address, ascending" %}</span>
-              </a>
-              <a href="?{% param_replace sort='address' order='desc' %}" class="icon-arrow down {% if sort == 'address' and order == 'desc' %} selected {% endif %}">
-                <span class="visually-hidden">{% trans "Sort by address, descending" %}</span>
-              </a>
-              <br>
-              {% trans "Address" %}
-            </th>
-            <th scope="col">
-              <a href="?{% param_replace sort='date' order='asc' %}" class="icon-arrow up {% if sort == 'date' and order == 'asc' %} selected {% endif %}">
-                <span class="visually-hidden">{% trans "Sort by date of exposure, ascending" %}</span>
-              </a>
-              <a href="?{% param_replace sort='date' order='desc' %}" class="icon-arrow down {% if sort == 'date' and order == 'desc' %} selected {% endif %}">
-                <span class="visually-hidden">{% trans "Sort by date of exposure, descending" %}</span>
-              </a>
-              <br>
-              {% trans "Date of public exposure" %}
-            </th>
-            <th scope="col"></th>
-          </tr>
-      </thead>
-      <tbody>
+    {% if object_list %}
+    
+      <table class="with-actions">
+        <caption class="visually-hidden">{% trans "Prior notifications" %}</caption>
+        <thead>
+        <tr>
+          <th scope="col">
+            <a href="?{% param_replace sort='name' order='asc' %}"
+              class="icon-arrow up {% if sort == 'name' and order == 'asc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by name, ascending" %}</span>
+            </a>
+            <a href="?{% param_replace sort='name' order='desc' %}"
+              class="icon-arrow down {% if sort == 'name' and order == 'desc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by name, descending" %}</span>
+            </a>
+            <br>
+            {% trans "Name" %}
+          </th>
+          <th scope="col">
+            <a href="?{% param_replace sort='address' order='asc' %}"
+              class="icon-arrow up {% if sort == 'address' and order == 'asc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by address, ascending" %}</span>
+            </a>
+            <a href="?{% param_replace sort='address' order='desc' %}"
+              class="icon-arrow down {% if sort == 'address' and order == 'desc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by address, descending" %}</span>
+            </a>
+            <br>
+            {% trans "Address" %}
+          </th>
+          <th scope="col">
+            <a href="?{% param_replace sort='date' order='asc' %}"
+              class="icon-arrow up {% if sort == 'date' and order == 'asc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by date of exposure, ascending" %}</span>
+            </a>
+            <a href="?{% param_replace sort='date' order='desc' %}"
+              class="icon-arrow down {% if sort == 'date' and order == 'desc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by date of exposure, descending" %}</span>
+            </a>
+            <br>
+            {% trans "Date of public exposure" %}
+          </th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
         {% for notification in object_list %}
           <tr>
             <td>{{ notification.location.name }}</td>
@@ -68,25 +76,34 @@
             </td>
           </tr>
         {% endfor %}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
 
-    <div class="pagination">
-      <span class="step-links">
+      <div class="pagination">
+        <span class="step-links">
 
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+          <span class="current">
+              {{ paging_phrase }}
+          </span>
+
+          {% if page_obj.has_previous %}
+            <a href="?{% param_replace page=1 %}" class="no-underline-link page-back-link"></a>&nbsp;&nbsp;
+            <a href="?{% param_replace page=page_obj.previous_page_number %}">{% trans "Previous" %}</a>
+          {% endif %}
+
+          {% if page_obj.has_next and page_obj.has_previous %}
+            &nbsp;
+          {% endif %}
+
+          {% if page_obj.has_next %}
+            <a href="?{% param_replace page=page_obj.next_page_number %}">{% trans "Next" %}</a>&nbsp;
+            <a href="?{% param_replace page=page_obj.paginator.num_pages %}" class="no-underline-link page-next-link"></a>
+          {% endif %}
         </span>
-
-        {% if page_obj.has_previous %}
-            <a href="?{% param_replace page=1 %}">&laquo; {% trans "first" %}</a>
-            <a href="?{% param_replace page=page_obj.previous_page_number %}">{% trans "previous page" %}</a>
-        {% endif %}
-
-        {% if page_obj.has_next %}
-            <a href="?{% param_replace page=page_obj.next_page_number %}">{% trans "next page" %}</a>
-            <a href="?{% param_replace page=page_obj.paginator.num_pages %}">{% trans "last" %} &raquo;</a>
-        {% endif %}
-      </span>
-    </div>
+      </div>
+    {% else %}
+      <p>
+        <b>{% trans 'No prior alerts for' %}</b> [Location Name].
+      </p>
+    {% endif %}
 {% endblock %}

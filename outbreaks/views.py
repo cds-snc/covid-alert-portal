@@ -597,7 +597,14 @@ class ExposureDetailsView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
         return context
 
 
-class LocationHistoryView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
-    permission_required = ["profiles.can_send_alerts"]
+class LocationHistoryView(SearchListBaseView):
+    model = Notification
     template_name = "location_history.html"
+    sort_options = ["name", "address", "date"]
+
+
+
+
+
+
     
