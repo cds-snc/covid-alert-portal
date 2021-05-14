@@ -49,6 +49,10 @@ class Location(models.Model):
     created = models.DateTimeField(default=timezone.now)
     registrant = models.ForeignKey(Registrant, on_delete=models.SET_NULL, null=True)
 
+    @property
+    def registrant_email(self):
+        return self.registrant.email
+
     # Override save method to generate a unique short code for poster
     def save(self, *args, **kwargs):
         if not self.short_code:

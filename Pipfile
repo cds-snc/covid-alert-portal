@@ -48,6 +48,7 @@ pynacl = "*"
 protobuf = "*"
 segno = "*"
 cairosvg = "*"
+django-basicauth = "*"
 
 [pipenv]
 allow_prereleases = true

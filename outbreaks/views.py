@@ -12,9 +12,10 @@ from django.db import transaction
 from django.shortcuts import redirect, render
 from django.views.generic import FormView, ListView, TemplateView, View
 from django.utils.translation import get_language, gettext_lazy as _
+from django.utils.html import conditional_escape
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from portal.mixins import Is2FAMixin
-from .forms import end_hours, DateForm, SeverityForm
+from .forms import end_hours, DateForm, SeverityForm, SearchForm
 from .protobufs import outbreak_pb2
 from datetime import datetime
 import pytz
@@ -55,48 +56,85 @@ def process_query(s):
     return query
 
 
-class SearchView(PermissionRequiredMixin, Is2FAMixin, ListView):
+class SearchListBaseView(PermissionRequiredMixin, Is2FAMixin, ListView):
     permission_required = ["profiles.can_send_alerts"]
-    paginate_by = 5
+    paginate_by = 10
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        search_result_count = len(self.object_list)
+        search_result_page_min = (
+            (context["page_obj"].number - 1) * self.paginate_by
+        ) + 1
+        page_result_max = context["page_obj"].number * self.paginate_by
+        search_result_page_max = (
+            page_result_max
+            if page_result_max < len(self.object_list)
+            else len(self.object_list)
+        )
+        paging_phrase = _("Showing {} {} {} of {} results.").format(
+            search_result_page_min,
+            "\u2014",
+            search_result_page_max,
+            search_result_count,
+        )
+        context["search_result_page_min"] = search_result_page_min
+        context["search_result_page_max"] = search_result_page_max
+        context["search_result_count"] = search_result_count
+        context["paging_phrase"] = conditional_escape(paging_phrase)
+        return context
+
+
+class SearchView(SearchListBaseView):
     model = Location
     template_name = "search.html"
 
     def get_queryset(self):
-        searchStr = self.request.GET.get("search_text")
-        if searchStr:
-            # Heads-up: this code relies on Postgres full text search
-            # features, so will not work with a SQLite database
-            #
-            # Also note: this was originally based on Django built-in functions,
-            # but they don't support partial string search so refactored
-            # to use postgres directly, see:
-            # https://www.fusionbox.com/blog/detail/partial-word-search-with-postgres-full-text-search-in-django/632/
+        if "search_text" in self.request.GET:
+            self.form = SearchForm(self.request.GET)
+            if self.form.is_valid():
+                # Heads-up: this code relies on Postgres full text search
+                # features, so will not work with a SQLite database
+                #
+                # Also note: this was originally based on Django built-in functions,
+                # but they don't support partial string search so refactored
+                # to use postgres directly, see:
+                # https://www.fusionbox.com/blog/detail/partial-word-search-with-postgres-full-text-search-in-django
+                # /632/
 
-            query = process_query(searchStr)
-            queryset = Location.objects.all()
+                query = process_query(self.form.cleaned_data.get("search_text"))
+                queryset = Location.objects.all()
 
-            queryset = queryset.extra(
-                where=[
-                    """
-                    to_tsvector(unaccent(concat_ws(' ',
-                        register_location.name,
-                        register_location.address,
-                        register_location.city,
-                        register_location.postal_code
-                    ))) @@ to_tsquery(unaccent(%s))
-                    """
-                ],
-                params=[query],
-            )
+                queryset = queryset.extra(
+                    where=[
+                        """
+                        to_tsvector(unaccent(concat_ws(' ',
+                            register_location.name,
+                            register_location.address,
+                            register_location.city,
+                            register_location.postal_code
+                        ))) @@ to_tsquery(unaccent(%s))
+                        """
+                    ],
+                    params=[query],
+                )
 
-            # If you're not a superuser, search only in your province
-            if not self.request.user.is_superuser:
-                province = self.request.user.province.abbr
-                queryset = queryset.filter(province=province)
+                # If you're not a superuser, search only in your province
+                if not self.request.user.is_superuser:
+                    province = self.request.user.province.abbr
+                    queryset = queryset.filter(province=province)
 
-            return queryset
+                return queryset
 
         return Location.objects.none()
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["form"] = self.form if hasattr(self, "form") else None
+        context["search_text"] = (
+            self.form.cleaned_data.get("search_text") if hasattr(self, "form") else None
+        )
+        return context
 
 
 class ProfileView(PermissionRequiredMixin, Is2FAMixin, FormView):
@@ -471,9 +509,7 @@ class ConfirmedView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
         return context
 
 
-class HistoryView(PermissionRequiredMixin, Is2FAMixin, ListView):
-    permission_required = ["profiles.can_send_alerts"]
-    paginate_by = 10
+class HistoryView(SearchListBaseView):
     model = Notification
     template_name = "history.html"
     sort_options = ["name", "address", "date"]
@@ -494,11 +530,12 @@ class HistoryView(PermissionRequiredMixin, Is2FAMixin, ListView):
         context = super().get_context_data(*args, **kwargs)
         context["sort"] = self.request.GET.get("sort")
         context["order"] = self.request.GET.get("order")
+        context["search_text"] = self.request.GET.get("search_text", "").strip()
         return context
 
     def get_queryset(self):
         province = self.request.user.province.abbr
-        search = self.request.GET.get("search_text")
+        search = self.request.GET.get("search_text", "").strip()
         if search:
             # 'icontains' will produce a case-insensitive SQL 'LIKE' statement which adds a certain level of
             # 'fuzziness' to the search

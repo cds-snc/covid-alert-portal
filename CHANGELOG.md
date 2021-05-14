@@ -7,8 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-- QR Code Registration form with Email verification
-- Location search with Canada Post Address Complete API
+## [2.0.2] - 2021-05-13
+
+## Updated
+
+- Added a temporary user/pass for registration site to prevent early access
+- Fixed a language switch bug when in an environment with dual domains (ie, production)
+
+## [2.0.1] - 2021-05-12
+
+### Updated
+
+- Added English and French URL config for Registration Site to fix language switching
+
+## [2.0] - 2021-05-12
+
+### Added
+
+- QR Code Registration site
+- Portal QR Code Venue search and Outbreak features
 
 ## [1.19.4] - 2021-04-28
 
