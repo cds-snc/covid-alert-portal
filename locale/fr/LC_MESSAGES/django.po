@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-09 08:11+0000\n"
+"POT-Creation-Date: 2021-05-11 09:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -522,7 +522,6 @@ msgstr "Si le patient est prêt, générez une clé"
 #: outbreaks/templates/confirm.html outbreaks/templates/datetime.html
 #: outbreaks/templates/details.html outbreaks/templates/profile.html
 #: outbreaks/templates/severity.html
-#: register/templates/register/contact_us.html
 #: register/templates/register/location_address.html
 #: register/templates/register/location_category.html
 #: register/templates/register/location_contact.html
@@ -2314,8 +2313,8 @@ msgstr ""
 "    "
 
 #: register/templates/register/confirmation.html
-msgid "Remember to make a poster for each address of the establishment or event. "
-msgstr "N’oubliez pas de créer une affiche pour chacune des adresses de votre établissement ou événement."
+msgid "Remember to make a poster for each address of the place or event. "
+msgstr "N’oubliez pas de créer une affiche pour chacune des adresses de votre lieu ou événement."
 
 #: register/templates/register/confirmation.html
 msgid "Make another poster"
@@ -2357,8 +2356,8 @@ msgstr "Des questions?"
 #, python-format
 msgid ""
 "\n"
-"    <p>Visit <a href=\"%(helplink)s\">Help with your poster</a></p>\n"
-"    <p>Or <a href=\"%(contactlink)s\">Contact us</a></p>\n"
+"      <p>Read about <a href=\"%(helplink)s\">COVID Alert posters.</a></p>\n"
+"      <p>Or <a href=\"%(contactlink)s\">ask for help.</a></p>\n"
 "    "
 msgstr ""
 "\n"
@@ -2369,6 +2368,11 @@ msgstr ""
 #: register/templates/register/contact_us.html
 msgid "Contact Us"
 msgstr "Nous joindre"
+
+#: register/templates/register/contact_us.html
+#: register/templates/register/help_page.html
+msgid "Home"
+msgstr ""
 
 #: register/templates/register/contact_us.html
 msgid "For information about common issues, visit"
@@ -2395,10 +2399,6 @@ msgstr "Désolé, le lien de validation est expiré ou a déjà été utilisé."
 #: register/templates/register/includes/footer.html
 msgid "Help and information"
 msgstr "Aide et information"
-
-#: register/templates/register/help_page.html
-msgid "Home"
-msgstr ""
 
 #: register/templates/register/help_page.html
 msgid "Learn about"
