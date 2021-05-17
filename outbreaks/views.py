@@ -595,7 +595,7 @@ class ExposureDetailsView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
             )
 
             timezone = pytz.timezone(settings.PORTAL_LOCAL_TZ)
-            
+
             start_date = notification.start_date.astimezone(timezone)
             end_date = notification.end_date.astimezone(timezone)
 
@@ -606,7 +606,7 @@ class ExposureDetailsView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
             end_hm = end_date.strftime(get_time_format(get_language()))
             notification_txt = date_entry_tmpl.format(start_dmy, start_hm, end_hm)
             context["exposure_date_time"] = notification_txt
-            
+
             # TODO: not crazy about this
             self.request.session["alert_location"] = notification.location.id.hex
         except Location.DoesNotExist:
