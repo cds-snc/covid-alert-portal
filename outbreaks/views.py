@@ -607,7 +607,12 @@ class LocationHistoryView(SearchListBaseView):
         order = self.request.GET.get("order")
         if not sort or sort not in self.sort_options or order not in ["asc", "desc"]:
             params = "?sort=start_date&order=asc"
-            return redirect(reverse_lazy("outbreaks:location_history", kwargs={"pk": self.kwargs.get("pk")}) + params)
+            return redirect(
+                reverse_lazy(
+                    "outbreaks:location_history", kwargs={"pk": self.kwargs.get("pk")}
+                )
+                + params
+            )
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
@@ -636,12 +641,3 @@ class LocationHistoryView(SearchListBaseView):
         else:
             col = "start_date"
             return qs.order_by(col if order == "asc" else f"-{col}")
-    
-
-
-
-
-
-
-
-    

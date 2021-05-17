@@ -17,7 +17,7 @@ urlpatterns = [
     path(
         "<uuid:pk>/history",
         views.LocationHistoryView.as_view(),
-        name="location_history"
+        name="location_history",
     ),
     path(
         "datetime",
