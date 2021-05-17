@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-17 17:43+0000\n"
+"POT-Creation-Date: 2021-05-17 19:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -731,8 +731,7 @@ msgstr "Adresse"
 msgid "Show on map"
 msgstr "Montrer sur la carte"
 
-#: outbreaks/templates/confirm.html outbreaks/templates/profile.html
-#: register/templates/register/summary.html
+#: outbreaks/templates/confirm.html register/templates/register/summary.html
 msgid "Type"
 msgstr "Type"
 
@@ -963,13 +962,13 @@ msgstr "Trier par émetteur, ordre alphabétique inverse"
 msgid "Details of place or event"
 msgstr "Renseignements sur le lieu ou l’événement"
 
+#: outbreaks/templates/profile.html
+msgid "Contact name"
+msgstr "Personne-ressource"
+
 #: outbreaks/templates/profile.html register/forms.py
 msgid "Contact email"
 msgstr "Adresse courriel"
-
-#: outbreaks/templates/profile.html
-msgid "Contact phone"
-msgstr "Numéro du contact"
 
 #: outbreaks/templates/profile.html
 msgid "Number of prior alerts"
@@ -1026,8 +1025,8 @@ msgid "Select notification message"
 msgstr "Choisissez le message de la notification"
 
 #: outbreaks/views.py
-msgid "Showing {} {} {} of {} results."
-msgstr "Résultats {} {} {} sur {}."
+msgid "Showing {} - {} of {} results."
+msgstr "Résultats {} à {} sur {}."
 
 #: outbreaks/views.py
 msgid "A conflicting time range: ({}) was entered below."
