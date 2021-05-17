@@ -11,9 +11,12 @@ from calendar import month_name
 import pytz
 
 severity_choices = [
-    ("1", _("Self-monitor")),
-    ("2", _("Self-isolate")),
-    ("3", _("Get tested immediately")),
+    ("1", _("Isolate and get tested")),
+    ("2", _("Self-monitor for 14 days")),
+]
+severity_help = [
+    ("1", _("Isolate and get tested")),
+    ("2", _("Self-monitor for 14 days")),
 ]
 hour_format = "%-H:%M" if get_language() == "fr" else "%-I:%M %p"
 start_hours = []
@@ -147,10 +150,15 @@ class DateForm(HealthcareBaseForm):
 
 
 class SeverityForm(HealthcareBaseForm):
+    help_text = {
+        '1': _('Continue to self-isolate until you get your test result.'),
+        '2': _('If you develop symptoms, get tested and self-isolate until you get your test result.'),
+    }
+
     alert_level = forms.ChoiceField(
         label="",
         choices=severity_choices,
-        widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
+        widget=CDSRadioWidget(attrs={"class": "multichoice-radio", "help_text": help_text}),
     )
 
 
