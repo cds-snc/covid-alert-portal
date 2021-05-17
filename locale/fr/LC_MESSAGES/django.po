@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-11 14:58+0000\n"
+"POT-Creation-Date: 2021-05-17 19:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2102,36 +2102,48 @@ msgid "— Scan a place registration"
 msgstr ""
 
 #: register/forms.py
-msgid "Restaurant, bar, coffee shop"
-msgstr "Restaurants, bars et cafés"
+msgid "Restaurant, bar, coffee shop."
+msgstr "Restaurants, bars et cafés."
 
 #: register/forms.py
-msgid "Fitness and recreation"
-msgstr "Entraînement et activités physiques"
+msgid "Fitness, sports, recreation."
+msgstr "Entraînement et activités sportives ou récréatives."
 
 #: register/forms.py
-msgid "Arts and entertainment"
-msgstr "Arts et divertissement"
+msgid "Arts, entertainment."
+msgstr "Arts et divertissement."
 
 #: register/forms.py
-msgid "Grooming and wellness"
-msgstr "Soins de beauté et bien-être"
+msgid "Grooming and wellness."
+msgstr "Soins de beauté et bien-être."
 
 #: register/forms.py
-msgid "Religious space"
-msgstr "Espaces religieux"
+msgid "Places of worship."
+msgstr "Lieux de culte."
 
 #: register/forms.py
-msgid "Events, for example festivals or funerals."
-msgstr "Événements (p. ex., festivals, funérailles)."
+msgid "Events such as festivals, weddings, conferences."
+msgstr "Événements publics et privés (festivals, mariages, conférences, etc.)."
 
 #: register/forms.py
-msgid "Something else"
-msgstr "Autre"
+msgid "Retail such as grocery stores, liquor stores, pharmacies."
+msgstr "Commerces (épiceries, magasins de vins et spiritueux, pharmacies, etc.)."
 
 #: register/forms.py
-msgid "Tell us the type of establishment."
-msgstr "Quel est le type de votre établissement?"
+msgid "Medical office or centre (doctor, dentist, etc.)."
+msgstr "Centres et cabinets médicaux, dentaires, etc."
+
+#: register/forms.py
+msgid "Community centres, libraries, government service centres."
+msgstr "Centres communautaires, bibliothèques et centres de services gouvernementaux."
+
+#: register/forms.py
+msgid "Other."
+msgstr "Autre."
+
+#: register/forms.py
+msgid "Tell us the type of place."
+msgstr "De quel type de lieu s’agit-il?"
 
 #: register/forms.py
 msgid "Select a province or territory"
@@ -2274,8 +2286,8 @@ msgid "This is a new service — your feedback will help us improve it."
 msgstr ""
 
 #: register/templates/register/base.html
-msgid "Make a COVID Alert Poster"
-msgstr "Créer une affiche Alerte COVID"
+msgid "Make a COVID Alert QR code Poster"
+msgstr "Créer une affiche à code QR Alerte COVID"
 
 #: register/templates/register/confirmation.html
 msgid "Your poster is ready"
@@ -2481,8 +2493,8 @@ msgid "If the event or service has several addresses, you need a poster for each
 msgstr "Si le service ou l’événement comporte plusieurs adresses, vous devrez créer une affiche pour chaque adresse. Nous vous rappelerons de le faire quand vous aurez terminé la présente affiche."
 
 #: register/templates/register/location_category.html
-msgid "Type of establishment or event"
-msgstr "Type d’établissement ou d’événement"
+msgid "Type of place or event"
+msgstr "Type de lieu ou d’événement"
 
 #: register/templates/register/location_category.html
 msgid "Step 1 of 5"

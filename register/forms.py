@@ -18,9 +18,9 @@ location_arts_entertainment = "arts_entertainment"
 location_grooming_wellness = "grooming_wellness"
 location_religious_space = "religious_space"
 location_events = "events"
-location_retail = 'retail'
-location_medical = 'medical'
-location_centres = 'centres'
+location_retail = "retail"
+location_medical = "medical"
+location_centres = "centres"
 location_other = "other"
 
 location_category_type_map = {
