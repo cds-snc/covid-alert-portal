@@ -953,11 +953,11 @@ msgstr "Date d’envoi de l’alerte"
 
 #: outbreaks/templates/location_history.html
 msgid "Sort by sender, ascending"
-msgstr ""
+msgstr "Trier par émetteur, ordre alphabétique"
 
 #: outbreaks/templates/location_history.html
 msgid "Sort by sender, descending"
-msgstr ""
+msgstr "Trier par émetteur, ordre alphabétique inverse"
 
 #: outbreaks/templates/profile.html
 msgid "Details of place or event"
