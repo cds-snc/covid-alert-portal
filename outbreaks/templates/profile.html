@@ -49,10 +49,11 @@
         </div>
     </dl>
 
+    <div class="content-button">
+        <a href="{% url 'outbreaks:datetime' %}" role="button" draggable="false" class="start with-chevron">{% trans "Add an exposure" %}</a>
+    </div>
   {% else %}
     <p>{% trans "Place not found." %}</p>
   {% endif %}
-
-  {% include "includes/cds_form.html" with submit_text=_("Add an exposure") %}
 
 {% endblock %}
