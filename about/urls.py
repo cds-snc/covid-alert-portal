@@ -27,7 +27,7 @@ urlpatterns = [
     path(
         "sending-qr-alerts",
         TemplateView.as_view(template_name="about/6_sending_qr_alerts.html"),
-        name="sending_qr_alerts"
+        name="sending_qr_alerts",
     ),
     path(
         "admin-accounts",
