@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-17 16:51+0000\n"
+"POT-Creation-Date: 2021-05-17 17:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -948,11 +948,11 @@ msgid "Exposure date"
 msgstr "Date de l’exposition"
 
 #: outbreaks/templates/location_history.html
-msgid "Sort by alert sent, ascending"
+msgid "Sort by date alert sent, ascending"
 msgstr ""
 
 #: outbreaks/templates/location_history.html
-msgid "Sort by alert sent, descending"
+msgid "Sort by date alert sent, descending"
 msgstr ""
 
 #: outbreaks/templates/location_history.html
@@ -968,10 +968,8 @@ msgid "Sort by sender, descending"
 msgstr ""
 
 #: outbreaks/templates/profile.html
-#, fuzzy
-#| msgid "Details of exposure"
 msgid "Details of place or event"
-msgstr "Détails de l’exposition"
+msgstr "Renseignements sur le lieu ou l’événement"
 
 #: outbreaks/templates/profile.html register/forms.py
 msgid "Contact email"

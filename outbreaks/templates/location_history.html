@@ -36,11 +36,11 @@
           <th scope="col">
             <a href="?{% param_replace sort='created_date' order='asc' %}"
               class="icon-arrow up {% if sort == 'created_date' and order == 'asc' %} selected {% endif %}">
-              <span class="visually-hidden">{% trans "Sort by alert sent, ascending" %}</span>
+              <span class="visually-hidden">{% trans "Sort by date alert sent, ascending" %}</span>
             </a>
             <a href="?{% param_replace sort='created_date' order='desc' %}"
               class="icon-arrow down {% if sort == 'created_date' and order == 'desc' %} selected {% endif %}">
-              <span class="visually-hidden">{% trans "Sort by alert sent, descending" %}</span>
+              <span class="visually-hidden">{% trans "Sort by date alert sent, descending" %}</span>
             </a>
             <br>
             {% trans "Alert sent" %}
