@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-11 14:58+0000\n"
+"POT-Creation-Date: 2021-05-17 21:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,6 +54,7 @@ msgstr "Alerte COVID ne remplace pas la recherche manuelle de contacts effectué
 #: about/templates/about/3_one_time_keys.html
 #: about/templates/about/4_give_a_key.html
 #: about/templates/about/5_help_patient_enter_key.html
+#: about/templates/about/6_sending_qr_alerts.html
 msgid "Next:"
 msgstr "Suivant :"
 
@@ -201,32 +202,77 @@ msgid "To enter the key, the phone must be connected to the internet."
 msgstr "Le patient doit connecter son téléphone à Internet pour pouvoir entrer la clé."
 
 #: about/templates/about/5_help_patient_enter_key.html
-#: about/templates/about/6_admin_accounts.html
+#: about/templates/includes/_nav_about.html
+msgid "Sending alerts"
+msgstr "Envoi d’alertes"
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "Sending QR alerts"
+msgstr "Envoi d’alertes QR"
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "You’ll send alerts to people who scanned a QR code during an exposure. Your health authority will give you the address, date, time and guidance for the exposure."
+msgstr "Cette fonction vous permet d’envoyer une alerte aux personnes qui ont scanné le code QR d’un lieu pendant un risque d’exposition. L’autorité de santé publique vous communiquera l’adresse, la date et l’heure de l’exposition, ainsi que la consigne à transmettre."
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "We’ll guide you through the steps to create the alert"
+msgstr "Vous serez guidé étape par étape pour créer l’alerte"
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "If there are no results for a place or event"
+msgstr "Si votre recherche ne donne aucun résultat"
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "Follow local procedures for addresses without QR codes."
+msgstr "Suivez les procédures locales pour les lieux ou événements sans code QR."
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "After checking the details, you'll be able to send the alert"
+msgstr "Après avoir tout vérifié, vous pourrez envoyer l’alerte "
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "If there’s already been a QR alert for the exposure"
+msgstr "Si une alerte a déjà été envoyée pour l’exposition en question"
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "You will not be able to send the alert."
+msgstr "Vous ne pourrez pas envoyer l’alerte à nouveau."
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "We’ll confirm it’s sent"
+msgstr "Vous verrez une confirmation que l’alerte a été envoyée"
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "Health authorities continue to manually contact visitors who do not scan QR codes."
+msgstr "Les autorités sanitaires continueront de contacter manuellement les visiteurs qui ne scannent pas les codes QR."
+
+#: about/templates/about/6_sending_qr_alerts.html
+#: about/templates/about/7_admin_accounts.html
 #: about/templates/includes/_nav_about.html
 msgid "Admin accounts"
 msgstr "Comptes administrateurs"
 
-#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
 msgid "Both administrators and team members can generate one-time keys."
 msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
 
-#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
 msgid "Administrators can also:"
 msgstr "Les administrateurs peuvent aussi :"
 
-#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
 msgid "Invite team members to create portal accounts."
 msgstr "Inviter des membres à se créer un compte pour le portail."
 
-#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
 msgid "Make changes or update information in team member accounts."
 msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
 
-#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
 msgid "Delete portal accounts."
 msgstr "Supprimer des comptes."
 
-#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
 msgid "Give log in codes to team members who are locked out of the portal."
 msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
 
