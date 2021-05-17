@@ -45,6 +45,12 @@
             <td></td>
         </tr>
         <tr>
+            <th scope="row">{% trans "Guidance" %}</th>
+            <td>
+                {{ notification.severity }}
+            </td>
+        </tr>
+        <tr>
             <th scope="row">{% trans "Date of alert" %}</th>
             <td>{{ notification.created_date|date:'j M Y' }}</td>
             <td></td>
@@ -55,11 +61,6 @@
                 <span>{{ notification.created_by.name }}</span>
                 <span>{{ notification.created_by.email }}</span>
             </td>
-            <td></td>
-        </tr>
-        <tr>
-            <th scope="row">{% trans "Severity" %}</th>
-            <td>{{ notification.severity }}</td>
             <td></td>
         </tr>
       </tbody>

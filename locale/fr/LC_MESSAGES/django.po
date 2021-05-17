@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-17 19:55+0000\n"
+"POT-Creation-Date: 2021-05-17 20:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -743,7 +743,7 @@ msgstr ""
 msgid "dates"
 msgstr ""
 
-#: outbreaks/templates/confirm.html outbreaks/templates/details.html
+#: outbreaks/templates/confirm.html
 msgid "Severity"
 msgstr ""
 
@@ -840,6 +840,10 @@ msgstr "Détails de l’exposition"
 #: outbreaks/templates/details.html
 msgid "Date and time of exposure"
 msgstr "Date et heure de l’exposition"
+
+#: outbreaks/templates/details.html
+msgid "Guidance"
+msgstr "Consigne"
 
 #: outbreaks/templates/details.html
 msgid "Date of alert"
