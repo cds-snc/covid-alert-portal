@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-11 09:32+0000\n"
+"POT-Creation-Date: 2021-05-17 16:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -423,9 +423,9 @@ msgstr "Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne.
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html
 #: covid_key/templates/covid_key/otk_sms_sent.html
 #: outbreaks/templates/datetime.html outbreaks/templates/history.html
-#: outbreaks/templates/profile.html outbreaks/templates/search.html
-#: outbreaks/templates/severity.html profiles/templates/profiles/2fa.html
-#: profiles/templates/profiles/signup.html
+#: outbreaks/templates/location_history.html outbreaks/templates/profile.html
+#: outbreaks/templates/search.html outbreaks/templates/severity.html
+#: profiles/templates/profiles/2fa.html profiles/templates/profiles/signup.html
 #: profiles/templates/profiles/signup_2fa.html
 #: register/templates/register/location_address.html
 #: register/templates/register/location_category.html
@@ -520,8 +520,8 @@ msgstr "Si le patient est prêt, générez une clé"
 
 #: covid_key/templates/covid_key/generate_key.html
 #: outbreaks/templates/confirm.html outbreaks/templates/datetime.html
-#: outbreaks/templates/details.html outbreaks/templates/profile.html
-#: outbreaks/templates/severity.html
+#: outbreaks/templates/details.html outbreaks/templates/location_history.html
+#: outbreaks/templates/profile.html outbreaks/templates/severity.html
 #: register/templates/register/location_address.html
 #: register/templates/register/location_category.html
 #: register/templates/register/location_contact.html
@@ -847,30 +847,30 @@ msgid "Delete"
 msgstr "Supprimer"
 
 #: outbreaks/templates/details.html
-msgid "Details of public exposure"
-msgstr "Détails de l’exposition publique"
+msgid "Details of exposure"
+msgstr "Détails de l’exposition"
 
 #: outbreaks/templates/details.html
 msgid "Exposure details"
 msgstr "Détails de l’exposition publique"
 
 #: outbreaks/templates/details.html
-msgid "Sender"
-msgstr "Émetteur"
-
-#: outbreaks/templates/details.html outbreaks/templates/history.html
-msgid "Date of public exposure"
-msgstr "Date d’exposition publique"
+msgid "Date and time of exposure"
+msgstr "Date et heure de l’exposition"
 
 #: outbreaks/templates/details.html
 msgid "Date of notification"
 msgstr "Date de la notification"
 
+#: outbreaks/templates/details.html outbreaks/templates/location_history.html
+msgid "Sender"
+msgstr "Émetteur"
+
 #: outbreaks/templates/details.html
 msgid "Exposure details not found."
 msgstr ""
 
-#: outbreaks/templates/history.html
+#: outbreaks/templates/history.html outbreaks/templates/location_history.html
 msgid "Alert history"
 msgstr "Historique des alertes"
 
@@ -894,7 +894,7 @@ msgstr "Chercher"
 msgid "results for"
 msgstr "résultats pour"
 
-#: outbreaks/templates/history.html
+#: outbreaks/templates/history.html outbreaks/templates/location_history.html
 msgid "Prior notifications"
 msgstr "Notifications antérieures"
 
@@ -914,29 +914,58 @@ msgstr "Trier par adresse, par ordre croissant"
 msgid "Sort by address, descending"
 msgstr "Trier par adresse, par ordre décroissant"
 
-#: outbreaks/templates/history.html
+#: outbreaks/templates/history.html outbreaks/templates/location_history.html
 msgid "Sort by date of exposure, ascending"
 msgstr "Trier par date d'exposition, par ordre croissant"
 
-#: outbreaks/templates/history.html
+#: outbreaks/templates/history.html outbreaks/templates/location_history.html
 msgid "Sort by date of exposure, descending"
 msgstr "Trier par date d'exposition, par ordre décroissant"
 
 #: outbreaks/templates/history.html
+msgid "Date of public exposure"
+msgstr "Date d’exposition publique"
+
+#: outbreaks/templates/history.html outbreaks/templates/location_history.html
 msgid "See more notification "
 msgstr "Voir plus de notification "
 
-#: outbreaks/templates/history.html
+#: outbreaks/templates/history.html outbreaks/templates/location_history.html
 msgid "Details"
 msgstr "Détails"
 
-#: outbreaks/templates/history.html outbreaks/templates/search.html
+#: outbreaks/templates/history.html outbreaks/templates/location_history.html
+#: outbreaks/templates/search.html
 msgid "Previous"
 msgstr "précédent"
 
-#: outbreaks/templates/history.html
+#: outbreaks/templates/history.html outbreaks/templates/location_history.html
 msgid "No prior alerts for"
 msgstr "Aucune alerte n’a été envoyée pour"
+
+#: outbreaks/templates/location_history.html
+msgid "Exposure date"
+msgstr "Date de l’exposition"
+
+#: outbreaks/templates/location_history.html
+msgid "Sort by alert sent, ascending"
+msgstr ""
+
+#: outbreaks/templates/location_history.html
+msgid "Sort by alert sent, descending"
+msgstr ""
+
+#: outbreaks/templates/location_history.html
+msgid "Alert sent"
+msgstr "Date d’envoi de l’alerte"
+
+#: outbreaks/templates/location_history.html
+msgid "Sort by sender, ascending"
+msgstr ""
+
+#: outbreaks/templates/location_history.html
+msgid "Sort by sender, descending"
+msgstr ""
 
 #: outbreaks/templates/profile.html
 msgid "Place profile"
@@ -951,8 +980,8 @@ msgid "Contact phone"
 msgstr "Numéro du contact"
 
 #: outbreaks/templates/profile.html
-msgid "Number of prior notifications"
-msgstr "Nombre de notifications passées"
+msgid "Number of prior alerts"
+msgstr "Nombre d’alertes précédentes"
 
 #: outbreaks/templates/profile.html
 msgid "Place not found."

@@ -2,7 +2,7 @@
 {% load i18n param_replace %}
 
 {% block title %}
-    {% trans "Place history" %}
+    {% trans "Alert history" %}
 {% endblock %}
 
 {% block content %}
@@ -24,11 +24,11 @@
           <th scope="col">
             <a href="?{% param_replace sort='start_date' order='asc' %}"
               class="icon-arrow up {% if sort == 'start_date' and order == 'asc' %} selected {% endif %}">
-              <span class="visually-hidden">{% trans "Sort by exposure date, ascending" %}</span>
+              <span class="visually-hidden">{% trans "Sort by date of exposure, ascending" %}</span>
             </a>
             <a href="?{% param_replace sort='start_date' order='desc' %}"
               class="icon-arrow down {% if sort == 'start_date' and order == 'desc' %} selected {% endif %}">
-              <span class="visually-hidden">{% trans "Sort by exposure date, descending" %}</span>
+              <span class="visually-hidden">{% trans "Sort by date of exposure, descending" %}</span>
             </a>
             <br>
             {% trans "Exposure date" %}

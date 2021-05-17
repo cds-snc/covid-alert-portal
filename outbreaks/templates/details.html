@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block title %}
-    {% trans "Details of public exposure" %}
+    {% trans "Details of exposure" %}
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@
     </div>
 
   {% if location %}
-    <h1>{% trans "Details of public exposure" %}</h1>
+    <h1>{% trans "Details of exposure" %}</h1>
 
     <table>
       <caption class="visually-hidden">{% trans "Exposure details" %}</caption>
@@ -37,21 +37,21 @@
             </td>
         </tr>
         <tr>
-            <th scope="row">{% trans "Sender" %}</th>
-            <td>
-                <span>{{ notification.created_by.name }}</span>
-                <span>{{ notification.created_by.email }}</span>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <th scope="row">{% trans "Date of public exposure" %}</th>
+            <th scope="row">{% trans "Date and time of exposure" %}</th>
             <td>{{ notification.start_date|date:'Y-m-d' }}</td>
             <td></td>
         </tr>
         <tr>
             <th scope="row">{% trans "Date of notification" %}</th>
             <td>{{ notification.created_date|date:'Y-m-d' }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">{% trans "Sender" %}</th>
+            <td>
+                <span>{{ notification.created_by.name }}</span>
+                <span>{{ notification.created_by.email }}</span>
+            </td>
             <td></td>
         </tr>
         <tr>
