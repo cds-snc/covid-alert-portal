@@ -635,18 +635,6 @@ msgstr "Consultez la page"
 msgid "Something went wrong. Contact your administrator."
 msgstr "Une erreur est survenue. Veuillez contacter votre admistrateur du portail."
 
-#: google_analytics/models.py
-msgid "Google Analytics Code"
-msgstr "Code pour Google Analytics"
-
-#: google_analytics/models.py
-msgid "If no tracking code provided Google Analytics will not record any data for site."
-msgstr "Si aucun code est soumis Google Analytics ne serait pas en mesure de captures les données pour ce site."
-
-#: google_analytics/models.py
-msgid "Google Analytics V4 Tracking Code"
-msgstr "Code pour Google Analytics version 4"
-
 #: outbreaks/forms.py
 msgid "Self-monitor"
 msgstr "Serveillez vos symptômes"
