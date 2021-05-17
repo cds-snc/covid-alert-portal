@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block title %}
-    {% trans "Place profile" %}
+    {% trans "Details of place or event" %}
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@
     </div>
 
   {% if location %}
-    <h1>{% trans "Place profile" %}</h1>
+    <h1>{% trans "Details of place or event" %}</h1>
 
     <dl class="summary-list">
         <div class="summary-list__row">
@@ -63,6 +63,6 @@
     <p>{% trans "Place not found." %}</p>
   {% endif %}
 
-  {% include "includes/cds_form.html" with submit_text=_("Next") %}
+  {% include "includes/cds_form.html" with submit_text=_("Add an exposure") %}
 
 {% endblock %}

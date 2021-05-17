@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-17 16:42+0000\n"
+"POT-Creation-Date: 2021-05-17 16:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -423,9 +423,9 @@ msgstr "Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne.
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html
 #: covid_key/templates/covid_key/otk_sms_sent.html
 #: outbreaks/templates/datetime.html outbreaks/templates/history.html
-#: outbreaks/templates/location_history.html outbreaks/templates/profile.html
-#: outbreaks/templates/search.html outbreaks/templates/severity.html
-#: profiles/templates/profiles/2fa.html profiles/templates/profiles/signup.html
+#: outbreaks/templates/location_history.html outbreaks/templates/search.html
+#: outbreaks/templates/severity.html profiles/templates/profiles/2fa.html
+#: profiles/templates/profiles/signup.html
 #: profiles/templates/profiles/signup_2fa.html
 #: register/templates/register/location_address.html
 #: register/templates/register/location_category.html
@@ -968,8 +968,10 @@ msgid "Sort by sender, descending"
 msgstr ""
 
 #: outbreaks/templates/profile.html
-msgid "Place profile"
-msgstr "Profil du lieu d’exposition"
+#, fuzzy
+#| msgid "Details of exposure"
+msgid "Details of place or event"
+msgstr "Détails de l’exposition"
 
 #: outbreaks/templates/profile.html register/forms.py
 msgid "Contact email"
@@ -986,6 +988,10 @@ msgstr "Nombre d’alertes précédentes"
 #: outbreaks/templates/profile.html
 msgid "Place not found."
 msgstr "Lieu introuvable"
+
+#: outbreaks/templates/profile.html
+msgid "Add an exposure"
+msgstr "Ajouter une exposition"
 
 #: outbreaks/templates/search.html
 msgid "Alert people who scanned the QR code during an exposure."
@@ -2735,3 +2741,6 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Place profile"
+#~ msgstr "Profil du lieu d’exposition"
