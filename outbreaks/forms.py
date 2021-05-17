@@ -151,14 +151,18 @@ class DateForm(HealthcareBaseForm):
 
 class SeverityForm(HealthcareBaseForm):
     help_text = {
-        '1': _('Continue to self-isolate until you get your test result.'),
-        '2': _('If you develop symptoms, get tested and self-isolate until you get your test result.'),
+        "1": _("Continue to self-isolate until you get your test result."),
+        "2": _(
+            "If you develop symptoms, get tested and self-isolate until you get your test result."
+        ),
     }
 
     alert_level = forms.ChoiceField(
         label="",
         choices=severity_choices,
-        widget=CDSRadioWidget(attrs={"class": "multichoice-radio", "help_text": help_text}),
+        widget=CDSRadioWidget(
+            attrs={"class": "multichoice-radio", "help_text": help_text}
+        ),
     )
 
 
