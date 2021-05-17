@@ -598,9 +598,46 @@ class ExposureDetailsView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
 
 
 class LocationHistoryView(SearchListBaseView):
-    model = Notification
     template_name = "location_history.html"
-    sort_options = ["name", "address", "date"]
+    sort_options = ["start_date", "created_date", "created_by"]
+
+    def get(self, request, *args, **kwargs):
+        # Ensure there is a clean sort and order column
+        sort = self.request.GET.get("sort")
+        order = self.request.GET.get("order")
+        if not sort or sort not in self.sort_options or order not in ["asc", "desc"]:
+            params = "?sort=start_date&order=asc"
+            return redirect(reverse_lazy("outbreaks:location_history", kwargs={"pk": self.kwargs.get("pk")}) + params)
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        # send the sort and order info to the template
+        context = super().get_context_data(*args, **kwargs)
+        context["location"] = Location.objects.get(id=self.kwargs["pk"])
+        context["sort"] = self.request.GET.get("sort")
+        context["order"] = self.request.GET.get("order")
+        return context
+
+    def get_queryset(self):
+        qs = Notification.objects.filter(location__id=self.kwargs["pk"])
+
+        # Order the queryset
+        return self._order_queryset(qs)
+
+    def _order_queryset(self, qs):
+        order = self.request.GET.get("order")
+        sort = self.request.GET.get("sort")
+        if sort == "created_by":
+            col = "created_by"
+            return qs.order_by(col if order == "asc" else f"-{col}")
+        elif sort == "created_date":
+            col = "created_date"
+            return qs.order_by(col if order == "asc" else f"-{col}")
+        else:
+            col = "start_date"
+            return qs.order_by(col if order == "asc" else f"-{col}")
+    
+
 
 
 

@@ -7,10 +7,13 @@
 
 {% block content %}
     <div class="content-back-link">
-        <a href="{% url 'outbreaks:search' %}" class="chevron-left">{% trans "Find QR places and events" %}</a>
+        <a href="{% url 'outbreaks:profile' location.id %}" class="chevron-left">{% trans "Back" %}</a>
     </div>
 
     <h1>{% trans "Alert history" %}</h1>
+
+    <p>{{ location.name }}<br>
+    {{ location.address }}</p>
 
     {% if object_list %}
     
@@ -19,40 +22,40 @@
         <thead>
         <tr>
           <th scope="col">
-            <a href="?{% param_replace sort='name' order='asc' %}"
-              class="icon-arrow up {% if sort == 'name' and order == 'asc' %} selected {% endif %}">
-              <span class="visually-hidden">{% trans "Sort by name, ascending" %}</span>
+            <a href="?{% param_replace sort='start_date' order='asc' %}"
+              class="icon-arrow up {% if sort == 'start_date' and order == 'asc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by exposure date, ascending" %}</span>
             </a>
-            <a href="?{% param_replace sort='name' order='desc' %}"
-              class="icon-arrow down {% if sort == 'name' and order == 'desc' %} selected {% endif %}">
-              <span class="visually-hidden">{% trans "Sort by name, descending" %}</span>
+            <a href="?{% param_replace sort='start_date' order='desc' %}"
+              class="icon-arrow down {% if sort == 'start_date' and order == 'desc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by exposure date, descending" %}</span>
             </a>
             <br>
-            {% trans "Name" %}
+            {% trans "Exposure date" %}
           </th>
           <th scope="col">
-            <a href="?{% param_replace sort='address' order='asc' %}"
-              class="icon-arrow up {% if sort == 'address' and order == 'asc' %} selected {% endif %}">
-              <span class="visually-hidden">{% trans "Sort by address, ascending" %}</span>
+            <a href="?{% param_replace sort='created_date' order='asc' %}"
+              class="icon-arrow up {% if sort == 'created_date' and order == 'asc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by alert sent, ascending" %}</span>
             </a>
-            <a href="?{% param_replace sort='address' order='desc' %}"
-              class="icon-arrow down {% if sort == 'address' and order == 'desc' %} selected {% endif %}">
-              <span class="visually-hidden">{% trans "Sort by address, descending" %}</span>
+            <a href="?{% param_replace sort='created_date' order='desc' %}"
+              class="icon-arrow down {% if sort == 'created_date' and order == 'desc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by alert sent, descending" %}</span>
             </a>
             <br>
-            {% trans "Address" %}
+            {% trans "Alert sent" %}
           </th>
           <th scope="col">
-            <a href="?{% param_replace sort='date' order='asc' %}"
-              class="icon-arrow up {% if sort == 'date' and order == 'asc' %} selected {% endif %}">
-              <span class="visually-hidden">{% trans "Sort by date of exposure, ascending" %}</span>
+            <a href="?{% param_replace sort='created_by' order='asc' %}"
+              class="icon-arrow up {% if sort == 'created_by' and order == 'asc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by sender, ascending" %}</span>
             </a>
-            <a href="?{% param_replace sort='date' order='desc' %}"
-              class="icon-arrow down {% if sort == 'date' and order == 'desc' %} selected {% endif %}">
-              <span class="visually-hidden">{% trans "Sort by date of exposure, descending" %}</span>
+            <a href="?{% param_replace sort='created_by' order='desc' %}"
+              class="icon-arrow down {% if sort == 'created_by' and order == 'desc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by sender, descending" %}</span>
             </a>
             <br>
-            {% trans "Date of public exposure" %}
+            {% trans "Sender" %}
           </th>
           <th scope="col"></th>
         </tr>
@@ -60,15 +63,14 @@
         <tbody>
         {% for notification in object_list %}
           <tr>
-            <td>{{ notification.location.name }}</td>
+            <td>{{ notification.start_date|date:'j M Y' }}</td>
             <td>
-              <address>
-                <span> {{ notification.location.address }} </span>
-                <span> {{ notification.location.city }}, {{ notification.location.province }} </span>
-                <span> {{ notification.location.postal_code }} </span>
-              </address>
+              {{ notification.created_date|date:'j M Y' }}
             </td>
-            <td>{{ notification.start_date|date:'Y-m-d' }}</td>
+            <td>
+              {{ notification.created_by.name }}<br>
+              {{ notification.created_by.email }}
+            </td>
             <td>
               <a href="{% url 'outbreaks:details' notification.id %}">
                 <span class="visually-hidden">{% trans "See more notification " %}</span>{% trans "Details" %}
