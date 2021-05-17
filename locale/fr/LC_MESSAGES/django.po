@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-17 17:16+0000\n"
+"POT-Creation-Date: 2021-05-17 17:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -839,20 +839,24 @@ msgid "Details of exposure"
 msgstr "Détails de l’exposition"
 
 #: outbreaks/templates/details.html
-msgid "Exposure details"
-msgstr "Détails de l’exposition publique"
-
-#: outbreaks/templates/details.html
 msgid "Date and time of exposure"
 msgstr "Date et heure de l’exposition"
 
 #: outbreaks/templates/details.html
-msgid "Date of notification"
-msgstr "Date de la notification"
+msgid "Date of alert"
+msgstr "Date d’envoi de l’alerte"
 
 #: outbreaks/templates/details.html outbreaks/templates/location_history.html
 msgid "Sender"
 msgstr "Émetteur"
+
+#: outbreaks/templates/details.html
+msgid "Need to add a new exposure for this address?"
+msgstr "Besoin d’ajouter une nouvelle exposition à cette adresse?"
+
+#: outbreaks/templates/details.html outbreaks/templates/profile.html
+msgid "Add an exposure"
+msgstr "Ajouter une exposition"
 
 #: outbreaks/templates/details.html
 msgid "Exposure details not found."
@@ -974,10 +978,6 @@ msgstr "Nombre d’alertes précédentes"
 #: outbreaks/templates/profile.html
 msgid "Place not found."
 msgstr "Lieu introuvable"
-
-#: outbreaks/templates/profile.html
-msgid "Add an exposure"
-msgstr "Ajouter une exposition"
 
 #: outbreaks/templates/search.html
 msgid "Alert people who scanned the QR code during an exposure."
@@ -2727,6 +2727,3 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
-
-#~ msgid "Place profile"
-#~ msgstr "Profil du lieu d’exposition"
