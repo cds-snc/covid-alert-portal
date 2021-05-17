@@ -940,11 +940,11 @@ msgstr "Date de l’exposition"
 
 #: outbreaks/templates/location_history.html
 msgid "Sort by date alert sent, ascending"
-msgstr ""
+msgstr "Trier par date d'envoi de l'alerte, ordre croissant"
 
 #: outbreaks/templates/location_history.html
 msgid "Sort by date alert sent, descending"
-msgstr ""
+msgstr "Trier par date d'envoi de l'alerte, ordre décroissant"
 
 #: outbreaks/templates/location_history.html
 msgid "Alert sent"
