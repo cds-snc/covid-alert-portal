@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load tz %}
 
 {% block title %}
     {% trans "Details of exposure" %}
@@ -38,12 +39,14 @@
         </tr>
         <tr>
             <th scope="row">{% trans "Date and time of exposure" %}</th>
-            <td>{{ notification.start_date|date:'Y-m-d' }}</td>
+            <td>
+                {{ exposure_date_time }}
+            </td>
             <td></td>
         </tr>
         <tr>
             <th scope="row">{% trans "Date of alert" %}</th>
-            <td>{{ notification.created_date|date:'Y-m-d' }}</td>
+            <td>{{ notification.created_date|date:'j M Y' }}</td>
             <td></td>
         </tr>
         <tr>
