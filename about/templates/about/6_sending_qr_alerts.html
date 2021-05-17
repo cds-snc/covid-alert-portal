@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+{% trans "Sending QR alerts" %}
+{% endblock %}
+
+{% block content_class %}row{% endblock %}
+{% block content %}
+  <div class="column">
+    {% include  "includes/nav_about.html" %}
+  </div>
+
+  <div class="column column--2-3">
+    <h1>{% trans "Sending QR alerts" %}</h1>
+
+
+
+    <div class="content-next-link">
+      <a href="{% url 'about:admin_accounts' %}" class="chevron-right">{% trans "Next:" %} {% trans "Admin accounts" %}</a>
+    </div>
+  </div>
+{% endblock %}

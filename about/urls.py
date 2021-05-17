@@ -25,8 +25,13 @@ urlpatterns = [
         name="help_patient_enter_key",
     ),
     path(
+        "sending-qr-alerts",
+        TemplateView.as_view(template_name="about/6_sending_qr_alerts.html"),
+        name="sending_qr_alerts"
+    ),
+    path(
         "admin-accounts",
-        TemplateView.as_view(template_name="about/6_admin_accounts.html"),
+        TemplateView.as_view(template_name="about/7_admin_accounts.html"),
         name="admin_accounts",
     ),
 ]
