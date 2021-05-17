@@ -592,6 +592,8 @@ class ExposureDetailsView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
             context["map_link"] = "https://maps.google.com/?q=" + str(
                 notification.location
             )
+            
+            self.request.session["alert_location"] = notification.location.id.hex
         except Location.DoesNotExist:
             pass
         return context

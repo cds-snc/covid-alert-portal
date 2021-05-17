@@ -14,7 +14,7 @@
     <h1>{% trans "Details of exposure" %}</h1>
 
     <table>
-      <caption class="visually-hidden">{% trans "Exposure details" %}</caption>
+      <caption class="visually-hidden">{% trans "Details of exposure" %}</caption>
       <tbody>
         <tr>
             <th scope="row">{% trans "Name" %}</th>
@@ -42,7 +42,7 @@
             <td></td>
         </tr>
         <tr>
-            <th scope="row">{% trans "Date of notification" %}</th>
+            <th scope="row">{% trans "Date of alert" %}</th>
             <td>{{ notification.created_date|date:'Y-m-d' }}</td>
             <td></td>
         </tr>
@@ -61,6 +61,13 @@
         </tr>
       </tbody>
     </table>
+
+    <br>
+    <p>{% trans "Need to add a new exposure for this address?" %}</p>
+
+    <div class="content-button">
+        <a href="{% url 'outbreaks:datetime' %}" role="button" draggable="false" class="with-chevron">{% trans "Add an exposure" %}</a>
+    </div>
 
   {% else %}
     <p>{% trans "Exposure details not found." %}</p>
