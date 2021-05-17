@@ -2544,7 +2544,7 @@ msgstr "Une affiche Alerte COVID est envoyée à votre adresse courriel."
 
 #: register/templates/register/privacy.html
 msgid "You’re the contact person for an address that has a COVID Alert poster"
-msgstr "Vous êtes la personne-ressource pour une adresse où il y a une affiche Alerte COVID."
+msgstr "Vous êtes la personne-ressource pour une adresse où il y a une affiche Alerte COVID"
 
 #: register/templates/register/privacy.html
 msgid "This notice may also apply to you if:"
