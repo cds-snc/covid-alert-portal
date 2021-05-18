@@ -104,6 +104,7 @@ INSTALLED_APPS = [
     "announcements",
     "google_analytics",
     "formtools",  # for form wizard
+    "localflavor",
 ]
 
 MIDDLEWARE = [

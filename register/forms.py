@@ -8,6 +8,7 @@ from dependency_injector.wiring import inject, Provide
 from portal.containers import Container
 from portal.services import NotifyService
 from .widgets import AutocompleteWidget
+from localflavor.ca.forms import CAPostalCodeField
 
 type_event = 1
 type_establishment = 2
@@ -107,7 +108,7 @@ class LocationAddressForm(HealthcareBaseForm, forms.Form):
     )
     city = forms.CharField(label=_("City"), max_length=100)
     province = forms.ChoiceField(label=_("Province or territory"), choices=provinces)
-    postal_code = forms.CharField(label=_("Postal code"), max_length=10)
+    postal_code = CAPostalCodeField(label=_("Postal code"), max_length=10)
 
 
 class LocationContactForm(HealthcareBaseForm, forms.Form):
