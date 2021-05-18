@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load static i18n %}
 
 {% block title %}
 {% trans "Sending QR alerts" %}
@@ -18,23 +18,53 @@
 
     <h2>{% trans "We’ll guide you through the steps to create the alert" %}</h2>
 
-    <p>Start by <a href="">finding the address</a>.</p>
+    {% url "outbreaks:search" as link %}
+    {% blocktrans %}
+        <p>Start by <a href="{{ link }}">finding the address</a>.</p>
+    {% endblocktrans %}
 
-    [SCREENSHOT]
+    <details>
+        <summary>
+            <span>
+                {% trans "Show screenshot" %}
+            </span>
+        </summary>
+        <div>
+            <img alt="" src="{% static 'about/img/qr_code_1-'|add:request.LANGUAGE_CODE|add:'.png' %}" />
+        </div>
+    </details>
 
     <h3>{% trans "If there are no results for a place or event" %}</h3>
     <p>{% trans "Follow local procedures for addresses without QR codes." %}</p>
 
     <h2{% trans "After checking the details, you'll be able to send the alert" %}></h2>
 
-    [SCREENSHOT]
+    <details>
+        <summary>
+            <span>
+                {% trans "Show screenshot" %}
+            </span>
+        </summary>
+        <div>
+            <img alt="" src="{% static 'about/img/qr_code_2-'|add:request.LANGUAGE_CODE|add:'.png' %}" />
+        </div>
+    </details>
 
     <h3>{% trans "If there’s already been a QR alert for the exposure" %}</h3>
     <p>{% trans "You will not be able to send the alert." %}</p>
 
     <h2>{% trans "We’ll confirm it’s sent" %}</h2>
 
-    [SCREENSHOT]
+    <details>
+        <summary>
+            <span>
+                {% trans "Show screenshot" %}
+            </span>
+        </summary>
+        <div>
+            <img alt="" src="{% static 'about/img/qr_code_3-'|add:request.LANGUAGE_CODE|add:'.png' %}" />
+        </div>
+    </details>
 
     <p>{% trans "Health authorities continue to manually contact visitors who do not scan QR codes." %}</p>
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-17 21:19+0000\n"
+"POT-Creation-Date: 2021-05-18 15:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -217,6 +217,21 @@ msgstr "Cette fonction vous permet d’envoyer une alerte aux personnes qui ont 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "We’ll guide you through the steps to create the alert"
 msgstr "Vous serez guidé étape par étape pour créer l’alerte"
+
+#: about/templates/about/6_sending_qr_alerts.html
+#, python-format
+msgid ""
+"\n"
+"        <p>Start by <a href=\"%(link)s\">finding the address</a>.</p>\n"
+"    "
+msgstr ""
+"\n"
+"        <p>Commencez par <a href=\"%(link)s\">trouver le lieu ou l’événement en question</a>.</p>\n"
+"    "
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "Show screenshot"
+msgstr "Afficher la capture d’écran"
 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "If there are no results for a place or event"
