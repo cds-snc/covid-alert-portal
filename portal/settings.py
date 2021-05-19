@@ -53,7 +53,9 @@ ALLOWED_HOSTS = [
     gethostname(),
 ]
 
-if is_prod and "alpha.canada.ca" in gethostname():
+URL_DUAL_DOMAINS = os.getenv("URL_DUAL_DOMAINS", "False") == "True"
+
+if is_prod and URL_DUAL_DOMAINS:
     LANGUAGE_COOKIE_DOMAIN = "alpha.canada.ca"
 
 if not DEBUG and not TESTING:
@@ -100,7 +102,6 @@ INSTALLED_APPS = [
     "djversion",
     "widget_tweaks",
     "announcements",
-    "solo",
     "google_analytics",
     "formtools",  # for form wizard
 ]
@@ -122,6 +123,14 @@ MIDDLEWARE = [
     "waffle.middleware.WaffleMiddleware",
     "portal.middleware.TZMiddleware",
 ]
+
+# Just a temporary basic user/pass to prevent early access to reg form
+BASICAUTH_USERS = {
+    os.getenv("BASICAUTH_USER", "cds"): os.getenv("BASICAUTH_PASS", "cds")
+}
+
+if os.getenv("APP_SWITCH") == "QRCODE" and URL_DUAL_DOMAINS:
+    MIDDLEWARE.insert(0, "register.middleware.BasicAuthMiddleware")
 
 ROOT_URLCONF = "portal.urls"
 
@@ -159,10 +168,12 @@ if APP_SWITCH != "QRCODE":
         "profiles.context_processors.logout_messages",
         "profiles.context_processors.general_settings",
     ]
+    GA_ID = os.getenv("PORTAL_GA_ID", None)
 else:
     TEMPLATES[0]["OPTIONS"]["context_processors"] += [
         "register.context_processors.general_settings",
     ]
+    GA_ID = os.getenv("QRCODE_GA_ID", None)
 
 AUTHENTICATION_BACKENDS = [
     "axes.backends.AxesBackend",  # Needs to be first
@@ -400,8 +411,6 @@ AXES_META_PRECEDENCE_ORDER = [  # Use the IP provided by the load balancer
 ]
 AXES_HANDLER = "profiles.login_handler.HealthcareLoginHandler"
 # Site Setup for Separate Domains
-
-URL_DUAL_DOMAINS = os.getenv("URL_DUAL_DOMAINS", "False") == "True"
 
 if APP_SWITCH == "QRCODE":
     URL_EN_PRODUCTION = os.getenv(

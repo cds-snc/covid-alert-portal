@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [2.0.3] - 2021-05-14
+
+## Updated
+
+- Skip basicauth on /status for dns health checks
+
+## [2.0.2] - 2021-05-13
+
+## Updated
+
+- Added a temporary user/pass for registration site to prevent early access
+- Fixed a language switch bug when in an environment with dual domains (ie, production)
+
 ## [2.0.1] - 2021-05-12
 
 ### Updated
