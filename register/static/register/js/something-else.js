@@ -12,3 +12,6 @@ categorySelect.onchange = function (e) {
     document.getElementById("id_category-category_description").parentElement.style.display = 'none';
   }
 }
+// Add optgroup to allow text zoom in mobile html control
+const optGroup = document.createElement("optgroup");
+categorySelect.append(optGroup);
