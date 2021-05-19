@@ -2148,7 +2148,7 @@ msgstr "Quel est le type de votre établissement?"
 #: register/forms.py
 #, python-format
 msgid "Your name is longer than the %(limit_value)d character limit"
-msgstr ""
+msgstr "Le nom dépasse la limite de %(limit_value)d caractères"
 
 #: register/forms.py
 msgid "Select a province or territory"
