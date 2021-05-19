@@ -21,20 +21,14 @@ def location_type_str(location_category, prefix, *args, **kwargs):
                 return _("Address of establishment")
             elif location_category_type_map[location_category] == type_event:
                 return _("Address of event")
-            elif (
-                location_category_type_map[location_category]
-                == type_event_or_place
-            ):
+            elif location_category_type_map[location_category] == type_event_or_place:
                 return _("Address of establishment or event")
         elif prefix == "name":
             if location_category_type_map[location_category] == type_place:
                 return _("Name of establishment")
             elif location_category_type_map[location_category] == type_event:
                 return _("Name of event")
-            elif (
-                location_category_type_map[location_category]
-                == type_event_or_place
-            ):
+            elif location_category_type_map[location_category] == type_event_or_place:
                 return _("Name of establishment or event")
         raise ValueError(
             "Location category or prefix not valid for template tag filter."
