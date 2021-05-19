@@ -318,6 +318,10 @@ HEROKU_APP_NAME = os.getenv("HEROKU_APP_NAME") or False
 # phonenumber_field app, default to Canadian numbers
 PHONENUMBER_DEFAULT_REGION = "CA"
 
+# TODO: we need to do some further work to apply this format to the Portal app
+if APP_SWITCH == "QRCODE":
+    PHONENUMBER_DEFAULT_FORMAT = "NATIONAL"
+
 # Invitations app
 SITE_ID = 1  # Required for invitations app
 INVITATIONS_GONE_ON_ACCEPT_ERROR = False
