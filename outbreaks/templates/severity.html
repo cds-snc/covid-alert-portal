@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block title %}
-    {% trans "Select notification message" %}
+    {% trans "Choose guidance" %}
 {% endblock %}
 
 {% block content %}
@@ -10,8 +10,12 @@
         <a href="{% url 'outbreaks:datetime' %}" class="chevron-left">{% trans "Back" %}</a>
     </div>
 
-  <h1>{% trans "Select notification message" %}</h1>
+    <p>{% trans "Step 2 of 3" %}</p>
 
-  {% include "includes/cds_form.html" with submit_text=_("Next") %}
+    <h1>{% trans "Choose guidance" %}</h1>
+
+    <p>{% trans "The alert will include this message." %}</p>
+
+    {% include "includes/cds_form.html" with submit_text=_("Next") %}
 
 {% endblock %}
