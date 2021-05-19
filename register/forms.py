@@ -10,8 +10,8 @@ from portal.services import NotifyService
 from .widgets import AutocompleteWidget
 
 type_event = 1
-type_establishment = 2
-type_event_or_establishment = 3
+type_place = 2
+type_event_or_place = 3
 location_restaurant_bar_coffee = "restaurant_bar_coffee"
 location_fitness_recreation = "fitness_recreation"
 location_arts_entertainment = "arts_entertainment"
@@ -24,16 +24,16 @@ location_centres = "centres"
 location_other = "other"
 
 location_category_type_map = {
-    location_restaurant_bar_coffee: type_establishment,
-    location_fitness_recreation: type_establishment,
-    location_arts_entertainment: type_establishment,
-    location_grooming_wellness: type_establishment,
-    location_religious_space: type_establishment,
+    location_restaurant_bar_coffee: type_place,
+    location_fitness_recreation: type_place,
+    location_arts_entertainment: type_place,
+    location_grooming_wellness: type_place,
+    location_religious_space: type_place,
     location_events: type_event,
-    location_retail: type_establishment,
-    location_medical: type_establishment,
-    location_centres: type_establishment,
-    location_other: type_event_or_establishment,
+    location_retail: type_place,
+    location_medical: type_place,
+    location_centres: type_place,
+    location_other: type_event_or_place,
 }
 
 location_choices = [
