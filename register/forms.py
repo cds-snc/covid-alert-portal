@@ -77,7 +77,7 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
 
 
 class LocationNameForm(HealthcareBaseForm, forms.Form):
-    name = forms.CharField(label="", max_length=36)
+    name = forms.CharField(label="", max_length=65)
 
 
 provinces = [
