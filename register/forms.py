@@ -108,9 +108,11 @@ class LocationAddressForm(HealthcareBaseForm, forms.Form):
     )
     city = forms.CharField(label=_("City"), max_length=100)
     province = forms.ChoiceField(label=_("Province or territory"), choices=provinces)
-    postal_code = CAPostalCodeField(label=_("Postal code"), max_length=10, error_messages={
-        "invalid": _("Enter a valid Canadian postal code.")
-    })
+    postal_code = CAPostalCodeField(
+        label=_("Postal code"),
+        max_length=10,
+        error_messages={"invalid": _("Enter a valid Canadian postal code.")},
+    )
 
 
 class LocationContactForm(HealthcareBaseForm, forms.Form):
