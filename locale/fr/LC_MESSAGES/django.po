@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-17 20:50+0000\n"
+"POT-Creation-Date: 2021-05-19 19:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2220,6 +2220,10 @@ msgstr "Province ou territoire"
 #: register/forms.py register/models.py
 msgid "Postal code"
 msgstr "Code postal"
+
+#: register/forms.py
+msgid "Enter a valid Canadian postal code."
+msgstr ""
 
 #: register/forms.py register/models.py
 msgid "Name of contact"
