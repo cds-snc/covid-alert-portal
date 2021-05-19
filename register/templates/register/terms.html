@@ -1,0 +1,75 @@
+{% extends 'register/base.html' %}
+{% load i18n static %}
+
+{% block title %}
+  {% trans "How to display your COVID Alert poster" %}
+{% endblock %}
+
+
+{% block content %}
+  <div class="support">
+    <div class="content-back-link">
+      <a href="{% url 'register:start' %}" class="chevron-left">{% trans "Home" %}</a>
+    </div>
+    <h1>{% trans "Terms of use" %}</h1>
+    <br>
+    <p>
+      {% trans '“Make a COVID Alert QR code poster” is for businesses, community organizations and events in Canada.' %}
+    </p>
+<br>
+    <h2>{% trans "Your responsibilities" %}</h2>
+
+    <p>
+      {% trans 'By using this website, you agree that ' %}
+      <b>
+        {% trans 'you’re a person who’s responsible for making a poster for a place or event.' %}
+      </b>
+    </p>
+  <br>
+    <p>
+      <b>
+        {% trans 'You also agree that you’ll:' %}
+      </b>
+      <br>
+      <br>
+    </p>
+    <ul>
+      <li>
+        {% trans 'Only make posters for places or events that you’re responsible for.' %}
+      </li>
+      <li>
+        {% trans 'Enter accurate information when making posters.' %}
+      </li>
+      <li>
+        {% trans 'If needed, update name, address or contact information by using this website to make a new poster.  This changes the QR code for the place or event.' %}
+      </li>
+      <li>
+        {% trans 'Destroy any posters you do not need anymore or that display a previous QR code.' %}
+      </li>
+      <li>
+        {% trans 'Only display posters within the area that belongs to the address of the place or event.' %}
+      </li>
+      <li>
+        {% trans 'Display the correct poster for the address.' %}
+      </li>
+      <li>
+        {% trans 'Keep posters in good condition and replace damaged posters.' %}
+      </li>
+    </ul>
+  <br>
+    <h2>{% trans "Fraud or abuse" %}</h2>
+    <p>
+      {% trans 'The Government of Canada is not responsible for problems caused by damaged or altered posters. This includes altered or fake QR codes that link to apps or websites other than  COVID Alert.' %}
+    </p>
+    <p>
+      {% blocktrans %}
+        If we learn that you’re using this website for fraud or abuse, we may block your access without warning.
+        You can report fraud or abuse to <a href="mailto:security@cds-snc.ca">security@cds-snc.ca</a>.
+      {% endblocktrans %}
+    </p>
+  </div>
+{% endblock %}
+
+
+
+
