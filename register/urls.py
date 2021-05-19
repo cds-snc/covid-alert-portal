@@ -15,7 +15,6 @@ from register.views import check_for_province
 
 app_name = "register"
 
-
 # order matters here
 named_location_forms = (
     ("category", LocationCategoryForm),
@@ -69,6 +68,16 @@ urlpatterns = [
         "display",
         TemplateView.as_view(template_name="register/how_display_poster.html"),
         name="howtodisplay",
+    ),
+    path(
+        "privacy",
+        TemplateView.as_view(template_name="register/privacy.html"),
+        name="privacy",
+    ),
+    path(
+        "terms",
+        TemplateView.as_view(template_name="register/terms.html"),
+        name="terms",
     ),
     path(
         "success",

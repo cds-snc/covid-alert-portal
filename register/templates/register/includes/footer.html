@@ -7,8 +7,8 @@
             <ul>
                 <li><a href="{% url 'register:contactus' %}">{% trans "Contact us" %}</a></li>
                 <li><a href="{% url 'register:help' %}">{% trans "Help and information" %}</a></li>
-                <li><a href="">{% trans "Privacy" %}</a></li>
-                <li><a href="">{% trans "Terms of use" %}</a></li>
+                <li><a href="{% url 'register:privacy' %}">{% trans "Privacy" %}</a></li>
+                <li><a href="{% url 'register:terms' %}">{% trans "Terms of use" %}</a></li>
             </ul>
         </div>
         <div class="box-style">
