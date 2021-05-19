@@ -2283,7 +2283,7 @@ msgstr "BÊTA"
 
 #: register/templates/register/base.html
 msgid "This is a new service — your feedback will help us improve it."
-msgstr ""
+msgstr "Il s’agit d’un nouveau service, et vos commentaires nous aideront à l’améliorer."
 
 #: register/templates/register/base.html
 msgid "Make a COVID Alert Poster"
