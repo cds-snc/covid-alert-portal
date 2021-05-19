@@ -8,7 +8,7 @@
       <div class="multiple-choice__item">
         <input {% if option.attrs.id %} id="{{ option.attrs.id }}"{% endif %} type="radio" name="{{ option.name }}" value="{{ option.value|stringformat:'s' }}" {% if option.attrs.checked %} checked{% endif %}>
         <label {% if option.attrs.id %} for="{{ option.attrs.id }}"{% endif %}>
-          {{ option.label }}
+          <strong>{{ option.label }}</strong>
           {% if option.attrs.help_text %}
             <span class="help-text">{{ option.attrs.help_text|dict_key:option.value }}</span>
           {% endif %}
