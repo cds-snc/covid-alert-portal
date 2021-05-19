@@ -2223,7 +2223,7 @@ msgstr "Code postal"
 
 #: register/forms.py
 msgid "Enter a valid Canadian postal code."
-msgstr ""
+msgstr "Entrez un code postal canadien valide."
 
 #: register/forms.py register/models.py
 msgid "Name of contact"
