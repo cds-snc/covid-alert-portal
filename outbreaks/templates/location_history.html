@@ -105,7 +105,7 @@
       </div>
     {% else %}
       <p>
-        <b>{% trans 'No prior alerts for' %}</b> [Location Name].
+        <b>{% trans 'No prior alerts for' %} {{ location.name }}</b>.
       </p>
     {% endif %}
 {% endblock %}
