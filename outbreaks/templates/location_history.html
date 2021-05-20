@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load i18n param_replace %}
+
+{% block title %}
+    {% trans "Alert history" %}
+{% endblock %}
+
+{% block content %}
+    <div class="content-back-link">
+        <a href="{% url 'outbreaks:profile' location.id %}" class="chevron-left">{% trans "Back" %}</a>
+    </div>
+
+    <h1>{% trans "Alert history" %}</h1>
+
+    <p><strong>{{ location.name }}<br>
+    {{ location.address }}</strong></p>
+
+    {% if object_list %}
+    
+      <table class="with-actions">
+        <caption class="visually-hidden">{% trans "Prior notifications" %}</caption>
+        <thead>
+        <tr>
+          <th scope="col">
+            <a href="?{% param_replace sort='start_date' order='asc' %}"
+              class="icon-arrow up {% if sort == 'start_date' and order == 'asc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by date of exposure, ascending" %}</span>
+            </a>
+            <a href="?{% param_replace sort='start_date' order='desc' %}"
+              class="icon-arrow down {% if sort == 'start_date' and order == 'desc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by date of exposure, descending" %}</span>
+            </a>
+            <br>
+            {% trans "Exposure date" %}
+          </th>
+          <th scope="col">
+            <a href="?{% param_replace sort='created_date' order='asc' %}"
+              class="icon-arrow up {% if sort == 'created_date' and order == 'asc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by date alert sent, ascending" %}</span>
+            </a>
+            <a href="?{% param_replace sort='created_date' order='desc' %}"
+              class="icon-arrow down {% if sort == 'created_date' and order == 'desc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by date alert sent, descending" %}</span>
+            </a>
+            <br>
+            {% trans "Alert sent" %}
+          </th>
+          <th scope="col">
+            <a href="?{% param_replace sort='created_by' order='asc' %}"
+              class="icon-arrow up {% if sort == 'created_by' and order == 'asc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by sender, ascending" %}</span>
+            </a>
+            <a href="?{% param_replace sort='created_by' order='desc' %}"
+              class="icon-arrow down {% if sort == 'created_by' and order == 'desc' %} selected {% endif %}">
+              <span class="visually-hidden">{% trans "Sort by sender, descending" %}</span>
+            </a>
+            <br>
+            {% trans "Sender" %}
+          </th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for notification in object_list %}
+          <tr>
+            <td>{{ notification.start_date|date:'j M Y' }}</td>
+            <td>
+              {{ notification.created_date|date:'j M Y' }}
+            </td>
+            <td>
+              {{ notification.created_by.name }}<br>
+              {{ notification.created_by.email }}
+            </td>
+            <td>
+              <a href="{% url 'outbreaks:details' notification.id %}">
+                <span class="visually-hidden">{% trans "See more notification " %}</span>{% trans "Details" %}
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="pagination">
+        <span class="step-links">
+
+          <span class="current">
+              {{ paging_phrase }}
+          </span>
+
+          {% if page_obj.has_previous %}
+            <a href="?{% param_replace page=1 %}" class="no-underline-link page-back-link"></a>&nbsp;&nbsp;
+            <a href="?{% param_replace page=page_obj.previous_page_number %}">{% trans "Previous" %}</a>
+          {% endif %}
+
+          {% if page_obj.has_next and page_obj.has_previous %}
+            &nbsp;
+          {% endif %}
+
+          {% if page_obj.has_next %}
+            <a href="?{% param_replace page=page_obj.next_page_number %}">{% trans "Next" %}</a>&nbsp;
+            <a href="?{% param_replace page=page_obj.paginator.num_pages %}" class="no-underline-link page-next-link"></a>
+          {% endif %}
+        </span>
+      </div>
+    {% else %}
+      <p>
+        <b>{% trans 'No prior alerts for' %} {{ location.name }}</b>.
+      </p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,201 @@
+{% extends 'register/base.html' %}
+{% load i18n static %}
+
+{% block title %}
+  {% trans "How to display your COVID Alert poster" %}
+{% endblock %}
+
+
+{% block content %}
+  <div class="support">
+    <div class="content-back-link">
+      <a href="{% url 'register:start' %}" class="chevron-left">{% trans "Home" %}</a>
+    </div>
+    <h1>{% trans "Privacy notice" %}</h1>
+    <br>
+    <p>
+      <b>
+        {% trans "This privacy notice applies to you if:" %}
+      </b>
+      <br>
+    </p>
+    <ul>
+      <li>
+        {% trans "We send a COVID Alert poster to your email address." %}
+      </li>
+      <li>
+        {% trans "You’re the contact person for an address that has a COVID Alert poster" %}.
+      </li>
+    </ul>
+
+
+    <br>
+    <p>
+      <b>
+        {% trans "This notice may also apply to you if:" %}
+      </b>
+      <br>
+    </p>
+    <ul>
+      <li>
+        {% trans "You’re the owner of a place or event that has a COVID Alert poster." %}
+      </li>
+      <li>
+        {% trans "Your personal information forms part of the name or address of a place or event." %}
+      </li>
+    </ul>
+
+    <br>
+    <p>
+      <b>{% trans 'We ask for personal information to make a QR code' %}</b>
+      {% trans 'for each address of a place or event.  ' %}
+      {% trans 'If any of this information changes, the place or event will need a new QR code.' %}
+      {% trans 'Visit the home page for “Make a COVID Alert QR code poster’ to make a poster or posters with a new code.' %}
+    </p>
+
+    <br>
+    <p>
+      <b>
+        {% trans "We log all activity and information, including:" %}
+      </b>
+      <br>
+    </p>
+    <ul>
+      <li>
+        {% trans "The name and address of the place or event and the name, email and phone number of the contact person for each address. We also log the email address where we send the poster." %}
+      </li>
+      <li>
+        {% trans "Dates and times that you visit this website to make a QR code." %}
+      </li>
+      <li>
+        {% trans "Each time the COVID Alert app scans your QR code." %}
+      </li>
+    </ul>
+
+
+    <br>
+    <p>
+      <b>
+        {% trans "We may need to give this information to:" %}
+      </b>
+      <br>
+    </p>
+    <ul>
+      <li>
+        {% trans "Public health authorities in your province or territory. They’ll use the information to identify COVID-19 exposures at your address, and to respond to those exposures, if necessary." %}
+      </li>
+      <li>
+        {% blocktrans %}
+          Staff at
+          <a href="https://www.ic.gc.ca/eic/site/icgc.nsf/eng/home" target="_blank">
+            Innovation, Science, and Economic Development Canada</a>.
+          They can help you use this website.
+        {% endblocktrans %}
+      </li>
+      <li>
+        {% trans "Law enforcement, if we detect illegal activity." %}
+      </li>
+    </ul>
+
+
+    <br>
+    <p>
+      <b>
+        {% trans 'We do not share this information with app users.' %}
+      </b>
+    </p>
+
+    <br>
+    <p>
+      {% blocktrans %}
+        <b>
+          We’ll keep this information until Canada’s Chief Public Health Officer
+        </b>
+        <a href="http://www.phn-rsp.ca/pubs/mlisa-emer-eng.php#Declaration" target="_blank">
+          announces that the COVID-19 pandemic is over</a>.
+      {% endblocktrans %}
+    </p>
+
+
+    <br>
+    <p>
+      <b>
+        {% trans "We study and improve the COVID Alert system using:" %}
+      </b>
+      <br>
+    </p>
+    <ul>
+      <li>
+        {% trans "Services such as Google Analytics, to learn about website and poster activity. We do not share your personal information with these services." %}
+      </li>
+      <li>
+        {% blocktrans %}
+          Research to learn how people use this website. We may email any address entered in this website with an
+          invitation to participate in this research.
+          <b>You do not have to agree</b> to participate.
+          If you agree, you can change your mind and end your participation at any time.
+        {% endblocktrans %}
+      </li>
+    </ul>
+
+
+    <br>
+    <p>
+      {% blocktrans %}
+        <b>
+          We’re allowed to use this information and these services
+        </b>
+        under the
+        <a href="https://laws-lois.justice.gc.ca/eng/acts/H-3.2/" target="_blank">
+          Department of Health Act</a>
+        and the
+        <a href="https://laws-lois.justice.gc.ca/eng/acts/f-11/" target="_blank">
+          Financial Administration Act</a>
+        . We also follow the
+        <a href="https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=26761" target="_blank">
+          Standard on Privacy and Web Analytics</a>.
+      {% endblocktrans %}
+    </p>
+
+
+    <br>
+    <p>
+      <b>
+        {% trans 'You have the right to access, review and correct your personal information.' %}
+      </b>
+      {% trans 'Contact the Access to Information and Privacy Coordinator by:' %}
+    </p>
+    <ul>
+      <li>
+        {% trans "Email" %}:
+        <a href="mailto:ATIP-AIPRP@HC-SC.GC.CA">ATIP-AIPRP@HC-SC.GC.CA</a>.
+      </li>
+      <li>
+        {% trans 'Phone' %}: 613-954-9165.
+      </li>
+      <li>
+        {% trans 'Teletypewriter through Service Canada: 1-800-465-7735' %}.
+      </li>
+    </ul>
+
+    <br>
+    <p>
+      {% blocktrans %}
+        <b>
+          You have the right to complain
+        </b>
+        about how we use your information to the
+        <a href="https://www.priv.gc.ca/en/for-individuals/" target="_blank">
+          Privacy Commissioner of Canada</a>.
+      {% endblocktrans %}
+    </p>
+
+
+    <br>
+    <h2>{% trans "Questions?" %}</h2>
+    <p>
+      {% trans 'Contact' %}
+      <a href="mailto:hc.AlerteCOVIDAlert.sc@canada.ca">{% trans 'Health Canada' %}</a>.
+    </p>
+  </div>
+{% endblock %}
