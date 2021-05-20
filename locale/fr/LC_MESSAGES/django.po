@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-19 19:34+0000\n"
+"POT-Creation-Date: 2021-05-19 22:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2547,6 +2547,9 @@ msgid ""
 "      We do <b>not</b> show the contact information on your QR code poster.\n"
 "    "
 msgstr ""
+"\n"
+"      La personne-ressource <b>n’apparaîtra pas</b> sur votre affiche à code QR.\n"
+"    "
 
 #: register/templates/register/location_name.html
 msgid "Step 2 of 5"
@@ -2578,6 +2581,9 @@ msgid ""
 "    We do <b>not</b> show the email address on the poster.\n"
 "  "
 msgstr ""
+"\n"
+"    Cette adresse courriel <b>n’apparaîtra pas</b> sur l’affiche.\n"
+"  "
 
 #: register/templates/register/registrant_email.html
 msgid "We’ll send you a link to confirm your email address."
@@ -2621,7 +2627,7 @@ msgstr "Affichez un code QR pour contribuer à ralentir la COVID-19"
 
 #: register/templates/register/start.html
 msgid "Make a COVID Alert poster for your business, community organization or event."
-msgstr ""
+msgstr "Créez une affiche Alerte COVID pour votre entreprise, votre organisme communautaire ou votre événement."
 
 #: register/templates/register/start.html
 msgid ""
