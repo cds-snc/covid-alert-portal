@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-19 18:25+0000\n"
+"POT-Creation-Date: 2021-05-20 14:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2147,8 +2147,8 @@ msgstr "Quel est le type de votre établissement?"
 
 #: register/forms.py
 #, python-format
-msgid "Your name is longer than the %(limit_value)d character limit"
-msgstr "Le nom dépasse la limite de %(limit_value)d caractères"
+msgid "Your name is longer than the %(limit_value)d character limit."
+msgstr "Le nom dépasse la limite de %(limit_value)d caractères."
 
 #: register/forms.py
 msgid "Select a province or territory"
