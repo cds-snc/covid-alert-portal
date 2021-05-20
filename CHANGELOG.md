@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 - Enforce character limit for location name so it doesn't run off the poster
+- Add Location Outbreaks History view
 
 ## [2.0.3] - 2021-05-14
 
