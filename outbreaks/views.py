@@ -584,6 +584,7 @@ class ExposureDetailsView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
+
         try:
             notification = Notification.objects.get(id=self.kwargs["pk"])
             notification.severity = dict(SEVERITY)[notification.severity]
@@ -592,6 +593,68 @@ class ExposureDetailsView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
             context["map_link"] = "https://maps.google.com/?q=" + str(
                 notification.location
             )
+
+            timezone = pytz.timezone(settings.PORTAL_LOCAL_TZ)
+
+            start_date = notification.start_date.astimezone(timezone)
+            end_date = notification.end_date.astimezone(timezone)
+
+            date_entry_tmpl = _("{} from {} to {}")
+            start_dmy_fmt = "%e %B %Y"
+            start_dmy = start_date.strftime(start_dmy_fmt)
+            start_hm = start_date.strftime(get_time_format(get_language()))
+            end_hm = end_date.strftime(get_time_format(get_language()))
+            notification_txt = date_entry_tmpl.format(start_dmy, start_hm, end_hm)
+            context["exposure_date_time"] = notification_txt
+
+            # TODO: not crazy about this
+            self.request.session["alert_location"] = notification.location.id.hex
         except Location.DoesNotExist:
             pass
         return context
+
+
+class LocationHistoryView(SearchListBaseView):
+    template_name = "location_history.html"
+    sort_options = ["start_date", "created_date", "created_by"]
+
+    def get(self, request, *args, **kwargs):
+        # Ensure there is a clean sort and order column
+        sort = self.request.GET.get("sort")
+        order = self.request.GET.get("order")
+        if not sort or sort not in self.sort_options or order not in ["asc", "desc"]:
+            params = "?sort=start_date&order=asc"
+            return redirect(
+                reverse_lazy(
+                    "outbreaks:location_history", kwargs={"pk": self.kwargs.get("pk")}
+                )
+                + params
+            )
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        # send the sort and order info to the template
+        context = super().get_context_data(*args, **kwargs)
+        context["location"] = Location.objects.get(id=self.kwargs["pk"])
+        context["sort"] = self.request.GET.get("sort")
+        context["order"] = self.request.GET.get("order")
+        return context
+
+    def get_queryset(self):
+        qs = Notification.objects.filter(location__id=self.kwargs["pk"])
+
+        # Order the queryset
+        return self._order_queryset(qs)
+
+    def _order_queryset(self, qs):
+        order = self.request.GET.get("order")
+        sort = self.request.GET.get("sort")
+        if sort == "created_by":
+            col = "created_by"
+            return qs.order_by(col if order == "asc" else f"-{col}")
+        elif sort == "created_date":
+            col = "created_date"
+            return qs.order_by(col if order == "asc" else f"-{col}")
+        else:
+            col = "start_date"
+            return qs.order_by(col if order == "asc" else f"-{col}")
