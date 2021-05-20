@@ -7,7 +7,6 @@ from django import forms
 from django.conf import settings
 from django.urls import reverse_lazy
 from django.db.models.functions import Lower
-from django.db.models import Q
 from django.db import transaction
 from django.shortcuts import redirect, render
 from django.views.generic import FormView, ListView, TemplateView, View
