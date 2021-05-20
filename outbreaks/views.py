@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+from django.db.models.sql.query import JoinInfo
 from django.http import HttpResponseRedirect
 
 from register.models import Location
@@ -536,11 +537,18 @@ class HistoryView(SearchListBaseView):
     def get_queryset(self):
         province = self.request.user.province.abbr
         search = self.request.GET.get("search_text", "").strip()
+        
+        # If we don't have search text then just return all results within this province
+        if self.request.user.is_superuser:
+            qs = Notification.objects.all()
+        else:
+            qs = Notification.objects.filter(location__province=province)
+        
         if search:
             query = process_query(search)
-            qs = Notification.objects.select_related("location").all()
 
             qs = qs.extra(
+                tables=["register_location", "outbreaks_notification"],
                 where=[
                     """
                         to_tsvector(unaccent(concat_ws(' ',
@@ -553,13 +561,6 @@ class HistoryView(SearchListBaseView):
                 ],
                 params=[query],
             )
-            print(qs.query)
-        else:
-            # If we don't have search text then just return all results within this province
-            if self.request.user.is_superuser:
-                qs = Notification.objects.all()
-            else:
-                qs = Notification.objects.filter(location__province=province)
 
         # Order the queryset
         return self._order_queryset(qs)
