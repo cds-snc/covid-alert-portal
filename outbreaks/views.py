@@ -537,7 +537,7 @@ class HistoryView(SearchListBaseView):
         province = self.request.user.province.abbr
         search = self.request.GET.get("search_text", "").strip()
 
-        # If we don't have search text then just return all results within this province
+        # Start the queryset with all objects for Admin, province-specific for others
         if self.request.user.is_superuser:
             qs = Notification.objects.all()
         else:
