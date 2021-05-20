@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 - Validate Canadian postal code format
+- Add Location Outbreaks History view
 
 ## [2.0.3] - 2021-05-14
 
