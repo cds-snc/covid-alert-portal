@@ -537,23 +537,23 @@ class HistoryView(SearchListBaseView):
         province = self.request.user.province.abbr
         search = self.request.GET.get("search_text", "").strip()
         if search:
-            # 'icontains' will produce a case-insensitive SQL 'LIKE' statement which adds a certain level of
-            # 'fuzziness' to the search
-            # Fuzzy search either the name or the address field
-            # search within the same province as the user or CDS
-            if self.request.user.is_superuser:
-                qs = Notification.objects.filter(
-                    Q(location__name__icontains=search)
-                    | Q(location__address__icontains=search)
-                )
-            else:
-                qs = Notification.objects.filter(
-                    Q(location__province=province)
-                    & Q(
-                        Q(location__name__icontains=search)
-                        | Q(location__address__icontains=search)
-                    )
-                )
+            query = process_query(search)
+            qs = Notification.objects.select_related("location").all()
+
+            qs = qs.extra(
+                where=[
+                    """
+                        to_tsvector(unaccent(concat_ws(' ',
+                            register_location.name,
+                            register_location.address,
+                            register_location.city,
+                            register_location.postal_code
+                        ))) @@ to_tsquery(unaccent(%s))
+                        """
+                ],
+                params=[query],
+            )
+            print(qs.query)
         else:
             # If we don't have search text then just return all results within this province
             if self.request.user.is_superuser:
