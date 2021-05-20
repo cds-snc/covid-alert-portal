@@ -1,5 +1,4 @@
 from django.core.exceptions import ValidationError
-from django.db.models.sql.query import JoinInfo
 from django.http import HttpResponseRedirect
 
 from register.models import Location
