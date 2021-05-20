@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block title %}
-    {% trans "Place profile" %}
+    {% trans "Details of place or event" %}
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@
     </div>
 
   {% if location %}
-    <h1>{% trans "Place profile" %}</h1>
+    <h1>{% trans "Details of place or event" %}</h1>
 
     <dl class="summary-list">
         <div class="summary-list__row">
@@ -33,13 +33,8 @@
             </dd>
         </div>
         <div class="summary-list__row">
-            <dt class="summary-list__key">{% trans "Type" %}</dt>
-            <dd class="summary-list__value">
-                {{ location.category }}
-                {% if location.category_description%}
-                - {{ location.category_description }}
-                {% endif %}
-            </dd>
+            <dt class="summary-list__key">{% trans "Contact name" %}</dt>
+            <dd class="summary-list__value">{{ location.contact_name }}</dd>
             <dd class="summary-list__actions"></dd>
         </div>
         <div class="summary-list__row">
@@ -48,21 +43,17 @@
             <dd class="summary-list__actions"></dd>
         </div>
         <div class="summary-list__row">
-            <dt class="summary-list__key">{% trans "Contact phone" %}</dt>
-            <dd class="summary-list__value">{{ location.contact_phone }}</dd>
-            <dd class="summary-list__actions"></dd>
-        </div>
-        <div class="summary-list__row">
-            <dt class="summary-list__key">{% trans "Number of prior notifications" %}</dt>
+            <dt class="summary-list__key">{% trans "Number of prior alerts" %}</dt>
             <dd class="summary-list__value">{{ num_notifications }}</dd>
-            <dd class="summary-list__actions"></dd>
+            <dd class="summary-list__actions"><a href="{% url 'outbreaks:location_history' location.id %}">Show history</a></dd>
         </div>
     </dl>
 
+    <div class="content-button">
+        <a href="{% url 'outbreaks:datetime' %}" role="button" draggable="false" class="start with-chevron">{% trans "Add an exposure" %}</a>
+    </div>
   {% else %}
     <p>{% trans "Place not found." %}</p>
   {% endif %}
-
-  {% include "includes/cds_form.html" with submit_text=_("Next") %}
 
 {% endblock %}
