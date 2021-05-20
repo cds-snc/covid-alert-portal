@@ -118,7 +118,10 @@ def get_pdf_poster(location, lang="en"):
 
     # Get instructions PDF
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-    instructions = os.path.join(BASE_DIR, 'register/templates/register/posters/instructions-{lang}.pdf'.format(lang=lang))
+    instructions = os.path.join(
+        BASE_DIR,
+        "register/templates/register/posters/instructions-{lang}.pdf".format(lang=lang),
+    )
     pdf_instructions = PyPDF2.PdfFileReader(instructions)
 
     # Merge the pdfs
