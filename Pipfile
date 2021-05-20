@@ -49,6 +49,7 @@ protobuf = "*"
 segno = "*"
 cairosvg = "*"
 django-basicauth = "*"
+pypdf2 = "*"
 
 [pipenv]
 allow_prereleases = true

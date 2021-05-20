@@ -8,6 +8,8 @@ import io
 import cairosvg
 from django.template.loader import render_to_string
 import base64
+import PyPDF2
+import os
 
 
 # Will generate a random alphanumeric string with 62^length possible combinations
@@ -111,11 +113,23 @@ def get_pdf_poster(location, lang="en"):
     cairosvg.svg2pdf(
         bytestring=rendered.encode("UTF-8"),
         write_to=buffer,
-        output_width=2550,
-        output_height=3300,
+        output_width=815,
     )
 
+    # Get instructions PDF
+    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+    instructions = os.path.join(BASE_DIR, 'register/templates/register/posters/instructions-{lang}.pdf'.format(lang=lang))
+    pdf_instructions = PyPDF2.PdfFileReader(instructions)
+
+    # Merge the pdfs
+    mergeFile = PyPDF2.PdfFileMerger()
+    mergeFile.append(buffer)
+    mergeFile.append(pdf_instructions)
+
+    # Write it back to the puffer
+    mergeFile.write(buffer)
     buffer.seek(0)
+
     return buffer
 
 
