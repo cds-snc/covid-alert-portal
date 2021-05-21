@@ -3,7 +3,7 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: "%}{% endif %}
-  {% trans "Type of establishment or event" %}
+  {% trans "Type of place or event" %}
 {% endblock %}
 
 {% block content %}
@@ -21,7 +21,7 @@
     <p>{% trans "Choose the type that best fits your situation." %}</p>
   </div>
   
-  {% include "register/includes/category_form.html" with submit_text=_("Next") %}
+  {% include "register/includes/category_form.html" with submit_text=_("Next") form_class="registration-category-form" %}
 {% endblock %}
 
 {% block scripts %}

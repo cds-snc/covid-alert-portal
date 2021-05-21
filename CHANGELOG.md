@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add QR Alert docs to Portal
 - Add Location Outbreaks History view
+- New venue types and selection html select control
 
 ## [2.0.3] - 2021-05-14
 

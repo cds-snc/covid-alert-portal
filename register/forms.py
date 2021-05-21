@@ -10,34 +10,43 @@ from portal.services import NotifyService
 from .widgets import AutocompleteWidget
 
 type_event = 1
-type_establishment = 2
-type_event_or_establishment = 3
+type_place = 2
+type_event_or_place = 3
 location_restaurant_bar_coffee = "restaurant_bar_coffee"
 location_fitness_recreation = "fitness_recreation"
 location_arts_entertainment = "arts_entertainment"
 location_grooming_wellness = "grooming_wellness"
 location_religious_space = "religious_space"
 location_events = "events"
+location_retail = "retail"
+location_medical = "medical"
+location_centres = "centres"
 location_other = "other"
 
 location_category_type_map = {
-    location_restaurant_bar_coffee: type_establishment,
-    location_fitness_recreation: type_establishment,
-    location_arts_entertainment: type_establishment,
-    location_grooming_wellness: type_establishment,
-    location_religious_space: type_establishment,
+    location_restaurant_bar_coffee: type_place,
+    location_fitness_recreation: type_place,
+    location_arts_entertainment: type_place,
+    location_grooming_wellness: type_place,
+    location_religious_space: type_place,
     location_events: type_event,
-    location_other: type_event_or_establishment,
+    location_retail: type_place,
+    location_medical: type_place,
+    location_centres: type_place,
+    location_other: type_event_or_place,
 }
 
 location_choices = [
-    (location_restaurant_bar_coffee, _("Restaurant, bar, coffee shop")),
-    (location_fitness_recreation, _("Fitness and recreation")),
-    (location_arts_entertainment, _("Arts and entertainment")),
-    (location_grooming_wellness, _("Grooming and wellness")),
-    (location_religious_space, _("Religious space")),
-    (location_events, _("Events, for example festivals or funerals.")),
-    (location_other, _("Something else")),
+    (location_restaurant_bar_coffee, _("Restaurant, bar, coffee shop.")),
+    (location_fitness_recreation, _("Fitness, sports, recreation.")),
+    (location_arts_entertainment, _("Arts, entertainment.")),
+    (location_grooming_wellness, _("Grooming and wellness.")),
+    (location_religious_space, _("Places of worship.")),
+    (location_events, _("Events such as festivals, weddings, conferences.")),
+    (location_retail, _("Retail such as grocery stores, liquor stores, pharmacies.")),
+    (location_medical, _("Medical office or centre (doctor, dentist, etc.).")),
+    (location_centres, _("Community centres, libraries, government service centres.")),
+    (location_other, _("Other.")),
 ]
 
 
@@ -61,10 +70,9 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
     category = forms.ChoiceField(
         label="",
         choices=location_choices,
-        widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
     category_description = forms.CharField(
-        label=_("Tell us the type of establishment."), required=False, max_length=200
+        label=_("Tell us the type of place."), required=False, max_length=200
     )
 
     def clean(self):
@@ -73,7 +81,7 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
         category_description = cleaned_data.get("category_description")
 
         if other_selected and not category_description:
-            raise forms.ValidationError(_("Tell us the type of establishment."))
+            raise forms.ValidationError(_("Tell us the type of place."))
 
 
 class LocationNameForm(HealthcareBaseForm, forms.Form):
