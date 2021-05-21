@@ -13,6 +13,13 @@
     </div>
     {% url "register:contactus" as link %}
     <h1>{% trans "Help and information" %}</h1>
+    <h2>{% trans "Ottawa pilot" %}</h2>
+    <p>
+      {% trans 'Right now there’s only scanning in Ottawa.' %}
+    </p>
+    <p>
+      {% trans 'Outside of the city, you can still make a poster for your place or event. Then you’ll be ready when your region starts using QR codes.' %}
+    </p>
     <h2>{% trans "Learn about" %}</h2>
     <ul>
       <li><a href="">{% trans "Changes to name, address or contact information." %}</a></li>
@@ -20,18 +27,9 @@
       <li><a href="{% url 'register:howtodisplay' %}">{% trans "How to display your poster." %}</a></li>
     </ul>
     <br>
-    <h2>{% trans "Ottawa and eastern Ontario pilot" %}</h2>
-
-    <p>
-      {% trans 'Right now there’s only scanning in Ottawa and eastern Ontario.' %}
-    </p>
-    <p>
-      {% trans 'Outside of these regions, you can still make a poster for your establishment or event.  Then you’ll be ready when your region starts using QR codes.' %}
-    </p>
-    <br>
     <h2>{% trans "For more help with posters" %}</h2>
     <p>
-      <a href="{{ link }}">{% trans "Contact us." %}</a>
+      <a href="{{ link }}">{% trans "Contact poster support" %}.</a>
     </p>
     <br>
 
@@ -39,13 +37,13 @@
     <ul>
       <li>
         <a
-          href="https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html#a13">
+          href="https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html#a13" target="_blank">
           {% trans "Contact app support" %}
         </a>
       </li>
       <li>
         <a
-          href="https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert/help.html">
+          href="https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert/help.html" target="_blank">
           {% trans "Read about common support issues" %}
         </a>
       </li>
