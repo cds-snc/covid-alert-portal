@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-19 20:03+0000\n"
+"POT-Creation-Date: 2021-05-17 20:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,6 +54,7 @@ msgstr "Alerte COVID ne remplace pas la recherche manuelle de contacts effectué
 #: about/templates/about/3_one_time_keys.html
 #: about/templates/about/4_give_a_key.html
 #: about/templates/about/5_help_patient_enter_key.html
+#: about/templates/about/6_sending_qr_alerts.html
 msgid "Next:"
 msgstr "Suivant :"
 
@@ -201,32 +202,92 @@ msgid "To enter the key, the phone must be connected to the internet."
 msgstr "Le patient doit connecter son téléphone à Internet pour pouvoir entrer la clé."
 
 #: about/templates/about/5_help_patient_enter_key.html
-#: about/templates/about/6_admin_accounts.html
+#: about/templates/includes/_nav_about.html
+msgid "Sending alerts"
+msgstr "Envoi d’alertes"
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "Sending QR alerts"
+msgstr "Envoi d’alertes QR"
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "You’ll send alerts to people who scanned a QR code during an exposure. Your health authority will give you the address, date, time and guidance for the exposure."
+msgstr "Cette fonction vous permet d’envoyer une alerte aux personnes qui ont scanné le code QR d’un lieu pendant un risque d’exposition. L’autorité de santé publique vous communiquera l’adresse, la date et l’heure de l’exposition, ainsi que la consigne à transmettre."
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "We’ll guide you through the steps to create the alert"
+msgstr "Vous serez guidé étape par étape pour créer l’alerte"
+
+#: about/templates/about/6_sending_qr_alerts.html
+#, python-format
+msgid ""
+"\n"
+"        <p>Start by <a href=\"%(link)s\">finding the address</a>.</p>\n"
+"    "
+msgstr ""
+"\n"
+"        <p>Commencez par <a href=\"%(link)s\">trouver le lieu ou l’événement en question</a>.</p>\n"
+"    "
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "Show screenshot"
+msgstr "Afficher la capture d’écran"
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "If there are no results for a place or event"
+msgstr "Si votre recherche ne donne aucun résultat"
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "Follow local procedures for addresses without QR codes."
+msgstr "Suivez les procédures locales pour les lieux ou événements sans code QR."
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "After checking the details, you'll be able to send the alert"
+msgstr "Après avoir tout vérifié, vous pourrez envoyer l’alerte "
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "If there’s already been a QR alert for the exposure"
+msgstr "Si une alerte a déjà été envoyée pour l’exposition en question"
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "You will not be able to send the alert."
+msgstr "Vous ne pourrez pas envoyer l’alerte à nouveau."
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "We’ll confirm it’s sent"
+msgstr "Vous verrez une confirmation que l’alerte a été envoyée"
+
+#: about/templates/about/6_sending_qr_alerts.html
+msgid "Health authorities continue to manually contact visitors who do not scan QR codes."
+msgstr "Les autorités sanitaires continueront de contacter manuellement les visiteurs qui ne scannent pas les codes QR."
+
+#: about/templates/about/6_sending_qr_alerts.html
+#: about/templates/about/7_admin_accounts.html
 #: about/templates/includes/_nav_about.html
 msgid "Admin accounts"
 msgstr "Comptes administrateurs"
 
-#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
 msgid "Both administrators and team members can generate one-time keys."
 msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
 
-#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
 msgid "Administrators can also:"
 msgstr "Les administrateurs peuvent aussi :"
 
-#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
 msgid "Invite team members to create portal accounts."
 msgstr "Inviter des membres à se créer un compte pour le portail."
 
-#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
 msgid "Make changes or update information in team member accounts."
 msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
 
-#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
 msgid "Delete portal accounts."
 msgstr "Supprimer des comptes."
 
-#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
 msgid "Give log in codes to team members who are locked out of the portal."
 msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
 
@@ -423,7 +484,7 @@ msgstr "Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne.
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html
 #: covid_key/templates/covid_key/otk_sms_sent.html
 #: outbreaks/templates/datetime.html outbreaks/templates/history.html
-#: outbreaks/templates/profile.html outbreaks/templates/search.html
+#: outbreaks/templates/location_history.html outbreaks/templates/search.html
 #: outbreaks/templates/severity.html profiles/templates/profiles/2fa.html
 #: profiles/templates/profiles/signup.html
 #: profiles/templates/profiles/signup_2fa.html
@@ -520,8 +581,8 @@ msgstr "Si le patient est prêt, générez une clé"
 
 #: covid_key/templates/covid_key/generate_key.html
 #: outbreaks/templates/confirm.html outbreaks/templates/datetime.html
-#: outbreaks/templates/details.html outbreaks/templates/profile.html
-#: outbreaks/templates/severity.html
+#: outbreaks/templates/details.html outbreaks/templates/location_history.html
+#: outbreaks/templates/profile.html outbreaks/templates/severity.html
 #: register/templates/register/location_address.html
 #: register/templates/register/location_category.html
 #: register/templates/register/location_contact.html
@@ -735,8 +796,7 @@ msgstr "Adresse"
 msgid "Show on map"
 msgstr "Montrer sur la carte"
 
-#: outbreaks/templates/confirm.html outbreaks/templates/profile.html
-#: register/templates/register/summary.html
+#: outbreaks/templates/confirm.html register/templates/register/summary.html
 msgid "Type"
 msgstr "Type"
 
@@ -748,7 +808,7 @@ msgstr ""
 msgid "dates"
 msgstr ""
 
-#: outbreaks/templates/confirm.html outbreaks/templates/details.html
+#: outbreaks/templates/confirm.html
 msgid "Severity"
 msgstr ""
 
@@ -839,30 +899,38 @@ msgid "Delete"
 msgstr "Supprimer"
 
 #: outbreaks/templates/details.html
-msgid "Details of public exposure"
-msgstr "Détails de l’exposition publique"
+msgid "Details of exposure"
+msgstr "Détails de l’exposition"
 
 #: outbreaks/templates/details.html
-msgid "Exposure details"
-msgstr "Détails de l’exposition publique"
+msgid "Date and time of exposure"
+msgstr "Date et heure de l’exposition"
 
 #: outbreaks/templates/details.html
+msgid "Guidance"
+msgstr "Consigne"
+
+#: outbreaks/templates/details.html
+msgid "Date of alert"
+msgstr "Date d’envoi de l’alerte"
+
+#: outbreaks/templates/details.html outbreaks/templates/location_history.html
 msgid "Sender"
 msgstr "Émetteur"
 
-#: outbreaks/templates/details.html outbreaks/templates/history.html
-msgid "Date of public exposure"
-msgstr "Date d’exposition publique"
-
 #: outbreaks/templates/details.html
-msgid "Date of notification"
-msgstr "Date de la notification"
+msgid "Need to add a new exposure for this address?"
+msgstr "Besoin d’ajouter une nouvelle exposition à cette adresse?"
+
+#: outbreaks/templates/details.html outbreaks/templates/profile.html
+msgid "Add an exposure"
+msgstr "Ajouter une exposition"
 
 #: outbreaks/templates/details.html
 msgid "Exposure details not found."
 msgstr ""
 
-#: outbreaks/templates/history.html
+#: outbreaks/templates/history.html outbreaks/templates/location_history.html
 msgid "Alert history"
 msgstr "Historique des alertes"
 
@@ -886,7 +954,7 @@ msgstr "Chercher"
 msgid "results for"
 msgstr "résultats pour"
 
-#: outbreaks/templates/history.html
+#: outbreaks/templates/history.html outbreaks/templates/location_history.html
 msgid "Prior notifications"
 msgstr "Notifications antérieures"
 
@@ -906,45 +974,74 @@ msgstr "Trier par adresse, par ordre croissant"
 msgid "Sort by address, descending"
 msgstr "Trier par adresse, par ordre décroissant"
 
-#: outbreaks/templates/history.html
+#: outbreaks/templates/history.html outbreaks/templates/location_history.html
 msgid "Sort by date of exposure, ascending"
 msgstr "Trier par date d'exposition, par ordre croissant"
 
-#: outbreaks/templates/history.html
+#: outbreaks/templates/history.html outbreaks/templates/location_history.html
 msgid "Sort by date of exposure, descending"
 msgstr "Trier par date d'exposition, par ordre décroissant"
 
 #: outbreaks/templates/history.html
+msgid "Date of public exposure"
+msgstr "Date d’exposition publique"
+
+#: outbreaks/templates/history.html outbreaks/templates/location_history.html
 msgid "See more notification "
 msgstr "Voir plus de notification "
 
-#: outbreaks/templates/history.html
+#: outbreaks/templates/history.html outbreaks/templates/location_history.html
 msgid "Details"
 msgstr "Détails"
 
-#: outbreaks/templates/history.html outbreaks/templates/search.html
+#: outbreaks/templates/history.html outbreaks/templates/location_history.html
+#: outbreaks/templates/search.html
 msgid "Previous"
 msgstr "précédent"
 
-#: outbreaks/templates/history.html
+#: outbreaks/templates/history.html outbreaks/templates/location_history.html
 msgid "No prior alerts for"
 msgstr "Aucune alerte n’a été envoyée pour"
 
+#: outbreaks/templates/location_history.html
+msgid "Exposure date"
+msgstr "Date de l’exposition"
+
+#: outbreaks/templates/location_history.html
+msgid "Sort by date alert sent, ascending"
+msgstr "Trier par date d'envoi de l'alerte, ordre croissant"
+
+#: outbreaks/templates/location_history.html
+msgid "Sort by date alert sent, descending"
+msgstr "Trier par date d'envoi de l'alerte, ordre décroissant"
+
+#: outbreaks/templates/location_history.html
+msgid "Alert sent"
+msgstr "Date d’envoi de l’alerte"
+
+#: outbreaks/templates/location_history.html
+msgid "Sort by sender, ascending"
+msgstr "Trier par émetteur, ordre alphabétique"
+
+#: outbreaks/templates/location_history.html
+msgid "Sort by sender, descending"
+msgstr "Trier par émetteur, ordre alphabétique inverse"
+
 #: outbreaks/templates/profile.html
-msgid "Place profile"
-msgstr "Profil du lieu d’exposition"
+msgid "Details of place or event"
+msgstr "Renseignements sur le lieu ou l’événement"
+
+#: outbreaks/templates/profile.html
+msgid "Contact name"
+msgstr "Personne-ressource"
 
 #: outbreaks/templates/profile.html register/forms.py
 msgid "Contact email"
 msgstr "Adresse courriel"
 
 #: outbreaks/templates/profile.html
-msgid "Contact phone"
-msgstr "Numéro du contact"
-
-#: outbreaks/templates/profile.html
-msgid "Number of prior notifications"
-msgstr "Nombre de notifications passées"
+msgid "Number of prior alerts"
+msgstr "Nombre d’alertes précédentes"
 
 #: outbreaks/templates/profile.html
 msgid "Place not found."
@@ -1158,6 +1255,7 @@ msgstr "Confidentialité"
 
 #: portal/templates/includes/footer.html profiles/templates/profiles/terms.html
 #: register/templates/register/includes/footer.html
+#: register/templates/register/terms.html
 msgid "Terms of use"
 msgstr "Conditions d’utilisation"
 
@@ -2361,6 +2459,7 @@ msgid "Return to home page"
 msgstr "Revenir à la page d’accueil"
 
 #: register/templates/register/confirmation.html
+#: register/templates/register/privacy.html
 msgid "Questions?"
 msgstr "Des questions?"
 
@@ -2383,6 +2482,8 @@ msgstr "Nous joindre"
 
 #: register/templates/register/contact_us.html
 #: register/templates/register/help_page.html
+#: register/templates/register/privacy.html
+#: register/templates/register/terms.html
 msgid "Home"
 msgstr ""
 
@@ -2461,6 +2562,8 @@ msgid "Read about common support issues"
 msgstr "Consulter les problèmes fréquents."
 
 #: register/templates/register/how_display_poster.html
+#: register/templates/register/privacy.html
+#: register/templates/register/terms.html
 msgid "How to display your COVID Alert poster"
 msgstr "Comment placer votre affiche Alerte COVID"
 
@@ -2547,6 +2650,219 @@ msgstr ""
 #: register/templates/register/location_unavailable.html
 msgid "People in your province or territory are not yet able to scan a QR code for COVID Alert.You can still make a poster with your code.  That way, you’ll be ready when people are able to scan these codes."
 msgstr ""
+
+#: register/templates/register/privacy.html
+msgid "Privacy notice"
+msgstr "Avis de confidentialité"
+
+#: register/templates/register/privacy.html
+msgid "This privacy notice applies to you if:"
+msgstr "Cet avis de confidentialité vous concerne si :"
+
+#: register/templates/register/privacy.html
+msgid "We send a COVID Alert poster to your email address."
+msgstr "Une affiche Alerte COVID est envoyée à votre adresse courriel."
+
+#: register/templates/register/privacy.html
+msgid "You’re the contact person for an address that has a COVID Alert poster"
+msgstr "Vous êtes la personne-ressource pour une adresse où il y a une affiche Alerte COVID"
+
+#: register/templates/register/privacy.html
+msgid "This notice may also apply to you if:"
+msgstr "Cet avis peut aussi vous concerner si :"
+
+#: register/templates/register/privacy.html
+msgid "You’re the owner of a place or event that has a COVID Alert poster."
+msgstr "Vous êtes le propriétaire d’un lieu ou d’un événement où il y a une affiche Alerte COVID."
+
+#: register/templates/register/privacy.html
+msgid "Your personal information forms part of the name or address of a place or event."
+msgstr "Vos renseignements personnels forment une partie du nom ou de l’adresse du lieu ou de l’événement."
+
+#: register/templates/register/privacy.html
+msgid "We ask for personal information to make a QR code"
+msgstr "Nous recueillons des renseignements personnels"
+
+#: register/templates/register/privacy.html
+msgid "for each address of a place or event.  "
+msgstr "afin de créer un code QR pour chacune des adresses d’un lieu ou d’un événement."
+
+#: register/templates/register/privacy.html
+msgid "If any of this information changes, the place or event will need a new QR code."
+msgstr "Si ces renseignements changent, un nouveau code QR devra être créé pour le lieu ou l’événement."
+
+#: register/templates/register/privacy.html
+msgid "Visit the home page for “Make a COVID Alert QR code poster’ to make a poster or posters with a new code."
+msgstr "Consultez la page d’accueil du site « Créer une affiche à code QR Alerte COVID » pour créer une affiche avec un nouveau code QR."
+
+#: register/templates/register/privacy.html
+msgid "We log all activity and information, including:"
+msgstr "Nous enregistrons toute activité et tout renseignement, notamment :"
+
+#: register/templates/register/privacy.html
+msgid "The name and address of the place or event and the name, email and phone number of the contact person for each address. We also log the email address where we send the poster."
+msgstr "Le nom et l’adresse du lieu ou de l’événement, ainsi que le nom, l’adresse courriel et le numéro de téléphone de la personne-ressource pour chacune des adresses fournies. Nous enregistrons également l’adresse courriel à laquelle l’affiche est envoyée."
+
+#: register/templates/register/privacy.html
+msgid "Dates and times that you visit this website to make a QR code."
+msgstr "La date et l’heure où vous consultez le site Web pour créer un code QR."
+
+#: register/templates/register/privacy.html
+msgid "Each time the COVID Alert app scans your QR code."
+msgstr "Toutes les fois où l’application Alerte COVID scanne votre code QR."
+
+#: register/templates/register/privacy.html
+msgid "We may need to give this information to:"
+msgstr "Nous pourrions devoir communiquer ces renseignements aux personnes suivantes :"
+
+#: register/templates/register/privacy.html
+msgid "Public health authorities in your province or territory. They’ll use the information to identify COVID-19 exposures at your address, and to respond to those exposures, if necessary."
+msgstr "Les autorités de santé publique de votre province ou territoire. Ces autorités utiliseront vos renseignements pour repérer les risques d’exposition à la COVID-19 ayant lieu à votre adresse, et pour y répondre si nécessaire."
+
+#: register/templates/register/privacy.html
+msgid ""
+"\n"
+"          Staff at\n"
+"          <a href=\"https://www.ic.gc.ca/eic/site/icgc.nsf/eng/home\" target=\"_blank\">\n"
+"            Innovation, Science, and Economic Development Canada</a>.\n"
+"          They can help you use this website.\n"
+"        "
+msgstr ""
+"\n"
+"          Le personnel d’\n"
+"          <a href=\"https://www.ic.gc.ca/eic/site/icgc.nsf/eng/home\" target=\"_blank\">\n"
+"            Innovation, Sciences et Développement économique Canada</a>,\n"
+"          qui peut vous aider à utiliser le site Web.\n"
+"        "
+
+#: register/templates/register/privacy.html
+msgid "Law enforcement, if we detect illegal activity."
+msgstr "Les organismes d’application de la loi si nous détectons des activités illégales."
+
+#: register/templates/register/privacy.html
+msgid "We do not share this information with app users."
+msgstr "Nous ne communiquons pas ces renseignements aux utilisateurs de l’application."
+
+#: register/templates/register/privacy.html
+msgid ""
+"\n"
+"        <b>\n"
+"          We’ll keep this information until Canada’s Chief Public Health Officer\n"
+"        </b>\n"
+"        <a href=\"http://www.phn-rsp.ca/pubs/mlisa-emer-eng.php#Declaration\" target=\"_blank\">\n"
+"          announces that the COVID-19 pandemic is over</a>.\n"
+"      "
+msgstr ""
+"\n"
+"        <b>\n"
+"          Nous conserverons ces renseignements jusqu’à ce que l’administratrice en chef de la santé publique du Canada\n"
+"        </b>\n"
+"        <a href=\"http://www.phn-rsp.ca/pubs/mlisa-emer-eng.php#Declaration\" target=\"_blank\">\n"
+"          annonce que la pandémie de COVID-19 est terminée</a>.\n"
+"      "
+
+#: register/templates/register/privacy.html
+msgid "We study and improve the COVID Alert system using:"
+msgstr "Nous analysons et améliorons le système Alerte COVID grâce à :"
+
+#: register/templates/register/privacy.html
+msgid "Services such as Google Analytics, to learn about website and poster activity. We do not share your personal information with these services."
+msgstr "Des services comme Google Analytics, afin de mieux comprendre les activités liées au site Web et à l’affiche. Nous ne communiquons pas vos renseignements personnels à ces services."
+
+#: register/templates/register/privacy.html
+msgid ""
+"\n"
+"          Research to learn how people use this website. We may email any address entered in this website with an\n"
+"          invitation to participate in this research.\n"
+"          <b>You do not have to agree</b> to participate.\n"
+"          If you agree, you can change your mind and end your participation at any time.\n"
+"        "
+msgstr ""
+"\n"
+"          Des entretiens, afin d’apprendre comment les personnes utilisent le site Web. Nous pouvons envoyer une invitation pour un entretien à toute adresse courriel saisie dans le site Web.\n"
+"          <b>Vous pouvez refuser</b> de participer à un entretien.\n"
+"          Si vous acceptez, vous pouvez changer d’idée et arrêter l’entretien en tout temps.\n"
+"        "
+
+#: register/templates/register/privacy.html
+msgid ""
+"\n"
+"        <b>\n"
+"          We’re allowed to use this information and these services\n"
+"        </b>\n"
+"        under the\n"
+"        <a href=\"https://laws-lois.justice.gc.ca/eng/acts/H-3.2/\" target=\"_blank\">\n"
+"          Department of Health Act</a>\n"
+"        and the\n"
+"        <a href=\"https://laws-lois.justice.gc.ca/eng/acts/f-11/\" target=\"_blank\">\n"
+"          Financial Administration Act</a>\n"
+"        . We also follow the\n"
+"        <a href=\"https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=26761\" target=\"_blank\">\n"
+"          Standard on Privacy and Web Analytics</a>.\n"
+"      "
+msgstr ""
+"\n"
+"        <b>\n"
+"          Nous avons l’autorisation d’utiliser ces renseignements et ces services\n"
+"        </b>\n"
+"        selon la\n"
+"        <a href=\"https://laws-lois.justice.gc.ca/eng/acts/H-3.2/\" target=\"_blank\">\n"
+"          Loi sur le ministère de la Santé</a>\n"
+"        et la\n"
+"        <a href=\"https://laws-lois.justice.gc.ca/eng/acts/f-11/\" target=\"_blank\">\n"
+"          Loi sur la gestion des finances publiques</a>\n"
+"        . Nous respectons aussi la\n"
+"        <a href=\"https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=26761\" target=\"_blank\">\n"
+"          Norme sur la protection de la vie privée et le Web analytique</a>.\n"
+"      "
+
+#: register/templates/register/privacy.html
+msgid "You have the right to access, review and correct your personal information."
+msgstr "Vous avez le droit d’accéder à vos renseignements personnels, de les réviser et de les corriger."
+
+#: register/templates/register/privacy.html
+msgid "Contact the Access to Information and Privacy Coordinator by:"
+msgstr "Contactez la coordonnatrice de l’accès à l’information et de la protection des renseignements personnels par :"
+
+#: register/templates/register/privacy.html
+msgid "Email"
+msgstr "Courriel"
+
+#: register/templates/register/privacy.html
+msgid "Phone"
+msgstr "Téléphone"
+
+#: register/templates/register/privacy.html
+msgid "Teletypewriter through Service Canada: 1-800-465-7735"
+msgstr "Téléimprimeur (Service Canada) : 1-800-465-7735"
+
+#: register/templates/register/privacy.html
+msgid ""
+"\n"
+"        <b>\n"
+"          You have the right to complain\n"
+"        </b>\n"
+"        about how we use your information to the\n"
+"        <a href=\"https://www.priv.gc.ca/en/for-individuals/\" target=\"_blank\">\n"
+"          Privacy Commissioner of Canada</a>.\n"
+"      "
+msgstr ""
+"\n"
+"        <b>\n"
+"          Vous avez le droit de faire une plainte\n"
+"        </b>\n"
+"        au sujet de la façon dont nous utilisons vos renseignements au\n"
+"        <a href=\"https://www.priv.gc.ca/en/for-individuals/\" target=\"_blank\">\n"
+"          commissaire à la protection de la vie privée du Canada</a>.\n"
+"      "
+
+#: register/templates/register/privacy.html
+msgid "Contact"
+msgstr "Communiquez avec"
+
+#: register/templates/register/privacy.html
+msgid "Health Canada"
+msgstr "Santé Canada"
 
 #: register/templates/register/registrant_email.html
 msgid "Email address for your poster"
@@ -2686,6 +3002,74 @@ msgstr "En cliquant sur « Créer l’affiche », vous confirmez que vos répo
 #: register/templates/register/summary.html
 msgid "Make poster"
 msgstr "Créer l’affiche"
+
+#: register/templates/register/terms.html
+msgid "“Make a COVID Alert QR code poster” is for businesses, community organizations and events in Canada."
+msgstr "Le site Web « Créer une affiche à code QR Alerte COVID » est destiné aux entreprises, aux organismes communautaires et aux organisateurs d’événements au Canada."
+
+#: register/templates/register/terms.html
+msgid "Your responsibilities"
+msgstr "Vos responsabilités"
+
+#: register/templates/register/terms.html
+msgid "By using this website, you agree that "
+msgstr "En utilisant le site Web, "
+
+#: register/templates/register/terms.html
+msgid "you’re a person who’s responsible for making a poster for a place or event."
+msgstr "En utilisant le site Web, vous acceptez d’être la personne responsable de créer une affiche pour un lieu ou un événement."
+
+#: register/templates/register/terms.html
+msgid "You also agree that you’ll:"
+msgstr "Vous acceptez également de :"
+
+#: register/templates/register/terms.html
+msgid "Only make posters for places or events that you’re responsible for."
+msgstr "Créer des affiches uniquement pour des lieux ou des événements dont vous avez la responsabilité."
+
+#: register/templates/register/terms.html
+msgid "Enter accurate information when making posters."
+msgstr "Fournir des informations exactes lors de la création des affiches."
+
+#: register/templates/register/terms.html
+msgid "If needed, update name, address or contact information by using this website to make a new poster.  This changes the QR code for the place or event."
+msgstr "Mettre à jour le nom, l’adresse ou les coordonnées dans le site Web si ces renseignements changent, afin de créer une nouvelle affiche. Un nouveau code QR sera créé pour le lieu ou l’événement en question."
+
+#: register/templates/register/terms.html
+msgid "Destroy any posters you do not need anymore or that display a previous QR code."
+msgstr "Détruire toute affiche dont vous n’avez plus besoin ou toute affiche ayant un ancien code QR."
+
+#: register/templates/register/terms.html
+msgid "Only display posters within the area that belongs to the address of the place or event."
+msgstr "Placer des affiches uniquement sur le terrain correspondant à l’adresse de votre lieu ou événement."
+
+#: register/templates/register/terms.html
+msgid "Display the correct poster for the address."
+msgstr "Placer la bonne affiche pour l’adresse en question."
+
+#: register/templates/register/terms.html
+msgid "Keep posters in good condition and replace damaged posters."
+msgstr "Maintenir les affiches en bonne condition et remplacer celles qui sont abîmées."
+
+#: register/templates/register/terms.html
+msgid "Fraud or abuse"
+msgstr "Fraude ou mauvais usage"
+
+#: register/templates/register/terms.html
+msgid "The Government of Canada is not responsible for problems caused by damaged or altered posters. This includes altered or fake QR codes that link to apps or websites other than  COVID Alert."
+msgstr "Le gouvernement du Canada n’est pas responsable des problèmes causés par des affiches abîmées ou modifiées. Il n’est pas responsable des codes QR modifiés ou contrefaits qui dirigent l’utilisateur vers des applications ou des sites Web autres que ceux d’Alerte COVID."
+
+#: register/templates/register/terms.html
+msgid ""
+"\n"
+"        If we learn that you’re using this website for fraud or abuse, we may block your access without warning.\n"
+"        You can report fraud or abuse to <a href=\"mailto:security@cds-snc.ca\">security@cds-snc.ca</a>.\n"
+"      "
+msgstr ""
+"\n"
+"Si vous utilisez le site Web à des fins de fraude ou de mauvais usage, nous pouvons bloquer votre accès sans préavis.\n"
+"Vous pouvez signaler les fraudes ou les mauvais usages à <a href=\"mailto:security@cds-snc.ca\">security@cds-snc.ca</a>.\n"
+"      "
 
 #: register/templatetags/location_type_str.py
 msgid "Address of establishment"

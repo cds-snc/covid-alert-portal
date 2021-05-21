@@ -17,7 +17,11 @@
     <br />
     {% include "includes/detailed_instructions.html" %}
     <div class="content-next-link">
-      <a href="{% url 'about:admin_accounts' %}" class="chevron-right">{% trans "Next:" %} {% trans "Admin accounts" %}</a>
+      {% if user.can_send_alerts %}
+        <a href="{% url 'about:sending_qr_alerts' %}" class="chevron-right">{% trans "Next:" %} {% trans "Sending alerts" %}</a>
+      {% else %}
+        <a href="{% url 'about:admin_accounts' %}" class="chevron-right">{% trans "Next:" %} {% trans "Admin accounts" %}</a>
+      {% endif %}
     </div>
   </div>
 {% endblock %}

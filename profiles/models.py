@@ -128,6 +128,10 @@ class HealthcareUser(AbstractBaseUser, PermissionsMixin):
         # Only superusers can use the django backend
         return self.is_superuser
 
+    @property
+    def can_send_alerts(self):
+        return self.has_perm("profiles.can_send_alerts")
+
 
 class HealthcareFailedAccessAttempt(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4)
