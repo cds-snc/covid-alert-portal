@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-20 11:30+0000\n"
+"POT-Creation-Date: 2021-05-20 11:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2449,21 +2449,21 @@ msgstr "À chaque entrée et à l’intérieur."
 #: register/templates/register/confirmation.html
 #: register/templates/register/how_display_poster.html
 msgid "About 1.5 metres from the ground to the centre of the poster."
-msgstr ""
+msgstr "À environ 1,5 mètre du sol (à partir du centre de l’affiche)."
 
 #: register/templates/register/confirmation.html
 #: register/templates/register/how_display_poster.html
 msgid "On flat surfaces that do not move."
-msgstr "Sur des surfaces planes qui ne bougent pas."
+msgstr "Sur des surfaces plates qui ne bougent pas."
 
 #: register/templates/register/confirmation.html
 #: register/templates/register/how_display_poster.html
 msgid "In well lit areas without glare (not behind glass)."
-msgstr ""
+msgstr "Dans des lieux bien éclairés et sans reflets (pas derrière une vitre)."
 
 #: register/templates/register/confirmation.html
 msgid "Using the COVID Alert app and its features is voluntary. People should be able to enter or get service even if they do not scan the QR code."
-msgstr ""
+msgstr "L’utilisation de l’application Alerte COVID et de ses fonctionnalités est volontaire. Les personnes qui ne scannent pas le code QR doivent quand même pouvoir entrer et être servies."
 
 #: register/templates/register/confirmation.html
 msgid "Thank you for helping slow the spread of COVID-19."
@@ -2532,7 +2532,7 @@ msgstr "Désolé, le lien de validation est expiré ou a déjà été utilisé."
 
 #: register/templates/register/help_page.html
 msgid "Ottawa pilot"
-msgstr ""
+msgstr "Projet pilote à Ottawa"
 
 #: register/templates/register/help_page.html
 msgid "Right now there’s only scanning in Ottawa."
@@ -2658,7 +2658,7 @@ msgstr "Étape 4 de 5"
 
 #: register/templates/register/location_contact.html
 msgid "The contact could be you or a different person, such as a store manager. Public health may need to contact this person about exposures at this address."
-msgstr ""
+msgstr "La personne-ressource peut être vous-même ou bien une autre personne comme un gérant. La santé publique pourrait avoir à contacter cette personne s’il y a des expositions à l’adresse fournie."
 
 #: register/templates/register/location_contact.html
 msgid ""
