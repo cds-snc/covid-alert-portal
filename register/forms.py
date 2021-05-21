@@ -37,6 +37,7 @@ location_category_type_map = {
 }
 
 location_choices = [
+    ("", _("Select a type of place or event")),
     (location_restaurant_bar_coffee, _("Restaurant, bar, coffee shop.")),
     (location_fitness_recreation, _("Fitness, sports, recreation.")),
     (location_arts_entertainment, _("Arts, entertainment.")),
