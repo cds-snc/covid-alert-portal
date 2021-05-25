@@ -49,6 +49,7 @@ protobuf = "*"
 segno = "*"
 cairosvg = "*"
 django-basicauth = "*"
+django-localflavor = "*"
 
 [pipenv]
 allow_prereleases = true
