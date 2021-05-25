@@ -2346,7 +2346,7 @@ msgstr "Entrez un code postal canadien valide."
 
 #: register/forms.py
 msgid "Your phone number must be valid."
-msgstr "Votre numéro de téléphone doit avoir 10 chiffres."
+msgstr "Le numéro de téléphone doit être valide."
 
 #: register/forms.py register/models.py
 msgid "Name of contact"
