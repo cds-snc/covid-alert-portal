@@ -10,6 +10,14 @@ from datetime import datetime, timedelta
 from calendar import month_name
 import pytz
 
+default_end_time = "00:00:00:000000"
+
+
+def end_date_shift_for_view(dttm):
+    if dttm.strftime(hour_end_data_format) == default_end_time:
+        return dttm - timedelta(microseconds=1)
+    return dttm
+
 severity_choices = [
     ("1", _("Isolate and get tested")),
     ("2", _("Self-monitor for 14 days")),
@@ -41,7 +49,7 @@ for hour in range(24):
     dttm = dttm.replace(minute=0) + timedelta(hours=1)
     display_hour_59 = (
         dttm.strftime(hour_end_data_format),
-        dttm.strftime(hour_format),
+        end_date_shift_for_view(dttm).strftime(hour_format),
     )
     start_hours.append(display_hour)
     start_hours.append(display_hour_30)
@@ -117,7 +125,7 @@ class DateForm(HealthcareBaseForm):
                     ValidationError(
                         overlap_notification_error_tmpl.format(
                             notification.start_date.astimezone(tz).strftime("%c"),
-                            notification.end_date.astimezone(tz).strftime("%c"),
+                            end_date_shift_for_view(notification.end_date.astimezone(tz)).strftime("%c"),
                         ),
                         code="warning",
                     )
@@ -128,7 +136,6 @@ class DateForm(HealthcareBaseForm):
         tz = pytz.timezone(
             settings.PORTAL_LOCAL_TZ
         )  # TODO (mvp pilot setting) Change this for multi-tz rollout
-        default_end_time = "00:00:00:000000"
         default_time = (
             "0:00:00:000001" if start_or_end == "start" else default_end_time
         )
