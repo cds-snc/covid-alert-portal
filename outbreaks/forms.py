@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from django.conf import settings
 from portal.widgets import CDSRadioWidget
 from portal.forms import HealthcareBaseForm
-from datetime import datetime
+from datetime import datetime, timedelta
 from calendar import month_name
 import pytz
 
@@ -19,24 +19,29 @@ severity_help = [
     ("2", _("Self-monitor for 14 days")),
 ]
 hour_format = "%-H:%M" if get_language() == "fr" else "%-I:%M %p"
+hour_start_data_format = "%H:%M:00:000001"
+hour_end_data_format = "%H:%M:00:000000"
 start_hours = []
 end_hours = []
 for hour in range(24):
+    dttm = datetime(2020, 1, 1, hour)
     display_hour = (
-        f"{hour}:00:00:000000",
-        datetime.strftime(datetime(2020, 1, 1, hour), hour_format),
+        dttm.strftime(hour_start_data_format),
+        dttm.strftime(hour_format),
     )
+    dttm = dttm.replace(minute=30)
     display_hour_30 = (
-        f"{hour}:30:00:000000",
-        datetime.strftime(datetime(2020, 1, 1, hour, 30), hour_format),
+        dttm.strftime(hour_start_data_format),
+        dttm.strftime(hour_format),
     )
     display_hour_29 = (
-        f"{hour}:29:59:999999",
-        datetime.strftime(datetime(2020, 1, 1, hour, 29, 59), hour_format),
+        dttm.strftime(hour_end_data_format),
+        dttm.strftime(hour_format),
     )
+    dttm = dttm.replace(minute=0) + timedelta(hours=1)
     display_hour_59 = (
-        f"{hour}:59:59:999999",
-        datetime.strftime(datetime(2020, 1, 1, hour, 59, 59), hour_format),
+        dttm.strftime(hour_end_data_format),
+        dttm.strftime(hour_format),
     )
     start_hours.append(display_hour)
     start_hours.append(display_hour_30)
@@ -123,13 +128,15 @@ class DateForm(HealthcareBaseForm):
         tz = pytz.timezone(
             settings.PORTAL_LOCAL_TZ
         )  # TODO (mvp pilot setting) Change this for multi-tz rollout
+        default_end_time = "00:00:00:000000"
         default_time = (
-            "0:00:00:000000" if start_or_end == "start" else "23:59:59:999999"
+            "0:00:00:000001" if start_or_end == "start" else default_end_time
         )
+        time_str = data.get(f"{start_or_end}_time", default_time)
         hour, minute, second, ms = [
-            int(x) for x in data.get(f"{start_or_end}_time", default_time).split(":")
+            int(x) for x in time_str.split(":")
         ]
-        return tz.localize(
+        valid_dt = tz.localize(
             datetime(
                 year=int(data.get("year", -1)),
                 month=int(data.get("month", -1)),
@@ -140,6 +147,9 @@ class DateForm(HealthcareBaseForm):
                 microsecond=ms,
             )
         )
+        if start_or_end != "start" and time_str == default_end_time:
+            valid_dt = valid_dt + timedelta(days=1)
+        return valid_dt
 
     @staticmethod
     def get_notification_intersection(start_date, end_date, location):
