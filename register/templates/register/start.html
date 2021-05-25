@@ -1,4 +1,3 @@
-
 {% extends 'register/base.html' %}
 {% load static i18n %}
 
@@ -7,40 +6,48 @@
 {% endblock %}
 
 {% block hero %}
-<div class="hero">
-  <div class="hero-inner">
-    <h1>{% trans "Display a QR code to help slow the spread of COVID-19" %}</h1>
-    <div class="hero-image">
-      <img src="{% static 'img/register-start.svg' %}" alt="" />
+  <div class="hero">
+    <div class="hero-inner">
+      <h1>{% trans "Display a QR code to help slow the spread of COVID-19" %}</h1>
+      <div class="hero-image">
+        <img src="{% static 'img/register-start.svg' %}" alt=""/>
+      </div>
     </div>
   </div>
-</div>
 {% endblock %}
 
 {% block content %}
-  <p>{% trans "COVID-19 spreads quickly in enclosed spaces, like establishments and events. Help slow the spread. Make a COVID Alert poster for your business, community organization or social gathering." %}</p>
-
-  <p>{% trans "Visitors scan the poster’s QR code to add a visit with the <a href='https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html'>COVID Alert app</a>.  Then they’ll be notified if they were exposed during their visit." %}</p>
-
+  <p>{% trans "Make a COVID Alert poster for your business, community organization or event." %}</p>
+  {% blocktrans %}
+    <p>
+      People scan the poster’s QR code to add a visit with the
+      <a href="https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html" target="_blank">COVID
+        Alert app</a>.
+      Then we can notify them of exposures from their visit.
+    </p>
+  {% endblocktrans %}
   <h2>{% trans "You’ll need:" %}</h2>
   <ul>
-    <li>{% trans "An email address where we can send the poster." %}</li>
-    <li>{% trans "Name and address of establishment or event." %}</li>
-    <li>{% trans "Contact information for the address." %}</li>
+    <li>{% trans "an email address where we can send the poster;" %}</li>
+    <li>{% trans "the name and address of place or event;" %}</li>
+    <li>{% trans "contact information for the address." %}</li>
   </ul>
 
-  <p>{% trans "If there are several addresses, make a different QR poster for each.  After you finish this poster, we’ll remind you to make more." %}
-
   <div class="content-button">
-    <a href="{% url 'register:registrant_email' %}" role="button" draggable="false" class="with-chevron">{% trans "Start now" %}</a>
+    <a href="{% url 'register:registrant_email' %}" role="button" draggable="false"
+       class="with-chevron">{% trans "Start now" %}</a>
   </div>
+
+  <p>
+    {% trans 'When you’re done, we’ll remind you to make different posters for other addresses of the place or event.' %}
+  </p>
 
   {% url "register:contactus" as link %}
   {% url "register:help" as qrlink %}
-  
+
   {% blocktranslate %}
     <h2> Questions? </h2>
-    <p>Visit <a href="{{ qrlink }}">Help with your poster</a><br>
-      Or <a href ="{{ link }}">Contact us</a></p>
-   {% endblocktranslate %}
+    <p>Read about <a href="{{ qrlink }}">COVID Alert posters</a>.<br>
+      Or <a href="{{ link }}">ask for help</a>.</p>
+  {% endblocktranslate %}
 {% endblock %}
