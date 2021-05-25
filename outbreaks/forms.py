@@ -18,6 +18,7 @@ def end_date_shift_for_view(dttm):
         return dttm - timedelta(microseconds=1)
     return dttm
 
+
 severity_choices = [
     ("1", _("Isolate and get tested")),
     ("2", _("Self-monitor for 14 days")),
@@ -125,7 +126,9 @@ class DateForm(HealthcareBaseForm):
                     ValidationError(
                         overlap_notification_error_tmpl.format(
                             notification.start_date.astimezone(tz).strftime("%c"),
-                            end_date_shift_for_view(notification.end_date.astimezone(tz)).strftime("%c"),
+                            end_date_shift_for_view(
+                                notification.end_date.astimezone(tz)
+                            ).strftime("%c"),
                         ),
                         code="warning",
                     )
@@ -136,13 +139,9 @@ class DateForm(HealthcareBaseForm):
         tz = pytz.timezone(
             settings.PORTAL_LOCAL_TZ
         )  # TODO (mvp pilot setting) Change this for multi-tz rollout
-        default_time = (
-            "0:00:00:000001" if start_or_end == "start" else default_end_time
-        )
+        default_time = "0:00:00:000001" if start_or_end == "start" else default_end_time
         time_str = data.get(f"{start_or_end}_time", default_time)
-        hour, minute, second, ms = [
-            int(x) for x in time_str.split(":")
-        ]
+        hour, minute, second, ms = [int(x) for x in time_str.split(":")]
         valid_dt = tz.localize(
             datetime(
                 year=int(data.get("year", -1)),

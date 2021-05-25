@@ -15,7 +15,13 @@ from django.utils.translation import get_language, gettext_lazy as _
 from django.utils.html import conditional_escape
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from portal.mixins import Is2FAMixin
-from .forms import end_hours, DateForm, SeverityForm, SearchForm, end_date_shift_for_view
+from .forms import (
+    end_hours,
+    DateForm,
+    SeverityForm,
+    SearchForm,
+    end_date_shift_for_view,
+)
 from .protobufs import outbreak_pb2
 from datetime import datetime
 import pytz
@@ -301,7 +307,9 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
         start_dmy_fmt = "%e %B %Y"
         start_dmy = start_dt.strftime(start_dmy_fmt)
         start_hm = start_dt.strftime(get_time_format(get_language()))
-        end_hm = end_date_shift_for_view(end_dt).strftime(get_time_format(get_language()))
+        end_hm = end_date_shift_for_view(end_dt).strftime(
+            get_time_format(get_language())
+        )
         notification_txt = date_entry_tmpl.format(start_dmy, start_hm, end_hm)
         date_entry = {
             "start_ts": start_ts,
@@ -603,7 +611,9 @@ class ExposureDetailsView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
             start_dmy_fmt = "%e %B %Y"
             start_dmy = start_date.strftime(start_dmy_fmt)
             start_hm = start_date.strftime(get_time_format(get_language()))
-            end_hm = end_date_shift_for_view(end_date).strftime(get_time_format(get_language()))
+            end_hm = end_date_shift_for_view(end_date).strftime(
+                get_time_format(get_language())
+            )
             notification_txt = date_entry_tmpl.format(start_dmy, start_hm, end_hm)
             context["exposure_date_time"] = notification_txt
 
