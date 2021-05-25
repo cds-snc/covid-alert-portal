@@ -37,6 +37,7 @@ location_category_type_map = {
 }
 
 location_choices = [
+    ("", _("Select a type of place or event")),
     (location_restaurant_bar_coffee, _("Restaurant, bar, coffee shop.")),
     (location_fitness_recreation, _("Fitness, sports, recreation.")),
     (location_arts_entertainment, _("Arts, entertainment.")),
@@ -85,7 +86,15 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
 
 
 class LocationNameForm(HealthcareBaseForm, forms.Form):
-    name = forms.CharField(label="", max_length=200)
+    name = forms.CharField(
+        label="",
+        max_length=65,
+        error_messages={
+            "max_length": _(
+                "Your name is longer than the %(limit_value)d character limit."
+            )
+        },
+    )
 
 
 provinces = [
