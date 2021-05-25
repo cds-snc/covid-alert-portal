@@ -15,7 +15,12 @@
 
   {% include  "includes/flash_messages.html" %}
 
-  <h1>{% trans "Email address for your poster" %}</h1>
-  <p>{% trans "We’ll send you a link. Use the link to confirm your email address." %}</p>
+  <h1>{% trans "Email address where we can send your QR code poster" %}</h1>
+  <p>
+  {% blocktrans %}
+    We do <b>not</b> show the email address on the poster.
+  {% endblocktrans %}
+  </p>
   {% include "includes/cds_form.html" with submit_text=_("Next") %}
+  <p>{% trans "We’ll send you a link to confirm your email address." %}</p>
 {% endblock %}

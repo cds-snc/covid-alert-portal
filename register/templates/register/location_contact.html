@@ -25,9 +25,11 @@
   </b></p>
   <br>
   <p>
-    {% trans "This could be you, or a different person, such as a store manager." %}
+    {% trans "The contact could be you or a different person, such as a store manager. Public health may need to contact this person about exposures at this address." %}
     </br>
-    {% trans "We’ll contact them with any important health information for the address." %}
+    {% blocktrans %}
+      We do <b>not</b> show the contact information on your QR code poster.
+    {% endblocktrans %}
   </p>
 
 

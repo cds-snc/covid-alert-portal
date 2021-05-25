@@ -12,11 +12,14 @@
     <a href="{% url 'register:start' %}" class="chevron-left">{% trans "Home" %}</a>
   </div>
   <h1>{% trans "Contact Us" %}</h1>
- 
-  <p>{% trans "For information about common issues, visit" %} <a href="">{% trans "Support" %}</a>.</p>
+
+  <p>
+    {% trans "For information about common issues, visit" %}
+    <a href="{% url 'register:help' %}">{% trans "Help and information" %}</a>.
+  </p>
 
   <p><strong>{% trans "What do you want to do?" %}</strong></p>
 
-{% include "includes/cds_form.html" with submit_text=_("Send") %}
+  {% include "includes/cds_form.html" with submit_text=_("Send") %}
 
 {% endblock %}
