@@ -2263,6 +2263,11 @@ msgid "Tell us the type of place."
 msgstr "De quel type de lieu s’agit-il?"
 
 #: register/forms.py
+#, python-format
+msgid "Your name is longer than the %(limit_value)d character limit."
+msgstr "Le nom dépasse la limite de %(limit_value)d caractères."
+
+#: register/forms.py
 msgid "Select a province or territory"
 msgstr "Sélectionnez une province ou un territoire"
 
