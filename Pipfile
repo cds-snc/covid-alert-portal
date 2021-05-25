@@ -50,6 +50,7 @@ segno = "*"
 cairosvg = "*"
 django-basicauth = "*"
 pypdf2 = "*"
+django-localflavor = "*"
 
 [pipenv]
 allow_prereleases = true

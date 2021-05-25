@@ -2,7 +2,7 @@
 {% load i18n static location_type_str %}
 
 {% block title %}
-  {% if form.errors %}{% trans "Error: "%}{% endif %}
+  {% if form.errors %}{% trans "Error: " %}{% endif %}
   {% location_type_str form_data.category 'address' %}
 {% endblock %}
 
@@ -20,13 +20,21 @@
   <h1>{% location_type_str form_data.category 'address' %}</h1>
 
   <div class="info-message">
-    <p>{% trans "If the event or service has several addresses, you need a poster for each.  After you finish this poster, we’ll remind you to make more." %}
+    <p>
+      {% blocktrans %}
+        <b> If there are several addresses, make a poster for each.</b><br>
+        After you finish this poster, we’ll remind you to make others for each address.
+      {% endblocktrans %}
   </div>
+  <p>
+  {% trans 'We’ll show the address on your QR code poster.' %}
+  </p>
 
   {% include "includes/cds_form.html" with submit_text=_("Next") %}
 {% endblock %}
 
 {% block scripts %}
-  <script src="https://cdn.jsdelivr.net/gh/alphagov/accessible-autocomplete/dist/accessible-autocomplete.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/gh/alphagov/accessible-autocomplete/dist/accessible-autocomplete.min.js"></script>
   <script src="{% static 'register/js/address-autocomplete.js' %}"></script>
 {% endblock %}

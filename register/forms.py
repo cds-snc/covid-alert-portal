@@ -8,6 +8,7 @@ from dependency_injector.wiring import inject, Provide
 from portal.containers import Container
 from portal.services import NotifyService
 from .widgets import AutocompleteWidget
+from localflavor.ca.forms import CAPostalCodeField
 
 type_event = 1
 type_place = 2
@@ -37,6 +38,7 @@ location_category_type_map = {
 }
 
 location_choices = [
+    ("", _("Select a type of place or event")),
     (location_restaurant_bar_coffee, _("Restaurant, bar, coffee shop.")),
     (location_fitness_recreation, _("Fitness, sports, recreation.")),
     (location_arts_entertainment, _("Arts, entertainment.")),
@@ -85,7 +87,15 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
 
 
 class LocationNameForm(HealthcareBaseForm, forms.Form):
-    name = forms.CharField(label="", max_length=200)
+    name = forms.CharField(
+        label="",
+        max_length=65,
+        error_messages={
+            "max_length": _(
+                "Your name is longer than the %(limit_value)d character limit."
+            )
+        },
+    )
 
 
 provinces = [
@@ -115,7 +125,11 @@ class LocationAddressForm(HealthcareBaseForm, forms.Form):
     )
     city = forms.CharField(label=_("City"), max_length=100)
     province = forms.ChoiceField(label=_("Province or territory"), choices=provinces)
-    postal_code = forms.CharField(label=_("Postal code"), max_length=10)
+    postal_code = CAPostalCodeField(
+        label=_("Postal code"),
+        max_length=10,
+        error_messages={"invalid": _("Enter a valid Canadian postal code.")},
+    )
 
 
 class LocationContactForm(HealthcareBaseForm, forms.Form):
