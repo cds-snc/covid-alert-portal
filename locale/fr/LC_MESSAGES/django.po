@@ -2343,6 +2343,10 @@ msgstr "Province ou territoire"
 msgid "Postal code"
 msgstr "Code postal"
 
+#: register/forms.py
+msgid "Enter a valid Canadian postal code."
+msgstr "Entrez un code postal canadien valide."
+
 #: register/forms.py register/models.py
 msgid "Name of contact"
 msgstr "Nom de la personne-ressource"
