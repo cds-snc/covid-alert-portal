@@ -136,30 +136,6 @@ class LocationAddressForm(HealthcareBaseForm, forms.Form):
     )
 
 
-class NewPhoneNumberField(PhoneNumberField):
-    default_validators = [validate_international_phonenumber]
-    phone_regex = re.compile(r"^(1)?(-)?\d{3}(-)?\d{3}(-)?\d{4}$")
-
-    def __init__(self, *args, region=None, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def clean(self, value):
-
-        # if value in self.empty_values:
-        #    return self.empty_value
-
-        print(value)
-
-        m = self.phone_regex.match(str(value))
-
-        print(m)
-
-        if not m:
-            raise ValidationError(self.error_messages["invalid"])
-
-        return super().clean(value)
-
-
 class LocationContactForm(HealthcareBaseForm, forms.Form):
     invalid_phone_error = _("Your phone number must be valid.")
 
