@@ -1,7 +1,5 @@
 import re
 from django import forms
-from django.core import validators
-from phonenumber_field.validators import validate_international_phonenumber
 
 from portal.forms import HealthcareBaseForm
 from django.utils.translation import gettext_lazy as _
