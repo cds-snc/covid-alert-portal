@@ -254,7 +254,7 @@ class RegisterLocationDetailsValidation(TestCase):
 
         self.assertEqual(
             form.errors["contact_phone"],
-            ["Your phone number must have 10 digits"],
+            [form.invalid_phone_error]
         )
 
 
