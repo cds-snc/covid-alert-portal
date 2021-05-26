@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-26 17:09+0000\n"
+"POT-Creation-Date: 2021-05-26 17:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -757,8 +757,8 @@ msgid "Enter information to continue."
 msgstr "Entrez les informations pour continuer."
 
 #: outbreaks/templates/confirm.html
-msgid "Confirm notification"
-msgstr ""
+msgid "Review and send"
+msgstr "Vérifier et envoyer"
 
 #: outbreaks/templates/confirm.html
 msgid "To see all public exposures for this place, visit"
@@ -769,8 +769,8 @@ msgid "Notification history"
 msgstr "Historique de notification"
 
 #: outbreaks/templates/confirm.html
-msgid "Confirm and send"
-msgstr "Confirmer et envoyer"
+msgid "You’ll alert everyone who scanned this QR code on the date(s) and time(s) below."
+msgstr "L’alerte sera envoyée aux personnes qui ont scanné le code QR aux dates et heures ci-dessous :"
 
 #: outbreaks/templates/confirm.html outbreaks/templates/details.html
 #: outbreaks/templates/history.html outbreaks/templates/profile.html
@@ -800,33 +800,37 @@ msgstr "Adresse"
 msgid "Show on map"
 msgstr "Montrer sur la carte"
 
-#: outbreaks/templates/confirm.html register/templates/register/summary.html
-msgid "Type"
-msgstr "Type"
-
 #: outbreaks/templates/confirm.html
-msgid "Date(s)"
-msgstr ""
+msgid "Date and time"
+msgstr "Date et heure"
 
 #: outbreaks/templates/confirm.html
 msgid "dates"
 msgstr ""
 
-#: outbreaks/templates/confirm.html
-msgid "Severity"
-msgstr ""
+#: outbreaks/templates/confirm.html outbreaks/templates/details.html
+msgid "Guidance"
+msgstr "Consigne"
 
 #: outbreaks/templates/confirm.html
 msgid "severity"
 msgstr "Gravité"
 
 #: outbreaks/templates/confirm.html
-msgid "By selecting “Notify people who were there”,  you confirm you believe this information is correct and complete."
-msgstr "En cliquant sur « Notifier les visiteurs de ce lieu », vous confirmez que ces renseignements sont exacts et complets selon vous."
+msgid ""
+"\n"
+"        <p>When you “Send QR alert”,  you confirm you’ve correctly entered all details from the health authority.</p>\n"
+"        <p>It’s not possible to cancel an alert after sending.</p>\n"
+"      "
+msgstr ""
+"\n"
+"        <p>En cliquant sur « Notifier les visiteurs de ce lieu », vous confirmez que ces renseignements sont exacts et complets selon vous.</p>\n"
+"        <p>It’s not possible to cancel an alert after sending.</p>\n"
+"      "
 
 #: outbreaks/templates/confirm.html
-msgid "Notify people who were there"
-msgstr "Notifier les visiteurs de ce lieu"
+msgid "Send QR alert"
+msgstr "Envoyer l’alerte QR"
 
 #: outbreaks/templates/confirmed.html
 msgid "Notification sent"
@@ -922,10 +926,6 @@ msgstr "Détails de l’exposition"
 #: outbreaks/templates/details.html
 msgid "Date and time of exposure"
 msgstr "Date et heure de l’exposition"
-
-#: outbreaks/templates/details.html
-msgid "Guidance"
-msgstr "Consigne"
 
 #: outbreaks/templates/details.html
 msgid "Date of alert"
@@ -3049,6 +3049,10 @@ msgid " Change<span class=\"visually-hidden\"> your email</span> "
 msgstr "Modifier<span class=\"visually-hidden\"> votre adresse courriel</span>"
 
 #: register/templates/register/summary.html
+msgid "Type"
+msgstr "Type"
+
+#: register/templates/register/summary.html
 msgid " Change <span class=\"visually-hidden\"> business type</span>"
 msgstr "Modifier <span class=\"visually-hidden\"> business type</span>"
 
@@ -3183,6 +3187,12 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "By selecting “Notify people who were there”,  you confirm you believe this information is correct and complete."
+#~ msgstr "En cliquant sur « Notifier les visiteurs de ce lieu », vous confirmez que ces renseignements sont exacts et complets selon vous."
+
+#~ msgid "Notify people who were there"
+#~ msgstr "Notifier les visiteurs de ce lieu"
 
 #~ msgid "Selected dates"
 #~ msgstr "Dates sélectionnées"
