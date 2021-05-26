@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-20 11:42+0000\n"
+"POT-Creation-Date: 2021-05-26 15:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -207,42 +207,11 @@ msgid "Sending alerts"
 msgstr "Envoi d’alertes"
 
 #: about/templates/about/5_help_patient_enter_key.html
-#: about/templates/about/6_admin_accounts.html
 #: about/templates/about/6_sending_qr_alerts.html
 #: about/templates/about/7_admin_accounts.html
 #: about/templates/includes/_nav_about.html
 msgid "Admin accounts"
 msgstr "Comptes administrateurs"
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Both administrators and team members can generate one-time keys."
-msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Administrators can also:"
-msgstr "Les administrateurs peuvent aussi :"
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Invite team members to create portal accounts."
-msgstr "Inviter des membres à se créer un compte pour le portail."
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Make changes or update information in team member accounts."
-msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Delete portal accounts."
-msgstr "Supprimer des comptes."
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Give log in codes to team members who are locked out of the portal."
-msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "Sending QR alerts"
@@ -298,6 +267,30 @@ msgstr "Vous verrez une confirmation que l’alerte a été envoyée"
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "Health authorities continue to manually contact visitors who do not scan QR codes."
 msgstr "Les autorités sanitaires continueront de contacter manuellement les visiteurs qui ne scannent pas les codes QR."
+
+#: about/templates/about/7_admin_accounts.html
+msgid "Both administrators and team members can generate one-time keys."
+msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
+
+#: about/templates/about/7_admin_accounts.html
+msgid "Administrators can also:"
+msgstr "Les administrateurs peuvent aussi :"
+
+#: about/templates/about/7_admin_accounts.html
+msgid "Invite team members to create portal accounts."
+msgstr "Inviter des membres à se créer un compte pour le portail."
+
+#: about/templates/about/7_admin_accounts.html
+msgid "Make changes or update information in team member accounts."
+msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
+
+#: about/templates/about/7_admin_accounts.html
+msgid "Delete portal accounts."
+msgstr "Supprimer des comptes."
+
+#: about/templates/about/7_admin_accounts.html
+msgid "Give log in codes to team members who are locked out of the portal."
+msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
 
 #: about/templates/includes/_nav_about.html
 msgid "Table of contents: About the Portal"
@@ -942,7 +935,7 @@ msgstr ""
 msgid "Alert history"
 msgstr "Historique des alertes"
 
-#: outbreaks/templates/history.html outbreaks/templates/search.html
+#: outbreaks/templates/history.html
 msgid "Find QR places and events"
 msgstr "Trouver un lieu ou un événement"
 
@@ -1056,8 +1049,12 @@ msgid "Place not found."
 msgstr "Lieu introuvable"
 
 #: outbreaks/templates/search.html
-msgid "Alert people who scanned the QR code during an exposure."
-msgstr "Les personnes qui ont scanné le code QR de ce lieu ou de cet événement seront alertées d’une exposition."
+msgid "Find places and events"
+msgstr "Trouver un lieu ou un événement"
+
+#: outbreaks/templates/search.html
+msgid "Alert people who scanned a QR code and may have been exposed during their visit."
+msgstr "Les personnes qui ont scanné le code QR de ce lieu ou de cet événement seront alertées d’un risque d’exposition."
 
 #: outbreaks/templates/search.html
 msgid "Enter at least 3 characters"
@@ -1090,11 +1087,11 @@ msgstr "Consulter l’historique des alertes"
 #: outbreaks/templates/search.html
 msgid ""
 "\n"
-"      Visit <a href=\"\">Sending QR alerts</a>\n"
+"      Visit <a href=\"\">Sending alerts</a>\n"
 "    "
 msgstr ""
 "\n"
-"      Consultez la page <a href=\"\">À propos des alertes QR</a>.\n"
+"      Consultez la page <a href=\"\">Envoi d’alertes.</a>.\n"
 "    "
 
 #: outbreaks/templates/severity.html
@@ -2216,6 +2213,10 @@ msgstr "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le 
 
 #: register/context_processors.py
 msgid "— Scan a place registration"
+msgstr ""
+
+#: register/forms.py
+msgid "Select a type of place or event"
 msgstr ""
 
 #: register/forms.py

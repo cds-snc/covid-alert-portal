@@ -3,14 +3,14 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: " %}{% endif %}
-  {% trans "Find QR places and events" %}
+  {% trans "Find places and events" %}
 {% endblock %}
 
 {% block content %}
   {% include  "includes/flash_messages.html" %}
-  <h1>{% trans "Find QR places and events" %}</h1>
+  <h1>{% trans "Find places and events" %}</h1>
 
-  <p>{% trans "Alert people who scanned the QR code during an exposure." %}</p>
+  <p>{% trans "Alert people who scanned a QR code and may have been exposed during their visit." %}</p>
 
   <form action="{% url 'outbreaks:search' %}" method="get" id="form--{{ request.resolver_match.url_name }} search_form"
         class="outbreaks-search">
@@ -108,7 +108,7 @@
     <br>
     <b>{% trans "New or need a refresher?" %}</b><br>
     {% blocktrans %}
-      Visit <a href="">Sending QR alerts</a>
+      Visit <a href="">Sending alerts</a>
     {% endblocktrans %}
   </p>
 {% endblock %}
