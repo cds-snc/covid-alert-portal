@@ -134,5 +134,10 @@
         <b>{% trans 'No prior alerts for' %}</b> {{ search_text }}.
       </p>
     {% endif %}
+
+    <div class="content-section">
+      <p><strong>{% trans "New or need a refresher?" %}</strong><br>
+      {% trans "Visit" %} <a href="{% url 'about:sending_qr_alerts' %}">{% trans "Sending alerts" %}</a>.</p>
+    </div>
   {% endif %}
 {% endblock %}

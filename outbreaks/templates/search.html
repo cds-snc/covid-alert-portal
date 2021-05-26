@@ -104,11 +104,9 @@
   {% endif %}
   <br>
   <p><a href="{% url 'outbreaks:history' %}">{% trans "Search alert history" %}</a></p>
-  <p>
-    <br>
-    <b>{% trans "New or need a refresher?" %}</b><br>
-    {% blocktrans %}
-      Visit <a href="">Sending alerts</a>
-    {% endblocktrans %}
-  </p>
+  
+  <div class="content-section">
+    <p><strong>{% trans "New or need a refresher?" %}</strong><br>
+    {% trans "Visit" %} <a href="{% url 'about:sending_qr_alerts' %}">{% trans "Sending alerts" %}</a>.</p>
+  </div>
 {% endblock %}
