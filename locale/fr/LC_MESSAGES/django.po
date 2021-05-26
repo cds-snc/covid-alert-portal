@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-26 17:41+0000\n"
+"POT-Creation-Date: 2021-05-26 17:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -202,6 +202,7 @@ msgid "To enter the key, the phone must be connected to the internet."
 msgstr "Le patient doit connecter son téléphone à Internet pour pouvoir entrer la clé."
 
 #: about/templates/about/5_help_patient_enter_key.html
+#: about/templates/about/6_sending_qr_alerts.html
 #: about/templates/includes/_nav_about.html outbreaks/templates/history.html
 #: outbreaks/templates/search.html
 msgid "Sending alerts"
