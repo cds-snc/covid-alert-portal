@@ -88,7 +88,7 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
 
 
 alphanum_validator = RegexValidator(
-    r'^[0-9A-zÀ-ÿ-_\s,.!?"\'\(\)]*$', _("Please only use alphanumeric characters")
+    r'^[0-9A-zÀ-ÿ-_\s,.!?"\'\(\)]*$', _("Only enter letters or numbers.")
 )
 
 
