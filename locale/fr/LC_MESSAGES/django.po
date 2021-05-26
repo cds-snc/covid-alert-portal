@@ -2263,7 +2263,7 @@ msgstr "De quel type de lieu s’agit-il?"
 
 #: register/forms.py
 msgid "Only enter letters or numbers."
-msgstr ""
+msgstr "Vous ne pouvez saisir que des lettres et des chiffres."
 
 #: register/forms.py
 #, python-format
