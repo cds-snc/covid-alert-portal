@@ -859,7 +859,7 @@ msgstr "Pour voir les expositions publiques passées de ce lieu consultez"
 #: outbreaks/templates/datetime.html outbreaks/templates/history.html
 #: outbreaks/templates/location_history.html
 msgid "Alert history"
-msgstr "l’historique des alertes."
+msgstr "Historique des alertes."
 
 #: outbreaks/templates/datetime.html portal/templates/includes/error_list.html
 msgid "Please correct the errors on the page"
