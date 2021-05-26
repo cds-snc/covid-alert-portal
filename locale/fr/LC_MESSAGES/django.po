@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-26 15:30+0000\n"
+"POT-Creation-Date: 2021-05-26 17:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -741,8 +741,8 @@ msgid "\"To\" must be later than \"From\"."
 msgstr "\"À\" doit être après \"De\""
 
 #: outbreaks/forms.py
-msgid "Someone already notified people who were there between {} and {}."
-msgstr "Quelqu’un a déjà prévenu les personnes qui étaient là entre {} et {}."
+msgid "Your team already alerted people who scanned the QR code on {}."
+msgstr "Une alerte a déjà été envoyée pour l’exposition du {}."
 
 #: outbreaks/forms.py
 msgid "Continue to self-isolate until you get your test result."
@@ -760,11 +760,11 @@ msgstr "Entrez les informations pour continuer."
 msgid "Confirm notification"
 msgstr ""
 
-#: outbreaks/templates/confirm.html outbreaks/templates/datetime.html
+#: outbreaks/templates/confirm.html
 msgid "To see all public exposures for this place, visit"
 msgstr "Pour voir les expositions publiques passées de ce lieu consultez"
 
-#: outbreaks/templates/confirm.html outbreaks/templates/datetime.html
+#: outbreaks/templates/confirm.html
 msgid "Notification history"
 msgstr "Historique de notification"
 
@@ -853,19 +853,32 @@ msgid "Search notification history"
 msgstr "Consulter l’historique des notifications"
 
 #: outbreaks/templates/datetime.html
-msgid "Select date and time"
+msgid "Choose date and time"
 msgstr "Indiquer la date et l’heure"
+
+#: outbreaks/templates/datetime.html
+msgid "To check all alerts for this place or event, visit "
+msgstr "Pour voir les expositions publiques passées de ce lieu consultez"
+
+#: outbreaks/templates/datetime.html outbreaks/templates/history.html
+#: outbreaks/templates/location_history.html
+msgid "Alert history"
+msgstr "l’historique des alertes."
 
 #: outbreaks/templates/datetime.html portal/templates/includes/error_list.html
 msgid "Please correct the errors on the page"
 msgstr "Veuillez corriger les erreurs trouvées dans la page"
 
 #: outbreaks/templates/datetime.html
-msgid "We’ll notify people who scanned the QR code on that date. Remember to add all dates of this public exposure."
-msgstr "Nous notifierons les personnes qui ont scanné le code QR à la date indiquée. S’il y a plus d’une date, ajoutez toutes les dates d’exposition."
+msgid "You’ll alert people who scanned the QR code on that date and time."
+msgstr "L’alerte sera envoyée aux personnes qui ont scanné le code QR à la date et aux heures qui suivent."
 
 #: outbreaks/templates/datetime.html
-msgid "Select date"
+msgid "Enter all dates and times you want to add for this place or event."
+msgstr "S’il y a plus d’une date, ajoutez toutes les dates et heures d’exposition pour ce lieu ou cet événement."
+
+#: outbreaks/templates/datetime.html
+msgid "Choose date"
 msgstr "Trouver une date"
 
 #: outbreaks/templates/datetime.html
@@ -889,8 +902,8 @@ msgid "Add new date +"
 msgstr "Ajouter une date +"
 
 #: outbreaks/templates/datetime.html
-msgid "Selected dates"
-msgstr "Dates sélectionnées"
+msgid "Exposure dates"
+msgstr "Date de l’exposition"
 
 #: outbreaks/templates/datetime.html
 msgid "Delete selected date"
@@ -933,10 +946,6 @@ msgstr "Ajouter une exposition"
 #: outbreaks/templates/details.html
 msgid "Exposure details not found."
 msgstr ""
-
-#: outbreaks/templates/history.html outbreaks/templates/location_history.html
-msgid "Alert history"
-msgstr "Historique des alertes"
 
 #: outbreaks/templates/history.html
 msgid "Find QR places and events"
@@ -3174,6 +3183,15 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Selected dates"
+#~ msgstr "Dates sélectionnées"
+
+#~ msgid "Someone already notified people who were there between {} and {}."
+#~ msgstr "Quelqu’un a déjà prévenu les personnes qui étaient là entre {} et {}."
+
+#~ msgid "Select date"
+#~ msgstr "Trouver une date"
 
 #~ msgid ""
 #~ "\n"
