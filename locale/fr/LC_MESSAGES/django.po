@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-26 15:12+0000\n"
+"POT-Creation-Date: 2021-05-26 15:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1297,8 +1297,8 @@ msgid "Generate keys"
 msgstr "Générer des clés"
 
 #: portal/templates/includes/nav_main.html
-msgid "QR Alerts"
-msgstr "Alertes QR"
+msgid "Send Alerts"
+msgstr "Envoyer des alertes"
 
 #: portal/templates/includes/nav_main.html
 #: profiles/templates/profiles/healthcareuser_list.html
@@ -3177,3 +3177,6 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "QR Alerts"
+#~ msgstr "Alertes QR"
