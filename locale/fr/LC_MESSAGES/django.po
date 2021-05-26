@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-26 17:21+0000\n"
+"POT-Creation-Date: 2021-05-26 17:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -832,21 +832,13 @@ msgstr ""
 msgid "Send QR alert"
 msgstr "Envoyer l’alerte QR"
 
-#: outbreaks/templates/confirmed.html
-msgid "Notification sent"
-msgstr "Notification envoyée"
+#: outbreaks/templates/confirmed.html outbreaks/templates/location_history.html
+msgid "Alert sent"
+msgstr "Alerte envoyée"
 
 #: outbreaks/templates/confirmed.html
-msgid "You’ve notified people"
-msgstr "Notification envoyée"
-
-#: outbreaks/templates/confirmed.html
-msgid "People who’ve installed the app will get a notification if they were at"
-msgstr "Les personnes qui ont installé l’application recevront une notification si elles ont fréquenté"
-
-#: outbreaks/templates/confirmed.html
-msgid "on one or more of these dates:"
-msgstr "à l’une ou plusieurs des dates suivantes:"
+msgid "You’ve notified people who scanned the QR code at the address, date(s) and time(s) below."
+msgstr "Les personnes recevront une notification si elles ont scanné le code QR du lieu ci-dessous à l’une des dates et heures qui suivent :"
 
 #: outbreaks/templates/confirmed.html
 msgid "Notify of another public exposure"
@@ -1027,10 +1019,6 @@ msgstr "Trier par date d'envoi de l'alerte, ordre croissant"
 #: outbreaks/templates/location_history.html
 msgid "Sort by date alert sent, descending"
 msgstr "Trier par date d'envoi de l'alerte, ordre décroissant"
-
-#: outbreaks/templates/location_history.html
-msgid "Alert sent"
-msgstr "Date d’envoi de l’alerte"
 
 #: outbreaks/templates/location_history.html
 msgid "Sort by sender, ascending"
@@ -3187,6 +3175,18 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Notification sent"
+#~ msgstr "Notification envoyée"
+
+#~ msgid "You’ve notified people"
+#~ msgstr "Notification envoyée"
+
+#~ msgid "People who’ve installed the app will get a notification if they were at"
+#~ msgstr "Les personnes qui ont installé l’application recevront une notification si elles ont fréquenté"
+
+#~ msgid "on one or more of these dates:"
+#~ msgstr "à l’une ou plusieurs des dates suivantes:"
 
 #~ msgid "By selecting “Notify people who were there”,  you confirm you believe this information is correct and complete."
 #~ msgstr "En cliquant sur « Notifier les visiteurs de ce lieu », vous confirmez que ces renseignements sont exacts et complets selon vous."
