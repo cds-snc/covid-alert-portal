@@ -825,7 +825,7 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"        <p>En cliquant sur « Notifier les visiteurs de ce lieu », vous confirmez que ces renseignements sont exacts et complets selon vous.</p>\n"
+"        <p>En cliquant sur « Envoyer l’alerte », vous confirmez avoir correctement entré les détails de l’exposition potentielle.</p>\n"
 "        <p>Notez qu’une fois envoyée, l’alerte ne peut pas être annulée.</p>\n"
 "      "
 
