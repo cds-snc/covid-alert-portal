@@ -831,7 +831,7 @@ msgstr ""
 
 #: outbreaks/templates/confirm.html
 msgid "Send alert"
-msgstr "Envoyer l’alerte QR"
+msgstr "Envoyer l’alerte"
 
 #: outbreaks/templates/confirmed.html outbreaks/templates/location_history.html
 msgid "Alert sent"
