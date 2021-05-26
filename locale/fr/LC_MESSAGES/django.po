@@ -820,7 +820,7 @@ msgstr "Gravité"
 #: outbreaks/templates/confirm.html
 msgid ""
 "\n"
-"        <p>When you “Send QR alert”,  you confirm you’ve correctly entered all details from the health authority.</p>\n"
+"        <p>When you “Send alert”,  you confirm you’ve correctly entered all details of the possible exposure.</p>\n"
 "        <p>It’s not possible to cancel an alert after sending.</p>\n"
 "      "
 msgstr ""
