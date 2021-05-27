@@ -161,7 +161,7 @@ class LocationContactForm(HealthcareBaseForm, forms.Form):
         label=_("Contact email"),
         max_length=255,
     )
-    
+
     invalid_phone_error = _("Your phone number must be valid.")
 
     contact_phone = PhoneNumberField(
