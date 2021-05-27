@@ -263,8 +263,8 @@ class DatetimeView(NotificationsTestCase):
                 "month": 1,
                 "year": 2021,
                 "do_post": "add_date",
-                "start_time": "0:00:00:000000",
-                "end_time": "9:59:59:999999",
+                "start_time": "00:00:00:000001",
+                "end_time": "10:00:00:000000",
             },
         )
         self.assertEqual(response.status_code, 302)
@@ -279,8 +279,8 @@ class DatetimeView(NotificationsTestCase):
                 "month": 1,
                 "year": 2021,
                 "do_post": "add_date",
-                "start_time": "10:00:00:000000",
-                "end_time": "22:59:59:999999",
+                "start_time": "10:00:00:000001",
+                "end_time": "23:00:00:000000",
             },
         )
         self.assertEqual(response.status_code, 302)
