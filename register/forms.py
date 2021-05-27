@@ -1,3 +1,4 @@
+import re
 from django import forms
 from django.core.validators import RegexValidator
 
@@ -10,6 +11,7 @@ from portal.containers import Container
 from portal.services import NotifyService
 from .widgets import AutocompleteWidget
 from localflavor.ca.forms import CAPostalCodeField
+from django.core.exceptions import ValidationError
 
 type_event = 1
 type_place = 2
@@ -159,16 +161,34 @@ class LocationContactForm(HealthcareBaseForm, forms.Form):
         label=_("Contact email"),
         max_length=255,
     )
+    
+    invalid_phone_error = _("Your phone number must be valid.")
+
     contact_phone = PhoneNumberField(
         label=_("Contact phone number"),
-        error_messages={"invalid": _("Your phone number must have 10 digits")},
+        error_messages={"invalid": invalid_phone_error},
     )
+
     contact_phone_ext = forms.CharField(
         label=_("Extension"),
         required=False,
         max_length=20,
         validators=[alphanum_validator],
     )
+
+    def clean_contact_phone(self):
+        phone_number = self.data["contact-contact_phone"]
+        cleaned_phone_number = self.cleaned_data["contact_phone"]
+
+        # Search for an alpha characters
+        m = re.search("[A-Za-z]+", phone_number)
+
+        # By default the PhoneNumberField will convert chars to #s
+        # Raise a validation error if alpha chars found
+        if m:
+            raise ValidationError(self.invalid_phone_error)
+
+        return cleaned_phone_number
 
 
 class RegisterSummaryForm(HealthcareBaseForm, forms.Form):
