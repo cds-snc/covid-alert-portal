@@ -170,7 +170,7 @@ resource "aws_wafv2_web_acl" "covidportal_acl" {
   }
 
   rule {
-    name = "CanadaOnlyGeoRestriction"
+    name     = "CanadaOnlyGeoRestriction"
     priority = 5
 
     action {
