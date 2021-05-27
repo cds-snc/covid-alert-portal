@@ -7,7 +7,6 @@ from django import forms
 from django.conf import settings
 from django.urls import reverse_lazy
 from django.db.models.functions import Lower
-from django.db.models import Q
 from django.db import transaction
 from django.shortcuts import redirect, render
 from django.views.generic import FormView, ListView, TemplateView, View
@@ -15,7 +14,13 @@ from django.utils.translation import get_language, gettext_lazy as _
 from django.utils.html import conditional_escape
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from portal.mixins import Is2FAMixin
-from .forms import end_hours, DateForm, SeverityForm, SearchForm
+from .forms import (
+    end_hours,
+    DateForm,
+    SeverityForm,
+    SearchForm,
+    end_date_shift_for_view,
+)
 from .protobufs import outbreak_pb2
 from datetime import datetime
 import pytz
@@ -301,7 +306,9 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
         start_dmy_fmt = "%e %B %Y"
         start_dmy = start_dt.strftime(start_dmy_fmt)
         start_hm = start_dt.strftime(get_time_format(get_language()))
-        end_hm = end_dt.strftime(get_time_format(get_language()))
+        end_hm = end_date_shift_for_view(end_dt).strftime(
+            get_time_format(get_language())
+        )
         notification_txt = date_entry_tmpl.format(start_dmy, start_hm, end_hm)
         date_entry = {
             "start_ts": start_ts,
@@ -536,30 +543,30 @@ class HistoryView(SearchListBaseView):
     def get_queryset(self):
         province = self.request.user.province.abbr
         search = self.request.GET.get("search_text", "").strip()
-        if search:
-            # 'icontains' will produce a case-insensitive SQL 'LIKE' statement which adds a certain level of
-            # 'fuzziness' to the search
-            # Fuzzy search either the name or the address field
-            # search within the same province as the user or CDS
-            if self.request.user.is_superuser:
-                qs = Notification.objects.filter(
-                    Q(location__name__icontains=search)
-                    | Q(location__address__icontains=search)
-                )
-            else:
-                qs = Notification.objects.filter(
-                    Q(location__province=province)
-                    & Q(
-                        Q(location__name__icontains=search)
-                        | Q(location__address__icontains=search)
-                    )
-                )
+
+        # Start the queryset with all objects for Admin, province-specific for others
+        if self.request.user.is_superuser:
+            qs = Notification.objects.all()
         else:
-            # If we don't have search text then just return all results within this province
-            if self.request.user.is_superuser:
-                qs = Notification.objects.all()
-            else:
-                qs = Notification.objects.filter(location__province=province)
+            qs = Notification.objects.filter(location__province=province)
+
+        if search:
+            query = process_query(search)
+
+            qs = qs.extra(
+                tables=["register_location", "outbreaks_notification"],
+                where=[
+                    """
+                        to_tsvector(unaccent(concat_ws(' ',
+                            register_location.name,
+                            register_location.address,
+                            register_location.city,
+                            register_location.postal_code
+                        ))) @@ to_tsquery(unaccent(%s))
+                        """
+                ],
+                params=[query],
+            )
 
         # Order the queryset
         return self._order_queryset(qs)
@@ -603,7 +610,9 @@ class ExposureDetailsView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
             start_dmy_fmt = "%e %B %Y"
             start_dmy = start_date.strftime(start_dmy_fmt)
             start_hm = start_date.strftime(get_time_format(get_language()))
-            end_hm = end_date.strftime(get_time_format(get_language()))
+            end_hm = end_date_shift_for_view(end_date).strftime(
+                get_time_format(get_language())
+            )
             notification_txt = date_entry_tmpl.format(start_dmy, start_hm, end_hm)
             context["exposure_date_time"] = notification_txt
 
