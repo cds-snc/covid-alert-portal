@@ -252,10 +252,7 @@ class RegisterLocationDetailsValidation(TestCase):
     def test_location_contact_phone_format(self):
         form = forms.LocationContactForm(data={"contact_phone": "notaphonenumber"})
 
-        self.assertEqual(
-            form.errors["contact_phone"],
-            ["Your phone number must have 10 digits"],
-        )
+        self.assertEqual(form.errors["contact_phone"], [form.invalid_phone_error])
 
 
 class LocationModel(TestCase):
