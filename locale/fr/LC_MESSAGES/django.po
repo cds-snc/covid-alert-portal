@@ -1083,7 +1083,7 @@ msgstr ""
 
 #: outbreaks/templates/search.html
 msgid "No results in your region for"
-msgstr "Aucun résultat pour"
+msgstr "Aucun résultat dans votre région pour"
 
 #: outbreaks/templates/search.html
 msgid "Follow local procedures for places or events that do not have QR codes."
