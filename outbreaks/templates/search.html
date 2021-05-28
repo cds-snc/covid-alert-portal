@@ -39,7 +39,7 @@
   </form>
 
   {% if object_list %}
-    <b>{{ search_result_count }} {% trans 'results for' %}</b> {{ search_text }}.
+    <b>{{ search_result_count }} {% trans 'results in your region for' %}</b> {{ search_text }}.
     <br>
     <table class="with-actions">
       <caption class="visually-hidden">{% trans "Available locations" %}</caption>
@@ -95,7 +95,7 @@
   {% else %}
     {% if search_text %}
       <p>
-        <b>{% trans 'No results for' %}</b> {{ search_text }}.
+        <b>{% trans 'No results in your region for' %}</b> {{ search_text }}.
       <p>
         {% trans 'Follow local procedures for places or events that do not have QR codes.' %}
       </p>

@@ -183,5 +183,5 @@ class SearchForm(HealthcareBaseForm):
     search_text = forms.CharField(
         label="",
         min_length=3,
-        error_messages={"required": _("Enter information to continue.")},
+        error_messages={"required": _("Enter the name or address.")},
     )

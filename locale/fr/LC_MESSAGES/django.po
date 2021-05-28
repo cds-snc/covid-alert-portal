@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-27 14:29+0000\n"
+"POT-Creation-Date: 2021-05-28 15:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -754,8 +754,8 @@ msgid "If you develop symptoms, get tested and self-isolate until you get your t
 msgstr "Si vous développez des symptômes, passez un test de dépistage et isolez-vous jusqu’à ce que vous receviez le résultat du test."
 
 #: outbreaks/forms.py
-msgid "Enter information to continue."
-msgstr "Entrez les informations pour continuer."
+msgid "Enter the name or address."
+msgstr ""
 
 #: outbreaks/templates/confirm.html
 msgid "Review and send"
@@ -956,7 +956,7 @@ msgstr "Recherche par nom ou adresse"
 msgid "Search"
 msgstr "Chercher"
 
-#: outbreaks/templates/history.html outbreaks/templates/search.html
+#: outbreaks/templates/history.html
 msgid "results for"
 msgstr "résultats pour"
 
@@ -1066,6 +1066,10 @@ msgid "Enter at least 3 characters"
 msgstr "Saisissez au moins 3 caractères"
 
 #: outbreaks/templates/search.html
+msgid "results in your region for"
+msgstr ""
+
+#: outbreaks/templates/search.html
 msgid "Available locations"
 msgstr ""
 
@@ -1078,7 +1082,7 @@ msgid "location named "
 msgstr ""
 
 #: outbreaks/templates/search.html
-msgid "No results for"
+msgid "No results in your region for"
 msgstr "Aucun résultat pour"
 
 #: outbreaks/templates/search.html
@@ -3176,3 +3180,6 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Enter information to continue."
+#~ msgstr "Entrez les informations pour continuer."
