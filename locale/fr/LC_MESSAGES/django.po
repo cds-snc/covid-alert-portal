@@ -1067,7 +1067,7 @@ msgstr "Saisissez au moins 3 caractères"
 
 #: outbreaks/templates/search.html
 msgid "results in your region for"
-msgstr ""
+msgstr "résultats dans votre région pour"
 
 #: outbreaks/templates/search.html
 msgid "Available locations"
