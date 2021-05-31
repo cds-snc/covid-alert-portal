@@ -1,6 +1,7 @@
-const pickers = document.querySelectorAll("duet-date-picker");
+let pickers = document.querySelectorAll("duet-date-picker");
 
-pickers.forEach(function(picker) {
+// This Array.apply converts the nodelist to an array so IE can iterate with forEach
+Array.apply(null,pickers).forEach(function(picker) {
     // Replace the default input and button combo with our own 'show' button
     var button = document.querySelector("#button_datepicker");
     button.addEventListener('click', function (evt) {
