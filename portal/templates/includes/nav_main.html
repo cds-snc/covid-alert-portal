@@ -9,7 +9,7 @@
       <li><a {% if 'about' in request.path %}class="active"{% endif %} href="{% url 'about:index' %}">{% trans "About the portal" %}</a></li>
       {% switch "qr_codes" %}
         {% if perms.profiles.can_send_alerts and user.is_verified %}
-          <li><a {% if request.resolver_match.url_name == 'search' %}class="active"{% endif %} href="{% url 'outbreaks:search' %}">{% trans "QR Alerts" %}</a></li>
+          <li><a {% if request.resolver_match.url_name == 'search' %}class="active"{% endif %} href="{% url 'outbreaks:search' %}">{% trans "Send Alerts" %}</a></li>
         {% endif %}
       {% endswitch %}
       {% if user.is_admin and user.is_verified %}
