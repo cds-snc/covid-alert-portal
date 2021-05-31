@@ -3205,6 +3205,3 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
-
-#~ msgid "We’ll display the name on the poster with your QR code."
-#~ msgstr "Le nom sera inscrit sur l’affiche avec votre code QR."
