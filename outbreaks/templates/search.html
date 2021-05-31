@@ -3,14 +3,14 @@
 
 {% block title %}
   {% if form.errors %}{% trans "Error: " %}{% endif %}
-  {% trans "Find QR places and events" %}
+  {% trans "Find places and events" %}
 {% endblock %}
 
 {% block content %}
   {% include  "includes/flash_messages.html" %}
-  <h1>{% trans "Find QR places and events" %}</h1>
+  <h1>{% trans "Find places and events" %}</h1>
 
-  <p>{% trans "Alert people who scanned the QR code during an exposure." %}</p>
+  <p>{% trans "Alert people who scanned a QR code and may have been exposed during their visit." %}</p>
 
   <form action="{% url 'outbreaks:search' %}" method="get" id="form--{{ request.resolver_match.url_name }} search_form"
         class="outbreaks-search">
@@ -39,7 +39,7 @@
   </form>
 
   {% if object_list %}
-    <b>{{ search_result_count }} {% trans 'results for' %}</b> {{ search_text }}.
+    <b>{{ search_result_count }} {% trans 'results in your region for' %}</b> {{ search_text }}.
     <br>
     <table class="with-actions">
       <caption class="visually-hidden">{% trans "Available locations" %}</caption>
@@ -95,7 +95,7 @@
   {% else %}
     {% if search_text %}
       <p>
-        <b>{% trans 'No results for' %}</b> {{ search_text }}.
+        <b>{% trans 'No results in your region for' %}</b> {{ search_text }}.
       <p>
         {% trans 'Follow local procedures for places or events that do not have QR codes.' %}
       </p>
@@ -104,11 +104,9 @@
   {% endif %}
   <br>
   <p><a href="{% url 'outbreaks:history' %}">{% trans "Search alert history" %}</a></p>
-  <p>
-    <br>
-    <b>{% trans "New or need a refresher?" %}</b><br>
-    {% blocktrans %}
-      Visit <a href="">Sending QR alerts</a>
-    {% endblocktrans %}
-  </p>
+  
+  <div class="content-section">
+    <p><strong>{% trans "New or need a refresher?" %}</strong><br>
+    {% trans "Visit" %} <a href="{% url 'about:sending_qr_alerts' %}">{% trans "Sending alerts" %}</a>.</p>
+  </div>
 {% endblock %}

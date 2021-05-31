@@ -1,5 +1,6 @@
 import re
 from django import forms
+from django.core.validators import RegexValidator
 
 from portal.forms import HealthcareBaseForm
 from django.utils.translation import gettext_lazy as _
@@ -41,16 +42,16 @@ location_category_type_map = {
 
 location_choices = [
     ("", _("Select a type of place or event")),
-    (location_restaurant_bar_coffee, _("Restaurant, bar, coffee shop.")),
-    (location_fitness_recreation, _("Fitness, sports, recreation.")),
-    (location_arts_entertainment, _("Arts, entertainment.")),
-    (location_grooming_wellness, _("Grooming and wellness.")),
-    (location_religious_space, _("Places of worship.")),
-    (location_events, _("Events such as festivals, weddings, conferences.")),
-    (location_retail, _("Retail such as grocery stores, liquor stores, pharmacies.")),
-    (location_medical, _("Medical office or centre (doctor, dentist, etc.).")),
-    (location_centres, _("Community centres, libraries, government service centres.")),
-    (location_other, _("Other.")),
+    (location_restaurant_bar_coffee, _("Restaurant, bar, coffee shop")),
+    (location_fitness_recreation, _("Fitness, sports, recreation")),
+    (location_arts_entertainment, _("Arts, entertainment")),
+    (location_grooming_wellness, _("Grooming and wellness")),
+    (location_religious_space, _("Places of worship")),
+    (location_events, _("Events such as festivals, weddings, conferences")),
+    (location_retail, _("Retail such as grocery stores, liquor stores, pharmacies")),
+    (location_medical, _("Medical centres, such as doctor or dentist offices")),
+    (location_centres, _("Community centres, libraries, government service centres")),
+    (location_other, _("Other")),
 ]
 
 
@@ -88,10 +89,16 @@ class LocationCategoryForm(HealthcareBaseForm, forms.Form):
             raise forms.ValidationError(_("Tell us the type of place."))
 
 
+alphanum_validator = RegexValidator(
+    r'^[0-9A-zÀ-ÿ-_\s,.!?"\'\(\):;«»@$&]*$', _("Only enter letters or numbers.")
+)
+
+
 class LocationNameForm(HealthcareBaseForm, forms.Form):
     name = forms.CharField(
         label="",
         max_length=65,
+        validators=[alphanum_validator],
         error_messages={
             "max_length": _(
                 "Your name is longer than the %(limit_value)d character limit."
@@ -120,12 +127,22 @@ provinces = [
 
 class LocationAddressForm(HealthcareBaseForm, forms.Form):
     address = forms.CharField(
-        label=_("Address line 1"), widget=AutocompleteWidget(), max_length=200
+        label=_("Address line 1"),
+        widget=AutocompleteWidget(),
+        max_length=200,
+        validators=[alphanum_validator],
     )
     address_2 = forms.CharField(
-        label=_("Address line 2"), required=False, max_length=200
+        label=_("Address line 2"),
+        required=False,
+        max_length=200,
+        validators=[alphanum_validator],
     )
-    city = forms.CharField(label=_("City"), max_length=100)
+    city = forms.CharField(
+        label=_("City"),
+        max_length=100,
+        validators=[alphanum_validator],
+    )
     province = forms.ChoiceField(label=_("Province or territory"), choices=provinces)
     postal_code = CAPostalCodeField(
         label=_("Postal code"),
@@ -135,10 +152,17 @@ class LocationAddressForm(HealthcareBaseForm, forms.Form):
 
 
 class LocationContactForm(HealthcareBaseForm, forms.Form):
-    invalid_phone_error = _("Your phone number must be valid.")
+    contact_name = forms.CharField(
+        label=_("Name of contact"),
+        max_length=200,
+        validators=[alphanum_validator],
+    )
+    contact_email = forms.EmailField(
+        label=_("Contact email"),
+        max_length=255,
+    )
 
-    contact_name = forms.CharField(label=_("Name of contact"), max_length=200)
-    contact_email = forms.EmailField(label=_("Contact email"), max_length=255)
+    invalid_phone_error = _("Your phone number must be valid.")
 
     contact_phone = PhoneNumberField(
         label=_("Contact phone number"),
@@ -146,7 +170,10 @@ class LocationContactForm(HealthcareBaseForm, forms.Form):
     )
 
     contact_phone_ext = forms.CharField(
-        label=_("Extension"), required=False, max_length=20
+        label=_("Extension"),
+        required=False,
+        max_length=20,
+        validators=[alphanum_validator],
     )
 
     def clean_contact_phone(self):
@@ -187,7 +214,7 @@ class ContactUsForm(HealthcareBaseForm, forms.Form):
         widget=forms.Textarea,
     )
     contact_email = forms.EmailField(
-        label=_("Email address"),
+        label=_("Your email address"),
         help_text=_(
             "We'll use this if we need to contact you. We will not use your email address for anything else."
         ),
