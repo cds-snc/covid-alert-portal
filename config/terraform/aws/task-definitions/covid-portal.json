@@ -9,9 +9,7 @@
     ],
     "linuxParameters": {
       "capabilities": {
-        "drop": [
-          "ALL"
-        ]
+        "drop": ["ALL"]
       }
     },
     "logConfiguration": {
