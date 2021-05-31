@@ -41,16 +41,16 @@ location_category_type_map = {
 
 location_choices = [
     ("", _("Select a type of place or event")),
-    (location_restaurant_bar_coffee, _("Restaurant, bar, coffee shop.")),
-    (location_fitness_recreation, _("Fitness, sports, recreation.")),
-    (location_arts_entertainment, _("Arts, entertainment.")),
-    (location_grooming_wellness, _("Grooming and wellness.")),
-    (location_religious_space, _("Places of worship.")),
-    (location_events, _("Events such as festivals, weddings, conferences.")),
-    (location_retail, _("Retail such as grocery stores, liquor stores, pharmacies.")),
-    (location_medical, _("Medical centres, such as doctor or dentist offices.")),
-    (location_centres, _("Community centres, libraries, government service centres.")),
-    (location_other, _("Other.")),
+    (location_restaurant_bar_coffee, _("Restaurant, bar, coffee shop")),
+    (location_fitness_recreation, _("Fitness, sports, recreation")),
+    (location_arts_entertainment, _("Arts, entertainment")),
+    (location_grooming_wellness, _("Grooming and wellness")),
+    (location_religious_space, _("Places of worship")),
+    (location_events, _("Events such as festivals, weddings, conferences")),
+    (location_retail, _("Retail such as grocery stores, liquor stores, pharmacies")),
+    (location_medical, _("Medical centres, such as doctor or dentist offices")),
+    (location_centres, _("Community centres, libraries, government service centres")),
+    (location_other, _("Other")),
 ]
 
 

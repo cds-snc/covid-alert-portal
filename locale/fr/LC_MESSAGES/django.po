@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 13:56+0000\n"
+"POT-Creation-Date: 2021-05-31 13:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2216,44 +2216,44 @@ msgid "Select a type of place or event"
 msgstr "Sélectionner un type de lieu ou d’événement"
 
 #: register/forms.py
-msgid "Restaurant, bar, coffee shop."
-msgstr "Restaurants, bars et cafés."
+msgid "Restaurant, bar, coffee shop"
+msgstr "Restaurants, bars et cafés"
 
 #: register/forms.py
-msgid "Fitness, sports, recreation."
-msgstr "Entraînement et activités sportives ou récréatives."
+msgid "Fitness, sports, recreation"
+msgstr "Entraînement et activités sportives ou récréatives"
 
 #: register/forms.py
-msgid "Arts, entertainment."
-msgstr "Arts et divertissement."
+msgid "Arts, entertainment"
+msgstr "Arts et divertissement"
 
 #: register/forms.py
-msgid "Grooming and wellness."
-msgstr "Soins de beauté et bien-être."
+msgid "Grooming and wellness"
+msgstr "Soins de beauté et bien-être"
 
 #: register/forms.py
-msgid "Places of worship."
-msgstr "Lieux de culte."
+msgid "Places of worship"
+msgstr "Lieux de culte"
 
 #: register/forms.py
-msgid "Events such as festivals, weddings, conferences."
-msgstr "Événements publics et privés (festivals, mariages, conférences, etc.)."
+msgid "Events such as festivals, weddings, conferences"
+msgstr "Événements publics et privés (festivals, mariages, conférences, etc.)"
 
 #: register/forms.py
-msgid "Retail such as grocery stores, liquor stores, pharmacies."
-msgstr "Commerces (épiceries, magasins de vins et spiritueux, pharmacies, etc.)."
+msgid "Retail such as grocery stores, liquor stores, pharmacies"
+msgstr "Commerces (épiceries, magasins de vins et spiritueux, pharmacies, etc.)"
 
 #: register/forms.py
-msgid "Medical centres, such as doctor or dentist offices."
-msgstr "Centres et cabinets médicaux, dentaires, etc."
+msgid "Medical centres, such as doctor or dentist offices"
+msgstr "Centres et cabinets médicaux, dentaires, etc"
 
 #: register/forms.py
-msgid "Community centres, libraries, government service centres."
-msgstr "Centres communautaires, bibliothèques et centres de services gouvernementaux."
+msgid "Community centres, libraries, government service centres"
+msgstr "Centres communautaires, bibliothèques et centres de services gouvernementaux"
 
 #: register/forms.py
-msgid "Other."
-msgstr "Autre."
+msgid "Other"
+msgstr "Autre"
 
 #: register/forms.py
 msgid "Tell us the type of place."
