@@ -7,13 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [2.1] - 2021-06-01
+
+## Updated
+
 - Validate Canadian postal code format
 - Enforce character limit for location name so it doesn't run off the poster
 - Add QR Alert docs to Portal
 - Add Location Outbreaks History view
 - New venue types and selection html select control
 - Content updates throughout
-
+- Updated poster and instructions
+- Postal Code and Phone number validation
+- Remove Basicauth
 
 ## [2.0.3] - 2021-05-14
 
