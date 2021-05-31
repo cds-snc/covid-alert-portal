@@ -56,7 +56,7 @@ resource "aws_lb" "covidportal" {
   name                       = "covidportal"
   internal                   = false #tfsec:ignore:AWS005
   load_balancer_type         = "application"
-  drop_invalid_header_fields  = true
+  drop_invalid_header_fields = true
   security_groups = [
     aws_security_group.covidportal_load_balancer.id
   ]
