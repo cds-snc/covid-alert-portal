@@ -13,10 +13,15 @@
   </div>
   <h1>{% trans "Contact Us" %}</h1>
 
-  <p>
-    {% trans "For information about common issues, visit" %}
-    <a href="{% url 'register:help' %}">{% trans "Help and information" %}</a>.
-  </p>
+  <h2>{% trans "Call us" %}</h2>
+
+  {% blocktrans %}
+  <p>Phone: 1-833-694-1709<br>
+  Teletypewriter (TTY): 1-866-694-8389<br>
+  Hours of operation are Monday to Friday from 8:30 am to 5 pm ET</p>
+  {% endblocktrans %}
+
+  <h2>{% trans "Or send us a message" %}</h2>
 
   <p><strong>{% trans "What do you want to do?" %}</strong></p>
 

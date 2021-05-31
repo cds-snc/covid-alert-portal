@@ -111,7 +111,7 @@ class DateForm(HealthcareBaseForm):
         tz = pytz.timezone(settings.PORTAL_LOCAL_TZ or settings.TIME_ZONE or "UTC")
         start_later_end_error_msg = _('"To" must be later than "From".')
         overlap_notification_error_tmpl = _(
-            "Someone already notified people who were there between {} and {}."
+            "Your team already alerted people who scanned the QR code on {}."
         )
         if start_date >= end_date:
             form.add_error(None, start_later_end_error_msg)
@@ -126,9 +126,6 @@ class DateForm(HealthcareBaseForm):
                     ValidationError(
                         overlap_notification_error_tmpl.format(
                             notification.start_date.astimezone(tz).strftime("%c"),
-                            end_date_shift_for_view(
-                                notification.end_date.astimezone(tz)
-                            ).strftime("%c"),
                         ),
                         code="warning",
                     )
@@ -186,5 +183,5 @@ class SearchForm(HealthcareBaseForm):
     search_text = forms.CharField(
         label="",
         min_length=3,
-        error_messages={"required": _("Enter information to continue.")},
+        error_messages={"required": _("Enter the name or address.")},
     )

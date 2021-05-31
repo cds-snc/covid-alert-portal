@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-27 14:29+0000\n"
+"POT-Creation-Date: 2021-05-31 15:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -202,7 +202,9 @@ msgid "To enter the key, the phone must be connected to the internet."
 msgstr "Le patient doit connecter son téléphone à Internet pour pouvoir entrer la clé."
 
 #: about/templates/about/5_help_patient_enter_key.html
-#: about/templates/includes/_nav_about.html
+#: about/templates/about/6_sending_qr_alerts.html
+#: about/templates/includes/_nav_about.html outbreaks/templates/history.html
+#: outbreaks/templates/search.html
 msgid "Sending alerts"
 msgstr "Envoi d’alertes"
 
@@ -502,7 +504,7 @@ msgstr "Suivant"
 msgid "Your name (optional)"
 msgstr "Votre nom (facultatif)"
 
-#: contact/forms.py register/templates/register/summary.html
+#: contact/forms.py register/forms.py register/templates/register/summary.html
 msgid "Your email address"
 msgstr "Votre adresse courriel"
 
@@ -685,11 +687,13 @@ msgstr "Le patient remplit-il les deux conditions?"
 msgid "Yes, continue"
 msgstr "Oui, continuer"
 
-#: covid_key/templates/covid_key/start.html outbreaks/templates/search.html
+#: covid_key/templates/covid_key/start.html outbreaks/templates/history.html
+#: outbreaks/templates/search.html
 msgid "New or need a refresher?"
 msgstr "Besoin d’en savoir plus sur le portail?"
 
-#: covid_key/templates/covid_key/start.html
+#: covid_key/templates/covid_key/start.html outbreaks/templates/history.html
+#: outbreaks/templates/search.html
 msgid "Visit"
 msgstr "Consultez la page"
 
@@ -738,8 +742,8 @@ msgid "\"To\" must be later than \"From\"."
 msgstr "\"À\" doit être après \"De\""
 
 #: outbreaks/forms.py
-msgid "Someone already notified people who were there between {} and {}."
-msgstr "Quelqu’un a déjà prévenu les personnes qui étaient là entre {} et {}."
+msgid "Your team already alerted people who scanned the QR code on {}."
+msgstr "Une alerte a déjà été envoyée pour l’exposition du {}."
 
 #: outbreaks/forms.py
 msgid "Continue to self-isolate until you get your test result."
@@ -750,24 +754,24 @@ msgid "If you develop symptoms, get tested and self-isolate until you get your t
 msgstr "Si vous développez des symptômes, passez un test de dépistage et isolez-vous jusqu’à ce que vous receviez le résultat du test."
 
 #: outbreaks/forms.py
-msgid "Enter information to continue."
-msgstr "Entrez les informations pour continuer."
-
-#: outbreaks/templates/confirm.html
-msgid "Confirm notification"
+msgid "Enter the name or address."
 msgstr ""
 
-#: outbreaks/templates/confirm.html outbreaks/templates/datetime.html
+#: outbreaks/templates/confirm.html
+msgid "Review and send"
+msgstr "Vérifier et envoyer"
+
+#: outbreaks/templates/confirm.html
 msgid "To see all public exposures for this place, visit"
 msgstr "Pour voir les expositions publiques passées de ce lieu consultez"
 
-#: outbreaks/templates/confirm.html outbreaks/templates/datetime.html
+#: outbreaks/templates/confirm.html
 msgid "Notification history"
 msgstr "Historique de notification"
 
 #: outbreaks/templates/confirm.html
-msgid "Confirm and send"
-msgstr "Confirmer et envoyer"
+msgid "You’ll alert everyone who scanned this QR code on the date(s) and time(s) below."
+msgstr "L’alerte sera envoyée aux personnes qui ont scanné le code QR aux dates et heures ci-dessous :"
 
 #: outbreaks/templates/confirm.html outbreaks/templates/details.html
 #: outbreaks/templates/history.html outbreaks/templates/profile.html
@@ -797,49 +801,45 @@ msgstr "Adresse"
 msgid "Show on map"
 msgstr "Montrer sur la carte"
 
-#: outbreaks/templates/confirm.html register/templates/register/summary.html
-msgid "Type"
-msgstr "Type"
-
 #: outbreaks/templates/confirm.html
-msgid "Date(s)"
-msgstr ""
+msgid "Date and time"
+msgstr "Date et heure"
 
 #: outbreaks/templates/confirm.html
 msgid "dates"
 msgstr ""
 
-#: outbreaks/templates/confirm.html
-msgid "Severity"
-msgstr ""
+#: outbreaks/templates/confirm.html outbreaks/templates/details.html
+msgid "Guidance"
+msgstr "Consigne"
 
 #: outbreaks/templates/confirm.html
 msgid "severity"
 msgstr "Gravité"
 
 #: outbreaks/templates/confirm.html
-msgid "By selecting “Notify people who were there”,  you confirm you believe this information is correct and complete."
-msgstr "En cliquant sur « Notifier les visiteurs de ce lieu », vous confirmez que ces renseignements sont exacts et complets selon vous."
+msgid ""
+"\n"
+"        <p>When you “Send QR alert”,  you confirm you’ve correctly entered all details from the health authority.</p>\n"
+"        <p>It’s not possible to cancel an alert after sending.</p>\n"
+"      "
+msgstr ""
+"\n"
+"        <p>En cliquant sur « Envoyer l’alerte », vous confirmez avoir correctement entré les détails de l’exposition potentielle.</p>\n"
+"        <p>Notez qu’une fois envoyée, l’alerte ne peut pas être annulée.</p>\n"
+"      "
 
 #: outbreaks/templates/confirm.html
-msgid "Notify people who were there"
-msgstr "Notifier les visiteurs de ce lieu"
+msgid "Send QR alert"
+msgstr "Envoyer l’alerte"
+
+#: outbreaks/templates/confirmed.html outbreaks/templates/location_history.html
+msgid "Alert sent"
+msgstr "Alerte envoyée"
 
 #: outbreaks/templates/confirmed.html
-msgid "Notification sent"
-msgstr "Notification envoyée"
-
-#: outbreaks/templates/confirmed.html
-msgid "You’ve notified people"
-msgstr "Notification envoyée"
-
-#: outbreaks/templates/confirmed.html
-msgid "People who’ve installed the app will get a notification if they were at"
-msgstr "Les personnes qui ont installé l’application recevront une notification si elles ont fréquenté"
-
-#: outbreaks/templates/confirmed.html
-msgid "on one or more of these dates:"
-msgstr "à l’une ou plusieurs des dates suivantes:"
+msgid "You’ve notified people who scanned the QR code at the address, date(s) and time(s) below."
+msgstr "Les personnes recevront une notification si elles ont scanné le code QR du lieu ci-dessous à l’une des dates et heures qui suivent :"
 
 #: outbreaks/templates/confirmed.html
 msgid "Notify of another public exposure"
@@ -850,19 +850,32 @@ msgid "Search notification history"
 msgstr "Consulter l’historique des notifications"
 
 #: outbreaks/templates/datetime.html
-msgid "Select date and time"
+msgid "Choose date and time"
 msgstr "Indiquer la date et l’heure"
+
+#: outbreaks/templates/datetime.html
+msgid "To check all alerts for this place or event, visit "
+msgstr "Pour voir les expositions publiques passées de ce lieu consultez"
+
+#: outbreaks/templates/datetime.html outbreaks/templates/history.html
+#: outbreaks/templates/location_history.html
+msgid "Alert history"
+msgstr "Historique des alertes."
 
 #: outbreaks/templates/datetime.html portal/templates/includes/error_list.html
 msgid "Please correct the errors on the page"
 msgstr "Veuillez corriger les erreurs trouvées dans la page"
 
 #: outbreaks/templates/datetime.html
-msgid "We’ll notify people who scanned the QR code on that date. Remember to add all dates of this public exposure."
-msgstr "Nous notifierons les personnes qui ont scanné le code QR à la date indiquée. S’il y a plus d’une date, ajoutez toutes les dates d’exposition."
+msgid "You’ll alert people who scanned the QR code on that date and time."
+msgstr "L’alerte sera envoyée aux personnes qui ont scanné le code QR à la date et aux heures qui suivent."
 
 #: outbreaks/templates/datetime.html
-msgid "Select date"
+msgid "Enter all dates and times you want to add for this place or event."
+msgstr "S’il y a plus d’une date, ajoutez toutes les dates et heures d’exposition pour ce lieu ou cet événement."
+
+#: outbreaks/templates/datetime.html
+msgid "Choose date"
 msgstr "Trouver une date"
 
 #: outbreaks/templates/datetime.html
@@ -886,8 +899,8 @@ msgid "Add new date +"
 msgstr "Ajouter une date +"
 
 #: outbreaks/templates/datetime.html
-msgid "Selected dates"
-msgstr "Dates sélectionnées"
+msgid "Exposure dates"
+msgstr "Date de l’exposition"
 
 #: outbreaks/templates/datetime.html
 msgid "Delete selected date"
@@ -906,10 +919,6 @@ msgstr "Détails de l’exposition"
 #: outbreaks/templates/details.html
 msgid "Date and time of exposure"
 msgstr "Date et heure de l’exposition"
-
-#: outbreaks/templates/details.html
-msgid "Guidance"
-msgstr "Consigne"
 
 #: outbreaks/templates/details.html
 msgid "Date of alert"
@@ -931,11 +940,7 @@ msgstr "Ajouter une exposition"
 msgid "Exposure details not found."
 msgstr ""
 
-#: outbreaks/templates/history.html outbreaks/templates/location_history.html
-msgid "Alert history"
-msgstr "Historique des alertes"
-
-#: outbreaks/templates/history.html outbreaks/templates/search.html
+#: outbreaks/templates/history.html
 msgid "Find QR places and events"
 msgstr "Trouver un lieu ou un événement"
 
@@ -951,7 +956,7 @@ msgstr "Recherche par nom ou adresse"
 msgid "Search"
 msgstr "Chercher"
 
-#: outbreaks/templates/history.html outbreaks/templates/search.html
+#: outbreaks/templates/history.html
 msgid "results for"
 msgstr "résultats pour"
 
@@ -1017,10 +1022,6 @@ msgid "Sort by date alert sent, descending"
 msgstr "Trier par date d'envoi de l'alerte, ordre décroissant"
 
 #: outbreaks/templates/location_history.html
-msgid "Alert sent"
-msgstr "Date d’envoi de l’alerte"
-
-#: outbreaks/templates/location_history.html
 msgid "Sort by sender, ascending"
 msgstr "Trier par émetteur, ordre alphabétique"
 
@@ -1045,16 +1046,28 @@ msgid "Number of prior alerts"
 msgstr "Nombre d’alertes précédentes"
 
 #: outbreaks/templates/profile.html
+msgid "Show history"
+msgstr "Afficher l’historique"
+
+#: outbreaks/templates/profile.html
 msgid "Place not found."
 msgstr "Lieu introuvable"
 
 #: outbreaks/templates/search.html
-msgid "Alert people who scanned the QR code during an exposure."
-msgstr "Les personnes qui ont scanné le code QR de ce lieu ou de cet événement seront alertées d’une exposition."
+msgid "Find places and events"
+msgstr "Trouver un lieu ou un événement"
+
+#: outbreaks/templates/search.html
+msgid "Alert people who scanned a QR code and may have been exposed during their visit."
+msgstr "Les personnes qui ont scanné le code QR de ce lieu ou de cet événement seront alertées d’un risque d’exposition."
 
 #: outbreaks/templates/search.html
 msgid "Enter at least 3 characters"
 msgstr "Saisissez au moins 3 caractères"
+
+#: outbreaks/templates/search.html
+msgid "results in your region for"
+msgstr "résultats dans votre région pour"
 
 #: outbreaks/templates/search.html
 msgid "Available locations"
@@ -1069,8 +1082,8 @@ msgid "location named "
 msgstr ""
 
 #: outbreaks/templates/search.html
-msgid "No results for"
-msgstr "Aucun résultat pour"
+msgid "No results in your region for"
+msgstr "Aucun résultat dans votre région pour"
 
 #: outbreaks/templates/search.html
 msgid "Follow local procedures for places or events that do not have QR codes."
@@ -1079,16 +1092,6 @@ msgstr "Pour les lieux ou événements qui n’ont pas de code QR, suivez les pr
 #: outbreaks/templates/search.html
 msgid "Search alert history"
 msgstr "Consulter l’historique des alertes"
-
-#: outbreaks/templates/search.html
-msgid ""
-"\n"
-"      Visit <a href=\"\">Sending QR alerts</a>\n"
-"    "
-msgstr ""
-"\n"
-"      Consultez la page <a href=\"\">À propos des alertes QR</a>.\n"
-"    "
 
 #: outbreaks/templates/severity.html
 msgid "Choose guidance"
@@ -1293,8 +1296,8 @@ msgid "Generate keys"
 msgstr "Générer des clés"
 
 #: portal/templates/includes/nav_main.html
-msgid "QR Alerts"
-msgstr "Alertes QR"
+msgid "Send Alerts"
+msgstr "Envoyer des alertes"
 
 #: portal/templates/includes/nav_main.html
 #: profiles/templates/profiles/healthcareuser_list.html
@@ -2216,48 +2219,52 @@ msgid "Select a type of place or event"
 msgstr "Sélectionner un type de lieu ou d’événement"
 
 #: register/forms.py
-msgid "Restaurant, bar, coffee shop."
-msgstr "Restaurants, bars et cafés."
+msgid "Restaurant, bar, coffee shop"
+msgstr "Restaurants, bars et cafés"
 
 #: register/forms.py
-msgid "Fitness, sports, recreation."
-msgstr "Entraînement et activités sportives ou récréatives."
+msgid "Fitness, sports, recreation"
+msgstr "Entraînement et activités sportives ou récréatives"
 
 #: register/forms.py
-msgid "Arts, entertainment."
-msgstr "Arts et divertissement."
+msgid "Arts, entertainment"
+msgstr "Arts et divertissement"
 
 #: register/forms.py
-msgid "Grooming and wellness."
-msgstr "Soins de beauté et bien-être."
+msgid "Grooming and wellness"
+msgstr "Soins de beauté et bien-être"
 
 #: register/forms.py
-msgid "Places of worship."
-msgstr "Lieux de culte."
+msgid "Places of worship"
+msgstr "Lieux de culte"
 
 #: register/forms.py
-msgid "Events such as festivals, weddings, conferences."
-msgstr "Événements publics et privés (festivals, mariages, conférences, etc.)."
+msgid "Events such as festivals, weddings, conferences"
+msgstr "Événements publics et privés (festivals, mariages, conférences, etc.)"
 
 #: register/forms.py
-msgid "Retail such as grocery stores, liquor stores, pharmacies."
-msgstr "Commerces (épiceries, magasins de vins et spiritueux, pharmacies, etc.)."
+msgid "Retail such as grocery stores, liquor stores, pharmacies"
+msgstr "Commerces (épiceries, magasins de vins et spiritueux, pharmacies, etc.)"
 
 #: register/forms.py
-msgid "Medical office or centre (doctor, dentist, etc.)."
-msgstr "Centres et cabinets médicaux, dentaires, etc."
+msgid "Medical centres, such as doctor or dentist offices"
+msgstr "Centres et cabinets médicaux, dentaires, etc"
 
 #: register/forms.py
-msgid "Community centres, libraries, government service centres."
-msgstr "Centres communautaires, bibliothèques et centres de services gouvernementaux."
+msgid "Community centres, libraries, government service centres"
+msgstr "Centres communautaires, bibliothèques et centres de services gouvernementaux"
 
 #: register/forms.py
-msgid "Other."
-msgstr "Autre."
+msgid "Other"
+msgstr "Autre"
 
 #: register/forms.py
 msgid "Tell us the type of place."
 msgstr "De quel type de lieu s’agit-il?"
+
+#: register/forms.py
+msgid "Only enter letters or numbers."
+msgstr "Vous ne pouvez saisir que des lettres et des chiffres."
 
 #: register/forms.py
 #, python-format
@@ -2344,13 +2351,13 @@ msgstr "Code postal"
 msgid "Enter a valid Canadian postal code."
 msgstr "Entrez un code postal canadien valide."
 
-#: register/forms.py
-msgid "Your phone number must be valid."
-msgstr "Le numéro de téléphone doit être valide."
-
 #: register/forms.py register/models.py
 msgid "Name of contact"
 msgstr "Nom de la personne-ressource"
+
+#: register/forms.py
+msgid "Your phone number must be valid."
+msgstr "Le numéro de téléphone doit être valide."
 
 #: register/forms.py
 msgid "Contact phone number"
@@ -2472,8 +2479,8 @@ msgid "Using the COVID Alert app and its features is voluntary. People should be
 msgstr "L’utilisation de l’application Alerte COVID et de ses fonctionnalités est volontaire. Les personnes qui ne scannent pas le code QR doivent quand même pouvoir entrer et être servies."
 
 #: register/templates/register/confirmation.html
-msgid "Thank you for helping slow the spread of COVID-19."
-msgstr "Merci d’aider à ralentir la propagation de la COVID-19."
+msgid "Thank you for helping limit the spread of COVID-19."
+msgstr "Merci d’aider à limiter la propagation de la COVID-19."
 
 #: register/templates/register/confirmation.html
 #: register/templates/register/success.html
@@ -2510,15 +2517,26 @@ msgid "Home"
 msgstr ""
 
 #: register/templates/register/contact_us.html
-msgid "For information about common issues, visit"
-msgstr "Consultez la section pour les questions fréquentes"
+msgid "Call us"
+msgstr "Appelez-nous"
 
 #: register/templates/register/contact_us.html
-#: register/templates/register/help_page.html
-#: register/templates/register/how_display_poster.html
-#: register/templates/register/includes/footer.html
-msgid "Help and information"
-msgstr "Aide et information"
+msgid ""
+"\n"
+"  <p>Phone: 1-833-694-1709<br>\n"
+"  Teletypewriter (TTY): 1-866-694-8389<br>\n"
+"  Hours of operation are Monday to Friday from 8:30 am to 5 pm ET</p>\n"
+"  "
+msgstr ""
+"\n"
+"  <p>Téléphone : 1-833-694-1709<br>\n"
+"  Téléimprimeur (ATS) : 1-866-694-8389<br>\n"
+"  Heures de service : du lundi au vendredi de 8 h 30 à 17 h HE</p>\n"
+"  "
+
+#: register/templates/register/contact_us.html
+msgid "Or send us a message"
+msgstr "Ou écrivez-nous "
 
 #: register/templates/register/contact_us.html
 msgid "What do you want to do?"
@@ -2537,15 +2555,21 @@ msgid "Sorry, that confirmation link has expired or has already been used."
 msgstr "Désolé, le lien de validation est expiré ou a déjà été utilisé."
 
 #: register/templates/register/help_page.html
-msgid "Ottawa pilot"
-msgstr "Projet pilote à Ottawa"
+#: register/templates/register/how_display_poster.html
+#: register/templates/register/includes/footer.html
+msgid "Help and information"
+msgstr "Aide et information"
 
 #: register/templates/register/help_page.html
-msgid "Right now there’s only scanning in Ottawa."
-msgstr "Pour l’instant, il est uniquement possible de scanner des codes QR à Ottawa."
+msgid "Pilot project with the City of Ottawa "
+msgstr "Projet pilote avec la Ville d’Ottawa"
 
 #: register/templates/register/help_page.html
-msgid "Outside of the city, you can still make a poster for your place or event. Then you’ll be ready when your region starts using QR codes."
+msgid "Right now there’s only scanning in the City of Ottawa."
+msgstr "Pour l’instant, il est uniquement possible de scanner des codes QR dans la ville d’Ottawa."
+
+#: register/templates/register/help_page.html
+msgid "Outside of the City of Ottawa, you can still make a poster for your place or event. Then you’ll be ready when your region starts using QR codes."
 msgstr "Si vous n’êtes pas dans cette ville, vous pouvez tout de même créer une affiche pour votre lieu ou événement. Vous serez alors prêt lorsque votre région commencera à utiliser les codes QR."
 
 #: register/templates/register/help_page.html
@@ -2557,8 +2581,8 @@ msgid "Changes to name, address or contact information."
 msgstr "Changements au nom, à l’adresse ou aux coordonnées."
 
 #: register/templates/register/help_page.html
-msgid "How QR posters help slow the spread."
-msgstr "Comment les affiches à code QR aident à ralentir la COVID-19."
+msgid "How QR posters help limit the spread."
+msgstr "Comment les affiches à code QR aident à limiter la COVID-19."
 
 #: register/templates/register/help_page.html
 msgid "How to display your poster."
@@ -2960,8 +2984,8 @@ msgid "Make a COVID Alert poster"
 msgstr "Créer une affiche Alerte COVID"
 
 #: register/templates/register/start.html
-msgid "Display a QR code to help slow the spread of COVID-19"
-msgstr "Affichez un code QR pour contribuer à ralentir la COVID-19"
+msgid "Display a QR code to help limit the spread of COVID-19"
+msgstr "Affichez un code QR pour contribuer à limiter la COVID-19"
 
 #: register/templates/register/start.html
 msgid "Make a COVID Alert poster for your business, community organization or event."
@@ -3037,6 +3061,10 @@ msgstr "Étape 5 de 5"
 #: register/templates/register/summary.html
 msgid " Change<span class=\"visually-hidden\"> your email</span> "
 msgstr "Modifier<span class=\"visually-hidden\"> votre adresse courriel</span>"
+
+#: register/templates/register/summary.html
+msgid "Type"
+msgstr "Type"
 
 #: register/templates/register/summary.html
 msgid " Change <span class=\"visually-hidden\"> business type</span>"
@@ -3173,3 +3201,9 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Ottawa pilot"
+#~ msgstr "Projet pilote à Ottawa"
+
+#~ msgid "For information about common issues, visit"
+#~ msgstr "Consultez la section pour les questions fréquentes"
