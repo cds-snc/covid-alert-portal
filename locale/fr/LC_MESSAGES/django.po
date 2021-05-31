@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 19:35+0000\n"
+"POT-Creation-Date: 2021-05-31 19:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2705,16 +2705,20 @@ msgid "Step 2 of 5"
 msgstr "Étape 2 de 5"
 
 #: register/templates/register/location_name.html
-msgid "We’ll display the name on the poster with your QR code."
-msgstr "Le nom sera inscrit sur l’affiche avec votre code QR."
+msgid "We'll show the name on your QR code poster."
+msgstr "Ce nom apparaîtra sur votre affiche à code QR."
 
 #: register/templates/register/location_unavailable.html
 msgid "No scanning yet in your area"
-msgstr ""
+msgstr "Impossible de scanner des codes dans votre région"
 
 #: register/templates/register/location_unavailable.html
-msgid "People in your province or territory are not yet able to scan a QR code for COVID Alert.You can still make a poster with your code.  That way, you’ll be ready when people are able to scan these codes."
-msgstr ""
+msgid "People in your province or territory are not yet able to scan a QR code for COVID Alert."
+msgstr "Les personnes de votre province ou de votre territoire ne peuvent pas encore scanner de codes QR avec Alerte COVID."
+
+#: register/templates/register/location_unavailable.html
+msgid "You can still make a poster with your code.  That way, you’ll be ready when people are able to scan these codes."
+msgstr "Vous pouvez tout de même créer une affiche. De cette façon, vous serez prêt lorsque les personnes pourront scanner votre code QR."
 
 #: register/templates/register/privacy.html
 msgid "Privacy notice"
@@ -3201,3 +3205,6 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "We’ll display the name on the poster with your QR code."
+#~ msgstr "Le nom sera inscrit sur l’affiche avec votre code QR."
