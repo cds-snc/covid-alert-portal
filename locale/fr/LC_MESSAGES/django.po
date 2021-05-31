@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 19:42+0000\n"
+"POT-Creation-Date: 2021-05-31 19:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2569,7 +2569,7 @@ msgid "Right now there’s only scanning in the City of Ottawa."
 msgstr "Pour l’instant, il est uniquement possible de scanner des codes QR dans la ville d’Ottawa."
 
 #: register/templates/register/help_page.html
-msgid "Outside of the City of Ottawa, you can still make a poster for your place or event. Then you’ll be ready when your region starts using QR codes."
+msgid "Outside Ottawa, you can still make a poster for your place or event. Then you’ll be ready when your region starts using QR codes."
 msgstr "Si vous n’êtes pas dans cette ville, vous pouvez tout de même créer une affiche pour votre lieu ou événement. Vous serez alors prêt lorsque votre région commencera à utiliser les codes QR."
 
 #: register/templates/register/help_page.html
