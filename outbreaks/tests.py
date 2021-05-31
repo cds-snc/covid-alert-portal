@@ -133,18 +133,12 @@ class ProfileView(NotificationsTestCase):
 
 
 class DatetimeView(NotificationsTestCase):
-    def test_datetime_view_no_location(self):
-        # Ensure that the datetime view is not accessible if there is no location cached in the session
-        self.login()
-        response = self.client.get(reverse("outbreaks:datetime"))
-        self.assertEqual(response.status_code, 302)
-
     def test_datetime_view(self):
         # Ensure that the datetime view is rendered correctly with a cached location
         self.login()
         location = Location.objects.get(name="Nandos")
         self.client.get(reverse("outbreaks:profile", args=[location.id]))
-        response = self.client.get(reverse("outbreaks:datetime"))
+        response = self.client.get(reverse("outbreaks:datetime", args=[location.id]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "datetime.html")
 
@@ -167,28 +161,27 @@ class DatetimeView(NotificationsTestCase):
         # Login and ensure that a location has been cached
         self.login()
         location = Location.objects.get(name="Nandos")
-        self.client.get(reverse("outbreaks:profile", args=[location.id]))
-
+        self.client.get(reverse("outbreaks:datetime", args=[location.id]))
         # Post an 'add date' request and ensure it redirects back to the same page
         response = self.client.post(
-            reverse("outbreaks:datetime"),
+            reverse("outbreaks:datetime", args=[location.id]),
             {"day": 1, "month": 1, "year": 2021, "do_post": "add_date"},
         )
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime")))
+        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime", args=[location.id])))
 
         # Assert that getting the same page now returns a deletion link for the first
-        response = self.client.get(reverse("outbreaks:datetime"))
+        response = self.client.get(reverse("outbreaks:datetime", args=[location.id]))
         self.assertContains(response, "datetime/0/delete")
 
         # Get a 'remove date' request and ensure it loads the same page
         response = self.client.get(
-            reverse("outbreaks:datetime_delete", kwargs={"idx": 0})
+            reverse("outbreaks:datetime_delete", kwargs={"idx": 0, 'pk': location.id})
         )
         self.assertEqual(response.status_code, 200)
 
         # Assert that getting the same page now returns a new form
-        response = self.client.get(reverse("outbreaks:datetime"))
+        response = self.client.get(reverse("outbreaks:datetime", args=[location.id]))
         self.assertNotContains(response, "datetime/0/delete")
         self.assertContains(response, "add_date")
 
@@ -200,11 +193,10 @@ class DatetimeView(NotificationsTestCase):
         # Login and ensure that a location has been cached
         self.login()
         location = Location.objects.get(name="Nandos")
-        self.client.get(reverse("outbreaks:profile", args=[location.id]))
-
+        self.client.get(reverse("outbreaks:datetime", args=[location.id]))
         # Post a date
         self.client.post(
-            reverse("outbreaks:datetime"),
+            reverse("outbreaks:datetime", args=[location.id]),
             {"day": 1, "month": 1, "year": 2021, "do_post": "add_date"},
         )
         self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
@@ -214,7 +206,7 @@ class DatetimeView(NotificationsTestCase):
 
         # Post duplicate date
         response = self.client.post(
-            reverse("outbreaks:datetime"),
+            reverse("outbreaks:datetime", args=[location.id]),
             {"day": 1, "month": 1, "year": 2021, "do_post": "add_date"},
         )
         self.assertEqual(response.status_code, 200)
@@ -227,18 +219,17 @@ class DatetimeView(NotificationsTestCase):
         """
         self.login()
         location = Location.objects.get(name="Nandos")
-        self.client.get(reverse("outbreaks:profile", args=[location.id]))
-
+        self.client.get(reverse("outbreaks:datetime", args=[location.id]))
         # Post a date
         response = self.client.post(
-            reverse("outbreaks:datetime"),
+            reverse("outbreaks:datetime", args=[location.id]),
             {"day": 1, "month": 1, "year": 2021, "do_post": "add_date"},
         )
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime")))
+        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime", args=[location.id])))
 
         response = self.client.post(
-            reverse("outbreaks:datetime"),
+            reverse("outbreaks:datetime", args=[location.id]),
             {"day": 1, "month": 1, "year": 2021, "do_post": "add_date"},
         )
         self.assertEqual(response.status_code, 200)
@@ -253,11 +244,10 @@ class DatetimeView(NotificationsTestCase):
         """
         self.login()
         location = Location.objects.get(name="Nandos")
-        self.client.get(reverse("outbreaks:profile", args=[location.id]))
-
+        self.client.get(reverse("outbreaks:datetime", args=[location.id]))
         # Post a date
         response = self.client.post(
-            reverse("outbreaks:datetime"),
+            reverse("outbreaks:datetime", args=[location.id]),
             {
                 "day": 1,
                 "month": 1,
@@ -268,12 +258,12 @@ class DatetimeView(NotificationsTestCase):
             },
         )
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime")))
-        response = self.client.get(reverse("outbreaks:datetime"))
+        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime", args=[location.id])))
+        response = self.client.get(reverse("outbreaks:datetime", args=[location.id]))
         self.assertContains(response, "datetime/0/delete")
 
         response = self.client.post(
-            reverse("outbreaks:datetime"),
+            reverse("outbreaks:datetime", args=[location.id]),
             {
                 "day": 1,
                 "month": 1,
@@ -284,8 +274,8 @@ class DatetimeView(NotificationsTestCase):
             },
         )
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime")))
-        response = self.client.get(reverse("outbreaks:datetime"))
+        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime", args=[location.id])))
+        response = self.client.get(reverse("outbreaks:datetime", args=[location.id]))
         self.assertContains(response, "datetime/1/delete")
 
         # verify form isn't showing
@@ -294,7 +284,7 @@ class DatetimeView(NotificationsTestCase):
         self.assertContains(response, "Add new date")
 
         response = self.client.post(
-            reverse("outbreaks:datetime"), {"do_post": "show_date_form"}
+            reverse("outbreaks:datetime", args=[location.id]), {"do_post": "show_date_form"}
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "datetime.html")
@@ -302,10 +292,10 @@ class DatetimeView(NotificationsTestCase):
         self.assertNotContains(response, "error")
 
         response = self.client.post(
-            reverse("outbreaks:datetime"), {"do_post": "cancel"}
+            reverse("outbreaks:datetime", args=[location.id]), {"do_post": "cancel"}
         )
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, reverse("outbreaks:datetime"))
+        self.assertEqual(response.url, reverse("outbreaks:datetime", args=[location.id]))
 
 
 class SeverityView(NotificationsTestCase):
@@ -319,9 +309,9 @@ class SeverityView(NotificationsTestCase):
         # Ensure that the severity view is rendered correctly with previously cached data
         self.login()
         location = Location.objects.get(name="Nandos")
-        self.client.get(reverse("outbreaks:profile", args=[location.id]))
+        self.client.get(reverse("outbreaks:datetime", args=[location.id]))
         self.client.post(
-            reverse("outbreaks:datetime"),
+            reverse("outbreaks:datetime", args=[location.id]),
             {"day": 1, "month": 1, "year": 2021, "do_post": "add_date"},
         )
         response = self.client.get(reverse("outbreaks:severity"))
@@ -347,9 +337,9 @@ class ConfirmView(NotificationsTestCase):
         # Ensure that the confirm view is rendered correctly with previously cached data
         self.login()
         location = Location.objects.get(name="Nandos")
-        self.client.get(reverse("outbreaks:profile", args=[location.id]))
+        self.client.get(reverse("outbreaks:datetime", args=[location.id]))
         self.client.post(
-            reverse("outbreaks:datetime"),
+            reverse("outbreaks:datetime", args=[location.id]),
             {"day": 10, "month": 1, "year": 2021, "do_post": "add_date"},
         )
         self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
@@ -368,9 +358,9 @@ class ConfirmView(NotificationsTestCase):
         # Ensure that a notificatioon can successfully be created
         self.login()
         location = Location.objects.get(name="Nandos")
-        self.client.get(reverse("outbreaks:profile", args=[location.id]))
+        self.client.get(reverse("outbreaks:datetime", args=[location.id]))
         self.client.post(
-            reverse("outbreaks:datetime"),
+            reverse("outbreaks:datetime", args=[location.id]),
             {"day": 1, "month": 1, "year": 2021, "do_post": "add_date"},
         )
         self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})
@@ -393,9 +383,9 @@ class ConfirmedView(NotificationsTestCase):
         # Ensure that the confirmed view is rendered correctly with previously cached data
         self.login()
         location = Location.objects.get(name="Nandos")
-        self.client.get(reverse("outbreaks:profile", args=[location.id]))
+        self.client.get(reverse("outbreaks:datetime", args=[location.id]))
         self.client.post(
-            reverse("outbreaks:datetime"),
+            reverse("outbreaks:datetime", args=[location.id]),
             {"day": 1, "month": 1, "year": 2021, "do_post": "add_date"},
         )
         self.client.post(reverse("outbreaks:severity"), {"alert_level": 1})

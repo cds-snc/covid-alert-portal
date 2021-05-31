@@ -50,7 +50,7 @@
     </dl>
 
     <div class="content-button">
-        <a href="{% url 'outbreaks:datetime' %}" role="button" draggable="false" class="start with-chevron">{% trans "Add an exposure" %}</a>
+        <a href="{% url 'outbreaks:datetime' alert_location %}" role="button" draggable="false" class="start with-chevron">{% trans "Add an exposure" %}</a>
     </div>
   {% else %}
     <p>{% trans "Place not found." %}</p>

@@ -69,8 +69,8 @@ class SearchListBaseView(PermissionRequiredMixin, Is2FAMixin, ListView):
         context = super().get_context_data(*args, **kwargs)
         search_result_count = len(self.object_list)
         search_result_page_min = (
-            (context["page_obj"].number - 1) * self.paginate_by
-        ) + 1
+                                     (context["page_obj"].number - 1) * self.paginate_by
+                                 ) + 1
         page_result_max = context["page_obj"].number * self.paginate_by
         search_result_page_max = (
             page_result_max
@@ -156,23 +156,18 @@ class ProfileView(PermissionRequiredMixin, Is2FAMixin, FormView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        try:
-            # Fetch the location
-            location = Location.objects.get(id=self.kwargs["pk"])
-            context["location"] = location
-            context["map_link"] = "https://maps.google.com/?q=" + str(location)
-            location.category = dict(location_choices)[location.category]
-            # Cache the location for the next steps
-            self.request.session["alert_location"] = self.kwargs["pk"].hex
+        # Fetch the location
+        location = Location.objects.get(id=self.kwargs["pk"])
+        context["location"] = location
+        context["map_link"] = "https://maps.google.com/?q=" + str(location)
+        location.category = dict(location_choices)[location.category]
+        # Cache the location for the next steps
+        context["alert_location"] = self.kwargs["pk"]
 
-            # Fetch the notification count
-            context["num_notifications"] = Notification.objects.filter(
-                location=location
-            ).count()
-
-        except Location.DoesNotExist:
-            # Remove the location cache if users are trying invalid PKs
-            del self.request.session["alert_location"]
+        # Fetch the notification count
+        context["num_notifications"] = Notification.objects.filter(
+            location=location
+        ).count()
 
         return context
 
@@ -182,9 +177,11 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
     template_name = "datetime.html"
 
     def get(self, request, *args, **kwargs):
-        # Ensure we have a cached location
-        if "alert_location" not in request.session:
-            return redirect(reverse_lazy("outbreaks:search"))
+        location_id = str(kwargs.get('pk'))
+        saved_location = request.session.get('alert_location')
+        if saved_location and location_id != saved_location and request.session.get('selected_dates'):
+            del request.session["selected_dates"]
+        request.session["alert_location"] =  location_id
         idx = kwargs.pop("idx", None)
         if idx is not None:  # time to delete a thing
             request.session["selected_dates"] = [
@@ -229,7 +226,9 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
         form = None
         if not do_post:  # no form to submit, going next
             if not request.session.get("selected_dates"):
-                return HttpResponseRedirect(reverse_lazy("outbreaks:datetime"))
+                return HttpResponseRedirect(
+                    reverse_lazy("outbreaks:datetime", kwargs={'pk': request.session['alert_location']})
+                )
             return HttpResponseRedirect(success_url)
 
         if do_post == "add_date":  # submitting a form
@@ -240,12 +239,16 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
             )
             if form.is_valid():
                 if self.save_form_dates(form):
-                    return HttpResponseRedirect(reverse_lazy("outbreaks:datetime"))
+                    return HttpResponseRedirect(
+                        reverse_lazy("outbreaks:datetime", kwargs={'pk': request.session['alert_location']})
+                    )
             show_errors = True
 
         # not submitting a form, other toggles or form invalid
         elif do_post == "cancel":
-            return HttpResponseRedirect(reverse_lazy("outbreaks:datetime"))
+            return HttpResponseRedirect(
+                reverse_lazy("outbreaks:datetime", kwargs={'pk': request.session['alert_location']})
+            )
         elif do_post == "show_date_form":
             show_date_form = True
             post_data = None  # re-init form
@@ -325,17 +328,18 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
         context["min_date"] = "2021-01-01"  # Start of the year for simplicity
         context["max_date"] = (
             datetime.utcnow()
-            .replace(
+                .replace(
                 tzinfo=pytz.timezone(settings.PORTAL_LOCAL_TZ)
                 # TODO this may need refactoring for client side max date calculation beyond PORTAL_LOCAL_TZ
             )
-            .strftime("%Y-%m-%d")
+                .strftime("%Y-%m-%d")
         )  # Set max date to today
         context["language"] = get_language()
         if context.get("show_errors", False):
             context["warning_ind"] = (
                 context["form"].non_field_errors().data[0].code == "warning"
             )
+        context['alert_location'] = self.request.session['alert_location']
         return context
 
 
@@ -362,6 +366,11 @@ class SeverityView(PermissionRequiredMixin, Is2FAMixin, FormView):
         self.request.session["alert_level"] = form.cleaned_data.get("alert_level")
         response = super().form_valid(form)
         return response
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['alert_location'] = self.request.session['alert_location']
+        return context
 
 
 class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
@@ -391,6 +400,7 @@ class ConfirmView(PermissionRequiredMixin, Is2FAMixin, FormView):
             self.request.session["alert_level"]
         ]
         context["dates"] = self.request.session["selected_dates"]
+        context['alert_location'] = self.request.session['alert_location']
         return context
 
     def form_valid(self, form):
@@ -615,9 +625,7 @@ class ExposureDetailsView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
             )
             notification_txt = date_entry_tmpl.format(start_dmy, start_hm, end_hm)
             context["exposure_date_time"] = notification_txt
-
-            # TODO: not crazy about this
-            self.request.session["alert_location"] = notification.location.id.hex
+            context["alert_location"] = notification.location.id
         except Location.DoesNotExist:
             pass
         return context

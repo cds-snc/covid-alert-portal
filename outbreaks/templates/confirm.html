@@ -58,7 +58,7 @@
           {{ date_entry.notification_txt }}<br/>
         {% endfor %}
       </dd>
-      <dd class="summary-list__actions"><a href="{% url 'outbreaks:datetime' %}">{% trans "Change" %}<span
+      <dd class="summary-list__actions"><a href="{% url 'outbreaks:datetime' alert_location %}">{% trans "Change" %}<span
         class="visually-hidden">{% trans "dates" %}</span></a></dd>
     </div>
     <div class="summary-list__row">

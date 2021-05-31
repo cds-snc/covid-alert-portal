@@ -162,7 +162,7 @@
             </td>
             <td>
               <a class="destructive-link"
-                 href="{% url "outbreaks:datetime_delete" forloop.counter0 %}">
+                 href="{% url "outbreaks:datetime_delete" alert_location forloop.counter0 %}">
                 <span aria-hidden="true">{{ _('Delete') }}</span>
                 <span class="visually-hidden">
                   {{ _('Delete') }}{{ date_entry.notification_txt }}
