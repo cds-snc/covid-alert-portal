@@ -13,17 +13,17 @@
     </div>
     {% url "register:contactus" as link %}
     <h1>{% trans "Help and information" %}</h1>
-    <h2>{% trans "Ottawa pilot" %}</h2>
-    <p>
-      {% trans 'Right now there’s only scanning in Ottawa.' %}
-    </p>
-    <p>
-      {% trans 'Outside of the city, you can still make a poster for your place or event. Then you’ll be ready when your region starts using QR codes.' %}
-    </p>
+
+    <h2>{% trans "Pilot project with the City of Ottawa " %}</h2>
+    
+    <p>{% trans 'Right now there’s only scanning in the City of Ottawa.' %}</p>
+
+    <p>{% trans 'Outside of the Ottawa, you can still make a poster for your place or event. Then you’ll be ready when your region starts using QR codes.' %}</p>
+
     <h2>{% trans "Learn about" %}</h2>
     <ul>
       <li><a href="">{% trans "Changes to name, address or contact information." %}</a></li>
-      <li><a href="">{% trans "How QR posters help slow the spread." %}</a></li>
+      <li><a href="">{% trans "How QR posters help limit the spread." %}</a></li>
       <li><a href="{% url 'register:howtodisplay' %}">{% trans "How to display your poster." %}</a></li>
     </ul>
     <br>

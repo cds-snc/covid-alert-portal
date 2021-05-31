@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 13:58+0000\n"
+"POT-Creation-Date: 2021-05-31 14:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2554,15 +2554,15 @@ msgid "Help and information"
 msgstr "Aide et information"
 
 #: register/templates/register/help_page.html
-msgid "Ottawa pilot"
-msgstr "Projet pilote à Ottawa"
+msgid "Pilot project with the City of Ottawa "
+msgstr "Projet pilote avec la Ville d’Ottawa"
 
 #: register/templates/register/help_page.html
-msgid "Right now there’s only scanning in Ottawa."
-msgstr "Pour l’instant, il est uniquement possible de scanner des codes QR à Ottawa."
+msgid "Right now there’s only scanning in the City of Ottawa."
+msgstr "Pour l’instant, il est uniquement possible de scanner des codes QR dans la ville d’Ottawa."
 
 #: register/templates/register/help_page.html
-msgid "Outside of the city, you can still make a poster for your place or event. Then you’ll be ready when your region starts using QR codes."
+msgid "Outside of the Ottawa, you can still make a poster for your place or event. Then you’ll be ready when your region starts using QR codes."
 msgstr "Si vous n’êtes pas dans cette ville, vous pouvez tout de même créer une affiche pour votre lieu ou événement. Vous serez alors prêt lorsque votre région commencera à utiliser les codes QR."
 
 #: register/templates/register/help_page.html
@@ -2574,8 +2574,8 @@ msgid "Changes to name, address or contact information."
 msgstr "Changements au nom, à l’adresse ou aux coordonnées."
 
 #: register/templates/register/help_page.html
-msgid "How QR posters help slow the spread."
-msgstr "Comment les affiches à code QR aident à ralentir la COVID-19."
+msgid "How QR posters help limit the spread."
+msgstr "Comment les affiches à code QR aident à limiter la COVID-19."
 
 #: register/templates/register/help_page.html
 msgid "How to display your poster."
@@ -3190,6 +3190,9 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Ottawa pilot"
+#~ msgstr "Projet pilote à Ottawa"
 
 #~ msgid "For information about common issues, visit"
 #~ msgstr "Consultez la section pour les questions fréquentes"
