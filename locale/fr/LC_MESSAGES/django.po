@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 15:58+0000\n"
+"POT-Creation-Date: 2021-05-31 15:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -504,7 +504,7 @@ msgstr "Suivant"
 msgid "Your name (optional)"
 msgstr "Votre nom (facultatif)"
 
-#: contact/forms.py register/templates/register/summary.html
+#: contact/forms.py register/forms.py register/templates/register/summary.html
 msgid "Your email address"
 msgstr "Votre adresse courriel"
 
@@ -2219,44 +2219,44 @@ msgid "Select a type of place or event"
 msgstr "Sélectionner un type de lieu ou d’événement"
 
 #: register/forms.py
-msgid "Restaurant, bar, coffee shop."
-msgstr "Restaurants, bars et cafés."
+msgid "Restaurant, bar, coffee shop"
+msgstr "Restaurants, bars et cafés"
 
 #: register/forms.py
-msgid "Fitness, sports, recreation."
-msgstr "Entraînement et activités sportives ou récréatives."
+msgid "Fitness, sports, recreation"
+msgstr "Entraînement et activités sportives ou récréatives"
 
 #: register/forms.py
-msgid "Arts, entertainment."
-msgstr "Arts et divertissement."
+msgid "Arts, entertainment"
+msgstr "Arts et divertissement"
 
 #: register/forms.py
-msgid "Grooming and wellness."
-msgstr "Soins de beauté et bien-être."
+msgid "Grooming and wellness"
+msgstr "Soins de beauté et bien-être"
 
 #: register/forms.py
-msgid "Places of worship."
-msgstr "Lieux de culte."
+msgid "Places of worship"
+msgstr "Lieux de culte"
 
 #: register/forms.py
-msgid "Events such as festivals, weddings, conferences."
-msgstr "Événements publics et privés (festivals, mariages, conférences, etc.)."
+msgid "Events such as festivals, weddings, conferences"
+msgstr "Événements publics et privés (festivals, mariages, conférences, etc.)"
 
 #: register/forms.py
-msgid "Retail such as grocery stores, liquor stores, pharmacies."
-msgstr "Commerces (épiceries, magasins de vins et spiritueux, pharmacies, etc.)."
+msgid "Retail such as grocery stores, liquor stores, pharmacies"
+msgstr "Commerces (épiceries, magasins de vins et spiritueux, pharmacies, etc.)"
 
 #: register/forms.py
-msgid "Medical office or centre (doctor, dentist, etc.)."
-msgstr "Centres et cabinets médicaux, dentaires, etc."
+msgid "Medical centres, such as doctor or dentist offices"
+msgstr "Centres et cabinets médicaux, dentaires, etc"
 
 #: register/forms.py
-msgid "Community centres, libraries, government service centres."
-msgstr "Centres communautaires, bibliothèques et centres de services gouvernementaux."
+msgid "Community centres, libraries, government service centres"
+msgstr "Centres communautaires, bibliothèques et centres de services gouvernementaux"
 
 #: register/forms.py
-msgid "Other."
-msgstr "Autre."
+msgid "Other"
+msgstr "Autre"
 
 #: register/forms.py
 msgid "Tell us the type of place."
@@ -2479,8 +2479,8 @@ msgid "Using the COVID Alert app and its features is voluntary. People should be
 msgstr "L’utilisation de l’application Alerte COVID et de ses fonctionnalités est volontaire. Les personnes qui ne scannent pas le code QR doivent quand même pouvoir entrer et être servies."
 
 #: register/templates/register/confirmation.html
-msgid "Thank you for helping slow the spread of COVID-19."
-msgstr "Merci d’aider à ralentir la propagation de la COVID-19."
+msgid "Thank you for helping limit the spread of COVID-19."
+msgstr "Merci d’aider à limiter la propagation de la COVID-19."
 
 #: register/templates/register/confirmation.html
 #: register/templates/register/success.html
@@ -2517,15 +2517,26 @@ msgid "Home"
 msgstr ""
 
 #: register/templates/register/contact_us.html
-msgid "For information about common issues, visit"
-msgstr "Consultez la section pour les questions fréquentes"
+msgid "Call us"
+msgstr "Appelez-nous"
 
 #: register/templates/register/contact_us.html
-#: register/templates/register/help_page.html
-#: register/templates/register/how_display_poster.html
-#: register/templates/register/includes/footer.html
-msgid "Help and information"
-msgstr "Aide et information"
+msgid ""
+"\n"
+"  <p>Phone: 1-833-694-1709<br>\n"
+"  Teletypewriter (TTY): 1-866-694-8389<br>\n"
+"  Hours of operation are Monday to Friday from 8:30 am to 5 pm ET</p>\n"
+"  "
+msgstr ""
+"\n"
+"  <p>Téléphone : 1-833-694-1709<br>\n"
+"  Téléimprimeur (ATS) : 1-866-694-8389<br>\n"
+"  Heures de service : du lundi au vendredi de 8 h 30 à 17 h HE</p>\n"
+"  "
+
+#: register/templates/register/contact_us.html
+msgid "Or send us a message"
+msgstr "Ou écrivez-nous "
 
 #: register/templates/register/contact_us.html
 msgid "What do you want to do?"
@@ -2544,15 +2555,21 @@ msgid "Sorry, that confirmation link has expired or has already been used."
 msgstr "Désolé, le lien de validation est expiré ou a déjà été utilisé."
 
 #: register/templates/register/help_page.html
-msgid "Ottawa pilot"
-msgstr "Projet pilote à Ottawa"
+#: register/templates/register/how_display_poster.html
+#: register/templates/register/includes/footer.html
+msgid "Help and information"
+msgstr "Aide et information"
 
 #: register/templates/register/help_page.html
-msgid "Right now there’s only scanning in Ottawa."
-msgstr "Pour l’instant, il est uniquement possible de scanner des codes QR à Ottawa."
+msgid "Pilot project with the City of Ottawa "
+msgstr "Projet pilote avec la Ville d’Ottawa"
 
 #: register/templates/register/help_page.html
-msgid "Outside of the city, you can still make a poster for your place or event. Then you’ll be ready when your region starts using QR codes."
+msgid "Right now there’s only scanning in the City of Ottawa."
+msgstr "Pour l’instant, il est uniquement possible de scanner des codes QR dans la ville d’Ottawa."
+
+#: register/templates/register/help_page.html
+msgid "Outside of the City of Ottawa, you can still make a poster for your place or event. Then you’ll be ready when your region starts using QR codes."
 msgstr "Si vous n’êtes pas dans cette ville, vous pouvez tout de même créer une affiche pour votre lieu ou événement. Vous serez alors prêt lorsque votre région commencera à utiliser les codes QR."
 
 #: register/templates/register/help_page.html
@@ -2564,8 +2581,8 @@ msgid "Changes to name, address or contact information."
 msgstr "Changements au nom, à l’adresse ou aux coordonnées."
 
 #: register/templates/register/help_page.html
-msgid "How QR posters help slow the spread."
-msgstr "Comment les affiches à code QR aident à ralentir la COVID-19."
+msgid "How QR posters help limit the spread."
+msgstr "Comment les affiches à code QR aident à limiter la COVID-19."
 
 #: register/templates/register/help_page.html
 msgid "How to display your poster."
@@ -2967,8 +2984,8 @@ msgid "Make a COVID Alert poster"
 msgstr "Créer une affiche Alerte COVID"
 
 #: register/templates/register/start.html
-msgid "Display a QR code to help slow the spread of COVID-19"
-msgstr "Affichez un code QR pour contribuer à ralentir la COVID-19"
+msgid "Display a QR code to help limit the spread of COVID-19"
+msgstr "Affichez un code QR pour contribuer à limiter la COVID-19"
 
 #: register/templates/register/start.html
 msgid "Make a COVID Alert poster for your business, community organization or event."
@@ -3184,3 +3201,9 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Ottawa pilot"
+#~ msgstr "Projet pilote à Ottawa"
+
+#~ msgid "For information about common issues, visit"
+#~ msgstr "Consultez la section pour les questions fréquentes"
