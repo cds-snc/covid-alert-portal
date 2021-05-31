@@ -46,3 +46,20 @@ main .info-message {
     }
   }
 }
+
+main .success-message {
+  margin: $space-xl 0;
+  padding: $space-sm $space-md;
+  border-left: 4px solid #008751;
+  background: #E6FAE8;
+
+  ul {
+    li {
+      margin-bottom: 0;
+    }
+  }
+
+  h1 {
+    margin: 0;
+  }
+}
