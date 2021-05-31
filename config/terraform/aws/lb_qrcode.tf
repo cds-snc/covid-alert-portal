@@ -53,9 +53,11 @@ resource "aws_lb_target_group" "qrcode_2" {
 }
 
 resource "aws_lb" "qrcode" {
-  name               = "qrcode"
-  internal           = false #tfsec:ignore:AWS005
-  load_balancer_type = "application"
+  name                       = "qrcode"
+  internal                   = false #tfsec:ignore:AWS005
+  load_balancer_type         = "application"
+  drop_invalid_header_fields = true
+
   security_groups = [
     aws_security_group.qrcode_load_balancer.id
   ]
