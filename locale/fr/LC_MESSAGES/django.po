@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-27 14:29+0000\n"
+"POT-Creation-Date: 2021-05-31 13:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2472,7 +2472,7 @@ msgid "Using the COVID Alert app and its features is voluntary. People should be
 msgstr "L’utilisation de l’application Alerte COVID et de ses fonctionnalités est volontaire. Les personnes qui ne scannent pas le code QR doivent quand même pouvoir entrer et être servies."
 
 #: register/templates/register/confirmation.html
-msgid "Thank you for helping slow the spread of COVID-19."
+msgid "Thank you for helping limit the spread of COVID-19."
 msgstr "Merci d’aider à ralentir la propagation de la COVID-19."
 
 #: register/templates/register/confirmation.html
@@ -2960,7 +2960,7 @@ msgid "Make a COVID Alert poster"
 msgstr "Créer une affiche Alerte COVID"
 
 #: register/templates/register/start.html
-msgid "Display a QR code to help slow the spread of COVID-19"
+msgid "Display a QR code to help limit the spread of COVID-19"
 msgstr "Affichez un code QR pour contribuer à ralentir la COVID-19"
 
 #: register/templates/register/start.html
