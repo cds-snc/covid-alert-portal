@@ -48,7 +48,6 @@ pynacl = "*"
 protobuf = "*"
 segno = "*"
 cairosvg = "*"
-django-basicauth = "*"
 pypdf2 = "*"
 django-localflavor = "*"
 
