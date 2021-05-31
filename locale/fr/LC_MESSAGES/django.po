@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 15:59+0000\n"
+"POT-Creation-Date: 2021-05-31 19:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2984,8 +2984,8 @@ msgid "Make a COVID Alert poster"
 msgstr "Créer une affiche Alerte COVID"
 
 #: register/templates/register/start.html
-msgid "Display a QR code to help limit the spread of COVID-19"
-msgstr "Affichez un code QR pour contribuer à limiter la COVID-19"
+msgid "Display a QR code to limit community spread"
+msgstr "Affichez un code QR pour limiter la transmission communautaire"
 
 #: register/templates/register/start.html
 msgid "Make a COVID Alert poster for your business, community organization or event."
@@ -3020,7 +3020,7 @@ msgid "an email address where we can send the poster;"
 msgstr "une adresse courriel pour recevoir votre affiche;"
 
 #: register/templates/register/start.html
-msgid "the name and address of place or event;"
+msgid "the name and address of the place or event;"
 msgstr "le nom et l’adresse du lieu ou de l’événement;"
 
 #: register/templates/register/start.html
@@ -3201,9 +3201,3 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
-
-#~ msgid "Ottawa pilot"
-#~ msgstr "Projet pilote à Ottawa"
-
-#~ msgid "For information about common issues, visit"
-#~ msgstr "Consultez la section pour les questions fréquentes"
