@@ -2,22 +2,32 @@
 {% load i18n %}
 
 {% block title %}
-    {% trans "Notification sent" %}
+    {% trans "Alert sent" %}
 {% endblock %}
 
 {% block content %}
-  <h1>{% trans "You’ve notified people" %}</h1>
+  <div class="success-message">
+    <h1>{% trans "Alert sent" %}</h1>
+  </div>
 
-  <p>
-      {% trans "People who’ve installed the app will get a notification if they were at" %}
-      {{ location.name }} ({{ location.address }}, {{ location.city }}, {{ location.province }})
-      {% trans "on one or more of these dates:" %}
-  </p>
-  <ul>
+  <p>{% trans "You’ve notified people who scanned the QR code at the address, date(s) and time(s) below." %}</p>
+
+  <address>{{ location.name }}<br> 
+  {{ location.address }}<br> 
+  {{ location.city }}, {{ location.province }}<br>
+  {{ location.postal_code }}</address>
+
+  <br>
+
+  <hr>
+
+  <ul class="style-none">
       {% for date_entry in dates %}
         <li>{{ date_entry.notification_txt }}</li>
       {% endfor %}
   </ul>
+
+  <hr>
 
   <div class="content-button">
     <a href="{% url 'outbreaks:search' %}" role='button' draggable='false'>{% trans "Notify of another public exposure" %}</a>

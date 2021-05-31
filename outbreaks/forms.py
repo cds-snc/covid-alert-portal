@@ -6,9 +6,18 @@ from django.core.exceptions import ValidationError
 from django.conf import settings
 from portal.widgets import CDSRadioWidget
 from portal.forms import HealthcareBaseForm
-from datetime import datetime
+from datetime import datetime, timedelta
 from calendar import month_name
 import pytz
+
+default_end_time = "00:00:00:000000"
+
+
+def end_date_shift_for_view(dttm):
+    if dttm.strftime(hour_end_data_format) == default_end_time:
+        return dttm - timedelta(microseconds=1)
+    return dttm
+
 
 severity_choices = [
     ("1", _("Isolate and get tested")),
@@ -19,24 +28,29 @@ severity_help = [
     ("2", _("Self-monitor for 14 days")),
 ]
 hour_format = "%-H:%M" if get_language() == "fr" else "%-I:%M %p"
+hour_start_data_format = "%H:%M:00:000001"
+hour_end_data_format = "%H:%M:00:000000"
 start_hours = []
 end_hours = []
 for hour in range(24):
+    dttm = datetime(2020, 1, 1, hour)
     display_hour = (
-        f"{hour}:00:00:000000",
-        datetime.strftime(datetime(2020, 1, 1, hour), hour_format),
+        dttm.strftime(hour_start_data_format),
+        dttm.strftime(hour_format),
     )
+    dttm = dttm.replace(minute=30)
     display_hour_30 = (
-        f"{hour}:30:00:000000",
-        datetime.strftime(datetime(2020, 1, 1, hour, 30), hour_format),
+        dttm.strftime(hour_start_data_format),
+        dttm.strftime(hour_format),
     )
     display_hour_29 = (
-        f"{hour}:29:59:999999",
-        datetime.strftime(datetime(2020, 1, 1, hour, 29, 59), hour_format),
+        dttm.strftime(hour_end_data_format),
+        dttm.strftime(hour_format),
     )
+    dttm = dttm.replace(minute=0) + timedelta(hours=1)
     display_hour_59 = (
-        f"{hour}:59:59:999999",
-        datetime.strftime(datetime(2020, 1, 1, hour, 59, 59), hour_format),
+        dttm.strftime(hour_end_data_format),
+        end_date_shift_for_view(dttm).strftime(hour_format),
     )
     start_hours.append(display_hour)
     start_hours.append(display_hour_30)
@@ -97,7 +111,7 @@ class DateForm(HealthcareBaseForm):
         tz = pytz.timezone(settings.PORTAL_LOCAL_TZ or settings.TIME_ZONE or "UTC")
         start_later_end_error_msg = _('"To" must be later than "From".')
         overlap_notification_error_tmpl = _(
-            "Someone already notified people who were there between {} and {}."
+            "Your team already alerted people who scanned the QR code on {}."
         )
         if start_date >= end_date:
             form.add_error(None, start_later_end_error_msg)
@@ -112,7 +126,6 @@ class DateForm(HealthcareBaseForm):
                     ValidationError(
                         overlap_notification_error_tmpl.format(
                             notification.start_date.astimezone(tz).strftime("%c"),
-                            notification.end_date.astimezone(tz).strftime("%c"),
                         ),
                         code="warning",
                     )
@@ -123,13 +136,10 @@ class DateForm(HealthcareBaseForm):
         tz = pytz.timezone(
             settings.PORTAL_LOCAL_TZ
         )  # TODO (mvp pilot setting) Change this for multi-tz rollout
-        default_time = (
-            "0:00:00:000000" if start_or_end == "start" else "23:59:59:999999"
-        )
-        hour, minute, second, ms = [
-            int(x) for x in data.get(f"{start_or_end}_time", default_time).split(":")
-        ]
-        return tz.localize(
+        default_time = "0:00:00:000001" if start_or_end == "start" else default_end_time
+        time_str = data.get(f"{start_or_end}_time", default_time)
+        hour, minute, second, ms = [int(x) for x in time_str.split(":")]
+        valid_dt = tz.localize(
             datetime(
                 year=int(data.get("year", -1)),
                 month=int(data.get("month", -1)),
@@ -140,6 +150,9 @@ class DateForm(HealthcareBaseForm):
                 microsecond=ms,
             )
         )
+        if start_or_end != "start" and time_str == default_end_time:
+            valid_dt = valid_dt + timedelta(days=1)
+        return valid_dt
 
     @staticmethod
     def get_notification_intersection(start_date, end_date, location):
@@ -170,5 +183,5 @@ class SearchForm(HealthcareBaseForm):
     search_text = forms.CharField(
         label="",
         min_length=3,
-        error_messages={"required": _("Enter information to continue.")},
+        error_messages={"required": _("Enter the name or address.")},
     )
