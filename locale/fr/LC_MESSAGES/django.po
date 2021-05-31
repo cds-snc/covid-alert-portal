@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 19:39+0000\n"
+"POT-Creation-Date: 2021-05-31 19:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2368,15 +2368,15 @@ msgid "Extension"
 msgstr ""
 
 #: register/forms.py
-msgid "Get Help."
+msgid "Get help."
 msgstr "Obtenir de l’aide."
 
 #: register/forms.py
-msgid "Give Feedback."
+msgid "Give feedback."
 msgstr "Donner des commentaires."
 
 #: register/forms.py
-msgid "Something Else."
+msgid "Something else."
 msgstr "Autre chose."
 
 #: register/forms.py
