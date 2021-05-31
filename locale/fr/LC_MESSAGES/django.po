@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 13:43+0000\n"
+"POT-Creation-Date: 2021-05-31 13:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -502,7 +502,7 @@ msgstr "Suivant"
 msgid "Your name (optional)"
 msgstr "Votre nom (facultatif)"
 
-#: contact/forms.py register/templates/register/summary.html
+#: contact/forms.py register/forms.py register/templates/register/summary.html
 msgid "Your email address"
 msgstr "Votre adresse courriel"
 
@@ -2510,15 +2510,26 @@ msgid "Home"
 msgstr ""
 
 #: register/templates/register/contact_us.html
-msgid "For information about common issues, visit"
-msgstr "Consultez la section pour les questions fréquentes"
+msgid "Call us"
+msgstr "Appelez-nous"
 
 #: register/templates/register/contact_us.html
-#: register/templates/register/help_page.html
-#: register/templates/register/how_display_poster.html
-#: register/templates/register/includes/footer.html
-msgid "Help and information"
-msgstr "Aide et information"
+msgid ""
+"\n"
+"  <p>Phone: 1-833-694-1709<br>\n"
+"  Teletypewriter (TTY): 1-866-694-8389<br>\n"
+"  Hours of operation are Monday to Friday from 8:30 am to 5 pm ET</p>\n"
+"  "
+msgstr ""
+"\n"
+"  <p>Téléphone : 1-833-694-1709<br>\n"
+"  Téléimprimeur (ATS) : 1-866-694-8389<br>\n"
+"  Heures de service : du lundi au vendredi de 8 h 30 à 17 h HE</p>\n"
+"  "
+
+#: register/templates/register/contact_us.html
+msgid "Or send us a message"
+msgstr "Ou écrivez-nous "
 
 #: register/templates/register/contact_us.html
 msgid "What do you want to do?"
@@ -2535,6 +2546,12 @@ msgstr "Invalide ou expiré"
 #: register/templates/register/error.html
 msgid "Sorry, that confirmation link has expired or has already been used."
 msgstr "Désolé, le lien de validation est expiré ou a déjà été utilisé."
+
+#: register/templates/register/help_page.html
+#: register/templates/register/how_display_poster.html
+#: register/templates/register/includes/footer.html
+msgid "Help and information"
+msgstr "Aide et information"
 
 #: register/templates/register/help_page.html
 msgid "Ottawa pilot"
@@ -3173,3 +3190,6 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "For information about common issues, visit"
+#~ msgstr "Consultez la section pour les questions fréquentes"
