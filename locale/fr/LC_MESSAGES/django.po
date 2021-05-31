@@ -2473,7 +2473,7 @@ msgstr "L’utilisation de l’application Alerte COVID et de ses fonctionnalit�
 
 #: register/templates/register/confirmation.html
 msgid "Thank you for helping limit the spread of COVID-19."
-msgstr "Merci d’aider à ralentir la propagation de la COVID-19."
+msgstr "Merci d’aider à limiter la propagation de la COVID-19."
 
 #: register/templates/register/confirmation.html
 #: register/templates/register/success.html
@@ -2978,7 +2978,7 @@ msgstr "Créer une affiche Alerte COVID"
 
 #: register/templates/register/start.html
 msgid "Display a QR code to help limit the spread of COVID-19"
-msgstr "Affichez un code QR pour contribuer à ralentir la COVID-19"
+msgstr "Affichez un code QR pour contribuer à limiter la COVID-19"
 
 #: register/templates/register/start.html
 msgid "Make a COVID Alert poster for your business, community organization or event."
