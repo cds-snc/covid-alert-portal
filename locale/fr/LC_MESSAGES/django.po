@@ -2263,6 +2263,10 @@ msgid "Tell us the type of place."
 msgstr "De quel type de lieu s’agit-il?"
 
 #: register/forms.py
+msgid "Only enter letters or numbers."
+msgstr "Vous ne pouvez saisir que des lettres et des chiffres."
+
+#: register/forms.py
 #, python-format
 msgid "Your name is longer than the %(limit_value)d character limit."
 msgstr "Le nom dépasse la limite de %(limit_value)d caractères."
@@ -2347,13 +2351,13 @@ msgstr "Code postal"
 msgid "Enter a valid Canadian postal code."
 msgstr "Entrez un code postal canadien valide."
 
-#: register/forms.py
-msgid "Your phone number must be valid."
-msgstr "Le numéro de téléphone doit être valide."
-
 #: register/forms.py register/models.py
 msgid "Name of contact"
 msgstr "Nom de la personne-ressource"
+
+#: register/forms.py
+msgid "Your phone number must be valid."
+msgstr "Le numéro de téléphone doit être valide."
 
 #: register/forms.py
 msgid "Contact phone number"
