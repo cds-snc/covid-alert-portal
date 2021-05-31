@@ -8,9 +8,11 @@
       <div class="multiple-choice__item">
         <input {% if option.attrs.id %} id="{{ option.attrs.id }}"{% endif %} type="radio" name="{{ option.name }}" value="{{ option.value|stringformat:'s' }}" {% if option.attrs.checked %} checked{% endif %}>
         <label {% if option.attrs.id %} for="{{ option.attrs.id }}"{% endif %}>
-          <strong>{{ option.label }}</strong>
           {% if option.attrs.help_text %}
+            <strong>{{ option.label }}</strong>
             <span class="help-text">{{ option.attrs.help_text|dict_key:option.value }}</span>
+          {% else %}
+            {{ option.label }}
           {% endif %}
         </label>
       </div>

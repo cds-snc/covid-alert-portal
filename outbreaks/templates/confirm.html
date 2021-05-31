@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block title %}
-  {% trans "Confirm notification" %}
+  {% trans "Review and send" %}
 {% endblock %}
 
 {% block content %}
@@ -25,7 +25,9 @@
       </div>
   {% endif %}
 
-  <h1>{% trans "Confirm and send" %}</h1>
+  <h1>{% trans "Review and send" %}</h1>
+
+  <p>{% trans "You’ll alert everyone who scanned this QR code on the date(s) and time(s) below." %}</p>
 
   <dl class="summary-list">
     <div class="summary-list__row">
@@ -46,13 +48,7 @@
       </dd>
     </div>
     <div class="summary-list__row">
-      <dt class="summary-list__key">{% trans "Type" %}</dt>
-      <dd class="summary-list__value">{{ location_category }}</dd>
-      <dd class="summary-list__actions"><a href="{% url 'outbreaks:search' %}">{% trans "Change" %}<span
-        class="visually-hidden">{% trans "location" %}</span></a></dd>
-    </div>
-    <div class="summary-list__row">
-      <dt class="summary-list__key">{% trans "Date(s)" %}</dt>
+      <dt class="summary-list__key">{% trans "Date and time" %}</dt>
       <dd class="summary-list__value">
         {% for date_entry in dates %}
           {{ date_entry.notification_txt }}<br/>
@@ -62,15 +58,21 @@
         class="visually-hidden">{% trans "dates" %}</span></a></dd>
     </div>
     <div class="summary-list__row">
-      <dt class="summary-list__key">{% trans "Severity" %}</dt>
+      <dt class="summary-list__key">{% trans "Guidance" %}</dt>
       <dd class="summary-list__value">{{ alert_level }}</dd>
       <dd class="summary-list__actions"><a href="{% url 'outbreaks:severity' %}">{% trans "Change" %}<span
         class="visually-hidden">{% trans "severity" %}</span></a></dd>
     </div>
   </dl>
 
-  <p>{% trans "By selecting “Notify people who were there”,  you confirm you believe this information is correct and complete." %}</p>
+  <div class="info-message">
+    <p>
+      {% blocktrans %}
+        <p>When you “Send QR alert”,  you confirm you’ve correctly entered all details from the health authority.</p>
+        <p>It’s not possible to cancel an alert after sending.</p>
+      {% endblocktrans %}
+  </div>
 
-  {% include "includes/cds_form.html" with submit_text=_("Notify people who were there") submit_class="warning" %}
+  {% include "includes/cds_form.html" with submit_text=_("Send QR alert") submit_class="warning" %}
 
 {% endblock %}
