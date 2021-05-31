@@ -48,7 +48,7 @@ location_choices = [
     (location_religious_space, _("Places of worship.")),
     (location_events, _("Events such as festivals, weddings, conferences.")),
     (location_retail, _("Retail such as grocery stores, liquor stores, pharmacies.")),
-    (location_medical, _("Medical office or centre (doctor, dentist, etc.).")),
+    (location_medical, _("Medical centres, such as doctor or dentist offices.")),
     (location_centres, _("Community centres, libraries, government service centres.")),
     (location_other, _("Other.")),
 ]
