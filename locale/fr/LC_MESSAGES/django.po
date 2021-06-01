@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 15:59+0000\n"
+"POT-Creation-Date: 2021-05-31 19:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2368,15 +2368,15 @@ msgid "Extension"
 msgstr ""
 
 #: register/forms.py
-msgid "Get Help."
+msgid "Get help."
 msgstr "Obtenir de l’aide."
 
 #: register/forms.py
-msgid "Give Feedback."
+msgid "Give feedback."
 msgstr "Donner des commentaires."
 
 #: register/forms.py
-msgid "Something Else."
+msgid "Something else."
 msgstr "Autre chose."
 
 #: register/forms.py
@@ -2569,7 +2569,7 @@ msgid "Right now there’s only scanning in the City of Ottawa."
 msgstr "Pour l’instant, il est uniquement possible de scanner des codes QR dans la ville d’Ottawa."
 
 #: register/templates/register/help_page.html
-msgid "Outside of the City of Ottawa, you can still make a poster for your place or event. Then you’ll be ready when your region starts using QR codes."
+msgid "Outside Ottawa, you can still make a poster for your place or event. Then you’ll be ready when your region starts using QR codes."
 msgstr "Si vous n’êtes pas dans cette ville, vous pouvez tout de même créer une affiche pour votre lieu ou événement. Vous serez alors prêt lorsque votre région commencera à utiliser les codes QR."
 
 #: register/templates/register/help_page.html
@@ -2705,16 +2705,20 @@ msgid "Step 2 of 5"
 msgstr "Étape 2 de 5"
 
 #: register/templates/register/location_name.html
-msgid "We’ll display the name on the poster with your QR code."
-msgstr "Le nom sera inscrit sur l’affiche avec votre code QR."
+msgid "We'll show the name on your QR code poster."
+msgstr "Ce nom apparaîtra sur votre affiche à code QR."
 
 #: register/templates/register/location_unavailable.html
 msgid "No scanning yet in your area"
-msgstr ""
+msgstr "Impossible de scanner des codes dans votre région"
 
 #: register/templates/register/location_unavailable.html
-msgid "People in your province or territory are not yet able to scan a QR code for COVID Alert.You can still make a poster with your code.  That way, you’ll be ready when people are able to scan these codes."
-msgstr ""
+msgid "People in your province or territory are not yet able to scan a QR code for COVID Alert."
+msgstr "Les personnes de votre province ou de votre territoire ne peuvent pas encore scanner de codes QR avec Alerte COVID."
+
+#: register/templates/register/location_unavailable.html
+msgid "You can still make a poster with your code.  That way, you’ll be ready when people are able to scan these codes."
+msgstr "Vous pouvez tout de même créer une affiche. De cette façon, vous serez prêt lorsque les personnes pourront scanner votre code QR."
 
 #: register/templates/register/privacy.html
 msgid "Privacy notice"
@@ -2970,8 +2974,8 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"    <p>Check your inbox, junk or spam folder for an email with the subject line <q>Confirm Email for your poster</q></p>\n"
-"    <p>If you did not get the email, we can <a href=\"%(register_url)s\">send it again</a></p>\n"
+"    <p>Check your inbox, junk or spam folder for an email with the subject line <q>Confirm email for your poster.</q></p>\n"
+"    <p>If you did not get the email, we can <a href=\"%(register_url)s\">send it again</a>.</p>\n"
 "  "
 msgstr ""
 "\n"
@@ -2984,8 +2988,8 @@ msgid "Make a COVID Alert poster"
 msgstr "Créer une affiche Alerte COVID"
 
 #: register/templates/register/start.html
-msgid "Display a QR code to help limit the spread of COVID-19"
-msgstr "Affichez un code QR pour contribuer à limiter la COVID-19"
+msgid "Display a QR code to limit community spread"
+msgstr "Affichez un code QR pour limiter la transmission communautaire"
 
 #: register/templates/register/start.html
 msgid "Make a COVID Alert poster for your business, community organization or event."
@@ -3020,7 +3024,7 @@ msgid "an email address where we can send the poster;"
 msgstr "une adresse courriel pour recevoir votre affiche;"
 
 #: register/templates/register/start.html
-msgid "the name and address of place or event;"
+msgid "the name and address of the place or event;"
 msgstr "le nom et l’adresse du lieu ou de l’événement;"
 
 #: register/templates/register/start.html
@@ -3201,9 +3205,3 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
-
-#~ msgid "Ottawa pilot"
-#~ msgstr "Projet pilote à Ottawa"
-
-#~ msgid "For information about common issues, visit"
-#~ msgstr "Consultez la section pour les questions fréquentes"
