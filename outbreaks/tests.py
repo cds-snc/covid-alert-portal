@@ -168,7 +168,9 @@ class DatetimeView(NotificationsTestCase):
             {"day": 1, "month": 1, "year": 2021, "do_post": "add_date"},
         )
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime", args=[location.id])))
+        self.assertTrue(
+            response.url.startswith(reverse("outbreaks:datetime", args=[location.id]))
+        )
 
         # Assert that getting the same page now returns a deletion link for the first
         response = self.client.get(reverse("outbreaks:datetime", args=[location.id]))
@@ -176,7 +178,7 @@ class DatetimeView(NotificationsTestCase):
 
         # Get a 'remove date' request and ensure it loads the same page
         response = self.client.get(
-            reverse("outbreaks:datetime_delete", kwargs={"idx": 0, 'pk': location.id})
+            reverse("outbreaks:datetime_delete", kwargs={"idx": 0, "pk": location.id})
         )
         self.assertEqual(response.status_code, 200)
 
@@ -226,7 +228,9 @@ class DatetimeView(NotificationsTestCase):
             {"day": 1, "month": 1, "year": 2021, "do_post": "add_date"},
         )
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime", args=[location.id])))
+        self.assertTrue(
+            response.url.startswith(reverse("outbreaks:datetime", args=[location.id]))
+        )
 
         response = self.client.post(
             reverse("outbreaks:datetime", args=[location.id]),
@@ -258,7 +262,9 @@ class DatetimeView(NotificationsTestCase):
             },
         )
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime", args=[location.id])))
+        self.assertTrue(
+            response.url.startswith(reverse("outbreaks:datetime", args=[location.id]))
+        )
         response = self.client.get(reverse("outbreaks:datetime", args=[location.id]))
         self.assertContains(response, "datetime/0/delete")
 
@@ -274,7 +280,9 @@ class DatetimeView(NotificationsTestCase):
             },
         )
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.url.startswith(reverse("outbreaks:datetime", args=[location.id])))
+        self.assertTrue(
+            response.url.startswith(reverse("outbreaks:datetime", args=[location.id]))
+        )
         response = self.client.get(reverse("outbreaks:datetime", args=[location.id]))
         self.assertContains(response, "datetime/1/delete")
 
@@ -284,7 +292,8 @@ class DatetimeView(NotificationsTestCase):
         self.assertContains(response, "Add new date")
 
         response = self.client.post(
-            reverse("outbreaks:datetime", args=[location.id]), {"do_post": "show_date_form"}
+            reverse("outbreaks:datetime", args=[location.id]),
+            {"do_post": "show_date_form"},
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "datetime.html")
@@ -295,7 +304,9 @@ class DatetimeView(NotificationsTestCase):
             reverse("outbreaks:datetime", args=[location.id]), {"do_post": "cancel"}
         )
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, reverse("outbreaks:datetime", args=[location.id]))
+        self.assertEqual(
+            response.url, reverse("outbreaks:datetime", args=[location.id])
+        )
 
 
 class SeverityView(NotificationsTestCase):
