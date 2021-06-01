@@ -38,3 +38,12 @@ if (validationSummary) {
 }
 
 document.cookie = 'browserTimezone=' + Intl.DateTimeFormat().resolvedOptions().timeZone + '; path=/';
+
+function navBack() {
+  window.history.back();
+}
+
+backInlineLinks = document.getElementsByClassName('back-inline-link');
+for (let i=0; i< backInlineLinks.length; i++){
+  backInlineLinks[i].addEventListener('click', navBack);
+}
