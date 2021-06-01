@@ -31,7 +31,8 @@ data "aws_iam_policy_document" "covidportal_secrets_manager" {
       aws_secretsmanager_secret_version.freshdesk_product_id.arn,
       aws_secretsmanager_secret_version.new_relic_license_key.arn,
       aws_secretsmanager_secret_version.notify_api_key.arn,
-      aws_secretsmanager_secret_version.qrcode_signature_private_key.arn
+      aws_secretsmanager_secret_version.qrcode_signature_private_key.arn,
+      aws_secretsmanager_secret_version.qrcode_notify_api_key.arn
     ]
   }
 }

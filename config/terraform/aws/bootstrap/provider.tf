@@ -1,9 +1,9 @@
 provider "aws" {
-  region  = "ca-central-1"
+  region = "ca-central-1"
 }
 
 resource "aws_s3_bucket" "log_bucket" {
-  bucket = join("",[var.storage_bucket,"-logs"])
+  bucket = join("", [var.storage_bucket, "-logs"])
   acl    = "log-delivery-write"
   #tfsec:ignore:AWS002
   server_side_encryption_configuration {
