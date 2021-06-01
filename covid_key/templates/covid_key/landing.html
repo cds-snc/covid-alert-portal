@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Welcome to the COVID Alert portal" %}{% endblock %}
+
+{% block content %}
+  <h1>{% trans "Welcome to the COVID Alert portal" %}</h1>
+
+  <div class="box-container">
+    <a href="{% url 'start' %}">
+      <div class="box-button">
+        <div class="box-button-column">
+          <div class="box-button-row">
+            <div>
+              <b>{% trans 'Give individuals a one-time key' %}</b>
+            </div>
+            <div>
+              <div class="with-chevron"></div>
+            </div>
+          </div>
+          <div class="box-detail">
+            {% trans 'Give a key to individuals who tested positive for COVID-19 so they can inform close contacts of a possible exposure.' %}
+          </div>
+        </div>
+      </div>
+    </a>
+    <a href="{% url 'outbreaks:search' %}">
+      <div class="box-button">
+        <div class="box-button-column">
+          <div class="box-button-row">
+            <div>
+              <b>{% trans 'Send place or event alerts' %}</b>
+            </div>
+            <div>
+              <div class="with-chevron"></div>
+            </div>
+          </div>
+          <div class="box-detail">
+            {% trans 'Send alerts of a possible exposure to people who scanned a QR code poster at a place or event.' %}
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <br>
+  <div>
+    <p><strong>{% trans "New or need a refresher?" %}</strong></p>
+    <p>{% trans "Visit" %} <a href="{% url 'about:index' %}">{% trans "About the portal" %}</a>.</p>
+  </div>
+{% endblock %}

@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django_otp import DEVICE_ID_SESSION_KEY
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Permission
 from django.conf import settings
 
 from profiles.models import HealthcareUser, HealthcareProvince
@@ -24,6 +25,24 @@ class CovidKeyConfigTest(TestCase):
     def test_apps(self):
         self.assertEqual(CovidKeyConfig.name, "covid_key")
         self.assertEqual(apps.get_app_config("covid_key").name, "covid_key")
+
+
+class LandingView(AdminUserTestCase):
+    def setUp(self):
+        super().setUp()
+
+    def test_landing_view_with_alert_perm(self):
+        self.user.user_permissions.add(Permission.objects.get(codename="can_send_alerts"))
+        self.login()
+        response = self.client.get(reverse("landing"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Welcome to the COVID Alert portal</h1>")
+
+    def test_landing_view_without_alert_perm(self):
+        self.login()
+        response = self.client.get(reverse("landing"))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse("start"))
 
 
 class StartView(AdminUserTestCase):

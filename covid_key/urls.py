@@ -8,14 +8,14 @@ from . import views
 urlpatterns = [
     path("key/", views.CodeView.as_view(), name="key"),
     path(
-        "start/",
-        login_required(otp_required(views.StartView.as_view())),
-        name="start",
+        "landing/",
+        login_required(otp_required(views.PortalLandingView.as_view())),
+        name="landing",
     ),
     path(
-        "otk-start/",
+        "start/",
         login_required(otp_required(views.OTKStartView.as_view())),
-        name="otk_start",
+        name="start",
     ),
     path(
         "generate-key/",

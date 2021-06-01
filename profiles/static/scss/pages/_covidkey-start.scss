@@ -3,17 +3,22 @@
   display: flex;
   flex-wrap: wrap;
 
+  a {
+    text-decoration: none;
+    color: black;
+    margin-bottom: $space-lg;
+  }
+
   .box-button {
     display: flex;
     flex-direction: row;
-
+    height: 100%;
     border-style: solid;
     border-width: 1px;
     border-bottom-width: 5px;
     border-radius: 10px;
     border-color: #8A8A8A;
     padding: $space-sm;
-    margin-bottom: $space-lg;
 
     .box-button-column {
       display: flex;
@@ -47,8 +52,11 @@
 @include md {
   .box-container {
     flex-wrap: nowrap;
+    a {
+      max-width: 50%;
+    }
     .box-button {
-      width: 50%;
+      //width: 50%;
       margin-right: $space-md;
     }
   }

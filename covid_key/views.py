@@ -2,6 +2,7 @@ import logging
 import requests
 from datetime import timedelta, datetime
 from django.conf import settings
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -22,17 +23,17 @@ from .models import COVIDKey
 logger = logging.getLogger(__name__)
 
 
-class StartView(TemplateView):
-    template_name = "covid_key/start.html"
+class PortalLandingView(TemplateView):
+    template_name = "covid_key/landing.html"
 
     def get(self, request):
-        # clear any existing one time keys
-        self.request.session.pop("otk", None)
+        if not request.user.can_send_alerts:
+            return HttpResponseRedirect(reverse_lazy("start"))
         return super().get(request)
 
 
 class OTKStartView(TemplateView):
-    template_name = "covid_key/otk_start.html"
+    template_name = "covid_key/start.html"
 
     def get(self, request):
         # clear any existing one time keys

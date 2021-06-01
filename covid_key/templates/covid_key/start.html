@@ -1,45 +1,24 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Welcome to the COVID Alert portal" %}{% endblock %}
+{% block title %}{% trans "You’re logged in to give one-time keys" %}{% endblock %}
 
 {% block content %}
-  <h1>{% trans "Welcome to the COVID Alert portal" %}</h1>
+  <h1>{% trans "You’re logged in to give one-time keys" %}</h1>
+  <p>
+    {% trans "Patients need a key if they’ve:" %}
+  </p>
+  <ul class="expanded">
+    <li>{% blocktrans %}Tested positive for COVID-19, <strong>and</strong>,{% endblocktrans %}</li>
+    <li>{% trans "Installed the COVID Alert app on their phone." %}</li>
+  </ul>
 
-  <div class="box-container">
-    <div class="box-button">
-      <div class="box-button-column">
-        <div class="box-button-row">
-          <div>
-            <b>{% trans 'Give individuals a one-time key' %}</b>
-          </div>
-          <div>
-            <div class="with-chevron"></div>
-          </div>
-        </div>
-        <div class="box-detail">
-          {% trans 'Give a key to individuals who tested positive for COVID-19 so they can inform close contacts of a possible exposure.' %}
-        </div>
-      </div>
-    </div>
-    <div class="box-button">
-      <div class="box-button-column">
-        <div class="box-button-row">
-          <div>
-            <b>{% trans 'Send place or event alerts' %}</b>
-          </div>
-          <div>
-            <div class="with-chevron"></div>
-          </div>
-        </div>
-        <div class="box-detail">
-          {% trans 'Send alerts of a possible exposure to people who scanned a QR code poster at a place or event.' %}
-        </div>
-      </div>
-    </div>
+  <div class="content-button content-section">
+    <p><strong>{% trans "Does this patient meet both conditions?" %}</strong></p>
+    <a href="{% url 'generate_key' %}" role='button' draggable='false'>{% trans "Yes, continue" %}</a>
   </div>
-  <br>
-  <div>
+
+  <div class="content-section">
     <p><strong>{% trans "New or need a refresher?" %}</strong></p>
     <p>{% trans "Visit" %} <a href="{% url 'about:index' %}">{% trans "About the portal" %}</a>.</p>
   </div>
