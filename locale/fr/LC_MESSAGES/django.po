@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 15:59+0000\n"
+"POT-Creation-Date: 2021-06-01 05:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -209,11 +209,42 @@ msgid "Sending alerts"
 msgstr "Envoi d’alertes"
 
 #: about/templates/about/5_help_patient_enter_key.html
+#: about/templates/about/6_admin_accounts.html
 #: about/templates/about/6_sending_qr_alerts.html
 #: about/templates/about/7_admin_accounts.html
 #: about/templates/includes/_nav_about.html
 msgid "Admin accounts"
 msgstr "Comptes administrateurs"
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Both administrators and team members can generate one-time keys."
+msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Administrators can also:"
+msgstr "Les administrateurs peuvent aussi :"
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Invite team members to create portal accounts."
+msgstr "Inviter des membres à se créer un compte pour le portail."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Make changes or update information in team member accounts."
+msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Delete portal accounts."
+msgstr "Supprimer des comptes."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Give log in codes to team members who are locked out of the portal."
+msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "Sending QR alerts"
@@ -270,37 +301,15 @@ msgstr "Vous verrez une confirmation que l’alerte a été envoyée"
 msgid "Health authorities continue to manually contact visitors who do not scan QR codes."
 msgstr "Les autorités sanitaires continueront de contacter manuellement les visiteurs qui ne scannent pas les codes QR."
 
-#: about/templates/about/7_admin_accounts.html
-msgid "Both administrators and team members can generate one-time keys."
-msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Administrators can also:"
-msgstr "Les administrateurs peuvent aussi :"
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Invite team members to create portal accounts."
-msgstr "Inviter des membres à se créer un compte pour le portail."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Make changes or update information in team member accounts."
-msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Delete portal accounts."
-msgstr "Supprimer des comptes."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Give log in codes to team members who are locked out of the portal."
-msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
-
 #: about/templates/includes/_nav_about.html
 msgid "Table of contents: About the Portal"
 msgstr "Table des matières: Le portail"
 
 #: about/templates/includes/nav_about.html
+#: covid_key/templates/covid_key/landing.html
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
-#: portal/templates/includes/nav_main.html
+#: portal/templates/includes/footer.html
 msgid "About the portal"
 msgstr "Le portail"
 
@@ -629,6 +638,40 @@ msgstr "Les patients peuvent aussi <a href='https://www.canada.ca/fr/sante-publi
 msgid "Generate another key"
 msgstr "Générer une nouvelle clé"
 
+#: covid_key/templates/covid_key/landing.html
+msgid "Welcome to the COVID Alert portal"
+msgstr "Bienvenue dans le portail Alerte COVID"
+
+#: covid_key/templates/covid_key/landing.html
+msgid "Give individuals a one-time key"
+msgstr "Donner des clés à usage unique"
+
+#: covid_key/templates/covid_key/landing.html
+msgid "Give a key to individuals who tested positive for COVID-19 so they can inform close contacts of a possible exposure."
+msgstr "Donnez une clé aux personnes déclarées positives pour qu’elles puissent aviser leurs contacts étroits d’une possible exposition."
+
+#: covid_key/templates/covid_key/landing.html
+msgid "Send place or event alerts"
+msgstr "Envoyer des alertes"
+
+#: covid_key/templates/covid_key/landing.html
+msgid "Send alerts of a possible exposure to people who scanned a QR code poster at a place or event."
+msgstr "Envoyez une alerte aux personnes qui ont scanné le code QR d’un lieu ou d’un événement pendant un risque d’exposition."
+
+#: covid_key/templates/covid_key/landing.html
+#: covid_key/templates/covid_key/otk_start.html
+#: covid_key/templates/covid_key/start.html outbreaks/templates/history.html
+#: outbreaks/templates/search.html
+msgid "New or need a refresher?"
+msgstr "Besoin d’en savoir plus sur le portail?"
+
+#: covid_key/templates/covid_key/landing.html
+#: covid_key/templates/covid_key/otk_start.html
+#: covid_key/templates/covid_key/start.html outbreaks/templates/history.html
+#: outbreaks/templates/search.html
+msgid "Visit"
+msgstr "Consultez la page"
+
 #: covid_key/templates/covid_key/locked.html
 msgid "Key generation limit reached"
 msgstr "Limite de génération clé atteinte"
@@ -663,39 +706,35 @@ msgstr "Le message texte met environ 30 secondes pour arriver."
 msgid "Did %(phone_number)s get the key?"
 msgstr "La clé a-t-elle été reçue au numéro %(phone_number)s?"
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "You’re logged in to give one-time keys"
 msgstr "Vous pouvez maintenant fournir des clés"
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "Patients need a key if they’ve:"
 msgstr "Un patient peut recevoir une clé si :"
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "Tested positive for COVID-19, <strong>and</strong>,"
 msgstr "D’une part, il a reçu un résultat positif de COVID-19."
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "Installed the COVID Alert app on their phone."
 msgstr "D’autre part, il a l’application Alerte COVID sur son téléphone."
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "Does this patient meet both conditions?"
 msgstr "Le patient remplit-il les deux conditions?"
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "Yes, continue"
 msgstr "Oui, continuer"
-
-#: covid_key/templates/covid_key/start.html outbreaks/templates/history.html
-#: outbreaks/templates/search.html
-msgid "New or need a refresher?"
-msgstr "Besoin d’en savoir plus sur le portail?"
-
-#: covid_key/templates/covid_key/start.html outbreaks/templates/history.html
-#: outbreaks/templates/search.html
-msgid "Visit"
-msgstr "Consultez la page"
 
 #: covid_key/views.py
 msgid "Something went wrong. Contact your administrator."
@@ -1252,6 +1291,11 @@ msgid "at"
 msgstr "à"
 
 #: portal/templates/includes/footer.html
+#: profiles/templates/profiles/support.html
+msgid "Support"
+msgstr "Assistance"
+
+#: portal/templates/includes/footer.html
 #: profiles/templates/profiles/privacy.html
 #: register/templates/register/includes/footer.html
 msgid "Privacy"
@@ -1292,6 +1336,14 @@ msgid "Product navigation"
 msgstr "Navigation du produit"
 
 #: portal/templates/includes/nav_main.html
+#: register/templates/register/contact_us.html
+#: register/templates/register/help_page.html
+#: register/templates/register/privacy.html
+#: register/templates/register/terms.html
+msgid "Home"
+msgstr ""
+
+#: portal/templates/includes/nav_main.html
 msgid "Generate keys"
 msgstr "Générer des clés"
 
@@ -1303,11 +1355,6 @@ msgstr "Envoyer des alertes"
 #: profiles/templates/profiles/healthcareuser_list.html
 msgid "Manage team"
 msgstr "Gérer l’équipe"
-
-#: portal/templates/includes/nav_main.html
-#: profiles/templates/profiles/support.html
-msgid "Support"
-msgstr "Assistance"
 
 #: portal/templates/includes/phonetic.html
 msgid "Read key phonetically to confirm patient understands letters:"
@@ -2508,13 +2555,6 @@ msgstr ""
 #: register/templates/register/contact_us.html
 msgid "Contact Us"
 msgstr "Nous joindre"
-
-#: register/templates/register/contact_us.html
-#: register/templates/register/help_page.html
-#: register/templates/register/privacy.html
-#: register/templates/register/terms.html
-msgid "Home"
-msgstr ""
 
 #: register/templates/register/contact_us.html
 msgid "Call us"

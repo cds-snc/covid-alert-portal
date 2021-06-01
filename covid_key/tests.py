@@ -32,7 +32,9 @@ class LandingView(AdminUserTestCase):
         super().setUp()
 
     def test_landing_view_with_alert_perm(self):
-        self.user.user_permissions.add(Permission.objects.get(codename="can_send_alerts"))
+        self.user.user_permissions.add(
+            Permission.objects.get(codename="can_send_alerts")
+        )
         self.login()
         response = self.client.get(reverse("landing"))
         self.assertEqual(response.status_code, 200)
