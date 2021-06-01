@@ -15,7 +15,7 @@ resource "aws_cloudwatch_metric_alarm" "qrcode_cpu_utilization_high_warn" {
   alarm_name          = "CpuUtilizationWarn_qrcode"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "2"
-  metric_name         = "CPUUtilization_qrcode"
+  metric_name         = "CPUUtilization"
   namespace           = "AWS/ECS"
   period              = "120"
   statistic           = "Average"
@@ -34,7 +34,7 @@ resource "aws_cloudwatch_metric_alarm" "qrcode_memory_utilization_high_warn" {
   alarm_name          = "MemoryUtilizationWarn_qrcode"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 2
-  metric_name         = "MemoryUtilization_qrcode"
+  metric_name         = "MemoryUtilization"
   namespace           = "AWS/ECS"
   period              = "120"
   statistic           = "Average"
