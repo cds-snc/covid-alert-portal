@@ -13,6 +13,11 @@ urlpatterns = [
         name="start",
     ),
     path(
+        "otk-start/",
+        login_required(otp_required(views.OTKStartView.as_view())),
+        name="otk_start",
+    ),
+    path(
         "generate-key/",
         login_required(
             otp_required(

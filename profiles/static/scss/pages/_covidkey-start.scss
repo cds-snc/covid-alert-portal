@@ -1,0 +1,55 @@
+.box-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  .box-button {
+    display: flex;
+    flex-direction: row;
+
+    border-style: solid;
+    border-width: 1px;
+    border-bottom-width: 5px;
+    border-radius: 10px;
+    border-color: #8A8A8A;
+    padding: $space-sm;
+    margin-bottom: $space-lg;
+
+    .box-button-column {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+    }
+
+    .box-button-row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      margin-bottom: $space-sm;
+      div {
+        font-size: .9em;
+      }
+      .with-chevron {
+        @include chevron();
+        font-size: 1.3em;
+        border-width: 0.1em 0.1em 0 0;
+        left: 0;
+      }
+    }
+
+    .box-detail {
+      font-size: .9em;
+    }
+  }
+}
+
+@include md {
+  .box-container {
+    flex-wrap: nowrap;
+    .box-button {
+      width: 50%;
+      margin-right: $space-md;
+    }
+  }
+}

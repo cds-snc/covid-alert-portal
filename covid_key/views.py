@@ -31,6 +31,15 @@ class StartView(TemplateView):
         return super().get(request)
 
 
+class OTKStartView(TemplateView):
+    template_name = "covid_key/otk_start.html"
+
+    def get(self, request):
+        # clear any existing one time keys
+        self.request.session.pop("otk", None)
+        return super().get(request)
+
+
 class SessionTemplateView(TemplateView):
     def get(self, request, **kwargs):
         if "otk" in self.request.session:
