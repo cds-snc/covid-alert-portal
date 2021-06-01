@@ -9,7 +9,11 @@
   <div class="content-back-link">
     <a href="{% url 'register:location_step' step='address' %}" class="chevron-left">{% trans "Back" %}</a>
   </div>
+  
   <h1>{% trans "No scanning yet in your area" %}</h1>
-  {% trans "People in your province or territory are not yet able to scan a QR code for COVID Alert.You can still make a poster with your code.  That way, you’ll be ready when people are able to scan these codes." %}
+  
+  <p>{% trans "People in your province or territory are not yet able to scan a QR code for COVID Alert." %}</p>
+  <p>{% trans "You can still make a poster with your code.  That way, you’ll be ready when people are able to scan these codes." %}</p>
+
   {% include "includes/cds_form.html" with submit_text=_("Next") %}  
 {% endblock %}
