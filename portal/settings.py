@@ -170,11 +170,13 @@ if APP_SWITCH != "QRCODE":
         "profiles.context_processors.general_settings",
     ]
     GA_ID = os.getenv("PORTAL_GA_ID", None)
+    OTP_NOTIFY_API_KEY = os.getenv("OTP_NOTIFY_API_KEY")
 else:
     TEMPLATES[0]["OPTIONS"]["context_processors"] += [
         "register.context_processors.general_settings",
     ]
     GA_ID = os.getenv("QRCODE_GA_ID", None)
+    OTP_NOTIFY_API_KEY = os.getenv("QRCODE_NOTIFY_API_KEY")
 
 AUTHENTICATION_BACKENDS = [
     "axes.backends.AxesBackend",  # Needs to be first
@@ -287,7 +289,6 @@ OTP_NOTIFY_ENDPOINT = (
     os.getenv("OTP_NOTIFY_ENDPOINT") or "https://api.notification.alpha.canada.ca"
 )
 NOTIFY_ENDPOINT = OTP_NOTIFY_ENDPOINT
-OTP_NOTIFY_API_KEY = os.getenv("OTP_NOTIFY_API_KEY")
 NOTIFY_API_KEY = OTP_NOTIFY_API_KEY
 OTP_NOTIFY_TEMPLATE_ID = "eac546b3-90c3-4834-82fb-7fb9be564c81"
 OTP_NOTIFY_TOKEN_VALIDITY = 90
@@ -368,14 +369,14 @@ CONFIRMATION_EMAIL_TEMPLATE_ID = {
 }
 
 REGISTER_EMAIL_CONFIRMATION_TEMPLATE_ID = {
-    "en": "69512434-970a-4504-8f0e-eaec81fa570b",
-    "fr": "719e51e3-5946-4699-b980-ce04dd2d6590",
+    "en": "9d9d1c72-f5b4-4172-801c-609cf79e48d1",
+    "fr": "cdcd493f-3451-4791-bd33-b681b33c2255",
 }
 
-ISED_TEMPLATE_ID = "fa50eed6-0948-45e0-979e-0ac4943b4635"
+ISED_TEMPLATE_ID = "445521ca-c16f-4df0-9e3f-6303dcfd905b"
 POSTER_LINKED_EMAIL_TEMPLATE_ID = {
-    "en": "79b032d6-34f7-4410-9f6e-764a7aea9735",
-    "fr": "66804d87-3174-48a4-b796-7d268e1e0d79",
+    "en": "e772cb6a-7e01-4f25-91e2-8738204c6c5a",
+    "fr": "2e44064d-ca04-4002-a7e1-3d873861c5f7",
 }
 
 # QRCode signing key
