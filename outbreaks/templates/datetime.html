@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-{% load i18n static form_date %}
+{% load i18n static form_date show_error %}
 
 {% block title %}
-  {% trans "Select date and time" %}
+  {% trans "Choose date and time" %}
 {% endblock %}
 
 {% block content %}
@@ -19,8 +19,8 @@
             <li class="warning"><b> {{ err.message }} </b></li>
           {% endfor %}
           <li class="warning">
-            {% trans "To see all public exposures for this place, visit" %} <a
-            href="{% url 'outbreaks:history' %}">‘{% trans "Notification history" %}’</a>
+            {% trans "To check all alerts for this place or event, visit " %} <a
+            href="{% url 'outbreaks:history' %}">‘{% trans "Alert history" %}’</a>
           </li>
         </ul>
       </div>
@@ -46,9 +46,10 @@
     {% endif %}
   {% endif %}
 
-  <h1>{% trans "Select date and time" %}</h1>
+  <h1>{% trans "Choose date and time" %}</h1> 
 
-  <p>{% trans "We’ll notify people who scanned the QR code on that date. Remember to add all dates of this public exposure." %}</p>
+  <p>{% trans "You’ll alert people who scanned the QR code on that date and time." %}</p>
+  <p>{% trans "Enter all dates and times you want to add for this place or event." %}</p>
 
   <form method="post" id="form--{{ request.resolver_match.url_name }}" class="outbreaks-datetime">
     {% csrf_token %}
@@ -63,7 +64,7 @@
         {% endif %}">
 
           {% if form.non_field_errors and show_errors %}
-            <div id="error--{{ form.html_name }}-{{ group }}" class="validation-error"> {{ form.error }} </div>
+            <div id="error--{{ form.html_name }}-{{ group }}" class="validation-error"> {{ form.non_field_errors|show_error }} </div>
           {% endif %}
 
           <div class="row">
@@ -80,7 +81,7 @@
               {{ form.year }}
             </div>
             <div class="col">
-              <button type="button" class="link" id="button_datepicker">{% trans "Select date" %}
+              <button type="button" class="link" id="button_datepicker">{% trans "Choose date" %}
                 <img src="{% static 'img/calendar_today_24px.svg' %}" alt=""/>
               </button>
               <duet-date-picker
@@ -147,7 +148,7 @@
         <thead>
         <tr>
           <th>
-            {{ _("Selected dates") }}
+            {{ _("Exposure dates") }}
           </th>
           <th>
             <span class="visually-hidden">{{ _("Delete selected date") }}</span>

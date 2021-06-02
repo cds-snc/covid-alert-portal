@@ -45,7 +45,7 @@
         <div class="summary-list__row">
             <dt class="summary-list__key">{% trans "Number of prior alerts" %}</dt>
             <dd class="summary-list__value">{{ num_notifications }}</dd>
-            <dd class="summary-list__actions"><a href="{% url 'outbreaks:location_history' location.id %}">Show history</a></dd>
+            <dd class="summary-list__actions"><a href="{% url 'outbreaks:location_history' location.id %}">{% trans "Show history" %}</a></dd>
         </div>
     </dl>
 

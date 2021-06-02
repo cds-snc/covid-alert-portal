@@ -28,6 +28,7 @@ env:
   TF_VAR_rds_server_db_password: ${{ secrets.DB_PASSWORD }}
   TF_VAR_slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
   TF_VAR_ecs_secret_qrcode_signature_private_key: ${{ secrets.QRCODE_SIGNATURE_PRIVATE_KEY }}
+  TF_VAR_ecs_secret_qrcode_notify_api_key: ${{ secrets.QRCODE_NOTIFY_API_KEY }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
@@ -62,7 +63,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Terraform security scan
-        uses: triat/terraform-security-scan@v2.0.2
+        uses: triat/terraform-security-scan@v2.2.3
         with:
           tfsec_actions_working_dir: ./config/terraform/aws
         env:

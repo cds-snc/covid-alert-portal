@@ -116,6 +116,10 @@ variable "ecs_secret_qrcode_signature_private_key" {
   type = string
 }
 
+variable "ecs_secret_qrcode_notify_api_key" {
+  type = string
+}
+
 # Task Covid Portal Env Vars
 
 variable "django_env" {
