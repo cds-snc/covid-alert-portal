@@ -48,7 +48,7 @@ class SessionTemplateView(TemplateView):
             return super().get(request, kwargs)
         else:
             # if we don't have a cached OTK then redirect back to the start
-            return redirect("start")
+            return redirect("landing")
 
 
 class CodeView(Is2FAMixin, ThrottledMixin, SessionTemplateView):
@@ -164,7 +164,7 @@ class OtkSmsView(PermissionRequiredMixin, FormView, SessionTemplateView):
         Override here to redirect back to start when users are from
         a province that disallows SMS
         """
-        return redirect(reverse_lazy("start"))
+        return redirect(reverse_lazy("landing"))
 
     def get_success_url(self):
         return reverse_lazy("otk_sms_sent", kwargs={"phone_number": self.phone_number})
@@ -187,14 +187,14 @@ class OtkSmsSentView(PermissionRequiredMixin, FormView, SessionTemplateView):
 
     def __init__(self):
         super().__init__()
-        self.redirect_choice = "start"
+        self.redirect_choice = "landing"
 
     def handle_no_permission(self):
         """
         Override here to redirect back to start when users are from
         a province that disallows SMS
         """
-        return redirect(reverse_lazy("start"))
+        return redirect(reverse_lazy("landing"))
 
     def get_success_url(self):
         return reverse_lazy(self.redirect_choice)
