@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 19:44+0000\n"
+"POT-Creation-Date: 2021-06-02 15:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2248,7 +2248,7 @@ msgstr "Commerces (épiceries, magasins de vins et spiritueux, pharmacies, etc.)
 
 #: register/forms.py
 msgid "Medical centres, such as doctor or dentist offices"
-msgstr "Centres et cabinets médicaux, dentaires, etc"
+msgstr "Centres et cabinets médicaux, dentaires, etc."
 
 #: register/forms.py
 msgid "Community centres, libraries, government service centres"
@@ -2381,7 +2381,7 @@ msgstr "Autre chose."
 
 #: register/forms.py
 msgid "Tell us more about the issue"
-msgstr "Dites-nous en plus sur le problème"
+msgstr "Dites-nous en plus sur le problème rencontré"
 
 #: register/forms.py
 msgid "We'll use this if we need to contact you. We will not use your email address for anything else."
@@ -2439,7 +2439,7 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"      <p>Nous enverrons votre affiche à %(email)s</p>\n"
+"      <p>Nous enverrons aussi l’affiche à %(email)s</p>\n"
 "    "
 
 #: register/templates/register/confirmation.html
@@ -2452,12 +2452,12 @@ msgstr "Créer une autre affiche"
 
 #: register/templates/register/confirmation.html
 msgid "Display your poster"
-msgstr "Où placer votre affiche"
+msgstr "Placez votre affiche"
 
 #: register/templates/register/confirmation.html
 #: register/templates/register/how_display_poster.html
 msgid "At each entrance and inside."
-msgstr "À chaque entrée et à l’intérieur."
+msgstr "À chaque porte d’entrée et à l’intérieur."
 
 #: register/templates/register/confirmation.html
 #: register/templates/register/how_display_poster.html
@@ -2501,8 +2501,8 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    <p>Consultez la page <a href=\"%(helplink)s\">Aide pour votre affiche</a></p>\n"
-"    <p>Sinon, <a href=\"%(contactlink)s\">contactez-nous</a></p>\n"
+"    <p>Obtenez plus d’information sur les <a href=\"%(helplink)s\">affiches Alerte COVID.</a></p>\n"
+"    <p>Sinon, <a href=\"%(contactlink)s\">contactez-nous.</a></p>\n"
 "    "
 
 #: register/templates/register/contact_us.html
@@ -2531,7 +2531,7 @@ msgstr ""
 "\n"
 "  <p>Téléphone : 1-833-694-1709<br>\n"
 "  Téléimprimeur (ATS) : 1-866-694-8389<br>\n"
-"  Heures de service : du lundi au vendredi de 8 h 30 à 17 h HE</p>\n"
+"  Heures de service : du lundi au vendredi de 8 h 30 à 17 h (heure de l’Est)</p>\n"
 "  "
 
 #: register/templates/register/contact_us.html
@@ -2594,7 +2594,7 @@ msgstr "Pour de l’aide supplémentaire"
 
 #: register/templates/register/help_page.html
 msgid "Contact poster support"
-msgstr "Contactez-nous."
+msgstr "Contactez-nous"
 
 #: register/templates/register/help_page.html
 msgid "For help with the app"
@@ -2602,11 +2602,11 @@ msgstr "Pour de l’aide relative à l’application"
 
 #: register/templates/register/help_page.html
 msgid "Contact app support"
-msgstr "Contacter le soutien direct."
+msgstr "Contactez le soutien pour l’application."
 
 #: register/templates/register/help_page.html
 msgid "Read about common support issues"
-msgstr "Consulter les problèmes fréquents."
+msgstr "Consultez les problèmes fréquents."
 
 #: register/templates/register/how_display_poster.html
 #: register/templates/register/privacy.html
@@ -2879,8 +2879,8 @@ msgstr ""
 "          Loi sur le ministère de la Santé</a>\n"
 "        et la\n"
 "        <a href=\"https://laws-lois.justice.gc.ca/eng/acts/f-11/\" target=\"_blank\">\n"
-"          Loi sur la gestion des finances publiques</a>\n"
-"        . Nous respectons aussi la\n"
+"          Loi sur la gestion des finances publiques</a>.\n"
+"         Nous respectons aussi la\n"
 "        <a href=\"https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=26761\" target=\"_blank\">\n"
 "          Norme sur la protection de la vie privée et le Web analytique</a>.\n"
 "      "
@@ -2895,11 +2895,11 @@ msgstr "Contactez la coordonnatrice de l’accès à l’information et de la pr
 
 #: register/templates/register/privacy.html
 msgid "Email"
-msgstr "Courriel"
+msgstr "Courriel "
 
 #: register/templates/register/privacy.html
 msgid "Phone"
-msgstr "Téléphone"
+msgstr "Téléphone "
 
 #: register/templates/register/privacy.html
 msgid "Teletypewriter through Service Canada: 1-800-465-7735"
@@ -3009,7 +3009,7 @@ msgstr ""
 "\n"
 "    <p>\n"
 "      Les visiteurs scanneront le code QR de l’affiche pour ajouter une visite avec\n"
-"      <a href=\"https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html\" target=\"_blank\">\n"
+"      <a href=\"https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid.html\" target=\"_blank\">\n"
 "        l’application Alerte COVID</a>.\n"
 "      Nous pourrons ensuite les aviser s’ils ont été exposés au virus pendant leur visite.\n"
 "    </p>\n"
@@ -3120,7 +3120,7 @@ msgstr "En utilisant le site Web, "
 
 #: register/templates/register/terms.html
 msgid "you’re a person who’s responsible for making a poster for a place or event."
-msgstr "En utilisant le site Web, vous acceptez d’être la personne responsable de créer une affiche pour un lieu ou un événement."
+msgstr "vous acceptez d’être la personne responsable de créer une affiche pour un lieu ou un événement."
 
 #: register/templates/register/terms.html
 msgid "You also agree that you’ll:"
@@ -3176,7 +3176,7 @@ msgstr ""
 
 #: register/templatetags/location_type_str.py
 msgid "Address of place"
-msgstr "Adresse de du lieu"
+msgstr "Adresse du lieu"
 
 #: register/templatetags/location_type_str.py
 msgid "Address of event"
@@ -3192,7 +3192,7 @@ msgstr "Nom du lieu"
 
 #: register/templatetags/location_type_str.py
 msgid "Name of event"
-msgstr "Nom de de l’événement"
+msgstr "Nom de l’événement"
 
 #: register/templatetags/location_type_str.py
 msgid "Name of place or event"
