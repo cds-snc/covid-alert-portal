@@ -5,9 +5,9 @@
     <ul>
       {% if user.is_verified %}
         {% if perms.profiles.can_send_alerts%}
-        <li><a {% if request.resolver_match.url_name == 'landing' %}class="active"{% endif %} href="{% url 'landing' %}">{% trans "Home" %}</a></li>
-          {% endif %}
-        <li><a {% if request.resolver_match.url_name == 'start' or request.resolver_match.url_name == 'generate_key' %}class="active"{% endif %} href="{% url 'start' %}">{% trans "Generate keys" %}</a></li>
+        <li><a {% if request.resolver_match.url_name == 'start' %}class="active"{% endif %} href="{% url 'start' %}">{% trans "Home" %}</a></li>
+        {% endif %}
+        <li><a {% if request.resolver_match.url_name == 'otk_start' or request.resolver_match.url_name == 'generate_key' %}class="active"{% endif %} href="{% url 'otk_start' %}">{% trans "Generate keys" %}</a></li>
       {% endif %}
       {% switch "qr_codes" %}
         {% if perms.profiles.can_send_alerts and user.is_verified %}

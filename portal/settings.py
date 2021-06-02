@@ -283,7 +283,7 @@ AUTH_USER_MODEL = "profiles.HealthcareUser"
 LOGIN_URL = "login"
 OTP_LOGIN_URL = "login_2fa"
 
-LOGIN_REDIRECT_URL = "landing"
+LOGIN_REDIRECT_URL = "start"
 LOGOUT_REDIRECT_URL = "login"
 OTP_NOTIFY_ENDPOINT = (
     os.getenv("OTP_NOTIFY_ENDPOINT") or "https://api.notification.alpha.canada.ca"

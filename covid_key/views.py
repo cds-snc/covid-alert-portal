@@ -23,17 +23,17 @@ from .models import COVIDKey
 logger = logging.getLogger(__name__)
 
 
-class PortalLandingView(TemplateView):
+class StartLandingView(TemplateView):
     template_name = "covid_key/landing.html"
 
     def get(self, request):
         if not request.user.can_send_alerts:
-            return HttpResponseRedirect(reverse_lazy("start"))
+            return HttpResponseRedirect(reverse_lazy("otk_start"))
         return super().get(request)
 
 
 class OTKStartView(TemplateView):
-    template_name = "covid_key/start.html"
+    template_name = "covid_key/otk_start.html"
 
     def get(self, request):
         # clear any existing one time keys
@@ -48,7 +48,7 @@ class SessionTemplateView(TemplateView):
             return super().get(request, kwargs)
         else:
             # if we don't have a cached OTK then redirect back to the start
-            return redirect("landing")
+            return redirect("start")
 
 
 class CodeView(Is2FAMixin, ThrottledMixin, SessionTemplateView):
@@ -164,7 +164,7 @@ class OtkSmsView(PermissionRequiredMixin, FormView, SessionTemplateView):
         Override here to redirect back to start when users are from
         a province that disallows SMS
         """
-        return redirect(reverse_lazy("landing"))
+        return redirect(reverse_lazy("start"))
 
     def get_success_url(self):
         return reverse_lazy("otk_sms_sent", kwargs={"phone_number": self.phone_number})
@@ -187,14 +187,14 @@ class OtkSmsSentView(PermissionRequiredMixin, FormView, SessionTemplateView):
 
     def __init__(self):
         super().__init__()
-        self.redirect_choice = "landing"
+        self.redirect_choice = "otk_start"
 
     def handle_no_permission(self):
         """
         Override here to redirect back to start when users are from
         a province that disallows SMS
         """
-        return redirect(reverse_lazy("landing"))
+        return redirect(reverse_lazy("otk_start"))
 
     def get_success_url(self):
         return reverse_lazy(self.redirect_choice)

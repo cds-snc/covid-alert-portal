@@ -4,6 +4,7 @@ from django.conf import settings
 from django.test import TestCase, Client, override_settings
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Permission
 from django.utils import translation, timezone
 from django.utils.translation import activate
 from django.core.exceptions import ValidationError
@@ -114,6 +115,9 @@ class AdminUserTestCase(TestCase):
 
         self.invited_email = "invited@test.com"
         AuthorizedDomain.objects.create(domain="test.com")
+
+        if is_admin:
+            self.user.user_permissions.add(Permission.objects.get(codename="can_send_alerts"))
 
     def login(self, credentials: dict = None, login_2fa: bool = True):
         if credentials is None:
@@ -361,35 +365,35 @@ class AuthenticatedView(AdminUserTestCase):
 
     def test_1hour_inactivity(self):
         self.login()
-        response = self.client.get(reverse("start"))
+        response = self.client.get(reverse("otk_start"))
         self.assertEqual(response.status_code, 200)
         now = datetime.now()
         expiry = now + timedelta(seconds=settings.SESSION_COOKIE_AGE + 1)
         with freeze_time(expiry):
-            response = self.client.get(reverse("start"))
-            self.assertRedirects(response, "/en/login/?next=/en/start/")
+            response = self.client.get(reverse("otk_start"))
+            self.assertRedirects(response, "/en/login/?next=/en/otk-start/")
 
     def test_1hour_with_activity(self):
         self.login()
-        response = self.client.get(reverse("start"))
+        response = self.client.get(reverse("otk_start"))
         self.assertEqual(response.status_code, 200)
         now = datetime.now()
         # 30 minutes
         expiry = now + timedelta(seconds=settings.SESSION_COOKIE_AGE / 2)
         with freeze_time(expiry):
-            response = self.client.get(reverse("start"))
+            response = self.client.get(reverse("otk_start"))
             self.assertEqual(response.status_code, 200)
 
         # 1 hour + 1 second from original request
         expiry2 = now + timedelta(seconds=settings.SESSION_COOKIE_AGE + 1)
         with freeze_time(expiry2):
-            response = self.client.get(reverse("start"))
+            response = self.client.get(reverse("otk_start"))
             self.assertEqual(response.status_code, 200)
 
         # 2h + 2 sec
         expiry3 = now + timedelta(seconds=(settings.SESSION_COOKIE_AGE * 2) + 2)
         with freeze_time(expiry3):
-            response = self.client.get(reverse("start"))
+            response = self.client.get(reverse("otk_start"))
             self.assertEqual(response.status_code, 302)
 
     def test_session_timed_out_message(self):
@@ -942,7 +946,7 @@ class ProfilesView(AdminUserTestCase):
     def test_manage_accounts_link_visible_if_logged_in(self):
         self.login()
 
-        response = self.client.get(reverse("start"))
+        response = self.client.get(reverse("otk_start"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response, '<a  href="{}">Manage team</a>'.format(reverse("profiles"))
