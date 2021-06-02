@@ -117,7 +117,9 @@ class AdminUserTestCase(TestCase):
         AuthorizedDomain.objects.create(domain="test.com")
 
         if is_admin:
-            self.user.user_permissions.add(Permission.objects.get(codename="can_send_alerts"))
+            self.user.user_permissions.add(
+                Permission.objects.get(codename="can_send_alerts")
+            )
 
     def login(self, credentials: dict = None, login_2fa: bool = True):
         if credentials is None:
