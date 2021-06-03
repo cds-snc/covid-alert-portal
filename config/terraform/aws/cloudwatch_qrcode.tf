@@ -15,7 +15,7 @@ resource "aws_cloudwatch_metric_alarm" "qrcode_cpu_utilization_high_warn" {
   alarm_name          = "CpuUtilizationWarn_qrcode"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "2"
-  metric_name         = "CPUUtilization_qrcode"
+  metric_name         = "CPUUtilization"
   namespace           = "AWS/ECS"
   period              = "120"
   statistic           = "Average"
@@ -34,7 +34,7 @@ resource "aws_cloudwatch_metric_alarm" "qrcode_memory_utilization_high_warn" {
   alarm_name          = "MemoryUtilizationWarn_qrcode"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 2
-  metric_name         = "MemoryUtilization_qrcode"
+  metric_name         = "MemoryUtilization"
   namespace           = "AWS/ECS"
   period              = "120"
   statistic           = "Average"
@@ -89,7 +89,7 @@ resource "aws_cloudwatch_log_metric_filter" "application_error_qrcode" {
   log_group_name = aws_cloudwatch_log_group.qrcode.name
 
   metric_transformation {
-    name          = "ApplicationError"
+    name          = "ApplicationError_qrcode"
     namespace     = "qrcode"
     value         = "1"
     default_value = "0"
@@ -97,7 +97,7 @@ resource "aws_cloudwatch_log_metric_filter" "application_error_qrcode" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "application_error_warn_qrcode" {
-  alarm_name          = "ApplicationError_qrcode"
+  alarm_name          = "ApplicationErrorWarn_qrcode"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
   metric_name         = aws_cloudwatch_log_metric_filter.application_error_qrcode.name
