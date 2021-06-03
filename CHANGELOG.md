@@ -8,7 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 - Remove Basicauth
 
-
 ## [2.1.0] - 2021-06-01
 
 ## Updated
@@ -21,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Content updates throughout
 - Updated poster and instructions
 - Phone number validation
+- Updated Portal start screen and navigation
 
 ## [2.0.3] - 2021-05-14
 
