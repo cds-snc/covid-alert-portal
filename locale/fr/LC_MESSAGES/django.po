@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-02 15:17+0000\n"
+"POT-Creation-Date: 2021-06-03 07:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -209,11 +209,42 @@ msgid "Sending alerts"
 msgstr "Envoi d’alertes"
 
 #: about/templates/about/5_help_patient_enter_key.html
+#: about/templates/about/6_admin_accounts.html
 #: about/templates/about/6_sending_qr_alerts.html
 #: about/templates/about/7_admin_accounts.html
 #: about/templates/includes/_nav_about.html
 msgid "Admin accounts"
 msgstr "Comptes administrateurs"
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Both administrators and team members can generate one-time keys."
+msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Administrators can also:"
+msgstr "Les administrateurs peuvent aussi :"
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Invite team members to create portal accounts."
+msgstr "Inviter des membres à se créer un compte pour le portail."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Make changes or update information in team member accounts."
+msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Delete portal accounts."
+msgstr "Supprimer des comptes."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Give log in codes to team members who are locked out of the portal."
+msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "Sending QR alerts"
@@ -269,30 +300,6 @@ msgstr "Vous verrez une confirmation que l’alerte a été envoyée"
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "Health authorities continue to manually contact visitors who do not scan QR codes."
 msgstr "Les autorités sanitaires continueront de contacter manuellement les visiteurs qui ne scannent pas les codes QR."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Both administrators and team members can generate one-time keys."
-msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Administrators can also:"
-msgstr "Les administrateurs peuvent aussi :"
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Invite team members to create portal accounts."
-msgstr "Inviter des membres à se créer un compte pour le portail."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Make changes or update information in team member accounts."
-msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Delete portal accounts."
-msgstr "Supprimer des comptes."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Give log in codes to team members who are locked out of the portal."
-msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
 
 #: about/templates/includes/_nav_about.html
 msgid "Table of contents: About the Portal"
@@ -583,9 +590,9 @@ msgid "When patient is ready, generate a key"
 msgstr "Si le patient est prêt, générez une clé"
 
 #: covid_key/templates/covid_key/generate_key.html
-#: outbreaks/templates/confirm.html outbreaks/templates/datetime.html
-#: outbreaks/templates/details.html outbreaks/templates/location_history.html
-#: outbreaks/templates/profile.html outbreaks/templates/severity.html
+#: outbreaks/templates/confirm.html outbreaks/templates/details.html
+#: outbreaks/templates/location_history.html outbreaks/templates/profile.html
+#: outbreaks/templates/severity.html
 #: register/templates/register/location_address.html
 #: register/templates/register/location_category.html
 #: register/templates/register/location_contact.html
@@ -853,6 +860,10 @@ msgstr "Consulter l’historique des notifications"
 msgid "Choose date and time"
 msgstr "Indiquer la date et l’heure"
 
+#: outbreaks/templates/datetime.html outbreaks/templates/profile.html
+msgid "Details of place or event"
+msgstr "Renseignements sur le lieu ou l’événement"
+
 #: outbreaks/templates/datetime.html
 msgid "To check all alerts for this place or event, visit "
 msgstr "Pour voir les expositions publiques passées de ce lieu consultez"
@@ -1028,10 +1039,6 @@ msgstr "Trier par émetteur, ordre alphabétique"
 #: outbreaks/templates/location_history.html
 msgid "Sort by sender, descending"
 msgstr "Trier par émetteur, ordre alphabétique inverse"
-
-#: outbreaks/templates/profile.html
-msgid "Details of place or event"
-msgstr "Renseignements sur le lieu ou l’événement"
 
 #: outbreaks/templates/profile.html
 msgid "Contact name"
