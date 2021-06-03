@@ -20,12 +20,12 @@ urlpatterns = [
         name="location_history",
     ),
     path(
-        "datetime",
+        "<uuid:pk>/datetime",
         views.DatetimeView.as_view(),
         name="datetime",
     ),
     path(
-        "datetime/<int:idx>/delete",
+        "<uuid:pk>/datetime/<int:idx>/delete",
         views.DatetimeView.as_view(),
         name="datetime_delete",
     ),
