@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-02 15:17+0000\n"
+"POT-Creation-Date: 2021-06-03 02:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -209,11 +209,42 @@ msgid "Sending alerts"
 msgstr "Envoi d’alertes"
 
 #: about/templates/about/5_help_patient_enter_key.html
+#: about/templates/about/6_admin_accounts.html
 #: about/templates/about/6_sending_qr_alerts.html
 #: about/templates/about/7_admin_accounts.html
 #: about/templates/includes/_nav_about.html
 msgid "Admin accounts"
 msgstr "Comptes administrateurs"
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Both administrators and team members can generate one-time keys."
+msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Administrators can also:"
+msgstr "Les administrateurs peuvent aussi :"
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Invite team members to create portal accounts."
+msgstr "Inviter des membres à se créer un compte pour le portail."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Make changes or update information in team member accounts."
+msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Delete portal accounts."
+msgstr "Supprimer des comptes."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Give log in codes to team members who are locked out of the portal."
+msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "Sending QR alerts"
@@ -269,30 +300,6 @@ msgstr "Vous verrez une confirmation que l’alerte a été envoyée"
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "Health authorities continue to manually contact visitors who do not scan QR codes."
 msgstr "Les autorités sanitaires continueront de contacter manuellement les visiteurs qui ne scannent pas les codes QR."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Both administrators and team members can generate one-time keys."
-msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Administrators can also:"
-msgstr "Les administrateurs peuvent aussi :"
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Invite team members to create portal accounts."
-msgstr "Inviter des membres à se créer un compte pour le portail."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Make changes or update information in team member accounts."
-msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Delete portal accounts."
-msgstr "Supprimer des comptes."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Give log in codes to team members who are locked out of the portal."
-msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
 
 #: about/templates/includes/_nav_about.html
 msgid "Table of contents: About the Portal"
@@ -701,11 +708,11 @@ msgstr "Consultez la page"
 msgid "Something went wrong. Contact your administrator."
 msgstr "Une erreur est survenue. Veuillez contacter votre admistrateur du portail."
 
-#: outbreaks/forms.py
+#: outbreaks/forms.py outbreaks/models.py
 msgid "Isolate and get tested"
 msgstr "Isolez-vous et passez un test"
 
-#: outbreaks/forms.py
+#: outbreaks/forms.py outbreaks/models.py
 msgid "Self-monitor for 14 days"
 msgstr "Surveillez vos symptômes pendant 14 jours"
 
@@ -755,6 +762,10 @@ msgstr "Si vous développez des symptômes, passez un test de dépistage et isol
 
 #: outbreaks/forms.py
 msgid "Enter the name or address."
+msgstr ""
+
+#: outbreaks/models.py
+msgid "Deprecated Severity"
 msgstr ""
 
 #: outbreaks/templates/confirm.html
