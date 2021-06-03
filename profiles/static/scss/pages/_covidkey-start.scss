@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 
   a {
     text-decoration: none;
@@ -35,6 +36,11 @@
       div {
         font-size: .9em;
       }
+      h2 {
+        margin-block-end: 0;
+        margin-block-start: 0;
+        font-size: 1.1em;
+      }
       .with-chevron {
         @include chevron();
         font-size: 1.3em;
@@ -53,11 +59,7 @@
   .box-container {
     flex-wrap: nowrap;
     a {
-      max-width: 50%;
-    }
-    .box-button {
-      //width: 50%;
-      margin-right: $space-md;
+      max-width: 49%;
     }
   }
 }
