@@ -169,6 +169,31 @@ resource "aws_wafv2_web_acl" "covidportal_acl" {
     }
   }
 
+  rule {
+    name     = "CanadaOnlyGeoRestriction"
+    priority = 5
+
+    action {
+      block {}
+    }
+
+    statement {
+      not_statement {
+        statement {
+          geo_match_statement {
+            country_codes = ["CA"]
+          }
+        }
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "CanadaOnlyGeoRestriction"
+      sampled_requests_enabled   = true
+    }
+  }
+
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
   }
