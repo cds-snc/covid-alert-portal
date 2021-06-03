@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated poster and instructions
 - Phone number validation
 - Updated Portal start screen and navigation
+- Split notify service for different notify services in portal and qrposter
+- Change rounding of datetime wizard values in minutes
+- New privacy and ToU pages
+- Google analytics separate between environments and portal / qrposter
 
 ## [2.0.3] - 2021-05-14
 
