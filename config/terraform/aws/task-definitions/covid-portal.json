@@ -94,6 +94,10 @@
       {
         "name": "QRCODE_SIGNATURE_PRIVATE_KEY",
         "valueFrom": "${qrcode_signature_private_key}"
+      },
+      {
+        "name": "QRCODE_NOTIFY_API_KEY",
+        "valueFrom": "${qrcode_notify_api_key}"
       }
     ]
   }

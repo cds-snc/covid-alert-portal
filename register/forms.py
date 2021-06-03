@@ -203,9 +203,9 @@ class ContactUsForm(HealthcareBaseForm, forms.Form):
     help_category = forms.ChoiceField(
         label="",
         choices=[
-            ("get_help", _("Get Help.")),
-            ("give_feedback", _("Give Feedback.")),
-            ("something_else", _("Something Else.")),
+            ("get_help", _("Get help.")),
+            ("give_feedback", _("Give feedback.")),
+            ("something_else", _("Something else.")),
         ],
         widget=CDSRadioWidget(attrs={"class": "multichoice-radio"}),
     )
