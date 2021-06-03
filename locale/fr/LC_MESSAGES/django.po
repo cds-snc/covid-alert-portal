@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-02 15:17+0000\n"
+"POT-Creation-Date: 2021-06-03 04:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -307,6 +307,7 @@ msgstr "Table des matières: Le portail"
 
 #: about/templates/includes/nav_about.html
 #: covid_key/templates/covid_key/landing.html
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 #: portal/templates/includes/footer.html
 msgid "About the portal"
@@ -557,10 +558,9 @@ msgstr "Merci de nous avoir contactés."
 msgid "We’ll reply as soon as possible."
 msgstr "Nous vous répondrons le plus rapidement possible."
 
-#: contact/templates/contact/success.html portal/templates/403.html
-#: portal/templates/404.html
-msgid "New patient"
-msgstr "Nouveau patient"
+#: contact/templates/contact/success.html
+msgid "Return home"
+msgstr "Revenir à l’accueil"
 
 #: covid_key/forms.py
 msgid "Phone numbers must match"
@@ -658,12 +658,14 @@ msgid "Send alerts of a possible exposure to people who scanned a QR code poster
 msgstr "Envoyez une alerte aux personnes qui ont scanné le code QR d’un lieu ou d’un événement pendant un risque d’exposition."
 
 #: covid_key/templates/covid_key/landing.html
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html outbreaks/templates/history.html
 #: outbreaks/templates/search.html
 msgid "New or need a refresher?"
 msgstr "Besoin d’en savoir plus sur le portail?"
 
 #: covid_key/templates/covid_key/landing.html
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html outbreaks/templates/history.html
 #: outbreaks/templates/search.html
 msgid "Visit"
@@ -703,26 +705,32 @@ msgstr "Le message texte met environ 30 secondes pour arriver."
 msgid "Did %(phone_number)s get the key?"
 msgstr "La clé a-t-elle été reçue au numéro %(phone_number)s?"
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "You’re logged in to give one-time keys"
 msgstr "Vous pouvez maintenant fournir des clés"
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "Patients need a key if they’ve:"
 msgstr "Un patient peut recevoir une clé si :"
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "Tested positive for COVID-19, <strong>and</strong>,"
 msgstr "D’une part, il a reçu un résultat positif de COVID-19."
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "Installed the COVID Alert app on their phone."
 msgstr "D’autre part, il a l’application Alerte COVID sur son téléphone."
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "Does this patient meet both conditions?"
 msgstr "Le patient remplit-il les deux conditions?"
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "Yes, continue"
 msgstr "Oui, continuer"
@@ -1158,6 +1166,10 @@ msgstr "Non autorisé"
 #: portal/templates/403.html register/templates/register/403.html
 msgid "You do not have permission to visit this page."
 msgstr "Vous n’avez pas l’autorisation de visiter la page."
+
+#: portal/templates/403.html portal/templates/404.html
+msgid "Start again"
+msgstr "Recommencer"
 
 #: portal/templates/403_csrf.html
 msgid "Forbidden"
@@ -3236,3 +3248,6 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "New patient"
+#~ msgstr "Nouveau patient"
