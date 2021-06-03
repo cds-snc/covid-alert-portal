@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-03 02:10+0000\n"
+"POT-Creation-Date: 2021-06-03 02:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2620,8 +2620,6 @@ msgid "Read about common support issues"
 msgstr "Consultez les problèmes fréquents."
 
 #: register/templates/register/how_display_poster.html
-#: register/templates/register/privacy.html
-#: register/templates/register/terms.html
 msgid "How to display your COVID Alert poster"
 msgstr "Comment placer votre affiche Alerte COVID"
 
