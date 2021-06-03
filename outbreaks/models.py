@@ -5,7 +5,11 @@ from profiles.models import HealthcareUser
 from register.models import Location
 
 
-SEVERITY = [("1", _("Isolate and get tested")), ("2", _("Self-monitor for 14 days")), ("3", _("Deprecated Severity"))]
+SEVERITY = [
+    ("1", _("Isolate and get tested")),
+    ("2", _("Self-monitor for 14 days")),
+    ("3", _("Deprecated Severity")),
+]
 
 
 class Notification(models.Model):
