@@ -1344,7 +1344,7 @@ msgstr "Navigation du produit"
 #: register/templates/register/privacy.html
 #: register/templates/register/terms.html
 msgid "Home"
-msgstr ""
+msgstr "Accueil"
 
 #: portal/templates/includes/nav_main.html
 msgid "Generate keys"
