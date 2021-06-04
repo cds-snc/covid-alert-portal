@@ -739,11 +739,11 @@ msgstr "Oui, continuer"
 msgid "Something went wrong. Contact your administrator."
 msgstr "Une erreur est survenue. Veuillez contacter votre admistrateur du portail."
 
-#: outbreaks/forms.py
+#: outbreaks/forms.py outbreaks/models.py
 msgid "Isolate and get tested"
 msgstr "Isolez-vous et passez un test"
 
-#: outbreaks/forms.py
+#: outbreaks/forms.py outbreaks/models.py
 msgid "Self-monitor for 14 days"
 msgstr "Surveillez vos symptômes pendant 14 jours"
 
@@ -793,6 +793,10 @@ msgstr "Si vous développez des symptômes, passez un test de dépistage et isol
 
 #: outbreaks/forms.py
 msgid "Enter the name or address."
+msgstr ""
+
+#: outbreaks/models.py
+msgid "Deprecated Severity"
 msgstr ""
 
 #: outbreaks/templates/confirm.html
@@ -2652,8 +2656,6 @@ msgid "Read about common support issues"
 msgstr "Consultez les problèmes fréquents."
 
 #: register/templates/register/how_display_poster.html
-#: register/templates/register/privacy.html
-#: register/templates/register/terms.html
 msgid "How to display your COVID Alert poster"
 msgstr "Comment placer votre affiche Alerte COVID"
 
