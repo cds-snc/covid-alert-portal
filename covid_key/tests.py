@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django_otp import DEVICE_ID_SESSION_KEY
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Permission
 from django.conf import settings
 
 from profiles.models import HealthcareUser, HealthcareProvince
@@ -26,13 +27,32 @@ class CovidKeyConfigTest(TestCase):
         self.assertEqual(apps.get_app_config("covid_key").name, "covid_key")
 
 
+class LandingView(AdminUserTestCase):
+    def setUp(self):
+        super().setUp(is_admin=True)
+        self.user2_credentials = get_other_credentials(is_admin=False)
+        self.user2 = User.objects.create_user(**self.user2_credentials)
+
+    def test_landing_view_with_alert_perm(self):
+        self.login()
+        response = self.client.get(reverse("start"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Welcome to the COVID Alert portal</h1>")
+
+    def test_landing_view_without_alert_perm(self):
+        self.login(self.user2_credentials)
+        response = self.client.get(reverse("start"))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse("otk_start"))
+
+
 class StartView(AdminUserTestCase):
     def setUp(self):
         super().setUp()
 
     def test_start_view(self):
         self.login()
-        response = self.client.get(reverse("start"))
+        response = self.client.get(reverse("otk_start"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "<h1>You’re logged in to give one-time keys</h1>")
 
@@ -70,7 +90,7 @@ class KeyView(AdminUserTestCase):
 
         response = self.client.get(reverse("key"))
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, "/en/start/")
+        self.assertRedirects(response, "/en/start/", target_status_code=302)
 
     @override_settings(COVID_KEY_MAX_PER_USER=1)
     def test_key_throttled(self):
@@ -112,7 +132,7 @@ class KeyView(AdminUserTestCase):
         self.login(user2_credentials)
         response = self.client.get(reverse("key"))
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, "/en/start/")
+        self.assertRedirects(response, "/en/start/", target_status_code=302)
         CodeView.throttled_limit = previous_throttled_value
 
 

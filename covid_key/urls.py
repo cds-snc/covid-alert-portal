@@ -9,8 +9,13 @@ urlpatterns = [
     path("key/", views.CodeView.as_view(), name="key"),
     path(
         "start/",
-        login_required(otp_required(views.StartView.as_view())),
+        login_required(otp_required(views.StartLandingView.as_view())),
         name="start",
+    ),
+    path(
+        "otk-start/",
+        login_required(otp_required(views.OTKStartView.as_view())),
+        name="otk_start",
     ),
     path(
         "generate-key/",
