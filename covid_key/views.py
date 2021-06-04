@@ -2,6 +2,7 @@ import logging
 import requests
 from datetime import timedelta, datetime
 from django.conf import settings
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -22,8 +23,17 @@ from .models import COVIDKey
 logger = logging.getLogger(__name__)
 
 
-class StartView(TemplateView):
-    template_name = "covid_key/start.html"
+class StartLandingView(TemplateView):
+    template_name = "covid_key/landing.html"
+
+    def get(self, request):
+        if not request.user.can_send_alerts:
+            return HttpResponseRedirect(reverse_lazy("otk_start"))
+        return super().get(request)
+
+
+class OTKStartView(TemplateView):
+    template_name = "covid_key/otk_start.html"
 
     def get(self, request):
         # clear any existing one time keys
@@ -177,14 +187,14 @@ class OtkSmsSentView(PermissionRequiredMixin, FormView, SessionTemplateView):
 
     def __init__(self):
         super().__init__()
-        self.redirect_choice = "start"
+        self.redirect_choice = "otk_start"
 
     def handle_no_permission(self):
         """
         Override here to redirect back to start when users are from
         a province that disallows SMS
         """
-        return redirect(reverse_lazy("start"))
+        return redirect(reverse_lazy("otk_start"))
 
     def get_success_url(self):
         return reverse_lazy(self.redirect_choice)

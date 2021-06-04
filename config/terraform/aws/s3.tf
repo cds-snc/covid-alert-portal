@@ -12,6 +12,7 @@ resource "aws_s3_bucket" "firehose_waf_logs" {
     }
   }
   #tfsec:ignore:AWS002
+  #tfsec:ignore:AWS077
 }
 
 ###
@@ -28,6 +29,7 @@ resource "aws_s3_bucket" "portal_maintenance_mode" {
     }
   }
   #tfsec:ignore:AWS002
+  #tfsec:ignore:AWS077
 }
 
 resource "aws_s3_bucket_object" "html_files" {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 15:59+0000\n"
+"POT-Creation-Date: 2021-06-03 04:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -209,11 +209,42 @@ msgid "Sending alerts"
 msgstr "Envoi d’alertes"
 
 #: about/templates/about/5_help_patient_enter_key.html
+#: about/templates/about/6_admin_accounts.html
 #: about/templates/about/6_sending_qr_alerts.html
 #: about/templates/about/7_admin_accounts.html
 #: about/templates/includes/_nav_about.html
 msgid "Admin accounts"
 msgstr "Comptes administrateurs"
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Both administrators and team members can generate one-time keys."
+msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Administrators can also:"
+msgstr "Les administrateurs peuvent aussi :"
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Invite team members to create portal accounts."
+msgstr "Inviter des membres à se créer un compte pour le portail."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Make changes or update information in team member accounts."
+msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Delete portal accounts."
+msgstr "Supprimer des comptes."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Give log in codes to team members who are locked out of the portal."
+msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "Sending QR alerts"
@@ -270,37 +301,15 @@ msgstr "Vous verrez une confirmation que l’alerte a été envoyée"
 msgid "Health authorities continue to manually contact visitors who do not scan QR codes."
 msgstr "Les autorités sanitaires continueront de contacter manuellement les visiteurs qui ne scannent pas les codes QR."
 
-#: about/templates/about/7_admin_accounts.html
-msgid "Both administrators and team members can generate one-time keys."
-msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Administrators can also:"
-msgstr "Les administrateurs peuvent aussi :"
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Invite team members to create portal accounts."
-msgstr "Inviter des membres à se créer un compte pour le portail."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Make changes or update information in team member accounts."
-msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Delete portal accounts."
-msgstr "Supprimer des comptes."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Give log in codes to team members who are locked out of the portal."
-msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
-
 #: about/templates/includes/_nav_about.html
 msgid "Table of contents: About the Portal"
 msgstr "Table des matières: Le portail"
 
 #: about/templates/includes/nav_about.html
+#: covid_key/templates/covid_key/landing.html
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
-#: portal/templates/includes/nav_main.html
+#: portal/templates/includes/footer.html
 msgid "About the portal"
 msgstr "Le portail"
 
@@ -549,10 +558,9 @@ msgstr "Merci de nous avoir contactés."
 msgid "We’ll reply as soon as possible."
 msgstr "Nous vous répondrons le plus rapidement possible."
 
-#: contact/templates/contact/success.html portal/templates/403.html
-#: portal/templates/404.html
-msgid "New patient"
-msgstr "Nouveau patient"
+#: contact/templates/contact/success.html
+msgid "Return home"
+msgstr "Revenir à l’accueil"
 
 #: covid_key/forms.py
 msgid "Phone numbers must match"
@@ -629,6 +637,40 @@ msgstr "Les patients peuvent aussi <a href='https://www.canada.ca/fr/sante-publi
 msgid "Generate another key"
 msgstr "Générer une nouvelle clé"
 
+#: covid_key/templates/covid_key/landing.html
+msgid "Welcome to the COVID Alert portal"
+msgstr "Bienvenue dans le portail Alerte COVID"
+
+#: covid_key/templates/covid_key/landing.html
+msgid "Give individuals a one-time key"
+msgstr "Donner des clés à usage unique"
+
+#: covid_key/templates/covid_key/landing.html
+msgid "Give a key to individuals who tested positive for COVID-19 so they can inform close contacts of a possible exposure."
+msgstr "Donnez une clé aux personnes déclarées positives pour qu’elles puissent aviser leurs contacts étroits d’une possible exposition."
+
+#: covid_key/templates/covid_key/landing.html
+msgid "Send place or event alerts"
+msgstr "Envoyer des alertes"
+
+#: covid_key/templates/covid_key/landing.html
+msgid "Send alerts of a possible exposure to people who scanned a QR code poster at a place or event."
+msgstr "Envoyez une alerte aux personnes qui ont scanné le code QR d’un lieu ou d’un événement pendant un risque d’exposition."
+
+#: covid_key/templates/covid_key/landing.html
+#: covid_key/templates/covid_key/otk_start.html
+#: covid_key/templates/covid_key/start.html outbreaks/templates/history.html
+#: outbreaks/templates/search.html
+msgid "New or need a refresher?"
+msgstr "Besoin d’en savoir plus sur le portail?"
+
+#: covid_key/templates/covid_key/landing.html
+#: covid_key/templates/covid_key/otk_start.html
+#: covid_key/templates/covid_key/start.html outbreaks/templates/history.html
+#: outbreaks/templates/search.html
+msgid "Visit"
+msgstr "Consultez la page"
+
 #: covid_key/templates/covid_key/locked.html
 msgid "Key generation limit reached"
 msgstr "Limite de génération clé atteinte"
@@ -663,39 +705,35 @@ msgstr "Le message texte met environ 30 secondes pour arriver."
 msgid "Did %(phone_number)s get the key?"
 msgstr "La clé a-t-elle été reçue au numéro %(phone_number)s?"
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "You’re logged in to give one-time keys"
 msgstr "Vous pouvez maintenant fournir des clés"
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "Patients need a key if they’ve:"
 msgstr "Un patient peut recevoir une clé si :"
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "Tested positive for COVID-19, <strong>and</strong>,"
 msgstr "D’une part, il a reçu un résultat positif de COVID-19."
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "Installed the COVID Alert app on their phone."
 msgstr "D’autre part, il a l’application Alerte COVID sur son téléphone."
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "Does this patient meet both conditions?"
 msgstr "Le patient remplit-il les deux conditions?"
 
+#: covid_key/templates/covid_key/otk_start.html
 #: covid_key/templates/covid_key/start.html
 msgid "Yes, continue"
 msgstr "Oui, continuer"
-
-#: covid_key/templates/covid_key/start.html outbreaks/templates/history.html
-#: outbreaks/templates/search.html
-msgid "New or need a refresher?"
-msgstr "Besoin d’en savoir plus sur le portail?"
-
-#: covid_key/templates/covid_key/start.html outbreaks/templates/history.html
-#: outbreaks/templates/search.html
-msgid "Visit"
-msgstr "Consultez la page"
 
 #: covid_key/views.py
 msgid "Something went wrong. Contact your administrator."
@@ -1129,6 +1167,10 @@ msgstr "Non autorisé"
 msgid "You do not have permission to visit this page."
 msgstr "Vous n’avez pas l’autorisation de visiter la page."
 
+#: portal/templates/403.html portal/templates/404.html
+msgid "Start again"
+msgstr "Recommencer"
+
 #: portal/templates/403_csrf.html
 msgid "Forbidden"
 msgstr "Interdit"
@@ -1252,6 +1294,11 @@ msgid "at"
 msgstr "à"
 
 #: portal/templates/includes/footer.html
+#: profiles/templates/profiles/support.html
+msgid "Support"
+msgstr "Assistance"
+
+#: portal/templates/includes/footer.html
 #: profiles/templates/profiles/privacy.html
 #: register/templates/register/includes/footer.html
 msgid "Privacy"
@@ -1292,6 +1339,14 @@ msgid "Product navigation"
 msgstr "Navigation du produit"
 
 #: portal/templates/includes/nav_main.html
+#: register/templates/register/contact_us.html
+#: register/templates/register/help_page.html
+#: register/templates/register/privacy.html
+#: register/templates/register/terms.html
+msgid "Home"
+msgstr "Accueil"
+
+#: portal/templates/includes/nav_main.html
 msgid "Generate keys"
 msgstr "Générer des clés"
 
@@ -1303,11 +1358,6 @@ msgstr "Envoyer des alertes"
 #: profiles/templates/profiles/healthcareuser_list.html
 msgid "Manage team"
 msgstr "Gérer l’équipe"
-
-#: portal/templates/includes/nav_main.html
-#: profiles/templates/profiles/support.html
-msgid "Support"
-msgstr "Assistance"
 
 #: portal/templates/includes/phonetic.html
 msgid "Read key phonetically to confirm patient understands letters:"
@@ -2248,7 +2298,7 @@ msgstr "Commerces (épiceries, magasins de vins et spiritueux, pharmacies, etc.)
 
 #: register/forms.py
 msgid "Medical centres, such as doctor or dentist offices"
-msgstr "Centres et cabinets médicaux, dentaires, etc"
+msgstr "Centres et cabinets médicaux, dentaires, etc."
 
 #: register/forms.py
 msgid "Community centres, libraries, government service centres"
@@ -2368,20 +2418,20 @@ msgid "Extension"
 msgstr ""
 
 #: register/forms.py
-msgid "Get Help."
+msgid "Get help."
 msgstr "Obtenir de l’aide."
 
 #: register/forms.py
-msgid "Give Feedback."
+msgid "Give feedback."
 msgstr "Donner des commentaires."
 
 #: register/forms.py
-msgid "Something Else."
+msgid "Something else."
 msgstr "Autre chose."
 
 #: register/forms.py
 msgid "Tell us more about the issue"
-msgstr "Dites-nous en plus sur le problème"
+msgstr "Dites-nous en plus sur le problème rencontré"
 
 #: register/forms.py
 msgid "We'll use this if we need to contact you. We will not use your email address for anything else."
@@ -2439,7 +2489,7 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"      <p>Nous enverrons votre affiche à %(email)s</p>\n"
+"      <p>Nous enverrons aussi l’affiche à %(email)s</p>\n"
 "    "
 
 #: register/templates/register/confirmation.html
@@ -2452,12 +2502,12 @@ msgstr "Créer une autre affiche"
 
 #: register/templates/register/confirmation.html
 msgid "Display your poster"
-msgstr "Où placer votre affiche"
+msgstr "Placez votre affiche"
 
 #: register/templates/register/confirmation.html
 #: register/templates/register/how_display_poster.html
 msgid "At each entrance and inside."
-msgstr "À chaque entrée et à l’intérieur."
+msgstr "À chaque porte d’entrée et à l’intérieur."
 
 #: register/templates/register/confirmation.html
 #: register/templates/register/how_display_poster.html
@@ -2501,20 +2551,13 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    <p>Consultez la page <a href=\"%(helplink)s\">Aide pour votre affiche</a></p>\n"
-"    <p>Sinon, <a href=\"%(contactlink)s\">contactez-nous</a></p>\n"
+"    <p>Obtenez plus d’information sur les <a href=\"%(helplink)s\">affiches Alerte COVID.</a></p>\n"
+"    <p>Sinon, <a href=\"%(contactlink)s\">contactez-nous.</a></p>\n"
 "    "
 
 #: register/templates/register/contact_us.html
 msgid "Contact Us"
 msgstr "Nous joindre"
-
-#: register/templates/register/contact_us.html
-#: register/templates/register/help_page.html
-#: register/templates/register/privacy.html
-#: register/templates/register/terms.html
-msgid "Home"
-msgstr ""
 
 #: register/templates/register/contact_us.html
 msgid "Call us"
@@ -2531,7 +2574,7 @@ msgstr ""
 "\n"
 "  <p>Téléphone : 1-833-694-1709<br>\n"
 "  Téléimprimeur (ATS) : 1-866-694-8389<br>\n"
-"  Heures de service : du lundi au vendredi de 8 h 30 à 17 h HE</p>\n"
+"  Heures de service : du lundi au vendredi de 8 h 30 à 17 h (heure de l’Est)</p>\n"
 "  "
 
 #: register/templates/register/contact_us.html
@@ -2569,7 +2612,7 @@ msgid "Right now there’s only scanning in the City of Ottawa."
 msgstr "Pour l’instant, il est uniquement possible de scanner des codes QR dans la ville d’Ottawa."
 
 #: register/templates/register/help_page.html
-msgid "Outside of the City of Ottawa, you can still make a poster for your place or event. Then you’ll be ready when your region starts using QR codes."
+msgid "Outside Ottawa, you can still make a poster for your place or event. Then you’ll be ready when your region starts using QR codes."
 msgstr "Si vous n’êtes pas dans cette ville, vous pouvez tout de même créer une affiche pour votre lieu ou événement. Vous serez alors prêt lorsque votre région commencera à utiliser les codes QR."
 
 #: register/templates/register/help_page.html
@@ -2594,7 +2637,7 @@ msgstr "Pour de l’aide supplémentaire"
 
 #: register/templates/register/help_page.html
 msgid "Contact poster support"
-msgstr "Contactez-nous."
+msgstr "Contactez-nous"
 
 #: register/templates/register/help_page.html
 msgid "For help with the app"
@@ -2602,11 +2645,11 @@ msgstr "Pour de l’aide relative à l’application"
 
 #: register/templates/register/help_page.html
 msgid "Contact app support"
-msgstr "Contacter le soutien direct."
+msgstr "Contactez le soutien pour l’application."
 
 #: register/templates/register/help_page.html
 msgid "Read about common support issues"
-msgstr "Consulter les problèmes fréquents."
+msgstr "Consultez les problèmes fréquents."
 
 #: register/templates/register/how_display_poster.html
 #: register/templates/register/privacy.html
@@ -2705,16 +2748,20 @@ msgid "Step 2 of 5"
 msgstr "Étape 2 de 5"
 
 #: register/templates/register/location_name.html
-msgid "We’ll display the name on the poster with your QR code."
-msgstr "Le nom sera inscrit sur l’affiche avec votre code QR."
+msgid "We'll show the name on your QR code poster."
+msgstr "Ce nom apparaîtra sur votre affiche à code QR."
 
 #: register/templates/register/location_unavailable.html
 msgid "No scanning yet in your area"
-msgstr ""
+msgstr "Impossible de scanner des codes dans votre région"
 
 #: register/templates/register/location_unavailable.html
-msgid "People in your province or territory are not yet able to scan a QR code for COVID Alert.You can still make a poster with your code.  That way, you’ll be ready when people are able to scan these codes."
-msgstr ""
+msgid "People in your province or territory are not yet able to scan a QR code for COVID Alert."
+msgstr "Les personnes de votre province ou de votre territoire ne peuvent pas encore scanner de codes QR avec Alerte COVID."
+
+#: register/templates/register/location_unavailable.html
+msgid "You can still make a poster with your code.  That way, you’ll be ready when people are able to scan these codes."
+msgstr "Vous pouvez tout de même créer une affiche. De cette façon, vous serez prêt lorsque les personnes pourront scanner votre code QR."
 
 #: register/templates/register/privacy.html
 msgid "Privacy notice"
@@ -2875,8 +2922,8 @@ msgstr ""
 "          Loi sur le ministère de la Santé</a>\n"
 "        et la\n"
 "        <a href=\"https://laws-lois.justice.gc.ca/eng/acts/f-11/\" target=\"_blank\">\n"
-"          Loi sur la gestion des finances publiques</a>\n"
-"        . Nous respectons aussi la\n"
+"          Loi sur la gestion des finances publiques</a>.\n"
+"         Nous respectons aussi la\n"
 "        <a href=\"https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=26761\" target=\"_blank\">\n"
 "          Norme sur la protection de la vie privée et le Web analytique</a>.\n"
 "      "
@@ -2891,11 +2938,11 @@ msgstr "Contactez la coordonnatrice de l’accès à l’information et de la pr
 
 #: register/templates/register/privacy.html
 msgid "Email"
-msgstr "Courriel"
+msgstr "Courriel "
 
 #: register/templates/register/privacy.html
 msgid "Phone"
-msgstr "Téléphone"
+msgstr "Téléphone "
 
 #: register/templates/register/privacy.html
 msgid "Teletypewriter through Service Canada: 1-800-465-7735"
@@ -2970,8 +3017,8 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"    <p>Check your inbox, junk or spam folder for an email with the subject line <q>Confirm Email for your poster</q></p>\n"
-"    <p>If you did not get the email, we can <a href=\"%(register_url)s\">send it again</a></p>\n"
+"    <p>Check your inbox, junk or spam folder for an email with the subject line <q>Confirm email for your poster.</q></p>\n"
+"    <p>If you did not get the email, we can <a href=\"%(register_url)s\">send it again</a>.</p>\n"
 "  "
 msgstr ""
 "\n"
@@ -2984,8 +3031,8 @@ msgid "Make a COVID Alert poster"
 msgstr "Créer une affiche Alerte COVID"
 
 #: register/templates/register/start.html
-msgid "Display a QR code to help limit the spread of COVID-19"
-msgstr "Affichez un code QR pour contribuer à limiter la COVID-19"
+msgid "Display a QR code to limit community spread"
+msgstr "Affichez un code QR pour limiter la transmission communautaire"
 
 #: register/templates/register/start.html
 msgid "Make a COVID Alert poster for your business, community organization or event."
@@ -3005,7 +3052,7 @@ msgstr ""
 "\n"
 "    <p>\n"
 "      Les visiteurs scanneront le code QR de l’affiche pour ajouter une visite avec\n"
-"      <a href=\"https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html\" target=\"_blank\">\n"
+"      <a href=\"https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid.html\" target=\"_blank\">\n"
 "        l’application Alerte COVID</a>.\n"
 "      Nous pourrons ensuite les aviser s’ils ont été exposés au virus pendant leur visite.\n"
 "    </p>\n"
@@ -3020,7 +3067,7 @@ msgid "an email address where we can send the poster;"
 msgstr "une adresse courriel pour recevoir votre affiche;"
 
 #: register/templates/register/start.html
-msgid "the name and address of place or event;"
+msgid "the name and address of the place or event;"
 msgstr "le nom et l’adresse du lieu ou de l’événement;"
 
 #: register/templates/register/start.html
@@ -3116,7 +3163,7 @@ msgstr "En utilisant le site Web, "
 
 #: register/templates/register/terms.html
 msgid "you’re a person who’s responsible for making a poster for a place or event."
-msgstr "En utilisant le site Web, vous acceptez d’être la personne responsable de créer une affiche pour un lieu ou un événement."
+msgstr "vous acceptez d’être la personne responsable de créer une affiche pour un lieu ou un événement."
 
 #: register/templates/register/terms.html
 msgid "You also agree that you’ll:"
@@ -3172,7 +3219,7 @@ msgstr ""
 
 #: register/templatetags/location_type_str.py
 msgid "Address of place"
-msgstr "Adresse de du lieu"
+msgstr "Adresse du lieu"
 
 #: register/templatetags/location_type_str.py
 msgid "Address of event"
@@ -3188,7 +3235,7 @@ msgstr "Nom du lieu"
 
 #: register/templatetags/location_type_str.py
 msgid "Name of event"
-msgstr "Nom de de l’événement"
+msgstr "Nom de l’événement"
 
 #: register/templatetags/location_type_str.py
 msgid "Name of place or event"
@@ -3202,8 +3249,5 @@ msgstr "Votre adresse courriel est validée."
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
 
-#~ msgid "Ottawa pilot"
-#~ msgstr "Projet pilote à Ottawa"
-
-#~ msgid "For information about common issues, visit"
-#~ msgstr "Consultez la section pour les questions fréquentes"
+#~ msgid "New patient"
+#~ msgstr "Nouveau patient"

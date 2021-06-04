@@ -101,3 +101,13 @@ resource "aws_secretsmanager_secret_version" "qrcode_signature_private_key" {
   secret_id     = aws_secretsmanager_secret.qrcode_signature_private_key.id
   secret_string = var.ecs_secret_qrcode_signature_private_key
 }
+
+resource "aws_secretsmanager_secret" "qrcode_notify_api_key" {
+  name                    = "qrcode_notify_api_key"
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret_version" "qrcode_notify_api_key" {
+  secret_id     = aws_secretsmanager_secret.qrcode_notify_api_key.id
+  secret_string = var.ecs_secret_qrcode_notify_api_key
+}
