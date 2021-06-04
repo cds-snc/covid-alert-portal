@@ -23,10 +23,7 @@ severity_choices = [
     ("1", _("Isolate and get tested")),
     ("2", _("Self-monitor for 14 days")),
 ]
-severity_help = [
-    ("1", _("Isolate and get tested")),
-    ("2", _("Self-monitor for 14 days")),
-]
+
 hour_format = "%-H:%M" if get_language() == "fr" else "%-I:%M %p"
 hour_start_data_format = "%H:%M:00:000001"
 hour_end_data_format = "%H:%M:00:000000"

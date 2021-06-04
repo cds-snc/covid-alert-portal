@@ -39,7 +39,7 @@ class AnnoncementsSiteWide(AdminUserTestCase):
 
         # Second user can see message
         self.login(self.user2_credentials)
-        response = self.client.get(reverse("start"))
+        response = self.client.get(reverse("otk_start"))
         self.assertContains(response, '<div class="title">Test for Site Wide</div>')
 
     def test_site_wide_is_visible_on_multiple_pages(self):
@@ -63,13 +63,13 @@ class AnnoncementsSiteWide(AdminUserTestCase):
             for_user=self.user,
         )
         self.login()
-        response = self.client.get(reverse("start"))
+        response = self.client.get(reverse("otk_start"))
         self.assertContains(response, '<div class="title">Test for User 1 Only</div>')
         self.client.logout()
 
         # Second user can not see message
         self.login(self.user2_credentials)
-        response = self.client.get(reverse("start"))
+        response = self.client.get(reverse("otk_start"))
         self.assertNotContains(
             response, '<div class="title">Test for User 1 Only</div>'
         )

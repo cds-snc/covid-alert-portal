@@ -1,10 +1,15 @@
 from uuid import uuid4
+from django.utils.translation import gettext_lazy as _
 from django.db import models
 from profiles.models import HealthcareUser
 from register.models import Location
 
 
-SEVERITY = [("1", "Level 1"), ("2", "Level 2"), ("3", "Level 3")]
+SEVERITY = [
+    ("1", _("Isolate and get tested")),
+    ("2", _("Self-monitor for 14 days")),
+    ("3", _("Deprecated Severity")),
+]
 
 
 class Notification(models.Model):
