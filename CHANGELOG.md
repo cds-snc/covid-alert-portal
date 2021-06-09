@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+- Remove Basicauth
+
+## [2.1.0] - 2021-06-01
+
+## Updated
 
 - Validate Canadian postal code format
 - Enforce character limit for location name so it doesn't run off the poster
@@ -13,7 +18,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Location Outbreaks History view
 - New venue types and selection html select control
 - Content updates throughout
-
+- Updated poster and instructions
+- Phone number validation
+- Updated Portal start screen and navigation
+- Split notify service for different notify services in portal and qrposter
+- Change rounding of datetime wizard values in minutes
+- New privacy and ToU pages
+- Google analytics separate between environments and portal / qrposter
 
 ## [2.0.3] - 2021-05-14
 
