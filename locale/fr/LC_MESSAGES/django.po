@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-03 04:30+0000\n"
+"POT-Creation-Date: 2021-06-04 18:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -209,42 +209,11 @@ msgid "Sending alerts"
 msgstr "Envoi d’alertes"
 
 #: about/templates/about/5_help_patient_enter_key.html
-#: about/templates/about/6_admin_accounts.html
 #: about/templates/about/6_sending_qr_alerts.html
 #: about/templates/about/7_admin_accounts.html
 #: about/templates/includes/_nav_about.html
 msgid "Admin accounts"
 msgstr "Comptes administrateurs"
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Both administrators and team members can generate one-time keys."
-msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Administrators can also:"
-msgstr "Les administrateurs peuvent aussi :"
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Invite team members to create portal accounts."
-msgstr "Inviter des membres à se créer un compte pour le portail."
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Make changes or update information in team member accounts."
-msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Delete portal accounts."
-msgstr "Supprimer des comptes."
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Give log in codes to team members who are locked out of the portal."
-msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "Sending QR alerts"
@@ -301,6 +270,30 @@ msgstr "Vous verrez une confirmation que l’alerte a été envoyée"
 msgid "Health authorities continue to manually contact visitors who do not scan QR codes."
 msgstr "Les autorités sanitaires continueront de contacter manuellement les visiteurs qui ne scannent pas les codes QR."
 
+#: about/templates/about/7_admin_accounts.html
+msgid "Both administrators and team members can generate one-time keys."
+msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
+
+#: about/templates/about/7_admin_accounts.html
+msgid "Administrators can also:"
+msgstr "Les administrateurs peuvent aussi :"
+
+#: about/templates/about/7_admin_accounts.html
+msgid "Invite team members to create portal accounts."
+msgstr "Inviter des membres à se créer un compte pour le portail."
+
+#: about/templates/about/7_admin_accounts.html
+msgid "Make changes or update information in team member accounts."
+msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
+
+#: about/templates/about/7_admin_accounts.html
+msgid "Delete portal accounts."
+msgstr "Supprimer des comptes."
+
+#: about/templates/about/7_admin_accounts.html
+msgid "Give log in codes to team members who are locked out of the portal."
+msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
+
 #: about/templates/includes/_nav_about.html
 msgid "Table of contents: About the Portal"
 msgstr "Table des matières: Le portail"
@@ -308,7 +301,6 @@ msgstr "Table des matières: Le portail"
 #: about/templates/includes/nav_about.html
 #: covid_key/templates/covid_key/landing.html
 #: covid_key/templates/covid_key/otk_start.html
-#: covid_key/templates/covid_key/start.html
 #: portal/templates/includes/footer.html
 msgid "About the portal"
 msgstr "Le portail"
@@ -591,9 +583,9 @@ msgid "When patient is ready, generate a key"
 msgstr "Si le patient est prêt, générez une clé"
 
 #: covid_key/templates/covid_key/generate_key.html
-#: outbreaks/templates/confirm.html outbreaks/templates/datetime.html
-#: outbreaks/templates/details.html outbreaks/templates/location_history.html
-#: outbreaks/templates/profile.html outbreaks/templates/severity.html
+#: outbreaks/templates/confirm.html outbreaks/templates/details.html
+#: outbreaks/templates/location_history.html outbreaks/templates/profile.html
+#: outbreaks/templates/severity.html
 #: register/templates/register/location_address.html
 #: register/templates/register/location_category.html
 #: register/templates/register/location_contact.html
@@ -659,15 +651,13 @@ msgstr "Envoyez une alerte aux personnes qui ont scanné le code QR d’un lieu 
 
 #: covid_key/templates/covid_key/landing.html
 #: covid_key/templates/covid_key/otk_start.html
-#: covid_key/templates/covid_key/start.html outbreaks/templates/history.html
-#: outbreaks/templates/search.html
+#: outbreaks/templates/history.html outbreaks/templates/search.html
 msgid "New or need a refresher?"
 msgstr "Besoin d’en savoir plus sur le portail?"
 
 #: covid_key/templates/covid_key/landing.html
 #: covid_key/templates/covid_key/otk_start.html
-#: covid_key/templates/covid_key/start.html outbreaks/templates/history.html
-#: outbreaks/templates/search.html
+#: outbreaks/templates/history.html outbreaks/templates/search.html
 msgid "Visit"
 msgstr "Consultez la page"
 
@@ -706,32 +696,26 @@ msgid "Did %(phone_number)s get the key?"
 msgstr "La clé a-t-elle été reçue au numéro %(phone_number)s?"
 
 #: covid_key/templates/covid_key/otk_start.html
-#: covid_key/templates/covid_key/start.html
 msgid "You’re logged in to give one-time keys"
 msgstr "Vous pouvez maintenant fournir des clés"
 
 #: covid_key/templates/covid_key/otk_start.html
-#: covid_key/templates/covid_key/start.html
 msgid "Patients need a key if they’ve:"
 msgstr "Un patient peut recevoir une clé si :"
 
 #: covid_key/templates/covid_key/otk_start.html
-#: covid_key/templates/covid_key/start.html
 msgid "Tested positive for COVID-19, <strong>and</strong>,"
 msgstr "D’une part, il a reçu un résultat positif de COVID-19."
 
 #: covid_key/templates/covid_key/otk_start.html
-#: covid_key/templates/covid_key/start.html
 msgid "Installed the COVID Alert app on their phone."
 msgstr "D’autre part, il a l’application Alerte COVID sur son téléphone."
 
 #: covid_key/templates/covid_key/otk_start.html
-#: covid_key/templates/covid_key/start.html
 msgid "Does this patient meet both conditions?"
 msgstr "Le patient remplit-il les deux conditions?"
 
 #: covid_key/templates/covid_key/otk_start.html
-#: covid_key/templates/covid_key/start.html
 msgid "Yes, continue"
 msgstr "Oui, continuer"
 
@@ -739,11 +723,11 @@ msgstr "Oui, continuer"
 msgid "Something went wrong. Contact your administrator."
 msgstr "Une erreur est survenue. Veuillez contacter votre admistrateur du portail."
 
-#: outbreaks/forms.py
+#: outbreaks/forms.py outbreaks/models.py
 msgid "Isolate and get tested"
 msgstr "Isolez-vous et passez un test"
 
-#: outbreaks/forms.py
+#: outbreaks/forms.py outbreaks/models.py
 msgid "Self-monitor for 14 days"
 msgstr "Surveillez vos symptômes pendant 14 jours"
 
@@ -793,6 +777,10 @@ msgstr "Si vous développez des symptômes, passez un test de dépistage et isol
 
 #: outbreaks/forms.py
 msgid "Enter the name or address."
+msgstr ""
+
+#: outbreaks/models.py
+msgid "Deprecated Severity"
 msgstr ""
 
 #: outbreaks/templates/confirm.html
@@ -890,6 +878,10 @@ msgstr "Consulter l’historique des notifications"
 #: outbreaks/templates/datetime.html
 msgid "Choose date and time"
 msgstr "Indiquer la date et l’heure"
+
+#: outbreaks/templates/datetime.html outbreaks/templates/profile.html
+msgid "Details of place or event"
+msgstr "Renseignements sur le lieu ou l’événement"
 
 #: outbreaks/templates/datetime.html
 msgid "To check all alerts for this place or event, visit "
@@ -1066,10 +1058,6 @@ msgstr "Trier par émetteur, ordre alphabétique"
 #: outbreaks/templates/location_history.html
 msgid "Sort by sender, descending"
 msgstr "Trier par émetteur, ordre alphabétique inverse"
-
-#: outbreaks/templates/profile.html
-msgid "Details of place or event"
-msgstr "Renseignements sur le lieu ou l’événement"
 
 #: outbreaks/templates/profile.html
 msgid "Contact name"
@@ -2568,7 +2556,7 @@ msgid ""
 "\n"
 "  <p>Phone: 1-833-694-1709<br>\n"
 "  Teletypewriter (TTY): 1-866-694-8389<br>\n"
-"  Hours of operation are Monday to Friday from 8:30 am to 5 pm ET</p>\n"
+"  Hours of operation are Monday to Friday from 8:30 am to 5 pm Eastern Time</p>\n"
 "  "
 msgstr ""
 "\n"
@@ -2580,6 +2568,10 @@ msgstr ""
 #: register/templates/register/contact_us.html
 msgid "Or send us a message"
 msgstr "Ou écrivez-nous "
+
+#: register/templates/register/contact_us.html
+msgid "We usually reply within 24 hours, except for weekends and holidays."
+msgstr "Nous répondons généralement dans un délai de 24 heures, sauf les fins de semaine et les jours fériés."
 
 #: register/templates/register/contact_us.html
 msgid "What do you want to do?"
@@ -2644,16 +2636,38 @@ msgid "For help with the app"
 msgstr "Pour de l’aide relative à l’application"
 
 #: register/templates/register/help_page.html
-msgid "Contact app support"
-msgstr "Contactez le soutien pour l’application."
+msgid ""
+"\n"
+"        <a\n"
+"          href=\"https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html#a13\" target=\"_blank\">\n"
+"          Contact app support\n"
+"        </a>\n"
+"        "
+msgstr ""
+"\n"
+"        <a\n"
+"          href=\"https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid.html#a13\" target=\"_blank\">\n"
+"          Contactez le soutien pour l'application\n"
+"        </a>\n"
+"        "
 
 #: register/templates/register/help_page.html
-msgid "Read about common support issues"
-msgstr "Consultez les problèmes fréquents."
+msgid ""
+"\n"
+"        <a\n"
+"          href=\"https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert/help.html\" target=\"_blank\">\n"
+"          Read about common support issues\n"
+"        </a>\n"
+"        "
+msgstr ""
+"\n"
+"        <a\n"
+"          href=\"https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid/aide.html\" target=\"_blank\">\n"
+"          Consultez les problèmes fréquents\n"
+"        </a>\n"
+"        "
 
 #: register/templates/register/how_display_poster.html
-#: register/templates/register/privacy.html
-#: register/templates/register/terms.html
 msgid "How to display your COVID Alert poster"
 msgstr "Comment placer votre affiche Alerte COVID"
 
@@ -3248,6 +3262,3 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
-
-#~ msgid "New patient"
-#~ msgstr "Nouveau patient"
