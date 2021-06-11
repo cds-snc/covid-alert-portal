@@ -3193,23 +3193,23 @@ msgstr "Fournir des informations exactes lors de la création des affiches."
 
 #: register/templates/register/terms.html
 msgid "If needed, update name, address or contact information by using this website to make a new poster.  This changes the QR code for the place or event."
-msgstr "Mettre à jour le nom, l’adresse ou les coordonnées dans le site Web si ces renseignements changent, afin de créer une nouvelle affiche. Un nouveau code QR sera créé pour le lieu ou l’événement en question."
-
-#: register/templates/register/terms.html
-msgid "Destroy any posters you do not need anymore or that display a previous QR code."
-msgstr "Détruire toute affiche dont vous n’avez plus besoin ou toute affiche ayant un ancien code QR."
-
-#: register/templates/register/terms.html
-msgid "Only display posters within the area that belongs to the address of the place or event."
 msgstr "Placer des affiches uniquement sur le terrain correspondant à l’adresse de votre lieu ou événement."
 
 #: register/templates/register/terms.html
-msgid "Display the correct poster for the address."
+msgid "Destroy any posters you do not need anymore or that display a previous QR code."
 msgstr "Placer la bonne affiche pour l’adresse en question."
 
 #: register/templates/register/terms.html
-msgid "Keep posters in good condition and replace damaged posters."
+msgid "Only display posters within the area that belongs to the address of the place or event."
 msgstr "Maintenir les affiches en bonne condition et remplacer celles qui sont abîmées."
+
+#: register/templates/register/terms.html
+msgid "Display the correct poster for the address."
+msgstr "Mettre à jour le nom, l’adresse ou les coordonnées dans le site Web si ces renseignements changent. Un nouveau code QR sera créé pour le lieu ou l’événement en question."
+
+#: register/templates/register/terms.html
+msgid "Keep posters in good condition and replace damaged posters."
+msgstr "Mettre à jour le nom, l’adresse ou les coordonnées dans le site Web si ces renseignements changent. Un nouveau code QR sera créé pour le lieu ou l’événement en question."
 
 #: register/templates/register/terms.html
 msgid "Fraud or abuse"
