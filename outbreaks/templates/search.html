@@ -39,7 +39,12 @@
   </form>
 
   {% if object_list %}
-    <b>{{ search_result_count }} {% trans 'results in your region for' %}</b> {{ search_text }}.
+    {% blocktrans count count=search_result_count %}
+      <b>{{ search_result_count }} result in your region for</b> {{ search_text }}.
+    {% plural %}
+      <b>{{ search_result_count }} results in your region for</b> {{ search_text }}.
+    {% endblocktrans %}
+
     <br>
     <table class="with-actions">
       <caption class="visually-hidden">{% trans "Available locations" %}</caption>
