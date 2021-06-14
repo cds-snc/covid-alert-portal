@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-04 18:08+0000\n"
+"POT-Creation-Date: 2021-06-14 17:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2450,8 +2450,15 @@ msgid "BETA"
 msgstr "BÊTA"
 
 #: register/templates/register/base.html
-msgid "This is a new service — your feedback will help us improve it."
-msgstr "Il s’agit d’un nouveau service, et vos commentaires nous aideront à l’améliorer."
+#, python-format
+msgid ""
+"\n"
+"                This is a new service — your <a href=\"%(contact_url)s\">feedback</a> will help us improve it.\n"
+"              "
+msgstr ""
+"\n"
+"                Il s’agit d’un nouveau service, et vos <a href=\"%(contact_url)s\">commentaires</a> nous aideront à l’améliorer.\n"
+"              "
 
 #: register/templates/register/base.html
 msgid "Make a COVID Alert QR code poster"
