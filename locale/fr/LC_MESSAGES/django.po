@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-14 18:45+0000\n"
+"POT-Creation-Date: 2021-06-14 19:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2761,14 +2761,8 @@ msgid "The contact could be you or a different person, such as a store manager. 
 msgstr "La personne-ressource peut être vous-même ou bien une autre personne comme un gérant. La santé publique pourrait avoir à contacter cette personne s’il y a des expositions à l’adresse fournie."
 
 #: register/templates/register/location_contact.html
-msgid ""
-"\n"
-"      We do <b>not</b> show the contact information on your QR code poster.\n"
-"    "
-msgstr ""
-"\n"
-"      La personne-ressource <b>n’apparaîtra pas</b> sur votre affiche à code QR.\n"
-"    "
+msgid "We do <b>not</b> show the contact information on your QR code poster."
+msgstr "La personne-ressource <b>n’apparaîtra pas</b> sur votre affiche à code QR."
 
 #: register/templates/register/location_name.html
 msgid "Step 2 of 5"
