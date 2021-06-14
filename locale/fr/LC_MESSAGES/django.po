@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-14 18:31+0000\n"
+"POT-Creation-Date: 2021-06-14 18:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2509,7 +2509,6 @@ msgid "At each entrance and inside."
 msgstr "À chaque porte d’entrée et à l’intérieur."
 
 #: register/templates/register/confirmation.html
-#: register/templates/register/how_display_poster.html
 msgid "About 1.5 metres from the ground to the centre of the poster."
 msgstr "À environ 1,5 mètre du sol (à partir du centre de l’affiche)."
 
@@ -2519,7 +2518,6 @@ msgid "On flat surfaces that do not move."
 msgstr "Sur des surfaces plates qui ne bougent pas."
 
 #: register/templates/register/confirmation.html
-#: register/templates/register/how_display_poster.html
 msgid "In well lit areas without glare (not behind glass)."
 msgstr "Dans des lieux bien éclairés et sans reflets (pas derrière une vitre)."
 
@@ -2689,6 +2687,10 @@ msgstr "Vous pouvez imprimer l’affiche en noir et blanc ou en couleur. Vous po
 #: register/templates/register/how_display_poster.html
 msgid "Staff and visitors can find and scan if you put posters:"
 msgstr "Pour que les affiches soient faciles à trouver et à scanner par les employés et les visiteurs, placez-les :"
+
+#: register/templates/register/how_display_poster.html
+msgid "About 130 cm (4 feet 3 inches) from the ground."
+msgstr "À une hauteur d'environ 130 cm (4 pieds 3 pouces)."
 
 #: register/templates/register/how_display_poster.html
 msgid "Add or move posters to meet your visitors’ needs."
