@@ -2831,7 +2831,7 @@ msgid "If any of this information changes, the place or event will need a new QR
 msgstr "Si ces renseignements changent, un nouveau code QR devra être créé pour le lieu ou l’événement."
 
 #: register/templates/register/privacy.html
-msgid "Visit the home page for “Make a COVID Alert QR code poster’ to make a poster or posters with a new code."
+msgid "Visit the home page for “Make a COVID Alert QR code poster” to make a poster or posters with a new code."
 msgstr "Consultez la page d’accueil du site « Créer une affiche à code QR Alerte COVID » pour créer une affiche avec un nouveau code QR."
 
 #: register/templates/register/privacy.html
