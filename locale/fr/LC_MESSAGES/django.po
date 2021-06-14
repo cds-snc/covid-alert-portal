@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-14 17:05+0000\n"
+"POT-Creation-Date: 2021-06-14 17:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3016,8 +3016,8 @@ msgstr ""
 "  "
 
 #: register/templates/register/registrant_email.html
-msgid "We’ll send you a link to confirm your email address."
-msgstr "Nous vous enverrons un lien pour valider votre adresse courriel."
+msgid "<p>We’ll send you a link to confirm your email address.</p>"
+msgstr "<p>Nous vous enverrons un lien pour valider votre adresse courriel.</p>"
 
 #: register/templates/register/registrant_email_submitted.html
 msgid "Confirm your email address"
