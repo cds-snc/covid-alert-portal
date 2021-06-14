@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-14 17:16+0000\n"
+"POT-Creation-Date: 2021-06-14 18:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -585,7 +585,7 @@ msgstr "Si le patient est prêt, générez une clé"
 #: covid_key/templates/covid_key/generate_key.html
 #: outbreaks/templates/confirm.html outbreaks/templates/details.html
 #: outbreaks/templates/location_history.html outbreaks/templates/profile.html
-#: outbreaks/templates/severity.html
+#: outbreaks/templates/severity.html register/templates/register/error.html
 #: register/templates/register/location_address.html
 #: register/templates/register/location_category.html
 #: register/templates/register/location_contact.html
@@ -1187,11 +1187,11 @@ msgstr "Si vous avez collé l’adresse URL, vérifiez que vous avez copié l’
 msgid "Try again later"
 msgstr "Réessayer plus tard"
 
-#: portal/templates/500.html register/templates/register/500.html
+#: portal/templates/500.html
 msgid "Something went wrong with the system. Tell your portal adminstrator as soon as possible."
 msgstr "Un problème a eu lieu avec le serveur. Parlez-en à votre administrateur du portail dès que possible."
 
-#: portal/templates/500.html register/templates/register/500.html
+#: portal/templates/500.html
 msgid "We need to fix the problem so you can generate keys."
 msgstr "Nous devons régler le problème pour que vous puissez générer des clés."
 
@@ -2444,6 +2444,10 @@ msgstr ""
 #: register/models.py
 msgid "Province"
 msgstr "Province"
+
+#: register/templates/register/500.html
+msgid "Something went wrong with the system."
+msgstr "Un problème est survenu lors de la visite de cette page."
 
 #: register/templates/register/base.html
 msgid "BETA"
