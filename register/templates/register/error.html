@@ -6,6 +6,10 @@
 {% endblock %}
 
 {% block content %}
+  <div class="content-back-link">
+    <a href="{% url 'register:registrant_email' %}" class="chevron-left">{% trans "Back" %}</a>
+  </div>
+
   <h1>{% trans "Invalid / Expired" %}</h1>
   {% trans "Sorry, that confirmation link has expired or has already been used." %}
 {% endblock %}
