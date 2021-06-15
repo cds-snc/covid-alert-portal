@@ -115,47 +115,46 @@ class RegistrantAdmin(admin.ModelAdmin, ExportCsvMixin):
 
     @staticmethod
     def send_survey_by_id(id, modeladmin, request, queryset):
-        response_msg = ""
         count = 0
-        err_count = 0
         for registrant in queryset:
             reg_surveys = registrant.registrantsurvey_set.filter(survey_id=id)
             if reg_surveys:
                 modeladmin.message_user(
                     request,
-                    _("Some registrants have already had this survey sent to them."),
-                    messages.ERROR,
+                    _(f"{registrant.email} has already had this survey sent to them."),
+                    messages.WARNING,
                 )
-                return
-        for registrant in queryset:
-            reg_survey = RegistrantSurvey.objects.create(
-                registrant=registrant,
-                survey_id=id,
-                sent_by=request.user,
-                sent_ts=timezone.now(),
-            )
-            try:
-                survey = reg_survey.survey
-                template_id = (
-                    survey.en_notify_template_id
-                    if registrant.language_cd == "en"
-                    else survey.fr_notify_template_id
+            else:
+                reg_survey = RegistrantSurvey.objects.create(
+                    registrant=registrant,
+                    survey_id=id,
+                    sent_by=request.user,
+                    sent_ts=timezone.now(),
                 )
-                send_email(
-                    registrant.email,
-                    {"registrant_id": str(registrant.id), "url": survey.url},
-                    template_id,
-                )
-                count += 1
-            except Exception as e:
-                response_msg += _(f"{str(e)} :: email: {registrant.email} <br/>")
-                reg_survey.delete()
-                err_count += 1
+                try:
+                    survey = reg_survey.survey
+                    template_id = (
+                        survey.en_notify_template_id
+                        if registrant.language_cd == "en"
+                        else survey.fr_notify_template_id
+                    )
+                    send_email(
+                        registrant.email,
+                        {"registrant_id": str(registrant.id), "url": survey.url},
+                        template_id,
+                    )
+                    count += 1
+                except Exception as e:
+                    modeladmin.message_user(
+                        request,
+                        _(f"{str(e)} :: email: {registrant.email}"),
+                        messages.ERROR,
+                    )
+                    reg_survey.delete()
         if count:
-            spacer = "" if not err_count else "<br/><br/>"
-            response_msg += _(f"{spacer}Sent {count} messages successfully")
-        resp_code = messages.SUCCESS if err_count == 0 else messages.WARNING
-        modeladmin.message_user(request, mark_safe(_(response_msg)), resp_code)
+            modeladmin.message_user(
+                request, _(f"Sent {count} messages successfully"), messages.SUCCESS
+            )
 
 
 @admin.register(Location)
