@@ -120,7 +120,7 @@ msgstr "Clés à usage unique"
 
 #: about/templates/about/3_one_time_keys.html
 msgid "Patients only get 1 key per positive test, and the key expires in 24 hours."
-msgstr "Les personnes ne peuvent recevoir qu’une seule clé par résultat positif au test de dépistage. La clé expire au bout de 24 heures."
+msgstr "Les personnes ne peuvent recevoir qu’une seule clé par résultat positif au test de dépistage. La clé expire au bout de 24 heures."
 
 #: about/templates/about/3_one_time_keys.html
 msgid "Before generating a key"
@@ -162,7 +162,7 @@ msgstr "Possibilité d’envoyer la clé par message texte"
 
 #: about/templates/about/4_give_a_key.html
 msgid "If permitted by your health authority, the portal displays the button 'Text key to patient'. That button guides you through next steps if the patient agrees to get the key by text."
-msgstr "Si votre autorité de santé publique le permet, le portail vous offrira de « Texter la clé au patient ». Si la personne accepte de recevoir la clé ainsi, ce bouton vous guidera vers les prochaines étapes."
+msgstr "Si votre autorité de santé publique le permet, le portail vous offrira de « Texter la clé au patient ». Si la personne accepte de recevoir la clé ainsi, ce bouton vous guidera vers les prochaines étapes."
 
 #: about/templates/about/4_give_a_key.html
 msgid "How the portal displays keys"
@@ -209,42 +209,11 @@ msgid "Sending alerts"
 msgstr "Envoi d’alertes"
 
 #: about/templates/about/5_help_patient_enter_key.html
-#: about/templates/about/6_admin_accounts.html
 #: about/templates/about/6_sending_qr_alerts.html
 #: about/templates/about/7_admin_accounts.html
 #: about/templates/includes/_nav_about.html
 msgid "Admin accounts"
 msgstr "Comptes administrateurs"
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Both administrators and team members can generate one-time keys."
-msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Administrators can also:"
-msgstr "Les administrateurs peuvent aussi :"
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Invite team members to create portal accounts."
-msgstr "Inviter des membres à se créer un compte pour le portail."
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Make changes or update information in team member accounts."
-msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Delete portal accounts."
-msgstr "Supprimer des comptes."
-
-#: about/templates/about/6_admin_accounts.html
-#: about/templates/about/7_admin_accounts.html
-msgid "Give log in codes to team members who are locked out of the portal."
-msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "Sending QR alerts"
@@ -300,6 +269,30 @@ msgstr "Vous verrez une confirmation que l’alerte a été envoyée"
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "Health authorities continue to manually contact visitors who do not scan QR codes."
 msgstr "Les autorités sanitaires continueront de contacter manuellement les visiteurs qui ne scannent pas les codes QR."
+
+#: about/templates/about/7_admin_accounts.html
+msgid "Both administrators and team members can generate one-time keys."
+msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
+
+#: about/templates/about/7_admin_accounts.html
+msgid "Administrators can also:"
+msgstr "Les administrateurs peuvent aussi :"
+
+#: about/templates/about/7_admin_accounts.html
+msgid "Invite team members to create portal accounts."
+msgstr "Inviter des membres à se créer un compte pour le portail."
+
+#: about/templates/about/7_admin_accounts.html
+msgid "Make changes or update information in team member accounts."
+msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
+
+#: about/templates/about/7_admin_accounts.html
+msgid "Delete portal accounts."
+msgstr "Supprimer des comptes."
+
+#: about/templates/about/7_admin_accounts.html
+msgid "Give log in codes to team members who are locked out of the portal."
+msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
 
 #: about/templates/includes/_nav_about.html
 msgid "Table of contents: About the Portal"
@@ -388,7 +381,7 @@ msgstr "Donnez le code suivant à %(staff_email)s pour lui permettre de se conne
 
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html
 msgid "Read the code phonetically and ask the team member to read it back to you:"
-msgstr "Lisez le code de façon phonétique puis demandez à l’employé de vous le répéter :"
+msgstr "Lisez le code de façon phonétique puis demandez à l’employé de vous le répéter :"
 
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html
 msgid "After they log in, they can follow the instructions to get more codes."
@@ -606,7 +599,7 @@ msgstr "Précédent"
 
 #: covid_key/templates/covid_key/generate_key.html
 msgid "Tell the patient:"
-msgstr "Dites à la personne :"
+msgstr "Dites à la personne :"
 
 #: covid_key/templates/covid_key/generate_key.html
 msgid "The key expires in 24 hours and they cannot get another one."
@@ -708,7 +701,7 @@ msgstr "Vous pouvez maintenant donner des clés"
 
 #: covid_key/templates/covid_key/otk_start.html
 msgid "Patients need a key if they’ve:"
-msgstr "Une personne peut recevoir une clé si :"
+msgstr "Une personne peut recevoir une clé si :"
 
 #: covid_key/templates/covid_key/otk_start.html
 msgid "Tested positive for COVID-19, <strong>and</strong>,"
@@ -804,7 +797,7 @@ msgstr "Historique de notification"
 
 #: outbreaks/templates/confirm.html
 msgid "You’ll alert everyone who scanned this QR code on the date(s) and time(s) below."
-msgstr "L’alerte sera envoyée aux personnes qui ont scanné le code QR aux dates et heures ci-dessous :"
+msgstr "L’alerte sera envoyée aux personnes qui ont scanné le code QR aux dates et heures ci-dessous :"
 
 #: outbreaks/templates/confirm.html outbreaks/templates/details.html
 #: outbreaks/templates/history.html outbreaks/templates/profile.html
@@ -858,7 +851,7 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"        <p>En cliquant sur « Envoyer l’alerte », vous confirmez avoir correctement entré les détails de l’exposition potentielle.</p>\n"
+"        <p>En cliquant sur « Envoyer l’alerte », vous confirmez avoir correctement entré les détails de l’exposition potentielle.</p>\n"
 "        <p>Notez qu’une fois envoyée, l’alerte ne peut pas être annulée.</p>\n"
 "      "
 
@@ -872,7 +865,7 @@ msgstr "Alerte envoyée"
 
 #: outbreaks/templates/confirmed.html
 msgid "You’ve notified people who scanned the QR code at the address, date(s) and time(s) below."
-msgstr "Les personnes recevront une notification si elles ont scanné le code QR du lieu ci-dessous à l’une des dates et heures qui suivent :"
+msgstr "Les personnes recevront une notification si elles ont scanné le code QR du lieu ci-dessous à l’une des dates et heures qui suivent :"
 
 #: outbreaks/templates/confirmed.html
 msgid "Notify of another public exposure"
@@ -1261,7 +1254,7 @@ msgstr "Soumettre"
 
 #: portal/templates/includes/detailed_instructions.html
 msgid "Open the app. At the bottom of the screen, tap “Menu”."
-msgstr "Ouvrir l’application. Appuyer sur « Menu » en bas à droite."
+msgstr "Ouvrir l’application. Appuyer sur « Menu » en bas à droite."
 
 #: portal/templates/includes/detailed_instructions.html
 msgid "Tap “Enter your one-time key”."
@@ -1771,7 +1764,7 @@ msgstr "L’heure de la tentative"
 #: profiles/templates/invitations/messages/invite_already_accepted.txt
 #, python-format
 msgid "Account already exists for ‘%(email)s’"
-msgstr "Un compte existe déjà pour « %(email)s »"
+msgstr "Un compte existe déjà pour « %(email)s »"
 
 #: profiles/templates/invitations/messages/invite_expired.txt
 msgid "This link has expired."
@@ -2132,7 +2125,7 @@ msgstr "Contactez votre administrateur à l’adresse <a href=\"mailto:%(admin_e
 
 #: profiles/templates/profiles/support.html
 msgid "Contact your administrator. You’ll find their contact information in the email “Account confirmation and useful links”."
-msgstr "Contactez votre administrateur. Vous trouverez ses coordonnées dans le courriel intitulé « Confirmation de compte et liens utiles »."
+msgstr "Contactez votre administrateur. Vous trouverez ses coordonnées dans le courriel intitulé « Confirmation de compte et liens utiles »."
 
 #: profiles/templates/profiles/support.html
 msgid "If the portal is down and patients need keys"
@@ -2629,9 +2622,9 @@ msgid ""
 "  "
 msgstr ""
 "\n"
-"  <p>Téléphone : 1-833-694-1709<br>\n"
-"  Téléimprimeur (ATS) : 1-866-694-8389<br>\n"
-"  Heures de service : du lundi au vendredi de 8 h 30 à 17 h (heure de l’Est)</p>\n"
+"  <p>Téléphone : 1-833-694-1709<br>\n"
+"  Téléimprimeur (ATS) : 1-866-694-8389<br>\n"
+"  Heures de service : du lundi au vendredi de 8 h 30 à 17 h (heure de l’Est)</p>\n"
 "  "
 
 #: register/templates/register/contact_us.html
@@ -3141,7 +3134,7 @@ msgstr ""
 
 #: register/templates/register/start.html
 msgid "You’ll need:"
-msgstr "Assurez-vous d’avoir :"
+msgstr "Assurez-vous d’avoir :"
 
 #: register/templates/register/start.html
 msgid "an email address where we can send the poster;"
@@ -3224,7 +3217,7 @@ msgstr "Nous créerons votre affiche à l’aide de ces réponses"
 
 #: register/templates/register/summary.html
 msgid "By selecting “Make poster”, you confirm your answers are correct and complete."
-msgstr "En cliquant sur « Créer l’affiche », vous confirmez que vos réponses sont exactes et complètes."
+msgstr "En cliquant sur « Créer l’affiche », vous confirmez que vos réponses sont exactes et complètes."
 
 #: register/templates/register/summary.html
 msgid "Make poster"
