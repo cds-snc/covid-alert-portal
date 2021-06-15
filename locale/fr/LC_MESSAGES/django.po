@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-15 20:31+0000\n"
+"POT-Creation-Date: 2021-06-15 21:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,11 +38,15 @@ msgid "You’re crucial to the app’s success"
 msgstr "Votre rôle est essentiel au succès de l’appli"
 
 #: about/templates/about/1_index.html
-msgid "You’ll give one-time keys to patients with COVID-19 who’ve installed the app. To notify people, patients enter the key in the app. This confirms they’ve been diagnosed with COVID-19."
+#, fuzzy
+#| msgid "You’ll give one-time keys to patients with COVID-19 who’ve installed the app. To notify people, patients enter the key in the app. This confirms they’ve been diagnosed with COVID-19."
+msgid "You’ll give one-time keys to people with COVID-19 who’ve installed the app. To send notifications, people enter the key in the app. This confirms they’ve been diagnosed with COVID-19."
 msgstr "Vous fournirez des clés à usage unique aux personnes qui ont la COVID-19 et qui possèdent l’application. Pour pouvoir aviser les autres, les personnes doivent entrer ces clés dans l’application. Cette action prouve qu’elles ont reçu un diagnostic de COVID-19."
 
 #: about/templates/about/1_index.html
-msgid "Only authorized healthcare workers can generate and give one-time keys."
+#, fuzzy
+#| msgid "Only authorized healthcare workers can generate and give one-time keys."
+msgid "Only authorized team members can generate and give one-time keys."
 msgstr "Seuls les travailleurs autorisés peuvent générer et fournir des clés à usage unique."
 
 #: about/templates/about/1_index.html
@@ -64,9 +68,13 @@ msgid "Create an account"
 msgstr "Créer un compte"
 
 #: about/templates/about/2_create_account.html
-#: about/templates/includes/_nav_about.html
 msgid "Log in to the portal"
 msgstr "Se connecter au portail"
+
+#: about/templates/about/2_create_account.html
+#: about/templates/includes/_nav_about.html
+msgid "Logging in"
+msgstr "Connexion"
 
 #: about/templates/about/2_create_account.html
 msgid "If your administrator decides you need a portal account, you’ll get an email invitation. Check your spam folder if you’re expecting an invitation."
@@ -114,12 +122,16 @@ msgstr "Chaque code ne peut être utilisé qu’une fois."
 
 #: about/templates/about/2_create_account.html
 #: about/templates/about/3_one_time_keys.html
-#: about/templates/includes/_nav_about.html
 msgid "One-time keys"
 msgstr "Clés à usage unique"
 
 #: about/templates/about/3_one_time_keys.html
-msgid "Patients only get 1 key per positive test, and the key expires in 24 hours."
+#: about/templates/includes/_nav_about.html
+msgid "Generating keys"
+msgstr "Générer des clés"
+
+#: about/templates/about/3_one_time_keys.html
+msgid "People only get 1 key per positive test, and the key expires in 24 hours."
 msgstr "Les personnes ne peuvent recevoir qu’une seule clé par résultat positif au test de dépistage. La clé expire au bout de 24 heures."
 
 #: about/templates/about/3_one_time_keys.html
@@ -127,11 +139,13 @@ msgid "Before generating a key"
 msgstr "Avant de générer une clé"
 
 #: about/templates/about/3_one_time_keys.html
-msgid "You’ll confirm that the patient should get a key, and that they’re ready to enter or record it. The portal will guide you each time you need to do this."
+msgid "You’ll confirm that the person should get a key, and that they’re ready to enter or record it. The portal will guide you each time you need to do this."
 msgstr "Vous devrez confirmer que la personne peut recevoir une clé et qu’elle est prête à entrer celle-ci dans l’application ou à la prendre en note. Le portail vous guidera à travers ces étapes."
 
 #: about/templates/about/3_one_time_keys.html
-msgid "Only generate a key if you intend to give it to a patient"
+#, fuzzy
+#| msgid "Only generate a key if you intend to give it to a patient"
+msgid "Only generate a key if you intend to give it to a person"
 msgstr "Ne générez une clé que si vous prévoyez la donner à une personne"
 
 #: about/templates/about/3_one_time_keys.html
@@ -140,8 +154,12 @@ msgstr "Cette règle fait partie de nos conditions d’utilisation et nous perme
 
 #: about/templates/about/3_one_time_keys.html
 #: about/templates/about/4_give_a_key.html
-#: about/templates/includes/_nav_about.html
 msgid "Give a key"
+msgstr "Fournir une clé"
+
+#: about/templates/about/4_give_a_key.html
+#: about/templates/includes/_nav_about.html
+msgid "Giving keys"
 msgstr "Fournir une clé"
 
 #: about/templates/about/4_give_a_key.html
@@ -153,7 +171,7 @@ msgid "Read key phonetically"
 msgstr "Lecture de la clé de façon phonétique"
 
 #: about/templates/about/4_give_a_key.html
-msgid "We’ve chosen words for each letter so patients understand letters correctly."
+msgid "We’ve chosen words for each letter so people understand letters correctly."
 msgstr "Nous avons choisi certains mots pour épeler les lettres de la clé et aider les personnes à noter les bonnes lettres."
 
 #: about/templates/about/4_give_a_key.html
@@ -161,7 +179,7 @@ msgid "You may be able to text the key"
 msgstr "Possibilité d’envoyer la clé par message texte"
 
 #: about/templates/about/4_give_a_key.html
-msgid "If permitted by your health authority, the portal displays the button 'Text key to patient'. That button guides you through next steps if the patient agrees to get the key by text."
+msgid "If permitted by your health authority, the portal displays the button 'Text key to person'. That button guides you through next steps if the person agrees to get the key by text."
 msgstr "Si votre autorité de santé publique le permet, le portail vous offrira de « Texter la clé au patient ». Si la personne accepte de recevoir la clé ainsi, ce bouton vous guidera vers les prochaines étapes."
 
 #: about/templates/about/4_give_a_key.html
@@ -169,18 +187,18 @@ msgid "How the portal displays keys"
 msgstr "Affichage d’une clé dans le portail"
 
 #: about/templates/about/4_give_a_key.html
-msgid "The app guides the patient through the next steps"
+msgid "The app guides the person through the next steps"
 msgstr "L’application explique à l’utilisateur les étapes à suivre"
 
 #: about/templates/about/4_give_a_key.html
-msgid "The patient enters the key. Then the app guides them through the steps to notify people of possible exposure."
+msgid "The person enters the key. Then the app guides them through the steps to notify people of possible exposure."
 msgstr "La personne sera guidée étape par étape pour entrer sa clé et aviser les autres d’une exposition potentielle."
 
 #: about/templates/about/4_give_a_key.html
 #, python-format
 msgid ""
 "\n"
-"        <p>You can view screenshots from the app with instructions in <a href=\"%(help_url)s\">Help patient enter key</a>.</p>\n"
+"        <p>You can view screenshots from the app with instructions in <a href=\"%(help_url)s\">Help person enter key</a>.</p>\n"
 "    "
 msgstr ""
 "\n"
@@ -189,10 +207,12 @@ msgstr ""
 
 #: about/templates/about/4_give_a_key.html
 #: about/templates/about/5_help_patient_enter_key.html
+msgid "Help person enter key"
+msgstr "Aider le patient avec sa clé"
+
+#: about/templates/about/5_help_patient_enter_key.html
 #: about/templates/includes/_nav_about.html
-#: covid_key/templates/covid_key/key.html
-#: covid_key/templates/covid_key/otk_sms_sent.html
-msgid "Help patient enter key"
+msgid "Helping people enter keys"
 msgstr "Aider le patient avec sa clé"
 
 #: about/templates/about/5_help_patient_enter_key.html
@@ -622,6 +642,11 @@ msgid "Give patient this key"
 msgstr "Donnez la clé suivante"
 
 #: covid_key/templates/covid_key/key.html
+#: covid_key/templates/covid_key/otk_sms_sent.html
+msgid "Help patient enter key"
+msgstr "Aider le patient avec sa clé"
+
+#: covid_key/templates/covid_key/key.html
 msgid "Patients can also <a href=\"https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert/help.html#a17\" target=\"_blank\">contact direct app support</a>"
 msgstr "Les personnes peuvent aussi <a href='https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid/aide.html#a17' target='_blank'>obtenir une aide directe pour l’application</a>"
 
@@ -670,7 +695,6 @@ msgid "You are generating too many keys. Try again later."
 msgstr "Vous générez trop de clés. Réessayez plus tard."
 
 #: covid_key/templates/covid_key/otk_sms.html
-#: portal/templates/includes/big-code.html
 msgid "Text key to patient"
 msgstr "Texter la clé à la personne"
 
@@ -1236,6 +1260,12 @@ msgid "EXAMPLE ONLY. NOT A VALID ONE-TIME KEY."
 msgstr "CLÉ À TITRE D’EXEMPLE (NON VALIDE)"
 
 #: portal/templates/includes/big-code.html
+#, fuzzy
+#| msgid "Text key to patient"
+msgid "Text key to person"
+msgstr "Texter la clé à la personne"
+
+#: portal/templates/includes/big-code.html
 msgid ""
 "\n"
 "        <p>The <strong>key expires in 24 hours</strong>.</p>\n"
@@ -1265,19 +1295,21 @@ msgid "On “Notify people they’ve been exposed”, read the instructions. The
 msgstr "Lire les instructions de l’écran « Aviser les personnes d’une exposition », puis appuyer sur « Suivant »."
 
 #: portal/templates/includes/detailed_instructions.html
-msgid "Patients can use capital or small letters to enter the one-time key. Tap “Submit key”."
+msgid "People can use capital or small letters to enter the one-time key. Tap “Submit key”."
 msgstr "La clé peut être saisie en majuscules ou en minuscules. Appuyer sur « Soumettre la clé »."
 
 #: portal/templates/includes/detailed_instructions.html
-msgid "Then several screens ask questions. The app uses the answers to calculate when patients were most likely contagious, so it only notifies people they were near at that time."
+msgid "Then several screens ask questions. The app uses the answers to calculate when the person was most likely contagious, so it only notifies people they were near at that time."
 msgstr "Les écrans qui suivent posent quelques questions. L’application s’en sert pour calculer la période où la personne était susceptible d’être le plus contagieuse, pour ensuite n’aviser que les individus côtoyés pendant cette période."
 
 #: portal/templates/includes/detailed_instructions.html
-msgid "If a patient decides not to answer, then the app notifies everyone they were near over the past 14 days."
+#, fuzzy
+#| msgid "If a patient decides not to answer, then the app notifies everyone they were near over the past 14 days."
+msgid "If a person decides not to answer, then the app notifies everyone they were near over the past 14 days."
 msgstr "Si la personne préfère ne pas répondre aux questions, l’application enverra des notifications à tous les individus qu’elle a côtoyés au cours des 14 derniers jours."
 
 #: portal/templates/includes/detailed_instructions.html
-msgid "After patients have either answered questions or decided not to answer,  they need to give COVID Alert permission to upload random codes. Tap “Share exposures” to give permission."
+msgid "After people have either answered questions or decided not to answer,  they need to give COVID Alert permission to upload random codes. Tap “Share exposures” to give permission."
 msgstr "Après avoir répondu ou non aux questions, la personne doit autoriser Alerte COVID à téléverser les codes aléatoires. Appuyer sur « Partager les expositions » pour le faire."
 
 #: portal/templates/includes/detailed_instructions.html
@@ -1363,11 +1395,11 @@ msgid "Manage team"
 msgstr "Gérer l’équipe"
 
 #: portal/templates/includes/phonetic.html
-msgid "Read key phonetically to confirm patient understands letters:"
+msgid "Read key phonetically to confirm person understands letters:"
 msgstr "Lisez la clé de façon phonétique pour aider la personne à noter les bonnes lettres :"
 
 #: portal/templates/includes/phonetic.html
-msgid "Ask patient to read key back to you."
+msgid "Ask person to read key back to you."
 msgstr "Demandez à la personne de vous répéter la clé."
 
 #: portal/templates/locked_out.html
