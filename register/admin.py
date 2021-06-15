@@ -3,7 +3,6 @@ from functools import partial
 from django.contrib import admin, messages
 from django.db.models import Count
 from django.utils import timezone
-from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
 from portal.mixins import ExportCsvMixin
