@@ -11,11 +11,12 @@
     <a href="{% url 'register:registrant_email' %}" class="chevron-left">{% trans "Back" %}</a>
   </div>
 
+  {% include  "includes/flash_messages.html" %}
+
   <p>{% trans "Step 1 of 5" %}</p>
 
   {% include  "includes/error_list.html" %}
 
-  {% include  "includes/flash_messages.html" %}
   <div class="step-one-info">
     <h1>{% trans "Type of place or event" %}</h1>
     <p>{% trans "Choose the type that best fits your situation." %}</p>

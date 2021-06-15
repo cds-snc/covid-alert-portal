@@ -24,14 +24,10 @@
     {{ form_data.address_2 }}
   </b></p>
   <br>
-  <p>
-    {% trans "The contact could be you or a different person, such as a store manager. Public health may need to contact this person about exposures at this address." %}
-    </br>
-    {% blocktrans %}
-      We do <b>not</b> show the contact information on your QR code poster.
-    {% endblocktrans %}
-  </p>
 
+  <p>{% trans "The contact could be you or a different person, such as a store manager. Public health may need to contact this person about exposures at this address." %}</p>
+
+  <p>{% trans "We do <b>not</b> show the contact information on your QR code poster." %}</p>
 
   {% include "register/includes/contact_form.html" with submit_text=_("Next") form_class="registration-contact-form" %}
 {% endblock %}

@@ -21,6 +21,6 @@
     We do <b>not</b> show the email address on the poster.
   {% endblocktrans %}
   </p>
-  {% include "includes/cds_form.html" with submit_text=_("Next") %}
-  <p>{% trans "We’ll send you a link to confirm your email address." %}</p>
+  
+  {% include "includes/cds_form.html" with submit_text=_("Next") before_submit=_("<p>We’ll send you a link to confirm your email address.</p>") %}
 {% endblock %}
