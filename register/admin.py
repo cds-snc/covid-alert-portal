@@ -48,17 +48,17 @@ class SurveyListFilter(admin.SimpleListFilter):
         result = []
         surveys = Survey.objects.all()
         if surveys:
-            result.append((0, "None sent"))
+            result.append(("none", "None sent"))
             for survey in surveys:
                 result.append((f"{survey.id}:0", f"{survey.title}: None"))
                 result.append((f"{survey.id}:1", f"{survey.title}: Sent"))
-            result.append((1, "All surveys sent"))
+            result.append(("all", "All surveys sent"))
         return result
 
     def queryset(self, request, queryset):
-        if self.value() == '0':
+        if self.value() == 'none':
             return queryset.exclude(registrantsurvey__registrant__in=queryset)
-        elif self.value() == '1':
+        elif self.value() == 'all':
             surveys = Survey.objects.all()
             for survey in surveys:
                 queryset = queryset.filter(registrantsurvey__registrant__in=queryset,
@@ -101,8 +101,8 @@ class RegistrantAdmin(admin.ModelAdmin, ExportCsvMixin):
         actions = super().get_actions(request)
         surveys = Survey.objects.all()
         for survery in surveys:
-            sender = partial(self.send_survey_by_id, survery.id)
-            actions[f"survey_{survery.id}"] = (sender, f"survey_{survery.id}", f"Immediately email {survery} to registrant(s)")
+            sender_func = partial(self.send_survey_by_id, survery.id)
+            actions[f"survey_{survery.id}"] = (sender_func, f"survey_{survery.id}", f"Immediately email {survery} to registrant(s)")
         return actions
 
     @staticmethod
