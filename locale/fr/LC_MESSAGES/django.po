@@ -372,7 +372,7 @@ msgstr "Révocable"
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html
 #: profiles/forms.py
 msgid "Log in code"
-msgstr ""
+msgstr "Code de connexion"
 
 #: backup_codes/templates/backup_codes/admin_backup_codes_list.html
 #, python-format
