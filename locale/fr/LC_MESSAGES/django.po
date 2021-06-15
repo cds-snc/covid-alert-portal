@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-15 14:27+0000\n"
+"POT-Creation-Date: 2021-06-15 18:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1088,8 +1088,8 @@ msgid "Alert people who scanned a QR code and may have been exposed during their
 msgstr "Les personnes qui ont scanné le code QR de ce lieu ou de cet événement seront alertées d’un risque d’exposition."
 
 #: outbreaks/templates/search.html
-msgid "Enter at least 3 characters"
-msgstr "Saisissez au moins 3 caractères"
+msgid "Enter at least 3 characters."
+msgstr "Saisissez au moins 3 caractères."
 
 #: outbreaks/templates/search.html
 #, python-format
