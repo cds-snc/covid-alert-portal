@@ -92,7 +92,10 @@ def confirm_email(request, pk):
             return redirect(reverse_lazy("register:confirm_email_error"))
 
         # Create the Registrant
-        registrant, created = Registrant.objects.get_or_create(email=confirm.email)
+        registrant, created = Registrant.objects.get_or_create(
+            email=confirm.email,
+            language_cd=request.LANGUAGE_CODE or "en"
+        )
 
         # Save to session
         request.session["registrant_id"] = str(registrant.id)
@@ -192,6 +195,10 @@ class LocationWizard(NamedUrlSessionWizardView):
         location.contact_phone_ext = data["contact_phone_ext"]
         location.registrant = registrant
         location.save()
+
+        if self.request.LANGUAGE_CODE != registrant.language_cd:
+            registrant.language_cd = self.request.LANGUAGE_CODE
+            registrant.save()
 
         # Save location id to session for next step
         # (@TODO: should we just put it on the url?)

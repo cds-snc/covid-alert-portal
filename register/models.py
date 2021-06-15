@@ -2,6 +2,8 @@ from uuid import uuid4
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
+
+from profiles.models import HealthcareUser
 from .utils import generate_random_key
 from django.utils import timezone
 
@@ -14,6 +16,7 @@ class Registrant(models.Model):
         unique=True,
     )
     created = models.DateTimeField(default=timezone.now)
+    language_cd = models.CharField(max_length=2, default="en")
 
     def __str__(self):  # new
         return "{}".format(self.email)
@@ -74,3 +77,32 @@ class LocationSummary(Location):
         proxy = True
         verbose_name = "Location summary"
         verbose_name_plural = "Locations summary"
+
+
+class Survey(models.Model):
+    url = models.URLField(verbose_name=_("General Survey URL"))
+    title = models.CharField(max_length=200, verbose_name=_("Survey Title"))
+    en_notify_template_id = models.CharField(
+        max_length=200, verbose_name=_("English Notify Template ID")
+    )
+    fr_notify_template_id = models.CharField(
+        max_length=200, verbose_name=_("French Notify Template ID")
+    )
+
+    class Meta:
+        ordering = ["id"]
+
+    def __str__(self):
+        return self.title
+
+
+class RegistrantSurvey(models.Model):
+    survey = models.ForeignKey(Survey, on_delete=models.SET_NULL, null=True)
+    registrant = models.ForeignKey(Registrant, on_delete=models.SET_NULL, null=True)
+    sent_ts = models.DateTimeField(blank=True, null=True,
+                                   verbose_name=_("Sent Timestamp"))
+    sent_by = models.ForeignKey(HealthcareUser, on_delete=models.SET_NULL, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.registrant}:{self.survey}"
