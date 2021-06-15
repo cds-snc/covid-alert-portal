@@ -99,8 +99,9 @@ class Survey(models.Model):
 class RegistrantSurvey(models.Model):
     survey = models.ForeignKey(Survey, on_delete=models.SET_NULL, null=True)
     registrant = models.ForeignKey(Registrant, on_delete=models.SET_NULL, null=True)
-    sent_ts = models.DateTimeField(blank=True, null=True,
-                                   verbose_name=_("Sent Timestamp"))
+    sent_ts = models.DateTimeField(
+        blank=True, null=True, verbose_name=_("Sent Timestamp")
+    )
     sent_by = models.ForeignKey(HealthcareUser, on_delete=models.SET_NULL, null=True)
     created = models.DateTimeField(auto_now_add=True)
 

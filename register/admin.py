@@ -56,13 +56,15 @@ class SurveyListFilter(admin.SimpleListFilter):
         return result
 
     def queryset(self, request, queryset):
-        if self.value() == 'none':
+        if self.value() == "none":
             return queryset.exclude(registrantsurvey__registrant__in=queryset)
-        elif self.value() == 'all':
+        elif self.value() == "all":
             surveys = Survey.objects.all()
             for survey in surveys:
-                queryset = queryset.filter(registrantsurvey__registrant__in=queryset,
-                                           registrantsurvey__survey=survey)
+                queryset = queryset.filter(
+                    registrantsurvey__registrant__in=queryset,
+                    registrantsurvey__survey=survey,
+                )
             return queryset.distinct()
         elif self.value():
             id, code = self.value().split(":")
@@ -91,7 +93,9 @@ class RegistrantAdmin(admin.ModelAdmin, ExportCsvMixin):
         count = 0
         for survey in surveys:
             delimiter = "" if count == 0 else ", "
-            registrant_surveys = RegistrantSurvey.objects.filter(registrant=obj, survey=survey)
+            registrant_surveys = RegistrantSurvey.objects.filter(
+                registrant=obj, survey=survey
+            )
             if registrant_surveys:
                 count += 1
                 val += f"{delimiter}{survey}"
@@ -102,7 +106,11 @@ class RegistrantAdmin(admin.ModelAdmin, ExportCsvMixin):
         surveys = Survey.objects.all()
         for survery in surveys:
             sender_func = partial(self.send_survey_by_id, survery.id)
-            actions[f"survey_{survery.id}"] = (sender_func, f"survey_{survery.id}", f"Immediately email {survery} to registrant(s)")
+            actions[f"survey_{survery.id}"] = (
+                sender_func,
+                f"survey_{survery.id}",
+                f"Immediately email {survery} to registrant(s)",
+            )
         return actions
 
     @staticmethod
@@ -113,27 +121,29 @@ class RegistrantAdmin(admin.ModelAdmin, ExportCsvMixin):
         for registrant in queryset:
             reg_surveys = registrant.registrantsurvey_set.filter(survey_id=id)
             if reg_surveys:
-                modeladmin.message_user(request,
-                                        _("Some registrants have already had this survey sent to them."),
-                                        messages.ERROR)
+                modeladmin.message_user(
+                    request,
+                    _("Some registrants have already had this survey sent to them."),
+                    messages.ERROR,
+                )
                 return
         for registrant in queryset:
             reg_survey = RegistrantSurvey.objects.create(
                 registrant=registrant,
                 survey_id=id,
                 sent_by=request.user,
-                sent_ts=timezone.now()
+                sent_ts=timezone.now(),
             )
             try:
                 survey = reg_survey.survey
-                template_id = survey.en_notify_template_id if registrant.language_cd == "en" \
+                template_id = (
+                    survey.en_notify_template_id
+                    if registrant.language_cd == "en"
                     else survey.fr_notify_template_id
+                )
                 send_email(
                     registrant.email,
-                    {
-                        "registrant_id": str(registrant.id),
-                        "url": survey.url
-                    },
+                    {"registrant_id": str(registrant.id), "url": survey.url},
                     template_id,
                 )
                 count += 1
