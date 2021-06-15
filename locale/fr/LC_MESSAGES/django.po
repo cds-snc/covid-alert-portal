@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-15 19:28+0000\n"
+"POT-Creation-Date: 2021-06-15 20:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3194,15 +3194,19 @@ msgid "Your responsibilities"
 msgstr "Vos responsabilités"
 
 #: register/templates/register/terms.html
-msgid "By using this website, you agree that "
-msgstr "En utilisant le site Web, "
+msgid "By using this website, you confirm that:"
+msgstr "En utilisant le site Web, vous confirmez que:"
 
 #: register/templates/register/terms.html
-msgid "you’re a person who’s responsible for making a poster for a place or event."
-msgstr "vous acceptez d’être la personne responsable de créer une affiche pour un lieu ou un événement."
+msgid "You’re authorized to give information so that the place or event can make posters."
+msgstr "Vous avez la permission de fournir des renseignements permettant de créer des affiches pour un lieu ou un événement."
 
 #: register/templates/register/terms.html
-msgid "You also agree that you’ll:"
+msgid "You’ve received consent to share personal information that you need to make the posters."
+msgstr "Vous avez obtenu le consentement nécessaire pour fournir les renseignements personnels requis pour créer des affiches."
+
+#: register/templates/register/terms.html
+msgid "You also agree to:"
 msgstr "Vous acceptez également de :"
 
 #: register/templates/register/terms.html
@@ -3212,14 +3216,6 @@ msgstr "Créer des affiches uniquement pour des lieux ou des événements dont v
 #: register/templates/register/terms.html
 msgid "Enter accurate information when making posters."
 msgstr "Fournir des informations exactes lors de la création des affiches."
-
-#: register/templates/register/terms.html
-msgid "If needed, update name, address or contact information by using this website to make a new poster.  This changes the QR code for the place or event."
-msgstr "Placer des affiches uniquement sur le terrain correspondant à l’adresse de votre lieu ou événement."
-
-#: register/templates/register/terms.html
-msgid "Destroy any posters you do not need anymore or that display a previous QR code."
-msgstr "Placer la bonne affiche pour l’adresse en question."
 
 #: register/templates/register/terms.html
 msgid "Only display posters within the area that belongs to the address of the place or event."
@@ -3234,12 +3230,18 @@ msgid "Keep posters in good condition and replace damaged posters."
 msgstr "Mettre à jour le nom, l’adresse ou les coordonnées dans le site Web si ces renseignements changent. Un nouveau code QR sera créé pour le lieu ou l’événement en question."
 
 #: register/templates/register/terms.html
-msgid "Fraud or abuse"
-msgstr "Fraude ou mauvais usage"
+#, fuzzy
+#| msgid "If needed, update name, address or contact information by using this website to make a new poster.  This changes the QR code for the place or event."
+msgid "If needed, use this website to update name, address or contact information. This changes the QR code for the place or event."
+msgstr "Placer des affiches uniquement sur le terrain correspondant à l’adresse de votre lieu ou événement."
 
 #: register/templates/register/terms.html
-msgid "The Government of Canada is not responsible for problems caused by damaged or altered posters. This includes altered or fake QR codes that link to apps or websites other than  COVID Alert."
-msgstr "Le gouvernement du Canada n’est pas responsable des problèmes causés par des affiches abîmées ou modifiées. Il n’est pas responsable des codes QR modifiés ou contrefaits qui dirigent l’utilisateur vers des applications ou des sites Web autres que ceux d’Alerte COVID."
+msgid "Destroy any posters you do not need anymore or that display a previous QR code."
+msgstr "Placer la bonne affiche pour l’adresse en question."
+
+#: register/templates/register/terms.html
+msgid "Fraud or abuse"
+msgstr "Fraude ou mauvais usage"
 
 #: register/templates/register/terms.html
 msgid ""
@@ -3284,3 +3286,9 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "you’re a person who’s responsible for making a poster for a place or event."
+#~ msgstr "vous acceptez d’être la personne responsable de créer une affiche pour un lieu ou un événement."
+
+#~ msgid "The Government of Canada is not responsible for problems caused by damaged or altered posters. This includes altered or fake QR codes that link to apps or websites other than  COVID Alert."
+#~ msgstr "Le gouvernement du Canada n’est pas responsable des problèmes causés par des affiches abîmées ou modifiées. Il n’est pas responsable des codes QR modifiés ou contrefaits qui dirigent l’utilisateur vers des applications ou des sites Web autres que ceux d’Alerte COVID."
