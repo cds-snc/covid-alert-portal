@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-15 21:29+0000\n"
+"POT-Creation-Date: 2021-06-16 18:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,14 +38,10 @@ msgid "You’re crucial to the app’s success"
 msgstr "Votre rôle est essentiel au succès de l’appli"
 
 #: about/templates/about/1_index.html
-#, fuzzy
-#| msgid "You’ll give one-time keys to patients with COVID-19 who’ve installed the app. To notify people, patients enter the key in the app. This confirms they’ve been diagnosed with COVID-19."
 msgid "You’ll give one-time keys to people with COVID-19 who’ve installed the app. To send notifications, people enter the key in the app. This confirms they’ve been diagnosed with COVID-19."
 msgstr "Vous fournirez des clés à usage unique aux personnes qui ont la COVID-19 et qui possèdent l’application. Pour pouvoir aviser les autres, les personnes doivent entrer ces clés dans l’application. Cette action prouve qu’elles ont reçu un diagnostic de COVID-19."
 
 #: about/templates/about/1_index.html
-#, fuzzy
-#| msgid "Only authorized healthcare workers can generate and give one-time keys."
 msgid "Only authorized team members can generate and give one-time keys."
 msgstr "Seuls les travailleurs autorisés peuvent générer et fournir des clés à usage unique."
 
@@ -143,8 +139,6 @@ msgid "You’ll confirm that the person should get a key, and that they’re rea
 msgstr "Vous devrez confirmer que la personne peut recevoir une clé et qu’elle est prête à entrer celle-ci dans l’application ou à la prendre en note. Le portail vous guidera à travers ces étapes."
 
 #: about/templates/about/3_one_time_keys.html
-#, fuzzy
-#| msgid "Only generate a key if you intend to give it to a patient"
 msgid "Only generate a key if you intend to give it to a person"
 msgstr "Ne générez une clé que si vous prévoyez la donner à une personne"
 
@@ -207,6 +201,8 @@ msgstr ""
 
 #: about/templates/about/4_give_a_key.html
 #: about/templates/about/5_help_patient_enter_key.html
+#: covid_key/templates/covid_key/key.html
+#: covid_key/templates/covid_key/otk_sms_sent.html
 msgid "Help person enter key"
 msgstr "Aider le patient avec sa clé"
 
@@ -587,7 +583,9 @@ msgid "Enter the number again"
 msgstr "Entrez de nouveau le numéro de téléphone"
 
 #: covid_key/forms.py
-msgid "Yes, generate a key for another patient."
+#, fuzzy
+#| msgid "Yes, generate a key for another patient."
+msgid "Yes, generate a key for another person."
 msgstr "Oui, générer une clé pour une autre personne."
 
 #: covid_key/forms.py
@@ -618,7 +616,11 @@ msgid "Back"
 msgstr "Précédent"
 
 #: covid_key/templates/covid_key/generate_key.html
-msgid "Tell the patient:"
+msgid "When person is ready, generate a key"
+msgstr "Si la personne est prête, générez une clé"
+
+#: covid_key/templates/covid_key/generate_key.html
+msgid "Tell the person:"
 msgstr "Dites à la personne :"
 
 #: covid_key/templates/covid_key/generate_key.html
@@ -630,7 +632,7 @@ msgid "<span>To open the app and check they’re connected to the internet.</spa
 msgstr "<span>D’ouvrir l’application et de vérifier qu’il y a une connexion Internet.</span><strong class=\"break-line\">OU</strong><span>De trouver un endroit sûr où noter la clé.</span>"
 
 #: covid_key/templates/covid_key/generate_key.html
-msgid "Is this patient ready?"
+msgid "Is this person ready?"
 msgstr "La personne est-elle prête?"
 
 #: covid_key/templates/covid_key/generate_key.html
@@ -642,9 +644,8 @@ msgid "Give patient this key"
 msgstr "Donnez la clé suivante"
 
 #: covid_key/templates/covid_key/key.html
-#: covid_key/templates/covid_key/otk_sms_sent.html
-msgid "Help patient enter key"
-msgstr "Aider le patient avec sa clé"
+msgid "Give person this key"
+msgstr "Donnez la clé suivante"
 
 #: covid_key/templates/covid_key/key.html
 msgid "Patients can also <a href=\"https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert/help.html#a17\" target=\"_blank\">contact direct app support</a>"
@@ -659,11 +660,11 @@ msgid "Welcome to the COVID Alert portal"
 msgstr "Bienvenue dans le portail Alerte COVID"
 
 #: covid_key/templates/covid_key/landing.html
-msgid "Now you can give one-time keys"
-msgstr "Vous pouvez maintenant donner des clés"
+msgid "Give one-time keys"
+msgstr "Clés à usage unique"
 
 #: covid_key/templates/covid_key/landing.html
-msgid "Give a key to individuals who tested positive for COVID-19 so they can inform close contacts of a possible exposure."
+msgid "Give a key to people who tested positive for COVID-19 so they can inform close contacts of a possible exposure."
 msgstr "Donnez une clé aux personnes déclarées positives pour qu’elles puissent aviser leurs contacts étroits d’une possible exposition."
 
 #: covid_key/templates/covid_key/landing.html
@@ -695,11 +696,12 @@ msgid "You are generating too many keys. Try again later."
 msgstr "Vous générez trop de clés. Réessayez plus tard."
 
 #: covid_key/templates/covid_key/otk_sms.html
-msgid "Text key to patient"
+#: portal/templates/includes/big-code.html
+msgid "Text key to person"
 msgstr "Texter la clé à la personne"
 
 #: covid_key/templates/covid_key/otk_sms.html
-msgid "If patient gives permission, text this key to their phone"
+msgid "If person gives permission, text this key to their phone"
 msgstr "Si la personne accepte, textez-lui la clé suivante"
 
 #: covid_key/templates/covid_key/otk_sms.html
@@ -708,6 +710,10 @@ msgstr "Texter la clé"
 
 #: covid_key/templates/covid_key/otk_sms_sent.html
 msgid "Check patient received this key"
+msgstr "Vérifiez que la personne a reçu la clé suivante"
+
+#: covid_key/templates/covid_key/otk_sms_sent.html
+msgid "Check person received this key"
 msgstr "Vérifiez que la personne a reçu la clé suivante"
 
 #: covid_key/templates/covid_key/otk_sms_sent.html
@@ -724,7 +730,7 @@ msgid "You’re logged in to give one-time keys"
 msgstr "Vous pouvez maintenant donner des clés"
 
 #: covid_key/templates/covid_key/otk_start.html
-msgid "Patients need a key if they’ve:"
+msgid "People need a key if they’ve:"
 msgstr "Une personne peut recevoir une clé si :"
 
 #: covid_key/templates/covid_key/otk_start.html
@@ -736,7 +742,7 @@ msgid "Installed the COVID Alert app on their phone."
 msgstr "D’autre part, elle a l’application Alerte COVID sur son téléphone."
 
 #: covid_key/templates/covid_key/otk_start.html
-msgid "Does this patient meet both conditions?"
+msgid "Does this person meet both conditions?"
 msgstr "La personne remplit-elle les deux conditions?"
 
 #: covid_key/templates/covid_key/otk_start.html
@@ -1260,12 +1266,6 @@ msgid "EXAMPLE ONLY. NOT A VALID ONE-TIME KEY."
 msgstr "CLÉ À TITRE D’EXEMPLE (NON VALIDE)"
 
 #: portal/templates/includes/big-code.html
-#, fuzzy
-#| msgid "Text key to patient"
-msgid "Text key to person"
-msgstr "Texter la clé à la personne"
-
-#: portal/templates/includes/big-code.html
 msgid ""
 "\n"
 "        <p>The <strong>key expires in 24 hours</strong>.</p>\n"
@@ -1303,8 +1303,6 @@ msgid "Then several screens ask questions. The app uses the answers to calculate
 msgstr "Les écrans qui suivent posent quelques questions. L’application s’en sert pour calculer la période où la personne était susceptible d’être le plus contagieuse, pour ensuite n’aviser que les individus côtoyés pendant cette période."
 
 #: portal/templates/includes/detailed_instructions.html
-#, fuzzy
-#| msgid "If a patient decides not to answer, then the app notifies everyone they were near over the past 14 days."
 msgid "If a person decides not to answer, then the app notifies everyone they were near over the past 14 days."
 msgstr "Si la personne préfère ne pas répondre aux questions, l’application enverra des notifications à tous les individus qu’elle a côtoyés au cours des 14 derniers jours."
 
@@ -2200,17 +2198,17 @@ msgid ""
 "        <p>The COVID Alert Portal is only for authorized staff in Canada.</p>\n"
 "        <p>By using the portal, you agree to follow your health authority’s procedures.</p>\n"
 "        <p>You also agree to:</p>\n"
-"        <strong><p>Only generate keys for real patients</p></strong>\n"
+"        <strong><p>Only generate keys for real people</p></strong>\n"
 "        <p>Give only 1 key per positive test.</p>\n"
 "        <p>For a sample key, visit \"<a href=\"#\">Give a key</a>\".</p>\n"
-"        <strong><p>Confirm the patient meets 2 conditions</p></strong>\n"
+"        <strong><p>Confirm the person meets 2 conditions</p></strong>\n"
 "        <p>They've:</p>\n"
 "        <ul class=\"expanded\">\n"
 "            <li>Tested positive for COVID-19, and,</li>\n"
 "            <li>Installed the COVID Alert app on their phone.</li>\n"
 "        </ul>\n"
-"        <strong><p>Get the patient’s consent before texting a key</p></strong>\n"
-"        <p>Some patients may want you to text the one-time key to their mobile phone.  If your health authority offers this feature, the portal displays the button “Text key to patient”.</p>\n"
+"        <strong><p>Get the person’s consent before texting a key</p></strong>\n"
+"        <p>Some people may want you to text the one-time key to their mobile phone.  If your health authority offers this feature, the portal displays the button “Text key to person”.</p>\n"
 "        <strong><p>Prevent others from using your account</p></strong>\n"
 "        <p>Protect your username and password, even from other people working for a health authority.</p>\n"
 "        <strong><p>Keep the portal secure</p></strong>\n"
@@ -3319,8 +3317,8 @@ msgstr "Votre adresse courriel est validée."
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
 
-#~ msgid "you’re a person who’s responsible for making a poster for a place or event."
-#~ msgstr "vous acceptez d’être la personne responsable de créer une affiche pour un lieu ou un événement."
+#~ msgid "Text key to patient"
+#~ msgstr "Texter la clé à la personne"
 
-#~ msgid "The Government of Canada is not responsible for problems caused by damaged or altered posters. This includes altered or fake QR codes that link to apps or websites other than  COVID Alert."
-#~ msgstr "Le gouvernement du Canada n’est pas responsable des problèmes causés par des affiches abîmées ou modifiées. Il n’est pas responsable des codes QR modifiés ou contrefaits qui dirigent l’utilisateur vers des applications ou des sites Web autres que ceux d’Alerte COVID."
+#~ msgid "Help patient enter key"
+#~ msgstr "Aider le patient avec sa clé"
