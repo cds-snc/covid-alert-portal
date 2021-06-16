@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-16 18:24+0000\n"
+"POT-Creation-Date: 2021-06-16 22:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -602,8 +602,8 @@ msgstr "Si la personne est prête, générez une clé"
 
 #: covid_key/templates/covid_key/generate_key.html
 #: outbreaks/templates/confirm.html outbreaks/templates/details.html
-#: outbreaks/templates/location_history.html outbreaks/templates/profile.html
-#: outbreaks/templates/severity.html register/templates/register/error.html
+#: outbreaks/templates/location_history.html outbreaks/templates/severity.html
+#: register/templates/register/error.html
 #: register/templates/register/location_address.html
 #: register/templates/register/location_category.html
 #: register/templates/register/location_contact.html
@@ -837,11 +837,6 @@ msgstr "L’alerte sera envoyée aux personnes qui ont scanné le code QR aux da
 msgid "Name"
 msgstr "Nom"
 
-#: outbreaks/templates/confirm.html profiles/templates/profiles/edit.html
-#: profiles/templates/profiles/healthcareuser_detail.html
-msgid "Change"
-msgstr "Modifier"
-
 #: outbreaks/templates/confirm.html
 msgid "location"
 msgstr ""
@@ -861,6 +856,11 @@ msgstr "Montrer sur la carte"
 msgid "Date and time"
 msgstr "Date et heure"
 
+#: outbreaks/templates/confirm.html profiles/templates/profiles/edit.html
+#: profiles/templates/profiles/healthcareuser_detail.html
+msgid "Change"
+msgstr "Modifier"
+
 #: outbreaks/templates/confirm.html
 msgid "dates"
 msgstr ""
@@ -876,7 +876,7 @@ msgstr "Gravité"
 #: outbreaks/templates/confirm.html
 msgid ""
 "\n"
-"        <p>When you “Send QR alert”,  you confirm you’ve correctly entered all details from the health authority.</p>\n"
+"        <p>When you “Send alert”, you confirm you’ve correctly entered all details of the possible exposure.</p>\n"
 "        <p>It’s not possible to cancel an alert after sending.</p>\n"
 "      "
 msgstr ""
@@ -886,8 +886,12 @@ msgstr ""
 "      "
 
 #: outbreaks/templates/confirm.html
-msgid "Send QR alert"
+msgid "Send alert"
 msgstr "Envoyer l’alerte"
+
+#: outbreaks/templates/confirm.html
+msgid "Cancel this exposure"
+msgstr "Détails de l’exposition"
 
 #: outbreaks/templates/confirmed.html outbreaks/templates/location_history.html
 msgid "Alert sent"
@@ -920,7 +924,7 @@ msgstr "Pour voir toutes les alertes associées à ce lieu ou à cet événement
 #: outbreaks/templates/datetime.html outbreaks/templates/history.html
 #: outbreaks/templates/location_history.html
 msgid "Alert history"
-msgstr "Historique des alertes"
+msgstr "l'historique des alertes"
 
 #: outbreaks/templates/datetime.html portal/templates/includes/error_list.html
 msgid "Please correct the errors on the page"
@@ -1089,6 +1093,10 @@ msgstr "Trier par émetteur, ordre alphabétique"
 msgid "Sort by sender, descending"
 msgstr "Trier par émetteur, ordre alphabétique inverse"
 
+#: outbreaks/templates/profile.html outbreaks/templates/search.html
+msgid "Find places and events"
+msgstr "Trouver un lieu ou un événement"
+
 #: outbreaks/templates/profile.html
 msgid "Contact name"
 msgstr "Personne-ressource"
@@ -1108,10 +1116,6 @@ msgstr "Afficher l’historique"
 #: outbreaks/templates/profile.html
 msgid "Place not found."
 msgstr "Lieu introuvable"
-
-#: outbreaks/templates/search.html
-msgid "Find places and events"
-msgstr "Trouver un lieu ou un événement"
 
 #: outbreaks/templates/search.html
 msgid "Alert people who scanned a QR code and may have been exposed during their visit."
