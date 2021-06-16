@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-16 22:03+0000\n"
+"POT-Creation-Date: 2021-06-16 22:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -947,6 +947,10 @@ msgid "Remove time range"
 msgstr "Enlever la plage horaire"
 
 #: outbreaks/templates/datetime.html
+msgid "Enter separate dates for exposures that extend past midnight."
+msgstr "Si l’exposition se poursuit après minuit, ajoutez une nouvelle date."
+
+#: outbreaks/templates/datetime.html
 msgid "Add a time range"
 msgstr "Préciser une plage horaire"
 
@@ -1388,8 +1392,8 @@ msgid "Generate keys"
 msgstr "Générer des clés"
 
 #: portal/templates/includes/nav_main.html
-msgid "Send Alerts"
-msgstr "Envoyer des alertes"
+msgid "Send alerts"
+msgstr "Envoyer l’alerte"
 
 #: portal/templates/includes/nav_main.html
 #: profiles/templates/profiles/healthcareuser_list.html
@@ -3320,6 +3324,9 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Send Alerts"
+#~ msgstr "Envoyer des alertes"
 
 #~ msgid "Text key to patient"
 #~ msgstr "Texter la clé à la personne"
