@@ -60,7 +60,7 @@ class StartView(AdminUserTestCase):
         self.login()
         response = self.client.get(reverse("generate_key"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>When patient is ready, generate a key</h1>")
+        self.assertContains(response, "<h1>When person is ready, generate a key</h1>")
 
 
 class KeyView(AdminUserTestCase):
@@ -76,7 +76,7 @@ class KeyView(AdminUserTestCase):
 
         response = self.client.post(reverse("key"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Give patient this key</h1>")
+        self.assertContains(response, "<h1>Give person this key</h1>")
         self.assertContains(
             response, "<code>{}</code>".format(response.context["code"])
         )
@@ -192,7 +192,7 @@ class OtkSmsViewTests(AdminUserTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
-            "<h1>If patient gives permission, text this key to their phone</h1>",
+            "<h1>If person gives permission, text this key to their phone</h1>",
         )
 
     def test_otk_sms_view_disabled_province(self):
@@ -255,4 +255,4 @@ class OtkSmsViewTests(AdminUserTestCase):
             reverse("otk_sms_sent", kwargs={"phone_number": "+12125552368"})
         )
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Check patient received this key</h1>")
+        self.assertContains(response, "<h1>Check person received this key</h1>")
