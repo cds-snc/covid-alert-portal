@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-16 22:42+0000\n"
+"POT-Creation-Date: 2021-06-17 22:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -583,8 +583,6 @@ msgid "Enter the number again"
 msgstr "Entrez de nouveau le numéro de téléphone"
 
 #: covid_key/forms.py
-#, fuzzy
-#| msgid "Yes, generate a key for another patient."
 msgid "Yes, generate a key for another person."
 msgstr "Oui, générer une clé pour une autre personne."
 
@@ -603,7 +601,6 @@ msgstr "Si la personne est prête, générez une clé"
 #: covid_key/templates/covid_key/generate_key.html
 #: outbreaks/templates/confirm.html outbreaks/templates/details.html
 #: outbreaks/templates/location_history.html outbreaks/templates/severity.html
-#: register/templates/register/error.html
 #: register/templates/register/location_address.html
 #: register/templates/register/location_category.html
 #: register/templates/register/location_contact.html
@@ -1021,6 +1018,10 @@ msgid "Search by name or address"
 msgstr "Recherche par nom ou adresse"
 
 #: outbreaks/templates/history.html outbreaks/templates/search.html
+msgid "Enter at least 3 characters."
+msgstr "Saisissez au moins 3 caractères."
+
+#: outbreaks/templates/history.html outbreaks/templates/search.html
 msgid "Search"
 msgstr "Chercher"
 
@@ -1124,10 +1125,6 @@ msgstr "Lieu introuvable"
 #: outbreaks/templates/search.html
 msgid "Alert people who scanned a QR code and may have been exposed during their visit."
 msgstr "Les personnes qui ont scanné le code QR de ce lieu ou de cet événement seront alertées d’un risque d’exposition."
-
-#: outbreaks/templates/search.html
-msgid "Enter at least 3 characters."
-msgstr "Saisissez au moins 3 caractères."
 
 #: outbreaks/templates/search.html
 #, python-format
@@ -2644,12 +2641,16 @@ msgid "Invalid / expired link"
 msgstr "Lien non valide ou expiré"
 
 #: register/templates/register/error.html
-msgid "Invalid / Expired"
-msgstr "Invalide ou expiré"
+msgid "The link has expired"
+msgstr "Lien expiré"
 
 #: register/templates/register/error.html
-msgid "Sorry, that confirmation link has expired or has already been used."
-msgstr "Désolé, le lien de validation est expiré ou a déjà été utilisé."
+msgid "If you want to continue, we can send a new link to your email."
+msgstr "Si vous souhaitez continuer, nous pouvons envoyer un nouveau lien à votre adresse courriel."
+
+#: register/templates/register/error.html
+msgid "Send new link"
+msgstr "Envoyer un nouveau lien"
 
 #: register/templates/register/help_page.html
 #: register/templates/register/how_display_poster.html
@@ -3324,3 +3325,9 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Invalid / Expired"
+#~ msgstr "Invalide ou expiré"
+
+#~ msgid "Sorry, that confirmation link has expired or has already been used."
+#~ msgstr "Désolé, le lien de validation est expiré ou a déjà été utilisé."
