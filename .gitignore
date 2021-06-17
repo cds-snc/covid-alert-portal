@@ -10,7 +10,7 @@ db.sqlite3
 !/staticfiles/.gitkeep
 __pycache__
 *.tfstate*
-secrets.tfvars
+secrets*.tfvars
 .terraform/
 *.tfplan
 .coverage
