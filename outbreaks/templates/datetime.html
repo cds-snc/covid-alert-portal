@@ -80,7 +80,7 @@
               {{ form.year.label_tag }}
               {{ form.year }}
             </div>
-            <div class="col">
+            <div class="col md-top-padding">
               <button type="button" class="link" id="button_datepicker">{% trans "Choose date" %}
                 <img src="{% static 'img/calendar_today_24px.svg' %}" alt=""/>
               </button>
@@ -106,7 +106,7 @@
                 {{ form.end_time.label_tag }}
                 {{ form.end_time }}
               </div>
-              <div class="col">
+              <div class="col md-top-padding">
                 <button name="do_post" value="clear_time" class="link">
                   {{ _("Remove time range") }}
                 </button>

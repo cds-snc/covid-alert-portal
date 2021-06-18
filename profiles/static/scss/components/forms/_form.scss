@@ -33,22 +33,14 @@ main form {
   }
 
   .search_bar {
-    div {
-      display: inline-block;
-      width: 100%;
-    }
-
-    input {
-      display: inline-block;
-      width: 70%;
-    }
 
     button[type='submit'] {
-      display: inline-block;
       vertical-align: baseline;
       padding: 0px 18px;
       margin-top: 0px;
       line-height: inherit;
+      white-space: nowrap;
+      display: inline-block;
     }
   }
 

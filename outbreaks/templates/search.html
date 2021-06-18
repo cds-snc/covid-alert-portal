@@ -25,15 +25,21 @@
         {% if form.visible_fields.0.errors %}
           <div id="error--{{ form.visible_fields.0.html_name }}"
                class="validation-error">{{ form.visible_fields.0.errors|first }}</div>
-          {% else %}
+        {% else %}
           <span>{% trans 'Enter at least 3 characters' %}</span>
         {% endif %}
-        <input type="search" name="search_text" size="30" autocomplete="on" id="id_search_text"
-               value="{{ form.visible_fields.0.data }}">
-        <button type="submit">
-          {{ _("Search") }}
-          <img src="{% static 'img/search_24px.svg' %}" alt=""/>
-        </button>
+        <div class="search-flex-container">
+          <div>
+            <input type="search" name="search_text" size="30" autocomplete="on" id="id_search_text"
+                   value="{{ form.visible_fields.0.data }}">
+          </div>
+          <div>
+            <button type="submit">
+              {{ _("Search") }}
+              <img src="{% static 'img/search_24px.svg' %}" alt=""/>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </form>
@@ -45,7 +51,6 @@
       <b>{{ search_result_count }} results in your region for</b> {{ search_text }}.
     {% endblocktrans %}
 
-    <br>
     <table class="with-actions">
       <caption class="visually-hidden">{% trans "Available locations" %}</caption>
       <thead>
@@ -107,11 +112,11 @@
       </p>
     {% endif %}
   {% endif %}
-  <br>
+
   <p><a href="{% url 'outbreaks:history' %}">{% trans "Search alert history" %}</a></p>
-  
+
   <div class="content-section">
     <p><strong>{% trans "New or need a refresher?" %}</strong><br>
-    {% trans "Visit" %} <a href="{% url 'about:sending_qr_alerts' %}">{% trans "Sending alerts" %}</a>.</p>
+      {% trans "Visit" %} <a href="{% url 'about:sending_qr_alerts' %}">{% trans "Sending alerts" %}</a>.</p>
   </div>
 {% endblock %}
