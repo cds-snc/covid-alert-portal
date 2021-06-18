@@ -1182,8 +1182,8 @@ msgid "The alert will include this message."
 msgstr "L'alerte affichera cette consigne."
 
 #: outbreaks/views.py
-msgid "Showing {} {} {} of {} results."
-msgstr "Résultats {} {} {} sur {}."
+msgid "Showing {} — {} of {} results."
+msgstr "Résultats {} à {} sur {}."
 
 #: outbreaks/views.py
 msgid "A conflicting time range: ({}) was entered below."
