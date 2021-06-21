@@ -10,6 +10,14 @@ resource "aws_ecs_cluster" "covidportal" {
     value = "enabled"
   }
 
+  capacity_providers = ["FARGATE"]
+
+  default_capacity_provider_strategy {
+    capacity_provider = "FARGATE"
+    weight            = 1
+    base              = 2
+  }
+
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
   }
@@ -155,6 +163,12 @@ resource "aws_ecs_service" "covidportal" {
     container_port   = 8000
   }
 
+  capacity_provider_strategy {
+    capacity_provider = "FARGATE"
+    weight            = 1
+    base              = 2
+  }
+
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
   }
@@ -204,6 +218,12 @@ resource "aws_ecs_service" "qrcode" {
     target_group_arn = aws_lb_target_group.qrcode.arn
     container_name   = var.ecs_covid_portal_name
     container_port   = 8000
+  }
+
+  capacity_provider_strategy {
+    capacity_provider = "FARGATE"
+    weight            = 1
+    base              = 2
   }
 
   tags = {
