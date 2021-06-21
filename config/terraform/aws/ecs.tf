@@ -167,7 +167,7 @@ resource "aws_ecs_service" "covidportal" {
     capacity_provider = "FARGATE"
     weight            = 1
     base              = 2
-  }  
+  }
 
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
@@ -224,7 +224,7 @@ resource "aws_ecs_service" "qrcode" {
     capacity_provider = "FARGATE"
     weight            = 1
     base              = 2
-  }  
+  }
 
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
