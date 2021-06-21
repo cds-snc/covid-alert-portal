@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-15 14:27+0000\n"
+"POT-Creation-Date: 2021-06-16 15:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1147,8 +1147,8 @@ msgid "The alert will include this message."
 msgstr "L'alerte affichera cette consigne."
 
 #: outbreaks/views.py
-msgid "Showing {} {} {} of {} results."
-msgstr "Résultats {} {} {} sur {}."
+msgid "Showing {} — {} of {} results."
+msgstr "Résultats {} à {} sur {}."
 
 #: outbreaks/views.py
 msgid "A conflicting time range: ({}) was entered below."

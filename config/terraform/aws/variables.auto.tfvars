@@ -31,7 +31,7 @@ dual_urls             = "False"
 
 #Autoscaling ECS
 
-portal_autoscale_enabled = false
+portal_autoscale_enabled = true
 
 ###
 # AWS VPC - networking.tf

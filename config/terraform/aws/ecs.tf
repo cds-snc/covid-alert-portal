@@ -10,6 +10,14 @@ resource "aws_ecs_cluster" "covidportal" {
     value = "enabled"
   }
 
+  capacity_providers = ["FARGATE"]
+
+  default_capacity_provider_strategy {
+    capacity_provider = "FARGATE"
+    weight            = 1
+    base              = 2
+  }
+
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
   }
@@ -223,7 +231,7 @@ resource "aws_ecs_service" "qrcode" {
 resource "aws_appautoscaling_target" "portal" {
   count              = var.portal_autoscale_enabled ? 1 : 0
   service_namespace  = "ecs"
-  resource_id        = "service/${aws_ecs_service.covidportal.cluster}/${aws_ecs_service.covidportal.name}"
+  resource_id        = "service/${aws_ecs_cluster.covidportal.name}/${aws_ecs_service.covidportal.name}"
   scalable_dimension = "ecs:service:DesiredCount"
   min_capacity       = var.min_capacity
   max_capacity       = var.max_capacity
@@ -232,9 +240,9 @@ resource "aws_appautoscaling_policy" "portal_cpu" {
   count              = var.portal_autoscale_enabled ? 1 : 0
   name               = "portal_cpu"
   policy_type        = "TargetTrackingScaling"
-  service_namespace  = "ecs"
-  resource_id        = "service/${aws_ecs_service.covidportal.cluster}/${aws_ecs_service.covidportal.name}"
-  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = aws_appautoscaling_target.portal[count.index].service_namespace
+  resource_id        = aws_appautoscaling_target.portal[count.index].resource_id
+  scalable_dimension = aws_appautoscaling_target.portal[count.index].scalable_dimension
 
   target_tracking_scaling_policy_configuration {
     scale_in_cooldown  = var.scale_in_cooldown
@@ -250,9 +258,9 @@ resource "aws_appautoscaling_policy" "portal_memory" {
   count              = var.portal_autoscale_enabled ? 1 : 0
   name               = "portal_memory"
   policy_type        = "TargetTrackingScaling"
-  service_namespace  = "ecs"
-  resource_id        = "service/${aws_ecs_service.covidportal.cluster}/${aws_ecs_service.covidportal.name}"
-  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = aws_appautoscaling_target.portal[count.index].service_namespace
+  resource_id        = aws_appautoscaling_target.portal[count.index].resource_id
+  scalable_dimension = aws_appautoscaling_target.portal[count.index].scalable_dimension
 
   target_tracking_scaling_policy_configuration {
     scale_in_cooldown  = var.scale_in_cooldown
@@ -267,7 +275,7 @@ resource "aws_appautoscaling_policy" "portal_memory" {
 resource "aws_appautoscaling_target" "qrcode" {
   count              = var.portal_autoscale_enabled ? 1 : 0
   service_namespace  = "ecs"
-  resource_id        = "service/${aws_ecs_service.qrcode.cluster}/${aws_ecs_service.qrcode.name}"
+  resource_id        = "service/${aws_ecs_cluster.covidportal.name}/${aws_ecs_service.qrcode.name}"
   scalable_dimension = "ecs:service:DesiredCount"
   min_capacity       = var.min_capacity
   max_capacity       = var.max_capacity
@@ -276,9 +284,9 @@ resource "aws_appautoscaling_policy" "qrcode_cpu" {
   count              = var.portal_autoscale_enabled ? 1 : 0
   name               = "qrcode_cpu"
   policy_type        = "TargetTrackingScaling"
-  service_namespace  = "ecs"
-  resource_id        = "service/${aws_ecs_service.qrcode.cluster}/${aws_ecs_service.qrcode.name}"
-  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = aws_appautoscaling_target.qrcode[count.index].service_namespace
+  resource_id        = aws_appautoscaling_target.qrcode[count.index].resource_id
+  scalable_dimension = aws_appautoscaling_target.qrcode[count.index].scalable_dimension
 
   target_tracking_scaling_policy_configuration {
     scale_in_cooldown  = var.scale_in_cooldown
@@ -294,9 +302,9 @@ resource "aws_appautoscaling_policy" "qrcode_memory" {
   count              = var.portal_autoscale_enabled ? 1 : 0
   name               = "portal_memory"
   policy_type        = "TargetTrackingScaling"
-  service_namespace  = "ecs"
-  resource_id        = "service/${aws_ecs_service.qrcode.cluster}/${aws_ecs_service.qrcode.name}"
-  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = aws_appautoscaling_target.qrcode[count.index].service_namespace
+  resource_id        = aws_appautoscaling_target.qrcode[count.index].resource_id
+  scalable_dimension = aws_appautoscaling_target.qrcode[count.index].scalable_dimension
 
   target_tracking_scaling_policy_configuration {
     scale_in_cooldown  = var.scale_in_cooldown
