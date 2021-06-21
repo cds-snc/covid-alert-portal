@@ -11,7 +11,12 @@
                         "ContainerName": "placeholder",
                         "ContainerPort": 0
                     }
-                }
+                },
+                "CapacityProviderStrategy": [{
+                    "CapacityProvider": "FARGATE",
+                    "Weight": 1,
+                    "Base": 2                    
+                }]                
             }
         }
     ]
