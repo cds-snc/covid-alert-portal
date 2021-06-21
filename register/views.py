@@ -207,10 +207,8 @@ class LocationWizard(NamedUrlSessionWizardView):
         en_poster = get_encoded_poster(location, "en")
         fr_poster = get_encoded_poster(location, "fr")
 
-        to_email = self.request.session["registrant_email"]
-
         send_email(
-            to_email,
+            registrant.email,
             {
                 "location_name": location.name,
                 "location_address": location.address,
