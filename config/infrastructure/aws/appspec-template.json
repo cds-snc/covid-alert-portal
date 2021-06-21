@@ -10,12 +10,7 @@
                     "LoadBalancerInfo": {
                         "ContainerName": "placeholder",
                         "ContainerPort": 0
-                    },
-                    "CapacityProviderStrategy": [{
-                        "CapacityProvider": "FARGATE",
-                        "Base": 2,
-                        "Weight": 1
-                    }]
+                    }
                 }
             }
         }

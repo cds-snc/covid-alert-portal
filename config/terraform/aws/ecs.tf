@@ -13,12 +13,6 @@ resource "aws_ecs_cluster" "covidportal" {
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
   }
-
-  default_capacity_provider_strategy {
-    capacity_provider = "FARGATE"
-    weight            = 1
-    base              = 2
-  }
 }
 
 locals {
@@ -142,13 +136,6 @@ resource "aws_ecs_service" "covidportal" {
   deployment_minimum_healthy_percent = 50
   deployment_maximum_percent         = 200
   health_check_grace_period_seconds  = 60
-
-  capacity_provider_strategy {
-    capacity_provider = "FARGATE"
-    weight            = 1
-    base              = 2
-  }
-
   deployment_controller {
     type = "CODE_DEPLOY"
   }
@@ -200,13 +187,6 @@ resource "aws_ecs_service" "qrcode" {
   deployment_minimum_healthy_percent = 50
   deployment_maximum_percent         = 200
   health_check_grace_period_seconds  = 60
-
-  capacity_provider_strategy {
-    capacity_provider = "FARGATE"
-    weight            = 1
-    base              = 2
-  }
-
   deployment_controller {
     type = "CODE_DEPLOY"
   }
