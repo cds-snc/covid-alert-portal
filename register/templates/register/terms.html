@@ -20,15 +20,20 @@
     <h2>{% trans "Your responsibilities" %}</h2>
 
     <p>
-      {% trans 'By using this website, you agree that ' %}
-      <b>
-        {% trans 'you’re a person who’s responsible for making a poster for a place or event.' %}
-      </b>
+      {% trans 'By using this website, you confirm that:' %}
     </p>
+      <ul>
+        <li>
+          {% trans 'You’re authorized to give information so that the place or event can make posters.' %}
+        </li>
+        <li>
+          {% trans 'You’ve received consent to share personal information that you need to make the posters.' %}
+        </li>
+      </ul>
   <br>
     <p>
       <b>
-        {% trans 'You also agree that you’ll:' %}
+        {% trans 'You also agree to:' %}
       </b>
       <br>
       <br>
@@ -41,12 +46,6 @@
         {% trans 'Enter accurate information when making posters.' %}
       </li>
       <li>
-        {% trans 'If needed, update name, address or contact information by using this website to make a new poster.  This changes the QR code for the place or event.' %}
-      </li>
-      <li>
-        {% trans 'Destroy any posters you do not need anymore or that display a previous QR code.' %}
-      </li>
-      <li>
         {% trans 'Only display posters within the area that belongs to the address of the place or event.' %}
       </li>
       <li>
@@ -55,12 +54,15 @@
       <li>
         {% trans 'Keep posters in good condition and replace damaged posters.' %}
       </li>
+      <li>
+        {% trans 'If needed, use this website to update name, address or contact information. This changes the QR code for the place or event.' %}
+      </li>
+      <li>
+        {% trans 'Destroy any posters you do not need anymore or that display a previous QR code.' %}
+      </li>
     </ul>
   <br>
     <h2>{% trans "Fraud or abuse" %}</h2>
-    <p>
-      {% trans 'The Government of Canada is not responsible for problems caused by damaged or altered posters. This includes altered or fake QR codes that link to apps or websites other than  COVID Alert.' %}
-    </p>
     <p>
       {% blocktrans %}
         If we learn that you’re using this website for fraud or abuse, we may block your access without warning.
