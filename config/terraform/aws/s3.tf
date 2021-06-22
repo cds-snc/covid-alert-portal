@@ -25,10 +25,6 @@ resource "aws_s3_bucket" "firehose_waf_logs_qrcode" {
       }
     }
   }
-  logging {
-    target_bucket = "cbs-satellite-account-bucket136676205420"
-    target_prefix = "136676205420/s3_access_logs/qrcode-terraform-waf-logs/"
-  }
   #tfsec:ignore:AWS002
   #tfsec:ignore:AWS077
 }
