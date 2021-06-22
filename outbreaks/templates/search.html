@@ -26,7 +26,7 @@
           <div id="error--{{ form.visible_fields.0.html_name }}"
                class="validation-error">{{ form.visible_fields.0.errors|first }}</div>
           {% else %}
-          <span>{% trans 'Enter at least 3 characters' %}</span>
+          <span>{% trans 'Enter at least 3 characters.' %}</span>
         {% endif %}
         <input type="search" name="search_text" size="30" autocomplete="on" id="id_search_text"
                value="{{ form.visible_fields.0.data }}">

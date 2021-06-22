@@ -6,7 +6,7 @@
 {% block content %}
   <h1>{% trans "You’re logged in to give one-time keys" %}</h1>
   <p>
-    {% trans "Patients need a key if they’ve:" %}
+    {% trans "People need a key if they’ve:" %}
   </p>
   <ul class="expanded">
     <li>{% blocktrans %}Tested positive for COVID-19, <strong>and</strong>,{% endblocktrans %}</li>
@@ -14,7 +14,7 @@
   </ul>
 
   <div class="content-button content-section">
-    <p><strong>{% trans "Does this patient meet both conditions?" %}</strong></p>
+    <p><strong>{% trans "Does this person meet both conditions?" %}</strong></p>
     <a href="{% url 'generate_key' %}" role='button' draggable='false'>{% trans "Yes, continue" %}</a>
   </div>
 

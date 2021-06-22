@@ -8,9 +8,9 @@
     <a href="{% url 'otk_start' %}" class="chevron-left">{% trans "Back" %}</a>
   </div>
 
-  <h1>{% trans "When patient is ready, generate a key" %}</h1>
+  <h1>{% trans "When person is ready, generate a key" %}</h1>
   <p>
-    {% trans "Tell the patient:" %}
+    {% trans "Tell the person:" %}
   </p>
   <ol class="expanded">
     <li>{% trans "The key expires in 24 hours and they cannot get another one." %}</li>
@@ -18,7 +18,7 @@
   </ol>
 
   <div class="content-button content-section">
-    <p><strong>{% trans "Is this patient ready?" %}</strong></p>
+    <p><strong>{% trans "Is this person ready?" %}</strong></p>
    <form action="{% url 'key' %}" method="post">
     {% csrf_token %}
       <button type="submit" class="start with-chevron">{% trans "Yes, generate a key" %}</button>
