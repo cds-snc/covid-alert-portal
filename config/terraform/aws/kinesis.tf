@@ -44,7 +44,9 @@ resource "aws_iam_role_policy" "firehose_waf_logs" {
       ],
       "Resource": [
         "${aws_s3_bucket.firehose_waf_logs.arn}",
-        "${aws_s3_bucket.firehose_waf_logs.arn}/*"
+        "${aws_s3_bucket.firehose_waf_logs.arn}/*",
+        "${aws_s3_bucket.firehose_waf_logs_qrcode.arn}",
+        "${aws_s3_bucket.firehose_waf_logs_qrcode.arn}/*"
       ]
     },
     {
@@ -70,5 +72,18 @@ resource "aws_kinesis_firehose_delivery_stream" "firehose_waf_logs" {
   s3_configuration {
     role_arn   = aws_iam_role.firehose_waf_logs.arn
     bucket_arn = aws_s3_bucket.firehose_waf_logs.arn
+  }
+}
+
+resource "aws_kinesis_firehose_delivery_stream" "firehose_waf_logs_qrcode" {
+  name        = "aws-waf-logs-qrcode"
+  destination = "s3"
+  server_side_encryption {
+    enabled = true
+  }
+
+  s3_configuration {
+    role_arn   = aws_iam_role.firehose_waf_logs.arn
+    bucket_arn = aws_s3_bucket.firehose_waf_logs_qrcode.arn
   }
 }
