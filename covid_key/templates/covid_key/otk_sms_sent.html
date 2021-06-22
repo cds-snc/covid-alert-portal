@@ -10,7 +10,7 @@
 {% block content %}
   {% include  "includes/error_list.html" %}
   {% include  "includes/flash_messages.html" %}
-  <h1>{% trans "Check patient received this key" %}</h1>
+  <h1>{% trans "Check person received this key" %}</h1>
 
   <div class="otk">{{ request.session.otk.code }}</div>
 
@@ -18,7 +18,7 @@
 
   <details>
     <summary>
-      <span>{% trans "Help patient enter key" %}</span>
+      <span>{% trans "Help person enter key" %}</span>
     </summary>
 
     <div>

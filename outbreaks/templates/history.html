@@ -26,6 +26,7 @@
         <label for="id_search_text">
           <b>{% trans "Search by name or address" %}</b>
         </label>
+        <span>{% trans 'Enter at least 3 characters.' %}</span>
         <input type="search" name="search_text" size="30" autocomplete="on" id="id_search_text"
                value="{{ search_text }}">
         <button type="submit">
