@@ -2263,6 +2263,24 @@ msgstr "Vous avez supprimé le compte associé à ‘%(email)s’"
 msgid "Your session timed out. Log in again to continue using the portal."
 msgstr "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le portail."
 
+#: register/admin.py
+msgid "Surveys Completed"
+msgstr "Enquêtes complétées"
+
+#: register/admin.py
+#, python-brace-format
+msgid "{registrant.email} has already had this survey sent to them."
+msgstr "{registrant.email} a déjà reçu cette enquête."
+
+#: register/admin.py
+msgid "{str(e)} :: email: {registrant.email}"
+msgstr ""
+
+#: register/admin.py
+#, python-brace-format
+msgid "Sent {count} messages successfully"
+msgstr "Envoyé {count} messages avec succès"
+
 #: register/context_processors.py
 msgid "— Scan a place registration"
 msgstr ""
@@ -2459,6 +2477,26 @@ msgstr ""
 #: register/models.py
 msgid "Province"
 msgstr "Province"
+
+#: register/models.py
+msgid "General Survey URL"
+msgstr "URL de l'enquête générale"
+
+#: register/models.py
+msgid "Survey Title"
+msgstr "Titre de l'enquête"
+
+#: register/models.py
+msgid "English Notify Template ID"
+msgstr "Anglais Notify Template ID"
+
+#: register/models.py
+msgid "French Notify Template ID"
+msgstr "ID du modèle de notification en français"
+
+#: register/models.py
+msgid "Sent Timestamp"
+msgstr "Horodatage de l'envoi"
 
 #: register/templates/register/500.html
 msgid "Something went wrong with the system."
