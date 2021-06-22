@@ -16,7 +16,7 @@ resource "aws_s3_bucket" "firehose_waf_logs" {
 }
 
 resource "aws_s3_bucket" "firehose_waf_logs_qrcode" {
-  bucket = "qrcode-terraform-waf-logs"
+  bucket = "staging-qrcode-terraform-waf-logs"
   acl    = "private"
   server_side_encryption_configuration {
     rule {
