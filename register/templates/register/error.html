@@ -6,10 +6,10 @@
 {% endblock %}
 
 {% block content %}
-  <div class="content-back-link">
-    <a href="{% url 'register:registrant_email' %}" class="chevron-left">{% trans "Back" %}</a>
-  </div>
+  <h1>{% trans "The link has expired" %}</h1>
+  {% trans "If you want to continue, we can send a new link to your email." %}
 
-  <h1>{% trans "Invalid / Expired" %}</h1>
-  {% trans "Sorry, that confirmation link has expired or has already been used." %}
+  <div class="content-button">
+        <a href="{% url 'register:registrant_email' %}" role="button" draggable="false">{% trans "Send new link" %}</a>
+  </div>
 {% endblock %}
