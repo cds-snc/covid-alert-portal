@@ -83,9 +83,6 @@ class RegistrantAdmin(admin.ModelAdmin, ExportCsvMixin):
     search_fields = ["id", "email"]
     actions = ["export_as_csv"]
 
-    def has_change_permission(self, request, obj=None):
-        return False
-
     def surveys(self, obj):
         surveys = Survey.objects.all()
         val = ""
