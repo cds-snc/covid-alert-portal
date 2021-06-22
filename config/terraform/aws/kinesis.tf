@@ -44,7 +44,9 @@ resource "aws_iam_role_policy" "firehose_waf_logs" {
       ],
       "Resource": [
         "${aws_s3_bucket.firehose_waf_logs.arn}",
-        "${aws_s3_bucket.firehose_waf_logs.arn}/*"
+        "${aws_s3_bucket.firehose_waf_logs.arn}/*",
+        "${aws_s3_bucket.firehose_waf_logs_qrcode.arn}",
+        "${aws_s3_bucket.firehose_waf_logs_qrcode.arn}/*"
       ]
     },
     {
