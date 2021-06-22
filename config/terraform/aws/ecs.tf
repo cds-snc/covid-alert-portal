@@ -300,7 +300,7 @@ resource "aws_appautoscaling_policy" "qrcode_cpu" {
 
 resource "aws_appautoscaling_policy" "qrcode_memory" {
   count              = var.portal_autoscale_enabled ? 1 : 0
-  name               = "portal_memory"
+  name               = "qrcode_memory"
   policy_type        = "TargetTrackingScaling"
   service_namespace  = aws_appautoscaling_target.qrcode[count.index].service_namespace
   resource_id        = aws_appautoscaling_target.qrcode[count.index].resource_id
