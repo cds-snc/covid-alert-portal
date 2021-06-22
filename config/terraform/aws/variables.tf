@@ -54,7 +54,7 @@ variable "scale_out_cooldown" {
 }
 variable "cpu_scale_metric" {
   type    = number
-  default = 60
+  default = 20
 }
 variable "memory_scale_metric" {
   type    = number
