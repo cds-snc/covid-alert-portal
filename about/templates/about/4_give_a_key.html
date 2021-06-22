@@ -12,28 +12,28 @@
   </div>
 
   <div class="column column--2-3">
-    <h1>{% trans "Give a key" %}</h1>
+    <h1>{% trans "Giving keys" %}</h1>
     <p>{% trans "The key is a combination of letters and numbers." %}</p>
     <h2>{% trans "Read key phonetically" %}</h2>
-    <p>{% trans "We’ve chosen words for each letter so patients understand letters correctly." %}</p>
+    <p>{% trans "We’ve chosen words for each letter so people understand letters correctly." %}</p>
     <h2>{% trans "You may be able to text the key" %}</h2>
-    <p>{% trans "If permitted by your health authority, the portal displays the button 'Text key to patient'. That button guides you through next steps if the patient agrees to get the key by text." %}</p>
+    <p>{% trans "If permitted by your health authority, the portal displays the button 'Text key to person'. That button guides you through next steps if the person agrees to get the key by text." %}</p>
 
     <h2>{% trans "How the portal displays keys" %}</h2>
     {% with code="AHJ 232 ZWFA" with_example="true" %}
         {% include "includes/big-code.html" %}
     {% endwith %}
 
-    <h2>{% trans "The app guides the patient through the next steps" %}</h2>
-    <p>{% trans "The patient enters the key. Then the app guides them through the steps to notify people of possible exposure." %}
+    <h2>{% trans "The app guides the person through the next steps" %}</h2>
+    <p>{% trans "The person enters the key. Then the app guides them through the steps to notify people of possible exposure." %}
 
     {% url 'about:help_patient_enter_key' as help_url %}
     {% blocktrans %}
-        <p>You can view screenshots from the app with instructions in <a href="{{ help_url }}">Help patient enter key</a>.</p>
+        <p>You can view screenshots from the app with instructions in <a href="{{ help_url }}">Help person enter key</a>.</p>
     {% endblocktrans %}
 
     <div class="content-next-link">
-      <a href="{% url 'about:help_patient_enter_key' %}" class="chevron-right">{% trans "Next:" %} {% trans "Help patient enter key" %}</a>
+      <a href="{% url 'about:help_patient_enter_key' %}" class="chevron-right">{% trans "Next:" %} {% trans "Help person enter key" %}</a>
     </div>
   </div>
 {% endblock %}

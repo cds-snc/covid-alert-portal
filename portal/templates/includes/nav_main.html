@@ -11,7 +11,7 @@
       {% endif %}
       {% switch "qr_codes" %}
         {% if perms.profiles.can_send_alerts and user.is_verified %}
-          <li><a {% if request.resolver_match.url_name == 'search' %}class="active"{% endif %} href="{% url 'outbreaks:search' %}">{% trans "Send Alerts" %}</a></li>
+          <li><a {% if request.resolver_match.url_name == 'search' %}class="active"{% endif %} href="{% url 'outbreaks:search' %}">{% trans "Send alerts" %}</a></li>
         {% endif %}
       {% endswitch %}
       {% if user.is_admin and user.is_verified %}

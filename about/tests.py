@@ -24,40 +24,40 @@ class AboutView(TestCase):
     def test_about_create_account_page(self):
         response = self.client.get(reverse("about:create_account"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Log in to the portal</h1>", html=True)
+        self.assertContains(response, "<h1>Logging in</h1>", html=True)
         self.assertContains(
             response,
-            '<a class="active" href="/en/about/create-an-account">Log in to the portal</a>',
+            '<a class="active" href="/en/about/create-an-account">Logging in</a>',
             html=True,
         )
 
     def test_about_one_time_keys_page(self):
         response = self.client.get(reverse("about:one_time_keys"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>One-time keys</h1>", html=True)
+        self.assertContains(response, "<h1>Generating keys</h1>", html=True)
         self.assertContains(
             response,
-            '<a class="active" href="/en/about/one-time-keys">One-time keys</a>',
+            '<a class="active" href="/en/about/one-time-keys">Generating keys</a>',
             html=True,
         )
 
     def test_about_give_a_key_page(self):
         response = self.client.get(reverse("about:give_a_key"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Give a key</h1>", html=True)
+        self.assertContains(response, "<h1>Giving keys</h1>", html=True)
         self.assertContains(
             response,
-            '<a class="active" href="/en/about/give-a-key">Give a key</a>',
+            '<a class="active" href="/en/about/give-a-key">Giving keys</a>',
             html=True,
         )
 
     def test_about_help_patient_enter_key_page(self):
         response = self.client.get(reverse("about:help_patient_enter_key"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Help patient enter key</h1>", html=True)
+        self.assertContains(response, "<h1>Helping people enter keys</h1>", html=True)
         self.assertContains(
             response,
-            '<a class="active" href="/en/about/help-patient-enter-key">Help patient enter key</a>',
+            '<a class="active" href="/en/about/help-patient-enter-key">Helping people enter keys</a>',
             html=True,
         )
 

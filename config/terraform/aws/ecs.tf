@@ -10,6 +10,14 @@ resource "aws_ecs_cluster" "covidportal" {
     value = "enabled"
   }
 
+  capacity_providers = ["FARGATE"]
+
+  default_capacity_provider_strategy {
+    capacity_provider = "FARGATE"
+    weight            = 1
+    base              = 2
+  }
+
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
   }
@@ -292,7 +300,7 @@ resource "aws_appautoscaling_policy" "qrcode_cpu" {
 
 resource "aws_appautoscaling_policy" "qrcode_memory" {
   count              = var.portal_autoscale_enabled ? 1 : 0
-  name               = "portal_memory"
+  name               = "qrcode_memory"
   policy_type        = "TargetTrackingScaling"
   service_namespace  = aws_appautoscaling_target.qrcode[count.index].service_namespace
   resource_id        = aws_appautoscaling_target.qrcode[count.index].resource_id
