@@ -3377,12 +3377,3 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
-
-#~ msgid "Cancel"
-#~ msgstr "Annuler l’ajout"
-
-#~ msgid "Invalid / Expired"
-#~ msgstr "Invalide ou expiré"
-
-#~ msgid "Sorry, that confirmation link has expired or has already been used."
-#~ msgstr "Désolé, le lien de validation est expiré ou a déjà été utilisé."
