@@ -53,7 +53,14 @@ class Location(models.Model):
     registrant = models.ForeignKey(Registrant, on_delete=models.SET_NULL, null=True)
 
     class Meta:
-        unique_together = ('name', 'address', 'address_2', 'city', 'province', 'postal_code')
+        unique_together = (
+            "name",
+            "address",
+            "address_2",
+            "city",
+            "province",
+            "postal_code",
+        )
 
     @property
     def registrant_email(self):
