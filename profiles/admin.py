@@ -9,6 +9,7 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationFor
 from django.contrib.admin.templatetags.admin_list import _boolean_icon
 
 from profiles.models import HealthcareUser, HealthcareProvince, AuthorizedDomain
+from register.models import Survey
 
 
 class ProvinceAdmin(admin.ModelAdmin):
@@ -217,3 +218,4 @@ class UserAdmin(BaseUserAdmin):
 admin.site.register(HealthcareProvince, ProvinceAdmin)
 admin.site.register(HealthcareUser, UserAdmin)
 admin.site.register(AuthorizedDomain)
+admin.site.register(Survey)

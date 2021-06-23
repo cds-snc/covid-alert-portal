@@ -15,6 +15,20 @@ resource "aws_s3_bucket" "firehose_waf_logs" {
   #tfsec:ignore:AWS077
 }
 
+resource "aws_s3_bucket" "firehose_waf_logs_qrcode" {
+  bucket = "staging-qrcode-terraform-waf-logs"
+  acl    = "private"
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
+  #tfsec:ignore:AWS002
+  #tfsec:ignore:AWS077
+}
+
 ###
 # AWS S3 bucket - Maintenance mode HTML
 

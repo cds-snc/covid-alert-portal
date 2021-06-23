@@ -3,10 +3,10 @@
 <nav class="nav--about" aria-label="{% trans 'Table of contents: About the Portal' %}">
     <ul>
       <li><a {% if request.resolver_match.url_name == 'index' %}class="active"{% endif %} href="{% url 'about:index' %}">{% trans "COVID Alert" %}</a></li>
-      <li><a {% if request.resolver_match.url_name == 'create_account' %}class="active"{% endif %} href="{% url 'about:create_account' %}">{% trans "Log in to the portal" %}</a></li>
-      <li><a {% if request.resolver_match.url_name == 'one_time_keys' %}class="active"{% endif %} href="{% url 'about:one_time_keys' %}">{% trans "One-time keys" %}</a></li>
-      <li><a {% if request.resolver_match.url_name == 'give_a_key' %}class="active"{% endif %} href="{% url 'about:give_a_key' %}">{% trans "Give a key" %}</a></li>
-      <li><a {% if request.resolver_match.url_name == 'help_patient_enter_key' %}class="active"{% endif %} href="{% url 'about:help_patient_enter_key' %}">{% trans "Help patient enter key" %}</a></li>
+      <li><a {% if request.resolver_match.url_name == 'create_account' %}class="active"{% endif %} href="{% url 'about:create_account' %}">{% trans "Logging in" %}</a></li>
+      <li><a {% if request.resolver_match.url_name == 'one_time_keys' %}class="active"{% endif %} href="{% url 'about:one_time_keys' %}">{% trans "Generating keys" %}</a></li>
+      <li><a {% if request.resolver_match.url_name == 'give_a_key' %}class="active"{% endif %} href="{% url 'about:give_a_key' %}">{% trans "Giving keys" %}</a></li>
+      <li><a {% if request.resolver_match.url_name == 'help_patient_enter_key' %}class="active"{% endif %} href="{% url 'about:help_patient_enter_key' %}">{% trans "Helping people enter keys" %}</a></li>
       {% if user.can_send_alerts %}
         <li><a {% if request.resolver_match.url_name == 'sending_qr_alerts' %}class="active"{% endif %} href="{% url 'about:sending_qr_alerts' %}">{% trans "Sending alerts" %}</a></li>
       {% endif %}

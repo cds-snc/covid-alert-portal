@@ -1,8 +1,13 @@
-from portal.mixins import ExportCsvMixin
-from django.contrib import admin
+from functools import partial
 
-from .models import Registrant, Location, LocationSummary
+from django.contrib import admin, messages
 from django.db.models import Count
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
+
+from portal.mixins import ExportCsvMixin
+from .forms import send_email
+from .models import Registrant, Location, LocationSummary, Survey, RegistrantSurvey
 
 
 class LocationInline(admin.TabularInline):
@@ -34,14 +39,118 @@ class LocationInline(admin.TabularInline):
         return False
 
 
+class SurveyListFilter(admin.SimpleListFilter):
+    title = _("Surveys Completed")
+    parameter_name = "surveys"
+
+    def lookups(self, request, model_admin):
+        result = []
+        surveys = Survey.objects.all()
+        if surveys:
+            result.append(("none", "None sent"))
+            for survey in surveys:
+                result.append((f"{survey.id}:0", f"{survey.title}: None"))
+                result.append((f"{survey.id}:1", f"{survey.title}: Sent"))
+            result.append(("all", "All surveys sent"))
+        return result
+
+    def queryset(self, request, queryset):
+        if self.value() == "none":
+            return queryset.exclude(registrantsurvey__registrant__in=queryset)
+        elif self.value() == "all":
+            surveys = Survey.objects.all()
+            for survey in surveys:
+                queryset = queryset.filter(
+                    registrantsurvey__registrant__in=queryset,
+                    registrantsurvey__survey=survey,
+                )
+            return queryset.distinct()
+        elif self.value():
+            id, code = self.value().split(":")
+            if code == "0":
+                return queryset.exclude(registrantsurvey__survey_id=id)
+            elif code == "1":
+                return queryset.filter(registrantsurvey__survey_id=id).distinct()
+
+
 @admin.register(Registrant)
 class RegistrantAdmin(admin.ModelAdmin, ExportCsvMixin):
-    list_display = ["id", "email", "created"]
+    list_display = ["email", "surveys", "created", "id"]
+    list_filter = (SurveyListFilter,)
     inlines = [
         LocationInline,
     ]
     search_fields = ["id", "email"]
     actions = ["export_as_csv"]
+
+    def surveys(self, obj):
+        surveys = Survey.objects.all()
+        val = ""
+        count = 0
+        for survey in surveys:
+            delimiter = "" if count == 0 else ", "
+            registrant_surveys = RegistrantSurvey.objects.filter(
+                registrant=obj, survey=survey
+            )
+            if registrant_surveys:
+                count += 1
+                val += f"{delimiter}{survey}"
+        return val
+
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        surveys = Survey.objects.all()
+        for survery in surveys:
+            sender_func = partial(self.send_survey_by_id, survery.id)
+            actions[f"survey_{survery.id}"] = (
+                sender_func,
+                f"survey_{survery.id}",
+                f"Immediately email {survery} to registrant(s)",
+            )
+        return actions
+
+    @staticmethod
+    def send_survey_by_id(id, modeladmin, request, queryset):
+        count = 0
+        for registrant in queryset:
+            reg_surveys = registrant.registrantsurvey_set.filter(survey_id=id)
+            if reg_surveys:
+                modeladmin.message_user(
+                    request,
+                    _(f"{registrant.email} has already had this survey sent to them."),
+                    messages.WARNING,
+                )
+            else:
+                reg_survey = RegistrantSurvey.objects.create(
+                    registrant=registrant,
+                    survey_id=id,
+                    sent_by=request.user,
+                    sent_ts=timezone.now(),
+                )
+                try:
+                    survey = reg_survey.survey
+                    template_id = (
+                        survey.en_notify_template_id
+                        if registrant.language_cd == "en"
+                        else survey.fr_notify_template_id
+                    )
+                    send_email(
+                        registrant.email,
+                        {"registrant_id": str(registrant.id), "url": survey.url},
+                        template_id,
+                    )
+                    count += 1
+                except Exception as e:
+                    modeladmin.message_user(
+                        request,
+                        _(f"{str(e)} :: email: {registrant.email}"),
+                        messages.ERROR,
+                    )
+                    reg_survey.delete()
+        if count:
+            modeladmin.message_user(
+                request, _(f"Sent {count} messages successfully"), messages.SUCCESS
+            )
 
 
 @admin.register(Location)

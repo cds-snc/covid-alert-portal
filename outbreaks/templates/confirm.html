@@ -33,8 +33,7 @@
     <div class="summary-list__row">
       <dt class="summary-list__key">{% trans "Name" %}</dt>
       <dd class="summary-list__value">{{ location.name }}</dd>
-      <dd class="summary-list__actions"><a href="{% url 'outbreaks:search' %}">{% trans "Change" %}<span
-        class="visually-hidden">{% trans "location" %}</span></a></dd>
+      <dd class="summary-list__actions"><span class="visually-hidden">{% trans "location" %}</span></dd>
     </div>
     <div class="summary-list__row">
       <dt class="summary-list__key">{% trans "Address" %}</dt>
@@ -68,11 +67,12 @@
   <div class="info-message">
     <p>
       {% blocktrans %}
-        <p>When you “Send QR alert”,  you confirm you’ve correctly entered all details from the health authority.</p>
+        <p>When you “Send alert”, you confirm you’ve correctly entered all details of the possible exposure.</p>
         <p>It’s not possible to cancel an alert after sending.</p>
       {% endblocktrans %}
   </div>
 
-  {% include "includes/cds_form.html" with submit_text=_("Send QR alert") submit_class="warning" %}
+  {% url 'outbreaks:search' as outbreaks_search_url %}
+  {% include "includes/cds_form.html" with submit_text=_("Send alert") submit_class='warning' secondary_action_after=True secondary_action_text=_('Cancel this exposure') secondary_action_url=outbreaks_search_url %}
 
 {% endblock %}

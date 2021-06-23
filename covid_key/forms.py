@@ -60,7 +60,7 @@ class OtkSmsSentForm(HealthcareBaseForm):
     redirect_choice = forms.ChoiceField(
         label="",
         choices=[
-            ("otk_start", _("Yes, generate a key for another patient.")),
+            ("otk_start", _("Yes, generate a key for another person.")),
             ("otk_sms", _("No, try again or use different phone number.")),
             ("key", _("No, read key.")),
         ],
