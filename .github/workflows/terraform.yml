@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "config/**"
+      - ".github/workflows/terraform.yml"
   pull_request:
     paths:
-      - "config/terraform/aws/*"
+      - "config/**"
+      - ".github/workflows/terraform.yml"
 
 defaults:
   run:
