@@ -54,7 +54,7 @@ class Location(models.Model):
 
     @property
     def registrant_email(self):
-        return self.registrant.email
+        return self.registrant.email or ''
 
     # Override save method to generate a unique short code for poster
     def save(self, *args, **kwargs):
