@@ -38,8 +38,8 @@ Array.apply(null,pickers).forEach(function(picker) {
               "septembre", "octobre", "novembre", "décembre"
             ],
             monthNamesShort: [
-              "janv", "févr", "mars", "avril", "mai", "juin",
-              "juil", "août", "sept", "oct", "nov", "déc"
+              "janv", "févr", "mars", "avr", "mai", "juin",
+              "juill", "août", "sept", "oct", "nov", "déc"
             ],
             locale: "ca-FR",
         }
