@@ -126,8 +126,8 @@ def get_pdf_poster(location, lang="en"):
 
     # Merge the pdfs
     mergeFile = PyPDF2.PdfFileMerger()
-    mergeFile.append(buffer)
     mergeFile.append(pdf_instructions)
+    mergeFile.append(buffer)
 
     # Write it back to the puffer
     mergeFile.write(buffer)
