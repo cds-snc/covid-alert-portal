@@ -16,11 +16,17 @@ form.outbreaks-datetime {
     padding-right: .5rem;
     display: flex;
     flex-direction: column;
+    align-items: start;
 
     button {
       margin-top: auto;
     }
   }
+
+  .top-padding-25 {
+    padding-top: 25px;
+  }
+
 
   .content-button {
     margin-bottom: 30px;

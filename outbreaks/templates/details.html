@@ -3,74 +3,67 @@
 {% load tz %}
 
 {% block title %}
-    {% trans "Details of exposure" %}
+  {% trans "Details of exposure" %}
 {% endblock %}
 
 {% block content %}
-    <div class="content-back-link">
-        <a href="#" class="chevron-left back-inline-link">{% trans "Back" %}</a>
-    </div>
+  <div class="content-back-link">
+    <a href="#" class="chevron-left back-inline-link">{% trans "Back" %}</a>
+  </div>
 
   {% if location %}
     <h1>{% trans "Details of exposure" %}</h1>
+    <div class="visually-hidden">{% trans "Details of exposure" %}</div>
 
-    <table>
-      <caption class="visually-hidden">{% trans "Details of exposure" %}</caption>
-      <tbody>
-        <tr>
-            <th scope="row">{% trans "Name" %}</th>
-            <td>{{ location.name }}</td>
-            <td></td>
-        </tr>
-        <tr>
-            <th scope="row">{% trans "Address" %}</th>
-            <td>
-                <address>
-                    <span> {{ location.address }} </span>
-                    <span> {{ location.city }}, {{ location.province }} </span>
-                    <span> {{ location.postal_code }} </span>
-                </address>
-            </td>
-            <td>
-                <a href="{{ map_link }}" target="_blank">
-                    <span>{% trans "Show on map" %}</span>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">{% trans "Date and time of exposure" %}</th>
-            <td>
-                {{ exposure_date_time }}
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <th scope="row">{% trans "Guidance" %}</th>
-            <td>
-                {{ notification.severity }}
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">{% trans "Date of alert" %}</th>
-            <td>{{ notification.created_date|date:'j M Y' }}</td>
-            <td></td>
-        </tr>
-        <tr>
-            <th scope="row">{% trans "Sender" %}</th>
-            <td>
-                <span>{{ notification.created_by.name }}</span>
-                <span>{{ notification.created_by.email }}</span>
-            </td>
-            <td></td>
-        </tr>
-      </tbody>
-    </table>
+    <dl class="summary-list">
+      <div class="summary-list__row">
+        <dt class="summary-list__key">{% trans "Name" %}</dt>
+        <dd class="summary-list__value">{{ location.name }}</dd>
+        <dd class="summary-list__actions"></dd>
+      </div>
+      <div class="summary-list__row">
+        <dt class="summary-list__key">{% trans "Address" %}</dt>
+        <dd class="summary-list__value">
+          {{ location.address }}<br>
+          {{ location.city }}, {{ location.province }}<br>
+          {{ location.postal_code }}<br>
+        </dd>
+        <dd class="summary-list__actions">
+          <a href="{{ map_link }}" target="_blank">{% trans "Show on map" %}</a>
+        </dd>
+      </div>
+      <div class="summary-list__row">
+        <dt class="summary-list__key">{% trans "Date and time of exposure" %}</dt>
+        <dd class="summary-list__value">
+          {{ exposure_date_time }}
+        </dd>
+        <dd class="summary-list__actions"></dd>
+      </div>
+      <div class="summary-list__row">
+        <dt class="summary-list__key">{% trans "Guidance" %}</dt>
+        <dd class="summary-list__value">{{ notification.severity }}</dd>
+        <dd class="summary-list__actions"></dd>
+      </div>
+      <div class="summary-list__row">
+        <dt class="summary-list__key">{% trans "Date of alert" %}</dt>
+        <dd class="summary-list__value">{{ notification.created_date|date:'j M Y' }}</dd>
+        <dd class="summary-list__actions"></dd>
+      </div>
+      <div class="summary-list__row">
+        <dt class="summary-list__key">{% trans "Sender" %}</dt>
+        <dd class="summary-list__value">
+          <span>{{ notification.created_by.name }}</span><br>
+          <span>{{ notification.created_by.email }}</span>
+        </dd>
+        <dd class="summary-list__actions"></dd>
+      </div>
+    </dl>
 
-    <br>
     <p>{% trans "Need to add a new exposure for this address?" %}</p>
 
     <div class="content-button">
-        <a href="{% url 'outbreaks:datetime' alert_location %}" role="button" draggable="false" class="start with-chevron">{% trans "Add an exposure" %}</a>
+      <a href="{% url 'outbreaks:datetime' alert_location %}" role="button" draggable="false"
+         class="start with-chevron">{% trans "Add an exposure" %}</a>
     </div>
 
   {% else %}

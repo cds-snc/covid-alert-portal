@@ -14,7 +14,7 @@
   {% include  "includes/flash_messages.html" %}
   <h1>{% trans "Alert history" %}</h1>
   <p>
-  {% trans 'Browse below for alerts send to date in your province. For more specific results, use the search bar.' %}
+    {% trans 'Browse below for alerts send to date in your province. For more specific results, use the search bar.' %}
   </p>
 
   <form method="get" id="form--{{ request.resolver_match.url_name }}" class="outbreaks-search">
@@ -27,12 +27,18 @@
           <b>{% trans "Search by name or address" %}</b>
         </label>
         <span>{% trans 'Enter at least 3 characters.' %}</span>
-        <input type="search" name="search_text" size="30" autocomplete="on" id="id_search_text"
-               value="{{ search_text }}">
-        <button type="submit">
-          {{ _("Search") }}
-          <img src="{% static 'img/search_24px.svg' %}" alt=""/>
-        </button>
+        <div class="search-flex-container">
+          <div>
+            <input type="search" name="search_text" size="30" autocomplete="on" id="id_search_text"
+                   value="{{ search_text }}">
+          </div>
+          <div>
+            <button type="submit">
+              {{ _("Search") }}
+              <img src="{% static 'img/search_24px.svg' %}" alt=""/>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </form>
@@ -138,7 +144,7 @@
 
     <div class="content-section">
       <p><strong>{% trans "New or need a refresher?" %}</strong><br>
-      {% trans "Visit" %} <a href="{% url 'about:sending_qr_alerts' %}">{% trans "Sending alerts" %}</a>.</p>
+        {% trans "Visit" %} <a href="{% url 'about:sending_qr_alerts' %}">{% trans "Sending alerts" %}</a>.</p>
     </div>
   {% endif %}
 {% endblock %}

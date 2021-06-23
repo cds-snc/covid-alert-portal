@@ -1,6 +1,7 @@
 form.outbreaks-search {
   margin-bottom: 0;
   margin-top: 30px;
+  max-width: 600px;
 
   button {
     img {
@@ -11,4 +12,33 @@ form.outbreaks-search {
 
 form.outbreaks-search + p {
   margin-bottom: 15px;
+}
+
+form.outbreaks-search .search-flex-container {
+  display: flex;
+  flex-direction: column;
+
+  @include xs {
+    div:first-of-type {
+      padding-bottom: $space-xs;
+    }
+    div {
+      display: flex;
+
+      button[type='submit'] {
+        flex: 1;
+      }
+    }
+  }
+
+  @include md {
+    flex-direction: row;
+    div:first-of-type {
+      flex-grow: 1;
+      padding-right: $space-xs;
+    }
+    div {
+      display: block;
+    }
+  }
 }
