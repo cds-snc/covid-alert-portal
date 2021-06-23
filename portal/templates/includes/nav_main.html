@@ -17,6 +17,11 @@
       {% if user.is_admin and user.is_verified %}
         <li><a {% if request.resolver_match.url_name == 'profiles' %}class="active"{% endif %} href="{% url 'profiles' %}">{% trans "Manage team" %}</a></li>
       {% endif %}
+      {% if not user.is_verified %}
+        <li><a href="{% url 'about:index' %}">{% trans "About the portal" %}</a></li>
+        <li><a href="{% url 'support' %}">{% trans "Support" %}</a></li>
+      {% endif %}
+
     </ul>
   </div>
 </nav>
