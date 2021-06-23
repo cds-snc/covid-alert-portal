@@ -50,15 +50,15 @@ variable "scale_in_cooldown" {
 }
 variable "scale_out_cooldown" {
   type    = number
-  default = 60
+  default = 10
 }
 variable "cpu_scale_metric" {
   type    = number
-  default = 20
+  default = 15
 }
 variable "memory_scale_metric" {
   type    = number
-  default = 60
+  default = 10
 }
 variable "min_capacity" {
   type    = number
