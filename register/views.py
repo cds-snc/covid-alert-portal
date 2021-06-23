@@ -92,9 +92,11 @@ def confirm_email(request, pk):
             return redirect(reverse_lazy("register:confirm_email_error"))
 
         # Create the Registrant
-        registrant, created = Registrant.objects.get_or_create(
-            email=confirm.email, language_cd=request.LANGUAGE_CODE or "en"
-        )
+        registrant, created = Registrant.objects.get_or_create(email=confirm.email)
+
+        if registrant.language_cd != request.LANGUAGE_CODE:
+            registrant.language_cd = request.LANGUAGE_CODE
+            registrant.save()
 
         # Save to session
         request.session["registrant_id"] = str(registrant.id)
