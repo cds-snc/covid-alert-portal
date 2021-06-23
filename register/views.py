@@ -207,26 +207,27 @@ class LocationWizard(NamedUrlSessionWizardView):
         en_poster = get_encoded_poster(location, "en")
         fr_poster = get_encoded_poster(location, "fr")
 
-        send_email(
-            registrant.email,
-            {
-                "location_name": location.name,
-                "location_address": location.address,
-                "english_poster": {
-                    "file": en_poster,
-                    "filename": "poster-en.pdf",
-                    "sending_method": "attach",
+        if "nonotify" not in self.request.COOKIES:
+            send_email(
+                registrant.email,
+                {
+                    "location_name": location.name,
+                    "location_address": location.address,
+                    "english_poster": {
+                        "file": en_poster,
+                        "filename": "poster-en.pdf",
+                        "sending_method": "attach",
+                    },
+                    "french_poster": {
+                        "file": fr_poster,
+                        "filename": "poster-fr.pdf",
+                        "sending_method": "attach",
+                    },
                 },
-                "french_poster": {
-                    "file": fr_poster,
-                    "filename": "poster-fr.pdf",
-                    "sending_method": "attach",
-                },
-            },
-            settings.POSTER_LINKED_EMAIL_TEMPLATE_ID.get(
-                self.request.LANGUAGE_CODE or "en"
-            ),
-        )
+                settings.POSTER_LINKED_EMAIL_TEMPLATE_ID.get(
+                    self.request.LANGUAGE_CODE or "en"
+                ),
+            )
 
         return HttpResponseRedirect(reverse("register:confirmation"))
 
