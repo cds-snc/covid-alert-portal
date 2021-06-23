@@ -6,9 +6,7 @@
 {% endblock %}
 
 {% block content %}
-  <div class="content-back-link">
-    <a href="{% url 'outbreaks:profile' alert_location %}" class="chevron-left">{% trans "Details of place or event" %}</a>
-  </div>
+  {% trans 'Step 1 of 3' %}
 
   {% if form.non_field_errors and show_errors %}
     {% if warning_ind %}
@@ -46,7 +44,7 @@
     {% endif %}
   {% endif %}
 
-  <h1>{% trans "Choose date and time" %}</h1> 
+  <h1>{% trans "Choose date and time" %}</h1>
 
   <p>{% trans "You’ll alert people who scanned the QR code on that date and time." %}</p>
   <p>{% trans "Enter all dates and times you want to add for this place or event." %}</p>
@@ -64,7 +62,8 @@
         {% endif %}">
 
           {% if form.non_field_errors and show_errors %}
-            <div id="error--{{ form.html_name }}-{{ group }}" class="validation-error"> {{ form.non_field_errors|show_error }} </div>
+            <div id="error--{{ form.html_name }}-{{ group }}"
+                 class="validation-error"> {{ form.non_field_errors|show_error }} </div>
           {% endif %}
 
           <div class="row">
@@ -112,11 +111,10 @@
                 </button>
               </div>
             </div>
-          <br>
-          <p>{% trans "Enter separate dates for exposures that extend past midnight." %}</p>
+            <br>
+            <p>{% trans "Enter separate dates for exposures that extend past midnight." %}</p>
           {% endif %}
         </div>
-
       </div>
 
       {% if not show_time_fields %}
@@ -134,7 +132,7 @@
             {{ _("Add date") }}
           </button>
           <button name="do_post" value="cancel" class="secondary">
-            {{ _("Cancel") }}
+            {{ _("Do not add") }}
           </button>
         </div>
       {% endif %}
@@ -163,11 +161,11 @@
               {{ date_entry.notification_txt }}
             </td>
             <td>
-              <a class="destructive-link"
+              <a
                  href="{% url "outbreaks:datetime_delete" alert_location forloop.counter0 %}">
-                <span aria-hidden="true">{{ _('Delete') }}</span>
+                <span aria-hidden="true">{{ _('Remove') }}</span>
                 <span class="visually-hidden">
-                  {{ _('Delete') }}{{ date_entry.notification_txt }}
+                  {{ _('Remove') }}{{ date_entry.notification_txt }}
                 </span>
               </a>
             </td>
@@ -181,6 +179,9 @@
       <div class="content-button">
         <button type="submit" {% if next_button_submit_form_ind %}name="do_post" value="add_date"{% endif %}>
           {{ _("Next") }}
+        </button>
+        <button name="do_post" value="full_cancel" class="secondary">
+          {{ _("Cancel this exposure") }}
         </button>
       </div>
     {% endif %}

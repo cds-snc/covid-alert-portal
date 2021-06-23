@@ -1,34 +1,28 @@
-from django.core.exceptions import ValidationError
-from django.http import HttpResponseRedirect
-
-from register.models import Location
-from .models import Notification, SEVERITY
-from django import forms
-from django.conf import settings
-from django.urls import reverse_lazy
-from django.db.models.functions import Lower
-from django.db import transaction
-from django.shortcuts import redirect, render
-from django.views.generic import FormView, ListView, TemplateView, View
-from django.utils.translation import get_language, gettext_lazy as _
-from django.utils.html import conditional_escape
-from django.contrib.auth.mixins import PermissionRequiredMixin
-from portal.mixins import Is2FAMixin
-from .forms import (
-    end_hours,
-    DateForm,
-    SeverityForm,
-    SearchForm,
-    end_date_shift_for_view,
-)
-from .protobufs import outbreak_pb2
-from datetime import datetime
-import pytz
-from .forms import severity_choices
-from register.forms import location_choices
-import requests
 import logging
 import re
+from datetime import datetime
+
+import pytz
+import requests
+from django import forms
+from django.conf import settings
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.core.exceptions import ValidationError
+from django.db import transaction
+from django.db.models.functions import Lower
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.utils.html import conditional_escape
+from django.utils.translation import get_language, gettext_lazy as _
+from django.views.generic import FormView, ListView, TemplateView, View
+
+from portal.mixins import Is2FAMixin
+from register.forms import location_choices
+from register.models import Location
+from .forms import end_hours, DateForm, SeverityForm, SearchForm, end_date_shift_for_view, severity_choices
+from .models import Notification, SEVERITY
+from .protobufs import outbreak_pb2
 
 
 def get_datetime_format(language):
@@ -69,8 +63,8 @@ class SearchListBaseView(PermissionRequiredMixin, Is2FAMixin, ListView):
         context = super().get_context_data(*args, **kwargs)
         search_result_count = len(self.object_list)
         search_result_page_min = (
-            (context["page_obj"].number - 1) * self.paginate_by
-        ) + 1
+                                     (context["page_obj"].number - 1) * self.paginate_by
+                                 ) + 1
         page_result_max = context["page_obj"].number * self.paginate_by
         search_result_page_max = (
             page_result_max
@@ -271,6 +265,12 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
                 post_data.appendlist("end_time", end_hours[-1])
         if do_post == "clear_time":
             show_time_fields = False
+        if do_post == "full_cancel":
+            return HttpResponseRedirect(
+                reverse_lazy(
+                    "outbreaks:search"
+                )
+            )
 
         # only re-rendering form if shifting time mode, or failed validation
         form = (
@@ -340,11 +340,11 @@ class DatetimeView(PermissionRequiredMixin, Is2FAMixin, View):
         context["min_date"] = "2021-01-01"  # Start of the year for simplicity
         context["max_date"] = (
             datetime.utcnow()
-            .replace(
+                .replace(
                 tzinfo=pytz.timezone(settings.PORTAL_LOCAL_TZ)
                 # TODO this may need refactoring for client side max date calculation beyond PORTAL_LOCAL_TZ
             )
-            .strftime("%Y-%m-%d")
+                .strftime("%Y-%m-%d")
         )  # Set max date to today
         context["language"] = get_language()
         if context.get("show_errors", False):
