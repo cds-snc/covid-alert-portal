@@ -93,8 +93,11 @@ def confirm_email(request, pk):
 
         # Create the Registrant
         registrant, created = Registrant.objects.get_or_create(
-            email=confirm.email, language_cd=request.LANGUAGE_CODE or "en"
+            email=confirm.email
         )
+
+        registrant.language_cd = request.LANGUAGE_CODE or "en"
+        registrant.save()
 
         # Save to session
         request.session["registrant_id"] = str(registrant.id)
