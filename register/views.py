@@ -94,7 +94,7 @@ def confirm_email(request, pk):
         # Create the Registrant
         registrant, created = Registrant.objects.get_or_create(email=confirm.email)
 
-        if (registrant.language_cd != request.LANGUAGE_CODE):
+        if registrant.language_cd != request.LANGUAGE_CODE:
             registrant.language_cd = request.LANGUAGE_CODE
             registrant.save()
 
