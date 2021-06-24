@@ -607,7 +607,9 @@ class HistoryView(SearchListBaseView):
             return qs.order_by(col if order == "asc" else col.desc())
         else:
             col = "start_date"
-            return qs.order_by(col if order == "asc" else f"-{col}", Lower("location__name"))
+            return qs.order_by(
+                col if order == "asc" else f"-{col}", Lower("location__name")
+            )
 
 
 class ExposureDetailsView(PermissionRequiredMixin, Is2FAMixin, TemplateView):
