@@ -5,33 +5,67 @@ on: push
 jobs:
   code:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11.8
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: covid_portal
+        ports:
+        - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v2
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
         with:
           python-version: ${{ matrix.python-version }}
 
-      - uses: dschep/install-pipenv-action@v1
-      - name: Install dependecies
-        uses: VaultVulp/action-pipenv@v2.0.1
+      - name: Install pipenv
+        run: |
+          python -m pip install --upgrade pipenv wheel
+
+      - id: cache-pipenv
+        uses: actions/cache@v1
         with:
-          command: install -d # Install all dependencies, including development ones
-      
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+
+      - name: Install dependencies
+        if: steps.cache-pipenv.outputs.cache-hit != 'true'
+        run: |
+          pipenv install --dev
+
+      - name: Static assets
+        run: |
+          pipenv run python manage.py sass profiles/static/scss/styles.scss profiles/static/css/
+          pipenv run python manage.py collectstatic --noinput -i scss
+
       - name: Check format with black
-        uses: VaultVulp/action-pipenv@v2.0.1
-        with:
-          command: run format --check
+        run: |
+          pipenv run format --check
 
       - name: Lint for style with flake8
-        uses: VaultVulp/action-pipenv@v2.0.1
-        with:
-          command: run lint
+        run: |
+          pipenv run lint
 
-      - name: Check SASS
-        uses: VaultVulp/action-pipenv@v2.0.1
-        with:
-          command: run css
+      - name: Check css
+        run: |
+          pipenv run css
+
+      - name: Generate coverage report
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/covid_portal
+        run: | 
+          pipenv run coverage_test
+
+      - name: Generate coverage report
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/covid_portal
+        run: |
+          pipenv run coverage_report
       
   test:
     runs-on: ubuntu-latest
@@ -52,24 +86,39 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
         with:
           python-version: ${{ matrix.python-version }}
-      - uses: dschep/install-pipenv-action@v1
-      - name: Install dependecies
-        uses: VaultVulp/action-pipenv@v2.0.1
+      
+      - name: Install pipenv
+        run: |
+          python -m pip install --upgrade pipenv wheel
+
+      - id: cache-pipenv
+        uses: actions/cache@v1
         with:
-          command: install -d # Install all dependencies, including development ones
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+
+      - name: Install dependencies
+        if: steps.cache-pipenv.outputs.cache-hit != 'true'
+        run: |
+          pipenv install --dev
+
+      - name: Static assets
+        run: |
+          pipenv run python manage.py sass profiles/static/scss/styles.scss profiles/static/css/
+          pipenv run python manage.py collectstatic --noinput -i scss
 
       - name: Pipenv check for security vulnerabilities
-        uses: VaultVulp/action-pipenv@v2.0.1
-        with:
-          command: check
+        run: |
+          pipenv check
 
-      - name: Test
+      - name: Run test suite
+        run: |
+          pipenv run test
         env:
-          DATABASE_URL: postgres://postgres:postgres@postgres:5432/covid_portal
-        uses: VaultVulp/action-pipenv@v2.0.1
-        with:
-          command: run test # Run custom `test` command defined in the `[scripts]` block of Pipfile
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/covid_portal
+
