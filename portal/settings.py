@@ -74,6 +74,7 @@ GITHUB_SHA = os.getenv("GITHUB_SHA") or None
 # Application definition
 
 INSTALLED_APPS = [
+    "whitenoise.runserver_nostatic",
     "waffle",
     "django_sass",
     "profiles",
