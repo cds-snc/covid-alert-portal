@@ -50,21 +50,29 @@ variable "scale_in_cooldown" {
 }
 variable "scale_out_cooldown" {
   type    = number
-  default = 10
+  default = 60
 }
 variable "cpu_scale_metric" {
   type    = number
-  default = 15
+  default = 10
 }
 variable "memory_scale_metric" {
   type    = number
   default = 10
 }
-variable "min_capacity" {
+variable "min_capacity_portal" {
   type    = number
   default = 2
 }
-variable "max_capacity" {
+variable "max_capacity_portal" {
+  type    = number
+  default = 10
+}
+variable "min_capacity_qrcode" {
+  type    = number
+  default = 4
+}
+variable "max_capacity_qrcode" {
   type    = number
   default = 10
 }

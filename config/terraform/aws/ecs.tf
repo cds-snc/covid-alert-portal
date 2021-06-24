@@ -140,7 +140,7 @@ resource "aws_ecs_service" "covidportal" {
   # Enable the new ARN format to propagate tags to containers (see config/terraform/aws/README.md)
   propagate_tags = "SERVICE"
 
-  desired_count                      = 2
+  desired_count                      = var.min_capacity_portal
   deployment_minimum_healthy_percent = 50
   deployment_maximum_percent         = 200
   health_check_grace_period_seconds  = 60
@@ -191,7 +191,7 @@ resource "aws_ecs_service" "qrcode" {
   # Enable the new ARN format to propagate tags to containers (see config/terraform/aws/README.md)
   propagate_tags = "SERVICE"
 
-  desired_count                      = 2
+  desired_count                      = var.min_capacity_qrcode
   deployment_minimum_healthy_percent = 50
   deployment_maximum_percent         = 200
   health_check_grace_period_seconds  = 60
@@ -233,8 +233,8 @@ resource "aws_appautoscaling_target" "portal" {
   service_namespace  = "ecs"
   resource_id        = "service/${aws_ecs_cluster.covidportal.name}/${aws_ecs_service.covidportal.name}"
   scalable_dimension = "ecs:service:DesiredCount"
-  min_capacity       = var.min_capacity
-  max_capacity       = var.max_capacity
+  min_capacity       = var.min_capacity_portal
+  max_capacity       = var.max_capacity_portal
 }
 resource "aws_appautoscaling_policy" "portal_cpu" {
   count              = var.portal_autoscale_enabled ? 1 : 0
@@ -277,8 +277,8 @@ resource "aws_appautoscaling_target" "qrcode" {
   service_namespace  = "ecs"
   resource_id        = "service/${aws_ecs_cluster.covidportal.name}/${aws_ecs_service.qrcode.name}"
   scalable_dimension = "ecs:service:DesiredCount"
-  min_capacity       = var.min_capacity
-  max_capacity       = var.max_capacity
+  min_capacity       = var.min_capacity_qrcode
+  max_capacity       = var.max_capacity_qrcode
 }
 resource "aws_appautoscaling_policy" "qrcode_cpu" {
   count              = var.portal_autoscale_enabled ? 1 : 0
