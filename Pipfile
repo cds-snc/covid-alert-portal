@@ -51,6 +51,7 @@ cairosvg = "*"
 django-basicauth = "*"
 pypdf2 = "*"
 django-localflavor = "*"
+whitenoise = "*"
 
 [pipenv]
 allow_prereleases = true
