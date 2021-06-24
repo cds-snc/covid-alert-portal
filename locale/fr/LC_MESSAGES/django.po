@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-22 19:42+0000\n"
+"POT-Creation-Date: 2021-06-24 20:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -325,6 +325,7 @@ msgstr "Table des matières: Le portail"
 #: covid_key/templates/covid_key/landing.html
 #: covid_key/templates/covid_key/otk_start.html
 #: portal/templates/includes/footer.html
+#: portal/templates/includes/nav_main.html
 msgid "About the portal"
 msgstr "Le portail"
 
@@ -1341,6 +1342,7 @@ msgid "at"
 msgstr "à"
 
 #: portal/templates/includes/footer.html
+#: portal/templates/includes/nav_main.html
 #: profiles/templates/profiles/support.html
 msgid "Support"
 msgstr "Assistance"
@@ -2315,6 +2317,20 @@ msgstr "Votre session a expiré. Reconnectez-vous pour continuer à utiliser le 
 #: register/admin.py
 msgid "Surveys Completed"
 msgstr "Enquêtes complétées"
+
+#: register/admin.py
+#, python-brace-format
+msgid "{SURVEY_FILTER_DAY_DIFF} days since survey sent"
+msgstr ""
+
+#: register/admin.py
+msgid "Created a Poster"
+msgstr "Créer une affiche"
+
+#: register/admin.py
+#, python-brace-format
+msgid "{registrant.email} has not created a poster."
+msgstr "{registrant.email} n'a pas créé d'affiche."
 
 #: register/admin.py
 #, python-brace-format

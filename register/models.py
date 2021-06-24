@@ -18,6 +18,10 @@ class Registrant(models.Model):
     created = models.DateTimeField(default=timezone.now)
     language_cd = models.CharField(max_length=2, default="en")
 
+    @property
+    def created_poster(self):
+        return self.location_set.exists()
+
     def __str__(self):  # new
         return "{}".format(self.email)
 

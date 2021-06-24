@@ -1,3 +1,4 @@
+from datetime import timedelta
 from functools import partial
 
 from django.contrib import admin, messages
@@ -8,6 +9,8 @@ from django.utils.translation import gettext_lazy as _
 from portal.mixins import ExportCsvMixin
 from .forms import send_email
 from .models import Registrant, Location, LocationSummary, Survey, RegistrantSurvey
+
+SURVEY_FILTER_DAY_DIFF = 14
 
 
 class LocationInline(admin.TabularInline):
@@ -39,7 +42,7 @@ class LocationInline(admin.TabularInline):
         return False
 
 
-class SurveyListFilter(admin.SimpleListFilter):
+class SurveySentFilter(admin.SimpleListFilter):
     title = _("Surveys Completed")
     parameter_name = "surveys"
 
@@ -73,15 +76,69 @@ class SurveyListFilter(admin.SimpleListFilter):
                 return queryset.filter(registrantsurvey__survey_id=id).distinct()
 
 
+class SurveyTimeSinceFilter(admin.SimpleListFilter):
+    title = _(f"{SURVEY_FILTER_DAY_DIFF} days since survey sent")
+    parameter_name = "timesince"
+
+    def lookups(self, request, model_admin):
+        result = []
+        date_offset = timezone.now() - timedelta(days=SURVEY_FILTER_DAY_DIFF)
+        offset_sent_surveys = RegistrantSurvey.objects.filter(
+            sent_ts__lte=date_offset
+        ).distinct("survey")
+        for reg_survey in offset_sent_surveys:
+            result.append(
+                (
+                    f"{reg_survey.survey.id}:offset",
+                    f"{reg_survey.survey.title}: {SURVEY_FILTER_DAY_DIFF}+ days",
+                )
+            )
+        return result
+
+    def queryset(self, request, queryset):
+        if self.value():
+            id, code = self.value().split(":")
+            if code == "offset":
+                date_offset = timezone.now() - timedelta(days=SURVEY_FILTER_DAY_DIFF)
+                return queryset.filter(
+                    registrantsurvey__survey_id=id,
+                    registrantsurvey__sent_ts__lte=date_offset,
+                )
+
+
+class CreatedPosterFilter(admin.SimpleListFilter):
+    title = _("Created a Poster")
+    parameter_name = "poster"
+
+    def lookups(self, request, model_admin):
+        return (("yes", "Yes"), ("no", "No"))
+
+    def queryset(self, request, queryset):
+        if self.value():
+            created = self.value() == "yes"
+            return queryset.filter(location__isnull=not created).distinct()
+
+
 @admin.register(Registrant)
 class RegistrantAdmin(admin.ModelAdmin, ExportCsvMixin):
-    list_display = ["email", "surveys", "created", "id"]
-    list_filter = (SurveyListFilter,)
+    list_display = ["email", "surveys", "province", "created_poster", "created", "id"]
+    list_filter = (
+        CreatedPosterFilter,
+        SurveySentFilter,
+        SurveyTimeSinceFilter,
+        "location__province",
+    )
     inlines = [
         LocationInline,
     ]
     search_fields = ["id", "email"]
     actions = ["export_as_csv"]
+
+    def province(self, obj):
+        locations = obj.location_set.all()
+        if locations:
+            return locations[0].province if len(locations) == 1 else "Multiple"
+        return ""
 
     def surveys(self, obj):
         surveys = Survey.objects.all()
@@ -113,40 +170,49 @@ class RegistrantAdmin(admin.ModelAdmin, ExportCsvMixin):
     def send_survey_by_id(id, modeladmin, request, queryset):
         count = 0
         for registrant in queryset:
-            reg_surveys = registrant.registrantsurvey_set.filter(survey_id=id)
-            if reg_surveys:
+            if not registrant.location_set.exists():
                 modeladmin.message_user(
                     request,
-                    _(f"{registrant.email} has already had this survey sent to them."),
+                    _(f"{registrant.email} has not created a poster."),
                     messages.WARNING,
                 )
             else:
-                reg_survey = RegistrantSurvey.objects.create(
-                    registrant=registrant,
-                    survey_id=id,
-                    sent_by=request.user,
-                    sent_ts=timezone.now(),
-                )
-                try:
-                    survey = reg_survey.survey
-                    template_id = (
-                        survey.en_notify_template_id
-                        if registrant.language_cd == "en"
-                        else survey.fr_notify_template_id
-                    )
-                    send_email(
-                        registrant.email,
-                        {"registrant_id": str(registrant.id), "url": survey.url},
-                        template_id,
-                    )
-                    count += 1
-                except Exception as e:
+                reg_surveys = registrant.registrantsurvey_set.filter(survey_id=id)
+                if reg_surveys:
                     modeladmin.message_user(
                         request,
-                        _(f"{str(e)} :: email: {registrant.email}"),
-                        messages.ERROR,
+                        _(
+                            f"{registrant.email} has already had this survey sent to them."
+                        ),
+                        messages.WARNING,
                     )
-                    reg_survey.delete()
+                else:
+                    reg_survey = RegistrantSurvey.objects.create(
+                        registrant=registrant,
+                        survey_id=id,
+                        sent_by=request.user,
+                        sent_ts=timezone.now(),
+                    )
+                    try:
+                        survey = reg_survey.survey
+                        template_id = (
+                            survey.en_notify_template_id
+                            if registrant.language_cd == "en"
+                            else survey.fr_notify_template_id
+                        )
+                        send_email(
+                            registrant.email,
+                            {"registrant_id": str(registrant.id), "url": survey.url},
+                            template_id,
+                        )
+                        count += 1
+                    except Exception as e:
+                        modeladmin.message_user(
+                            request,
+                            _(f"{str(e)} :: email: {registrant.email}"),
+                            messages.ERROR,
+                        )
+                        reg_survey.delete()
         if count:
             modeladmin.message_user(
                 request, _(f"Sent {count} messages successfully"), messages.SUCCESS
