@@ -127,7 +127,7 @@ class RegistrantAdmin(admin.ModelAdmin, ExportCsvMixin):
         SurveySentFilter,
         SurveyTimeSinceFilter,
         "location__province",
-        "location__city"
+        "location__city",
     )
     inlines = [
         LocationInline,
