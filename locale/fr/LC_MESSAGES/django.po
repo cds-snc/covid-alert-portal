@@ -2321,7 +2321,7 @@ msgstr "Enquêtes complétées"
 #: register/admin.py
 #, python-brace-format
 msgid "{SURVEY_FILTER_DAY_DIFF} days since survey sent"
-msgstr ""
+msgstr "{SURVEY_FILTER_DAY_DIFF} jours depuis l'envoi de l'enquête"
 
 #: register/admin.py
 msgid "Created a Poster"

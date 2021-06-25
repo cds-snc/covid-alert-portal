@@ -127,11 +127,12 @@ class RegistrantAdmin(admin.ModelAdmin, ExportCsvMixin):
         SurveySentFilter,
         SurveyTimeSinceFilter,
         "location__province",
+        "location__city"
     )
     inlines = [
         LocationInline,
     ]
-    search_fields = ["id", "email"]
+    search_fields = ["id", "email", "location__city", "location__province"]
     actions = ["export_as_csv"]
 
     def province(self, obj):
