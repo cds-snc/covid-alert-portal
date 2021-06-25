@@ -74,6 +74,7 @@ GITHUB_SHA = os.getenv("GITHUB_SHA") or None
 # Application definition
 
 INSTALLED_APPS = [
+    "whitenoise.runserver_nostatic",
     "waffle",
     "django_sass",
     "profiles",
@@ -109,6 +110,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "corsheaders.middleware.CorsMiddleware",
@@ -278,6 +280,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "portal", "static"),
 ]
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 AUTH_USER_MODEL = "profiles.HealthcareUser"
 
 LOGIN_URL = "login"
@@ -438,6 +442,9 @@ CSP_DEFAULT_SRC = [
     "staging.covid-hcportal.cdssandbox.xyz",
     "covid-alert-portal.alpha.canada.ca",
     "portail-alerte-covid.alpha.canada.ca",
+    "register.covid-hcportal.cdssandbox.xyz",
+    "covid-alert-qr-poster.alpha.canada.ca",
+    "alerte-covid-affiche-qr.alpha.canada.ca",
 ]
 CSP_STYLE_SRC = [
     "'self'",
