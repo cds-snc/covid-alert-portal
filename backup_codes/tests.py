@@ -497,7 +497,12 @@ class BackupCodesLockout(BackupCodesLogin):
             follow=True,
         )
         # Check if we are now verified
-        self.assertFormError(response, "form", "code", "Something went wrong. Try again or ask for another code.")
+        self.assertFormError(
+            response,
+            "form",
+            "code",
+            "Something went wrong. Try again or ask for another code.",
+        )
         # Pause to ensure second request isn't throttled.
         sleep(2)
         response = self.client.post(
@@ -533,7 +538,12 @@ class BackupCodesLockout(BackupCodesLogin):
             follow=True,
         )
         # Check if we are now verified
-        self.assertFormError(response, "form", "code", "Something went wrong. Try again or ask for another code.")
+        self.assertFormError(
+            response,
+            "form",
+            "code",
+            "Something went wrong. Try again or ask for another code.",
+        )
         # Pause to ensure second request isn't throttled.
         sleep(2)
         response = self.client.post(
@@ -567,7 +577,12 @@ class BackupCodesLockout(BackupCodesLogin):
             follow=True,
         )
         # Check if we are now verified
-        self.assertFormError(response, "form", "code", "Something went wrong. Try again or ask for another code.")
+        self.assertFormError(
+            response,
+            "form",
+            "code",
+            "Something went wrong. Try again or ask for another code.",
+        )
         # Pause to ensure second request isn't throttled.
         response = self.client.post(
             reverse("login_2fa"),
@@ -593,7 +608,12 @@ class BackupCodesLockout(BackupCodesLogin):
             follow=True,
         )
         # Check if we are now verified
-        self.assertFormError(response, "form", "code", "Something went wrong. Try again or ask for another code.")
+        self.assertFormError(
+            response,
+            "form",
+            "code",
+            "Something went wrong. Try again or ask for another code.",
+        )
         # Pause to ensure second request isn't throttled.
         response = self.client.post(
             reverse("login_2fa"),
