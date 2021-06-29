@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-29 15:30+0000\n"
+"POT-Creation-Date: 2021-06-29 16:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2707,7 +2707,7 @@ msgstr "Lien expiré"
 
 #: register/templates/register/error.html
 msgid "If you want to continue, we can send a new link to your email."
-msgstr "Si vous souhaitez continuer, nous pouvons envoyer un nouveau lien à votre adresse courriel."
+msgstr "Si vous souhaitez continuer, nous pouvons envoyer un nouveau par courriel."
 
 #: register/templates/register/error.html
 msgid "Send new link"
