@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "You’re logged in to give one-time keys" %}{% endblock %}
+{% block title %}
+  {% if request.user.can_send_alerts %}
+    {% trans "Now you can give one-time keys" %}
+  {% else %}
+    {% trans "You’re logged in to give one-time keys" %}
+  {% endif %}
+{% endblock %}
 
 {% block content %}
   {% if request.user.can_send_alerts %}
