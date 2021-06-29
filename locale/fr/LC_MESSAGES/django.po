@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-28 21:37+0000\n"
+"POT-Creation-Date: 2021-06-29 16:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -957,8 +957,8 @@ msgid "Add date"
 msgstr "Ajouter la date"
 
 #: outbreaks/templates/datetime.html
-msgid "Do not add"
-msgstr "Annuler l’ajout"
+msgid "Cancel"
+msgstr "Annuler"
 
 #: outbreaks/templates/datetime.html
 msgid "Add new date +"
@@ -2707,7 +2707,7 @@ msgstr "Lien expiré"
 
 #: register/templates/register/error.html
 msgid "If you want to continue, we can send a new link to your email."
-msgstr "Si vous souhaitez continuer, nous pouvons envoyer un nouveau lien à votre adresse courriel."
+msgstr "Si vous souhaitez continuer, nous pouvons envoyer un nouveau par courriel."
 
 #: register/templates/register/error.html
 msgid "Send new link"
