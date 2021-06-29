@@ -21,5 +21,5 @@ echo "Starting server"
 if [[ ${DJANGO_ENV} == 'development' ]]; then
 	python manage.py runserver 0.0.0.0:8000
 else
-	uwsgi --http :8000 --master --module portal.wsgi --static-map /static=/code/staticfiles --enable-threads --processes 5
+	uwsgi --http :8000 --master --module portal.wsgi --static-map /static=/code/staticfiles --enable-threads --processes 10
 fi
