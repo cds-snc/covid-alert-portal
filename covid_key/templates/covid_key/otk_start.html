@@ -1,10 +1,20 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "You’re logged in to give one-time keys" %}{% endblock %}
+{% block title %}
+  {% if request.user.can_send_alerts %}
+    {% trans "Now you can give one-time keys" %}
+  {% else %}
+    {% trans "You’re logged in to give one-time keys" %}
+  {% endif %}
+{% endblock %}
 
 {% block content %}
-  <h1>{% trans "You’re logged in to give one-time keys" %}</h1>
+  {% if request.user.can_send_alerts %}
+    <h1>{% trans "Now you can give one-time keys" %}</h1>
+  {% else %}
+    <h1>{% trans "You’re logged in to give one-time keys" %}</h1>
+  {% endif %}
   <p>
     {% trans "People need a key if they’ve:" %}
   </p>
