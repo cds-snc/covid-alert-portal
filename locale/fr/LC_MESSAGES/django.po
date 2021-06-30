@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-29 16:45+0000\n"
+"POT-Creation-Date: 2021-06-30 17:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -724,6 +724,10 @@ msgid "Did %(phone_number)s get the key?"
 msgstr "La clé a-t-elle été reçue au numéro %(phone_number)s?"
 
 #: covid_key/templates/covid_key/otk_start.html
+msgid "Now you can give one-time keys"
+msgstr "Clés à usage unique"
+
+#: covid_key/templates/covid_key/otk_start.html
 msgid "You’re logged in to give one-time keys"
 msgstr "Vous pouvez maintenant donner des clés"
 
@@ -783,9 +787,9 @@ msgstr "De"
 msgid "To"
 msgstr "À"
 
-#: outbreaks/forms.py
-msgid "Invalid date specified."
-msgstr "Date non valide"
+#: outbreaks/forms.py outbreaks/templates/datetime.html
+msgid "Something's wrong with this date."
+msgstr "Il y a un problème avec cette date."
 
 #: outbreaks/forms.py
 msgid "\"To\" must be later than \"From\"."
@@ -925,8 +929,20 @@ msgid "Alert history"
 msgstr "l'historique des alertes"
 
 #: outbreaks/templates/datetime.html portal/templates/includes/error_list.html
-msgid "Please correct the errors on the page"
-msgstr "Veuillez corriger les erreurs trouvées dans la page"
+msgid "Correct these errors:"
+msgstr "Corrigez les erreurs suivantes :"
+
+#: outbreaks/templates/datetime.html
+msgid "Enter a day."
+msgstr "Saisissez un jour."
+
+#: outbreaks/templates/datetime.html
+msgid "Enter a month."
+msgstr "Saisissez un mois."
+
+#: outbreaks/templates/datetime.html
+msgid "Enter a year."
+msgstr "Saisissez un année."
 
 #: outbreaks/templates/datetime.html
 msgid "You’ll alert people who scanned the QR code on that date and time."
@@ -3330,8 +3346,6 @@ msgid "Keep posters in good condition and replace damaged posters."
 msgstr "Mettre à jour le nom, l’adresse ou les coordonnées dans le site Web si ces renseignements changent. Un nouveau code QR sera créé pour le lieu ou l’événement en question."
 
 #: register/templates/register/terms.html
-#, fuzzy
-#| msgid "If needed, update name, address or contact information by using this website to make a new poster.  This changes the QR code for the place or event."
 msgid "If needed, use this website to update name, address or contact information. This changes the QR code for the place or event."
 msgstr "Placer des affiches uniquement sur le terrain correspondant à l’adresse de votre lieu ou événement."
 
