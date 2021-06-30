@@ -55,7 +55,7 @@ for hour in range(24):
     end_hours.append(display_hour_59)
 
 month_choices = [(i + 1, _(month_name[i + 1])) for i in range(12)]
-month_choices.insert(0, ('', _("Select")))
+month_choices.insert(0, ("", _("Select")))
 
 
 class DateForm(HealthcareBaseForm):
