@@ -12,7 +12,7 @@ class TextView(TestCase):
         self.assertContains(response, "User-Agent: *\nDisallow: /")
 
     def test_status(self):
-        response = self.client.get(reverse("status"))
+        response = self.client.get("/status")
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get("Content-type"), "text/plain")
