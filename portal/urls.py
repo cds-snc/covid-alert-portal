@@ -35,13 +35,6 @@ urlpatterns = [
         lambda x: HttpResponse("User-Agent: *\nDisallow: /", content_type="text/plain"),
         name="robots_file",
     ),
-    path(
-        r"status/",
-        lambda x: HttpResponse(
-            "{}".format(settings.DJVERSION_VERSION), content_type="text/plain"
-        ),
-        name="status",
-    ),
     path("i18n/", include("django.conf.urls.i18n")),
     path("403/", views.permission_denied_view),
     path("404/", views.page_not_found),
