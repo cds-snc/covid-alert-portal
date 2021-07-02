@@ -25,19 +25,26 @@
     {% else %}
       <div class="errorlist--container" role="alert">
         <h2 class="errorlist--heading">
-          {% trans "Please correct the errors on the page" %}
+          {% trans "Correct these errors:" %}
         </h2>
         <ol class="errorlist">
           {% for key,value in form.errors.items %}
             <li>
               {% if key == '__all__' %}
                 <a href="#form--{{ request.resolver_match.url_name }}">
+                {% trans "Something's wrong with this date." %}
               {% else %}
                 <a href="#id_{{ key }}">
-              {% endif %}
-              {{ value|first }}
-              </a>
-            </li>
+                  {% if key == 'day' %}
+                    {% trans "Enter a day." %}
+                  {% elif key == 'month' %}
+                    {% trans "Enter a month." %}
+                  {% else %}
+                    {% trans "Enter a year." %}
+                  {% endif %}
+                {% endif %}
+                </a>
+              </li>
           {% endfor %}
         </ol>
       </div>

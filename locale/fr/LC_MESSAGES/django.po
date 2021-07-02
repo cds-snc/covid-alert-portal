@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-02 15:00+0000\n"
+"POT-Creation-Date: 2021-07-02 21:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -724,8 +724,6 @@ msgid "Did %(phone_number)s get the key?"
 msgstr "La clé a-t-elle été reçue au numéro %(phone_number)s?"
 
 #: covid_key/templates/covid_key/otk_start.html
-#, fuzzy
-#| msgid "Give one-time keys"
 msgid "Now you can give one-time keys"
 msgstr "Clés à usage unique"
 
@@ -789,9 +787,9 @@ msgstr "De"
 msgid "To"
 msgstr "À"
 
-#: outbreaks/forms.py
-msgid "Invalid date specified."
-msgstr "Date non valide"
+#: outbreaks/forms.py outbreaks/templates/datetime.html
+msgid "Something's wrong with this date."
+msgstr "Il y a un problème avec cette date."
 
 #: outbreaks/forms.py
 msgid "\"To\" must be later than \"From\"."
@@ -931,8 +929,20 @@ msgid "Alert history"
 msgstr "l'historique des alertes"
 
 #: outbreaks/templates/datetime.html portal/templates/includes/error_list.html
-msgid "Please correct the errors on the page"
-msgstr "Veuillez corriger les erreurs trouvées dans la page"
+msgid "Correct these errors:"
+msgstr "Corrigez les erreurs suivantes :"
+
+#: outbreaks/templates/datetime.html
+msgid "Enter a day."
+msgstr "Saisissez un jour."
+
+#: outbreaks/templates/datetime.html
+msgid "Enter a month."
+msgstr "Saisissez un mois."
+
+#: outbreaks/templates/datetime.html
+msgid "Enter a year."
+msgstr "Saisissez un année."
 
 #: outbreaks/templates/datetime.html
 msgid "You’ll alert people who scanned the QR code on that date and time."
