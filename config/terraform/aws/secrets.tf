@@ -1,3 +1,4 @@
+# tfsec:ignore:AWS095
 resource "aws_secretsmanager_secret" "server_database_url" {
   name                    = "server-database-url"
   recovery_window_in_days = 0
@@ -12,6 +13,7 @@ resource "aws_secretsmanager_secret_version" "server_database_url" {
 # AWS Secret Manager - Covid Alert Portal
 ###
 
+# tfsec:ignore:AWS095
 resource "aws_secretsmanager_secret" "api_authorization" {
   name                    = "api_authorization"
   recovery_window_in_days = 0
@@ -22,6 +24,7 @@ resource "aws_secretsmanager_secret_version" "api_authorization" {
   secret_string = var.ecs_secret_api_authorization
 }
 
+# tfsec:ignore:AWS095
 resource "aws_secretsmanager_secret" "api_endpoint" {
   name                    = "api_endpoint"
   recovery_window_in_days = 0
@@ -32,6 +35,7 @@ resource "aws_secretsmanager_secret_version" "api_endpoint" {
   secret_string = var.ecs_secret_api_endpoint
 }
 
+# tfsec:ignore:AWS095
 resource "aws_secretsmanager_secret" "django_secret_key" {
   name                    = "django_secret_key"
   recovery_window_in_days = 0
@@ -42,6 +46,7 @@ resource "aws_secretsmanager_secret_version" "django_secret_key" {
   secret_string = var.ecs_secret_django_secret_key
 }
 
+# tfsec:ignore:AWS095
 resource "aws_secretsmanager_secret" "freshdesk_api_endpoint" {
   name                    = "freshdesk_api_endpoint"
   recovery_window_in_days = 0
@@ -52,6 +57,7 @@ resource "aws_secretsmanager_secret_version" "freshdesk_api_endpoint" {
   secret_string = var.ecs_secret_freshdesk_api_endpoint
 }
 
+# tfsec:ignore:AWS095
 resource "aws_secretsmanager_secret" "freshdesk_api_key" {
   name                    = "freshdesk_api_key"
   recovery_window_in_days = 0
@@ -62,6 +68,7 @@ resource "aws_secretsmanager_secret_version" "freshdesk_api_key" {
   secret_string = var.ecs_secret_freshdesk_api_key
 }
 
+# tfsec:ignore:AWS095
 resource "aws_secretsmanager_secret" "freshdesk_product_id" {
   name                    = "freshdesk_product_id"
   recovery_window_in_days = 0
@@ -72,6 +79,7 @@ resource "aws_secretsmanager_secret_version" "freshdesk_product_id" {
   secret_string = var.ecs_secret_freshdesk_product_id
 }
 
+# tfsec:ignore:AWS095
 resource "aws_secretsmanager_secret" "new_relic_license_key" {
   name                    = "new_relic_license_key"
   recovery_window_in_days = 0
@@ -82,6 +90,7 @@ resource "aws_secretsmanager_secret_version" "new_relic_license_key" {
   secret_string = var.ecs_secret_new_relic_license_key
 }
 
+# tfsec:ignore:AWS095
 resource "aws_secretsmanager_secret" "notify_api_key" {
   name                    = "notify_api_key"
   recovery_window_in_days = 0
@@ -92,6 +101,7 @@ resource "aws_secretsmanager_secret_version" "notify_api_key" {
   secret_string = var.ecs_secret_notify_api_key
 }
 
+# tfsec:ignore:AWS095
 resource "aws_secretsmanager_secret" "qrcode_signature_private_key" {
   name                    = "qrcode_signature_private_key"
   recovery_window_in_days = 0
@@ -102,6 +112,7 @@ resource "aws_secretsmanager_secret_version" "qrcode_signature_private_key" {
   secret_string = var.ecs_secret_qrcode_signature_private_key
 }
 
+# tfsec:ignore:AWS095
 resource "aws_secretsmanager_secret" "qrcode_notify_api_key" {
   name                    = "qrcode_notify_api_key"
   recovery_window_in_days = 0
