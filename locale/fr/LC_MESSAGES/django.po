@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-29 16:45+0000\n"
+"POT-Creation-Date: 2021-07-02 15:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -722,6 +722,12 @@ msgstr "Le message texte met environ 30 secondes pour arriver."
 #, python-format
 msgid "Did %(phone_number)s get the key?"
 msgstr "La clé a-t-elle été reçue au numéro %(phone_number)s?"
+
+#: covid_key/templates/covid_key/otk_start.html
+#, fuzzy
+#| msgid "Give one-time keys"
+msgid "Now you can give one-time keys"
+msgstr "Clés à usage unique"
 
 #: covid_key/templates/covid_key/otk_start.html
 msgid "You’re logged in to give one-time keys"
@@ -3295,7 +3301,7 @@ msgstr "Vos responsabilités"
 
 #: register/templates/register/terms.html
 msgid "By using this website, you confirm that:"
-msgstr "En utilisant le site Web, vous confirmez que:"
+msgstr "En utilisant le site Web, vous confirmez que :"
 
 #: register/templates/register/terms.html
 msgid "You’re authorized to give information so that the place or event can make posters."
@@ -3319,25 +3325,23 @@ msgstr "Fournir des informations exactes lors de la création des affiches."
 
 #: register/templates/register/terms.html
 msgid "Only display posters within the area that belongs to the address of the place or event."
-msgstr "Maintenir les affiches en bonne condition et remplacer celles qui sont abîmées."
-
-#: register/templates/register/terms.html
-msgid "Display the correct poster for the address."
-msgstr "Mettre à jour le nom, l’adresse ou les coordonnées dans le site Web si ces renseignements changent. Un nouveau code QR sera créé pour le lieu ou l’événement en question."
-
-#: register/templates/register/terms.html
-msgid "Keep posters in good condition and replace damaged posters."
-msgstr "Mettre à jour le nom, l’adresse ou les coordonnées dans le site Web si ces renseignements changent. Un nouveau code QR sera créé pour le lieu ou l’événement en question."
-
-#: register/templates/register/terms.html
-#, fuzzy
-#| msgid "If needed, update name, address or contact information by using this website to make a new poster.  This changes the QR code for the place or event."
-msgid "If needed, use this website to update name, address or contact information. This changes the QR code for the place or event."
 msgstr "Placer des affiches uniquement sur le terrain correspondant à l’adresse de votre lieu ou événement."
 
 #: register/templates/register/terms.html
-msgid "Destroy any posters you do not need anymore or that display a previous QR code."
+msgid "Display the correct poster for the address."
 msgstr "Placer la bonne affiche pour l’adresse en question."
+
+#: register/templates/register/terms.html
+msgid "Keep posters in good condition and replace damaged posters."
+msgstr "Maintenir les affiches en bonne condition et remplacer celles qui sont abîmées."
+
+#: register/templates/register/terms.html
+msgid "If needed, use this website to update name, address or contact information. This changes the QR code for the place or event."
+msgstr "Mettre à jour le nom, l’adresse ou les coordonnées dans le site Web si ces renseignements changent, afin de créer une nouvelle affiche. Un nouveau code QR sera créé pour le lieu ou l’événement en question."
+
+#: register/templates/register/terms.html
+msgid "Destroy any posters you do not need anymore or that display a previous QR code."
+msgstr "Détruire toute affiche dont vous n’avez plus besoin ou toute affiche ayant un ancien code QR."
 
 #: register/templates/register/terms.html
 msgid "Fraud or abuse"
