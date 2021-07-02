@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-29 16:45+0000\n"
+"POT-Creation-Date: 2021-07-02 15:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -722,6 +722,12 @@ msgstr "Le message texte met environ 30 secondes pour arriver."
 #, python-format
 msgid "Did %(phone_number)s get the key?"
 msgstr "La clé a-t-elle été reçue au numéro %(phone_number)s?"
+
+#: covid_key/templates/covid_key/otk_start.html
+#, fuzzy
+#| msgid "Give one-time keys"
+msgid "Now you can give one-time keys"
+msgstr "Clés à usage unique"
 
 #: covid_key/templates/covid_key/otk_start.html
 msgid "You’re logged in to give one-time keys"

@@ -47,6 +47,8 @@ class HealthcareBaseForm(forms.Form):
             self.fields[field].widget.attrs.pop("autofocus", None)
             # remove autocomplete attributes
             self.fields[field].widget.attrs.update({"autocomplete": "off"})
+            if 'required' in self.fields[field].error_messages:
+                self.fields[field].error_messages['required'] = 'Enter the information.'
 
     def fieldsets(self):
         meta = getattr(self, "Meta", None)
