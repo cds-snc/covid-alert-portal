@@ -29,9 +29,8 @@ class TZMiddleware:
 
 
 class HealthCheckMiddleware(MiddlewareMixin):
-
     def __call__(self, request):
-        if request.path == '/status':
+        if request.path == "/status":
             return HttpResponse(
                 "{}".format(settings.DJVERSION_VERSION), content_type="text/plain"
             )
