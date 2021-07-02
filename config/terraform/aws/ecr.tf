@@ -2,7 +2,7 @@ locals {
   image_name = "covid-alert-portal-terraform"
 }
 
-#tfsec:ignore:AWS078
+#tfsec:ignore:AWS078 tfsec:ignore:AWS093
 resource "aws_ecr_repository" "repository" {
   name                 = local.image_name
   image_tag_mutability = "MUTABLE"
