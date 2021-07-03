@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-30 17:13+0000\n"
+"POT-Creation-Date: 2021-07-03 03:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -225,11 +225,42 @@ msgid "Sending alerts"
 msgstr "Envoi d’alertes"
 
 #: about/templates/about/5_help_patient_enter_key.html
+#: about/templates/about/6_admin_accounts.html
 #: about/templates/about/6_sending_qr_alerts.html
 #: about/templates/about/7_admin_accounts.html
 #: about/templates/includes/_nav_about.html
 msgid "Admin accounts"
 msgstr "Comptes administrateurs"
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Both administrators and team members can generate one-time keys."
+msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Administrators can also:"
+msgstr "Les administrateurs peuvent aussi :"
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Invite team members to create portal accounts."
+msgstr "Inviter des membres à se créer un compte pour le portail."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Make changes or update information in team member accounts."
+msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Delete portal accounts."
+msgstr "Supprimer des comptes."
+
+#: about/templates/about/6_admin_accounts.html
+#: about/templates/about/7_admin_accounts.html
+msgid "Give log in codes to team members who are locked out of the portal."
+msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "Sending QR alerts"
@@ -285,30 +316,6 @@ msgstr "Vous verrez une confirmation que l’alerte a été envoyée"
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "Health authorities continue to manually contact visitors who do not scan QR codes."
 msgstr "Les autorités sanitaires continueront de contacter manuellement les visiteurs qui ne scannent pas les codes QR."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Both administrators and team members can generate one-time keys."
-msgstr "Les administrateurs et les membres d’équipe peuvent tous générer des clés à usage unique."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Administrators can also:"
-msgstr "Les administrateurs peuvent aussi :"
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Invite team members to create portal accounts."
-msgstr "Inviter des membres à se créer un compte pour le portail."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Make changes or update information in team member accounts."
-msgstr "Modifier ou mettre à jour les renseignements dans les comptes des membres."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Delete portal accounts."
-msgstr "Supprimer des comptes."
-
-#: about/templates/about/7_admin_accounts.html
-msgid "Give log in codes to team members who are locked out of the portal."
-msgstr "Fournir des codes de connexion aux membres incapables de se connecter au portail."
 
 #: about/templates/includes/_nav_about.html
 msgid "Table of contents: About the Portal"
@@ -724,10 +731,6 @@ msgid "Did %(phone_number)s get the key?"
 msgstr "La clé a-t-elle été reçue au numéro %(phone_number)s?"
 
 #: covid_key/templates/covid_key/otk_start.html
-msgid "Now you can give one-time keys"
-msgstr "Clés à usage unique"
-
-#: covid_key/templates/covid_key/otk_start.html
 msgid "You’re logged in to give one-time keys"
 msgstr "Vous pouvez maintenant donner des clés"
 
@@ -787,9 +790,9 @@ msgstr "De"
 msgid "To"
 msgstr "À"
 
-#: outbreaks/forms.py outbreaks/templates/datetime.html
-msgid "Something's wrong with this date."
-msgstr "Il y a un problème avec cette date."
+#: outbreaks/forms.py
+msgid "Invalid date specified."
+msgstr "Date non valide"
 
 #: outbreaks/forms.py
 msgid "\"To\" must be later than \"From\"."
@@ -929,20 +932,8 @@ msgid "Alert history"
 msgstr "l'historique des alertes"
 
 #: outbreaks/templates/datetime.html portal/templates/includes/error_list.html
-msgid "Correct these errors:"
-msgstr "Corrigez les erreurs suivantes :"
-
-#: outbreaks/templates/datetime.html
-msgid "Enter a day."
-msgstr "Saisissez un jour."
-
-#: outbreaks/templates/datetime.html
-msgid "Enter a month."
-msgstr "Saisissez un mois."
-
-#: outbreaks/templates/datetime.html
-msgid "Enter a year."
-msgstr "Saisissez un année."
+msgid "Please correct the errors on the page"
+msgstr "Veuillez corriger les erreurs trouvées dans la page"
 
 #: outbreaks/templates/datetime.html
 msgid "You’ll alert people who scanned the QR code on that date and time."
@@ -973,8 +964,8 @@ msgid "Add date"
 msgstr "Ajouter la date"
 
 #: outbreaks/templates/datetime.html
-msgid "Cancel"
-msgstr "Annuler"
+msgid "Do not add"
+msgstr "Annuler l’ajout"
 
 #: outbreaks/templates/datetime.html
 msgid "Add new date +"
@@ -2307,8 +2298,8 @@ msgid "Please try again later."
 msgstr "Réessayer plus tard"
 
 #: profiles/views.py
-msgid "Something went wrong. Try again or ask for another code."
-msgstr "Une erreur est survenue. Réessayez ou demandez un nouveau code."
+msgid "You entered the wrong code."
+msgstr "Vous n’avez pas saisi le bon code."
 
 #: profiles/views.py
 msgid "Log in code has been sent."
@@ -2557,6 +2548,10 @@ msgid "General Survey URL"
 msgstr "URL de l'enquête générale"
 
 #: register/models.py
+msgid "Not including any registrant or venue param codes here"
+msgstr ""
+
+#: register/models.py
 msgid "Survey Title"
 msgstr "Titre de l'enquête"
 
@@ -2567,6 +2562,22 @@ msgstr "Anglais Notify Template ID"
 #: register/models.py
 msgid "French Notify Template ID"
 msgstr "ID du modèle de notification en français"
+
+#: register/models.py
+msgid "Registrant ID parameter"
+msgstr ""
+
+#: register/models.py
+msgid "Append registration ID to url"
+msgstr ""
+
+#: register/models.py
+msgid "Venue tag parameter"
+msgstr ""
+
+#: register/models.py
+msgid "Append venue tags to url"
+msgstr ""
 
 #: register/models.py
 msgid "Sent Timestamp"
@@ -2723,7 +2734,7 @@ msgstr "Lien expiré"
 
 #: register/templates/register/error.html
 msgid "If you want to continue, we can send a new link to your email."
-msgstr "Si vous souhaitez continuer, nous pouvons envoyer un nouveau par courriel."
+msgstr "Si vous souhaitez continuer, nous pouvons envoyer un nouveau lien à votre adresse courriel."
 
 #: register/templates/register/error.html
 msgid "Send new link"
@@ -3346,6 +3357,8 @@ msgid "Keep posters in good condition and replace damaged posters."
 msgstr "Mettre à jour le nom, l’adresse ou les coordonnées dans le site Web si ces renseignements changent. Un nouveau code QR sera créé pour le lieu ou l’événement en question."
 
 #: register/templates/register/terms.html
+#, fuzzy
+#| msgid "If needed, update name, address or contact information by using this website to make a new poster.  This changes the QR code for the place or event."
 msgid "If needed, use this website to update name, address or contact information. This changes the QR code for the place or event."
 msgstr "Placer des affiches uniquement sur le terrain correspondant à l’adresse de votre lieu ou événement."
 
