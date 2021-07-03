@@ -2558,7 +2558,7 @@ msgstr "URL de l'enquête générale"
 
 #: register/models.py
 msgid "Not including any registrant or venue param codes here"
-msgstr ""
+msgstr "N'incluant aucun code d'inscription ou de paramètre de lieu ici"
 
 #: register/models.py
 msgid "Survey Title"
@@ -2574,19 +2574,19 @@ msgstr "ID du modèle de notification en français"
 
 #: register/models.py
 msgid "Registrant ID parameter"
-msgstr ""
+msgstr "Paramètre d'ID de titulaire"
 
 #: register/models.py
 msgid "Append registration ID to url"
-msgstr ""
+msgstr "Ajouter l'ID d'enregistrement à l'URL"
 
 #: register/models.py
 msgid "Venue tag parameter"
-msgstr ""
+msgstr "Paramètre de balise de lieu"
 
 #: register/models.py
 msgid "Append venue tags to url"
-msgstr ""
+msgstr "Ajouter des balises de lieu à l'URL"
 
 #: register/models.py
 msgid "Sent Timestamp"
