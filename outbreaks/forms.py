@@ -105,7 +105,10 @@ class DateForm(HealthcareBaseForm):
 
     @staticmethod
     def validate_date_entry(form, start_date, end_date, alert_location):
-        tz = pytz.timezone(settings.PORTAL_LOCAL_TZ or settings.TIME_ZONE or "UTC")
+        # province = Location.objects.get(id=alert_location).province
+        # timezone = HealthcareProvince.objects.get(abbr=province).timezone
+        tz = pytz.timezone('America/Vancouver')
+        # tz = pytz.timezone(settings.PORTAL_LOCAL_TZ or settings.TIME_ZONE or "UTC")
         start_later_end_error_msg = _('"To" must be later than "From".')
         overlap_notification_error_tmpl = _(
             "Your team already alerted people who scanned the QR code on {}."
@@ -131,7 +134,8 @@ class DateForm(HealthcareBaseForm):
 
     def get_valid_date(self, data, start_or_end="start"):
         tz = pytz.timezone(
-            settings.PORTAL_LOCAL_TZ
+            # settings.PORTAL_LOCAL_TZ
+            'America/Vancouver'
         )  # TODO (mvp pilot setting) Change this for multi-tz rollout
         default_time = "0:00:00:000001" if start_or_end == "start" else default_end_time
         time_str = data.get(f"{start_or_end}_time", default_time)
