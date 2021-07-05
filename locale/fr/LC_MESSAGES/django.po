@@ -724,8 +724,6 @@ msgid "Did %(phone_number)s get the key?"
 msgstr "La clé a-t-elle été reçue au numéro %(phone_number)s?"
 
 #: covid_key/templates/covid_key/otk_start.html
-#, fuzzy
-#| msgid "Give one-time keys"
 msgid "Now you can give one-time keys"
 msgstr "Clés à usage unique"
 
@@ -1203,8 +1201,6 @@ msgid "{} from {} to {}"
 msgstr "{} de {} à {}"
 
 #: portal/forms.py
-#, fuzzy
-#| msgid "This link has expired."
 msgid "This field is required."
 msgstr "Le lien est expiré."
 
