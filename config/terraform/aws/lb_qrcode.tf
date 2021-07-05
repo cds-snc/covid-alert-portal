@@ -12,13 +12,13 @@ resource "aws_lb_target_group" "qrcode" {
 
   health_check {
     enabled             = true
-    interval            = 10
+    interval            = 15
     path                = "/status/"
     port                = 8000
     matcher             = "301,200"
     timeout             = 5
     healthy_threshold   = 2
-    unhealthy_threshold = 2
+    unhealthy_threshold = 10
   }
 
   tags = {
@@ -37,13 +37,13 @@ resource "aws_lb_target_group" "qrcode_2" {
 
   health_check {
     enabled             = true
-    interval            = 10
+    interval            = 15
     port                = 8000
     path                = "/status/"
     matcher             = "301,200"
     timeout             = 5
     healthy_threshold   = 2
-    unhealthy_threshold = 2
+    unhealthy_threshold = 10
   }
 
   tags = {
