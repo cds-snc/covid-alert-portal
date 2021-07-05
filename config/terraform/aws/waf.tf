@@ -315,7 +315,15 @@ resource "aws_wafv2_web_acl" "qrcode_acl" {
     priority = 5
 
     action {
-      block {}
+      block {
+        custom_response {
+          response_code = 403
+          response_header {
+            name  = "waf-block"
+            value = "CanadaOnlyGeoRestriction"
+          }
+        }
+      }
     }
 
     statement {
