@@ -16,7 +16,7 @@ class ContactForm(HealthcareBaseForm):
     email = forms.EmailField(
         label=_("Your email address"),
         error_messages={
-                "required": _("Enter your email address if you want to contact us")
+            "required": _("Enter your email address if you want to contact us")
         },
     )
     FEEDBACK_MESSAGE = _("You need to enter something if you want to contact us")
@@ -26,11 +26,6 @@ class ContactForm(HealthcareBaseForm):
         help_text=_("Do not include any personal details"),
         widget=forms.Textarea,
     )
-
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields["email"].error_messages["required"] = _("Enter your email address if you want to contact us")
-    #     self.fields["feedback"].error_messages["required"] = _("You need to enter something if you want to contact us")
 
     def send_freshdesk(self):
         try:

@@ -55,7 +55,7 @@ for hour in range(24):
     end_hours.append(display_hour_59)
 
 month_choices = [(i + 1, _(month_name[i + 1])) for i in range(12)]
-month_choices.insert(0, (-1, _("Select")))
+month_choices.insert(0, ("", _("Select")))
 
 
 class DateForm(HealthcareBaseForm):
@@ -92,7 +92,7 @@ class DateForm(HealthcareBaseForm):
     def clean(self):
         # Validate each date provided to ensure that it is in fact a correct date
         cleaned_data = super().clean()
-        invalid_date_error_msg = _("Invalid date specified.")
+        invalid_date_error_msg = _("Something's wrong with this date.")
 
         try:
             start_date = self.get_valid_date(cleaned_data, "start")
@@ -105,10 +105,7 @@ class DateForm(HealthcareBaseForm):
 
     @staticmethod
     def validate_date_entry(form, start_date, end_date, alert_location):
-        # province = Location.objects.get(id=alert_location).province
-        # timezone = HealthcareProvince.objects.get(abbr=province).timezone
-        tz = pytz.timezone('America/Vancouver')
-        # tz = pytz.timezone(settings.PORTAL_LOCAL_TZ or settings.TIME_ZONE or "UTC")
+        tz = pytz.timezone(settings.PORTAL_LOCAL_TZ or settings.TIME_ZONE or "UTC")
         start_later_end_error_msg = _('"To" must be later than "From".')
         overlap_notification_error_tmpl = _(
             "Your team already alerted people who scanned the QR code on {}."
@@ -134,8 +131,7 @@ class DateForm(HealthcareBaseForm):
 
     def get_valid_date(self, data, start_or_end="start"):
         tz = pytz.timezone(
-            # settings.PORTAL_LOCAL_TZ
-            'America/Vancouver'
+            settings.PORTAL_LOCAL_TZ
         )  # TODO (mvp pilot setting) Change this for multi-tz rollout
         default_time = "0:00:00:000001" if start_or_end == "start" else default_end_time
         time_str = data.get(f"{start_or_end}_time", default_time)
