@@ -47,3 +47,32 @@ backInlineLinks = document.getElementsByClassName('back-inline-link');
 for (let i=0; i< backInlineLinks.length; i++){
   backInlineLinks[i].addEventListener('click', navBack);
 }
+
+
+var startTimeControl = document.getElementById('id_start_time');
+var endTimeControlClone = document.getElementById('id_end_time').cloneNode(true);
+function getTimeIntFromElement(value){
+  return parseInt(value.replaceAll(":",""));
+}
+startTimeControl.addEventListener('change', function (ele){
+  var startval = getTimeIntFromElement(ele.target.value);
+  var endTimeControl = document.getElementById('id_end_time');
+  var selectedEndValue = endTimeControl.value;
+  var replacementClone = endTimeControlClone.cloneNode(true);
+  endTimeControl.parentNode.replaceChild(replacementClone, endTimeControl);
+  endTimeControl = document.getElementById('id_end_time');
+  for(var i = 0; i< endTimeControl.length-1; i++){
+    if (getTimeIntFromElement(endTimeControl[i].value) < startval){
+      endTimeControl.remove(i);
+      i--;
+    }
+  }
+  for(var i = 0; i < endTimeControl.length; i++){
+    if(endTimeControl[i].value == selectedEndValue){
+      endTimeControl.options[i].selected = true;
+      break;
+    }else{
+      endTimeControl.options[0].selected = true;
+    }
+  }
+});
