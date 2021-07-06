@@ -1209,6 +1209,14 @@ msgstr "Une plage horaire conflictuelle : ({}) a été saisie ci-dessous."
 msgid "{} from {} to {}"
 msgstr "{} de {} à {}"
 
+#: portal/forms.py
+msgid "This field is required."
+msgstr "Le lien est expiré."
+
+#: portal/forms.py
+msgid "Enter the information."
+msgstr "Entrez les renseignements demandés."
+
 #: portal/settings.py
 msgid "This account has been locked due to too many failed log in attempts."
 msgstr "Ce compte a été verrouillé en raison d’un trop grand nombre de tentatives d’ouverture de session infructueuses."
