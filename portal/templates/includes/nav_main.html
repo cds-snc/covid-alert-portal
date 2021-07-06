@@ -15,7 +15,7 @@
         {% endif %}
       {% endswitch %}
       {% if user.is_admin and user.is_verified %}
-        <li><a {% if request.resolver_match.url_name == 'profiles' or request.resolver_match.url_name == 'invite' or request.resolver_match.url_name == 'healthcareuser' %}class="active"{% endif %} href="{% url 'profiles' %}">{% trans "Manage team" %}</a></li>
+        <li><a {% if request.resolver_match.url_name == 'profiles' or request.resolver_match.url_name == 'invite' %}class="active"{% endif %} href="{% url 'profiles' %}">{% trans "Manage team" %}</a></li>
       {% endif %}
       {% if not user.is_verified %}
         <li><a href="{% url 'about:index' %}">{% trans "About the portal" %}</a></li>
