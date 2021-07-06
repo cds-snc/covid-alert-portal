@@ -1024,8 +1024,9 @@ msgstr "Ajouter une exposition"
 msgid "Exposure details not found."
 msgstr ""
 
-#: outbreaks/templates/history.html
-msgid "Find QR places and events"
+#: outbreaks/templates/history.html outbreaks/templates/profile.html
+#: outbreaks/templates/search.html
+msgid "Find places and events"
 msgstr "Trouver un lieu ou un événement"
 
 #: outbreaks/templates/history.html
@@ -1121,10 +1122,6 @@ msgstr "Trier par émetteur, ordre alphabétique inverse"
 msgid "Details of place or event"
 msgstr "Renseignements sur le lieu ou l’événement"
 
-#: outbreaks/templates/profile.html outbreaks/templates/search.html
-msgid "Find places and events"
-msgstr "Trouver un lieu ou un événement"
-
 #: outbreaks/templates/profile.html
 msgid "Contact name"
 msgstr "Personne-ressource"
@@ -1215,6 +1212,14 @@ msgstr "Une plage horaire conflictuelle : ({}) a été saisie ci-dessous."
 #: outbreaks/views.py
 msgid "{} from {} to {}"
 msgstr "{} de {} à {}"
+
+#: portal/forms.py
+msgid "This field is required."
+msgstr "Le lien est expiré."
+
+#: portal/forms.py
+msgid "Enter the information."
+msgstr "Entrez les renseignements demandés."
 
 #: portal/settings.py
 msgid "This account has been locked due to too many failed log in attempts."

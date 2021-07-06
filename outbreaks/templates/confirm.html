@@ -75,6 +75,6 @@
   </div>
 
   {% url 'outbreaks:search' as outbreaks_search_url %}
-  {% include "includes/cds_form.html" with submit_text=_("Send alert") submit_class='warning' secondary_action_after=True secondary_action_text=_('Cancel this exposure') secondary_action_url=outbreaks_search_url %}
+  {% include "includes/cds_form.html" with submit_text=_("Send alert") submit_class='start with-chevron' secondary_action_after=True secondary_action_text=_('Cancel this exposure') secondary_action_url=outbreaks_search_url %}
 
 {% endblock %}
