@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-02 21:03+0000\n"
+"POT-Creation-Date: 2021-07-06 16:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -818,6 +818,10 @@ msgstr ""
 #: outbreaks/templates/confirm.html
 msgid "Review and send"
 msgstr "Vérifier et envoyer"
+
+#: outbreaks/templates/confirm.html
+msgid "Step 3 of 3"
+msgstr "Étape 3 de 3"
 
 #: outbreaks/templates/confirm.html
 msgid "To see all public exposures for this place, visit"
