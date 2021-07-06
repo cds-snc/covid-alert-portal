@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-02 21:03+0000\n"
+"POT-Creation-Date: 2021-07-05 19:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1211,6 +1211,14 @@ msgstr "Une plage horaire conflictuelle : ({}) a été saisie ci-dessous."
 #: outbreaks/views.py
 msgid "{} from {} to {}"
 msgstr "{} de {} à {}"
+
+#: portal/forms.py
+msgid "This field is required."
+msgstr "Le lien est expiré."
+
+#: portal/forms.py
+msgid "Enter the information."
+msgstr "Entrez les renseignements demandés."
 
 #: portal/settings.py
 msgid "This account has been locked due to too many failed log in attempts."
