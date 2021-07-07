@@ -13,6 +13,10 @@ variable "billing_tag_value" {
   type = string
 }
 
+variable "environment" {
+  type = string
+}
+
 ###
 # Global Secret
 ###
