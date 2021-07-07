@@ -50,29 +50,37 @@ for (let i=0; i< backInlineLinks.length; i++){
 
 
 var startTimeControl = document.getElementById('id_start_time');
-var endTimeControlClone = document.getElementById('id_end_time').cloneNode(true);
-function getTimeIntFromElement(value){
-  return parseInt(value.replaceAll(":",""));
+if (startTimeControl !== null){
+  // Keep a fresh copy of the end time array elements
+  var endTimeControlClone = document.getElementById('id_end_time').cloneNode(true);
+
+  function getTimeIntFromElement(value){
+    return parseInt(value.replace(/:/g,""));
+  }
+
+  // Listener captures selected time and currently selected end time
+  // Re-clones array of end times to start with fresh list, deletes any items in list before selected start time
+  // End time is reselected if still in list, else pushed to next available end time
+  startTimeControl.addEventListener('change', function (ele){
+    var startval = getTimeIntFromElement(ele.target.value);
+    endTimeControl = document.getElementById('id_end_time');
+    var selectedEndValue = endTimeControl.value;
+    var replacementClone = endTimeControlClone.cloneNode(true);
+    endTimeControl.parentNode.replaceChild(replacementClone, endTimeControl);
+    endTimeControl = document.getElementById('id_end_time');
+    for(var i = 0; i< endTimeControl.length-1; i++){
+      if (getTimeIntFromElement(endTimeControl[i].value) < startval){
+        endTimeControl.remove(i);
+        i--;
+      }
+    }
+    for(var i = 0; i < endTimeControl.length; i++){
+      if(endTimeControl[i].value == selectedEndValue){
+        endTimeControl.options[i].selected = true;
+        break;
+      }else{
+        endTimeControl.options[0].selected = true;
+      }
+    }
+  });
 }
-startTimeControl.addEventListener('change', function (ele){
-  var startval = getTimeIntFromElement(ele.target.value);
-  var endTimeControl = document.getElementById('id_end_time');
-  var selectedEndValue = endTimeControl.value;
-  var replacementClone = endTimeControlClone.cloneNode(true);
-  endTimeControl.parentNode.replaceChild(replacementClone, endTimeControl);
-  endTimeControl = document.getElementById('id_end_time');
-  for(var i = 0; i< endTimeControl.length-1; i++){
-    if (getTimeIntFromElement(endTimeControl[i].value) < startval){
-      endTimeControl.remove(i);
-      i--;
-    }
-  }
-  for(var i = 0; i < endTimeControl.length; i++){
-    if(endTimeControl[i].value == selectedEndValue){
-      endTimeControl.options[i].selected = true;
-      break;
-    }else{
-      endTimeControl.options[0].selected = true;
-    }
-  }
-});
