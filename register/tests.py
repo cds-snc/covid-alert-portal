@@ -75,7 +75,7 @@ class RegisterEmailConfirmation(TestCase):
     def test_email_form_empty(self):
         form = forms.EmailForm(data={})
 
-        self.assertEqual(form.errors["email"], ["This field is required."])
+        self.assertEqual(form.errors["email"], ["Enter the information."])
 
     def test_can_confirm_email(self):
         email = "test@test.com"
@@ -207,37 +207,37 @@ class RegisterLocationDetailsValidation(TestCase):
     def test_location_category_empty(self):
         form = forms.LocationCategoryForm(data={})
 
-        self.assertEqual(form.errors["category"], ["This field is required."])
+        self.assertEqual(form.errors["category"], ["Enter the information."])
 
     def test_location_name_empty(self):
         form = forms.LocationNameForm(data={})
 
-        self.assertEqual(form.errors["name"], ["This field is required."])
+        self.assertEqual(form.errors["name"], ["Enter the information."])
 
     def test_location_address_address_field_empty(self):
         form = forms.LocationAddressForm(data={"address": ""})
 
-        self.assertEqual(form.errors["address"], ["This field is required."])
+        self.assertEqual(form.errors["address"], ["Enter the information."])
 
     def test_location_address_city_field_empty(self):
         form = forms.LocationAddressForm(data={"city": ""})
 
-        self.assertEqual(form.errors["city"], ["This field is required."])
+        self.assertEqual(form.errors["city"], ["Enter the information."])
 
     def test_location_address_province_field_empty(self):
         form = forms.LocationAddressForm(data={"province": ""})
 
-        self.assertEqual(form.errors["province"], ["This field is required."])
+        self.assertEqual(form.errors["province"], ["Enter the information."])
 
     def test_location_address_postal_field_empty(self):
         form = forms.LocationAddressForm(data={"postal_code": ""})
 
-        self.assertEqual(form.errors["postal_code"], ["This field is required."])
+        self.assertEqual(form.errors["postal_code"], ["Enter the information."])
 
     def test_location_contact_email_empty(self):
         form = forms.LocationContactForm(data={"contact_email": ""})
 
-        self.assertEqual(form.errors["contact_email"], ["This field is required."])
+        self.assertEqual(form.errors["contact_email"], ["Enter the information."])
 
     def test_location_contact_email_format(self):
         form = forms.LocationContactForm(data={"contact_email": "notanemail"})
@@ -247,7 +247,7 @@ class RegisterLocationDetailsValidation(TestCase):
     def test_location_contact_phone_empty(self):
         form = forms.LocationContactForm(data={"contact_phone": ""})
 
-        self.assertEqual(form.errors["contact_phone"], ["This field is required."])
+        self.assertEqual(form.errors["contact_phone"], ["Enter the information."])
 
     def test_location_contact_phone_format(self):
         form = forms.LocationContactForm(data={"contact_phone": "notaphonenumber"})
