@@ -110,3 +110,22 @@ resource "aws_cloudwatch_metric_alarm" "application_error_warn_qrcode" {
 
   alarm_actions = [aws_sns_topic.alert_warning.arn]
 }
+
+resource "aws_cloudwatch_metric_alarm" "status_health_check_warn_qrcode" {
+  alarm_name          = "StatusHealthCheck_qrcode"
+  comparison_operator = "LessThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "SuccessPercent"
+  namespace           = "CloudWatchSynthetics"
+  period              = "300"
+  statistic           = "Minimum"
+  threshold           = "100"
+  treat_missing_data  = "notBreaching"
+  alarm_description   = "QR Code registration Warning - status canary is failing"
+
+  alarm_actions = [aws_sns_topic.alert_warning.arn]
+
+  dimensions = {
+    CanaryName = aws_synthetics_canary.qr_code_status.name
+  }
+}
