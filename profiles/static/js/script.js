@@ -55,7 +55,7 @@ if (startTimeControl !== null){
   var endTimeControlClone = document.getElementById('id_end_time').cloneNode(true);
 
   function getTimeIntFromElement(value){
-    return parseInt(value.replace(/:/g,""));
+    return parseInt(value.replace(/:/g, ""));
   }
 
   // Listener captures selected time and currently selected end time
@@ -68,13 +68,13 @@ if (startTimeControl !== null){
     var replacementClone = endTimeControlClone.cloneNode(true);
     endTimeControl.parentNode.replaceChild(replacementClone, endTimeControl);
     endTimeControl = document.getElementById('id_end_time');
-    for(var i = 0; i< endTimeControl.length-1; i++){
+    for (var i = 0; i < endTimeControl.length-1; i++){
       if (getTimeIntFromElement(endTimeControl[i].value) < startval){
         endTimeControl.remove(i);
         i--;
       }
     }
-    for(var i = 0; i < endTimeControl.length; i++){
+    for (var i = 0; i < endTimeControl.length; i++){
       if(endTimeControl[i].value == selectedEndValue){
         endTimeControl.options[i].selected = true;
         break;
