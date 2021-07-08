@@ -23,11 +23,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Django and dependencies update
 - Updated poster/tipsheet
 - Accessibility and Mobile/responsive display fixes
+- Updated navigation / flow and content on alerting wizard
 
 ## Added
 
 - Add WhiteNoise to help with static asset caching
 - Add Survey management/sending ui for post-pilot surveys
+- Navigation home screen for portal for alerting enabled users
 
 ## [2.1.0] - 2021-06-01
 
