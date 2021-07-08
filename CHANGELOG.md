@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated poster/tipsheet
 - Accessibility and Mobile/responsive display fixes
 - Updated navigation / flow and content on alerting wizard
+- Fix bug in nav bar highlight in outbreaks section
 
 ## Added
 
