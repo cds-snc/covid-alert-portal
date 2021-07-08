@@ -7,7 +7,7 @@ resource "aws_synthetics_canary" "qr_code_status" {
   artifact_s3_location = "s3://${aws_s3_bucket.synthetic_artifacts.id}/qr-code-canary/"
   execution_role_arn   = aws_iam_role.synthetic_canary_execution_role.arn
   zip_file             = data.archive_file.canary_qr_code_status.output_path
-  handler              = "exports.handler"
+  handler              = "healthcheck.handler"
   runtime_version      = "syn-nodejs-puppeteer-3.1"
   start_canary         = true
 
@@ -16,16 +16,27 @@ resource "aws_synthetics_canary" "qr_code_status" {
   }
 }
 
+resource "random_uuid" "qr_code_status_zip" {
+  keepers = {
+    "template" : sha256(data.template_file.canary_qr_code_status.rendered)
+  }
+}
+
+data "template_file" "canary_qr_code_status" {
+  template = file("synthetic_canary/healthcheck.tmpl.js")
+  vars = {
+    healthcheck_url_en = "https://register.covid-hcportal.cdssandbox.xyz/status/"
+    healthcheck_url_fr = "https://register.covid-hcportal.cdssandbox.xyz/status/"
+  }
+}
+
 data "archive_file" "canary_qr_code_status" {
   type = "zip"
   source {
-    content = templatefile("synthetic_canary/healthcheck.tmpl.js", {
-      healthcheck_url_en = "https://${aws_route53_record.qrcode.fqdn}/status"
-      healthcheck_url_fr = "https://${aws_route53_record.qrcode.fqdn}/status"
-    })
-    filename = "qr-code-status.js"
+    content  = data.template_file.canary_qr_code_status.rendered
+    filename = "nodejs/node_modules/healthcheck.js"
   }
-  output_path = "qr-code-status.js.zip"
+  output_path = "${random_uuid.qr_code_status_zip.result}.js.zip"
 }
 
 #
