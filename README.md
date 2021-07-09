@@ -17,6 +17,25 @@ The mode of the project is determined by an [Environment variable](#environment-
 - `APP_SWITCH=QRCODE` will run the registration site
 - `APP_SWITCH=PORTAL` will run the portal
 
+## Contents
+
+- [Technical overview](#technical-overview)
+- [Environment variables](#environment-variables)
+- [Local development](#local-development)
+  - [External dependencies](#external-dependencies)
+  - [Activating a virtualenv](#activating-a-virtualenv)
+  - [Database](#database)
+    - [Database migrations](#database-migrations)
+  - [Compile CSS](#compile-css)
+  - [Create admin superuser](#create-admin-super-user-optional)
+  - [Run development server](#run-development-server)
+- [Running using Docker Compose](#running-using-docker-compose)
+- [Translations](#translations)
+- [Development workflow](#development-workflow)
+  - [Feature development](#feature-development)
+  - [Application versioning](#application-versioning)
+  - [Automated tests](#automated-tests)
+
 ## Technical overview
 
 The COVID Alert Portal is a Django application: it can be run as a python process or using `docker-compose`.
@@ -142,9 +161,9 @@ When creating or modifying existing models, you will need to generate migrations
 
 For more information, see [Django Migrations](https://docs.djangoproject.com/en/3.2/topics/migrations/).
 
-### Compile SCSS files to CSS
+### Compile CSS
 
-To compile the SCSS to CSS:
+To compile the SCSS files to CSS:
 
 ```
 pipenv run css
