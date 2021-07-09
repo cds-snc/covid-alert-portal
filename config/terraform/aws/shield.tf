@@ -9,3 +9,8 @@ resource "aws_shield_protection" "alb_covidportal" {
   name         = "alb_covidportal"
   resource_arn = aws_lb.covidportal.arn
 }
+
+resource "aws_shield_protection" "alb_qrcode" {
+  name         = "alb_qrcode"
+  resource_arn = aws_lb.qrcode.arn
+}
