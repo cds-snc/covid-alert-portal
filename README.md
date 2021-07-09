@@ -141,7 +141,11 @@ pipenv install --dev # install dev dependencies
 
 ### Database
 
-You will need to have a PostgreSQL database running. You can install one using Homebrew on MacOS: `brew install postgresql`
+You will need to have a PostgreSQL database running. You can install one using Homebrew on MacOS: 
+
+```
+brew install postgresql
+```
 
 NOTE: Earlier versions of this project would default to using a SQLite database if none is configured. Some features have been introduced in the Outbreaks feature that depend on features of PostgreSQL, so SQLite is no longer recommended.
 
@@ -153,11 +157,15 @@ Ensure that you have configured teh `DATABASE_URL` environment variable accordin
 
 Migrate the database by running:
 
-`python manage.py migrate`
+```
+python manage.py migrate
+```
 
 When creating or modifying existing models, you will need to generate migrations to keep your database in sync:
 
-`python manage.py makemigrations`
+```
+python manage.py makemigrations
+```
 
 For more information, see [Django Migrations](https://docs.djangoproject.com/en/3.2/topics/migrations/).
 
@@ -204,17 +212,19 @@ Read the step-by-step process at [Django, Docker, and PostgreSQL Tutorial](https
 
 We're using the default [Django translation](https://docs.djangoproject.com/en/3.2/topics/i18n/translation/) library to add content in French and English.
 
-Here is a short overview of adding a translated string to the application.
-
-Add your string to a template using the `trans` tag.
+When you have updated or added a new localized string, for example in a template file:
 
 ```
-# profiles/templates/profiles/start.html
-
 <h1>{% trans "Generate code for Exposure Notification app" %}</h1>
 ```
 
-Run `python manage.py makemessages -l fr --add-location=file --no-wrap` to update the `django.po` translations file inside of `/locale`.
+You will need to run the following command which will scan the the application for localized strings and add them to the locale files:
+
+```
+python manage.py makemessages -l fr --add-location=file --no-wrap
+```
+
+This command will collect all localized strings to the `locale/django.po` file. For example:
 
 ```
 # locale/fr/LC_MESSAGES/django.po
@@ -224,7 +234,11 @@ msgid "Generate code for Exposure Notification app"
 msgstr "Générer du code pour l'application de notification d'exposition"
 ```
 
-Run `python manage.py compilemessages` to compile the translations so that Django knows how to use them.
+Once the string has been translated in the .po file, you will need to compile the translations to the `django.mo` file by running the following command:
+
+```
+python manage.py compilemessages
+```
 
 For more complete documentation refer to the [Django Translation](https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#translation) docs.
 
