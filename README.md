@@ -126,7 +126,11 @@ This section describes how to get the project running on your local device. You 
 
 If you are running the app using Docker Compose, this dependency is already included. If you are running in a local virtual environment, you'll need to install cairo for PDF poster generation.
 
-Using Homebrew on MacOS: `brew install cairo`
+Using Homebrew on MacOS: 
+
+```
+brew install cairo
+```
 
 ### Activating a virtualenv
 
@@ -171,7 +175,7 @@ For more information, see [Django Migrations](https://docs.djangoproject.com/en/
 
 ### Compile CSS
 
-To compile the SCSS files to CSS:
+To compile the SCSS files to CSS once:
 
 ```
 pipenv run css
