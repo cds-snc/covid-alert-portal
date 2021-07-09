@@ -19,7 +19,7 @@ The mode of the project is determined by an [Environment variable](#environment-
 
 ## Table of contents
 
-- [Technical overview](#technical-overview)
+- [Running the project](#running-the-project)
 - [Environment variables](#environment-variables)
 - [Local development](#local-development)
   - [External dependencies](#external-dependencies)
@@ -36,18 +36,18 @@ The mode of the project is determined by an [Environment variable](#environment-
   - [Application versioning](#application-versioning)
   - [Automated tests](#automated-tests)
 
-## Technical overview
+## Running the project
 
 The COVID Alert Portal is a Django application: it can be run as a python process or using `docker-compose`.
 
-- [Running the COVID Alert Portal locally](#local-development) as a python process requires [python3](https://www.python.org/downloads/) and a database, although an SQLite database will be created if no connection string exists.
+- [Running the COVID Alert Portal locally](#local-development) as a python process requires [python3](https://www.python.org/downloads/) and a PostgreSQL database.
 - [Using `docker-compose`](#running-using-docker-compose), you’ll need [Docker](https://www.docker.com/get-started) installed.
 
-## Environment variables
+### Environment variables
 
 Environment variables are used to control app settings, and configuration for utilities and third-party services. Defaults are `''` or `None` unless otherwise specified.
 
-Before running the app(s), you will need to copy `./portal/.env.example` to `./portal/.env` and provide the appropriate values for your configuration.
+Before running the project, you will need to copy `./portal/.env.example` to `./portal/.env` and provide the appropriate values for your configuration.
 
 <details>
 <summary>Detailed explanation of each environment variable</summary>
@@ -101,9 +101,9 @@ The contact form sends any inquiry to Freshdesk.
 
 - `FRESHDESK_PRODUCT_ID`: If you use more than one product, use this variable to specify where the feedback should go to.
 
-##### email configuration
+##### Email configuration
 
-- We use [GC Notify](https://notification.canada.ca/) for sending all user-facing emails and text messages, so we shouldn't need [the SMTP interface that Django provides](https://docs.djangoproject.com/en/3.1/topics/email/). In case there are any errant `send_mail` calls, they will be printed to the console.
+- We use [GC Notify](https://notification.canada.ca/) for sending all user-facing emails and text messages.
 
 #### New Relic configuration
 
@@ -120,7 +120,7 @@ We use New Relic to monitor for server side errors and application performance i
 
 ## Local development
 
-This section describes how to get the project running on your local device. You can alternatively [run it using docker-compose](#running-using-docker-compose) which will include all required dependencies and services and may be a simpler setup depending on your preference and experience.
+This section describes how to get the project running on your local device. You can alternatively [run using docker-compose](#running-using-docker-compose) which will include all required dependencies and services and may be a simpler setup depending on your preference and experience.
 
 ### External dependencies
 
@@ -153,7 +153,7 @@ brew install postgresql
 
 NOTE: Earlier versions of this project would default to using a SQLite database if none is configured. Some features have been introduced in the Outbreaks feature that depend on features of PostgreSQL, so SQLite is no longer recommended.
 
-Ensure that you have configured teh `DATABASE_URL` environment variable according to your PostgreSQL config, using the following format:
+Ensure that you have configured the `DATABASE_URL` environment variable according to your PostgreSQL config, using the following format:
 
 `postgres://USER:PASSWORD@HOST:PORT/NAME`
 
@@ -219,6 +219,8 @@ We're using the default [Django translation](https://docs.djangoproject.com/en/3
 When you have updated or added a new localized string, for example in a template file:
 
 ```
+# profiles/templates/profiles/start.html
+
 <h1>{% trans "Generate code for Exposure Notification app" %}</h1>
 ```
 
