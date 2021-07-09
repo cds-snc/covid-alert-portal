@@ -1662,10 +1662,8 @@ msgid "Allow user to send outbreak alerts"
 msgstr "Permettre à l’utilisateur d’envoyer des alertes"
 
 #: profiles/admin.py
-#, fuzzy
-#| msgid "Send alert"
 msgid "Sent an alert"
-msgstr "Envoyer l’alerte"
+msgstr "Envoyé une alerte"
 
 #: profiles/admin.py
 msgid "Number of keys generated in the last 24 hours"
