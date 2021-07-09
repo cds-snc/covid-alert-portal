@@ -127,3 +127,21 @@ class RegistrantSurvey(models.Model):
 
     def __str__(self):
         return f"{self.registrant}:{self.survey}"
+
+
+class HealthcareUserSurvey(models.Model):
+    survey = models.ForeignKey(Survey, on_delete=models.SET_NULL, null=True)
+    healthcare_user = models.ForeignKey(
+        HealthcareUser,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="survey_recipient"
+    )
+    sent_ts = models.DateTimeField(
+        blank=True, null=True, verbose_name=_("Sent Timestamp")
+    )
+    sent_by = models.ForeignKey(HealthcareUser, on_delete=models.SET_NULL, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.healthcare_user}:{self.survey}"
