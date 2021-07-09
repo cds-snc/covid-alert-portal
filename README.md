@@ -6,34 +6,29 @@ The COVID Alert Portal provides authenticated healthcare providers unique tempor
 
 A healthcare portal is one of the three pieces of the [COVID Shield](https://www.covidshield.app/) open-source reference implementation built by Shopify volunteers. For a high-level view on how the components work together, read through the [COVID Shield Rationale](https://github.com/CovidShield/rationale).
 
+## COVID Alert Business Registration Site
+
+The COVID Alert Business Registration Site is part of the Outbreaks feature of COVID Alert Portal. Outbreaks is a new feature developed to help public health and businesses in their contact tracing efforts. Business owners can register and print a poster that includes a QR Code. Visitors to their location that have COVID Alert installed on their device can scan the QR Code to record their visit. Subsequently, if public health authorites identify an Outbreak at that location, they can send alerts to people who may have been exposed through COVID Alert.
+
+This project includes the code for both the COVID Alert Portal and the COVID Alert Business Registration Site, but the two websites are deployed separately, and this project can only be run in one mode or the other. 
+
+The mode of the project is determined by an [Environment variable](#environment-variables):
+
+- `APP_SWITCH=QRCODE` will run the registration site
+- `APP_SWITCH=PORTAL` will run the portal
+
 ## Technical overview
 
 The COVID Alert Portal is a Django application: it can be run as a python process or using `docker-compose`.
 
-- Running the COVID Alert Portal locally as a python process requires [python3](https://www.python.org/downloads/) and a database, although an SQLite database will be created if no connection string exists.
-- Using `docker-compose`, you’ll need [Docker](https://www.docker.com/get-started) installed.
+- [Running the COVID Alert Portal locally](#local-development) as a python process requires [python3](https://www.python.org/downloads/) and a database, although an SQLite database will be created if no connection string exists.
+- [Using `docker-compose`](#running-using-docker-compose), you’ll need [Docker](https://www.docker.com/get-started) installed.
 
-## Setup
-
-### External dependencies
-
-If you are running the app using Docker Compose and the included container, this dependency is already included. If you are running in a local virtual environment, you'll need to install cairo for PDF poster generation: `brew install cairo`
-
-### Activating a virtualenv
-
-Install [`pipenv`](https://pypi.org/project/pipenv/).
-
-```sh
-# cd into project folder
-pipenv --three       # create a new virtualenv
-pipenv shell         # activate virtualenv
-pipenv install       # install dependencies
-pipenv install --dev # install dev dependencies
-```
-
-### Environment variables
+## Environment variables
 
 Environment variables are used to control app settings, and configuration for utilities and third-party services. Defaults are `''` or `None` unless otherwise specified.
+
+Before running the app(s), you will need to copy `./portal/.env.example` to `./portal/.env` and provide the appropriate values for your configuration.
 
 <details>
 <summary>Detailed explanation of each environment variable</summary>
@@ -50,6 +45,8 @@ Environment variables are used to control app settings, and configuration for ut
 - `SU_DEFAULT_PASSWORD`: Setting to trigger the creation of a default superuser the first time the app is provisioned. If this variable exists, a default superuser will be created at `admin@cds-snc.ca` with this password.
 
 - `QRCODE_SIGNATURE_PRIVATE_KEY`: Private key for signing QR Code payloads. Should be a Base64 encoded key generated with the [PyNaCl encryption library](https://pynacl.readthedocs.io/)
+
+- `APP_SWITCH`: Should be set to `QRCODE` or nothing. This determines whether the app will run in "Registration site" mode, or "Portal" mode.
 
 ##### database configuration
 
@@ -102,39 +99,52 @@ We use New Relic to monitor for server side errors and application performance i
 
 <strong>[Example `.env` file](https://github.com/cds-snc/covid-healthcare-portal/blob/main/portal/.env.example)</strong>
 
-### Running the app for the first time
+## Local development
 
-**Quick Start:** After activating a virtual environment, run
+This section describes how to get the project running on your local device. You can alternatively [run it using docker-compose](#running-using-docker-compose) which will include all required dependencies and services and may be a simpler setup depending on your preference and experience.
 
-- `pipenv run css`
-- `python manage.py collectstatic --noinput -i scss`
-- the `entrypoint.sh` script to perform the database migrations
+### External dependencies
 
-The local server can be accessed at `http://127.0.0.1:8000/` or `http://localhost:8000`.
+If you are running the app using Docker Compose, this dependency is already included. If you are running in a local virtual environment, you'll need to install cairo for PDF poster generation.
 
-For a more thorough setup of the various environment options please follow the instructions below after having activated your virtual environment from inside the root project folder.
+Using Homebrew on MacOS: `brew install cairo`
 
-Copy `./portal/.env.example` to `./portal/.env` and provide the appropriate values for your configuration.
+### Activating a virtualenv
 
-#### 1. Database migrations
+Install [`pipenv`](https://pypi.org/project/pipenv/).
 
-By default the Django creates an SQLite database, but we use Postgres in production.
+```sh
+# cd into project folder
+pipenv --three       # create a new virtualenv
+pipenv shell         # activate virtualenv
+pipenv install --dev # install dev dependencies
+```
 
-If a `DATABASE_URL` environment variable exists, it will set all the connection parameters at the same time.
+### Database
 
-##### Postgres [URL schema](https://github.com/jacobian/dj-database-url#url-schema)
+You will need to have a PostgreSQL database running. You can install one using Homebrew on MacOS: `brew install postgresql`
 
-| Django Backend                  | DATABASE_URL                              |
-| ------------------------------- | ----------------------------------------- |
-| `django.db.backends.postgresql` | `postgres://USER:PASSWORD@HOST:PORT/NAME` |
+NOTE: Earlier versions of this project would default to using a SQLite database if none is configured. Some features have been introduced in the Outbreaks feature that depend on features of PostgreSQL, so SQLite is no longer recommended.
 
-To create the database schema, run `python manage.py makemigrations`.
+Ensure that you have configured teh `DATABASE_URL` environment variable according to your PostgreSQL config, using the following format:
 
-Then, create the tables by running `python manage.py migrate`.
+`postgres://USER:PASSWORD@HOST:PORT/NAME`
 
-#### 2. Compile SCSS files to CSS
+#### Database migrations
 
-You will need to generate the `profiles/static/css/styles.css` file by compiling the SCSS files. To generate the file once, run:
+Migrate the database by running:
+
+`python manage.py migrate`
+
+When creating or modifying existing models, you will need to generate migrations to keep your database in sync:
+
+`python manage.py makemigrations`
+
+For more information, see [Django Migrations](https://docs.djangoproject.com/en/3.2/topics/migrations/).
+
+### Compile SCSS files to CSS
+
+To compile the SCSS to CSS:
 
 ```
 pipenv run css
@@ -146,9 +156,7 @@ If you are developing the app and want your styling changes applied as you make 
 pipenv run csswatch
 ```
 
-Note that watching the SCSS will require a new terminal window to run the development server. If you are using iTerm, you can open another tab with `Command + t` or a new pane with `Command + d`. Remember to activate your virtual environment in your new pane using `pipenv shell` and `pipenv install`.
-
-#### 3. Create admin super user (optional)
+### Create admin super user (optional)
 
 This app allows you to use the Django admininstration panel (`/admin`) to manage users.
 
@@ -156,11 +164,11 @@ In order to access the `/admin` route, you will need to create a super user acco
 
 Run `python manage.py createsuperuser` to create a super user.
 
-#### 4. Run development server
+### Run development server
 
 Then, run `python manage.py runserver` to run the app. Go to `http://127.0.0.1:8000/` to see the login page.
 
-### Running using Docker Compose
+## Running using Docker Compose
 
 > [Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration.
 
@@ -173,7 +181,7 @@ Read the step-by-step process at [Django, Docker, and PostgreSQL Tutorial](https
 1. Spin up the app: `docker-compose up`
 2. Spin down the app: `Command + c` or `docker-compose down`
 
-### Translations
+## Translations
 
 We're using the default Django translations library to add content in French and English.
 
