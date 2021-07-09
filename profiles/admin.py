@@ -134,7 +134,6 @@ class UserAddForm(UserCreationForm):
 
 
 class SurveySentFilter(RegisterSurveySentFilter):
-
     def queryset(self, request, queryset):
         if self.value() == "none":
             return queryset.exclude(healthcareusersurvey__healthcare_user__in=queryset)
@@ -164,7 +163,9 @@ class SentAlertFilter(admin.SimpleListFilter):
     def queryset(self, request, queryset):
         if self.value():
             created = self.value() == "yes"
-            return queryset.filter(notification__created_by__isnull=not created).distinct()
+            return queryset.filter(
+                notification__created_by__isnull=not created
+            ).distinct()
 
 
 class UserAdmin(BaseUserAdmin):
@@ -184,7 +185,7 @@ class UserAdmin(BaseUserAdmin):
         "is_superuser",
         "can_send_alerts",
         "number_keys_generated",
-        "surveys"
+        "surveys",
     )
     list_filter = (
         "is_admin",
@@ -192,7 +193,7 @@ class UserAdmin(BaseUserAdmin):
         "is_active",
         "province",
         SentAlertFilter,
-        SurveySentFilter
+        SurveySentFilter,
     )
 
     def can_send_alerts(self, user: HealthcareUser):

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-06 16:34+0000\n"
+"POT-Creation-Date: 2021-07-09 21:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1662,8 +1662,33 @@ msgid "Allow user to send outbreak alerts"
 msgstr "Permettre à l’utilisateur d’envoyer des alertes"
 
 #: profiles/admin.py
+#, fuzzy
+#| msgid "Send alert"
+msgid "Sent an alert"
+msgstr "Envoyer l’alerte"
+
+#: profiles/admin.py
 msgid "Number of keys generated in the last 24 hours"
 msgstr "Nombre de clés générées dans les dernières 24 heures"
+
+#: profiles/admin.py
+#, python-brace-format
+msgid "{healthcare_user.email} has not sent an alert."
+msgstr "{healthcare_user.email} n'a pas envoyé d'alerte."
+
+#: profiles/admin.py
+#, python-brace-format
+msgid "{healthcare_user.email} has already had this survey sent to them."
+msgstr "{healthcare_user.email} a déjà reçu cette enquête."
+
+#: profiles/admin.py
+msgid "{str(e)} :: email: {healthcare_user.email}"
+msgstr ""
+
+#: profiles/admin.py register/admin.py
+#, python-brace-format
+msgid "Sent {count} messages successfully"
+msgstr "Envoyé {count} messages avec succès"
 
 #: profiles/context_processors.py
 msgid "— COVID Alert Portal"
@@ -2358,11 +2383,6 @@ msgstr "{registrant.email} a déjà reçu cette enquête."
 #: register/admin.py
 msgid "{str(e)} :: email: {registrant.email}"
 msgstr ""
-
-#: register/admin.py
-#, python-brace-format
-msgid "Sent {count} messages successfully"
-msgstr "Envoyé {count} messages avec succès"
 
 #: register/context_processors.py
 msgid "— Scan a place registration"

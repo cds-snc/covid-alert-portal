@@ -135,7 +135,7 @@ class HealthcareUserSurvey(models.Model):
         HealthcareUser,
         on_delete=models.SET_NULL,
         null=True,
-        related_name="survey_recipient"
+        related_name="survey_recipient",
     )
     sent_ts = models.DateTimeField(
         blank=True, null=True, verbose_name=_("Sent Timestamp")
