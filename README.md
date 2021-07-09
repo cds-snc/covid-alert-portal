@@ -202,7 +202,7 @@ Read the step-by-step process at [Django, Docker, and PostgreSQL Tutorial](https
 
 ## Translations
 
-We're using the default Django translations library to add content in French and English.
+We're using the default [Django translation](https://docs.djangoproject.com/en/3.2/topics/i18n/translation/) library to add content in French and English.
 
 Here is a short overview of adding a translated string to the application.
 
