@@ -17,7 +17,7 @@ The mode of the project is determined by an [Environment variable](#environment-
 - `APP_SWITCH=QRCODE` will run the registration site
 - `APP_SWITCH=PORTAL` will run the portal
 
-## Contents
+## Table of contents
 
 - [Technical overview](#technical-overview)
 - [Environment variables](#environment-variables)
