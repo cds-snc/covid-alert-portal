@@ -6,7 +6,7 @@ The COVID Alert Portal provides authenticated healthcare providers unique tempor
 
 A healthcare portal is one of the three pieces of the [COVID Shield](https://www.covidshield.app/) open-source reference implementation built by Shopify volunteers. For a high-level view on how the components work together, read through the [COVID Shield Rationale](https://github.com/CovidShield/rationale).
 
-## COVID Alert Business Registration Site
+## COVID Alert Outbreaks and Business Registration Site
 
 The COVID Alert Business Registration Site is part of the Outbreaks feature of COVID Alert Portal. Outbreaks is a new feature developed to help public health and businesses in their contact tracing efforts. Business owners can register and print a poster that includes a QR Code. Visitors to their location that have COVID Alert installed on their device can scan the QR Code to record their visit. Subsequently, if public health authorites identify an Outbreak at that location, they can send alerts to people who may have been exposed through COVID Alert.
 
