@@ -65,6 +65,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Remove .tfvars
+        run: |
+          # Workaround for https://github.com/aquasecurity/tfsec-pr-commenter-action/issues/11
+          rm ./config/terraform/aws/variables.auto.tfvars
+
       - name: Terraform security scan
         uses: aquasecurity/tfsec-pr-commenter-action@89c691a931c555965b3f2c85857f7aa08980e311 # v0.1.7
         with:
