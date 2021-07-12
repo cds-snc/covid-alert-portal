@@ -60,7 +60,7 @@ def switch_language(request):
     if hasattr(request, "session"):
         request.session[LANGUAGE_SESSION_KEY] = lang
 
-    if lang != request.user.language_cd:
+    if not request.user.is_anonymous and lang != request.user.language_cd:
         request.user.language_cd = lang
         request.user.save()
 
