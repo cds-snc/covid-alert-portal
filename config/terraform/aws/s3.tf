@@ -104,6 +104,7 @@ resource "aws_s3_bucket_policy" "web_distribution" {
 ###
 resource "aws_s3_bucket" "cloudfront_logs" {
 
+  # tfsec:ignore:AWS002 Logging not required in Staging
   # tfsec:ignore:AWS077 Don't need to version these they should expire and are ephemeral
 
   bucket = "covid-portal-${var.environment}-cloudfront-logs"
