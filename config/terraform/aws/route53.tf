@@ -77,9 +77,9 @@ resource "aws_route53_record" "qrcode" {
   }
 
   alias {
-    name                   = aws_lb.qrcode.dns_name
-    zone_id                = aws_lb.qrcode.zone_id
-    evaluate_target_health = true
+    name                   = aws_cloudfront_distribution.qrcode.domain_name
+    zone_id                = aws_cloudfront_distribution.qrcode.hosted_zone_id
+    evaluate_target_health = false
   }
 }
 
