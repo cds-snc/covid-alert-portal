@@ -92,6 +92,9 @@ class HealthcareUser(AbstractBaseUser, PermissionsMixin):
         help_text=_("If set, the user will be blocked until that time."),
         blank=True,
     )
+    # this is only used for sending surveys right now, if used for other purpose
+    # this should be captured in the Portal before use to ensure accuracy
+    language_cd = models.CharField(max_length=2, default="en")
 
     objects = HealthcareUserManager()
 

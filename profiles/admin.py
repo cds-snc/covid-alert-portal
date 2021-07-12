@@ -1,5 +1,7 @@
+from functools import partial
+
 from django import forms
-from django.contrib import admin
+from django.contrib import admin, messages
 from datetime import timedelta
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -9,7 +11,9 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationFor
 from django.contrib.admin.templatetags.admin_list import _boolean_icon
 
 from profiles.models import HealthcareUser, HealthcareProvince, AuthorizedDomain
-from register.models import Survey
+from register.admin import SurveySentFilter as RegisterSurveySentFilter
+from register.models import Survey, HealthcareUserSurvey
+from register.forms import send_email
 
 
 class ProvinceAdmin(admin.ModelAdmin):
@@ -129,6 +133,41 @@ class UserAddForm(UserCreationForm):
         return user
 
 
+class SurveySentFilter(RegisterSurveySentFilter):
+    def queryset(self, request, queryset):
+        if self.value() == "none":
+            return queryset.exclude(healthcareusersurvey__healthcare_user__in=queryset)
+        elif self.value() == "all":
+            surveys = Survey.objects.all()
+            for survey in surveys:
+                queryset = queryset.filter(
+                    healthcareusersurvey__healthcare_user__in=queryset,
+                    healthcareusersurvey__survey=survey,
+                )
+            return queryset.distinct()
+        elif self.value():
+            id, code = self.value().split(":")
+            if code == "0":
+                return queryset.exclude(healthcareusersurvey__survey_id=id)
+            elif code == "1":
+                return queryset.filter(healthcareusersurvey__survey_id=id).distinct()
+
+
+class SentAlertFilter(admin.SimpleListFilter):
+    title = _("Sent an alert")
+    parameter_name = "sentalert"
+
+    def lookups(self, request, model_admin):
+        return (("yes", "Yes"), ("no", "No"))
+
+    def queryset(self, request, queryset):
+        if self.value():
+            created = self.value() == "yes"
+            return queryset.filter(
+                notification__created_by__isnull=not created
+            ).distinct()
+
+
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
     form = UserChangeForm
@@ -146,11 +185,15 @@ class UserAdmin(BaseUserAdmin):
         "is_superuser",
         "can_send_alerts",
         "number_keys_generated",
+        "surveys",
     )
     list_filter = (
         "is_admin",
         "is_superuser",
         "is_active",
+        "province",
+        SentAlertFilter,
+        SurveySentFilter,
     )
 
     def can_send_alerts(self, user: HealthcareUser):
@@ -213,6 +256,84 @@ class UserAdmin(BaseUserAdmin):
         if request.user.is_superuser and obj.id != request.user.id:
             fieldsets += (permissions_tuple,)
         return fieldsets
+
+    def surveys(self, obj):
+        surveys = Survey.objects.all()
+        val = ""
+        count = 0
+        for survey in surveys:
+            delimiter = "" if count == 0 else ", "
+            healthcare_user_surveys = HealthcareUserSurvey.objects.filter(
+                healthcare_user=obj, survey=survey
+            )
+            if healthcare_user_surveys:
+                count += 1
+                val += f"{delimiter}{survey}"
+        return val
+
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        surveys = Survey.objects.all()
+        for survery in surveys:
+            sender_func = partial(self.send_survey_by_id, survery.id)
+            actions[f"survey_{survery.id}"] = (
+                sender_func,
+                f"survey_{survery.id}",
+                f"Immediately email {survery} to healthcare user(s)",
+            )
+        return actions
+
+    @staticmethod
+    def send_survey_by_id(id, modeladmin, request, queryset):
+        count = 0
+        for healthcare_user in queryset:
+            if not healthcare_user.notification_set.exists():
+                modeladmin.message_user(
+                    request,
+                    _(f"{healthcare_user.email} has not sent an alert."),
+                    messages.WARNING,
+                )
+            else:
+                reg_surveys = healthcare_user.survey_recipient.filter(survey_id=id)
+                if reg_surveys:
+                    modeladmin.message_user(
+                        request,
+                        _(
+                            f"{healthcare_user.email} has already had this survey sent to them."
+                        ),
+                        messages.WARNING,
+                    )
+                else:
+                    reg_survey = HealthcareUserSurvey.objects.create(
+                        healthcare_user=healthcare_user,
+                        survey_id=id,
+                        sent_by=request.user,
+                        sent_ts=timezone.now(),
+                    )
+                    try:
+                        survey = reg_survey.survey
+                        template_id = (
+                            survey.en_notify_template_id
+                            if healthcare_user.language_cd == "en"
+                            else survey.fr_notify_template_id
+                        )
+                        send_email(
+                            healthcare_user.email,
+                            {"url": survey.url},
+                            template_id,
+                        )
+                        count += 1
+                    except Exception as e:
+                        modeladmin.message_user(
+                            request,
+                            _(f"{str(e)} :: email: {healthcare_user.email}"),
+                            messages.ERROR,
+                        )
+                        reg_survey.delete()
+        if count:
+            modeladmin.message_user(
+                request, _(f"Sent {count} messages successfully"), messages.SUCCESS
+            )
 
 
 admin.site.register(HealthcareProvince, ProvinceAdmin)
