@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-09 21:11+0000\n"
+"POT-Creation-Date: 2021-07-13 19:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,7 +70,7 @@ msgstr "Se connecter au portail"
 #: about/templates/about/2_create_account.html
 #: about/templates/includes/_nav_about.html
 msgid "Logging in"
-msgstr "Connexion"
+msgstr "Connexion au portail"
 
 #: about/templates/about/2_create_account.html
 msgid "If your administrator decides you need a portal account, you’ll get an email invitation. Check your spam folder if you’re expecting an invitation."
@@ -124,7 +124,7 @@ msgstr "Clés à usage unique"
 #: about/templates/about/3_one_time_keys.html
 #: about/templates/includes/_nav_about.html
 msgid "Generating keys"
-msgstr "Générer des clés"
+msgstr "Génération de clés"
 
 #: about/templates/about/3_one_time_keys.html
 msgid "People only get 1 key per positive test, and the key expires in 24 hours."
@@ -154,7 +154,7 @@ msgstr "Fournir une clé"
 #: about/templates/about/4_give_a_key.html
 #: about/templates/includes/_nav_about.html
 msgid "Giving keys"
-msgstr "Fournir une clé"
+msgstr "Distribution des clés"
 
 #: about/templates/about/4_give_a_key.html
 msgid "The key is a combination of letters and numbers."
@@ -209,7 +209,7 @@ msgstr "Aider le patient avec sa clé"
 #: about/templates/about/5_help_patient_enter_key.html
 #: about/templates/includes/_nav_about.html
 msgid "Helping people enter keys"
-msgstr "Aider le patient avec sa clé"
+msgstr "Aide à apporter pour entrer une clé"
 
 #: about/templates/about/5_help_patient_enter_key.html
 #: covid_key/templates/covid_key/key.html
@@ -236,8 +236,8 @@ msgid "Sending QR alerts"
 msgstr "Envoi d’alertes QR"
 
 #: about/templates/about/6_sending_qr_alerts.html
-msgid "You’ll send alerts to people who scanned a QR code during an exposure. Your health authority will give you the address, date, time and guidance for the exposure."
-msgstr "Cette fonction vous permet d’envoyer une alerte aux personnes qui ont scanné le code QR d’un lieu pendant un risque d’exposition. L’autorité de santé publique vous communiquera l’adresse, la date et l’heure de l’exposition, ainsi que la consigne à transmettre."
+msgid "You’ll send alerts to people who scanned a QR code during an exposure. To send an alert, you'll need the address, date, time and guidance for the exposure."
+msgstr "Cette fonction vous permet d’envoyer une alerte aux personnes qui ont scanné le code QR d’un lieu pendant un risque d’exposition. Pour envoyer une alerte, vous devrez connaître l'adresse, la date et l'heure de l'exposition, ainsi que la consigne à transmettre."
 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "We’ll guide you through the steps to create the alert"
@@ -263,12 +263,12 @@ msgid "If there are no results for a place or event"
 msgstr "Si votre recherche ne donne aucun résultat"
 
 #: about/templates/about/6_sending_qr_alerts.html
-msgid "Follow local procedures for addresses without QR codes."
-msgstr "Suivez les procédures locales pour les lieux ou événements sans code QR."
+msgid "Follow your local contact tracing procedures."
+msgstr "Suivez les procédures de recherche de contacts de votre région."
 
 #: about/templates/about/6_sending_qr_alerts.html
-msgid "After checking the details, you'll be able to send the alert"
-msgstr "Après avoir tout vérifié, vous pourrez envoyer l’alerte "
+msgid "After entering and checking the details, you'll be able to send the alert"
+msgstr "Une fois les informations entrées et vérifiées, vous pourrez envoyer l’alerte"
 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "If there’s already been a QR alert for the exposure"
@@ -280,11 +280,7 @@ msgstr "Vous ne pourrez pas envoyer l’alerte à nouveau."
 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "We’ll confirm it’s sent"
-msgstr "Vous verrez une confirmation que l’alerte a été envoyée"
-
-#: about/templates/about/6_sending_qr_alerts.html
-msgid "Health authorities continue to manually contact visitors who do not scan QR codes."
-msgstr "Les autorités sanitaires continueront de contacter manuellement les visiteurs qui ne scannent pas les codes QR."
+msgstr "Nous confirmerons que l’alerte a été envoyée"
 
 #: about/templates/about/7_admin_accounts.html
 msgid "Both administrators and team members can generate one-time keys."
@@ -3447,3 +3443,9 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Follow local procedures for addresses without QR codes."
+#~ msgstr "Suivez les procédures locales pour les lieux ou événements sans code QR."
+
+#~ msgid "Health authorities continue to manually contact visitors who do not scan QR codes."
+#~ msgstr "Les autorités sanitaires continueront de contacter manuellement les visiteurs qui ne scannent pas les codes QR."
