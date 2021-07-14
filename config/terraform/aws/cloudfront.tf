@@ -95,10 +95,10 @@ resource "aws_cloudfront_distribution" "qrcode" {
 
   aliases = ["register.covid-hcportal.cdssandbox.xyz"]
 
-  # Cache GET/HEAD respecting cache-control headers (min_ttl = 0)
+  # By default, cache nothing
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD", "OPTIONS", "POST"]
-    cached_methods   = ["GET", "HEAD"]
+    cached_methods   = []
     target_origin_id = aws_lb.qrcode.name
 
     forwarded_values {
@@ -111,8 +111,8 @@ resource "aws_cloudfront_distribution" "qrcode" {
 
     viewer_protocol_policy = "redirect-to-https"
     min_ttl                = 0
-    default_ttl            = 3600
-    max_ttl                = 7200
+    default_ttl            = 0
+    max_ttl                = 0
     compress               = true
   }
 
