@@ -2,11 +2,28 @@
 {% load i18n settings %}
 
 {% block title %}
-    {% trans "No entry" %}
+    {% trans "Outside Canada" %}
 {% endblock %}
 
 
 {% block content %}
-    <h1>{% trans "No entry" %}</h1>
-    <p>{% trans "You do not have permission to visit this page." %}</p>
+    <h1>{% trans "It looks like you’re outside Canada" %}</h1>
+    <p>{% trans "If you would like to use this website, contact us." %}</p>
+
+    <h2>{% trans "By phone" %}</h2>
+     {% blocktrans %}
+        <p>Monday to Friday from 8:30 am to 5 pm Eastern Time.<br>
+            <ul>
+                <li>Phone: 1-833-694-1709</li>
+                <li>Teletypewriter (TTY): 1-866-694-8389</li>
+            </ul>
+        </p>
+    {% endblocktrans %}
+
+    <h2>{% trans "By email" %}</h2>
+    {% blocktrans %}
+    <p>You can reach us at <a href="mailto:support@email.ca">support@email.ca</a>.<br><br>
+       We usually reply within 24 hours, except for weekends and holidays.
+    </p>
+    {% endblocktrans %}
 {% endblock %}

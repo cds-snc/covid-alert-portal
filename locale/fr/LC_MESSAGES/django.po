@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-13 20:06+0000\n"
+"POT-Creation-Date: 2021-07-14 17:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1221,11 +1221,11 @@ msgstr "Entrez les renseignements demandés."
 msgid "This account has been locked due to too many failed log in attempts."
 msgstr "Ce compte a été verrouillé en raison d’un trop grand nombre de tentatives d’ouverture de session infructueuses."
 
-#: portal/templates/403.html register/templates/register/403.html
+#: portal/templates/403.html
 msgid "No entry"
 msgstr "Non autorisé"
 
-#: portal/templates/403.html register/templates/register/403.html
+#: portal/templates/403.html
 msgid "You do not have permission to visit this page."
 msgstr "Vous n’avez pas l’autorisation de visiter la page."
 
@@ -2614,6 +2614,60 @@ msgstr "Ajouter des balises de lieu à l'URL"
 #: register/models.py
 msgid "Sent Timestamp"
 msgstr "Horodatage de l'envoi"
+
+#: register/templates/register/403.html
+msgid "Outside Canada"
+msgstr ""
+
+#: register/templates/register/403.html
+msgid "It looks like you’re outside Canada"
+msgstr "Il semble que vous vous trouviez à l’extérieur du Canada"
+
+#: register/templates/register/403.html
+msgid "If you would like to use this website, contact us."
+msgstr "Si vous souhaitez utiliser ce site Web, contactez-nous."
+
+#: register/templates/register/403.html
+msgid "By phone"
+msgstr "Par téléphone"
+
+#: register/templates/register/403.html
+msgid ""
+"\n"
+"        <p>Monday to Friday from 8:30 am to 5 pm Eastern Time.<br>\n"
+"            <ul>\n"
+"                <li>Phone: 1-833-694-1709</li>\n"
+"                <li>Teletypewriter (TTY): 1-866-694-8389</li>\n"
+"            </ul>\n"
+"        </p>\n"
+"    "
+msgstr ""
+"\n"
+"        <p>Du lundi au vendredi de 8 h 30 à 17 h (heure de l’Est).<br>\n"
+"            <ul>\n"
+"                <li>Téléphone : 1-833-694-1709</li>\n"
+"                <li>Téléimprimeur (ATS) : 1-866-694-8389</li>\n"
+"            </ul>\n"
+"        </p>\n"
+"    "
+
+#: register/templates/register/403.html
+msgid "By email"
+msgstr "Ou par courriel"
+
+#: register/templates/register/403.html
+msgid ""
+"\n"
+"    <p>You can reach us at <a href=\"mailto:support@email.ca\">support@email.ca</a>.<br><br>\n"
+"       We usually reply within 24 hours, except for weekends and holidays.\n"
+"    </p>\n"
+"    "
+msgstr ""
+"\n"
+"    <p>Envoyez votre message à <a href=\"mailto:support@email.ca\">support@email.ca</a>.<br><br>\n"
+"       Nous répondons généralement dans un délai de 24 heures, sauf les fins de semaine et les jours fériés.\n"
+"    </p>\n"
+"    "
 
 #: register/templates/register/500.html
 msgid "Something went wrong with the system."
