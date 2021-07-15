@@ -110,7 +110,7 @@ class DateForm(HealthcareBaseForm):
         overlap_notification_error_tmpl = _(
             "Your team already alerted people who scanned the QR code on {}."
         )
-        future_date_error_msg = _("A future date is not allowed.")
+        future_date_error_msg = _("Enter an exposure that has already happened.")
         end_date_max = datetime.now(tz=tz).replace(
             hour=0, minute=0, second=0, microsecond=0
         ) + timedelta(days=1)
