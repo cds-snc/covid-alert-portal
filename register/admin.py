@@ -1,5 +1,6 @@
 from datetime import timedelta
 from functools import partial
+from urllib.parse import urlencode
 
 from django.contrib import admin, messages
 from django.db.models import Count
@@ -201,9 +202,31 @@ class RegistrantAdmin(admin.ModelAdmin, ExportCsvMixin):
                             if registrant.language_cd == "en"
                             else survey.fr_notify_template_id
                         )
+                        query_param_dict = (
+                            {survey.registrant_id_url_param: str(registrant.id)}
+                            if survey.append_registrant_id_ind
+                            else {}
+                        )
+                        if survey.append_venue_tag_ind:
+                            query_param_dict.update(
+                                {
+                                    survey.venue_tag_url_param: ",".join(
+                                        [
+                                            location["category"]
+                                            for location in registrant.location_set.all()
+                                            .distinct("category")
+                                            .values("category")
+                                        ]
+                                    )
+                                }
+                            )
+                        if query_param_dict:
+                            full_url = f"{survey.url}?{urlencode(query_param_dict)}"
+                        else:
+                            full_url = survey.url
                         send_email(
                             registrant.email,
-                            {"registrant_id": str(registrant.id), "url": survey.url},
+                            {"url": full_url},
                             template_id,
                         )
                         count += 1

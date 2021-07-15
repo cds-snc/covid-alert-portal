@@ -14,7 +14,7 @@
   <div class="column column--2-3">
     <h1>{% trans "Sending alerts" %}</h1>
 
-    <p>{% trans "You’ll send alerts to people who scanned a QR code during an exposure. Your health authority will give you the address, date, time and guidance for the exposure." %}</p>
+    <p>{% trans "You’ll send alerts to people who scanned a QR code during an exposure. To send an alert, you'll need the address, date, time and guidance for the exposure." %}</p>
 
     <h2>{% trans "We’ll guide you through the steps to create the alert" %}</h2>
 
@@ -35,9 +35,9 @@
     </details>
 
     <h3>{% trans "If there are no results for a place or event" %}</h3>
-    <p>{% trans "Follow local procedures for addresses without QR codes." %}</p>
+    <p>{% trans "Follow your local contact tracing procedures." %}</p>
 
-    <h2>{% trans "After checking the details, you'll be able to send the alert" %}</h2>
+    <h2>{% trans "After entering and checking the details, you'll be able to send the alert" %}</h2>
 
     <details>
         <summary>
@@ -65,8 +65,6 @@
             <img alt="" src="{% static 'about/img/qr_code_3-'|add:request.LANGUAGE_CODE|add:'.png' %}" />
         </div>
     </details>
-
-    <p>{% trans "Health authorities continue to manually contact visitors who do not scan QR codes." %}</p>
 
     <div class="content-next-link">
       <a href="{% url 'about:admin_accounts' %}" class="chevron-right">{% trans "Next:" %} {% trans "Admin accounts" %}</a>

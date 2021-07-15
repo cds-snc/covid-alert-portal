@@ -1,11 +1,12 @@
 from uuid import uuid4
+
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 
 from profiles.models import HealthcareUser
 from .utils import generate_random_key
-from django.utils import timezone
 
 
 class Registrant(models.Model):
@@ -84,13 +85,28 @@ class LocationSummary(Location):
 
 
 class Survey(models.Model):
-    url = models.URLField(verbose_name=_("General Survey URL"))
+    url = models.URLField(
+        verbose_name=_("General Survey URL"),
+        help_text=_("Not including any registrant or venue param codes here"),
+    )
     title = models.CharField(max_length=200, verbose_name=_("Survey Title"))
     en_notify_template_id = models.CharField(
         max_length=200, verbose_name=_("English Notify Template ID")
     )
     fr_notify_template_id = models.CharField(
         max_length=200, verbose_name=_("French Notify Template ID")
+    )
+    registrant_id_url_param = models.CharField(
+        _("Registrant ID parameter"), max_length=32, blank=True, null=True
+    )
+    append_registrant_id_ind = models.BooleanField(
+        verbose_name=_("Append registration ID to url"), default=True
+    )
+    venue_tag_url_param = models.CharField(
+        _("Venue tag parameter"), max_length=32, blank=True, null=True
+    )
+    append_venue_tag_ind = models.BooleanField(
+        verbose_name=_("Append venue tags to url"), default=True
     )
 
     class Meta:
@@ -111,3 +127,21 @@ class RegistrantSurvey(models.Model):
 
     def __str__(self):
         return f"{self.registrant}:{self.survey}"
+
+
+class HealthcareUserSurvey(models.Model):
+    survey = models.ForeignKey(Survey, on_delete=models.SET_NULL, null=True)
+    healthcare_user = models.ForeignKey(
+        HealthcareUser,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="survey_recipient",
+    )
+    sent_ts = models.DateTimeField(
+        blank=True, null=True, verbose_name=_("Sent Timestamp")
+    )
+    sent_by = models.ForeignKey(HealthcareUser, on_delete=models.SET_NULL, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.healthcare_user}:{self.survey}"

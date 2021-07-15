@@ -14,3 +14,4 @@ secrets*.tfvars
 .terraform/
 *.tfplan
 .coverage
+node_modules

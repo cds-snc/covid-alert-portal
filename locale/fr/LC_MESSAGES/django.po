@@ -70,7 +70,7 @@ msgstr "Se connecter au portail"
 #: about/templates/about/2_create_account.html
 #: about/templates/includes/_nav_about.html
 msgid "Logging in"
-msgstr "Connexion"
+msgstr "Connexion au portail"
 
 #: about/templates/about/2_create_account.html
 msgid "If your administrator decides you need a portal account, you’ll get an email invitation. Check your spam folder if you’re expecting an invitation."
@@ -124,7 +124,7 @@ msgstr "Clés à usage unique"
 #: about/templates/about/3_one_time_keys.html
 #: about/templates/includes/_nav_about.html
 msgid "Generating keys"
-msgstr "Générer des clés"
+msgstr "Génération de clés"
 
 #: about/templates/about/3_one_time_keys.html
 msgid "People only get 1 key per positive test, and the key expires in 24 hours."
@@ -154,7 +154,7 @@ msgstr "Fournir une clé"
 #: about/templates/about/4_give_a_key.html
 #: about/templates/includes/_nav_about.html
 msgid "Giving keys"
-msgstr "Fournir une clé"
+msgstr "Distribution des clés"
 
 #: about/templates/about/4_give_a_key.html
 msgid "The key is a combination of letters and numbers."
@@ -209,7 +209,7 @@ msgstr "Aider le patient avec sa clé"
 #: about/templates/about/5_help_patient_enter_key.html
 #: about/templates/includes/_nav_about.html
 msgid "Helping people enter keys"
-msgstr "Aider le patient avec sa clé"
+msgstr "Aide à apporter pour entrer une clé"
 
 #: about/templates/about/5_help_patient_enter_key.html
 #: covid_key/templates/covid_key/key.html
@@ -236,8 +236,8 @@ msgid "Sending QR alerts"
 msgstr "Envoi d’alertes QR"
 
 #: about/templates/about/6_sending_qr_alerts.html
-msgid "You’ll send alerts to people who scanned a QR code during an exposure. Your health authority will give you the address, date, time and guidance for the exposure."
-msgstr "Cette fonction vous permet d’envoyer une alerte aux personnes qui ont scanné le code QR d’un lieu pendant un risque d’exposition. L’autorité de santé publique vous communiquera l’adresse, la date et l’heure de l’exposition, ainsi que la consigne à transmettre."
+msgid "You’ll send alerts to people who scanned a QR code during an exposure. To send an alert, you'll need the address, date, time and guidance for the exposure."
+msgstr "Cette fonction vous permet d’envoyer une alerte aux personnes qui ont scanné le code QR d’un lieu pendant un risque d’exposition. Pour envoyer une alerte, vous devrez connaître l'adresse, la date et l'heure de l'exposition, ainsi que la consigne à transmettre."
 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "We’ll guide you through the steps to create the alert"
@@ -263,12 +263,12 @@ msgid "If there are no results for a place or event"
 msgstr "Si votre recherche ne donne aucun résultat"
 
 #: about/templates/about/6_sending_qr_alerts.html
-msgid "Follow local procedures for addresses without QR codes."
-msgstr "Suivez les procédures locales pour les lieux ou événements sans code QR."
+msgid "Follow your local contact tracing procedures."
+msgstr "Suivez les procédures de recherche de contacts de votre région."
 
 #: about/templates/about/6_sending_qr_alerts.html
-msgid "After checking the details, you'll be able to send the alert"
-msgstr "Après avoir tout vérifié, vous pourrez envoyer l’alerte "
+msgid "After entering and checking the details, you'll be able to send the alert"
+msgstr "Une fois les informations entrées et vérifiées, vous pourrez envoyer l’alerte"
 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "If there’s already been a QR alert for the exposure"
@@ -280,11 +280,7 @@ msgstr "Vous ne pourrez pas envoyer l’alerte à nouveau."
 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "We’ll confirm it’s sent"
-msgstr "Vous verrez une confirmation que l’alerte a été envoyée"
-
-#: about/templates/about/6_sending_qr_alerts.html
-msgid "Health authorities continue to manually contact visitors who do not scan QR codes."
-msgstr "Les autorités sanitaires continueront de contacter manuellement les visiteurs qui ne scannent pas les codes QR."
+msgstr "Nous confirmerons que l’alerte a été envoyée"
 
 #: about/templates/about/7_admin_accounts.html
 msgid "Both administrators and team members can generate one-time keys."
@@ -824,6 +820,10 @@ msgid "Review and send"
 msgstr "Vérifier et envoyer"
 
 #: outbreaks/templates/confirm.html
+msgid "Step 3 of 3"
+msgstr "Étape 3 de 3"
+
+#: outbreaks/templates/confirm.html
 msgid "To see all public exposures for this place, visit"
 msgstr "Pour voir toutes les alertes associées à ce lieu ou à cet événement, consultez"
 
@@ -1024,8 +1024,9 @@ msgstr "Ajouter une exposition"
 msgid "Exposure details not found."
 msgstr ""
 
-#: outbreaks/templates/history.html
-msgid "Find QR places and events"
+#: outbreaks/templates/history.html outbreaks/templates/profile.html
+#: outbreaks/templates/search.html
+msgid "Find places and events"
 msgstr "Trouver un lieu ou un événement"
 
 #: outbreaks/templates/history.html
@@ -1121,10 +1122,6 @@ msgstr "Trier par émetteur, ordre alphabétique inverse"
 msgid "Details of place or event"
 msgstr "Renseignements sur le lieu ou l’événement"
 
-#: outbreaks/templates/profile.html outbreaks/templates/search.html
-msgid "Find places and events"
-msgstr "Trouver un lieu ou un événement"
-
 #: outbreaks/templates/profile.html
 msgid "Contact name"
 msgstr "Personne-ressource"
@@ -1215,6 +1212,14 @@ msgstr "Une plage horaire conflictuelle : ({}) a été saisie ci-dessous."
 #: outbreaks/views.py
 msgid "{} from {} to {}"
 msgstr "{} de {} à {}"
+
+#: portal/forms.py
+msgid "This field is required."
+msgstr "Le lien est expiré."
+
+#: portal/forms.py
+msgid "Enter the information."
+msgstr "Entrez les renseignements demandés."
 
 #: portal/settings.py
 msgid "This account has been locked due to too many failed log in attempts."
@@ -1657,8 +1662,31 @@ msgid "Allow user to send outbreak alerts"
 msgstr "Permettre à l’utilisateur d’envoyer des alertes"
 
 #: profiles/admin.py
+msgid "Sent an alert"
+msgstr "Envoyé une alerte"
+
+#: profiles/admin.py
 msgid "Number of keys generated in the last 24 hours"
 msgstr "Nombre de clés générées dans les dernières 24 heures"
+
+#: profiles/admin.py
+#, python-brace-format
+msgid "{healthcare_user.email} has not sent an alert."
+msgstr "{healthcare_user.email} n'a pas envoyé d'alerte."
+
+#: profiles/admin.py
+#, python-brace-format
+msgid "{healthcare_user.email} has already had this survey sent to them."
+msgstr "{healthcare_user.email} a déjà reçu cette enquête."
+
+#: profiles/admin.py
+msgid "{str(e)} :: email: {healthcare_user.email}"
+msgstr ""
+
+#: profiles/admin.py register/admin.py
+#, python-brace-format
+msgid "Sent {count} messages successfully"
+msgstr "Envoyé {count} messages avec succès"
 
 #: profiles/context_processors.py
 msgid "— COVID Alert Portal"
@@ -2354,11 +2382,6 @@ msgstr "{registrant.email} a déjà reçu cette enquête."
 msgid "{str(e)} :: email: {registrant.email}"
 msgstr ""
 
-#: register/admin.py
-#, python-brace-format
-msgid "Sent {count} messages successfully"
-msgstr "Envoyé {count} messages avec succès"
-
 #: register/context_processors.py
 msgid "— Scan a place registration"
 msgstr ""
@@ -2561,6 +2584,10 @@ msgid "General Survey URL"
 msgstr "URL de l'enquête générale"
 
 #: register/models.py
+msgid "Not including any registrant or venue param codes here"
+msgstr "N'incluant aucun code d'inscription ou de paramètre de lieu ici"
+
+#: register/models.py
 msgid "Survey Title"
 msgstr "Titre de l'enquête"
 
@@ -2571,6 +2598,22 @@ msgstr "Anglais Notify Template ID"
 #: register/models.py
 msgid "French Notify Template ID"
 msgstr "ID du modèle de notification en français"
+
+#: register/models.py
+msgid "Registrant ID parameter"
+msgstr "Paramètre d'ID de titulaire"
+
+#: register/models.py
+msgid "Append registration ID to url"
+msgstr "Ajouter l'ID d'enregistrement à l'URL"
+
+#: register/models.py
+msgid "Venue tag parameter"
+msgstr "Paramètre de balise de lieu"
+
+#: register/models.py
+msgid "Append venue tags to url"
+msgstr "Ajouter des balises de lieu à l'URL"
 
 #: register/models.py
 msgid "Sent Timestamp"

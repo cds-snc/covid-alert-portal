@@ -100,13 +100,3 @@ resource "aws_route53_record" "maintenance_qrcode" {
     evaluate_target_health = false
   }
 }
-
-# Route 53 Healthcheck
-resource "aws_route53_health_check" "dns-is-routeable-2" {
-  fqdn              = "register.${aws_route53_zone.covidportal.name}"
-  port              = 443
-  type              = "HTTPS"
-  resource_path     = "/status/"
-  failure_threshold = "5"
-  request_interval  = "30"
-}

@@ -1,21 +1,21 @@
 {% load i18n waffle_tags %}
 
-<nav class="nav--main"  aria-label="{% trans 'Product navigation' %}">
+<nav class="nav--main" aria-label="{% trans 'Product navigation' %}">
   <div class="page--container">
     <ul>
       {% if user.is_verified %}
         {% if perms.profiles.can_send_alerts%}
         <li><a {% if request.resolver_match.url_name == 'start' %}class="active"{% endif %} href="{% url 'start' %}">{% trans "Home" %}</a></li>
         {% endif %}
-        <li><a {% if request.resolver_match.url_name == 'otk_start' or request.resolver_match.url_name == 'generate_key' %}class="active"{% endif %} href="{% url 'otk_start' %}">{% trans "Generate keys" %}</a></li>
+        <li><a {% if request.resolver_match.url_name == 'otk_start' or request.resolver_match.url_name == 'generate_key' or request.resolver_match.url_name == 'key' %}class="active"{% endif %} href="{% url 'otk_start' %}">{% trans "Generate keys" %}</a></li>
       {% endif %}
       {% switch "qr_codes" %}
         {% if perms.profiles.can_send_alerts and user.is_verified %}
-          <li><a {% if request.resolver_match.url_name == 'search' %}class="active"{% endif %} href="{% url 'outbreaks:search' %}">{% trans "Send alerts" %}</a></li>
+          <li><a {% if request.resolver_match.namespace == "outbreaks" %}class="active"{% endif %} href="{% url 'outbreaks:search' %}">{% trans "Send alerts" %}</a></li>
         {% endif %}
       {% endswitch %}
       {% if user.is_admin and user.is_verified %}
-        <li><a {% if request.resolver_match.url_name == 'profiles' %}class="active"{% endif %} href="{% url 'profiles' %}">{% trans "Manage team" %}</a></li>
+        <li><a {% if request.resolver_match.url_name == 'profiles' or request.resolver_match.url_name == 'invite' %}class="active"{% endif %} href="{% url 'profiles' %}">{% trans "Manage team" %}</a></li>
       {% endif %}
       {% if not user.is_verified %}
         <li><a href="{% url 'about:index' %}">{% trans "About the portal" %}</a></li>

@@ -8,6 +8,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 - Remove Basicauth
 
+## [2.2.0] - 2021-07-07
+
+## Updated
+
+- Modify uwsgi config to scale number of workers/threads
+- Portal content audit updates
+- Registration site content audit updates
+- Fix autoscaling config
+- Adjust health check thresholds so ELB doesn't kill processes as unhealthy when slow to respond under load
+- Updated post-login flow for users with/without alert permission
+- Fix bug when sorting on Alert History screen
+- Add French translations for short month names
+- Django and dependencies update
+- Updated poster/tipsheet
+- Accessibility and Mobile/responsive display fixes
+- Updated navigation / flow and content on alerting wizard
+- Fix bug in nav bar highlight in outbreaks section
+
+## Added
+
+- Add WhiteNoise to help with static asset caching
+- Add Survey management/sending ui for post-pilot surveys
+- Navigation home screen for portal for alerting enabled users
+
 ## [2.1.0] - 2021-06-01
 
 ## Updated

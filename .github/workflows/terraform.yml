@@ -50,7 +50,7 @@ jobs:
           terraform_wrapper: false
 
       - name: Terraform Plan
-        uses: cds-snc/terraform-plan@v1.0.5
+        uses: cds-snc/terraform-plan@v1
         with:
           comment-delete: true
           directory: ./config/terraform/aws

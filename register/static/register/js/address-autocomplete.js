@@ -3,7 +3,7 @@
  * but it'll be locked to our domain and is not sensitive
  * https://www.canadapost.ca/pca/support/kb/address-complete-basics/#safe
  */
-const key = 'GK23-JU85-CC97-ZG36'
+const key = 'BG68-KD46-DD33-CM93'
 
 /**
  * Just a wrapper around xhr for convenience.

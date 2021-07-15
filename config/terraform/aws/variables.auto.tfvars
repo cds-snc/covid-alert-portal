@@ -6,6 +6,7 @@ region = "ca-central-1"
 # Enable the new ARN format to propagate tags to containers (see config/terraform/aws/README.md)
 billing_tag_key   = "CostCentre"
 billing_tag_value = "CovidPortal_Staging"
+environment       = "staging"
 
 ###
 # AWS Cloud Watch - cloudwatch.tf

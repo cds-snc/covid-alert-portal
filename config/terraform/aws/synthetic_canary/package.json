@@ -1,0 +1,14 @@
+{
+  "name": "synthetic_canary",
+  "version": "1.0.0",
+  "description": "Unit tests for synthetic canary",
+  "main": "healthcheck.tmpl.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Canadian Digital Service",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^27.0.6"
+  }
+}

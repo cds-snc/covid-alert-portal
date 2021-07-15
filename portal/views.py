@@ -60,6 +60,10 @@ def switch_language(request):
     if hasattr(request, "session"):
         request.session[LANGUAGE_SESSION_KEY] = lang
 
+    if not request.user.is_anonymous and lang != request.user.language_cd:
+        request.user.language_cd = lang
+        request.user.save()
+
     response.set_cookie(
         settings.LANGUAGE_COOKIE_NAME,
         lang,

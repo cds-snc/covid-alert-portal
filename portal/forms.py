@@ -1,6 +1,6 @@
 from django import forms
 from django.forms.models import ModelFormOptions
-
+from django.utils.translation import gettext_lazy as _
 
 """
 Monkey-patch ModelFormOptions so that we can specify the fieldsets ourselves.
@@ -47,6 +47,12 @@ class HealthcareBaseForm(forms.Form):
             self.fields[field].widget.attrs.pop("autofocus", None)
             # remove autocomplete attributes
             self.fields[field].widget.attrs.update({"autocomplete": "off"})
+            if self.fields[field].error_messages["required"] == _(
+                "This field is required."
+            ):
+                self.fields[field].error_messages["required"] = _(
+                    "Enter the information."
+                )
 
     def fieldsets(self):
         meta = getattr(self, "Meta", None)
