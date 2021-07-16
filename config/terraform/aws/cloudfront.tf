@@ -97,7 +97,7 @@ resource "aws_cloudfront_distribution" "qrcode" {
 
   # By default, cache nothing
   default_cache_behavior {
-    allowed_methods  = ["GET", "HEAD", "OPTIONS", "POST"]
+    allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = []
     target_origin_id = aws_lb.qrcode.name
 
