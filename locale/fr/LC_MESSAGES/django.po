@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-13 20:06+0000\n"
+"POT-Creation-Date: 2021-07-15 05:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -794,6 +794,10 @@ msgstr "\"À\" doit être après \"De\""
 #: outbreaks/forms.py
 msgid "Your team already alerted people who scanned the QR code on {}."
 msgstr "Une alerte a déjà été envoyée pour l’exposition du {}."
+
+#: outbreaks/forms.py
+msgid "Enter an exposure that has already happened."
+msgstr "Entrez la date d’une exposition qui a déjà eu lieu."
 
 #: outbreaks/forms.py
 msgid "Continue to self-isolate until you get your test result."

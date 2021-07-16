@@ -110,9 +110,19 @@ class DateForm(HealthcareBaseForm):
         overlap_notification_error_tmpl = _(
             "Your team already alerted people who scanned the QR code on {}."
         )
+        future_date_error_msg = _("Enter an exposure that has already happened.")
+        end_date_max = datetime.now(tz=tz).replace(
+            hour=0, minute=0, second=0, microsecond=0
+        ) + timedelta(days=1)
+        if not end_date.tzinfo:
+            start_date = start_date.astimezone(tz)
+            end_date = end_date.astimezone(tz)
         if start_date >= end_date:
             form.add_error(None, start_later_end_error_msg)
             raise ValidationError(start_later_end_error_msg)
+        elif end_date > end_date_max:
+            form.add_error(None, future_date_error_msg)
+            raise ValidationError(future_date_error_msg)
         notifications = DateForm.get_notification_intersection(
             start_date, end_date, alert_location
         )

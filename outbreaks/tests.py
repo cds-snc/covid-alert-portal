@@ -1,9 +1,11 @@
+import pytz
 from django.urls import reverse
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Permission
 from profiles.tests import AdminUserTestCase, get_other_credentials
 from register.models import Location
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from .models import Notification
 from .forms import DateForm, SeverityForm
 
@@ -152,6 +154,34 @@ class DatetimeView(NotificationsTestCase):
         self.assertFalse(DateForm({"day": 0, "month": 2, "year": 2021}).is_valid())
         self.assertFalse(DateForm({"day": 32, "month": 2, "year": 2021}).is_valid())
         self.assertFalse(DateForm({"day": 1, "month": 13, "year": 2021}).is_valid())
+
+    def test_future_date_invalid(self):
+        """
+        Assert that setting the datetime to end later than today is an error
+        """
+
+        tz = pytz.timezone(settings.PORTAL_LOCAL_TZ)
+        invalid_future_date = datetime.now(tz=tz).replace(
+            hour=0, minute=0, second=0, microsecond=0
+        ) + timedelta(days=1, microseconds=1)
+
+        # Login and ensure that a location has been cached
+        self.login()
+        location = Location.objects.get(name="Nandos")
+        self.client.get(reverse("outbreaks:datetime", args=[location.id]))
+        # Post a date
+        response = self.client.post(
+            reverse("outbreaks:datetime", args=[location.id]),
+            {
+                "day": invalid_future_date.day,
+                "month": invalid_future_date.month,
+                "year": invalid_future_date.year,
+                "do_post": "add_date",
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "datetime.html")
+        self.assertContains(response, "error")
 
     def test_add_remove_date(self):
         """
