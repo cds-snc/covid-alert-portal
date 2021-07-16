@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-15 05:37+0000\n"
+"POT-Creation-Date: 2021-07-16 14:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -237,7 +237,7 @@ msgstr "Envoi d’alertes QR"
 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "You’ll send alerts to people who scanned a QR code during an exposure. To send an alert, you'll need the address, date, time and guidance for the exposure."
-msgstr "Cette fonction vous permet d’envoyer une alerte aux personnes qui ont scanné le code QR d’un lieu pendant un risque d’exposition. Pour envoyer une alerte, vous devrez connaître l'adresse, la date et l'heure de l'exposition, ainsi que la consigne à transmettre."
+msgstr "Cette fonction vous permet d’envoyer une alerte aux personnes qui ont scanné le code QR d’un lieu pendant un risque d’exposition. Pour envoyer une alerte, vous devrez connaître l’adresse, la date et l’heure de l’exposition, ainsi que la consigne à transmettre."
 
 #: about/templates/about/6_sending_qr_alerts.html
 msgid "We’ll guide you through the steps to create the alert"
