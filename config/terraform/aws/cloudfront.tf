@@ -95,10 +95,10 @@ resource "aws_cloudfront_distribution" "qrcode" {
 
   aliases = ["register.covid-hcportal.cdssandbox.xyz"]
 
-  # By default, cache nothing
+  # By default, cache nothing (controlled by TTL of 0)
   default_cache_behavior {
-    allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
-    cached_methods   = []
+    allowed_methods  = ["GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT", "DELETE"]
+    cached_methods   = ["GET", "HEAD", "OPTIONS"]
     target_origin_id = aws_lb.qrcode.name
 
     forwarded_values {
@@ -121,7 +121,7 @@ resource "aws_cloudfront_distribution" "qrcode" {
   ordered_cache_behavior {
     path_pattern     = "/static/*"
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
-    cached_methods   = ["GET", "HEAD"]
+    cached_methods   = ["GET", "HEAD", "OPTIONS"]
     target_origin_id = aws_lb.qrcode.name
 
     forwarded_values {
@@ -133,7 +133,7 @@ resource "aws_cloudfront_distribution" "qrcode" {
     }
 
     viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 604800
+    min_ttl                = 604800 # 1 week
     default_ttl            = 604800
     max_ttl                = 604800
     compress               = true
