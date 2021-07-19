@@ -33,7 +33,6 @@ env:
   TF_VAR_slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
   TF_VAR_ecs_secret_qrcode_signature_private_key: ${{ secrets.QRCODE_SIGNATURE_PRIVATE_KEY }}
   TF_VAR_ecs_secret_qrcode_notify_api_key: ${{ secrets.QRCODE_NOTIFY_API_KEY }}
-  TF_VAR_cloudfront_qrcode_custom_header: ${{ secrets.CLOUDFRONT_QRCODE_CUSTOM_HEADER }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:

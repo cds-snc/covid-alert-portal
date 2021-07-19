@@ -178,70 +178,13 @@ resource "aws_wafv2_web_acl" "covidportal_acl" {
     metric_name                = "covid_portal_global_rule"
     sampled_requests_enabled   = false
   }
+
+
 }
 
-###
-# AWS WAF - QR Code ALB
-# Only allow requests to the ALB if they have the CloudFront custom header
-###
 resource "aws_wafv2_web_acl" "qrcode_acl" {
   name  = "qrcode"
   scope = "REGIONAL"
-
-  default_action {
-    block {}
-  }
-
-  rule {
-    name     = "CloudFrontCustomHeader"
-    priority = 201
-
-    action {
-      allow {}
-    }
-
-    statement {
-      byte_match_statement {
-        positional_constraint = "EXACTLY"
-        field_to_match {
-          single_header {
-            name = "covidqrcode"
-          }
-        }
-        search_string = var.cloudfront_qrcode_custom_header
-        text_transformation {
-          priority = 1
-          type     = "NONE"
-        }
-      }
-    }
-
-    visibility_config {
-      cloudwatch_metrics_enabled = true
-      metric_name                = "CloudFrontCustomHeader"
-      sampled_requests_enabled   = false
-    }
-  }
-
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
-
-  visibility_config {
-    cloudwatch_metrics_enabled = true
-    metric_name                = "covid_portal_global_rule"
-    sampled_requests_enabled   = false
-  }
-}
-
-###
-# AWS WAF - QR Code CloudFront distribution
-###
-resource "aws_wafv2_web_acl" "qrcode_cdn_acl" {
-  provider = aws.us-east-1
-
-  name  = "qrcode_cdn"
-  scope = "CLOUDFRONT"
 
   default_action {
     allow {}
@@ -547,11 +490,4 @@ resource "aws_wafv2_web_acl_logging_configuration" "firehose_waf_logs_portal" {
 resource "aws_wafv2_web_acl_logging_configuration" "firehose_waf_logs_qrcode" {
   log_destination_configs = [aws_kinesis_firehose_delivery_stream.firehose_waf_logs_qrcode.arn]
   resource_arn            = aws_wafv2_web_acl.qrcode_acl.arn
-}
-
-resource "aws_wafv2_web_acl_logging_configuration" "firehose_waf_logs_qrcode_cdn" {
-  provider = aws.us-east-1
-
-  log_destination_configs = [aws_kinesis_firehose_delivery_stream.firehose_waf_logs_qrcode_cdn.arn]
-  resource_arn            = aws_wafv2_web_acl.qrcode_cdn_acl.arn
 }

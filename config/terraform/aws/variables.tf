@@ -232,11 +232,3 @@ variable "rds_server_instance_class" {
 variable "route53_zone_name" {
   type = string
 }
-
-###
-# CloudFront - cloudfront.tf
-###
-variable "cloudfront_qrcode_custom_header" {
-  type        = string
-  description = "Header to authenticate CloudFront to QR code ALB"
-}

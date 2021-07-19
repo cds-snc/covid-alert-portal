@@ -87,18 +87,3 @@ resource "aws_kinesis_firehose_delivery_stream" "firehose_waf_logs_qrcode" {
     bucket_arn = aws_s3_bucket.firehose_waf_logs_qrcode.arn
   }
 }
-
-resource "aws_kinesis_firehose_delivery_stream" "firehose_waf_logs_qrcode_cdn" {
-  provider = aws.us-east-1
-
-  name        = "aws-waf-logs-qrcode-cdn"
-  destination = "s3"
-  server_side_encryption {
-    enabled = true
-  }
-
-  s3_configuration {
-    role_arn   = aws_iam_role.firehose_waf_logs.arn
-    bucket_arn = aws_s3_bucket.firehose_waf_logs_qrcode.arn
-  }
-}
