@@ -63,12 +63,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Remove .tfvars
+        run: rm variables.auto.tfvars
+
       - name: Terraform security scan
-        uses: triat/terraform-security-scan@v2.2.3
+        uses: aquasecurity/tfsec-pr-commenter-action@89c691a931c555965b3f2c85857f7aa08980e311 # v0.1.7
         with:
-          tfsec_actions_working_dir: ./config/terraform/aws
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   terraform-apply:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
