@@ -181,7 +181,7 @@ To compile the SCSS files to CSS once:
 pipenv run css
 ```
 
-If you are developing the app and want your styling changes applied as you make changes, you can use the `--watch` flag.
+If you are developing the app and want your styling changes applied as you make changes, you can use the csswatch command:
 
 ```
 pipenv run csswatch
