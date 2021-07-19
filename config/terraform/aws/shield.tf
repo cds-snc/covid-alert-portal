@@ -1,9 +1,3 @@
-# Enable shield on QR code CloudFront distribution
-resource "aws_shield_protection" "cloudfront_qrcode_distribution" {
-  name         = "qrcode_cloudfront_covidportal"
-  resource_arn = aws_cloudfront_distribution.qrcode.arn
-}
-
 # Enable shield on Route53 hosted zone
 resource "aws_shield_protection" "route53_covidportal" {
   name         = "route53_covidportal"
