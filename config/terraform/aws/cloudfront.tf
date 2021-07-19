@@ -55,7 +55,7 @@ resource "aws_cloudfront_distribution" "maintenance_mode" {
     }
   }
   viewer_certificate {
-    acm_certificate_arn      = aws_acm_certificate.covidportal_certificate.arn
+    acm_certificate_arn      = aws_acm_certificate_validation.cert.certificate_arn
     minimum_protocol_version = "TLSv1.2_2021"
     ssl_support_method       = "sni-only"
   }
@@ -149,7 +149,7 @@ resource "aws_cloudfront_distribution" "qrcode" {
   }
 
   viewer_certificate {
-    acm_certificate_arn      = aws_acm_certificate.covidportal_certificate.arn
+    acm_certificate_arn      = aws_acm_certificate_validation.cert.certificate_arn
     minimum_protocol_version = "TLSv1.2_2021"
     ssl_support_method       = "sni-only"
   }
