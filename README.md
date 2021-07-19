@@ -20,12 +20,12 @@ The mode of the project is determined by an [Environment variable](#environment-
 ## Table of contents
 
 - [Running the project](#running-the-project)
-- [Environment variables](#environment-variables)
-- [Local development](#local-development)
-  - [External dependencies](#external-dependencies)
-  - [Activating a virtualenv](#activating-a-virtualenv)
-  - [Database](#database)
-    - [Database migrations](#database-migrations)
+  - [Environment variables](#environment-variables)
+  - [Local development](#local-development)
+    - [External dependencies](#external-dependencies)
+    - [Activating a virtualenv](#activating-a-virtualenv)
+    - [Database](#database)
+      - [Database migrations](#database-migrations)
   - [Compile CSS](#compile-css)
   - [Create admin superuser](#create-admin-super-user-optional)
   - [Run development server](#run-development-server)
