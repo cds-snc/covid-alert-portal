@@ -5,6 +5,8 @@ from django.conf.urls.i18n import i18n_patterns
 from django.conf import settings
 from axes.admin import AccessLogAdmin
 from invitations.views import AcceptInvite
+from django.views.generic import TemplateView
+from django.conf import settings
 
 from .admin import Admin2FASite
 from . import views
@@ -73,19 +75,38 @@ if settings.APP_SWITCH == "PORTAL" or settings.APP_SWITCH == "UNIT":
         path("admin/", admin.site.urls),
     ]
 
-    urlpatterns += i18n_patterns(
-        path("", include("profiles.urls")),
-        path("", include("covid_key.urls")),
-        path("contact/", include("contact.urls")),
-        path("about/", include("about.urls")),
-        path("outbreaks/", include("outbreaks.urls")),
-        path("", include("backup_codes.urls")),
-        path(
-            "invitations/",
-            include(invitation_patterns, namespace="invitations"),
-        ),
-        path("announcements/", include("announcements.urls")),
-    )
+    if settings.DECOMMISSION:
+        urlpatterns += i18n_patterns(
+            path("",
+                 TemplateView.as_view(template_name="decommission/decommission.html"),
+                 name="decommission",
+                 ),
+            path(
+                "terms",
+                TemplateView.as_view(template_name="decommission/terms.html"),
+                name="terms",
+            ),
+            path(
+                "privacy",
+                TemplateView.as_view(template_name="decommission/privacy.html"),
+                name="privacy",
+            ),
+            path("announcements/", include("announcements.urls")),
+        )
+    else:
+        urlpatterns += i18n_patterns(
+            path("", include("profiles.urls")),
+            path("", include("covid_key.urls")),
+            path("contact/", include("contact.urls")),
+            path("about/", include("about.urls")),
+            path("outbreaks/", include("outbreaks.urls")),
+            path("", include("backup_codes.urls")),
+            path(
+                "invitations/",
+                 include(invitation_patterns, namespace="invitations"),
+            ),
+            path("announcements/", include("announcements.urls")),
+        )
 
 # ----
 # URL Paths used when serving the QR Code registration site

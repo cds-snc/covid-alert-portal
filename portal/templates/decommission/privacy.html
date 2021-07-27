@@ -1,0 +1,46 @@
+{% extends './base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Privacy" %}
+{% endblock %}
+
+
+{% block content %}
+<div class="content-back-link">
+      <a href="{% url 'decommission' %}" class="chevron-left">{% trans "Home" %}</a>
+    </div>
+    <h1>{% trans "Privacy notice for COVID Alert Portal" %}</h1>
+    {% blocktrans %}
+        <ul class="paragraphs">
+        <li>
+            <b>We need your personal information</b> so you can use the portal to generate one-time keys.
+        </li>
+        <li>
+            <b>We log all activity and information in the portal</b>, including:
+            <ul class="disc">
+                <li>each time you generate a key.</li>
+                <li>personal information you share with the portal, such as your phone number.</li>
+            </ul>
+        </li>
+        <li>
+            <b>We study portal activity using services</b> such as Google Analytics, but we do not share personal information with these services. These services help us improve the portal.
+        </li>
+        <li>
+            <b>We are allowed to use this information and these services</b> under the <a href="https://laws-lois.justice.gc.ca/eng/acts/H-3.2/"><em>Department of Health Act</em></a> and the <a href="https://laws-lois.justice.gc.ca/eng/acts/f-11/"><em>Financial Administration Act</em></a>. We also follow the <a href="https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=26761"> <em>Standard on Privacy and Web Analytics</em></a>.
+        </li>
+        <li>
+            <b>We’ll only share your personal information if we detect illegal activity.</b> Then we may give your information to law enforcement.
+        </li>
+        <li>
+            <b>You have the right to access, review and correct your personal information.</b> You can correct most information in the portal by yourself.
+        </li>
+        <li>
+            <b>You have the right to complain</b> about how we use your information to the <a href="https://www.priv.gc.ca/en/for-individuals/" target="_blank">Privacy Commissioner of Canada</a>.
+        </li>
+        </ul>
+        <h2>Questions?</h2>
+        <p>Contact <a href="mailto:hc.AlerteCOVIDAlert.sc@canada.ca">Health Canada</a>.</p>
+    {% endblocktrans %}
+
+{% endblock %}
