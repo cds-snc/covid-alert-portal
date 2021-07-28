@@ -9,11 +9,14 @@
 {% block body_class %}login{% endblock %}
 
 {% block content %}
-<div class="column__container" style="border-top: 3px solid #26374a;">
+<div class = "decommission__border"></div>
+<div class="column__container">
     <div class="column column__content column--1 column-md--1-2">
         <h1>{% trans "The portal is no longer in service" %}</h1>
         {% blocktrans %}
-            <p>Health Canada has retired COVID Alert. you can no longer log into the portal or generate keys. For more information visit <a href="http://canada.ca/covid-alert">canada.ca/covid-alert</a></p>
+            <p>
+                Health Canada has retired COVID Alert. You can no longer log into the portal or generate keys. For more information, visit <a href="http://canada.ca/covid-alert">canada.ca/covid-alert.</a>
+            </p>
         {% endblocktrans %}
     </div>
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-27 20:18+0000\n"
+"POT-Creation-Date: 2021-07-28 16:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1298,14 +1298,21 @@ msgstr "Pas de code de connexion?"
 
 #: portal/templates/decommission/decommission.html
 msgid "The portal is no longer in service"
-msgstr ""
+msgstr "Le portail n’est plus en service"
 
 #: portal/templates/decommission/decommission.html
 msgid ""
 "\n"
-"            <p>Health Canada has retired COVID Alert. you can no longer log into the portal or generate keys. For more information visit <a href=\"http://canada.ca/covid-alert\">canada.ca/covid-alert</a></p>\n"
+"            <p>\n"
+"                Health Canada has retired COVID Alert. You can no longer log into the portal or generate keys. For more information, visit <a href=\"http://canada.ca/covid-alert\">canada.ca/covid-alert.</a>\n"
+"            </p>\n"
 "        "
 msgstr ""
+"\n"
+"            <p>\n"
+"               Santé Canada a retiré le service Alerte COVID. Vous ne pouvez plus vous connecter au portail ni générer de clés. Pour en savoir plus, consultez <a href=\"http://canada.ca/alerte-covid\">canada.ca/alerte-covid.</a></p>\n"
+"            </p>\n"
+"        "
 
 #: portal/templates/decommission/decommission.html
 #: portal/templates/registration/login.html
@@ -3477,28 +3484,3 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
-
-#, fuzzy
-#~| msgid "Privacy notice for COVID Alert Portal"
-#~ msgid "Privacy notice 1111 for COVID Alert Portal"
-#~ msgstr "Avis de confidentialité pour le portail Alerte COVID"
-
-#, fuzzy
-#~| msgid "Terms of use"
-#~ msgid "Terms of use 12345"
-#~ msgstr "Conditions d’utilisation"
-
-#, fuzzy
-#~| msgid "Permissions"
-#~ msgid "Decommission Message"
-#~ msgstr "Droit d’accès"
-
-#, fuzzy
-#~| msgid "Permissions"
-#~ msgid "Decommission Message 123"
-#~ msgstr "Droit d’accès"
-
-#, fuzzy
-#~| msgid "Log in"
-#~ msgid "Log in 1 2 3"
-#~ msgstr "Connexion"
