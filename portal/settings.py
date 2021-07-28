@@ -500,4 +500,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 PORTAL_LOCAL_TZ = "America/Toronto"  # TODO Refactor this fallback, assumption baked in here for portal users
 
-DECOMMISSION = True
+DECOMMISSION = True 
