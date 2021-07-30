@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-16 14:07+0000\n"
+"POT-Creation-Date: 2021-07-30 19:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -460,7 +460,7 @@ msgstr "Demandez à votre administrateur de vous donner un code. Vous pouvez leu
 
 #: backup_codes/templates/backup_codes/backup_codes_help.html
 msgid "Get code from admin"
-msgstr ""
+msgstr "Demander un code"
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html
 msgid "Use these codes to log in to the portal. The code proves it's you."
@@ -865,7 +865,7 @@ msgstr "Date et heure"
 #: outbreaks/templates/confirm.html profiles/templates/profiles/edit.html
 #: profiles/templates/profiles/healthcareuser_detail.html
 msgid "Change"
-msgstr "Modifier"
+msgstr "Mettre à jour"
 
 #: outbreaks/templates/confirm.html
 msgid "dates"
@@ -897,11 +897,11 @@ msgstr "Envoyer l’alerte"
 
 #: outbreaks/templates/confirm.html outbreaks/templates/datetime.html
 msgid "Cancel this exposure"
-msgstr "Détails de l’exposition"
+msgstr "Abandonner"
 
 #: outbreaks/templates/confirmed.html outbreaks/templates/location_history.html
 msgid "Alert sent"
-msgstr "Alerte envoyée"
+msgstr "Date d'envoi de l'alerte"
 
 #: outbreaks/templates/confirmed.html
 msgid "You’ve notified people who scanned the QR code at the address, date(s) and time(s) below."
@@ -930,7 +930,7 @@ msgstr "Pour voir toutes les alertes associées à ce lieu ou à cet événement
 #: outbreaks/templates/datetime.html outbreaks/templates/history.html
 #: outbreaks/templates/location_history.html
 msgid "Alert history"
-msgstr "l'historique des alertes"
+msgstr "Historique des alertes"
 
 #: outbreaks/templates/datetime.html portal/templates/includes/error_list.html
 msgid "Correct these errors:"
@@ -2188,7 +2188,7 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"<ul class=\"paragraphs\"><li><b>Nous avons besoin de vos renseignements personnels</b> pour vous permettre d’utiliser le portail et de générer des clés à usage unique.<li><b>Nous consignons les activités et les renseignements liés au portail</b>, notamment : <ul class=\"disc\"><li>chacune des fois où vous générez une clé,</li><li>les renseignements personnels que vous partagez avec le portail, comme votre numéro de téléphone.</li></ul><li><b>Nous analysons l’activité du portail à l’aide de services</b> comme Google Analytics, mais nous ne leur transmettons aucun renseignement personnel. Ces services nous aident à améliorer le portail.</li><li><b>Nous avons l’autorisation d’utiliser ces renseignements</b> selon la <a href=\"https://laws-lois.justice.gc.ca/fra/lois/H-3.2/\"><em>Loi sur le ministère de la Santé</em></a> et la <a href=\"https://laws-lois.justice.gc.ca/fra/lois/f-11/\"><em>Loi sur la gestion des finances publiques</em></a>. Nous respectons aussi la <a href=\"https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=26761\"><em>Norme sur la protection de la vie privée et le Web analytique.</em></a></li><li><b>Nous ne partagerons vos renseignements personnels que si nous détectons des activités illégales.</b> Nous pourrions alors fournir vos renseignements aux forces policières.</li><li><b>Vous avez le droit d’accéder à vos renseignements personnels, de les réviser et de les corriger.</b> Vous pouvez corriger par vous-même la plupart des renseignements dans le portail.</li><li><b>Vous avez le droit de faire une plainte</b> au sujet de la façon dont nous utilisons vos renseignements au commissaire à la protection de la vie privée du Canada.</li></ul><h2>Des questions?</h2><p>Communiquez avec <a href=\"mailto:hc.AlerteCOVIDAlert.sc@canada.ca\">Santé Canada</a>.</p>"
+"<ul class=\"paragraphs\"><li><b>Nous avons besoin de vos renseignements personnels</b> pour vous permettre d’utiliser le portail et de générer des clés à usage unique.<li><b>Nous consignons les activités et les renseignements liés au portail</b>, notamment : <ul class=\"disc\"><li>chacune des fois où vous générez une clé,</li><li>les renseignements personnels que vous partagez avec le portail, comme votre numéro de téléphone.</li></ul><li><b>Nous analysons l’activité du portail à l’aide de services</b> comme Google Analytics, mais nous ne leur transmettons aucun renseignement personnel. Ces services nous aident à améliorer le portail.</li><li><b>Nous avons l’autorisation d’utiliser ces renseignements</b> selon la <a href=\"https://laws-lois.justice.gc.ca/fra/lois/H-3.2/\"><em>Loi sur le ministère de la Santé</em></a> et la <a href=\"https://laws-lois.justice.gc.ca/fra/lois/f-11/\"><em>Loi sur la gestion des finances publiques</em></a>. Nous respectons aussi la <a href=\"https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=26761\"><em>Norme sur la protection de la vie privée et le Web analytique.</em></a></li><li><b>Nous ne partagerons vos renseignements personnels que si nous détectons des activités illégales.</b> Nous pourrions alors fournir vos renseignements aux forces policières.</li><li><b>Vous avez le droit d’accéder à vos renseignements personnels, de les réviser et de les corriger.</b> Vous pouvez corriger par vous-même la plupart des renseignements dans le portail.</li><li><b>Vous avez le droit de faire une plainte</b> au sujet de la façon dont nous utilisons vos renseignements au <a href=\"https://www.priv.gc.ca/fr/pour-les-individus\" target=\"_blank\">commissaire à la protection de la vie privée du Canada</a>.</li></ul><h2>Des questions?</h2><p>Communiquez avec <a href=\"mailto:hc.AlerteCOVIDAlert.sc@canada.ca\">Santé Canada</a>.</p>"
 
 #: profiles/templates/profiles/signup.html
 msgid "Create account"
@@ -2266,7 +2266,7 @@ msgid ""
 "        <strong><p>Confirm the person meets 2 conditions</p></strong>\n"
 "        <p>They've:</p>\n"
 "        <ul class=\"expanded\">\n"
-"            <li>Tested positive for COVID-19, and,</li>\n"
+"            <li>Tested positive for COVID-19, <strong>and</strong>,</li>\n"
 "            <li>Installed the COVID Alert app on their phone.</li>\n"
 "        </ul>\n"
 "        <strong><p>Get the person’s consent before texting a key</p></strong>\n"
@@ -2278,6 +2278,26 @@ msgid ""
 "        <p>If we detect any misuse of the portal or security issues with your account, we’ll immediately disable your account.</p>\n"
 "    "
 msgstr ""
+"\n"
+"        <p>Le portail Alerte COVID est réservé au personnel du Canada autorisé.</p>\n"
+"        <p>En utilisant le portail, vous acceptez de suivre les procédures établies par votre autorité sanitaire.</p>\n"
+"        <p>Vous acceptez aussi de :</p>\n"
+"        <strong><p>Générer des clés uniquement pour des cas réels</p></strong>\n"
+"        <p>Ne donnez qu’une seule clé par test positif.</p>\n"
+"        <p>Pour voir un exemple de clé, consultez la page \"<a href=\"#\">Distribution des clés</a>\".</p>\n"
+"        <strong><p>Valider que la personne remplit les 2 conditions</p></strong>\n"
+"        <ul class=\"expanded\">\n"
+"            <li>Elle a reçu un test positif de COVID-19.</li>\n"
+"            <li>Elle possède l’application Alerte COVID sur son téléphone.</li>\n"
+"        </ul>\n"
+"        <strong><p>Obtenir un consentement avant d’envoyer la clé par texto</p></strong>\n"
+"        <p>Certaines personnes pourraient vouloir recevoir leur clé à usage unique par texto. Si votre autorité sanitaire permet cette fonction, vous verrez le bouton « Texter la clé » dans le portail.</p>\n"
+"        <strong><p>Empêcher d’autres personnes d’utiliser votre compte</p></strong>\n"
+"        <p>Évitez de divulguer votre nom d’utilisateur et votre mot de passe, même aux personnes travaillant pour une autorité sanitaire.</p>\n"
+"        <strong><p>Assurer la sécurité du portail</p></strong>\n"
+"        <p>Signalez immédiatement tout problème de sécurité à votre administrateur <strong>et</strong> à <a href=\"mailto:security@cds-snc.ca\">security@cds-snc.ca</a></p>\n"
+"        <p>Si nous détectons une mauvaise utilisation du portail ou des problèmes de sécurité lié à votre compte, nous désactiverons immédiatement votre compte.</p>\n"
+"    "
 
 #: profiles/templates/profiles/yubikey_create.html
 msgid "Add Yubikey token"
