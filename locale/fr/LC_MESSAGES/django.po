@@ -102,7 +102,7 @@ msgstr "Gérer votre compte."
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html
 #: profiles/templates/profiles/signup_2fa.html
 msgid "No mobile phone?"
-msgstr "Pas de téléphone mobile?"
+msgstr "Vous n'avez pas de téléphone mobile?"
 
 #: about/templates/about/2_create_account.html
 msgid "You can get log in codes by visiting"
