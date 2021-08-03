@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-30 19:09+0000\n"
+"POT-Creation-Date: 2021-08-03 19:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -658,8 +658,8 @@ msgid "Give one-time keys"
 msgstr "Clés à usage unique"
 
 #: covid_key/templates/covid_key/landing.html
-msgid "Give a key to people who tested positive for COVID-19 so they can inform close contacts of a possible exposure."
-msgstr "Donnez une clé aux personnes déclarées positives pour qu’elles puissent aviser leurs contacts étroits d’une possible exposition."
+msgid "Give keys to people who tested positive for COVID-19 so they can inform close contacts of a possible exposure."
+msgstr "Donnez des clés aux personnes déclarées positives pour qu’elles puissent aviser leurs contacts étroits d’une possible exposition."
 
 #: covid_key/templates/covid_key/landing.html
 msgid "Send place or event alerts"
