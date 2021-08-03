@@ -31,7 +31,7 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"<p>Le portail Alerte COVID fait partie du système sous-jacent à l’<a href=\"https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html\" target=\"_blank\">application gratuite de notification d’exposition du Canada, Alerte COVID</a>. Vous pouvez obtenir plus d'informations dans <a href=\"https://www.canada.ca/en/public-health/services/video/covid-alert.html\" target=\"_blank\">une courte vidéo sur le fonctionnement d’Alerte COVID</a>.</p>"
+"<p>Le portail Alerte COVID fait partie du système sous-jacent à l’<a href=\"https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html\" target=\"_blank\">application canadienne de notification d'exposition Alerte COVID</a>. Vous pouvez obtenir plus d'informations dans <a href=\"https://www.canada.ca/en/public-health/services/video/covid-alert.html\" target=\"_blank\">une courte vidéo sur le fonctionnement d’Alerte COVID</a>.</p>"
 
 #: about/templates/about/1_index.html
 msgid "You’re crucial to the app’s success"
@@ -308,7 +308,7 @@ msgstr "Fournir des codes de connexion aux membres incapables de se connecter au
 
 #: about/templates/includes/_nav_about.html
 msgid "Table of contents: About the Portal"
-msgstr "Table des matières: Le portail"
+msgstr "Table des matières : Le portail"
 
 #: about/templates/includes/nav_about.html
 #: covid_key/templates/covid_key/landing.html
@@ -721,7 +721,7 @@ msgstr "La clé a-t-elle été reçue au numéro %(phone_number)s?"
 
 #: covid_key/templates/covid_key/otk_start.html
 msgid "Now you can give one-time keys"
-msgstr "Clés à usage unique"
+msgstr "Vous pouvez maintenant donner des clés"
 
 #: covid_key/templates/covid_key/otk_start.html
 msgid "You’re logged in to give one-time keys"
@@ -1321,7 +1321,7 @@ msgstr "Ouvrir l’application. Appuyer sur « Menu » en bas à droite."
 
 #: portal/templates/includes/detailed_instructions.html
 msgid "Tap “Enter your one-time key”."
-msgstr "Appuyez sur « Entrer votre clé »."
+msgstr "Appuyer sur « Entrer une clé à usage unique»."
 
 #: portal/templates/includes/detailed_instructions.html
 msgid "On “Notify people they’ve been exposed”, read the instructions. Then tap “Next”."
@@ -1345,7 +1345,7 @@ msgstr "Après avoir répondu ou non aux questions, la personne doit autoriser A
 
 #: portal/templates/includes/detailed_instructions.html
 msgid "The next screen asks permission to share information to notify others. Depending on the phone’s operating system, the screen may describe this in different ways, such as sharing random IDs with COVID Alert. Tap “Share”."
-msgstr "L’écran qui suit demande l’autorisation de partager des renseignements afin d’aviser les autres. La formulation de cette demande, par exemple « partager des identifiants aléatoires avec Alerte COVID », peut varier selon le système d’exploitation du téléphone. Appuyer sur « Partager »."
+msgstr "L’écran qui suit demande l’autorisation de partager des renseignements afin d’aviser les autres. La formulation de cette demande, par exemple  « partager des identifiants aléatoires avec Alerte COVID », peut varier selon le système d’exploitation du téléphone. Appuyer sur « Partager »."
 
 #: portal/templates/includes/detailed_instructions.html
 msgid "COVID Alert will ask permission to upload random codes daily for the next 13 days."
@@ -2024,7 +2024,7 @@ msgstr "%(name)s ne pourra plus se connecter. La suppression d’un compte effac
 
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html
 msgid "You can create a new account for them later."
-msgstr "Vous pouvez toujours créer un nouveau compte pour cette personne."
+msgstr "Vous pouvez toujours créer un nouveau compte pour cette personne plus tard."
 
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html
 msgid "Yes, delete"

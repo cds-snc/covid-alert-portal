@@ -166,7 +166,7 @@ class HealthcarePhoneEditForm(HealthcareBaseEditForm):
 
     phone_number2 = PhoneNumberField(
         label=_("Confirm your mobile phone number"),
-        help_text=_("Enter the phone number again."),
+        help_text=_("Enter the same mobile number as above."),
     )
     phone_number2.error_messages["required"] = validation_messages["phone_number2"][
         "required"
