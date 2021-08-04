@@ -7,11 +7,15 @@ from axes.admin import AccessLogAdmin
 from invitations.views import AcceptInvite
 from django.views.generic import TemplateView
 from django.conf import settings
-
+from django_otp.admin import OTPAdminSite
 from .admin import Admin2FASite
 from . import views
 
-admin.site.__class__ = Admin2FASite
+if settings.DECOMMISSION:
+    admin.site.__class__ = OTPAdminSite
+else:
+    admin.site.__class__ = Admin2FASite
+
 admin.site.site_header = (
     "COVID Health Portal administration | Administration du Portail Alerte COVID"
 )

@@ -97,6 +97,7 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "django_otp",
     "django_otp.plugins.otp_static",
+    "django_otp.plugins.otp_totp",
     "otp_notify",
     "otp_yubikey",
     "easyaudit",
@@ -500,4 +501,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 PORTAL_LOCAL_TZ = "America/Toronto"  # TODO Refactor this fallback, assumption baked in here for portal users
 
-DECOMMISSION = True 
+DECOMMISSION = True

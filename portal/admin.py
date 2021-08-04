@@ -13,10 +13,7 @@ class Admin2FASite(AdminSite):
 
     def has_permission(self, request):
         # Let's make sure 2fa is enabled and confirmed on this user
-        if settings.DECOMMISSION:
-            return super().has_permission(request)
-        else:
-            return super().has_permission(request) and request.user.is_verified()
+        return super().has_permission(request) and request.user.is_verified()
 
 
 # unregister the Group model from admin.
