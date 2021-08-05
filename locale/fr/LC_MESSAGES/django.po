@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-03 19:37+0000\n"
+"POT-Creation-Date: 2021-08-04 20:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -424,6 +424,7 @@ msgstr "Connexion"
 #: covid_key/templates/covid_key/otk_sms.html
 #: covid_key/templates/covid_key/otk_sms_sent.html
 #: outbreaks/templates/history.html outbreaks/templates/search.html
+#: portal/templates/decommission/2fa.html
 #: portal/templates/registration/login.html
 #: portal/templates/registration/password_reset_confirm.html
 #: portal/templates/registration/password_reset_form.html
@@ -502,8 +503,8 @@ msgstr "Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne.
 #: covid_key/templates/covid_key/otk_sms_sent.html
 #: outbreaks/templates/datetime.html outbreaks/templates/history.html
 #: outbreaks/templates/location_history.html outbreaks/templates/search.html
-#: outbreaks/templates/severity.html profiles/templates/profiles/2fa.html
-#: profiles/templates/profiles/signup.html
+#: outbreaks/templates/severity.html portal/templates/decommission/2fa.html
+#: profiles/templates/profiles/2fa.html profiles/templates/profiles/signup.html
 #: profiles/templates/profiles/signup_2fa.html
 #: register/templates/register/location_address.html
 #: register/templates/register/location_category.html
@@ -1290,6 +1291,34 @@ msgstr "Passer au contenu principal"
 msgid "COVID Alert Portal"
 msgstr "Portail Alerte COVID"
 
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "Validate your code"
+msgstr "Valider votre code"
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "Enter your log in code"
+msgstr "Entrez votre code de connexion"
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "You kept these codes somewhere safe. You can use each code only once."
+msgstr "Vous devriez avoir conservé vos codes dans un endroit sûr. Chaque code ne peut être utilisé qu’une fois."
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "You need to enter a new code each time you log in."
+msgstr "Il faut entrer un nouveau code à chaque connexion."
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "We’ve just sent a text message with your new code."
+msgstr "Nous venons de vous envoyer un nouveau code par message texte."
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "We’ve texted you a code and you also kept codes somewhere safe. Use 1 of these codes to log in. You can use each code only once."
+msgstr "Utilisez le code reçu par message texte ou l’un de ceux que avez conservés dans un endroit sûr. Chaque code ne peut être utilisé qu’une fois."
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "Resend log in code?"
+msgstr "Renvoyer un code de connexion"
+
 #: portal/templates/includes/FIP_header.html
 msgid "Government of Canada"
 msgstr "Gouvernement du Canada"
@@ -1462,7 +1491,7 @@ msgstr "Merci pour tout votre travail"
 #: portal/templates/registration/password_reset_confirm.html profiles/forms.py
 #: profiles/templates/profiles/healthcareuser_detail.html
 msgid "Change your password"
-msgstr "Modifier votre mot de passe"
+msgstr "Modifiez votre mot de passe"
 
 #: portal/templates/registration/password_reset_confirm.html
 msgid "This link has expired"
@@ -1710,7 +1739,7 @@ msgstr "Saisissez votre mot de passe"
 
 #: profiles/forms.py
 msgid "Enter the same password again"
-msgstr "Saisissez le même mot de passe"
+msgstr "Confirmation du nouveau mot de passe"
 
 #: profiles/forms.py
 msgid "Enter your phone number"
@@ -1768,8 +1797,10 @@ msgid "Confirm your mobile phone number"
 msgstr "Confirmez votre numéro de téléphone mobile"
 
 #: profiles/forms.py
-msgid "Enter the phone number again."
-msgstr "Saisissez de nouveau votre numéro mobile."
+#, fuzzy
+#| msgid "Enter the same phone number again"
+msgid "Enter the same mobile number as above."
+msgstr "Saisissez le même numéro de téléphone."
 
 #: profiles/forms.py
 msgid "You entered 2 different phone numbers."
@@ -1784,12 +1815,8 @@ msgid "Password"
 msgstr "Mot de passe"
 
 #: profiles/forms.py
-msgid ""
-"Choose a password that is hard to guess, with at least 12 characters including 1 letter.\n"
-" The password cannot include your name, email or words related to Covid or the portal."
-msgstr ""
-"Choisissez un mot de passe difficile à deviner et comprenant au moins 12 caractères, dont au moins une lettre.\n"
-" Le mot de passe ne peut pas comprendre votre nom, votre courriel ou des mots faisant référence à la COVID ou au portail."
+msgid "Your password must be at least 12 characters and hard to guess."
+msgstr "Votre mot de passe doit avoir au moins 12 caractères."
 
 #: profiles/forms.py
 msgid "Enter your password again"
@@ -1797,7 +1824,7 @@ msgstr "Saisissez de nouveau votre mot de passe"
 
 #: profiles/forms.py
 msgid "New password"
-msgstr "Modifier mon mot de passe"
+msgstr "Nouveau mot de passe"
 
 #: profiles/forms.py
 msgid "Email already exists"
@@ -1810,6 +1837,10 @@ msgstr "L’invitation n’a pu être envoyée."
 #: profiles/forms.py
 msgid "Confirm your phone number"
 msgstr "Confirmez votre numéro de téléphone mobile"
+
+#: profiles/forms.py
+msgid "Enter the phone number again."
+msgstr "Saisissez de nouveau votre numéro mobile."
 
 #: profiles/forms.py
 msgid "The phone numbers didn’t match."
@@ -1979,34 +2010,6 @@ msgstr "Si vous n’avez pas reçu de code, nous pouvons vous en renvoyer un."
 #: profiles/templates/profiles/2fa-resend.html
 msgid "Cannot get text messages?"
 msgstr "Incapable de recevoir des messages texte?"
-
-#: profiles/templates/profiles/2fa.html
-msgid "Validate your code"
-msgstr "Valider votre code"
-
-#: profiles/templates/profiles/2fa.html
-msgid "Enter your log in code"
-msgstr "Entrez votre code de connexion"
-
-#: profiles/templates/profiles/2fa.html
-msgid "You kept these codes somewhere safe. You can use each code only once."
-msgstr "Vous devriez avoir conservé vos codes dans un endroit sûr. Chaque code ne peut être utilisé qu’une fois."
-
-#: profiles/templates/profiles/2fa.html
-msgid "You need to enter a new code each time you log in."
-msgstr "Il faut entrer un nouveau code à chaque connexion."
-
-#: profiles/templates/profiles/2fa.html
-msgid "We’ve just sent a text message with your new code."
-msgstr "Nous venons de vous envoyer un nouveau code par message texte."
-
-#: profiles/templates/profiles/2fa.html
-msgid "We’ve texted you a code and you also kept codes somewhere safe. Use 1 of these codes to log in. You can use each code only once."
-msgstr "Utilisez le code reçu par message texte ou l’un de ceux que avez conservés dans un endroit sûr. Chaque code ne peut être utilisé qu’une fois."
-
-#: profiles/templates/profiles/2fa.html
-msgid "Resend log in code?"
-msgstr "Renvoyer un code de connexion"
 
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html
 msgid "Confirm delete user"
@@ -3467,3 +3470,10 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid ""
+#~ "Choose a password that is hard to guess, with at least 12 characters including 1 letter.\n"
+#~ " The password cannot include your name, email or words related to Covid or the portal."
+#~ msgstr ""
+#~ "Choisissez un mot de passe difficile à deviner et comprenant au moins 12 caractères, dont au moins une lettre.\n"
+#~ " Le mot de passe ne peut pas comprendre votre nom, votre courriel ou des mots faisant référence à la COVID ou au portail."
