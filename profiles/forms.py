@@ -200,9 +200,7 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
         label=_("Password"),
         strip=False,
         widget=forms.PasswordInput(),
-        help_text=_(
-            "Your password must be at least 12 characters and hard to guess."
-        ),
+        help_text=_("Your password must be at least 12 characters and hard to guess."),
     )
     password1.error_messages["required"] = validation_messages["password"]["required"]
 
@@ -303,9 +301,7 @@ class HealthcarePasswordResetConfirm(HealthcareBaseForm, SetPasswordForm):
         label=_("New password"),
         strip=False,
         widget=forms.PasswordInput(),
-        help_text=_(
-            "Your password must be at least 12 characters and hard to guess."
-        ),
+        help_text=_("Your password must be at least 12 characters and hard to guess."),
     )
     new_password1.error_messages["required"] = validation_messages["password"][
         "required"
@@ -352,9 +348,7 @@ class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):
         label=_("Password"),
         strip=False,
         widget=forms.PasswordInput(),
-        help_text=_(
-            "Your password must be at least 12 characters and hard to guess."
-        ),
+        help_text=_("Your password must be at least 12 characters and hard to guess."),
     )
     password1.error_messages["required"] = validation_messages["password"]["required"]
 
