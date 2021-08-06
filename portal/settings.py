@@ -97,7 +97,6 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "django_otp",
     "django_otp.plugins.otp_static",
-    "django_otp.plugins.otp_totp",
     "otp_notify",
     "otp_yubikey",
     "easyaudit",
@@ -283,11 +282,11 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 AUTH_USER_MODEL = "profiles.HealthcareUser"
 
-LOGIN_URL = "login"
+LOGIN_URL = "admin:login"
 OTP_LOGIN_URL = "login_2fa"
 
-LOGIN_REDIRECT_URL = "start"
-LOGOUT_REDIRECT_URL = "login"
+LOGIN_REDIRECT_URL = "admin:index"
+LOGOUT_REDIRECT_URL = "admin:login"
 OTP_NOTIFY_ENDPOINT = (
         os.getenv("OTP_NOTIFY_ENDPOINT") or "https://api.notification.alpha.canada.ca"
 )
@@ -501,4 +500,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 PORTAL_LOCAL_TZ = "America/Toronto"  # TODO Refactor this fallback, assumption baked in here for portal users
 
-DECOMMISSION = True
+DECOMMISSION = True 

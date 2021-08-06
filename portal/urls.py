@@ -2,20 +2,17 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.http import HttpResponse
 from django.conf.urls.i18n import i18n_patterns
-from django.conf import settings
 from axes.admin import AccessLogAdmin
 from invitations.views import AcceptInvite
 from django.views.generic import TemplateView
 from django.conf import settings
-from django_otp.admin import OTPAdminSite
+
+
 from .admin import Admin2FASite
 from . import views
+from profiles.views import Login2FAView, Resend2FAView
 
-if settings.DECOMMISSION:
-    admin.site.__class__ = OTPAdminSite
-else:
-    admin.site.__class__ = Admin2FASite
-
+admin.site.__class__ = Admin2FASite
 admin.site.site_header = (
     "COVID Health Portal administration | Administration du Portail Alerte COVID"
 )
@@ -96,6 +93,16 @@ if settings.APP_SWITCH == "PORTAL" or settings.APP_SWITCH == "UNIT":
                 name="privacy",
             ),
             path("announcements/", include("announcements.urls")),
+            path(
+                "login-2fa/",
+                Login2FAView.as_view(),
+                name="login_2fa",
+            ),
+            path(
+                "resend-2fa/",
+                Resend2FAView.as_view(),
+                name="resend_2fa",
+            ),
         )
     else:
         urlpatterns += i18n_patterns(
