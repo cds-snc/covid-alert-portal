@@ -167,6 +167,45 @@ class SentAlertFilter(admin.SimpleListFilter):
                 notification__created_by__isnull=not created
             ).distinct()
 
+@admin.action(description=_("Mark non-super user(s) INACTIVE"))
+def deactivate_users(modeladmin, request, queryset):
+    count = 0
+    for user in queryset:
+        if user.is_superuser:
+            modeladmin.message_user(
+                request,
+                _(f"{user.email} is a super user, ignored."),
+                messages.WARNING
+            )
+        else:
+            if not user.is_active:
+                modeladmin.message_user(
+                    request,
+                    _(f"{user.email} is already disabled, ignored."),
+                    messages.WARNING
+                )
+            else:
+                user.is_active = False
+                user.save()
+                modeladmin.message_user(
+                    request,
+                    _(f"{user.email} has been disabled."),
+                    messages.SUCCESS
+                )
+                count += 1
+    if count:
+        modeladmin.message_user(
+            request,
+            _(f"{count} accounts have been deactivated."),
+            messages.SUCCESS
+        )
+    else:
+        modeladmin.message_user(
+            request,
+            _("No accounts have been deactivated."),
+            messages.WARNING
+        )
+
 
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
@@ -195,6 +234,7 @@ class UserAdmin(BaseUserAdmin):
         SentAlertFilter,
         SurveySentFilter,
     )
+    actions = [deactivate_users]
 
     def can_send_alerts(self, user: HealthcareUser):
         return user.has_perm("profiles.can_send_alerts")
