@@ -8,6 +8,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 - Remove Basicauth
 
+## [2.3.0] - 2021-08-09
+
+## Updated
+
+- Remove QR code DNS health check 
+- Fix/send Alert menu fix
+- Update the address complete api key 
+- Changes to "Sending Alerts" screen
+- QR code 403 changes 
+- Fix French apostrophes
+- Removed lock for sending surveys to health care users regardless of whether they sent an alert previously or not.
+
+## Added
+
+- Added CloudWatch synthetic canary to monitor QR code
+- Added CloudWatch alarm for unhealthy QR code canary 
+- Enabled AWS Shield for QR Code 
+- Enable sending of surveys to healthcare users
+- Added new bulk action for marking inactie
+
+
 ## [2.2.0] - 2021-07-07
 
 ## Updated
