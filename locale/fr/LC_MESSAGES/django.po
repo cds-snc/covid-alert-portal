@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-28 16:52+0000\n"
+"POT-Creation-Date: 2021-08-10 20:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -414,8 +414,9 @@ msgstr "Votre administrateur vous donnera un code."
 
 #: backup_codes/templates/backup_codes/backup_codes_contacted.html
 #: contact/templates/contact/success.html portal/templates/403.html
-#: portal/templates/404.html portal/templates/includes/nav_header.html
-#: portal/templates/locked_out.html portal/templates/registration/login.html
+#: portal/templates/404.html portal/templates/decommission/login.html
+#: portal/templates/includes/nav_header.html portal/templates/locked_out.html
+#: portal/templates/registration/login.html
 msgid "Log in"
 msgstr "Connexion"
 
@@ -424,6 +425,8 @@ msgstr "Connexion"
 #: covid_key/templates/covid_key/otk_sms.html
 #: covid_key/templates/covid_key/otk_sms_sent.html
 #: outbreaks/templates/history.html outbreaks/templates/search.html
+#: portal/templates/decommission/2fa.html
+#: portal/templates/decommission/login.html
 #: portal/templates/registration/login.html
 #: portal/templates/registration/password_reset_confirm.html
 #: portal/templates/registration/password_reset_form.html
@@ -449,7 +452,6 @@ msgid "Error: "
 msgstr "Erreur : "
 
 #: backup_codes/templates/backup_codes/backup_codes_help.html
-#: profiles/templates/profiles/2fa.html
 msgid "No log in code?"
 msgstr "Pas de code de connexion?"
 
@@ -502,8 +504,9 @@ msgstr "Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne.
 #: covid_key/templates/covid_key/otk_sms_sent.html
 #: outbreaks/templates/datetime.html outbreaks/templates/history.html
 #: outbreaks/templates/location_history.html outbreaks/templates/search.html
-#: outbreaks/templates/severity.html profiles/templates/profiles/2fa.html
-#: profiles/templates/profiles/signup.html
+#: outbreaks/templates/severity.html portal/templates/decommission/2fa.html
+#: portal/templates/decommission/login.html
+#: profiles/templates/profiles/2fa.html profiles/templates/profiles/signup.html
 #: profiles/templates/profiles/signup_2fa.html
 #: register/templates/register/location_address.html
 #: register/templates/register/location_category.html
@@ -1290,6 +1293,34 @@ msgstr "Passer au contenu principal"
 msgid "COVID Alert Portal"
 msgstr "Portail Alerte COVID"
 
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "Validate your code"
+msgstr "Valider votre code"
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "Enter your log in code"
+msgstr "Entrez votre code de connexion"
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "You kept these codes somewhere safe. You can use each code only once."
+msgstr "Vous devriez avoir conservé vos codes dans un endroit sûr. Chaque code ne peut être utilisé qu’une fois."
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "You need to enter a new code each time you log in."
+msgstr "Il faut entrer un nouveau code à chaque connexion."
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "We’ve just sent a text message with your new code."
+msgstr "Nous venons de vous envoyer un nouveau code par message texte."
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "We’ve texted you a code and you also kept codes somewhere safe. Use 1 of these codes to log in. You can use each code only once."
+msgstr "Utilisez le code reçu par message texte ou l’un de ceux que avez conservés dans un endroit sûr. Chaque code ne peut être utilisé qu’une fois."
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "Resend log in code?"
+msgstr "Renvoyer un code de connexion"
+
 #: portal/templates/decommission/decommission.html
 #, fuzzy
 #| msgid "No log in code?"
@@ -1298,23 +1329,24 @@ msgstr "Pas de code de connexion?"
 
 #: portal/templates/decommission/decommission.html
 msgid "The portal is no longer in service"
-msgstr "Le portail n’est plus en service"
+msgstr "Ce portail n’est plus en service"
 
 #: portal/templates/decommission/decommission.html
 msgid ""
 "\n"
 "            <p>\n"
-"                Health Canada has retired COVID Alert. You can no longer log into the portal or generate keys. For more information, visit <a href=\"http://canada.ca/covid-alert\">canada.ca/covid-alert.</a>\n"
+"                The COVID Alert service has been retired. You can no longer log into this portal or generate keys. For more information, visit <a href=\"http://canada.ca/covid-alert\">canada.ca/covid-alert.</a>\n"
 "            </p>\n"
 "        "
 msgstr ""
 "\n"
 "            <p>\n"
-"               Santé Canada a retiré le service Alerte COVID. Vous ne pouvez plus vous connecter au portail ni générer de clés. Pour en savoir plus, consultez <a href=\"http://canada.ca/alerte-covid\">canada.ca/alerte-covid.</a></p>\n"
+"                Le service Alerte COVID a été retiré. Vous ne pouvez plus vous connecter au portail ni générer de clés. Pour en savoir plus, consultez<a href=\"http://canada.ca/alerte-covid\">canada.ca/alerte-covid.</a></p>\n"
 "            </p>\n"
 "        "
 
 #: portal/templates/decommission/decommission.html
+#: portal/templates/decommission/login.html
 #: portal/templates/registration/login.html
 msgid "Thanks for your essential work"
 msgstr "Merci pour tout votre travail"
@@ -1352,6 +1384,11 @@ msgstr "Navigation de compte et changement de langue"
 #: register/templates/register/includes/nav_header.html
 msgid "Language selection"
 msgstr "Choix de langue"
+
+#: portal/templates/decommission/login.html
+#: portal/templates/registration/login.html
+msgid "Only an authorized staff member can use a portal account and give a COVID Alert key."
+msgstr "Seuls les employés autorisés peuvent avoir un compte pour le portail et fournir une clé Alerte COVID."
 
 #: portal/templates/decommission/privacy.html
 #: portal/templates/decommission/terms.html
@@ -1577,10 +1614,6 @@ msgstr "Contactez <a href=\"mailto:assistance+healthcare@cds-snc.ca\">assistance
 #: portal/templates/registration/password_reset_form.html
 msgid "Forgot your password?"
 msgstr "Mot de passe oublié?"
-
-#: portal/templates/registration/login.html
-msgid "Only an authorized staff member can use a portal account and give a COVID Alert key."
-msgstr "Seuls les employés autorisés peuvent avoir un compte pour le portail et fournir une clé Alerte COVID."
 
 #: portal/templates/registration/password_reset_confirm.html profiles/forms.py
 #: profiles/templates/profiles/healthcareuser_detail.html
@@ -2098,38 +2131,6 @@ msgstr "Renvoyer un code de connexion"
 #: profiles/templates/profiles/2fa-resend.html
 msgid "If you did not get the code, we can send it again."
 msgstr "Si vous n’avez pas reçu de code, nous pouvons vous en renvoyer un."
-
-#: profiles/templates/profiles/2fa-resend.html
-msgid "Cannot get text messages?"
-msgstr "Incapable de recevoir des messages texte?"
-
-#: profiles/templates/profiles/2fa.html
-msgid "Validate your code"
-msgstr "Valider votre code"
-
-#: profiles/templates/profiles/2fa.html
-msgid "Enter your log in code"
-msgstr "Entrez votre code de connexion"
-
-#: profiles/templates/profiles/2fa.html
-msgid "You kept these codes somewhere safe. You can use each code only once."
-msgstr "Vous devriez avoir conservé vos codes dans un endroit sûr. Chaque code ne peut être utilisé qu’une fois."
-
-#: profiles/templates/profiles/2fa.html
-msgid "You need to enter a new code each time you log in."
-msgstr "Il faut entrer un nouveau code à chaque connexion."
-
-#: profiles/templates/profiles/2fa.html
-msgid "We’ve just sent a text message with your new code."
-msgstr "Nous venons de vous envoyer un nouveau code par message texte."
-
-#: profiles/templates/profiles/2fa.html
-msgid "We’ve texted you a code and you also kept codes somewhere safe. Use 1 of these codes to log in. You can use each code only once."
-msgstr "Utilisez le code reçu par message texte ou l’un de ceux que avez conservés dans un endroit sûr. Chaque code ne peut être utilisé qu’une fois."
-
-#: profiles/templates/profiles/2fa.html
-msgid "Resend log in code?"
-msgstr "Renvoyer un code de connexion"
 
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html
 msgid "Confirm delete user"
@@ -3504,3 +3505,6 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Cannot get text messages?"
+#~ msgstr "Incapable de recevoir des messages texte?"
