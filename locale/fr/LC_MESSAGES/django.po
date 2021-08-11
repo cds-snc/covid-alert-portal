@@ -1341,7 +1341,7 @@ msgid ""
 msgstr ""
 "\n"
 "            <p>\n"
-"                Le service Alerte COVID a été retiré. Vous ne pouvez plus vous connecter au portail ni générer de clés. Pour en savoir plus, consultez<a href=\"http://canada.ca/alerte-covid\">canada.ca/alerte-covid.</a></p>\n"
+"                Le service Alerte COVID a été retiré. Vous ne pouvez plus vous connecter au portail ni générer de clés. Pour en savoir plus, consultez <a href=\"http://canada.ca/alerte-covid\">canada.ca/alerte-covid.</a></p>\n"
 "            </p>\n"
 "        "
 
