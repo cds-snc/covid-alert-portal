@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-16 14:07+0000\n"
+"POT-Creation-Date: 2021-08-23 18:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"<p>Le portail Alerte COVID fait partie du système sous-jacent à l’<a href=\"https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html\" target=\"_blank\">application gratuite de notification d’exposition du Canada, Alerte COVID</a>. Vous pouvez obtenir plus d'informations dans <a href=\"https://www.canada.ca/en/public-health/services/video/covid-alert.html\" target=\"_blank\">une courte vidéo sur le fonctionnement d’Alerte COVID</a>.</p>"
+"<p>Le portail Alerte COVID fait partie du système sous-jacent à l’<a href=\"https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html\" target=\"_blank\">application canadienne de notification d'exposition Alerte COVID</a>. Vous pouvez obtenir plus d'informations dans <a href=\"https://www.canada.ca/en/public-health/services/video/covid-alert.html\" target=\"_blank\">une courte vidéo sur le fonctionnement d’Alerte COVID</a>.</p>"
 
 #: about/templates/about/1_index.html
 msgid "You’re crucial to the app’s success"
@@ -102,7 +102,7 @@ msgstr "Gérer votre compte."
 #: backup_codes/templates/backup_codes/signup_backup_codes_list.html
 #: profiles/templates/profiles/signup_2fa.html
 msgid "No mobile phone?"
-msgstr "Pas de téléphone mobile?"
+msgstr "Vous n'avez pas de téléphone mobile?"
 
 #: about/templates/about/2_create_account.html
 msgid "You can get log in codes by visiting"
@@ -308,7 +308,7 @@ msgstr "Fournir des codes de connexion aux membres incapables de se connecter au
 
 #: about/templates/includes/_nav_about.html
 msgid "Table of contents: About the Portal"
-msgstr "Table des matières: Le portail"
+msgstr "Table des matières : Le portail"
 
 #: about/templates/includes/nav_about.html
 #: covid_key/templates/covid_key/landing.html
@@ -414,8 +414,9 @@ msgstr "Votre administrateur vous donnera un code."
 
 #: backup_codes/templates/backup_codes/backup_codes_contacted.html
 #: contact/templates/contact/success.html portal/templates/403.html
-#: portal/templates/404.html portal/templates/includes/nav_header.html
-#: portal/templates/locked_out.html portal/templates/registration/login.html
+#: portal/templates/404.html portal/templates/decommission/login.html
+#: portal/templates/includes/nav_header.html portal/templates/locked_out.html
+#: portal/templates/registration/login.html
 msgid "Log in"
 msgstr "Connexion"
 
@@ -424,6 +425,8 @@ msgstr "Connexion"
 #: covid_key/templates/covid_key/otk_sms.html
 #: covid_key/templates/covid_key/otk_sms_sent.html
 #: outbreaks/templates/history.html outbreaks/templates/search.html
+#: portal/templates/decommission/2fa.html
+#: portal/templates/decommission/login.html
 #: portal/templates/registration/login.html
 #: portal/templates/registration/password_reset_confirm.html
 #: portal/templates/registration/password_reset_form.html
@@ -460,7 +463,7 @@ msgstr "Demandez à votre administrateur de vous donner un code. Vous pouvez leu
 
 #: backup_codes/templates/backup_codes/backup_codes_help.html
 msgid "Get code from admin"
-msgstr ""
+msgstr "Demander un code"
 
 #: backup_codes/templates/backup_codes/backup_codes_list.html
 msgid "Use these codes to log in to the portal. The code proves it's you."
@@ -502,8 +505,9 @@ msgstr "Ne les envoyez pas par courriel, ni à vous ni à aucune autre personne.
 #: covid_key/templates/covid_key/otk_sms_sent.html
 #: outbreaks/templates/datetime.html outbreaks/templates/history.html
 #: outbreaks/templates/location_history.html outbreaks/templates/search.html
-#: outbreaks/templates/severity.html profiles/templates/profiles/2fa.html
-#: profiles/templates/profiles/signup.html
+#: outbreaks/templates/severity.html portal/templates/decommission/2fa.html
+#: portal/templates/decommission/login.html
+#: profiles/templates/profiles/2fa.html profiles/templates/profiles/signup.html
 #: profiles/templates/profiles/signup_2fa.html
 #: register/templates/register/location_address.html
 #: register/templates/register/location_category.html
@@ -658,8 +662,8 @@ msgid "Give one-time keys"
 msgstr "Clés à usage unique"
 
 #: covid_key/templates/covid_key/landing.html
-msgid "Give a key to people who tested positive for COVID-19 so they can inform close contacts of a possible exposure."
-msgstr "Donnez une clé aux personnes déclarées positives pour qu’elles puissent aviser leurs contacts étroits d’une possible exposition."
+msgid "Give keys to people who tested positive for COVID-19 so they can inform close contacts of a possible exposure."
+msgstr "Donnez des clés aux personnes déclarées positives pour qu’elles puissent aviser leurs contacts étroits d’une possible exposition."
 
 #: covid_key/templates/covid_key/landing.html
 msgid "Send place or event alerts"
@@ -721,7 +725,7 @@ msgstr "La clé a-t-elle été reçue au numéro %(phone_number)s?"
 
 #: covid_key/templates/covid_key/otk_start.html
 msgid "Now you can give one-time keys"
-msgstr "Clés à usage unique"
+msgstr "Vous pouvez maintenant donner des clés"
 
 #: covid_key/templates/covid_key/otk_start.html
 msgid "You’re logged in to give one-time keys"
@@ -865,7 +869,7 @@ msgstr "Date et heure"
 #: outbreaks/templates/confirm.html profiles/templates/profiles/edit.html
 #: profiles/templates/profiles/healthcareuser_detail.html
 msgid "Change"
-msgstr "Modifier"
+msgstr "Mettre à jour"
 
 #: outbreaks/templates/confirm.html
 msgid "dates"
@@ -897,22 +901,22 @@ msgstr "Envoyer l’alerte"
 
 #: outbreaks/templates/confirm.html outbreaks/templates/datetime.html
 msgid "Cancel this exposure"
-msgstr "Détails de l’exposition"
+msgstr "Abandonner"
 
 #: outbreaks/templates/confirmed.html outbreaks/templates/location_history.html
 msgid "Alert sent"
-msgstr "Alerte envoyée"
+msgstr "Date d'envoi de l'alerte"
 
 #: outbreaks/templates/confirmed.html
 msgid "You’ve notified people who scanned the QR code at the address, date(s) and time(s) below."
 msgstr "Les personnes recevront une notification si elles ont scanné le code QR du lieu ci-dessous à l’une des dates et heures qui suivent :"
 
 #: outbreaks/templates/confirmed.html
-msgid "Notify of another public exposure"
+msgid "Send another alert"
 msgstr "Envoyer une autre alerte"
 
 #: outbreaks/templates/confirmed.html
-msgid "Search notification history"
+msgid "Check alert history"
 msgstr "Consulter l’historique des alertes"
 
 #: outbreaks/templates/datetime.html
@@ -930,7 +934,7 @@ msgstr "Pour voir toutes les alertes associées à ce lieu ou à cet événement
 #: outbreaks/templates/datetime.html outbreaks/templates/history.html
 #: outbreaks/templates/location_history.html
 msgid "Alert history"
-msgstr "l'historique des alertes"
+msgstr "Historique des alertes"
 
 #: outbreaks/templates/datetime.html portal/templates/includes/error_list.html
 msgid "Correct these errors:"
@@ -977,8 +981,8 @@ msgid "Add date"
 msgstr "Ajouter la date"
 
 #: outbreaks/templates/datetime.html
-msgid "Cancel"
-msgstr "Annuler"
+msgid "Do not add"
+msgstr "Annuler l’ajout"
 
 #: outbreaks/templates/datetime.html
 msgid "Add new date +"
@@ -1290,6 +1294,44 @@ msgstr "Passer au contenu principal"
 msgid "COVID Alert Portal"
 msgstr "Portail Alerte COVID"
 
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "Validate your code"
+msgstr "Valider votre code"
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "Enter your log in code"
+msgstr "Entrez votre code de connexion"
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "You kept these codes somewhere safe. You can use each code only once."
+msgstr "Vous devriez avoir conservé vos codes dans un endroit sûr. Chaque code ne peut être utilisé qu’une fois."
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "You need to enter a new code each time you log in."
+msgstr "Il faut entrer un nouveau code à chaque connexion."
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "We’ve just sent a text message with your new code."
+msgstr "Nous venons de vous envoyer un nouveau code par message texte."
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "We’ve texted you a code and you also kept codes somewhere safe. Use 1 of these codes to log in. You can use each code only once."
+msgstr "Utilisez le code reçu par message texte ou l’un de ceux que avez conservés dans un endroit sûr. Chaque code ne peut être utilisé qu’une fois."
+
+#: portal/templates/decommission/2fa.html profiles/templates/profiles/2fa.html
+msgid "Resend log in code?"
+msgstr "Renvoyer un code de connexion"
+
+#: portal/templates/decommission/login.html
+#: portal/templates/registration/login.html
+msgid "Only an authorized staff member can use a portal account and give a COVID Alert key."
+msgstr "Seuls les employés autorisés peuvent avoir un compte pour le portail et fournir une clé Alerte COVID."
+
+#: portal/templates/decommission/login.html
+#: portal/templates/registration/login.html
+msgid "Thanks for your essential work"
+msgstr "Merci pour tout votre travail"
+
 #: portal/templates/includes/FIP_header.html
 msgid "Government of Canada"
 msgstr "Gouvernement du Canada"
@@ -1321,7 +1363,7 @@ msgstr "Ouvrir l’application. Appuyer sur « Menu » en bas à droite."
 
 #: portal/templates/includes/detailed_instructions.html
 msgid "Tap “Enter your one-time key”."
-msgstr "Appuyez sur « Entrer votre clé »."
+msgstr "Appuyer sur « Entrer une clé à usage unique »."
 
 #: portal/templates/includes/detailed_instructions.html
 msgid "On “Notify people they’ve been exposed”, read the instructions. Then tap “Next”."
@@ -1329,7 +1371,7 @@ msgstr "Lire les instructions de l’écran « Aviser les personnes d’une expo
 
 #: portal/templates/includes/detailed_instructions.html
 msgid "People can use capital or small letters to enter the one-time key. Tap “Submit key”."
-msgstr "La clé peut être saisie en majuscules ou en minuscules. Appuyer sur « Soumettre la clé »."
+msgstr "La clé peut être saisie en majuscules ou en minuscules. Appuyer sur « Soumettre la clé »."
 
 #: portal/templates/includes/detailed_instructions.html
 msgid "Then several screens ask questions. The app uses the answers to calculate when the person was most likely contagious, so it only notifies people they were near at that time."
@@ -1345,7 +1387,7 @@ msgstr "Après avoir répondu ou non aux questions, la personne doit autoriser A
 
 #: portal/templates/includes/detailed_instructions.html
 msgid "The next screen asks permission to share information to notify others. Depending on the phone’s operating system, the screen may describe this in different ways, such as sharing random IDs with COVID Alert. Tap “Share”."
-msgstr "L’écran qui suit demande l’autorisation de partager des renseignements afin d’aviser les autres. La formulation de cette demande, par exemple « partager des identifiants aléatoires avec Alerte COVID », peut varier selon le système d’exploitation du téléphone. Appuyer sur « Partager »."
+msgstr "L’écran qui suit demande l’autorisation de partager des renseignements afin d’aviser les autres. La formulation de cette demande, par exemple « partager des identifiants aléatoires avec Alerte COVID », peut varier selon le système d’exploitation du téléphone. Appuyer sur « Partager »."
 
 #: portal/templates/includes/detailed_instructions.html
 msgid "COVID Alert will ask permission to upload random codes daily for the next 13 days."
@@ -1451,18 +1493,10 @@ msgstr "Contactez <a href=\"mailto:assistance+healthcare@cds-snc.ca\">assistance
 msgid "Forgot your password?"
 msgstr "Mot de passe oublié?"
 
-#: portal/templates/registration/login.html
-msgid "Only an authorized staff member can use a portal account and give a COVID Alert key."
-msgstr "Seuls les employés autorisés peuvent avoir un compte pour le portail et fournir une clé Alerte COVID."
-
-#: portal/templates/registration/login.html
-msgid "Thanks for your essential work"
-msgstr "Merci pour tout votre travail"
-
 #: portal/templates/registration/password_reset_confirm.html profiles/forms.py
 #: profiles/templates/profiles/healthcareuser_detail.html
 msgid "Change your password"
-msgstr "Modifier votre mot de passe"
+msgstr "Modifiez votre mot de passe"
 
 #: portal/templates/registration/password_reset_confirm.html
 msgid "This link has expired"
@@ -1710,7 +1744,7 @@ msgstr "Saisissez votre mot de passe"
 
 #: profiles/forms.py
 msgid "Enter the same password again"
-msgstr "Saisissez le même mot de passe"
+msgstr "Confirmation du nouveau mot de passe"
 
 #: profiles/forms.py
 msgid "Enter your phone number"
@@ -1768,8 +1802,10 @@ msgid "Confirm your mobile phone number"
 msgstr "Confirmez votre numéro de téléphone mobile"
 
 #: profiles/forms.py
-msgid "Enter the phone number again."
-msgstr "Saisissez de nouveau votre numéro mobile."
+#, fuzzy
+#| msgid "Enter the same phone number again"
+msgid "Enter the same mobile number as above."
+msgstr "Saisissez le même numéro de téléphone."
 
 #: profiles/forms.py
 msgid "You entered 2 different phone numbers."
@@ -1784,12 +1820,8 @@ msgid "Password"
 msgstr "Mot de passe"
 
 #: profiles/forms.py
-msgid ""
-"Choose a password that is hard to guess, with at least 12 characters including 1 letter.\n"
-" The password cannot include your name, email or words related to Covid or the portal."
-msgstr ""
-"Choisissez un mot de passe difficile à deviner et comprenant au moins 12 caractères, dont au moins une lettre.\n"
-" Le mot de passe ne peut pas comprendre votre nom, votre courriel ou des mots faisant référence à la COVID ou au portail."
+msgid "Your password must be at least 12 characters and hard to guess."
+msgstr "Votre mot de passe doit avoir au moins 12 caractères."
 
 #: profiles/forms.py
 msgid "Enter your password again"
@@ -1797,7 +1829,7 @@ msgstr "Saisissez de nouveau votre mot de passe"
 
 #: profiles/forms.py
 msgid "New password"
-msgstr "Modifier mon mot de passe"
+msgstr "Nouveau mot de passe"
 
 #: profiles/forms.py
 msgid "Email already exists"
@@ -1810,6 +1842,10 @@ msgstr "L’invitation n’a pu être envoyée."
 #: profiles/forms.py
 msgid "Confirm your phone number"
 msgstr "Confirmez votre numéro de téléphone mobile"
+
+#: profiles/forms.py
+msgid "Enter the phone number again."
+msgstr "Saisissez de nouveau votre numéro mobile."
 
 #: profiles/forms.py
 msgid "The phone numbers didn’t match."
@@ -1980,34 +2016,6 @@ msgstr "Si vous n’avez pas reçu de code, nous pouvons vous en renvoyer un."
 msgid "Cannot get text messages?"
 msgstr "Incapable de recevoir des messages texte?"
 
-#: profiles/templates/profiles/2fa.html
-msgid "Validate your code"
-msgstr "Valider votre code"
-
-#: profiles/templates/profiles/2fa.html
-msgid "Enter your log in code"
-msgstr "Entrez votre code de connexion"
-
-#: profiles/templates/profiles/2fa.html
-msgid "You kept these codes somewhere safe. You can use each code only once."
-msgstr "Vous devriez avoir conservé vos codes dans un endroit sûr. Chaque code ne peut être utilisé qu’une fois."
-
-#: profiles/templates/profiles/2fa.html
-msgid "You need to enter a new code each time you log in."
-msgstr "Il faut entrer un nouveau code à chaque connexion."
-
-#: profiles/templates/profiles/2fa.html
-msgid "We’ve just sent a text message with your new code."
-msgstr "Nous venons de vous envoyer un nouveau code par message texte."
-
-#: profiles/templates/profiles/2fa.html
-msgid "We’ve texted you a code and you also kept codes somewhere safe. Use 1 of these codes to log in. You can use each code only once."
-msgstr "Utilisez le code reçu par message texte ou l’un de ceux que avez conservés dans un endroit sûr. Chaque code ne peut être utilisé qu’une fois."
-
-#: profiles/templates/profiles/2fa.html
-msgid "Resend log in code?"
-msgstr "Renvoyer un code de connexion"
-
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html
 msgid "Confirm delete user"
 msgstr "Confirmez la suppression de l’utilisateur"
@@ -2024,7 +2032,7 @@ msgstr "%(name)s ne pourra plus se connecter. La suppression d’un compte effac
 
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html
 msgid "You can create a new account for them later."
-msgstr "Vous pouvez toujours créer un nouveau compte pour cette personne."
+msgstr "Vous pouvez toujours créer un nouveau compte pour cette personne plus tard."
 
 #: profiles/templates/profiles/healthcareuser_confirm_delete.html
 msgid "Yes, delete"
@@ -2188,7 +2196,7 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"<ul class=\"paragraphs\"><li><b>Nous avons besoin de vos renseignements personnels</b> pour vous permettre d’utiliser le portail et de générer des clés à usage unique.<li><b>Nous consignons les activités et les renseignements liés au portail</b>, notamment : <ul class=\"disc\"><li>chacune des fois où vous générez une clé,</li><li>les renseignements personnels que vous partagez avec le portail, comme votre numéro de téléphone.</li></ul><li><b>Nous analysons l’activité du portail à l’aide de services</b> comme Google Analytics, mais nous ne leur transmettons aucun renseignement personnel. Ces services nous aident à améliorer le portail.</li><li><b>Nous avons l’autorisation d’utiliser ces renseignements</b> selon la <a href=\"https://laws-lois.justice.gc.ca/fra/lois/H-3.2/\"><em>Loi sur le ministère de la Santé</em></a> et la <a href=\"https://laws-lois.justice.gc.ca/fra/lois/f-11/\"><em>Loi sur la gestion des finances publiques</em></a>. Nous respectons aussi la <a href=\"https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=26761\"><em>Norme sur la protection de la vie privée et le Web analytique.</em></a></li><li><b>Nous ne partagerons vos renseignements personnels que si nous détectons des activités illégales.</b> Nous pourrions alors fournir vos renseignements aux forces policières.</li><li><b>Vous avez le droit d’accéder à vos renseignements personnels, de les réviser et de les corriger.</b> Vous pouvez corriger par vous-même la plupart des renseignements dans le portail.</li><li><b>Vous avez le droit de faire une plainte</b> au sujet de la façon dont nous utilisons vos renseignements au commissaire à la protection de la vie privée du Canada.</li></ul><h2>Des questions?</h2><p>Communiquez avec <a href=\"mailto:hc.AlerteCOVIDAlert.sc@canada.ca\">Santé Canada</a>.</p>"
+"<ul class=\"paragraphs\"><li><b>Nous avons besoin de vos renseignements personnels</b> pour vous permettre d’utiliser le portail et de générer des clés à usage unique.<li><b>Nous consignons les activités et les renseignements liés au portail</b>, notamment : <ul class=\"disc\"><li>chacune des fois où vous générez une clé,</li><li>les renseignements personnels que vous partagez avec le portail, comme votre numéro de téléphone.</li></ul><li><b>Nous analysons l’activité du portail à l’aide de services</b> comme Google Analytics, mais nous ne leur transmettons aucun renseignement personnel. Ces services nous aident à améliorer le portail.</li><li><b>Nous avons l’autorisation d’utiliser ces renseignements</b> selon la <a href=\"https://laws-lois.justice.gc.ca/fra/lois/H-3.2/\"><em>Loi sur le ministère de la Santé</em></a> et la <a href=\"https://laws-lois.justice.gc.ca/fra/lois/f-11/\"><em>Loi sur la gestion des finances publiques</em></a>. Nous respectons aussi la <a href=\"https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=26761\"><em>Norme sur la protection de la vie privée et le Web analytique.</em></a></li><li><b>Nous ne partagerons vos renseignements personnels que si nous détectons des activités illégales.</b> Nous pourrions alors fournir vos renseignements aux forces policières.</li><li><b>Vous avez le droit d’accéder à vos renseignements personnels, de les réviser et de les corriger.</b> Vous pouvez corriger par vous-même la plupart des renseignements dans le portail.</li><li><b>Vous avez le droit de faire une plainte</b> au sujet de la façon dont nous utilisons vos renseignements au <a href=\"https://www.priv.gc.ca/fr/pour-les-individus\" target=\"_blank\">commissaire à la protection de la vie privée du Canada</a>.</li></ul><h2>Des questions?</h2><p>Communiquez avec <a href=\"mailto:hc.AlerteCOVIDAlert.sc@canada.ca\">Santé Canada</a>.</p>"
 
 #: profiles/templates/profiles/signup.html
 msgid "Create account"
@@ -2266,7 +2274,7 @@ msgid ""
 "        <strong><p>Confirm the person meets 2 conditions</p></strong>\n"
 "        <p>They've:</p>\n"
 "        <ul class=\"expanded\">\n"
-"            <li>Tested positive for COVID-19, and,</li>\n"
+"            <li>Tested positive for COVID-19, <strong>and</strong>,</li>\n"
 "            <li>Installed the COVID Alert app on their phone.</li>\n"
 "        </ul>\n"
 "        <strong><p>Get the person’s consent before texting a key</p></strong>\n"
@@ -2278,6 +2286,26 @@ msgid ""
 "        <p>If we detect any misuse of the portal or security issues with your account, we’ll immediately disable your account.</p>\n"
 "    "
 msgstr ""
+"\n"
+"        <p>Le portail Alerte COVID est réservé au personnel du Canada autorisé.</p>\n"
+"        <p>En utilisant le portail, vous acceptez de suivre les procédures établies par votre autorité sanitaire.</p>\n"
+"        <p>Vous acceptez aussi de :</p>\n"
+"        <strong><p>Générer des clés uniquement pour des cas réels</p></strong>\n"
+"        <p>Ne donnez qu’une seule clé par test positif.</p>\n"
+"        <p>Pour voir un exemple de clé, consultez la page \"<a href=\"#\">Distribution des clés</a>\".</p>\n"
+"        <strong><p>Valider que la personne remplit les 2 conditions</p></strong>\n"
+"        <ul class=\"expanded\">\n"
+"            <li>Elle a reçu un test positif de COVID-19.</li>\n"
+"            <li>Elle possède l’application Alerte COVID sur son téléphone.</li>\n"
+"        </ul>\n"
+"        <strong><p>Obtenir un consentement avant d’envoyer la clé par texto</p></strong>\n"
+"        <p>Certaines personnes pourraient vouloir recevoir leur clé à usage unique par texto. Si votre autorité sanitaire permet cette fonction, vous verrez le bouton « Texter la clé » dans le portail.</p>\n"
+"        <strong><p>Empêcher d’autres personnes d’utiliser votre compte</p></strong>\n"
+"        <p>Évitez de divulguer votre nom d’utilisateur et votre mot de passe, même aux personnes travaillant pour une autorité sanitaire.</p>\n"
+"        <strong><p>Assurer la sécurité du portail</p></strong>\n"
+"        <p>Signalez immédiatement tout problème de sécurité à votre administrateur <strong>et</strong> à <a href=\"mailto:security@cds-snc.ca\">security@cds-snc.ca</a></p>\n"
+"        <p>Si nous détectons une mauvaise utilisation du portail ou des problèmes de sécurité lié à votre compte, nous désactiverons immédiatement votre compte.</p>\n"
+"    "
 
 #: profiles/templates/profiles/yubikey_create.html
 msgid "Add Yubikey token"
@@ -3447,3 +3475,19 @@ msgstr "Votre adresse courriel est validée."
 #: register/views.py
 msgid "There has been an error, you need to confirm your email address"
 msgstr "Une erreur s’est produite. Veuillez valider votre adresse courriel."
+
+#~ msgid "Cancel"
+#~ msgstr "Annuler"
+
+#~ msgid "Notify of another public exposure"
+#~ msgstr "Envoyer une autre alerte"
+
+#~ msgid "Search notification history"
+#~ msgstr "Consulter l’historique des alertes"
+
+#~ msgid ""
+#~ "Choose a password that is hard to guess, with at least 12 characters including 1 letter.\n"
+#~ " The password cannot include your name, email or words related to Covid or the portal."
+#~ msgstr ""
+#~ "Choisissez un mot de passe difficile à deviner et comprenant au moins 12 caractères, dont au moins une lettre.\n"
+#~ " Le mot de passe ne peut pas comprendre votre nom, votre courriel ou des mots faisant référence à la COVID ou au portail."

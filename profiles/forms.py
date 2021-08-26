@@ -166,7 +166,7 @@ class HealthcarePhoneEditForm(HealthcareBaseEditForm):
 
     phone_number2 = PhoneNumberField(
         label=_("Confirm your mobile phone number"),
-        help_text=_("Enter the phone number again."),
+        help_text=_("Enter the same mobile number as above."),
     )
     phone_number2.error_messages["required"] = validation_messages["phone_number2"][
         "required"
@@ -200,9 +200,7 @@ class HealthcarePasswordEditForm(HealthcareBaseEditForm):
         label=_("Password"),
         strip=False,
         widget=forms.PasswordInput(),
-        help_text=_(
-            "Choose a password that is hard to guess, with at least 12 characters including 1 letter.\n The password cannot include your name, email or words related to Covid or the portal."
-        ),
+        help_text=_("Your password must be at least 12 characters and hard to guess."),
     )
     password1.error_messages["required"] = validation_messages["password"]["required"]
 
@@ -303,9 +301,7 @@ class HealthcarePasswordResetConfirm(HealthcareBaseForm, SetPasswordForm):
         label=_("New password"),
         strip=False,
         widget=forms.PasswordInput(),
-        help_text=_(
-            "Choose a password that is hard to guess, with at least 12 characters including 1 letter.\n The password cannot include your name, email or words related to Covid or the portal."
-        ),
+        help_text=_("Your password must be at least 12 characters and hard to guess."),
     )
     new_password1.error_messages["required"] = validation_messages["password"][
         "required"
@@ -352,9 +348,7 @@ class SignupForm(HealthcareBaseForm, UserCreationForm, forms.ModelForm):
         label=_("Password"),
         strip=False,
         widget=forms.PasswordInput(),
-        help_text=_(
-            "Choose a password that is hard to guess, with at least 12 characters including 1 letter.\n The password cannot include your name, email or words related to Covid or the portal."
-        ),
+        help_text=_("Your password must be at least 12 characters and hard to guess."),
     )
     password1.error_messages["required"] = validation_messages["password"]["required"]
 
