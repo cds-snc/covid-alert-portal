@@ -8,6 +8,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 - Remove Basicauth
 
+## [2.3.1] - 2021-08-30
+
+## Updated
+
+- Fixed alignment issues with buttons on review page, 'Choose date and time' screens and invitations page 
+- Changed button text on confirmation page after sending alerts and changed button copy on adding new date screen 
+- Fixed up French translations 
+- Removed italics in addresses
+- Changed hint message on "Change your mobile number" page
+- Fixed up non-breaking spaces in French before colons and around text in quotes- Fixed up typos on Portal start page
+- Fixed up blolding in Terms of Use page
+
+
 ## [2.3.0] - 2021-08-09
 
 ## Updated
