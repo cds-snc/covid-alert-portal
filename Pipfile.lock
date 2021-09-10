@@ -235,11 +235,11 @@
         },
         "django-axes": {
             "hashes": [
-                "sha256:3b6fbd40cd46014b99eb9c7abcb2fafe790234a47b12135f6537c9321fe3a542",
-                "sha256:45090e102908200cf8ee8e619eb6b05a2db09e6119d195d9956cd6bcc06da60f"
+                "sha256:4d7b8bef6c1094aaa94abef12a7085b4fd63b933a4010d1c82f9f120b50c19d1",
+                "sha256:dadee869826b6f5061d1e77369770f27008aaac7e9d6cf4eb1b0f8f7dd802691"
             ],
             "index": "pypi",
-            "version": "==5.23.0"
+            "version": "==5.24.0"
         },
         "django-basicauth": {
             "hashes": [
@@ -765,11 +765,11 @@
         },
         "sqlparse": {
             "hashes": [
-                "sha256:017cde379adbd6a1f15a61873f43e8274179378e95ef3fede90b5aa64d304ed0",
-                "sha256:0f91fd2e829c44362cbcfab3e9ae12e22badaa8a29ad5ff599f9ec109f0454e8"
+                "sha256:0c00730c74263a94e5a9919ade150dfc3b19c574389985446148402998287dae",
+                "sha256:48719e356bb8b42991bdbb1e8b83223757b93789c00910a616a071910ca4a64d"
             ],
             "markers": "python_version >= '3.5'",
-            "version": "==0.4.1"
+            "version": "==0.4.2"
         },
         "tinycss2": {
             "hashes": [
