@@ -8,6 +8,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 - Remove Basicauth
 
+## [2.3.2] - 2021-09-13
+
+## Updated
+
+- Updated beautiful soup to version 4.10.0 from 4.9.3
+- Updated black to version 21.8b0 from 21.6b0
+- Updated cffi to version 1.14.6 from 1.14.5
+- Updated dependency-injector to version 4.36.0 from 4.34.0
+- Updated django to version 3.2.7 from 3.2.5
+- Updated django-axes to version 5.24.0 from 5.20.0
+- Updated django-cors-headers to version 3.8.0 from 3.7.0
+- Updated django-ipware to version 4.0.0 from 3.0.2
+- Updated django-sass to version 1.1.0 from 1.0.1
+- Updated django-waffle to version 2.2.1 from 2.2.0
+- Updated idna to version 3.2 from 2.10
+- Updated newrelic to version 6.8.1.164 from 6.4.3.160
+- Updated notifications-python-client to version 6.2.1 from 6.2.0
+- Updated pathspec to version 0.9.0 from 0.8.1
+- Updated phonenumbers to version 8.12.31 from 8.12.26
+- Updated pillow to version 8.3.2 from 8.3.0
+- Updated protobuf to version 3.18.0rc2 from 3.17.3 
+- Updated python-dotenv to version 0.19.0 from 0.18.0
+- Updated regex to version 2021.8.28 from 2021.7.1
+- Updated requests to version 2.26.0 from 2.25.1
+- Updated six to version 1.16.0 from 1.15.0
+- Updated sqlparse to version 0.4.2 from 0.4.1
+- Updated toml/tomli to version 1.2.1 from 0.10.2
+- Updated whitenoise to version 5.3.0 from 5.2.0
+- Updated develop to version 6.0b1 from 5.5
+- Updated python-dateutil to version 2.8.2 from 2.8.1
+
+
 ## [2.3.1] - 2021-08-30
 
 ## Updated
@@ -18,7 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed italics in addresses
 - Changed hint message on "Change your mobile number" page
 - Fixed up non-breaking spaces in French before colons and around text in quotes- Fixed up typos on Portal start page
-- Fixed up blolding in Terms of Use page
+- Fixed up bolding in Terms of Use page
 
 
 ## [2.3.0] - 2021-08-09
