@@ -6,34 +6,48 @@ The COVID Alert Portal provides authenticated healthcare providers unique tempor
 
 A healthcare portal is one of the three pieces of the [COVID Shield](https://www.covidshield.app/) open-source reference implementation built by Shopify volunteers. For a high-level view on how the components work together, read through the [COVID Shield Rationale](https://github.com/CovidShield/rationale).
 
-## Technical overview
+## COVID Alert Outbreaks and Business Registration Site
+
+The COVID Alert Business Registration Site is part of the Outbreaks feature of COVID Alert Portal. Outbreaks is a new feature developed to help public health and businesses in their contact tracing efforts. Business owners can register and print a poster that includes a QR Code. Visitors to their location that have COVID Alert installed on their device can scan the QR Code to record their visit. Subsequently, if public health authorites identify an Outbreak at that location, they can send alerts to people who may have been exposed through COVID Alert.
+
+This project includes the code for both the COVID Alert Portal and the COVID Alert Business Registration Site, but the two websites are deployed separately, and this project can only be run in one mode or the other. 
+
+The mode of the project is determined by an [Environment variable](#environment-variables):
+
+- `APP_SWITCH=QRCODE` will run the registration site
+- `APP_SWITCH=PORTAL` will run the portal
+
+## Table of contents
+
+- [Running the project](#running-the-project)
+  - [Environment variables](#environment-variables)
+- [Local development](#local-development)
+  - [External dependencies](#external-dependencies)
+  - [Activating a virtualenv](#activating-a-virtualenv)
+  - [Database](#database)
+    - [Database migrations](#database-migrations)
+  - [Compile CSS](#compile-css)
+  - [Create admin superuser](#create-admin-super-user-optional)
+  - [Run development server](#run-development-server)
+- [Running using Docker Compose](#running-using-docker-compose)
+- [Translations](#translations)
+- [Development workflow](#development-workflow)
+  - [Feature development](#feature-development)
+  - [Application versioning](#application-versioning)
+  - [Automated tests](#automated-tests)
+
+## Running the project
 
 The COVID Alert Portal is a Django application: it can be run as a python process or using `docker-compose`.
 
-- Running the COVID Alert Portal locally as a python process requires [python3](https://www.python.org/downloads/) and a database, although an SQLite database will be created if no connection string exists.
-- Using `docker-compose`, you’ll need [Docker](https://www.docker.com/get-started) installed.
-
-## Setup
-
-### External dependencies
-
-If you are running the app using Docker Compose and the included container, this dependency is already included. If you are running in a local virtual environment, you'll need to install cairo for PDF poster generation: `brew install cairo`
-
-### Activating a virtualenv
-
-Install [`pipenv`](https://pypi.org/project/pipenv/).
-
-```sh
-# cd into project folder
-pipenv --three       # create a new virtualenv
-pipenv shell         # activate virtualenv
-pipenv install       # install dependencies
-pipenv install --dev # install dev dependencies
-```
+- [Running the COVID Alert Portal locally](#local-development) as a python process requires [python3](https://www.python.org/downloads/) and a PostgreSQL database.
+- [Using `docker-compose`](#running-using-docker-compose), you’ll need [Docker](https://www.docker.com/get-started) installed.
 
 ### Environment variables
 
 Environment variables are used to control app settings, and configuration for utilities and third-party services. Defaults are `''` or `None` unless otherwise specified.
+
+Before running the project, you will need to copy `./portal/.env.example` to `./portal/.env` and provide the appropriate values for your configuration.
 
 <details>
 <summary>Detailed explanation of each environment variable</summary>
@@ -50,6 +64,8 @@ Environment variables are used to control app settings, and configuration for ut
 - `SU_DEFAULT_PASSWORD`: Setting to trigger the creation of a default superuser the first time the app is provisioned. If this variable exists, a default superuser will be created at `admin@cds-snc.ca` with this password.
 
 - `QRCODE_SIGNATURE_PRIVATE_KEY`: Private key for signing QR Code payloads. Should be a Base64 encoded key generated with the [PyNaCl encryption library](https://pynacl.readthedocs.io/)
+
+- `APP_SWITCH`: Should be set to `QRCODE` or nothing. This determines whether the app will run in "Registration site" mode, or "Portal" mode.
 
 ##### database configuration
 
@@ -85,9 +101,9 @@ The contact form sends any inquiry to Freshdesk.
 
 - `FRESHDESK_PRODUCT_ID`: If you use more than one product, use this variable to specify where the feedback should go to.
 
-##### email configuration
+##### Email configuration
 
-- We use [GC Notify](https://notification.canada.ca/) for sending all user-facing emails and text messages, so we shouldn't need [the SMTP interface that Django provides](https://docs.djangoproject.com/en/3.1/topics/email/). In case there are any errant `send_mail` calls, they will be printed to the console.
+- We use [GC Notify](https://notification.canada.ca/) for sending all user-facing emails and text messages.
 
 #### New Relic configuration
 
@@ -102,53 +118,76 @@ We use New Relic to monitor for server side errors and application performance i
 
 <strong>[Example `.env` file](https://github.com/cds-snc/covid-healthcare-portal/blob/main/portal/.env.example)</strong>
 
-### Running the app for the first time
+## Local development
 
-**Quick Start:** After activating a virtual environment, run
+This section describes how to get the project running on your local device. You can alternatively [run using docker-compose](#running-using-docker-compose) which will include all required dependencies and services and may be a simpler setup depending on your preference and experience.
 
-- `pipenv run css`
-- `python manage.py collectstatic --noinput -i scss`
-- the `entrypoint.sh` script to perform the database migrations
+### External dependencies
 
-The local server can be accessed at `http://127.0.0.1:8000/` or `http://localhost:8000`.
+If you are running the app using Docker Compose, this dependency is already included. If you are running in a local virtual environment, you'll need to install cairo for PDF poster generation.
 
-For a more thorough setup of the various environment options please follow the instructions below after having activated your virtual environment from inside the root project folder.
+Using Homebrew on MacOS: 
 
-Copy `./portal/.env.example` to `./portal/.env` and provide the appropriate values for your configuration.
+```
+brew install cairo
+```
 
-#### 1. Database migrations
+### Activating a virtualenv
 
-By default the Django creates an SQLite database, but we use Postgres in production.
+Install [`pipenv`](https://pypi.org/project/pipenv/).
 
-If a `DATABASE_URL` environment variable exists, it will set all the connection parameters at the same time.
+```sh
+# cd into project folder
+pipenv --three       # create a new virtualenv
+pipenv shell         # activate virtualenv
+pipenv install --dev # install dev dependencies
+```
 
-##### Postgres [URL schema](https://github.com/jacobian/dj-database-url#url-schema)
+### Database
 
-| Django Backend                  | DATABASE_URL                              |
-| ------------------------------- | ----------------------------------------- |
-| `django.db.backends.postgresql` | `postgres://USER:PASSWORD@HOST:PORT/NAME` |
+You will need to have a PostgreSQL database running. You can install one using Homebrew on MacOS: 
 
-To create the database schema, run `python manage.py makemigrations`.
+```
+brew install postgresql
+```
 
-Then, create the tables by running `python manage.py migrate`.
+NOTE: Earlier versions of this project would default to using a SQLite database if none is configured. Some features have been introduced in the Outbreaks feature that depend on features of PostgreSQL, so SQLite is no longer recommended.
 
-#### 2. Compile SCSS files to CSS
+Ensure that you have configured the `DATABASE_URL` environment variable according to your PostgreSQL config, using the following format:
 
-You will need to generate the `profiles/static/css/styles.css` file by compiling the SCSS files. To generate the file once, run:
+`postgres://USER:PASSWORD@HOST:PORT/NAME`
+
+#### Database migrations
+
+Migrate the database by running:
+
+```
+python manage.py migrate
+```
+
+When creating or modifying existing models, you will need to generate migrations to keep your database in sync:
+
+```
+python manage.py makemigrations
+```
+
+For more information, see [Django Migrations](https://docs.djangoproject.com/en/3.2/topics/migrations/).
+
+### Compile CSS
+
+To compile the SCSS files to CSS once:
 
 ```
 pipenv run css
 ```
 
-If you are developing the app and want your styling changes applied as you make changes, you can use the `--watch` flag.
+If you are developing the app and want your styling changes applied as you make changes, you can use the csswatch command:
 
 ```
 pipenv run csswatch
 ```
 
-Note that watching the SCSS will require a new terminal window to run the development server. If you are using iTerm, you can open another tab with `Command + t` or a new pane with `Command + d`. Remember to activate your virtual environment in your new pane using `pipenv shell` and `pipenv install`.
-
-#### 3. Create admin super user (optional)
+### Create admin super user (optional)
 
 This app allows you to use the Django admininstration panel (`/admin`) to manage users.
 
@@ -156,11 +195,11 @@ In order to access the `/admin` route, you will need to create a super user acco
 
 Run `python manage.py createsuperuser` to create a super user.
 
-#### 4. Run development server
+### Run development server
 
 Then, run `python manage.py runserver` to run the app. Go to `http://127.0.0.1:8000/` to see the login page.
 
-### Running using Docker Compose
+## Running using Docker Compose
 
 > [Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration.
 
@@ -173,13 +212,11 @@ Read the step-by-step process at [Django, Docker, and PostgreSQL Tutorial](https
 1. Spin up the app: `docker-compose up`
 2. Spin down the app: `Command + c` or `docker-compose down`
 
-### Translations
+## Translations
 
-We're using the default Django translations library to add content in French and English.
+We're using the default [Django translation](https://docs.djangoproject.com/en/3.2/topics/i18n/translation/) library to add content in French and English.
 
-Here is a short overview of adding a translated string to the application.
-
-Add your string to a template using the `trans` tag.
+When you have updated or added a new localized string, for example in a template file:
 
 ```
 # profiles/templates/profiles/start.html
@@ -187,7 +224,13 @@ Add your string to a template using the `trans` tag.
 <h1>{% trans "Generate code for Exposure Notification app" %}</h1>
 ```
 
-Run `python manage.py makemessages -l fr --add-location=file --no-wrap` to update the `django.po` translations file inside of `/locale`.
+You will need to run the following command which will scan the the application for localized strings and add them to the locale files:
+
+```
+python manage.py makemessages -l fr --add-location=file --no-wrap
+```
+
+This command will collect all localized strings to the `locale/django.po` file. For example:
 
 ```
 # locale/fr/LC_MESSAGES/django.po
@@ -197,7 +240,11 @@ msgid "Generate code for Exposure Notification app"
 msgstr "Générer du code pour l'application de notification d'exposition"
 ```
 
-Run `python manage.py compilemessages` to compile the translations so that Django knows how to use them.
+Once the string has been translated in the .po file, you will need to compile the translations to the `django.mo` file by running the following command:
+
+```
+python manage.py compilemessages
+```
 
 For more complete documentation refer to the [Django Translation](https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#translation) docs.
 
@@ -236,102 +283,191 @@ We also have an automated test for code coverage, which will fail if code covera
 
 ---
 
+[La version française suit.](#portail-de-soins-de-santé-covid)
+
 # Portail Alerte COVID
 
-Ce dépôt met en oeuvre un portail de soins de santé qui accompagne l’[application mobile COVID Shield du gouvernement du Canada](https://github.com/cds-snc/covid-shield-mobile). Ce portail fournit des codes temporaires à utilisation unique aux professionnels de la santé authentifiés, et ces codes peuvent être transmis aux personnes ayant un diagnostic de COVID-19. Le code permet aux personnes de téléverser les ID aléatoires de l’application mobile si elles acceptent. Aucune information personnelle n’est recueillie, et aucun lien n’est établi entre les codes et les tests.
+Le portail Alerte COVID produit des codes uniques temporaires que les fournisseurs de soins de santé peuvent transmettre aux personnes ayant reçu un diagnostic positif de COVID-19. Le code permet à ces personnes de téléverser leurs identifiants anonymes à l’aide de l’application mobile. Aucune information personnelle n’est recueillie, et aucun lien n’est établi entre les codes et les tests Le portail complète l’application [Alerte COVID du gouvernement du Canada](https://github.com/cds-snc/covid-alert-app).
 
-Pour plus d’information sur la façon dont tout cela fonctionne, référez-vous au [raisonnement derrière COVID Shield](https://github.com/CovidShield/rationale) (en anglais).
+Le portail des soins de santé est l’un des trois éléments du référentiel source ouvert [COVID Shield](https://www.covidshield.app/) développé par des bénévoles de Shopify. Pour une vue d’ensemble des interactions entre les composantes, lisez la [justification de COVID Shield](https://github.com/CovidShield/rationale).
 
-## Configuration
+## Fonction éclosions d’Alerte COVID et site d’inscription des entreprises
+
+Le site d’inscription des entreprises d’Alerte COVID fait partie de la fonction éclosions du portail Alerte COVID. La nouvelle fonction éclosions a été développée pour aider les autorités de santé publique et les entreprises dans leurs efforts de recherche des contacts. Les propriétaires d’entreprise peuvent s’inscrire et imprimer une affiche qui comprend un code QR. Les gens qui ont installé Alerte COVID sur leur appareil et qui visitent un de ces lieux peuvent scanner le code QR pour enregistrer leur visite. Par la suite, si les autorités de santé publique déterminent qu’une éclosion s’est produite dans ce lieu, elles peuvent envoyer des alertes (à l’aide d’Alerte COVID) aux personnes qui pourraient avoir été exposées.
+
+Ce projet comprend le code du portail Alerte COVID et du site d’inscription des entreprises d’Alerte COVID, mais les deux sites Web sont déployés séparément et ce projet ne peut être exécuté que dans un mode ou dans l’autre. 
+
+Le mode du projet est déterminé par une [variable d’environnement](#environment-variables) :
+
+- `APP_SWITCH=QRCODE` exécute le site d’inscription
+- `APP_SWITCH=PORTAL` exécute le portail
+
+## Table des matières
+
+- [Exécution du projet](#running-the-project)
+  - [Variables d’environnement](#environment-variables)
+- [Développement local](#local-development)
+  - [Dépendances externes](#external-dependencies)
+  - [Activer un virtualenv](#activating-a-virtualenv)
+  - [Base de données](#database)
+    - [Migrations de bases de données](#database-migrations)
+  - [Compiler le code CSS](#compile-css)
+  - [Créer un superutilisateur administrateur](#create-admin-super-user-optional)
+  - [Exécuter le serveur de développement](#run-development-server)
+- [Exécuter l’application à l’aide de docker-compose](#running-using-docker-compose)
+- [Traductions](#translations)
+- [Flux de travail de développement](#development-workflow)
+  - [Développement de fonctionnalités](#feature-development)
+  - [Gestion des versions de l’application](#application-versioning)
+  - [Tests automatisés](#automated-tests)
+
+## Exécution du projet
+
+Le portail Alerte COVID est une application Django : elle peut être exécutée comme processus python ou à l’aide de `docker-compose`.
+
+- [L’exécution du portail d’alerte COVID localement](#local-development) en tant que processus python nécessite [python3](https://www.python.org/downloads/) et une base de données PostgreSQL.
+- [Pour utiliser `docker-compose`](#running-using-docker-compose), il faut d’abord installer [Docker](https://www.docker.com/get-started).
+
+### Variables d’environnement
+
+Les variables d’environnement sont utilisées pour contrôler les paramètres de l’application et la configuration d’utilitaires et de services tiers. Les valeurs par défaut sont `''` ou `None`, sauf indication contraire.
+
+Avant d’exécuter le projet, vous devrez copier `./portal/.env.example` dans `./portal/.env` et fournir les valeurs appropriées pour votre configuration.
+
+<details>
+<summary>Explication détaillée de chaque variable d’environnement</summary>
+<div>
+
+#### Paramètres de l’application 
+- `DJANGO_ENV` (par défaut : `development`) : Active le mode [`DEBUG`](https://docs.djangoproject.com/en/3.0/ref/settings/#debug) et ne nécessite pas HTTPS pour s’exécuter. Pour le développement local, laissez ce paramètre à `development`. 
+- `DJANGO_SECRET_KEY` : `SECRET_KEY` dans Django sert à fournir une signature cryptographique. Assurez-vous de définir une valeur unique et aléatoire.  Django ne démarrera pas si cette valeur n’a pas été définie. [Cliquer ici pour lire la documentation] (https://docs.djangoproject.com/en/3.0/ref/settings/#secret-key). 
+- `DJANGO_ALLOWED_HOSTS` : Liste de chaînes représentant les noms d’hôte/de domaine que le site Django peut prendre en charge. Doit seulement être réglé dans l’environnement de production. [Cliquer ici pour lire la documentation] (https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts). 
+- `SU_DEFAULT_PASSWORD` : Paramètre qui déclenche la création d’un superutilisateur par défaut la première fois que l’application est mise en service. Si cette variable existe, un superutilisateur par défaut sera créé avec l’identifiant 'admin@cds-snc.ca' et ce mot de passe. 
+- `QRCODE_SIGNATURE_PRIVATE_KEY` : Clé privée pour signer les données à transmettre pour les codes QR. Il doit s’agir d’une clé chiffrée en Base64 générée selon la base de données de la [bibliothèque de chiffrement PyNaCl](https://pynacl.readthedocs.io/) 
+- `APP_SWITCH` : Doit être réglé à `QRCODE` ou rien. Détermine si l’application s’exécute en mode « Site d’inscription » ou en mode « Portail ». 
+
+##### Configuration de la base de données 
+- `DATABASE_URL` : Chaîne contenant le schéma de base de données, l’hôte, le nom d’utilisateur, le mot de passe et le port. L’URL de base donnée (`DATABASE_URL`) est analysée par [`dj-django-url`](https://pypi.org/project/dj-database-url/). 
+
+#### Paramètres API d’Alerte COVID 
+- `API_ENDPOINT` : Le point de terminaison de l’API qui renvoie des clés à usage unique. Si elles ne sont pas définies, les clés à usage unique affichent `0000 0000`. 
+- `API_AUTHORIZATION` : Les identifiants requis pour s’authentifier auprès de l’API des clés à usage unique. Sinon, la demande produira une réponse `401` interdite. 
+
+#### Configuration de mot de passe à usage unique (2 facteurs) 
+
+Nous utilisons GC Notification et django-otp pour envoyer des codes d’authentification 2FA par SMS. 
+- `OTP_NOTIFY_ENDPOINT` : Modifie le point de terminaison GC Notification par défaut utilisé. 
+- `OTP_NOTIFY_API_KEY` : La clé API utilisée pour appeler GC Notification - 
+- `OTP_NOTIFY_NO_DELIVERY`: Utilisé dans les tests, inscrit le jeton dans la console plutôt que d’appeler GC Notification. 
+- `OTP_NOTIFY_TOKEN_VALIDITY` : Temps en secondes avant l’expiration du jeton [Cliquer ici pour lire la documentation](https://django-otp-notify.readthedocs.io/en/latest/) 
+
+#### Formulaire de contact et Freshdesk 
+
+Le formulaire de contact envoie toute demande à Freshdesk. 
+- `FRESHDESK_API_KEY` : Votre clé API utilisateur générée dans Freshdesk. 
+- `FRESHDESK_API_ENDPOINT` : Votre domaine Freshdesk se terminant par `/api/v2/`. 
+- `FRESHDESK_PRODUCT_ID` : Si vous utilisez plusieurs produits, utilisez cette variable pour préciser où les commentaires doivent être acheminés. 
+
+##### Configuration des courriels 
+- Nous utilisons [GC Notification] (https://notification.canada.ca/) pour envoyer les courriels et messages textes destinés aux utilisateurs. 
+
+#### Configuration de New Relic 
+Nous utilisons New Relic pour surveiller les erreurs côté serveur et la performance de l’application en environnement de production et de préproduction. Nous n’utilisons pas les rapports de mesures du client New Relic (côté navigateur). 
+- `NEW_RELIC_APP_NAME` : Nom de l’application configurée dans New Relic. 
+- `NEW_RELIC_LICENSE_KEY` : Informations d’identification nécessaires pour s’authentifier auprès de New Relic.
+
+</div>
+</details>
+
+<strong>[Exemple de fichier `.env` ](https://github.com/cds-snc/covid-healthcare-portal/blob/main/portal/.env.example)</strong>
+
+## Développement local
+
+Cette section décrit comment exécuter le projet sur votre appareil local. Vous pouvez également [exécuter l’application à l’aide de docker-compose](#running-using-docker-compose) qui comprend toutes les dépendances et tous les services requis. Cette configuration peut être plus simple, selon vos préférences et votre expérience.
 
 ### Dépendances externes
 
-Si vous exécutez l’application à l’aide de Docker Compose et du conteneur inclus, cette dépendance est déjà comprise. Si toutefois l’exécution se fait dans un environnement virtuel local, vous devrez installer cairo pour générer les affiches PDF : `brew install cairo`
+Si vous exécutez l’application à l’aide de docker-compose, cette dépendance est déjà comprise. Si toutefois, vous exécutez l’application dans un environnement virtuel local, vous devez installer cairo pour générer les affiches PDF.
+
+Utiliser Homebrew sur MacOS : 
+
+``` brew install cairo ```
 
 ### Activer un virtualenv
 
 Installez [`pipenv`](https://pypi.org/project/pipenv/).
 
 ```sh
-# cd into project folder
-pipenv --three        # create a new virtualenv
-pipenv shell          # activate virtualenv
-pipenv install        # install dependencies
-pipenv install --dev  # install dependencies
+# changez de répertoire (cd) pour accéder au répertoire de projet
+pipenv --three # créez un nouveau virtualenv 
+pipenv shell # activez le virtualenv 
+pipenv install --dev # installez les dépendances dev
 ```
 
-### Exécuter l’appli pour une première fois
+### Base de données
 
-**Démarrage rapide:** Après avoir activé un environnement virtuel, exécutez le script `entrypoint.sh` pour effectuer les migrations de base de données, la collecte de fichiers statiques et la compilation des fichiers CSS. Une instance de l'application sera alors démarré et sera accessible à `http://127.0.0.1:8000 /` ou `http://localhost:8000`.
+Vous devez exécuter une base de données PostgreSQL. Vous pouvez en installer une en utilisant Homebrew sur MacOS : 
 
-Pour une configuration plus approfondie des différentes options d'environnement, veuillez suivre les instructions ci-dessous après avoir activé votre environnement virtuel et déplacé dans le dossier `portal` de niveau supérieur.
+``` brew install postgresql ```
 
-Copiez `./portal/.env.example` vers `./portal/.env` et fournissez les valeurs adéquates pour votre configuration.
+NOTE : Les versions antérieures de ce projet utilisaient une base de données SQLite par défaut si aucune base de données n’était configurée. Certaines fonctionnalités comprises dans la fonction éclosions dépendent des fonctionnalités de PostgreSQL. Les bases de données SQLite ne sont donc plus recommandées.
 
-#### 1. Migrations de bases de données
+Assurez-vous d’avoir configuré la variable d’environnement `DATABASE_URL` en fonction de votre configuration PostgreSQL, en utilisant le format suivant :
 
-Par défaut, Django crée une base de données SQLite, mais nous utilisons Postgres en production.
+`postgres://USER:PASSWORD@HOST:PORT/NAME`
 
-Si une variable d’environnement `DATABASE_URL` existe, elle configurera tous les paramètres de connexion au même moment.
+#### Migrations de bases de données
 
-##### Postgres [URL schema](https://github.com/jacobian/dj-database-url#url-schema)
+Migrez la base de données en exécutant :
 
-| Django Backend                  | DATABASE_URL                              |
-| ------------------------------- | ----------------------------------------- |
-| `django.db.backends.postgresql` | `postgres://USER:PASSWORD@HOST:PORT/NAME` |
+``` python manage.py migrate ```
 
-Pour créer le schéma de base de données, exécutez `python manage.py makemigrations`
+Lors de la création ou de la modification de modèles existants, vous devrez générer des migrations pour synchroniser votre base de données :
 
-Ensuite, créez les tableaux en exécutant `python manage.py migrate`
+``` python manage.py makemigrations ```
 
-#### 2. Compilation des fichiers SCSS en CSS
+Pour en savoir plus, consultez ce document d’aide sur les [migrations Django](https://docs.djangoproject.com/en/3.2/topics/migrations/) (en anglais).
 
-Vous devrez générer le fichier `profiles/static/css/styles.css` en compilant les fichiers SCSS. Pour générer le fichier une seule fois, exécutez :
+### Compiler le code CSS
 
-```
-python manage.py sass profiles/static/scss/ profiles/static/css/
-```
+Pour compiler les fichiers SCSS en CSS une fois :
 
-Si vous développez l’application et que vous voulez voir vos changements de styles être appliqués au fur et à mesure que vous les faites, vous pouvez utiliser le flag `--watch`.
+``` pipenv run css ```
 
-```
-python manage.py sass profiles/static/scss/ profiles/static/css/ --watch
-```
+Si vous développez l’application et souhaitez que vos modifications de style soient appliquées en effectuant des modifications, vous pouvez utiliser la commande csswatch :
 
-Remarquez que surveiller ainsi le SCSS nécessitera d’avoir une nouvelle fenêtre du terminal pour exécuter le serveur de développement. Si vous utilisez iTerm, vous pouvez ouvrir un nouvel onglet avec `Command + t` ou ajouter une subdivision avec `Command + d`. N’oubliez pas d’activer votre environnement virtuel dans votre nouvelle subdivision à l’aide de `pipenv shell` et `pipenv install`.
+``` pipenv run csswatch ```
 
-#### 3. Création d’un super utilisateur admin (facultatif)
+### Créer un super utilisateur administrateur (facultatif)
 
-Cette application vous permet d’utiliser l’admin (`/admin`) pour gérer les utilisateurs, même si les utilisateurs peuvent s’inscrire eux-mêmes.
+Cette application vous permet d’utiliser le panneau d’administration Django (`/admin`) pour gérer les utilisateurs.
 
-Pour accéder au chemin `/admin` vous devrez créer un compte de super utilisateur.
+Pour accéder au chemin d’accès `/admin`, vous devez créer un compte super utilisateur.
 
 Exécutez `python manage.py createsuperuser` pour créer un super utilisateur.
 
-#### 4. Exécution du serveur de développement
+### Exécuter le serveur de développement
 
-Exécutez ensuite `python manage.py runserver` pour faire fonctionner l’application. Rendez-vous à `http://127.0.0.1:8000/` pour voir la page d’accueil.
+Exécutez ensuite `python manage.py runserver` pour lancer l’application. Accédez à `http://127.0.0.1:8000/` pour afficher la page d’ouverture de session.
 
-### Exécuter avec Docker Compose
+## Exécuter l’application à l’aide de docker-compose
 
-> [Compose](https://docs.docker.com/compose/) est un outil pour définir et exécuter des applications Docker multiconteneurs. Avec Compose, vous utilisez un fichier YAML pour configurer les services de votre application. Puis, avec une seule commande, vous créez et lancez tous les services à partir de votre configuration.
+> [Compose](https://docs.docker.com/compose/) est un outil permettant de définir et d’exécuter des applications Docker multiconteneurs. Avec Compose, un fichier YAML est utilisé pour configurer les services de votre application. Puis, avec une seule commande, tous les services sont créés et exécutés à partir de votre configuration.
 
-Vous pouvez utiliser Docker Compose pour construire un conteneur d’application parallèlement à une base de données Postgres. Il va mapper vos fichiers locaux dans un conteneur Docker, créer une base de données PostgreSQL et faire une compilation CSS et une migration de base de données. L’application s’exécute sur le port `8000`, la base de donnée sur le port `5432` (u: `user`, p: `password`) et sera desservie à l’adresse `http://0.0.0.0:8000`.
+Vous pouvez utiliser Docker Compose pour créer un conteneur d’applications avec une base de données Postgres. Docker Compose établira un lien entre vos fichiers locaux et un conteneur Docker; créera une base de données PostgreSQL, et effectuera une compilation CSS et une migration de base de données. L’application s’exécute sur le port `8000`, la base de données sur le port `5432` (u : `utilisateur`, p : `mot de passe`), et est traitée à l’adresse http://0.0.0.0:8000.
 
-Vous pouvez les le processus étape par étape sur [Django, Docker, et PostgreSQL Tutorial](https://learndjango.com/tutorials/django-docker-and-postgresql-tutorial) (en anglais).
+Lisez le processus étape par étape dans le [tutoriel Django, Docker et PostgreSQL](https://learndjango.com/tutorials/django-docker-and-postgresql-tutorial) (en anglais).
 
-### Exécuter
+### Exécuter l’application
 
-1. Créez l’application : `docker-compose up`
-2. Arrêter l’exécution de l’application : `Command + c` ou `docker-compose down`
+1. Lancez l’application : `docker-compose up`
+2. Arrêtez l’application : `Command + c` ou `docker-compose down`
 
-### Traductions
+## Traductions
 
-Nous utilisons la bibliothèque Django par défaut pour ajouter de contenu en anglais et en français.
+Nous utilisons la [bibliothèque de traduction par défaut de Django](https://docs.djangoproject.com/en/3.2/topics/i18n/translation/) pour ajouter du contenu en français et en anglais.
 
-Voici un survol rapide de la façon d’ajouter des chaînes de caractères traduites dans l’application.
-
-Ajoutez votre chaîne de caractères à un modèle en utilisant le tag `trans`.
+Lorsque vous mettez à jour ou ajoutez une nouvelle chaîne localisée, par exemple dans un fichier modèle :
 
 ```
 # profiles/templates/profiles/start.html
@@ -339,16 +475,54 @@ Ajoutez votre chaîne de caractères à un modèle en utilisant le tag `trans`.
 <h1>{% trans "Generate code for Exposure Notification app" %}</h1>
 ```
 
-Exécutez `python manage.py makemessages -l fr --add-location=file --no-wrap` pour mettre à jour le fichier de traductions `django.po` à l’intérieur de `/locale`.
+Vous devez exécuter la commande suivante pour repérer les chaînes localisées et les ajouter aux fichiers de paramètres régionaux :
+
+``` python manage.py makemessages -l fr --add-location=file --no-wrap ```
+
+Cette commande collectera toutes les chaînes localisées dans le fichier `locale/django.po`. Par exemple :
 
 ```
-# locale/fr/LC_MESSAGES/django.po
+# locale/fr/LC\_MESSAGES/django.po
 
-#: profiles/templates/profiles/start.html:7
-msgid "Generate code for Exposure Notification app"
-msgstr "Générer du code pour l'application de notification d'exposition"
+#: profiles/templates/profiles/start.html:7 msgid "Generate code for Exposure Notification app" msgstr "Générer du code pour l’application de notification d’exposition"
 ```
+Une fois la chaîne traduite dans le fichier .po, vous devez compiler les traductions dans le fichier `django.mo` en exécutant la commande suivante :
 
-Exécutez `python manage.py compilemessages` pour compiler les traductions afin que Django sache comment les utiliser.
+``` python manage.py compilemessages ```
 
-Pour obtenir de la documentation plus exhaustive, veuillez vous référer à celle des [traductions Django](https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#translation) (en anglais).
+Pour plus de détails, consultez la documentation de [Django sur la traduction](https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#translation) (en anglais).
+
+## Flux de travail de développement
+
+### Développement de fonctionnalités
+
+Le développement des fonctionnalités sur le portail suit un flux de travail de [développement basé sur un tronc commun](https://trunkbaseddevelopment.com/) (en anglais). La branche `main` contient le code le plus à jour et est toujours prête pour la production. Lors de la création d’une nouvelle fonctionnalité (ou d’un correctif, etc.), une nouvelle branche est créée à partir de la pointe de la branche `main`. Une fois le travail terminé, la fonctionnalité est fusionnée dans la branche `main` au moyen d’une demande de tirage (<i>pull request</i>). Les demandes de tirage doivent subir une série de [tests automatisés](https://github.com/cds-snc/covid-alert-portal#automated-tests) (tests unitaires, analyse statique, etc.), ainsi qu’une révision manuelle par un autre développeur. Une fois les tests automatisés terminés et la demande de tirage approuvée, le code est fusionné dans la branche `main` et la branche de fonctionnalité est supprimée. La branche `main` est protégée contre le fusionnement direct ou forcé — les demandes de tirage sont obligatoires.
+
+### Gestion des versions de l’application
+
+Nous conservons le numéro de version dans un [fichier racine `VERSION`](https://github.com/cds-snc/covid-alert-portal/blob/main/VERSION) et le journal des modifications dans le [fichier racine `CHANGELOG.md`](https://github.com/cds-snc/covid-alert-portal/blob/main/CHANGELOG.md). Nous suivons les [conventions de la gestion sémantique des versions](https://semver.org/) pour l’application et le fichier Changelog suit le format suggéré par [keepachangelog.com](https://keepachangelog.com/en/1.0.0/).
+
+Les demandes de tirage ne mettent pas forcément à jour la version de l’application — en fait, la plupart d’entre eux ne le font pas. Les demandes de tirage avec de nouvelles fonctionnalités ou des correctifs nécessitent une mise à jour du fichier Changelog, sous « Unreleased ». Lors de la publication d’une nouvelle version, toutes les modifications non publiées sont incluses. Ne vous en faites pas si quelque chose ne figure pas dans le journal des modifications lorsqu’une branche est fusionnée - `CHANGELOG.md` est un fichier tout à fait normal et peut être corrigé rétroactivement.
+
+Notez que la publication d’une modification à l’environnement de production **exige** une nouvelle version du fichier `VERSION`. Le journal des modifications est tenu à jour par convention, mais ne doit pas forcément être synchronisé avec la version du fichier VERSION.
+
+### Tests automatisés
+
+Nous utilisons [GitHub Actions](https://github.com/features/actions) comme plateforme d’intégration continue : elle nous permet d’exécuter nos tests automatisés et d’automatiser nos déploiements.
+
+Nos tests automatisés comprennent :
+
+- `pipenv run test` : Exécute notre suite de tests unitaires (pour l’intégration continue, nous les exécutons dans les versions Python 3.6, 3.7, 3.8)
+- `pipenv run format --check` : fait appel à l’outil de formatage Python `black` pour assurer l’uniformité de notre code
+- `pipenv run lint` : fait appel à `flake8` pour assurer la conformité au guide de style Python
+- Snyk (SaaS) : repère les dépendances vulnérables
+- LGTM (SaaS) : repère les symptômes de code (<i>code smells</i>) et les pratiques de codage non sécurisées
+- `terraform plan` : si la configuration terraform a été modifiée, `terraform plan` affichera les changements entre l’infrastructure actuelle et les fichiers dans la demande de tirage.
+- `terraform security-scan` : signalera tout changement de configuration dangereux
+
+Nous avons également un test automatisé pour la couverture du code, qui échoue si la couverture du code est inférieure à 80 %. Nous utilisons la bibliothèque [`coverage`](https://coverage.readthedocs.io/en/coverage-5.3/), selon les recommandations dans la documentation de Django. La configuration de `coverage` se trouve dans [`pyproject.toml`](https://github.com/cds-snc/covid-alert-portal/blob/main/pyproject.toml).
+
+- `pipenv run coverage_test` : lance les tests unitaires pour générer le rapport
+- `pipenv run coverage_report` : affiche le rapport
+
+---
