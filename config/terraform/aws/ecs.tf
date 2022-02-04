@@ -135,7 +135,6 @@ resource "aws_ecs_service" "covidportal" {
   name             = var.ecs_covid_portal_name
   cluster          = aws_ecs_cluster.covidportal.id
   task_definition  = aws_ecs_task_definition.covidportal.arn
-  launch_type      = "FARGATE"
   platform_version = "1.4.0"
   # Enable the new ARN format to propagate tags to containers (see config/terraform/aws/README.md)
   propagate_tags = "SERVICE"
@@ -167,7 +166,7 @@ resource "aws_ecs_service" "covidportal" {
     capacity_provider = "FARGATE"
     weight            = 1
     base              = 2
-  }  
+  }
 
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
@@ -192,7 +191,6 @@ resource "aws_ecs_service" "qrcode" {
   name             = var.ecs_qrcode_name
   cluster          = aws_ecs_cluster.covidportal.id
   task_definition  = aws_ecs_task_definition.qrcode.arn
-  launch_type      = "FARGATE"
   platform_version = "1.4.0"
   # Enable the new ARN format to propagate tags to containers (see config/terraform/aws/README.md)
   propagate_tags = "SERVICE"
@@ -224,7 +222,7 @@ resource "aws_ecs_service" "qrcode" {
     capacity_provider = "FARGATE"
     weight            = 1
     base              = 2
-  } 
+  }
 
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
