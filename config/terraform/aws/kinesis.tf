@@ -1,3 +1,9 @@
+locals {
+  cbs_satellite_bucket_name   = "${var.cbs_satellite_bucket_name_prefix}${data.aws_caller_identity.current.account_id}"
+  cbs_satellite_bucket_arn    = "arn:aws:s3:::${local.cbs_satellite_bucket_name}"
+  cbs_satellite_bucket_prefix = "waf_acl_logs/AWSLogs/${data.aws_caller_identity.current.account_id}/"
+}
+
 ###
 # AWS Kinesis Firehose - IAM Role
 ###
@@ -43,10 +49,8 @@ resource "aws_iam_role_policy" "firehose_waf_logs" {
         "s3:PutObject"
       ],
       "Resource": [
-        "${aws_s3_bucket.firehose_waf_logs.arn}",
-        "${aws_s3_bucket.firehose_waf_logs.arn}/*",
-        "${aws_s3_bucket.firehose_waf_logs_qrcode.arn}",
-        "${aws_s3_bucket.firehose_waf_logs_qrcode.arn}/*"
+        "${local.cbs_satellite_bucket_arn}",
+        "${local.cbs_satellite_bucket_arn}/*"
       ]
     },
     {
@@ -64,26 +68,32 @@ EOF
 ###
 resource "aws_kinesis_firehose_delivery_stream" "firehose_waf_logs" {
   name        = "aws-waf-logs-covid-portal"
-  destination = "s3"
+  destination = "extended_s3"
+
   server_side_encryption {
     enabled = true
   }
 
-  s3_configuration {
-    role_arn   = aws_iam_role.firehose_waf_logs.arn
-    bucket_arn = aws_s3_bucket.firehose_waf_logs.arn
+  extended_s3_configuration {
+    role_arn           = aws_iam_role.firehose_waf_logs.arn
+    prefix             = local.cbs_satellite_bucket_prefix
+    bucket_arn         = local.cbs_satellite_bucket_arn
+    compression_format = "GZIP"
   }
 }
 
 resource "aws_kinesis_firehose_delivery_stream" "firehose_waf_logs_qrcode" {
   name        = "aws-waf-logs-qrcode"
-  destination = "s3"
+  destination = "extended_s3"
+
   server_side_encryption {
     enabled = true
   }
 
-  s3_configuration {
-    role_arn   = aws_iam_role.firehose_waf_logs.arn
-    bucket_arn = aws_s3_bucket.firehose_waf_logs_qrcode.arn
+  extended_s3_configuration {
+    role_arn           = aws_iam_role.firehose_waf_logs.arn
+    prefix             = local.cbs_satellite_bucket_prefix
+    bucket_arn         = local.cbs_satellite_bucket_arn
+    compression_format = "GZIP"
   }
 }
