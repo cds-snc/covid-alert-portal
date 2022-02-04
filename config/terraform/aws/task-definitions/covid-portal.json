@@ -1,25 +1,5 @@
 [
   {
-    "name": "${name}",
-    "image": "${image}",
-    "portMappings": [
-      {
-        "containerPort": 8000
-      }
-    ],
-    "linuxParameters": {
-      "capabilities": {
-        "drop": ["ALL"]
-      }
-    },
-    "logConfiguration": {
-      "logDriver": "awslogs",
-      "options": {
-        "awslogs-group": "${awslogs-group}",
-        "awslogs-region": "${awslogs-region}",
-        "awslogs-stream-prefix": "${awslogs-stream-prefix}"
-      }
-    },
     "environment": [
       {
         "name": "METRIC_PROVIDER",
@@ -52,6 +32,28 @@
       {
         "name": "QRCODE_GA_ID",
         "value": "G-J1BT97XQ6P"
+      }
+    ],
+    "image": "${image}",
+    "linuxParameters": {
+      "capabilities": {
+        "drop": [
+          "ALL"
+        ]
+      }
+    },
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${awslogs-group}",
+        "awslogs-region": "${awslogs-region}",
+        "awslogs-stream-prefix": "${awslogs-stream-prefix}"
+      }
+    },
+    "name": "${name}",
+    "portMappings": [
+      {
+        "containerPort": 8000
       }
     ],
     "secrets": [
