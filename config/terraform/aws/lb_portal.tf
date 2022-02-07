@@ -63,6 +63,12 @@ resource "aws_lb" "covidportal" {
   ]
   subnets = aws_subnet.covidportal_public.*.id
 
+  access_logs {
+    bucket  = local.cbs_satellite_bucket_name
+    enabled = true
+    prefix  = "lb_logs"
+  }
+
   tags = {
     Name                  = "covidportal"
     (var.billing_tag_key) = var.billing_tag_value

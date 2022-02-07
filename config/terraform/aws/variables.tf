@@ -232,3 +232,8 @@ variable "rds_server_instance_class" {
 variable "route53_zone_name" {
   type = string
 }
+
+variable "cbs_satellite_bucket_name_prefix" {
+  description = "Name prefix for the Cloud Based Sensor satellite bucket"
+  type        = string
+}

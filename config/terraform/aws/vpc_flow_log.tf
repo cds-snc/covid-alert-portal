@@ -54,3 +54,16 @@ resource "aws_iam_role_policy" "vpc_flow_logs" {
 }
 EOF
 }
+
+resource "aws_flow_log" "cloud_based_sensor" {
+  log_destination      = "${local.cbs_satellite_bucket_arn}/vpc_flow_logs/"
+  log_destination_type = "s3"
+  traffic_type         = "ALL"
+  vpc_id               = aws_vpc.covidportal.id
+  log_format           = "$${vpc-id} $${version} $${account-id} $${interface-id} $${srcaddr} $${dstaddr} $${srcport} $${dstport} $${protocol} $${packets} $${bytes} $${start} $${end} $${action} $${log-status} $${subnet-id} $${instance-id}"
+
+  tags = {
+    (var.billing_tag_key) = var.billing_tag_value
+    Terraform             = true
+  }
+}
