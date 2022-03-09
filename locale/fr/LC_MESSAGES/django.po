@@ -1349,7 +1349,7 @@ msgstr ""
 #: portal/templates/decommission/login.html
 #: portal/templates/registration/login.html
 msgid "Thanks for your essential work"
-msgstr "Merci pour tout votre travail"
+msgstr "Merci pour votre travail essentiel"
 
 #: portal/templates/decommission/includes/footer.html
 #: portal/templates/decommission/privacy.html
