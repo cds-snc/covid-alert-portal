@@ -168,6 +168,38 @@ class SentAlertFilter(admin.SimpleListFilter):
             ).distinct()
 
 
+@admin.action(description=_("Mark non-super user(s) INACTIVE"))
+def deactivate_users(modeladmin, request, queryset):
+    count = 0
+    for user in queryset:
+        if user.is_superuser:
+            modeladmin.message_user(
+                request, _(f"{user.email} is a super user, ignored."), messages.WARNING
+            )
+        else:
+            if not user.is_active:
+                modeladmin.message_user(
+                    request,
+                    _(f"{user.email} is already disabled, ignored."),
+                    messages.WARNING,
+                )
+            else:
+                user.is_active = False
+                user.save()
+                modeladmin.message_user(
+                    request, _(f"{user.email} has been disabled."), messages.SUCCESS
+                )
+                count += 1
+    if count:
+        modeladmin.message_user(
+            request, _(f"{count} accounts have been deactivated."), messages.SUCCESS
+        )
+    else:
+        modeladmin.message_user(
+            request, _("No accounts have been deactivated."), messages.WARNING
+        )
+
+
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
     form = UserChangeForm
@@ -195,6 +227,7 @@ class UserAdmin(BaseUserAdmin):
         SentAlertFilter,
         SurveySentFilter,
     )
+    actions = [deactivate_users]
 
     def can_send_alerts(self, user: HealthcareUser):
         return user.has_perm("profiles.can_send_alerts")
@@ -287,49 +320,42 @@ class UserAdmin(BaseUserAdmin):
     def send_survey_by_id(id, modeladmin, request, queryset):
         count = 0
         for healthcare_user in queryset:
-            if not healthcare_user.notification_set.exists():
+            reg_surveys = healthcare_user.survey_recipient.filter(survey_id=id)
+            if reg_surveys:
                 modeladmin.message_user(
                     request,
-                    _(f"{healthcare_user.email} has not sent an alert."),
+                    _(
+                        f"{healthcare_user.email} has already had this survey sent to them."
+                    ),
                     messages.WARNING,
                 )
             else:
-                reg_surveys = healthcare_user.survey_recipient.filter(survey_id=id)
-                if reg_surveys:
+                reg_survey = HealthcareUserSurvey.objects.create(
+                    healthcare_user=healthcare_user,
+                    survey_id=id,
+                    sent_by=request.user,
+                    sent_ts=timezone.now(),
+                )
+                try:
+                    survey = reg_survey.survey
+                    template_id = (
+                        survey.en_notify_template_id
+                        if healthcare_user.language_cd == "en"
+                        else survey.fr_notify_template_id
+                    )
+                    send_email(
+                        healthcare_user.email,
+                        {"url": survey.url},
+                        template_id,
+                    )
+                    count += 1
+                except Exception as e:
                     modeladmin.message_user(
                         request,
-                        _(
-                            f"{healthcare_user.email} has already had this survey sent to them."
-                        ),
-                        messages.WARNING,
+                        _(f"{str(e)} :: email: {healthcare_user.email}"),
+                        messages.ERROR,
                     )
-                else:
-                    reg_survey = HealthcareUserSurvey.objects.create(
-                        healthcare_user=healthcare_user,
-                        survey_id=id,
-                        sent_by=request.user,
-                        sent_ts=timezone.now(),
-                    )
-                    try:
-                        survey = reg_survey.survey
-                        template_id = (
-                            survey.en_notify_template_id
-                            if healthcare_user.language_cd == "en"
-                            else survey.fr_notify_template_id
-                        )
-                        send_email(
-                            healthcare_user.email,
-                            {"url": survey.url},
-                            template_id,
-                        )
-                        count += 1
-                    except Exception as e:
-                        modeladmin.message_user(
-                            request,
-                            _(f"{str(e)} :: email: {healthcare_user.email}"),
-                            messages.ERROR,
-                        )
-                        reg_survey.delete()
+                    reg_survey.delete()
         if count:
             modeladmin.message_user(
                 request, _(f"Sent {count} messages successfully"), messages.SUCCESS

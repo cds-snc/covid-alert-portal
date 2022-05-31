@@ -8,6 +8,124 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 - Remove Basicauth
 
+## [2.3.3] - 2022-01-26
+
+## Updated
+
+- Updated black to version 21.12b0 from 21.8b0 
+- Updated cairocffi to version 1.3.0 from 1.2.0 
+- Updated cffi to version 1.14.6 from 1.14.5
+- Updated certifi to version 2021.10.8 from 2021.5.30
+- Updated charset-normalizer to version 2.0.10 from 2.0.4
+- Updated click to version 8.0.3 from 8.0.1
+- Updated dependency-injector to version 4.37.0 from 4.36.0
+- Updated django to version 3.2.11 from version 3.2.1
+- Updated django-appconf to version 1.0.5 from 1.0.5
+- Updated django-axes to version 5.31.0 from 5.24.0
+- Updated django-cors-headers to version 3.11.0 from 3.8.0
+- Updated django-ipware to version 4.0.2 from 4.0.0
+- Updated django-otp to version 1.1.3 from 1.0.6
+- Updated django-otp-yubikey to version 1.0.1 from 1.0.0.post1
+- Updated django-phonenumber-field to version 6.0.0 from 5.2.0
+- Updated django-project-version to 0.16.0 from 0.15.1
+- Updated django-solo to version 2.0.0 from 1.1.5
+- Updated django-waffle to version 2.3.0 from 2.2.1
+- Updated django-widget-tweaks to 1.4.12 from 1.4.8
+- Updated idna to version 3.3 from 3.2
+- Updated newrelic to version 7.2.4.171 from 6.8.1.164
+- Updated notifications-python-client to 6.3.0 from 6.2.1
+- Updated phonenumbers to 8.12.41 from 8.12.31
+- Updated pillow to 9.0.0 from 8.3.2
+- Updated platformdirs to 2.4.1 from 2.3.0
+- Updated protobuf to 3.19.3 from 3.18.0rc2
+- Updated psycopg2-binary to 2.9.3 from 2.9.1
+- Updated pycparser to 2.21 from 2.20
+- Updated pycryptodome to 3.12.0 from 3.10.1
+- Updated pyjwt to 2.3.0 from 2.1.0
+- Updated pynacl to 1.5.0 from 1.4.0
+- Updated python-dotenv to 0.19.2 from 0.19.0
+- Udpated python-stdnum to 1.17 from 1.16
+- Updated pytz to 2021.3 from 2021.1
+- Updated requests to 2.27.1 from 2.26.0
+- Updated segno to 1.4.1 from 1.3.3
+- Updated soupsieve to 2.3.1 from 2.2.1
+- Updated tinycss2 to 1.1.1 from 1.1.0
+- Updated tomli to 1.2.3 from 1.2.1
+- Udpated typing-extensions to 4.0.1 from 3.10.0.2
+- Updated urllib3 to 1.26.8 from 1.26.6
+- Updated develop/coveraget to 6.2 from 6.0b1
+- Updated flake8n to 4.0.1 from 3.9.2
+- Updated pycodestyle to 2.8.0 from 2.7.0
+- Updated pyflakes to 2.4.0 from 2.3.1 
+
+
+
+## [2.3.2] - 2021-09-13
+
+## Updated
+
+- Updated beautiful soup to version 4.10.0 from 4.9.3
+- Updated black to version 21.8b0 from 21.6b0
+- Updated cffi to version 1.14.6 from 1.14.5
+- Updated dependency-injector to version 4.36.0 from 4.34.0
+- Updated django to version 3.2.7 from 3.2.5
+- Updated django-axes to version 5.24.0 from 5.20.0
+- Updated django-cors-headers to version 3.8.0 from 3.7.0
+- Updated django-ipware to version 4.0.0 from 3.0.2
+- Updated django-sass to version 1.1.0 from 1.0.1
+- Updated django-waffle to version 2.2.1 from 2.2.0
+- Updated idna to version 3.2 from 2.10
+- Updated newrelic to version 6.8.1.164 from 6.4.3.160
+- Updated notifications-python-client to version 6.2.1 from 6.2.0
+- Updated pathspec to version 0.9.0 from 0.8.1
+- Updated phonenumbers to version 8.12.31 from 8.12.26
+- Updated pillow to version 8.3.2 from 8.3.0
+- Updated protobuf to version 3.18.0rc2 from 3.17.3 
+- Updated python-dotenv to version 0.19.0 from 0.18.0
+- Updated regex to version 2021.8.28 from 2021.7.1
+- Updated requests to version 2.26.0 from 2.25.1
+- Updated six to version 1.16.0 from 1.15.0
+- Updated sqlparse to version 0.4.2 from 0.4.1
+- Updated toml/tomli to version 1.2.1 from 0.10.2
+- Updated whitenoise to version 5.3.0 from 5.2.0
+- Updated develop to version 6.0b1 from 5.5
+- Updated python-dateutil to version 2.8.2 from 2.8.1
+
+
+## [2.3.1] - 2021-08-30
+
+## Updated
+
+- Fixed alignment issues with buttons on review page, 'Choose date and time' screens and invitations page 
+- Changed button text on confirmation page after sending alerts and changed button copy on adding new date screen 
+- Fixed up French translations 
+- Removed italics in addresses
+- Changed hint message on "Change your mobile number" page
+- Fixed up non-breaking spaces in French before colons and around text in quotes- Fixed up typos on Portal start page
+- Fixed up bolding in Terms of Use page
+
+
+## [2.3.0] - 2021-08-09
+
+## Updated
+
+- Remove QR code DNS health check 
+- Fix/send Alert menu fix
+- Update the address complete api key 
+- Changes to "Sending Alerts" screen
+- QR code 403 changes 
+- Fix French apostrophes
+- Removed lock for sending surveys to health care users regardless of whether they sent an alert previously or not.
+
+## Added
+
+- Added CloudWatch synthetic canary to monitor QR code
+- Added CloudWatch alarm for unhealthy QR code canary 
+- Enabled AWS Shield for QR Code 
+- Enable sending of surveys to healthcare users
+- Added new bulk action for marking inactive
+
+
 ## [2.2.0] - 2021-07-07
 
 ## Updated
