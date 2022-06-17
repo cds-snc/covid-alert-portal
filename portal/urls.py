@@ -104,7 +104,16 @@ if settings.APP_SWITCH == "PORTAL" or settings.APP_SWITCH == "UNIT":
                 Resend2FAView.as_view(),
                 name="resend_2fa",
             ),
-            path("login/", login_views.LoginView.as_view(), name="login")
+            path(
+                "invitations/",
+                 include(invitation_patterns, namespace="invitations"),
+            ),
+            path("contact/", include("contact.urls")),
+            path("about/", include("about.urls")),
+            path("outbreaks/", include("outbreaks.urls")),
+            path("", include("profiles.urls")),
+            path("", include("covid_key.urls")),
+            path("", include("backup_codes.urls")),
         )
     else:
         urlpatterns += i18n_patterns(
