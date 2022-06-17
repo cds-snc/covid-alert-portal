@@ -343,6 +343,43 @@ resource "aws_wafv2_web_acl" "qrcode_acl" {
     }
   }
 
+  rule {
+    name     = "RedirectLoginToHome"
+    priority = 110
+
+    action {
+      block {
+        custom_response {
+          response_code = 301
+          response_header {
+            name  = "Location"
+            value = "https://staging.covid-hcportal.cdssandbox.xyz"
+          }
+        }
+      }
+    }
+
+    statement {
+      byte_match_statement {
+        field_to_match {
+          uri_path {}
+        }
+        positional_constraint = "CONTAINS"
+        search_string         = "/login"
+        text_transformation {
+          type     = "LOWERCASE"
+          priority = 0
+        }
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "RedirectLoginToHome"
+      sampled_requests_enabled   = true
+    }
+  }
+
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
   }
