@@ -452,7 +452,6 @@ msgid "Error: "
 msgstr "Erreur : "
 
 #: backup_codes/templates/backup_codes/backup_codes_help.html
-#: profiles/templates/profiles/2fa.html
 msgid "No log in code?"
 msgstr "Pas de code de connexion?"
 
@@ -1290,7 +1289,7 @@ msgstr "Veuillez utiliser <a href=\"%(login_url)s\">le site principal pour vous 
 msgid "Skip to main content"
 msgstr "Passer au contenu principal"
 
-#: portal/templates/base.html
+#: portal/templates/base.html portal/templates/decommission/base.html
 msgid "COVID Alert Portal"
 msgstr "Portail Alerte COVID"
 
@@ -1322,10 +1321,173 @@ msgstr "Utilisez le code reçu par message texte ou l’un de ceux que avez cons
 msgid "Resend log in code?"
 msgstr "Renvoyer un code de connexion"
 
+#: portal/templates/decommission/decommission.html
+#, fuzzy
+#| msgid "No log in code?"
+msgid "No longer in service"
+msgstr "Pas de code de connexion?"
+
+#: portal/templates/decommission/decommission.html
+msgid "The portal is no longer in service"
+msgstr "Ce portail n’est plus en service"
+
+#: portal/templates/decommission/decommission.html
+msgid ""
+"\n"
+"            <p>\n"
+"                The COVID Alert service has been retired. You can no longer log into this portal or generate keys. For more information, visit <a href=\"http://canada.ca/covid-alert\">canada.ca/covid-alert.</a>\n"
+"            </p>\n"
+"        "
+msgstr ""
+"\n"
+"            <p>\n"
+"                Le service Alerte COVID a été retiré. Vous ne pouvez plus vous connecter au portail ni générer de clés. Pour en savoir plus, consultez <a href=\"http://canada.ca/alerte-covid\">canada.ca/alerte-covid.</a></p>\n"
+"            </p>\n"
+"        "
+
+#: portal/templates/decommission/decommission.html
+#: portal/templates/decommission/login.html
+#: portal/templates/registration/login.html
+msgid "Thanks for your essential work"
+msgstr "Merci pour votre travail essentiel"
+
+#: portal/templates/decommission/includes/footer.html
+#: portal/templates/decommission/privacy.html
+#: portal/templates/includes/footer.html
+#: profiles/templates/profiles/privacy.html
+#: register/templates/register/includes/footer.html
+msgid "Privacy"
+msgstr "Confidentialité"
+
+#: portal/templates/decommission/includes/footer.html
+#: portal/templates/decommission/terms.html
+#: portal/templates/includes/footer.html profiles/templates/profiles/terms.html
+#: register/templates/register/includes/footer.html
+#: register/templates/register/terms.html
+msgid "Terms of use"
+msgstr "Conditions d’utilisation"
+
+#: portal/templates/decommission/includes/footer.html
+#: portal/templates/includes/footer.html
+#: register/templates/register/includes/footer.html
+msgid "Symbol of the Government of Canada"
+msgstr "Symbole du gouvernement du Canada"
+
+#: portal/templates/decommission/includes/nav_header.html
+#: portal/templates/includes/nav_header.html
+#: register/templates/register/includes/nav_header.html
+msgid "Language and account navigation"
+msgstr "Navigation de compte et changement de langue"
+
+#: portal/templates/decommission/includes/nav_header.html
+#: portal/templates/includes/nav_header.html
+#: register/templates/register/includes/nav_header.html
+msgid "Language selection"
+msgstr "Choix de langue"
+
 #: portal/templates/decommission/login.html
 #: portal/templates/registration/login.html
 msgid "Only an authorized staff member can use a portal account and give a COVID Alert key."
 msgstr "Seuls les employés autorisés peuvent avoir un compte pour le portail et fournir une clé Alerte COVID."
+
+#: portal/templates/decommission/privacy.html
+#: portal/templates/decommission/terms.html
+#: portal/templates/includes/nav_main.html
+#: register/templates/register/contact_us.html
+#: register/templates/register/help_page.html
+#: register/templates/register/privacy.html
+#: register/templates/register/terms.html
+msgid "Home"
+msgstr "Accueil"
+
+#: portal/templates/decommission/privacy.html
+#: profiles/templates/profiles/privacy.html
+msgid "Privacy notice for COVID Alert Portal"
+msgstr "Avis de confidentialité pour le portail Alerte COVID"
+
+#: portal/templates/decommission/privacy.html
+#: profiles/templates/profiles/privacy.html
+msgid ""
+"\n"
+"        <ul class=\"paragraphs\">\n"
+"        <li>\n"
+"            <b>We need your personal information</b> so you can use the portal to generate one-time keys.\n"
+"        </li>\n"
+"        <li>\n"
+"            <b>We log all activity and information in the portal</b>, including:\n"
+"            <ul class=\"disc\">\n"
+"                <li>each time you generate a key.</li>\n"
+"                <li>personal information you share with the portal, such as your phone number.</li>\n"
+"            </ul>\n"
+"        </li>\n"
+"        <li>\n"
+"            <b>We study portal activity using services</b> such as Google Analytics, but we do not share personal information with these services. These services help us improve the portal.\n"
+"        </li>\n"
+"        <li>\n"
+"            <b>We are allowed to use this information and these services</b> under the <a href=\"https://laws-lois.justice.gc.ca/eng/acts/H-3.2/\"><em>Department of Health Act</em></a> and the <a href=\"https://laws-lois.justice.gc.ca/eng/acts/f-11/\"><em>Financial Administration Act</em></a>. We also follow the <a href=\"https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=26761\"> <em>Standard on Privacy and Web Analytics</em></a>.\n"
+"        </li>\n"
+"        <li>\n"
+"            <b>We’ll only share your personal information if we detect illegal activity.</b> Then we may give your information to law enforcement.\n"
+"        </li>\n"
+"        <li>\n"
+"            <b>You have the right to access, review and correct your personal information.</b> You can correct most information in the portal by yourself.\n"
+"        </li>\n"
+"        <li>\n"
+"            <b>You have the right to complain</b> about how we use your information to the <a href=\"https://www.priv.gc.ca/en/for-individuals/\" target=\"_blank\">Privacy Commissioner of Canada</a>.\n"
+"        </li>\n"
+"        </ul>\n"
+"        <h2>Questions?</h2>\n"
+"        <p>Contact <a href=\"mailto:hc.AlerteCOVIDAlert.sc@canada.ca\">Health Canada</a>.</p>\n"
+"    "
+msgstr ""
+"\n"
+"<ul class=\"paragraphs\"><li><b>Nous avons besoin de vos renseignements personnels</b> pour vous permettre d’utiliser le portail et de générer des clés à usage unique.<li><b>Nous consignons les activités et les renseignements liés au portail</b>, notamment : <ul class=\"disc\"><li>chacune des fois où vous générez une clé,</li><li>les renseignements personnels que vous partagez avec le portail, comme votre numéro de téléphone.</li></ul><li><b>Nous analysons l’activité du portail à l’aide de services</b> comme Google Analytics, mais nous ne leur transmettons aucun renseignement personnel. Ces services nous aident à améliorer le portail.</li><li><b>Nous avons l’autorisation d’utiliser ces renseignements</b> selon la <a href=\"https://laws-lois.justice.gc.ca/fra/lois/H-3.2/\"><em>Loi sur le ministère de la Santé</em></a> et la <a href=\"https://laws-lois.justice.gc.ca/fra/lois/f-11/\"><em>Loi sur la gestion des finances publiques</em></a>. Nous respectons aussi la <a href=\"https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=26761\"><em>Norme sur la protection de la vie privée et le Web analytique.</em></a></li><li><b>Nous ne partagerons vos renseignements personnels que si nous détectons des activités illégales.</b> Nous pourrions alors fournir vos renseignements aux forces policières.</li><li><b>Vous avez le droit d’accéder à vos renseignements personnels, de les réviser et de les corriger.</b> Vous pouvez corriger par vous-même la plupart des renseignements dans le portail.</li><li><b>Vous avez le droit de faire une plainte</b> au sujet de la façon dont nous utilisons vos renseignements au commissaire à la protection de la vie privée du Canada.</li></ul><h2>Des questions?</h2><p>Communiquez avec <a href=\"mailto:hc.AlerteCOVIDAlert.sc@canada.ca\">Santé Canada</a>.</p>"
+
+#: portal/templates/decommission/terms.html
+#: profiles/templates/profiles/terms.html
+msgid ""
+"\n"
+"        <p>The COVID Alert Portal is only for authorized staff in Canada.</p>\n"
+"        <p>By using the portal, you agree to follow your health authority’s procedures.</p>\n"
+"        <p>You also agree to:</p>\n"
+"        <strong><p>Only generate keys for real people</p></strong>\n"
+"        <p>Give only 1 key per positive test.</p>\n"
+"        <p>For a sample key, visit \"<a href=\"#\">Give a key</a>\".</p>\n"
+"        <strong><p>Confirm the person meets 2 conditions</p></strong>\n"
+"        <p>They've:</p>\n"
+"        <ul class=\"expanded\">\n"
+"            <li>Tested positive for COVID-19, and,</li>\n"
+"            <li>Installed the COVID Alert app on their phone.</li>\n"
+"        </ul>\n"
+"        <strong><p>Get the person’s consent before texting a key</p></strong>\n"
+"        <p>Some people may want you to text the one-time key to their mobile phone.  If your health authority offers this feature, the portal displays the button “Text key to person”.</p>\n"
+"        <strong><p>Prevent others from using your account</p></strong>\n"
+"        <p>Protect your username and password, even from other people working for a health authority.</p>\n"
+"        <strong><p>Keep the portal secure</p></strong>\n"
+"        <p>Immediately report any security issues to your administrator <strong>and</strong> <a href=\"mailto:security@cds-snc.ca\">security@cds-snc.ca</a></p>\n"
+"        <p>If we detect any misuse of the portal or security issues with your account, we’ll immediately disable your account.</p>\n"
+"    "
+msgstr ""
+"\n"
+"        <p>Le portail Alerte COVID est réservé au personnel du Canada autorisé.</p>\n"
+"        <p>En utilisant le portail, vous acceptez de suivre les procédures établies par votre autorité sanitaire.</p>\n"
+"        <p>Vous acceptez aussi de :</p>\n"
+"        <strong><p>Générer des clés uniquement pour des cas réels</p></strong>\n"
+"        <p>Ne donnez qu’une seule clé par test positif.</p>\n"
+"        <p>Pour voir un exemple de clé, consultez la page \"<a href=\"#\">Distribution des clés</a>\".</p>\n"
+"        <strong><p>Valider que la personne remplit les 2 conditions</p></strong>\n"
+"        <ul class=\"expanded\">\n"
+"            <li>Elle a reçu un test positif de COVID-19.</li>\n"
+"            <li>Elle possède l’application Alerte COVID sur son téléphone.</li>\n"
+"        </ul>\n"
+"        <strong><p>Obtenir un consentement avant d’envoyer la clé par texto</p></strong>\n"
+"        <p>Certaines personnes pourraient vouloir recevoir leur clé à usage unique par texto. Si votre autorité sanitaire permet cette fonction, vous verrez le bouton « Texter la clé » dans le portail.</p>\n"
+"        <strong><p>Empêcher d’autres personnes d’utiliser votre compte</p></strong>\n"
+"        <p>vitez de divulguer votre nom d’utilisateur et votre mot de passe, même aux personnes travaillant pour une autorité sanitaire.</p>\n"
+"        <strong><p>Assurer la sécurité du portail</p></strong>\n"
+"        <p>Signalez immédiatement tout problème de sécurité à votre administrateur <strong>et</strong> à <a href=\"mailto:security@cds-snc.ca\">security@cds-snc.ca</a></p>\n"
+"        <p>Si nous détectons une mauvaise utilisation du portail ou des problèmes de sécurité lié à votre compte, nous désactiverons immédiatement votre compte.</p>\n"
+"    "
 
 #: portal/templates/decommission/login.html
 #: portal/templates/registration/login.html
@@ -1407,28 +1569,6 @@ msgstr "à"
 msgid "Support"
 msgstr "Assistance"
 
-#: portal/templates/includes/footer.html
-#: profiles/templates/profiles/privacy.html
-#: register/templates/register/includes/footer.html
-msgid "Privacy"
-msgstr "Confidentialité"
-
-#: portal/templates/includes/footer.html profiles/templates/profiles/terms.html
-#: register/templates/register/includes/footer.html
-#: register/templates/register/terms.html
-msgid "Terms of use"
-msgstr "Conditions d’utilisation"
-
-#: portal/templates/includes/footer.html
-#: register/templates/register/includes/footer.html
-msgid "Symbol of the Government of Canada"
-msgstr "Symbole du gouvernement du Canada"
-
-#: portal/templates/includes/nav_header.html
-#: register/templates/register/includes/nav_header.html
-msgid "Language and account navigation"
-msgstr "Navigation de compte et changement de langue"
-
 #: portal/templates/includes/nav_header.html
 #: profiles/templates/profiles/healthcareuser_detail.html
 msgid "Manage your account"
@@ -1438,22 +1578,9 @@ msgstr "Gérer votre compte"
 msgid "Log out"
 msgstr "Déconnexion"
 
-#: portal/templates/includes/nav_header.html
-#: register/templates/register/includes/nav_header.html
-msgid "Language selection"
-msgstr "Choix de langue"
-
 #: portal/templates/includes/nav_main.html
 msgid "Product navigation"
 msgstr "Navigation du produit"
-
-#: portal/templates/includes/nav_main.html
-#: register/templates/register/contact_us.html
-#: register/templates/register/help_page.html
-#: register/templates/register/privacy.html
-#: register/templates/register/terms.html
-msgid "Home"
-msgstr "Accueil"
 
 #: portal/templates/includes/nav_main.html
 msgid "Generate keys"

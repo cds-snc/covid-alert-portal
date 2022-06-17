@@ -35,8 +35,8 @@ with open(os.path.join(BASE_DIR, "VERSION")) as version_file:
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = (
-    os.getenv("DJANGO_SECRET_KEY")
-    or "j$e+wzxdum=!k$bwxpgt!$(@6!iasecid^tqnijx@r@o-6x%6d"
+        os.getenv("DJANGO_SECRET_KEY")
+        or "j$e+wzxdum=!k$bwxpgt!$(@6!iasecid^tqnijx@r@o-6x%6d"
 )
 
 # Application security: should be set to True in production
@@ -187,7 +187,6 @@ AUTHENTICATION_BACKENDS = [
 
 WSGI_APPLICATION = "portal.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -223,7 +222,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "profiles.validators.HealthcareNumericPasswordValidator"},
     {"NAME": "profiles.validators.BannedPasswordValidator"},
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -284,13 +282,13 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 AUTH_USER_MODEL = "profiles.HealthcareUser"
 
-LOGIN_URL = "login"
+LOGIN_URL = "admin:login"
 OTP_LOGIN_URL = "login_2fa"
 
-LOGIN_REDIRECT_URL = "start"
-LOGOUT_REDIRECT_URL = "login"
+LOGIN_REDIRECT_URL = "admin:index"
+LOGOUT_REDIRECT_URL = "admin:login"
 OTP_NOTIFY_ENDPOINT = (
-    os.getenv("OTP_NOTIFY_ENDPOINT") or "https://api.notification.alpha.canada.ca"
+        os.getenv("OTP_NOTIFY_ENDPOINT") or "https://api.notification.alpha.canada.ca"
 )
 NOTIFY_ENDPOINT = OTP_NOTIFY_ENDPOINT
 NOTIFY_API_KEY = OTP_NOTIFY_API_KEY
@@ -501,3 +499,5 @@ WAFFLE_CREATE_MISSING_SWITCHES = True
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 PORTAL_LOCAL_TZ = "America/Toronto"  # TODO Refactor this fallback, assumption baked in here for portal users
+
+DECOMMISSION = True 

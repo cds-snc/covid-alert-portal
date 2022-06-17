@@ -211,7 +211,7 @@ class SignUp2FAView(LoginRequiredMixin, FormView):
 class Login2FAView(LoginRequiredMixin, FormView):
     form_class = Healthcare2FAForm
     template_name = "profiles/2fa.html"
-    success_url = reverse_lazy("start")
+    success_url = reverse_lazy("admin:index")
 
     @cached_property
     def has_mobile(self):
@@ -223,7 +223,7 @@ class Login2FAView(LoginRequiredMixin, FormView):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_verified():
-            return redirect(reverse_lazy("start"))
+            return redirect(reverse_lazy("admin:index"))
 
         if request.user.remoteyubikeydevice_set.first() is not None:
             return redirect(reverse_lazy("yubikey_verify"))
@@ -231,6 +231,9 @@ class Login2FAView(LoginRequiredMixin, FormView):
         if not self.has_mobile and not self.has_static_code:
             return redirect(reverse_lazy("signup_2fa"))
 
+        if self.request.user.remoteyubikeydevice_set.first() is None:
+        # Dont send SMS if the user has a Yubikey
+            generate_2fa_code(self.request.user)
         return super().get(request, *args, **kwargs)
 
     def get_initial(self):

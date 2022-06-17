@@ -1,0 +1,30 @@
+{% extends './base.html' %}
+{% load i18n static %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block title %}
+  {% trans "No longer in service" %}
+{% endblock %}
+
+{% block body_class %}login{% endblock %}
+
+{% block content %}
+<div class = "decommission__border"></div>
+<div class="column__container">
+    <div class="column column__content column--1 column-md--1-2">
+        <h1>{% trans "The portal is no longer in service" %}</h1>
+        {% blocktrans %}
+            <p>
+                The COVID Alert service has been retired. You can no longer log into this portal or generate keys. For more information, visit <a href="http://canada.ca/covid-alert">canada.ca/covid-alert.</a>
+            </p>
+        {% endblocktrans %}
+    </div>
+
+    <div class="column column__decoration column--0 column-md--1-2" aria-hidden="true">
+      <div class="ty">
+        <p class="ty__message">{% trans "Thanks for your essential work" %}</p>
+        <img class="ty__logo" src="{% static 'img/logo-'|add:request.LANGUAGE_CODE|add:'.svg' %}" alt="" />
+      </div>
+    </div>
+  </div>
+{% endblock %}

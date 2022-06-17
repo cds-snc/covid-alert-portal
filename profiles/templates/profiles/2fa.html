@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'decommission/base.html' %}
 {% load i18n %}
 
 {% block title %}
@@ -31,8 +31,6 @@
 
   {% if view.has_mobile %}
     <a href="{% url 'resend_2fa' %}">{{ _("Resend log in code?") }}</a>
-  {% else %}
-    <a href="{% url 'backup_codes_help' %}">{{ _("No log in code?") }}</a>
   {% endif %}
 
 {% endblock %}

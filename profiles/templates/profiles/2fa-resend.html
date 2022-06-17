@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'decommission/base.html' %}
 {% load i18n %}
 
 {% block title %}
@@ -13,6 +13,5 @@
   <h1>{% trans "Re-send log in code" %}</h1>
   <p>{% trans "If you did not get the code, we can send it again." %}</p>
   {% include "includes/cds_form.html" with submit_text=_("Re-send log in code") %}
-  <a href="{% url 'backup_codes_help' %}">{{ _("Cannot get text messages?") }}</a>
 
 {% endblock %}

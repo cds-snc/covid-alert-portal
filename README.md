@@ -1,5 +1,8 @@
 [La version française suit.](#portail-de-soins-de-santé-covid)
 
+**COVID Alert is now retired**:
+For more information, visit the [Government of Canada COVID Alert home page](https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/covid-alert.html).
+
 # COVID Alert Portal
 
 The COVID Alert Portal provides authenticated healthcare providers unique temporary codes which can be shared with COVID-diagnosed individuals. The code enables individuals to upload their random IDs via the mobile app if they choose. No personal information is collected by the app and there is no association between the codes and specific tests. The Portal complements the [Government of Canada COVID Alert app](https://github.com/cds-snc/covid-alert-app).
@@ -283,7 +286,11 @@ We also have an automated test for code coverage, which will fail if code covera
 
 ---
 
-[La version française suit.](#portail-de-soins-de-santé-covid)
+
+**Alerte COVID a été mis hors service**.
+Pour en savoir davantage, visitez la:
+[page d'accueil d’Alerte COVID du gouvernement du Canada](https://www.canada.ca/fr/sante-publique/services/maladies/maladie-coronavirus-covid-19/alerte-covid.html).
+
 
 # Portail Alerte COVID
 

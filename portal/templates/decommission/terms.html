@@ -1,0 +1,36 @@
+{% extends './base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Terms of use" %}
+{% endblock %}
+
+{% block content %}
+<div class="content-back-link">
+      <a href="{% url 'decommission' %}" class="chevron-left">{% trans "Home" %}</a>
+    </div>
+    <h1>{% trans "Terms of use" %}</h1>
+    {% url 'contact:index' as contact_url %}
+    {% blocktrans %}
+        <p>The COVID Alert Portal is only for authorized staff in Canada.</p>
+        <p>By using the portal, you agree to follow your health authority’s procedures.</p>
+        <p>You also agree to:</p>
+        <strong><p>Only generate keys for real people</p></strong>
+        <p>Give only 1 key per positive test.</p>
+        <p>For a sample key, visit "<a href="#">Give a key</a>".</p>
+        <strong><p>Confirm the person meets 2 conditions</p></strong>
+        <p>They've:</p>
+        <ul class="expanded">
+            <li>Tested positive for COVID-19, and,</li>
+            <li>Installed the COVID Alert app on their phone.</li>
+        </ul>
+        <strong><p>Get the person’s consent before texting a key</p></strong>
+        <p>Some people may want you to text the one-time key to their mobile phone.  If your health authority offers this feature, the portal displays the button “Text key to person”.</p>
+        <strong><p>Prevent others from using your account</p></strong>
+        <p>Protect your username and password, even from other people working for a health authority.</p>
+        <strong><p>Keep the portal secure</p></strong>
+        <p>Immediately report any security issues to your administrator <strong>and</strong> <a href="mailto:security@cds-snc.ca">security@cds-snc.ca</a></p>
+        <p>If we detect any misuse of the portal or security issues with your account, we’ll immediately disable your account.</p>
+    {% endblocktrans %}
+
+{% endblock %}
