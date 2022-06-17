@@ -104,6 +104,7 @@ if settings.APP_SWITCH == "PORTAL" or settings.APP_SWITCH == "UNIT":
                 Resend2FAView.as_view(),
                 name="resend_2fa",
             ),
+            path("login/", login_views.LoginView.as_view(), name="login")
         )
     else:
         urlpatterns += i18n_patterns(
@@ -118,7 +119,6 @@ if settings.APP_SWITCH == "PORTAL" or settings.APP_SWITCH == "UNIT":
                  include(invitation_patterns, namespace="invitations"),
             ),
             path("announcements/", include("announcements.urls")),
-            path("login/", login_views.LoginView.as_view(), name="login"),
         )
 
 # ----
