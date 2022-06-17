@@ -378,7 +378,7 @@ resource "aws_wafv2_web_acl" "qrcode_acl" {
       metric_name                = "RedirectLoginToHome"
       sampled_requests_enabled   = true
     }
-  }  
+  }
 
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
