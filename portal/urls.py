@@ -4,8 +4,9 @@ from django.http import HttpResponse
 from django.conf.urls.i18n import i18n_patterns
 from axes.admin import AccessLogAdmin
 from invitations.views import AcceptInvite
-from django.views.generic import TemplateView
+from django.views.generic import RedirectView, TemplateView
 from django.conf import settings
+from django.contrib.auth import views as login_views
 
 
 from .admin import Admin2FASite
@@ -117,6 +118,7 @@ if settings.APP_SWITCH == "PORTAL" or settings.APP_SWITCH == "UNIT":
                  include(invitation_patterns, namespace="invitations"),
             ),
             path("announcements/", include("announcements.urls")),
+            path("login/", login_views.LoginView.as_view(), name="login"),
         )
 
 # ----
