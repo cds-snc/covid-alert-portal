@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 - Remove Basicauth
 
+## [3.0.0] - 2022-06-17
+## Updated
+- New decommissioning code
+
 ## [2.3.3] - 2022-01-26
 
 ## Updated
